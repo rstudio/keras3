@@ -85,7 +85,9 @@
 
 
 <dt>trainable</dt>
-<dd><p>if <code>NA</code> (the default), all weights are returned. If <code>TRUE, </code></p></dd>
+<dd><p>if <code>NA</code> (the default), all weights are returned. If <code>TRUE</code>,
+only weights of trainable variables are returned. If <code>FALSE</code>, only weights
+of non-trainable variables are returned.</p></dd>
 
 
 <dt>weights</dt>
@@ -94,9 +96,9 @@
 </dl></div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>You can access the Layer/Model as <code>tf.Tensors</code> or <code>tf.Variables</code> at
-<code>object$weights</code>, <code>object$trainable_weights</code>, or
-<code>object$non_trainable_weights</code></p>
+    <p>You can access the Layer/Model as <code>KerasVariables</code> (which are also
+backend-native tensors like <code>tf.Variable</code>) at <code>object$weights</code>,
+<code>object$trainable_weights</code>, or <code>object$non_trainable_weights</code></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

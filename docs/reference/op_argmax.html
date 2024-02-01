@@ -92,7 +92,8 @@ along the specified axis.</p></dd>
     
 
 <p>Tensor of indices. It has the same shape as <code>x</code>, with the dimension
-along <code>axis</code> removed.</p>
+along <code>axis</code> removed. Note that the returned integer is 0-based (i.e., if the
+argmax is in the first index position, the returned value will be <code>0</code>)</p>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
@@ -323,7 +324,7 @@ along <code>axis</code> removed.</p>
 <code><a href="op_image_affine_transform.html">op_image_affine_transform</a>()</code>,
 <code><a href="op_image_extract_patches.html">op_image_extract_patches</a>()</code>,
 <code><a href="op_image_map_coordinates.html">op_image_map_coordinates</a>()</code>,
-<code><a href="op_image_pad_images.html">op_image_pad_images</a>()</code>,
+<code><a href="op_image_pad.html">op_image_pad</a>()</code>,
 <code><a href="op_image_resize.html">op_image_resize</a>()</code>,
 <code><a href="op_in_top_k.html">op_in_top_k</a>()</code>,
 <code><a href="op_irfft.html">op_irfft</a>()</code>,
