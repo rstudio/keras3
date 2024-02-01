@@ -936,8 +936,8 @@ function ()
 #' @export
 #' @family callbacks
 #' @tether keras.callbacks.SwapEMAWeights
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/SwapEMAWeights>
+# @seealso
+# + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/SwapEMAWeights>
 callback_swap_ema_weights <-
 function (swap_on_epoch = FALSE)
 {

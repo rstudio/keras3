@@ -38,19 +38,16 @@ This website provides documentation for the R interface to Keras. See the main K
 First, install the keras R package:
 
 ```{r, eval=FALSE}
-remotes::install_github("rstudio/keras")
-
-## Keras 3 not on CRAN yet
-# install.packages("keras")
+install.packages("keras3")
 ```
 
-<!-- or install the development version with: -->
+or install the development version with:
 
-<!-- ```{r} -->
-<!-- remotes::install_github("rstudio/keras") -->
-<!-- ``` -->
+```{r, eval=FALSE}
+remotes::install_github("rstudio/keras")
+```
 
-The Keras R interface requires that a backend engine be installed. This is  [TensorFlow](https://www.tensorflow.org/) by default.
+The Keras R interface requires that a backend engine be installed. This is [TensorFlow](https://www.tensorflow.org/) by default.
 
 ```{r, eval=FALSE}
 keras3::install_keras(backend = "tensorflow")

@@ -536,8 +536,8 @@ function (x)
 #'
 #' @export
 #' @tether keras.activations.hard_silu
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_silu>
+# @seealso
+# + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_silu>
 activation_hard_silu <-
   structure(function (x)
   {

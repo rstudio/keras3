@@ -27,7 +27,7 @@ Turing machine.
 or \href{https://github.com/pytorch/pytorch}{PyTorch}.
 }
 
-See the package website at \url{https://keras.rstudio.com} for complete documentation.
+See the package website at \url{https://keras.posit.co} for complete documentation.
 }
 \seealso{
 Useful links:

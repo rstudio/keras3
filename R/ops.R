@@ -6830,8 +6830,8 @@ keras$ops$zeros_like(x, dtype)
 #' @family nn ops
 #' @family ops
 #' @tether keras.ops.ctc_loss
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss>
+# @seealso
+# + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss>
 op_ctc_loss <-
 function (target, output, target_length, output_length, mask_index = 0L)
 {
@@ -6867,8 +6867,8 @@ function (target, output, target_length, output_length, mask_index = 0L)
 #' @family nn ops
 #' @family ops
 #' @tether keras.ops.hard_silu
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_silu>
+# @seealso
+# + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_silu>
 op_hard_silu <-
 function (x)
 keras$ops$hard_silu(x)

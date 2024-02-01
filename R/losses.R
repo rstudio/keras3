@@ -1535,8 +1535,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @export
 #' @inheritParams loss_hinge
 #' @tether keras.losses.CTC
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>
+# @seealso
+# + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>
 loss_ctc <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "sparse_categorical_crossentropy")

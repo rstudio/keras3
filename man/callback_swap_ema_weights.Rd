@@ -47,10 +47,6 @@ model |> fit(
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/SwapEMAWeights}
-}
-
 Other callbacks: 
 \code{\link{Callback}()},
 \code{\link{callback_backup_and_restore}()},

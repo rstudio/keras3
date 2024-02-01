@@ -40,19 +40,17 @@ First, install the keras R package:
 
 
 ```r
-remotes::install_github("rstudio/keras")
-
-## Keras 3 not on CRAN yet
-# install.packages("keras")
+install.packages("keras3")
 ```
 
-<!-- or install the development version with: -->
+or install the development version with:
 
-<!-- ```{r} -->
-<!-- remotes::install_github("rstudio/keras") -->
-<!-- ``` -->
 
-The Keras R interface requires that a backend engine be installed. This is  [TensorFlow](https://www.tensorflow.org/) by default.
+```r
+remotes::install_github("rstudio/keras")
+```
+
+The Keras R interface requires that a backend engine be installed. This is [TensorFlow](https://www.tensorflow.org/) by default.
 
 
 ```r
@@ -132,23 +130,23 @@ summary(model)
 ```
 
 ```
-## [1mModel: "sequential"[0m
+## [1mModel: "sequential"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m256[0m)               │    [38;5;34m200,960[0m │
+## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m256[0m)               │    [38;5;34m200,960[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dropout_1 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;34m256[0m)               │          [38;5;34m0[0m │
+## │ dropout_1 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;34m256[0m)               │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │     [38;5;34m32,896[0m │
+## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │     [38;5;34m32,896[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
+## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m10[0m)                │      [38;5;34m1,290[0m │
+## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m10[0m)                │      [38;5;34m1,290[0m │
 ## └─────────────────────────────────┴───────────────────────────┴────────────┘
-## [1m Total params: [0m[38;5;34m235,146[0m (918.54 KB)
-## [1m Trainable params: [0m[38;5;34m235,146[0m (918.54 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+## [1m Total params: [0m[38;5;34m235,146[0m (918.54 KB)
+## [1m Trainable params: [0m[38;5;34m235,146[0m (918.54 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 
@@ -156,7 +154,7 @@ summary(model)
 plot(model)
 ```
 
-<img src="getting_started/unnamed-chunk-8-1.png" width="145" style="display: block; margin: auto;" />
+<img src="getting_started/unnamed-chunk-9-1.png" width="145" style="display: block; margin: auto;" />
 Next, compile the model with appropriate loss function, optimizer, and metrics:
 
 
@@ -188,7 +186,7 @@ The `history` object returned by `fit()` includes loss and accuracy metrics whic
 plot(history)
 ```
 
-![plot of chunk unnamed-chunk-11](getting_started/unnamed-chunk-11-1.png)
+![plot of chunk unnamed-chunk-12](getting_started/unnamed-chunk-12-1.png)
 
 Evaluate the model's performance on the test data:
 
@@ -198,15 +196,15 @@ model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9815 - loss: 0.0933
+## 313/313 - 1s - 2ms/step - accuracy: 0.9822 - loss: 0.0891
 ```
 
 ```
 ## $accuracy
-## [1] 0.9815
+## [1] 0.9822
 ##
 ## $loss
-## [1] 0.09328237
+## [1] 0.08911845
 ```
 
 Generate predictions on new data:
@@ -235,7 +233,7 @@ Keras provides a vocabulary for building deep learning models that is simple, el
 
 ### Deep Learning with R Book
 
-If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](https://rstd.io/dlwr-2e) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
+If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](https://www.manning.com/books/deep-learning-with-r-second-edition) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
 
 The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras.
 

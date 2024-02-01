@@ -28,8 +28,3 @@ It's a faster, piecewise linear approximation of the silu activation.
 }
 }
 
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/activations/hard_silu}
-}
-}

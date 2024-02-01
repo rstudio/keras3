@@ -35,10 +35,6 @@ op_hard_silu(x)
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_silu}
-}
-
 Other nn ops: 
 \code{\link{op_average_pool}()},
 \code{\link{op_binary_crossentropy}()},

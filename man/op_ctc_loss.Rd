@@ -26,10 +26,6 @@ Defaults to \code{0}.}
 CTC (Connectionist Temporal Classification) loss.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss}
-}
-
 Other nn ops: 
 \code{\link{op_average_pool}()},
 \code{\link{op_binary_crossentropy}()},

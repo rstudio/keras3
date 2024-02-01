@@ -32,8 +32,3 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.
 \description{
 CTC (Connectionist Temporal Classification) loss.
 }
-\seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC}
-}
-}
