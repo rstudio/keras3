@@ -42,3 +42,15 @@ py_to_r.keras.src.utils.tracking.TrackedList <- function(x) import("builtins")$l
 
 #' @export
 py_to_r.keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$list(x)
+
+#' @exportS3Method base::all.equal
+all.equal.keras.src.backend.common.variables.KerasVariable <-
+function(target, current, ...) {
+  if (inherits(target, "keras.src.backend.common.variables.KerasVariable"))
+    target <- as_r_value(target$numpy())
+  if (inherits(current, "keras.src.backend.common.variables.KerasVariable"))
+    current <- as_r_value(current$numpy())
+  all.equal(target, current, ...)
+}
+
+
