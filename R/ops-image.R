@@ -236,7 +236,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #' # Examples
 #' ```{r}
 #' images <- random_uniform(c(15, 25, 3))
-#' padded_images <- op_image_pad_images(
+#' padded_images <- op_image_pad(
 #'     images, 2, 3, target_height = 20, target_width = 30
 #' )
 #' shape(padded_images)
@@ -244,17 +244,17 @@ function (input, coordinates, order, fill_mode = "constant",
 #'
 #' ```{r}
 #' batch_images <- random_uniform(c(2, 15, 25, 3))
-#' padded_batch <- op_image_pad_images(batch_images, 2, 3,
-#'                                    target_height = 20,
-#'                                    target_width = 30)
+#' padded_batch <- op_image_pad(batch_images, 2, 3,
+#'                              target_height = 20,
+#'                              target_width = 30)
 #' shape(padded_batch)
 #' ```
 #'
 #' @returns
-#' If `images` were 4D, a 4D float Tensor of shape
-#'     `(batch, target_height, target_width, channels)`
-#' If `images` were 3D, a 3D float Tensor of shape
-#'     `(target_height, target_width, channels)`
+#' - If `images` were 4D, a 4D float Tensor of shape
+#'   `(batch, target_height, target_width, channels)`
+#' - If `images` were 3D, a 3D float Tensor of shape
+#'   `(target_height, target_width, channels)`
 #'
 #' @param images
 #' 4D Tensor of shape `(batch, height, width, channels)` or 3D
@@ -286,7 +286,7 @@ function (input, coordinates, order, fill_mode = "constant",
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/pad_images>
 #'
 #' @tether keras.ops.image.pad_images
-op_image_pad_images <-
+op_image_pad <-
 function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
     target_width = NULL, bottom_padding = NULL, right_padding = NULL)
 {

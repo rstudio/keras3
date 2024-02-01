@@ -165,7 +165,7 @@ Other ops:
 \code{\link{op_image_affine_transform}()},
 \code{\link{op_image_extract_patches}()},
 \code{\link{op_image_map_coordinates}()},
-\code{\link{op_image_pad_images}()},
+\code{\link{op_image_pad}()},
 \code{\link{op_image_resize}()},
 \code{\link{op_in_top_k}()},
 \code{\link{op_irfft}()},

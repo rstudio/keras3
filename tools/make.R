@@ -97,8 +97,7 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: WORKON_HOME should reflect an absolute path, not relative path, incase
 #      WORKON_HOME=~/..
 #
-# TODO: reexport tuple() from keras3, tfdatasets
-
+#
 # TODO: add tests for R generator functions in fit()/evaluate()/predict().
 # TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
 #
@@ -144,9 +143,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
 
-# TODO: in reticulate, change subclassed dict autoconversion back to off:
-#      so that keras$utils$get_custom_objects()$clear() works.
-
 # TODO: get_custom_objects() needs thinking
 
 # TODO: many of the applications can share a man page, e.g., application_convnext_{large...}
@@ -173,9 +169,6 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 
 # TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
 
-# Daniels votes YES to rename to layer_bidirectional, etc.
-# TODO: bidirectional, time_distributed -- need special caseing
-
 # TODO: note in docs for op_logical_and (and friends) that these are dispatched
 #       to from & != and so on.
 
@@ -185,12 +178,9 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # Daniel votes:
 #   Yes to `keras_function()` (keras$Function)
 #   Yes to `keras_tensor()` (keras$KerasTensor)
-#   Yes to `keras_input()`  (keras$Input)
 #   Document on same page for less confsion:
 #      keras_input() adds batch dim to shape, keras_tensor() doesn't.
 #   NO to keras$Variable()
-# alias layer_input() with keras_input()?
-# change layer_input() to call InputLayer()?
 
 
 # TODO: to_categorical():
@@ -207,12 +197,9 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 #
 # TODO: make the op_* @family tags make sense.
 #
-#
 # TODO: remove any tensorflow imports / DESCRIPTION deps
 #
 # TODO: op_istft op_irfft example is wrong, investigate
-#
-# TODO: rename: op_image_pad_images -> op_image_pad
 #
 # TODO: this should work: op_convert_to_tensor(c(1, 3, 2, 0), "int32")
 #

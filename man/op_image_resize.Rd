@@ -73,7 +73,7 @@ Other image ops:
 \code{\link{op_image_affine_transform}()},
 \code{\link{op_image_extract_patches}()},
 \code{\link{op_image_map_coordinates}()},
-\code{\link{op_image_pad_images}()}
+\code{\link{op_image_pad}()}
 
 Other image utils: 
 \code{\link{image_array_save}()},
@@ -84,7 +84,7 @@ Other image utils:
 \code{\link{op_image_affine_transform}()},
 \code{\link{op_image_extract_patches}()},
 \code{\link{op_image_map_coordinates}()},
-\code{\link{op_image_pad_images}()}
+\code{\link{op_image_pad}()}
 
 Other ops: 
 \code{\link{op_abs}()},
@@ -165,7 +165,7 @@ Other ops:
 \code{\link{op_image_affine_transform}()},
 \code{\link{op_image_extract_patches}()},
 \code{\link{op_image_map_coordinates}()},
-\code{\link{op_image_pad_images}()},
+\code{\link{op_image_pad}()},
 \code{\link{op_in_top_k}()},
 \code{\link{op_irfft}()},
 \code{\link{op_is_tensor}()},
