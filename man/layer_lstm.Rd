@@ -144,6 +144,7 @@ shape(output)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{lstm <- layer_lstm(units = 4, return_sequences = TRUE, return_state = TRUE)
@@ -152,18 +153,21 @@ shape(whole_seq_output)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 10, 4)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(final_memory_state)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(final_carry_state)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
+
 }\if{html}{\out{</div>}}
 }
 \section{Call Arguments}{

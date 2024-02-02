@@ -82,6 +82,7 @@ output
 ##   [2.5]
 ##   [3.5]
 ##   [4.5]]], shape=(1, 4, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \code{strides=2} and \code{padding="valid"}:
@@ -97,6 +98,7 @@ output
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[1.5]
 ##   [3.5]]], shape=(1, 2, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \code{strides=1} and \code{padding="same"}:
@@ -115,6 +117,7 @@ output
 ##   [3.5]
 ##   [4.5]
 ##   [5. ]]], shape=(1, 5, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

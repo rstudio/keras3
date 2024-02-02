@@ -79,6 +79,7 @@ constraint_nonnegative()(weight)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.  1.], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Usage in a layer:
@@ -87,6 +88,7 @@ Usage in a layer:
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <Dense name=dense, built=False>
+
 }\if{html}{\out{</div>}}
 }
 \section{Symbols in scope}{

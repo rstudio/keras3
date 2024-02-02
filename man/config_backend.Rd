@@ -18,6 +18,7 @@ Publicly accessible method for determining the current backend.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "tensorflow"
+
 }\if{html}{\out{</div>}}
 }
 

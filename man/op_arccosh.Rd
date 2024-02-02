@@ -21,6 +21,7 @@ op_arccosh(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2.993223 5.298292], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

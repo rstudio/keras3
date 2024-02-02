@@ -31,6 +31,7 @@ softmax_layer(input)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.21194157 0.5761169  0.21194157], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -31,24 +31,28 @@ Return the maximum of a tensor or maximum along an axis.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1. 3. 5.]
 ##  [1. 5. 2.]], shape=(2, 3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_max(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(5.0, shape=(), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_max(x, axis = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 5. 5.], shape=(3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_max(x, axis = 1, keepdims = TRUE)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[1. 5. 5.]], shape=(1, 3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

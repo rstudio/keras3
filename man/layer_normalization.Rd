@@ -67,6 +67,7 @@ layer(input_data)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.4142135  -0.70710677  0.        ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Calculate a mean and variance for each index on the last axis.
@@ -82,6 +83,7 @@ layer(input_data)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[-1. -1. -1.]], shape=(1, 3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Pass the mean and variance directly.
@@ -95,6 +97,7 @@ layer(input_data)
 ## [[-1.4142135 ]
 ##  [-0.70710677]
 ##  [ 0.        ]], shape=(3, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Use the layer to de-normalize inputs (after adapting the layer).
@@ -110,6 +113,7 @@ layer(input_data)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ 2. 10.  8.]], shape=(1, 3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

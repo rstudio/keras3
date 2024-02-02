@@ -82,6 +82,7 @@ tryCatch(\{
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras3:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
@@ -98,6 +99,7 @@ nrow(as.data.frame(history))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 10
+
 }\if{html}{\out{</div>}}
 }
 

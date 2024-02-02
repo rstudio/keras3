@@ -58,6 +58,7 @@ predict(model, c(0, 1, 2), verbose = FALSE) # [1] -1  0  1
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -1  0  1
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt(layer, c(-1, 1))
@@ -66,6 +67,7 @@ predict(model, c(0, 1, 2), verbose = FALSE) # [1] 0 1 2
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0 1 2
+
 }\if{html}{\out{</div>}}
 
 \code{tfdatasets} example with multiple adapts:
@@ -82,6 +84,7 @@ str(tfdatasets::iterate(normalized_ds))
 ##  $ :<tf.Tensor: shape=(1), dtype=float32, numpy=array([-1.], dtype=float32)>
 ##  $ :<tf.Tensor: shape=(1), dtype=float32, numpy=array([0.], dtype=float32)>
 ##  $ :<tf.Tensor: shape=(1), dtype=float32, numpy=array([1.], dtype=float32)>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt(layer, c(-1, 1))
@@ -98,6 +101,7 @@ normalized_ds |>
 ##  $ : num [1(1d)] 0
 ##  $ : num [1(1d)] 1
 ##  $ : num [1(1d)] 2
+
 }\if{html}{\out{</div>}}
 }
 \concept{preprocessing layer methods}

@@ -23,6 +23,7 @@ op_hard_sigmoid(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.33333334 0.5        0.6666667 ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- as.array(seq(-5, 5, .1))

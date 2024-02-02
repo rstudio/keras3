@@ -35,6 +35,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 3, 4)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# also supports shape inference using `-1` as dimension
@@ -43,6 +44,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 3, 2, 2)
+
 }\if{html}{\out{</div>}}
 }
 

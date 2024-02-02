@@ -24,6 +24,7 @@ reticulate::py_id(input)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
+
 }\if{html}{\out{</div>}}
 }
 

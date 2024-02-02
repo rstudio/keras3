@@ -50,6 +50,7 @@ as.array(result)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] -5.0 -2.5  0.0  5.0 10.0
+
 }\if{html}{\out{</div>}}
 }
 

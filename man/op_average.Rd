@@ -35,12 +35,14 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 3 4], shape=(4), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_average(data)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.5, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_average(
@@ -50,6 +52,7 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_arange(6) |> op_reshape(c(3, 2))
@@ -60,6 +63,7 @@ data
 ## [[0. 1.]
 ##  [2. 3.]
 ##  [4. 5.]], shape=(3, 2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_average(
@@ -70,6 +74,7 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Error: Axis must be specified when shapes of a and weights differ.
@@ -82,6 +87,7 @@ try(op_average(
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) :
 ##   tensorflow.python.framework.errors_impl.InvalidArgumentError: Expected 'tf.Tensor(False, shape=(), dtype=bool)' to be true. Summarized data: 3, 2
 ## 2
+
 }\if{html}{\out{</div>}}
 }
 

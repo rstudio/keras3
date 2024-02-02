@@ -27,24 +27,28 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[10. 11. 12.]
 ##  [13. 14. 15.]], shape=(2, 3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmin(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0, shape=(), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmin(x, axis = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 0 0], shape=(3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmin(x, axis = 2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 0], shape=(2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

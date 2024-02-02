@@ -34,6 +34,7 @@ op_segment_sum(data, segment_ids, num_segments)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  3.  30. 300.], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -27,6 +27,7 @@ op_append(x1, x2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4. 5. 6. 7. 8. 9.], shape=(9), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 When \code{axis} is specified, \code{x1} and \code{x2} must have compatible shapes.
@@ -40,6 +41,7 @@ op_append(x1, x2, axis = 1)
 ## [[1. 2. 3.]
 ##  [4. 5. 6.]
 ##  [7. 8. 9.]], shape=(3, 3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x3 <- op_convert_to_tensor(c(7, 8, 9))
@@ -48,6 +50,7 @@ try(op_append(x1, x3, axis = 1))
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## Error in py_call_impl(callable, call_args$unnamed, call_args$named) :
 ##   tensorflow.python.framework.errors_impl.InvalidArgumentError: \{\{function_node __wrapped__ConcatV2_N_2_device_/job:localhost/replica:0/task:0/device:CPU:0\}\} ConcatOp : Ranks of all input tensors should match: shape[0] = [2,3] vs. shape[1] = [3] [Op:ConcatV2] name: concat
+
 }\if{html}{\out{</div>}}
 }
 

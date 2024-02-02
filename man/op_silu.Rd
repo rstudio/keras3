@@ -22,12 +22,14 @@ op_sigmoid(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.00247262 0.7310586  0.5        0.7310586  0.99752736], shape=(5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_silu(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.01483574  0.7310586   0.          0.7310586   5.985164  ], shape=(5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -21,6 +21,7 @@ op_arcsinh(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.8813736 -0.8813736  0.       ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

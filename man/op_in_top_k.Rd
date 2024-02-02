@@ -31,6 +31,7 @@ op_in_top_k(targets, predictions, k = 3L)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True False  True], shape=(3), dtype=bool)
+
 }\if{html}{\out{</div>}}
 }
 

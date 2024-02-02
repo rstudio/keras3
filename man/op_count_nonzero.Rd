@@ -25,18 +25,21 @@ op_count_nonzero(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(5, shape=(), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_count_nonzero(x, axis = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 2 1], shape=(4), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_count_nonzero(x, axis = 2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 3], shape=(2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

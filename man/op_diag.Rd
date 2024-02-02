@@ -29,24 +29,28 @@ x
 ## [[0 1 2]
 ##  [3 4 5]
 ##  [6 7 8]], shape=(3, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_diag(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 4 8], shape=(3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_diag(x, k = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 5], shape=(2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_diag(x, k = -1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3 7], shape=(2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_diag(op_diag(x))
@@ -56,6 +60,7 @@ x
 ## [[0 0 0]
 ##  [0 4 0]
 ##  [0 0 8]], shape=(3, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -47,6 +47,7 @@ print(new_layer$name)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "dense_10"
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{clear_session()
@@ -55,6 +56,7 @@ print(new_layer$name)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "dense"
+
 }\if{html}{\out{</div>}}
 }
 \seealso{

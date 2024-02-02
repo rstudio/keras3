@@ -31,6 +31,7 @@ str(result)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Tensor: shape=(3, 128), dtype=float32, numpy=…>
+
 }\if{html}{\out{</div>}}
 }
 

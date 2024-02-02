@@ -26,6 +26,7 @@ op_solve(a, b)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[2. 0.]
 ##  [0. 2.]], shape=(2, 2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -66,6 +66,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3)
+
 }\if{html}{\out{</div>}}
 }
 

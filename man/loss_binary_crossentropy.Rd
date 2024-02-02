@@ -64,6 +64,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.91629073 0.71355818], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Recommended Usage:} (set \code{from_logits=TRUE})
@@ -86,6 +87,7 @@ bce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.865458, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 2: (batch_size = 2, number of samples = 4)
@@ -97,6 +99,7 @@ bce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.865458, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sample_weight' attribute
@@ -104,6 +107,7 @@ bce(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.2436386, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# 0.243
@@ -113,6 +117,7 @@ bce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.730916, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
@@ -121,6 +126,7 @@ bce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.23515666 1.4957594 ], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \strong{Default Usage:} (set \code{from_logits=FALSE})
@@ -131,6 +137,7 @@ loss_binary_crossentropy() # OR ...('from_logits=FALSE')
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.losses.losses.BinaryCrossentropy object>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2. Update `y_pred` to use probabilities instead of logits

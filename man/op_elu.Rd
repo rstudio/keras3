@@ -25,6 +25,7 @@ op_elu(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.63212055  0.          1.        ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

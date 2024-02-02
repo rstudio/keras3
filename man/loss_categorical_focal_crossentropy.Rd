@@ -104,6 +104,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.20583090e-05 4.66273481e-01], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 Standalone usage:
@@ -116,6 +117,7 @@ cce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.23315276, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
@@ -123,6 +125,7 @@ cce(y_true, y_pred, sample_weight = op_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.16320053, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
@@ -131,6 +134,7 @@ cce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.46630552, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
@@ -139,6 +143,7 @@ cce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.2058331e-05 4.6627346e-01], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Usage with the \code{compile()} API:

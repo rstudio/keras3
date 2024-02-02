@@ -90,6 +90,7 @@ output # shape(NA, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 64), dtype=float32, sparse=False, name=keras_tensor_1>
+
 }\if{html}{\out{</div>}}
 
 \strong{Applying a dense layer to a sequence}
@@ -109,6 +110,7 @@ output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, None, 64), dtype=float32, sparse=False, name=keras_tensor_3>
+
 }\if{html}{\out{</div>}}
 
 \strong{Applying a dense layer to a sequence using ellipses}
@@ -132,6 +134,7 @@ output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 32, 64), dtype=float32, sparse=False, name=keras_tensor_5>
+
 }\if{html}{\out{</div>}}
 }
 

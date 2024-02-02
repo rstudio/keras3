@@ -68,6 +68,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.32986466 0.20579838], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -24,6 +24,7 @@ layer(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_activation(activation = activation_relu)
@@ -31,6 +32,7 @@ layer(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_activation(activation = op_relu)
@@ -38,6 +40,7 @@ layer(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 0. 0. 2.], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

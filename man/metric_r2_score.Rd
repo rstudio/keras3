@@ -63,6 +63,7 @@ metric$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.57142854, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -31,24 +31,28 @@ Return the minimum of a tensor or minimum along an axis.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1. 3. 5.]
 ##  [1. 5. 2.]], shape=(2, 3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_min(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_min(x, axis = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 3. 2.], shape=(3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_min(x, axis = 1, keepdims = TRUE)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[1. 3. 2.]], shape=(1, 3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

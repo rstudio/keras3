@@ -24,6 +24,7 @@ op_add(x1, x2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# alias for x1 + x2
@@ -31,6 +32,7 @@ x1 + x2
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \code{op_add} also broadcasts shapes:
@@ -43,6 +45,7 @@ op_add(x1, x2)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[10. 10.]
 ##  [10. 12.]], shape=(2, 2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

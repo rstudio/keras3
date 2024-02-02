@@ -74,6 +74,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 64, 80, 3)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 64, 80, 3)
@@ -86,6 +87,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(64, 80, 3)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (64, 80, 3)
@@ -101,6 +103,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3, 64, 80)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 3, 64, 80)

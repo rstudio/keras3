@@ -91,6 +91,7 @@ conv_base
 ##  Total params: 14,714,688 (56.13 MB)
 ##  Trainable params: 0 (0.00 B)
 ##  Non-trainable params: 14,714,688 (56.13 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{
@@ -126,6 +127,7 @@ model
 ##  Total params: 16,812,353 (64.13 MB)
 ##  Trainable params: 2,097,665 (8.00 MB)
 ##  Non-trainable params: 14,714,688 (56.13 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{print(model, expand_nested = TRUE)
@@ -190,6 +192,7 @@ model
 ##  Total params: 16,812,353 (64.13 MB)
 ##  Trainable params: 2,097,665 (8.00 MB)
 ##  Non-trainable params: 14,714,688 (56.13 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{
@@ -252,6 +255,7 @@ conv_base
 ##  Total params: 14,714,688 (56.13 MB)
 ##  Trainable params: 7,079,424 (27.01 MB)
 ##  Non-trainable params: 7,635,264 (29.13 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{print(model, expand_nested = TRUE)
@@ -316,6 +320,7 @@ conv_base
 ##  Total params: 16,812,353 (64.13 MB)
 ##  Trainable params: 9,177,089 (35.01 MB)
 ##  Non-trainable params: 7,635,264 (29.13 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{
@@ -369,6 +374,7 @@ conv_base
 ##  Total params: 14,714,688 (56.13 MB)
 ##  Trainable params: 7,635,264 (29.13 MB)
 ##  Non-trainable params: 7,079,424 (27.01 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# freeze only the last 5 layers, a different way
@@ -421,6 +427,7 @@ conv_base
 ##  Total params: 14,714,688 (56.13 MB)
 ##  Trainable params: 7,635,264 (29.13 MB)
 ##  Non-trainable params: 7,079,424 (27.01 MB)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{

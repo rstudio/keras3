@@ -33,6 +33,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 9, 9, 2)
+
 }\if{html}{\out{</div>}}
 
 Wrap \code{layer_dense}:
@@ -44,6 +45,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 10, 10, 10)
+
 }\if{html}{\out{</div>}}
 }
 

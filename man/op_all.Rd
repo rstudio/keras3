@@ -31,6 +31,7 @@ op_all(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(False, shape=(), dtype=bool)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_convert_to_tensor(array(c(TRUE, FALSE, TRUE, TRUE, TRUE, TRUE), dim = c(3, 2))))
@@ -40,12 +41,14 @@ op_all(x)
 ## [[ True  True]
 ##  [False  True]
 ##  [ True  True]], shape=(3, 2), dtype=bool)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_all(x, axis = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False  True], shape=(2), dtype=bool)
+
 }\if{html}{\out{</div>}}
 
 \code{keepdims = TRUE} outputs a tensor with dimensions reduced to one.
@@ -54,6 +57,7 @@ op_all(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[False]], shape=(1, 1), dtype=bool)
+
 }\if{html}{\out{</div>}}
 }
 

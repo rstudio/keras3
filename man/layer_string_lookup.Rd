@@ -170,6 +170,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 3 4]
 ##  [4 0 2]], shape=(2, 3), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Creating a lookup layer with an adapted vocabulary}
@@ -184,6 +185,7 @@ get_vocabulary(layer)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "[UNK]" "d"     "z"     "c"     "b"     "a"
+
 }\if{html}{\out{</div>}}
 
 Note that the OOV token \code{"[UNK]"} has been added to the vocabulary.
@@ -199,6 +201,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[5 3 1]
 ##  [1 2 4]], shape=(2, 3), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Lookups with multiple OOV indices}
@@ -217,6 +220,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[2 4 5]
 ##  [0 1 3]], shape=(2, 3), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 Note that the output for OOV value 'm' is 0, while the output for OOV value
@@ -241,6 +245,7 @@ layer(data)
 ##  [0 0 0 1 0]
 ##  [0 0 0 0 1]
 ##  [1 0 0 0 0]], shape=(5, 5), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Multi-hot output}
@@ -257,6 +262,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0 1 0 1 1]
 ##  [1 0 1 0 1]], shape=(2, 5), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Token count output}
@@ -273,6 +279,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0 1 0 1 2]
 ##  [2 0 1 0 1]], shape=(2, 5), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{TF-IDF output}
@@ -296,6 +303,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0.   0.25 0.   0.6  0.8 ]
 ##  [1.   0.   0.75 0.   0.4 ]], shape=(2, 5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 To specify the idf weights for oov values, you will need to pass the entire
@@ -312,6 +320,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0.   0.25 0.   0.6  0.8 ]
 ##  [1.8  0.   0.75 0.   0.4 ]], shape=(2, 5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 When adapting the layer in \code{"tf_idf"} mode, each input sample will be
@@ -333,6 +342,7 @@ layer(data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[b'a' b'c' b'd']
 ##  [b'd' b'[UNK]' b'b']], shape=(2, 3), dtype=string)
+
 }\if{html}{\out{</div>}}
 
 Note that the first index correspond to the oov token by default.
@@ -353,6 +363,7 @@ i_layer(int_data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[b'a' b'c' b'd']
 ##  [b'd' b'[UNK]' b'b']], shape=(2, 3), dtype=string)
+
 }\if{html}{\out{</div>}}
 
 In this example, the input value \code{"z"} resulted in an output of \code{"[UNK]"},

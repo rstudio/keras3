@@ -21,6 +21,7 @@ op_erf(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.99997777 -0.9953222  -0.84270084  0.          0.84270084], shape=(5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)

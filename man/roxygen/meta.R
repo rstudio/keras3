@@ -89,7 +89,7 @@ local({
 
     x <- paste0(x, collapse = "\n")
     if (final_new_line && !endsWith(x, "\n"))
-      x <- paste0(x, "\n")
+      x <- paste0(x, "\n\n")
     x
   }
 

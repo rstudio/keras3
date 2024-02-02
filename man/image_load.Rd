@@ -45,6 +45,7 @@ Loads an image into PIL format.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=724x561>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_arr <- image_to_array(image)
@@ -52,6 +53,7 @@ str(input_arr)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{##  num [1:561, 1:724, 1:3] 0 0 0 0 0 0 0 0 0 0 ...
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_arr \%<>\% array_reshape(dim = c(1, dim(input_arr))) # Convert single image to a batch.

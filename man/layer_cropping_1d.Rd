@@ -37,6 +37,7 @@ x
 ##  [[ 6.  7.]
 ##   [ 8.  9.]
 ##   [10. 11.]]], shape=(2, 3, 2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- x |> layer_cropping_1d(cropping = 1)
@@ -47,6 +48,7 @@ y
 ## [[[2. 3.]]
 ##
 ##  [[8. 9.]]], shape=(2, 1, 2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -61,6 +61,7 @@ pad_sequences(sequence)
 ## [1,]    0    0    1
 ## [2,]    0    2    3
 ## [3,]    4    5    6
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pad_sequences(sequence, value=-1)
@@ -70,6 +71,7 @@ pad_sequences(sequence)
 ## [1,]   -1   -1    1
 ## [2,]   -1    2    3
 ## [3,]    4    5    6
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pad_sequences(sequence, padding='post')
@@ -79,6 +81,7 @@ pad_sequences(sequence)
 ## [1,]    1    0    0
 ## [2,]    2    3    0
 ## [3,]    4    5    6
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pad_sequences(sequence, maxlen=2)
@@ -88,6 +91,7 @@ pad_sequences(sequence)
 ## [1,]    0    1
 ## [2,]    2    3
 ## [3,]    5    6
+
 }\if{html}{\out{</div>}}
 }
 \seealso{

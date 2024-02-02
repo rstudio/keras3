@@ -85,6 +85,7 @@ outputs
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 10, 10, 10, 3), dtype=float32, sparse=False, name=keras_tensor_1>
+
 }\if{html}{\out{</div>}}
 }
 

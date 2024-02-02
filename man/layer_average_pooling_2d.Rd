@@ -94,6 +94,7 @@ output
 ##
 ##   [[6.]
 ##    [7.]]]], shape=(1, 2, 2, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \verb{strides=(2, 2)} and \code{padding="valid"}:
@@ -109,6 +110,7 @@ output
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[[3.5]
 ##    [5.5]]]], shape=(1, 1, 2, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \verb{stride=(1, 1)} and \code{padding="same"}:
@@ -133,6 +135,7 @@ output
 ##   [[7.5]
 ##    [8.5]
 ##    [9. ]]]], shape=(1, 3, 3, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

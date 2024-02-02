@@ -42,12 +42,14 @@ op_irfft(c(real, imag))
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> tf.Tensor(
 #> [ 2.         -2.0606601   0.5        -0.35355338  0.          0.06066012
 #>  -0.5         0.35355338], shape=(8), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_irfft(op_rfft(real, 5), 5), real)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] TRUE
+
 }\if{html}{\out{</div>}}
 }
 

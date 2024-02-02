@@ -17,6 +17,7 @@ Return the default image data format convention.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "channels_last"
+
 }\if{html}{\out{</div>}}
 }
 

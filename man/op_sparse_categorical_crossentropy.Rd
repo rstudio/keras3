@@ -51,6 +51,7 @@ op_sparse_categorical_crossentropy(target, output)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536052 0.22314355 0.69314718], shape=(3), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

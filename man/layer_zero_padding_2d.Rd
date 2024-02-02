@@ -44,6 +44,7 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[[1 2]
 ##    [3 4]]]], shape=(1, 1, 2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_zero_padding_2d(x, padding = 1)
@@ -65,6 +66,7 @@ y
 ##    [0 0]
 ##    [0 0]
 ##    [0 0]]]], shape=(1, 3, 4, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

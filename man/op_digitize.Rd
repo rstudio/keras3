@@ -25,6 +25,7 @@ op_digitize(x, bins)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 2 1], shape=(4), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([1, 1, 2, 1])

@@ -100,9 +100,11 @@ schedule(step)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasVariable shape=(), dtype=int64, path=variable>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

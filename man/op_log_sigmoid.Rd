@@ -21,6 +21,7 @@ op_log_sigmoid(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.0000418  -0.6931472  -0.474077   -0.00671535], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

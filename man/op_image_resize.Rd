@@ -45,6 +45,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 2, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 4, 3)) # single RGB image
@@ -53,6 +54,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 4, 4)) # batch of 2 RGB images
@@ -61,6 +63,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3, 2, 2)
+
 }\if{html}{\out{</div>}}
 }
 

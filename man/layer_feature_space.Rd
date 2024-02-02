@@ -218,6 +218,7 @@ preprocessed_ds <- labeled_dataset |>
 ##
 ## $int_values
 ## <KerasTensor shape=(None, 1), dtype=int32, sparse=None, name=int_values>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Retrieve the corresponding encoded Keras tensors
@@ -225,6 +226,7 @@ preprocessed_ds <- labeled_dataset |>
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 43), dtype=float32, sparse=False, name=keras_tensor_7>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Build a Functional model

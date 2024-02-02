@@ -25,6 +25,7 @@ layer_add(x1, x2)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[2. 2. 2.]
 ##   [2. 2. 2.]]], shape=(1, 2, 3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:

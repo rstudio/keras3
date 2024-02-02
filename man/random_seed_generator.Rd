@@ -46,6 +46,7 @@ out(op_ones(10), training = TRUE)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 5. 5. 0. 0. 0. 0. 0. 0. 0.], shape=(10), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

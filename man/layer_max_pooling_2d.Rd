@@ -95,6 +95,7 @@ max_pool_2d(x)
 ##
 ##   [[8.]
 ##    [9.]]]], shape=(1, 2, 2, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \code{strides = c(2, 2)} and \code{padding = "valid"}:
@@ -111,6 +112,7 @@ max_pool_2d(x)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[[6.]
 ##    [8.]]]], shape=(1, 1, 2, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \verb{stride = (1, 1)} and \code{padding = "same"}:
@@ -136,6 +138,7 @@ max_pool_2d(x)
 ##   [[8.]
 ##    [9.]
 ##    [9.]]]], shape=(1, 3, 3, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

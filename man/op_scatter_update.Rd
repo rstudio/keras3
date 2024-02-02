@@ -56,6 +56,7 @@ op_scatter_update(inputs, indices, updates)
 ##   [0. 0. 0. 0.]
 ##   [0. 0. 0. 0.]
 ##   [0. 0. 0. 0.]]], shape=(4, 4, 4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 2 \code{indices} is a 2D tensor of shape \verb{(num_updates, k)}, where \code{num_updates}
@@ -93,6 +94,7 @@ op_scatter_update(inputs, indices, updates)
 ##   [0. 0. 0. 0.]
 ##   [0. 0. 0. 0.]
 ##   [0. 0. 0. 0.]]], shape=(4, 4, 4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 \seealso{

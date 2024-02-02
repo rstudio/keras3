@@ -26,6 +26,7 @@ op_argsort(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 0], shape=(3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 Two-dimensional array:
@@ -40,6 +41,7 @@ op_argsort(x, axis = 1)
 ## [[0 1]
 ##  [1 0]
 ##  [2 2]], shape=(3, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argsort(x, axis = 2)
@@ -49,6 +51,7 @@ op_argsort(x, axis = 1)
 ## [[0 1]
 ##  [1 0]
 ##  [0 1]], shape=(3, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

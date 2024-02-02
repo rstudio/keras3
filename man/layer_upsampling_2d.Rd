@@ -55,6 +55,7 @@ print(x)
 ##  [[[ 7  8  9]]
 ##
 ##   [[10 11 12]]]], shape=(2, 2, 1, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_upsampling_2d(x, size = c(1, 2))
@@ -74,6 +75,7 @@ print(y)
 ##
 ##   [[10 11 12]
 ##    [10 11 12]]]], shape=(2, 2, 2, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

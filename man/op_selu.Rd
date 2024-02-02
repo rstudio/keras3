@@ -24,6 +24,7 @@ op_selu(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.1113307  0.         1.050701 ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

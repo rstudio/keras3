@@ -30,6 +30,7 @@ print(a)
 ## [2,]    0    1    0    0
 ## [3,]    0    0    1    0
 ## [4,]    0    0    0    1
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{b <- array(c(.9, .04, .03, .03,
@@ -42,6 +43,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.41284522 0.45601739 0.54430155 0.80437282], shape=(4), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- op_categorical_crossentropy(a, a)
@@ -49,6 +51,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.00000005e-07 1.00000005e-07 1.00000005e-07 1.00000005e-07], shape=(4), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

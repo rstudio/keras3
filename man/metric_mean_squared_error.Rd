@@ -36,6 +36,7 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.25, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

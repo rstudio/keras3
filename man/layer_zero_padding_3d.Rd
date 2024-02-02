@@ -52,6 +52,7 @@ x
 ##
 ##    [[ 7  8  9]
 ##     [10 11 12]]]]], shape=(1, 1, 2, 2, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_zero_padding_3d(x, padding = 2)
@@ -59,6 +60,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 5, 6, 6, 3)
+
 }\if{html}{\out{</div>}}
 }
 

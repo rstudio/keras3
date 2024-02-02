@@ -38,6 +38,7 @@ op_moments(x, axes = c(1))
 ##
 ## [[2]]
 ## tf.Tensor(1553.3601, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

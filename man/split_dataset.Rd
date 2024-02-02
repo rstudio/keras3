@@ -47,12 +47,14 @@ left_ds$cardinality()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(800, shape=(), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{right_ds$cardinality()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(200, shape=(), dtype=int64)
+
 }\if{html}{\out{</div>}}
 }
 

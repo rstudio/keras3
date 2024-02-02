@@ -79,6 +79,7 @@ nrow(as.data.frame(history))  # Only 4 epochs are run.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 10
+
 }\if{html}{\out{</div>}}
 }
 

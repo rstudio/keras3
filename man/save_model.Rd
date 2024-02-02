@@ -50,6 +50,7 @@ Thus models can be reinstantiated in the exact same state.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "metadata.json"    "config.json"      "model.weights.h5"
+
 }\if{html}{\out{</div>}}
 }
 

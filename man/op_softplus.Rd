@@ -22,6 +22,7 @@ op_softplus(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.45366603 0.6931472  1.008666  ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-10, 10, .1)

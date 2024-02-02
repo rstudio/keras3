@@ -25,6 +25,7 @@ op_log_softmax(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-2.407606   -1.4076059  -0.40760595], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

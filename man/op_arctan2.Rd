@@ -32,6 +32,7 @@ op_arctan2(y, x) * 180 / pi
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-135.  -45.   45.  135.], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Note the order of the parameters. \code{arctan2} is defined also when x2 = 0 and
@@ -44,6 +45,7 @@ at several other points, obtaining values in the range \verb{[-pi, pi]}:
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.5707964 -1.5707964], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_arctan2(
@@ -53,6 +55,7 @@ at several other points, obtaining values in the range \verb{[-pi, pi]}:
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        3.1415927 0.7853982], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

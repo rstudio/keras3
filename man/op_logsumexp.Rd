@@ -29,6 +29,7 @@ op_logsumexp(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(3.407606, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

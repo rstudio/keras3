@@ -34,6 +34,7 @@ grid_x
 ## [[1 1 1]
 ##  [2 2 2]
 ##  [3 3 3]], shape=(3, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[1, 1, 1],
@@ -46,6 +47,7 @@ grid_y
 ## [[4 5 6]
 ##  [4 5 6]
 ##  [4 5 6]], shape=(3, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[4, 5, 6],

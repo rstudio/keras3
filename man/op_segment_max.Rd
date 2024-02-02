@@ -34,6 +34,7 @@ op_segment_max(data, segment_ids, num_segments)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  2.  20. 200.], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([2, 20, 200], dtype=int32)

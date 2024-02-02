@@ -32,6 +32,7 @@ op_multi_hot(data, num_classes = 5)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 0. 0. 0. 1.], shape=(5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -52,6 +52,7 @@ op_istft(op_stft(x, 1, 1, 1), 1, 1, 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([], shape=(0), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.0, 1.0, 2.0, 3.0, 4.0])

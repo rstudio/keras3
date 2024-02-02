@@ -34,6 +34,7 @@ op_fft2(x)
 ## tf.Tensor(
 ## [[ 2.  0.]
 ##  [ 0. -2.]], shape=(2, 2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -47,6 +47,7 @@ This function can be used to create or get the shape of an object.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 3 ways to specify an unknown dimension
@@ -59,6 +60,7 @@ shape(-1,   2, 3)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 2, 3)
 ## shape(NA, 2, 3)
 ## shape(NA, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 Most functions that take a 'shape' argument also coerce with \code{shape()}
@@ -69,6 +71,7 @@ layer_input(shape(1, 2, 3))
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor>
 ## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=None, name=keras_tensor_1>
+
 }\if{html}{\out{</div>}}
 
 You can also use \code{shape()} to get the shape of a tensor
@@ -79,6 +82,7 @@ shape(symbolic_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{eager_tensor <- op_ones(c(1,2,3))
@@ -86,12 +90,14 @@ shape(eager_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_shape(eager_tensor)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, 2, 3)
+
 }\if{html}{\out{</div>}}
 
 Combine or expand shapes
@@ -100,12 +106,14 @@ Combine or expand shapes
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(NA, 1, 2, 3, 4)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(5, symbolic_tensor, 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, NA, 1, 2, 3, 4)
+
 }\if{html}{\out{</div>}}
 
 Scalar integer tensors are treated as axis values. These are most commonly
@@ -121,6 +129,7 @@ invisible(tfn(op_ones(shape(1, 2, 3))))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1, Tensor("strided_slice:0", shape=(), dtype=int32), 3)
+
 }\if{html}{\out{</div>}}
 
 A useful pattern is to unpack the \code{shape()} with \verb{\%<-\%}, like this:
@@ -156,24 +165,28 @@ invisible(tfn(op_ones(shape(2, 4, 16))))
 ##  $ axis1:<tf.Tensor 'strided_slice:0' shape=() dtype=int32>
 ##  $ axis2: int 4
 ##  $ axis3: int 16
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(axis1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(Tensor("strided_slice:0", shape=(), dtype=int32))
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(axis1, axis2, axis3)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(Tensor("strided_slice:0", shape=(), dtype=int32), 4, 16)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## > shape(axis1, axis2, n_heads, axis3/n_heads)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(Tensor("strided_slice:0", shape=(), dtype=int32), 4, 4, 4)
+
 }\if{html}{\out{</div>}}
 
 If you want to resolve the shape of a tensor that can potentially be
@@ -183,6 +196,7 @@ a scalar integer, you can wrap the tensor in \code{I()}, or use \code{\link[=op_
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2, shape=(), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# by default, shape() treats scalar integer tensors as axis values
@@ -190,6 +204,7 @@ shape(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(tf.Tensor(2, shape=(), dtype=int32))
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# to access the shape of a scalar integer,
@@ -198,12 +213,14 @@ op_shape(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape()
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(I(x))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape()
+
 }\if{html}{\out{</div>}}
 }
 

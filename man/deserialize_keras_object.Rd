@@ -66,6 +66,7 @@ deserialize_keras_object(config)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.optimizers.adam.Adam object>
+
 }\if{html}{\out{</div>}}
 
 If the class does not have an exported Keras namespace, the library tracks
@@ -101,12 +102,14 @@ get_custom_objects()
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## $`keras3>ModifiedMeanSquaredError`
 ## <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_registered_name(loss_modified_mse)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] "keras3>ModifiedMeanSquaredError"
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# now custom object instances can be serialized
@@ -123,6 +126,7 @@ str(full_config)
 ##   ..$ name     : chr "mean_squared_error"
 ##   ..$ reduction: chr "sum_over_batch_size"
 ##  $ registered_name: chr "keras3>ModifiedMeanSquaredError"
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# and custom object instances can be deserialized
@@ -130,6 +134,7 @@ deserialize_keras_object(full_config)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <<r-namespace:keras3>.ModifiedMeanSquaredError object>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Returns the `ModifiedMeanSquaredError` object

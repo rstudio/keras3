@@ -104,6 +104,7 @@ layer(inp)
 ##  [1]
 ##  [1]
 ##  [2]], shape=(5, 1), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Example (FarmHash64) with a mask value}
@@ -119,6 +120,7 @@ layer(inp)
 ##  [0]
 ##  [2]
 ##  [2]], shape=(5, 1), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Example (SipHash64)}
@@ -134,6 +136,7 @@ layer(inp)
 ##  [1]
 ##  [0]
 ##  [2]], shape=(5, 1), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Example (Siphash64 with a single integer, same as \verb{salt=[133, 133]})}
@@ -149,6 +152,7 @@ layer(inp)
 ##  [2]
 ##  [1]
 ##  [0]], shape=(5, 1), dtype=int64)
+
 }\if{html}{\out{</div>}}
 }
 \section{Input Shape}{

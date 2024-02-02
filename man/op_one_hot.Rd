@@ -40,6 +40,7 @@ op_one_hot(x, num_classes = 4)
 ##  [0. 0. 0. 1.]
 ##  [0. 0. 1. 0.]
 ##  [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[0. 1. 0. 0.]

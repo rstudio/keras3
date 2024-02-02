@@ -41,6 +41,7 @@ op_slice_update(inputs, start_indices, updates)
 ##  [0. 0. 1. 1. 0.]
 ##  [0. 0. 1. 1. 0.]
 ##  [0. 0. 0. 0. 0.]], shape=(5, 5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 \seealso{

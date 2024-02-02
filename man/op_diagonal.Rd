@@ -41,18 +41,21 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0 1]
 ##  [2 3]], shape=(2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_diagonal(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 3], shape=(2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_diagonal(x, offset = 1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1], shape=(1), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:8) |> op_reshape(c(2, 2, 2))
@@ -65,6 +68,7 @@ x
 ##
 ##  [[5 6]
 ##   [7 8]]], shape=(2, 2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> op_diagonal(0)
@@ -73,6 +77,7 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 7]
 ##  [2 8]], shape=(2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> op_diagonal(0, 1, 2) # same as above, the default
@@ -81,6 +86,7 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 7]
 ##  [2 8]], shape=(2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> op_diagonal(0, 2, 3)
@@ -89,6 +95,7 @@ x
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 4]
 ##  [5 8]], shape=(2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

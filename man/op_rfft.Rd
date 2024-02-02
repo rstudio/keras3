@@ -40,6 +40,7 @@ op_rfft(x)
 ##
 ## [[2]]
 ## tf.Tensor([0.        3.440955  0.8122992], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_rfft(x, 3)
@@ -50,6 +51,7 @@ op_rfft(x)
 ##
 ## [[2]]
 ## tf.Tensor([0.        0.8660254], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

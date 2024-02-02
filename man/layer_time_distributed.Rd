@@ -31,6 +31,7 @@ shape(outputs)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 10, 126, 126, 64)
+
 }\if{html}{\out{</div>}}
 
 Because \code{layer_time_distributed} applies the same instance of \code{layer_conv2d} to each of

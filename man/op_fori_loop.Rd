@@ -33,6 +33,7 @@ final_state
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(45, shape=(), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -31,6 +31,7 @@ op_unstack(x, axis=1)
 ##
 ## [[2]]
 ## tf.Tensor([3. 4.], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_unstack(x, axis=2)
@@ -41,6 +42,7 @@ op_unstack(x, axis=1)
 ##
 ## [[2]]
 ## tf.Tensor([2. 4.], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_unstack(x),
@@ -48,6 +50,7 @@ op_unstack(x, axis=1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_unstack(x, axis = -1),
@@ -55,6 +58,7 @@ op_unstack(x, axis=1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# [array([1, 2)), array([3, 4))]

@@ -28,6 +28,7 @@ x
 ##
 ##  [[ 7  8  9]
 ##   [10 11 12]]], shape=(2, 2, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_upsampling_1d(x, size = 2)
@@ -44,6 +45,7 @@ y
 ##   [ 7  8  9]
 ##   [10 11 12]
 ##   [10 11 12]]], shape=(2, 4, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \verb{[[ 6.  7.  8.]}

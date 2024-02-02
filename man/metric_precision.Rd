@@ -66,6 +66,7 @@ m$result() |> as.double() |> signif()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.666667
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
@@ -76,6 +77,7 @@ m$result() |> as.double() |> signif()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=2, it will calculate precision over y_true[1:2]
@@ -86,6 +88,7 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=4, it will calculate precision over y_true[1:4]
@@ -96,6 +99,7 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:

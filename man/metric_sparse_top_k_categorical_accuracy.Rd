@@ -42,6 +42,7 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
@@ -54,6 +55,7 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:

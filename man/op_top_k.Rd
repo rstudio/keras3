@@ -32,6 +32,7 @@ op_top_k(x, k = 3)
 ##
 ## $indices
 ## tf.Tensor([4 2 0], shape=(3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{c(values, indices) \%<-\% op_top_k(x, k = 3)
@@ -39,12 +40,14 @@ values
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([9 7 5], shape=(3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{indices
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([4 2 0], shape=(3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

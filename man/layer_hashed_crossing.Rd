@@ -70,6 +70,7 @@ layer(list(feat1, feat2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 4 1 1 3], shape=(5), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 \strong{Crossing and one-hotting two scalar features.}
@@ -84,6 +85,7 @@ layer(list(feat1, feat2))
 ##  [0. 1. 0. 0. 0.]
 ##  [0. 1. 0. 0. 0.]
 ##  [0. 0. 0. 1. 0.]], shape=(5, 5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

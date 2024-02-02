@@ -102,6 +102,7 @@ reticulate::iter_next(iter)
 ##
 ## [[2]]
 ## tf.Tensor([11], shape=(1), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 Example 3: Temporal regression for many-to-many architectures.

@@ -30,6 +30,7 @@ op_scatter(indices, values, shape= c(2, 2))
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0. 1.]
 ##  [0. 1.]], shape=(2, 2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

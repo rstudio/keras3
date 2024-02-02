@@ -83,6 +83,7 @@ max_pool_1d(x)
 ##   [3.]
 ##   [4.]
 ##   [5.]]], shape=(1, 4, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \code{strides=2} and \code{padding="valid"}:
@@ -98,6 +99,7 @@ max_pool_1d(x)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[2.]
 ##   [4.]]], shape=(1, 2, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \code{strides=1} and \code{padding="same"}:
@@ -116,6 +118,7 @@ max_pool_1d(x)
 ##   [4.]
 ##   [5.]
 ##   [5.]]], shape=(1, 5, 1), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

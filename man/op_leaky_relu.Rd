@@ -26,6 +26,7 @@ op_leaky_relu(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.2  0.   1. ], shape=(3), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)

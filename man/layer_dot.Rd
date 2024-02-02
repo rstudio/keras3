@@ -46,6 +46,7 @@ layer_dot(x, y, axes=c(2, 3))
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[[260 360]
 ##   [320 445]]], shape=(1, 2, 2), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
@@ -56,12 +57,14 @@ shape(x1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, 8)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(x2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, 8)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y <- layer_dot(x1, x2, axes=2)
@@ -69,6 +72,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(5, 1)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -31,6 +31,7 @@ op_hard_silu(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.         -0.33333334  0.          0.6666667   3.        ], shape=(5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

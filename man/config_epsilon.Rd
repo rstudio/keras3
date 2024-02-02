@@ -17,6 +17,7 @@ Return the value of the fuzz factor used in numeric expressions.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1e-07
+
 }\if{html}{\out{</div>}}
 }
 

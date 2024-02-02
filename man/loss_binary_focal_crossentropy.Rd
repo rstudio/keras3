@@ -104,6 +104,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.32986466 0.20579838], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 With the \code{compile()} API:
@@ -125,6 +126,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6912122, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
@@ -134,6 +136,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5101333, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Example 2: (batch_size = 2, number of samples = 4)
@@ -146,6 +149,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6469951, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
@@ -155,6 +159,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.48214132, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sample_weight' attribute with focal effect
@@ -164,6 +169,7 @@ loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.13312504, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
@@ -173,6 +179,7 @@ loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.09735977, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction` type.
@@ -183,6 +190,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.2218808, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
@@ -193,6 +201,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9140807, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
@@ -203,6 +212,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.00174837 1.1561027 ], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
@@ -213,6 +223,7 @@ loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([4.3709317e-04 8.6707699e-01], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

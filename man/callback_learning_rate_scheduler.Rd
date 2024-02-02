@@ -35,6 +35,7 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.01
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
@@ -45,6 +46,7 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.00607
+
 }\if{html}{\out{</div>}}
 }
 

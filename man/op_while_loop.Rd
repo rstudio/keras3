@@ -42,6 +42,7 @@ op_while_loop(cond, body, loop_vars)
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
 ## tf.Tensor(10.0, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

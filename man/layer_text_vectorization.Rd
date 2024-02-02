@@ -222,6 +222,7 @@ vectorize_layer(input_data)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[4 1 3 0]
 ##  [1 2 0 0]], shape=(2, 4), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 This example instantiates a \code{TextVectorization} layer by passing a list
@@ -247,6 +248,7 @@ vectorize_layer \%>\% get_vocabulary()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] ""      "[UNK]" "earth" "wind"  "and"   "fire"
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# ['', '[UNK]', 'earth', 'wind', 'and', 'fire']

@@ -140,6 +140,7 @@ shape(y)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 3, 3, 12)
+
 }\if{html}{\out{</div>}}
 }
 

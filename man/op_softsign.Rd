@@ -21,6 +21,7 @@ op_softsign(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.09090909 -0.90909094  0.5         0.          0.990099  ], shape=(5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-10, 10, .1)

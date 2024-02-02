@@ -35,24 +35,28 @@ Count the number of occurrences of each value in a tensor of integers.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 2 3], shape=(4), dtype=uint8)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_bincount(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 1 2 1], shape=(4), dtype=int32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(weights <- x / 2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.5 1.  1.  1.5], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_bincount(x, weights = weights)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.5 2.  1.5], shape=(4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{minlength <- as.integer(op_max(x) + 1 + 2) # 6
@@ -60,6 +64,7 @@ op_bincount(x, minlength = minlength)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 1 2 1 0 0], shape=(6), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

@@ -22,6 +22,7 @@ Divide arguments element-wise.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.5, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

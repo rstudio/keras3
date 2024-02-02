@@ -34,6 +34,7 @@ pil_img
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=100x100>
+
 }\if{html}{\out{</div>}}
 }
 

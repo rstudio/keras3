@@ -101,6 +101,7 @@ output
 ##  [1 3 2 1]
 ##  [0 1 1 2]
 ##  [2 3 3 3]], shape=(4, 4), dtype=int64)
+
 }\if{html}{\out{</div>}}
 
 Discretize float values based on a number of buckets to compute.
@@ -115,6 +116,7 @@ layer(input)
 ##  [1 3 2 1]
 ##  [0 1 1 2]
 ##  [2 3 3 3]], shape=(4, 4), dtype=int64)
+
 }\if{html}{\out{</div>}}
 }
 

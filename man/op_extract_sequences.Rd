@@ -34,6 +34,7 @@ op_extract_sequences(x, 3, 2)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[1 2 3]
 ##  [3 4 5]], shape=(2, 3), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

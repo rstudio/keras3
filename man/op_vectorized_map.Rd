@@ -44,6 +44,7 @@ a single list of tensor arguments.
 ##  [ 4.  5.  6.  7.]
 ##  [ 8.  9. 10. 11.]
 ##  [12. 13. 14. 15.]], shape=(4, 4), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x |> op_vectorized_map(\\(row) \{row + 10\})
@@ -54,6 +55,7 @@ a single list of tensor arguments.
 ##  [14. 15. 16. 17.]
 ##  [18. 19. 20. 21.]
 ##  [22. 23. 24. 25.]], shape=(4, 4), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{list(x, x, x) |> op_vectorized_map(\\(rows) Reduce(`+`, rows))
@@ -64,6 +66,7 @@ a single list of tensor arguments.
 ##  [12. 15. 18. 21.]
 ##  [24. 27. 30. 33.]
 ##  [36. 39. 42. 45.]], shape=(4, 4), dtype=float64)
+
 }\if{html}{\out{</div>}}
 }
 \seealso{

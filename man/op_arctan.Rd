@@ -22,6 +22,7 @@ op_arctan(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        0.7853982], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

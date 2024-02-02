@@ -29,6 +29,7 @@ op_shape(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(8, 12)
+
 }\if{html}{\out{</div>}}
 }
 

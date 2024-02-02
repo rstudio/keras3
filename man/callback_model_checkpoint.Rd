@@ -131,6 +131,7 @@ load_model(checkpoint_filepath)
 ##  Trainable params: 11 (44.00 B)
 ##  Non-trainable params: 0 (0.00 B)
 ##  Optimizer params: 24 (100.00 B)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Alternatively, one could checkpoint just the model weights as -

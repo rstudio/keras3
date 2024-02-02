@@ -63,6 +63,7 @@ layer(x)
 ##  [0. 0. 1. 0.]
 ##  [1. 0. 0. 0.]
 ##  [0. 1. 0. 0.]], shape=(4, 4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \strong{Multi-hot encoding data}
@@ -80,6 +81,7 @@ layer(x)
 ##  [1. 0. 0. 0.]
 ##  [0. 1. 1. 0.]
 ##  [0. 1. 0. 1.]], shape=(4, 4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \strong{Using weighted inputs in \code{"count"} mode}

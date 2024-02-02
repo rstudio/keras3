@@ -27,6 +27,7 @@ op_sum(normalized_data[1,]^2)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

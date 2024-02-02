@@ -64,6 +64,7 @@ loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129339 2.30258509], shape=(2), dtype=float64)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- c(1, 2)
@@ -74,6 +75,7 @@ scce(op_array(y_true), op_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.177
@@ -84,6 +86,7 @@ scce(op_array(y_true), op_array(y_pred), sample_weight = op_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.8135988, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
@@ -92,6 +95,7 @@ scce(op_array(y_true), op_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.3538785, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2.354
@@ -103,6 +107,7 @@ scce(op_array(y_true), op_array(y_pred))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129344 2.3025851 ], shape=(2), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.0513, 2.303], dtype=float32)

@@ -77,6 +77,7 @@ dim(output_array)    # (32, 10, 64)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 32 10 64
+
 }\if{html}{\out{</div>}}
 }
 

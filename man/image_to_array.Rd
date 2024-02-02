@@ -30,6 +30,7 @@ Converts a PIL Image instance to a matrix.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <PIL.Image.Image image mode=RGB size=724x561>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{array <- image_to_array(img)
@@ -37,6 +38,7 @@ str(array)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{##  num [1:561, 1:724, 1:3] 0 0 0 0 0 0 0 0 0 0 ...
+
 }\if{html}{\out{</div>}}
 }
 

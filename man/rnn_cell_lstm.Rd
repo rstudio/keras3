@@ -105,6 +105,7 @@ shape(output)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(32, 4)
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(cell = rnn_cell_lstm(4),
@@ -115,6 +116,7 @@ str(whole_sequence_output)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Tensor: shape=(32, 10, 4), dtype=float32, numpy=…>
+
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{str(final_state)
@@ -123,6 +125,7 @@ str(whole_sequence_output)
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
 ##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
 ##  $ :<tf.Tensor: shape=(32, 4), dtype=float32, numpy=…>
+
 }\if{html}{\out{</div>}}
 }
 

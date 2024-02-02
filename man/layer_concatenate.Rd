@@ -37,6 +37,7 @@ layer_concatenate(x, y, axis = 2)
 ##   [15. 16. 17. 18. 19.]
 ##   [30. 31. 32. 33. 34.]
 ##   [35. 36. 37. 38. 39.]]], shape=(2, 4, 5), dtype=float32)
+
 }\if{html}{\out{</div>}}
 
 Usage in a Keras model:
