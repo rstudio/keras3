@@ -24,7 +24,7 @@ be called before fit(), evaluate(), or predict()."><!-- mathjax --><script src="
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,7 +157,8 @@ original form.</p></dd>
 <span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="va">layer</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">adapt_data</span><span class="op">)</span></span>
 <span><span class="fu">layer</span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([-1.4142135  -0.70710677  0.        ], shape=(3), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([-1.4142135  -0.70710677  0.        ], shape=(3), dtype=float32)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>Calculate a mean and variance for each index on the last axis.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">adapt_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_array.html">op_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.</span>, <span class="fl">7.</span>, <span class="fl">4.</span><span class="op">)</span>,</span>
 <span>                       <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.</span>, <span class="fl">9.</span>, <span class="fl">6.</span><span class="op">)</span>,</span>
@@ -167,7 +168,8 @@ original form.</p></dd>
 <span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis<span class="op">=</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">layer</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">adapt_data</span><span class="op">)</span></span>
 <span><span class="fu">layer</span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([[-1. -1. -1.]], shape=(1, 3), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([[-1. -1. -1.]], shape=(1, 3), dtype=float32)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>Pass the mean and variance directly.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">input_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_array.html">op_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, dtype<span class="op">=</span><span class="st">'float32'</span><span class="op">)</span></span>
 <span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fl">3.</span>, variance<span class="op">=</span><span class="fl">2.</span><span class="op">)</span></span>
@@ -175,7 +177,8 @@ original form.</p></dd>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[-1.4142135 ]</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##  [-0.70710677]</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [ 0.        ]], shape=(3, 1), dtype=float32)</span></span></code></pre><p></p></div>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##  [ 0.        ]], shape=(3, 1), dtype=float32)</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>Use the layer to de-normalize inputs (after adapting the layer).</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">adapt_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_array.html">op_array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.</span>, <span class="fl">7.</span>, <span class="fl">4.</span><span class="op">)</span>,</span>
 <span>                       <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2.</span>, <span class="fl">9.</span>, <span class="fl">6.</span><span class="op">)</span>,</span>
@@ -185,7 +188,8 @@ original form.</p></dd>
 <span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_normalization.html">layer_normalization</a></span><span class="op">(</span>axis<span class="op">=</span><span class="op">-</span><span class="fl">1</span>, invert<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">layer</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/adapt.html">adapt</a></span><span class="op">(</span><span class="va">adapt_data</span><span class="op">)</span></span>
 <span><span class="fu">layer</span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([[ 2. 10.  8.]], shape=(1, 3), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([[ 2. 10.  8.]], shape=(1, 3), dtype=float32)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

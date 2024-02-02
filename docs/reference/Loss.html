@@ -16,7 +16,7 @@ function to compile()."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,7 +148,8 @@ runtime.</p></dd>
 <span><span class="va">y_true</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span> <span class="op">*</span> <span class="fl">2</span></span>
 <span><span class="op">(</span><span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu">mse</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(123.5, shape=(), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(123.5, shape=(), dtype=float32)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">loss2</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">y_pred</span> <span class="op">-</span> <span class="va">y_true</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/op_mean.html">op_mean</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/op_mean.html">op_mean</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -157,7 +158,8 @@ runtime.</p></dd>
 <span></span>
 <span><span class="va">sample_weight</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.25</span>, <span class="fl">.25</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">weighted_loss</span> <span class="op">&lt;-</span> <span class="fu">mse</span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, sample_weight <span class="op">=</span> <span class="va">sample_weight</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(112.8125, shape=(), dtype=float32)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(112.8125, shape=(), dtype=float32)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">weighted_loss2</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">y_true</span> <span class="op">-</span> <span class="va">y_pred</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/op_mean.html">op_mean</a></span><span class="op">(</span>axis <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/op_multiply.html">op_multiply</a></span><span class="op">(</span><span class="va">sample_weight</span><span class="op">)</span> <span class="op">|&gt;</span></span>

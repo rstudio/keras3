@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,7 +180,8 @@ einsum operations. This example is equivalent to
 <span>                     output_shape <span class="op">=</span> <span class="fl">64</span>,</span>
 <span>                     bias_axes <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="co"># shape(NA, 64)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 64), dtype=float32, sparse=False, name=keras_tensor_1&gt;</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 64), dtype=float32, sparse=False, name=keras_tensor_1&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p><strong>Applying a dense layer to a sequence</strong></p>
 <p>This example shows how to instantiate a layer that applies the same dense
 operation to every element in a sequence. Here, the <code>output_shape</code> has two
@@ -193,7 +194,8 @@ dimension in the <code>output_shape</code> is <code>NA</code>, because the seque
 <span>                     output_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">64</span><span class="op">)</span>,</span>
 <span>                     bias_axes <span class="op">=</span> <span class="st">"d"</span><span class="op">)</span></span>
 <span><span class="va">output</span>  <span class="co"># shape(NA, 32, 64)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, None, 64), dtype=float32, sparse=False, name=keras_tensor_3&gt;</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, None, 64), dtype=float32, sparse=False, name=keras_tensor_3&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p><strong>Applying a dense layer to a sequence using ellipses</strong></p>
 <p>This example shows how to instantiate a layer that applies the same dense
 operation to every element in a sequence, but uses the ellipsis notation
@@ -209,7 +211,8 @@ where no sequence dimension exists.</p>
 <span>                     bias_axes <span class="op">=</span> <span class="st">"y"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">output</span>  <span class="co"># shape(NA, 32, 64)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 32, 64), dtype=float32, sparse=False, name=keras_tensor_5&gt;</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 32, 64), dtype=float32, sparse=False, name=keras_tensor_5&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>

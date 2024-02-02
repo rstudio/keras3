@@ -14,7 +14,7 @@ concatenation of all inputs."><!-- mathjax --><script src="https://cdnjs.cloudfl
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +116,8 @@ concatenation of all inputs.</p>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">##  [[10. 11. 12. 13. 14.]</span></span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">##   [15. 16. 17. 18. 19.]</span></span>
 <span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">##   [30. 31. 32. 33. 34.]</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">##   [35. 36. 37. 38. 39.]]], shape=(2, 4, 5), dtype=float32)</span></span></code></pre><p></p></div>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">##   [35. 36. 37. 38. 39.]]], shape=(2, 4, 5), dtype=float32)</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>Usage in a Keras model:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">x1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>     <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
 <span><span class="va">x2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
