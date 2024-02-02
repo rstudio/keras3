@@ -767,7 +767,7 @@ Note that the `Model` class also features built-in training & evaluation loops:
 These built-in functions give you access to the
 following built-in training infrastructure features:
 
-* [Callbacks](/api/callbacks/). You can leverage built-in
+* [Callbacks](https://keras.posit.co/reference/index.html#callbacks). You can leverage built-in
 callbacks for early-stopping, model checkpointing,
 and monitoring training with TensorBoard. You can also
 [implement custom callbacks](writing_your_own_callbacks.html) if needed.
