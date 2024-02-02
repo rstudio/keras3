@@ -1,6 +1,7 @@
 # keras3 0.1.0
 
-# keras (development version)
+- The package has been rebuilt for Keras 3.0. Refer to <blogpost> for an overview
+  and https://keras.posit.co for the current up-to-date documentation.
 
 # keras 2.13.0
 

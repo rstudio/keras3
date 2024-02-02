@@ -11,14 +11,15 @@ local({
                      method = identity, #as.function(alist(x = , x), envir = baseenv()),
                      envir = asNamespace("roxygen2"))
   }
-  if(isNamespaceLoaded('roxygen2')) register_tether_tag_parser()
+  if (isNamespaceLoaded('roxygen2')) register_tether_tag_parser()
   else setHook(packageEvent("roxygen2", "onLoad"), register_tether_tag_parser)
 })
 
-# silence useless warnings from tensorflow
 local({
 
   on_py_init <- function() {
+
+    # silence useless warnings from tensorflow
     reticulate:::py_register_load_hook("tensorflow", function() {
       reticulate::py_run_string(local = TRUE, glue::trim(r"---(
         from importlib import import_module
@@ -29,14 +30,39 @@ local({
         )---"
       ))
     })
+
+    # R CMD check: no unicode in .Rd files for PDF manuals
+    reticulate:::py_register_load_hook("keras", function() {
+      reticulate::py_run_string(local = TRUE, glue::trim(r"---(
+        def patch_rich_Table_ascii_only():
+            from functools import wraps
+
+            from rich.table import Table
+            from rich.box import ASCII_DOUBLE_HEAD
+
+            og_Table__init__ = Table.__init__
+
+            @wraps(Table.__init__)
+            def __init__(self, *args, **kwargs):
+                kwargs["safe_box"] = True
+                kwargs["box"] = ASCII_DOUBLE_HEAD
+                return og_Table__init__(self, *args, **kwargs)
+
+            Table.__init__ = __init__
+
+        patch_rich_Table_ascii_only()
+        )---"
+      ))
+    })
+
   }
 
   on_reticulate_load <- function(...) {
-    if(reticulate::py_available()) on_py_init() else
-    setHook("reticulate.onPyInit", on_py_init)
+    if (reticulate::py_available()) on_py_init()
+    else setHook("reticulate.onPyInit", on_py_init)
   }
 
-  if(isNamespaceLoaded('reticulate')) on_reticulate_load()
+  if (isNamespaceLoaded('reticulate')) on_reticulate_load()
   else setHook(packageEvent("reticulate", "onLoad"), on_reticulate_load)
 })
 
@@ -57,8 +83,12 @@ local({
     x <- x[!grepl(r"{## .*rstudio:run:reticulate::py_last_error\(\).*}", x)]
     x <- x[!grepl(r"{## .*reticulate::py_last_error\(\).*}", x)]
 
+    # need ascii only
+    # this is used in model summary to indicate layers in a nested model
+    x <- gsub("\u2514", ">", x, fixed = TRUE)
+
     x <- paste0(x, collapse = "\n")
-    if(final_new_line && !endsWith(x, "\n"))
+    if (final_new_line && !endsWith(x, "\n"))
       x <- paste0(x, "\n")
     x
   }
@@ -114,7 +144,7 @@ local({
     )
   }
 
-  if(isNamespaceLoaded('knitr')) knitr_on_load()
+  if (isNamespaceLoaded('knitr')) knitr_on_load()
   else setHook(packageEvent("knitr", "onLoad"), knitr_on_load)
 
 })
@@ -127,7 +157,6 @@ list(
     comment = "##",
     collapse = FALSE,
     eval = !interactive(), # for faster interactive workflow
-    # eval = FALSE, # uncomment this for a faster workflow
     keras.roxy.post_process_output = TRUE
   )
 )

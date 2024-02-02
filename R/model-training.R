@@ -903,6 +903,8 @@ function(x,
       args$show_trainable <- built && as.logical(length(x$non_trainable_weights))
     }
 
+    # args$print_fn <- function(x, ...) {browser(); x}
+
     # Do we need to check for model$built before calling summary?
     with_rich_config(
       out <- trimws(py_capture_output(do.call(x$summary, args)))
@@ -939,9 +941,7 @@ with_rich_config <- function(expr) {
     # set the number of columns to the current width.
     if (is.null(os$environ$get("COLUMNS"))) {
         os$environ["COLUMNS"] = as.character(getOption("width"))
-        on.exit({
-            os$environ$pop("COLUMNS")
-        }, add = TRUE)
+        on.exit({ os$environ$pop("COLUMNS") }, add = TRUE)
     }
 
     # allow colored output if the terminal supports it

@@ -780,7 +780,7 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
 #' (Optional) A list of floating point values to use as the
 #' thresholds for discretizing the curve. If set, the `num_thresholds`
 #' parameter is ignored. Values should be in `[0, 1]`. Endpoint
-#' thresholds equal to {`-epsilon`, `1+epsilon`} for a small positive
+#' thresholds equal to \{`-epsilon`, `1+epsilon`\} for a small positive
 #' epsilon value will be automatically included with these to correctly
 #' handle predictions equal to exactly 0 or 1.
 #'

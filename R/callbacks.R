@@ -512,7 +512,7 @@ function (schedule, verbose = 0L)
 #' overwritten by each new better model.
 #'
 #' @param mode
-#' one of {`"auto"`, `"min"`, `"max"`}. If `save_best_only = TRUE`, the
+#' one of \{`"auto"`, `"min"`, `"max"`\}. If `save_best_only = TRUE`, the
 #' decision to overwrite the current save file is made based on either
 #' the maximization or the minimization of the monitored quantity.
 #' For `val_acc`, this should be `"max"`, for `val_loss` this should be

@@ -29,7 +29,7 @@
 #'   np_array
 #' @importFrom graphics par plot points
 #' @importFrom tensorflow tf_version tf_config install_tensorflow all_dims
-#' @aliases keras-package
+#' @aliases keras3-package
 "_PACKAGE"
 
 

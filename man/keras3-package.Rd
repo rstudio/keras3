@@ -3,7 +3,6 @@
 \docType{package}
 \name{keras3-package}
 \alias{keras3-package}
-\alias{keras-package}
 \title{keras3: R Interface to 'Keras'}
 \description{
 Interface to 'Keras' \url{https://keras.io}, a high-level neural networks 'API'. 'Keras' was developed with a focus on enabling fast experimentation, supports both convolution based networks and recurrent networks (as well as combinations of the two), and runs seamlessly on both 'CPU' and 'GPU' devices.
@@ -33,6 +32,7 @@ See the package website at \url{https://keras.posit.co} for complete documentati
 Useful links:
 \itemize{
   \item \url{https://keras.posit.co/}
+  \item \url{https://github.com/rstudio/keras}
   \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 
@@ -40,6 +40,7 @@ Useful links:
 Useful links:
 \itemize{
   \item \url{https://keras.posit.co/}
+  \item \url{https://github.com/rstudio/keras}
   \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 

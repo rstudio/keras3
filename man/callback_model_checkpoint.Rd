@@ -57,7 +57,7 @@ overwritten by each new better model.}
 (\code{model |> save_model_weights(filepath)}), else the full model is saved
 (\code{model |> save_model(filepath)}).}
 
-\item{mode}{one of {\code{"auto"}, \code{"min"}, \code{"max"}}. If \code{save_best_only = TRUE}, the
+\item{mode}{one of \{\code{"auto"}, \code{"min"}, \code{"max"}\}. If \code{save_best_only = TRUE}, the
 decision to overwrite the current save file is made based on either
 the maximization or the minimization of the monitored quantity.
 For \code{val_acc}, this should be \code{"max"}, for \code{val_loss} this should be
@@ -122,11 +122,11 @@ load_model(checkpoint_filepath)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## Model: "sequential"
-## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃ Layer (type)                    ┃ Output Shape              ┃    Param # ┃
-## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ dense (Dense)                   │ (None, 1)                 │         11 │
-## └─────────────────────────────────┴───────────────────────────┴────────────┘
+## +---------------------------------+---------------------------+------------+
+## | Layer (type)                    | Output Shape              |    Param # |
+## +=================================+===========================+============+
+## | dense (Dense)                   | (None, 1)                 |         11 |
+## +---------------------------------+---------------------------+------------+
 ##  Total params: 35 (144.00 B)
 ##  Trainable params: 11 (44.00 B)
 ##  Non-trainable params: 0 (0.00 B)
