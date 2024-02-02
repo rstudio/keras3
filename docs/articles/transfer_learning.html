@@ -56,6 +56,7 @@
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -181,8 +182,8 @@ layer that has non-trainable weights is
 [<code><a href="../reference/layer_batch_normalization.html">layer_batch_normalization()</a></code>]. It uses non-trainable
 weights to keep track of the mean and variance of its inputs during
 training. To learn how to use non-trainable weights in your own custom
-layers, see the <a href="https://keras.io/guides/making_new_layers_and_models_via_subclassing/" class="external-link">guide
-to writing new layers from scratch</a>.</p>
+layers, see the <a href="making_new_layers_and_models_via_subclassing.html">guide to
+writing new layers from scratch</a>.</p>
 <p><strong>Example: the <code>BatchNormalization</code> layer has 2
 trainable weights and 2 non-trainable weights</strong></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -618,26 +619,26 @@ fine-tuning.</li>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span>, show_trainable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_10"</span></span></span>
+<pre><code><span><span class="co">## [1mModel: "functional_10"[0m</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                </span>┃<span style="font-weight: bold;"> Output Shape             </span>┃<span style="font-weight: bold;"> Param # </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
+<span><span class="co">## ┃[1m [0m[1mLayer (type)               [0m[1m [0m┃[1m [0m[1mOutput Shape            [0m[1m [0m┃[1m [0m[1mParam #[0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer_7 (<span style="color: #0087FF;">InputLayer</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">3</span>)      │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ input_layer_7 ([38;5;33mInputLayer[0m)  │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)      │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ rescaling (<span style="color: #0087FF;">Rescaling</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">3</span>)      │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ rescaling ([38;5;33mRescaling[0m)       │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)      │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ xception (<span style="color: #0087FF;">Functional</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">2048</span>)       │ <span style="color: #00AF00;">20,861…</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
+<span><span class="co">## │ xception ([38;5;33mFunctional[0m)       │ ([38;5;45mNone[0m, [38;5;34m5[0m, [38;5;34m5[0m, [38;5;34m2048[0m)       │ [38;5;34m20,861…[0m │   [1;91mN[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ global_average_pooling2d_1  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">2048</span>)             │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePooling2D</span>)    │                          │         │       │</span></span>
+<span><span class="co">## │ global_average_pooling2d_1  │ ([38;5;45mNone[0m, [38;5;34m2048[0m)             │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
+<span><span class="co">## │ ([38;5;33mGlobalAveragePooling2D[0m)    │                          │         │       │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">2048</span>)             │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ dropout ([38;5;33mDropout[0m)           │ ([38;5;45mNone[0m, [38;5;34m2048[0m)             │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dense_8 (<span style="color: #0087FF;">Dense</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)                │   <span style="color: #00AF00;">2,049</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ dense_8 ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m1[0m)                │   [38;5;34m2,049[0m │   [1;38;5;34mY[0m   │</span></span>
 <span><span class="co">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">20,863,529</span> (79.59 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">2,049</span> (8.00 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">20,861,480</span> (79.58 MB)</span></span></code></pre>
+<span><span class="co">## [1m Total params: [0m[38;5;34m20,863,529[0m (79.59 MB)</span></span>
+<span><span class="co">## [1m Trainable params: [0m[38;5;34m2,049[0m (8.00 KB)</span></span>
+<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m20,861,480[0m (79.58 MB)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="train-the-top-layer">Train the top layer<a class="anchor" aria-label="anchor" href="#train-the-top-layer"></a>
@@ -672,27 +673,27 @@ so far.</p>
 <span><span class="co"># we've done so far.</span></span>
 <span><span class="va">base_model</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span>, show_trainable <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_10"</span></span></span>
+<pre><code><span><span class="co">## [1mModel: "functional_10"[0m</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                </span>┃<span style="font-weight: bold;"> Output Shape             </span>┃<span style="font-weight: bold;"> Param # </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
+<span><span class="co">## ┃[1m [0m[1mLayer (type)               [0m[1m [0m┃[1m [0m[1mOutput Shape            [0m[1m [0m┃[1m [0m[1mParam #[0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer_7 (<span style="color: #0087FF;">InputLayer</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">3</span>)      │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ input_layer_7 ([38;5;33mInputLayer[0m)  │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)      │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ rescaling (<span style="color: #0087FF;">Rescaling</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">150</span>, <span style="color: #00AF00;">3</span>)      │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ rescaling ([38;5;33mRescaling[0m)       │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)      │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ xception (<span style="color: #0087FF;">Functional</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">2048</span>)       │ <span style="color: #00AF00;">20,861…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ xception ([38;5;33mFunctional[0m)       │ ([38;5;45mNone[0m, [38;5;34m5[0m, [38;5;34m5[0m, [38;5;34m2048[0m)       │ [38;5;34m20,861…[0m │   [1;38;5;34mY[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ global_average_pooling2d_1  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">2048</span>)             │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePooling2D</span>)    │                          │         │       │</span></span>
+<span><span class="co">## │ global_average_pooling2d_1  │ ([38;5;45mNone[0m, [38;5;34m2048[0m)             │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
+<span><span class="co">## │ ([38;5;33mGlobalAveragePooling2D[0m)    │                          │         │       │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">2048</span>)             │       <span style="color: #00AF00;">0</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ dropout ([38;5;33mDropout[0m)           │ ([38;5;45mNone[0m, [38;5;34m2048[0m)             │       [38;5;34m0[0m │   [1m-[0m   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dense_8 (<span style="color: #0087FF;">Dense</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)                │   <span style="color: #00AF00;">2,049</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ dense_8 ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m1[0m)                │   [38;5;34m2,049[0m │   [1;38;5;34mY[0m   │</span></span>
 <span><span class="co">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">20,867,629</span> (79.60 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">20,809,001</span> (79.38 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">54,528</span> (213.00 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Optimizer params: </span><span style="color: #00AF00;">4,100</span> (16.02 KB)</span></span></code></pre>
+<span><span class="co">## [1m Total params: [0m[38;5;34m20,867,629[0m (79.60 MB)</span></span>
+<span><span class="co">## [1m Trainable params: [0m[38;5;34m20,809,001[0m (79.38 MB)</span></span>
+<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m54,528[0m (213.00 KB)</span></span>
+<span><span class="co">## [1m Optimizer params: [0m[38;5;34m4,100[0m (16.02 KB)</span></span></code></pre>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span><span class="fl">1e-5</span><span class="op">)</span>, <span class="co"># Low learning rate</span></span>

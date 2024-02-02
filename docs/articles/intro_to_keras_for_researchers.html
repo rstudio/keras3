@@ -56,6 +56,7 @@
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -927,7 +928,7 @@ provides a few other advantages (generally the same advantages that
 functional, typed languages provide over untyped OO development).
 However, it can only be used to define DAGs of layers – recursive
 networks should be defined as Layer subclasses instead.</p>
-<p>Learn more about the Functional API <a href="/guides/functional_api/">here</a>.</p>
+<p>Learn more about the Functional API <a href="functional_api.html">here</a>.</p>
 <p>In your research workflows, you may often find yourself
 mix-and-matching OO models and Functional models.</p>
 <p>Note that the <code>Model</code> class also features built-in
@@ -939,15 +940,15 @@ to the following built-in training infrastructure features:</p>
 <li>
 <a href="/api/callbacks/">Callbacks</a>. You can leverage built-in
 callbacks for early-stopping, model checkpointing, and monitoring
-training with TensorBoard. You can also <a href="/guides/writing_your_own_callbacks/">implement custom
-callbacks</a> if needed.</li>
+training with TensorBoard. You can also <a href="writing_your_own_callbacks.html">implement custom callbacks</a> if
+needed.</li>
 <li>
-<a href="https://keras.io/guides/distributed_training_with_tensorflow/" class="external-link">Distributed
+<a href="distributed_training_with_tensorflow.html">Distributed
 training</a>. You can easily scale up your training to multiple GPUs,
 TPU, or even multiple machines with the <code>tf.distribute</code> API –
 with no changes to your code.</li>
 <li>
-<a href="https://keras.io/api/models/model_training_apis/#compile-method" class="external-link">Step
+<a href="https://keras.posit.co/reference/compile.keras.src.models.model.Model.html">Step
 fusing</a>. With the <code>steps_per_execution</code> argument in
 <code>Model.compile()</code>, you can process multiple batches in a
 single <code>tf.function</code> call, which greatly improves device
@@ -998,7 +999,7 @@ distribution support, and step fusing support. You may also override
 <code>test_step()</code> to customize what happens in
 <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and override <code>predict_step()</code> to
 customize what happens in <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. For more information,
-please refer to <a href="https://keras.io/guides/custom_train_step_in_tensorflow/" class="external-link">this
+please refer to <a href="custom_train_step_in_tensorflow.html">this
 guide</a>.</p>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CustomModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_model_class.html">new_model_class</a></span><span class="op">(</span></span>

@@ -56,6 +56,7 @@
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -116,7 +117,7 @@
 </h2>
 <p>Keras provides default training and evaluation loops,
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>. Their usage is covered
-in the guide <a href="https://keras.io/guides/training_with_built_in_methods/" class="external-link">Training
+in the guide <a href="training_with_built_in_methods.html">Training
 &amp; evaluation with the built-in methods</a>.</p>
 <p>If you want to customize the learning algorithm of your model while
 still leveraging the convenience of <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> (for instance, to
@@ -552,26 +553,26 @@ meant to classify fake vs real digits:</p>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">discriminator</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "discriminator"</span></span></span>
+<pre><code><span><span class="co">## [1mModel: "discriminator"[0m</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">64</span>)        │        <span style="color: #00AF00;">640</span> │</span></span>
+<span><span class="co">## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │        [38;5;34m640[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_1 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">64</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_1 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)         │     <span style="color: #00AF00;">73,856</span> │</span></span>
+<span><span class="co">## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │     [38;5;34m73,856[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu (<span style="color: #0087FF;">LeakyReLU</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu ([38;5;33mLeakyReLU[0m)         │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                           │            │</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │</span></span>
+<span><span class="co">## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_6 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)                 │        <span style="color: #00AF00;">129</span> │</span></span>
+<span><span class="co">## │ dense_6 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)                 │        [38;5;34m129[0m │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">74,625</span> (291.50 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">74,625</span> (291.50 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">## [1m Total params: [0m[38;5;34m74,625[0m (291.50 KB)</span></span>
+<span><span class="co">## [1m Trainable params: [0m[38;5;34m74,625[0m (291.50 KB)</span></span>
+<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
 <p>Then let’s create a generator network, that turns latent vectors into
 outputs of shape <code>(28, 28, 1)</code> (representing MNIST
 digits):</p>
@@ -599,31 +600,31 @@ digits):</p>
 <span>                activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">generator</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "generator"</span></span></span>
+<pre><code><span><span class="co">## [1mModel: "generator"[0m</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ dense_7 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6272</span>)              │    <span style="color: #00AF00;">809,088</span> │</span></span>
+<span><span class="co">## │ dense_7 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │    [38;5;34m809,088[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_4 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6272</span>)              │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_4 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ reshape (<span style="color: #0087FF;">Reshape</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_1              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">128</span>)       │    <span style="color: #00AF00;">262,272</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │</span></span>
+<span><span class="co">## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_3 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">128</span>)       │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_3 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">128</span>)       │    <span style="color: #00AF00;">262,272</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                           │            │</span></span>
+<span><span class="co">## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │</span></span>
+<span><span class="co">## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_2 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">128</span>)       │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_2 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)         │      <span style="color: #00AF00;">6,273</span> │</span></span>
+<span><span class="co">## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │      [38;5;34m6,273[0m │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">1,339,905</span> (5.11 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">1,339,905</span> (5.11 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">## [1m Total params: [0m[38;5;34m1,339,905[0m (5.11 MB)</span></span>
+<span><span class="co">## [1m Trainable params: [0m[38;5;34m1,339,905[0m (5.11 MB)</span></span>
+<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
 <p>Here’s the key bit: the training loop. As you can see it is quite
 straightforward. The training step function only takes 17 lines.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">

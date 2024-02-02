@@ -56,6 +56,7 @@
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -117,19 +118,19 @@ models when using built-in APIs for training &amp; validation (such as
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> and
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>).</p>
 <p>If you are interested in leveraging <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> while
-specifying your own training step function, see the <a href="/guides/customizing_what_happens_in_fit/">Customizing what happens
-in <code>fit()</code> guide</a>.</p>
+specifying your own training step function, see the <a href="custom_train_step_in_tensorflow.html">Customizing what happens in
+<code>fit()</code> guide</a>.</p>
 <p>If you are interested in writing your own training &amp; evaluation
-loops from scratch, see the guide <a href="/guides/writing_a_training_loop_from_scratch/">“writing a training
-loop from scratch”</a>.</p>
+loops from scratch, see the guide <a href="writing_a_custom_training_loop_in_tensorflow.html">“writing a
+training loop from scratch”</a>.</p>
 <p>In general, whether you are using built-in loops or writing your own,
 model training &amp; evaluation works strictly in the same way across
 every kind of Keras model – Sequential models, models built with the
 Functional API, and models written from scratch via model
 subclassing.</p>
 <p>This guide doesn’t cover distributed training, which is covered in
-our <a href="https://keras.io/guides/distributed_training_with_tensorflow/" class="external-link">guide
-to multi-GPU &amp; distributed training</a>.</p>
+our <a href="distributed_training_with_tensorflow.html">guide to
+multi-GPU &amp; distributed training</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="api-overview-a-first-end-to-end-example">API overview: a first end-to-end example<a class="anchor" aria-label="anchor" href="#api-overview-a-first-end-to-end-example"></a>
@@ -157,21 +158,21 @@ as well):</p>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span>, activation <span class="op">=</span> <span class="st">"softmax"</span>, name <span class="op">=</span> <span class="st">"predictions"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_1"</span></span></span>
+<pre><code><span><span class="co">## [1mModel: "functional_1"[0m</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
+<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ digits (<span style="color: #0087FF;">InputLayer</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">784</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ digits ([38;5;33mInputLayer[0m)             │ ([38;5;45mNone[0m, [38;5;34m784[0m)               │          [38;5;34m0[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_1 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)                │     <span style="color: #00AF00;">50,240</span> │</span></span>
+<span><span class="co">## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │     [38;5;34m50,240[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_2 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)                │      <span style="color: #00AF00;">4,160</span> │</span></span>
+<span><span class="co">## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │      [38;5;34m4,160[0m │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ predictions (<span style="color: #0087FF;">Dense</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)                │        <span style="color: #00AF00;">650</span> │</span></span>
+<span><span class="co">## │ predictions ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m10[0m)                │        [38;5;34m650[0m │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">55,050</span> (215.04 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">55,050</span> (215.04 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">## [1m Total params: [0m[38;5;34m55,050[0m (215.04 KB)</span></span>
+<span><span class="co">## [1m Trainable params: [0m[38;5;34m55,050[0m (215.04 KB)</span></span>
+<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
 <p>Here’s what the typical end-to-end workflow looks like, consisting
 of:</p>
 <ul>
@@ -1292,7 +1293,7 @@ basic example:</p>
 <pre><code><span><span class="co">## 1563/1563 - 3s - 2ms/step - loss: 0.2949 - sparse_categorical_accuracy: 0.9148</span></span></code></pre>
 <p>You call also write your own callback for saving and restoring
 models.</p>
-<p>For a complete guide on serialization and saving, see the <a href="/guides/serialization_and_saving/">guide to saving and serializing
+<p>For a complete guide on serialization and saving, see the <a href="serialization_and_saving.html">guide to saving and serializing
 Models</a>.</p>
 </div>
 <div class="section level2">
@@ -1372,8 +1373,7 @@ write logs, and you’re good to go:</p>
 <span>  embeddings_freq <span class="op">=</span> <span class="fl">0</span>, <span class="co"># How often to log embedding visualizations</span></span>
 <span>  update_freq <span class="op">=</span> <span class="st">"epoch"</span>, <span class="co"># How often to write logs (default: once per epoch)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>For more information, see the <a href="https://keras.io/api/callbacks/tensorboard/" class="external-link">documentation for the
-<code>TensorBoard</code> callback</a>.</p>
+<p>For more information, see <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

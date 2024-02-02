@@ -56,6 +56,7 @@
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a>
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
@@ -243,8 +244,8 @@ then evaluate the model on the test data:</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Test loss: 0.1337984</span></span>
 <span><span class="co">## Test accuracy: 0.9578</span></span></code></pre>
-<p>For further reading, see the <a href="/guides/training_with_built_in_methods/">training and
-evaluation</a> guide.</p>
+<p>For further reading, see the <a href="training_with_built_in_methods.html">training and evaluation</a>
+guide.</p>
 </div>
 <div class="section level2">
 <h2 id="save-and-serialize">Save and serialize<a class="anchor" aria-label="anchor" href="#save-and-serialize"></a>
@@ -264,7 +265,7 @@ any (to restart training where you left off)</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co"># Recreate the exact same model purely from the file:</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"my_model.keras"</span><span class="op">)</span></span></code></pre></div>
-<p>For details, read the model <a href="/guides/serialization_and_saving/">serialization &amp; saving</a>
+<p>For details, read the model <a href="serialization_and_saving.html">serialization &amp; saving</a>
 guide.</p>
 </div>
 <div class="section level2">
@@ -609,8 +610,8 @@ either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
 or a list of named lists like
 <code>list(list(title = title_data, body = body_data, tags = tags_data), list(priority = priority_targets, department = dept_targets))</code>.</p>
-<p>For more detailed explanation, refer to the <a href="/guides/training_with_built_in_methods/">training and
-evaluation</a> guide.</p>
+<p>For more detailed explanation, refer to the <a href="training_with_built_in_methods.html">training and evaluation</a>
+guide.</p>
 </div>
 <div class="section level3">
 <h3 id="a-toy-resnet-model">A toy ResNet model<a class="anchor" aria-label="anchor" href="#a-toy-resnet-model"></a>
@@ -809,8 +810,8 @@ layer.</li>
 (this is just a style convention since you can create weights in
 <code>initialize</code>, as well).</li>
 </ul>
-<p>To learn more about creating layers from scratch, read <a href="/guides/making_new_layers_and_models_via_subclassing">custom
-layers and models</a> guide.</p>
+<p>To learn more about creating layers from scratch, read <a href="making_new_layers_and_models_via_subclassing.html">custom layers
+and models</a> guide.</p>
 <p>The following is a basic implementation of
 <code><a href="../reference/layer_dense.html">layer_dense()</a></code>:</p>
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
@@ -976,7 +977,7 @@ activations of intermediate layers (as seen in a previous example):</p>
 <p>Because a functional model is a data structure rather than a piece of
 code, it is safely serializable and can be saved as a single file that
 allows you to recreate the exact same model without having access to any
-of the original code. See the <a href="/guides/serialization_and_saving/">serialization &amp; saving
+of the original code. See the <a href="serialization_and_saving.html">serialization &amp; saving
 guide</a>.</p>
 <p>To serialize a subclassed model, it is necessary for the implementer
 to specify a <code><a href="../reference/get_config.html">get_config()</a></code> and <code><a href="../reference/get_config.html">from_config()</a></code>
