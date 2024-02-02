@@ -5,11 +5,11 @@
 \title{Callback used to stream events to a server.}
 \usage{
 callback_remote_monitor(
-  root = "http://localhost:9000",
-  path = "/publish/epoch/end/",
-  field = "data",
-  headers = NULL,
-  send_as_json = FALSE
+root = "http://localhost:9000",
+path = "/publish/epoch/end/",
+field = "data",
+headers = NULL,
+send_as_json = FALSE
 )
 }
 \arguments{
@@ -40,17 +40,17 @@ Otherwise the serialized JSON will be sent within a form.
 \item \url{https://keras.io/api/callbacks/remote_monitor#remotemonitor-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

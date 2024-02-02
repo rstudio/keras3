@@ -5,16 +5,16 @@
 \title{Downloads a file from a URL if it not already in the cache.}
 \usage{
 get_file(
-  fname = NULL,
-  origin = NULL,
-  ...,
-  file_hash = NULL,
-  cache_subdir = "datasets",
-  hash_algorithm = "auto",
-  extract = FALSE,
-  archive_format = "auto",
-  cache_dir = NULL,
-  force_download = FALSE
+fname = NULL,
+origin = NULL,
+...,
+file_hash = NULL,
+cache_subdir = "datasets",
+hash_algorithm = "auto",
+extract = FALSE,
+archive_format = "auto",
+cache_dir = NULL,
+force_download = FALSE
 )
 }
 \arguments{
@@ -75,8 +75,8 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{path_to_downloaded_file <- get_file(
-    origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
-    extract = TRUE
+origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
+extract = TRUE
 )
 }\if{html}{\out{</div>}}
 }
@@ -86,33 +86,33 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
 \item \url{https://keras.io/api/utils/python_utils#getfile-function}
 }
 
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{clear_session}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()},
-\code{\link{zip_lists}()}
+Other utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
+\code{\link{to_categorical}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+\code{\link{zip_lists}()} \cr
 }
 \concept{utils}

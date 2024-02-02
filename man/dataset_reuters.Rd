@@ -6,15 +6,15 @@
 \title{Reuters newswire topics classification}
 \usage{
 dataset_reuters(
-  path = "reuters.npz",
-  num_words = NULL,
-  skip_top = 0L,
-  maxlen = NULL,
-  test_split = 0.2,
-  seed = 113L,
-  start_char = 1L,
-  oov_char = 2L,
-  index_from = 3L
+path = "reuters.npz",
+num_words = NULL,
+skip_top = 0L,
+maxlen = NULL,
+test_split = 0.2,
+seed = 113L,
+start_char = 1L,
+oov_char = 2L,
+index_from = 3L
 )
 
 dataset_reuters_word_index(path = "reuters_word_index.pkl")
@@ -55,12 +55,12 @@ Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with
 conventions).
 }
 \seealso{
-Other datasets: 
-\code{\link{dataset_boston_housing}()},
-\code{\link{dataset_cifar10}()},
-\code{\link{dataset_cifar100}()},
-\code{\link{dataset_fashion_mnist}()},
-\code{\link{dataset_imdb}()},
-\code{\link{dataset_mnist}()}
+Other datasets: \cr
+\code{\link{dataset_boston_housing}()} \cr
+\code{\link{dataset_cifar10}()} \cr
+\code{\link{dataset_cifar100}()} \cr
+\code{\link{dataset_fashion_mnist}()} \cr
+\code{\link{dataset_imdb}()} \cr
+\code{\link{dataset_mnist}()} \cr
 }
 \concept{datasets}

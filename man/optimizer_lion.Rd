@@ -5,20 +5,20 @@
 \title{Optimizer that implements the Lion algorithm.}
 \usage{
 optimizer_lion(
-  learning_rate = 0.001,
-  beta_1 = 0.9,
-  beta_2 = 0.99,
-  weight_decay = NULL,
-  clipnorm = NULL,
-  clipvalue = NULL,
-  global_clipnorm = NULL,
-  use_ema = FALSE,
-  ema_momentum = 0.99,
-  ema_overwrite_frequency = NULL,
-  name = "lion",
-  ...,
-  loss_scale_factor = NULL,
-  gradient_accumulation_steps = NULL
+learning_rate = 0.001,
+beta_1 = 0.9,
+beta_2 = 0.99,
+weight_decay = NULL,
+clipnorm = NULL,
+clipvalue = NULL,
+global_clipnorm = NULL,
+use_ema = FALSE,
+ema_momentum = 0.99,
+ema_overwrite_frequency = NULL,
+name = "lion",
+...,
+loss_scale_factor = NULL,
+gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -112,17 +112,17 @@ similar strength (lr * wd).
 }
 
 \seealso{
-Other optimizers: 
-\code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adafactor}()},
-\code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adam}()},
-\code{\link{optimizer_adam_w}()},
-\code{\link{optimizer_adamax}()},
-\code{\link{optimizer_ftrl}()},
-\code{\link{optimizer_loss_scale}()},
-\code{\link{optimizer_nadam}()},
-\code{\link{optimizer_rmsprop}()},
-\code{\link{optimizer_sgd}()}
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adafactor}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_sgd}()} \cr
 }
 \concept{optimizers}

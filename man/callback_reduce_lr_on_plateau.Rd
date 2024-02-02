@@ -5,15 +5,15 @@
 \title{Reduce learning rate when a metric has stopped improving.}
 \usage{
 callback_reduce_lr_on_plateau(
-  monitor = "val_loss",
-  factor = 0.1,
-  patience = 10L,
-  verbose = 0L,
-  mode = "auto",
-  min_delta = 1e-04,
-  cooldown = 0L,
-  min_lr = 0,
-  ...
+monitor = "val_loss",
+factor = 0.1,
+patience = 10L,
+verbose = 0L,
+mode = "auto",
+min_delta = 1e-04,
+cooldown = 0L,
+min_lr = 0,
+...
 )
 }
 \arguments{
@@ -52,7 +52,7 @@ of epochs, the learning rate is reduced.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
-                                           patience = 5, min_lr = 0.001)
+patience = 5, min_lr = 0.001)
 model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 }\if{html}{\out{</div>}}
 }
@@ -62,17 +62,17 @@ model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 \item \url{https://keras.io/api/callbacks/reduce_lr_on_plateau#reducelronplateau-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

@@ -23,11 +23,11 @@ Indices are based on order of horizontal graph traversal (bottom-up) and are
 precedence.
 }
 \seealso{
-Other model functions: 
-\code{\link{get_config}()},
-\code{\link{keras_model}()},
-\code{\link{keras_model_sequential}()},
-\code{\link{pop_layer}()},
-\code{\link{summary.keras.src.models.model.Model}()}
+Other model functions: \cr
+\code{\link{get_config}()} \cr
+\code{\link{keras_model}()} \cr
+\code{\link{keras_model_sequential}()} \cr
+\code{\link{pop_layer}()} \cr
+\code{\link{summary.keras.src.models.model.Model}()} \cr
 }
 \concept{model functions}

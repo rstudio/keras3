@@ -5,19 +5,19 @@
 \title{Generates a \code{tf.data.Dataset} from audio files in a directory.}
 \usage{
 audio_dataset_from_directory(
-  directory,
-  labels = "inferred",
-  label_mode = "int",
-  class_names = NULL,
-  batch_size = 32L,
-  sampling_rate = NULL,
-  output_sequence_length = NULL,
-  ragged = FALSE,
-  shuffle = TRUE,
-  seed = NULL,
-  validation_split = NULL,
-  subset = NULL,
-  follow_links = FALSE
+directory,
+labels = "inferred",
+label_mode = "int",
+class_names = NULL,
+batch_size = 32L,
+sampling_rate = NULL,
+output_sequence_length = NULL,
+ragged = FALSE,
+shuffle = TRUE,
+seed = NULL,
+validation_split = NULL,
+subset = NULL,
+follow_links = FALSE
 )
 }
 \arguments{
@@ -125,40 +125,40 @@ Only \code{.wav} files are supported at this time.
 \item \url{https://keras.io/api/data_loading/audio#audiodatasetfromdirectory-function}
 }
 
-Other dataset utils: 
-\code{\link{image_dataset_from_directory}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()}
+Other dataset utils: \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
 
-Other utils: 
-\code{\link{clear_session}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_file}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()},
-\code{\link{zip_lists}()}
+Other utils: \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_file}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
+\code{\link{to_categorical}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+\code{\link{zip_lists}()} \cr
 }
 \concept{dataset utils}
 \concept{utils}

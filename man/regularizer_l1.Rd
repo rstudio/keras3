@@ -25,9 +25,9 @@ In this case, the default value used is \code{l1=0.01}.
 \item \url{https://keras.io/api/layers/regularizers#l1-class}
 }
 
-Other regularizers: 
-\code{\link{regularizer_l1_l2}()},
-\code{\link{regularizer_l2}()},
-\code{\link{regularizer_orthogonal}()}
+Other regularizers: \cr
+\code{\link{regularizer_l1_l2}()} \cr
+\code{\link{regularizer_l2}()} \cr
+\code{\link{regularizer_orthogonal}()} \cr
 }
 \concept{regularizers}

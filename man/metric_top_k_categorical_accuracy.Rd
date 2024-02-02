@@ -5,12 +5,12 @@
 \title{Computes how often targets are in the top \code{K} predictions.}
 \usage{
 metric_top_k_categorical_accuracy(
-  y_true,
-  y_pred,
-  k = 5L,
-  ...,
-  name = "top_k_categorical_accuracy",
-  dtype = NULL
+y_true,
+y_pred,
+k = 5L,
+...,
+name = "top_k_categorical_accuracy",
+dtype = NULL
 )
 }
 \arguments{
@@ -35,8 +35,8 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_top_k_categorical_accuracy(k = 1)
 m$update_state(
-  rbind(c(0, 0, 1), c(0, 1, 0)),
-  op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
+rbind(c(0, 0, 1), c(0, 1, 0)),
+op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
 )
 m$result()
 }\if{html}{\out{</div>}}
@@ -47,9 +47,9 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(
-  rbind(c(0, 0, 1), c(0, 1, 0)),
-  op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
-  sample_weight = c(0.7, 0.3))
+rbind(c(0, 0, 1), c(0, 1, 0)),
+op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
+sample_weight = c(0.7, 0.3))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -60,8 +60,8 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model.compile(optimizer = 'sgd',
-              loss = 'categorical_crossentropy',
-              metrics = list(metric_top_k_categorical_accuracy()))
+loss = 'categorical_crossentropy',
+metrics = list(metric_top_k_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 
@@ -70,60 +70,60 @@ Usage with \code{compile()} API:
 \item \url{https://keras.io/api/metrics/accuracy_metrics#topkcategoricalaccuracy-class}
 }
 
-Other accuracy metrics: 
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()}
+Other accuracy metrics: \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
 
-Other metrics: 
-\code{\link{Metric}()},
-\code{\link{custom_metric}()},
-\code{\link{metric_auc}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_binary_focal_crossentropy}()},
-\code{\link{metric_binary_iou}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_focal_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_f1_score}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_fbeta_score}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_huber}()},
-\code{\link{metric_iou}()},
-\code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh}()},
-\code{\link{metric_log_cosh_error}()},
-\code{\link{metric_mean}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_wrapper}()},
-\code{\link{metric_one_hot_iou}()},
-\code{\link{metric_one_hot_mean_iou}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_r2_score}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+Other metrics: \cr
+\code{\link{Metric}()} \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_iou}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
 }
 \concept{accuracy metrics}
 \concept{metrics}

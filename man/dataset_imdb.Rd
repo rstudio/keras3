@@ -6,14 +6,14 @@
 \title{IMDB Movie reviews sentiment classification}
 \usage{
 dataset_imdb(
-  path = "imdb.npz",
-  num_words = NULL,
-  skip_top = 0L,
-  maxlen = NULL,
-  seed = 113L,
-  start_char = 1L,
-  oov_char = 2L,
-  index_from = 3L
+path = "imdb.npz",
+num_words = NULL,
+skip_top = 0L,
+maxlen = NULL,
+seed = 113L,
+start_char = 1L,
+oov_char = 2L,
+index_from = 3L
 )
 
 dataset_imdb_word_index(path = "imdb_word_index.json")
@@ -67,12 +67,12 @@ As a convention, "0" does not stand for a specific word, but instead is used
 to encode any unknown word.
 }
 \seealso{
-Other datasets: 
-\code{\link{dataset_boston_housing}()},
-\code{\link{dataset_cifar10}()},
-\code{\link{dataset_cifar100}()},
-\code{\link{dataset_fashion_mnist}()},
-\code{\link{dataset_mnist}()},
-\code{\link{dataset_reuters}()}
+Other datasets: \cr
+\code{\link{dataset_boston_housing}()} \cr
+\code{\link{dataset_cifar10}()} \cr
+\code{\link{dataset_cifar100}()} \cr
+\code{\link{dataset_fashion_mnist}()} \cr
+\code{\link{dataset_mnist}()} \cr
+\code{\link{dataset_reuters}()} \cr
 }
 \concept{datasets}

@@ -30,10 +30,10 @@ to have a norm less than or equal to a desired value.
 \item \url{https://keras.io/api/layers/constraints#maxnorm-class}
 }
 
-Other constraints: 
-\code{\link{Constraint}()},
-\code{\link{constraint_minmaxnorm}()},
-\code{\link{constraint_nonneg}()},
-\code{\link{constraint_unitnorm}()}
+Other constraints: \cr
+\code{\link{Constraint}()} \cr
+\code{\link{constraint_minmaxnorm}()} \cr
+\code{\link{constraint_nonneg}()} \cr
+\code{\link{constraint_unitnorm}()} \cr
 }
 \concept{constraints}

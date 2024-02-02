@@ -34,11 +34,11 @@ Test the model on a single batch of samples.
 \item \url{https://keras.io/api/models/model_training_apis#testonbatch-method}
 }
 
-Other model training: 
-\code{\link{compile.keras.src.models.model.Model}()},
-\code{\link{evaluate.keras.src.models.model.Model}()},
-\code{\link{predict.keras.src.models.model.Model}()},
-\code{\link{predict_on_batch}()},
-\code{\link{train_on_batch}()}
+Other model training: \cr
+\code{\link{compile.keras.src.models.model.Model}()} \cr
+\code{\link{evaluate.keras.src.models.model.Model}()} \cr
+\code{\link{predict.keras.src.models.model.Model}()} \cr
+\code{\link{predict_on_batch}()} \cr
+\code{\link{train_on_batch}()} \cr
 }
 \concept{model training}

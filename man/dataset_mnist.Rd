@@ -18,12 +18,12 @@ is an array of digit labels (integers in range 0-9) with shape (num_samples).
 Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.
 }
 \seealso{
-Other datasets: 
-\code{\link{dataset_boston_housing}()},
-\code{\link{dataset_cifar10}()},
-\code{\link{dataset_cifar100}()},
-\code{\link{dataset_fashion_mnist}()},
-\code{\link{dataset_imdb}()},
-\code{\link{dataset_reuters}()}
+Other datasets: \cr
+\code{\link{dataset_boston_housing}()} \cr
+\code{\link{dataset_cifar10}()} \cr
+\code{\link{dataset_cifar100}()} \cr
+\code{\link{dataset_fashion_mnist}()} \cr
+\code{\link{dataset_imdb}()} \cr
+\code{\link{dataset_reuters}()} \cr
 }
 \concept{datasets}

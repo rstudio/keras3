@@ -19,12 +19,12 @@ framework. It maps objects to the string names associated with those objects
 for serialization/deserialization.
 }
 \seealso{
-Other serialization utilities: 
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_object}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()},
-\code{\link{with_custom_object_scope}()}
+Other serialization utilities: \cr
+\code{\link{deserialize_keras_object}()} \cr
+\code{\link{get_custom_objects}()} \cr
+\code{\link{get_registered_object}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{serialize_keras_object}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{serialization utilities}

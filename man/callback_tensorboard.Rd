@@ -5,15 +5,15 @@
 \title{Enable visualizations for TensorBoard.}
 \usage{
 callback_tensorboard(
-  log_dir = "logs",
-  histogram_freq = 0L,
-  write_graph = TRUE,
-  write_images = FALSE,
-  write_steps_per_second = FALSE,
-  update_freq = "epoch",
-  profile_batch = 0L,
-  embeddings_freq = 0L,
-  embeddings_metadata = NULL
+log_dir = "logs",
+histogram_freq = 0L,
+write_graph = TRUE,
+write_images = FALSE,
+write_steps_per_second = FALSE,
+update_freq = "epoch",
+profile_batch = 0L,
+embeddings_freq = 0L,
+embeddings_metadata = NULL
 )
 }
 \arguments{
@@ -107,14 +107,14 @@ model \%>\% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callb
 Custom batch-level summaries in a subclassed Model:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{MyModel <- new_model_class("MyModel",
-  initialize = function() \{
-    self$dense <- layer_dense(units = 10)
-  \},
-  call = function(x) \{
-    outputs <- x |> self$dense()
-    tf$summary$histogram('outputs', outputs)
-    outputs
-  \}
+initialize = function() \{
+self$dense <- layer_dense(units = 10)
+\},
+call = function(x) \{
+outputs <- x |> self$dense()
+tf$summary$histogram('outputs', outputs)
+outputs
+\}
 )
 
 model <- MyModel()
@@ -130,14 +130,14 @@ model |> fit(x_train, y_train, callbacks = list(tb_callback))
 Custom batch-level summaries in a Functional API Model:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{my_summary <- function(x) \{
-  tf$summary$histogram('x', x)
-  x
+tf$summary$histogram('x', x)
+x
 \}
 
 inputs <- layer_input(10)
 outputs <- inputs |>
-  layer_dense(10) |>
-  layer_lambda(my_summary)
+layer_dense(10) |>
+layer_lambda(my_summary)
 
 model <- keras_model(inputs, outputs)
 model |> compile(optimizer = 'sgd', loss = 'mse')
@@ -153,15 +153,15 @@ Profiling:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Profile a single batch, e.g. the 5th batch.
 tensorboard_callback <- callback_tensorboard(
-  log_dir = './logs', profile_batch = 5)
+log_dir = './logs', profile_batch = 5)
 model |> fit(x_train, y_train, epochs = 2,
-             callbacks = list(tensorboard_callback))
+callbacks = list(tensorboard_callback))
 
 # Profile a range of batches, e.g. from 10 to 20.
 tensorboard_callback <- callback_tensorboard(
-  log_dir = './logs', profile_batch = c(10, 20))
+log_dir = './logs', profile_batch = c(10, 20))
 model |> fit(x_train, y_train, epochs = 2,
-             callbacks = list(tensorboard_callback))
+callbacks = list(tensorboard_callback))
 }\if{html}{\out{</div>}}
 }
 
@@ -170,17 +170,17 @@ model |> fit(x_train, y_train, epochs = 2,
 \item \url{https://keras.io/api/callbacks/tensorboard#tensorboard-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

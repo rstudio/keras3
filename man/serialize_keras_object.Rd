@@ -27,12 +27,12 @@ information about the full config format.
 \item \url{https://keras.io/api/models/model_saving_apis/serialization_utils#serializekerasobject-function}
 }
 
-Other serialization utilities: 
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{with_custom_object_scope}()}
+Other serialization utilities: \cr
+\code{\link{deserialize_keras_object}()} \cr
+\code{\link{get_custom_objects}()} \cr
+\code{\link{get_registered_name}()} \cr
+\code{\link{get_registered_object}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{serialization utilities}

@@ -5,24 +5,24 @@
 \title{Optimizer that implements the FTRL algorithm.}
 \usage{
 optimizer_ftrl(
-  learning_rate = 0.001,
-  learning_rate_power = -0.5,
-  initial_accumulator_value = 0.1,
-  l1_regularization_strength = 0,
-  l2_regularization_strength = 0,
-  l2_shrinkage_regularization_strength = 0,
-  beta = 0,
-  weight_decay = NULL,
-  clipnorm = NULL,
-  clipvalue = NULL,
-  global_clipnorm = NULL,
-  use_ema = FALSE,
-  ema_momentum = 0.99,
-  ema_overwrite_frequency = NULL,
-  name = "ftrl",
-  ...,
-  loss_scale_factor = NULL,
-  gradient_accumulation_steps = NULL
+learning_rate = 0.001,
+learning_rate_power = -0.5,
+initial_accumulator_value = 0.1,
+l1_regularization_strength = 0,
+l2_regularization_strength = 0,
+l2_shrinkage_regularization_strength = 0,
+beta = 0,
+weight_decay = NULL,
+clipnorm = NULL,
+clipvalue = NULL,
+global_clipnorm = NULL,
+use_ema = FALSE,
+ema_momentum = 0.99,
+ema_overwrite_frequency = NULL,
+name = "ftrl",
+...,
+loss_scale_factor = NULL,
+gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -133,9 +133,9 @@ n <- n + g^2
 sigma <- (n^(-lr_power) - prev_n^(-lr_power)) / lr
 z <- z + g - sigma * w
 if (abs(z) < lambda_1) \{
-  w <- 0
+w <- 0
 \} else \{
-  w <- (sgn(z) * lambda_1 - z) / ((beta + sqrt(n)) / alpha + lambda_2)
+w <- (sgn(z) * lambda_1 - z) / ((beta + sqrt(n)) / alpha + lambda_2)
 \}
 }\if{html}{\out{</div>}}
 
@@ -157,17 +157,17 @@ is replaced with a gradient with shrinkage.
 \item \url{https://keras.io/api/optimizers/ftrl#ftrl-class}
 }
 
-Other optimizers: 
-\code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adafactor}()},
-\code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adam}()},
-\code{\link{optimizer_adam_w}()},
-\code{\link{optimizer_adamax}()},
-\code{\link{optimizer_lion}()},
-\code{\link{optimizer_loss_scale}()},
-\code{\link{optimizer_nadam}()},
-\code{\link{optimizer_rmsprop}()},
-\code{\link{optimizer_sgd}()}
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adafactor}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_lion}()} \cr
+\code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_sgd}()} \cr
 }
 \concept{optimizers}

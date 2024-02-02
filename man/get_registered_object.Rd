@@ -27,22 +27,22 @@ serialization/deserialization.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config <- function(cls, config, custom_objects = NULL) \{
-  if ('my_custom_object_name' \\\%in\\\% names(config)) \{
-    config$hidden_cls <- get_registered_object(
-      config$my_custom_object_name,
-      custom_objects = custom_objects)
-  \}
+if ('my_custom_object_name' \\\%in\\\% names(config)) \{
+config$hidden_cls <- get_registered_object(
+config$my_custom_object_name,
+custom_objects = custom_objects)
+\}
 \}
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other serialization utilities: 
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_name}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()},
-\code{\link{with_custom_object_scope}()}
+Other serialization utilities: \cr
+\code{\link{deserialize_keras_object}()} \cr
+\code{\link{get_custom_objects}()} \cr
+\code{\link{get_registered_name}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{serialize_keras_object}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{serialization utilities}

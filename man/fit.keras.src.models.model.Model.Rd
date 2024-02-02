@@ -5,25 +5,25 @@
 \title{Train a model for a fixed number of epochs (dataset iterations).}
 \usage{
 \method{fit}{keras.src.models.model.Model}(
-  object,
-  x = NULL,
-  y = NULL,
-  ...,
-  batch_size = NULL,
-  epochs = 1L,
-  callbacks = NULL,
-  validation_split = 0,
-  validation_data = NULL,
-  shuffle = TRUE,
-  class_weight = NULL,
-  sample_weight = NULL,
-  initial_epoch = 1L,
-  steps_per_epoch = NULL,
-  validation_steps = NULL,
-  validation_batch_size = NULL,
-  validation_freq = 1L,
-  verbose = getOption("keras.verbose", default = "auto"),
-  view_metrics = getOption("keras.view_metrics", default = "auto")
+object,
+x = NULL,
+y = NULL,
+...,
+batch_size = NULL,
+epochs = 1L,
+callbacks = NULL,
+validation_split = 0,
+validation_data = NULL,
+shuffle = TRUE,
+class_weight = NULL,
+sample_weight = NULL,
+initial_epoch = 1L,
+steps_per_epoch = NULL,
+validation_steps = NULL,
+validation_batch_size = NULL,
+validation_freq = 1L,
+verbose = getOption("keras.verbose", default = "auto"),
+view_metrics = getOption("keras.view_metrics", default = "auto")
 )
 }
 \arguments{

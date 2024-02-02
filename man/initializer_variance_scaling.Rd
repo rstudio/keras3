@@ -5,10 +5,10 @@
 \title{Initializer that adapts its scale to the shape of its input tensors.}
 \usage{
 initializer_variance_scaling(
-  scale = 1,
-  mode = "fan_in",
-  distribution = "truncated_normal",
-  seed = NULL
+scale = 1,
+mode = "fan_in",
+distribution = "truncated_normal",
+seed = NULL
 )
 }
 \arguments{
@@ -44,13 +44,13 @@ within \verb{[-limit, limit]}, where \code{limit = sqrt(3 * scale / n)}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
 initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
-                                            distribution = 'uniform')
+distribution = 'uniform')
 values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
 initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
-                                            distribution = 'uniform')
+distribution = 'uniform')
 layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }
@@ -60,33 +60,33 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 \item \url{https://keras.io/api/layers/initializers#variancescaling-class}
 }
 
-Other random initializers: 
-\code{\link{initializer_glorot_normal}()},
-\code{\link{initializer_glorot_uniform}()},
-\code{\link{initializer_he_normal}()},
-\code{\link{initializer_he_uniform}()},
-\code{\link{initializer_lecun_normal}()},
-\code{\link{initializer_lecun_uniform}()},
-\code{\link{initializer_orthogonal}()},
-\code{\link{initializer_random_normal}()},
-\code{\link{initializer_random_uniform}()},
-\code{\link{initializer_truncated_normal}()}
+Other random initializers: \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
 
-Other initializers: 
-\code{\link{initializer_constant}()},
-\code{\link{initializer_glorot_normal}()},
-\code{\link{initializer_glorot_uniform}()},
-\code{\link{initializer_he_normal}()},
-\code{\link{initializer_he_uniform}()},
-\code{\link{initializer_identity}()},
-\code{\link{initializer_lecun_normal}()},
-\code{\link{initializer_lecun_uniform}()},
-\code{\link{initializer_ones}()},
-\code{\link{initializer_orthogonal}()},
-\code{\link{initializer_random_normal}()},
-\code{\link{initializer_random_uniform}()},
-\code{\link{initializer_truncated_normal}()},
-\code{\link{initializer_zeros}()}
+Other initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_zeros}()} \cr
 }
 \concept{initializers}
 \concept{random initializers}

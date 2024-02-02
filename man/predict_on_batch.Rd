@@ -22,11 +22,11 @@ Returns predictions for a single batch of samples.
 \item \url{https://keras.io/api/models/model_training_apis#predictonbatch-method}
 }
 
-Other model training: 
-\code{\link{compile.keras.src.models.model.Model}()},
-\code{\link{evaluate.keras.src.models.model.Model}()},
-\code{\link{predict.keras.src.models.model.Model}()},
-\code{\link{test_on_batch}()},
-\code{\link{train_on_batch}()}
+Other model training: \cr
+\code{\link{compile.keras.src.models.model.Model}()} \cr
+\code{\link{evaluate.keras.src.models.model.Model}()} \cr
+\code{\link{predict.keras.src.models.model.Model}()} \cr
+\code{\link{test_on_batch}()} \cr
+\code{\link{train_on_batch}()} \cr
 }
 \concept{model training}

@@ -28,49 +28,49 @@ block of code, and is automatically recognized when loading saved models.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# define custom metric
 metric_top_3_categorical_accuracy <-
-  custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) \{
-    metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
-  \})
+custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) \{
+metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
+\})
 
 with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), \{
 
-  # ...define model...
+# ...define model...
 
-  # compile model (refer to "top_k_acc" by name)
-  model |> compile(
-    loss = "binary_crossentropy",
-    optimizer = optimizer_nadam(),
-    metrics = c("top_k_acc")
-  )
+# compile model (refer to "top_k_acc" by name)
+model |> compile(
+loss = "binary_crossentropy",
+optimizer = optimizer_nadam(),
+metrics = c("top_k_acc")
+)
 
-  # save the model
-  model |> save_model("my_model.keras")
+# save the model
+model |> save_model("my_model.keras")
 
-  # loading the model within the custom object scope doesn't
-  # require explicitly providing the custom_object
-  reloaded_model <- load_model("my_model.keras")
+# loading the model within the custom object scope doesn't
+# require explicitly providing the custom_object
+reloaded_model <- load_model("my_model.keras")
 \})
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other saving and loading functions: 
-\code{\link{export_savedmodel.keras.src.models.model.Model}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{load_model_weights}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{save_model}()},
-\code{\link{save_model_config}()},
-\code{\link{save_model_weights}()}
+Other saving and loading functions: \cr
+\code{\link{export_savedmodel.keras.src.models.model.Model}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{load_model}()} \cr
+\code{\link{load_model_weights}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{save_model}()} \cr
+\code{\link{save_model_config}()} \cr
+\code{\link{save_model_weights}()} \cr
 
-Other serialization utilities: 
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()}
+Other serialization utilities: \cr
+\code{\link{deserialize_keras_object}()} \cr
+\code{\link{get_custom_objects}()} \cr
+\code{\link{get_registered_name}()} \cr
+\code{\link{get_registered_object}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{serialize_keras_object}()} \cr
 }
 \concept{saving and loading functions}
 \concept{serialization utilities}

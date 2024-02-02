@@ -5,15 +5,15 @@
 \title{Metric}
 \usage{
 new_metric_class(
-  classname,
-  initialize = NULL,
-  update_state = NULL,
-  result = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+initialize = NULL,
+update_state = NULL,
+result = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{

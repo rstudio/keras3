@@ -24,11 +24,11 @@ Active bindings defined in a \code{\link{\%py_class\%}} are converted to
 \examples{
 set.seed(1234)
 x \%<-active\% function(value) {
-  message("Evaluating function of active binding")
-  if(missing(value))
-    runif(1)
-  else
-   message("Received: ", value)
+message("Evaluating function of active binding")
+if(missing(value))
+runif(1)
+else
+message("Received: ", value)
 }
 x
 x

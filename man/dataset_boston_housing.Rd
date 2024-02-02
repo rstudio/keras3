@@ -5,9 +5,9 @@
 \title{Boston housing price regression dataset}
 \usage{
 dataset_boston_housing(
-  path = "boston_housing.npz",
-  test_split = 0.2,
-  seed = 113L
+path = "boston_housing.npz",
+test_split = 0.2,
+seed = 113L
 )
 }
 \arguments{
@@ -31,12 +31,12 @@ Dataset taken from the StatLib library which is maintained at Carnegie Mellon
 University.
 }
 \seealso{
-Other datasets: 
-\code{\link{dataset_cifar10}()},
-\code{\link{dataset_cifar100}()},
-\code{\link{dataset_fashion_mnist}()},
-\code{\link{dataset_imdb}()},
-\code{\link{dataset_mnist}()},
-\code{\link{dataset_reuters}()}
+Other datasets: \cr
+\code{\link{dataset_cifar10}()} \cr
+\code{\link{dataset_cifar100}()} \cr
+\code{\link{dataset_fashion_mnist}()} \cr
+\code{\link{dataset_imdb}()} \cr
+\code{\link{dataset_mnist}()} \cr
+\code{\link{dataset_reuters}()} \cr
 }
 \concept{datasets}

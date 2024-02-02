@@ -5,12 +5,12 @@
 \title{A \code{LearningRateSchedule} that uses a cosine decay with optional warmup.}
 \usage{
 learning_rate_schedule_cosine_decay(
-  initial_learning_rate,
-  decay_steps,
-  alpha = 0,
-  name = "CosineDecay",
-  warmup_target = NULL,
-  warmup_steps = 0L
+initial_learning_rate,
+decay_steps,
+alpha = 0,
+name = "CosineDecay",
+warmup_target = NULL,
+warmup_steps = 0L
 )
 }
 \arguments{
@@ -63,25 +63,25 @@ optimizer functions.
 Our warmup is computed as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{warmup_learning_rate <- function(step) \{
-  completed_fraction <- step / warmup_steps
-  total_delta <- target_warmup - initial_learning_rate
-  completed_fraction * total_delta
+completed_fraction <- step / warmup_steps
+total_delta <- target_warmup - initial_learning_rate
+completed_fraction * total_delta
 \}
 }\if{html}{\out{</div>}}
 
 And our decay is computed as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{if (is.null(warmup_target)) \{
-  initial_decay_lr <- initial_learning_rate
+initial_decay_lr <- initial_learning_rate
 \} else \{
-  initial_decay_lr <- warmup_target
+initial_decay_lr <- warmup_target
 \}
 
 decayed_learning_rate <- function(step) \{
-  step <- min(step, decay_steps)
-  cosine_decay <- 0.5 * (1 + cos(pi * step / decay_steps))
-  decayed <- (1 - alpha) * cosine_decay + alpha
-  initial_decay_lr * decayed
+step <- min(step, decay_steps)
+cosine_decay <- 0.5 * (1 + cos(pi * step / decay_steps))
+decayed <- (1 - alpha) * cosine_decay + alpha
+initial_decay_lr * decayed
 \}
 }\if{html}{\out{</div>}}
 
@@ -90,7 +90,7 @@ Example usage without warmup:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{decay_steps <- 1000
 initial_learning_rate <- 0.1
 lr_decayed_fn <- learning_rate_schedule_cosine_decay(
-    initial_learning_rate, decay_steps)
+initial_learning_rate, decay_steps)
 }\if{html}{\out{</div>}}
 
 Example usage with warmup:
@@ -100,8 +100,8 @@ initial_learning_rate <- 0
 warmup_steps <- 1000
 target_learning_rate <- 0.1
 lr_warmup_decayed_fn <- learning_rate_schedule_cosine_decay(
-    initial_learning_rate, decay_steps, warmup_target = target_learning_rate,
-    warmup_steps = warmup_steps
+initial_learning_rate, decay_steps, warmup_target = target_learning_rate,
+warmup_steps = warmup_steps
 )
 }\if{html}{\out{</div>}}
 
@@ -115,12 +115,12 @@ deserializable using \code{keras$optimizers$schedules$serialize} and
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/cosine_decay#cosinedecay-class}
 }
 
-Other optimizer learning rate schedules: 
-\code{\link{LearningRateSchedule}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_inverse_time_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
+Other optimizer learning rate schedules: \cr
+\code{\link{LearningRateSchedule}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()} \cr
+\code{\link{learning_rate_schedule_exponential_decay}()} \cr
+\code{\link{learning_rate_schedule_inverse_time_decay}()} \cr
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()} \cr
+\code{\link{learning_rate_schedule_polynomial_decay}()} \cr
 }
 \concept{optimizer learning rate schedules}

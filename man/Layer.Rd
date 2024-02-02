@@ -5,16 +5,16 @@
 \title{Define a custom \code{Layer} class.}
 \usage{
 Layer(
-  classname,
-  initialize = NULL,
-  call = NULL,
-  build = NULL,
-  get_config = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+initialize = NULL,
+call = NULL,
+build = NULL,
+get_config = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{
@@ -149,32 +149,32 @@ Variables set as attributes of a layer are tracked as weights
 of the layers (in \code{layer$weights}).
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_simple_dense <- Layer(
-  "SimpleDense",
-  initialize = function(units = 32) \{
-    super$initialize()
-    self$units <- units
-  \},
+"SimpleDense",
+initialize = function(units = 32) \{
+super$initialize()
+self$units <- units
+\},
 
-  # Create the state of the layer (weights)
-  build = function(input_shape) \{
-    self$kernel <- self$add_weight(
-      shape = shape(tail(input_shape, 1), self$units),
-      initializer = "glorot_uniform",
-      trainable = TRUE,
-      name = "kernel"
-    )
-    self$bias = self$add_weight(
-      shape = shape(self$units),
-      initializer = "zeros",
-      trainable = TRUE,
-      name = "bias"
-    )
-  \},
+# Create the state of the layer (weights)
+build = function(input_shape) \{
+self$kernel <- self$add_weight(
+shape = shape(tail(input_shape, 1), self$units),
+initializer = "glorot_uniform",
+trainable = TRUE,
+name = "kernel"
+)
+self$bias = self$add_weight(
+shape = shape(self$units),
+initializer = "zeros",
+trainable = TRUE,
+name = "bias"
+)
+\},
 
-  # Defines the computation
-  call = function(self, inputs) \{
-    op_matmul(inputs, self$kernel) + self$bias
-  \}
+# Defines the computation
+call = function(self, inputs) \{
+op_matmul(inputs, self$kernel) + self$bias
+\}
 )
 
 # Instantiates the layer.
@@ -197,24 +197,24 @@ be updated manually during \code{call()}. Here's a example layer that computes
 the running sum of its inputs:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_compute_sum <- Layer(
-  classname = "ComputeSum",
+classname = "ComputeSum",
 
-  initialize = function(input_dim) \{
-    super$initialize()
+initialize = function(input_dim) \{
+super$initialize()
 
-    # Create a non-trainable weight.
-    self$total <- self$add_weight(
-      shape = shape(),
-      initializer = "zeros",
-      trainable = FALSE,
-      name = "total"
-    )
-  \},
+# Create a non-trainable weight.
+self$total <- self$add_weight(
+shape = shape(),
+initializer = "zeros",
+trainable = FALSE,
+name = "total"
+)
+\},
 
-  call = function(inputs) \{
-    self$total$assign(self$total + op_sum(inputs))
-    self$total
-  \}
+call = function(inputs) \{
+self$total$assign(self$total + op_sum(inputs))
+self$total
+\}
 )
 
 my_sum <- layer_compute_sum(, 2)
@@ -222,16 +222,16 @@ x <- op_ones(c(2, 2))
 y <- my_sum(x)
 
 stopifnot(exprs = \{
-  all.equal(my_sum$weights,               list(my_sum$total))
-  all.equal(my_sum$non_trainable_weights, list(my_sum$total))
-  all.equal(my_sum$trainable_weights,     list())
+all.equal(my_sum$weights,               list(my_sum$total))
+all.equal(my_sum$non_trainable_weights, list(my_sum$total))
+all.equal(my_sum$trainable_weights,     list())
 \})
 }\if{html}{\out{</div>}}
 }
 
 \section{Methods available}{
 \itemize{
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_loss(loss)
 }\if{html}{\out{</div>}}
@@ -241,31 +241,31 @@ Can be called inside of the \code{call()} method to add a scalar loss.
 Example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{Layer("MyLayer",
-  ...
-  call = function(x) \{
-    self$add_loss(op_sum(x))
-    x
-  \}
+...
+call = function(x) \{
+self$add_loss(op_sum(x))
+x
+\}
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_metric()
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_variable(...)
 }\if{html}{\out{</div>}}
 
 Alias of \code{add_weight()}.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_weight(shape = NULL,
-           initializer = NULL,
-           dtype = NULL,
-           trainable = TRUE,
-           regularizer = NULL,
-           constraint = NULL,
-           name = NULL)
+initializer = NULL,
+dtype = NULL,
+trainable = TRUE,
+regularizer = NULL,
+constraint = NULL,
+name = NULL)
 }\if{html}{\out{</div>}}
 
 Add a weight variable to the layer.
@@ -318,11 +318,11 @@ Properties/Attributes:
 \item \code{shape} (calling \verb{shape(<variable>)} is preferred)
 \item \code{trainable}
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{build(input_shape)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{build_from_config(config)
 }\if{html}{\out{</div>}}
@@ -338,25 +338,25 @@ Args:
 \itemize{
 \item \code{config}: Named list containing the input shape associated with this layer.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{call(...)
 }\if{html}{\out{</div>}}
 
 See description above
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{compute_mask(inputs, previous_mask)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_shape(...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_spec(...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{count_params()
 }\if{html}{\out{</div>}}
@@ -368,7 +368,7 @@ An integer count.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_build_config()
 }\if{html}{\out{</div>}}
@@ -387,7 +387,7 @@ loading.
 
 Returns:
 A named list containing the input shape associated with the layer.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_config()
 }\if{html}{\out{</div>}}
@@ -399,13 +399,13 @@ containing the information needed to re-instantiate it.
 The config is expected to be serializable to JSON, and is expected
 to consist of a (potentially complex, nested) structure of names lists
 consisting of simple objects like strings, ints.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_weights()
 }\if{html}{\out{</div>}}
 
 Return the values of \code{layer$weights} as a list of R or NumPy arrays.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{load_own_variables(store)
 }\if{html}{\out{</div>}}
@@ -419,7 +419,7 @@ Args:
 \itemize{
 \item \code{store}: Named list from which the state of the model will be loaded.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{save_own_variables(store)
 }\if{html}{\out{</div>}}
@@ -433,16 +433,16 @@ Args:
 \itemize{
 \item \code{store}: Named list where the state of the model will be saved.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{set_weights(weights)
 }\if{html}{\out{</div>}}
 
 Sets the values of \code{weights} from a list of R or NumPy arrays.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{stateless_call(trainable_variables, non_trainable_variables,
-               ..., return_losses = FALSE)
+..., return_losses = FALSE)
 }\if{html}{\out{</div>}}
 
 Call the layer without any side effects.
@@ -476,21 +476,21 @@ trainable_variables <- model$trainable_variables
 non_trainable_variables <- model$non_trainable_variables
 # Call the model with zero side effects
 c(outputs, non_trainable_variables) \%<-\% model$stateless_call(
-    trainable_variables,
-    non_trainable_variables,
-    data
+trainable_variables,
+non_trainable_variables,
+data
 )
 # Attach the updated state to the model
 # (until you do this, the model is still in its pre-call state).
 purrr::walk2(
-  model$non_trainable_variables, non_trainable_variables,
-  \\(variable, value) variable$assign(value))
+model$non_trainable_variables, non_trainable_variables,
+\\(variable, value) variable$assign(value))
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{symbolic_call(...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{from_config(config)
 }\if{html}{\out{</div>}}
@@ -503,7 +503,7 @@ provided when the \code{Layer()} was constructed) to resolve the class definitio
 The default implementation is:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config = function(config) \{
-  do.call(`__class__`, config)
+do.call(`__class__`, config)
 \}
 }\if{html}{\out{</div>}}
 
@@ -523,21 +523,21 @@ A layer instance.
 }
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{initialize(...,
-           activity_regularizer = NULL,
-           trainable = TRUE,
-           dtype = NULL,
-           autocast = TRUE,
-           name = NULL)
+activity_regularizer = NULL,
+trainable = TRUE,
+dtype = NULL,
+autocast = TRUE,
+name = NULL)
 }\if{html}{\out{</div>}}
 
 Initialize self. This method is typically called from a custom \code{initialize()} method.
 Example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_my_layer <- Layer("MyLayer",
-  initialize = function(units, ..., dtype = NULL, name = NULL) \{
-    super$initialize(..., dtype = dtype, name = name)
-    # .... finish initializing `self` instance
-  \}
+initialize = function(units, ..., dtype = NULL, name = NULL) \{
+super$initialize(..., dtype = dtype, name = name)
+# .... finish initializing `self` instance
+\}
 )
 }\if{html}{\out{</div>}}
 }
@@ -621,112 +621,112 @@ Settable boolean, whether this layer should be trainable or not.
 \item \url{https://keras.io/api/layers/base_layer#layer-class}
 }
 
-Other layers: 
-\code{\link{layer_activation}()},
-\code{\link{layer_activation_elu}()},
-\code{\link{layer_activation_leaky_relu}()},
-\code{\link{layer_activation_parametric_relu}()},
-\code{\link{layer_activation_relu}()},
-\code{\link{layer_activation_softmax}()},
-\code{\link{layer_activity_regularization}()},
-\code{\link{layer_add}()},
-\code{\link{layer_additive_attention}()},
-\code{\link{layer_alpha_dropout}()},
-\code{\link{layer_attention}()},
-\code{\link{layer_average}()},
-\code{\link{layer_average_pooling_1d}()},
-\code{\link{layer_average_pooling_2d}()},
-\code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_batch_normalization}()},
-\code{\link{layer_bidirectional}()},
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_center_crop}()},
-\code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_1d_transpose}()},
-\code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_2d_transpose}()},
-\code{\link{layer_conv_3d}()},
-\code{\link{layer_conv_3d_transpose}()},
-\code{\link{layer_conv_lstm_1d}()},
-\code{\link{layer_conv_lstm_2d}()},
-\code{\link{layer_conv_lstm_3d}()},
-\code{\link{layer_cropping_1d}()},
-\code{\link{layer_cropping_2d}()},
-\code{\link{layer_cropping_3d}()},
-\code{\link{layer_dense}()},
-\code{\link{layer_depthwise_conv_1d}()},
-\code{\link{layer_depthwise_conv_2d}()},
-\code{\link{layer_discretization}()},
-\code{\link{layer_dot}()},
-\code{\link{layer_dropout}()},
-\code{\link{layer_einsum_dense}()},
-\code{\link{layer_embedding}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_flatten}()},
-\code{\link{layer_gaussian_dropout}()},
-\code{\link{layer_gaussian_noise}()},
-\code{\link{layer_global_average_pooling_1d}()},
-\code{\link{layer_global_average_pooling_2d}()},
-\code{\link{layer_global_average_pooling_3d}()},
-\code{\link{layer_global_max_pooling_1d}()},
-\code{\link{layer_global_max_pooling_2d}()},
-\code{\link{layer_global_max_pooling_3d}()},
-\code{\link{layer_group_normalization}()},
-\code{\link{layer_group_query_attention}()},
-\code{\link{layer_gru}()},
-\code{\link{layer_hashed_crossing}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_identity}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_lambda}()},
-\code{\link{layer_layer_normalization}()},
-\code{\link{layer_lstm}()},
-\code{\link{layer_masking}()},
-\code{\link{layer_max_pooling_1d}()},
-\code{\link{layer_max_pooling_2d}()},
-\code{\link{layer_max_pooling_3d}()},
-\code{\link{layer_maximum}()},
-\code{\link{layer_minimum}()},
-\code{\link{layer_multi_head_attention}()},
-\code{\link{layer_multiply}()},
-\code{\link{layer_normalization}()},
-\code{\link{layer_permute}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_repeat_vector}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_reshape}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_rnn}()},
-\code{\link{layer_separable_conv_1d}()},
-\code{\link{layer_separable_conv_2d}()},
-\code{\link{layer_simple_rnn}()},
-\code{\link{layer_spatial_dropout_1d}()},
-\code{\link{layer_spatial_dropout_2d}()},
-\code{\link{layer_spatial_dropout_3d}()},
-\code{\link{layer_spectral_normalization}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_subtract}()},
-\code{\link{layer_text_vectorization}()},
-\code{\link{layer_tfsm}()},
-\code{\link{layer_time_distributed}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{layer_unit_normalization}()},
-\code{\link{layer_upsampling_1d}()},
-\code{\link{layer_upsampling_2d}()},
-\code{\link{layer_upsampling_3d}()},
-\code{\link{layer_zero_padding_1d}()},
-\code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()},
-\code{\link{rnn_cell_gru}()},
-\code{\link{rnn_cell_lstm}()},
-\code{\link{rnn_cell_simple}()},
-\code{\link{rnn_cells_stack}()}
+Other layers: \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
 \concept{layers}

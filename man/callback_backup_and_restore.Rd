@@ -5,9 +5,9 @@
 \title{Callback to back up and restore the training state.}
 \usage{
 callback_backup_and_restore(
-  backup_dir,
-  save_freq = "epoch",
-  delete_checkpoint = TRUE
+backup_dir,
+save_freq = "epoch",
+delete_checkpoint = TRUE
 )
 }
 \arguments{
@@ -52,26 +52,26 @@ can become invalid.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{callback_interrupting <- new_callback_class(
-  "InterruptingCallback",
-  on_epoch_begin = function(epoch, logs = NULL) \{
-    if (epoch == 4) \{
-      stop('Interrupting!')
-    \}
-  \}
+"InterruptingCallback",
+on_epoch_begin = function(epoch, logs = NULL) \{
+if (epoch == 4) \{
+stop('Interrupting!')
+\}
+\}
 )
 
 backup_dir <- tempfile()
 callback <- callback_backup_and_restore(backup_dir = backup_dir)
 model <- keras_model_sequential() \%>\%
-  layer_dense(10)
+layer_dense(10)
 model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
 
 tryCatch(\{
-  model \%>\% fit(x = op_ones(c(5, 20)),
-                y = op_zeros(5),
-                epochs = 10, batch_size = 1,
-                callbacks = list(callback, callback_interrupting()),
-                verbose = 0)
+model \%>\% fit(x = op_ones(c(5, 20)),
+y = op_zeros(5),
+epochs = 10, batch_size = 1,
+callbacks = list(callback, callback_interrupting()),
+verbose = 0)
 \}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
 }\if{html}{\out{</div>}}
 
@@ -88,10 +88,10 @@ tryCatch(\{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras3:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
 
 history <- model \%>\% fit(x = op_ones(c(5, 20)),
-                         y = op_zeros(5),
-                         epochs = 10, batch_size = 1,
-                         callbacks = list(callback),
-                         verbose = 0)
+y = op_zeros(5),
+epochs = 10, batch_size = 1,
+callbacks = list(callback),
+verbose = 0)
 
 # Only 6 more epochs are run, since first training got interrupted at
 # zero-indexed epoch 4, second training will continue from 4 to 9.
@@ -108,17 +108,17 @@ nrow(as.data.frame(history))
 \item \url{https://keras.io/api/callbacks/backup_and_restore#backupandrestore-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

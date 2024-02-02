@@ -5,17 +5,17 @@
 \title{Computes focal cross-entropy loss between true labels and predictions.}
 \usage{
 loss_binary_focal_crossentropy(
-  y_true,
-  y_pred,
-  apply_class_balancing = FALSE,
-  alpha = 0.25,
-  gamma = 2,
-  from_logits = FALSE,
-  label_smoothing = 0,
-  axis = -1L,
-  ...,
-  reduction = "sum_over_batch_size",
-  name = "binary_focal_crossentropy"
+y_true,
+y_pred,
+apply_class_balancing = FALSE,
+alpha = 0.25,
+gamma = 2,
+from_logits = FALSE,
+label_smoothing = 0,
+axis = -1L,
+...,
+reduction = "sum_over_batch_size",
+name = "binary_focal_crossentropy"
 )
 }
 \arguments{
@@ -110,9 +110,9 @@ loss
 With the \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-    loss = loss_binary_focal_crossentropy(
-        gamma = 2.0, from_logits = TRUE),
-    ...
+loss = loss_binary_focal_crossentropy(
+gamma = 2.0, from_logits = TRUE),
+...
 )
 }\if{html}{\out{</div>}}
 
@@ -131,7 +131,7 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-  apply_class_balancing = TRUE, gamma = 2, from_logits = TRUE)
+apply_class_balancing = TRUE, gamma = 2, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -144,7 +144,7 @@ y_true <- rbind(c(0, 1), c(0, 0))
 y_pred <- rbind(c(-18.6, 0.51), c(2.94, -12.8))
 # Using default 'auto'/'sum_over_batch_size' reduction type.
 loss <- loss_binary_focal_crossentropy(
-    gamma = 3, from_logits = TRUE)
+gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -154,7 +154,7 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
+apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -164,7 +164,7 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sample_weight' attribute with focal effect
 loss <- loss_binary_focal_crossentropy(
-    gamma = 3, from_logits = TRUE)
+gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
@@ -174,7 +174,7 @@ loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
+apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
@@ -184,8 +184,8 @@ loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction` type.
 loss <- loss_binary_focal_crossentropy(
-    gamma = 4, from_logits = TRUE,
-    reduction = "sum")
+gamma = 4, from_logits = TRUE,
+reduction = "sum")
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -195,8 +195,8 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-    apply_class_balancing = TRUE, gamma = 4, from_logits = TRUE,
-    reduction = "sum")
+apply_class_balancing = TRUE, gamma = 4, from_logits = TRUE,
+reduction = "sum")
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -206,8 +206,8 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
 loss <- loss_binary_focal_crossentropy(
-    gamma = 5, from_logits = TRUE,
-    reduction = NULL)
+gamma = 5, from_logits = TRUE,
+reduction = NULL)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -217,8 +217,8 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-    apply_class_balancing = TRUE, gamma = 5, from_logits = TRUE,
-    reduction = NULL)
+apply_class_balancing = TRUE, gamma = 5, from_logits = TRUE,
+reduction = NULL)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -228,39 +228,39 @@ loss(y_true, y_pred)
 }
 
 \seealso{
-Other losses: 
-\code{\link{Loss}()},
-\code{\link{loss_binary_crossentropy}()},
-\code{\link{loss_categorical_crossentropy}()},
-\code{\link{loss_categorical_focal_crossentropy}()},
-\code{\link{loss_categorical_hinge}()},
-\code{\link{loss_cosine_similarity}()},
-\code{\link{loss_hinge}()},
-\code{\link{loss_huber}()},
-\code{\link{loss_kl_divergence}()},
-\code{\link{loss_log_cosh}()},
-\code{\link{loss_mean_absolute_error}()},
-\code{\link{loss_mean_absolute_percentage_error}()},
-\code{\link{loss_mean_squared_error}()},
-\code{\link{loss_mean_squared_logarithmic_error}()},
-\code{\link{loss_poisson}()},
-\code{\link{loss_sparse_categorical_crossentropy}()},
-\code{\link{loss_squared_hinge}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_binary_focal_crossentropy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_focal_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_huber}()},
-\code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_squared_hinge}()}
+Other losses: \cr
+\code{\link{Loss}()} \cr
+\code{\link{loss_binary_crossentropy}()} \cr
+\code{\link{loss_categorical_crossentropy}()} \cr
+\code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_hinge}()} \cr
+\code{\link{loss_cosine_similarity}()} \cr
+\code{\link{loss_hinge}()} \cr
+\code{\link{loss_huber}()} \cr
+\code{\link{loss_kl_divergence}()} \cr
+\code{\link{loss_log_cosh}()} \cr
+\code{\link{loss_mean_absolute_error}()} \cr
+\code{\link{loss_mean_absolute_percentage_error}()} \cr
+\code{\link{loss_mean_squared_error}()} \cr
+\code{\link{loss_mean_squared_logarithmic_error}()} \cr
+\code{\link{loss_poisson}()} \cr
+\code{\link{loss_sparse_categorical_crossentropy}()} \cr
+\code{\link{loss_squared_hinge}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
 }
 \concept{losses}

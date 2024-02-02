@@ -35,9 +35,9 @@ layer <- layer_dense(units=4, kernel_regularizer=regularizer)
 \item \url{https://keras.io/api/layers/regularizers#orthogonalregularizer-class}
 }
 
-Other regularizers: 
-\code{\link{regularizer_l1}()},
-\code{\link{regularizer_l1_l2}()},
-\code{\link{regularizer_l2}()}
+Other regularizers: \cr
+\code{\link{regularizer_l1}()} \cr
+\code{\link{regularizer_l1_l2}()} \cr
+\code{\link{regularizer_l2}()} \cr
 }
 \concept{regularizers}

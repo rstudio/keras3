@@ -5,17 +5,17 @@
 \title{Configure a model for training.}
 \usage{
 \method{compile}{keras.src.models.model.Model}(
-  object,
-  optimizer = "rmsprop",
-  loss = NULL,
-  metrics = NULL,
-  ...,
-  loss_weights = NULL,
-  weighted_metrics = NULL,
-  run_eagerly = FALSE,
-  steps_per_execution = 1L,
-  jit_compile = "auto",
-  auto_scale_loss = TRUE
+object,
+optimizer = "rmsprop",
+loss = NULL,
+metrics = NULL,
+...,
+loss_weights = NULL,
+weighted_metrics = NULL,
+run_eagerly = FALSE,
+steps_per_execution = 1L,
+jit_compile = "auto",
+auto_scale_loss = TRUE
 )
 }
 \arguments{
@@ -126,10 +126,10 @@ Configure a model for training.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-  optimizer = optimizer_adam(learning_rate = 1e-3),
-  loss = loss_binary_crossentropy(),
-  metrics = c(metric_binary_accuracy(),
-              metric_false_negatives())
+optimizer = optimizer_adam(learning_rate = 1e-3),
+loss = loss_binary_crossentropy(),
+metrics = c(metric_binary_accuracy(),
+metric_false_negatives())
 )
 }\if{html}{\out{</div>}}
 }
@@ -139,11 +139,11 @@ Configure a model for training.
 \item \url{https://keras.io/api/models/model_training_apis#compile-method}
 }
 
-Other model training: 
-\code{\link{evaluate.keras.src.models.model.Model}()},
-\code{\link{predict.keras.src.models.model.Model}()},
-\code{\link{predict_on_batch}()},
-\code{\link{test_on_batch}()},
-\code{\link{train_on_batch}()}
+Other model training: \cr
+\code{\link{evaluate.keras.src.models.model.Model}()} \cr
+\code{\link{predict.keras.src.models.model.Model}()} \cr
+\code{\link{predict_on_batch}()} \cr
+\code{\link{test_on_batch}()} \cr
+\code{\link{train_on_batch}()} \cr
 }
 \concept{model training}

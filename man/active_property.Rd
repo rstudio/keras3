@@ -14,10 +14,10 @@ Create an active property class method
 }
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_foo <- Model("Foo", ...,
-  metrics = active_property(function() \{
-    list(self$d_loss_metric,
-         self$g_loss_metric)
-  \}))
+metrics = active_property(function() \{
+list(self$d_loss_metric,
+self$g_loss_metric)
+\}))
 }\if{html}{\out{</div>}}
 }
 

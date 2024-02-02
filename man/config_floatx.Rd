@@ -26,37 +26,37 @@ E.g. \code{'bfloat16'} \code{'float16'}, \code{'float32'}, \code{'float64'}.
 \item \url{https://keras.io/api/utils/config_utils#floatx-function}
 }
 
-Other config backend: 
-\code{\link{config_backend}()},
-\code{\link{config_epsilon}()},
-\code{\link{config_image_data_format}()},
-\code{\link{config_set_epsilon}()},
-\code{\link{config_set_floatx}()},
-\code{\link{config_set_image_data_format}()}
+Other config backend: \cr
+\code{\link{config_backend}()} \cr
+\code{\link{config_epsilon}()} \cr
+\code{\link{config_image_data_format}()} \cr
+\code{\link{config_set_epsilon}()} \cr
+\code{\link{config_set_floatx}()} \cr
+\code{\link{config_set_image_data_format}()} \cr
 
-Other backend: 
-\code{\link{clear_session}()},
-\code{\link{config_backend}()},
-\code{\link{config_epsilon}()},
-\code{\link{config_image_data_format}()},
-\code{\link{config_set_epsilon}()},
-\code{\link{config_set_floatx}()},
-\code{\link{config_set_image_data_format}()}
+Other backend: \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_backend}()} \cr
+\code{\link{config_epsilon}()} \cr
+\code{\link{config_image_data_format}()} \cr
+\code{\link{config_set_epsilon}()} \cr
+\code{\link{config_set_floatx}()} \cr
+\code{\link{config_set_image_data_format}()} \cr
 
-Other config: 
-\code{\link{config_backend}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_enable_unsafe_deserialization}()},
-\code{\link{config_epsilon}()},
-\code{\link{config_image_data_format}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{config_set_epsilon}()},
-\code{\link{config_set_floatx}()},
-\code{\link{config_set_image_data_format}()}
+Other config: \cr
+\code{\link{config_backend}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_enable_unsafe_deserialization}()} \cr
+\code{\link{config_epsilon}()} \cr
+\code{\link{config_image_data_format}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{config_set_epsilon}()} \cr
+\code{\link{config_set_floatx}()} \cr
+\code{\link{config_set_image_data_format}()} \cr
 }
 \concept{backend}
 \concept{config}

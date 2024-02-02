@@ -9,14 +9,14 @@
 \method{summary}{keras.src.models.model.Model}(object, ...)
 
 \method{format}{keras.src.models.model.Model}(
-  x,
-  line_length = getOption("width"),
-  positions = NULL,
-  expand_nested = FALSE,
-  show_trainable = NA,
-  ...,
-  layer_range = NULL,
-  compact = TRUE
+x,
+line_length = getOption("width"),
+positions = NULL,
+expand_nested = FALSE,
+show_trainable = NA,
+...,
+layer_range = NULL,
+compact = TRUE
 )
 
 \method{print}{keras.src.models.model.Model}(x, ...)
@@ -59,11 +59,11 @@ invisibly after printing it.
 Print a summary of a Keras Model
 }
 \seealso{
-Other model functions: 
-\code{\link{get_config}()},
-\code{\link{get_layer}()},
-\code{\link{keras_model}()},
-\code{\link{keras_model_sequential}()},
-\code{\link{pop_layer}()}
+Other model functions: \cr
+\code{\link{get_config}()} \cr
+\code{\link{get_layer}()} \cr
+\code{\link{keras_model}()} \cr
+\code{\link{keras_model_sequential}()} \cr
+\code{\link{pop_layer}()} \cr
 }
 \concept{model functions}

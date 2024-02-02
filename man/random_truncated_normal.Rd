@@ -34,14 +34,14 @@ standard deviation, discarding and re-drawing any samples that are more
 than two standard deviations from the mean.
 }
 \seealso{
-Other random: 
-\code{\link{random_categorical}()},
-\code{\link{random_dropout}()},
-\code{\link{random_gamma}()},
-\code{\link{random_integer}()},
-\code{\link{random_normal}()},
-\code{\link{random_seed_generator}()},
-\code{\link{random_shuffle}()},
-\code{\link{random_uniform}()}
+Other random: \cr
+\code{\link{random_categorical}()} \cr
+\code{\link{random_dropout}()} \cr
+\code{\link{random_gamma}()} \cr
+\code{\link{random_integer}()} \cr
+\code{\link{random_normal}()} \cr
+\code{\link{random_seed_generator}()} \cr
+\code{\link{random_shuffle}()} \cr
+\code{\link{random_uniform}()} \cr
 }
 \concept{random}

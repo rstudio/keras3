@@ -5,16 +5,16 @@
 \title{Layer}
 \usage{
 new_layer_class(
-  classname,
-  initialize = NULL,
-  call = NULL,
-  build = NULL,
-  get_config = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+initialize = NULL,
+call = NULL,
+build = NULL,
+get_config = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{

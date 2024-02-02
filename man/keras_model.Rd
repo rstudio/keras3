@@ -24,31 +24,31 @@ inputs <- keras_input(shape = c(784))
 
 # outputs compose input + dense layers
 predictions <- inputs |>
-  layer_dense(units = 64, activation = 'relu') |>
-  layer_dense(units = 64, activation = 'relu') |>
-  layer_dense(units = 10, activation = 'softmax')
+layer_dense(units = 64, activation = 'relu') |>
+layer_dense(units = 64, activation = 'relu') |>
+layer_dense(units = 10, activation = 'softmax')
 
 # create and compile model
 model <- keras_model(inputs = inputs, outputs = predictions)
 model |> compile(
-  optimizer = 'rmsprop',
-  loss = 'categorical_crossentropy',
-  metrics = c('accuracy')
+optimizer = 'rmsprop',
+loss = 'categorical_crossentropy',
+metrics = c('accuracy')
 )
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other model functions: 
-\code{\link{get_config}()},
-\code{\link{get_layer}()},
-\code{\link{keras_model_sequential}()},
-\code{\link{pop_layer}()},
-\code{\link{summary.keras.src.models.model.Model}()}
+Other model functions: \cr
+\code{\link{get_config}()} \cr
+\code{\link{get_layer}()} \cr
+\code{\link{keras_model_sequential}()} \cr
+\code{\link{pop_layer}()} \cr
+\code{\link{summary.keras.src.models.model.Model}()} \cr
 
-Other model creation: 
-\code{\link{keras_input}()},
-\code{\link{keras_model_sequential}()}
+Other model creation: \cr
+\code{\link{keras_input}()} \cr
+\code{\link{keras_model_sequential}()} \cr
 }
 \concept{model creation}
 \concept{model functions}

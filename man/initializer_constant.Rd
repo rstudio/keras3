@@ -31,26 +31,26 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 \item \url{https://keras.io/api/layers/initializers#constant-class}
 }
 
-Other constant initializers: 
-\code{\link{initializer_identity}()},
-\code{\link{initializer_ones}()},
-\code{\link{initializer_zeros}()}
+Other constant initializers: \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_zeros}()} \cr
 
-Other initializers: 
-\code{\link{initializer_glorot_normal}()},
-\code{\link{initializer_glorot_uniform}()},
-\code{\link{initializer_he_normal}()},
-\code{\link{initializer_he_uniform}()},
-\code{\link{initializer_identity}()},
-\code{\link{initializer_lecun_normal}()},
-\code{\link{initializer_lecun_uniform}()},
-\code{\link{initializer_ones}()},
-\code{\link{initializer_orthogonal}()},
-\code{\link{initializer_random_normal}()},
-\code{\link{initializer_random_uniform}()},
-\code{\link{initializer_truncated_normal}()},
-\code{\link{initializer_variance_scaling}()},
-\code{\link{initializer_zeros}()}
+Other initializers: \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+\code{\link{initializer_zeros}()} \cr
 }
 \concept{constant initializers}
 \concept{initializers}

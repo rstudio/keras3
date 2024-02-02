@@ -5,20 +5,20 @@
 \title{A preprocessing layer that maps integers to (possibly encoded) indices.}
 \usage{
 layer_integer_lookup(
-  object,
-  max_tokens = NULL,
-  num_oov_indices = 1L,
-  mask_token = NULL,
-  oov_token = -1L,
-  vocabulary = NULL,
-  vocabulary_dtype = "int64",
-  idf_weights = NULL,
-  invert = FALSE,
-  output_mode = "int",
-  sparse = FALSE,
-  pad_to_max_tokens = FALSE,
-  name = NULL,
-  ...
+object,
+max_tokens = NULL,
+num_oov_indices = 1L,
+mask_token = NULL,
+oov_token = -1L,
+vocabulary = NULL,
+vocabulary_dtype = "int64",
+idf_weights = NULL,
+invert = FALSE,
+output_mode = "int",
+sparse = FALSE,
+pad_to_max_tokens = FALSE,
+name = NULL,
+...
 )
 }
 \arguments{
@@ -160,7 +160,7 @@ This example creates a lookup layer with a pre-existing vocabulary.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(rbind(c(12, 1138, 42),
-                      c(42, 1000, 36)))  # Note OOV tokens
+c(42, 1000, 36)))  # Note OOV tokens
 out <- data |> layer_integer_lookup(vocabulary = vocab)
 out
 }\if{html}{\out{</div>}}
@@ -177,7 +177,7 @@ This example creates a lookup layer and generates the vocabulary by
 analyzing the dataset.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_array(rbind(c(12, 1138, 42),
-                      c(42, 1000, 36)))  # Note OOV tokens
+c(42, 1000, 36)))  # Note OOV tokens
 layer <- layer_integer_lookup()
 layer |> adapt(data)
 layer |> get_vocabulary() |> str()
@@ -215,10 +215,10 @@ a deterministic fashion across the set.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(rbind(c(12, 1138, 42),
-                      c(37, 1000, 36)))  # Note OOV tokens
+c(37, 1000, 36)))  # Note OOV tokens
 out <- data |>
-  layer_integer_lookup(vocabulary = vocab,
-                       num_oov_indices = 2)
+layer_integer_lookup(vocabulary = vocab,
+num_oov_indices = 2)
 out
 }\if{html}{\out{</div>}}
 
@@ -241,7 +241,7 @@ Configure the layer with \code{output_mode='one_hot'}. Note that the first
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(c(12, 36, 1138, 42, 7), 'int32')  # Note OOV tokens
 layer <- layer_integer_lookup(vocabulary = vocab,
-                              output_mode = 'one_hot')
+output_mode = 'one_hot')
 layer(data)
 }\if{html}{\out{</div>}}
 
@@ -261,9 +261,9 @@ Configure the layer with \code{output_mode = 'multi_hot'}. Note that the first
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(rbind(c(12, 1138, 42, 42),
-                      c(42,    7, 36,  7)), "int64")  # Note OOV tokens
+c(42,    7, 36,  7)), "int64")  # Note OOV tokens
 layer <- layer_integer_lookup(vocabulary = vocab,
-                              output_mode = 'multi_hot')
+output_mode = 'multi_hot')
 layer(data)
 }\if{html}{\out{</div>}}
 
@@ -280,9 +280,9 @@ the first \code{num_oov_indices} dimensions in the output represent OOV tokens.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- rbind(c(12, 1138, 42, 42),
-              c(42,    7, 36,  7)) |> op_array("int64")
+c(42,    7, 36,  7)) |> op_array("int64")
 layer <- layer_integer_lookup(vocabulary = vocab,
-                              output_mode = 'count')
+output_mode = 'count')
 layer(data)
 }\if{html}{\out{</div>}}
 
@@ -305,10 +305,10 @@ tokens will default to the average of all idf weights passed in.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 idf_weights <- c(0.25, 0.75, 0.6, 0.4)
 data <- rbind(c(12, 1138, 42, 42),
-              c(42,    7, 36,  7)) |> op_array("int64")
+c(42,    7, 36,  7)) |> op_array("int64")
 layer <- layer_integer_lookup(output_mode = 'tf_idf',
-                              vocabulary = vocab,
-                              idf_weights = idf_weights)
+vocabulary = vocab,
+idf_weights = idf_weights)
 layer(data)
 }\if{html}{\out{</div>}}
 
@@ -324,10 +324,10 @@ vocabularly including the leading oov token.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(-1, 12, 36, 1138, 42) |> as.integer()
 idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)
 data <- rbind(c(12, 1138, 42, 42),
-              c(42,    7, 36,  7)) |> op_array("int64")
+c(42,    7, 36,  7)) |> op_array("int64")
 layer <- layer_integer_lookup(output_mode = 'tf_idf',
-                              vocabulary = vocab,
-                              idf_weights = idf_weights)
+vocabulary = vocab,
+idf_weights = idf_weights)
 layer(data)
 }\if{html}{\out{</div>}}
 
@@ -350,7 +350,7 @@ pass the vocab in this example.)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(c(1, 3, 4,
-                  4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
+4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
 layer <- layer_integer_lookup(vocabulary = vocab, invert = TRUE)
 layer(data)
 }\if{html}{\out{</div>}}
@@ -372,7 +372,7 @@ layer to create an inverse lookup layer.
 data <- op_array(rbind(c(12, 1138, 42), c(42, 1000, 36)), "int32")
 layer <- layer_integer_lookup(vocabulary = vocab)
 i_layer <- layer_integer_lookup(vocabulary = get_vocabulary(layer),
-                                invert = TRUE)
+invert = TRUE)
 int_data <- layer(data)
 i_layer(int_data)
 }\if{html}{\out{</div>}}
@@ -395,139 +395,139 @@ either directly or via \code{adapt()} before calling \code{get_vocabulary()}.
 \item \url{https://keras.io/api/layers/preprocessing_layers/categorical/integer_lookup#integerlookup-class}
 }
 
-Other categorical features preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_hashed_crossing}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_string_lookup}()}
+Other categorical features preprocessing layers: \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_string_lookup}()} \cr
 
-Other preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_center_crop}()},
-\code{\link{layer_discretization}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_hashed_crossing}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_normalization}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+Other preprocessing layers: \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
 
-Other layers: 
-\code{\link{Layer}()},
-\code{\link{layer_activation}()},
-\code{\link{layer_activation_elu}()},
-\code{\link{layer_activation_leaky_relu}()},
-\code{\link{layer_activation_parametric_relu}()},
-\code{\link{layer_activation_relu}()},
-\code{\link{layer_activation_softmax}()},
-\code{\link{layer_activity_regularization}()},
-\code{\link{layer_add}()},
-\code{\link{layer_additive_attention}()},
-\code{\link{layer_alpha_dropout}()},
-\code{\link{layer_attention}()},
-\code{\link{layer_average}()},
-\code{\link{layer_average_pooling_1d}()},
-\code{\link{layer_average_pooling_2d}()},
-\code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_batch_normalization}()},
-\code{\link{layer_bidirectional}()},
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_center_crop}()},
-\code{\link{layer_concatenate}()},
-\code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_1d_transpose}()},
-\code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_2d_transpose}()},
-\code{\link{layer_conv_3d}()},
-\code{\link{layer_conv_3d_transpose}()},
-\code{\link{layer_conv_lstm_1d}()},
-\code{\link{layer_conv_lstm_2d}()},
-\code{\link{layer_conv_lstm_3d}()},
-\code{\link{layer_cropping_1d}()},
-\code{\link{layer_cropping_2d}()},
-\code{\link{layer_cropping_3d}()},
-\code{\link{layer_dense}()},
-\code{\link{layer_depthwise_conv_1d}()},
-\code{\link{layer_depthwise_conv_2d}()},
-\code{\link{layer_discretization}()},
-\code{\link{layer_dot}()},
-\code{\link{layer_dropout}()},
-\code{\link{layer_einsum_dense}()},
-\code{\link{layer_embedding}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_flatten}()},
-\code{\link{layer_gaussian_dropout}()},
-\code{\link{layer_gaussian_noise}()},
-\code{\link{layer_global_average_pooling_1d}()},
-\code{\link{layer_global_average_pooling_2d}()},
-\code{\link{layer_global_average_pooling_3d}()},
-\code{\link{layer_global_max_pooling_1d}()},
-\code{\link{layer_global_max_pooling_2d}()},
-\code{\link{layer_global_max_pooling_3d}()},
-\code{\link{layer_group_normalization}()},
-\code{\link{layer_group_query_attention}()},
-\code{\link{layer_gru}()},
-\code{\link{layer_hashed_crossing}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_identity}()},
-\code{\link{layer_lambda}()},
-\code{\link{layer_layer_normalization}()},
-\code{\link{layer_lstm}()},
-\code{\link{layer_masking}()},
-\code{\link{layer_max_pooling_1d}()},
-\code{\link{layer_max_pooling_2d}()},
-\code{\link{layer_max_pooling_3d}()},
-\code{\link{layer_maximum}()},
-\code{\link{layer_minimum}()},
-\code{\link{layer_multi_head_attention}()},
-\code{\link{layer_multiply}()},
-\code{\link{layer_normalization}()},
-\code{\link{layer_permute}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_repeat_vector}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_reshape}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_rnn}()},
-\code{\link{layer_separable_conv_1d}()},
-\code{\link{layer_separable_conv_2d}()},
-\code{\link{layer_simple_rnn}()},
-\code{\link{layer_spatial_dropout_1d}()},
-\code{\link{layer_spatial_dropout_2d}()},
-\code{\link{layer_spatial_dropout_3d}()},
-\code{\link{layer_spectral_normalization}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_subtract}()},
-\code{\link{layer_text_vectorization}()},
-\code{\link{layer_tfsm}()},
-\code{\link{layer_time_distributed}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{layer_unit_normalization}()},
-\code{\link{layer_upsampling_1d}()},
-\code{\link{layer_upsampling_2d}()},
-\code{\link{layer_upsampling_3d}()},
-\code{\link{layer_zero_padding_1d}()},
-\code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()},
-\code{\link{rnn_cell_gru}()},
-\code{\link{rnn_cell_lstm}()},
-\code{\link{rnn_cell_simple}()},
-\code{\link{rnn_cells_stack}()}
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
 \concept{categorical features preprocessing layers}
 \concept{layers}

@@ -14,10 +14,10 @@ Constrains the weights to be non-negative.
 \item \url{https://keras.io/api/layers/constraints#nonneg-class}
 }
 
-Other constraints: 
-\code{\link{Constraint}()},
-\code{\link{constraint_maxnorm}()},
-\code{\link{constraint_minmaxnorm}()},
-\code{\link{constraint_unitnorm}()}
+Other constraints: \cr
+\code{\link{Constraint}()} \cr
+\code{\link{constraint_maxnorm}()} \cr
+\code{\link{constraint_minmaxnorm}()} \cr
+\code{\link{constraint_unitnorm}()} \cr
 }
 \concept{constraints}

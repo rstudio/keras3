@@ -5,16 +5,16 @@
 \title{Creates a dataset of sliding windows over a timeseries provided as array.}
 \usage{
 timeseries_dataset_from_array(
-  data,
-  targets,
-  sequence_length,
-  sequence_stride = 1L,
-  sampling_rate = 1L,
-  batch_size = 128L,
-  shuffle = FALSE,
-  seed = NULL,
-  start_index = NULL,
-  end_index = NULL
+data,
+targets,
+sequence_length,
+sequence_stride = 1L,
+sampling_rate = 1L,
+batch_size = 128L,
+shuffle = FALSE,
+seed = NULL,
+start_index = NULL,
+end_index = NULL
 )
 }
 \arguments{
@@ -92,7 +92,7 @@ timesteps to predict the next timestep, you would use:
 input_data <- data[1:10]
 targets <- data[11:20]
 dataset <- timeseries_dataset_from_array(
-  input_data, targets, sequence_length=10)
+input_data, targets, sequence_length=10)
 iter <- reticulate::as_iterator(dataset)
 reticulate::iter_next(iter)
 }\if{html}{\out{</div>}}
@@ -118,9 +118,9 @@ Y <- X*2
 
 sample_length <- 20
 input_dataset <- timeseries_dataset_from_array(
-    X, NULL, sequence_length=sample_length, sequence_stride=sample_length)
+X, NULL, sequence_length=sample_length, sequence_stride=sample_length)
 target_dataset <- timeseries_dataset_from_array(
-    Y, NULL, sequence_length=sample_length, sequence_stride=sample_length)
+Y, NULL, sequence_length=sample_length, sequence_stride=sample_length)
 
 
 inputs <- reticulate::as_iterator(input_dataset) \%>\% reticulate::iter_next()
@@ -138,45 +138,45 @@ to produce batches of timeseries inputs and targets.
 \item \url{https://keras.io/api/data_loading/timeseries#timeseriesdatasetfromarray-function}
 }
 
-Other dataset utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()}
+Other dataset utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
 
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{clear_session}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_file}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()},
-\code{\link{zip_lists}()}
+Other utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_file}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{to_categorical}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+\code{\link{zip_lists}()} \cr
 
-Other preprocessing: 
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_smart_resize}()},
-\code{\link{text_dataset_from_directory}()}
+Other preprocessing: \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
 }
 \concept{dataset utils}
 \concept{preprocessing}

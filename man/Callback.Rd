@@ -5,26 +5,26 @@
 \title{Define a custom \code{Callback} class}
 \usage{
 Callback(
-  classname,
-  on_epoch_begin = NULL,
-  on_epoch_end = NULL,
-  on_train_begin = NULL,
-  on_train_end = NULL,
-  on_train_batch_begin = NULL,
-  on_train_batch_end = NULL,
-  on_test_begin = NULL,
-  on_test_end = NULL,
-  on_test_batch_begin = NULL,
-  on_test_batch_end = NULL,
-  on_predict_begin = NULL,
-  on_predict_end = NULL,
-  on_predict_batch_begin = NULL,
-  on_predict_batch_end = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+on_epoch_begin = NULL,
+on_epoch_end = NULL,
+on_train_begin = NULL,
+on_train_end = NULL,
+on_train_batch_begin = NULL,
+on_train_batch_end = NULL,
+on_test_begin = NULL,
+on_test_end = NULL,
+on_test_batch_begin = NULL,
+on_test_batch_end = NULL,
+on_predict_begin = NULL,
+on_predict_end = NULL,
+on_predict_batch_begin = NULL,
+on_predict_batch_end = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{
@@ -278,16 +278,16 @@ override the method associated with the stage of interest.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{training_finished <- FALSE
 callback_mark_finished <- Callback("MarkFinished",
-  on_train_end = function(logs = NULL) \{
-    training_finished <<- TRUE
-  \}
+on_train_end = function(logs = NULL) \{
+training_finished <<- TRUE
+\}
 )
 
 model <- keras_model_sequential(input_shape = c(1)) |>
-  layer_dense(1)
+layer_dense(1)
 model |> compile(loss = 'mean_squared_error')
 model |> fit(op_ones(c(1, 1)), op_ones(c(1, 1)),
-             callbacks = callback_mark_finished())
+callbacks = callback_mark_finished())
 stopifnot(isTRUE(training_finished))
 }\if{html}{\out{</div>}}
 
@@ -333,17 +333,17 @@ Any objects assigned here are invisible to the Keras framework.
 \item \url{https://keras.io/api/callbacks/base_callback#callback-class}
 }
 
-Other callbacks: 
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

@@ -28,17 +28,17 @@ new_values <- random_normal(shape = c(2, 3), seed = seed_gen)
 Usage in a layer:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_dropout2 <- new_layer_class(
-  "dropout2",
-  initialize = function(...) \{
-    super$initialize(...)
-    self$seed_generator <- random_seed_generator(seed = 1337)
-  \},
-  call = function(x, training = FALSE) \{
-    if (training) \{
-      return(random_dropout(x, rate = 0.5, seed = self$seed_generator))
-    \}
-    return(x)
-  \}
+"dropout2",
+initialize = function(...) \{
+super$initialize(...)
+self$seed_generator <- random_seed_generator(seed = 1337)
+\},
+call = function(x, training = FALSE) \{
+if (training) \{
+return(random_dropout(x, rate = 0.5, seed = self$seed_generator))
+\}
+return(x)
+\}
 )
 
 out <- layer_dropout(rate = 0.8)
@@ -51,14 +51,14 @@ out(op_ones(10), training = TRUE)
 }
 
 \seealso{
-Other random: 
-\code{\link{random_categorical}()},
-\code{\link{random_dropout}()},
-\code{\link{random_gamma}()},
-\code{\link{random_integer}()},
-\code{\link{random_normal}()},
-\code{\link{random_shuffle}()},
-\code{\link{random_truncated_normal}()},
-\code{\link{random_uniform}()}
+Other random: \cr
+\code{\link{random_categorical}()} \cr
+\code{\link{random_dropout}()} \cr
+\code{\link{random_gamma}()} \cr
+\code{\link{random_integer}()} \cr
+\code{\link{random_normal}()} \cr
+\code{\link{random_shuffle}()} \cr
+\code{\link{random_truncated_normal}()} \cr
+\code{\link{random_uniform}()} \cr
 }
 \concept{random}

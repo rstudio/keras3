@@ -5,20 +5,20 @@
 \title{An optimizer that dynamically scales the loss to prevent underflow.}
 \usage{
 optimizer_loss_scale(
-  inner_optimizer,
-  initial_scale = 32768,
-  dynamic_growth_steps = 2000L,
-  ...,
-  name = NULL,
-  weight_decay = NULL,
-  clipnorm = NULL,
-  clipvalue = NULL,
-  global_clipnorm = NULL,
-  use_ema = NULL,
-  ema_momentum = NULL,
-  ema_overwrite_frequency = NULL,
-  loss_scale_factor = NULL,
-  gradient_accumulation_steps = NULL
+inner_optimizer,
+initial_scale = 32768,
+dynamic_growth_steps = 2000L,
+...,
+name = NULL,
+weight_decay = NULL,
+clipnorm = NULL,
+clipvalue = NULL,
+global_clipnorm = NULL,
+use_ema = NULL,
+ema_momentum = NULL,
+ema_overwrite_frequency = NULL,
+loss_scale_factor = NULL,
+gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -107,17 +107,17 @@ is doubled.
 }
 }
 \seealso{
-Other optimizers: 
-\code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adafactor}()},
-\code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adam}()},
-\code{\link{optimizer_adam_w}()},
-\code{\link{optimizer_adamax}()},
-\code{\link{optimizer_ftrl}()},
-\code{\link{optimizer_lion}()},
-\code{\link{optimizer_nadam}()},
-\code{\link{optimizer_rmsprop}()},
-\code{\link{optimizer_sgd}()}
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adafactor}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lion}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_sgd}()} \cr
 }
 \concept{optimizers}

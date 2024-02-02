@@ -19,22 +19,22 @@ It is defined as:
 \item \url{https://keras.io/api/layers/activations#tanh-function}
 }
 
-Other activations: 
-\code{\link{activation_elu}()},
-\code{\link{activation_exponential}()},
-\code{\link{activation_gelu}()},
-\code{\link{activation_hard_sigmoid}()},
-\code{\link{activation_leaky_relu}()},
-\code{\link{activation_linear}()},
-\code{\link{activation_log_softmax}()},
-\code{\link{activation_mish}()},
-\code{\link{activation_relu}()},
-\code{\link{activation_relu6}()},
-\code{\link{activation_selu}()},
-\code{\link{activation_sigmoid}()},
-\code{\link{activation_silu}()},
-\code{\link{activation_softmax}()},
-\code{\link{activation_softplus}()},
-\code{\link{activation_softsign}()}
+Other activations: \cr
+\code{\link{activation_elu}()} \cr
+\code{\link{activation_exponential}()} \cr
+\code{\link{activation_gelu}()} \cr
+\code{\link{activation_hard_sigmoid}()} \cr
+\code{\link{activation_leaky_relu}()} \cr
+\code{\link{activation_linear}()} \cr
+\code{\link{activation_log_softmax}()} \cr
+\code{\link{activation_mish}()} \cr
+\code{\link{activation_relu}()} \cr
+\code{\link{activation_relu6}()} \cr
+\code{\link{activation_selu}()} \cr
+\code{\link{activation_sigmoid}()} \cr
+\code{\link{activation_silu}()} \cr
+\code{\link{activation_softmax}()} \cr
+\code{\link{activation_softplus}()} \cr
+\code{\link{activation_softsign}()} \cr
 }
 \concept{activations}

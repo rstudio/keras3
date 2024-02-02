@@ -5,11 +5,11 @@
 \title{A \code{LearningRateSchedule} that uses an exponential decay schedule.}
 \usage{
 learning_rate_schedule_exponential_decay(
-  initial_learning_rate,
-  decay_steps,
-  decay_rate,
-  staircase = FALSE,
-  name = "ExponentialDecay"
+initial_learning_rate,
+decay_steps,
+decay_rate,
+staircase = FALSE,
+name = "ExponentialDecay"
 )
 }
 \arguments{
@@ -42,7 +42,7 @@ the learning rate value across different invocations of optimizer functions.
 It is computed as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
-  initial_learning_rate * decay_rate ^ (step / decay_steps)
+initial_learning_rate * decay_rate ^ (step / decay_steps)
 \}
 }\if{html}{\out{</div>}}
 
@@ -59,15 +59,15 @@ of 0.96:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{initial_learning_rate <- 0.1
 lr_schedule <- learning_rate_schedule_exponential_decay(
-    initial_learning_rate,
-    decay_steps=100000,
-    decay_rate=0.96,
-    staircase=TRUE)
+initial_learning_rate,
+decay_steps=100000,
+decay_rate=0.96,
+staircase=TRUE)
 
 model \%>\% compile(
-  optimizer = optimizer_sgd(learning_rate = lr_schedule),
-  loss = 'sparse_categorical_crossentropy',
-  metrics = c('accuracy'))
+optimizer = optimizer_sgd(learning_rate = lr_schedule),
+loss = 'sparse_categorical_crossentropy',
+metrics = c('accuracy'))
 
 model \%>\% fit(data, labels, epochs=5)
 }\if{html}{\out{</div>}}
@@ -82,12 +82,12 @@ The learning rate schedule is also serializable and deserializable using
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/exponential_decay#exponentialdecay-class}
 }
 
-Other optimizer learning rate schedules: 
-\code{\link{LearningRateSchedule}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_inverse_time_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
+Other optimizer learning rate schedules: \cr
+\code{\link{LearningRateSchedule}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()} \cr
+\code{\link{learning_rate_schedule_inverse_time_decay}()} \cr
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()} \cr
+\code{\link{learning_rate_schedule_polynomial_decay}()} \cr
 }
 \concept{optimizer learning rate schedules}

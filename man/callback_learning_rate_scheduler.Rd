@@ -23,10 +23,10 @@ the optimizer.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
 # and decreases it exponentially after that.
 scheduler <- function(epoch, lr) \{
-  if (epoch < 10)
-    return(lr)
-  else
-    return(lr * exp(-0.1))
+if (epoch < 10)
+return(lr)
+else
+return(lr * exp(-0.1))
 \}
 
 model <- keras_model_sequential() |> layer_dense(units = 10)
@@ -40,8 +40,8 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
 history <- model |> fit(x = array(runif(100), c(5, 20)),
-                        y = array(0, c(5, 1)),
-                        epochs = 15, callbacks = list(callback), verbose = 0)
+y = array(0, c(5, 1)),
+epochs = 15, callbacks = list(callback), verbose = 0)
 model$optimizer$learning_rate |> as.array() |> round(5)
 }\if{html}{\out{</div>}}
 
@@ -55,17 +55,17 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 \item \url{https://keras.io/api/callbacks/learning_rate_scheduler#learningratescheduler-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

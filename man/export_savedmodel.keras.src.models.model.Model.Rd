@@ -42,14 +42,14 @@ predictions <- reloaded_artifact$serve(input_data)
 }
 
 \seealso{
-Other saving and loading functions: 
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{load_model_weights}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{save_model}()},
-\code{\link{save_model_config}()},
-\code{\link{save_model_weights}()},
-\code{\link{with_custom_object_scope}()}
+Other saving and loading functions: \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{load_model}()} \cr
+\code{\link{load_model_weights}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{save_model}()} \cr
+\code{\link{save_model_config}()} \cr
+\code{\link{save_model_weights}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{saving and loading functions}

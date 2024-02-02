@@ -5,14 +5,14 @@
 \title{Stop training when a monitored metric has stopped improving.}
 \usage{
 callback_early_stopping(
-  monitor = "val_loss",
-  min_delta = 0L,
-  patience = 0L,
-  verbose = 0L,
-  mode = "auto",
-  baseline = NULL,
-  restore_best_weights = FALSE,
-  start_from_epoch = 0L
+monitor = "val_loss",
+min_delta = 0L,
+patience = 0L,
+verbose = 0L,
+mode = "auto",
+baseline = NULL,
+restore_best_weights = FALSE,
+start_from_epoch = 0L
 )
 }
 \arguments{
@@ -64,17 +64,17 @@ To make it so, pass the loss or metrics at \code{model$compile()}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_early_stopping(monitor = 'loss',
-                                   patience = 3)
+patience = 3)
 # This callback will stop the training when there is no improvement in
 # the loss for three consecutive epochs.
 model <- keras_model_sequential() \%>\%
-  layer_dense(10)
+layer_dense(10)
 model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
 history <- model \%>\% fit(x = op_ones(c(5, 20)),
-                         y = op_zeros(5),
-                         epochs = 10, batch_size = 1,
-                         callbacks = list(callback),
-                         verbose = 0)
+y = op_zeros(5),
+epochs = 10, batch_size = 1,
+callbacks = list(callback),
+verbose = 0)
 nrow(as.data.frame(history))  # Only 4 epochs are run.
 }\if{html}{\out{</div>}}
 
@@ -88,17 +88,17 @@ nrow(as.data.frame(history))  # Only 4 epochs are run.
 \item \url{https://keras.io/api/callbacks/early_stopping#earlystopping-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

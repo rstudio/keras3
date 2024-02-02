@@ -5,20 +5,20 @@
 \title{Gradient descent (with momentum) optimizer.}
 \usage{
 optimizer_sgd(
-  learning_rate = 0.01,
-  momentum = 0,
-  nesterov = FALSE,
-  weight_decay = NULL,
-  clipnorm = NULL,
-  clipvalue = NULL,
-  global_clipnorm = NULL,
-  use_ema = FALSE,
-  ema_momentum = 0.99,
-  ema_overwrite_frequency = NULL,
-  name = "SGD",
-  ...,
-  loss_scale_factor = NULL,
-  gradient_accumulation_steps = NULL
+learning_rate = 0.01,
+momentum = 0,
+nesterov = FALSE,
+weight_decay = NULL,
+clipnorm = NULL,
+clipvalue = NULL,
+global_clipnorm = NULL,
+use_ema = FALSE,
+ema_momentum = 0.99,
+ema_overwrite_frequency = NULL,
+name = "SGD",
+...,
+loss_scale_factor = NULL,
+gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -112,17 +112,17 @@ w <- w + momentum * velocity - learning_rate * g
 \item \url{https://keras.io/api/optimizers/sgd#sgd-class}
 }
 
-Other optimizers: 
-\code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adafactor}()},
-\code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adam}()},
-\code{\link{optimizer_adam_w}()},
-\code{\link{optimizer_adamax}()},
-\code{\link{optimizer_ftrl}()},
-\code{\link{optimizer_lion}()},
-\code{\link{optimizer_loss_scale}()},
-\code{\link{optimizer_nadam}()},
-\code{\link{optimizer_rmsprop}()}
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adafactor}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lion}()} \cr
+\code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
 }
 \concept{optimizers}

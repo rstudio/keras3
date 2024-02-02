@@ -23,26 +23,26 @@ Make a python class constructor
 \examples{
 \dontrun{
 MyClass \%py_class\% {
-  initialize <- function(x) {
-    print("Hi from MyClass$initialize()!")
-    self$x <- x
-  }
-  my_method <- function() {
-    self$x
-  }
+initialize <- function(x) {
+print("Hi from MyClass$initialize()!")
+self$x <- x
+}
+my_method <- function() {
+self$x
+}
 }
 
 my_class_instance <- MyClass(42)
 my_class_instance$my_method()
 
 MyClass2(MyClass) \%py_class\% {
-  "This will be a __doc__ string for MyClass2"
+"This will be a __doc__ string for MyClass2"
 
-  initialize <- function(...) {
-    "This will be the __doc__ string for the MyClass2.__init__() method"
-    print("Hi from MyClass2$initialize()!")
-    super$initialize(...)
-  }
+initialize <- function(...) {
+"This will be the __doc__ string for the MyClass2.__init__() method"
+print("Hi from MyClass2$initialize()!")
+super$initialize(...)
+}
 }
 
 my_class_instance2 <- MyClass2(42)
@@ -58,33 +58,33 @@ reticulate::py_help(MyClass2) # see the __doc__ strings and more!
 
 MyClass \%py_class\% {
 
-  initialize <- function(x) {
-    print("Hi from MyClass$initialize()!")
-    private$y <- paste("A Private field:", x)
-  }
+initialize <- function(x) {
+print("Hi from MyClass$initialize()!")
+private$y <- paste("A Private field:", x)
+}
 
-  get_private_field <- function() {
-    private$y
-  }
+get_private_field <- function() {
+private$y
+}
 
-  private$a_private_method <- function() {
-    cat("a_private_method() was called.\n")
-    cat("private$y is ", sQuote(private$y), "\n")
-  }
+private$a_private_method <- function() {
+cat("a_private_method() was called.\n")
+cat("private$y is ", sQuote(private$y), "\n")
+}
 
-  call_private_method <- function()
-    private$a_private_method()
+call_private_method <- function()
+private$a_private_method()
 
-  # equivalent of @property decorator in python
-  an_active_property \%<-active\% function(x = NULL) {
-    if(!is.null(x)) {
-      cat("`an_active_property` was assigned", x, "\n")
-      return(x)
-    } else {
-      cat("`an_active_property` was accessed\n")
-      return(42)
-    }
-  }
+# equivalent of @property decorator in python
+an_active_property \%<-active\% function(x = NULL) {
+if(!is.null(x)) {
+cat("`an_active_property` was assigned", x, "\n")
+return(x)
+} else {
+cat("`an_active_property` was accessed\n")
+return(42)
+}
+}
 }
 
 inst1 <- MyClass(1)

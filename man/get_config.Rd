@@ -36,17 +36,17 @@ or \code{\link[=save_model]{save_model()}} to save the model configuration and w
 to the filesystem.
 }
 \seealso{
-Other model functions: 
-\code{\link{get_layer}()},
-\code{\link{keras_model}()},
-\code{\link{keras_model_sequential}()},
-\code{\link{pop_layer}()},
-\code{\link{summary.keras.src.models.model.Model}()}
+Other model functions: \cr
+\code{\link{get_layer}()} \cr
+\code{\link{keras_model}()} \cr
+\code{\link{keras_model_sequential}()} \cr
+\code{\link{pop_layer}()} \cr
+\code{\link{summary.keras.src.models.model.Model}()} \cr
 
-Other layer methods: 
-\code{\link{count_params}()},
-\code{\link{get_weights}()},
-\code{\link{reset_state}()}
+Other layer methods: \cr
+\code{\link{count_params}()} \cr
+\code{\link{get_weights}()} \cr
+\code{\link{reset_state}()} \cr
 }
 \concept{layer methods}
 \concept{model functions}

@@ -5,17 +5,17 @@
 \title{Approximates the AUC (Area under the curve) of the ROC or PR curves.}
 \usage{
 metric_auc(
-  ...,
-  num_thresholds = 200L,
-  curve = "ROC",
-  summation_method = "interpolation",
-  name = NULL,
-  dtype = NULL,
-  thresholds = NULL,
-  multi_label = FALSE,
-  num_labels = NULL,
-  label_weights = NULL,
-  from_logits = FALSE
+...,
+num_thresholds = 200L,
+curve = "ROC",
+summation_method = "interpolation",
+name = NULL,
+dtype = NULL,
+thresholds = NULL,
+multi_label = FALSE,
+num_labels = NULL,
+label_weights = NULL,
+from_logits = FALSE
 )
 }
 \arguments{
@@ -118,7 +118,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_auc(num_thresholds = 3)
 m$update_state(c(0,   0,   1,   1),
-               c(0, 0.5, 0.3, 0.9))
+c(0, 0.5, 0.3, 0.9))
 # threshold values are [0 - 1e-7, 0.5, 1 + 1e-7]
 # tp = [2, 1, 0], fp = [2, 0, 0], fn = [0, 1, 2], tn = [0, 2, 2]
 # tp_rate = recall = [1, 0.5, 0], fp_rate = [1, 0, 0]
@@ -133,8 +133,8 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0,   0,   1,   1),
-               c(0, 0.5, 0.3, 0.9),
-               sample_weight=c(1, 0, 0, 1))
+c(0, 0.5, 0.3, 0.9),
+sample_weight=c(1, 0, 0, 1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -146,16 +146,16 @@ Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Reports the AUC of a model outputting a probability.
 model |> compile(
-  optimizer = 'sgd',
-  loss = loss_binary_crossentropy(),
-  metrics = list(metric_auc())
+optimizer = 'sgd',
+loss = loss_binary_crossentropy(),
+metrics = list(metric_auc())
 )
 
 # Reports the AUC of a model outputting a logit.
 model |> compile(
-  optimizer = 'sgd',
-  loss = loss_binary_crossentropy(from_logits = TRUE),
-  metrics = list(metric_auc(from_logits = TRUE))
+optimizer = 'sgd',
+loss = loss_binary_crossentropy(from_logits = TRUE),
+metrics = list(metric_auc(from_logits = TRUE))
 )
 }\if{html}{\out{</div>}}
 }
@@ -165,66 +165,66 @@ model |> compile(
 \item \url{https://keras.io/api/metrics/classification_metrics#auc-class}
 }
 
-Other confusion metrics: 
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+Other confusion metrics: \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
 
-Other metrics: 
-\code{\link{Metric}()},
-\code{\link{custom_metric}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_binary_focal_crossentropy}()},
-\code{\link{metric_binary_iou}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_focal_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_f1_score}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_fbeta_score}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_huber}()},
-\code{\link{metric_iou}()},
-\code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh}()},
-\code{\link{metric_log_cosh_error}()},
-\code{\link{metric_mean}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_wrapper}()},
-\code{\link{metric_one_hot_iou}()},
-\code{\link{metric_one_hot_mean_iou}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_r2_score}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+Other metrics: \cr
+\code{\link{Metric}()} \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_iou}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
 }
 \concept{confusion metrics}
 \concept{metrics}

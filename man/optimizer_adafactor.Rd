@@ -5,23 +5,23 @@
 \title{Optimizer that implements the Adafactor algorithm.}
 \usage{
 optimizer_adafactor(
-  learning_rate = 0.001,
-  beta_2_decay = -0.8,
-  epsilon_1 = 1e-30,
-  epsilon_2 = 0.001,
-  clip_threshold = 1,
-  relative_step = TRUE,
-  weight_decay = NULL,
-  clipnorm = NULL,
-  clipvalue = NULL,
-  global_clipnorm = NULL,
-  use_ema = FALSE,
-  ema_momentum = 0.99,
-  ema_overwrite_frequency = NULL,
-  name = "adafactor",
-  ...,
-  loss_scale_factor = NULL,
-  gradient_accumulation_steps = NULL
+learning_rate = 0.001,
+beta_2_decay = -0.8,
+epsilon_1 = 1e-30,
+epsilon_2 = 0.001,
+clip_threshold = 1,
+relative_step = TRUE,
+weight_decay = NULL,
+clipnorm = NULL,
+clipvalue = NULL,
+global_clipnorm = NULL,
+use_ema = FALSE,
+ema_momentum = 0.99,
+ema_overwrite_frequency = NULL,
+name = "adafactor",
+...,
+loss_scale_factor = NULL,
+gradient_accumulation_steps = NULL
 )
 }
 \arguments{
@@ -123,17 +123,17 @@ last 2 dimensions separately in its accumulator variables.
 \item \url{https://keras.io/api/optimizers/adafactor#adafactor-class}
 }
 
-Other optimizers: 
-\code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adam}()},
-\code{\link{optimizer_adam_w}()},
-\code{\link{optimizer_adamax}()},
-\code{\link{optimizer_ftrl}()},
-\code{\link{optimizer_lion}()},
-\code{\link{optimizer_loss_scale}()},
-\code{\link{optimizer_nadam}()},
-\code{\link{optimizer_rmsprop}()},
-\code{\link{optimizer_sgd}()}
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lion}()} \cr
+\code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_sgd}()} \cr
 }
 \concept{optimizers}

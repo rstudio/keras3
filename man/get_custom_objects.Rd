@@ -37,24 +37,24 @@ You can use \code{set_custom_objects()} to restore a previous registry state.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# within a function, if you want to temporarily modify the registry,
 function() \{
-  orig_objects <- set_custom_objects(clear = TRUE)
-  on.exit(set_custom_objects(orig_objects))
+orig_objects <- set_custom_objects(clear = TRUE)
+on.exit(set_custom_objects(orig_objects))
 
-  ## temporarily modify the global registry
-  # register_keras_serializable(....)
-  # ....  <do work>
-  # on.exit(), the previous registry state is restored.
+## temporarily modify the global registry
+# register_keras_serializable(....)
+# ....  <do work>
+# on.exit(), the previous registry state is restored.
 \}
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other serialization utilities: 
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{serialize_keras_object}()},
-\code{\link{with_custom_object_scope}()}
+Other serialization utilities: \cr
+\code{\link{deserialize_keras_object}()} \cr
+\code{\link{get_registered_name}()} \cr
+\code{\link{get_registered_object}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{serialize_keras_object}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{serialization utilities}

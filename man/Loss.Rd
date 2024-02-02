@@ -5,13 +5,13 @@
 \title{Subclass the base \code{Loss} class}
 \usage{
 Loss(
-  classname,
-  call = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+call = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{
@@ -47,10 +47,10 @@ function to \code{compile()}.
 Example subclass implementation:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss_custom_mse <- Loss(
-  classname = "CustomMeanSquaredError",
-  call = function(y_true, y_pred) \{
-    op_mean(op_square(y_pred - y_true), axis = -1)
-  \}
+classname = "CustomMeanSquaredError",
+call = function(y_true, y_pred) \{
+op_mean(op_square(y_pred - y_true), axis = -1)
+\}
 )
 
 # Usage in compile()
@@ -70,8 +70,8 @@ y_pred <- op_arange(20) |> op_reshape(4, 5) * 2
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss2 <- (y_pred - y_true)^2 |>
-  op_mean(axis = -1) |>
-  op_mean()
+op_mean(axis = -1) |>
+op_mean()
 
 stopifnot(all.equal(as.array(loss), as.array(loss2)))
 
@@ -84,17 +84,17 @@ sample_weight <-array(c(.25, .25, 1, 1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{weighted_loss2 <- (y_true - y_pred)^2 |>
-  op_mean(axis = -1) |>
-  op_multiply(sample_weight) |>
-  op_mean()
+op_mean(axis = -1) |>
+op_multiply(sample_weight) |>
+op_mean()
 
 stopifnot(all.equal(as.array(weighted_loss),
-                    as.array(weighted_loss2)))
+as.array(weighted_loss2)))
 }\if{html}{\out{</div>}}
 }
 \section{Methods defined by base \code{Loss} class:}{
 \itemize{
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{initialize(name=NULL, reduction="sum_over_batch_size", dtype=NULL)
 }\if{html}{\out{</div>}}
@@ -105,13 +105,13 @@ Args:
 \item \code{reduction}: Valid values are one of \verb{\{"sum_over_batch_size", "sum", NULL, "none"\}}
 \item \code{dtype}
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{__call__(y_true, y_pred, sample_weight=NULL)
 }\if{html}{\out{</div>}}
 
 Call the loss instance as a function, optionally with \code{sample_weight}.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_config()
 }\if{html}{\out{</div>}}
@@ -131,39 +131,39 @@ Any objects assigned here are invisible to the Keras framework.
 }
 
 \seealso{
-Other losses: 
-\code{\link{loss_binary_crossentropy}()},
-\code{\link{loss_binary_focal_crossentropy}()},
-\code{\link{loss_categorical_crossentropy}()},
-\code{\link{loss_categorical_focal_crossentropy}()},
-\code{\link{loss_categorical_hinge}()},
-\code{\link{loss_cosine_similarity}()},
-\code{\link{loss_hinge}()},
-\code{\link{loss_huber}()},
-\code{\link{loss_kl_divergence}()},
-\code{\link{loss_log_cosh}()},
-\code{\link{loss_mean_absolute_error}()},
-\code{\link{loss_mean_absolute_percentage_error}()},
-\code{\link{loss_mean_squared_error}()},
-\code{\link{loss_mean_squared_logarithmic_error}()},
-\code{\link{loss_poisson}()},
-\code{\link{loss_sparse_categorical_crossentropy}()},
-\code{\link{loss_squared_hinge}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_binary_focal_crossentropy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_focal_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_huber}()},
-\code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_squared_hinge}()}
+Other losses: \cr
+\code{\link{loss_binary_crossentropy}()} \cr
+\code{\link{loss_binary_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_crossentropy}()} \cr
+\code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_hinge}()} \cr
+\code{\link{loss_cosine_similarity}()} \cr
+\code{\link{loss_hinge}()} \cr
+\code{\link{loss_huber}()} \cr
+\code{\link{loss_kl_divergence}()} \cr
+\code{\link{loss_log_cosh}()} \cr
+\code{\link{loss_mean_absolute_error}()} \cr
+\code{\link{loss_mean_absolute_percentage_error}()} \cr
+\code{\link{loss_mean_squared_error}()} \cr
+\code{\link{loss_mean_squared_logarithmic_error}()} \cr
+\code{\link{loss_poisson}()} \cr
+\code{\link{loss_sparse_categorical_crossentropy}()} \cr
+\code{\link{loss_squared_hinge}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
 }
 \concept{losses}

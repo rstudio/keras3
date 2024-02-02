@@ -35,30 +35,30 @@ register_keras_serializable(layer_my_dense, package = "my_package")
 
 MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
 stopifnot(exprs = \{
-  get_registered_object('my_package>MyDense') == MyDense
-  get_registered_name(MyDense) == 'my_package>MyDense'
+get_registered_object('my_package>MyDense') == MyDense
+get_registered_name(MyDense) == 'my_package>MyDense'
 \})
 }\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other saving and loading functions: 
-\code{\link{export_savedmodel.keras.src.models.model.Model}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{load_model_weights}()},
-\code{\link{save_model}()},
-\code{\link{save_model_config}()},
-\code{\link{save_model_weights}()},
-\code{\link{with_custom_object_scope}()}
+Other saving and loading functions: \cr
+\code{\link{export_savedmodel.keras.src.models.model.Model}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{load_model}()} \cr
+\code{\link{load_model_weights}()} \cr
+\code{\link{save_model}()} \cr
+\code{\link{save_model_config}()} \cr
+\code{\link{save_model_weights}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 
-Other serialization utilities: 
-\code{\link{deserialize_keras_object}()},
-\code{\link{get_custom_objects}()},
-\code{\link{get_registered_name}()},
-\code{\link{get_registered_object}()},
-\code{\link{serialize_keras_object}()},
-\code{\link{with_custom_object_scope}()}
+Other serialization utilities: \cr
+\code{\link{deserialize_keras_object}()} \cr
+\code{\link{get_custom_objects}()} \cr
+\code{\link{get_registered_name}()} \cr
+\code{\link{get_registered_object}()} \cr
+\code{\link{serialize_keras_object}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{saving and loading functions}
 \concept{serialization utilities}

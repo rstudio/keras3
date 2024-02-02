@@ -5,15 +5,15 @@
 \title{Define a custom \code{LearningRateSchedule} class}
 \usage{
 LearningRateSchedule(
-  classname,
-  call = NULL,
-  initialize = NULL,
-  get_config = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+call = NULL,
+initialize = NULL,
+get_config = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{
@@ -45,9 +45,9 @@ Several built-in learning rate schedules are available, such as
 \code{\link[=learning_rate_schedule_piecewise_constant_decay]{learning_rate_schedule_piecewise_constant_decay()}}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{lr_schedule <- learning_rate_schedule_exponential_decay(
-  initial_learning_rate = 1e-2,
-  decay_steps = 10000,
-  decay_rate = 0.9
+initial_learning_rate = 1e-2,
+decay_steps = 10000,
+decay_rate = 0.9
 )
 optimizer <- optimizer_sgd(learning_rate = lr_schedule)
 }\if{html}{\out{</div>}}
@@ -65,37 +65,37 @@ and \code{from_config()} methods.
 }
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{my_custom_learning_rate_schedule <- LearningRateSchedule(
-  classname = "MyLRSchedule",
-  initialize = function( initial_learning_rate) \{
+classname = "MyLRSchedule",
+initialize = function( initial_learning_rate) \{
 
-    self$initial_learning_rate <- initial_learning_rate
-  \},
+self$initial_learning_rate <- initial_learning_rate
+\},
 
 
-  call = function(step) \{
-    # note that `step` is a tensor
-    # and call() will be traced via tf_function() or similar.
+call = function(step) \{
+# note that `step` is a tensor
+# and call() will be traced via tf_function() or similar.
 
-    str(step) # <KerasVariable shape=(), dtype=int64, path=SGD/iteration>
+str(step) # <KerasVariable shape=(), dtype=int64, path=SGD/iteration>
 
-    # print 'step' every 1000 steps
-    op_cond((step \%\% 1000) == 0,
-            \\() \{tensorflow::tf$print(step); NULL\},
-            \\() \{NULL\})
-    self$initial_learning_rate / (step + 1)
-  \}
+# print 'step' every 1000 steps
+op_cond((step \%\% 1000) == 0,
+\\() \{tensorflow::tf$print(step); NULL\},
+\\() \{NULL\})
+self$initial_learning_rate / (step + 1)
+\}
 )
 
 optimizer <- optimizer_sgd(
-  learning_rate = my_custom_learning_rate_schedule(0.1)
+learning_rate = my_custom_learning_rate_schedule(0.1)
 )
 
 # You can also call schedule instances directly
 # (e.g., for interactive testing, or if implementing a custom optimizer)
 schedule <- my_custom_learning_rate_schedule(0.1)
 step <- keras$Variable(initializer = op_ones,
-                       shape = shape(),
-                       dtype = "int64")
+shape = shape(),
+dtype = "int64")
 schedule(step)
 }\if{html}{\out{</div>}}
 
@@ -110,7 +110,7 @@ schedule(step)
 
 \section{Methods available:}{
 \itemize{
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{get_config()
 }\if{html}{\out{</div>}}
@@ -130,12 +130,12 @@ Any objects assigned here are invisible to the Keras framework.
 }
 
 \seealso{
-Other optimizer learning rate schedules: 
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_inverse_time_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
+Other optimizer learning rate schedules: \cr
+\code{\link{learning_rate_schedule_cosine_decay}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()} \cr
+\code{\link{learning_rate_schedule_exponential_decay}()} \cr
+\code{\link{learning_rate_schedule_inverse_time_decay}()} \cr
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()} \cr
+\code{\link{learning_rate_schedule_polynomial_decay}()} \cr
 }
 \concept{optimizer learning rate schedules}

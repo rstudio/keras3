@@ -5,13 +5,13 @@
 \title{Create a Keras tensor (Functional API input).}
 \usage{
 keras_input(
-  shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  sparse = NULL,
-  batch_shape = NULL,
-  name = NULL,
-  tensor = NULL
+shape = NULL,
+batch_size = NULL,
+dtype = NULL,
+sparse = NULL,
+batch_shape = NULL,
+name = NULL,
+tensor = NULL
 )
 }
 \arguments{
@@ -65,8 +65,8 @@ model <- keras_model(input, output)
 }
 
 \seealso{
-Other model creation: 
-\code{\link{keras_model}()},
-\code{\link{keras_model_sequential}()}
+Other model creation: \cr
+\code{\link{keras_model}()} \cr
+\code{\link{keras_model_sequential}()} \cr
 }
 \concept{model creation}

@@ -37,14 +37,14 @@ while the upper bound \code{maxval} is excluded.
 \code{dtype} must be a floating point type, the default range is \verb{[0, 1)}.
 }
 \seealso{
-Other random: 
-\code{\link{random_categorical}()},
-\code{\link{random_dropout}()},
-\code{\link{random_gamma}()},
-\code{\link{random_integer}()},
-\code{\link{random_normal}()},
-\code{\link{random_seed_generator}()},
-\code{\link{random_shuffle}()},
-\code{\link{random_truncated_normal}()}
+Other random: \cr
+\code{\link{random_categorical}()} \cr
+\code{\link{random_dropout}()} \cr
+\code{\link{random_gamma}()} \cr
+\code{\link{random_integer}()} \cr
+\code{\link{random_normal}()} \cr
+\code{\link{random_seed_generator}()} \cr
+\code{\link{random_shuffle}()} \cr
+\code{\link{random_truncated_normal}()} \cr
 }
 \concept{random}

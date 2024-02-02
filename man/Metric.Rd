@@ -5,15 +5,15 @@
 \title{Subclass the base \code{Metric} class}
 \usage{
 Metric(
-  classname,
-  initialize = NULL,
-  update_state = NULL,
-  result = NULL,
-  ...,
-  public = list(),
-  private = list(),
-  inherit = NULL,
-  parent_env = parent.frame()
+classname,
+initialize = NULL,
+update_state = NULL,
+result = NULL,
+...,
+public = list(),
+private = list(),
+inherit = NULL,
+parent_env = parent.frame()
 )
 }
 \arguments{
@@ -44,9 +44,9 @@ returned by custom metrics defined with \code{Metric()}.
 \subsection{Usage with \code{compile()}:}{
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-  optimizer = 'sgd',
-  loss = 'mse',
-  metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
+optimizer = 'sgd',
+loss = 'mse',
+metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
 )
 }\if{html}{\out{</div>}}
 }
@@ -55,12 +55,12 @@ returned by custom metrics defined with \code{Metric()}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_SOME_METRIC()
 for (e in seq(epochs)) \{
-  for (i in seq(train_steps)) \{
-    c(y_true, y_pred, sample_weight = NULL) \%<-\% ...
-    m$update_state(y_true, y_pred, sample_weight)
-  \}
-  cat('Final epoch result: ', as.numeric(m$result()), "\\n")
-  m$reset_state()
+for (i in seq(train_steps)) \{
+c(y_true, y_pred, sample_weight = NULL) \%<-\% ...
+m$update_state(y_true, y_pred, sample_weight)
+\}
+cat('Final epoch result: ', as.numeric(m$result()), "\\n")
+m$reset_state()
 \}
 }\if{html}{\out{</div>}}
 }
@@ -71,13 +71,13 @@ for (e in seq(epochs)) \{
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential()
 model |>
-  layer_dense(64, activation = "relu") |>
-  layer_dense(64, activation = "relu") |>
-  layer_dense(10, activation = "softmax")
+layer_dense(64, activation = "relu") |>
+layer_dense(64, activation = "relu") |>
+layer_dense(10, activation = "softmax")
 model |>
-  compile(optimizer = optimizer_rmsprop(0.01),
-          loss = loss_categorical_crossentropy(),
-          metrics = metric_categorical_accuracy())
+compile(optimizer = optimizer_rmsprop(0.01),
+loss = loss_categorical_crossentropy(),
+metrics = metric_categorical_accuracy())
 
 data <- random_uniform(c(1000, 32))
 labels <- random_uniform(c(1000, 10))
@@ -98,37 +98,37 @@ for the metric from the state variables.
 Example subclass implementation:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{metric_binary_true_positives <- Metric(
-  classname = "BinaryTruePositives",
+classname = "BinaryTruePositives",
 
-  initialize = function(name = 'binary_true_positives', ...) \{
-    super$initialize(name = name, ...)
-    self$true_positives <-
-      self$add_weight(shape = shape(),
-                      initializer = 'zeros',
-                      name = 'true_positives')
-  \},
+initialize = function(name = 'binary_true_positives', ...) \{
+super$initialize(name = name, ...)
+self$true_positives <-
+self$add_weight(shape = shape(),
+initializer = 'zeros',
+name = 'true_positives')
+\},
 
-  update_state = function(y_true, y_pred, sample_weight = NULL) \{
-    y_true <- op_cast(y_true, "bool")
-    y_pred <- op_cast(y_pred, "bool")
+update_state = function(y_true, y_pred, sample_weight = NULL) \{
+y_true <- op_cast(y_true, "bool")
+y_pred <- op_cast(y_pred, "bool")
 
-    values <- y_true & y_pred # `&` calls op_logical_and()
-    values <- op_cast(values, self$dtype)
-    if (!is.null(sample_weight)) \{
-      sample_weight <- op_cast(sample_weight, self$dtype)
-      sample_weight <- op_broadcast_to(sample_weight, shape(values))
-      values <- values * sample_weight # `*` calls op_multiply()
-    \}
-    self$true_positives$assign(self$true_positives + op_sum(values))
-  \},
+values <- y_true & y_pred # `&` calls op_logical_and()
+values <- op_cast(values, self$dtype)
+if (!is.null(sample_weight)) \{
+sample_weight <- op_cast(sample_weight, self$dtype)
+sample_weight <- op_broadcast_to(sample_weight, shape(values))
+values <- values * sample_weight # `*` calls op_multiply()
+\}
+self$true_positives$assign(self$true_positives + op_sum(values))
+\},
 
-  result = function() \{
-    self$true_positives
-  \}
+result = function() \{
+self$true_positives
+\}
 )
 model <- keras_model_sequential(input_shape = 32) |> layer_dense(10)
 model |> compile(loss = loss_binary_crossentropy(),
-                 metrics = list(metric_binary_true_positives()))
+metrics = list(metric_binary_true_positives()))
 model |> fit(data, labels, verbose = 0)
 }\if{html}{\out{</div>}}
 }
@@ -136,7 +136,7 @@ model |> fit(data, labels, verbose = 0)
 
 \section{Methods defined by the base \code{Metric} class:}{
 \itemize{
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{__call__(...)
 }\if{html}{\out{</div>}}
@@ -144,11 +144,11 @@ model |> fit(data, labels, verbose = 0)
 Calling a metric instance self like \code{m(...)} is equivalent to calling:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{function(...) \{
-  m$update_state(...)
-  m$result()
+m$update_state(...)
+m$result()
 \}
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{initialize(dtype=NULL, name=NULL)
 }\if{html}{\out{</div>}}
@@ -160,21 +160,21 @@ Args:
 \item \code{name}: (Optional) string name of the metric instance.
 \item \code{dtype}: (Optional) data type of the metric result.
 }
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{add_variable(shape, initializer, dtype=NULL, name=NULL)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{add_weight(shape=shape(), initializer=NULL, dtype=NULL, name=NULL)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_config()
 }\if{html}{\out{</div>}}
 
 Return the serializable config of the metric.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reset_state()
 }\if{html}{\out{</div>}}
@@ -183,7 +183,7 @@ Reset all of the metric state variables.
 
 This function is called between epochs/steps,
 when a metric is evaluated during training.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{result()
 }\if{html}{\out{</div>}}
@@ -192,15 +192,15 @@ Compute the current metric value.
 
 Returns:
 A scalar tensor, or a named list of scalar tensors.
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{stateless_result(metric_variables)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{stateless_update_state(metric_variables, ...)
 }\if{html}{\out{</div>}}
-\item 
+\item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{update_state(...)
 }\if{html}{\out{</div>}}
@@ -229,53 +229,53 @@ Any objects assigned here are invisible to the Keras framework.
 }
 
 \seealso{
-Other metrics: 
-\code{\link{custom_metric}()},
-\code{\link{metric_auc}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_binary_focal_crossentropy}()},
-\code{\link{metric_binary_iou}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_focal_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_f1_score}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_fbeta_score}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_huber}()},
-\code{\link{metric_iou}()},
-\code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh}()},
-\code{\link{metric_log_cosh_error}()},
-\code{\link{metric_mean}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_wrapper}()},
-\code{\link{metric_one_hot_iou}()},
-\code{\link{metric_one_hot_mean_iou}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_r2_score}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+Other metrics: \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_iou}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
 }
 \concept{metrics}

@@ -5,13 +5,13 @@
 \title{Returns numbers spaced evenly on a log scale.}
 \usage{
 op_logspace(
-  start,
-  stop,
-  num = 50L,
-  endpoint = TRUE,
-  base = 10L,
-  dtype = NULL,
-  axis = 1L
+start,
+stop,
+num = 50L,
+endpoint = TRUE,
+base = 10L,
+dtype = NULL,
+axis = 1L
 )
 }
 \arguments{
@@ -50,337 +50,337 @@ Torch backend does not support \code{axis} argument.
 \item \url{https://keras.io/api/ops/numpy#logspace-function}
 }
 
-Other numpy ops: 
-\code{\link{op_abs}()},
-\code{\link{op_add}()},
-\code{\link{op_all}()},
-\code{\link{op_any}()},
-\code{\link{op_append}()},
-\code{\link{op_arange}()},
-\code{\link{op_arccos}()},
-\code{\link{op_arccosh}()},
-\code{\link{op_arcsin}()},
-\code{\link{op_arcsinh}()},
-\code{\link{op_arctan}()},
-\code{\link{op_arctan2}()},
-\code{\link{op_arctanh}()},
-\code{\link{op_argmax}()},
-\code{\link{op_argmin}()},
-\code{\link{op_argsort}()},
-\code{\link{op_array}()},
-\code{\link{op_average}()},
-\code{\link{op_bincount}()},
-\code{\link{op_broadcast_to}()},
-\code{\link{op_ceil}()},
-\code{\link{op_clip}()},
-\code{\link{op_concatenate}()},
-\code{\link{op_conj}()},
-\code{\link{op_copy}()},
-\code{\link{op_cos}()},
-\code{\link{op_cosh}()},
-\code{\link{op_count_nonzero}()},
-\code{\link{op_cross}()},
-\code{\link{op_cumprod}()},
-\code{\link{op_cumsum}()},
-\code{\link{op_diag}()},
-\code{\link{op_diagonal}()},
-\code{\link{op_diff}()},
-\code{\link{op_digitize}()},
-\code{\link{op_divide}()},
-\code{\link{op_dot}()},
-\code{\link{op_einsum}()},
-\code{\link{op_empty}()},
-\code{\link{op_equal}()},
-\code{\link{op_exp}()},
-\code{\link{op_expand_dims}()},
-\code{\link{op_expm1}()},
-\code{\link{op_eye}()},
-\code{\link{op_flip}()},
-\code{\link{op_floor}()},
-\code{\link{op_floor_divide}()},
-\code{\link{op_full}()},
-\code{\link{op_full_like}()},
-\code{\link{op_get_item}()},
-\code{\link{op_greater}()},
-\code{\link{op_greater_equal}()},
-\code{\link{op_hstack}()},
-\code{\link{op_identity}()},
-\code{\link{op_imag}()},
-\code{\link{op_isclose}()},
-\code{\link{op_isfinite}()},
-\code{\link{op_isinf}()},
-\code{\link{op_isnan}()},
-\code{\link{op_less}()},
-\code{\link{op_less_equal}()},
-\code{\link{op_linspace}()},
-\code{\link{op_log}()},
-\code{\link{op_log10}()},
-\code{\link{op_log1p}()},
-\code{\link{op_log2}()},
-\code{\link{op_logaddexp}()},
-\code{\link{op_logical_and}()},
-\code{\link{op_logical_not}()},
-\code{\link{op_logical_or}()},
-\code{\link{op_logical_xor}()},
-\code{\link{op_matmul}()},
-\code{\link{op_max}()},
-\code{\link{op_maximum}()},
-\code{\link{op_mean}()},
-\code{\link{op_median}()},
-\code{\link{op_meshgrid}()},
-\code{\link{op_min}()},
-\code{\link{op_minimum}()},
-\code{\link{op_mod}()},
-\code{\link{op_moveaxis}()},
-\code{\link{op_multiply}()},
-\code{\link{op_nan_to_num}()},
-\code{\link{op_ndim}()},
-\code{\link{op_negative}()},
-\code{\link{op_nonzero}()},
-\code{\link{op_not_equal}()},
-\code{\link{op_ones}()},
-\code{\link{op_ones_like}()},
-\code{\link{op_outer}()},
-\code{\link{op_pad}()},
-\code{\link{op_power}()},
-\code{\link{op_prod}()},
-\code{\link{op_quantile}()},
-\code{\link{op_ravel}()},
-\code{\link{op_real}()},
-\code{\link{op_reciprocal}()},
-\code{\link{op_repeat}()},
-\code{\link{op_reshape}()},
-\code{\link{op_roll}()},
-\code{\link{op_round}()},
-\code{\link{op_sign}()},
-\code{\link{op_sin}()},
-\code{\link{op_sinh}()},
-\code{\link{op_size}()},
-\code{\link{op_sort}()},
-\code{\link{op_split}()},
-\code{\link{op_sqrt}()},
-\code{\link{op_square}()},
-\code{\link{op_squeeze}()},
-\code{\link{op_stack}()},
-\code{\link{op_std}()},
-\code{\link{op_subtract}()},
-\code{\link{op_sum}()},
-\code{\link{op_swapaxes}()},
-\code{\link{op_take}()},
-\code{\link{op_take_along_axis}()},
-\code{\link{op_tan}()},
-\code{\link{op_tanh}()},
-\code{\link{op_tensordot}()},
-\code{\link{op_tile}()},
-\code{\link{op_trace}()},
-\code{\link{op_transpose}()},
-\code{\link{op_tri}()},
-\code{\link{op_tril}()},
-\code{\link{op_triu}()},
-\code{\link{op_var}()},
-\code{\link{op_vdot}()},
-\code{\link{op_vstack}()},
-\code{\link{op_where}()},
-\code{\link{op_zeros}()},
-\code{\link{op_zeros_like}()}
+Other numpy ops: \cr
+\code{\link{op_abs}()} \cr
+\code{\link{op_add}()} \cr
+\code{\link{op_all}()} \cr
+\code{\link{op_any}()} \cr
+\code{\link{op_append}()} \cr
+\code{\link{op_arange}()} \cr
+\code{\link{op_arccos}()} \cr
+\code{\link{op_arccosh}()} \cr
+\code{\link{op_arcsin}()} \cr
+\code{\link{op_arcsinh}()} \cr
+\code{\link{op_arctan}()} \cr
+\code{\link{op_arctan2}()} \cr
+\code{\link{op_arctanh}()} \cr
+\code{\link{op_argmax}()} \cr
+\code{\link{op_argmin}()} \cr
+\code{\link{op_argsort}()} \cr
+\code{\link{op_array}()} \cr
+\code{\link{op_average}()} \cr
+\code{\link{op_bincount}()} \cr
+\code{\link{op_broadcast_to}()} \cr
+\code{\link{op_ceil}()} \cr
+\code{\link{op_clip}()} \cr
+\code{\link{op_concatenate}()} \cr
+\code{\link{op_conj}()} \cr
+\code{\link{op_copy}()} \cr
+\code{\link{op_cos}()} \cr
+\code{\link{op_cosh}()} \cr
+\code{\link{op_count_nonzero}()} \cr
+\code{\link{op_cross}()} \cr
+\code{\link{op_cumprod}()} \cr
+\code{\link{op_cumsum}()} \cr
+\code{\link{op_diag}()} \cr
+\code{\link{op_diagonal}()} \cr
+\code{\link{op_diff}()} \cr
+\code{\link{op_digitize}()} \cr
+\code{\link{op_divide}()} \cr
+\code{\link{op_dot}()} \cr
+\code{\link{op_einsum}()} \cr
+\code{\link{op_empty}()} \cr
+\code{\link{op_equal}()} \cr
+\code{\link{op_exp}()} \cr
+\code{\link{op_expand_dims}()} \cr
+\code{\link{op_expm1}()} \cr
+\code{\link{op_eye}()} \cr
+\code{\link{op_flip}()} \cr
+\code{\link{op_floor}()} \cr
+\code{\link{op_floor_divide}()} \cr
+\code{\link{op_full}()} \cr
+\code{\link{op_full_like}()} \cr
+\code{\link{op_get_item}()} \cr
+\code{\link{op_greater}()} \cr
+\code{\link{op_greater_equal}()} \cr
+\code{\link{op_hstack}()} \cr
+\code{\link{op_identity}()} \cr
+\code{\link{op_imag}()} \cr
+\code{\link{op_isclose}()} \cr
+\code{\link{op_isfinite}()} \cr
+\code{\link{op_isinf}()} \cr
+\code{\link{op_isnan}()} \cr
+\code{\link{op_less}()} \cr
+\code{\link{op_less_equal}()} \cr
+\code{\link{op_linspace}()} \cr
+\code{\link{op_log}()} \cr
+\code{\link{op_log10}()} \cr
+\code{\link{op_log1p}()} \cr
+\code{\link{op_log2}()} \cr
+\code{\link{op_logaddexp}()} \cr
+\code{\link{op_logical_and}()} \cr
+\code{\link{op_logical_not}()} \cr
+\code{\link{op_logical_or}()} \cr
+\code{\link{op_logical_xor}()} \cr
+\code{\link{op_matmul}()} \cr
+\code{\link{op_max}()} \cr
+\code{\link{op_maximum}()} \cr
+\code{\link{op_mean}()} \cr
+\code{\link{op_median}()} \cr
+\code{\link{op_meshgrid}()} \cr
+\code{\link{op_min}()} \cr
+\code{\link{op_minimum}()} \cr
+\code{\link{op_mod}()} \cr
+\code{\link{op_moveaxis}()} \cr
+\code{\link{op_multiply}()} \cr
+\code{\link{op_nan_to_num}()} \cr
+\code{\link{op_ndim}()} \cr
+\code{\link{op_negative}()} \cr
+\code{\link{op_nonzero}()} \cr
+\code{\link{op_not_equal}()} \cr
+\code{\link{op_ones}()} \cr
+\code{\link{op_ones_like}()} \cr
+\code{\link{op_outer}()} \cr
+\code{\link{op_pad}()} \cr
+\code{\link{op_power}()} \cr
+\code{\link{op_prod}()} \cr
+\code{\link{op_quantile}()} \cr
+\code{\link{op_ravel}()} \cr
+\code{\link{op_real}()} \cr
+\code{\link{op_reciprocal}()} \cr
+\code{\link{op_repeat}()} \cr
+\code{\link{op_reshape}()} \cr
+\code{\link{op_roll}()} \cr
+\code{\link{op_round}()} \cr
+\code{\link{op_sign}()} \cr
+\code{\link{op_sin}()} \cr
+\code{\link{op_sinh}()} \cr
+\code{\link{op_size}()} \cr
+\code{\link{op_sort}()} \cr
+\code{\link{op_split}()} \cr
+\code{\link{op_sqrt}()} \cr
+\code{\link{op_square}()} \cr
+\code{\link{op_squeeze}()} \cr
+\code{\link{op_stack}()} \cr
+\code{\link{op_std}()} \cr
+\code{\link{op_subtract}()} \cr
+\code{\link{op_sum}()} \cr
+\code{\link{op_swapaxes}()} \cr
+\code{\link{op_take}()} \cr
+\code{\link{op_take_along_axis}()} \cr
+\code{\link{op_tan}()} \cr
+\code{\link{op_tanh}()} \cr
+\code{\link{op_tensordot}()} \cr
+\code{\link{op_tile}()} \cr
+\code{\link{op_trace}()} \cr
+\code{\link{op_transpose}()} \cr
+\code{\link{op_tri}()} \cr
+\code{\link{op_tril}()} \cr
+\code{\link{op_triu}()} \cr
+\code{\link{op_var}()} \cr
+\code{\link{op_vdot}()} \cr
+\code{\link{op_vstack}()} \cr
+\code{\link{op_where}()} \cr
+\code{\link{op_zeros}()} \cr
+\code{\link{op_zeros_like}()} \cr
 
-Other ops: 
-\code{\link{op_abs}()},
-\code{\link{op_add}()},
-\code{\link{op_all}()},
-\code{\link{op_any}()},
-\code{\link{op_append}()},
-\code{\link{op_arange}()},
-\code{\link{op_arccos}()},
-\code{\link{op_arccosh}()},
-\code{\link{op_arcsin}()},
-\code{\link{op_arcsinh}()},
-\code{\link{op_arctan}()},
-\code{\link{op_arctan2}()},
-\code{\link{op_arctanh}()},
-\code{\link{op_argmax}()},
-\code{\link{op_argmin}()},
-\code{\link{op_argsort}()},
-\code{\link{op_array}()},
-\code{\link{op_average}()},
-\code{\link{op_average_pool}()},
-\code{\link{op_binary_crossentropy}()},
-\code{\link{op_bincount}()},
-\code{\link{op_broadcast_to}()},
-\code{\link{op_cast}()},
-\code{\link{op_categorical_crossentropy}()},
-\code{\link{op_ceil}()},
-\code{\link{op_clip}()},
-\code{\link{op_concatenate}()},
-\code{\link{op_cond}()},
-\code{\link{op_conj}()},
-\code{\link{op_conv}()},
-\code{\link{op_conv_transpose}()},
-\code{\link{op_convert_to_numpy}()},
-\code{\link{op_convert_to_tensor}()},
-\code{\link{op_copy}()},
-\code{\link{op_cos}()},
-\code{\link{op_cosh}()},
-\code{\link{op_count_nonzero}()},
-\code{\link{op_cross}()},
-\code{\link{op_ctc_loss}()},
-\code{\link{op_cumprod}()},
-\code{\link{op_cumsum}()},
-\code{\link{op_depthwise_conv}()},
-\code{\link{op_diag}()},
-\code{\link{op_diagonal}()},
-\code{\link{op_diff}()},
-\code{\link{op_digitize}()},
-\code{\link{op_divide}()},
-\code{\link{op_dot}()},
-\code{\link{op_einsum}()},
-\code{\link{op_elu}()},
-\code{\link{op_empty}()},
-\code{\link{op_equal}()},
-\code{\link{op_erf}()},
-\code{\link{op_exp}()},
-\code{\link{op_expand_dims}()},
-\code{\link{op_expm1}()},
-\code{\link{op_extract_sequences}()},
-\code{\link{op_eye}()},
-\code{\link{op_fft}()},
-\code{\link{op_fft2}()},
-\code{\link{op_flip}()},
-\code{\link{op_floor}()},
-\code{\link{op_floor_divide}()},
-\code{\link{op_fori_loop}()},
-\code{\link{op_full}()},
-\code{\link{op_full_like}()},
-\code{\link{op_gelu}()},
-\code{\link{op_get_item}()},
-\code{\link{op_greater}()},
-\code{\link{op_greater_equal}()},
-\code{\link{op_hard_sigmoid}()},
-\code{\link{op_hard_silu}()},
-\code{\link{op_hstack}()},
-\code{\link{op_identity}()},
-\code{\link{op_imag}()},
-\code{\link{op_image_affine_transform}()},
-\code{\link{op_image_extract_patches}()},
-\code{\link{op_image_map_coordinates}()},
-\code{\link{op_image_pad}()},
-\code{\link{op_image_resize}()},
-\code{\link{op_in_top_k}()},
-\code{\link{op_irfft}()},
-\code{\link{op_is_tensor}()},
-\code{\link{op_isclose}()},
-\code{\link{op_isfinite}()},
-\code{\link{op_isinf}()},
-\code{\link{op_isnan}()},
-\code{\link{op_istft}()},
-\code{\link{op_leaky_relu}()},
-\code{\link{op_less}()},
-\code{\link{op_less_equal}()},
-\code{\link{op_linspace}()},
-\code{\link{op_log}()},
-\code{\link{op_log10}()},
-\code{\link{op_log1p}()},
-\code{\link{op_log2}()},
-\code{\link{op_log_sigmoid}()},
-\code{\link{op_log_softmax}()},
-\code{\link{op_logaddexp}()},
-\code{\link{op_logical_and}()},
-\code{\link{op_logical_not}()},
-\code{\link{op_logical_or}()},
-\code{\link{op_logical_xor}()},
-\code{\link{op_logsumexp}()},
-\code{\link{op_matmul}()},
-\code{\link{op_max}()},
-\code{\link{op_max_pool}()},
-\code{\link{op_maximum}()},
-\code{\link{op_mean}()},
-\code{\link{op_median}()},
-\code{\link{op_meshgrid}()},
-\code{\link{op_min}()},
-\code{\link{op_minimum}()},
-\code{\link{op_mod}()},
-\code{\link{op_moments}()},
-\code{\link{op_moveaxis}()},
-\code{\link{op_multi_hot}()},
-\code{\link{op_multiply}()},
-\code{\link{op_nan_to_num}()},
-\code{\link{op_ndim}()},
-\code{\link{op_negative}()},
-\code{\link{op_nonzero}()},
-\code{\link{op_not_equal}()},
-\code{\link{op_one_hot}()},
-\code{\link{op_ones}()},
-\code{\link{op_ones_like}()},
-\code{\link{op_outer}()},
-\code{\link{op_pad}()},
-\code{\link{op_power}()},
-\code{\link{op_prod}()},
-\code{\link{op_qr}()},
-\code{\link{op_quantile}()},
-\code{\link{op_ravel}()},
-\code{\link{op_real}()},
-\code{\link{op_reciprocal}()},
-\code{\link{op_relu}()},
-\code{\link{op_relu6}()},
-\code{\link{op_repeat}()},
-\code{\link{op_reshape}()},
-\code{\link{op_rfft}()},
-\code{\link{op_roll}()},
-\code{\link{op_round}()},
-\code{\link{op_rsqrt}()},
-\code{\link{op_scatter}()},
-\code{\link{op_scatter_update}()},
-\code{\link{op_segment_max}()},
-\code{\link{op_segment_sum}()},
-\code{\link{op_selu}()},
-\code{\link{op_separable_conv}()},
-\code{\link{op_shape}()},
-\code{\link{op_sigmoid}()},
-\code{\link{op_sign}()},
-\code{\link{op_silu}()},
-\code{\link{op_sin}()},
-\code{\link{op_sinh}()},
-\code{\link{op_size}()},
-\code{\link{op_slice}()},
-\code{\link{op_slice_update}()},
-\code{\link{op_softmax}()},
-\code{\link{op_softplus}()},
-\code{\link{op_softsign}()},
-\code{\link{op_solve}()},
-\code{\link{op_sort}()},
-\code{\link{op_sparse_categorical_crossentropy}()},
-\code{\link{op_split}()},
-\code{\link{op_sqrt}()},
-\code{\link{op_square}()},
-\code{\link{op_squeeze}()},
-\code{\link{op_stack}()},
-\code{\link{op_std}()},
-\code{\link{op_stft}()},
-\code{\link{op_stop_gradient}()},
-\code{\link{op_subtract}()},
-\code{\link{op_sum}()},
-\code{\link{op_swapaxes}()},
-\code{\link{op_take}()},
-\code{\link{op_take_along_axis}()},
-\code{\link{op_tan}()},
-\code{\link{op_tanh}()},
-\code{\link{op_tensordot}()},
-\code{\link{op_tile}()},
-\code{\link{op_top_k}()},
-\code{\link{op_trace}()},
-\code{\link{op_transpose}()},
-\code{\link{op_tri}()},
-\code{\link{op_tril}()},
-\code{\link{op_triu}()},
-\code{\link{op_unstack}()},
-\code{\link{op_var}()},
-\code{\link{op_vdot}()},
-\code{\link{op_vectorized_map}()},
-\code{\link{op_vstack}()},
-\code{\link{op_where}()},
-\code{\link{op_while_loop}()},
-\code{\link{op_zeros}()},
-\code{\link{op_zeros_like}()}
+Other ops: \cr
+\code{\link{op_abs}()} \cr
+\code{\link{op_add}()} \cr
+\code{\link{op_all}()} \cr
+\code{\link{op_any}()} \cr
+\code{\link{op_append}()} \cr
+\code{\link{op_arange}()} \cr
+\code{\link{op_arccos}()} \cr
+\code{\link{op_arccosh}()} \cr
+\code{\link{op_arcsin}()} \cr
+\code{\link{op_arcsinh}()} \cr
+\code{\link{op_arctan}()} \cr
+\code{\link{op_arctan2}()} \cr
+\code{\link{op_arctanh}()} \cr
+\code{\link{op_argmax}()} \cr
+\code{\link{op_argmin}()} \cr
+\code{\link{op_argsort}()} \cr
+\code{\link{op_array}()} \cr
+\code{\link{op_average}()} \cr
+\code{\link{op_average_pool}()} \cr
+\code{\link{op_binary_crossentropy}()} \cr
+\code{\link{op_bincount}()} \cr
+\code{\link{op_broadcast_to}()} \cr
+\code{\link{op_cast}()} \cr
+\code{\link{op_categorical_crossentropy}()} \cr
+\code{\link{op_ceil}()} \cr
+\code{\link{op_clip}()} \cr
+\code{\link{op_concatenate}()} \cr
+\code{\link{op_cond}()} \cr
+\code{\link{op_conj}()} \cr
+\code{\link{op_conv}()} \cr
+\code{\link{op_conv_transpose}()} \cr
+\code{\link{op_convert_to_numpy}()} \cr
+\code{\link{op_convert_to_tensor}()} \cr
+\code{\link{op_copy}()} \cr
+\code{\link{op_cos}()} \cr
+\code{\link{op_cosh}()} \cr
+\code{\link{op_count_nonzero}()} \cr
+\code{\link{op_cross}()} \cr
+\code{\link{op_ctc_loss}()} \cr
+\code{\link{op_cumprod}()} \cr
+\code{\link{op_cumsum}()} \cr
+\code{\link{op_depthwise_conv}()} \cr
+\code{\link{op_diag}()} \cr
+\code{\link{op_diagonal}()} \cr
+\code{\link{op_diff}()} \cr
+\code{\link{op_digitize}()} \cr
+\code{\link{op_divide}()} \cr
+\code{\link{op_dot}()} \cr
+\code{\link{op_einsum}()} \cr
+\code{\link{op_elu}()} \cr
+\code{\link{op_empty}()} \cr
+\code{\link{op_equal}()} \cr
+\code{\link{op_erf}()} \cr
+\code{\link{op_exp}()} \cr
+\code{\link{op_expand_dims}()} \cr
+\code{\link{op_expm1}()} \cr
+\code{\link{op_extract_sequences}()} \cr
+\code{\link{op_eye}()} \cr
+\code{\link{op_fft}()} \cr
+\code{\link{op_fft2}()} \cr
+\code{\link{op_flip}()} \cr
+\code{\link{op_floor}()} \cr
+\code{\link{op_floor_divide}()} \cr
+\code{\link{op_fori_loop}()} \cr
+\code{\link{op_full}()} \cr
+\code{\link{op_full_like}()} \cr
+\code{\link{op_gelu}()} \cr
+\code{\link{op_get_item}()} \cr
+\code{\link{op_greater}()} \cr
+\code{\link{op_greater_equal}()} \cr
+\code{\link{op_hard_sigmoid}()} \cr
+\code{\link{op_hard_silu}()} \cr
+\code{\link{op_hstack}()} \cr
+\code{\link{op_identity}()} \cr
+\code{\link{op_imag}()} \cr
+\code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_map_coordinates}()} \cr
+\code{\link{op_image_pad}()} \cr
+\code{\link{op_image_resize}()} \cr
+\code{\link{op_in_top_k}()} \cr
+\code{\link{op_irfft}()} \cr
+\code{\link{op_is_tensor}()} \cr
+\code{\link{op_isclose}()} \cr
+\code{\link{op_isfinite}()} \cr
+\code{\link{op_isinf}()} \cr
+\code{\link{op_isnan}()} \cr
+\code{\link{op_istft}()} \cr
+\code{\link{op_leaky_relu}()} \cr
+\code{\link{op_less}()} \cr
+\code{\link{op_less_equal}()} \cr
+\code{\link{op_linspace}()} \cr
+\code{\link{op_log}()} \cr
+\code{\link{op_log10}()} \cr
+\code{\link{op_log1p}()} \cr
+\code{\link{op_log2}()} \cr
+\code{\link{op_log_sigmoid}()} \cr
+\code{\link{op_log_softmax}()} \cr
+\code{\link{op_logaddexp}()} \cr
+\code{\link{op_logical_and}()} \cr
+\code{\link{op_logical_not}()} \cr
+\code{\link{op_logical_or}()} \cr
+\code{\link{op_logical_xor}()} \cr
+\code{\link{op_logsumexp}()} \cr
+\code{\link{op_matmul}()} \cr
+\code{\link{op_max}()} \cr
+\code{\link{op_max_pool}()} \cr
+\code{\link{op_maximum}()} \cr
+\code{\link{op_mean}()} \cr
+\code{\link{op_median}()} \cr
+\code{\link{op_meshgrid}()} \cr
+\code{\link{op_min}()} \cr
+\code{\link{op_minimum}()} \cr
+\code{\link{op_mod}()} \cr
+\code{\link{op_moments}()} \cr
+\code{\link{op_moveaxis}()} \cr
+\code{\link{op_multi_hot}()} \cr
+\code{\link{op_multiply}()} \cr
+\code{\link{op_nan_to_num}()} \cr
+\code{\link{op_ndim}()} \cr
+\code{\link{op_negative}()} \cr
+\code{\link{op_nonzero}()} \cr
+\code{\link{op_not_equal}()} \cr
+\code{\link{op_one_hot}()} \cr
+\code{\link{op_ones}()} \cr
+\code{\link{op_ones_like}()} \cr
+\code{\link{op_outer}()} \cr
+\code{\link{op_pad}()} \cr
+\code{\link{op_power}()} \cr
+\code{\link{op_prod}()} \cr
+\code{\link{op_qr}()} \cr
+\code{\link{op_quantile}()} \cr
+\code{\link{op_ravel}()} \cr
+\code{\link{op_real}()} \cr
+\code{\link{op_reciprocal}()} \cr
+\code{\link{op_relu}()} \cr
+\code{\link{op_relu6}()} \cr
+\code{\link{op_repeat}()} \cr
+\code{\link{op_reshape}()} \cr
+\code{\link{op_rfft}()} \cr
+\code{\link{op_roll}()} \cr
+\code{\link{op_round}()} \cr
+\code{\link{op_rsqrt}()} \cr
+\code{\link{op_scatter}()} \cr
+\code{\link{op_scatter_update}()} \cr
+\code{\link{op_segment_max}()} \cr
+\code{\link{op_segment_sum}()} \cr
+\code{\link{op_selu}()} \cr
+\code{\link{op_separable_conv}()} \cr
+\code{\link{op_shape}()} \cr
+\code{\link{op_sigmoid}()} \cr
+\code{\link{op_sign}()} \cr
+\code{\link{op_silu}()} \cr
+\code{\link{op_sin}()} \cr
+\code{\link{op_sinh}()} \cr
+\code{\link{op_size}()} \cr
+\code{\link{op_slice}()} \cr
+\code{\link{op_slice_update}()} \cr
+\code{\link{op_softmax}()} \cr
+\code{\link{op_softplus}()} \cr
+\code{\link{op_softsign}()} \cr
+\code{\link{op_solve}()} \cr
+\code{\link{op_sort}()} \cr
+\code{\link{op_sparse_categorical_crossentropy}()} \cr
+\code{\link{op_split}()} \cr
+\code{\link{op_sqrt}()} \cr
+\code{\link{op_square}()} \cr
+\code{\link{op_squeeze}()} \cr
+\code{\link{op_stack}()} \cr
+\code{\link{op_std}()} \cr
+\code{\link{op_stft}()} \cr
+\code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subtract}()} \cr
+\code{\link{op_sum}()} \cr
+\code{\link{op_swapaxes}()} \cr
+\code{\link{op_take}()} \cr
+\code{\link{op_take_along_axis}()} \cr
+\code{\link{op_tan}()} \cr
+\code{\link{op_tanh}()} \cr
+\code{\link{op_tensordot}()} \cr
+\code{\link{op_tile}()} \cr
+\code{\link{op_top_k}()} \cr
+\code{\link{op_trace}()} \cr
+\code{\link{op_transpose}()} \cr
+\code{\link{op_tri}()} \cr
+\code{\link{op_tril}()} \cr
+\code{\link{op_triu}()} \cr
+\code{\link{op_unstack}()} \cr
+\code{\link{op_var}()} \cr
+\code{\link{op_vdot}()} \cr
+\code{\link{op_vectorized_map}()} \cr
+\code{\link{op_vstack}()} \cr
+\code{\link{op_where}()} \cr
+\code{\link{op_while_loop}()} \cr
+\code{\link{op_zeros}()} \cr
+\code{\link{op_zeros_like}()} \cr
 }
 \concept{numpy ops}
 \concept{ops}

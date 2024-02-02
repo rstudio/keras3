@@ -5,15 +5,15 @@
 \title{Evaluate a Keras Model}
 \usage{
 \method{evaluate}{keras.src.models.model.Model}(
-  object,
-  x = NULL,
-  y = NULL,
-  ...,
-  batch_size = NULL,
-  verbose = getOption("keras.verbose", default = "auto"),
-  sample_weight = NULL,
-  steps = NULL,
-  callbacks = NULL
+object,
+x = NULL,
+y = NULL,
+...,
+batch_size = NULL,
+verbose = getOption("keras.verbose", default = "auto"),
+sample_weight = NULL,
+steps = NULL,
+callbacks = NULL
 )
 }
 \arguments{
@@ -91,11 +91,11 @@ Computation is done in batches (see the \code{batch_size} arg.)
 \item \url{https://keras.io/api/models/model_training_apis#evaluate-method}
 }
 
-Other model training: 
-\code{\link{compile.keras.src.models.model.Model}()},
-\code{\link{predict.keras.src.models.model.Model}()},
-\code{\link{predict_on_batch}()},
-\code{\link{test_on_batch}()},
-\code{\link{train_on_batch}()}
+Other model training: \cr
+\code{\link{compile.keras.src.models.model.Model}()} \cr
+\code{\link{predict.keras.src.models.model.Model}()} \cr
+\code{\link{predict_on_batch}()} \cr
+\code{\link{test_on_batch}()} \cr
+\code{\link{train_on_batch}()} \cr
 }
 \concept{model training}

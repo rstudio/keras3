@@ -5,9 +5,9 @@
 \title{A \code{LearningRateSchedule} that uses a piecewise constant decay schedule.}
 \usage{
 learning_rate_schedule_piecewise_constant_decay(
-  boundaries,
-  values,
-  name = "PiecewiseConstant"
+boundaries,
+values,
+name = "PiecewiseConstant"
 )
 }
 \arguments{
@@ -46,7 +46,7 @@ for the next 10000 steps, and 0.1 for any additional steps.
 boundaries <- c(100000, 110000)
 values <- c(1.0, 0.5, 0.1)
 learning_rate_fn <- learning_rate_schedule_piecewise_constant_decay(
-  boundaries, values)
+boundaries, values)
 
 # Later, whenever we perform an optimization step, we pass in the step.
 learning_rate <- learning_rate_fn(step)
@@ -68,12 +68,12 @@ lists do not match.
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/piecewise_constant_decay#piecewiseconstantdecay-class}
 }
 
-Other optimizer learning rate schedules: 
-\code{\link{LearningRateSchedule}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_inverse_time_decay}()},
-\code{\link{learning_rate_schedule_polynomial_decay}()}
+Other optimizer learning rate schedules: \cr
+\code{\link{LearningRateSchedule}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()} \cr
+\code{\link{learning_rate_schedule_exponential_decay}()} \cr
+\code{\link{learning_rate_schedule_inverse_time_decay}()} \cr
+\code{\link{learning_rate_schedule_polynomial_decay}()} \cr
 }
 \concept{optimizer learning rate schedules}

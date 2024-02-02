@@ -5,12 +5,12 @@
 \title{A \code{LearningRateSchedule} that uses a polynomial decay schedule.}
 \usage{
 learning_rate_schedule_polynomial_decay(
-  initial_learning_rate,
-  decay_steps,
-  end_learning_rate = 1e-04,
-  power = 1,
-  cycle = FALSE,
-  name = "PolynomialDecay"
+initial_learning_rate,
+decay_steps,
+end_learning_rate = 1e-04,
+power = 1,
+cycle = FALSE,
+name = "PolynomialDecay"
 )
 }
 \arguments{
@@ -51,10 +51,10 @@ learning rate value across different invocations of optimizer functions.
 It is computed as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
-  step = min(step, decay_steps)
-  ((initial_learning_rate - end_learning_rate) *
-    (1 - step / decay_steps) ^ (power)) +
-    end_learning_rate
+step = min(step, decay_steps)
+((initial_learning_rate - end_learning_rate) *
+(1 - step / decay_steps) ^ (power)) +
+end_learning_rate
 \}
 }\if{html}{\out{</div>}}
 
@@ -62,10 +62,10 @@ If \code{cycle} is TRUE then a multiple of \code{decay_steps} is used, the first
 that is bigger than \code{step}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
-  decay_steps = decay_steps * ceil(step / decay_steps)
-  ((initial_learning_rate - end_learning_rate) *
-      (1 - step / decay_steps) ^ (power)) +
-    end_learning_rate
+decay_steps = decay_steps * ceil(step / decay_steps)
+((initial_learning_rate - end_learning_rate) *
+(1 - step / decay_steps) ^ (power)) +
+end_learning_rate
 \}
 }\if{html}{\out{</div>}}
 
@@ -81,15 +81,15 @@ starter_learning_rate <- 0.1
 end_learning_rate <- 0.01
 decay_steps <- 10000
 learning_rate_fn <- learning_rate_schedule_polynomial_decay(
-    starter_learning_rate,
-    decay_steps,
-    end_learning_rate,
-    power=0.5)
+starter_learning_rate,
+decay_steps,
+end_learning_rate,
+power=0.5)
 
 model \%>\% compile(
-  optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
-  loss = 'sparse_categorical_crossentropy',
-  metrics = 'accuracy'
+optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
+loss = 'sparse_categorical_crossentropy',
+metrics = 'accuracy'
 )
 
 model \%>\% fit(data, labels, epochs=5)
@@ -105,12 +105,12 @@ The learning rate schedule is also serializable and deserializable using
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/polynomial_decay#polynomialdecay-class}
 }
 
-Other optimizer learning rate schedules: 
-\code{\link{LearningRateSchedule}()},
-\code{\link{learning_rate_schedule_cosine_decay}()},
-\code{\link{learning_rate_schedule_cosine_decay_restarts}()},
-\code{\link{learning_rate_schedule_exponential_decay}()},
-\code{\link{learning_rate_schedule_inverse_time_decay}()},
-\code{\link{learning_rate_schedule_piecewise_constant_decay}()}
+Other optimizer learning rate schedules: \cr
+\code{\link{LearningRateSchedule}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay}()} \cr
+\code{\link{learning_rate_schedule_cosine_decay_restarts}()} \cr
+\code{\link{learning_rate_schedule_exponential_decay}()} \cr
+\code{\link{learning_rate_schedule_inverse_time_decay}()} \cr
+\code{\link{learning_rate_schedule_piecewise_constant_decay}()} \cr
 }
 \concept{optimizer learning rate schedules}

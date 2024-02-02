@@ -27,10 +27,10 @@ Constrains the weights incident to each hidden unit to have unit norm.
 \item \url{https://keras.io/api/layers/constraints#unitnorm-class}
 }
 
-Other constraints: 
-\code{\link{Constraint}()},
-\code{\link{constraint_maxnorm}()},
-\code{\link{constraint_minmaxnorm}()},
-\code{\link{constraint_nonneg}()}
+Other constraints: \cr
+\code{\link{Constraint}()} \cr
+\code{\link{constraint_maxnorm}()} \cr
+\code{\link{constraint_minmaxnorm}()} \cr
+\code{\link{constraint_nonneg}()} \cr
 }
 \concept{constraints}

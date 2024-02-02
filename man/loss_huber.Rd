@@ -5,12 +5,12 @@
 \title{Computes the Huber loss between \code{y_true} & \code{y_pred}.}
 \usage{
 loss_huber(
-  y_true,
-  y_pred,
-  delta = 1,
-  ...,
-  reduction = "sum_over_batch_size",
-  name = "huber_loss"
+y_true,
+y_pred,
+delta = 1,
+...,
+reduction = "sum_over_batch_size",
+name = "huber_loss"
 )
 }
 \arguments{
@@ -36,11 +36,11 @@ Tensor with one scalar loss entry per sample.
 Formula:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{for (x in error) \{
-  if (abs(x) <= delta)\{
-    loss <- c(loss, (0.5 * x^2))
-  \} else if (abs(x) > delta) \{
-    loss <- c(loss, (delta * abs(x) - 0.5 * delta^2))
-  \}
+if (abs(x) <= delta)\{
+loss <- c(loss, (0.5 * x^2))
+\} else if (abs(x) > delta) \{
+loss <- c(loss, (delta * abs(x) - 0.5 * delta^2))
+\}
 \}
 loss <- mean(loss)
 }\if{html}{\out{</div>}}
@@ -59,39 +59,39 @@ loss <- loss_huber(y_true, y_pred)
 \item \url{https://keras.io/api/losses/regression_losses#huber-class}
 }
 
-Other losses: 
-\code{\link{Loss}()},
-\code{\link{loss_binary_crossentropy}()},
-\code{\link{loss_binary_focal_crossentropy}()},
-\code{\link{loss_categorical_crossentropy}()},
-\code{\link{loss_categorical_focal_crossentropy}()},
-\code{\link{loss_categorical_hinge}()},
-\code{\link{loss_cosine_similarity}()},
-\code{\link{loss_hinge}()},
-\code{\link{loss_kl_divergence}()},
-\code{\link{loss_log_cosh}()},
-\code{\link{loss_mean_absolute_error}()},
-\code{\link{loss_mean_absolute_percentage_error}()},
-\code{\link{loss_mean_squared_error}()},
-\code{\link{loss_mean_squared_logarithmic_error}()},
-\code{\link{loss_poisson}()},
-\code{\link{loss_sparse_categorical_crossentropy}()},
-\code{\link{loss_squared_hinge}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_binary_focal_crossentropy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_focal_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_huber}()},
-\code{\link{metric_kl_divergence}()},
-\code{\link{metric_log_cosh}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_squared_hinge}()}
+Other losses: \cr
+\code{\link{Loss}()} \cr
+\code{\link{loss_binary_crossentropy}()} \cr
+\code{\link{loss_binary_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_crossentropy}()} \cr
+\code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_hinge}()} \cr
+\code{\link{loss_cosine_similarity}()} \cr
+\code{\link{loss_hinge}()} \cr
+\code{\link{loss_kl_divergence}()} \cr
+\code{\link{loss_log_cosh}()} \cr
+\code{\link{loss_mean_absolute_error}()} \cr
+\code{\link{loss_mean_absolute_percentage_error}()} \cr
+\code{\link{loss_mean_squared_error}()} \cr
+\code{\link{loss_mean_squared_logarithmic_error}()} \cr
+\code{\link{loss_poisson}()} \cr
+\code{\link{loss_sparse_categorical_crossentropy}()} \cr
+\code{\link{loss_squared_hinge}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
 }
 \concept{losses}

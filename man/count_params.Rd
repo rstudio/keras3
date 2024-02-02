@@ -16,9 +16,9 @@ An integer count
 Count the total number of scalars composing the weights.
 }
 \seealso{
-Other layer methods: 
-\code{\link{get_config}()},
-\code{\link{get_weights}()},
-\code{\link{reset_state}()}
+Other layer methods: \cr
+\code{\link{get_config}()} \cr
+\code{\link{get_weights}()} \cr
+\code{\link{reset_state}()} \cr
 }
 \concept{layer methods}

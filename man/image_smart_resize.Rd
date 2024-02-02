@@ -5,11 +5,11 @@
 \title{Resize images to a target size without aspect ratio distortion.}
 \usage{
 image_smart_resize(
-  x,
-  size,
-  interpolation = "bilinear",
-  data_format = "channels_last",
-  backend_module = NULL
+x,
+size,
+interpolation = "bilinear",
+data_format = "channels_last",
+backend_module = NULL
 )
 }
 \arguments{
@@ -77,50 +77,50 @@ we resize the \verb{(340, 340)} crop to \verb{(200, 200)}.
 }
 }
 \seealso{
-Other image utils: 
-\code{\link{image_array_save}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_to_array}()},
-\code{\link{op_image_affine_transform}()},
-\code{\link{op_image_extract_patches}()},
-\code{\link{op_image_map_coordinates}()},
-\code{\link{op_image_pad}()},
-\code{\link{op_image_resize}()}
+Other image utils: \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_map_coordinates}()} \cr
+\code{\link{op_image_pad}()} \cr
+\code{\link{op_image_resize}()} \cr
 
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{clear_session}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_file}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()},
-\code{\link{zip_lists}()}
+Other utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_file}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
+\code{\link{to_categorical}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+\code{\link{zip_lists}()} \cr
 
-Other preprocessing: 
-\code{\link{image_dataset_from_directory}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()}
+Other preprocessing: \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
 }
 \concept{image utils}
 \concept{preprocessing}

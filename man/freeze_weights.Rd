@@ -34,9 +34,9 @@ Models must be compiled again after weights are frozen or unfrozen.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# instantiate a VGG16 model
 conv_base <- application_vgg16(
-  weights = "imagenet",
-  include_top = FALSE,
-  input_shape = c(150, 150, 3)
+weights = "imagenet",
+include_top = FALSE,
+input_shape = c(150, 150, 3)
 )
 
 # freeze it's weights
@@ -97,16 +97,16 @@ conv_base
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{
 # create a composite model that includes the base + more layers
 model <- keras_model_sequential(input_batch_shape = shape(conv_base$input)) |>
-  conv_base() |>
-  layer_flatten() |>
-  layer_dense(units = 256, activation = "relu") |>
-  layer_dense(units = 1, activation = "sigmoid")
+conv_base() |>
+layer_flatten() |>
+layer_dense(units = 256, activation = "relu") |>
+layer_dense(units = 1, activation = "sigmoid")
 
 # compile
 model |> compile(
-  loss = "binary_crossentropy",
-  optimizer = optimizer_rmsprop(learning_rate = 2e-5),
-  metrics = c("accuracy")
+loss = "binary_crossentropy",
+optimizer = optimizer_rmsprop(learning_rate = 2e-5),
+metrics = c("accuracy")
 )
 
 model
@@ -202,9 +202,9 @@ unfreeze_weights(conv_base, from = "block5_conv1")
 
 # compile again since we froze or unfroze weights
 model |> compile(
-  loss = "binary_crossentropy",
-  optimizer = optimizer_rmsprop(learning_rate = 2e-5),
-  metrics = c("accuracy")
+loss = "binary_crossentropy",
+optimizer = optimizer_rmsprop(learning_rate = 2e-5),
+metrics = c("accuracy")
 )
 
 conv_base
@@ -441,10 +441,10 @@ freeze_weights(model, which = is_batch_norm_layer)
 
 # equivalent to:
 for(layer in model$layers) \{
-  if(is_batch_norm_layer(layer))
-    layer$trainable <- FALSE
-  else
-    layer$trainable <- TRUE
+if(is_batch_norm_layer(layer))
+layer$trainable <- FALSE
+else
+layer$trainable <- TRUE
 \}
 }\if{html}{\out{</div>}}
 }

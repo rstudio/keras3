@@ -31,8 +31,8 @@ Loads a model saved via \code{save_model()}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(3)) |>
-  layer_dense(5) |>
-  layer_activation_softmax()
+layer_dense(5) |>
+layer_activation_softmax()
 
 model |> save_model("model.keras")
 loaded_model <- load_model("model.keras")
@@ -40,8 +40,8 @@ loaded_model <- load_model("model.keras")
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(10, 3))
 stopifnot(all.equal(
-  model |> predict(x),
-  loaded_model |> predict(x)
+model |> predict(x),
+loaded_model |> predict(x)
 ))
 }\if{html}{\out{</div>}}
 
@@ -56,14 +56,14 @@ access specific variables, e.g. \code{model |> get_layer("dense_1") |> _$kernel}
 \item \url{https://keras.io/api/models/model_saving_apis/model_saving_and_loading#loadmodel-function}
 }
 
-Other saving and loading functions: 
-\code{\link{export_savedmodel.keras.src.models.model.Model}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model_weights}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{save_model}()},
-\code{\link{save_model_config}()},
-\code{\link{save_model_weights}()},
-\code{\link{with_custom_object_scope}()}
+Other saving and loading functions: \cr
+\code{\link{export_savedmodel.keras.src.models.model.Model}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{load_model_weights}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{save_model}()} \cr
+\code{\link{save_model_config}()} \cr
+\code{\link{save_model_weights}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{saving and loading functions}

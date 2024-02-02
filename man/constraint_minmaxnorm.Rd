@@ -41,10 +41,10 @@ to have the norm between a lower bound and an upper bound.
 \item \url{https://keras.io/api/layers/constraints#minmaxnorm-class}
 }
 
-Other constraints: 
-\code{\link{Constraint}()},
-\code{\link{constraint_maxnorm}()},
-\code{\link{constraint_nonneg}()},
-\code{\link{constraint_unitnorm}()}
+Other constraints: \cr
+\code{\link{Constraint}()} \cr
+\code{\link{constraint_maxnorm}()} \cr
+\code{\link{constraint_nonneg}()} \cr
+\code{\link{constraint_unitnorm}()} \cr
 }
 \concept{constraints}

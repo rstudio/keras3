@@ -17,9 +17,9 @@ Calling this on a Layer instance without any resettable-state will error.}
 Reset the state for a model, layer or metric.
 }
 \seealso{
-Other layer methods: 
-\code{\link{count_params}()},
-\code{\link{get_config}()},
-\code{\link{get_weights}()}
+Other layer methods: \cr
+\code{\link{count_params}()} \cr
+\code{\link{get_config}()} \cr
+\code{\link{get_weights}()} \cr
 }
 \concept{layer methods}

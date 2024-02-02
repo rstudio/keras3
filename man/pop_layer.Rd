@@ -13,11 +13,11 @@ pop_layer(object)
 Remove the last layer in a Sequential model
 }
 \seealso{
-Other model functions: 
-\code{\link{get_config}()},
-\code{\link{get_layer}()},
-\code{\link{keras_model}()},
-\code{\link{keras_model_sequential}()},
-\code{\link{summary.keras.src.models.model.Model}()}
+Other model functions: \cr
+\code{\link{get_config}()} \cr
+\code{\link{get_layer}()} \cr
+\code{\link{keras_model}()} \cr
+\code{\link{keras_model_sequential}()} \cr
+\code{\link{summary.keras.src.models.model.Model}()} \cr
 }
 \concept{model functions}

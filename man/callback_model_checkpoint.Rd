@@ -5,14 +5,14 @@
 \title{Callback to save the Keras model or model weights at some frequency.}
 \usage{
 callback_model_checkpoint(
-  filepath,
-  monitor = "val_loss",
-  verbose = 0L,
-  save_best_only = FALSE,
-  save_weights_only = FALSE,
-  mode = "auto",
-  save_freq = "epoch",
-  initial_value_threshold = NULL
+filepath,
+monitor = "val_loss",
+verbose = 0L,
+save_best_only = FALSE,
+save_weights_only = FALSE,
+mode = "auto",
+save_freq = "epoch",
+initial_value_threshold = NULL
 )
 }
 \arguments{
@@ -99,23 +99,23 @@ at the end of every epoch, or after a fixed number of training batches.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(10)) |>
-  layer_dense(1, activation = "sigmoid") |>
-  compile(loss = "binary_crossentropy", optimizer = "adam",
-          metrics = c('accuracy'))
+layer_dense(1, activation = "sigmoid") |>
+compile(loss = "binary_crossentropy", optimizer = "adam",
+metrics = c('accuracy'))
 
 EPOCHS <- 10
 checkpoint_filepath <- tempfile('checkpoint-model-', fileext = ".keras")
 model_checkpoint_callback <- callback_model_checkpoint(
-  filepath = checkpoint_filepath,
-  monitor = 'val_accuracy',
-  mode = 'max',
-  save_best_only = TRUE
+filepath = checkpoint_filepath,
+monitor = 'val_accuracy',
+mode = 'max',
+save_best_only = TRUE
 )
 
 # Model is saved at the end of every epoch, if it's the best seen so far.
 model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
-             epochs = EPOCHS, validation_split = .5, verbose = 0,
-             callbacks = list(model_checkpoint_callback))
+epochs = EPOCHS, validation_split = .5, verbose = 0,
+callbacks = list(model_checkpoint_callback))
 
 # The model (that are considered the best) can be loaded as -
 load_model(checkpoint_filepath)
@@ -137,19 +137,19 @@ load_model(checkpoint_filepath)
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Alternatively, one could checkpoint just the model weights as -
 checkpoint_filepath <- tempfile('checkpoint-', fileext = ".weights.h5")
 model_checkpoint_callback <- callback_model_checkpoint(
-  filepath = checkpoint_filepath,
-  save_weights_only = TRUE,
-  monitor = 'val_accuracy',
-  mode = 'max',
-  save_best_only = TRUE
+filepath = checkpoint_filepath,
+save_weights_only = TRUE,
+monitor = 'val_accuracy',
+mode = 'max',
+save_best_only = TRUE
 )
 
 # Model weights are saved at the end of every epoch, if it's the best seen
 # so far.
 # same as above
 model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
-             epochs = EPOCHS, validation_split = .5, verbose = 0,
-             callbacks = list(model_checkpoint_callback))
+epochs = EPOCHS, validation_split = .5, verbose = 0,
+callbacks = list(model_checkpoint_callback))
 
 # The model weights (that are considered the best) can be loaded
 model |> load_model_weights(checkpoint_filepath)
@@ -161,17 +161,17 @@ model |> load_model_weights(checkpoint_filepath)
 \item \url{https://keras.io/api/callbacks/model_checkpoint#modelcheckpoint-class}
 }
 
-Other callbacks: 
-\code{\link{Callback}()},
-\code{\link{callback_backup_and_restore}()},
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_swap_ema_weights}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_nan}()}
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

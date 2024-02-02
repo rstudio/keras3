@@ -5,13 +5,13 @@
 \title{Generates output predictions for the input samples.}
 \usage{
 \method{predict}{keras.src.models.model.Model}(
-  object,
-  x,
-  ...,
-  batch_size = NULL,
-  verbose = getOption("keras.verbose", default = "auto"),
-  steps = NULL,
-  callbacks = NULL
+object,
+x,
+...,
+batch_size = NULL,
+verbose = getOption("keras.verbose", default = "auto"),
+steps = NULL,
+callbacks = NULL
 )
 }
 \arguments{
@@ -82,11 +82,11 @@ for more details about the difference between \code{Model} methods
 \item \url{https://keras.io/api/models/model_training_apis#predict-method}
 }
 
-Other model training: 
-\code{\link{compile.keras.src.models.model.Model}()},
-\code{\link{evaluate.keras.src.models.model.Model}()},
-\code{\link{predict_on_batch}()},
-\code{\link{test_on_batch}()},
-\code{\link{train_on_batch}()}
+Other model training: \cr
+\code{\link{compile.keras.src.models.model.Model}()} \cr
+\code{\link{evaluate.keras.src.models.model.Model}()} \cr
+\code{\link{predict_on_batch}()} \cr
+\code{\link{test_on_batch}()} \cr
+\code{\link{train_on_batch}()} \cr
 }
 \concept{model training}

@@ -40,26 +40,26 @@ save_model_config(model, file)
 model2 <- load_model_config(file)
 
 stopifnot(exprs = \{
-  all.equal(get_config(model), get_config(model2))
+all.equal(get_config(model), get_config(model2))
 
-  # To extract the `get_config()` value from a saved model config:
-  all.equal(
-      get_config(model),
-      structure(jsonlite::read_json(file)$config,
-                "__class__" = keras_model_sequential()$`__class__`)
-  )
+# To extract the `get_config()` value from a saved model config:
+all.equal(
+get_config(model),
+structure(jsonlite::read_json(file)$config,
+"__class__" = keras_model_sequential()$`__class__`)
+)
 \})
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other saving and loading functions: 
-\code{\link{export_savedmodel.keras.src.models.model.Model}()},
-\code{\link{layer_tfsm}()},
-\code{\link{load_model}()},
-\code{\link{load_model_weights}()},
-\code{\link{register_keras_serializable}()},
-\code{\link{save_model}()},
-\code{\link{save_model_weights}()},
-\code{\link{with_custom_object_scope}()}
+Other saving and loading functions: \cr
+\code{\link{export_savedmodel.keras.src.models.model.Model}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{load_model}()} \cr
+\code{\link{load_model_weights}()} \cr
+\code{\link{register_keras_serializable}()} \cr
+\code{\link{save_model}()} \cr
+\code{\link{save_model_weights}()} \cr
+\code{\link{with_custom_object_scope}()} \cr
 }
 \concept{saving and loading functions}

@@ -18,23 +18,23 @@ clutter from old models and layers, especially when memory is limited.
 Example 1: calling \code{clear_session()} when creating models in a loop
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{for (i in 1:100) \{
-  # Without `clear_session()`, each iteration of this loop will
-  # slightly increase the size of the global state managed by Keras
-  model <- keras_model_sequential()
-  for (j in 1:10) \{
-    model <- model |> layer_dense(units = 10)
-  \}
+# Without `clear_session()`, each iteration of this loop will
+# slightly increase the size of the global state managed by Keras
+model <- keras_model_sequential()
+for (j in 1:10) \{
+model <- model |> layer_dense(units = 10)
+\}
 \}
 
 for (i in 1:100) \{
-  # With `clear_session()` called at the beginning,
-  # Keras starts with a blank state at each iteration
-  # and memory consumption is constant over time.
-  clear_session()
-  model <- keras_model_sequential()
-  for (j in 1:10) \{
-    model <- model |> layer_dense(units = 10)
-  \}
+# With `clear_session()` called at the beginning,
+# Keras starts with a blank state at each iteration
+# and memory consumption is constant over time.
+clear_session()
+model <- keras_model_sequential()
+for (j in 1:10) \{
+model <- model |> layer_dense(units = 10)
+\}
 \}
 }\if{html}{\out{</div>}}
 
@@ -64,43 +64,43 @@ print(new_layer$name)
 \item \url{https://keras.io/api/utils/config_utils#clearsession-function}
 }
 
-Other backend: 
-\code{\link{config_backend}()},
-\code{\link{config_epsilon}()},
-\code{\link{config_floatx}()},
-\code{\link{config_image_data_format}()},
-\code{\link{config_set_epsilon}()},
-\code{\link{config_set_floatx}()},
-\code{\link{config_set_image_data_format}()}
+Other backend: \cr
+\code{\link{config_backend}()} \cr
+\code{\link{config_epsilon}()} \cr
+\code{\link{config_floatx}()} \cr
+\code{\link{config_image_data_format}()} \cr
+\code{\link{config_set_epsilon}()} \cr
+\code{\link{config_set_floatx}()} \cr
+\code{\link{config_set_image_data_format}()} \cr
 
-Other utils: 
-\code{\link{audio_dataset_from_directory}()},
-\code{\link{config_disable_interactive_logging}()},
-\code{\link{config_disable_traceback_filtering}()},
-\code{\link{config_enable_interactive_logging}()},
-\code{\link{config_enable_traceback_filtering}()},
-\code{\link{config_is_interactive_logging_enabled}()},
-\code{\link{config_is_traceback_filtering_enabled}()},
-\code{\link{get_file}()},
-\code{\link{get_source_inputs}()},
-\code{\link{image_array_save}()},
-\code{\link{image_dataset_from_directory}()},
-\code{\link{image_from_array}()},
-\code{\link{image_load}()},
-\code{\link{image_smart_resize}()},
-\code{\link{image_to_array}()},
-\code{\link{layer_feature_space}()},
-\code{\link{layer_torch_module_wrapper}()},
-\code{\link{normalize}()},
-\code{\link{pack_x_y_sample_weight}()},
-\code{\link{pad_sequences}()},
-\code{\link{set_random_seed}()},
-\code{\link{split_dataset}()},
-\code{\link{text_dataset_from_directory}()},
-\code{\link{timeseries_dataset_from_array}()},
-\code{\link{to_categorical}()},
-\code{\link{unpack_x_y_sample_weight}()},
-\code{\link{zip_lists}()}
+Other utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_file}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
+\code{\link{to_categorical}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+\code{\link{zip_lists}()} \cr
 }
 \concept{backend}
 \concept{utils}

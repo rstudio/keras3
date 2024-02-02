@@ -5,13 +5,13 @@
 \title{Instantiates a NASNet model in ImageNet mode.}
 \usage{
 application_nasnetlarge(
-  input_shape = NULL,
-  include_top = TRUE,
-  weights = "imagenet",
-  input_tensor = NULL,
-  pooling = NULL,
-  classes = 1000L,
-  classifier_activation = "softmax"
+input_shape = NULL,
+include_top = TRUE,
+weights = "imagenet",
+input_tensor = NULL,
+pooling = NULL,
+classes = 1000L,
+classifier_activation = "softmax"
 )
 }
 \arguments{
