@@ -495,7 +495,7 @@ res = model |> evaluate(
 ## Up to batch 7, the average loss is   16.61.
 ## Up to batch 8, the average loss is   16.53.
 ```
-For more information about callbacks, you can check out the [Keras callback API documentation](https://keras.io/api/callbacks/).
+For more information about callbacks, you can check out the [Keras callback API documentation](https://keras.posit.co/reference/index.html#callbacks).
 
 
 ## Usage of `self$model` attribute

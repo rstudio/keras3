@@ -797,7 +797,7 @@ zero-code distribution support, and step fusing support.
 You may also override `test_step()` to customize what happens in `evaluate()`,
 and override `predict_step()` to customize what happens in `predict()`. For more
 information, please refer to
-[this guide](https://keras.io/guides/customizing_what_happens_in_fit/).
+[this guide](custom_train_step_in_tensorflow.html).
 
 ```python
 class CustomModel(keras.Model):

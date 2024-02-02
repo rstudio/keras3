@@ -457,7 +457,7 @@ such structured inputs.
 
 ### Define a custom cell that supports nested input/output
 
-See [Making new Layers & Models via subclassing](/guides/making_new_layers_and_models_via_subclassing/)
+See [Making new Layers & Models via subclassing](making_new_layers_and_models_via_subclassing.html)
 for details on writing your own layers.
 
 ```python

@@ -1006,7 +1006,7 @@ advantages (generally the same advantages that functional, typed languages provi
 untyped OO development). However, it can only be used to define DAGs of layers --
 recursive networks should be defined as Layer subclasses instead.
 
-Learn more about the Functional API [here](/guides/functional_api/).
+Learn more about the Functional API [here](functional_api.html).
 
 In your research workflows, you may often find yourself mix-and-matching OO models and
 Functional models.
@@ -1019,11 +1019,11 @@ following built-in training infrastructure features:
 * [Callbacks](/api/callbacks/). You can leverage built-in
 callbacks for early-stopping, model checkpointing,
 and monitoring training with TensorBoard. You can also
-[implement custom callbacks](/guides/writing_your_own_callbacks/) if needed.
-* [Distributed training](https://keras.io/guides/distributed_training_with_tensorflow/). You
+[implement custom callbacks](writing_your_own_callbacks.html) if needed.
+* [Distributed training](distributed_training_with_tensorflow.html). You
 can easily scale up your training to multiple GPUs, TPU, or even multiple machines
 with the `tf.distribute` API -- with no changes to your code.
-* [Step fusing](https://keras.io/api/models/model_training_apis/#compile-method).
+* [Step fusing](https://keras.posit.co/reference/compile.keras.src.models.model.Model.html).
 With the `steps_per_execution` argument in `Model.compile()`, you can process
 multiple batches in a single `tf.function` call, which greatly improves
 device utilization on TPUs.
@@ -1092,7 +1092,7 @@ zero-code distribution support, and step fusing support.
 You may also override `test_step()` to customize what happens in `evaluate()`,
 and override `predict_step()` to customize what happens in `predict()`. For more
 information, please refer to
-[this guide](https://keras.io/guides/custom_train_step_in_tensorflow/).
+[this guide](custom_train_step_in_tensorflow.html).
 
 
 ```r

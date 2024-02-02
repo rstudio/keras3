@@ -261,7 +261,7 @@ mask
 ```
 
 Note: For more details about format limitations related to masking, see the
-[serialization guide](/guides/serialization_and_saving).
+[serialization guide](serialization_and_saving.html).
 
 ## Opting-in to mask propagation on compatible layers
 

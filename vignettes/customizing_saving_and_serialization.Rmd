@@ -14,7 +14,7 @@ vignette: >
 
 This guide covers advanced methods that can be customized in Keras saving. For most
 users, the methods outlined in the primary
-[Serialize, save, and export guide](https://keras.io/guides/serialization_and_saving)
+[Serialize, save, and export guide](serialization_and_saving.html)
 are sufficient.
 
 ### APIs

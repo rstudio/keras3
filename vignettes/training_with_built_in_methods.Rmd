@@ -25,11 +25,11 @@ when using built-in APIs for training & validation (such as `fit()`,
 
 If you are interested in leveraging `fit()` while specifying your
 own training step function, see the
-[Customizing what happens in `fit()` guide](/guides/customizing_what_happens_in_fit/).
+[Customizing what happens in `fit()` guide](custom_train_step_in_tensorflow.html).
 
 If you are interested in writing your own training & evaluation loops from
 scratch, see the guide
-["writing a training loop from scratch"](/guides/writing_a_training_loop_from_scratch/).
+["writing a training loop from scratch"](writing_a_custom_training_loop_in_tensorflow.html).
 
 In general, whether you are using built-in loops or writing your own, model training &
 evaluation works strictly in the same way across every kind of Keras model --
@@ -37,7 +37,7 @@ Sequential models, models built with the Functional API, and models written from
 scratch via model subclassing.
 
 This guide doesn't cover distributed training, which is covered in our
-[guide to multi-GPU & distributed training](https://keras.io/guides/distributed_training_with_tensorflow/).
+[guide to multi-GPU & distributed training](distributed_training_with_tensorflow.html).
 
 ## API overview: a first end-to-end example
 
@@ -66,21 +66,21 @@ summary(model)
 ```
 
 ```
-## [1mModel: "functional_1"[0m
+## [1mModel: "functional_1"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ digits ([38;5;33mInputLayer[0m)             │ ([38;5;45mNone[0m, [38;5;34m784[0m)               │          [38;5;34m0[0m │
+## │ digits ([38;5;33mInputLayer[0m)             │ ([38;5;45mNone[0m, [38;5;34m784[0m)               │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │     [38;5;34m50,240[0m │
+## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │     [38;5;34m50,240[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │      [38;5;34m4,160[0m │
+## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)                │      [38;5;34m4,160[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ predictions ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m10[0m)                │        [38;5;34m650[0m │
+## │ predictions ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m10[0m)                │        [38;5;34m650[0m │
 ## └─────────────────────────────────┴───────────────────────────┴────────────┘
-## [1m Total params: [0m[38;5;34m55,050[0m (215.04 KB)
-## [1m Trainable params: [0m[38;5;34m55,050[0m (215.04 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+## [1m Total params: [0m[38;5;34m55,050[0m (215.04 KB)
+## [1m Trainable params: [0m[38;5;34m55,050[0m (215.04 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 Here's what the typical end-to-end workflow looks like, consisting of:
@@ -1404,7 +1404,7 @@ model |> fit(x_train, y_train, epochs = 1, callbacks = callbacks)
 You call also write your own callback for saving and restoring models.
 
 For a complete guide on serialization and saving, see the
-[guide to saving and serializing Models](/guides/serialization_and_saving/).
+[guide to saving and serializing Models](serialization_and_saving.html).
 
 ## Using learning rate schedules
 
@@ -1487,5 +1487,4 @@ tb_callback <- callback_tensorboard(
 )
 ```
 
-For more information, see the
-[documentation for the `TensorBoard` callback](https://keras.io/api/callbacks/tensorboard/).
+For more information, see `callback_tensorboard()`.

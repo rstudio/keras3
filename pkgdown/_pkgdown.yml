@@ -67,6 +67,9 @@ navbar:
         - text: "Writing a training loop from scratch in TensorFlow"
           href: articles/writing_a_custom_training_loop_in_tensorflow.html
 
+        - text: "Serialization and Saving"
+          href: articles/serialization_and_saving.html
+
         - text: "Other topics"
 
         - text: "Transfer learning and fine tuning"

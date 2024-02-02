@@ -66,9 +66,9 @@ Here's our model.
 
 Different model-building options that Keras offers include:
 
-- [The Sequential API](https://keras.io/guides/sequential_model/) (what we use below)
-- [The Functional API](https://keras.io/guides/functional_api/) (most typical)
-- [Writing your own models yourself via subclassing](https://keras.io/guides/making_new_layers_and_models_via_subclassing/) (for advanced use cases)
+- [The Sequential API](sequential_model.html) (what we use below)
+- [The Functional API](functional_api.html) (most typical)
+- [Writing your own models yourself via subclassing](making_new_layers_and_models_via_subclassing.html) (for advanced use cases)
 
 ```{r}
 # Model parameters
@@ -354,19 +354,19 @@ Want to implement a non-standard training algorithm yourself but still want to b
 the power and usability of `fit()`? It's easy to customize
 `fit()` to support arbitrary use cases:
 
-- [Customizing what happens in `fit()` with TensorFlow](https://keras.io/guides/custom_train_step_in_tensorflow/)
+- [Customizing what happens in `fit()` with TensorFlow](custom_train_step_in_tensorflow.html)
 <!-- - [Customizing what happens in `fit()` with JAX](https://keras.io/guides/custom_train_step_in_jax/) -->
 <!-- - [Customizing what happens in `fit()` with PyTorch](https://keras.io/guides/custom_train_step_in_pytorch/) -->
 
 ## How to write custom training loops
 
-- [Writing a training loop from scratch in TensorFlow](https://keras.io/guides/writing_a_custom_training_loop_in_tensorflow/)
+- [Writing a training loop from scratch in TensorFlow](writing_a_custom_training_loop_in_tensorflow.html)
 <!-- - [Writing a training loop from scratch in JAX](https://keras.io/guides/writing_a_custom_training_loop_in_jax/) -->
 <!-- - [Writing a training loop from scratch in PyTorch](https://keras.io/guides/writing_a_custom_training_loop_in_torch/) -->
 
 ## How to distribute training
 
-- [Guide to distributed training with TensorFlow](https://keras.io/guides/distributed_training_with_tensorflow/)
+- [Guide to distributed training with TensorFlow](distributed_training_with_tensorflow.html)
 <!-- - [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py) -->
 <!-- - [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py) -->
 

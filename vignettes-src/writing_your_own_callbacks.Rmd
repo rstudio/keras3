@@ -213,7 +213,7 @@ res = model |> evaluate(
   callbacks = list(callback_print_loss_and_mae())
 )
 ```
-For more information about callbacks, you can check out the [Keras callback API documentation](https://keras.io/api/callbacks/).
+For more information about callbacks, you can check out the [Keras callback API documentation](https://keras.posit.co/reference/index.html#callbacks).
 
 
 ## Usage of `self$model` attribute

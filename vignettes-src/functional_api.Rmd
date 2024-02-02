@@ -133,7 +133,7 @@ built using the functional API as for `Sequential` models.
 
 The `Model` class offers a built-in training loop (the `fit()` method)
 and a built-in evaluation loop (the `evaluate()` method). Note
-that you can easily [customize these loops](/guides/customizing_what_happens_in_fit/)
+that you can easily [customize these loops](custom_train_step_in_tensorflow.html)
 to implement training routines beyond supervised learning
 (e.g. [GANs](https://keras.io/examples/generative/dcgan_overriding_train_step/)).
 
@@ -166,7 +166,7 @@ cat("Test loss:", test_scores$loss, "\n")
 cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
-For further reading, see the [training and evaluation](/guides/training_with_built_in_methods/) guide.
+For further reading, see the [training and evaluation](training_with_built_in_methods.html) guide.
 
 ## Save and serialize
 
@@ -194,7 +194,7 @@ unlink("my_model.keras")
 ```
 
 
-For details, read the model [serialization & saving](/guides/serialization_and_saving/) guide.
+For details, read the model [serialization & saving](serialization_and_saving.html) guide.
 
 ## Use the same graph of layers to define multiple models
 
@@ -430,7 +430,7 @@ list of lists like `list(list(title_data, body_data, tags_data), list(priority_t
 or a list of named lists like
 `list(list(title = title_data, body = body_data, tags = tags_data), list(priority = priority_targets, department = dept_targets))`.
 
-For more detailed explanation, refer to the [training and evaluation](/guides/training_with_built_in_methods/) guide.
+For more detailed explanation, refer to the [training and evaluation](training_with_built_in_methods.html) guide.
 
 ### A toy ResNet model
 
@@ -590,7 +590,7 @@ your own layers. All layers subclass the `Layer` class and implement:
 convention since you can create weights in `initialize`, as well).
 
 To learn more about creating layers from scratch, read
-[custom layers and models](/guides/making_new_layers_and_models_via_subclassing) guide.
+[custom layers and models](making_new_layers_and_models_via_subclassing.html) guide.
 
 The following is a basic implementation of `layer_dense()`:
 
@@ -768,7 +768,7 @@ Because a functional model is a data structure rather than a piece of code,
 it is safely serializable and can be saved as a single file
 that allows you to recreate the exact same model
 without having access to any of the original code.
-See the [serialization & saving guide](/guides/serialization_and_saving/).
+See the [serialization & saving guide](serialization_and_saving.html).
 
 To serialize a subclassed model, it is necessary for the implementer
 to specify a `get_config()`

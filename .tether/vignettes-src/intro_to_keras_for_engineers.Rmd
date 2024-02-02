@@ -67,7 +67,7 @@ Different model-building options that Keras offers include:
 
 - [The Sequential API](https://keras.io/guides/sequential_model/) (what we use below)
 - [The Functional API](https://keras.io/guides/functional_api/) (most typical)
-- [Writing your own models yourself via subclassing](https://keras.io/guides/making_new_layers_and_models_via_subclassing/) (for advanced use cases)
+- [Writing your own models yourself via subclassing](https://keras.iomaking_new_layers_and_models_via_subclassing.html) (for advanced use cases)
 
 ```python
 # Model parameters
