@@ -5,15 +5,15 @@
 \title{LearningRateSchedule}
 \usage{
 new_learning_rate_schedule_class(
-classname,
-call = NULL,
-initialize = NULL,
-get_config = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  call = NULL,
+  initialize = NULL,
+  get_config = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{

@@ -5,13 +5,13 @@
 \title{A preprocessing layer which crosses features using the "hashing trick".}
 \usage{
 layer_hashed_crossing(
-object,
-num_bins,
-output_mode = "int",
-sparse = FALSE,
-name = NULL,
-dtype = NULL,
-...
+  object,
+  num_bins,
+  output_mode = "int",
+  sparse = FALSE,
+  name = NULL,
+  dtype = NULL,
+  ...
 )
 }
 \arguments{

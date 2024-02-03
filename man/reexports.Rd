@@ -29,14 +29,14 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-\item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}}
+  \item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}}
 
-\item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
+  \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
 
-\item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
+  \item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
 
-\item{tensorflow}{\code{\link[tensorflow]{all_dims}}, \code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{tensorboard}}}
+  \item{tensorflow}{\code{\link[tensorflow]{all_dims}}, \code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{tensorboard}}}
 
-\item{tfruns}{\code{\link[tfruns:flags]{flag_boolean}}, \code{\link[tfruns:flags]{flag_integer}}, \code{\link[tfruns:flags]{flag_numeric}}, \code{\link[tfruns:flags]{flag_string}}, \code{\link[tfruns]{flags}}, \code{\link[tfruns]{run_dir}}}
+  \item{tfruns}{\code{\link[tfruns:flags]{flag_boolean}}, \code{\link[tfruns:flags]{flag_integer}}, \code{\link[tfruns:flags]{flag_numeric}}, \code{\link[tfruns:flags]{flag_string}}, \code{\link[tfruns]{flags}}, \code{\link[tfruns]{run_dir}}}
 }}
 

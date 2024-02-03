@@ -21,9 +21,9 @@ Conditionally applies \code{true_fn} or \code{false_fn}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{fn <- tensorflow::tf_function(function(x) \{
-op_cond(x > 0,
-true_fn = \\() x + 1,
-false_fn = \\() x - 1)
+  op_cond(x > 0,
+    true_fn = \\() x + 1,
+    false_fn = \\() x - 1)
 \})
 
 fn(tensorflow::as_tensor(1))
@@ -44,20 +44,20 @@ fn(tensorflow::as_tensor(1))
 # Conditional side-effect (print only, no return value).
 file <- tempfile(fileext = ".txt")
 fn <- tensorflow::tf_function(function(epochs) \{
-op_fori_loop(
-0, epochs,
-body_fun = \\(epoch, state) \{
-op_cond(epoch \%\% 20 == 0,
-\\() \{
-tensorflow::tf$print(
-"epoch:", epoch,
-output_stream = paste0("file://", file))
-NULL
-\},
-\\() \{NULL\})
-state
-\},
-init_val = tensorflow::as_tensor(0))
+  op_fori_loop(
+    0, epochs,
+    body_fun = \\(epoch, state) \{
+      op_cond(epoch \%\% 20 == 0,
+              \\() \{
+                tensorflow::tf$print(
+                  "epoch:", epoch,
+                  output_stream = paste0("file://", file))
+                NULL
+              \},
+              \\() \{NULL\})
+      state
+    \},
+    init_val = tensorflow::as_tensor(0))
 \})
 
 fn(tensorflow::as_tensor(100))

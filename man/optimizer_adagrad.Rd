@@ -5,20 +5,20 @@
 \title{Optimizer that implements the Adagrad algorithm.}
 \usage{
 optimizer_adagrad(
-learning_rate = 0.001,
-initial_accumulator_value = 0.1,
-epsilon = 1e-07,
-weight_decay = NULL,
-clipnorm = NULL,
-clipvalue = NULL,
-global_clipnorm = NULL,
-use_ema = FALSE,
-ema_momentum = 0.99,
-ema_overwrite_frequency = NULL,
-name = "adagrad",
-...,
-loss_scale_factor = NULL,
-gradient_accumulation_steps = NULL
+  learning_rate = 0.001,
+  initial_accumulator_value = 0.1,
+  epsilon = 1e-07,
+  weight_decay = NULL,
+  clipnorm = NULL,
+  clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = FALSE,
+  ema_momentum = 0.99,
+  ema_overwrite_frequency = NULL,
+  name = "adagrad",
+  ...,
+  loss_scale_factor = NULL,
+  gradient_accumulation_steps = NULL
 )
 }
 \arguments{

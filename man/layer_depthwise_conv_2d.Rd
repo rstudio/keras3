@@ -5,23 +5,23 @@
 \title{2D depthwise convolution layer.}
 \usage{
 layer_depthwise_conv_2d(
-object,
-kernel_size,
-strides = list(1L, 1L),
-padding = "valid",
-depth_multiplier = 1L,
-data_format = NULL,
-dilation_rate = list(1L, 1L),
-activation = NULL,
-use_bias = TRUE,
-depthwise_initializer = "glorot_uniform",
-bias_initializer = "zeros",
-depthwise_regularizer = NULL,
-bias_regularizer = NULL,
-activity_regularizer = NULL,
-depthwise_constraint = NULL,
-bias_constraint = NULL,
-...
+  object,
+  kernel_size,
+  strides = list(1L, 1L),
+  padding = "valid",
+  depth_multiplier = 1L,
+  data_format = NULL,
+  dilation_rate = list(1L, 1L),
+  activation = NULL,
+  use_bias = TRUE,
+  depthwise_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  depthwise_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  depthwise_constraint = NULL,
+  bias_constraint = NULL,
+  ...
 )
 }
 \arguments{

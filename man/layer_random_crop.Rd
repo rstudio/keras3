@@ -5,13 +5,13 @@
 \title{A preprocessing layer which randomly crops images during training.}
 \usage{
 layer_random_crop(
-object,
-height,
-width,
-seed = NULL,
-data_format = NULL,
-name = NULL,
-...
+  object,
+  height,
+  width,
+  seed = NULL,
+  data_format = NULL,
+  name = NULL,
+  ...
 )
 }
 \arguments{

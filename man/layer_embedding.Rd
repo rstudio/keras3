@@ -5,15 +5,15 @@
 \title{Turns positive integers (indexes) into dense vectors of fixed size.}
 \usage{
 layer_embedding(
-object,
-input_dim,
-output_dim,
-embeddings_initializer = "uniform",
-embeddings_regularizer = NULL,
-embeddings_constraint = NULL,
-mask_zero = FALSE,
-lora_rank = NULL,
-...
+  object,
+  input_dim,
+  output_dim,
+  embeddings_initializer = "uniform",
+  embeddings_regularizer = NULL,
+  embeddings_constraint = NULL,
+  mask_zero = FALSE,
+  lora_rank = NULL,
+  ...
 )
 }
 \arguments{
@@ -62,7 +62,7 @@ This layer can only be used on positive integer inputs of a fixed range.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential() |>
-layer_embedding(1000, 64)
+  layer_embedding(1000, 64)
 
 # The model will take as input an integer matrix of size (batch,input_length),
 # and the largest integer (i.e. word index) in the input
@@ -94,9 +94,9 @@ dim(output_array)    # (32, 10, 64)
 \item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
-rank,
-a_initializer = 'he_uniform',
-b_initializer = 'zeros'
+  rank,
+  a_initializer = 'he_uniform',
+  b_initializer = 'zeros'
 )
 }\if{html}{\out{</div>}}
 }

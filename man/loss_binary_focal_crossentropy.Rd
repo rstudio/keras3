@@ -5,17 +5,17 @@
 \title{Computes focal cross-entropy loss between true labels and predictions.}
 \usage{
 loss_binary_focal_crossentropy(
-y_true,
-y_pred,
-apply_class_balancing = FALSE,
-alpha = 0.25,
-gamma = 2,
-from_logits = FALSE,
-label_smoothing = 0,
-axis = -1L,
-...,
-reduction = "sum_over_batch_size",
-name = "binary_focal_crossentropy"
+  y_true,
+  y_pred,
+  apply_class_balancing = FALSE,
+  alpha = 0.25,
+  gamma = 2,
+  from_logits = FALSE,
+  label_smoothing = 0,
+  axis = -1L,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "binary_focal_crossentropy"
 )
 }
 \arguments{
@@ -110,9 +110,9 @@ loss
 With the \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-loss = loss_binary_focal_crossentropy(
-gamma = 2.0, from_logits = TRUE),
-...
+    loss = loss_binary_focal_crossentropy(
+        gamma = 2.0, from_logits = TRUE),
+    ...
 )
 }\if{html}{\out{</div>}}
 
@@ -131,7 +131,7 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-apply_class_balancing = TRUE, gamma = 2, from_logits = TRUE)
+  apply_class_balancing = TRUE, gamma = 2, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -144,7 +144,7 @@ y_true <- rbind(c(0, 1), c(0, 0))
 y_pred <- rbind(c(-18.6, 0.51), c(2.94, -12.8))
 # Using default 'auto'/'sum_over_batch_size' reduction type.
 loss <- loss_binary_focal_crossentropy(
-gamma = 3, from_logits = TRUE)
+    gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -154,7 +154,7 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
+     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -164,7 +164,7 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sample_weight' attribute with focal effect
 loss <- loss_binary_focal_crossentropy(
-gamma = 3, from_logits = TRUE)
+    gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
@@ -174,7 +174,7 @@ loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
+     apply_class_balancing = TRUE, gamma = 3, from_logits = TRUE)
 loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 }\if{html}{\out{</div>}}
 
@@ -184,8 +184,8 @@ loss(y_true, y_pred, sample_weight = c(0.8, 0.2))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction` type.
 loss <- loss_binary_focal_crossentropy(
-gamma = 4, from_logits = TRUE,
-reduction = "sum")
+    gamma = 4, from_logits = TRUE,
+    reduction = "sum")
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -195,8 +195,8 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-apply_class_balancing = TRUE, gamma = 4, from_logits = TRUE,
-reduction = "sum")
+    apply_class_balancing = TRUE, gamma = 4, from_logits = TRUE,
+    reduction = "sum")
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -206,8 +206,8 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
 loss <- loss_binary_focal_crossentropy(
-gamma = 5, from_logits = TRUE,
-reduction = NULL)
+    gamma = 5, from_logits = TRUE,
+    reduction = NULL)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
@@ -217,8 +217,8 @@ loss(y_true, y_pred)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Apply class weight
 loss <- loss_binary_focal_crossentropy(
-apply_class_balancing = TRUE, gamma = 5, from_logits = TRUE,
-reduction = NULL)
+    apply_class_balancing = TRUE, gamma = 5, from_logits = TRUE,
+    reduction = NULL)
 loss(y_true, y_pred)
 }\if{html}{\out{</div>}}
 

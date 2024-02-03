@@ -5,26 +5,26 @@
 \title{Callback}
 \usage{
 new_callback_class(
-classname,
-on_epoch_begin = NULL,
-on_epoch_end = NULL,
-on_train_begin = NULL,
-on_train_end = NULL,
-on_train_batch_begin = NULL,
-on_train_batch_end = NULL,
-on_test_begin = NULL,
-on_test_end = NULL,
-on_test_batch_begin = NULL,
-on_test_batch_end = NULL,
-on_predict_begin = NULL,
-on_predict_end = NULL,
-on_predict_batch_begin = NULL,
-on_predict_batch_end = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  on_epoch_begin = NULL,
+  on_epoch_end = NULL,
+  on_train_begin = NULL,
+  on_train_end = NULL,
+  on_train_batch_begin = NULL,
+  on_train_batch_end = NULL,
+  on_test_begin = NULL,
+  on_test_end = NULL,
+  on_test_batch_begin = NULL,
+  on_test_batch_end = NULL,
+  on_predict_begin = NULL,
+  on_predict_end = NULL,
+  on_predict_batch_begin = NULL,
+  on_predict_batch_end = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{

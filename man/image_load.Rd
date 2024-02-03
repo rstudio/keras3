@@ -5,11 +5,11 @@
 \title{Loads an image into PIL format.}
 \usage{
 image_load(
-path,
-color_mode = "rgb",
-target_size = NULL,
-interpolation = "nearest",
-keep_aspect_ratio = FALSE
+  path,
+  color_mode = "rgb",
+  target_size = NULL,
+  interpolation = "nearest",
+  keep_aspect_ratio = FALSE
 )
 }
 \arguments{

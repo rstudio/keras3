@@ -5,10 +5,10 @@
 \title{Cropping layer for 2D input (e.g. picture).}
 \usage{
 layer_cropping_2d(
-object,
-cropping = list(list(0L, 0L), list(0L, 0L)),
-data_format = NULL,
-...
+  object,
+  cropping = list(list(0L, 0L), list(0L, 0L)),
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

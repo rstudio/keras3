@@ -5,16 +5,16 @@
 \title{Creates a dataset of sliding windows over a timeseries provided as array.}
 \usage{
 timeseries_dataset_from_array(
-data,
-targets,
-sequence_length,
-sequence_stride = 1L,
-sampling_rate = 1L,
-batch_size = 128L,
-shuffle = FALSE,
-seed = NULL,
-start_index = NULL,
-end_index = NULL
+  data,
+  targets,
+  sequence_length,
+  sequence_stride = 1L,
+  sampling_rate = 1L,
+  batch_size = 128L,
+  shuffle = FALSE,
+  seed = NULL,
+  start_index = NULL,
+  end_index = NULL
 )
 }
 \arguments{
@@ -92,7 +92,7 @@ timesteps to predict the next timestep, you would use:
 input_data <- data[1:10]
 targets <- data[11:20]
 dataset <- timeseries_dataset_from_array(
-input_data, targets, sequence_length=10)
+  input_data, targets, sequence_length=10)
 iter <- reticulate::as_iterator(dataset)
 reticulate::iter_next(iter)
 }\if{html}{\out{</div>}}
@@ -118,9 +118,9 @@ Y <- X*2
 
 sample_length <- 20
 input_dataset <- timeseries_dataset_from_array(
-X, NULL, sequence_length=sample_length, sequence_stride=sample_length)
+    X, NULL, sequence_length=sample_length, sequence_stride=sample_length)
 target_dataset <- timeseries_dataset_from_array(
-Y, NULL, sequence_length=sample_length, sequence_stride=sample_length)
+    Y, NULL, sequence_length=sample_length, sequence_stride=sample_length)
 
 
 inputs <- reticulate::as_iterator(input_dataset) \%>\% reticulate::iter_next()

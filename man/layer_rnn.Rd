@@ -5,15 +5,15 @@
 \title{Base class for recurrent layers}
 \usage{
 layer_rnn(
-object,
-cell,
-return_sequences = FALSE,
-return_state = FALSE,
-go_backwards = FALSE,
-stateful = FALSE,
-unroll = FALSE,
-zero_output_for_mask = FALSE,
-...
+  object,
+  cell,
+  return_sequences = FALSE,
+  return_state = FALSE,
+  go_backwards = FALSE,
+  stateful = FALSE,
+  unroll = FALSE,
+  zero_output_for_mask = FALSE,
+  ...
 )
 }
 \arguments{
@@ -157,34 +157,34 @@ the initial state of the RNN layer.
 First, let's define a RNN Cell, as a layer subclass.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn_cell_minimal <- Layer(
-"MinimalRNNCell",
+  "MinimalRNNCell",
 
-initialize = function(units, ...) \{
-super$initialize(...)
-self$units <- as.integer(units)
-self$state_size <- as.integer(units)
-\},
+  initialize = function(units, ...) \{
+    super$initialize(...)
+    self$units <- as.integer(units)
+    self$state_size <- as.integer(units)
+  \},
 
-build = function(input_shape) \{
-self$kernel <- self$add_weight(
-shape = shape(tail(input_shape, 1), self$units),
-initializer = 'uniform',
-name = 'kernel'
-)
-self$recurrent_kernel <- self$add_weight(
-shape = shape(self$units, self$units),
-initializer = 'uniform',
-name = 'recurrent_kernel'
-)
-self$built <- TRUE
-\},
+  build = function(input_shape) \{
+    self$kernel <- self$add_weight(
+      shape = shape(tail(input_shape, 1), self$units),
+      initializer = 'uniform',
+      name = 'kernel'
+    )
+    self$recurrent_kernel <- self$add_weight(
+      shape = shape(self$units, self$units),
+      initializer = 'uniform',
+      name = 'recurrent_kernel'
+    )
+    self$built <- TRUE
+  \},
 
-call = function(inputs, states) \{
-prev_output <- states[[1]]
-h <- op_matmul(inputs, self$kernel)
-output <- h + op_matmul(prev_output, self$recurrent_kernel)
-list(output, list(output))
-\}
+  call = function(inputs, states) \{
+    prev_output <- states[[1]]
+    h <- op_matmul(inputs, self$kernel)
+    output <- h + op_matmul(prev_output, self$recurrent_kernel)
+    list(output, list(output))
+  \}
 )
 }\if{html}{\out{</div>}}
 

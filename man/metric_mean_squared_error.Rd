@@ -5,11 +5,11 @@
 \title{Computes the mean squared error between \code{y_true} and \code{y_pred}.}
 \usage{
 metric_mean_squared_error(
-y_true,
-y_pred,
-...,
-name = "mean_squared_error",
-dtype = NULL
+  y_true,
+  y_pred,
+  ...,
+  name = "mean_squared_error",
+  dtype = NULL
 )
 }
 \arguments{

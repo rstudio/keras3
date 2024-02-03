@@ -19,9 +19,9 @@ Computes the 2D Fast Fourier Transform along the last two axes of input.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- c(op_array(rbind(c(1, 2),
-c(2, 1))),
-op_array(rbind(c(0, 1),
-c(1, 0))))
+                     c(2, 1))),
+       op_array(rbind(c(0, 1),
+                     c(1, 0))))
 op_fft2(x)
 }\if{html}{\out{</div>}}
 

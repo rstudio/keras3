@@ -5,11 +5,11 @@
 \title{Calculates how often predictions match integer labels.}
 \usage{
 metric_sparse_categorical_accuracy(
-y_true,
-y_pred,
-...,
-name = "sparse_categorical_accuracy",
-dtype = NULL
+  y_true,
+  y_pred,
+  ...,
+  name = "sparse_categorical_accuracy",
+  dtype = NULL
 )
 }
 \arguments{
@@ -52,7 +52,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)),
-sample_weight = c(0.7, 0.3))
+               sample_weight = c(0.7, 0.3))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -63,8 +63,8 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-loss = 'sparse_categorical_crossentropy',
-metrics = list(metric_sparse_categorical_accuracy()))
+                  loss = 'sparse_categorical_crossentropy',
+                  metrics = list(metric_sparse_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 

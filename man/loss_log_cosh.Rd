@@ -5,11 +5,11 @@
 \title{Computes the logarithm of the hyperbolic cosine of the prediction error.}
 \usage{
 loss_log_cosh(
-y_true,
-y_pred,
-...,
-reduction = "sum_over_batch_size",
-name = "log_cosh"
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "log_cosh"
 )
 }
 \arguments{

@@ -5,10 +5,10 @@
 \title{Computes the cosine similarity between the labels and predictions.}
 \usage{
 metric_cosine_similarity(
-...,
-name = "cosine_similarity",
-dtype = NULL,
-axis = -1L
+  ...,
+  name = "cosine_similarity",
+  dtype = NULL,
+  axis = -1L
 )
 }
 \arguments{
@@ -45,7 +45,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(c(0., 1.), c(1., 1.)), rbind(c(1., 0.), c(1., 1.)),
-sample_weight = c(0.3, 0.7))
+               sample_weight = c(0.3, 0.7))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -56,9 +56,9 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_cosine_similarity(axis=2)))
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_cosine_similarity(axis=2)))
 }\if{html}{\out{</div>}}
 }
 

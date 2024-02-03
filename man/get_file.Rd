@@ -5,16 +5,16 @@
 \title{Downloads a file from a URL if it not already in the cache.}
 \usage{
 get_file(
-fname = NULL,
-origin = NULL,
-...,
-file_hash = NULL,
-cache_subdir = "datasets",
-hash_algorithm = "auto",
-extract = FALSE,
-archive_format = "auto",
-cache_dir = NULL,
-force_download = FALSE
+  fname = NULL,
+  origin = NULL,
+  ...,
+  file_hash = NULL,
+  cache_subdir = "datasets",
+  hash_algorithm = "auto",
+  extract = FALSE,
+  archive_format = "auto",
+  cache_dir = NULL,
+  force_download = FALSE
 )
 }
 \arguments{
@@ -75,8 +75,8 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{path_to_downloaded_file <- get_file(
-origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
-extract = TRUE
+    origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
+    extract = TRUE
 )
 }\if{html}{\out{</div>}}
 }

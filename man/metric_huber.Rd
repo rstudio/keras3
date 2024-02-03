@@ -21,11 +21,11 @@ Tensor with one scalar loss entry per sample.
 Formula:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{for (x in error) \{
-if (abs(x) <= delta)\{
-loss <- c(loss, (0.5 * x^2))
-\} else if (abs(x) > delta) \{
-loss <- c(loss, (delta * abs(x) - 0.5 * delta^2))
-\}
+  if (abs(x) <= delta)\{
+    loss <- c(loss, (0.5 * x^2))
+  \} else if (abs(x) > delta) \{
+    loss <- c(loss, (delta * abs(x) - 0.5 * delta^2))
+  \}
 \}
 loss <- mean(loss)
 }\if{html}{\out{</div>}}

@@ -5,12 +5,12 @@
 \title{Short-Time Fourier Transform along the last axis of the input.}
 \usage{
 op_stft(
-x,
-sequence_length,
-sequence_stride,
-fft_length,
-window = "hann",
-center = TRUE
+  x,
+  sequence_length,
+  sequence_stride,
+  fft_length,
+  window = "hann",
+  center = TRUE
 )
 }
 \arguments{

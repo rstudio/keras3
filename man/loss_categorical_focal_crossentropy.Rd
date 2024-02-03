@@ -5,16 +5,16 @@
 \title{Computes the alpha balanced focal crossentropy loss.}
 \usage{
 loss_categorical_focal_crossentropy(
-y_true,
-y_pred,
-alpha = 0.25,
-gamma = 2,
-from_logits = FALSE,
-label_smoothing = 0,
-axis = -1L,
-...,
-reduction = "sum_over_batch_size",
-name = "categorical_focal_crossentropy"
+  y_true,
+  y_pred,
+  alpha = 0.25,
+  gamma = 2,
+  from_logits = FALSE,
+  label_smoothing = 0,
+  axis = -1L,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "categorical_focal_crossentropy"
 )
 }
 \arguments{
@@ -149,8 +149,8 @@ cce(y_true, y_pred)
 Usage with the \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'adam',
-loss = loss_categorical_focal_crossentropy())
+  optimizer = 'adam',
+  loss = loss_categorical_focal_crossentropy())
 }\if{html}{\out{</div>}}
 }
 

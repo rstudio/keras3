@@ -5,12 +5,12 @@
 \title{Wraps arbitrary expressions as a \code{Layer} object.}
 \usage{
 layer_lambda(
-object,
-f,
-output_shape = NULL,
-mask = NULL,
-arguments = NULL,
-...
+  object,
+  f,
+  output_shape = NULL,
+  mask = NULL,
+  arguments = NULL,
+  ...
 )
 }
 \arguments{

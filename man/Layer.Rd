@@ -5,16 +5,16 @@
 \title{Define a custom \code{Layer} class.}
 \usage{
 Layer(
-classname,
-initialize = NULL,
-call = NULL,
-build = NULL,
-get_config = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  initialize = NULL,
+  call = NULL,
+  build = NULL,
+  get_config = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{
@@ -149,32 +149,32 @@ Variables set as attributes of a layer are tracked as weights
 of the layers (in \code{layer$weights}).
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_simple_dense <- Layer(
-"SimpleDense",
-initialize = function(units = 32) \{
-super$initialize()
-self$units <- units
-\},
+  "SimpleDense",
+  initialize = function(units = 32) \{
+    super$initialize()
+    self$units <- units
+  \},
 
-# Create the state of the layer (weights)
-build = function(input_shape) \{
-self$kernel <- self$add_weight(
-shape = shape(tail(input_shape, 1), self$units),
-initializer = "glorot_uniform",
-trainable = TRUE,
-name = "kernel"
-)
-self$bias = self$add_weight(
-shape = shape(self$units),
-initializer = "zeros",
-trainable = TRUE,
-name = "bias"
-)
-\},
+  # Create the state of the layer (weights)
+  build = function(input_shape) \{
+    self$kernel <- self$add_weight(
+      shape = shape(tail(input_shape, 1), self$units),
+      initializer = "glorot_uniform",
+      trainable = TRUE,
+      name = "kernel"
+    )
+    self$bias = self$add_weight(
+      shape = shape(self$units),
+      initializer = "zeros",
+      trainable = TRUE,
+      name = "bias"
+    )
+  \},
 
-# Defines the computation
-call = function(self, inputs) \{
-op_matmul(inputs, self$kernel) + self$bias
-\}
+  # Defines the computation
+  call = function(self, inputs) \{
+    op_matmul(inputs, self$kernel) + self$bias
+  \}
 )
 
 # Instantiates the layer.
@@ -197,24 +197,24 @@ be updated manually during \code{call()}. Here's a example layer that computes
 the running sum of its inputs:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_compute_sum <- Layer(
-classname = "ComputeSum",
+  classname = "ComputeSum",
 
-initialize = function(input_dim) \{
-super$initialize()
+  initialize = function(input_dim) \{
+    super$initialize()
 
-# Create a non-trainable weight.
-self$total <- self$add_weight(
-shape = shape(),
-initializer = "zeros",
-trainable = FALSE,
-name = "total"
-)
-\},
+    # Create a non-trainable weight.
+    self$total <- self$add_weight(
+      shape = shape(),
+      initializer = "zeros",
+      trainable = FALSE,
+      name = "total"
+    )
+  \},
 
-call = function(inputs) \{
-self$total$assign(self$total + op_sum(inputs))
-self$total
-\}
+  call = function(inputs) \{
+    self$total$assign(self$total + op_sum(inputs))
+    self$total
+  \}
 )
 
 my_sum <- layer_compute_sum(, 2)
@@ -222,9 +222,9 @@ x <- op_ones(c(2, 2))
 y <- my_sum(x)
 
 stopifnot(exprs = \{
-all.equal(my_sum$weights,               list(my_sum$total))
-all.equal(my_sum$non_trainable_weights, list(my_sum$total))
-all.equal(my_sum$trainable_weights,     list())
+  all.equal(my_sum$weights,               list(my_sum$total))
+  all.equal(my_sum$non_trainable_weights, list(my_sum$total))
+  all.equal(my_sum$trainable_weights,     list())
 \})
 }\if{html}{\out{</div>}}
 }
@@ -241,11 +241,11 @@ Can be called inside of the \code{call()} method to add a scalar loss.
 Example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{Layer("MyLayer",
-...
-call = function(x) \{
-self$add_loss(op_sum(x))
-x
-\}
+  ...
+  call = function(x) \{
+    self$add_loss(op_sum(x))
+    x
+  \}
 }\if{html}{\out{</div>}}
 \item
 
@@ -260,12 +260,12 @@ Alias of \code{add_weight()}.
 \item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_weight(shape = NULL,
-initializer = NULL,
-dtype = NULL,
-trainable = TRUE,
-regularizer = NULL,
-constraint = NULL,
-name = NULL)
+           initializer = NULL,
+           dtype = NULL,
+           trainable = TRUE,
+           regularizer = NULL,
+           constraint = NULL,
+           name = NULL)
 }\if{html}{\out{</div>}}
 
 Add a weight variable to the layer.
@@ -442,7 +442,7 @@ Sets the values of \code{weights} from a list of R or NumPy arrays.
 \item
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{stateless_call(trainable_variables, non_trainable_variables,
-..., return_losses = FALSE)
+               ..., return_losses = FALSE)
 }\if{html}{\out{</div>}}
 
 Call the layer without any side effects.
@@ -476,15 +476,15 @@ trainable_variables <- model$trainable_variables
 non_trainable_variables <- model$non_trainable_variables
 # Call the model with zero side effects
 c(outputs, non_trainable_variables) \%<-\% model$stateless_call(
-trainable_variables,
-non_trainable_variables,
-data
+    trainable_variables,
+    non_trainable_variables,
+    data
 )
 # Attach the updated state to the model
 # (until you do this, the model is still in its pre-call state).
 purrr::walk2(
-model$non_trainable_variables, non_trainable_variables,
-\\(variable, value) variable$assign(value))
+  model$non_trainable_variables, non_trainable_variables,
+  \\(variable, value) variable$assign(value))
 }\if{html}{\out{</div>}}
 \item
 
@@ -503,7 +503,7 @@ provided when the \code{Layer()} was constructed) to resolve the class definitio
 The default implementation is:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config = function(config) \{
-do.call(`__class__`, config)
+  do.call(`__class__`, config)
 \}
 }\if{html}{\out{</div>}}
 
@@ -523,21 +523,21 @@ A layer instance.
 }
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{initialize(...,
-activity_regularizer = NULL,
-trainable = TRUE,
-dtype = NULL,
-autocast = TRUE,
-name = NULL)
+           activity_regularizer = NULL,
+           trainable = TRUE,
+           dtype = NULL,
+           autocast = TRUE,
+           name = NULL)
 }\if{html}{\out{</div>}}
 
 Initialize self. This method is typically called from a custom \code{initialize()} method.
 Example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_my_layer <- Layer("MyLayer",
-initialize = function(units, ..., dtype = NULL, name = NULL) \{
-super$initialize(..., dtype = dtype, name = name)
-# .... finish initializing `self` instance
-\}
+  initialize = function(units, ..., dtype = NULL, name = NULL) \{
+    super$initialize(..., dtype = dtype, name = name)
+    # .... finish initializing `self` instance
+  \}
 )
 }\if{html}{\out{</div>}}
 }

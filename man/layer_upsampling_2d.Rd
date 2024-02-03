@@ -5,11 +5,11 @@
 \title{Upsampling layer for 2D inputs.}
 \usage{
 layer_upsampling_2d(
-object,
-size = list(2L, 2L),
-data_format = NULL,
-interpolation = "nearest",
-...
+  object,
+  size = list(2L, 2L),
+  data_format = NULL,
+  interpolation = "nearest",
+  ...
 )
 }
 \arguments{

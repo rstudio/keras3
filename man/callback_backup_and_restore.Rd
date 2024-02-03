@@ -5,9 +5,9 @@
 \title{Callback to back up and restore the training state.}
 \usage{
 callback_backup_and_restore(
-backup_dir,
-save_freq = "epoch",
-delete_checkpoint = TRUE
+  backup_dir,
+  save_freq = "epoch",
+  delete_checkpoint = TRUE
 )
 }
 \arguments{
@@ -52,26 +52,26 @@ can become invalid.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{callback_interrupting <- new_callback_class(
-"InterruptingCallback",
-on_epoch_begin = function(epoch, logs = NULL) \{
-if (epoch == 4) \{
-stop('Interrupting!')
-\}
-\}
+  "InterruptingCallback",
+  on_epoch_begin = function(epoch, logs = NULL) \{
+    if (epoch == 4) \{
+      stop('Interrupting!')
+    \}
+  \}
 )
 
 backup_dir <- tempfile()
 callback <- callback_backup_and_restore(backup_dir = backup_dir)
 model <- keras_model_sequential() \%>\%
-layer_dense(10)
+  layer_dense(10)
 model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
 
 tryCatch(\{
-model \%>\% fit(x = op_ones(c(5, 20)),
-y = op_zeros(5),
-epochs = 10, batch_size = 1,
-callbacks = list(callback, callback_interrupting()),
-verbose = 0)
+  model \%>\% fit(x = op_ones(c(5, 20)),
+                y = op_zeros(5),
+                epochs = 10, batch_size = 1,
+                callbacks = list(callback, callback_interrupting()),
+                verbose = 0)
 \}, python.builtin.RuntimeError = function(e) message("Interrupted!"))
 }\if{html}{\out{</div>}}
 
@@ -88,10 +88,10 @@ verbose = 0)
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# model$history \%>\% keras3:::to_keras_training_history() \%>\% as.data.frame() \%>\% print()
 
 history <- model \%>\% fit(x = op_ones(c(5, 20)),
-y = op_zeros(5),
-epochs = 10, batch_size = 1,
-callbacks = list(callback),
-verbose = 0)
+                         y = op_zeros(5),
+                         epochs = 10, batch_size = 1,
+                         callbacks = list(callback),
+                         verbose = 0)
 
 # Only 6 more epochs are run, since first training got interrupted at
 # zero-indexed epoch 4, second training will continue from 4 to 9.

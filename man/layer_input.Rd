@@ -5,13 +5,13 @@
 \title{keras_input}
 \usage{
 layer_input(
-shape = NULL,
-batch_size = NULL,
-dtype = NULL,
-sparse = NULL,
-batch_shape = NULL,
-name = NULL,
-tensor = NULL
+  shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  sparse = NULL,
+  batch_shape = NULL,
+  name = NULL,
+  tensor = NULL
 )
 }
 \arguments{

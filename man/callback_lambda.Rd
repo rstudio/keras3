@@ -5,13 +5,13 @@
 \title{Callback for creating simple, custom callbacks on-the-fly.}
 \usage{
 callback_lambda(
-on_epoch_begin = NULL,
-on_epoch_end = NULL,
-on_train_begin = NULL,
-on_train_end = NULL,
-on_train_batch_begin = NULL,
-on_train_batch_end = NULL,
-...
+  on_epoch_begin = NULL,
+  on_epoch_end = NULL,
+  on_train_begin = NULL,
+  on_train_end = NULL,
+  on_train_batch_begin = NULL,
+  on_train_batch_end = NULL,
+  ...
 )
 }
 \arguments{
@@ -50,46 +50,46 @@ expected arguments.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Print the batch number at the beginning of every batch.
 batch_print_callback <- callback_lambda(
-on_train_batch_begin = function(batch, logs) \{
-print(batch)
-\}
+  on_train_batch_begin = function(batch, logs) \{
+    print(batch)
+  \}
 )
 
 # Stream the epoch loss to a file in new-line delimited JSON format
 # (one valid JSON object per line)
 json_log <- file('loss_log.json', open = 'wt')
 json_logging_callback <- callback_lambda(
-on_epoch_end = function(epoch, logs) \{
-jsonlite::write_json(
-list(epoch = epoch, loss = logs$loss),
-json_log,
-append = TRUE
-)
-\},
-on_train_end = function(logs) \{
-close(json_log)
-\}
+  on_epoch_end = function(epoch, logs) \{
+    jsonlite::write_json(
+      list(epoch = epoch, loss = logs$loss),
+      json_log,
+      append = TRUE
+    )
+  \},
+  on_train_end = function(logs) \{
+    close(json_log)
+  \}
 )
 
 # Terminate some processes after having finished model training.
 processes <- ...
 cleanup_callback <- callback_lambda(
-on_train_end = function(logs) \{
-for (p in processes) \{
-if (is_alive(p)) \{
-terminate(p)
-\}
-\}
-\}
+  on_train_end = function(logs) \{
+    for (p in processes) \{
+      if (is_alive(p)) \{
+        terminate(p)
+      \}
+    \}
+  \}
 )
 
 model \%>\% fit(
-...,
-callbacks = list(
-batch_print_callback,
-json_logging_callback,
-cleanup_callback
-)
+  ...,
+  callbacks = list(
+    batch_print_callback,
+    json_logging_callback,
+    cleanup_callback
+  )
 )
 }\if{html}{\out{</div>}}
 }

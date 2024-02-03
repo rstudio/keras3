@@ -5,11 +5,11 @@
 \title{Computes the categorical hinge loss between \code{y_true} & \code{y_pred}.}
 \usage{
 loss_categorical_hinge(
-y_true,
-y_pred,
-...,
-reduction = "sum_over_batch_size",
-name = "categorical_hinge"
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "categorical_hinge"
 )
 }
 \arguments{

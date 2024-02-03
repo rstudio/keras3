@@ -5,24 +5,24 @@
 \title{3D convolution layer.}
 \usage{
 layer_conv_3d(
-object,
-filters,
-kernel_size,
-strides = list(1L, 1L, 1L),
-padding = "valid",
-data_format = NULL,
-dilation_rate = list(1L, 1L, 1L),
-groups = 1L,
-activation = NULL,
-use_bias = TRUE,
-kernel_initializer = "glorot_uniform",
-bias_initializer = "zeros",
-kernel_regularizer = NULL,
-bias_regularizer = NULL,
-activity_regularizer = NULL,
-kernel_constraint = NULL,
-bias_constraint = NULL,
-...
+  object,
+  filters,
+  kernel_size,
+  strides = list(1L, 1L, 1L),
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = list(1L, 1L, 1L),
+  groups = 1L,
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  ...
 )
 }
 \arguments{

@@ -5,19 +5,19 @@
 \title{Layer normalization layer (Ba et al., 2016).}
 \usage{
 layer_layer_normalization(
-object,
-axis = -1L,
-epsilon = 0.001,
-center = TRUE,
-scale = TRUE,
-rms_scaling = FALSE,
-beta_initializer = "zeros",
-gamma_initializer = "ones",
-beta_regularizer = NULL,
-gamma_regularizer = NULL,
-beta_constraint = NULL,
-gamma_constraint = NULL,
-...
+  object,
+  axis = -1L,
+  epsilon = 0.001,
+  center = TRUE,
+  scale = TRUE,
+  rms_scaling = FALSE,
+  beta_initializer = "zeros",
+  gamma_initializer = "ones",
+  beta_regularizer = NULL,
+  gamma_regularizer = NULL,
+  beta_constraint = NULL,
+  gamma_constraint = NULL,
+  ...
 )
 }
 \arguments{
@@ -87,9 +87,9 @@ transform the normalized output by \code{gamma} and \code{beta},
 which are learned parameters:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{outputs <- inputs |> apply(1, function(x) \{
-x_normalized <- (x - mean(x)) /
-sqrt(var(x) + epsilon)
-x_normalized * gamma + beta
+  x_normalized <- (x - mean(x)) /
+                  sqrt(var(x) + epsilon)
+  x_normalized * gamma + beta
 \})
 }\if{html}{\out{</div>}}
 

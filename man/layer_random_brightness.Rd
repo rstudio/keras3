@@ -5,11 +5,11 @@
 \title{A preprocessing layer which randomly adjusts brightness during training.}
 \usage{
 layer_random_brightness(
-object,
-factor,
-value_range = list(0L, 255L),
-seed = NULL,
-...
+  object,
+  factor,
+  value_range = list(0L, 255L),
+  seed = NULL,
+  ...
 )
 }
 \arguments{

@@ -5,11 +5,11 @@
 \title{Map the input array to new coordinates by interpolation..}
 \usage{
 op_image_map_coordinates(
-input,
-coordinates,
-order,
-fill_mode = "constant",
-fill_value = 0L
+  input,
+  coordinates,
+  order,
+  fill_mode = "constant",
+  fill_value = 0L
 )
 }
 \arguments{

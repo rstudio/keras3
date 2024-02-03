@@ -5,12 +5,12 @@
 \title{Spatial 3D version of Dropout.}
 \usage{
 layer_spatial_dropout_3d(
-object,
-rate,
-data_format = NULL,
-seed = NULL,
-name = NULL,
-dtype = NULL
+  object,
+  rate,
+  data_format = NULL,
+  seed = NULL,
+  name = NULL,
+  dtype = NULL
 )
 }
 \arguments{

@@ -5,29 +5,29 @@
 \title{Fully-connected RNN where the output is to be fed back as the new input.}
 \usage{
 layer_simple_rnn(
-object,
-units,
-activation = "tanh",
-use_bias = TRUE,
-kernel_initializer = "glorot_uniform",
-recurrent_initializer = "orthogonal",
-bias_initializer = "zeros",
-kernel_regularizer = NULL,
-recurrent_regularizer = NULL,
-bias_regularizer = NULL,
-activity_regularizer = NULL,
-kernel_constraint = NULL,
-recurrent_constraint = NULL,
-bias_constraint = NULL,
-dropout = 0,
-recurrent_dropout = 0,
-return_sequences = FALSE,
-return_state = FALSE,
-go_backwards = FALSE,
-stateful = FALSE,
-unroll = FALSE,
-seed = NULL,
-...
+  object,
+  units,
+  activation = "tanh",
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  dropout = 0,
+  recurrent_dropout = 0,
+  return_sequences = FALSE,
+  return_state = FALSE,
+  go_backwards = FALSE,
+  stateful = FALSE,
+  unroll = FALSE,
+  seed = NULL,
+  ...
 )
 }
 \arguments{
@@ -132,7 +132,7 @@ call of the cell.
 simple_rnn <- layer_simple_rnn(units = 4)
 output <- simple_rnn(inputs)  # The output has shape `(32, 4)`.
 simple_rnn <- layer_simple_rnn(
-units = 4, return_sequences=TRUE, return_state=TRUE
+    units = 4, return_sequences=TRUE, return_state=TRUE
 )
 # whole_sequence_output has shape `(32, 10, 4)`.
 # final_state has shape `(32, 4)`.

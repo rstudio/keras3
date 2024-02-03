@@ -5,13 +5,13 @@
 \title{Subclass the base \code{Loss} class}
 \usage{
 Loss(
-classname,
-call = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  call = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{
@@ -47,10 +47,10 @@ function to \code{compile()}.
 Example subclass implementation:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss_custom_mse <- Loss(
-classname = "CustomMeanSquaredError",
-call = function(y_true, y_pred) \{
-op_mean(op_square(y_pred - y_true), axis = -1)
-\}
+  classname = "CustomMeanSquaredError",
+  call = function(y_true, y_pred) \{
+    op_mean(op_square(y_pred - y_true), axis = -1)
+  \}
 )
 
 # Usage in compile()
@@ -70,8 +70,8 @@ y_pred <- op_arange(20) |> op_reshape(4, 5) * 2
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss2 <- (y_pred - y_true)^2 |>
-op_mean(axis = -1) |>
-op_mean()
+  op_mean(axis = -1) |>
+  op_mean()
 
 stopifnot(all.equal(as.array(loss), as.array(loss2)))
 
@@ -84,12 +84,12 @@ sample_weight <-array(c(.25, .25, 1, 1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{weighted_loss2 <- (y_true - y_pred)^2 |>
-op_mean(axis = -1) |>
-op_multiply(sample_weight) |>
-op_mean()
+  op_mean(axis = -1) |>
+  op_multiply(sample_weight) |>
+  op_mean()
 
 stopifnot(all.equal(as.array(weighted_loss),
-as.array(weighted_loss2)))
+                    as.array(weighted_loss2)))
 }\if{html}{\out{</div>}}
 }
 \section{Methods defined by base \code{Loss} class:}{

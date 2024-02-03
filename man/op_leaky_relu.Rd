@@ -34,7 +34,7 @@ op_leaky_relu(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-5, 5, .1)
 plot(x, op_leaky_relu(x),
-type = 'l', panel.first = grid())
+     type = 'l', panel.first = grid())
 }\if{html}{\out{</div>}}
 
 \figure{op_leaky_relu-plot-1.png}

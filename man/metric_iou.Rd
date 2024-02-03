@@ -5,15 +5,15 @@
 \title{Computes the Intersection-Over-Union metric for specific target classes.}
 \usage{
 metric_iou(
-...,
-num_classes,
-target_class_ids,
-name = NULL,
-dtype = NULL,
-ignore_class = NULL,
-sparse_y_true = TRUE,
-sparse_y_pred = TRUE,
-axis = -1L
+  ...,
+  num_classes,
+  target_class_ids,
+  name = NULL,
+  dtype = NULL,
+  ignore_class = NULL,
+  sparse_y_true = TRUE,
+  sparse_y_pred = TRUE,
+  axis = -1L
 )
 }
 \arguments{
@@ -80,7 +80,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
-sample_weight = c(0.3, 0.3, 0.3, 0.1))
+               sample_weight = c(0.3, 0.3, 0.3, 0.1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -91,9 +91,9 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_iou(num_classes = 2L, target_class_ids = list(0L))))
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_iou(num_classes = 2L, target_class_ids = list(0L))))
 }\if{html}{\out{</div>}}
 }
 

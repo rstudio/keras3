@@ -5,17 +5,17 @@
 \title{Keras Model composed of a linear stack of layers}
 \usage{
 keras_model_sequential(
-input_shape = NULL,
-name = NULL,
-...,
-input_dtype = NULL,
-input_batch_size = NULL,
-input_sparse = NULL,
-input_batch_shape = NULL,
-input_name = NULL,
-input_tensor = NULL,
-trainable = TRUE,
-layers = list()
+  input_shape = NULL,
+  name = NULL,
+  ...,
+  input_dtype = NULL,
+  input_batch_size = NULL,
+  input_sparse = NULL,
+  input_batch_shape = NULL,
+  input_name = NULL,
+  input_tensor = NULL,
+  trainable = TRUE,
+  layers = list()
 )
 }
 \arguments{
@@ -70,15 +70,15 @@ explicitly calling \code{model$build(input_shape)}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(784))
 model |>
-layer_dense(units = 32) |>
-layer_activation('relu') |>
-layer_dense(units = 10) |>
-layer_activation('softmax')
+  layer_dense(units = 32) |>
+  layer_activation('relu') |>
+  layer_dense(units = 10) |>
+  layer_activation('softmax')
 
 model |> compile(
-optimizer = 'rmsprop',
-loss = 'categorical_crossentropy',
-metrics = c('accuracy')
+  optimizer = 'rmsprop',
+  loss = 'categorical_crossentropy',
+  metrics = c('accuracy')
 )
 
 model

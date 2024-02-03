@@ -5,15 +5,15 @@
 \title{A preprocessing layer which randomly translates images during training.}
 \usage{
 layer_random_translation(
-object,
-height_factor,
-width_factor,
-fill_mode = "reflect",
-interpolation = "bilinear",
-seed = NULL,
-fill_value = 0,
-data_format = NULL,
-...
+  object,
+  height_factor,
+  width_factor,
+  fill_mode = "reflect",
+  interpolation = "bilinear",
+  seed = NULL,
+  fill_value = 0,
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

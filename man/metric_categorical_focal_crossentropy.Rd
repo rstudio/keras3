@@ -5,13 +5,13 @@
 \title{Computes the categorical focal crossentropy loss.}
 \usage{
 metric_categorical_focal_crossentropy(
-y_true,
-y_pred,
-alpha = 0.25,
-gamma = 2,
-from_logits = FALSE,
-label_smoothing = 0,
-axis = -1L
+  y_true,
+  y_pred,
+  alpha = 0.25,
+  gamma = 2,
+  from_logits = FALSE,
+  label_smoothing = 0,
+  axis = -1L
 )
 }
 \arguments{

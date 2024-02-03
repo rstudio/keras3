@@ -5,11 +5,11 @@
 \title{Callback used to stream events to a server.}
 \usage{
 callback_remote_monitor(
-root = "http://localhost:9000",
-path = "/publish/epoch/end/",
-field = "data",
-headers = NULL,
-send_as_json = FALSE
+  root = "http://localhost:9000",
+  path = "/publish/epoch/end/",
+  field = "data",
+  headers = NULL,
+  send_as_json = FALSE
 )
 }
 \arguments{

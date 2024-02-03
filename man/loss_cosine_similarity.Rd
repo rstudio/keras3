@@ -5,12 +5,12 @@
 \title{Computes the cosine similarity between \code{y_true} & \code{y_pred}.}
 \usage{
 loss_cosine_similarity(
-y_true,
-y_pred,
-axis = -1L,
-...,
-reduction = "sum_over_batch_size",
-name = "cosine_similarity"
+  y_true,
+  y_pred,
+  axis = -1L,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "cosine_similarity"
 )
 }
 \arguments{

@@ -18,23 +18,23 @@ clutter from old models and layers, especially when memory is limited.
 Example 1: calling \code{clear_session()} when creating models in a loop
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{for (i in 1:100) \{
-# Without `clear_session()`, each iteration of this loop will
-# slightly increase the size of the global state managed by Keras
-model <- keras_model_sequential()
-for (j in 1:10) \{
-model <- model |> layer_dense(units = 10)
-\}
+  # Without `clear_session()`, each iteration of this loop will
+  # slightly increase the size of the global state managed by Keras
+  model <- keras_model_sequential()
+  for (j in 1:10) \{
+    model <- model |> layer_dense(units = 10)
+  \}
 \}
 
 for (i in 1:100) \{
-# With `clear_session()` called at the beginning,
-# Keras starts with a blank state at each iteration
-# and memory consumption is constant over time.
-clear_session()
-model <- keras_model_sequential()
-for (j in 1:10) \{
-model <- model |> layer_dense(units = 10)
-\}
+  # With `clear_session()` called at the beginning,
+  # Keras starts with a blank state at each iteration
+  # and memory consumption is constant over time.
+  clear_session()
+  model <- keras_model_sequential()
+  for (j in 1:10) \{
+    model <- model |> layer_dense(units = 10)
+  \}
 \}
 }\if{html}{\out{</div>}}
 

@@ -3,7 +3,7 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 # rd_file <- "man/activation_elu.Rd"
 itemize_family <- function(rd_file) {
-  x <- trimws(readLines(rd_file))
+  x <- rd_file |> readLines() |> trimws(which = "right")
 
   for (i in grep("^Other .+:$", x)) {
     x[i] %<>% str_c("\n\\itemize{")
@@ -19,7 +19,7 @@ itemize_family <- function(rd_file) {
 }
 
 cr_family <- function(rd_file) {
-  x <- trimws(readLines(rd_file))
+  x <- rd_file |> readLines() |> trimws(which = "right")
 
   for (i in grep("^Other .+:$", x)) {
     # x[i] %<>% str_c("\n\\itemize{")

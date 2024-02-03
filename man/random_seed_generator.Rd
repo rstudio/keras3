@@ -28,17 +28,17 @@ new_values <- random_normal(shape = c(2, 3), seed = seed_gen)
 Usage in a layer:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_dropout2 <- new_layer_class(
-"dropout2",
-initialize = function(...) \{
-super$initialize(...)
-self$seed_generator <- random_seed_generator(seed = 1337)
-\},
-call = function(x, training = FALSE) \{
-if (training) \{
-return(random_dropout(x, rate = 0.5, seed = self$seed_generator))
-\}
-return(x)
-\}
+  "dropout2",
+  initialize = function(...) \{
+    super$initialize(...)
+    self$seed_generator <- random_seed_generator(seed = 1337)
+  \},
+  call = function(x, training = FALSE) \{
+    if (training) \{
+      return(random_dropout(x, rate = 0.5, seed = self$seed_generator))
+    \}
+    return(x)
+  \}
 )
 
 out <- layer_dropout(rate = 0.8)

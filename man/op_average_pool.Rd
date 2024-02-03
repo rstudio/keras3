@@ -5,11 +5,11 @@
 \title{Average pooling operation.}
 \usage{
 op_average_pool(
-inputs,
-pool_size,
-strides = NULL,
-padding = "valid",
-data_format = NULL
+  inputs,
+  pool_size,
+  strides = NULL,
+  padding = "valid",
+  data_format = NULL
 )
 }
 \arguments{

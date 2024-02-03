@@ -20,7 +20,7 @@ If no axis is specified then all non-zeros in the tensor are counted.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(0, 1, 7, 0),
-c(3, 0, 2, 19)))
+                   c(3, 0, 2, 19)))
 op_count_nonzero(x)
 }\if{html}{\out{</div>}}
 

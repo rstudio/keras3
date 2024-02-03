@@ -5,13 +5,13 @@
 \title{Max pooling operation for 2D spatial data.}
 \usage{
 layer_max_pooling_2d(
-object,
-pool_size = list(2L, 2L),
-strides = NULL,
-padding = "valid",
-data_format = NULL,
-name = NULL,
-...
+  object,
+  pool_size = list(2L, 2L),
+  strides = NULL,
+  padding = "valid",
+  data_format = NULL,
+  name = NULL,
+  ...
 )
 }
 \arguments{
@@ -81,11 +81,11 @@ The resulting output shape when using the \code{"same"} padding option is:
 \verb{strides = (1, 1)} and \code{padding = "valid"}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3.),
-c(4., 5., 6.),
-c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
+           c(4., 5., 6.),
+           c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
 max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
-strides = c(1, 1),
-padding = "valid")
+                                    strides = c(1, 1),
+                                    padding = "valid")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
 
@@ -101,11 +101,11 @@ max_pool_2d(x)
 \code{strides = c(2, 2)} and \code{padding = "valid"}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3., 4.),
-c(5., 6., 7., 8.),
-c(9., 10., 11., 12.)) |> op_reshape(c(1, 3, 4, 1))
+           c(5., 6., 7., 8.),
+           c(9., 10., 11., 12.)) |> op_reshape(c(1, 3, 4, 1))
 max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
-strides = c(2, 2),
-padding = "valid")
+                                    strides = c(2, 2),
+                                    padding = "valid")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
 
@@ -118,11 +118,11 @@ max_pool_2d(x)
 \verb{stride = (1, 1)} and \code{padding = "same"}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- rbind(c(1., 2., 3.),
-c(4., 5., 6.),
-c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
+           c(4., 5., 6.),
+           c(7., 8., 9.)) |> op_reshape(c(1, 3, 3, 1))
 max_pool_2d <- layer_max_pooling_2d(pool_size = c(2, 2),
-strides = c(1, 1),
-padding = "same")
+                                    strides = c(1, 1),
+                                    padding = "same")
 max_pool_2d(x)
 }\if{html}{\out{</div>}}
 

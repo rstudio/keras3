@@ -23,9 +23,9 @@ Checks if the targets are in the top-k predictions.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{targets <- op_array(c(2, 5, 3), "int32")
 predictions <- op_array(dtype = "float32", rbind(
-c(0.1, 0.4, 0.6, 0.9, 0.5),
-c(0.1, 0.7, 0.9, 0.8, 0.3),
-c(0.1, 0.6, 0.9, 0.9, 0.5)
+  c(0.1, 0.4, 0.6, 0.9, 0.5),
+  c(0.1, 0.7, 0.9, 0.8, 0.3),
+  c(0.1, 0.6, 0.9, 0.9, 0.5)
 ))
 op_in_top_k(targets, predictions, k = 3L)
 }\if{html}{\out{</div>}}

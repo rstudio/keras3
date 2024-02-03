@@ -5,12 +5,12 @@
 \title{Computes best recall where precision is >= specified value.}
 \usage{
 metric_recall_at_precision(
-...,
-precision,
-num_thresholds = 200L,
-class_id = NULL,
-name = NULL,
-dtype = NULL
+  ...,
+  precision,
+  num_thresholds = 200L,
+  class_id = NULL,
+  name = NULL,
+  dtype = NULL
 )
 }
 \arguments{
@@ -51,7 +51,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_recall_at_precision(precision = 0.8)
 m$update_state(c(0,   0,   1,   1),
-c(0, 0.5, 0.3, 0.9))
+               c(0, 0.5, 0.3, 0.9))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -61,8 +61,8 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0,   0,   1,   1),
-c(0, 0.5, 0.3, 0.9),
-sample_weight = c(1, 0, 0, 1))
+               c(0, 0.5, 0.3, 0.9),
+               sample_weight = c(1, 0, 0, 1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -73,9 +73,9 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-optimizer = 'sgd',
-loss = 'binary_crossentropy',
-metrics = list(metric_recall_at_precision(precision = 0.8))
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_recall_at_precision(precision = 0.8))
 )
 }\if{html}{\out{</div>}}
 }

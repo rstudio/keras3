@@ -7,21 +7,21 @@
 \title{A preprocessing layer which maps text features to integer sequences.}
 \usage{
 layer_text_vectorization(
-object,
-max_tokens = NULL,
-standardize = "lower_and_strip_punctuation",
-split = "whitespace",
-ngrams = NULL,
-output_mode = "int",
-output_sequence_length = NULL,
-pad_to_max_tokens = FALSE,
-vocabulary = NULL,
-idf_weights = NULL,
-sparse = FALSE,
-ragged = FALSE,
-encoding = "utf-8",
-name = NULL,
-...
+  object,
+  max_tokens = NULL,
+  standardize = "lower_and_strip_punctuation",
+  split = "whitespace",
+  ngrams = NULL,
+  output_mode = "int",
+  output_sequence_length = NULL,
+  pad_to_max_tokens = FALSE,
+  vocabulary = NULL,
+  idf_weights = NULL,
+  sparse = FALSE,
+  ragged = FALSE,
+  encoding = "utf-8",
+  name = NULL,
+  ...
 )
 
 get_vocabulary(object, include_special_tokens = TRUE)
@@ -203,9 +203,9 @@ splits on whitespace, strips punctuation, and outputs integer vocab indices.
 max_len <- 4  # Sequence length to pad the outputs to.
 # Create the layer.
 vectorize_layer <- layer_text_vectorization(
-max_tokens = max_tokens,
-output_mode = 'int',
-output_sequence_length = max_len)
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Now that the vocab layer has been created, call `adapt` on the
@@ -234,10 +234,10 @@ max_len <- 4  # Sequence length to pad the outputs to.
 # vocabulary arg a path to a file containing one vocabulary word per
 # line.
 vectorize_layer <- layer_text_vectorization(
-max_tokens = max_tokens,
-output_mode = 'int',
-output_sequence_length = max_len,
-vocabulary = vocab_data)
+    max_tokens = max_tokens,
+    output_mode = 'int',
+    output_sequence_length = max_len,
+    vocabulary = vocab_data)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Because we've passed the vocabulary directly, we don't need to adapt

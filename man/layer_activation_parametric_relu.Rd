@@ -5,12 +5,12 @@
 \title{Parametric Rectified Linear Unit activation layer.}
 \usage{
 layer_activation_parametric_relu(
-object,
-alpha_initializer = "Zeros",
-alpha_regularizer = NULL,
-alpha_constraint = NULL,
-shared_axes = NULL,
-...
+  object,
+  alpha_initializer = "Zeros",
+  alpha_regularizer = NULL,
+  alpha_constraint = NULL,
+  shared_axes = NULL,
+  ...
 )
 }
 \arguments{

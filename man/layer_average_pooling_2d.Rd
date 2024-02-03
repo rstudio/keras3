@@ -5,13 +5,13 @@
 \title{Average pooling operation for 2D spatial data.}
 \usage{
 layer_average_pooling_2d(
-object,
-pool_size,
-strides = NULL,
-padding = "valid",
-data_format = "channels_last",
-name = NULL,
-...
+  object,
+  pool_size,
+  strides = NULL,
+  padding = "valid",
+  data_format = "channels_last",
+  name = NULL,
+  ...
 )
 }
 \arguments{
@@ -82,9 +82,9 @@ The resulting output shape when using the \code{"same"} padding option is:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:9, "float32") |> op_reshape(c(1, 3, 3, 1))
 output <- x |>
-layer_average_pooling_2d(pool_size = c(2, 2),
-strides = c(1, 1),
-padding = "valid")
+  layer_average_pooling_2d(pool_size = c(2, 2),
+                           strides = c(1, 1),
+                           padding = "valid")
 output
 }\if{html}{\out{</div>}}
 
@@ -101,9 +101,9 @@ output
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:12, "float32") |> op_reshape(c(1, 3, 4, 1))
 output <- x |>
-layer_average_pooling_2d(pool_size = c(2, 2),
-strides = c(2, 2),
-padding = "valid")
+  layer_average_pooling_2d(pool_size = c(2, 2),
+                           strides = c(2, 2),
+                           padding = "valid")
 output
 }\if{html}{\out{</div>}}
 
@@ -117,9 +117,9 @@ output
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(1:9, "float32") |> op_reshape(c(1, 3, 3, 1))
 output <- x |>
-layer_average_pooling_2d(pool_size = c(2, 2),
-strides = c(1, 1),
-padding = "same")
+  layer_average_pooling_2d(pool_size = c(2, 2),
+                           strides = c(1, 1),
+                           padding = "same")
 output
 }\if{html}{\out{</div>}}
 

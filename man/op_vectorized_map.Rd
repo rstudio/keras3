@@ -16,7 +16,7 @@ Schematically, \code{vectorized_map} implements the following,
 in the case of a single tensor input \code{elements}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_vectorized_map <- function(elements, f) \{
-apply(elements, 1, f)
+  apply(elements, 1, f)
 \}
 }\if{html}{\out{</div>}}
 
@@ -24,12 +24,12 @@ In the case of an iterable of tensors \code{elements},
 it implements the following:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_vectorized_map <- function(elements, f) \{
-batch_size <- elements[[1]] |> shape() |> _[[1]]
-outputs <- vector("list", batch_size)
-outputs <- lapply(seq(batch_size), \\(index) \{
-f(lapply(elements, \\(e) e[index, all_dims()]))
-\}
-op_stack(outputs)
+    batch_size <- elements[[1]] |> shape() |> _[[1]]
+    outputs <- vector("list", batch_size)
+    outputs <- lapply(seq(batch_size), \\(index) \{
+        f(lapply(elements, \\(e) e[index, all_dims()]))
+    \}
+    op_stack(outputs)
 \}
 }\if{html}{\out{</div>}}
 

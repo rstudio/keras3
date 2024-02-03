@@ -26,7 +26,7 @@ Wrap \code{layer_conv_2d}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(1, 10, 10, 1))
 conv2d <- layer_spectral_normalization(
-layer = layer_conv_2d(filters = 2, kernel_size = 2)
+  layer = layer_conv_2d(filters = 2, kernel_size = 2)
 )
 y <- conv2d(x)
 shape(y)

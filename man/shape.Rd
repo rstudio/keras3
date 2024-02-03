@@ -121,8 +121,8 @@ encountered when tracing a function in graph mode, where an axis size might
 be unknown.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{tfn <- tensorflow::tf_function(function(x) \{
-print(op_shape(x))
-x
+  print(op_shape(x))
+  x
 \},
 input_signature = list(tensorflow::tf$TensorSpec(shape(1, NA, 3))))
 invisible(tfn(op_ones(shape(1, 2, 3))))
@@ -138,21 +138,21 @@ A useful pattern is to unpack the \code{shape()} with \verb{\%<-\%}, like this:
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{echo_print <- function(x) \{
-message("> ", deparse(substitute(x)));
-if(!is.null(x)) print(x)
+  message("> ", deparse(substitute(x)));
+  if(!is.null(x)) print(x)
 \}
 tfn <- tensorflow::tf_function(function(x) \{
-c(axis1, axis2, axis3) \%<-\% shape(x)
-echo_print(str(list(axis1 = axis1, axis2 = axis2, axis3 = axis3)))
+  c(axis1, axis2, axis3) \%<-\% shape(x)
+  echo_print(str(list(axis1 = axis1, axis2 = axis2, axis3 = axis3)))
 
-echo_print(shape(axis1))               # use axis1 tensor as axis value
-echo_print(shape(axis1, axis2, axis3)) # use axis1 tensor as axis value
+  echo_print(shape(axis1))               # use axis1 tensor as axis value
+  echo_print(shape(axis1, axis2, axis3)) # use axis1 tensor as axis value
 
-# use shape() to compose a new shape, e.g., in multihead attention
-n_heads <- 4
-echo_print(shape(axis1, axis2, n_heads, axis3/n_heads))
+  # use shape() to compose a new shape, e.g., in multihead attention
+  n_heads <- 4
+  echo_print(shape(axis1, axis2, n_heads, axis3/n_heads))
 
-x
+  x
 \},
 input_signature = list(tensorflow::tf$TensorSpec(shape(NA, 4, 16))))
 invisible(tfn(op_ones(shape(2, 4, 16))))

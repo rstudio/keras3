@@ -5,13 +5,13 @@
 \title{General N-D convolution transpose.}
 \usage{
 op_conv_transpose(
-inputs,
-kernel,
-strides,
-padding = "valid",
-output_padding = NULL,
-data_format = NULL,
-dilation_rate = 1L
+  inputs,
+  kernel,
+  strides,
+  padding = "valid",
+  output_padding = NULL,
+  data_format = NULL,
+  dilation_rate = 1L
 )
 }
 \arguments{

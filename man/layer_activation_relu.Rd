@@ -5,11 +5,11 @@
 \title{Rectified Linear Unit activation function layer.}
 \usage{
 layer_activation_relu(
-object,
-max_value = NULL,
-negative_slope = 0,
-threshold = 0,
-...
+  object,
+  max_value = NULL,
+  negative_slope = 0,
+  threshold = 0,
+  ...
 )
 }
 \arguments{
@@ -30,20 +30,20 @@ Defaults to \code{0.0}.}
 Formula:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{f <- function(x, max_value = Inf, negative_slope = 0, threshold = 0) \{
-x <- max(x,0)
-if (x >= max_value)
-max_value
-else if (threshold <= x && x < max_value)
-x
-else
-negative_slope * (x - threshold)
+ x <- max(x,0)
+ if (x >= max_value)
+   max_value
+ else if (threshold <= x && x < max_value)
+   x
+ else
+   negative_slope * (x - threshold)
 \}
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{relu_layer <- layer_activation_relu(max_value = 10,
-negative_slope = 0.5,
-threshold = 0)
+                                    negative_slope = 0.5,
+                                    threshold = 0)
 input <- array(c(-10, -5, 0.0, 5, 10))
 result <- relu_layer(input)
 as.array(result)

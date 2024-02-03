@@ -37,8 +37,8 @@ inputs[, 3, ] <- 0
 inputs[, 5, ] <- 0
 
 model <- keras_model_sequential() \%>\%
-layer_masking(mask_value = 0) \%>\%
-layer_lstm(32)
+  layer_masking(mask_value = 0) \%>\%
+  layer_lstm(32)
 
 output <- model(inputs)
 # The time step 3 and 5 will be skipped from LSTM calculation.

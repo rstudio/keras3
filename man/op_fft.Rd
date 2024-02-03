@@ -19,7 +19,7 @@ Computes the Fast Fourier Transform along last axis of input.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x = c(op_array(c(1., 2.)),
-op_array(c(0., 1.)))
+      op_array(c(0., 1.)))
 op_fft(x)
 }\if{html}{\out{</div>}}
 

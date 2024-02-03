@@ -5,10 +5,10 @@
 \title{A preprocessing layer which encodes integer features.}
 \usage{
 layer_category_encoding(
-object,
-num_tokens = NULL,
-output_mode = "multi_hot",
-...
+  object,
+  num_tokens = NULL,
+  output_mode = "multi_hot",
+  ...
 )
 }
 \arguments{
@@ -70,9 +70,9 @@ layer(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "multi_hot")
 x <- op_array(rbind(c(0, 1),
-c(0, 0),
-c(1, 2),
-c(3, 1)), "int32")
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
 layer(x)
 }\if{html}{\out{</div>}}
 
@@ -88,13 +88,13 @@ layer(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_category_encoding(num_tokens = 4, output_mode = "count")
 count_weights <- op_array(rbind(c(.1, .2),
-c(.1, .1),
-c(.2, .3),
-c(.4, .2)))
+                               c(.1, .1),
+                               c(.2, .3),
+                               c(.4, .2)))
 x <- op_array(rbind(c(0, 1),
-c(0, 0),
-c(1, 2),
-c(3, 1)), "int32")
+                   c(0, 0),
+                   c(1, 2),
+                   c(3, 1)), "int32")
 layer(x, count_weights = count_weights)
 #   array([[01, 02, 0. , 0. ],
 #          [02, 0. , 0. , 0. ],

@@ -5,14 +5,14 @@
 \title{Computes the cross-entropy loss between true labels and predicted labels.}
 \usage{
 loss_binary_crossentropy(
-y_true,
-y_pred,
-from_logits = FALSE,
-label_smoothing = 0,
-axis = -1L,
-...,
-reduction = "sum_over_batch_size",
-name = "binary_crossentropy"
+  y_true,
+  y_pred,
+  from_logits = FALSE,
+  label_smoothing = 0,
+  axis = -1L,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "binary_crossentropy"
 )
 }
 \arguments{
@@ -72,8 +72,8 @@ loss
 With \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-loss = loss_binary_crossentropy(from_logits=TRUE),
-...
+    loss = loss_binary_crossentropy(from_logits=TRUE),
+    ...
 )
 }\if{html}{\out{</div>}}
 

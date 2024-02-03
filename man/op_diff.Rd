@@ -39,7 +39,7 @@ op_diff(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(1, 3, 6, 10),
-c(0, 5, 6, 8)))
+                  c(0, 5, 6, 8)))
 op_diff(x)
 }\if{html}{\out{</div>}}
 

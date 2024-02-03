@@ -5,13 +5,13 @@
 \title{Create a Keras tensor (Functional API input).}
 \usage{
 keras_input(
-shape = NULL,
-batch_size = NULL,
-dtype = NULL,
-sparse = NULL,
-batch_shape = NULL,
-name = NULL,
-tensor = NULL
+  shape = NULL,
+  batch_size = NULL,
+  dtype = NULL,
+  sparse = NULL,
+  batch_shape = NULL,
+  name = NULL,
+  tensor = NULL
 )
 }
 \arguments{

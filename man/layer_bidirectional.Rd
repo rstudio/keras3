@@ -5,12 +5,12 @@
 \title{Bidirectional wrapper for RNNs.}
 \usage{
 layer_bidirectional(
-object,
-layer,
-merge_mode = "concat",
-weights = NULL,
-backward_layer = NULL,
-...
+  object,
+  layer,
+  merge_mode = "concat",
+  weights = NULL,
+  backward_layer = NULL,
+  ...
 )
 }
 \arguments{
@@ -76,24 +76,24 @@ instance will not reuse the weights state of the RNN layer instance -- the
 
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(5, 10)) \%>\%
-layer_bidirectional(layer_lstm(units = 10, return_sequences = TRUE)) \%>\%
-layer_bidirectional(layer_lstm(units = 10)) \%>\%
-layer_dense(5, activation = "softmax")
+  layer_bidirectional(layer_lstm(units = 10, return_sequences = TRUE)) \%>\%
+  layer_bidirectional(layer_lstm(units = 10)) \%>\%
+  layer_dense(5, activation = "softmax")
 
 model \%>\% compile(loss = "categorical_crossentropy",
-optimizer = "rmsprop")
+                  optimizer = "rmsprop")
 
 # With custom backward layer
 forward_layer <- layer_lstm(units = 10, return_sequences = TRUE)
 backward_layer <- layer_lstm(units = 10, activation = "relu",
-return_sequences = TRUE, go_backwards = TRUE)
+                             return_sequences = TRUE, go_backwards = TRUE)
 
 model <- keras_model_sequential(input_shape = c(5, 10)) \%>\%
-bidirectional(forward_layer, backward_layer = backward_layer) \%>\%
-layer_dense(5, activation = "softmax")
+  bidirectional(forward_layer, backward_layer = backward_layer) \%>\%
+  layer_dense(5, activation = "softmax")
 
 model \%>\% compile(loss = "categorical_crossentropy",
-optimizer = "rmsprop")
+                  optimizer = "rmsprop")
 }\if{html}{\out{</div>}}
 }
 

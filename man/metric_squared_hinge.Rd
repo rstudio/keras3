@@ -42,7 +42,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(0.6, 0.4), c(0.4, 0.6)),
-sample_weight = c(1, 0))
+               sample_weight = c(1, 0))
 m$result()
 }\if{html}{\out{</div>}}
 

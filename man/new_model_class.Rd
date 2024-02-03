@@ -5,19 +5,19 @@
 \title{Model}
 \usage{
 new_model_class(
-classname,
-initialize = NULL,
-call = NULL,
-train_step = NULL,
-predict_step = NULL,
-test_step = NULL,
-compute_loss = NULL,
-compute_metrics = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  initialize = NULL,
+  call = NULL,
+  train_step = NULL,
+  predict_step = NULL,
+  test_step = NULL,
+  compute_loss = NULL,
+  compute_metrics = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{

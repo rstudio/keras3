@@ -5,13 +5,13 @@
 \title{Generates output predictions for the input samples.}
 \usage{
 \method{predict}{keras.src.models.model.Model}(
-object,
-x,
-...,
-batch_size = NULL,
-verbose = getOption("keras.verbose", default = "auto"),
-steps = NULL,
-callbacks = NULL
+  object,
+  x,
+  ...,
+  batch_size = NULL,
+  verbose = getOption("keras.verbose", default = "auto"),
+  steps = NULL,
+  callbacks = NULL
 )
 }
 \arguments{

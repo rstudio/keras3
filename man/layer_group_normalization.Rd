@@ -5,19 +5,19 @@
 \title{Group normalization layer.}
 \usage{
 layer_group_normalization(
-object,
-groups = 32L,
-axis = -1L,
-epsilon = 0.001,
-center = TRUE,
-scale = TRUE,
-beta_initializer = "zeros",
-gamma_initializer = "ones",
-beta_regularizer = NULL,
-gamma_regularizer = NULL,
-beta_constraint = NULL,
-gamma_constraint = NULL,
-...
+  object,
+  groups = 32L,
+  axis = -1L,
+  epsilon = 0.001,
+  center = TRUE,
+  scale = TRUE,
+  beta_initializer = "zeros",
+  gamma_initializer = "ones",
+  beta_regularizer = NULL,
+  gamma_regularizer = NULL,
+  beta_constraint = NULL,
+  gamma_constraint = NULL,
+  ...
 )
 }
 \arguments{

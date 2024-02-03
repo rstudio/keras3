@@ -5,15 +5,15 @@
 \title{Instantiates the ConvNeXtSmall architecture.}
 \usage{
 application_convnext_small(
-model_name = "convnext_small",
-include_top = TRUE,
-include_preprocessing = TRUE,
-weights = "imagenet",
-input_tensor = NULL,
-input_shape = NULL,
-pooling = NULL,
-classes = 1000L,
-classifier_activation = "softmax"
+  model_name = "convnext_small",
+  include_top = TRUE,
+  include_preprocessing = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 }
 \arguments{

@@ -5,12 +5,12 @@
 \title{Applies the given transform(s) to the image(s).}
 \usage{
 op_image_affine_transform(
-image,
-transform,
-interpolation = "bilinear",
-fill_mode = "constant",
-fill_value = 0L,
-data_format = "channels_last"
+  image,
+  transform,
+  interpolation = "bilinear",
+  fill_mode = "constant",
+  fill_value = 0L,
+  data_format = "channels_last"
 )
 }
 \arguments{
@@ -68,7 +68,7 @@ Applies the given transform(s) to the image(s).
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 64, 80, 3)) # batch of 2 RGB images
 transform <- op_array(rbind(c(1.5, 0, -20, 0, 1.5, -16, 0, 0),  # zoom
-c(1, 0, -20, 0, 1, -16, 0, 0)))  # translation))
+                           c(1, 0, -20, 0, 1, -16, 0, 0)))  # translation))
 y <- op_image_affine_transform(x, transform)
 shape(y)
 }\if{html}{\out{</div>}}
@@ -95,8 +95,8 @@ shape(y)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 3, 64, 80)) # batch of 2 RGB images
 transform <- op_array(rbind(
-c(1.5, 0,-20, 0, 1.5,-16, 0, 0),  # zoom
-c(1, 0,-20, 0, 1,-16, 0, 0)  # translation
+  c(1.5, 0,-20, 0, 1.5,-16, 0, 0),  # zoom
+  c(1, 0,-20, 0, 1,-16, 0, 0)  # translation
 ))
 y <- op_image_affine_transform(x, transform, data_format = "channels_first")
 shape(y)

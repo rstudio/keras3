@@ -5,12 +5,12 @@
 \title{Pads sequences to the same length.}
 \usage{
 pad_sequences(
-sequences,
-maxlen = NULL,
-dtype = "int32",
-padding = "pre",
-truncating = "pre",
-value = 0
+  sequences,
+  maxlen = NULL,
+  dtype = "int32",
+  padding = "pre",
+  truncating = "pre",
+  value = 0
 )
 }
 \arguments{

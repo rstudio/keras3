@@ -5,10 +5,10 @@
 \title{Global average pooling operation for 2D data.}
 \usage{
 layer_global_average_pooling_2d(
-object,
-data_format = NULL,
-keepdims = FALSE,
-...
+  object,
+  data_format = NULL,
+  keepdims = FALSE,
+  ...
 )
 }
 \arguments{

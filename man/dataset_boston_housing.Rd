@@ -5,9 +5,9 @@
 \title{Boston housing price regression dataset}
 \usage{
 dataset_boston_housing(
-path = "boston_housing.npz",
-test_split = 0.2,
-seed = 113L
+  path = "boston_housing.npz",
+  test_split = 0.2,
+  seed = 113L
 )
 }
 \arguments{

@@ -5,14 +5,14 @@
 \title{Computes the crossentropy metric between the labels and predictions.}
 \usage{
 metric_sparse_categorical_crossentropy(
-y_true,
-y_pred,
-from_logits = FALSE,
-ignore_class = NULL,
-axis = -1L,
-...,
-name = "sparse_categorical_crossentropy",
-dtype = NULL
+  y_true,
+  y_pred,
+  from_logits = FALSE,
+  ignore_class = NULL,
+  axis = -1L,
+  ...,
+  name = "sparse_categorical_crossentropy",
+  dtype = NULL
 )
 }
 \arguments{
@@ -53,7 +53,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_crossentropy()
 m$update_state(c(1, 2),
-rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -63,8 +63,8 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(1, 2),
-rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
-sample_weight = c(0.3, 0.7))
+               rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
+               sample_weight = c(0.3, 0.7))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -78,9 +78,9 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_sparse_categorical_crossentropy()))
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_sparse_categorical_crossentropy()))
 }\if{html}{\out{</div>}}
 }
 

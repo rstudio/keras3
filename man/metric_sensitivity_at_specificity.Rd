@@ -5,12 +5,12 @@
 \title{Computes best sensitivity where specificity is >= specified value.}
 \usage{
 metric_sensitivity_at_specificity(
-...,
-specificity,
-num_thresholds = 200L,
-class_id = NULL,
-name = NULL,
-dtype = NULL
+  ...,
+  specificity,
+  num_thresholds = 200L,
+  class_id = NULL,
+  name = NULL,
+  dtype = NULL
 )
 }
 \arguments{
@@ -57,7 +57,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sensitivity_at_specificity(specificity = 0.5)
 m$update_state(c(0,   0,   0,   1,   1),
-c(0, 0.3, 0.8, 0.3, 0.8))
+               c(0, 0.3, 0.8, 0.3, 0.8))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -67,8 +67,8 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0,   0,   0,   1,   1),
-c(0, 0.3, 0.8, 0.3, 0.8),
-sample_weight = c(1, 1, 2, 2, 1))
+               c(0, 0.3, 0.8, 0.3, 0.8),
+               sample_weight = c(1, 1, 2, 2, 1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -79,9 +79,9 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-optimizer = 'sgd',
-loss = 'binary_crossentropy',
-metrics = list(metric_sensitivity_at_specificity())
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_sensitivity_at_specificity())
 )
 }\if{html}{\out{</div>}}
 }

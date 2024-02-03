@@ -5,14 +5,14 @@
 \title{A preprocessing layer which buckets continuous features by ranges.}
 \usage{
 layer_discretization(
-object,
-bin_boundaries = NULL,
-num_bins = NULL,
-epsilon = 0.01,
-output_mode = "int",
-sparse = FALSE,
-dtype = NULL,
-name = NULL
+  object,
+  bin_boundaries = NULL,
+  num_bins = NULL,
+  epsilon = 0.01,
+  output_mode = "int",
+  sparse = FALSE,
+  dtype = NULL,
+  name = NULL
 )
 }
 \arguments{
@@ -89,9 +89,9 @@ Same as input shape.
 Discretize float values based on provided buckets.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- op_array(rbind(c(-1.5, 1, 3.4, 0.5),
-c(0, 3, 1.3, 0),
-c(-.5, 0, .5, 1),
-c(1.5, 2, 2.5, 3)))
+                       c(0, 3, 1.3, 0),
+                       c(-.5, 0, .5, 1),
+                       c(1.5, 2, 2.5, 3)))
 output <- input |> layer_discretization(bin_boundaries = c(0, 1, 2))
 output
 }\if{html}{\out{</div>}}

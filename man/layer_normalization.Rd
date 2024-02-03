@@ -5,12 +5,12 @@
 \title{A preprocessing layer that normalizes continuous features.}
 \usage{
 layer_normalization(
-object,
-axis = -1L,
-mean = NULL,
-variance = NULL,
-invert = FALSE,
-...
+  object,
+  axis = -1L,
+  mean = NULL,
+  variance = NULL,
+  invert = FALSE,
+  ...
 )
 }
 \arguments{
@@ -73,9 +73,9 @@ layer(input_data)
 Calculate a mean and variance for each index on the last axis.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(rbind(c(0., 7., 4.),
-c(2., 9., 6.),
-c(0., 7., 4.),
-c(2., 9., 6.)), dtype='float32')
+                       c(2., 9., 6.),
+                       c(0., 7., 4.),
+                       c(2., 9., 6.)), dtype='float32')
 input_data <- op_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
 layer <- layer_normalization(axis=-1)
 layer \%>\% adapt(adapt_data)
@@ -103,9 +103,9 @@ layer(input_data)
 Use the layer to de-normalize inputs (after adapting the layer).
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(rbind(c(0., 7., 4.),
-c(2., 9., 6.),
-c(0., 7., 4.),
-c(2., 9., 6.)), dtype='float32')
+                       c(2., 9., 6.),
+                       c(0., 7., 4.),
+                       c(2., 9., 6.)), dtype='float32')
 input_data <- op_array(c(1., 2., 3.), dtype='float32')
 layer <- layer_normalization(axis=-1, invert=TRUE)
 layer \%>\% adapt(adapt_data)

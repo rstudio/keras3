@@ -5,10 +5,10 @@
 \title{Initializer that adapts its scale to the shape of its input tensors.}
 \usage{
 initializer_variance_scaling(
-scale = 1,
-mode = "fan_in",
-distribution = "truncated_normal",
-seed = NULL
+  scale = 1,
+  mode = "fan_in",
+  distribution = "truncated_normal",
+  seed = NULL
 )
 }
 \arguments{
@@ -44,13 +44,13 @@ within \verb{[-limit, limit]}, where \code{limit = sqrt(3 * scale / n)}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
 initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
-distribution = 'uniform')
+                                            distribution = 'uniform')
 values <- initializer(shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
 initializer <- initializer_variance_scaling(scale = 0.1, mode = 'fan_in',
-distribution = 'uniform')
+                                            distribution = 'uniform')
 layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }\if{html}{\out{</div>}}
 }

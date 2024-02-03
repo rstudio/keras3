@@ -22,7 +22,7 @@ Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(1, 2),
-c(3, 4)))
+                   c(3, 4)))
 op_unstack(x, axis=1)
 }\if{html}{\out{</div>}}
 
@@ -46,7 +46,7 @@ op_unstack(x, axis=1)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_unstack(x),
-op_unstack(x, axis = 1))
+          op_unstack(x, axis = 1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE
@@ -54,7 +54,7 @@ op_unstack(x, axis = 1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_unstack(x, axis = -1),
-op_unstack(x, axis = 2))
+          op_unstack(x, axis = 2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] TRUE

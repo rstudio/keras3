@@ -5,11 +5,11 @@
 \title{Computes the mean squared logarithmic error between \code{y_true} and \code{y_pred}.}
 \usage{
 loss_mean_squared_logarithmic_error(
-y_true,
-y_pred,
-...,
-reduction = "sum_over_batch_size",
-name = "mean_squared_logarithmic_error"
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "mean_squared_logarithmic_error"
 )
 }
 \arguments{

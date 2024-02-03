@@ -5,26 +5,26 @@
 \title{Define a custom \code{Callback} class}
 \usage{
 Callback(
-classname,
-on_epoch_begin = NULL,
-on_epoch_end = NULL,
-on_train_begin = NULL,
-on_train_end = NULL,
-on_train_batch_begin = NULL,
-on_train_batch_end = NULL,
-on_test_begin = NULL,
-on_test_end = NULL,
-on_test_batch_begin = NULL,
-on_test_batch_end = NULL,
-on_predict_begin = NULL,
-on_predict_end = NULL,
-on_predict_batch_begin = NULL,
-on_predict_batch_end = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  on_epoch_begin = NULL,
+  on_epoch_end = NULL,
+  on_train_begin = NULL,
+  on_train_end = NULL,
+  on_train_batch_begin = NULL,
+  on_train_batch_end = NULL,
+  on_test_begin = NULL,
+  on_test_end = NULL,
+  on_test_batch_begin = NULL,
+  on_test_batch_end = NULL,
+  on_predict_begin = NULL,
+  on_predict_end = NULL,
+  on_predict_batch_begin = NULL,
+  on_predict_batch_end = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{
@@ -278,16 +278,16 @@ override the method associated with the stage of interest.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{training_finished <- FALSE
 callback_mark_finished <- Callback("MarkFinished",
-on_train_end = function(logs = NULL) \{
-training_finished <<- TRUE
-\}
+  on_train_end = function(logs = NULL) \{
+    training_finished <<- TRUE
+  \}
 )
 
 model <- keras_model_sequential(input_shape = c(1)) |>
-layer_dense(1)
+  layer_dense(1)
 model |> compile(loss = 'mean_squared_error')
 model |> fit(op_ones(c(1, 1)), op_ones(c(1, 1)),
-callbacks = callback_mark_finished())
+             callbacks = callback_mark_finished())
 stopifnot(isTRUE(training_finished))
 }\if{html}{\out{</div>}}
 

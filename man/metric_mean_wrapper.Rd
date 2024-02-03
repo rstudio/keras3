@@ -25,7 +25,7 @@ the average metric value across all samples seen so far.
 For example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{mse <- function(y_true, y_pred) \{
-(y_true - y_pred)^2
+  (y_true - y_pred)^2
 \}
 
 mse_metric <- metric_mean_wrapper(fn = mse)

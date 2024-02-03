@@ -5,11 +5,11 @@
 \title{Computes Kullback-Leibler divergence loss between \code{y_true} & \code{y_pred}.}
 \usage{
 loss_kl_divergence(
-y_true,
-y_pred,
-...,
-reduction = "sum_over_batch_size",
-name = "kl_divergence"
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "kl_divergence"
 )
 }
 \arguments{

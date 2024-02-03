@@ -39,8 +39,8 @@ Note the order of the parameters. \code{arctan2} is defined also when x2 = 0 and
 at several other points, obtaining values in the range \verb{[-pi, pi]}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_arctan2(
-op_array(c(1, -1)),
-op_array(c(0, 0))
+    op_array(c(1, -1)),
+    op_array(c(0, 0))
 )
 }\if{html}{\out{</div>}}
 
@@ -49,8 +49,8 @@ op_array(c(0, 0))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_arctan2(
-op_array(c(0, 0, Inf)),
-op_array(c(+0, -0, Inf))
+    op_array(c(0, 0, Inf)),
+    op_array(c(+0, -0, Inf))
 )
 }\if{html}{\out{</div>}}
 

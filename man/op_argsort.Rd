@@ -32,8 +32,8 @@ op_argsort(x)
 Two-dimensional array:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(0, 3),
-c(3, 2),
-c(4, 5)), dtype = "int32")
+                   c(3, 2),
+                   c(4, 5)), dtype = "int32")
 op_argsort(x, axis = 1)
 }\if{html}{\out{</div>}}
 

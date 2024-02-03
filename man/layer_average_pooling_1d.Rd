@@ -5,13 +5,13 @@
 \title{Average pooling for temporal data.}
 \usage{
 layer_average_pooling_1d(
-object,
-pool_size,
-strides = NULL,
-padding = "valid",
-data_format = NULL,
-name = NULL,
-...
+  object,
+  pool_size,
+  strides = NULL,
+  padding = "valid",
+  data_format = NULL,
+  name = NULL,
+  ...
 )
 }
 \arguments{
@@ -71,9 +71,9 @@ The resulting output shape when using the "same" padding option is:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(1., 2., 3., 4., 5.)) |> op_reshape(c(1, 5, 1))
 output <- x |>
-layer_average_pooling_1d(pool_size = 2,
-strides = 1,
-padding = "valid")
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 1,
+                           padding = "valid")
 output
 }\if{html}{\out{</div>}}
 
@@ -89,9 +89,9 @@ output
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(1., 2., 3., 4., 5.)) |> op_reshape(c(1, 5, 1))
 output <- x |>
-layer_average_pooling_1d(pool_size = 2,
-strides = 2,
-padding = "valid")
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 2,
+                           padding = "valid")
 output
 }\if{html}{\out{</div>}}
 
@@ -105,9 +105,9 @@ output
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(1., 2., 3., 4., 5.)) |> op_reshape(c(1, 5, 1))
 output <- x |>
-layer_average_pooling_1d(pool_size = 2,
-strides = 1,
-padding = "same")
+  layer_average_pooling_1d(pool_size = 2,
+                           strides = 1,
+                           padding = "same")
 output
 }\if{html}{\out{</div>}}
 

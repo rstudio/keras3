@@ -5,14 +5,14 @@
 \title{Computes the Intersection-Over-Union metric for one-hot encoded labels.}
 \usage{
 metric_one_hot_iou(
-...,
-num_classes,
-target_class_ids,
-name = NULL,
-dtype = NULL,
-ignore_class = NULL,
-sparse_y_pred = FALSE,
-axis = -1L
+  ...,
+  num_classes,
+  target_class_ids,
+  name = NULL,
+  dtype = NULL,
+  ignore_class = NULL,
+  sparse_y_pred = FALSE,
+  axis = -1L
 )
 }
 \arguments{
@@ -74,11 +74,11 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
 y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
-c(0.1, 0.4, 0.5))
+                c(0.1, 0.4, 0.5))
 sample_weight <- c(0.1, 0.2, 0.3, 0.4)
 m <- metric_one_hot_iou(num_classes = 3, target_class_ids = c(0, 2))
 m$update_state(
-y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
+    y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -89,12 +89,12 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_one_hot_iou(
-num_classes = 3L,
-target_class_id = list(1L)
-))
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_one_hot_iou(
+    num_classes = 3L,
+    target_class_id = list(1L)
+  ))
 )
 }\if{html}{\out{</div>}}
 }

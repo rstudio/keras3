@@ -5,11 +5,11 @@
 \title{Resize images to size using the specified interpolation method.}
 \usage{
 op_image_resize(
-image,
-size,
-interpolation = "bilinear",
-antialias = FALSE,
-data_format = "channels_last"
+  image,
+  size,
+  interpolation = "bilinear",
+  antialias = FALSE,
+  data_format = "channels_last"
 )
 }
 \arguments{

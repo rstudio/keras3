@@ -28,27 +28,27 @@ block of code, and is automatically recognized when loading saved models.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# define custom metric
 metric_top_3_categorical_accuracy <-
-custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) \{
-metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
-\})
+  custom_metric("top_3_categorical_accuracy", function(y_true, y_pred) \{
+    metric_top_k_categorical_accuracy(y_true, y_pred, k = 3)
+  \})
 
 with_custom_object_scope(c(top_k_acc = sparse_top_k_cat_acc), \{
 
-# ...define model...
+  # ...define model...
 
-# compile model (refer to "top_k_acc" by name)
-model |> compile(
-loss = "binary_crossentropy",
-optimizer = optimizer_nadam(),
-metrics = c("top_k_acc")
-)
+  # compile model (refer to "top_k_acc" by name)
+  model |> compile(
+    loss = "binary_crossentropy",
+    optimizer = optimizer_nadam(),
+    metrics = c("top_k_acc")
+  )
 
-# save the model
-model |> save_model("my_model.keras")
+  # save the model
+  model |> save_model("my_model.keras")
 
-# loading the model within the custom object scope doesn't
-# require explicitly providing the custom_object
-reloaded_model <- load_model("my_model.keras")
+  # loading the model within the custom object scope doesn't
+  # require explicitly providing the custom_object
+  reloaded_model <- load_model("my_model.keras")
 \})
 }\if{html}{\out{</div>}}
 }

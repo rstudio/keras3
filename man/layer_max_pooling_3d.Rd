@@ -5,13 +5,13 @@
 \title{Max pooling operation for 3D data (spatial or spatio-temporal).}
 \usage{
 layer_max_pooling_3d(
-object,
-pool_size = list(2L, 2L, 2L),
-strides = NULL,
-padding = "valid",
-data_format = NULL,
-name = NULL,
-...
+  object,
+  pool_size = list(2L, 2L, 2L),
+  strides = NULL,
+  padding = "valid",
+  data_format = NULL,
+  name = NULL,
+  ...
 )
 }
 \arguments{

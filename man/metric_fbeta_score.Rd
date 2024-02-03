@@ -5,12 +5,12 @@
 \title{Computes F-Beta score.}
 \usage{
 metric_fbeta_score(
-...,
-average = NULL,
-beta = 1,
-threshold = NULL,
-name = "fbeta_score",
-dtype = NULL
+  ...,
+  average = NULL,
+  beta = 1,
+  threshold = NULL,
+  name = "fbeta_score",
+  dtype = NULL
 )
 }
 \arguments{
@@ -62,11 +62,11 @@ and multi-label classification.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{metric <- metric_fbeta_score(beta = 2.0, threshold = 0.5)
 y_true <- rbind(c(1, 1, 1),
-c(1, 0, 0),
-c(1, 1, 0))
+                c(1, 0, 0),
+                c(1, 1, 0))
 y_pred <- rbind(c(0.2, 0.6, 0.7),
-c(0.2, 0.6, 0.6),
-c(0.6, 0.8, 0.0))
+                c(0.2, 0.6, 0.6),
+                c(0.6, 0.8, 0.0))
 metric$update_state(y_true, y_pred)
 metric$result()
 }\if{html}{\out{</div>}}

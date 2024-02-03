@@ -1179,11 +1179,18 @@ where a certain performance threshold is exceeded</li>
 as:</p>
 <ul>
 <li>
-<li>metrics.</li>
+<code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code>: Periodically save the
+model.</li>
 <li>
-<a href="https://www.tensorflow.org/tensorboard" class="external-link">TensorBoard</a>
-(more details in the section “Visualization”).</li>
+<code><a href="../reference/callback_early_stopping.html">callback_early_stopping()</a></code>: Stop training when training
+is no longer improving the validation metrics.</li>
 <li>
+<code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>: periodically write model logs
+that can be visualized in <a href="https://www.tensorflow.org/tensorboard" class="external-link">TensorBoard</a> (more
+details in the section “Visualization”).</li>
+<li>
+<code><a href="../reference/callback_csv_logger.html">callback_csv_logger()</a></code>: streams loss and metrics data to
+a CSV file.</li>
 <li>etc.</li>
 </ul>
 <p>See the <a href="https://keras.posit.co/reference/index.html#callbacks">callbacks
@@ -1224,7 +1231,8 @@ training:</p>
 </h2>
 <p>When you’re training model on relatively large datasets, it’s crucial
 to save checkpoints of your model at frequent intervals.</p>
-<p>The easiest way to achieve this is with <a href="Periodically%20save%20the%20model."><code>callback_model_checkpoint()</code></a>:</p>
+<p>The easiest way to achieve this is with
+[<code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code>]:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
@@ -1363,7 +1371,8 @@ launch TensorBoard from the command line:</p>
 <h3 id="using-the-tensorboard-callback">Using the TensorBoard callback<a class="anchor" aria-label="anchor" href="#using-the-tensorboard-callback"></a>
 </h3>
 <p>The easiest way to use TensorBoard with a Keras model and the
-<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> method is with <a href="periodically%20write%20model%20logs%20that%20can%20be%20visualized%20in"><code>callback_tensorboard()</code></a>.</p>
+<code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> method is with
+[<code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>].</p>
 <p>In the simplest case, just specify where you want the callback to
 write logs, and you’re good to go:</p>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">

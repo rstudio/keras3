@@ -5,15 +5,15 @@
 \title{Subclass the base \code{Metric} class}
 \usage{
 Metric(
-classname,
-initialize = NULL,
-update_state = NULL,
-result = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  initialize = NULL,
+  update_state = NULL,
+  result = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{
@@ -44,9 +44,9 @@ returned by custom metrics defined with \code{Metric()}.
 \subsection{Usage with \code{compile()}:}{
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
 )
 }\if{html}{\out{</div>}}
 }
@@ -55,12 +55,12 @@ metrics = c(metric_SOME_METRIC(), metric_SOME_OTHER_METRIC())
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_SOME_METRIC()
 for (e in seq(epochs)) \{
-for (i in seq(train_steps)) \{
-c(y_true, y_pred, sample_weight = NULL) \%<-\% ...
-m$update_state(y_true, y_pred, sample_weight)
-\}
-cat('Final epoch result: ', as.numeric(m$result()), "\\n")
-m$reset_state()
+  for (i in seq(train_steps)) \{
+    c(y_true, y_pred, sample_weight = NULL) \%<-\% ...
+    m$update_state(y_true, y_pred, sample_weight)
+  \}
+  cat('Final epoch result: ', as.numeric(m$result()), "\\n")
+  m$reset_state()
 \}
 }\if{html}{\out{</div>}}
 }
@@ -71,13 +71,13 @@ m$reset_state()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential()
 model |>
-layer_dense(64, activation = "relu") |>
-layer_dense(64, activation = "relu") |>
-layer_dense(10, activation = "softmax")
+  layer_dense(64, activation = "relu") |>
+  layer_dense(64, activation = "relu") |>
+  layer_dense(10, activation = "softmax")
 model |>
-compile(optimizer = optimizer_rmsprop(0.01),
-loss = loss_categorical_crossentropy(),
-metrics = metric_categorical_accuracy())
+  compile(optimizer = optimizer_rmsprop(0.01),
+          loss = loss_categorical_crossentropy(),
+          metrics = metric_categorical_accuracy())
 
 data <- random_uniform(c(1000, 32))
 labels <- random_uniform(c(1000, 10))
@@ -98,37 +98,37 @@ for the metric from the state variables.
 Example subclass implementation:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{metric_binary_true_positives <- Metric(
-classname = "BinaryTruePositives",
+  classname = "BinaryTruePositives",
 
-initialize = function(name = 'binary_true_positives', ...) \{
-super$initialize(name = name, ...)
-self$true_positives <-
-self$add_weight(shape = shape(),
-initializer = 'zeros',
-name = 'true_positives')
-\},
+  initialize = function(name = 'binary_true_positives', ...) \{
+    super$initialize(name = name, ...)
+    self$true_positives <-
+      self$add_weight(shape = shape(),
+                      initializer = 'zeros',
+                      name = 'true_positives')
+  \},
 
-update_state = function(y_true, y_pred, sample_weight = NULL) \{
-y_true <- op_cast(y_true, "bool")
-y_pred <- op_cast(y_pred, "bool")
+  update_state = function(y_true, y_pred, sample_weight = NULL) \{
+    y_true <- op_cast(y_true, "bool")
+    y_pred <- op_cast(y_pred, "bool")
 
-values <- y_true & y_pred # `&` calls op_logical_and()
-values <- op_cast(values, self$dtype)
-if (!is.null(sample_weight)) \{
-sample_weight <- op_cast(sample_weight, self$dtype)
-sample_weight <- op_broadcast_to(sample_weight, shape(values))
-values <- values * sample_weight # `*` calls op_multiply()
-\}
-self$true_positives$assign(self$true_positives + op_sum(values))
-\},
+    values <- y_true & y_pred # `&` calls op_logical_and()
+    values <- op_cast(values, self$dtype)
+    if (!is.null(sample_weight)) \{
+      sample_weight <- op_cast(sample_weight, self$dtype)
+      sample_weight <- op_broadcast_to(sample_weight, shape(values))
+      values <- values * sample_weight # `*` calls op_multiply()
+    \}
+    self$true_positives$assign(self$true_positives + op_sum(values))
+  \},
 
-result = function() \{
-self$true_positives
-\}
+  result = function() \{
+    self$true_positives
+  \}
 )
 model <- keras_model_sequential(input_shape = 32) |> layer_dense(10)
 model |> compile(loss = loss_binary_crossentropy(),
-metrics = list(metric_binary_true_positives()))
+                 metrics = list(metric_binary_true_positives()))
 model |> fit(data, labels, verbose = 0)
 }\if{html}{\out{</div>}}
 }
@@ -144,8 +144,8 @@ model |> fit(data, labels, verbose = 0)
 Calling a metric instance self like \code{m(...)} is equivalent to calling:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{function(...) \{
-m$update_state(...)
-m$result()
+  m$update_state(...)
+  m$result()
 \}
 }\if{html}{\out{</div>}}
 \item

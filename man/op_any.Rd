@@ -35,7 +35,7 @@ op_any(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_reshape(c(FALSE, FALSE, FALSE,
-TRUE, FALSE, FALSE), c(2, 3)))
+                  TRUE, FALSE, FALSE), c(2, 3)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(

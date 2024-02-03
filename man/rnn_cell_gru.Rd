@@ -5,24 +5,24 @@
 \title{Cell class for the GRU layer.}
 \usage{
 rnn_cell_gru(
-units,
-activation = "tanh",
-recurrent_activation = "sigmoid",
-use_bias = TRUE,
-kernel_initializer = "glorot_uniform",
-recurrent_initializer = "orthogonal",
-bias_initializer = "zeros",
-kernel_regularizer = NULL,
-recurrent_regularizer = NULL,
-bias_regularizer = NULL,
-kernel_constraint = NULL,
-recurrent_constraint = NULL,
-bias_constraint = NULL,
-dropout = 0,
-recurrent_dropout = 0,
-reset_after = TRUE,
-seed = NULL,
-...
+  units,
+  activation = "tanh",
+  recurrent_activation = "sigmoid",
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  dropout = 0,
+  recurrent_dropout = 0,
+  reset_after = TRUE,
+  seed = NULL,
+  ...
 )
 }
 \arguments{
@@ -107,9 +107,9 @@ shape(outputs)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(
-cell = rnn_cell_gru(4),
-return_sequences=TRUE,
-return_state=TRUE)
+   cell = rnn_cell_gru(4),
+   return_sequences=TRUE,
+   return_state=TRUE)
 c(whole_sequence_output, final_state) \%<-\% rnn(inputs)
 shape(whole_sequence_output)
 }\if{html}{\out{</div>}}

@@ -6,14 +6,14 @@
 \title{IMDB Movie reviews sentiment classification}
 \usage{
 dataset_imdb(
-path = "imdb.npz",
-num_words = NULL,
-skip_top = 0L,
-maxlen = NULL,
-seed = 113L,
-start_char = 1L,
-oov_char = 2L,
-index_from = 3L
+  path = "imdb.npz",
+  num_words = NULL,
+  skip_top = 0L,
+  maxlen = NULL,
+  seed = 113L,
+  start_char = 1L,
+  oov_char = 2L,
+  index_from = 3L
 )
 
 dataset_imdb_word_index(path = "imdb_word_index.json")

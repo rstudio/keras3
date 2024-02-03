@@ -23,10 +23,10 @@ the optimizer.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
 # and decreases it exponentially after that.
 scheduler <- function(epoch, lr) \{
-if (epoch < 10)
-return(lr)
-else
-return(lr * exp(-0.1))
+  if (epoch < 10)
+    return(lr)
+  else
+    return(lr * exp(-0.1))
 \}
 
 model <- keras_model_sequential() |> layer_dense(units = 10)
@@ -40,8 +40,8 @@ model$optimizer$learning_rate |> as.array() |> round(5)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_learning_rate_scheduler(schedule = scheduler)
 history <- model |> fit(x = array(runif(100), c(5, 20)),
-y = array(0, c(5, 1)),
-epochs = 15, callbacks = list(callback), verbose = 0)
+                        y = array(0, c(5, 1)),
+                        epochs = 15, callbacks = list(callback), verbose = 0)
 model$optimizer$learning_rate |> as.array() |> round(5)
 }\if{html}{\out{</div>}}
 

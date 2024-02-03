@@ -5,14 +5,14 @@
 \title{Install Keras}
 \usage{
 install_keras(
-envname = "r-keras",
-...,
-extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython",
-"tensorflow_datasets"),
-python_version = ">=3.9,<=3.11",
-backend = "tensorflow",
-gpu = NA,
-restart_session = TRUE
+  envname = "r-keras",
+  ...,
+  extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython",
+    "tensorflow_datasets"),
+  python_version = ">=3.9,<=3.11",
+  backend = "tensorflow",
+  gpu = NA,
+  restart_session = TRUE
 )
 }
 \arguments{

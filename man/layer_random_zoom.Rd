@@ -5,15 +5,15 @@
 \title{A preprocessing layer which randomly zooms images during training.}
 \usage{
 layer_random_zoom(
-object,
-height_factor,
-width_factor = NULL,
-fill_mode = "reflect",
-interpolation = "bilinear",
-seed = NULL,
-fill_value = 0,
-data_format = NULL,
-...
+  object,
+  height_factor,
+  width_factor = NULL,
+  fill_mode = "reflect",
+  interpolation = "bilinear",
+  seed = NULL,
+  fill_value = 0,
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

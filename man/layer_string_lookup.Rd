@@ -5,21 +5,21 @@
 \title{A preprocessing layer that maps strings to (possibly encoded) indices.}
 \usage{
 layer_string_lookup(
-object,
-max_tokens = NULL,
-num_oov_indices = 1L,
-mask_token = NULL,
-oov_token = "[UNK]",
-vocabulary = NULL,
-idf_weights = NULL,
-invert = FALSE,
-output_mode = "int",
-pad_to_max_tokens = FALSE,
-sparse = FALSE,
-encoding = "utf-8",
-name = NULL,
-...,
-vocabulary_dtype = NULL
+  object,
+  max_tokens = NULL,
+  num_oov_indices = 1L,
+  mask_token = NULL,
+  oov_token = "[UNK]",
+  vocabulary = NULL,
+  idf_weights = NULL,
+  invert = FALSE,
+  output_mode = "int",
+  pad_to_max_tokens = FALSE,
+  sparse = FALSE,
+  encoding = "utf-8",
+  name = NULL,
+  ...,
+  vocabulary_dtype = NULL
 )
 }
 \arguments{

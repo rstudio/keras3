@@ -5,11 +5,11 @@
 \title{Computes the mean absolute percentage error between \code{y_true} and \code{y_pred}.}
 \usage{
 loss_mean_absolute_percentage_error(
-y_true,
-y_pred,
-...,
-reduction = "sum_over_batch_size",
-name = "mean_absolute_percentage_error"
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "mean_absolute_percentage_error"
 )
 }
 \arguments{
@@ -32,7 +32,7 @@ Mean absolute percentage error values with shape = \verb{[batch_size, d0, ..dN-1
 Formula:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- 100 * op_mean(op_abs((y_true - y_pred) / y_true),
-axis=-1)
+                      axis=-1)
 }\if{html}{\out{</div>}}
 
 Division by zero is prevented by dividing by \code{max(y_true, epsilon)}

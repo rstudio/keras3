@@ -5,22 +5,22 @@
 \title{Multi Head Attention layer.}
 \usage{
 layer_multi_head_attention(
-inputs,
-num_heads,
-key_dim,
-value_dim = NULL,
-dropout = 0,
-use_bias = TRUE,
-output_shape = NULL,
-attention_axes = NULL,
-kernel_initializer = "glorot_uniform",
-bias_initializer = "zeros",
-kernel_regularizer = NULL,
-bias_regularizer = NULL,
-activity_regularizer = NULL,
-kernel_constraint = NULL,
-bias_constraint = NULL,
-...
+  inputs,
+  num_heads,
+  key_dim,
+  value_dim = NULL,
+  dropout = 0,
+  use_bias = TRUE,
+  output_shape = NULL,
+  attention_axes = NULL,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  ...
 )
 }
 \arguments{

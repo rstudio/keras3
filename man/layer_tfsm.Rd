@@ -5,13 +5,13 @@
 \title{Reload a Keras model/layer that was saved via \code{export_savedmodel()}.}
 \usage{
 layer_tfsm(
-object,
-filepath,
-call_endpoint = "serve",
-call_training_endpoint = NULL,
-trainable = TRUE,
-name = NULL,
-dtype = NULL
+  object,
+  filepath,
+  call_endpoint = "serve",
+  call_training_endpoint = NULL,
+  trainable = TRUE,
+  name = NULL,
+  dtype = NULL
 )
 }
 \arguments{
@@ -48,8 +48,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   140135859840848: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   140135859843344: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   139711596787664: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   139711064487504: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 

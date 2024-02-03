@@ -31,17 +31,17 @@ See the package website at \url{https://keras.posit.co} for complete documentati
 \seealso{
 Useful links:
 \itemize{
-\item \url{https://keras.posit.co/}
-\item \url{https://github.com/rstudio/keras}
-\item Report bugs at \url{https://github.com/rstudio/keras/issues}
+  \item \url{https://keras.posit.co/}
+  \item \url{https://github.com/rstudio/keras}
+  \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 
 
 Useful links:
 \itemize{
-\item \url{https://keras.posit.co/}
-\item \url{https://github.com/rstudio/keras}
-\item Report bugs at \url{https://github.com/rstudio/keras/issues}
+  \item \url{https://keras.posit.co/}
+  \item \url{https://github.com/rstudio/keras}
+  \item Report bugs at \url{https://github.com/rstudio/keras/issues}
 }
 
 }
@@ -50,19 +50,19 @@ Useful links:
 
 Authors:
 \itemize{
-\item JJ Allaire [copyright holder]
-\item François Chollet [copyright holder]
+  \item JJ Allaire [copyright holder]
+  \item François Chollet [copyright holder]
 }
 
 Other contributors: \cr
 \itemize{
-\item Daniel Falbel \email{daniel@posit.co} [contributor, copyright holder]
-\item Posit Software, PBC [copyright holder, funder]
-\item Google [copyright holder, funder]
-\item Yuan Tang \email{terrytangyuan@gmail.com} (\href{https://orcid.org/0000-0001-5243-233X}{ORCID}) [contributor, copyright holder]
-\item Wouter Van Der Bijl [contributor, copyright holder]
-\item Martin Studer [contributor, copyright holder]
-\item Sigrid Keydana [contributor]
+  \item Daniel Falbel \email{daniel@posit.co} [contributor, copyright holder]
+  \item Posit Software, PBC [copyright holder, funder]
+  \item Google [copyright holder, funder]
+  \item Yuan Tang \email{terrytangyuan@gmail.com} (\href{https://orcid.org/0000-0001-5243-233X}{ORCID}) [contributor, copyright holder]
+  \item Wouter Van Der Bijl [contributor, copyright holder]
+  \item Martin Studer [contributor, copyright holder]
+  \item Sigrid Keydana [contributor]
 }
 
 }

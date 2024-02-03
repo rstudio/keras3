@@ -5,11 +5,11 @@
 \title{Computes R2 score.}
 \usage{
 metric_r2_score(
-...,
-class_aggregation = "uniform_average",
-num_regressors = 0L,
-name = "r2_score",
-dtype = NULL
+  ...,
+  class_aggregation = "uniform_average",
+  num_regressors = 0L,
+  name = "r2_score",
+  dtype = NULL
 )
 }
 \arguments{

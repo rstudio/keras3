@@ -15,15 +15,15 @@
 \title{One-stop utility for preprocessing and encoding structured data.}
 \usage{
 layer_feature_space(
-object,
-features,
-output_mode = "concat",
-crosses = NULL,
-crossing_dim = 32L,
-hashing_dim = 32L,
-num_discretization_bins = 32L,
-name = NULL,
-feature_names = NULL
+  object,
+  features,
+  output_mode = "concat",
+  crosses = NULL,
+  crossing_dim = 32L,
+  hashing_dim = 32L,
+  num_discretization_bins = 32L,
+  name = NULL,
+  feature_names = NULL
 )
 
 feature_cross(feature_names, crossing_dim, output_mode = "one_hot")
@@ -37,24 +37,24 @@ feature_float_rescaled(scale = 1, offset = 0, name = NULL)
 feature_float_normalized(name = NULL)
 
 feature_float_discretized(
-num_bins,
-bin_boundaries = NULL,
-output_mode = "one_hot",
-name = NULL
+  num_bins,
+  bin_boundaries = NULL,
+  output_mode = "one_hot",
+  name = NULL
 )
 
 feature_integer_categorical(
-max_tokens = NULL,
-num_oov_indices = 1,
-output_mode = "one_hot",
-name = NULL
+  max_tokens = NULL,
+  num_oov_indices = 1,
+  output_mode = "one_hot",
+  name = NULL
 )
 
 feature_string_categorical(
-max_tokens = NULL,
-num_oov_indices = 1,
-output_mode = "one_hot",
-name = NULL
+  max_tokens = NULL,
+  num_oov_indices = 1,
+  output_mode = "one_hot",
+  name = NULL
 )
 
 feature_string_hashed(num_bins, output_mode = "one_hot", name = NULL)
@@ -129,28 +129,28 @@ feature_float_rescaled(scale = 1., offset = 0., name = NULL)
 # Float values to be discretized. By default, the discrete
 # representation will then be one-hot encoded.
 feature_float_discretized(
-num_bins,
-bin_boundaries = NULL,
-output_mode = "one_hot",
-name = NULL
+  num_bins,
+  bin_boundaries = NULL,
+  output_mode = "one_hot",
+  name = NULL
 )
 
 # Integer values to be indexed. By default, the discrete
 # representation will then be one-hot encoded.
 feature_integer_categorical(
-max_tokens = NULL,
-num_oov_indices = 1,
-output_mode = "one_hot",
-name = NULL
+  max_tokens = NULL,
+  num_oov_indices = 1,
+  output_mode = "one_hot",
+  name = NULL
 )
 
 # String values to be indexed. By default, the discrete
 # representation will then be one-hot encoded.
 feature_string_categorical(
-max_tokens = NULL,
-num_oov_indices = 1,
-output_mode = "one_hot",
-name = NULL
+  max_tokens = NULL,
+  num_oov_indices = 1,
+  output_mode = "one_hot",
+  name = NULL
 )
 
 # Integer values to be hashed into a fixed number of bins.
@@ -166,21 +166,21 @@ feature_string_hashed(num_bins, output_mode = "one_hot", name = NULL)
 \strong{Basic usage with a named list of input data:}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{raw_data <- list(
-float_values = c(0.0, 0.1, 0.2, 0.3),
-string_values = c("zero", "one", "two", "three"),
-int_values = as.integer(c(0, 1, 2, 3))
+  float_values = c(0.0, 0.1, 0.2, 0.3),
+  string_values = c("zero", "one", "two", "three"),
+  int_values = as.integer(c(0, 1, 2, 3))
 )
 
 dataset <- tfdatasets::tensor_slices_dataset(raw_data)
 
 feature_space <- layer_feature_space(
-features = list(
-float_values = "float_normalized",
-string_values = "string_categorical",
-int_values = "integer_categorical"
-),
-crosses = list(c("string_values", "int_values")),
-output_mode = "concat"
+  features = list(
+    float_values = "float_normalized",
+    string_values = "string_categorical",
+    int_values = "integer_categorical"
+  ),
+  crosses = list(c("string_values", "int_values")),
+  output_mode = "concat"
 )
 
 # Before you start using the feature_space(),
@@ -197,11 +197,11 @@ output_vector <- feature_space(raw_data)
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(tfdatasets)
 # Unlabeled data
 preprocessed_ds <- unlabeled_dataset |>
-dataset_map(feature_space)
+  dataset_map(feature_space)
 
 # Labeled data
 preprocessed_ds <- labeled_dataset |>
-dataset_map(function(x, y) tuple(feature_space(x), y))
+  dataset_map(function(x, y) tuple(feature_space(x), y))
 }\if{html}{\out{</div>}}
 
 \strong{Basic usage with the Keras Functional API:}
@@ -237,33 +237,33 @@ model <- keras_model(inputs, outputs)
 \strong{Customizing each feature or feature cross:}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{feature_space <- layer_feature_space(
-features = list(
-float_values = feature_float_normalized(),
-string_values = feature_string_categorical(max_tokens = 10),
-int_values = feature_integer_categorical(max_tokens = 10)
-),
-crosses = list(
-feature_cross(c("string_values", "int_values"), crossing_dim = 32)
-),
-output_mode = "concat"
+  features = list(
+    float_values = feature_float_normalized(),
+    string_values = feature_string_categorical(max_tokens = 10),
+    int_values = feature_integer_categorical(max_tokens = 10)
+  ),
+  crosses = list(
+    feature_cross(c("string_values", "int_values"), crossing_dim = 32)
+  ),
+  output_mode = "concat"
 )
 }\if{html}{\out{</div>}}
 
 \strong{Returning a dict (a named list) of integer-encoded features:}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{feature_space <- layer_feature_space(
-features = list(
-"string_values" = feature_string_categorical(output_mode = "int"),
-"int_values" = feature_integer_categorical(output_mode = "int")
-),
-crosses = list(
-feature_cross(
-feature_names = c("string_values", "int_values"),
-crossing_dim = 32,
-output_mode = "int"
-)
-),
-output_mode = "dict"
+  features = list(
+    "string_values" = feature_string_categorical(output_mode = "int"),
+    "int_values" = feature_integer_categorical(output_mode = "int")
+  ),
+  crosses = list(
+    feature_cross(
+      feature_names = c("string_values", "int_values"),
+      crossing_dim = 32,
+      output_mode = "int"
+    )
+  ),
+  output_mode = "dict"
 )
 }\if{html}{\out{</div>}}
 
@@ -279,13 +279,13 @@ custom_layer <- layer_text_vectorization(output_mode = "tf_idf")
 # We can use feature_custom() to create a custom feature
 # that will use our preprocessing layer.
 feature_space <- layer_feature_space(
-features = list(
-text = feature_custom(preprocessor = custom_layer,
-dtype = "string",
-output_mode = "float"
-)
-),
-output_mode = "concat"
+  features = list(
+    text = feature_custom(preprocessor = custom_layer,
+                          dtype = "string",
+                          output_mode = "float"
+    )
+  ),
+  output_mode = "concat"
 )
 feature_space |> adapt(tfdatasets::tensor_slices_dataset(data))
 output_vector <- feature_space(data)

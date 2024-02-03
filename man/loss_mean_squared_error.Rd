@@ -5,11 +5,11 @@
 \title{Computes the mean of squares of errors between labels and predictions.}
 \usage{
 loss_mean_squared_error(
-y_true,
-y_pred,
-...,
-reduction = "sum_over_batch_size",
-name = "mean_squared_error"
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "mean_squared_error"
 )
 }
 \arguments{

@@ -34,7 +34,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
-sample_weight = c(1, 0))
+               sample_weight = c(1, 0))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -45,8 +45,8 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_log_cosh_error()))
+                  loss = 'mse',
+                  metrics = list(metric_log_cosh_error()))
 }\if{html}{\out{</div>}}
 }
 

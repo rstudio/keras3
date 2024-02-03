@@ -5,14 +5,14 @@
 \title{Define a custom \code{Constraint} class}
 \usage{
 Constraint(
-classname,
-call = NULL,
-get_config = NULL,
-...,
-public = list(),
-private = list(),
-inherit = NULL,
-parent_env = parent.frame()
+  classname,
+  call = NULL,
+  get_config = NULL,
+  ...,
+  public = list(),
+  private = list(),
+  inherit = NULL,
+  parent_env = parent.frame()
 )
 }
 \arguments{
@@ -70,9 +70,9 @@ layers via the \code{kernel_constraint} or \code{bias_constraint} arguments.
 Here's a simple example of a non-negative weight constraint:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{constraint_nonnegative <- Constraint("NonNegative",
-call = function(w) \{
-w * op_cast(w >= 0, dtype = w$dtype)
-\}
+  call = function(w) \{
+    w * op_cast(w >= 0, dtype = w$dtype)
+  \}
 )
 weight <- op_convert_to_tensor(c(-1, 1))
 constraint_nonnegative()(weight)

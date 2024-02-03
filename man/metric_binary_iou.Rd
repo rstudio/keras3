@@ -5,11 +5,11 @@
 \title{Computes the Intersection-Over-Union metric for class 0 and/or 1.}
 \usage{
 metric_binary_iou(
-...,
-target_class_ids = list(0L, 1L),
-threshold = 0.5,
-name = NULL,
-dtype = NULL
+  ...,
+  target_class_ids = list(0L, 1L),
+  threshold = 0.5,
+  name = NULL,
+  dtype = NULL
 )
 }
 \arguments{
@@ -71,7 +71,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0, 1, 0, 1), c(0.1, 0.2, 0.4, 0.7),
-sample_weight = c(0.2, 0.3, 0.4, 0.1))
+               sample_weight = c(0.2, 0.3, 0.4, 0.1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -82,12 +82,12 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_binary_iou(
-target_class_ids = 0L,
-threshold = 0.5
-))
+    optimizer = 'sgd',
+    loss = 'mse',
+    metrics = list(metric_binary_iou(
+        target_class_ids = 0L,
+        threshold = 0.5
+    ))
 )
 }\if{html}{\out{</div>}}
 }

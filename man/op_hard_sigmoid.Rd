@@ -28,7 +28,7 @@ op_hard_sigmoid(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- as.array(seq(-5, 5, .1))
 plot(x, op_hard_sigmoid(x),
-type = 'l', panel.first = grid(), frame.plot = FALSE)
+     type = 'l', panel.first = grid(), frame.plot = FALSE)
 }\if{html}{\out{</div>}}
 
 \figure{op_hard_sigmoid-plot-1.png}

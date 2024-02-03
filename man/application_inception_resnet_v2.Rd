@@ -5,13 +5,13 @@
 \title{Instantiates the Inception-ResNet v2 architecture.}
 \usage{
 application_inception_resnet_v2(
-include_top = TRUE,
-weights = "imagenet",
-input_tensor = NULL,
-input_shape = NULL,
-pooling = NULL,
-classes = 1000L,
-classifier_activation = "softmax"
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 }
 \arguments{

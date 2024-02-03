@@ -5,19 +5,19 @@
 \title{A layer that uses \code{einsum} as the backing computation.}
 \usage{
 layer_einsum_dense(
-object,
-equation,
-output_shape,
-activation = NULL,
-bias_axes = NULL,
-kernel_initializer = "glorot_uniform",
-bias_initializer = "zeros",
-kernel_regularizer = NULL,
-bias_regularizer = NULL,
-kernel_constraint = NULL,
-bias_constraint = NULL,
-lora_rank = NULL,
-...
+  object,
+  equation,
+  output_shape,
+  activation = NULL,
+  bias_axes = NULL,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  lora_rank = NULL,
+  ...
 )
 }
 \arguments{
@@ -83,9 +83,9 @@ einsum operations. This example is equivalent to
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- layer_input(shape = c(32))
 output <- input |>
-layer_einsum_dense("ab,bc->ac",
-output_shape = 64,
-bias_axes = "c")
+  layer_einsum_dense("ab,bc->ac",
+                     output_shape = 64,
+                     bias_axes = "c")
 output # shape(NA, 64)
 }\if{html}{\out{</div>}}
 
@@ -103,9 +103,9 @@ dimension in the \code{output_shape} is \code{NA}, because the sequence dimensio
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- layer_input(shape = c(32, 128))
 output <- input |>
-layer_einsum_dense("abc,cd->abd",
-output_shape = c(NA, 64),
-bias_axes = "d")
+  layer_einsum_dense("abc,cd->abd",
+                     output_shape = c(NA, 64),
+                     bias_axes = "d")
 output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 
@@ -126,9 +126,9 @@ where no sequence dimension exists.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- layer_input(shape = c(32, 128))
 output <- input |>
-layer_einsum_dense("...x,xy->...y",
-output_shape = 64,
-bias_axes = "y")
+  layer_einsum_dense("...x,xy->...y",
+                     output_shape = 64,
+                     bias_axes = "y")
 
 output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
@@ -143,9 +143,9 @@ output  # shape(NA, 32, 64)
 \item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
-rank,
-a_initializer = 'he_uniform',
-b_initializer = 'zeros'
+  rank,
+  a_initializer = 'he_uniform',
+  b_initializer = 'zeros'
 )
 }\if{html}{\out{</div>}}
 }

@@ -5,15 +5,15 @@
 \title{A preprocessing layer which randomly rotates images during training.}
 \usage{
 layer_random_rotation(
-object,
-factor,
-fill_mode = "reflect",
-interpolation = "bilinear",
-seed = NULL,
-fill_value = 0,
-value_range = list(0L, 255L),
-data_format = NULL,
-...
+  object,
+  factor,
+  fill_mode = "reflect",
+  interpolation = "bilinear",
+  seed = NULL,
+  fill_value = 0,
+  value_range = list(0L, 255L),
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

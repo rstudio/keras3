@@ -5,19 +5,19 @@
 \title{Generates a \code{tf.data.Dataset} from audio files in a directory.}
 \usage{
 audio_dataset_from_directory(
-directory,
-labels = "inferred",
-label_mode = "int",
-class_names = NULL,
-batch_size = 32L,
-sampling_rate = NULL,
-output_sequence_length = NULL,
-ragged = FALSE,
-shuffle = TRUE,
-seed = NULL,
-validation_split = NULL,
-subset = NULL,
-follow_links = FALSE
+  directory,
+  labels = "inferred",
+  label_mode = "int",
+  class_names = NULL,
+  batch_size = 32L,
+  sampling_rate = NULL,
+  output_sequence_length = NULL,
+  ragged = FALSE,
+  shuffle = TRUE,
+  seed = NULL,
+  validation_split = NULL,
+  subset = NULL,
+  follow_links = FALSE
 )
 }
 \arguments{

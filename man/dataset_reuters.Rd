@@ -6,15 +6,15 @@
 \title{Reuters newswire topics classification}
 \usage{
 dataset_reuters(
-path = "reuters.npz",
-num_words = NULL,
-skip_top = 0L,
-maxlen = NULL,
-test_split = 0.2,
-seed = 113L,
-start_char = 1L,
-oov_char = 2L,
-index_from = 3L
+  path = "reuters.npz",
+  num_words = NULL,
+  skip_top = 0L,
+  maxlen = NULL,
+  test_split = 0.2,
+  seed = 113L,
+  start_char = 1L,
+  oov_char = 2L,
+  index_from = 3L
 )
 
 dataset_reuters_word_index(path = "reuters_word_index.pkl")

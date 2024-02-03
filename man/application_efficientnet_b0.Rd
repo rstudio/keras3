@@ -5,14 +5,14 @@
 \title{Instantiates the EfficientNetB0 architecture.}
 \usage{
 application_efficientnet_b0(
-include_top = TRUE,
-weights = "imagenet",
-input_tensor = NULL,
-input_shape = NULL,
-pooling = NULL,
-classes = 1000L,
-classifier_activation = "softmax",
-...
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  input_shape = NULL,
+  pooling = NULL,
+  classes = 1000L,
+  classifier_activation = "softmax",
+  ...
 )
 }
 \arguments{

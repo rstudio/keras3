@@ -5,13 +5,13 @@
 \title{Returns numbers spaced evenly on a log scale.}
 \usage{
 op_logspace(
-start,
-stop,
-num = 50L,
-endpoint = TRUE,
-base = 10L,
-dtype = NULL,
-axis = 1L
+  start,
+  stop,
+  num = 50L,
+  endpoint = TRUE,
+  base = 10L,
+  dtype = NULL,
+  axis = 1L
 )
 }
 \arguments{

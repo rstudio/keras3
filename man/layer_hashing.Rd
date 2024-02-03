@@ -5,13 +5,13 @@
 \title{A preprocessing layer which hashes and bins categorical features.}
 \usage{
 layer_hashing(
-object,
-num_bins,
-mask_value = NULL,
-salt = NULL,
-output_mode = "int",
-sparse = FALSE,
-...
+  object,
+  num_bins,
+  mask_value = NULL,
+  salt = NULL,
+  output_mode = "int",
+  sparse = FALSE,
+  ...
 )
 }
 \arguments{

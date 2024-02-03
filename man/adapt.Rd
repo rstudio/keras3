@@ -76,7 +76,7 @@ predict(model, c(0, 1, 2), verbose = FALSE) # [1] 0 1 2
 adapt(layer, c(0, 2))
 input_ds <- tfdatasets::range_dataset(0, 3)
 normalized_ds <- input_ds |>
-tfdatasets::dataset_map(layer)
+  tfdatasets::dataset_map(layer)
 str(tfdatasets::iterate(normalized_ds))
 }\if{html}{\out{</div>}}
 
@@ -89,12 +89,12 @@ str(tfdatasets::iterate(normalized_ds))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt(layer, c(-1, 1))
 normalized_ds <- input_ds |>
-tfdatasets::dataset_map(layer) # Re-map over the input dataset.
+  tfdatasets::dataset_map(layer) # Re-map over the input dataset.
 
 normalized_ds |>
-tfdatasets::as_array_iterator() |>
-tfdatasets::iterate() |>
-str()
+  tfdatasets::as_array_iterator() |>
+  tfdatasets::iterate() |>
+  str()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 3

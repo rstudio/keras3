@@ -5,12 +5,12 @@
 \title{Computes how often integer targets are in the top \code{K} predictions.}
 \usage{
 metric_sparse_top_k_categorical_accuracy(
-y_true,
-y_pred,
-k = 5L,
-...,
-name = "sparse_top_k_categorical_accuracy",
-dtype = NULL
+  y_true,
+  y_pred,
+  k = 5L,
+  ...,
+  name = "sparse_top_k_categorical_accuracy",
+  dtype = NULL
 )
 }
 \arguments{
@@ -35,8 +35,8 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_top_k_categorical_accuracy(k = 1L)
 m$update_state(
-rbind(2, 1),
-op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
+  rbind(2, 1),
+  op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
 )
 m$result()
 }\if{html}{\out{</div>}}
@@ -47,9 +47,9 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(
-rbind(2, 1),
-op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
-sample_weight = c(0.7, 0.3)
+  rbind(2, 1),
+  op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
+  sample_weight = c(0.7, 0.3)
 )
 m$result()
 }\if{html}{\out{</div>}}
@@ -61,8 +61,8 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-loss = 'sparse_categorical_crossentropy',
-metrics = list(metric_sparse_top_k_categorical_accuracy()))
+                  loss = 'sparse_categorical_crossentropy',
+                  metrics = list(metric_sparse_top_k_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 

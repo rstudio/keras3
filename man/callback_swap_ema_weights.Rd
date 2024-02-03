@@ -32,16 +32,16 @@ model |> compile(optimizer = optimizer, loss = ..., metrics = ...)
 
 # Metrics will be computed with EMA weights
 model |> fit(X_train, Y_train,
-callbacks = c(callback_swap_ema_weights()))
+             callbacks = c(callback_swap_ema_weights()))
 
 # If you want to save model checkpoint with EMA weights, you can set
 # `swap_on_epoch=TRUE` and place ModelCheckpoint after SwapEMAWeights.
 model |> fit(
-X_train, Y_train,
-callbacks = c(
-callback_swap_ema_weights(swap_on_epoch = TRUE),
-callback_model_checkpoint(...)
-)
+  X_train, Y_train,
+  callbacks = c(
+    callback_swap_ema_weights(swap_on_epoch = TRUE),
+    callback_model_checkpoint(...)
+  )
 )
 }\if{html}{\out{</div>}}
 }

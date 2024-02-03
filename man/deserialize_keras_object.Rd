@@ -49,17 +49,17 @@ For example, the following config list represents the built-in Adam optimizer
 with the relevant config:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{config <- list(
-class_name = "Adam",
-config = list(
-amsgrad = FALSE,
-beta_1 = 0.8999999761581421,
-beta_2 = 0.9990000128746033,
-epsilon = 1e-07,
-learning_rate = 0.0010000000474974513,
-name = "Adam"
-),
-module = "keras.optimizers",
-registered_name = NULL
+  class_name = "Adam",
+  config = list(
+    amsgrad = FALSE,
+    beta_1 = 0.8999999761581421,
+    beta_2 = 0.9990000128746033,
+    epsilon = 1e-07,
+    learning_rate = 0.0010000000474974513,
+    name = "Adam"
+  ),
+  module = "keras.optimizers",
+  registered_name = NULL
 )
 # Returns an `Adam` instance identical to the original one.
 deserialize_keras_object(config)
@@ -73,12 +73,12 @@ If the class does not have an exported Keras namespace, the library tracks
 it by its \code{module} and \code{class_name}. For example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{config <- list(
-class_name = "MetricsList",
-config =  list(
-...
-),
-module = "keras.trainers.compile_utils",
-registered_name = "MetricsList"
+  class_name = "MetricsList",
+  config =  list(
+    ...
+  ),
+  module = "keras.trainers.compile_utils",
+  registered_name = "MetricsList"
 )
 
 # Returns a `MetricsList` instance identical to the original one.
@@ -90,8 +90,8 @@ loss:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# define a custom object
 loss_modified_mse <- Loss(
-"ModifiedMeanSquaredError",
-inherit = loss_mean_squared_error)
+  "ModifiedMeanSquaredError",
+  inherit = loss_mean_squared_error)
 
 # register the custom object
 register_keras_serializable(loss_modified_mse)

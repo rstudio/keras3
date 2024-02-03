@@ -5,14 +5,14 @@
 \title{Computes the crossentropy loss between the labels and predictions.}
 \usage{
 loss_sparse_categorical_crossentropy(
-y_true,
-y_pred,
-from_logits = FALSE,
-ignore_class = NULL,
-axis = -1L,
-...,
-reduction = "sum_over_batch_size",
-name = "sparse_categorical_crossentropy"
+  y_true,
+  y_pred,
+  from_logits = FALSE,
+  ignore_class = NULL,
+  axis = -1L,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "sparse_categorical_crossentropy"
 )
 }
 \arguments{
@@ -116,7 +116,7 @@ scce(op_array(y_true), op_array(y_pred))
 Usage with the \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-loss = loss_sparse_categorical_crossentropy())
+                  loss = loss_sparse_categorical_crossentropy())
 }\if{html}{\out{</div>}}
 }
 

@@ -40,8 +40,8 @@ op_gelu(x)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- seq(-5, 5, .1)
 plot(x, op_gelu(x),
-type = "l", #, frame.plot = FALSE,
-panel.first = grid())
+     type = "l", #, frame.plot = FALSE,
+     panel.first = grid())
 }\if{html}{\out{</div>}}
 
 \figure{op_gelu-plot-1.png}

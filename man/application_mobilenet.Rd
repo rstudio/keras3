@@ -5,16 +5,16 @@
 \title{Instantiates the MobileNet architecture.}
 \usage{
 application_mobilenet(
-input_shape = NULL,
-alpha = 1,
-depth_multiplier = 1L,
-dropout = 0.001,
-include_top = TRUE,
-weights = "imagenet",
-input_tensor = NULL,
-pooling = NULL,
-classes = 1000L,
-classifier_activation = "softmax"
+  input_shape = NULL,
+  alpha = 1,
+  depth_multiplier = 1L,
+  dropout = 0.001,
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  pooling = NULL,
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 }
 \arguments{

@@ -5,12 +5,12 @@
 \title{Dot-product attention layer, a.k.a. Luong-style attention.}
 \usage{
 layer_attention(
-object,
-use_scale = FALSE,
-score_mode = "dot",
-dropout = 0,
-seed = NULL,
-...
+  object,
+  use_scale = FALSE,
+  score_mode = "dot",
+  dropout = 0,
+  seed = NULL,
+  ...
 )
 }
 \arguments{

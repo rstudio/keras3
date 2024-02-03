@@ -5,12 +5,12 @@
 \title{A \code{LearningRateSchedule} that uses a cosine decay schedule with restarts.}
 \usage{
 learning_rate_schedule_cosine_decay_restarts(
-initial_learning_rate,
-first_decay_steps,
-t_mul = 2,
-m_mul = 1,
-alpha = 0,
-name = "SGDRDecay"
+  initial_learning_rate,
+  first_decay_steps,
+  t_mul = 2,
+  m_mul = 1,
+  alpha = 0,
+  name = "SGDRDecay"
 )
 }
 \arguments{
@@ -58,8 +58,8 @@ Example usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{first_decay_steps <- 1000
 lr_decayed_fn <- learning_rate_schedule_cosine_decay_restarts(
-0.001,
-first_decay_steps)
+        0.001,
+        first_decay_steps)
 }\if{html}{\out{</div>}}
 
 You can pass this schedule directly into a \code{optimizer}

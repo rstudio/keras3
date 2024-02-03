@@ -5,15 +5,15 @@
 \title{Reduce learning rate when a metric has stopped improving.}
 \usage{
 callback_reduce_lr_on_plateau(
-monitor = "val_loss",
-factor = 0.1,
-patience = 10L,
-verbose = 0L,
-mode = "auto",
-min_delta = 1e-04,
-cooldown = 0L,
-min_lr = 0,
-...
+  monitor = "val_loss",
+  factor = 0.1,
+  patience = 10L,
+  verbose = 0L,
+  mode = "auto",
+  min_delta = 1e-04,
+  cooldown = 0L,
+  min_lr = 0,
+  ...
 )
 }
 \arguments{
@@ -52,7 +52,7 @@ of epochs, the learning rate is reduced.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reduce_lr <- callback_reduce_lr_on_plateau(monitor = 'val_loss', factor = 0.2,
-patience = 5, min_lr = 0.001)
+                                           patience = 5, min_lr = 0.001)
 model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 }\if{html}{\out{</div>}}
 }

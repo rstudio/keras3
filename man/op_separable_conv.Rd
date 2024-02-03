@@ -5,13 +5,13 @@
 \title{General N-D separable convolution.}
 \usage{
 op_separable_conv(
-inputs,
-depthwise_kernel,
-pointwise_kernel,
-strides = 1L,
-padding = "valid",
-data_format = NULL,
-dilation_rate = 1L
+  inputs,
+  depthwise_kernel,
+  pointwise_kernel,
+  strides = 1L,
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = 1L
 )
 }
 \arguments{

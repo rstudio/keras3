@@ -5,12 +5,12 @@
 \title{Computes how often targets are in the top \code{K} predictions.}
 \usage{
 metric_top_k_categorical_accuracy(
-y_true,
-y_pred,
-k = 5L,
-...,
-name = "top_k_categorical_accuracy",
-dtype = NULL
+  y_true,
+  y_pred,
+  k = 5L,
+  ...,
+  name = "top_k_categorical_accuracy",
+  dtype = NULL
 )
 }
 \arguments{
@@ -35,8 +35,8 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_top_k_categorical_accuracy(k = 1)
 m$update_state(
-rbind(c(0, 0, 1), c(0, 1, 0)),
-op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
+  rbind(c(0, 0, 1), c(0, 1, 0)),
+  op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
 )
 m$result()
 }\if{html}{\out{</div>}}
@@ -47,9 +47,9 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(
-rbind(c(0, 0, 1), c(0, 1, 0)),
-op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
-sample_weight = c(0.7, 0.3))
+  rbind(c(0, 0, 1), c(0, 1, 0)),
+  op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
+  sample_weight = c(0.7, 0.3))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -60,8 +60,8 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model.compile(optimizer = 'sgd',
-loss = 'categorical_crossentropy',
-metrics = list(metric_top_k_categorical_accuracy()))
+              loss = 'categorical_crossentropy',
+              metrics = list(metric_top_k_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 

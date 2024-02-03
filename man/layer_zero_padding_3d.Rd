@@ -5,10 +5,10 @@
 \title{Zero-padding layer for 3D data (spatial or spatio-temporal).}
 \usage{
 layer_zero_padding_3d(
-object,
-padding = list(list(1L, 1L), list(1L, 1L), list(1L, 1L)),
-data_format = NULL,
-...
+  object,
+  padding = list(list(1L, 1L), list(1L, 1L), list(1L, 1L)),
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

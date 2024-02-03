@@ -5,20 +5,20 @@
 \title{Optimizer that implements the Adadelta algorithm.}
 \usage{
 optimizer_adadelta(
-learning_rate = 0.001,
-rho = 0.95,
-epsilon = 1e-07,
-weight_decay = NULL,
-clipnorm = NULL,
-clipvalue = NULL,
-global_clipnorm = NULL,
-use_ema = FALSE,
-ema_momentum = 0.99,
-ema_overwrite_frequency = NULL,
-name = "adadelta",
-...,
-loss_scale_factor = NULL,
-gradient_accumulation_steps = NULL
+  learning_rate = 0.001,
+  rho = 0.95,
+  epsilon = 1e-07,
+  weight_decay = NULL,
+  clipnorm = NULL,
+  clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = FALSE,
+  ema_momentum = 0.99,
+  ema_overwrite_frequency = NULL,
+  name = "adadelta",
+  ...,
+  loss_scale_factor = NULL,
+  gradient_accumulation_steps = NULL
 )
 }
 \arguments{

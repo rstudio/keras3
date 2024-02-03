@@ -5,17 +5,17 @@
 \title{Generates a \code{tf.data.Dataset} from text files in a directory.}
 \usage{
 text_dataset_from_directory(
-directory,
-labels = "inferred",
-label_mode = "int",
-class_names = NULL,
-batch_size = 32L,
-max_length = NULL,
-shuffle = TRUE,
-seed = NULL,
-validation_split = NULL,
-subset = NULL,
-follow_links = FALSE
+  directory,
+  labels = "inferred",
+  label_mode = "int",
+  class_names = NULL,
+  batch_size = 32L,
+  max_length = NULL,
+  shuffle = TRUE,
+  seed = NULL,
+  validation_split = NULL,
+  subset = NULL,
+  follow_links = FALSE
 )
 }
 \arguments{

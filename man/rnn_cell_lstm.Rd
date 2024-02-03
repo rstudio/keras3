@@ -5,24 +5,24 @@
 \title{Cell class for the LSTM layer.}
 \usage{
 rnn_cell_lstm(
-units,
-activation = "tanh",
-recurrent_activation = "sigmoid",
-use_bias = TRUE,
-kernel_initializer = "glorot_uniform",
-recurrent_initializer = "orthogonal",
-bias_initializer = "zeros",
-unit_forget_bias = TRUE,
-kernel_regularizer = NULL,
-recurrent_regularizer = NULL,
-bias_regularizer = NULL,
-kernel_constraint = NULL,
-recurrent_constraint = NULL,
-bias_constraint = NULL,
-dropout = 0,
-recurrent_dropout = 0,
-seed = NULL,
-...
+  units,
+  activation = "tanh",
+  recurrent_activation = "sigmoid",
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  recurrent_initializer = "orthogonal",
+  bias_initializer = "zeros",
+  unit_forget_bias = TRUE,
+  kernel_regularizer = NULL,
+  recurrent_regularizer = NULL,
+  bias_regularizer = NULL,
+  kernel_constraint = NULL,
+  recurrent_constraint = NULL,
+  bias_constraint = NULL,
+  dropout = 0,
+  recurrent_dropout = 0,
+  seed = NULL,
+  ...
 )
 }
 \arguments{
@@ -100,7 +100,7 @@ training mode or in inference mode. Only relevant when \code{dropout} or
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- random_uniform(c(32, 10, 8))
 output <- inputs |>
-layer_rnn(cell = rnn_cell_lstm(4))
+  layer_rnn(cell = rnn_cell_lstm(4))
 shape(output)
 }\if{html}{\out{</div>}}
 
@@ -109,8 +109,8 @@ shape(output)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(cell = rnn_cell_lstm(4),
-return_sequences = T,
-return_state = T)
+                 return_sequences = T,
+                 return_state = T)
 c(whole_sequence_output, ...final_state) \%<-\% rnn(inputs)
 str(whole_sequence_output)
 }\if{html}{\out{</div>}}

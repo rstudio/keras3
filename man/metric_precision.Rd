@@ -5,12 +5,12 @@
 \title{Computes the precision of the predictions with respect to the labels.}
 \usage{
 metric_precision(
-...,
-thresholds = NULL,
-top_k = NULL,
-class_id = NULL,
-name = NULL,
-dtype = NULL
+  ...,
+  thresholds = NULL,
+  top_k = NULL,
+  class_id = NULL,
+  name = NULL,
+  dtype = NULL
 )
 }
 \arguments{
@@ -61,7 +61,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_precision()
 m$update_state(c(0, 1, 1, 1),
-c(1, 0, 1, 1))
+               c(1, 0, 1, 1))
 m$result() |> as.double() |> signif()
 }\if{html}{\out{</div>}}
 
@@ -71,8 +71,8 @@ m$result() |> as.double() |> signif()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0, 1, 1, 1),
-c(1, 0, 1, 1),
-sample_weight = c(0, 0, 1, 0))
+               c(1, 0, 1, 1),
+               sample_weight = c(0, 0, 1, 0))
 m$result() |> as.double() |> signif()
 }\if{html}{\out{</div>}}
 
@@ -105,18 +105,18 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-optimizer = 'sgd',
-loss = 'binary_crossentropy',
-metrics = list(metric_precision())
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_precision())
 )
 }\if{html}{\out{</div>}}
 
 Usage with a loss with \code{from_logits=TRUE}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
-optimizer = 'adam',
-loss = loss_binary_crossentropy(from_logits = TRUE),
-metrics = list(metric_precision(thresholds = 0))
+  optimizer = 'adam',
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_precision(thresholds = 0))
 )
 }\if{html}{\out{</div>}}
 }

@@ -40,14 +40,14 @@ save_model_config(model, file)
 model2 <- load_model_config(file)
 
 stopifnot(exprs = \{
-all.equal(get_config(model), get_config(model2))
+  all.equal(get_config(model), get_config(model2))
 
-# To extract the `get_config()` value from a saved model config:
-all.equal(
-get_config(model),
-structure(jsonlite::read_json(file)$config,
-"__class__" = keras_model_sequential()$`__class__`)
-)
+  # To extract the `get_config()` value from a saved model config:
+  all.equal(
+      get_config(model),
+      structure(jsonlite::read_json(file)$config,
+                "__class__" = keras_model_sequential()$`__class__`)
+  )
 \})
 }\if{html}{\out{</div>}}
 }

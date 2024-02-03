@@ -5,11 +5,11 @@
 \title{Resize images to a target size without aspect ratio distortion.}
 \usage{
 image_smart_resize(
-x,
-size,
-interpolation = "bilinear",
-data_format = "channels_last",
-backend_module = NULL
+  x,
+  size,
+  interpolation = "bilinear",
+  data_format = "channels_last",
+  backend_module = NULL
 )
 }
 \arguments{

@@ -5,12 +5,12 @@
 \title{General N-D convolution.}
 \usage{
 op_conv(
-inputs,
-kernel,
-strides = 1L,
-padding = "valid",
-data_format = NULL,
-dilation_rate = 1L
+  inputs,
+  kernel,
+  strides = 1L,
+  padding = "valid",
+  data_format = NULL,
+  dilation_rate = 1L
 )
 }
 \arguments{

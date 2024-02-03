@@ -5,11 +5,11 @@
 \title{Computes F-1 Score.}
 \usage{
 metric_f1_score(
-...,
-average = NULL,
-threshold = NULL,
-name = "f1_score",
-dtype = NULL
+  ...,
+  average = NULL,
+  threshold = NULL,
+  name = "f1_score",
+  dtype = NULL
 )
 }
 \arguments{
@@ -55,11 +55,11 @@ and multi-label classification.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{metric <- metric_f1_score(threshold = 0.5)
 y_true <- rbind(c(1, 1, 1),
-c(1, 0, 0),
-c(1, 1, 0))
+                c(1, 0, 0),
+                c(1, 1, 0))
 y_pred <- rbind(c(0.2, 0.6, 0.7),
-c(0.2, 0.6, 0.6),
-c(0.6, 0.8, 0.0))
+                c(0.2, 0.6, 0.6),
+                c(0.6, 0.8, 0.0))
 metric$update_state(y_true, y_pred)
 result <- metric$result()
 result

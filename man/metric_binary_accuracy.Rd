@@ -5,12 +5,12 @@
 \title{Calculates how often predictions match binary labels.}
 \usage{
 metric_binary_accuracy(
-y_true,
-y_pred,
-threshold = 0.5,
-...,
-name = "binary_accuracy",
-dtype = NULL
+  y_true,
+  y_pred,
+  threshold = 0.5,
+  ...,
+  name = "binary_accuracy",
+  dtype = NULL
 )
 }
 \arguments{
@@ -53,7 +53,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(1, 1, 0, 0), rbind(0.98, 1, 0, 0.6),
-sample_weight = c(1, 0, 0, 1))
+               sample_weight = c(1, 0, 0, 1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -67,8 +67,8 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer='sgd',
-loss='binary_crossentropy',
-metrics=list(metric_binary_accuracy()))
+                  loss='binary_crossentropy',
+                  metrics=list(metric_binary_accuracy()))
 }\if{html}{\out{</div>}}
 }
 

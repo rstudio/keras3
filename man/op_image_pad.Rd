@@ -5,13 +5,13 @@
 \title{Pad \code{images} with zeros to the specified \code{height} and \code{width}.}
 \usage{
 op_image_pad(
-images,
-top_padding = NULL,
-left_padding = NULL,
-target_height = NULL,
-target_width = NULL,
-bottom_padding = NULL,
-right_padding = NULL
+  images,
+  top_padding = NULL,
+  left_padding = NULL,
+  target_height = NULL,
+  target_width = NULL,
+  bottom_padding = NULL,
+  right_padding = NULL
 )
 }
 \arguments{
@@ -44,7 +44,7 @@ Pad \code{images} with zeros to the specified \code{height} and \code{width}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{images <- random_uniform(c(15, 25, 3))
 padded_images <- op_image_pad(
-images, 2, 3, target_height = 20, target_width = 30
+    images, 2, 3, target_height = 20, target_width = 30
 )
 shape(padded_images)
 }\if{html}{\out{</div>}}
@@ -55,8 +55,8 @@ shape(padded_images)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{batch_images <- random_uniform(c(2, 15, 25, 3))
 padded_batch <- op_image_pad(batch_images, 2, 3,
-target_height = 20,
-target_width = 30)
+                             target_height = 20,
+                             target_width = 30)
 shape(padded_batch)
 }\if{html}{\out{</div>}}
 

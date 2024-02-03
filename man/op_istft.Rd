@@ -5,13 +5,13 @@
 \title{Inverse Short-Time Fourier Transform along the last axis of the input.}
 \usage{
 op_istft(
-x,
-sequence_length,
-sequence_stride,
-fft_length,
-length = NULL,
-window = "hann",
-center = TRUE
+  x,
+  sequence_length,
+  sequence_stride,
+  fft_length,
+  length = NULL,
+  window = "hann",
+  center = TRUE
 )
 }
 \arguments{

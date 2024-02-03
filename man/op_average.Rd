@@ -46,8 +46,8 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_average(
-op_arange(1, 11),
-weights = op_arange(10, 0, -1)
+  op_arange(1, 11),
+  weights = op_arange(10, 0, -1)
 )
 }\if{html}{\out{</div>}}
 
@@ -67,9 +67,9 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_average(
-data,
-axis = 2,
-weights = op_array(c(1/4, 3/4))
+  data,
+  axis = 2,
+  weights = op_array(c(1/4, 3/4))
 )
 }\if{html}{\out{</div>}}
 
@@ -79,8 +79,8 @@ weights = op_array(c(1/4, 3/4))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Error: Axis must be specified when shapes of a and weights differ.
 try(op_average(
-data,
-weights = op_array(c(1/4, 3/4))
+  data,
+  weights = op_array(c(1/4, 3/4))
 ))
 }\if{html}{\out{</div>}}
 

@@ -5,13 +5,13 @@
 \title{Return evenly spaced numbers over a specified interval.}
 \usage{
 op_linspace(
-start,
-stop,
-num = 50L,
-endpoint = TRUE,
-retstep = FALSE,
-dtype = NULL,
-axis = 1L
+  start,
+  stop,
+  num = 50L,
+  endpoint = TRUE,
+  retstep = FALSE,
+  dtype = NULL,
+  axis = 1L
 )
 }
 \arguments{

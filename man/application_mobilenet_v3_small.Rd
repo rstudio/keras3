@@ -5,17 +5,17 @@
 \title{Instantiates the MobileNetV3Small architecture.}
 \usage{
 application_mobilenet_v3_small(
-input_shape = NULL,
-alpha = 1,
-minimalistic = FALSE,
-include_top = TRUE,
-weights = "imagenet",
-input_tensor = NULL,
-classes = 1000L,
-pooling = NULL,
-dropout_rate = 0.2,
-classifier_activation = "softmax",
-include_preprocessing = TRUE
+  input_shape = NULL,
+  alpha = 1,
+  minimalistic = FALSE,
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  classes = 1000L,
+  pooling = NULL,
+  dropout_rate = 0.2,
+  classifier_activation = "softmax",
+  include_preprocessing = TRUE
 )
 }
 \arguments{
@@ -104,13 +104,13 @@ Instantiates the MobileNetV3Small architecture.
 \subsection{The following table describes the performance of MobileNets v3:}{
 
 MACs stands for Multiply Adds\tabular{lllll}{
-Classification Checkpoint \tab MACs(M) \tab Parameters(M) \tab Top1 Accuracy \tab Pixel1 CPU(ms) \cr
-mobilenet_v3_large_1.0_224 \tab 217 \tab 5.4 \tab 75.6 \tab 51.2 \cr
-mobilenet_v3_large_0.75_224 \tab 155 \tab 4.0 \tab 73.3 \tab 39.8 \cr
-mobilenet_v3_large_minimalistic_1.0_224 \tab 209 \tab 3.9 \tab 72.3 \tab 44.1 \cr
-mobilenet_v3_small_1.0_224 \tab 66 \tab 2.9 \tab 68.1 \tab 15.8 \cr
-mobilenet_v3_small_0.75_224 \tab 44 \tab 2.4 \tab 65.4 \tab 12.8 \cr
-mobilenet_v3_small_minimalistic_1.0_224 \tab 65 \tab 2.0 \tab 61.9 \tab 12.2 \cr
+   Classification Checkpoint \tab MACs(M) \tab Parameters(M) \tab Top1 Accuracy \tab Pixel1 CPU(ms) \cr
+   mobilenet_v3_large_1.0_224 \tab 217 \tab 5.4 \tab 75.6 \tab 51.2 \cr
+   mobilenet_v3_large_0.75_224 \tab 155 \tab 4.0 \tab 73.3 \tab 39.8 \cr
+   mobilenet_v3_large_minimalistic_1.0_224 \tab 209 \tab 3.9 \tab 72.3 \tab 44.1 \cr
+   mobilenet_v3_small_1.0_224 \tab 66 \tab 2.9 \tab 68.1 \tab 15.8 \cr
+   mobilenet_v3_small_0.75_224 \tab 44 \tab 2.4 \tab 65.4 \tab 12.8 \cr
+   mobilenet_v3_small_minimalistic_1.0_224 \tab 65 \tab 2.0 \tab 61.9 \tab 12.2 \cr
 }
 
 

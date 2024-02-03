@@ -5,14 +5,14 @@
 \title{Computes the crossentropy loss between the labels and predictions.}
 \usage{
 loss_categorical_crossentropy(
-y_true,
-y_pred,
-from_logits = FALSE,
-label_smoothing = 0,
-axis = -1L,
-...,
-reduction = "sum_over_batch_size",
-name = "categorical_crossentropy"
+  y_true,
+  y_pred,
+  from_logits = FALSE,
+  label_smoothing = 0,
+  axis = -1L,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "categorical_crossentropy"
 )
 }
 \arguments{
@@ -103,7 +103,7 @@ cce(y_true, y_pred)
 Usage with the \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-loss=loss_categorical_crossentropy())
+              loss=loss_categorical_crossentropy())
 }\if{html}{\out{</div>}}
 }
 

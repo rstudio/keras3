@@ -5,12 +5,12 @@
 \title{Saves an image stored as an array to a path or file object.}
 \usage{
 image_array_save(
-x,
-path,
-data_format = NULL,
-file_format = NULL,
-scale = TRUE,
-...
+  x,
+  path,
+  data_format = NULL,
+  file_format = NULL,
+  scale = TRUE,
+  ...
 )
 }
 \arguments{

@@ -5,20 +5,20 @@
 \title{Optimizer that implements the Lion algorithm.}
 \usage{
 optimizer_lion(
-learning_rate = 0.001,
-beta_1 = 0.9,
-beta_2 = 0.99,
-weight_decay = NULL,
-clipnorm = NULL,
-clipvalue = NULL,
-global_clipnorm = NULL,
-use_ema = FALSE,
-ema_momentum = 0.99,
-ema_overwrite_frequency = NULL,
-name = "lion",
-...,
-loss_scale_factor = NULL,
-gradient_accumulation_steps = NULL
+  learning_rate = 0.001,
+  beta_1 = 0.9,
+  beta_2 = 0.99,
+  weight_decay = NULL,
+  clipnorm = NULL,
+  clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = FALSE,
+  ema_momentum = 0.99,
+  ema_overwrite_frequency = NULL,
+  name = "lion",
+  ...,
+  loss_scale_factor = NULL,
+  gradient_accumulation_steps = NULL
 )
 }
 \arguments{

@@ -5,19 +5,19 @@
 \title{Just your regular densely-connected NN layer.}
 \usage{
 layer_dense(
-object,
-units,
-activation = NULL,
-use_bias = TRUE,
-kernel_initializer = "glorot_uniform",
-bias_initializer = "zeros",
-kernel_regularizer = NULL,
-bias_regularizer = NULL,
-activity_regularizer = NULL,
-kernel_constraint = NULL,
-bias_constraint = NULL,
-lora_rank = NULL,
-...
+  object,
+  units,
+  activation = NULL,
+  use_bias = TRUE,
+  kernel_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  kernel_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  kernel_constraint = NULL,
+  bias_constraint = NULL,
+  lora_rank = NULL,
+  ...
 )
 }
 \arguments{
@@ -96,9 +96,9 @@ the output would have shape \verb{(batch_size, units)}.
 \item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
-rank,
-a_initializer = 'he_uniform',
-b_initializer = 'zeros'
+  rank,
+  a_initializer = 'he_uniform',
+  b_initializer = 'zeros'
 )
 }\if{html}{\out{</div>}}
 }

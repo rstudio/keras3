@@ -5,10 +5,10 @@
 \title{Cropping layer for 3D data (e.g. spatial or spatio-temporal).}
 \usage{
 layer_cropping_3d(
-object,
-cropping = list(list(1L, 1L), list(1L, 1L), list(1L, 1L)),
-data_format = NULL,
-...
+  object,
+  cropping = list(list(1L, 1L), list(1L, 1L), list(1L, 1L)),
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

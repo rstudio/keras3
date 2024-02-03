@@ -5,11 +5,11 @@
 \title{A \code{LearningRateSchedule} that uses an inverse time decay schedule.}
 \usage{
 learning_rate_schedule_inverse_time_decay(
-initial_learning_rate,
-decay_steps,
-decay_rate,
-staircase = FALSE,
-name = "InverseTimeDecay"
+  initial_learning_rate,
+  decay_steps,
+  decay_rate,
+  staircase = FALSE,
+  name = "InverseTimeDecay"
 )
 }
 \arguments{
@@ -43,15 +43,15 @@ the learning rate value across different invocations of optimizer functions.
 It is computed as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
-initial_learning_rate / (1 + decay_rate * step / decay_step)
+  initial_learning_rate / (1 + decay_rate * step / decay_step)
 \}
 }\if{html}{\out{</div>}}
 
 or, if \code{staircase} is \code{TRUE}, as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{decayed_learning_rate <- function(step) \{
-initial_learning_rate /
-(1 + decay_rate * floor(step / decay_step))
+  initial_learning_rate /
+           (1 + decay_rate * floor(step / decay_step))
 \}
 }\if{html}{\out{</div>}}
 
@@ -66,12 +66,12 @@ initial_learning_rate <- 0.1
 decay_steps <- 1.0
 decay_rate <- 0.5
 learning_rate_fn <- learning_rate_schedule_inverse_time_decay(
-initial_learning_rate, decay_steps, decay_rate)
+    initial_learning_rate, decay_steps, decay_rate)
 
 model \%>\% compile(
-optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
-loss = 'sparse_categorical_crossentropy',
-metrics = 'accuracy')
+  optimizer = optimizer_sgd(learning_rate=learning_rate_fn),
+  loss = 'sparse_categorical_crossentropy',
+  metrics = 'accuracy')
 )
 
 model \%>\% fit(data, labels, epochs=5)

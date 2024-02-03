@@ -5,23 +5,23 @@
 \title{1D depthwise convolution layer.}
 \usage{
 layer_depthwise_conv_1d(
-object,
-kernel_size,
-strides = 1L,
-padding = "valid",
-depth_multiplier = 1L,
-data_format = NULL,
-dilation_rate = 1L,
-activation = NULL,
-use_bias = TRUE,
-depthwise_initializer = "glorot_uniform",
-bias_initializer = "zeros",
-depthwise_regularizer = NULL,
-bias_regularizer = NULL,
-activity_regularizer = NULL,
-depthwise_constraint = NULL,
-bias_constraint = NULL,
-...
+  object,
+  kernel_size,
+  strides = 1L,
+  padding = "valid",
+  depth_multiplier = 1L,
+  data_format = NULL,
+  dilation_rate = 1L,
+  activation = NULL,
+  use_bias = TRUE,
+  depthwise_initializer = "glorot_uniform",
+  bias_initializer = "zeros",
+  depthwise_regularizer = NULL,
+  bias_regularizer = NULL,
+  activity_regularizer = NULL,
+  depthwise_constraint = NULL,
+  bias_constraint = NULL,
+  ...
 )
 }
 \arguments{
@@ -135,9 +135,9 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 12))
 y <- x |> layer_depthwise_conv_1d(
-kernel_size = 3,
-depth_multiplier = 3,
-activation = 'relu'
+  kernel_size = 3,
+  depth_multiplier = 3,
+  activation = 'relu'
 )
 shape(y)
 }\if{html}{\out{</div>}}

@@ -9,14 +9,14 @@
 \method{summary}{keras.src.models.model.Model}(object, ...)
 
 \method{format}{keras.src.models.model.Model}(
-x,
-line_length = getOption("width"),
-positions = NULL,
-expand_nested = FALSE,
-show_trainable = NA,
-...,
-layer_range = NULL,
-compact = TRUE
+  x,
+  line_length = getOption("width"),
+  positions = NULL,
+  expand_nested = FALSE,
+  show_trainable = NA,
+  ...,
+  layer_range = NULL,
+  compact = TRUE
 )
 
 \method{print}{keras.src.models.model.Model}(x, ...)

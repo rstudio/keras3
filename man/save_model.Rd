@@ -23,8 +23,8 @@ Saves a model as a \code{.keras} file.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(3)) |>
-layer_dense(5) |>
-layer_activation_softmax()
+  layer_dense(5) |>
+  layer_activation_softmax()
 
 model |> save_model("model.keras")
 loaded_model <- load_model("model.keras")
@@ -32,8 +32,8 @@ loaded_model <- load_model("model.keras")
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(10, 3))
 stopifnot(all.equal(
-model |> predict(x),
-loaded_model |> predict(x)
+  model |> predict(x),
+  loaded_model |> predict(x)
 ))
 }\if{html}{\out{</div>}}
 

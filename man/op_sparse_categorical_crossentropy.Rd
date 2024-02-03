@@ -5,10 +5,10 @@
 \title{Computes sparse categorical cross-entropy loss.}
 \usage{
 op_sparse_categorical_crossentropy(
-target,
-output,
-from_logits = FALSE,
-axis = -1L
+  target,
+  output,
+  from_logits = FALSE,
+  axis = -1L
 )
 }
 \arguments{
@@ -45,8 +45,8 @@ dissimilarity between the target and output probabilities or logits.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{target <- op_array(c(0, 1, 2), dtype="int32")
 output <- op_array(rbind(c(0.9, 0.05, 0.05),
-c(0.1, 0.8,  0.1),
-c(0.2, 0.3,  0.5)))
+                        c(0.1, 0.8,  0.1),
+                        c(0.2, 0.3,  0.5)))
 op_sparse_categorical_crossentropy(target, output)
 }\if{html}{\out{</div>}}
 

@@ -5,13 +5,13 @@
 \title{Max pooling operation for 1D temporal data.}
 \usage{
 layer_max_pooling_1d(
-object,
-pool_size = 2L,
-strides = NULL,
-padding = "valid",
-data_format = NULL,
-name = NULL,
-...
+  object,
+  pool_size = 2L,
+  strides = NULL,
+  padding = "valid",
+  data_format = NULL,
+  name = NULL,
+  ...
 )
 }
 \arguments{
@@ -71,10 +71,10 @@ The resulting output shape when using the \code{"same"} padding option is:
 \code{strides=1} and \code{padding="valid"}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_reshape(c(1, 2, 3, 4, 5),
-c(1, 5, 1))
+               c(1, 5, 1))
 max_pool_1d <- layer_max_pooling_1d(pool_size = 2,
-strides = 1,
-padding = "valid")
+                                    strides = 1,
+                                    padding = "valid")
 max_pool_1d(x)
 }\if{html}{\out{</div>}}
 
@@ -89,10 +89,10 @@ max_pool_1d(x)
 \code{strides=2} and \code{padding="valid"}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_reshape(c(1, 2, 3, 4, 5),
-c(1, 5, 1))
+               c(1, 5, 1))
 max_pool_1d <- layer_max_pooling_1d(pool_size = 2,
-strides = 2,
-padding = "valid")
+                                    strides = 2,
+                                    padding = "valid")
 max_pool_1d(x)
 }\if{html}{\out{</div>}}
 
@@ -105,10 +105,10 @@ max_pool_1d(x)
 \code{strides=1} and \code{padding="same"}:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_reshape(c(1, 2, 3, 4, 5),
-c(1, 5, 1))
+               c(1, 5, 1))
 max_pool_1d <- layer_max_pooling_1d(pool_size = 2,
-strides = 1,
-padding = "same")
+                                    strides = 1,
+                                    padding = "same")
 max_pool_1d(x)
 }\if{html}{\out{</div>}}
 

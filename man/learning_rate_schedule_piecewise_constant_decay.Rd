@@ -5,9 +5,9 @@
 \title{A \code{LearningRateSchedule} that uses a piecewise constant decay schedule.}
 \usage{
 learning_rate_schedule_piecewise_constant_decay(
-boundaries,
-values,
-name = "PiecewiseConstant"
+  boundaries,
+  values,
+  name = "PiecewiseConstant"
 )
 }
 \arguments{
@@ -46,7 +46,7 @@ for the next 10000 steps, and 0.1 for any additional steps.
 boundaries <- c(100000, 110000)
 values <- c(1.0, 0.5, 0.1)
 learning_rate_fn <- learning_rate_schedule_piecewise_constant_decay(
-boundaries, values)
+  boundaries, values)
 
 # Later, whenever we perform an optimization step, we pass in the step.
 learning_rate <- learning_rate_fn(step)

@@ -5,17 +5,17 @@
 \title{Approximates the AUC (Area under the curve) of the ROC or PR curves.}
 \usage{
 metric_auc(
-...,
-num_thresholds = 200L,
-curve = "ROC",
-summation_method = "interpolation",
-name = NULL,
-dtype = NULL,
-thresholds = NULL,
-multi_label = FALSE,
-num_labels = NULL,
-label_weights = NULL,
-from_logits = FALSE
+  ...,
+  num_thresholds = 200L,
+  curve = "ROC",
+  summation_method = "interpolation",
+  name = NULL,
+  dtype = NULL,
+  thresholds = NULL,
+  multi_label = FALSE,
+  num_labels = NULL,
+  label_weights = NULL,
+  from_logits = FALSE
 )
 }
 \arguments{
@@ -118,7 +118,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_auc(num_thresholds = 3)
 m$update_state(c(0,   0,   1,   1),
-c(0, 0.5, 0.3, 0.9))
+               c(0, 0.5, 0.3, 0.9))
 # threshold values are [0 - 1e-7, 0.5, 1 + 1e-7]
 # tp = [2, 1, 0], fp = [2, 0, 0], fn = [0, 1, 2], tn = [0, 2, 2]
 # tp_rate = recall = [1, 0.5, 0], fp_rate = [1, 0, 0]
@@ -133,8 +133,8 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0,   0,   1,   1),
-c(0, 0.5, 0.3, 0.9),
-sample_weight=c(1, 0, 0, 1))
+               c(0, 0.5, 0.3, 0.9),
+               sample_weight=c(1, 0, 0, 1))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -146,16 +146,16 @@ Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Reports the AUC of a model outputting a probability.
 model |> compile(
-optimizer = 'sgd',
-loss = loss_binary_crossentropy(),
-metrics = list(metric_auc())
+  optimizer = 'sgd',
+  loss = loss_binary_crossentropy(),
+  metrics = list(metric_auc())
 )
 
 # Reports the AUC of a model outputting a logit.
 model |> compile(
-optimizer = 'sgd',
-loss = loss_binary_crossentropy(from_logits = TRUE),
-metrics = list(metric_auc(from_logits = TRUE))
+  optimizer = 'sgd',
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_auc(from_logits = TRUE))
 )
 }\if{html}{\out{</div>}}
 }

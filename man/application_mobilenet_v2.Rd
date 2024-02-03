@@ -5,14 +5,14 @@
 \title{Instantiates the MobileNetV2 architecture.}
 \usage{
 application_mobilenet_v2(
-input_shape = NULL,
-alpha = 1,
-include_top = TRUE,
-weights = "imagenet",
-input_tensor = NULL,
-pooling = NULL,
-classes = 1000L,
-classifier_activation = "softmax"
+  input_shape = NULL,
+  alpha = 1,
+  include_top = TRUE,
+  weights = "imagenet",
+  input_tensor = NULL,
+  pooling = NULL,
+  classes = 1000L,
+  classifier_activation = "softmax"
 )
 }
 \arguments{

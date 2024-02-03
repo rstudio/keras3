@@ -5,12 +5,12 @@
 \title{layer_bidirectional}
 \usage{
 bidirectional(
-object,
-layer,
-merge_mode = "concat",
-weights = NULL,
-backward_layer = NULL,
-...
+  object,
+  layer,
+  merge_mode = "concat",
+  weights = NULL,
+  backward_layer = NULL,
+  ...
 )
 }
 \arguments{

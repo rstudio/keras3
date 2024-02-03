@@ -5,13 +5,13 @@
 \title{Average pooling operation for 3D data (spatial or spatio-temporal).}
 \usage{
 layer_average_pooling_3d(
-object,
-pool_size,
-strides = NULL,
-padding = "valid",
-data_format = "channels_last",
-name = NULL,
-...
+  object,
+  pool_size,
+  strides = NULL,
+  padding = "valid",
+  data_format = "channels_last",
+  name = NULL,
+  ...
 )
 }
 \arguments{

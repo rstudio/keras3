@@ -5,22 +5,22 @@
 \title{Layer that normalizes its inputs.}
 \usage{
 layer_batch_normalization(
-object,
-axis = -1L,
-momentum = 0.99,
-epsilon = 0.001,
-center = TRUE,
-scale = TRUE,
-beta_initializer = "zeros",
-gamma_initializer = "ones",
-moving_mean_initializer = "zeros",
-moving_variance_initializer = "ones",
-beta_regularizer = NULL,
-gamma_regularizer = NULL,
-beta_constraint = NULL,
-gamma_constraint = NULL,
-synchronized = FALSE,
-...
+  object,
+  axis = -1L,
+  momentum = 0.99,
+  epsilon = 0.001,
+  center = TRUE,
+  scale = TRUE,
+  beta_initializer = "zeros",
+  gamma_initializer = "ones",
+  moving_mean_initializer = "zeros",
+  moving_variance_initializer = "ones",
+  beta_regularizer = NULL,
+  gamma_regularizer = NULL,
+  beta_constraint = NULL,
+  gamma_constraint = NULL,
+  synchronized = FALSE,
+  ...
 )
 }
 \arguments{

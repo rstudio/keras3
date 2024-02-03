@@ -5,11 +5,11 @@
 \title{Computes mean squared logarithmic error between \code{y_true} and \code{y_pred}.}
 \usage{
 metric_mean_squared_logarithmic_error(
-y_true,
-y_pred,
-...,
-name = "mean_squared_logarithmic_error",
-dtype = NULL
+  y_true,
+  y_pred,
+  ...,
+  name = "mean_squared_logarithmic_error",
+  dtype = NULL
 )
 }
 \arguments{
@@ -47,7 +47,7 @@ m$result()
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
-sample_weight = c(1, 0))
+               sample_weight = c(1, 0))
 m$result()
 }\if{html}{\out{</div>}}
 
@@ -58,9 +58,9 @@ m$result()
 Usage with \code{compile()} API:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-optimizer = 'sgd',
-loss = 'mse',
-metrics = list(metric_mean_squared_logarithmic_error()))
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_mean_squared_logarithmic_error()))
 }\if{html}{\out{</div>}}
 }
 

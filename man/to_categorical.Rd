@@ -34,10 +34,10 @@ print(a)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{b <- array(c(.9, .04, .03, .03,
-.3, .45, .15, .13,
-.04, .01, .94, .05,
-.12, .21, .5, .17),
-dim = c(4, 4))
+              .3, .45, .15, .13,
+              .04, .01, .94, .05,
+              .12, .21, .5, .17),
+              dim = c(4, 4))
 loss <- op_categorical_crossentropy(a, b)
 loss
 }\if{html}{\out{</div>}}

@@ -5,11 +5,11 @@
 \title{Splits a dataset into a left half and a right half (e.g. train / test).}
 \usage{
 split_dataset(
-dataset,
-left_size = NULL,
-right_size = NULL,
-shuffle = FALSE,
-seed = NULL
+  dataset,
+  left_size = NULL,
+  right_size = NULL,
+  shuffle = FALSE,
+  seed = NULL
 )
 }
 \arguments{

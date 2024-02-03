@@ -5,12 +5,12 @@
 \title{Extracts patches from the image(s).}
 \usage{
 op_image_extract_patches(
-image,
-size,
-strides = NULL,
-dilation_rate = 1L,
-padding = "valid",
-data_format = "channels_last"
+  image,
+  size,
+  strides = NULL,
+  dilation_rate = 1L,
+  padding = "valid",
+  data_format = "channels_last"
 )
 }
 \arguments{

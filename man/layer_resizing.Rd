@@ -5,13 +5,13 @@
 \title{A preprocessing layer which resizes images.}
 \usage{
 layer_resizing(
-object,
-height,
-width,
-interpolation = "bilinear",
-crop_to_aspect_ratio = FALSE,
-data_format = NULL,
-...
+  object,
+  height,
+  width,
+  interpolation = "bilinear",
+  crop_to_aspect_ratio = FALSE,
+  data_format = NULL,
+  ...
 )
 }
 \arguments{

@@ -5,15 +5,15 @@
 \title{Evaluate a Keras Model}
 \usage{
 \method{evaluate}{keras.src.models.model.Model}(
-object,
-x = NULL,
-y = NULL,
-...,
-batch_size = NULL,
-verbose = getOption("keras.verbose", default = "auto"),
-sample_weight = NULL,
-steps = NULL,
-callbacks = NULL
+  object,
+  x = NULL,
+  y = NULL,
+  ...,
+  batch_size = NULL,
+  verbose = getOption("keras.verbose", default = "auto"),
+  sample_weight = NULL,
+  steps = NULL,
+  callbacks = NULL
 )
 }
 \arguments{

@@ -5,22 +5,22 @@
 \title{Optimizer that implements the AdamW algorithm.}
 \usage{
 optimizer_adam_w(
-learning_rate = 0.001,
-weight_decay = 0.004,
-beta_1 = 0.9,
-beta_2 = 0.999,
-epsilon = 1e-07,
-amsgrad = FALSE,
-clipnorm = NULL,
-clipvalue = NULL,
-global_clipnorm = NULL,
-use_ema = FALSE,
-ema_momentum = 0.99,
-ema_overwrite_frequency = NULL,
-name = "adamw",
-...,
-loss_scale_factor = NULL,
-gradient_accumulation_steps = NULL
+  learning_rate = 0.001,
+  weight_decay = 0.004,
+  beta_1 = 0.9,
+  beta_2 = 0.999,
+  epsilon = 1e-07,
+  amsgrad = FALSE,
+  clipnorm = NULL,
+  clipvalue = NULL,
+  global_clipnorm = NULL,
+  use_ema = FALSE,
+  ema_momentum = 0.99,
+  ema_overwrite_frequency = NULL,
+  name = "adamw",
+  ...,
+  loss_scale_factor = NULL,
+  gradient_accumulation_steps = NULL
 )
 }
 \arguments{

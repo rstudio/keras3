@@ -5,18 +5,18 @@
 \title{Plot a Keras model}
 \usage{
 \method{plot}{keras.src.models.model.Model}(
-x,
-show_shapes = FALSE,
-show_dtype = FALSE,
-show_layer_names = FALSE,
-...,
-rankdir = "TB",
-expand_nested = FALSE,
-dpi = 200,
-layer_range = NULL,
-show_layer_activations = FALSE,
-show_trainable = NA,
-to_file = NULL
+  x,
+  show_shapes = FALSE,
+  show_dtype = FALSE,
+  show_layer_names = FALSE,
+  ...,
+  rankdir = "TB",
+  expand_nested = FALSE,
+  dpi = 200,
+  layer_range = NULL,
+  show_layer_activations = FALSE,
+  show_trainable = NA,
+  to_file = NULL
 )
 }
 \arguments{
@@ -63,7 +63,7 @@ Nothing, called for it's side effects.
 Plot a Keras model
 }
 \section{Raises}{
-ValueError: if \code{plot(model)} is called before the model is
+ ValueError: if \code{plot(model)} is called before the model is
 built, unless a \verb{input_shape = } argument was supplied to
 \code{keras_model_sequential()}.
 }
