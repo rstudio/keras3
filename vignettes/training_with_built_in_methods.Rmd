@@ -1272,13 +1272,13 @@ model |> fit(
 
 There are many built-in callbacks already available in Keras, such as:
 
-- [`callback_model_checkpoint()`]: Periodically save the model.
-- [`callback_early_stopping()`]: Stop training when training is no longer improving the validation
+- `callback_model_checkpoint()`: Periodically save the model.
+- `callback_early_stopping()`: Stop training when training is no longer improving the validation
 metrics.
-- [`callback_tensorboard()`]: periodically write model logs that can be visualized in
+- `callback_tensorboard()`: periodically write model logs that can be visualized in
 [TensorBoard](https://www.tensorflow.org/tensorboard) (more details in the section
 "Visualization").
-- [`callback_csv_logger()`]: streams loss and metrics data to a CSV file.
+- `callback_csv_logger()`: streams loss and metrics data to a CSV file.
 - etc.
 
 See the [callbacks documentation](https://keras.posit.co/reference/index.html#callbacks) for the complete list.
