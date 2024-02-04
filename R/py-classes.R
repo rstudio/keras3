@@ -478,7 +478,7 @@ def wrap_fn(r_fn):
 #' @param body an expression that can be evaluated to construct the class
 #'   methods.
 #'
-#' @return The python class constructor, invisibly. Note, the same constructor is
+#' @returns The python class constructor, invisibly. Note, the same constructor is
 #'   also assigned in the parent frame.
 #' @export
 #' @aliases py_class
@@ -741,7 +741,7 @@ function(x) {
 #' @param sym symbol to bind
 #' @param value A function to call when the value of `sym` is accessed.
 #'
-#' @return `value`, invisibly
+#' @returns `value`, invisibly
 #' @export
 #'
 #' @details Active bindings defined in a [`%py_class%`] are converted to

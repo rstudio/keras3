@@ -97,7 +97,7 @@
 #'   wrapped in `I()` are used asis (see examples). All other objects are coerced
 #'   via `as.integer()`.
 #'
-#' @return A list with a `"keras_shape"` class attribute. Each element of the
+#' @returns A list with a `"keras_shape"` class attribute. Each element of the
 #'   list will be either a) `NULL`, b) an integer or c) a scalar integer tensor
 #'   (e.g., when supplied a TF tensor with a unspecified dimension in a function
 #'   being traced).

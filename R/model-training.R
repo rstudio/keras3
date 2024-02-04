@@ -866,7 +866,7 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #'
 #' @family model functions
 #'
-#' @return `format()` returns a length 1 character vector. `print()` returns the
+#' @returns `format()` returns a length 1 character vector. `print()` returns the
 #'   model object invisibly. `summary()` returns the output of `format()`
 #'   invisibly after printing it.
 #'

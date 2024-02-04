@@ -11,7 +11,7 @@
 #' this layer will call.
 #' @param args List of arguments to the layer initialize function.
 #'
-#' @return A Keras layer
+#' @returns A Keras layer
 #'
 #' @note The `object` parameter can be missing, in which case the
 #' layer is created without a connection to an existing graph.

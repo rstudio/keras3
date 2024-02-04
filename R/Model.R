@@ -18,7 +18,7 @@
 #' Optional methods that can be overridden.
 #' @inheritParams Layer
 #'
-#' @return A model constructor function, which you can call to create an
+#' @returns A model constructor function, which you can call to create an
 #'   instance of the new model type.
 #' @seealso [active_property()] (e.g., for a `metrics` property implemented as a
 #'   function).

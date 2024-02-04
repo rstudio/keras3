@@ -3881,7 +3881,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' (unless you changed it, it uses `"channels_last"`).
 #' Defaults to `NULL`.
 #'
-#' @return
+#' @returns
 #' - A list of decoded predictions in case of `application_decode_predictions()`.
 #' - A batch of preprocessed inputs in case of `application_preprocess_inputs()`.
 #'

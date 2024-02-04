@@ -316,7 +316,7 @@ clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
 #' @param index Integer, index of layer (1-based). Also valid are negative
 #'   values, which count from the end of model.
 #'
-#' @return A layer instance.
+#' @returns A layer instance.
 #'
 #' @family model functions
 #'

@@ -43,7 +43,7 @@
 #' The `keras` module object is the equivalent of
 #' `reticulate::import("keras")` and provided mainly as a convenience.
 #'
-#' @return the keras Python module
+#' @returns the keras Python module
 #' @export
 #' @usage NULL
 #' @format An object of class `python.builtin.module`
@@ -238,7 +238,7 @@ keras_version <- function() {
 #' @param version Minimum required version of Keras (defaults to `NULL`, no
 #'   required version).
 #'
-#' @return Logical indicating whether Keras (or the specified minimum version of
+#' @returns Logical indicating whether Keras (or the specified minimum version of
 #'   Keras) is available.
 #'
 #' @examples

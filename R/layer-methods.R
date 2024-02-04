@@ -14,7 +14,7 @@
 #' @param custom_objects list of custom objects needed to instantiate the layer,
 #'   e.g., custom layers defined by `new_layer_class()` or similar.
 #'
-#' @return `get_config()` returns an object with the configuration,
+#' @returns `get_config()` returns an object with the configuration,
 #'   `from_config()` returns a re-instantiation of the object.
 #'
 #' @note Objects returned from `get_config()` are not serializable via RDS. If
@@ -119,7 +119,7 @@ set_weights <- function(object, weights) {
 #'
 #' @param object Layer or model object
 #'
-#' @return An integer count
+#' @returns An integer count
 #'
 #' @family layer methods
 #'

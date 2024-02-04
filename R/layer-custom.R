@@ -55,7 +55,7 @@ py_formals <- function(py_obj) {
 #'
 #' See guide 'making_new_layers_and_models_via_subclassing.Rmd' for example usage.
 #'
-#' @return An R function that behaves similarly to the builtin keras `layer_*`
+#' @returns An R function that behaves similarly to the builtin keras `layer_*`
 #'   functions. When called, it will create the class instance, and also
 #'   optionally call it on a supplied argument `object` if it is present. This
 #'   enables keras layers to compose nicely with the pipe (`|>`).

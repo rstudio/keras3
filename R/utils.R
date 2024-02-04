@@ -500,7 +500,7 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #'   then R doubles will be converted to the default floating point type for the
 #'   current Keras backend.
 #'
-#' @return NumPy array with the specified `dtype` (or list of NumPy arrays if a
+#' @returns NumPy array with the specified `dtype` (or list of NumPy arrays if a
 #'   list was passed for `x`).
 #'
 #' @keywords internal
@@ -594,7 +594,7 @@ keras_array <- function(x, dtype = NULL) {
 #' @param show_trainable
 #' whether to display if a layer is trainable.
 #'
-#' @return Nothing, called for it's side effects.
+#' @returns Nothing, called for it's side effects.
 #'
 #' @section Raises: ValueError: if `plot(model)` is called before the model is
 #'   built, unless a `input_shape = ` argument was supplied to
@@ -715,7 +715,7 @@ function(x,
 #'
 #' @param ... R lists or atomic vectors, optionally named.
 #'
-#' @return A inverted list
+#' @returns A inverted list
 #' @export
 #'
 #' @family data utils
@@ -773,7 +773,7 @@ zip_lists <- function(...) {
 #' @param ... Dimensions for the array as separate integers or as a single vector.
 #' @param gen A function for generating random numbers, defaulting to `runif`.
 #'
-#' @return Returns an array with the specified dimensions filled with random numbers.
+#' @returns Returns an array with the specified dimensions filled with random numbers.
 #' @noRd
 #'
 #' @examples

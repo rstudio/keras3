@@ -6,7 +6,7 @@
 #' Dataset of 50,000 32x32 color training images, labeled over 10 categories,
 #' and 10,000 test images.
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
 #'
 #' The `x` data is an array of RGB image data with shape (num_samples, 3, 32,
 #' 32).
@@ -31,7 +31,7 @@ dataset_cifar10 <- function() {
 #'
 #' @param label_mode one of "fine", "coarse".
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
 #'
 #' The `x` data is an array of RGB image data with shape (num_samples, 3, 32, 32).
 #'
@@ -76,7 +76,7 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #'   `skip_top` limit will be replaced with this character.
 #' @param index_from Index actual words with this index and higher.
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
 #'
 #'   The `x` data includes integer sequences. If the `num_words` argument was
 #'   specific, the maximum possible index value is `num_words-1`. If the
@@ -137,7 +137,7 @@ dataset_imdb_word_index <- function(path = "imdb_word_index.json") {
 #'   `skip_top` limit will be replaced with this character.
 #' @param index_from index actual words with this index and higher.
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`
 #'   with same format as [dataset_imdb()]. The `dataset_reuters_word_index()`
 #'   function returns a list where the names are words and the values are
 #'   integer. e.g. `word_index[["giraffe"]]` might return `1234`.
@@ -177,7 +177,7 @@ dataset_reuters_word_index <- function(path = "reuters_word_index.pkl") {
 #'
 #' @param path Path where to cache the dataset locally (relative to ~/.keras/datasets).
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`, where
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`, where
 #'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
 #'   is an array of digit labels (integers in range 0-9) with shape (num_samples).
 #'
@@ -198,7 +198,7 @@ dataset_mnist <- function(path = "mnist.npz") {
 #' correspond to T-shirt/top, Trouser, Pullover, Dress, Coat, Sandal, Shirt,
 # 'Sneaker, Bag and Ankle boot.
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`, where
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`, where
 #'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
 #'   is an array of article labels (integers in range 0-9) with shape (num_samples).
 #'
@@ -237,7 +237,7 @@ dataset_fashion_mnist <- function() {
 #' @param seed Random seed for shuffling the data before computing the test
 #'   split.
 #'
-#' @return Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
 #'
 #' Samples contain 13 attributes of houses at different locations around
 #' the Boston suburbs in the late 1970s. Targets are the median values of the
