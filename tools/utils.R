@@ -36,6 +36,7 @@ library_stable(rlang)
 library_stable(purrr)
 library_stable(stringr)
 library_stable(glue)
+library_stable(cli)
 
 library(envir)
 library(commafree)
