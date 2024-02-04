@@ -104,6 +104,7 @@
 #' For forward/backward compatability.
 #'
 #' @export
+#' @returns an `Optimizer` instance
 #' @family optimizers
 #' @seealso
 #' + <https://keras.io/api/optimizers/adadelta#adadelta-class>
@@ -228,6 +229,7 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/adafactor#adafactor-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adafactor>
@@ -336,6 +338,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/adagrad#adagrad-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad>
@@ -457,6 +460,7 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/adam#adam-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adam>
@@ -587,6 +591,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/adamax#adamax-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax>
@@ -717,6 +722,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/adamw#adamw-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/AdamW>
@@ -879,6 +885,7 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/ftrl#ftrl-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl>
@@ -999,6 +1006,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Lion>
 #' @tether keras.optimizers.Lion
@@ -1110,6 +1118,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/LossScaleOptimizer>
 #' @tether keras.optimizers.LossScaleOptimizer
@@ -1223,6 +1232,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/Nadam#nadam-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Nadam>
@@ -1350,6 +1360,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/rmsprop#rmsprop-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/RMSprop>
@@ -1469,6 +1480,7 @@ function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
 #'
 #' @export
 #' @family optimizers
+#' @returns an `Optimizer` instance
 #' @seealso
 #' + <https://keras.io/api/optimizers/sgd#sgd-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD>

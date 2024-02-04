@@ -9,6 +9,8 @@ missing_returns_section <- function(block) {
 
 # Missing @returns
 walk_roxy_blocks(function(block) {
+  if(roxygen2::block_has_tags(block, "noRd"))
+    return()
   if(missing_returns_section(block)) {
     file <- block$file
     line <- block$line
