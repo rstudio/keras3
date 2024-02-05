@@ -11,6 +11,9 @@ with_custom_object_scope(objects, expr)
 
 \item{expr}{Expression to evaluate}
 }
+\value{
+The result from evaluating \code{expr} within the custom object scope.
+}
 \description{
 Provide a scope with mappings of names to custom objects
 }

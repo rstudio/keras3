@@ -15,6 +15,9 @@ random_dropout(inputs, rate, noise_shape = NULL, seed = NULL)
 
 \item{seed}{Initial seed for the random number generator}
 }
+\value{
+A tensor that is a copy of \code{inputs} with some values set to \code{0}.
+}
 \description{
 Randomly set some portion of values in the tensor to 0.
 }

@@ -9,6 +9,11 @@ active_property(fn)
 \arguments{
 \item{fn}{An R function}
 }
+\value{
+\code{fn}, with an additional R attribute that will cause \code{fn} to be
+converted to an active property when being converted to a method of a
+custom subclass.
+}
 \description{
 Create an active property class method
 }

@@ -78,6 +78,17 @@ while \code{"channels_first"} corresponds to inputs with shape
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 This layer will randomly zoom in or out on each axis of an image
 independently, filling empty space according to \code{fill_mode}.

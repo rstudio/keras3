@@ -15,6 +15,10 @@ register_keras_serializable(object, name = NULL, package = NULL)
 \code{key} (which is \code{"package>name"}) to identify the class.
 Defaults to the current package name, or \code{"Custom"} outside of a package.}
 }
+\value{
+\code{object} is returned invisibly, for convenient piping. This is
+primarily called for side effects.
+}
 \description{
 This function registers a custom class or function with the Keras custom
 object registry, so that it can be serialized and deserialized without

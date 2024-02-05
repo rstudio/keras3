@@ -29,6 +29,9 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 }
+\value{
+A tensor of random values.
+}
 \description{
 The generated values follow a uniform distribution in the range
 \verb{[minval, maxval)}. The lower bound \code{minval} is included in the range,

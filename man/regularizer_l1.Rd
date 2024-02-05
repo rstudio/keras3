@@ -9,6 +9,10 @@ regularizer_l1(l1 = 0.01)
 \arguments{
 \item{l1}{float, L1 regularization factor.}
 }
+\value{
+A \code{Regularizer} instance that can be passed to layer constructors or
+used as a standalone object.
+}
 \description{
 The L1 regularization penalty is computed as:
 \code{loss = l1 * reduce_sum(abs(x))}

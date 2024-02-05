@@ -30,16 +30,17 @@ modify_roxy_block_lines(function(block_lines, block) {
   if (basename(file) == "reexports.R") return()
 
   name <- doctether:::get_block_name(block)
-  if (!startsWith(name, "layer")) return()
-  # preferable prefferable  fod
+  # if (!startsWith(name, "layer")) return()
+  # # preferable prefferable  fod
+  # #
   #
-
-  # browser()
-  i <- which(block_lines ==  "#' @export")
-  block_lines[i] %<>% str_prefix("#' @inherit layer_dense return\n")
+  # # browser()
+  # i <- which(block_lines ==  "#' @export")
+  # block_lines[i] %<>% str_prefix("#' @inherit layer_dense return\n")
 
   cli_alert_info("{name} {.file {file}:{line}}")
-  block_lines
+  # block_lines
+  NULL
 })
 
 

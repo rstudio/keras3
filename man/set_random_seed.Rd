@@ -9,6 +9,9 @@ set_random_seed(seed)
 \arguments{
 \item{seed}{Integer, the random seed to use.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 You can use this utility to make almost any Keras program fully
 deterministic. Some limitations apply in cases where network communications

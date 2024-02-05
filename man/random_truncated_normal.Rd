@@ -28,6 +28,9 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 }
+\value{
+A tensor of random values.
+}
 \description{
 The values are drawn from a normal distribution with specified mean and
 standard deviation, discarding and re-drawing any samples that are more

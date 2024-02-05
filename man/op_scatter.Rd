@@ -14,6 +14,9 @@ indices for the values in \code{values}.}
 
 \item{shape}{Shape of the output tensor.}
 }
+\value{
+A tensor of shape \code{shape} where \code{indices} are set to \code{values}.
+}
 \description{
 At a high level, this operation does \code{zeros[indices] = updates} and
 returns the output. It is equivalent to:

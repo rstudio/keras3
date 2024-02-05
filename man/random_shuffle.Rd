@@ -21,6 +21,9 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 }
+\value{
+A tensor, a copy of \code{x} with the \code{axis} axis shuffled.
+}
 \description{
 Shuffle the elements of a tensor uniformly at random along an axis.
 }

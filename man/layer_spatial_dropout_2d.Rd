@@ -31,6 +31,17 @@ If you never set it, then it will be \code{"channels_last"}.}
 
 \item{dtype}{datatype (e.g., \code{"float32"}).}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 This version performs the same function as Dropout, however, it drops
 entire 2D feature maps instead of individual elements. If adjacent pixels

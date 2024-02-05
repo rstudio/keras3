@@ -40,7 +40,9 @@ converted to be 1, and the rest 0. If \code{threshold} is
 \item{dtype}{Optional. Data type of the metric result.}
 }
 \value{
-F-1 Score: float.
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
 }
 \description{
 Formula:
@@ -68,6 +70,10 @@ result
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.49999997 0.79999995 0.66666657], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
+}
+
+\section{Returns}{
+F-1 Score: float.
 }
 
 \seealso{

@@ -20,7 +20,7 @@ Computes the error function of \code{x}, element-wise.
 op_erf(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.99997777 -0.9953222  -0.84270084  0.          0.84270084], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.99997795 -0.9953222  -0.84270084  0.          0.84270084], shape=(5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

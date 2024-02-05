@@ -25,6 +25,9 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
 }
+\value{
+A tensor of random values.
+}
 \description{
 Draw random samples from the Gamma distribution.
 }

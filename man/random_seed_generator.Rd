@@ -11,6 +11,10 @@ random_seed_generator(seed = NULL, ...)
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+A \code{SeedGenerator} instance, which can be passed as the \verb{seed = }
+argument to other random tensor generators.
+}
 \description{
 In Keras, all RNG-using methods (such as \code{random_normal()})
 are stateless, meaning that if you pass an integer seed to them

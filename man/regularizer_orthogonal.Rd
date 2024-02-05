@@ -18,6 +18,10 @@ rows mode, the regularization effect seeks to make the rows of the
 input orthogonal to each other. In columns mode, it seeks to make
 the columns of the input orthogonal to each other.}
 }
+\value{
+A \code{Regularizer} instance that can be passed to layer constructors or
+used as a standalone object.
+}
 \description{
 It can be applied to either the rows of a matrix (\code{mode="rows"}) or its
 columns (\code{mode="columns"}). When applied to a \code{Dense} kernel of shape

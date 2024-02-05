@@ -35,6 +35,17 @@ Defaults to \code{"channels_last"}.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 The implementation uses interpolative resizing, given the resize method
 (specified by the \code{interpolation} argument). Use \code{interpolation=nearest}

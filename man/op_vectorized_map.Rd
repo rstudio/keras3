@@ -11,6 +11,9 @@ op_vectorized_map(elements, f)
 
 \item{f}{A function taking either a tensor, or list of tensors.}
 }
+\value{
+A tensor, the result of mapping \code{f} across \code{elements.}
+}
 \description{
 Schematically, \code{vectorized_map} implements the following,
 in the case of a single tensor input \code{elements}:

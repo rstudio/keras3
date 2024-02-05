@@ -38,6 +38,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A model constructor function, which you can call to create an
+instance of the new model type.
+}
 \description{
 \code{new_model_class()} is an alias for \code{\link[=Model]{Model()}}.
 See \verb{?}\code{\link[=Model]{Model()}} for the full documentation.

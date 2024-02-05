@@ -22,6 +22,9 @@ output lengths.}
 \item{mask_index}{The index of the mask character in the vocabulary.
 Defaults to \code{0}.}
 }
+\value{
+A tensor, shape \code{(batch_size)}, of loss values.
+}
 \description{
 CTC (Connectionist Temporal Classification) loss.
 }

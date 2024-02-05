@@ -36,6 +36,17 @@ output values will be clipped to this range.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 This layer will randomly increase/reduce the brightness for the input RGB
 images. At inference time, the output will be identical to the input.

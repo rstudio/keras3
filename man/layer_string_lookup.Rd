@@ -116,6 +116,17 @@ strings. Defaults to \code{"utf-8"}.}
 \item{vocabulary_dtype}{The dtype of the vocabulary terms, for example
 \code{"int64"} or \code{"int32"}. Defaults to \code{"int64"}.}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 This layer translates a set of arbitrary strings into integer output via a
 table-based vocabulary lookup. This layer will perform no splitting or

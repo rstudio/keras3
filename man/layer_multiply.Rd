@@ -11,6 +11,17 @@ layer_multiply(inputs, ...)
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 It takes as input a list of tensors, all of the same shape,
 and returns a single tensor (also of the same shape).

@@ -7,12 +7,18 @@
 op_get_item(x, key)
 }
 \arguments{
-\item{x}{see description}
+\item{x}{A dictionary-like object}
 
-\item{key}{see description}
+\item{key}{Generally, a string, but most object with a \verb{__hash__} method are acceptable.}
+}
+\value{
+\code{key}.
 }
 \description{
 Return \code{x[key]}.
+}
+\note{
+Generally, calling \code{x[[key]]} or \code{x$key} is preferable.
 }
 \seealso{
 \itemize{

@@ -108,6 +108,17 @@ For a complete list of all supported types, see
 
 \item{max_tokens, num_oov_indices}{Passed on to \code{\link[=layer_integer_lookup]{layer_integer_lookup()}} by \code{feature_integer_categorical()} or to \code{\link[=layer_string_lookup]{layer_string_lookup()}} by \code{feature_string_categorical()}.}
 }
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
+}
 \description{
 \strong{Available feature types:}
 
