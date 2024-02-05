@@ -267,6 +267,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns the custom \code{Callback} instances,
+similar to the builtin callback functions.
+}
 \description{
 \code{new_callback_class()} is an alias for \code{\link[=Callback]{Callback()}}.
 See \verb{?}\code{\link[=Callback]{Callback()}} for the full documentation.

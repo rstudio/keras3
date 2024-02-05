@@ -6,6 +6,9 @@
 \usage{
 callback_terminate_on_nan()
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 Callback that terminates training when a NaN loss is encountered.
 }

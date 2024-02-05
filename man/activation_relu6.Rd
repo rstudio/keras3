@@ -9,6 +9,9 @@ activation_relu6(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 It's the ReLU function, but truncated to a maximum value of 6.
 }

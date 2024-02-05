@@ -9,6 +9,9 @@ use_backend(backend = c("tensorflow", "jax", "torch"))
 \arguments{
 \item{backend}{string, one of \code{"tensorflow"}, \code{"jax"}, or \code{"torch"}. Defaults to \code{"tensorflow"}.}
 }
+\value{
+Called primarily for side effects. Returns the provided \code{backend}, invisibly.
+}
 \description{
 Configure a Keras backend
 }

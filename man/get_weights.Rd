@@ -18,6 +18,9 @@ of non-trainable variables are returned.}
 
 \item{weights}{Weights as R array}
 }
+\value{
+A list of R arrays.
+}
 \description{
 Layer/Model weights as R arrays
 }

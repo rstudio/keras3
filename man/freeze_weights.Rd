@@ -19,6 +19,11 @@ unfreeze_weights(object, from = NULL, to = NULL, which = NULL)
 \item{which}{layer names, integer positions, layers, logical vector (of
 \code{length(object$layers)}), or a function returning a logical vector.}
 }
+\value{
+The input \code{object} with frozen weights is returned, invisibly. Note,
+\code{object} is modified in place, and the return value is only provided to
+make usage with the pipe convenient.
+}
 \description{
 Freeze weights in a model or layer so that they are no longer trainable.
 }

@@ -18,6 +18,12 @@ via an interactive prompt.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+If \code{filepath} is provided, then this function is called primarily
+for side effects, and \code{model} is returned invisibly. If \code{filepath} is not
+provided or \code{NULL}, then the serialized model is returned as an R raw
+vector.
+}
 \description{
 Saves a model as a \code{.keras} file.
 }

@@ -19,6 +19,10 @@ the shape of the weights.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+This is called primarily for side effects. \code{model} is returned,
+invisibly, to enable usage with the pipe.
+}
 \description{
 Weights are loaded based on the network's
 topology. This means the architecture should be the same as when the

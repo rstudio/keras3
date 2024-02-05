@@ -11,6 +11,9 @@ activation_log_softmax(x, axis = -1L)
 
 \item{axis}{Integer, axis along which the softmax is applied.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 Each input vector is handled independently.
 The \code{axis} argument sets which axis of the input the function

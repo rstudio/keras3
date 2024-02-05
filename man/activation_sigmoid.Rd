@@ -9,6 +9,9 @@ activation_sigmoid(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 It is defined as: \code{sigmoid(x) = 1 / (1 + exp(-x))}.
 

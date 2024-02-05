@@ -12,6 +12,10 @@ initializer_orthogonal(gain = 1, seed = NULL)
 \item{seed}{An integer. Used to make the behavior of the initializer
 deterministic.}
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 If the shape of the tensor to initialize is two-dimensional, it is
 initialized with an orthogonal matrix obtained from the QR decomposition of

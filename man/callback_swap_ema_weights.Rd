@@ -12,6 +12,9 @@ and \code{on_epoch_end()}. This is useful if you want to use
 EMA weights for other callbacks such as \code{callback_model_checkpoint()}.
 Defaults to \code{FALSE}.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 This callbacks replaces the model's weight values with the values of
 the optimizer's EMA weights (the exponential moving average of the past

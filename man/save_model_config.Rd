@@ -21,6 +21,10 @@ via an interactive prompt.}
 \item{custom_objects}{Optional named list mapping names to custom classes or
 functions to be considered during deserialization.}
 }
+\value{
+This is called primarily for side effects. \code{model} is returned,
+invisibly, to enable usage with the pipe.
+}
 \description{
 Save and re-load models configurations as JSON. Note that the representation
 does not include the weights, only the architecture.

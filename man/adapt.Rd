@@ -28,6 +28,9 @@ input dataset is exhausted. When passing an infinitely repeating dataset,
 you must specify the steps argument. This argument is not supported with
 array inputs.}
 }
+\value{
+Returns \code{object}, invisibly.
+}
 \description{
 Fits the state of the preprocessing layer to the data being passed
 }

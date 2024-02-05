@@ -79,6 +79,9 @@ metric to be monitored. Only applies if \code{save_best_value = TRUE}. Only
 overwrites the model weights already saved if the performance of
 current model is better than this value.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 \code{callback_model_checkpoint()} is used in conjunction with training using
 \code{model |> fit()} to save a model or weights (in a checkpoint file) at some

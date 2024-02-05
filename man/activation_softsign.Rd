@@ -9,6 +9,9 @@ activation_softsign(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 Softsign is defined as: \code{softsign(x) = x / (abs(x) + 1)}.
 }

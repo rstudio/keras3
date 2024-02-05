@@ -16,6 +16,10 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{random_seed_generator()}.}
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 Initializers allow you to pre-specify an initialization strategy, encoded in
 the Initializer object, without knowing the shape and dtype of the variable

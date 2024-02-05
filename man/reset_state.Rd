@@ -13,6 +13,9 @@ Not all Layers have resettable state (E.g., \code{adapt()}-able preprocessing
 layers and rnn layers have resettable state, but a \code{layer_dense()} does not).
 Calling this on a Layer instance without any resettable-state will error.}
 }
+\value{
+\code{object}, invisibly.
+}
 \description{
 Reset the state for a model, layer or metric.
 }

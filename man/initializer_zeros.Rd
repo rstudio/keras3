@@ -6,6 +6,10 @@
 \usage{
 initializer_zeros()
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 Initializer that generates tensors initialized to 0.
 }

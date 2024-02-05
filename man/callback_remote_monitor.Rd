@@ -26,6 +26,9 @@ The field is used only if the payload is sent within a form
 \item{send_as_json}{Boolean; whether the request should be
 sent as \code{"application/json"}.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 Requires the \code{requests} library.
 Events are sent to \code{root + '/publish/epoch/end/'} by default. Calls are

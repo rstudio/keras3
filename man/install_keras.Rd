@@ -30,6 +30,9 @@ install_keras(
 
 \item{restart_session}{Whether to restart the R session after installing (note this will only occur within RStudio).}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 This function will install Keras along with a selected backend, including all Python dependencies.
 }

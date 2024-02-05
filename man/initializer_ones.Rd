@@ -6,6 +6,10 @@
 \usage{
 initializer_ones()
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 Also available via the shortcut function \code{ones}.
 }

@@ -6,6 +6,9 @@
 \usage{
 config_enable_unsafe_deserialization()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Disables safe mode globally, allowing deserialization of lambdas.
 }

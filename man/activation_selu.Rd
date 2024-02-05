@@ -9,6 +9,9 @@ activation_selu(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 The Scaled Exponential Linear Unit (SELU) activation function is defined as:
 \itemize{

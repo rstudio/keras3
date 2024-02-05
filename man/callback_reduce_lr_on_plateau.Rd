@@ -44,6 +44,9 @@ operation after the learning rate has been reduced.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 Models often benefit from reducing the learning rate by a factor
 of 2-10 once learning stagnates. This callback monitors a

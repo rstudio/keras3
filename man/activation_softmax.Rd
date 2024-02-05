@@ -11,6 +11,9 @@ activation_softmax(x, axis = -1L)
 
 \item{axis}{Integer, axis along which the softmax is applied.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 The elements of the output vector are in range \verb{[0, 1]} and sum to 1.
 

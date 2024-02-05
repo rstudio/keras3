@@ -82,6 +82,9 @@ for the linear transformation of the recurrent state. Default: 0.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+A \code{Layer} instance, which is intended to be used with \code{layer_rnn()}.
+}
 \description{
 This class processes one step within the whole time sequence input, whereas
 \code{\link[=layer_lstm]{layer_lstm()}} processes the whole sequence.

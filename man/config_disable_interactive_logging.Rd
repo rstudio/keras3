@@ -6,6 +6,9 @@
 \usage{
 config_disable_interactive_logging()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 When interactive logging is disabled, Keras sends logs to \code{absl.logging}.
 This is the best option when using Keras in a non-interactive

@@ -9,6 +9,9 @@ config_set_epsilon(value)
 \arguments{
 \item{value}{float. New value of epsilon.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Set the value of the fuzz factor used in numeric expressions.
 }

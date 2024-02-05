@@ -34,6 +34,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns \code{Metric} instances, similar to the
+builtin metric functions.
+}
 \description{
 A \code{Metric} object encapsulates metric logic and state that can be used to
 track model performance during training. It is what is returned by the family

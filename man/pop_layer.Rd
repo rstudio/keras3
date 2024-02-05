@@ -9,6 +9,9 @@ pop_layer(object)
 \arguments{
 \item{object}{Sequential keras model object}
 }
+\value{
+The input \code{object}, invisibly.
+}
 \description{
 Remove the last layer in a Sequential model
 }

@@ -29,6 +29,10 @@ used instead of a filename, this parameter should always be used.}
 
 \item{...}{Additional keyword arguments passed to \code{PIL.Image.save()}.}
 }
+\value{
+Called primarily for side effects. The input \code{x} is returned,
+invisibly, to enable usage with the pipe.
+}
 \description{
 Saves an image stored as an array to a path or file object.
 }

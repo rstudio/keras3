@@ -30,6 +30,9 @@ If \code{delete_checkpoint = TRUE}, the checkpoint will be deleted after
 training is finished. Use \code{FALSE} if you'd like to keep the checkpoint
 for future usage.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 \code{callback_backup_and_restore()} callback is intended to recover training from an
 interruption that has happened in the middle of a \code{fit} execution, by

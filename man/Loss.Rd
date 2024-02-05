@@ -37,6 +37,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns \code{Loss} instances, similar to the
+builtin loss functions.
+}
 \description{
 Use this to define a custom loss class. Note, in most cases you do not need
 to subclass \code{Loss} to define a custom loss: you can also pass a bare R

@@ -9,6 +9,9 @@ config_set_floatx(value)
 \arguments{
 \item{value}{String; \code{'bfloat16'}, \code{'float16'}, \code{'float32'}, or \code{'float64'}.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Set the default float dtype.
 }

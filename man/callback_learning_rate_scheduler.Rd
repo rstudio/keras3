@@ -13,6 +13,9 @@ learning rate as output (float).}
 
 \item{verbose}{Integer. 0: quiet, 1: log update messages.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 At the beginning of every epoch, this callback gets the updated learning
 rate value from \code{schedule} function provided at \verb{__init__}, with the current

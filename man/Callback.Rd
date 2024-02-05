@@ -267,6 +267,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns the custom \code{Callback} instances,
+similar to the builtin callback functions.
+}
 \description{
 Callbacks can be passed to keras methods such as \code{fit()}, \code{evaluate()}, and
 \code{predict()} in order to hook into the various stages of the model training,

@@ -28,6 +28,10 @@ across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{random_seed_generator()}.}
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 With \verb{distribution = "truncated_normal" or "untruncated_normal"}, samples are
 drawn from a truncated/untruncated normal distribution with a mean of zero

@@ -19,6 +19,10 @@ set \code{axis} to \verb{[0, 1, 2]}
 to constrain the weights of each filter tensor of size
 \verb{(rows, cols, input_depth)}.}
 }
+\value{
+A \code{Constraint} instance, a callable that can be passed to layer
+constructors or used directly by calling it with tensors.
+}
 \description{
 Constrains the weights incident to each hidden unit to have unit norm.
 }

@@ -9,6 +9,9 @@ activation_exponential(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 Exponential activation function.
 }

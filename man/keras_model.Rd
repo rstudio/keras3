@@ -13,6 +13,9 @@ keras_model(inputs = NULL, outputs = NULL, ...)
 
 \item{...}{Any additional arguments}
 }
+\value{
+A \code{Model} instance.
+}
 \description{
 A model is a directed acyclic graph of layers.
 }

@@ -29,6 +29,9 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.
 
 \item{name}{String, name for the object}
 }
+\value{
+CTC loss value.
+}
 \description{
 CTC (Connectionist Temporal Classification) loss.
 }

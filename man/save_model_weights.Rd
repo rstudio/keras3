@@ -16,6 +16,10 @@ Path where to save the model. Must end in \code{.weights.h5}.}
 at the target location, or instead ask the user
 via an interactive prompt.}
 }
+\value{
+This is called primarily for side effects. \code{model} is returned,
+invisibly, to enable usage with the pipe.
+}
 \description{
 Saves all layer weights to a \code{.weights.h5} file.
 }

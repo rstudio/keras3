@@ -6,6 +6,9 @@
 \usage{
 config_disable_traceback_filtering()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Raw Keras tracebacks (also known as stack traces)
 involve many internal frames, which can be

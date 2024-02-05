@@ -12,6 +12,9 @@ custom_metric(name, metric_fn)
 \item{metric_fn}{An R function with signature \verb{function(y_true, y_pred)}
 that accepts tensors.}
 }
+\value{
+A callable function with a \verb{__name__} attribute.
+}
 \description{
 Custom metric function
 }

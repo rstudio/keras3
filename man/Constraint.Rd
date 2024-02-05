@@ -57,6 +57,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns \code{Constraint} instances, similar to the
+builtin constraint functions like \code{constraint_maxnorm()}.
+}
 \description{
 Base class for weight constraints.
 

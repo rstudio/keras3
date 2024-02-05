@@ -12,6 +12,9 @@ rnn_cells_stack(cells, ...)
 \item{...}{Unnamed arguments are treated as additional \code{cells}.
 Named arguments are passed on to the underlying layer.}
 }
+\value{
+A \code{Layer} instance, which is intended to be used with \code{layer_rnn()}.
+}
 \description{
 Used to implement efficient stacked RNNs.
 }

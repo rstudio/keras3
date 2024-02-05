@@ -11,6 +11,9 @@ activation_gelu(x, approximate = FALSE)
 
 \item{approximate}{A \code{bool}, whether to enable approximation.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 The Gaussian error linear unit (GELU) is defined as:
 

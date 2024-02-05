@@ -9,6 +9,9 @@ activation_silu(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 It is defined as: \code{swish(x) = x * sigmoid(x)}.
 

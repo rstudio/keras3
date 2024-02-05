@@ -12,6 +12,9 @@ activation_leaky_relu(x, negative_slope = 0.2)
 \item{negative_slope}{A \code{float} that controls the slope
 for values lower than the threshold.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 Leaky relu activation function.
 }

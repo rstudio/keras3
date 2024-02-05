@@ -9,6 +9,10 @@ initializer_constant(value = 0)
 \arguments{
 \item{value}{A numeric scalar.}
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 Only scalar values are allowed.
 The constant value provided must be convertible to the dtype requested

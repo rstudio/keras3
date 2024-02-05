@@ -6,6 +6,9 @@
 \usage{
 config_enable_interactive_logging()
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 When interactive logging is enabled, Keras displays logs via stdout.
 This provides the best experience when using Keras in an interactive

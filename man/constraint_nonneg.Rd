@@ -6,6 +6,10 @@
 \usage{
 constraint_nonneg()
 }
+\value{
+A \code{Constraint} instance, a callable that can be passed to layer
+constructors or used directly by calling it with tensors.
+}
 \description{
 Constrains the weights to be non-negative.
 }

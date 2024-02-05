@@ -9,6 +9,9 @@ activation_tanh(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 It is defined as:
 \code{tanh(x) = sinh(x) / cosh(x)}, i.e.

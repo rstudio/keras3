@@ -55,7 +55,10 @@ than creating a new placeholder tensor.}
 You can also change the trainable status of a model/layer with
 \code{\link[=freeze_weights]{freeze_weights()}} and \code{\link[=unfreeze_weights]{unfreeze_weights()}}.}
 
-\item{layers}{List of layers to add to the model}
+\item{layers}{List of layers to add to the model.}
+}
+\value{
+A \code{Sequential} model instance.
 }
 \description{
 Keras Model composed of a linear stack of layers

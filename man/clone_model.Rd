@@ -26,6 +26,9 @@ e.g. by wrapping certain layers of interest (you might want to replace all
 LSTM instances with equivalent \code{Bidirectional(LSTM(...))} instances, for
 example).}
 }
+\value{
+A new model instance.
+}
 \description{
 Model cloning is similar to calling a model on new inputs, except that it
 creates new layers (and thus new weights) instead of sharing the weights of

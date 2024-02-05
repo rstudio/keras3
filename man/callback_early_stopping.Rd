@@ -51,6 +51,9 @@ improvement. This allows for a warm-up period in which no
 improvement is expected and thus training will not be stopped.
 Defaults to \code{0}.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 Assuming the goal of a training is to minimize the loss. With this, the
 metric to be monitored would be \code{'loss'}, and mode would be \code{'min'}. A

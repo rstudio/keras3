@@ -9,6 +9,9 @@ config_set_image_data_format(data_format)
 \arguments{
 \item{data_format}{string. \code{'channels_first'} or \code{'channels_last'}.}
 }
+\value{
+No return value, called for side effects.
+}
 \description{
 Set the value of the image data format convention.
 }

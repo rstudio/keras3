@@ -5,7 +5,7 @@
 \alias{keras3-package}
 \title{keras3: R Interface to 'Keras'}
 \description{
-Interface to 'Keras' \url{https://keras.io}, a high-level neural networks 'API'. 'Keras' was developed with a focus on enabling fast experimentation, supports both convolution based networks and recurrent networks (as well as combinations of the two), and runs seamlessly on both 'CPU' and 'GPU' devices.
+Interface to 'Keras' \url{https://keras.io}, a high-level neural networks API. 'Keras' was developed with a focus on enabling fast experimentation, supports both convolution based networks and recurrent networks (as well as combinations of the two), and runs seamlessly on both CPU and GPU devices.
 
 Keras is a high-level neural networks API, developed with a focus on enabling
 fast experimentation. Keras has the following key features:

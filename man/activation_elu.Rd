@@ -11,6 +11,9 @@ activation_elu(x, alpha = 1)
 
 \item{alpha}{Numeric. See description for details.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 The exponential linear unit (ELU) with \code{alpha > 0} is defined as:
 \itemize{

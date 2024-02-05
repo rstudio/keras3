@@ -12,6 +12,9 @@ activation_hard_swish(x)
 \arguments{
 \item{x}{Input tensor.}
 }
+\value{
+A tensor, the result from applying the activation to the input tensor \code{x}.
+}
 \description{
 It is defined as:
 \itemize{

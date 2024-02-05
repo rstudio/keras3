@@ -67,6 +67,9 @@ filename of a file in which to save metadata for the embedding layer.
 In case the same metadata file is to be
 used for all embedding layers, a single filename can be passed.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 TensorBoard is a visualization tool provided with TensorFlow. A TensorFlow
 installation is required to use this callback.

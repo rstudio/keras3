@@ -37,6 +37,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns \code{Loss} instances, similar to the
+builtin loss functions.
+}
 \description{
 \code{new_loss_class()} is an alias for \code{\link[=Loss]{Loss()}}.
 See \verb{?}\code{\link[=Loss]{Loss()}} for the full documentation.

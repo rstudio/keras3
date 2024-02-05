@@ -81,6 +81,9 @@ before matrix multiplication). \code{FALSE} = \code{"before"},
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+A \code{Layer} instance, which is intended to be used with \code{layer_rnn()}.
+}
 \description{
 This class processes one step within the whole time sequence input, whereas
 \code{\link[=layer_gru]{layer_gru()}} processes the whole sequence.

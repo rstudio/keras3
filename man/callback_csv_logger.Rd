@@ -14,6 +14,9 @@ callback_csv_logger(filename, separator = ",", append = FALSE)
 \item{append}{Boolean. \code{TRUE}: append if file exists (useful for continuing
 training). \code{FALSE}: overwrite existing file.}
 }
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
+}
 \description{
 Supports all values that can be represented as a string,
 including 1D iterables such as atomic vectors.
