@@ -461,7 +461,8 @@ function (object, filepath, call_endpoint = "serve", call_training_endpoint = NU
 #' @param object
 #' A keras object.
 #'
-#'
+#' @returns `object` is returned invisibly, for convenient piping. This is
+#'   primarily called for side effects.
 #' @export
 #' @family saving and loading functions
 #' @family serialization utilities
@@ -847,7 +848,7 @@ function (config, custom_objects = NULL, safe_mode = TRUE, ...)
 #'   reloaded_model <- load_model("my_model.keras")
 #' })
 #' ```
-#'
+#' @returns The result from evaluating `expr` within the custom object scope.
 #' @family saving and loading functions
 #' @family serialization utilities
 #' @export

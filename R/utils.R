@@ -53,7 +53,7 @@
 #' new_layer <- layer_dense(units = 10)
 #' print(new_layer$name)
 #' ```
-#'
+#' @returns `NULL`, invisibly, called for side effects.
 #' @export
 #' @family backend
 #' @family utils
@@ -379,6 +379,7 @@ function (x, num_classes = NULL)
 #' @param seed
 #' Integer, the random seed to use.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family utils
 #' @seealso

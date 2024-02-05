@@ -247,6 +247,8 @@ keras$ops$is_tensor(x)
 #' @param shape
 #' Shape of the output tensor.
 #'
+#' @returns A tensor of shape `shape` where `indices` are set to `values`.
+#'
 #' @export
 #' @family core ops
 #' @family ops
@@ -581,6 +583,7 @@ function (x, num = NULL, axis = 1L)
 #' @param f
 #' A function taking either a tensor, or list of tensors.
 #'
+#' @returns A tensor, the result of mapping `f` across `elements.`
 #' @export
 #' @family core ops
 #' @family ops
@@ -4443,11 +4446,15 @@ keras$ops$full_like(x, fill_value, dtype)
 #' Return `x[key]`.
 #'
 #' @param x
-#' see description
+#' A dictionary-like object
 #'
 #' @param key
-#' see description
+#' Generally, a string, but most object with a `__hash__` method are acceptable.
 #'
+#' @note
+#' Generally, calling `x[[key]]` or `x$key` is preferable.
+#'
+#' @returns `key`.
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -6826,6 +6833,7 @@ keras$ops$zeros_like(x, dtype)
 #' The index of the mask character in the vocabulary.
 #' Defaults to `0`.
 #'
+#' @returns A tensor, shape `(batch_size)`, of loss values.
 #' @export
 #' @family nn ops
 #' @family ops

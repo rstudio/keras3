@@ -8,6 +8,7 @@
     See `?`[`{name}()`] for the full documentation.
 
     @inheritParams {name}
+    @inherit {name} return
     @keywords internal
     @export
 

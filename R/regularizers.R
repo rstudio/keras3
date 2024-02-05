@@ -18,6 +18,8 @@
 #' @param l1
 #' float, L1 regularization factor.
 #'
+#' @returns A `Regularizer` instance that can be passed to layer constructors or
+#'  used as a standalone object.
 #' @export
 #' @family regularizers
 #' @seealso
@@ -56,6 +58,8 @@ function (l1 = 0.01)
 #' @param l2
 #' float, L2 regularization factor.
 #'
+#'
+#' @inherit regularizer_l1 return
 #' @export
 #' @family regularizers
 #' @seealso
@@ -88,6 +92,7 @@ function (l1 = 0, l2 = 0)
 #' @param l2
 #' float, L2 regularization factor.
 #'
+#' @inherit regularizer_l1 return
 #' @export
 #' @family regularizers
 #' @seealso
@@ -130,6 +135,7 @@ function (l2 = 0.01)
 #' input orthogonal to each other. In columns mode, it seeks to make
 #' the columns of the input orthogonal to each other.
 #'
+#' @inherit regularizer_l1 return
 #' @export
 #' @family regularizers
 #' @seealso

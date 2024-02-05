@@ -1,4 +1,4 @@
-
+#!/usr/bin/env Rscript
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 # rd_file <- "man/activation_elu.Rd"

@@ -806,7 +806,9 @@ ensure_first_arg_is <- function(fn, ...) {
 #'          self$g_loss_metric)
 #'   }))
 #' ```
-#'
+#' @returns `fn`, with an additional R attribute that will cause `fn` to be
+#'   converted to an active property when being converted to a method of a
+#'   custom subclass.
 #' @export
 active_property <- function(fn) {
   if(!is.function(fn))

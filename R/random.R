@@ -70,6 +70,7 @@ function (logits, num_samples, dtype = "int32", seed = NULL)
 #' @param noise_shape
 #' A `shape()` value
 #'
+#' @returns A tensor that is a copy of `inputs` with some values set to `0`.
 #' @export
 #' @family random
 # @seealso
@@ -107,6 +108,7 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of [`random_seed_generator()`].
 #'
+#' @returns A tensor of random values.
 #' @export
 #' @family random
 # @seealso
@@ -156,6 +158,7 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of [`random_seed_generator()`].
 #'
+#' @returns A tensor of random values.
 #' @export
 #' @family random
 # @seealso
@@ -199,6 +202,7 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of [`random_seed_generator()`].
 #'
+#' @returns A tensor of random values.
 #' @export
 #' @family random
 # @seealso
@@ -231,6 +235,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of [`random_seed_generator()`].
 #'
+#' @returns A tensor, a copy of `x` with the `axis` axis shuffled.
 #' @export
 #' @family random
 # @seealso
@@ -277,6 +282,7 @@ function (x, axis = 1L, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of [`random_seed_generator()`].
 #'
+#' @returns A tensor of random values.
 #' @export
 #' @family random
 # @seealso
@@ -326,6 +332,7 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of [`random_seed_generator()`].
 #'
+#' @returns A tensor of random values.
 #' @export
 #' @family random
 # @seealso
@@ -383,6 +390,8 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @returns A `SeedGenerator` instance, which can be passed as the `seed = `
+#'   argument to other random tensor generators.
 #' @export
 #' @family random
 # @seealso
