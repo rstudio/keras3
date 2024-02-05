@@ -2559,10 +2559,10 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' @param x
 #' Input tensor
 #'
-#' @description
-#'
-#' # Returns
+#' @returns
 #' An array containing the absolute value of each element in `x`.
+#'
+#' @description
 #'
 #' # Example
 #' ```{r}

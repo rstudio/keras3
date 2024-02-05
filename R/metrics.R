@@ -62,6 +62,7 @@
 #' @param axis
 #' The axis along which the mean is computed. Defaults to `-1`.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -132,6 +133,7 @@ function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
 #' Defaults to `-1`. The dimension along which the entropy is
 #' computed.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -190,6 +192,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
 #' A float, the point where the Huber loss function changes from a
 #' quadratic to linear. Defaults to `1.0`.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -241,6 +244,7 @@ function (y_true, y_pred, delta = 1)
 #' @param y_pred
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -321,6 +325,11 @@ function (y_true, y_pred)
 #' @export
 #' @family accuracy metrics
 #' @family metrics
+#' @returns If `y_true` and `y_pred` are missing, a `Metric`
+#'   instance is returned. The `Metric` instance that can be passed directly to
+#'   `compile(metrics = )`, or used as a standalone object. See `?Metric` for
+#'   example usage. If `y_true` and `y_pred` are provided, then a tensor with
+#'   the computed value is returned.
 #' @seealso
 #' + <https://keras.io/api/metrics/accuracy_metrics#binaryaccuracy-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/BinaryAccuracy>
@@ -407,6 +416,7 @@ function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
 #' @export
 #' @family accuracy metrics
 #' @family metrics
+#' @inherit metric_binary_accuracy return
 #' @seealso
 #' + <https://keras.io/api/metrics/accuracy_metrics#categoricalaccuracy-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/CategoricalAccuracy>
@@ -490,6 +500,7 @@ function (y_true, y_pred, ..., name = "categorical_accuracy",
 #' @export
 #' @family accuracy metrics
 #' @family metrics
+#' @inherit metric_binary_accuracy return
 #' @seealso
 #' + <https://keras.io/api/metrics/accuracy_metrics#sparsecategoricalaccuracy-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/SparseCategoricalAccuracy>
@@ -566,6 +577,7 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family accuracy metrics
 #' @family metrics
@@ -644,6 +656,7 @@ function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family accuracy metrics
 #' @family metrics
@@ -819,6 +832,9 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @returns a `Metric` instance is returned. The `Metric` instance can be passed
+#'   directly to `compile(metrics = )`, or used as a standalone object. See
+#'   `?Metric` for example usage.
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -881,6 +897,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -940,6 +957,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1060,6 +1078,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1142,6 +1161,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1245,6 +1265,7 @@ function (..., recall, num_thresholds = 200L, class_id = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1330,6 +1351,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1421,6 +1443,7 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1512,6 +1535,7 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1572,6 +1596,7 @@ function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1631,6 +1656,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family confusion metrics
 #' @family metrics
@@ -1673,7 +1699,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' result
 #' ```
 #'
-#' @returns
+#' # Returns
 #' F-1 Score: float.
 #'
 #' @param average
@@ -1707,6 +1733,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family f score metrics
 #' @family metrics
@@ -1749,7 +1776,7 @@ function (..., average = NULL, threshold = NULL, name = "f1_score",
 #' metric$result()
 #' ```
 #'
-#' @returns
+#' # Returns
 #' F-Beta Score: float.
 #'
 #' @param average
@@ -1789,6 +1816,7 @@ function (..., average = NULL, threshold = NULL, name = "f1_score",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family f score metrics
 #' @family metrics
@@ -1849,6 +1877,7 @@ function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -1919,6 +1948,7 @@ function (y_true, y_pred, ..., name = "categorical_hinge",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -1988,6 +2018,7 @@ function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -2094,6 +2125,7 @@ function (y_true, y_pred, ..., name = "squared_hinge",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family iou metrics
 #' @family metrics
@@ -2195,6 +2227,7 @@ function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family iou metrics
 #' @family metrics
@@ -2296,6 +2329,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family iou metrics
 #' @family metrics
@@ -2404,6 +2438,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family iou metrics
 #' @family metrics
@@ -2505,6 +2540,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family iou metrics
 #' @family metrics
@@ -2583,6 +2619,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -2685,6 +2722,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -2765,6 +2803,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @family losses
 #' @family metrics
 #' @family probabilistic metrics
+#' @inherit metric_binary_accuracy return
 #' @seealso
 #' + <https://keras.io/api/metrics/probabilistic_metrics#kldivergence-class>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/KLDivergence>
@@ -2842,6 +2881,7 @@ function (y_true, y_pred, ..., name = "kl_divergence",
 #' @export
 #' @family losses
 #' @family metrics
+#' @inherit metric_binary_accuracy return
 #' @family probabilistic metrics
 #' @seealso
 #' + <https://keras.io/api/metrics/probabilistic_metrics#poisson-class>
@@ -2937,6 +2977,7 @@ function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 #'
 #' @export
 #' @family losses
+#' @inherit metric_binary_accuracy return
 #' @family metrics
 #' @family probabilistic metrics
 #' @seealso
@@ -2995,6 +3036,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family reduction metrics
 #' @family metrics
@@ -3043,6 +3085,7 @@ function (..., name = "mean", dtype = NULL)
 #' @param ...
 #' Keyword arguments to pass on to `fn`.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family reduction metrics
 #' @family metrics
@@ -3097,6 +3140,7 @@ function (..., fn, name = NULL, dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family reduction metrics
 #' @family metrics
@@ -3160,6 +3204,7 @@ function (..., name = "sum", dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family regression metrics
 #' @family metrics
@@ -3217,6 +3262,7 @@ function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family regression metrics
 #' @family metrics
@@ -3282,6 +3328,7 @@ function (..., name = "logcosh", dtype = NULL)
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inherit metric_binary_accuracy return
 #' @family losses
 #' @family metrics
 #' @family regression metrics
@@ -3359,6 +3406,7 @@ function (y_true, y_pred, ..., name = "mean_absolute_error",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -3418,6 +3466,7 @@ function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -3496,6 +3545,7 @@ function (y_true, y_pred, ..., name = "mean_squared_error",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_binary_accuracy return
 #' @export
 #' @family losses
 #' @family metrics
@@ -3581,6 +3631,7 @@ function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family regression metrics
 #' @family metrics
@@ -3640,6 +3691,7 @@ function (..., class_aggregation = "uniform_average", num_regressors = 0L,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit metric_auc return
 #' @export
 #' @family regression metrics
 #' @family metrics
