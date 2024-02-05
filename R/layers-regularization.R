@@ -24,6 +24,7 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family regularization layers
 #' @family layers
@@ -85,6 +86,7 @@ function (object, l1 = 0, l2 = 0, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family regularization layers
 #' @family layers
@@ -138,6 +140,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family regularization layers
 #' @family layers
@@ -177,6 +180,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family regularization layers
 #' @family layers
@@ -221,6 +225,7 @@ function (object, rate, seed = NULL, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family regularization layers
 #' @family layers
@@ -279,6 +284,7 @@ function (object, stddev, seed = NULL, ...)
 #' @param dtype
 #' datatype (e.g., `"float32"`).
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family spatial dropout regularization layers
 #' @family regularization layers
@@ -349,6 +355,7 @@ function (object, rate, seed = NULL, name = NULL, dtype = NULL)
 #' @param dtype
 #' datatype (e.g., `"float32"`).
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family spatial dropout regularization layers
 #' @family regularization layers
@@ -420,6 +427,7 @@ function (object, rate, data_format = NULL, seed = NULL, name = NULL,
 #' @param dtype
 #' datatype (e.g., `"float32"`).
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family spatial dropout regularization layers
 #' @family regularization layers

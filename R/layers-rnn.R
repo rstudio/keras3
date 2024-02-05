@@ -92,6 +92,7 @@
 #' @param weights
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family rnn layers
 #' @family layers
@@ -282,6 +283,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family rnn layers
 #' @family layers
@@ -481,6 +483,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family rnn layers
 #' @family layers
@@ -679,6 +682,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family rnn layers
 #' @family layers
@@ -874,6 +878,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family gru rnn layers
 #' @family rnn layers
@@ -1182,6 +1187,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family lstm rnn layers
 #' @family rnn layers
@@ -1520,6 +1526,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family rnn cells
 #' @family rnn layers
@@ -1671,6 +1678,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family simple rnn layers
 #' @family rnn layers
@@ -1911,6 +1919,7 @@ function (cells, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family rnn layers
 #' @family layers

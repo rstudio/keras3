@@ -44,6 +44,8 @@ library(magrittr, include.only = c("%>%", "%<>%"))
 library(reticulate)
 library(assertthat, include.only = c("assert_that"))
 
+import_from(roxygen2, block_has_tags)
+
 attach_eval({
 
   import_from(memoise, memoise)
@@ -2042,6 +2044,57 @@ walk_roxy_blocks <- function(fn) {
   blocks <- roxygen2::parse_package(env = env)
 
   walk(blocks, fn, .progress = TRUE)
+}
+
+
+get_block_line_range <- function(block, section = c("roxygen", "code")) {
+  ## Returns the line number pair c(<start_of_roxygen_block>, <end_of_fn_body>)
+
+  # this only contains the start line for each tag
+  roxy_line_range <- code_line_range <- NULL
+  if("roxygen" %in% section) {
+
+    roxy_line_range <- range(unlist(lapply(block$tags, \(tag) {
+      if (is.null(tag$raw)) NULL # skip '<generated>' tags that point to sourcecode
+      else tag$line
+    })))
+
+  }
+  if ("code" %in% section) {
+    call_start_line <- getSrcLocation(block$object$value, "parse") %||% -1L
+    call_end_line <- getSrcLocation(block$object$value, "parse", FALSE) %||% -1L
+    call_body_start_line <- tryCatch(
+      getSrcLocation(body(block$object$value), "line")[1],
+      warning = function(w) NULL,
+      error = function(e) NULL
+    ) %||% call_end_line
+
+    code_line_range <- range(c(call_start_line, call_end_line))
+    # signature_line_range <- c(call_start_line, call_body_start_line)
+  }
+
+  line_range <- range(c(roxy_line_range, code_line_range))
+  if(any(line_range == -1L)) NULL
+  else as.integer(line_range)
+}
+
+
+
+modify_roxy_block_lines <- function(fn) {
+  withr::with_options(
+    list(keep.source.pkgs = TRUE, keep.parse.data.pkgs = TRUE), {
+      env <- roxygen2::env_package(".")
+    })
+  blocks <- roxygen2::parse_package(env = env)
+  files <- file_lines_manager()
+  for (block in blocks) {
+    line_range <- get_block_line_range(block, section = "roxygen")
+    block_lines <- files$get_lines(block$file, line_range)
+    new_block_lines <- fn(block_lines, block = block)
+    if(is.character(new_block_lines))
+      files$set_lines(block$file, line_range, new_block_lines)
+  }
+  files$write_out()
 }
 
 combine_files <- function(out, ..., sep = "\n") {

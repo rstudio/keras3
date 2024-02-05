@@ -233,6 +233,7 @@
 #' @param features
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family preprocessing layers
 #' @family layers

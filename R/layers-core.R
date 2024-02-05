@@ -96,6 +96,13 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @returns The return value depends on the value provided for the first argument.
+#' If  `object` is:
+#' - a `keras_model_sequential()`, then the layer is added to the sequential model
+#' (which is modified in place). To enable piping, the sequential model is also
+#' returned, invisibly.
+#' - a `keras_input()`, then the output tensor from calling `layer(input)` is returned.
+#' - `NULL` or missing, then a `Layer` instance is returned.
 #' @export
 #' @family core layers
 #' @family layers
@@ -252,6 +259,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family core layers
 #' @family layers
@@ -363,6 +371,7 @@ function (object, equation, output_shape, activation = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family core layers
 #' @family layers
@@ -395,6 +404,7 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family core layers
 #' @family layers
@@ -461,6 +471,7 @@ function (object, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family core layers
 #' @family layers
@@ -528,6 +539,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 #' @param mask_value
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family core layers
 #' @family layers

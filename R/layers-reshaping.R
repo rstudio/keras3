@@ -35,6 +35,7 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -106,6 +107,7 @@ function (object, cropping = list(1L, 1L), ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -183,6 +185,7 @@ function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -233,6 +236,7 @@ function (object, cropping = list(list(1L, 1L), list(1L, 1L),
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -281,6 +285,7 @@ function (object, data_format = NULL, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -326,6 +331,7 @@ function (object, dims, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -380,6 +386,7 @@ function (object, n, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -432,6 +439,7 @@ function (object, target_shape, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -507,6 +515,7 @@ function (object, size = 2L, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -579,6 +588,7 @@ function (object, size = list(2L, 2L), data_format = NULL, interpolation = "near
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -630,6 +640,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -703,6 +714,7 @@ function (object, padding = 1L, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers
@@ -782,6 +794,7 @@ function (object, padding = list(1L, 1L), data_format = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family reshaping layers
 #' @family layers

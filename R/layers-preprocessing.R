@@ -91,6 +91,7 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family categorical features preprocessing layers
 #' @family preprocessing layers
@@ -159,6 +160,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -270,6 +272,7 @@ function (object, height, width, data_format = NULL, ...)
 #' @param dtype
 #' datatype (e.g., `"float32"`).
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family numerical features preprocessing layers
 #' @family preprocessing layers
@@ -361,6 +364,7 @@ function (object, bin_boundaries = NULL, num_bins = NULL, epsilon = 0.01,
 #' @param dtype
 #' datatype (e.g., `"float32"`).
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family categorical features preprocessing layers
 #' @family preprocessing layers
@@ -506,6 +510,7 @@ function (object, num_bins, output_mode = "int", sparse = FALSE,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family categorical features preprocessing layers
 #' @family preprocessing layers
@@ -846,6 +851,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family categorical features preprocessing layers
 #' @family preprocessing layers
@@ -965,6 +971,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family numerical features preprocessing layers
 #' @family preprocessing layers
@@ -1048,6 +1055,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1112,6 +1120,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1180,6 +1189,7 @@ function (object, factor, seed = NULL, ...)
 #' @param data_format
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1236,6 +1246,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1334,6 +1345,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' @param data_format
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1446,6 +1458,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1565,6 +1578,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
 #' @family preprocessing layers
@@ -1619,6 +1633,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -1695,6 +1710,7 @@ function (object, scale, offset = 0, ...)
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -2023,6 +2039,7 @@ function (object, height, width, interpolation = "bilinear",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family categorical features preprocessing layers
 #' @family preprocessing layers
@@ -2273,6 +2290,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family preprocessing layers
 #' @family layers

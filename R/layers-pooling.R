@@ -89,6 +89,7 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -206,6 +207,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -294,6 +296,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -367,6 +370,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -436,6 +440,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -506,6 +511,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -574,6 +580,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -642,6 +649,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -711,6 +719,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -817,6 +826,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -937,6 +947,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers
@@ -1028,6 +1039,7 @@ function (object, pool_size = list(2L, 2L), strides = NULL, padding = "valid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family pooling layers
 #' @family layers

@@ -82,6 +82,7 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family utils
 #' @family layers

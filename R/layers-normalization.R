@@ -142,6 +142,7 @@
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family normalization layers
 #' @family layers
@@ -248,6 +249,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family normalization layers
 #' @family layers
@@ -381,6 +383,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family normalization layers
 #' @family layers
@@ -443,6 +446,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family normalization layers
 #' @family layers
@@ -486,6 +490,7 @@ function (object, layer, power_iterations = 1L, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family normalization layers
 #' @family layers

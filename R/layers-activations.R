@@ -26,6 +26,7 @@
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family activation layers
 #' @family layers
@@ -62,6 +63,7 @@ function (object, activation, ...)
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family activation layers
 #' @family layers
@@ -109,6 +111,7 @@ function (object, alpha = 1, ...)
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family activation layers
 #' @family layers
@@ -158,6 +161,7 @@ function (object, negative_slope = 0.3, ...)
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family activation layers
 #' @family layers
@@ -221,6 +225,7 @@ function (object, alpha_initializer = "Zeros", alpha_regularizer = NULL,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family activation layers
 #' @family layers

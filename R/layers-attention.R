@@ -61,6 +61,7 @@
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family attention layers
 #' @family layers
@@ -146,6 +147,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family attention layers
 #' @family layers
@@ -403,6 +405,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @param inputs
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family attention layers
 #' @family layers

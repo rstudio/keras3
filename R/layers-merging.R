@@ -37,6 +37,7 @@
 #' @param inputs
 #' layers to combine
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family add merging layers
 #' @family merging layers
@@ -100,6 +101,7 @@ function (inputs, ...)
 #' @param inputs
 #' layers to combine
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family average merging layers
 #' @family merging layers
@@ -304,6 +306,7 @@ function (inputs, ..., axes, normalize = FALSE)
 #' @param inputs
 #' layers to combine
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family maximum merging layers
 #' @family merging layers
@@ -365,6 +368,7 @@ function (inputs, ...)
 #' @param inputs
 #' layers to combine
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family minimum merging layers
 #' @family merging layers
@@ -426,6 +430,7 @@ function (inputs, ...)
 #' @param inputs
 #' layers to combine
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family multiply merging layers
 #' @family merging layers
@@ -487,6 +492,7 @@ function (inputs, ...)
 #' @param inputs
 #' layers to combine
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family subtract merging layers
 #' @family merging layers

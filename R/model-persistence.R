@@ -403,6 +403,7 @@ export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_ba
 #' @param trainable
 #' see description
 #'
+#' @inherit layer_dense return
 #' @export
 #' @family layers
 #' @family saving and loading functions
