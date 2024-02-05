@@ -54,6 +54,8 @@
 #' be used to reinstantiate the same object
 #' (via `do.call(<constraint_class>, <config>)`).
 #'
+#' @returns A function that returns `Constraint` instances, similar to the
+#'   builtin constraint functions like `constraint_maxnorm()`.
 #' @tether keras.constraints.Constraint
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
@@ -89,4 +91,3 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
     private = private
   )
 }
-

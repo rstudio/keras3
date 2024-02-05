@@ -30,6 +30,8 @@
 #'   metrics = c('accuracy')
 #' )
 #' ```
+#'
+#' @returns A `Model` instance.
 #' @export
 #' @family model functions
 #' @family model creation
@@ -156,7 +158,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #'
 #' @param ... additional arguments passed on to `keras.layers.InputLayer`.
 #'
-#' @param layers List of layers to add to the model
+#' @param layers List of layers to add to the model.
 #'
 #' @param trainable Boolean, whether the model's variables should be trainable.
 #'   You can also change the trainable status of a model/layer with
@@ -191,6 +193,7 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' model
 #' ```
 #'
+#' @returns A `Sequential` model instance.
 #' @export
 #' @family model functions
 #' @family model creation
@@ -295,6 +298,8 @@ function(input_shape = NULL,
 #'   LSTM instances with equivalent `Bidirectional(LSTM(...))` instances, for
 #'   example).
 #'
+#' @returns A new model instance.
+#'
 #' @export
 clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
   args <- capture_args()
@@ -332,14 +337,12 @@ get_layer <- function(object, name = NULL, index = NULL) {
 #' Remove the last layer in a Sequential model
 #'
 #' @param object Sequential keras model object
+#' @returns The input `object`, invisibly.
 #'
 #' @family model functions
 #'
 #' @export
 pop_layer <- function(object) {
   object$pop()
+  invisible(object)
 }
-
-
-
-

@@ -10,6 +10,8 @@
 #' @param restart_session Whether to restart the R session after installing (note this will only occur within RStudio).
 #' @param ... reserved for future compatability.
 #'
+#' @returns No return value, called for side effects.
+#'
 #' @seealso [`tensorflow::install_tensorflow()`]
 #' @export
 install_keras <- function(
@@ -106,8 +108,9 @@ is_linux <- function() {
 #' library(keras3)
 #' use_backend("tensorflow")
 #' ```
+#' @returns Called primarily for side effects. Returns the provided `backend`, invisibly.
 #' @export
-use_backend <- function(backend = c("tensorflow", "jax", "torch")) {
+use_backend <- function(backend = c("tensorflow", "jax", "torch")) { # "numpy"
   backend <- match.arg(backend)
 
   if (is_keras_loaded()) {

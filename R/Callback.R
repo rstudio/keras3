@@ -304,6 +304,8 @@
 # ' final_logs <- ...
 # ' callbacks$on_train_end(final_logs)
 # ' ```
+#' @returns A function that returns the custom `Callback` instances,
+#'   similar to the builtin callback functions.
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
 #' @export

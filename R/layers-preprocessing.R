@@ -2436,6 +2436,7 @@ function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
 #  + <https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method>
 #  + <https://keras.io/guides/preprocessing_layers/#the-adapt-method>
 #'
+#' @returns Returns `object`, invisibly.
 #' @export
 adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
   if (!inherits(data, "python.builtin.object"))

@@ -89,6 +89,9 @@
 #'     layer$trainable <- TRUE
 #' }
 #' ```
+#' @returns The input `object` with frozen weights is returned, invisibly. Note,
+#'   `object` is modified in place, and the return value is only provided to
+#'   make usage with the pipe convenient.
 #' @export
 freeze_weights <- function(object, from = NULL, to = NULL, which = NULL) {
 

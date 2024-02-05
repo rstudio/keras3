@@ -85,6 +85,7 @@
 #' training is finished. Use `FALSE` if you'd like to keep the checkpoint
 #' for future usage.
 #'
+#' @returns A `Callback` instance that can be passed to [`fit.keras.src.models.model.Model()`].
 #' @export
 #' @family callbacks
 #' @seealso
@@ -121,6 +122,7 @@ function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
 #' Boolean. `TRUE`: append if file exists (useful for continuing
 #' training). `FALSE`: overwrite existing file.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -208,6 +210,7 @@ function (filename, separator = ",", append = FALSE)
 #' improvement is expected and thus training will not be stopped.
 #' Defaults to `0`.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -313,6 +316,7 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #' `callback_lambda(.., on_train_end = train_end_fn)`. The custom function
 #' needs to have same arguments as the ones defined in [`Callback()`].
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -394,6 +398,7 @@ as_callback_lambda_fn_sig_logs <- function(fn) {
 #' @param verbose
 #' Integer. 0: quiet, 1: log update messages.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -541,6 +546,7 @@ function (schedule, verbose = 0L)
 #' overwrites the model weights already saved if the performance of
 #' current model is better than this value.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -635,6 +641,7 @@ function (count_mode = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -681,6 +688,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 #' Boolean; whether the request should be
 #' sent as `"application/json"`.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -858,6 +866,7 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #' In case the same metadata file is to be
 #' used for all embedding layers, a single filename can be passed.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -877,6 +886,7 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 
 #' Callback that terminates training when a NaN loss is encountered.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @seealso
@@ -933,6 +943,7 @@ function ()
 #' EMA weights for other callbacks such as `callback_model_checkpoint()`.
 #' Defaults to `FALSE`.
 #'
+#' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
 #' @tether keras.callbacks.SwapEMAWeights

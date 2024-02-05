@@ -146,6 +146,7 @@ function ()
 #' @param value
 #' float. New value of epsilon.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family config backend
 #' @family backend
@@ -194,6 +195,7 @@ function (value)
 #' @param value
 #' String; `'bfloat16'`, `'float16'`, `'float32'`, or `'float64'`.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family config backend
 #' @family backend
@@ -232,6 +234,7 @@ function (value)
 #' @param data_format
 #' string. `'channels_first'` or `'channels_last'`.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family config backend
 #' @family backend
@@ -250,6 +253,7 @@ function (data_format)
 
 #' Disables safe mode globally, allowing deserialization of lambdas.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family saving
 #' @family config
@@ -271,6 +275,7 @@ function ()
 #' This is the best option when using Keras in a non-interactive
 #' way, such as running a training or inference job on a server.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family io utils
 #' @family utils
@@ -293,6 +298,7 @@ function ()
 #' This provides the best experience when using Keras in an interactive
 #' environment such as a shell or a notebook.
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family io utils
 #' @family utils
@@ -351,6 +357,7 @@ function ()
 #' [`config_disable_traceback_filtering()`], you can re-enable it via
 #' [`config_enable_traceback_filtering()`].
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family traceback utils
 #' @family utils
@@ -383,6 +390,7 @@ function ()
 #' [`config_disable_traceback_filtering()`], you can re-enable it via
 #' [`config_enable_traceback_filtering()`].
 #'
+#' @returns No return value, called for side effects.
 #' @export
 #' @family traceback utils
 #' @family utils

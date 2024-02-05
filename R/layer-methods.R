@@ -93,6 +93,7 @@ from_config <- function(config, custom_objects = NULL) {
 #' @family model persistence
 #' @family layer methods
 #'
+#' @returns A list of R arrays.
 #' @export
 get_weights <- function(object, trainable = NA) {
   if(is.na(trainable))
@@ -143,6 +144,7 @@ count_params <- function(object) {
 #  @family metrics
 #  @family rnn layers
 #'
+#' @returns `object`, invisibly.
 #' @export
 reset_state <- function(object) {
   object$reset_state()

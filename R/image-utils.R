@@ -22,6 +22,8 @@
 #' @param ...
 #' Additional keyword arguments passed to `PIL.Image.save()`.
 #'
+#' @returns Called primarily for side effects. The input `x` is returned,
+#'   invisibly, to enable usage with the pipe.
 #' @export
 #' @family image utils
 #' @family utils
@@ -35,6 +37,7 @@ function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
 {
   args <- capture_args()
   do.call(keras$utils$save_img, args)
+  invisible(x)
 }
 
 

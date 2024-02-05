@@ -52,6 +52,10 @@
 #'
 #' @param model A keras model.
 #'
+#' @returns If `filepath` is provided, then this function is called primarily
+#'   for side effects, and `model` is returned invisibly. If `filepath` is not
+#'   provided or `NULL`, then the serialized model is returned as an R raw
+#'   vector.
 #' @export
 #' @seealso [load_model()]
 #' @family saving and loading functions
@@ -167,6 +171,8 @@ function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 #' at the target location, or instead ask the user
 #' via an interactive prompt.
 #'
+#' @returns This is called primarily for side effects. `model` is returned,
+#'   invisibly, to enable usage with the pipe.
 #' @export
 #' @family saving and loading functions
 #' @tether keras.Model.save_weights
@@ -215,6 +221,8 @@ function (model, filepath, overwrite = FALSE)
 #'
 #' @param model A keras model.
 #'
+#' @returns This is called primarily for side effects. `model` is returned,
+#'   invisibly, to enable usage with the pipe.
 #' @export
 #' @family saving and loading functions
 #' @tether keras.Model.load_weights
@@ -226,6 +234,7 @@ function (model, filepath, skip_mismatch = FALSE, ...)
 {
   args <- capture_args(ignore = "model")
   do.call(model$load_weights, args)
+  invisible(model)
 }
 
 #' Save and load model configuration as JSON
@@ -268,6 +277,8 @@ function (model, filepath, skip_mismatch = FALSE, ...)
 #' at `filepath`, or instead ask the user
 #' via an interactive prompt.
 #'
+#' @returns This is called primarily for side effects. `model` is returned,
+#'   invisibly, to enable usage with the pipe.
 #' @family saving and loading functions
 #' @tether keras.Model.to_json
 #' @export

@@ -74,6 +74,8 @@
 #'   get_config()
 #'   ```
 #'
+#' @returns A function that returns `Loss` instances, similar to the
+#'   builtin loss functions.
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
 #' @export

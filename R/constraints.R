@@ -23,6 +23,8 @@
 #' to constrain the weights of each filter tensor of size
 #' `(rows, cols, input_depth)`.
 #'
+#' @returns A `Constraint` instance, a callable that can be passed to layer
+#'   constructors or used directly by calling it with tensors.
 #' @export
 #' @family constraints
 #' @seealso
@@ -72,6 +74,7 @@ function (max_value = 2L, axis = 1L)
 #' to constrain the weights of each filter tensor of size
 #' `(rows, cols, input_depth)`.
 #'
+#' @inherit constraint_maxnorm return
 #' @export
 #' @family constraints
 #' @seealso
@@ -88,6 +91,7 @@ function (min_value = 0, max_value = 1, rate = 1, axis = 1L)
 
 #' Constrains the weights to be non-negative.
 #'
+#' @inherit constraint_maxnorm return
 #' @export
 #' @family constraints
 #' @seealso
@@ -117,6 +121,7 @@ function ()
 #' to constrain the weights of each filter tensor of size
 #' `(rows, cols, input_depth)`.
 #'
+#' @inherit constraint_maxnorm return
 #' @export
 #' @family constraints
 #' @seealso

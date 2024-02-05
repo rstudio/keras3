@@ -3772,6 +3772,7 @@ py_to_r_wrapper.keras.src.metrics.metric.Metric <- py_to_r_wrapper.keras.src.los
 #'  +  [metric_mean_wrapper()]: Wrap an arbitrary R function in a `Metric` instance.
 #'  +  Create a custom [`Metric()`] subclass.
 #'
+#' @returns A callable function with a `__name__` attribute.
 #' @family metrics
 #' @export
 custom_metric <- function(name, metric_fn) {

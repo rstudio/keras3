@@ -1005,6 +1005,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @returns A `Layer` instance, which is intended to be used with `layer_rnn()`.
 #' @export
 #' @family rnn cells
 #' @family gru rnn layers
@@ -1317,6 +1318,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit rnn_cell_gru return
 #' @export
 #' @family rnn cells
 #' @family lstm rnn layers
@@ -1798,6 +1800,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inherit rnn_cell_gru return
 #' @export
 #' @family rnn cells
 #' @family simple rnn layers
@@ -1850,6 +1853,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' Unnamed arguments are treated as additional `cells`.
 #' Named arguments are passed on to the underlying layer.
 #'
+#' @inherit rnn_cell_gru return
 #' @export
 #' @family rnn layers
 #' @family layers

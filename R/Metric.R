@@ -165,6 +165,8 @@
 #'
 #' * `variables`
 #'
+#' @returns A function that returns `Metric` instances, similar to the
+#'   builtin metric functions.
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer
 #' @param initialize,update_state,result
