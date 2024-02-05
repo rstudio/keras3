@@ -30,17 +30,19 @@ modify_roxy_block_lines(function(block_lines, block) {
   if (basename(file) == "reexports.R") return()
 
   name <- doctether:::get_block_name(block)
-  # if (!startsWith(name, "layer")) return()
-  # # preferable prefferable  fod
-  # #
-  #
-  # # browser()
-  # i <- which(block_lines ==  "#' @export")
-  # block_lines[i] %<>% str_prefix("#' @inherit layer_dense return\n")
+  if(block_has_tags(block, "rdname") &&
+     !identical(roxygen2::block_get_tag_value(block, "rdname"), name))
+    return() # object is documented alongside something else
+
+  if(inherits(block$object, "s3method")) return()
+  if (!startsWith(name, "initializer_")) return()
+  # browser()
+  i <- which(block_lines ==  "#' @export")
+  block_lines[i] %<>% str_prefix("#' @inherit initializer_constant return\n")
 
   cli_alert_info("{name} {.file {file}:{line}}")
-  # block_lines
   NULL
+  block_lines
 })
 
 

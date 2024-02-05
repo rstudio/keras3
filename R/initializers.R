@@ -1,6 +1,4 @@
 
-
-
 #' Initializer that generates tensors with constant values.
 #'
 #' @description
@@ -24,6 +22,8 @@
 #' @param value
 #' A numeric scalar.
 #'
+#' @returns An `Initializer` instance that can be passed to layer or variable
+#'   constructors, or called directly with a `shape` to return a Tensor.
 #' @export
 #' @family constant initializers
 #' @family initializers
@@ -60,6 +60,7 @@ function (value = 0)
 #' @param gain
 #' Multiplicative factor to apply to the identity matrix.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family constant initializers
 #' @family initializers
@@ -92,6 +93,7 @@ function (gain = 1)
 #' layer <- layer_dense(units = 3, kernel_initializer = initializer)
 #' ```
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family constant initializers
 #' @family initializers
@@ -124,6 +126,7 @@ function ()
 #' layer <- layer_dense(units = 3, kernel_initializer = initializer)
 #' ```
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family constant initializers
 #' @family initializers
@@ -173,6 +176,7 @@ function ()
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -221,6 +225,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -269,6 +274,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -317,6 +323,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -369,6 +376,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -416,6 +424,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -467,6 +476,7 @@ function (seed = NULL)
 #' An integer. Used to make the behavior of the initializer
 #' deterministic.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -517,6 +527,7 @@ function (gain = 1, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -568,6 +579,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -622,6 +634,7 @@ function (minval = -0.05, maxval = 0.05, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers
@@ -687,6 +700,7 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inherit initializer_constant return
 #' @export
 #' @family random initializers
 #' @family initializers

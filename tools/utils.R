@@ -2139,14 +2139,19 @@ file_lines_manager <- function() {
     # check_line_range(line_range, max = length(file_lines))
     file_lines[line_range[1]:line_range[2]] <- NA
     file_lines[line_range[1]] <- str_flatten_and_compact_lines(new_lines)
+    attr(file_lines, "modified") <- TRUE
     .files[[file]] <- file_lines
   }
 
   write_out <- function() {
     for(file in names(.files)) {
-      cli_alert_warning("Updating source file: {.file {file}}")
       # message("Writing out: ", file)
       file_lines <- .files[[file]]
+      if(!isTRUE(attr(file_lines, "modified", TRUE))) next
+
+      # if (str_flatten_and_compact_lines(readLines(file)) ==
+      #     str_flatten_and_compact_lines(file_lines)) next
+      cli_alert_warning("Updating source file: {.file {file}}")
       writeLines(file_lines[!is.na(file_lines)], file)
       rm(list = file, envir = .files)
     }
