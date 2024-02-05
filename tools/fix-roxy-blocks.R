@@ -35,14 +35,16 @@ modify_roxy_block_lines(function(block_lines, block) {
     return() # object is documented alongside something else
 
   if(inherits(block$object, "s3method")) return()
-  if (!startsWith(name, "initializer_")) return()
-  # browser()
-  i <- which(block_lines ==  "#' @export")
-  block_lines[i] %<>% str_prefix("#' @inherit initializer_constant return\n")
+
+  if (!startsWith(name, "activation_")) return()
 
   cli_alert_info("{name} {.file {file}:{line}}")
+  # # browser()
+  i <- which(block_lines ==  "#' @export")
+  block_lines[i] %<>% str_prefix("#' @inherit activation_elu return\n")
+  return(block_lines)
+
   NULL
-  block_lines
 })
 
 

@@ -27,6 +27,7 @@
 #' @param alpha
 #' Numeric. See description for details.
 #'
+#' @returns A tensor, the result from applying the activation to the input tensor `x`.
 #' @export
 #' @family activations
 #' @seealso
@@ -46,6 +47,7 @@ function (x, alpha = 1)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -80,6 +82,7 @@ function (x)
 #' @param approximate
 #' A `bool`, whether to enable approximation.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -112,6 +115,7 @@ function (x, approximate = FALSE)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -135,6 +139,7 @@ function (x)
 #' A `float` that controls the slope
 #' for values lower than the threshold.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -158,6 +163,7 @@ function (x, negative_slope = 0.2)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -185,6 +191,7 @@ function (x)
 #' @param axis
 #' Integer, axis along which the softmax is applied.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -216,6 +223,7 @@ function (x, axis = -1L)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -290,6 +298,7 @@ function (x, negative_slope = 0, max_value = NULL,
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -338,6 +347,7 @@ function (x)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -368,6 +378,7 @@ function (x)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -397,6 +408,7 @@ function (x)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -435,6 +447,7 @@ function (x)
 #' @param axis
 #' Integer, axis along which the softmax is applied.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -457,6 +470,7 @@ function (x, axis = -1L)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -479,6 +493,7 @@ function (x)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -503,6 +518,7 @@ function (x)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @family activations
 #' @seealso
@@ -534,6 +550,7 @@ function (x)
 #' @param x
 #' Input tensor.
 #'
+#' @inherit activation_elu return
 #' @export
 #' @tether keras.activations.hard_silu
 # @seealso
