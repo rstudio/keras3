@@ -21,6 +21,17 @@ local({
 
     # silence useless warnings from tensorflow
     reticulate:::py_register_load_hook("tensorflow", function() {
+
+      if(keras3:::is_mac_arm64())
+      reticulate::py_run_string(local = TRUE, glue::trim(r"---(
+        import tensorflow as tf
+        tf.config.set_visible_devices(tf.config.get_visible_devices("CPU"))
+        )---"
+      ))
+        # tf$config$get_visible_devices("CPU") |>
+        # tf$config$set_visible_devices()
+
+
       reticulate::py_run_string(local = TRUE, glue::trim(r"---(
         from importlib import import_module
         import tensorflow as tf
