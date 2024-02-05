@@ -37,6 +37,11 @@ This must be in the half-open interval \verb{[0, num_classes)}, where
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 This metric creates two local variables, \code{true_positives} and
 \code{false_negatives}, that are used to compute the recall. This value is

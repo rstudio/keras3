@@ -98,6 +98,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Much like Adam is essentially RMSprop with momentum, Nadam is Adam with
 Nesterov momentum.

@@ -13,6 +13,11 @@ metric_log_cosh_error(..., name = "logcosh", dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 Formula:
 

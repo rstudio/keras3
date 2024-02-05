@@ -46,6 +46,11 @@ is used to determine each sample's most likely associated label.}
 \item{axis}{(Optional) -1 is the dimension containing the logits.
 Defaults to \code{-1}.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 Formula:
 

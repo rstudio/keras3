@@ -103,6 +103,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Adam optimization is a stochastic gradient descent method that is based on
 adaptive estimation of first-order and second-order moments.

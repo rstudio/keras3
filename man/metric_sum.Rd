@@ -13,6 +13,11 @@ metric_sum(..., name = "sum", dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 For example, if \code{values} is \verb{[1, 3, 5, 7]} then their sum is 16.
 If \code{sample_weight} was specified as \verb{[1, 1, 0, 0]} then the sum would be 4.

@@ -13,6 +13,11 @@ metric_mean(..., name = "mean", dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 For example, if values is \code{c(1, 3, 5, 7)} then the mean is 4.
 If \code{sample_weight} was specified as \code{c(1, 1, 0, 0)} then the mean would be 2.

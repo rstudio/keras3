@@ -90,6 +90,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Adagrad is an optimizer with parameter-specific learning rates,
 which are adapted relative to how frequently a parameter gets

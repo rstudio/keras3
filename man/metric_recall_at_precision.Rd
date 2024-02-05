@@ -29,6 +29,11 @@ This must be in the half-open interval \verb{[0, num_classes)}, where
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 For a given score-label-distribution the required precision might not
 be achievable, in this case 0.0 is returned as recall.

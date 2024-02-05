@@ -23,6 +23,13 @@ metric_categorical_accuracy(
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+If \code{y_true} and \code{y_pred} are missing, a \code{Metric}
+instance is returned. The \code{Metric} instance that can be passed directly to
+\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
+example usage. If \code{y_true} and \code{y_pred} are provided, then a tensor with
+the computed value is returned.
+}
 \description{
 You can provide logits of classes as \code{y_pred}, since argmax of
 logits and probabilities are same.

@@ -89,6 +89,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Update rule for parameter \code{w} with gradient \code{g} when \code{momentum} is 0:
 

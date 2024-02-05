@@ -92,6 +92,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Adamax, a variant of Adam based on the infinity norm, is a first-order
 gradient-based optimization method. Due to its capability of adjusting the

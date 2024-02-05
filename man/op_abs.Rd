@@ -9,13 +9,12 @@ op_abs(x)
 \arguments{
 \item{x}{Input tensor}
 }
+\value{
+An array containing the absolute value of each element in \code{x}.
+}
 \description{
 Compute the absolute value element-wise.
 }
-\section{Returns}{
-An array containing the absolute value of each element in \code{x}.
-}
-
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_convert_to_tensor(c(-1.2, 1.2))
 op_abs(x)

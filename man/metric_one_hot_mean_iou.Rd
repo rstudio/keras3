@@ -36,6 +36,11 @@ associated label.}
 
 \item{axis}{(Optional) The dimension containing the logits. Defaults to \code{-1}.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 Formula:
 

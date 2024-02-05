@@ -92,6 +92,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 The Lion optimizer is a stochastic-gradient-descent method that uses the
 sign operator to control the magnitude of the update, unlike other adaptive

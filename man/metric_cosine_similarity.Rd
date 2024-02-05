@@ -21,6 +21,11 @@ metric_cosine_similarity(
 \item{axis}{(Optional) Defaults to \code{-1}. The dimension along which the cosine
 similarity is computed.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 Formula:
 

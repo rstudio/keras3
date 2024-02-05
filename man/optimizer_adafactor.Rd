@@ -103,6 +103,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Adafactor is commonly used in NLP tasks, and has the advantage
 of taking less memory because it only saves partial information of previous

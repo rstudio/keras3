@@ -88,6 +88,9 @@ value of the gradients since the last update. This is known as
 when your batch size is very small, in order to reduce gradient
 noise at each update step.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Loss scaling is a technique to prevent numeric underflow in intermediate
 gradients when float16 is used. To prevent underflow, the loss is multiplied

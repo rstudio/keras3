@@ -75,6 +75,11 @@ only on the index of that label before flattening; therefore
 when using a keras loss, the \code{from_logits} constructor argument of the
 loss should match the AUC \code{from_logits} constructor argument.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 The AUC (Area under the curve) of the ROC (Receiver operating
 characteristic; default) or PR (Precision Recall) curves are quality

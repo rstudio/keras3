@@ -16,6 +16,11 @@ metric_mean_wrapper(..., fn, name = NULL, dtype = NULL)
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
+\value{
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
+}
 \description{
 You could use this class to quickly build a mean metric from a function. The
 function needs to have the signature \code{fn(y_true, y_pred)} and return a
