@@ -121,7 +121,6 @@ knit_vignette <- function(input, ..., output_dir) {
 
   fig.path <- name
 
-
   unlink(fig.path, recursive = TRUE)
   message("kniting: ", output.md)
 
@@ -197,7 +196,7 @@ knit_vignette <- function(input, ..., output_dir) {
   output.Rmd <- sub("/vignettes-src/", "/vignettes/", fs::path_real(input.Rmd),
                     fixed = TRUE)
   message("postprocessed output file: ", output.Rmd)
-  writeLines(lines, output.Rmd)
+  writeLines(lines, output.Rmd, useBytes = TRUE)
 
   # figures dir
   if(dir.exists(fig.path)) {
