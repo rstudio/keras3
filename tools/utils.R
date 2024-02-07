@@ -124,7 +124,7 @@ attach_eval({
     for(f in Sys.glob(c(...))) {
       txt <- f |> readLines() |> trimws("right")
       length(txt) <- Position(nzchar, txt, right = TRUE)
-      writeLines(txt, f)
+      writeLines(txt, f, useBytes = TRUE)
     }
   }
 
@@ -2221,7 +2221,8 @@ move_roxy_blocks_to_mansrc <- function() {
   walk_roxy_blocks(function(block) {
     roxy_line_range <- get_block_line_range(block, "roxygen") %||% return()
     lines <- get_file_lines(block$file, line_range = roxy_line_range)
-    if(length(lines <= 4)) return()
+    if(length(lines) <= 4) return()
+    # or @noRd or @describeIn or ...
     name <- doctether:::get_block_name(block)
     new_file <- fs::path("man-src", name, name, ext = "Rmd")
     new_rendered_file <- new_file |> fs::path_ext_set("md")

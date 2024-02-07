@@ -163,6 +163,9 @@ local({
 list(
   markdown = TRUE,
   r6 = FALSE,
+  # packages = "doctether",
+  # if we had this, then wouldn't need to register
+  # the fake tether tag parser.
   roclets = c("namespace", "rd"),
   knitr_chunk_options = list(
     comment = "##",
