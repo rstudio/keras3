@@ -135,18 +135,16 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' The shape of the random values to generate.
 #'
 #' @param minval
-#' Float, defaults to 0. Lower bound of the range of
+#' integer, lower bound of the range of
 #' random values to generate (inclusive).
 #'
 #' @param maxval
-#' Float, defaults to 1. Upper bound of the range of
+#' integer, upper bound of the range of
 #' random values to generate (exclusive).
 #'
 #' @param dtype
 #' Optional dtype of the tensor. Only integer types are
-#' supported. If not specified, [`config_floatx()`] is used,
-#' which defaults to `float32` unless you configured it otherwise (via
-#' `config_set_floatx(float_dtype)`)
+#' supported. If not specified, `"int32"` is used.
 #'
 #' @param seed
 #' An R integer or instance of
