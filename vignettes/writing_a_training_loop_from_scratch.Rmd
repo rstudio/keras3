@@ -46,7 +46,7 @@ Let's consider a simple MNIST model:
 
 
 ```r
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 64, activation = "relu") %>%
@@ -144,18 +144,18 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.6731
+## Training loss (for one batch) at step 200: 1.6825
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8859
+## Training loss (for one batch) at step 400: 0.8280
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7074
+## Training loss (for one batch) at step 600: 0.6472
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8335
+## Training loss (for one batch) at step 200: 0.7153
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8314
+## Training loss (for one batch) at step 400: 0.6430
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4169
+## Training loss (for one batch) at step 600: 0.4325
 ## Seen so far: 38400 samples
 ```
 
@@ -178,7 +178,7 @@ the end of each epoch:
 
 ```r
 # Get model
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu") %>%
   layer_dense(units = 64, activation = "relu") %>%
@@ -246,23 +246,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.4448
+## Training loss (for one batch) at step 200: 1.0199
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.7797
+## Training loss (for one batch) at step 400: 0.7246
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7271
+## Training loss (for one batch) at step 600: 0.7681
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.7030
-## Validation acc: 0.7874
+## Training acc over epoch: 0.6977
+## Validation acc: 0.7766
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8021
+## Training loss (for one batch) at step 200: 0.8043
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.5809
+## Training loss (for one batch) at step 400: 0.6765
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6895
+## Training loss (for one batch) at step 600: 0.5626
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8185
-## Validation acc: 0.8365
+## Training acc over epoch: 0.8019
+## Validation acc: 0.8122
 ```
 
 ```r
@@ -270,7 +270,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 26.12411 secs
+## Time difference of 10.65904 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -350,23 +350,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 0.9179
+## Training loss (for one batch) at step 200: 0.8536
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.9179
+## Training loss (for one batch) at step 400: 0.8536
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9179
+## Training loss (for one batch) at step 600: 0.8536
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8616
-## Validation acc: 0.8673
+## Training acc over epoch: 0.8423
+## Validation acc: 0.8415
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.9179
+## Training loss (for one batch) at step 200: 0.8536
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.9179
+## Training loss (for one batch) at step 400: 0.8536
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9179
+## Training loss (for one batch) at step 600: 0.8536
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8828
-## Validation acc: 0.8819
+## Training acc over epoch: 0.8652
+## Validation acc: 0.8676
 ```
 
 ```r
@@ -374,7 +374,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 2.465652 secs
+## Time difference of 1.309618 secs
 ```
 
 Much faster, isn't it?
@@ -406,7 +406,7 @@ Let's build a really simple model that uses it:
 
 
 ```r
-inputs <- layer_input(shape = 784, name="digits")
+inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs %>%
   layer_dense(units = 64, activation = "relu") %>%
   ActivityRegularizationLayer() %>%
@@ -485,26 +485,26 @@ summary(discriminator)
 ```
 
 ```
-## [1mModel: "discriminator"[0m
+## [1mModel: "discriminator"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │        [38;5;34m640[0m │
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │        [38;5;34m640[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_1 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │          [38;5;34m0[0m │
+## │ leaky_re_lu_1 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │     [38;5;34m73,856[0m │
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │     [38;5;34m73,856[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu ([38;5;33mLeakyReLU[0m)         │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
+## │ leaky_re_lu ([38;5;33mLeakyReLU[0m)         │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
-## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
+## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
+## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dense_6 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)                 │        [38;5;34m129[0m │
+## │ dense_6 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)                 │        [38;5;34m129[0m │
 ## └─────────────────────────────────┴───────────────────────────┴────────────┘
-## [1m Total params: [0m[38;5;34m74,625[0m (291.50 KB)
-## [1m Trainable params: [0m[38;5;34m74,625[0m (291.50 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+## [1m Total params: [0m[38;5;34m74,625[0m (291.50 KB)
+## [1m Trainable params: [0m[38;5;34m74,625[0m (291.50 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 Then let's create a generator network,
@@ -528,31 +528,31 @@ summary(generator)
 ```
 
 ```
-## [1mModel: "generator"[0m
+## [1mModel: "generator"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ dense_7 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │    [38;5;34m809,088[0m │
+## │ dense_7 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │    [38;5;34m809,088[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_4 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │          [38;5;34m0[0m │
+## │ leaky_re_lu_4 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
+## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
-## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_3 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
+## │ leaky_re_lu_3 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
-## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_2 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
+## │ leaky_re_lu_2 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │      [38;5;34m6,273[0m │
+## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │      [38;5;34m6,273[0m │
 ## └─────────────────────────────────┴───────────────────────────┴────────────┘
-## [1m Total params: [0m[38;5;34m1,339,905[0m (5.11 MB)
-## [1m Trainable params: [0m[38;5;34m1,339,905[0m (5.11 MB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+## [1m Total params: [0m[38;5;34m1,339,905[0m (5.11 MB)
+## [1m Trainable params: [0m[38;5;34m1,339,905[0m (5.11 MB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 Here's the key bit: the training loop. As you can see it is quite straightforward. The

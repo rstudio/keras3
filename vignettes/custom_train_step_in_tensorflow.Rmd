@@ -114,7 +114,7 @@ Let's try this out:
 
 ```r
 # Construct and compile an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- CustomModel(inputs, outputs)
 model |> compile(optimizer = "adam", loss = "mse", metrics = "mae")
@@ -127,11 +127,11 @@ model |> fit(x, y, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 35ms/step - loss: 2.9118 - mae: 1.3597
+## 32/32 - 0s - 6ms/step - loss: 2.9118 - mae: 1.3597
 ## Epoch 2/3
-## 32/32 - 0s - 1ms/step - loss: 2.6026 - mae: 1.2856
+## 32/32 - 0s - 513us/step - loss: 2.6026 - mae: 1.2856
 ## Epoch 3/3
-## 32/32 - 0s - 1ms/step - loss: 2.3378 - mae: 1.2193
+## 32/32 - 0s - 509us/step - loss: 2.3378 - mae: 1.2193
 ```
 
 ## Going lower-level
@@ -197,7 +197,7 @@ CustomModel <- new_model_class(
 
 
 # Construct and compile an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- CustomModel(inputs, outputs)
 
@@ -212,11 +212,11 @@ model |> fit(x, y, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 25ms/step - loss: 2.6540 - mae: 1.2901
+## 32/32 - 0s - 5ms/step - loss: 2.6540 - mae: 1.2901
 ## Epoch 2/3
-## 32/32 - 0s - 1ms/step - loss: 2.4139 - mae: 1.2303
+## 32/32 - 0s - 527us/step - loss: 2.4139 - mae: 1.2303
 ## Epoch 3/3
-## 32/32 - 0s - 1ms/step - loss: 2.2080 - mae: 1.1761
+## 32/32 - 0s - 522us/step - loss: 2.2080 - mae: 1.1761
 ```
 
 ## Supporting `sample_weight` & `class_weight`
@@ -268,7 +268,7 @@ CustomModel <- new_model_class(
 
 
 # Construct and compile an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, units = 1)
 model <- CustomModel(inputs, outputs)
 model |> compile(optimizer = "adam", loss = "mse", metrics = "mae")
@@ -282,11 +282,11 @@ model |> fit(x, y, sample_weight = sw, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 30ms/step - loss: 0.1607 - mae: 1.3018
+## 32/32 - 0s - 7ms/step - loss: 0.1607 - mae: 1.3018
 ## Epoch 2/3
-## 32/32 - 0s - 1ms/step - loss: 0.1452 - mae: 1.2999
+## 32/32 - 0s - 540us/step - loss: 0.1452 - mae: 1.2999
 ## Epoch 3/3
-## 32/32 - 0s - 1ms/step - loss: 0.1335 - mae: 1.2986
+## 32/32 - 0s - 529us/step - loss: 0.1335 - mae: 1.2986
 ```
 
 ## Providing your own evaluation step
@@ -320,7 +320,7 @@ CustomModel <- new_model_class(
 )
 
 # Construct an instance of CustomModel
-inputs <- layer_input(shape = 32)
+inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
 model <- CustomModel(inputs, outputs)
 model |> compile(loss = "mse", metrics = "mae")
@@ -332,7 +332,7 @@ model |> evaluate(x, y)
 ```
 
 ```
-## 32/32 - 0s - 11ms/step - loss: 0.0000e+00 - mae: 1.3947
+## 32/32 - 0s - 2ms/step - loss: 0.0000e+00 - mae: 1.3947
 ```
 
 ```
@@ -507,7 +507,7 @@ gan |> fit(
 ```
 
 ```
-## 100/100 - 8s - 78ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+## 100/100 - 21s - 206ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?

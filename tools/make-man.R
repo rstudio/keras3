@@ -17,7 +17,7 @@ itemize_family <- function(rd_file) {
     x[i] %<>% str_prefix("}\n")
   }
 
-  writeLines(x, rd_file)
+  writeLines(x, rd_file, useBytes = TRUE)
 
 }
 

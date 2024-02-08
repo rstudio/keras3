@@ -41,7 +41,7 @@ Let's consider a simple MNIST model:
 
 ```r
 get_model <- function() {
-  inputs <- layer_input(shape = 784, name = "digits")
+  inputs <- keras_input(shape = 784, name = "digits")
   outputs <- inputs |>
     layer_dense(units = 64, activation = "relu") |>
     layer_dense(units = 64, activation = "relu") |>
@@ -153,18 +153,18 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.5075
+## Training loss (for one batch) at step 200: 1.6069
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 1.4778
+## Training loss (for one batch) at step 400: 1.3904
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.8656
+## Training loss (for one batch) at step 600: 0.9535
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.5394
+## Training loss (for one batch) at step 200: 0.5628
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.3430
+## Training loss (for one batch) at step 400: 0.2655
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.8861
+## Training loss (for one batch) at step 600: 0.9203
 ## Seen so far: 38400 samples
 ```
 
@@ -256,23 +256,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.1122
+## Training loss (for one batch) at step 200: 1.1918
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 1.8121
+## Training loss (for one batch) at step 400: 1.7761
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.5747
+## Training loss (for one batch) at step 600: 0.5306
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.7265
-## Validation acc: 0.8098
+## Training acc over epoch: 0.7229
+## Validation acc: 0.7953
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.6316
+## Training loss (for one batch) at step 200: 0.5075
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8805
+## Training loss (for one batch) at step 400: 0.7321
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.5094
+## Training loss (for one batch) at step 600: 0.6281
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8365
-## Validation acc: 0.8489
+## Training acc over epoch: 0.8266
+## Validation acc: 0.8524
 ```
 
 ```r
@@ -280,7 +280,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 24.82931 secs
+## Time difference of 10.97261 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -363,23 +363,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 0.5685
+## Training loss (for one batch) at step 200: 0.6893
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8591
+## Training loss (for one batch) at step 400: 1.2595
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4066
+## Training loss (for one batch) at step 600: 0.4772
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8690
-## Validation acc: 0.8731
+## Training acc over epoch: 0.8633
+## Validation acc: 0.8719
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.7467
+## Training loss (for one batch) at step 200: 0.4594
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.2867
+## Training loss (for one batch) at step 400: 0.3205
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.3622
+## Training loss (for one batch) at step 600: 0.4613
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8855
-## Validation acc: 0.8794
+## Training acc over epoch: 0.8830
+## Validation acc: 0.8756
 ```
 
 ```r
@@ -387,7 +387,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 2.997126 secs
+## Time difference of 1.637573 secs
 ```
 
 Much faster, isn't it?
@@ -419,7 +419,7 @@ Let's build a really simple model that uses it:
 
 
 ```r
-inputs <- layer_input(shape = 784, name = "digits")
+inputs <- keras_input(shape = 784, name = "digits")
 outputs <- inputs |>
   layer_dense(units = 64, activation = "relu") |>
   layer_activity_regularization() |>
@@ -506,26 +506,26 @@ summary(discriminator)
 ```
 
 ```
-## [1mModel: "discriminator"[0m
+## [1mModel: "discriminator"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │        [38;5;34m640[0m │
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │        [38;5;34m640[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_1 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │          [38;5;34m0[0m │
+## │ leaky_re_lu_1 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)        │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │     [38;5;34m73,856[0m │
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │     [38;5;34m73,856[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu ([38;5;33mLeakyReLU[0m)         │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
+## │ leaky_re_lu ([38;5;33mLeakyReLU[0m)         │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
-## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
+## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)               │          [38;5;34m0[0m │
+## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                           │            │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ dense_6 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)                 │        [38;5;34m129[0m │
+## │ dense_6 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)                 │        [38;5;34m129[0m │
 ## └─────────────────────────────────┴───────────────────────────┴────────────┘
-## [1m Total params: [0m[38;5;34m74,625[0m (291.50 KB)
-## [1m Trainable params: [0m[38;5;34m74,625[0m (291.50 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+## [1m Total params: [0m[38;5;34m74,625[0m (291.50 KB)
+## [1m Trainable params: [0m[38;5;34m74,625[0m (291.50 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 Then let's create a generator network,
@@ -560,31 +560,31 @@ summary(generator)
 ```
 
 ```
-## [1mModel: "generator"[0m
+## [1mModel: "generator"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩
-## │ dense_7 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │    [38;5;34m809,088[0m │
+## │ dense_7 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │    [38;5;34m809,088[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_4 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │          [38;5;34m0[0m │
+## │ leaky_re_lu_4 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m6272[0m)              │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
+## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)         │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
-## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_3 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
+## │ leaky_re_lu_3 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
-## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
+## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │    [38;5;34m262,272[0m │
+## │ ([38;5;33mConv2DTranspose[0m)               │                           │            │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ leaky_re_lu_2 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
+## │ leaky_re_lu_2 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)       │          [38;5;34m0[0m │
 ## ├─────────────────────────────────┼───────────────────────────┼────────────┤
-## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │      [38;5;34m6,273[0m │
+## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)         │      [38;5;34m6,273[0m │
 ## └─────────────────────────────────┴───────────────────────────┴────────────┘
-## [1m Total params: [0m[38;5;34m1,339,905[0m (5.11 MB)
-## [1m Trainable params: [0m[38;5;34m1,339,905[0m (5.11 MB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+## [1m Total params: [0m[38;5;34m1,339,905[0m (5.11 MB)
+## [1m Trainable params: [0m[38;5;34m1,339,905[0m (5.11 MB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 Here's the key bit: the training loop. As you can see it is quite straightforward. The
@@ -709,10 +709,10 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start epoch:  1
-## discriminator loss at step 200: 0.60
-## adversarial loss at step 200: 0.85
-## discriminator loss at step 400: 0.56
-## adversarial loss at step 400: 1.00
+## discriminator loss at step 200: 0.56
+## adversarial loss at step 200: 1.00
+## discriminator loss at step 400: 0.74
+## adversarial loss at step 400: 1.02
 ```
 
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training

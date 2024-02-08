@@ -86,7 +86,7 @@ which uses the `.keras` extension.
 ```r
 get_model <- function() {
   # Create a simple model.
-  inputs <- layer_input(shape(32))
+  inputs <- keras_input(shape(32))
   outputs <- inputs |> layer_dense(1)
   model <-  keras_model(inputs, outputs)
   model |> compile(optimizer = optimizer_adam(), loss = "mean_squared_error")
@@ -217,7 +217,7 @@ register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
 
 # Create the model.
 get_model <- function() {
-  inputs <- layer_input(shape(4))
+  inputs <- keras_input(shape(4))
   mid <- inputs |> layer_custom(0.5)
   outputs <- mid |> layer_dense(1, activation = custom_fn)
   model <- keras_model(inputs, outputs)
@@ -398,7 +398,7 @@ new_model <- from_config(config)
 
 
 ```r
-inputs <- layer_input(c(32))
+inputs <- keras_input(c(32))
 outputs <- inputs |> layer_dense(1)
 model <- keras_model(inputs, outputs)
 config <- get_config(model)
@@ -516,7 +516,7 @@ layer_2 |> set_weights(get_weights(layer_1))
 
 ```r
 # Create a simple functional model
-inputs <- layer_input(shape=c(784), name="digits")
+inputs <- keras_input(shape=c(784), name="digits")
 outputs <- inputs |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
   layer_dense(64, activation = "relu", name = "dense_2") |>
@@ -573,7 +573,7 @@ stateless layers.
 
 
 ```r
-input <- layer_input(shape = c(784), name = "digits")
+input <- keras_input(shape = c(784), name = "digits")
 output <- input |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
   layer_dense(64, activation = "relu", name = "dense_2") |>
@@ -581,7 +581,7 @@ output <- input |>
 functional_model <- keras_model(inputs, outputs,
                                 name = "3_layer_mlp")
 
-input <- layer_input(shape = c(784), name = "digits")
+input <- keras_input(shape = c(784), name = "digits")
 output <- input |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
   layer_dense(64, activation = "relu", name = "dense_2") |>
@@ -630,7 +630,7 @@ the desired weights/layers into a new model.
 
 ```r
 create_functional_model <- function() {
-  inputs <- layer_input(shape = c(784), name = "digits")
+  inputs <- keras_input(shape = c(784), name = "digits")
   outputs <- inputs |>
     layer_dense(64, activation = "relu", name = "dense_1") |>
     layer_dense(64, activation = "relu", name = "dense_2") |>
@@ -828,7 +828,7 @@ layer_custom_model <- register_keras_serializable(
 )
 
 # Let's make our first layer the custom layer from the previous example (MyDense)
-inputs <- layer_input(c(32))
+inputs <- keras_input(c(32))
 outputs <-  inputs |> layer_custom_model(first_layer=layer)
 model <- keras_model(inputs, outputs)
 

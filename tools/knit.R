@@ -76,7 +76,7 @@ knit_man <- function(input, ..., output_dir) {
 
   # x <- process_chunk_output(x)
 
-  writeLines(x, output)
+  writeLines(x, output, useBytes = TRUE)
 
 }
 

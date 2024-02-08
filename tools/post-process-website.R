@@ -11,5 +11,5 @@ for (file in Sys.glob(c("docs/articles/*.html",
   lines <- readLines(file)
   i <- grep("Source: ", lines, fixed = TRUE)
   lines[i] %<>% gsub("vignettes/", "vignettes-src/", ., fixed = TRUE)
-  writeLines(lines, file)
+  writeLines(lines, file, useBytes = TRUE)
 }

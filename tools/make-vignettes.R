@@ -82,7 +82,7 @@ tibble(local_tutobook_path = guides) %>%
     lines <- readLines(rmd_path) |> trimws("right")
     fm_end <- which(lines == "---")[2]
     lines[fm_end] <- sprintf("tether: %s\n---", tether_url)
-    writeLines(lines, rmd_path)
+    writeLines(lines, rmd_path, useBytes = TRUE)
   })
   relocate(tether_url) %>%
   print(n = Inf)

@@ -1114,6 +1114,7 @@ train_step <- function(x, y) {
     start_index <- start_index + prod(b2_shape)
 
     # Set the weight predictions as the weight variables on the outer model.
+    browser()
     dense1$kernel <- w1
     dense1$bias <- b1
     dense2$kernel <- w2
