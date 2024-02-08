@@ -1,4 +1,4 @@
-pandoc: 3.1.11
+pandoc: 3.1.11.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -29,7 +29,7 @@ articles:
   writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
   writing_a_training_loop_from_scratch: writing_a_training_loop_from_scratch.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-02-03T16:11Z
+last_built: 2024-02-08T01:01Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

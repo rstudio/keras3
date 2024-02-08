@@ -100,6 +100,17 @@ f(x) = x for x &amp;gt;= 0
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>The return value depends on the value provided for the first argument.
+If  <code>object</code> is:</p><ul><li><p>a <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code>, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.</p></li>
+<li><p>a <code><a href="keras_input.html">keras_input()</a></code>, then the output tensor from calling <code>layer(input)</code> is returned.</p></li>
+<li><p><code>NULL</code> or missing, then a <code>Layer</code> instance is returned.</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">
 <ul><li><p><a href="https://keras.io/api/layers/activation_layers/elu#elu-class" class="external-link">https://keras.io/api/layers/activation_layers/elu#elu-class</a></p></li>

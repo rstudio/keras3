@@ -184,15 +184,13 @@ multi-branch model)</li>
 method to remove layers: a Sequential model behaves very much like a
 stack of layers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/pop_layer.html">pop_layer</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## &lt;Dense name=dense_8, built=False&gt;</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span>  <span class="co"># 2</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/pop_layer.html">pop_layer</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span>  <span class="co"># 2</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 2</span></span></code></pre>
 <p>Also note that the Sequential constructor accepts a <code>name</code>
 argument, just like any layer or model in Keras. This is useful to
 annotate TensorBoard graphs with semantically meaningful names.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"my_sequential"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer1"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span>, name <span class="op">=</span> <span class="st">"layer2"</span><span class="op">)</span></span>
@@ -204,13 +202,13 @@ annotate TensorBoard graphs with semantically meaningful names.</p>
 <p>Generally, all layers in Keras need to know the shape of their inputs
 in order to be able to create their weights. So when you create a layer
 like this, initially, it has no weights:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span>  <span class="co"># Empty</span></span></code></pre></div>
 <pre><code><span><span class="co">## list()</span></span></code></pre>
 <p>It creates its weights the first time it is called on an input, since
 the shape of the weights depends on the shape of the inputs:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Call layer on a test input</span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_ones.html">op_ones</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -225,7 +223,7 @@ instantiate a Sequential model without an input shape, it isn’t “built”:
 it has no weights (and calling <code>model$weights</code> results in an
 error stating just this). The weights are created when the model first
 sees some input data:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -245,40 +243,40 @@ sees some input data:</p>
 <pre><code><span><span class="co">## [1] 6</span></span></code></pre>
 <p>Once a model is “built”, you can call its <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code>
 method to display its contents:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1mModel: "sequential_4"[0m</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_4"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ dense_12 ([38;5;33mDense[0m)                │ ([38;5;34m1[0m, [38;5;34m2[0m)                    │         [38;5;34m10[0m │</span></span>
+<span><span class="co">## │ dense_12 (<span style="color: #0087FF;">Dense</span>)                │ (<span style="color: #00AF00;">1</span>, <span style="color: #00AF00;">2</span>)                    │         <span style="color: #00AF00;">10</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_11 ([38;5;33mDense[0m)                │ ([38;5;34m1[0m, [38;5;34m3[0m)                    │          [38;5;34m9[0m │</span></span>
+<span><span class="co">## │ dense_11 (<span style="color: #0087FF;">Dense</span>)                │ (<span style="color: #00AF00;">1</span>, <span style="color: #00AF00;">3</span>)                    │          <span style="color: #00AF00;">9</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense_10 ([38;5;33mDense[0m)                │ ([38;5;34m1[0m, [38;5;34m4[0m)                    │         [38;5;34m16[0m │</span></span>
+<span><span class="co">## │ dense_10 (<span style="color: #0087FF;">Dense</span>)                │ (<span style="color: #00AF00;">1</span>, <span style="color: #00AF00;">4</span>)                    │         <span style="color: #00AF00;">16</span> │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## [1m Total params: [0m[38;5;34m35[0m (140.00 B)</span></span>
-<span><span class="co">## [1m Trainable params: [0m[38;5;34m35[0m (140.00 B)</span></span>
-<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">35</span> (140.00 B)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">35</span> (140.00 B)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <p>However, it can be very useful when building a Sequential model
 incrementally to be able to display the summary of the model so far,
 including the current output shape. In this case, you should start your
 model by passing an <code>input_shape</code> argument to your model, so
 that it knows its input shape from the start:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1mModel: "sequential_5"[0m</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_5"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ dense_13 ([38;5;33mDense[0m)                │ ([38;5;45mNone[0m, [38;5;34m2[0m)                 │         [38;5;34m10[0m │</span></span>
+<span><span class="co">## │ dense_13 (<span style="color: #0087FF;">Dense</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">2</span>)                 │         <span style="color: #00AF00;">10</span> │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## [1m Total params: [0m[38;5;34m10[0m (40.00 B)</span></span>
-<span><span class="co">## [1m Trainable params: [0m[38;5;34m10[0m (40.00 B)</span></span>
-<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">10</span> (40.00 B)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">10</span> (40.00 B)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span><span class="op">$</span><span class="va">layers</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
 <span><span class="co">## &lt;Dense name=dense_13, built=True&gt;</span></span></code></pre>
@@ -297,7 +295,7 @@ incrementally stack layers with <code>|&gt;</code> and frequently print
 model summaries. For instance, this enables you to monitor how a stack
 of <code>Conv2D</code> and <code>MaxPooling2D</code> layers is
 downsampling image feature maps:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -306,20 +304,20 @@ downsampling image feature maps:</p>
 <span><span class="co"># Can you guess what the current output shape is at this point? Probably not.</span></span>
 <span><span class="co"># Let's just print it:</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1mModel: "sequential_6"[0m</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_6"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m123[0m, [38;5;34m123[0m, [38;5;34m32[0m)      │      [38;5;34m2,432[0m │</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">123</span>, <span style="color: #00AF00;">123</span>, <span style="color: #00AF00;">32</span>)      │      <span style="color: #00AF00;">2,432</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m121[0m, [38;5;34m121[0m, [38;5;34m32[0m)      │      [38;5;34m9,248[0m │</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">121</span>, <span style="color: #00AF00;">121</span>, <span style="color: #00AF00;">32</span>)      │      <span style="color: #00AF00;">9,248</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m40[0m, [38;5;34m40[0m, [38;5;34m32[0m)        │          [38;5;34m0[0m │</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">32</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## [1m Total params: [0m[38;5;34m11,680[0m (45.62 KB)</span></span>
-<span><span class="co">## [1m Trainable params: [0m[38;5;34m11,680[0m (45.62 KB)</span></span>
-<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">11,680</span> (45.62 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">11,680</span> (45.62 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The answer was: (40, 40, 32), so we can keep downsampling...</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span></span>
@@ -332,32 +330,32 @@ downsampling image feature maps:</p>
 <span></span>
 <span><span class="co"># And now?</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1mModel: "sequential_6"[0m</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_6"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape             [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m123[0m, [38;5;34m123[0m, [38;5;34m32[0m)      │      [38;5;34m2,432[0m │</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">123</span>, <span style="color: #00AF00;">123</span>, <span style="color: #00AF00;">32</span>)      │      <span style="color: #00AF00;">2,432</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m121[0m, [38;5;34m121[0m, [38;5;34m32[0m)      │      [38;5;34m9,248[0m │</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">121</span>, <span style="color: #00AF00;">121</span>, <span style="color: #00AF00;">32</span>)      │      <span style="color: #00AF00;">9,248</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m40[0m, [38;5;34m40[0m, [38;5;34m32[0m)        │          [38;5;34m0[0m │</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">32</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_5 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m38[0m, [38;5;34m38[0m, [38;5;34m32[0m)        │      [38;5;34m9,248[0m │</span></span>
+<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">38</span>, <span style="color: #00AF00;">38</span>, <span style="color: #00AF00;">32</span>)        │      <span style="color: #00AF00;">9,248</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_4 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m36[0m, [38;5;34m36[0m, [38;5;34m32[0m)        │      [38;5;34m9,248[0m │</span></span>
+<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">36</span>, <span style="color: #00AF00;">36</span>, <span style="color: #00AF00;">32</span>)        │      <span style="color: #00AF00;">9,248</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_2 ([38;5;33mMaxPooling2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m12[0m, [38;5;34m12[0m, [38;5;34m32[0m)        │          [38;5;34m0[0m │</span></span>
+<span><span class="co">## │ max_pooling2d_2 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">32</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_3 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m10[0m, [38;5;34m10[0m, [38;5;34m32[0m)        │      [38;5;34m9,248[0m │</span></span>
+<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">32</span>)        │      <span style="color: #00AF00;">9,248</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)          │      [38;5;34m9,248[0m │</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)          │      <span style="color: #00AF00;">9,248</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1 ([38;5;33mMaxPooling2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m32[0m)          │          [38;5;34m0[0m │</span></span>
+<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">32</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
-<span><span class="co">## [1m Total params: [0m[38;5;34m48,672[0m (190.12 KB)</span></span>
-<span><span class="co">## [1m Trainable params: [0m[38;5;34m48,672[0m (190.12 KB)</span></span>
-<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">48,672</span> (190.12 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">48,672</span> (190.12 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Now that we have 4x4 feature maps, time to apply global max pooling.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_global_max_pooling_2d.html">layer_global_max_pooling_2d</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -392,7 +390,7 @@ every layer has an <code>input</code> and <code>output</code> attribute.
 These attributes can be used to do neat things, like quickly creating a
 model that extracts the outputs of all intermediate layers in a
 Sequential model:</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">3</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -409,7 +407,7 @@ Sequential model:</p>
 <span><span class="va">features</span> <span class="op">&lt;-</span> <span class="fu">feature_extractor</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s a similar example that only extract features from one
 layer:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial_model</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">250</span>, <span class="fl">250</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_conv_2d.html">layer_conv_2d</a></span><span class="op">(</span>filters <span class="op">=</span> <span class="fl">32</span>, kernel_size <span class="op">=</span> <span class="fl">5</span>, strides <span class="op">=</span> <span class="fl">2</span>,</span>
@@ -442,35 +440,35 @@ freeze all layers except the last one. In this case, you can call
 <code>model$layers</code> and set
 <code>layer$trainable &lt;- FALSE</code> on each layer, except the last
 one. Like this:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span>input_shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">32</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Presumably you would want to first load pre-trained weights.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Freeze all layers except the last one.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/freeze_weights.html">freeze_weights</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">1</span>, to <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="co"># note the "Trainable" column now visible in the summary table</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1mModel: "sequential_9"[0m</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential_9"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━┓</span></span>
-<span><span class="co">## ┃[1m [0m[1mLayer (type)               [0m[1m [0m┃[1m [0m[1mOutput Shape            [0m[1m [0m┃[1m [0m[1mParam #[0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                </span>┃<span style="font-weight: bold;"> Output Shape             </span>┃<span style="font-weight: bold;"> Param # </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━┩</span></span>
-<span><span class="co">## │ dense_18 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m32[0m)               │  [38;5;34m25,120[0m │   [1;91mN[0m   │</span></span>
+<span><span class="co">## │ dense_18 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>)               │  <span style="color: #00AF00;">25,120</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dense_17 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m32[0m)               │   [38;5;34m1,056[0m │   [1;91mN[0m   │</span></span>
+<span><span class="co">## │ dense_17 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>)               │   <span style="color: #00AF00;">1,056</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dense_16 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m32[0m)               │   [38;5;34m1,056[0m │   [1;91mN[0m   │</span></span>
+<span><span class="co">## │ dense_16 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>)               │   <span style="color: #00AF00;">1,056</span> │   <span style="color: #FF5555; font-weight: bold;">N</span>   │</span></span>
 <span><span class="co">## ├─────────────────────────────┼──────────────────────────┼─────────┼───────┤</span></span>
-<span><span class="co">## │ dense_15 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m10[0m)               │     [38;5;34m330[0m │   [1;38;5;34mY[0m   │</span></span>
+<span><span class="co">## │ dense_15 (<span style="color: #0087FF;">Dense</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)               │     <span style="color: #00AF00;">330</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
 <span><span class="co">## └─────────────────────────────┴──────────────────────────┴─────────┴───────┘</span></span>
-<span><span class="co">## [1m Total params: [0m[38;5;34m27,562[0m (107.66 KB)</span></span>
-<span><span class="co">## [1m Trainable params: [0m[38;5;34m330[0m (1.29 KB)</span></span>
-<span><span class="co">## [1m Non-trainable params: [0m[38;5;34m27,232[0m (106.38 KB)</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">27,562</span> (107.66 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">330</span> (1.29 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">27,232</span> (106.38 KB)</span></span></code></pre>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Another way to freeze all layers except the last one.</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">layer</span> <span class="kw">in</span> <span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">model</span><span class="op">$</span><span class="va">layers</span><span class="op">)</span><span class="op">]</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">layer</span><span class="op">$</span><span class="va">trainable</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
@@ -482,7 +480,7 @@ one. Like this:</p>
 <p>Another common blueprint is to use a Sequential model to stack a
 pre-trained model and some freshly initialized classification layers.
 Like this:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load a convolutional base with pre-trained weights</span></span>
 <span><span class="va">base_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/application_xception.html">application_xception</a></span><span class="op">(</span>weights <span class="op">=</span> <span class="st">'imagenet'</span>,</span>
 <span>                                   include_top <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -495,7 +493,7 @@ Like this:</p>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">base_model</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compile &amp; train</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>

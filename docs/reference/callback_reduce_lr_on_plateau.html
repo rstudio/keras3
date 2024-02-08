@@ -144,6 +144,12 @@ operation after the learning rate has been reduced.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A <code>Callback</code> instance that can be passed to <code><a href="fit.keras.src.models.model.Model.html">fit.keras.src.models.model.Model()</a></code>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">reduce_lr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callback_reduce_lr_on_plateau.html">callback_reduce_lr_on_plateau</a></span><span class="op">(</span>monitor <span class="op">=</span> <span class="st">'val_loss'</span>, factor <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span>                                           patience <span class="op">=</span> <span class="fl">5</span>, min_lr <span class="op">=</span> <span class="fl">0.001</span><span class="op">)</span></span>

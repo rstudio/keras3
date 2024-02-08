@@ -101,6 +101,14 @@ loss &amp;lt;- sqrt(mean((y_pred - y_true) ^ 2))
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>a <code>Metric</code> instance is returned. The <code>Metric</code> instance can be passed
+directly to <code>compile(metrics = )</code>, or used as a standalone object. See
+<code><a href="Metric.html">?Metric</a></code> for example usage.</p>
+    </div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p>Standalone usage:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metric_root_mean_squared_error.html">metric_root_mean_squared_error</a></span><span class="op">(</span><span class="op">)</span></span>

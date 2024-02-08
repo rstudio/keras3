@@ -138,6 +138,17 @@ function.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>The return value depends on the value provided for the first argument.
+If  <code>object</code> is:</p><ul><li><p>a <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code>, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.</p></li>
+<li><p>a <code><a href="keras_input.html">keras_input()</a></code>, then the output tensor from calling <code>layer(input)</code> is returned.</p></li>
+<li><p><code>NULL</code> or missing, then a <code>Layer</code> instance is returned.</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="co"># add a x -&gt; x^2 layer</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model_sequential.html">keras_model_sequential</a></span><span class="op">(</span><span class="op">)</span></span>

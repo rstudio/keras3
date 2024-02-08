@@ -297,6 +297,17 @@ approach that avoids ever computing the mean of the input.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>The return value depends on the value provided for the first argument.
+If  <code>object</code> is:</p><ul><li><p>a <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code>, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.</p></li>
+<li><p>a <code><a href="keras_input.html">keras_input()</a></code>, then the output tensor from calling <code>layer(input)</code> is returned.</p></li>
+<li><p><code>NULL</code> or missing, then a <code>Layer</code> instance is returned.</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="reference">Reference<a class="anchor" aria-label="anchor" href="#reference"></a></h2>
     
 <ul><li><p><a href="https://arxiv.org/abs/1607.06450" class="external-link">Lei Ba et al., 2016</a>.</p></li>

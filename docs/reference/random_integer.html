@@ -93,20 +93,18 @@ while the upper bound <code>maxval</code> is excluded.</p>
 
 
 <dt>minval</dt>
-<dd><p>Float, defaults to 0. Lower bound of the range of
+<dd><p>integer, lower bound of the range of
 random values to generate (inclusive).</p></dd>
 
 
 <dt>maxval</dt>
-<dd><p>Float, defaults to 1. Upper bound of the range of
+<dd><p>integer, upper bound of the range of
 random values to generate (exclusive).</p></dd>
 
 
 <dt>dtype</dt>
 <dd><p>Optional dtype of the tensor. Only integer types are
-supported. If not specified, <code><a href="config_floatx.html">config_floatx()</a></code> is used,
-which defaults to <code>float32</code> unless you configured it otherwise (via
-<code>config_set_floatx(float_dtype)</code>)</p></dd>
+supported. If not specified, <code>"int32"</code> is used.</p></dd>
 
 
 <dt>seed</dt>
@@ -120,6 +118,12 @@ across multiple calls, use as seed an instance
 of <code><a href="random_seed_generator.html">random_seed_generator()</a></code>.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A tensor of random values.</p>
+    </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other random: <br><code><a href="random_categorical.html">random_categorical</a>()</code> <br><code><a href="random_dropout.html">random_dropout</a>()</code> <br><code><a href="random_gamma.html">random_gamma</a>()</code> <br><code><a href="random_normal.html">random_normal</a>()</code> <br><code><a href="random_seed_generator.html">random_seed_generator</a>()</code> <br><code><a href="random_shuffle.html">random_shuffle</a>()</code> <br><code><a href="random_truncated_normal.html">random_truncated_normal</a>()</code> <br><code><a href="random_uniform.html">random_uniform</a>()</code> <br></p></div>

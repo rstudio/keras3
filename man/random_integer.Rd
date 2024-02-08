@@ -9,16 +9,14 @@ random_integer(shape, minval, maxval, dtype = "int32", seed = NULL)
 \arguments{
 \item{shape}{The shape of the random values to generate.}
 
-\item{minval}{Float, defaults to 0. Lower bound of the range of
+\item{minval}{integer, lower bound of the range of
 random values to generate (inclusive).}
 
-\item{maxval}{Float, defaults to 1. Upper bound of the range of
+\item{maxval}{integer, upper bound of the range of
 random values to generate (exclusive).}
 
 \item{dtype}{Optional dtype of the tensor. Only integer types are
-supported. If not specified, \code{\link[=config_floatx]{config_floatx()}} is used,
-which defaults to \code{float32} unless you configured it otherwise (via
-\code{config_set_floatx(float_dtype)})}
+supported. If not specified, \code{"int32"} is used.}
 
 \item{seed}{An R integer or instance of
 \code{\link[=random_seed_generator]{random_seed_generator()}}.
