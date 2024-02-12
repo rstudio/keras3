@@ -242,7 +242,7 @@ updated during training.</p>
 <span><span class="co"># Train the model</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span>, loss <span class="op">=</span> <span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 150ms/step - loss: 2.1868</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 1s - 653ms/step - loss: 2.1868</span></span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Check that the weights of layer1 have not changed during training</span></span>
 <span><span class="va">final_layer1_weights_values</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer1</span><span class="op">)</span></span>
@@ -652,7 +652,7 @@ fine-tuning.</li>
 <span></span>
 <span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>, validation_data <span class="op">=</span> <span class="va">validation_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 146/146 - 108s - 739ms/step - binary_accuracy: 0.9118 - loss: 0.1923 - val_binary_accuracy: 0.9662 - val_loss: 0.0916</span></span></code></pre>
+<pre><code><span><span class="co">## 146/146 - 60s - 411ms/step - binary_accuracy: 0.9106 - loss: 0.1951 - val_binary_accuracy: 0.9679 - val_loss: 0.0913</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="do-a-round-of-fine-tuning-of-the-entire-model">Do a round of fine-tuning of the entire model<a class="anchor" aria-label="anchor" href="#do-a-round-of-fine-tuning-of-the-entire-model"></a>
@@ -703,17 +703,17 @@ so far.</p>
 <span></span>
 <span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>, validation_data <span class="op">=</span> <span class="va">validation_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 146/146 - 1456s - 10s/step - binary_accuracy: 0.8708 - loss: 0.3244 - val_binary_accuracy: 0.9616 - val_loss: 0.1072</span></span></code></pre>
+<pre><code><span><span class="co">## 146/146 - 116s - 793ms/step - binary_accuracy: 0.8711 - loss: 0.3231 - val_binary_accuracy: 0.9616 - val_loss: 0.1073</span></span></code></pre>
 <p>After 10 epochs, fine-tuning gains us a nice improvement here. Let’s
 evaluate the model on the test dataset:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 37/37 - 34s - 913ms/step - binary_accuracy: 0.9573 - loss: 0.1075</span></span></code></pre>
+<pre><code><span><span class="co">## 37/37 - 2s - 42ms/step - binary_accuracy: 0.9565 - loss: 0.1078</span></span></code></pre>
 <pre><code><span><span class="co">## $binary_accuracy</span></span>
-<span><span class="co">## [1] 0.957348</span></span>
+<span><span class="co">## [1] 0.9565034</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.1075123</span></span></code></pre>
+<span><span class="co">## [1] 0.1078144</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

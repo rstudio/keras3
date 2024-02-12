@@ -240,18 +240,18 @@ based on the gradients</li>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 1.6069</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 1.5075</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 1.3904</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 1.4778</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.9535</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.8656</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.5628</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.5394</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.2655</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.3430</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.9203</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.8861</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -335,26 +335,26 @@ at the end of each epoch:</p>
 <span>  <span class="va">val_acc_metric</span><span class="op">$</span><span class="fu">reset_state</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 1.1918</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 1.1122</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 1.7761</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 1.8121</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.5306</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.5747</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.7229</span></span>
-<span><span class="co">## Validation acc: 0.7953</span></span>
+<span><span class="co">## Training acc over epoch: 0.7265</span></span>
+<span><span class="co">## Validation acc: 0.8098</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.5075</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.6316</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.7321</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.8805</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.6281</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.5094</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8266</span></span>
-<span><span class="co">## Validation acc: 0.8524</span></span></code></pre>
+<span><span class="co">## Training acc over epoch: 0.8365</span></span>
+<span><span class="co">## Validation acc: 0.8489</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 10.97261 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 33.52668 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf_function">Speeding-up your training step with <code>tf_function</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf_function"></a>
@@ -424,26 +424,26 @@ step:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Validation acc: %.4f\n"</span>, <span class="va">val_acc</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.6893</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.5685</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 1.2595</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.8591</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.4772</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.4066</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8633</span></span>
-<span><span class="co">## Validation acc: 0.8719</span></span>
+<span><span class="co">## Training acc over epoch: 0.8690</span></span>
+<span><span class="co">## Validation acc: 0.8731</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.4594</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.7467</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.3205</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.2867</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.4613</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.3622</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8830</span></span>
-<span><span class="co">## Validation acc: 0.8756</span></span></code></pre>
+<span><span class="co">## Training acc over epoch: 0.8855</span></span>
+<span><span class="co">## Validation acc: 0.8794</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 1.637573 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 5.113296 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">
@@ -738,10 +738,10 @@ want to run this code on a GPU.</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start epoch:  1</span></span>
-<span><span class="co">## discriminator loss at step 200: 0.56</span></span>
-<span><span class="co">## adversarial loss at step 200: 1.00</span></span>
-<span><span class="co">## discriminator loss at step 400: 0.74</span></span>
-<span><span class="co">## adversarial loss at step 400: 1.02</span></span></code></pre>
+<span><span class="co">## discriminator loss at step 200: 0.69</span></span>
+<span><span class="co">## adversarial loss at step 200: 0.91</span></span>
+<span><span class="co">## discriminator loss at step 400: 0.26</span></span>
+<span><span class="co">## adversarial loss at step 400: 1.79</span></span></code></pre>
 <p>That’s it! You’ll get nice-looking fake MNIST digits after just ~30s
 of training on a GPU.</p>
 </div>

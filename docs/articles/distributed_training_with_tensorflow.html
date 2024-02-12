@@ -204,7 +204,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <p>Here’s a simple end-to-end runnable example:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_compiled_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span></span>
+<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fl">784</span><span class="op">)</span></span>
 <span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">256</span>, activation <span class="op">=</span> <span class="st">"relu"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -276,7 +276,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 782/782 - 7s - 9ms/step - loss: 2.9199 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.9377 - val_sparse_categorical_accuracy: 0.8986</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.5622 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.7505 - val_sparse_categorical_accuracy: 0.9044</span></span>
+<span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.5622 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.7505 - val_sparse_categorical_accuracy: 0.9044</span></span>
 <span><span class="co">## 157/157 - 0s - 3ms/step - loss: 0.8129 - sparse_categorical_accuracy: 0.9042</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
 <span><span class="co">## [1] 0.8128782</span></span>
@@ -347,11 +347,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.5186 - sparse_categorical_accuracy: 0.9351 - val_loss: 0.7081 - val_sparse_categorical_accuracy: 0.9184</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 6s - 8ms/step - loss: 3.3305 - sparse_categorical_accuracy: 0.8592 - val_loss: 1.1806 - val_sparse_categorical_accuracy: 0.8930</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3189 - sparse_categorical_accuracy: 0.9476 - val_loss: 0.5234 - val_sparse_categorical_accuracy: 0.9382</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.6629 - sparse_categorical_accuracy: 0.9215 - val_loss: 0.8294 - val_sparse_categorical_accuracy: 0.9130</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">
