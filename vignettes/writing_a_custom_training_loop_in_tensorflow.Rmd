@@ -153,18 +153,18 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.6069
+## Training loss (for one batch) at step 200: 1.5075
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 1.3904
+## Training loss (for one batch) at step 400: 1.4778
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9535
+## Training loss (for one batch) at step 600: 0.8656
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.5628
+## Training loss (for one batch) at step 200: 0.5394
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.2655
+## Training loss (for one batch) at step 400: 0.3430
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9203
+## Training loss (for one batch) at step 600: 0.8861
 ## Seen so far: 38400 samples
 ```
 
@@ -256,23 +256,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.1918
+## Training loss (for one batch) at step 200: 1.1122
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 1.7761
+## Training loss (for one batch) at step 400: 1.8121
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.5306
+## Training loss (for one batch) at step 600: 0.5747
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.7229
-## Validation acc: 0.7953
+## Training acc over epoch: 0.7265
+## Validation acc: 0.8098
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.5075
+## Training loss (for one batch) at step 200: 0.6316
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.7321
+## Training loss (for one batch) at step 400: 0.8805
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6281
+## Training loss (for one batch) at step 600: 0.5094
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8266
-## Validation acc: 0.8524
+## Training acc over epoch: 0.8365
+## Validation acc: 0.8489
 ```
 
 ```r
@@ -280,7 +280,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 10.97261 secs
+## Time difference of 33.52668 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -363,23 +363,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 0.6893
+## Training loss (for one batch) at step 200: 0.5685
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 1.2595
+## Training loss (for one batch) at step 400: 0.8591
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4772
+## Training loss (for one batch) at step 600: 0.4066
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8633
-## Validation acc: 0.8719
+## Training acc over epoch: 0.8690
+## Validation acc: 0.8731
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.4594
+## Training loss (for one batch) at step 200: 0.7467
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.3205
+## Training loss (for one batch) at step 400: 0.2867
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4613
+## Training loss (for one batch) at step 600: 0.3622
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8830
-## Validation acc: 0.8756
+## Training acc over epoch: 0.8855
+## Validation acc: 0.8794
 ```
 
 ```r
@@ -387,7 +387,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 1.637573 secs
+## Time difference of 5.113296 secs
 ```
 
 Much faster, isn't it?
@@ -709,10 +709,10 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start epoch:  1
-## discriminator loss at step 200: 0.56
-## adversarial loss at step 200: 1.00
-## discriminator loss at step 400: 0.74
-## adversarial loss at step 400: 1.02
+## discriminator loss at step 200: 0.69
+## adversarial loss at step 200: 0.91
+## discriminator loss at step 400: 0.26
+## adversarial loss at step 400: 1.79
 ```
 
 That's it! You'll get nice-looking fake MNIST digits after just ~30s of training

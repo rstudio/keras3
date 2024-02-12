@@ -115,7 +115,7 @@ Here's a simple end-to-end runnable example:
 
 ```r
 get_compiled_model <- function() {
-  inputs <- layer_input(shape = 784)
+  inputs <- keras_input(shape = 784)
   outputs <- inputs |>
     layer_dense(units = 256, activation = "relu") |>
     layer_dense(units = 256, activation = "relu") |>
@@ -195,7 +195,7 @@ with(strategy$scope(), {
 ## Epoch 1/2
 ## 782/782 - 7s - 9ms/step - loss: 2.9199 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.9377 - val_sparse_categorical_accuracy: 0.8986
 ## Epoch 2/2
-## 782/782 - 3s - 4ms/step - loss: 0.5622 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.7505 - val_sparse_categorical_accuracy: 0.9044
+## 782/782 - 4s - 5ms/step - loss: 0.5622 - sparse_categorical_accuracy: 0.9254 - val_loss: 0.7505 - val_sparse_categorical_accuracy: 0.9044
 ## 157/157 - 0s - 3ms/step - loss: 0.8129 - sparse_categorical_accuracy: 0.9042
 ```
 
@@ -274,7 +274,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.5186 - sparse_categorical_accuracy: 0.9351 - val_loss: 0.7081 - val_sparse_categorical_accuracy: 0.9184
+## 782/782 - 6s - 8ms/step - loss: 3.3305 - sparse_categorical_accuracy: 0.8592 - val_loss: 1.1806 - val_sparse_categorical_accuracy: 0.8930
 ```
 
 ```r
@@ -283,7 +283,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.3189 - sparse_categorical_accuracy: 0.9476 - val_loss: 0.5234 - val_sparse_categorical_accuracy: 0.9382
+## 782/782 - 4s - 5ms/step - loss: 0.6629 - sparse_categorical_accuracy: 0.9215 - val_loss: 0.8294 - val_sparse_categorical_accuracy: 0.9130
 ```
 
 ## `tf$data` performance tips

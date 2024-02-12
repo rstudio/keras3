@@ -144,18 +144,18 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.6825
+## Training loss (for one batch) at step 200: 1.6731
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8280
+## Training loss (for one batch) at step 400: 0.8859
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6472
+## Training loss (for one batch) at step 600: 0.7074
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.7153
+## Training loss (for one batch) at step 200: 0.8335
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.6430
+## Training loss (for one batch) at step 400: 0.8314
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4325
+## Training loss (for one batch) at step 600: 0.4169
 ## Seen so far: 38400 samples
 ```
 
@@ -246,23 +246,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.0199
+## Training loss (for one batch) at step 200: 1.4448
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.7246
+## Training loss (for one batch) at step 400: 0.7797
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7681
+## Training loss (for one batch) at step 600: 0.7271
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.6977
-## Validation acc: 0.7766
+## Training acc over epoch: 0.7030
+## Validation acc: 0.7874
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8043
+## Training loss (for one batch) at step 200: 0.8021
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.6765
+## Training loss (for one batch) at step 400: 0.5809
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.5626
+## Training loss (for one batch) at step 600: 0.6895
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8019
-## Validation acc: 0.8122
+## Training acc over epoch: 0.8185
+## Validation acc: 0.8365
 ```
 
 ```r
@@ -270,7 +270,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 10.65904 secs
+## Time difference of 34.27442 secs
 ```
 
 ## Speeding-up your training step with `tf_function`
@@ -350,23 +350,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 0.8536
+## Training loss (for one batch) at step 200: 0.9179
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8536
+## Training loss (for one batch) at step 400: 0.9179
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.8536
+## Training loss (for one batch) at step 600: 0.9179
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8423
-## Validation acc: 0.8415
+## Training acc over epoch: 0.8616
+## Validation acc: 0.8673
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8536
+## Training loss (for one batch) at step 200: 0.9179
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8536
+## Training loss (for one batch) at step 400: 0.9179
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.8536
+## Training loss (for one batch) at step 600: 0.9179
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8652
-## Validation acc: 0.8676
+## Training acc over epoch: 0.8828
+## Validation acc: 0.8819
 ```
 
 ```r
@@ -374,7 +374,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 1.309618 secs
+## Time difference of 4.122807 secs
 ```
 
 Much faster, isn't it?
