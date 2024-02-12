@@ -50,6 +50,7 @@ install_keras <- function(
     tensorflow <- "tensorflow-cpu"
   }
 
+  # The "numpy" backend requires that "jax" be installed
   if("jax" %in% backend && !is.null(extra_packages))
     # undeclared dependency, import fails otherwise
     append(extra_packages) <- "packaging"
@@ -96,7 +97,7 @@ is_linux <- function() {
 
 #' Configure a Keras backend
 #'
-#' @param backend string, one of `"tensorflow"`, `"jax"`, or `"torch"`. Defaults to `"tensorflow"`.
+#' @param backend string, can be `"tensorflow"`, `"jax"`, `"numpy"`, or `"torch"`.
 #'
 #' @details
 #' These functions allow configuring which backend keras will use.
@@ -110,8 +111,7 @@ is_linux <- function() {
 #' ```
 #' @returns Called primarily for side effects. Returns the provided `backend`, invisibly.
 #' @export
-use_backend <- function(backend = c("tensorflow", "jax", "torch")) { # "numpy"
-  backend <- match.arg(backend)
+use_backend <- function(backend) {
 
   if (is_keras_loaded()) {
     if (config_backend() != backend)
@@ -126,7 +126,7 @@ use_backend <- function(backend = c("tensorflow", "jax", "torch")) { # "numpy"
 
 
 is_keras_loaded <- function() {
-  # package .onLoad() has run
+  # package .onLoad() has run (can be FALSE if in devtools::load_all())
   !is.null(keras) &&
 
   # python is initialized
