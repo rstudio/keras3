@@ -40,6 +40,13 @@ First, install the keras R package:
 
 
 ```r
+install.packages("keras3")
+```
+
+or install the development version with:
+
+
+```r
 remotes::install_github("rstudio/keras")
 ```
 
