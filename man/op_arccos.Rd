@@ -21,7 +21,7 @@ The inverse of \code{cos} so that, if \code{y = cos(x)}, then \code{x = arccos(y
 op_arccos(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        3.1415925], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        3.1415927], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }
