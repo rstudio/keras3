@@ -28,7 +28,7 @@ op_softsign(x)
 plot(x, op_softsign(x), ylim = c(-1, 1))
 }\if{html}{\out{</div>}}
 
-\figure{op_softsign-plot-1.png}
+\figure{op-softsign-plot-1.png}
 }
 
 \seealso{

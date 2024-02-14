@@ -37,7 +37,7 @@ plot(x, op_leaky_relu(x),
      type = 'l', panel.first = grid())
 }\if{html}{\out{</div>}}
 
-\figure{op_leaky_relu-plot-1.png}
+\figure{op-leaky-relu-plot-1.png}
 }
 
 \seealso{
