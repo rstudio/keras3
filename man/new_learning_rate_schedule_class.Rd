@@ -34,6 +34,10 @@ runtime.}
 
 \item{parent_env}{The R environment that all class methods will have as a grandparent.}
 }
+\value{
+A function that returns \code{LearningRateSchedule} instances, similar to the
+built-in \verb{learning_rate_schedule_*} family of functions.
+}
 \description{
 \code{new_learning_rate_schedule_class()} is an alias for \code{\link[=LearningRateSchedule]{LearningRateSchedule()}}.
 See \verb{?}\code{\link[=LearningRateSchedule]{LearningRateSchedule()}} for the full documentation.

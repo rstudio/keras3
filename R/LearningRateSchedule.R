@@ -77,6 +77,8 @@
 #'
 #' @param call,initialize,get_config
 #' Recommended methods to implement. See description and details sections.
+#' @returns A function that returns `LearningRateSchedule` instances, similar to the
+#'   built-in `learning_rate_schedule_*` family of functions.
 #' @tether keras.optimizers.schedules.LearningRateSchedule
 #' @inheritSection Layer Symbols in scope
 #' @inheritParams Layer

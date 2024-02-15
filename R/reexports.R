@@ -5,6 +5,10 @@
 #' @name %>%
 #' @rdname pipe
 #' @keywords internal
+#' @returns Most commonly, the result of calling the right hand side with the
+#'   left hand side as an argument: `rhs(lhs)`. See the magritter vignette for
+#'   other, more advanced, usages.
+#' @export
 #' @export
 #' @importFrom magrittr %<>% %>%
 #' @usage lhs \%>\% rhs
@@ -21,6 +25,8 @@ magrittr::`%<>%`
 #' @name %<-%
 #' @rdname multi-assign
 #' @keywords internal
+#' @returns The right-hand-side argument, `value`, invisibly. This called
+#'   primarily for it's side-effect of assigning symbols in the current frame.
 #' @export
 #' @importFrom zeallot %<-%
 #' @usage x \%<-\% value
