@@ -208,6 +208,16 @@ scale the loss to prevent underflow.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>This is called primarily for the side effect of modifying <code>object</code></p>
+
+
+<p>in-place. The first argument <code>object</code> is also returned, invisibly, to
+enable usage with the pipe.</p>
+    </div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="fl">1e-3</span><span class="op">)</span>,</span>
