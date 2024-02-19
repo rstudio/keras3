@@ -2810,7 +2810,8 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' ```{r}
 #' (x <- op_reshape(c(FALSE, FALSE, FALSE,
-#'                   TRUE, FALSE, FALSE), c(2, 3)))
+#'                    TRUE, FALSE, FALSE),
+#'                  c(2, 3)))
 #' op_any(x, axis = 1)
 #' op_any(x, axis = 2)
 #' op_any(x, axis = -1)

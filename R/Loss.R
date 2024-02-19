@@ -33,8 +33,8 @@
 #' # Standalone usage
 #' mse <- loss_custom_mse(name = "my_custom_mse_instance")
 #'
-#' y_true <- op_arange(20) |> op_reshape(4, 5)
-#' y_pred <- op_arange(20) |> op_reshape(4, 5) * 2
+#' y_true <- op_arange(20) |> op_reshape(c(4, 5))
+#' y_pred <- op_arange(20) |> op_reshape(c(4, 5)) * 2
 #' (loss <- mse(y_true, y_pred))
 #'
 #' loss2 <- (y_pred - y_true)^2 |>
