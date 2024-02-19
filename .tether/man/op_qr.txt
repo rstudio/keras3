@@ -4,15 +4,15 @@ __doc__
 Computes the QR decomposition of a tensor.
 
 Args:
-    x: Input tensor.
+    x: Input tensor of shape `(..., M, N)`.
     mode: A string specifying the mode of the QR decomposition.
         - 'reduced': Returns the reduced QR decomposition. (default)
         - 'complete': Returns the complete QR decomposition.
 
 Returns:
-    A tuple containing two tensors. The first tensor represents the
-    orthogonal matrix Q, and the second tensor represents the upper
-    triangular matrix R.
+    A tuple containing two tensors. The first tensor of shape `(..., M, K)`
+    is the orthogonal matrix `q` and the second tensor of shape
+    `(..., K, N)` is the upper triangular matrix `r`, where `K = min(M, N)`.
 
 Example:
 
@@ -22,3 +22,4 @@ Example:
 array([[-0.16903079  0.897085]
        [-0.5070925   0.2760267 ]
        [-0.8451542  -0.34503305]], shape=(3, 2), dtype=float32)
+

@@ -998,17 +998,17 @@ function (x, axis = NULL, keepdims = FALSE)
 #' # Examples
 #' ```{r}
 #' x <- op_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
+#' op_qr(x)
 #' c(q, r) %<-% op_qr(x)
-#' q
 #' ```
 #'
 #' @returns
-#' A list containing two tensors. The first tensor represents the
-#' orthogonal matrix Q, and the second tensor represents the upper
-#' triangular matrix R.
+#' A list containing two tensors. The first tensor of shape `(..., M, K)`
+#' is the orthogonal matrix `q` and the second tensor of shape
+#' (..., K, N)` is the upper triangular matrix `r`, where `K = min(M, N)`.
 #'
 #' @param x
-#' Input tensor.
+#' Input tensor of shape `(..., M, N)`.
 #'
 #' @param mode
 #' A string specifying the mode of the QR decomposition.
