@@ -85,6 +85,11 @@ multi_hot(
   dtype=None,
   **kwargs
 )
+normalize(
+  x,
+  axis=-1,
+  order=2
+)
 one_hot(
   x,
   num_classes,
