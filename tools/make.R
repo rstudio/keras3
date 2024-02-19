@@ -194,6 +194,7 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 ##     the compile('sparse_categorical') case makes it difficult to apply 1 based
 ##     globally, also, makes it more tricky to translate from python
 
+# TODO: args 2 and 3 to op_svd() are seemingly broken/inconsistent across backends.
 
 # TODO: make the op_* @family tags make sense.
 #

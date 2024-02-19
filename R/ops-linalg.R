@@ -195,6 +195,9 @@ function (x, ord = NULL, axis = NULL, keepdims = FALSE)
 #' A tensor of shape `(..., M)` or `(..., M, N)` represeting the
 #' right-hand side or "dependent variable" matrix.
 #'
+#' @param lower logical.
+#' Use only data contained in the lower triangle of `a`. Default is to use upper triangle.
+#'
 #' @export
 #' @family linear algebra ops
 #' @family ops
@@ -219,6 +222,9 @@ keras$ops$solve_triangular(a, b, lower)
 #'
 #' @param x
 #' Input tensor of shape `(..., M, N)`.
+#'
+#' @param full_matrices Logical
+#' @param compute_uv Logical
 #'
 #' @export
 #' @family linear algebra ops
