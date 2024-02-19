@@ -1,7 +1,7 @@
 Help on class AveragePooling2D in module keras.src.layers.pooling.average_pooling2d:
 
 class AveragePooling2D(keras.src.layers.pooling.base_pooling.BasePooling)
- |  AveragePooling2D(pool_size, strides=None, padding='valid', data_format='channels_last', name=None, **kwargs)
+ |  AveragePooling2D(pool_size, strides=None, padding='valid', data_format=None, name=None, **kwargs)
  |
  |  Average pooling operation for 2D spatial data.
  |
@@ -102,9 +102,10 @@ class AveragePooling2D(keras.src.layers.pooling.base_pooling.BasePooling)
  |    pool_size,
  |    strides=None,
  |    padding='valid',
- |    data_format='channels_last',
+ |    data_format=None,
  |    name=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+
