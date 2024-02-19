@@ -614,20 +614,31 @@ keras$ops$vectorized_map(f, elements)
 #' op_while_loop(cond, body, loop_vars)
 #' ```
 #'
+#' ```{r}
+#' x <- 0; y <- 1
+#' cond <- \(x, y) x < 10
+#' body <- \(x, y) list(x+1, y+1)
+#' op_while_loop(cond, body, list(x, y))
+#' ```
+#'
 #' @returns
 #' A list of tensors, has the same shape and dtype as `loop_vars`.
 #'
 #' @param cond
 #' A callable that represents the termination condition of the loop.
-#' Must have the same number of args as `loop_vars`, and return a bool.
+#' Must accept a `loop_vars` like structure as an argument. If
+#'`loop_vars` is a tuple or unnamed list, each element of `loop_vars` will be
+#' passed positionally to the callable.
 #'
 #' @param body
-#' A callable that represents the loop body. Must have the same
-#' number of args as `loop_vars`, and return a list of the same
-#' length, shape and dtype as `loop_vars`.
+#' A callable that represents the loop body. Must accept a
+#' `loop_vars` like structure as an argument, and return update value
+#' with the same structure. If `loop_vars` is a tuple or unnamed list, each
+#' element of `loop_vars` will be passed positionally to the callable.
 #'
 #' @param loop_vars
-#' A list of tensors, the loop variables.
+#' An arbitrary nested structure of tensor state to persist
+#' across loop iterations.
 #'
 #' @param maximum_iterations
 #' Optional maximum number of iterations of the while
