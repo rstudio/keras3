@@ -5871,13 +5871,11 @@ function (x, repeats, axis = NULL)
 #' @param x
 #' Input tensor.
 #'
-#' @param new_shape
+#' @param newshape
 #' The new shape should be compatible with the original shape.
-#' One shape dimension can be -1 in which case the value is
+#' One shape dimension can be `-1` in which case the value is
 #' inferred from the length of the array and remaining dimensions.
 #'
-#' @param ...
-#' For forward/backward compatability.
 #'
 #' @export
 #' @family numpy ops
@@ -5887,9 +5885,9 @@ function (x, repeats, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>
 #' @tether keras.ops.reshape
 op_reshape <-
-function (x, ..., new_shape = list(...))
+function (x, newshape)
 {
-    keras$ops$reshape(x, tuple(lapply(shape(new_shape),
+    keras$ops$reshape(x, tuple(lapply(shape(newshape),
                                       function(d) d %||% -1L)))
 }
 
