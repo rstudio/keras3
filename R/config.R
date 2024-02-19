@@ -440,3 +440,40 @@ function ()
     args <- capture_args()
     do.call(keras$config$is_traceback_filtering_enabled, args)
 }
+
+
+#' Returns the current default dtype policy object.
+#'
+#' @export
+#' @returns A `DTypePolicy` object.
+#' @tether keras.config.dtype_policy
+#'
+#  @seealso
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/dtype_policy>
+config_dtype_policy <-
+function ()
+{
+    keras$config$dtype_policy()
+}
+
+#' Sets the default dtype policy globally.
+#'
+#' @description
+#'
+#' # Examples
+#' ```r
+#' config_set_dtype_policy("mixed_float16")
+#' ```
+#' @param policy A string or `DTypePolicy` object.
+#' @returns No return value, called for side effects.
+#' @export
+#' @tether keras.config.set_dtype_policy
+#  @seealso
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/set_dtype_policy>
+config_set_dtype_policy <-
+function (policy)
+{
+    args <- capture_args()
+    do.call(keras$config$set_dtype_policy, args)
+}
+

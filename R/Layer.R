@@ -196,9 +196,9 @@
 #'       `keras$DTypePolicy`,
 #'       which allows the computation and
 #'       weight dtype to differ. Defaults to `NULL`. `NULL` means to use
-#'       `keras$config$dtype_policy()`,
+#'       `config_dtype_policy()`,
 #'       which is a `"float32"` policy unless set to different value
-#'       (via `keras$config$set_dtype_policy()`).
+#'       (via `config_set_dtype_policy()`).
 #'
 #' * ```
 #'   add_loss(loss)
