@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
-if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
+# if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/translate-tools.R")
 
 
 
@@ -425,6 +425,8 @@ endpoints <- list_endpoints(skip = c(
   "keras.distribution",  # multi-host multi-device training
   "keras.protobuf", # ???
 
+  "keras.dtype_policies",
+
   "keras.datasets",            # datasets unchanged, no need to autogen
   "keras.preprocessing.text",  # deprecated
   "keras.estimator",           # deprecated
@@ -485,6 +487,7 @@ exports <- endpoints |>
   lapply(mk_export)
 
 
+
 df <- exports |>
   lapply(\(e) {
     unclass(e) |> map_if(\(attr) !is_scalar_atomic(attr), list) |>
@@ -497,6 +500,46 @@ df <- df |>
   mutate(
     man_src_dir = path("man-src", r_name),
     endpoint_sans_name = str_extract(endpoint, "keras\\.(.*)\\.[^.]+$", 1))
+
+
+# new symbols
+df <- df %>%
+  filter(!r_name %in% getNamespaceExports("keras3")) #%>% print(n = Inf)
+
+intentionally_omited <- c(
+  "callback_progbar_logger",
+  "model_to_dot",
+  "op_true_divide",
+  "op_amax", "op_amin",
+  "op_conjugate"
+)
+
+df <- df %>%
+  filter(!r_name %in% intentionally_omited)
+
+# print(df, n = Inf)
+
+
+
+df %>%
+  mutate(
+    file = module %>%
+      gsub("keras.src.", "", ., fixed = TRUE) %>%
+      gsub(".", "-", ., fixed = TRUE) %>%
+      sprintf("R/%s.R", .)
+  ) %>%
+  split_by(file) %>%
+  walk(function(.df) {
+    file = .df$file[1]
+
+    dump <- .df$dump %>%
+      paste0(collapse = "\n\n") %>%
+      str_flatten_lines()
+
+    cat(dump, file = file, append = TRUE)
+  })
+
+# stop("DONE")
 
 if(!all(dir_exists(df$man_src_dir))) {
   df |>
