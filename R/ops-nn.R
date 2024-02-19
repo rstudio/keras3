@@ -5,19 +5,16 @@
 #' network. It normalizes the input tensor along the given axis.
 #'
 #' # Examples
-#' ```python
-#' x = keras.ops.convert_to_tensor(
-#'     [[0.1, 0.2, 0.3], [0.4, 0.5, 0.6], [0.7, 0.8, 0.9]]
+#' ```{r}
+#' x <- op_convert_to_tensor(rbind(c(0.1, 0.2, 0.3),
+#'                                 c(0.4, 0.5, 0.6),
+#'                                 c(0.7, 0.8, 0.9)))
+#' op_batch_normalization(
+#'   x,
+#'   mean = c(0.4, 0.5, 0.6),
+#'   variance = c(0.67, 0.67, 0.67),
+#'   axis = -1
 #' )
-#' keras.ops.batch_normalization(
-#'     x,
-#'     mean=[0.4, 0.5, 0.6],
-#'     variance=[0.67, 0.67, 0.67],
-#'     axis=-1
-#' )
-#' # array([[-3.6624e-01, -3.6624e-01, -3.6624e-01],
-#' #        [-4.6445e-09,  0.0000e+00, -1.8578e-08],
-#' #        [ 3.6624e-01,  3.6624e-01,  3.6624e-01]])
 #' ```
 #'
 #' @returns
@@ -39,19 +36,21 @@
 #'
 #' @param offset
 #' An offset vector of the same length as the `axis` dimension of
-#' the input tensor. If not `None`, `offset` is added to the normalized
-#' tensor. Defaults to `None`.
+#' the input tensor. If not `NULL`, `offset` is added to the normalized
+#' tensor. Defaults to `NULL`.
 #'
 #' @param scale
 #' A scale vector of the same length as the `axis` dimension of the
-#' input tensor. If not `None`, the normalized tensor is multiplied by
-#' `scale`. Defaults to `None`.
+#' input tensor. If not `NULL`, the normalized tensor is multiplied by
+#' `scale`. Defaults to `NULL`.
 #'
 #' @param epsilon
 #' Small float added to variance to avoid dividing by zero.
 #' Defaults to 1e-3.
 #'
 #' @export
+#' @family nn ops
+#' @family ops
 #' @tether keras.ops.batch_normalization
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/batch_normalization>
@@ -59,7 +58,12 @@ op_batch_normalization <-
 function (x, mean, variance, axis, offset = NULL, scale = NULL,
     epsilon = 0.001)
 {
-    args <- capture_args(list(axis = as_axis))
+    args <- capture_args(list(
+      axis = as_axis,
+      mean = as_array,
+      variance = as_array,
+      offset = as_array
+    ))
     do.call(keras$ops$batch_normalization, args)
 }
 
@@ -69,12 +73,10 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' It is defined as: `normalize(x) = x / max(norm(x), epsilon)`.
 #'
 #' # Examples
-#' ```python
-#' x = keras.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
-#' x_norm = keras.ops.math.normalize(x)
-#' print(x_norm)
-#' # array([[0.26726124 0.5345225  0.8017837 ]
-#' #        [0.45584232 0.5698029  0.68376344]], shape=(2, 3), dtype=float32)
+#' ```{r}
+#' x <- op_convert_to_tensor(rbind(c(1, 2, 3), c(4, 5, 6)))
+#' x_norm <- op_normalize(x)
+#' x_norm
 #' ```
 #'
 #' @returns
@@ -92,6 +94,8 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' Defaults to 2.
 #'
 #' @export
+#' @family nn ops
+#' @family ops
 #' @tether keras.ops.normalize
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/normalize>
