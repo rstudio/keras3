@@ -1,0 +1,11 @@
+__signature__
+keras.ops.inv(x)
+__doc__
+Computes the inverse of a square tensor.
+
+Args:
+    x: Input tensor of shape `(..., M, M)`.
+
+Returns:
+    A tensor of shape `(..., M, M)` representing the inverse of `x`.
+
