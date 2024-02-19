@@ -1,0 +1,9 @@
+__signature__
+keras.config.set_dtype_policy(policy)
+__doc__
+Sets the default dtype policy globally.
+
+Example:
+
+>>> keras.config.set_dtype_policy("mixed_float16")
+
