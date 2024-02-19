@@ -73,6 +73,8 @@ if(!"source:tools/translate-tools.R" %in% search()) envir::attach_source("tools/
 # TODO: add tests for keras_history `history` from fit().
 #   history - also mentions in docs (e.g., in callback_model_checkpoint())
 
+# TODO: export keras.DTypePolicy constructor - maybe module keras.dtype_policies
+
 # TODO: fix links to chunk plots in rendered vignettes - should be relative to
 #   package for R CMD build/pkgdown
 
