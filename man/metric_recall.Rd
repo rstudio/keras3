@@ -79,7 +79,7 @@ m$update_state(c(0, 1, 1, 1),
 m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.0, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
