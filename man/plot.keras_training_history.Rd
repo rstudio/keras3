@@ -35,6 +35,11 @@ black and white.}
 
 \item{...}{Additional parameters to pass to the \code{\link[=plot]{plot()}} method.}
 }
+\value{
+if \code{method == "ggplot2"}, the ggplot object is returned. If
+\code{method == "base"}, then this function will draw to the graphics device and
+return \code{NULL}, invisibly.
+}
 \description{
 Plots metrics recorded during training.
 }

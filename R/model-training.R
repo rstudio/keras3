@@ -119,6 +119,10 @@
 #' wrapped in a `LossScaleOptimizer`, which will dynamically
 #' scale the loss to prevent underflow.
 #'
+#' @returns This is called primarily for the side effect of modifying `object`
+#'   in-place. The first argument `object` is also returned, invisibly, to
+#'   enable usage with the pipe.
+#'
 #' @param object Keras model object
 #' @param ... Additional arguments passed on to the `compile()` model method.
 #' @export

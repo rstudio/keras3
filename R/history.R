@@ -61,6 +61,10 @@ print.keras_training_history <- function(x, ...) {
 #'
 #' @importFrom rlang .data
 #'
+#' @returns if `method == "ggplot2"`, the ggplot object is returned. If
+#' `method == "base"`, then this function will draw to the graphics device and
+#' return `NULL`, invisibly.
+#'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"),
                                         smooth = getOption("keras.plot.history.smooth", TRUE),
@@ -171,6 +175,7 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       else
         graphics::legend(legend_location, legend = metric, pch = 1)
     }
+  invisible(NULL)
   }
 }
 

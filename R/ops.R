@@ -1774,7 +1774,7 @@ keras$ops$elu(x, alpha)
 #' ```
 #'
 #'
-#' ```{r op_gelu-plot}
+#' ```{r op-gelu-plot}
 #' x <- seq(-5, 5, .1)
 #' plot(x, op_gelu(x),
 #'      type = "l", #, frame.plot = FALSE,
@@ -1816,7 +1816,7 @@ keras$ops$gelu(x, approximate)
 #' op_hard_sigmoid(x)
 #' ```
 #'
-#' ```{r op_hard_sigmoid-plot}
+#' ```{r op-hard-sigmoid-plot}
 #' x <- as.array(seq(-5, 5, .1))
 #' plot(x, op_hard_sigmoid(x),
 #'      type = 'l', panel.first = grid(), frame.plot = FALSE)
@@ -1853,7 +1853,7 @@ keras$ops$hard_sigmoid(x)
 #' op_leaky_relu(x)
 #' # array([-0.2,  0. ,  1. ], shape=(3,), dtype=float64)
 #' ```
-#' ```{r op_leaky_relu-plot}
+#' ```{r op-leaky-relu-plot}
 #' x <- seq(-5, 5, .1)
 #' plot(x, op_leaky_relu(x),
 #'      type = 'l', panel.first = grid())
@@ -2166,7 +2166,7 @@ function (x, num_classes, axis = -1L, dtype = NULL)
 #' op_relu(x1)
 #' ```
 #'
-#' ```{r op_relu-plot}
+#' ```{r op-relu-plot}
 #' x <- seq(-10, 10, .1)
 #' plot(x, op_relu(x))
 #' ```
@@ -2199,7 +2199,7 @@ keras$ops$relu(x)
 #' x <- op_convert_to_tensor(c(-3, -2, 0.1, 0.2, 6, 8))
 #' op_relu6(x)
 #' ```
-#' ```{r op_relu6-plot}
+#' ```{r op-relu6-plot}
 #' x <- seq(-10, 10, .1)
 #' plot(x, op_relu6(x))
 #' ```
@@ -2439,7 +2439,7 @@ function (x, axis = -1L)
 #' x <- op_convert_to_tensor(c(-0.555, 0, 0.555))
 #' op_softplus(x)
 #' ```
-#' ```{r op_softplus-plot}
+#' ```{r op-softplus-plot}
 #' x <- seq(-10, 10, .1)
 #' plot(x, op_softplus(x))
 #' ```
@@ -2472,7 +2472,7 @@ keras$ops$softplus(x)
 #' x <- op_convert_to_tensor(c(-0.100, -10.0, 1.0, 0.0, 100.0))
 #' op_softsign(x)
 #' ```
-#' ```{r op_softsign-plot}
+#' ```{r op-softsign-plot}
 #' x <- seq(-10, 10, .1)
 #' plot(x, op_softsign(x), ylim = c(-1, 1))
 #' ```

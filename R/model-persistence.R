@@ -341,6 +341,10 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #'
 #' @param object A keras model.
 #'
+#' @returns This is called primarily for the side effect of exporting `object`.
+#'   The first argument, `object` is also returned, invisibly, to enable usage
+#'   with the pipe.
+#'
 #' @exportS3Method tensorflow::export_savedmodel
 #' @tether keras.Model.export
 #' @family saving and loading functions
@@ -348,6 +352,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
 export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_base, ...) {
   object$export(export_dir_base, ...)
+  invisible(object)
 }
 
 

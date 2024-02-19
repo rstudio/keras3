@@ -44,7 +44,7 @@ plot(x, op_gelu(x),
      panel.first = grid())
 }\if{html}{\out{</div>}}
 
-\figure{op_gelu-plot-1.png}
+\figure{op-gelu-plot-1.png}
 }
 
 \seealso{

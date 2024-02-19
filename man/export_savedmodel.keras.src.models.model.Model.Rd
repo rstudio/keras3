@@ -14,6 +14,11 @@ the artifact.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+This is called primarily for the side effect of exporting \code{object}.
+The first argument, \code{object} is also returned, invisibly, to enable usage
+with the pipe.
+}
 \description{
 (e.g. via TF-Serving).
 

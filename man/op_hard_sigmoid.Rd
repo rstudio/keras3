@@ -31,7 +31,7 @@ plot(x, op_hard_sigmoid(x),
      type = 'l', panel.first = grid(), frame.plot = FALSE)
 }\if{html}{\out{</div>}}
 
-\figure{op_hard_sigmoid-plot-1.png}
+\figure{op-hard-sigmoid-plot-1.png}
 }
 
 \seealso{

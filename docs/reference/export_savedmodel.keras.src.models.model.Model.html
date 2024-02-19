@@ -118,6 +118,14 @@ the artifact.</p></dd>
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>This is called primarily for the side effect of exporting <code>object</code>.
+The first argument, <code>object</code> is also returned, invisibly, to enable usage
+with the pipe.</p>
+    </div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="co"># Create the artifact</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu">tensorflow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel</a></span><span class="op">(</span><span class="st">"path/to/location"</span><span class="op">)</span></span>

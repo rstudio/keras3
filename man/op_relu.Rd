@@ -28,7 +28,7 @@ op_relu(x1)
 plot(x, op_relu(x))
 }\if{html}{\out{</div>}}
 
-\figure{op_relu-plot-1.png}
+\figure{op-relu-plot-1.png}
 }
 
 \seealso{

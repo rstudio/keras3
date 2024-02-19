@@ -121,6 +121,11 @@ with the \code{"inductor"} backend.}
 wrapped in a \code{LossScaleOptimizer}, which will dynamically
 scale the loss to prevent underflow.}
 }
+\value{
+This is called primarily for the side effect of modifying \code{object}
+in-place. The first argument \code{object} is also returned, invisibly, to
+enable usage with the pipe.
+}
 \description{
 Configure a model for training.
 }

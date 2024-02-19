@@ -29,7 +29,7 @@ op_softplus(x)
 plot(x, op_softplus(x))
 }\if{html}{\out{</div>}}
 
-\figure{op_softplus-plot-1.png}
+\figure{op-softplus-plot-1.png}
 }
 
 \seealso{
