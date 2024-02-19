@@ -5239,8 +5239,8 @@ function (x, axis = NULL, keepdims = FALSE)
 #' 1-D tensors representing the coordinates of a grid.
 #'
 #' @param indexing
-#' Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
-#' of output.
+#' `"xy"` or `"ij"`. "xy" is cartesian; `"ij"` is matrix
+#' indexing of output. Defaults to `"xy"`.
 #'
 #' @export
 #' @family numpy ops
