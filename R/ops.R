@@ -1213,9 +1213,10 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 }
 
 
-#' Solves for `x` in the equation `a %*% x == b`.
+#' Solves a linear system of equations given by `a x = b`.
 #'
 #' @description
+#' Solves for `x` in the equation `a %*% x == b`.
 #'
 #' # Examples
 #' ```{r}
@@ -1225,13 +1226,15 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' ```
 #'
 #' @returns
-#' A tensor with the same shape and dtype as `a`.
+#' A tensor of shape `(..., M)` or `(..., M, N)` representing the solution
+#' of the linear system. Returned shape is identical to `b`.
 #'
 #' @param a
-#' Input tensor.
+#' A tensor of shape `(..., M, M)` representing the coefficients matrix.
 #'
 #' @param b
-#' Input tensor.
+#' A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+#' right-hand side or "dependent variable" matrix.
 #'
 #' @export
 #' @family math ops
