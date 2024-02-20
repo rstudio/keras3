@@ -584,6 +584,10 @@ input_data_normalizer <- function(model) {
     if (is.function(x))
       return(as_data_generator(x, dtype))
 
+    if (inherits(x, "factor"))
+      x <- array(as.integer(x) - 1L,
+                 dim = dim(x) %||% length(x))
+
     # only autocast to different sizes of the same type,
     # don't auto convert floats to ints, or ints to floats
     if (!(
