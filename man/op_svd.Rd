@@ -8,6 +8,10 @@ op_svd(x, full_matrices = TRUE, compute_uv = TRUE)
 }
 \arguments{
 \item{x}{Input tensor of shape \verb{(..., M, N)}.}
+
+\item{full_matrices}{Logical}
+
+\item{compute_uv}{Logical}
 }
 \value{
 A list of three tensors:

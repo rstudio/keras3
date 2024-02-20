@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
       <img src="" class="logo" alt=""><h1>Introduction to Keras for engineers</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/intro_to_keras_for_engineers.Rmd" class="external-link"><code>vignettes/intro_to_keras_for_engineers.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes-src/intro_to_keras_for_engineers.Rmd" class="external-link"><code>vignettes-src/intro_to_keras_for_engineers.Rmd</code></a></small>
       <div class="d-none name"><code>intro_to_keras_for_engineers.Rmd</code></div>
     </div>
 
@@ -185,26 +185,26 @@ cases)</li>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">64</span>)        │        <span style="color: #00AF00;">640</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">64</span>)        │     <span style="color: #00AF00;">36,928</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">64</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">128</span>)       │     <span style="color: #00AF00;">73,856</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">128</span>)         │    <span style="color: #00AF00;">147,584</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_average_pooling2d        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePooling2D</span>)        │                           │            │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)                │      <span style="color: #00AF00;">1,290</span> │</span></span>
-<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">64</span>)     │           <span style="color: #00AF00;">640</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">64</span>)     │        <span style="color: #00AF00;">36,928</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">64</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">128</span>)    │        <span style="color: #00AF00;">73,856</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">128</span>)      │       <span style="color: #00AF00;">147,584</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ global_average_pooling2d        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePooling2D</span>)        │                        │               │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)             │         <span style="color: #00AF00;">1,290</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">260,298</span> (1016.79 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">260,298</span> (1016.79 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
@@ -239,25 +239,25 @@ unseen data.</p>
 <span>  callbacks <span class="op">=</span> <span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 399/399 - 10s - 24ms/step - acc: 0.7362 - loss: 0.7750 - val_acc: 0.9622 - val_loss: 0.1377</span></span>
+<span><span class="co">## 399/399 - 9s - 21ms/step - acc: 0.7362 - loss: 0.7765 - val_acc: 0.9598 - val_loss: 0.1386</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9304 - loss: 0.2354 - val_acc: 0.9702 - val_loss: 0.0983</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9300 - loss: 0.2360 - val_acc: 0.9708 - val_loss: 0.0945</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9480 - loss: 0.1740 - val_acc: 0.9791 - val_loss: 0.0685</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9480 - loss: 0.1751 - val_acc: 0.9788 - val_loss: 0.0685</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9593 - loss: 0.1395 - val_acc: 0.9848 - val_loss: 0.0545</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9589 - loss: 0.1409 - val_acc: 0.9847 - val_loss: 0.0550</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9656 - loss: 0.1179 - val_acc: 0.9872 - val_loss: 0.0451</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9656 - loss: 0.1182 - val_acc: 0.9871 - val_loss: 0.0455</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9692 - loss: 0.1026 - val_acc: 0.9868 - val_loss: 0.0466</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9685 - loss: 0.1041 - val_acc: 0.9862 - val_loss: 0.0478</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9737 - loss: 0.0916 - val_acc: 0.9890 - val_loss: 0.0394</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9732 - loss: 0.0931 - val_acc: 0.9877 - val_loss: 0.0423</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9753 - loss: 0.0834 - val_acc: 0.9898 - val_loss: 0.0357</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0843 - val_acc: 0.9898 - val_loss: 0.0369</span></span>
 <span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9778 - loss: 0.0750 - val_acc: 0.9910 - val_loss: 0.0313</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9780 - loss: 0.0752 - val_acc: 0.9903 - val_loss: 0.0319</span></span>
 <span><span class="co">## Epoch 10/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9799 - loss: 0.0695 - val_acc: 0.9882 - val_loss: 0.0381</span></span></code></pre>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9793 - loss: 0.0697 - val_acc: 0.9887 - val_loss: 0.0396</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -386,7 +386,7 @@ layers:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>, <span class="co"># For speed</span></span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 9s - 22ms/step - acc: 0.7409 - loss: 0.7537 - val_acc: 0.9232 - val_loss: 0.2499</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 8s - 20ms/step - acc: 0.7398 - loss: 0.7554 - val_acc: 0.9231 - val_loss: 0.2490</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -454,7 +454,7 @@ your Keras backend.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 10s - 21ms/step - acc: 0.7581 - loss: 0.7151 - val_acc: 0.8985 - val_loss: 0.3161</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 9s - 19ms/step - acc: 0.7591 - loss: 0.7132 - val_acc: 0.8997 - val_loss: 0.3169</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>

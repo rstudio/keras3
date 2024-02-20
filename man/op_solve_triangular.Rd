@@ -11,6 +11,9 @@ op_solve_triangular(a, b, lower = FALSE)
 
 \item{b}{A tensor of shape \verb{(..., M)} or \verb{(..., M, N)} represeting the
 right-hand side or "dependent variable" matrix.}
+
+\item{lower}{logical.
+Use only data contained in the lower triangle of \code{a}. Default is to use upper triangle.}
 }
 \value{
 A tensor of shape \verb{(..., M)} or \verb{(..., M, N)} representing the solution

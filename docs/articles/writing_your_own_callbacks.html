@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
       <img src="" class="logo" alt=""><h1>Writing your own callbacks</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/writing_your_own_callbacks.Rmd" class="external-link"><code>vignettes/writing_your_own_callbacks.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes-src/writing_your_own_callbacks.Rmd" class="external-link"><code>vignettes-src/writing_your_own_callbacks.Rmd</code></a></small>
       <div class="d-none name"><code>writing_your_own_callbacks.Rmd</code></div>
     </div>
 
@@ -306,7 +306,7 @@ starts &amp; ends</li>
 <span><span class="co">##</span></span>
 <span><span class="co">## ...Training: end of batch 4; got logs: List of 2</span></span>
 <span><span class="co">##  $ loss               : num 226</span></span>
-<span><span class="co">##  $ mean_absolute_error: num 9.52</span></span>
+<span><span class="co">##  $ mean_absolute_error: num 9.68</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Start testing; got logs:  Named list()</span></span>
 <span><span class="co">##</span></span>
@@ -340,7 +340,7 @@ starts &amp; ends</li>
 <span><span class="co">##</span></span>
 <span><span class="co">## End epoch 1 of training; got logs: List of 4</span></span>
 <span><span class="co">##  $ loss                   : num 226</span></span>
-<span><span class="co">##  $ mean_absolute_error    : num 9.52</span></span>
+<span><span class="co">##  $ mean_absolute_error    : num 9.68</span></span>
 <span><span class="co">##  $ val_loss               : num 7.29</span></span>
 <span><span class="co">##  $ val_mean_absolute_error: num 2.21</span></span>
 <span><span class="co">##</span></span>
@@ -368,7 +368,7 @@ starts &amp; ends</li>
 <span><span class="co">##</span></span>
 <span><span class="co">## ...Training: end of batch 4; got logs: List of 2</span></span>
 <span><span class="co">##  $ loss               : num 6.07</span></span>
-<span><span class="co">##  $ mean_absolute_error: num 2.03</span></span>
+<span><span class="co">##  $ mean_absolute_error: num 2.04</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Start testing; got logs:  Named list()</span></span>
 <span><span class="co">##</span></span>
@@ -402,13 +402,13 @@ starts &amp; ends</li>
 <span><span class="co">##</span></span>
 <span><span class="co">## End epoch 2 of training; got logs: List of 4</span></span>
 <span><span class="co">##  $ loss                   : num 6.07</span></span>
-<span><span class="co">##  $ mean_absolute_error    : num 2.03</span></span>
+<span><span class="co">##  $ mean_absolute_error    : num 2.04</span></span>
 <span><span class="co">##  $ val_loss               : num 5.15</span></span>
 <span><span class="co">##  $ val_mean_absolute_error: num 1.82</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Stop training; got logs: List of 4</span></span>
 <span><span class="co">##  $ loss                   : num 6.07</span></span>
-<span><span class="co">##  $ mean_absolute_error    : num 2.03</span></span>
+<span><span class="co">##  $ mean_absolute_error    : num 2.04</span></span>
 <span><span class="co">##  $ val_loss               : num 5.15</span></span>
 <span><span class="co">##  $ val_mean_absolute_error: num 1.82</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -465,11 +465,11 @@ starts &amp; ends</li>
 <span><span class="co">##</span></span>
 <span><span class="co">## ...Evaluating: end of batch 8; got logs: List of 2</span></span>
 <span><span class="co">##  $ loss               : num 4.66</span></span>
-<span><span class="co">##  $ mean_absolute_error: num 1.74</span></span>
+<span><span class="co">##  $ mean_absolute_error: num 1.75</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Stop testing; got logs: List of 2</span></span>
 <span><span class="co">##  $ loss               : num 4.66</span></span>
-<span><span class="co">##  $ mean_absolute_error: num 1.74</span></span></code></pre>
+<span><span class="co">##  $ mean_absolute_error: num 1.75</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span></span>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>,</span>
@@ -559,7 +559,7 @@ mean absolute error.</p>
 <span><span class="co">## Up to batch 6, the average loss is  141.31.</span></span>
 <span><span class="co">## Up to batch 7, the average loss is  122.19.</span></span>
 <span><span class="co">## Up to batch 8, the average loss is  107.60.</span></span>
-<span><span class="co">## The average loss for epoch  1 is    107.60 and mean absolute error is    5.70.</span></span>
+<span><span class="co">## The average loss for epoch  1 is    107.60 and mean absolute error is    5.79.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is    4.71.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is    4.74.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is    4.81.</span></span>
@@ -568,7 +568,7 @@ mean absolute error.</p>
 <span><span class="co">## Up to batch 6, the average loss is    5.09.</span></span>
 <span><span class="co">## Up to batch 7, the average loss is    5.19.</span></span>
 <span><span class="co">## Up to batch 8, the average loss is    5.57.</span></span>
-<span><span class="co">## The average loss for epoch  2 is      5.57 and mean absolute error is    1.91.</span></span></code></pre>
+<span><span class="co">## The average loss for epoch  2 is      5.57 and mean absolute error is    1.90.</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">=</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span></span>
 <span>  <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">x</span>, <span class="va">mnist</span><span class="op">$</span><span class="va">test</span><span class="op">$</span><span class="va">y</span>,</span>
@@ -704,7 +704,7 @@ general implementation.</p>
 <span><span class="co">## Up to batch 14, the average loss is   80.21.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is   75.17.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is   70.97.</span></span>
-<span><span class="co">## The average loss for epoch  1 is     70.97 and mean absolute error is    4.04.</span></span>
+<span><span class="co">## The average loss for epoch  1 is     70.97 and mean absolute error is    4.08.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is    7.98.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is    9.92.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is   12.88.</span></span>
@@ -721,7 +721,7 @@ general implementation.</p>
 <span><span class="co">## Up to batch 14, the average loss is   31.80.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is   31.39.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is   31.49.</span></span>
-<span><span class="co">## The average loss for epoch  2 is     31.49 and mean absolute error is    4.83.</span></span>
+<span><span class="co">## The average loss for epoch  2 is     31.49 and mean absolute error is    4.82.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is   39.60.</span></span>
 <span><span class="co">## Up to batch 2, the average loss is   41.95.</span></span>
 <span><span class="co">## Up to batch 3, the average loss is   41.29.</span></span>
@@ -738,7 +738,7 @@ general implementation.</p>
 <span><span class="co">## Up to batch 14, the average loss is   27.87.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is   31.72.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is   34.05.</span></span>
-<span><span class="co">## The average loss for epoch  3 is     34.05 and mean absolute error is    4.86.</span></span>
+<span><span class="co">## The average loss for epoch  3 is     34.05 and mean absolute error is    4.79.</span></span>
 <span><span class="co">## Restoring model weights from the end of the best epoch.</span></span>
 <span><span class="co">## Epoch 00004: early stopping</span></span></code></pre>
 </div>
@@ -834,7 +834,7 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is   80.18.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is   75.11.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is   70.84.</span></span>
-<span><span class="co">## The average loss for epoch  1 is     70.84 and mean absolute error is    4.00.</span></span>
+<span><span class="co">## The average loss for epoch  1 is     70.84 and mean absolute error is    4.04.</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 002: Learning rate is 0.1000.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is    6.95.</span></span>
@@ -853,7 +853,7 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is   31.54.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is   31.05.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is   31.11.</span></span>
-<span><span class="co">## The average loss for epoch  2 is     31.11 and mean absolute error is    4.78.</span></span>
+<span><span class="co">## The average loss for epoch  2 is     31.11 and mean absolute error is    4.77.</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 003: Learning rate is 0.0500.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is   40.40.</span></span>
@@ -891,7 +891,7 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is   10.06.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is   10.00.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is   10.31.</span></span>
-<span><span class="co">## The average loss for epoch  4 is     10.31 and mean absolute error is    2.72.</span></span>
+<span><span class="co">## The average loss for epoch  4 is     10.31 and mean absolute error is    2.71.</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 005: Learning rate is 0.0500.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is   17.26.</span></span>
@@ -910,7 +910,7 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is    8.86.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is    9.17.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is    9.74.</span></span>
-<span><span class="co">## The average loss for epoch  5 is      9.74 and mean absolute error is    2.61.</span></span>
+<span><span class="co">## The average loss for epoch  5 is      9.74 and mean absolute error is    2.58.</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 006: Learning rate is 0.0100.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is   17.04.</span></span>
@@ -929,7 +929,7 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is    5.12.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is    4.96.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is    4.89.</span></span>
-<span><span class="co">## The average loss for epoch  6 is      4.89 and mean absolute error is    1.66.</span></span>
+<span><span class="co">## The average loss for epoch  6 is      4.89 and mean absolute error is    1.67.</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 007: Learning rate is 0.0100.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is    3.65.</span></span>
@@ -1005,7 +1005,7 @@ page</a>).</p>
 <span><span class="co">## Up to batch 14, the average loss is    2.77.</span></span>
 <span><span class="co">## Up to batch 15, the average loss is    2.77.</span></span>
 <span><span class="co">## Up to batch 16, the average loss is    2.82.</span></span>
-<span><span class="co">## The average loss for epoch 10 is      2.82 and mean absolute error is    1.28.</span></span>
+<span><span class="co">## The average loss for epoch 10 is      2.82 and mean absolute error is    1.27.</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 011: Learning rate is 0.0050.</span></span>
 <span><span class="co">## Up to batch 1, the average loss is    3.01.</span></span>

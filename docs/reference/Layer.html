@@ -38,7 +38,7 @@ Users will just instantiate a layer and then treat it as a callable."><!-- mathj
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -327,6 +327,31 @@ the running sum of its inputs:</p>
     <h2 id="methods-available">Methods available<a class="anchor" aria-label="anchor" href="#methods-available"></a></h2>
     
 <ul><li><p></p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">initialize</span>(...,</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>           <span class="at">activity_regularizer =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>           <span class="at">trainable =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>           <span class="at">dtype =</span> <span class="cn">NULL</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>           <span class="at">autocast =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>           <span class="at">name =</span> <span class="cn">NULL</span>)</span></code></pre><p></p></div>
+<p>Initialize self. This method is typically called from a custom <code>initialize()</code> method.
+Example:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer_my_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"MyLayer"</span>,</span>
+<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>, <span class="va">...</span>, <span class="va">dtype</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span>, dtype <span class="op">=</span> <span class="va">dtype</span>, name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span>
+<span>    <span class="co"># .... finish initializing `self` instance</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Args:</p><ul><li><p>trainable: Boolean, whether the layer's variables should be trainable.</p></li>
+<li><p>name: String name of the layer.</p></li>
+<li><p>dtype: The dtype of the layer's computations and weights. Can also be a
+<code>keras$DTypePolicy</code>,
+which allows the computation and
+weight dtype to differ. Defaults to <code>NULL</code>. <code>NULL</code> means to use
+<code><a href="config_dtype_policy.html">config_dtype_policy()</a></code>,
+which is a <code>"float32"</code> policy unless set to different value
+(via <code><a href="config_set_dtype_policy.html">config_set_dtype_policy()</a></code>).</p></li>
+</ul></li>
+<li><p></p>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">add_loss</span>(loss)</span></code></pre><p></p></div>
 <p>Can be called inside of the <code><a href="https://rdrr.io/r/base/call.html" class="external-link">call()</a></code> method to add a scalar loss.</p>
 <p>Example:</p>
@@ -509,21 +534,7 @@ named list. It does not handle layer connectivity
 output of <code><a href="get_config.html">get_config()</a></code>.</p></li>
 </ul><p>Returns:
 A layer instance.</p></li>
-</ul><p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">initialize</span>(...,</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>           <span class="at">activity_regularizer =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>           <span class="at">trainable =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>           <span class="at">dtype =</span> <span class="cn">NULL</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>           <span class="at">autocast =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>           <span class="at">name =</span> <span class="cn">NULL</span>)</span></code></pre><p></p></div>
-<p>Initialize self. This method is typically called from a custom <code>initialize()</code> method.
-Example:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">layer_my_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span><span class="st">"MyLayer"</span>,</span>
-<span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">units</span>, <span class="va">...</span>, <span class="va">dtype</span> <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">name</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span>, dtype <span class="op">=</span> <span class="va">dtype</span>, name <span class="op">=</span> <span class="va">name</span><span class="op">)</span></span>
-<span>    <span class="co"># .... finish initializing `self` instance</span></span>
-<span>  <span class="op">}</span></span>
-<span><span class="op">)</span></span></code></pre><p></p></div>
-    </div>
+</ul></div>
     <div class="section level2">
     <h2 id="readonly-properties-">Readonly properties:<a class="anchor" aria-label="anchor" href="#readonly-properties-"></a></h2>
     
