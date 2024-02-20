@@ -18,6 +18,10 @@
 
 - Doc improvements.
 
+- `to_categorical()`, `op_one_hot()`, and `fit()` can now accept R factors, 
+  offset them to be 0-based (reported in `#1055`).
+
+
 # keras3 0.1.0
 
 - The package has been rebuilt for Keras 3.0. Refer to <blogpost> for an overview
