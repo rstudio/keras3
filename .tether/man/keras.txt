@@ -7,6 +7,8 @@ constraints: Module(keras.constraints)
 datasets: Module(keras.datasets)
 device(device_name)
 distribution: Module(keras.distribution)
+dtype_policies: Module(keras.dtype_policies)
+DTypePolicy(name)
 export: Module(keras.export)
 Function(
   inputs,

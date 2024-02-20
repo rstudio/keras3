@@ -57,12 +57,14 @@ options(warn = 2)
 # debug(roxygen2:::warn_roxy_tag)
 # unlink(".tether", recursive = TRUE)
 doctether::retether(
-  "keras.ops",
-  unsafe = TRUE,
-  roxy_tag_eval = resolve_roxy_tether,
-  # roxy_tag_eval = NULL,
-  rmd_field_eval = resolve_rmd_tether
-  # rmd_field_eval = NULL
+  # "keras.ops",
+  # unsafe = TRUE,
+  roxy_tag_eval =
+    resolve_roxy_tether,
+    # NULL,
+  rmd_field_eval =
+    resolve_rmd_tether
+    # NULL
 )
 
 # to retether just one vignette:

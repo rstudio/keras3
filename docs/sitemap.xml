@@ -358,6 +358,9 @@
     <loc>https://keras.posit.co/reference/config_disable_traceback_filtering.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/config_dtype_policy.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/config_enable_interactive_logging.html</loc>
   </url>
   <url>
@@ -380,6 +383,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/config_is_traceback_filtering_enabled.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/config_set_dtype_policy.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/config_set_epsilon.html</loc>
@@ -1168,6 +1174,9 @@
     <loc>https://keras.posit.co/reference/op_average_pool.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_batch_normalization.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_binary_crossentropy.html</loc>
   </url>
   <url>
@@ -1184,6 +1193,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_ceil.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_cholesky.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_clip.html</loc>
@@ -1237,6 +1249,9 @@
     <loc>https://keras.posit.co/reference/op_depthwise_conv.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_det.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_diag.html</loc>
   </url>
   <url>
@@ -1252,7 +1267,13 @@
     <loc>https://keras.posit.co/reference/op_divide.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_divide_no_nan.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_dot.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_eig.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_einsum.html</loc>
@@ -1268,6 +1289,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_erf.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_erfinv.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_exp.html</loc>
@@ -1354,6 +1378,9 @@
     <loc>https://keras.posit.co/reference/op_in_top_k.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_inv.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_irfft.html</loc>
   </url>
   <url>
@@ -1426,6 +1453,9 @@
     <loc>https://keras.posit.co/reference/op_logsumexp.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_lu_factor.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_matmul.html</loc>
   </url>
   <url>
@@ -1478,6 +1508,12 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_nonzero.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_norm.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_normalize.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_not_equal.html</loc>
@@ -1600,6 +1636,9 @@
     <loc>https://keras.posit.co/reference/op_solve.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_solve_triangular.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_sort.html</loc>
   </url>
   <url>
@@ -1634,6 +1673,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_sum.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_svd.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_swapaxes.html</loc>

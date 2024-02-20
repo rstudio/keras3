@@ -1,0 +1,12 @@
+__signature__
+keras.ops.divide_no_nan(x1, x2)
+__doc__
+Safe element-wise division which returns 0 where the denominator is 0.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+
+Returns:
+    The quotient `x1/x2`, element-wise, with zero where x2 is zero.
+

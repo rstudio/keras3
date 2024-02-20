@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
       <img src="" class="logo" alt=""><h1>Image segmentation with a U-Net-like architecture</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/oxford_pets_image_segmentation.Rmd" class="external-link"><code>vignettes/examples/oxford_pets_image_segmentation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes-src/examples/oxford_pets_image_segmentation.Rmd" class="external-link"><code>vignettes-src/examples/oxford_pets_image_segmentation.Rmd</code></a></small>
       <div class="d-none name"><code>oxford_pets_image_segmentation.Rmd</code></div>
     </div>
 
@@ -179,21 +179,11 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <h2 id="prepare-dataset-to-load-vectorize-batches-of-data">Prepare dataset to load &amp; vectorize batches of data<a class="anchor" aria-label="anchor" href="#prepare-dataset-to-load-vectorize-batches-of-data"></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tensorflow'</span></span></code></pre>
-<pre><code><span><span class="co">## The following objects are masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     set_random_seed, shape</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
-<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     shape</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Returns a tf_dataset</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Returns a tf_dataset</span></span>
 <span><span class="va">get_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">input_img_paths</span>, <span class="va">target_img_paths</span>,</span>
 <span>                        <span class="va">max_dataset_len</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
@@ -232,7 +222,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <div class="section level2">
 <h2 id="prepare-u-net-xception-style-model">Prepare U-Net Xception-style model<a class="anchor" aria-label="anchor" href="#prepare-u-net-xception-style-model"></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">img_size</span>, <span class="va">num_classes</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">img_size</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
@@ -301,226 +291,225 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="va">img_size</span>, <span class="va">num_classes</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_1"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;">                   </span>┃<span style="font-weight: bold;">                 </span>┃<span style="font-weight: bold;">  Param </span>┃<span style="font-weight: bold;">                   </span>┃<span style="font-weight: bold;">       </span>┃</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)      </span>┃<span style="font-weight: bold;"> Output Shape    </span>┃<span style="font-weight: bold;">      # </span>┃<span style="font-weight: bold;"> Connected to      </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │      <span style="color: #00AF00;">0</span> │ -                 │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)      │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">3</span>)         │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">896</span> │ input_layer[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">128</span> │ conv2d[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]      │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_2      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ activation[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │  <span style="color: #00AF00;">2,400</span> │ activation_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">256</span> │ separable_conv2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_1      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ separable_conv2d  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │  <span style="color: #00AF00;">4,736</span> │ activation_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">256</span> │ separable_conv2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ max_pooling2d     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)    │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │  <span style="color: #00AF00;">2,112</span> │ activation[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]  │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ max_pooling2d[<span style="color: #00AF00;">0</span>]… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │        │ conv2d_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_4      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │  <span style="color: #00AF00;">8,896</span> │ activation_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">512</span> │ separable_conv2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_3      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │ <span style="color: #00AF00;">17,664</span> │ activation_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">512</span> │ separable_conv2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)    │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │  <span style="color: #00AF00;">8,320</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add_1 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ max_pooling2d_1[<span style="color: #00AF00;">…</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │        │ conv2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_6      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │ <span style="color: #00AF00;">34,176</span> │ activation_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │  <span style="color: #00AF00;">1,024</span> │ separable_conv2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_5      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │ <span style="color: #00AF00;">68,096</span> │ activation_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │  <span style="color: #00AF00;">1,024</span> │ separable_conv2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ max_pooling2d_2   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │ <span style="color: #00AF00;">33,024</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add_2 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │      <span style="color: #00AF00;">0</span> │ max_pooling2d_2[<span style="color: #00AF00;">…</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │        │ conv2d_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_8      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │      <span style="color: #00AF00;">0</span> │ add_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │ <span style="color: #00AF00;">590,0…</span> │ activation_8[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │  <span style="color: #00AF00;">1,024</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_7      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │ <span style="color: #00AF00;">590,0…</span> │ activation_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │  <span style="color: #00AF00;">1,024</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_1   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ add_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │ <span style="color: #00AF00;">65,792</span> │ up_sampling2d_1[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add_3 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ up_sampling2d[<span style="color: #00AF00;">0</span>]… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │        │ conv2d_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_10     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ add_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │ <span style="color: #00AF00;">295,0…</span> │ activation_10[<span style="color: #00AF00;">0</span>]… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │    <span style="color: #00AF00;">512</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_9      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │ <span style="color: #00AF00;">147,5…</span> │ activation_9[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │    <span style="color: #00AF00;">512</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_3   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ add_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_2   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │ <span style="color: #00AF00;">32,896</span> │ up_sampling2d_3[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add_4 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ up_sampling2d_2[<span style="color: #00AF00;">…</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │        │ conv2d_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_12     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ add_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │ <span style="color: #00AF00;">73,792</span> │ activation_12[<span style="color: #00AF00;">0</span>]… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">256</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_11     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │ <span style="color: #00AF00;">36,928</span> │ activation_11[<span style="color: #00AF00;">0</span>]… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">256</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_5   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ add_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">128</span>)            │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_4   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_6 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │  <span style="color: #00AF00;">8,256</span> │ up_sampling2d_5[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add_5 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ up_sampling2d_4[<span style="color: #00AF00;">…</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │        │ conv2d_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_14     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ add_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │ <span style="color: #00AF00;">18,464</span> │ activation_14[<span style="color: #00AF00;">0</span>]… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">128</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ activation_13     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │  <span style="color: #00AF00;">9,248</span> │ activation_13[<span style="color: #00AF00;">0</span>]… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">128</span> │ conv2d_transpose… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">32</span>)             │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_7   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │      <span style="color: #00AF00;">0</span> │ add_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">64</span>)        │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ up_sampling2d_6   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │      <span style="color: #00AF00;">0</span> │ batch_normalizat… │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">32</span>)        │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_7 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │  <span style="color: #00AF00;">2,080</span> │ up_sampling2d_7[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">32</span>)        │        │                   │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ add_6 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │      <span style="color: #00AF00;">0</span> │ up_sampling2d_6[<span style="color: #00AF00;">…</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">32</span>)        │        │ conv2d_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │       │</span></span>
-<span><span class="co">## ├───────────────────┼─────────────────┼────────┼───────────────────┼───────┤</span></span>
-<span><span class="co">## │ conv2d_8 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │    <span style="color: #00AF00;">867</span> │ add_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
-<span><span class="co">## │                   │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">3</span>)         │        │                   │       │</span></span>
-<span><span class="co">## └───────────────────┴─────────────────┴────────┴───────────────────┴───────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)      </span>┃<span style="font-weight: bold;"> Output Shape    </span>┃<span style="font-weight: bold;">   Param # </span>┃<span style="font-weight: bold;"> Connected to   </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━┩</span></span>
+<span><span class="co">## │ input_layer       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │         <span style="color: #00AF00;">0</span> │ -              │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)      │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">3</span>)         │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │       <span style="color: #00AF00;">896</span> │ input_layer[<span style="color: #00AF00;">0</span>… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │       <span style="color: #00AF00;">128</span> │ conv2d[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_2      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ activation[<span style="color: #00AF00;">0</span>]… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │     <span style="color: #00AF00;">2,400</span> │ activation_2[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │       <span style="color: #00AF00;">256</span> │ separable_con… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_1      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ separable_conv2d  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │     <span style="color: #00AF00;">4,736</span> │ activation_1[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │       <span style="color: #00AF00;">256</span> │ separable_con… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ max_pooling2d     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)    │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │     <span style="color: #00AF00;">2,112</span> │ activation[<span style="color: #00AF00;">0</span>]… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ max_pooling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │           │ conv2d_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_4      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]      │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │     <span style="color: #00AF00;">8,896</span> │ activation_4[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │       <span style="color: #00AF00;">512</span> │ separable_con… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_3      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">17,664</span> │ activation_3[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │       <span style="color: #00AF00;">512</span> │ separable_con… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ max_pooling2d_1   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)    │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │     <span style="color: #00AF00;">8,320</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]      │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add_1 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ max_pooling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │           │ conv2d_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_6      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │    <span style="color: #00AF00;">34,176</span> │ activation_6[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │     <span style="color: #00AF00;">1,024</span> │ separable_con… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_5      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ separable_conv2d… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │    <span style="color: #00AF00;">68,096</span> │ activation_5[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">SeparableConv2D</span>) │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │     <span style="color: #00AF00;">1,024</span> │ separable_con… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ max_pooling2d_2   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │    <span style="color: #00AF00;">33,024</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add_2 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │         <span style="color: #00AF00;">0</span> │ max_pooling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │           │ conv2d_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_8      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │         <span style="color: #00AF00;">0</span> │ add_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │   <span style="color: #00AF00;">590,080</span> │ activation_8[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │     <span style="color: #00AF00;">1,024</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_7      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │   <span style="color: #00AF00;">590,080</span> │ activation_7[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>,  │     <span style="color: #00AF00;">1,024</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_1   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ add_2[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │    <span style="color: #00AF00;">65,792</span> │ up_sampling2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add_3 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ up_sampling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">256</span>)            │           │ conv2d_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_10     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ add_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │   <span style="color: #00AF00;">295,040</span> │ activation_10… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │       <span style="color: #00AF00;">512</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_9      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │   <span style="color: #00AF00;">147,584</span> │ activation_9[<span style="color: #00AF00;">…</span> │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">20</span>, <span style="color: #00AF00;">20</span>,  │       <span style="color: #00AF00;">512</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_3   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ add_3[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">256</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_2   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">32,896</span> │ up_sampling2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add_4 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ up_sampling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">128</span>)            │           │ conv2d_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_12     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ add_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">73,792</span> │ activation_12… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │       <span style="color: #00AF00;">256</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_11     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │    <span style="color: #00AF00;">36,928</span> │ activation_11… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">40</span>, <span style="color: #00AF00;">40</span>,  │       <span style="color: #00AF00;">256</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_5   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ add_4[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">128</span>)            │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_4   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_6 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │     <span style="color: #00AF00;">8,256</span> │ up_sampling2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add_5 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ up_sampling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">64</span>)             │           │ conv2d_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_14     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ add_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">64</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │    <span style="color: #00AF00;">18,464</span> │ activation_14… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │       <span style="color: #00AF00;">128</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ activation_13     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Activation</span>)      │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_transpose… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │     <span style="color: #00AF00;">9,248</span> │ activation_13… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>) │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ batch_normalizat… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">80</span>, <span style="color: #00AF00;">80</span>,  │       <span style="color: #00AF00;">128</span> │ conv2d_transp… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">BatchNormalizat…</span> │ <span style="color: #00AF00;">32</span>)             │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_7   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │         <span style="color: #00AF00;">0</span> │ add_5[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">64</span>)        │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ up_sampling2d_6   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │         <span style="color: #00AF00;">0</span> │ batch_normali… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">UpSampling2D</span>)    │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">32</span>)        │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_7 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │     <span style="color: #00AF00;">2,080</span> │ up_sampling2d… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">32</span>)        │           │                │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ add_6 (<span style="color: #0087FF;">Add</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │         <span style="color: #00AF00;">0</span> │ up_sampling2d… │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">32</span>)        │           │ conv2d_7[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>] │       │</span></span>
+<span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
+<span><span class="co">## │ conv2d_8 (<span style="color: #0087FF;">Conv2D</span>) │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">160</span>,     │       <span style="color: #00AF00;">867</span> │ add_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │                   │ <span style="color: #00AF00;">160</span>, <span style="color: #00AF00;">3</span>)         │           │                │       │</span></span>
+<span><span class="co">## └───────────────────┴─────────────────┴───────────┴────────────────┴───────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">2,058,979</span> (7.85 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">2,055,203</span> (7.84 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">3,776</span> (14.75 KB)</span></span></code></pre>
@@ -528,7 +517,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <div class="section level2">
 <h2 id="set-aside-a-validation-split">Set aside a validation split<a class="anchor" aria-label="anchor" href="#set-aside-a-validation-split"></a>
 </h2>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Split our img paths into a training and a validation set</span></span>
 <span><span class="va">val_samples</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">val_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample.int</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">input_img_paths</span><span class="op">)</span>, <span class="va">val_samples</span><span class="op">)</span></span>
@@ -556,7 +545,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
 </h2>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Configure the model for training.</span></span>
 <span><span class="co"># We use the "sparse" version of categorical_crossentropy</span></span>
 <span><span class="co"># because our target data is integers.</span></span>
@@ -581,118 +570,118 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>    verbose<span class="op">=</span><span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/50</span></span>
-<span><span class="co">## 32/32 - 53s - 2s/step - loss: 1.3455 - val_loss: 1.7104</span></span>
+<span><span class="co">## 32/32 - 46s - 1s/step - loss: 1.3044 - val_loss: 1.5498</span></span>
 <span><span class="co">## Epoch 2/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.9089 - val_loss: 1.9939</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.8717 - val_loss: 1.9564</span></span>
 <span><span class="co">## Epoch 3/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.7865 - val_loss: 2.1239</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.7695 - val_loss: 2.1949</span></span>
 <span><span class="co">## Epoch 4/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.7200 - val_loss: 2.3201</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.7079 - val_loss: 2.4879</span></span>
 <span><span class="co">## Epoch 5/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6853 - val_loss: 2.4222</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.6689 - val_loss: 2.7766</span></span>
 <span><span class="co">## Epoch 6/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6598 - val_loss: 2.5909</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.6377 - val_loss: 3.1180</span></span>
 <span><span class="co">## Epoch 7/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6389 - val_loss: 2.7111</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.6129 - val_loss: 3.3666</span></span>
 <span><span class="co">## Epoch 8/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.6173 - val_loss: 2.9007</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.5918 - val_loss: 3.5221</span></span>
 <span><span class="co">## Epoch 9/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5979 - val_loss: 3.0063</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.5723 - val_loss: 3.6305</span></span>
 <span><span class="co">## Epoch 10/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5798 - val_loss: 3.1942</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.5537 - val_loss: 3.7290</span></span>
 <span><span class="co">## Epoch 11/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5625 - val_loss: 3.2041</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.5353 - val_loss: 3.8154</span></span>
 <span><span class="co">## Epoch 12/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5459 - val_loss: 3.3185</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.5161 - val_loss: 3.9059</span></span>
 <span><span class="co">## Epoch 13/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5284 - val_loss: 3.1717</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4958 - val_loss: 4.0074</span></span>
 <span><span class="co">## Epoch 14/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5110 - val_loss: 3.1707</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4738 - val_loss: 4.0558</span></span>
 <span><span class="co">## Epoch 15/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4921 - val_loss: 2.8822</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4500 - val_loss: 4.0174</span></span>
 <span><span class="co">## Epoch 16/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4717 - val_loss: 2.6727</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4242 - val_loss: 3.8026</span></span>
 <span><span class="co">## Epoch 17/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4495 - val_loss: 2.3151</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3969 - val_loss: 3.3929</span></span>
 <span><span class="co">## Epoch 18/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.4260 - val_loss: 1.9184</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3696 - val_loss: 2.7362</span></span>
 <span><span class="co">## Epoch 19/50</span></span>
-<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.4021 - val_loss: 1.5717</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3429 - val_loss: 1.9876</span></span>
 <span><span class="co">## Epoch 20/50</span></span>
-<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.3779 - val_loss: 1.3132</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3180 - val_loss: 1.4353</span></span>
 <span><span class="co">## Epoch 21/50</span></span>
-<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.3541 - val_loss: 1.2000</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2958 - val_loss: 1.1180</span></span>
 <span><span class="co">## Epoch 22/50</span></span>
-<span><span class="co">## 32/32 - 2s - 72ms/step - loss: 0.3315 - val_loss: 1.0762</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2768 - val_loss: 1.0289</span></span>
 <span><span class="co">## Epoch 23/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3107 - val_loss: 1.0902</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2615 - val_loss: 1.0295</span></span>
 <span><span class="co">## Epoch 24/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2919 - val_loss: 1.1165</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2516 - val_loss: 1.0897</span></span>
 <span><span class="co">## Epoch 25/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2755 - val_loss: 1.1280</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2553 - val_loss: 1.2197</span></span>
 <span><span class="co">## Epoch 26/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2615 - val_loss: 1.1839</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3089 - val_loss: 1.2692</span></span>
 <span><span class="co">## Epoch 27/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2504 - val_loss: 1.2567</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3672 - val_loss: 1.2685</span></span>
 <span><span class="co">## Epoch 28/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2487 - val_loss: 1.5241</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3261 - val_loss: 0.9220</span></span>
 <span><span class="co">## Epoch 29/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2888 - val_loss: 1.5717</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3229 - val_loss: 1.0110</span></span>
 <span><span class="co">## Epoch 30/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3307 - val_loss: 1.3285</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3159 - val_loss: 1.1444</span></span>
 <span><span class="co">## Epoch 31/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3300 - val_loss: 1.3402</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3146 - val_loss: 1.3011</span></span>
 <span><span class="co">## Epoch 32/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3151 - val_loss: 2.4250</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3081 - val_loss: 1.1028</span></span>
 <span><span class="co">## Epoch 33/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3007 - val_loss: 2.3580</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2905 - val_loss: 1.4912</span></span>
 <span><span class="co">## Epoch 34/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2971 - val_loss: 3.0257</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2778 - val_loss: 1.2097</span></span>
 <span><span class="co">## Epoch 35/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2998 - val_loss: 3.7731</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2708 - val_loss: 1.2280</span></span>
 <span><span class="co">## Epoch 36/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3082 - val_loss: 1.7686</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2582 - val_loss: 0.9688</span></span>
 <span><span class="co">## Epoch 37/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3215 - val_loss: 2.2977</span></span>
+<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.2473 - val_loss: 1.0168</span></span>
 <span><span class="co">## Epoch 38/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3022 - val_loss: 3.6808</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2433 - val_loss: 1.0666</span></span>
 <span><span class="co">## Epoch 39/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2929 - val_loss: 1.6121</span></span>
+<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.2358 - val_loss: 1.1375</span></span>
 <span><span class="co">## Epoch 40/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2868 - val_loss: 2.3306</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2337 - val_loss: 1.1005</span></span>
 <span><span class="co">## Epoch 41/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2775 - val_loss: 2.4752</span></span>
+<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2341 - val_loss: 1.0189</span></span>
 <span><span class="co">## Epoch 42/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2675 - val_loss: 1.9509</span></span>
+<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.2217 - val_loss: 1.0620</span></span>
 <span><span class="co">## Epoch 43/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2613 - val_loss: 2.3888</span></span>
+<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.2121 - val_loss: 1.0315</span></span>
 <span><span class="co">## Epoch 44/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2547 - val_loss: 2.5188</span></span>
+<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.2054 - val_loss: 1.0310</span></span>
 <span><span class="co">## Epoch 45/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2473 - val_loss: 7.1793</span></span>
+<span><span class="co">## 32/32 - 2s - 68ms/step - loss: 0.2024 - val_loss: 1.0612</span></span>
 <span><span class="co">## Epoch 46/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2495 - val_loss: 4.6344</span></span>
+<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.1980 - val_loss: 1.0694</span></span>
 <span><span class="co">## Epoch 47/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2505 - val_loss: 2.2792</span></span>
+<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.1922 - val_loss: 1.1753</span></span>
 <span><span class="co">## Epoch 48/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2580 - val_loss: 6.0419</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.1859 - val_loss: 1.3713</span></span>
 <span><span class="co">## Epoch 49/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2640 - val_loss: 9.4719</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.1826 - val_loss: 1.1816</span></span>
 <span><span class="co">## Epoch 50/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2614 - val_loss: 3.3474</span></span></code></pre>
+<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.1820 - val_loss: 1.0785</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-predictions">Visualize predictions<a class="anchor" aria-label="anchor" href="#visualize-predictions"></a>
 </h2>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/load_model.html">load_model</a></span><span class="op">(</span><span class="st">"models/oxford_segmentation.keras"</span><span class="op">)</span></span>
 <span><span class="co"># Generate predictions for all images in the validation set</span></span>
 <span><span class="va">val_dataset</span> <span class="op">&lt;-</span> <span class="fu">get_dataset</span><span class="op">(</span></span>
 <span>  <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">val_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">val_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 32/32 - 4s - 127ms/step</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## 32/32 - 4s - 133ms/step</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">display_mask</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Quick utility to display a model's prediction.</span></span>
 <span>  <span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">val_preds</span><span class="op">[</span><span class="va">i</span>,,,<span class="op">]</span> <span class="op"><a href="../../reference/pipe.html">%&gt;%</a></span></span>

@@ -243,6 +243,10 @@ reference:
   - contents:
     - has_concept("nn ops")
 
+  - subtitle: "Linear Algebra Operations"
+  - contents:
+    - has_concept("linear algebra ops")
+
   - subtitle: "Image Operations"
   - contents:
     - has_concept("image ops")

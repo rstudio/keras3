@@ -9,7 +9,7 @@ layer_average_pooling_2d(
   pool_size,
   strides = NULL,
   padding = "valid",
-  data_format = "channels_last",
+  data_format = NULL,
   name = NULL,
   ...
 )

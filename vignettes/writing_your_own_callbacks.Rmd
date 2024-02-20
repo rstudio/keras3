@@ -199,7 +199,7 @@ model |> fit(
 ##
 ## ...Training: end of batch 4; got logs: List of 2
 ##  $ loss               : num 226
-##  $ mean_absolute_error: num 9.52
+##  $ mean_absolute_error: num 9.68
 ##
 ## Start testing; got logs:  Named list()
 ##
@@ -233,7 +233,7 @@ model |> fit(
 ##
 ## End epoch 1 of training; got logs: List of 4
 ##  $ loss                   : num 226
-##  $ mean_absolute_error    : num 9.52
+##  $ mean_absolute_error    : num 9.68
 ##  $ val_loss               : num 7.29
 ##  $ val_mean_absolute_error: num 2.21
 ##
@@ -261,7 +261,7 @@ model |> fit(
 ##
 ## ...Training: end of batch 4; got logs: List of 2
 ##  $ loss               : num 6.07
-##  $ mean_absolute_error: num 2.03
+##  $ mean_absolute_error: num 2.04
 ##
 ## Start testing; got logs:  Named list()
 ##
@@ -295,13 +295,13 @@ model |> fit(
 ##
 ## End epoch 2 of training; got logs: List of 4
 ##  $ loss                   : num 6.07
-##  $ mean_absolute_error    : num 2.03
+##  $ mean_absolute_error    : num 2.04
 ##  $ val_loss               : num 5.15
 ##  $ val_mean_absolute_error: num 1.82
 ##
 ## Stop training; got logs: List of 4
 ##  $ loss                   : num 6.07
-##  $ mean_absolute_error    : num 2.03
+##  $ mean_absolute_error    : num 2.04
 ##  $ val_loss               : num 5.15
 ##  $ val_mean_absolute_error: num 1.82
 ```
@@ -363,11 +363,11 @@ res <- model |> evaluate(
 ##
 ## ...Evaluating: end of batch 8; got logs: List of 2
 ##  $ loss               : num 4.66
-##  $ mean_absolute_error: num 1.74
+##  $ mean_absolute_error: num 1.75
 ##
 ## Stop testing; got logs: List of 2
 ##  $ loss               : num 4.66
-##  $ mean_absolute_error: num 1.74
+##  $ mean_absolute_error: num 1.75
 ```
 
 ```r
@@ -465,7 +465,7 @@ model |> fit(
 ## Up to batch 6, the average loss is  141.31.
 ## Up to batch 7, the average loss is  122.19.
 ## Up to batch 8, the average loss is  107.60.
-## The average loss for epoch  1 is    107.60 and mean absolute error is    5.70.
+## The average loss for epoch  1 is    107.60 and mean absolute error is    5.79.
 ## Up to batch 1, the average loss is    4.71.
 ## Up to batch 2, the average loss is    4.74.
 ## Up to batch 3, the average loss is    4.81.
@@ -474,7 +474,7 @@ model |> fit(
 ## Up to batch 6, the average loss is    5.09.
 ## Up to batch 7, the average loss is    5.19.
 ## Up to batch 8, the average loss is    5.57.
-## The average loss for epoch  2 is      5.57 and mean absolute error is    1.91.
+## The average loss for epoch  2 is      5.57 and mean absolute error is    1.90.
 ```
 
 ```r
@@ -612,7 +612,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   80.21.
 ## Up to batch 15, the average loss is   75.17.
 ## Up to batch 16, the average loss is   70.97.
-## The average loss for epoch  1 is     70.97 and mean absolute error is    4.04.
+## The average loss for epoch  1 is     70.97 and mean absolute error is    4.08.
 ## Up to batch 1, the average loss is    7.98.
 ## Up to batch 2, the average loss is    9.92.
 ## Up to batch 3, the average loss is   12.88.
@@ -629,7 +629,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   31.80.
 ## Up to batch 15, the average loss is   31.39.
 ## Up to batch 16, the average loss is   31.49.
-## The average loss for epoch  2 is     31.49 and mean absolute error is    4.83.
+## The average loss for epoch  2 is     31.49 and mean absolute error is    4.82.
 ## Up to batch 1, the average loss is   39.60.
 ## Up to batch 2, the average loss is   41.95.
 ## Up to batch 3, the average loss is   41.29.
@@ -646,7 +646,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   27.87.
 ## Up to batch 15, the average loss is   31.72.
 ## Up to batch 16, the average loss is   34.05.
-## The average loss for epoch  3 is     34.05 and mean absolute error is    4.86.
+## The average loss for epoch  3 is     34.05 and mean absolute error is    4.79.
 ## Restoring model weights from the end of the best epoch.
 ## Epoch 00004: early stopping
 ```
@@ -745,7 +745,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   80.18.
 ## Up to batch 15, the average loss is   75.11.
 ## Up to batch 16, the average loss is   70.84.
-## The average loss for epoch  1 is     70.84 and mean absolute error is    4.00.
+## The average loss for epoch  1 is     70.84 and mean absolute error is    4.04.
 ##
 ## Epoch 002: Learning rate is 0.1000.
 ## Up to batch 1, the average loss is    6.95.
@@ -764,7 +764,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   31.54.
 ## Up to batch 15, the average loss is   31.05.
 ## Up to batch 16, the average loss is   31.11.
-## The average loss for epoch  2 is     31.11 and mean absolute error is    4.78.
+## The average loss for epoch  2 is     31.11 and mean absolute error is    4.77.
 ##
 ## Epoch 003: Learning rate is 0.0500.
 ## Up to batch 1, the average loss is   40.40.
@@ -802,7 +802,7 @@ model |> fit(
 ## Up to batch 14, the average loss is   10.06.
 ## Up to batch 15, the average loss is   10.00.
 ## Up to batch 16, the average loss is   10.31.
-## The average loss for epoch  4 is     10.31 and mean absolute error is    2.72.
+## The average loss for epoch  4 is     10.31 and mean absolute error is    2.71.
 ##
 ## Epoch 005: Learning rate is 0.0500.
 ## Up to batch 1, the average loss is   17.26.
@@ -821,7 +821,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    8.86.
 ## Up to batch 15, the average loss is    9.17.
 ## Up to batch 16, the average loss is    9.74.
-## The average loss for epoch  5 is      9.74 and mean absolute error is    2.61.
+## The average loss for epoch  5 is      9.74 and mean absolute error is    2.58.
 ##
 ## Epoch 006: Learning rate is 0.0100.
 ## Up to batch 1, the average loss is   17.04.
@@ -840,7 +840,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    5.12.
 ## Up to batch 15, the average loss is    4.96.
 ## Up to batch 16, the average loss is    4.89.
-## The average loss for epoch  6 is      4.89 and mean absolute error is    1.66.
+## The average loss for epoch  6 is      4.89 and mean absolute error is    1.67.
 ##
 ## Epoch 007: Learning rate is 0.0100.
 ## Up to batch 1, the average loss is    3.65.
@@ -916,7 +916,7 @@ model |> fit(
 ## Up to batch 14, the average loss is    2.77.
 ## Up to batch 15, the average loss is    2.77.
 ## Up to batch 16, the average loss is    2.82.
-## The average loss for epoch 10 is      2.82 and mean absolute error is    1.28.
+## The average loss for epoch 10 is      2.82 and mean absolute error is    1.27.
 ##
 ## Epoch 011: Learning rate is 0.0050.
 ## Up to batch 1, the average loss is    3.01.

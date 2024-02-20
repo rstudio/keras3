@@ -99,6 +99,7 @@ diff(
 )
 digitize(x, bins)
 divide(x1, x2)
+divide_no_nan(x1, x2)
 dot(x1, x2)
 einsum(subscripts, *operands)
 empty(shape, dtype=None)
@@ -233,7 +234,7 @@ repeat(
   repeats,
   axis=None
 )
-reshape(x, new_shape)
+reshape(x, newshape)
 roll(
   x,
   shift,

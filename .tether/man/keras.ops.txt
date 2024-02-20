@@ -83,6 +83,7 @@ categorical_crossentropy(
   axis=-1
 )
 ceil(x)
+cholesky(x)
 clip(
   x,
   x_min,
@@ -156,6 +157,7 @@ depthwise_conv(
   data_format=None,
   dilation_rate=1
 )
+det(x)
 diag(x, k=0)
 diagonal(
   x,
@@ -170,12 +172,15 @@ diff(
 )
 digitize(x, bins)
 divide(x1, x2)
+divide_no_nan(x1, x2)
 dot(x1, x2)
+eig(x)
 einsum(subscripts, *operands)
 elu(x, alpha=1.0)
 empty(shape, dtype=None)
 equal(x1, x2)
 erf(x)
+erfinv(x)
 exp(x)
 expand_dims(x, axis)
 expm1(x)
@@ -227,6 +232,7 @@ in_top_k(
   predictions,
   k
 )
+inv(x)
 irfft(x, fft_length=None)
 is_tensor(x)
 isclose(x1, x2)
@@ -245,6 +251,7 @@ istft(
 leaky_relu(x, negative_slope=0.2)
 less(x1, x2)
 less_equal(x1, x2)
+linalg: Module(keras.ops.linalg)
 linspace(
   start,
   stop,
@@ -279,6 +286,7 @@ logsumexp(
   axis=None,
   keepdims=False
 )
+lu_factor(x)
 matmul(x1, x2)
 max(
   x,
@@ -337,6 +345,17 @@ ndim(x)
 negative(x)
 nn: Module(keras.ops.nn)
 nonzero(x)
+norm(
+  x,
+  ord=None,
+  axis=None,
+  keepdims=False
+)
+normalize(
+  x,
+  axis=-1,
+  order=2
+)
 not_equal(x1, x2)
 numpy: Module(keras.ops.numpy)
 one_hot(
@@ -379,7 +398,7 @@ repeat(
   repeats,
   axis=None
 )
-reshape(x, new_shape)
+reshape(x, newshape)
 rfft(x, fft_length=None)
 roll(
   x,
@@ -441,6 +460,11 @@ softmax(x, axis=-1)
 softplus(x)
 softsign(x)
 solve(a, b)
+solve_triangular(
+  a,
+  b,
+  lower=False
+)
 sort(x, axis=-1)
 sparse_categorical_crossentropy(
   target,
@@ -476,6 +500,11 @@ sum(
   x,
   axis=None,
   keepdims=False
+)
+svd(
+  x,
+  full_matrices=True,
+  compute_uv=True
 )
 swapaxes(
   x,

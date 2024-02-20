@@ -93,12 +93,18 @@ class Metric(builtins.object)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+ |  __repr__(self)
+ |      Return repr(self).
+ |
  |  __setattr__(
  |    self,
  |    name,
  |    value
  |  )
  |      Implement setattr(self, name, value).
+ |
+ |  __str__(self)
+ |      Return str(self).
  |
  |  add_variable(
  |    self,
@@ -163,8 +169,8 @@ class Metric(builtins.object)
  |  Data descriptors defined here:
  |
  |  __dict__
- |      dictionary for instance variables (if defined)
+ |      dictionary for instance variables
  |
  |  __weakref__
- |      list of weak references to the object (if defined)
+ |      list of weak references to the object
 

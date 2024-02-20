@@ -233,6 +233,39 @@ stopifnot(exprs = \{
 \itemize{
 \item
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{initialize(...,
+           activity_regularizer = NULL,
+           trainable = TRUE,
+           dtype = NULL,
+           autocast = TRUE,
+           name = NULL)
+}\if{html}{\out{</div>}}
+
+Initialize self. This method is typically called from a custom \code{initialize()} method.
+Example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_my_layer <- Layer("MyLayer",
+  initialize = function(units, ..., dtype = NULL, name = NULL) \{
+    super$initialize(..., dtype = dtype, name = name)
+    # .... finish initializing `self` instance
+  \}
+)
+}\if{html}{\out{</div>}}
+
+Args:
+\itemize{
+\item trainable: Boolean, whether the layer's variables should be trainable.
+\item name: String name of the layer.
+\item dtype: The dtype of the layer's computations and weights. Can also be a
+\code{keras$DTypePolicy},
+which allows the computation and
+weight dtype to differ. Defaults to \code{NULL}. \code{NULL} means to use
+\code{config_dtype_policy()},
+which is a \code{"float32"} policy unless set to different value
+(via \code{config_set_dtype_policy()}).
+}
+\item
+
 \if{html}{\out{<div class="sourceCode">}}\preformatted{add_loss(loss)
 }\if{html}{\out{</div>}}
 
@@ -521,25 +554,6 @@ output of \code{get_config()}.
 Returns:
 A layer instance.
 }
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{initialize(...,
-           activity_regularizer = NULL,
-           trainable = TRUE,
-           dtype = NULL,
-           autocast = TRUE,
-           name = NULL)
-}\if{html}{\out{</div>}}
-
-Initialize self. This method is typically called from a custom \code{initialize()} method.
-Example:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer_my_layer <- Layer("MyLayer",
-  initialize = function(units, ..., dtype = NULL, name = NULL) \{
-    super$initialize(..., dtype = dtype, name = name)
-    # .... finish initializing `self` instance
-  \}
-)
-}\if{html}{\out{</div>}}
 }
 
 \section{Readonly properties:}{

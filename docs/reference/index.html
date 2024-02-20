@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1172,6 +1172,11 @@
         <dd>Computes the error function of <code>x</code>, element-wise.</dd>
       </dl><dl><dt>
           
+          <code><a href="op_erfinv.html">op_erfinv()</a></code> 
+        </dt>
+        <dd>Computes the inverse error function of <code>x</code>, element-wise.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_extract_sequences.html">op_extract_sequences()</a></code> 
         </dt>
         <dd>Expands the dimension of last axis into sequences of <code>sequence_length</code>.</dd>
@@ -1234,7 +1239,7 @@
           
           <code><a href="op_solve.html">op_solve()</a></code> 
         </dt>
-        <dd>Solves for <code>x</code> in the equation <code>a %*% x == b</code>.</dd>
+        <dd>Solves a linear system of equations given by <code>a x = b</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="op_stft.html">op_stft()</a></code> 
@@ -1436,6 +1441,11 @@
           <code><a href="op_divide.html">op_divide()</a></code> 
         </dt>
         <dd>Divide arguments element-wise.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_divide_no_nan.html">op_divide_no_nan()</a></code> 
+        </dt>
+        <dd>Safe element-wise division which returns 0 where the denominator is 0.</dd>
       </dl><dl><dt>
           
           <code><a href="op_dot.html">op_dot()</a></code> 
@@ -1939,6 +1949,11 @@
         <dd>Average pooling operation.</dd>
       </dl><dl><dt>
           
+          <code><a href="op_batch_normalization.html">op_batch_normalization()</a></code> 
+        </dt>
+        <dd>Normalizes <code>x</code> by <code>mean</code> and <code>variance</code>.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_binary_crossentropy.html">op_binary_crossentropy()</a></code> 
         </dt>
         <dd>Computes binary cross-entropy loss between target and output tensor.</dd>
@@ -2019,6 +2034,11 @@
         <dd>Encodes integer labels as multi-hot vectors.</dd>
       </dl><dl><dt>
           
+          <code><a href="op_normalize.html">op_normalize()</a></code> 
+        </dt>
+        <dd>Normalizes <code>x</code> over the specified axis.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_one_hot.html">op_one_hot()</a></code> 
         </dt>
         <dd>Converts integer tensor <code>x</code> into a one-hot tensor.</dd>
@@ -2072,6 +2092,57 @@
           <code><a href="op_sparse_categorical_crossentropy.html">op_sparse_categorical_crossentropy()</a></code> 
         </dt>
         <dd>Computes sparse categorical cross-entropy loss.</dd>
+      </dl></div><div class="section level2">
+      
+      <h3 id="linear-algebra-operations">Linear Algebra Operations<a class="anchor" aria-label="anchor" href="#linear-algebra-operations"></a></h3>
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="op_cholesky.html">op_cholesky()</a></code> 
+        </dt>
+        <dd>Computes the Cholesky decomposition of a positive semi-definite matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_det.html">op_det()</a></code> 
+        </dt>
+        <dd>Computes the determinant of a square tensor.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_eig.html">op_eig()</a></code> 
+        </dt>
+        <dd>Computes the eigenvalues and eigenvectors of a square matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_inv.html">op_inv()</a></code> 
+        </dt>
+        <dd>Computes the inverse of a square tensor.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_lu_factor.html">op_lu_factor()</a></code> 
+        </dt>
+        <dd>Computes the lower-upper decomposition of a square matrix.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_norm.html">op_norm()</a></code> 
+        </dt>
+        <dd>Matrix or vector norm.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_solve_triangular.html">op_solve_triangular()</a></code> 
+        </dt>
+        <dd>Solves a linear system of equations given by <code>a %*% x = b</code>.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_svd.html">op_svd()</a></code> 
+        </dt>
+        <dd>Computes the singular value decomposition of a matrix.</dd>
       </dl></div><div class="section level2">
       
       <h3 id="image-operations">Image Operations<a class="anchor" aria-label="anchor" href="#image-operations"></a></h3>
@@ -3271,6 +3342,11 @@
         <dd>Turn off traceback filtering.</dd>
       </dl><dl><dt>
           
+          <code><a href="config_dtype_policy.html">config_dtype_policy()</a></code> 
+        </dt>
+        <dd>Returns the current default dtype policy object.</dd>
+      </dl><dl><dt>
+          
           <code><a href="config_enable_interactive_logging.html">config_enable_interactive_logging()</a></code> 
         </dt>
         <dd>Turn on interactive logging.</dd>
@@ -3309,6 +3385,11 @@
           <code><a href="config_is_traceback_filtering_enabled.html">config_is_traceback_filtering_enabled()</a></code> 
         </dt>
         <dd>Check if traceback filtering is enabled.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_set_dtype_policy.html">config_set_dtype_policy()</a></code> 
+        </dt>
+        <dd>Sets the default dtype policy globally.</dd>
       </dl><dl><dt>
           
           <code><a href="config_set_epsilon.html">config_set_epsilon()</a></code> 

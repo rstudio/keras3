@@ -835,8 +835,12 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     # layer_preprocess_feature_space()? or
 
 
-    "keras.ops.in_top_k" = "k_in_top_k"
-    "keras.ops.top_k" = "k_top_k"
+    "keras.ops.in_top_k" = "op_in_top_k"
+    "keras.ops.top_k" = "op_top_k"
+    "keras.ops.image.pad_images" = "op_image_pad"
+
+    "keras.layers.StackedRNNCells" = "rnn_cells_stack"
+    "keras.layers.SimpleRNNCell" = "rnn_cell_simple"
 
     "keras.random.randint" = "random_integer"
 
@@ -851,7 +855,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
                                 "preprocessing" = character(),
                                 "utils" = character(),
                                 # "preprocessing" = character(),
-                                ops = "k",
+                                # ops = "k",
                                 .x
                                 ))
 
@@ -943,6 +947,8 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     # replace_val("callback_callback_list", "callback_list") |>
     identity()
 
+  if(grepl("^layer_.*_cell$", name))
+    name <- sub("layer_(.*)_cell$", "rnn_cell_\\1", name)
 
   name
 }
@@ -1156,10 +1162,11 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
   }
 
   if(endpoint == "keras.ops.reshape") {
-    stopifnot(identical(names(frmls), c("x", "new_shape")))
+    if(!identical(names(frmls), c("x", "newshape")))
+      browser()
 
-    return(function(x, ..., new_shape = list(...)) {
-      keras$ops$reshape(x, tuple(lapply(shape(new_shape), function(d) d %||% -1L)))
+    return(function(x, ..., newshape = list(...)) {
+      keras$ops$reshape(x, tuple(lapply(shape(newshape), function(d) d %||% -1L)))
     })
   }
 

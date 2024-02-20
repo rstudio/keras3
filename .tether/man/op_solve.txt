@@ -1,18 +1,14 @@
 __signature__
 keras.ops.solve(a, b)
 __doc__
-Solves for `x` in the equation `a * x = b`.
+Solves a linear system of equations given by `a x = b`.
 
 Args:
-    a: Input tensor.
-    b: Input tensor.
+    a: A tensor of shape `(..., M, M)` representing the coefficients matrix.
+    b: A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+    right-hand side or "dependent variable" matrix.
 
 Returns:
-    A tensor with the same shape and dtype as `a`.
+    A tensor of shape `(..., M)` or `(..., M, N)` representing the solution
+    of the linear system. Returned shape is identical to `b`.
 
-Example:
-
->>> a = np.array([[1, 2], [4, 5]], dtype="float32")
->>> b = np.array([[2, 4], [8, 10]], dtype="float32")
->>> keras.ops.solve(x1, x2)
-array([[2, 0], [0, 2]], dtype="float32")

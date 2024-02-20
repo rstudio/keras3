@@ -26,12 +26,12 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |      trainable: Boolean, whether the layer's variables should be trainable.
  |      name: String name of the layer.
  |      dtype: The dtype of the layer's computations and weights. Can also be a
- |          `keras.mixed_precision.DTypePolicy`,
+ |          `keras.DTypePolicy`,
  |          which allows the computation and
  |          weight dtype to differ. Defaults to `None`. `None` means to use
- |          `keras.mixed_precision.dtype_policy()`,
+ |          `keras.config.dtype_policy()`,
  |          which is a `float32` policy unless set to different value
- |          (via `keras.mixed_precision.set_dtype_policy()`).
+ |          (via `keras.config.set_dtype_policy()`).
  |
  |  Attributes:
  |      name: The name of the layer (string).
@@ -41,7 +41,7 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |          Layers automatically cast inputs to this dtype, which causes
  |          the computations and output to also be in this dtype.
  |          When mixed precision is used with a
- |          `keras.mixed_precision.DTypePolicy`, this will be different
+ |          `keras.DTypePolicy`, this will be different
  |          than `variable_dtype`.
  |      trainable_weights: List of variables to be included in backprop.
  |      non_trainable_weights: List of variables that should not be

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
       <img src="" class="logo" alt=""><h1>Simple MNIST convnet</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/mnist_convnet.Rmd" class="external-link"><code>vignettes/examples/mnist_convnet.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes-src/examples/mnist_convnet.Rmd" class="external-link"><code>vignettes-src/examples/mnist_convnet.Rmd</code></a></small>
       <div class="d-none name"><code>mnist_convnet.Rmd</code></div>
     </div>
 
@@ -155,23 +155,23 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">32</span>)        │        <span style="color: #00AF00;">320</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">32</span>)        │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">64</span>)        │     <span style="color: #00AF00;">18,496</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">64</span>)          │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ flatten (<span style="color: #0087FF;">Flatten</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)              │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)              │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)                │     <span style="color: #00AF00;">16,010</span> │</span></span>
-<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">32</span>)     │           <span style="color: #00AF00;">320</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">32</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">64</span>)     │        <span style="color: #00AF00;">18,496</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">64</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ flatten (<span style="color: #0087FF;">Flatten</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)             │        <span style="color: #00AF00;">16,010</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">34,826</span> (136.04 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">34,826</span> (136.04 KB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
@@ -196,35 +196,35 @@
 <span>  validation_split <span class="op">=</span> <span class="fl">0.1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/15</span></span>
-<span><span class="co">## 422/422 - 6s - 15ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9783 - val_loss: 0.0808</span></span>
+<span><span class="co">## 422/422 - 5s - 12ms/step - accuracy: 0.8845 - loss: 0.3815 - val_accuracy: 0.9783 - val_loss: 0.0811</span></span>
 <span><span class="co">## Epoch 2/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9645 - loss: 0.1152 - val_accuracy: 0.9862 - val_loss: 0.0550</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9643 - loss: 0.1152 - val_accuracy: 0.9865 - val_loss: 0.0548</span></span>
 <span><span class="co">## Epoch 3/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9737 - loss: 0.0838 - val_accuracy: 0.9873 - val_loss: 0.0457</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9738 - loss: 0.0838 - val_accuracy: 0.9880 - val_loss: 0.0456</span></span>
 <span><span class="co">## Epoch 4/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9783 - loss: 0.0691 - val_accuracy: 0.9893 - val_loss: 0.0418</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9782 - loss: 0.0689 - val_accuracy: 0.9893 - val_loss: 0.0419</span></span>
 <span><span class="co">## Epoch 5/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9811 - loss: 0.0609 - val_accuracy: 0.9902 - val_loss: 0.0374</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9812 - loss: 0.0609 - val_accuracy: 0.9907 - val_loss: 0.0374</span></span>
 <span><span class="co">## Epoch 6/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9820 - loss: 0.0564 - val_accuracy: 0.9913 - val_loss: 0.0360</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9823 - loss: 0.0562 - val_accuracy: 0.9910 - val_loss: 0.0364</span></span>
 <span><span class="co">## Epoch 7/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9848 - loss: 0.0488 - val_accuracy: 0.9920 - val_loss: 0.0326</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9849 - loss: 0.0489 - val_accuracy: 0.9922 - val_loss: 0.0329</span></span>
 <span><span class="co">## Epoch 8/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9844 - loss: 0.0485 - val_accuracy: 0.9918 - val_loss: 0.0334</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9846 - loss: 0.0484 - val_accuracy: 0.9917 - val_loss: 0.0330</span></span>
 <span><span class="co">## Epoch 9/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9860 - loss: 0.0441 - val_accuracy: 0.9922 - val_loss: 0.0317</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9860 - loss: 0.0441 - val_accuracy: 0.9922 - val_loss: 0.0318</span></span>
 <span><span class="co">## Epoch 10/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9868 - loss: 0.0406 - val_accuracy: 0.9923 - val_loss: 0.0320</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9869 - loss: 0.0406 - val_accuracy: 0.9923 - val_loss: 0.0316</span></span>
 <span><span class="co">## Epoch 11/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0389 - val_accuracy: 0.9920 - val_loss: 0.0315</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9876 - loss: 0.0388 - val_accuracy: 0.9923 - val_loss: 0.0314</span></span>
 <span><span class="co">## Epoch 12/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9881 - loss: 0.0371 - val_accuracy: 0.9925 - val_loss: 0.0304</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9884 - loss: 0.0369 - val_accuracy: 0.9925 - val_loss: 0.0305</span></span>
 <span><span class="co">## Epoch 13/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9880 - loss: 0.0361 - val_accuracy: 0.9933 - val_loss: 0.0282</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9878 - loss: 0.0360 - val_accuracy: 0.9928 - val_loss: 0.0276</span></span>
 <span><span class="co">## Epoch 14/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9889 - loss: 0.0335 - val_accuracy: 0.9932 - val_loss: 0.0288</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9890 - loss: 0.0332 - val_accuracy: 0.9932 - val_loss: 0.0290</span></span>
 <span><span class="co">## Epoch 15/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9899 - loss: 0.0310 - val_accuracy: 0.9930 - val_loss: 0.0293</span></span></code></pre>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9900 - loss: 0.0308 - val_accuracy: 0.9925 - val_loss: 0.0296</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-trained-model">Evaluate the trained model<a class="anchor" aria-label="anchor" href="#evaluate-the-trained-model"></a>
@@ -236,7 +236,7 @@
 <span><span class="co">## [1] 0.9912</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.02529005</span></span></code></pre>
+<span><span class="co">## [1] 0.02584332</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

@@ -25,3 +25,8 @@ class Identity(keras.src.layers.layer.Layer)
  |
  |  call(self, inputs)
  |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  compute_output_spec(self, inputs)
+ |
+

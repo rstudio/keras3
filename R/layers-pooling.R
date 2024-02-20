@@ -217,7 +217,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @tether keras.layers.AveragePooling2D
 layer_average_pooling_2d <-
 function (object, pool_size, strides = NULL, padding = "valid",
-    data_format = "channels_last", name = NULL, ...)
+    data_format = NULL, name = NULL, ...)
 {
     args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
@@ -306,7 +306,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' @tether keras.layers.AveragePooling3D
 layer_average_pooling_3d <-
 function (object, pool_size, strides = NULL, padding = "valid",
-    data_format = "channels_last", name = NULL, ...)
+    data_format = NULL, name = NULL, ...)
 {
     args <- capture_args(list(pool_size = as_integer, strides = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,

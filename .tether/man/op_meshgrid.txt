@@ -10,8 +10,8 @@ lengths `S0, S1, ..., SN-1`, this creates an `N` N-dimensional tensors
 
 Args:
     x: 1-D tensors representing the coordinates of a grid.
-    indexing: Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
-        of output.
+    indexing: `"xy"` or `"ij"`. "xy" is cartesian; `"ij"` is matrix
+        indexing of output. Defaults to `"xy"`.
 
 Returns:
     Sequence of N tensors.
@@ -30,3 +30,4 @@ array([[1, 1, 1],
 array([[4, 5, 6],
        [4, 5, 6],
        [4, 5, 6]])
+

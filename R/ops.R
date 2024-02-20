@@ -614,20 +614,31 @@ keras$ops$vectorized_map(f, elements)
 #' op_while_loop(cond, body, loop_vars)
 #' ```
 #'
+#' ```{r}
+#' x <- 0; y <- 1
+#' cond <- \(x, y) x < 10
+#' body <- \(x, y) list(x+1, y+1)
+#' op_while_loop(cond, body, list(x, y))
+#' ```
+#'
 #' @returns
 #' A list of tensors, has the same shape and dtype as `loop_vars`.
 #'
 #' @param cond
 #' A callable that represents the termination condition of the loop.
-#' Must have the same number of args as `loop_vars`, and return a bool.
+#' Must accept a `loop_vars` like structure as an argument. If
+#'`loop_vars` is a tuple or unnamed list, each element of `loop_vars` will be
+#' passed positionally to the callable.
 #'
 #' @param body
-#' A callable that represents the loop body. Must have the same
-#' number of args as `loop_vars`, and return a list of the same
-#' length, shape and dtype as `loop_vars`.
+#' A callable that represents the loop body. Must accept a
+#' `loop_vars` like structure as an argument, and return update value
+#' with the same structure. If `loop_vars` is a tuple or unnamed list, each
+#' element of `loop_vars` will be passed positionally to the callable.
 #'
 #' @param loop_vars
-#' A list of tensors, the loop variables.
+#' An arbitrary nested structure of tensor state to persist
+#' across loop iterations.
 #'
 #' @param maximum_iterations
 #' Optional maximum number of iterations of the while
@@ -998,17 +1009,17 @@ function (x, axis = NULL, keepdims = FALSE)
 #' # Examples
 #' ```{r}
 #' x <- op_convert_to_tensor(rbind(c(1, 2), c(3, 4), c(5, 6)))
+#' op_qr(x)
 #' c(q, r) %<-% op_qr(x)
-#' q
 #' ```
 #'
 #' @returns
-#' A list containing two tensors. The first tensor represents the
-#' orthogonal matrix Q, and the second tensor represents the upper
-#' triangular matrix R.
+#' A list containing two tensors. The first tensor of shape `(..., M, K)`
+#' is the orthogonal matrix `q` and the second tensor of shape
+#' (..., K, N)` is the upper triangular matrix `r`, where `K = min(M, N)`.
 #'
 #' @param x
-#' Input tensor.
+#' Input tensor of shape `(..., M, N)`.
 #'
 #' @param mode
 #' A string specifying the mode of the QR decomposition.
@@ -1213,9 +1224,10 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 }
 
 
-#' Solves for `x` in the equation `a %*% x == b`.
+#' Solves a linear system of equations given by `a x = b`.
 #'
 #' @description
+#' Solves for `x` in the equation `a %*% x == b`.
 #'
 #' # Examples
 #' ```{r}
@@ -1225,13 +1237,15 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' ```
 #'
 #' @returns
-#' A tensor with the same shape and dtype as `a`.
+#' A tensor of shape `(..., M)` or `(..., M, N)` representing the solution
+#' of the linear system. Returned shape is identical to `b`.
 #'
 #' @param a
-#' Input tensor.
+#' A tensor of shape `(..., M, M)` representing the coefficients matrix.
 #'
 #' @param b
-#' Input tensor.
+#' A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+#' right-hand side or "dependent variable" matrix.
 #'
 #' @export
 #' @family math ops
@@ -2796,7 +2810,8 @@ function (x, axis = NULL, keepdims = FALSE)
 #'
 #' ```{r}
 #' (x <- op_reshape(c(FALSE, FALSE, FALSE,
-#'                   TRUE, FALSE, FALSE), c(2, 3)))
+#'                    TRUE, FALSE, FALSE),
+#'                  c(2, 3)))
 #' op_any(x, axis = 1)
 #' op_any(x, axis = 2)
 #' op_any(x, axis = -1)
@@ -5239,8 +5254,8 @@ function (x, axis = NULL, keepdims = FALSE)
 #' 1-D tensors representing the coordinates of a grid.
 #'
 #' @param indexing
-#' Cartesian (`"xy"`, default) or matrix (`"ij"`) indexing
-#' of output.
+#' `"xy"` or `"ij"`. "xy" is cartesian; `"ij"` is matrix
+#' indexing of output. Defaults to `"xy"`.
 #'
 #' @export
 #' @family numpy ops
@@ -5857,13 +5872,11 @@ function (x, repeats, axis = NULL)
 #' @param x
 #' Input tensor.
 #'
-#' @param new_shape
+#' @param newshape
 #' The new shape should be compatible with the original shape.
-#' One shape dimension can be -1 in which case the value is
+#' One shape dimension can be `-1` in which case the value is
 #' inferred from the length of the array and remaining dimensions.
 #'
-#' @param ...
-#' For forward/backward compatability.
 #'
 #' @export
 #' @family numpy ops
@@ -5873,9 +5886,9 @@ function (x, repeats, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/reshape>
 #' @tether keras.ops.reshape
 op_reshape <-
-function (x, ..., new_shape = list(...))
+function (x, newshape)
 {
-    keras$ops$reshape(x, tuple(lapply(shape(new_shape),
+    keras$ops$reshape(x, tuple(lapply(shape(newshape),
                                       function(d) d %||% -1L)))
 }
 

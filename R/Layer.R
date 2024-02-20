@@ -171,6 +171,36 @@
 #' # Methods available
 #'
 #' * ```
+#'   initialize(...,
+#'              activity_regularizer = NULL,
+#'              trainable = TRUE,
+#'              dtype = NULL,
+#'              autocast = TRUE,
+#'              name = NULL)
+#'   ```
+#'   Initialize self. This method is typically called from a custom `initialize()` method.
+#'   Example:
+#'
+#'   ```r
+#'   layer_my_layer <- Layer("MyLayer",
+#'     initialize = function(units, ..., dtype = NULL, name = NULL) {
+#'       super$initialize(..., dtype = dtype, name = name)
+#'       # .... finish initializing `self` instance
+#'     }
+#'   )
+#'   ```
+#'   Args:
+#'   * trainable: Boolean, whether the layer's variables should be trainable.
+#'   * name: String name of the layer.
+#'   * dtype: The dtype of the layer's computations and weights. Can also be a
+#'       `keras$DTypePolicy`,
+#'       which allows the computation and
+#'       weight dtype to differ. Defaults to `NULL`. `NULL` means to use
+#'       `config_dtype_policy()`,
+#'       which is a `"float32"` policy unless set to different value
+#'       (via `config_set_dtype_policy()`).
+#'
+#' * ```
 #'   add_loss(loss)
 #'   ```
 #'   Can be called inside of the `call()` method to add a scalar loss.
@@ -430,25 +460,6 @@
 #'   Returns:
 #'   A layer instance.
 #'
-#' ```
-#' initialize(...,
-#'            activity_regularizer = NULL,
-#'            trainable = TRUE,
-#'            dtype = NULL,
-#'            autocast = TRUE,
-#'            name = NULL)
-#' ```
-#' Initialize self. This method is typically called from a custom `initialize()` method.
-#' Example:
-#'
-#' ```r
-#' layer_my_layer <- Layer("MyLayer",
-#'   initialize = function(units, ..., dtype = NULL, name = NULL) {
-#'     super$initialize(..., dtype = dtype, name = name)
-#'     # .... finish initializing `self` instance
-#'   }
-#' )
-#' ```
 #'
 #' # Readonly properties:
 #'

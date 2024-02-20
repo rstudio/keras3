@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,7 +98,7 @@
       <img src="" class="logo" alt=""><h1>Text classification from scratch</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes/examples/text_classification_from_scratch.Rmd" class="external-link"><code>vignettes/examples/text_classification_from_scratch.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/vignettes-src/examples/text_classification_from_scratch.Rmd" class="external-link"><code>vignettes-src/examples/text_classification_from_scratch.Rmd</code></a></small>
       <div class="d-none name"><code>text_classification_from_scratch.Rmd</code></div>
     </div>
 
@@ -367,28 +367,28 @@ layer.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_1"</span></span></span>
-<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape              </span>┃<span style="font-weight: bold;">    Param # </span>┃</span></span>
-<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)              │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ embedding_1 (<span style="color: #0087FF;">Embedding</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)         │  <span style="color: #00AF00;">2,560,000</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dropout_1 (<span style="color: #0087FF;">Dropout</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)         │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv1d_1 (<span style="color: #0087FF;">Conv1D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)         │    <span style="color: #00AF00;">114,816</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ conv1d (<span style="color: #0087FF;">Conv1D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)         │    <span style="color: #00AF00;">114,816</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling1d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling1D</span>)            │                           │            │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │     <span style="color: #00AF00;">16,512</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)               │          <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## ├─────────────────────────────────┼───────────────────────────┼────────────┤</span></span>
-<span><span class="co">## │ predictions (<span style="color: #0087FF;">Dense</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)                 │        <span style="color: #00AF00;">129</span> │</span></span>
-<span><span class="co">## └─────────────────────────────────┴───────────────────────────┴────────────┘</span></span>
+<span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
+<span><span class="co">## │ input_layer (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ embedding_1 (<span style="color: #0087FF;">Embedding</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │     <span style="color: #00AF00;">2,560,000</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dropout_1 (<span style="color: #0087FF;">Dropout</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ conv1d_1 (<span style="color: #0087FF;">Conv1D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │       <span style="color: #00AF00;">114,816</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ conv1d (<span style="color: #0087FF;">Conv1D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │       <span style="color: #00AF00;">114,816</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ global_max_pooling1d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling1D</span>)            │                        │               │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │        <span style="color: #00AF00;">16,512</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
+<span><span class="co">## │ predictions (<span style="color: #0087FF;">Dense</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)              │           <span style="color: #00AF00;">129</span> │</span></span>
+<span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">2,806,273</span> (10.71 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">2,806,273</span> (10.71 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
@@ -407,23 +407,23 @@ layer.</p>
 <span><span class="co"># Fit the model using the train and test datasets.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, validation_data <span class="op">=</span> <span class="va">val_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 625/625 - 7s - 11ms/step - accuracy: 0.7319 - loss: 0.4884 - val_accuracy: 0.8692 - val_loss: 0.3095</span></span>
+<span><span class="co">## 625/625 - 6s - 10ms/step - accuracy: 0.7334 - loss: 0.4873 - val_accuracy: 0.8648 - val_loss: 0.3114</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9123 - loss: 0.2210 - val_accuracy: 0.8690 - val_loss: 0.3180</span></span>
+<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9126 - loss: 0.2221 - val_accuracy: 0.8722 - val_loss: 0.3154</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9567 - loss: 0.1162 - val_accuracy: 0.8619 - val_loss: 0.3775</span></span></code></pre>
+<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9583 - loss: 0.1133 - val_accuracy: 0.8638 - val_loss: 0.3984</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-model-on-the-test-set">Evaluate the model on the test set<a class="anchor" aria-label="anchor" href="#evaluate-the-model-on-the-test-set"></a>
 </h2>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 2s - 2ms/step - accuracy: 0.8495 - loss: 0.4028</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8546 - loss: 0.4242</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.8495445</span></span>
+<span><span class="co">## [1] 0.85456</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4028154</span></span></code></pre>
+<span><span class="co">## [1] 0.4241929</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="make-an-end-to-end-model">Make an end-to-end model<a class="anchor" aria-label="anchor" href="#make-an-end-to-end-model"></a>
@@ -448,12 +448,12 @@ can simply create a new model (using the weights we just trained):</p>
 <span></span>
 <span><span class="co"># Test it with `raw_test_ds`, which yields raw strings</span></span>
 <span><span class="va">end_to_end_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - accuracy: 0.8498 - loss: 0.4020</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - accuracy: 0.8546 - loss: 0.4235</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.8497842</span></span>
+<span><span class="co">## [1] 0.85456</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4020182</span></span></code></pre>
+<span><span class="co">## [1] 0.4235309</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

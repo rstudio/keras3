@@ -1,13 +1,14 @@
 __signature__
-keras.ops.reshape(x, new_shape)
+keras.ops.reshape(x, newshape)
 __doc__
 Gives a new shape to a tensor without changing its data.
 
 Args:
     x: Input tensor.
-    new_shape: The new shape should be compatible with the original shape.
+    newshape: The new shape should be compatible with the original shape.
         One shape dimension can be -1 in which case the value is
         inferred from the length of the array and remaining dimensions.
 
 Returns:
     The reshaped tensor.
+
