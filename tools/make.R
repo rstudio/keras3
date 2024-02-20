@@ -47,15 +47,11 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 ## next  ----
 
-# TODO: self$model$stop_training <- TRUE should work.
-#       Need to avoid propogating `$<-` past first.
-
 # TODO: op_argmax() - returns a 0-based index. convert to 1-based?
 # TODO: op_arange() returns a 0-based tensor
 
 # TODO: R generator func should be passable to
 #   adapt(layer_feature_space(), <r_generator>)
-
 
 # TODO: op_array(<r_array>) should default to float32, not float64
 #
@@ -82,10 +78,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 #      convert factor()s to: as.integer(factor)-1
 ##     the compile('sparse_categorical') case makes it difficult to apply 1 based
 ##     globally, also, makes it more tricky to translate from python
-
-
-# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
-#       use `setNames(as.list())`
 
 ### internal utils ----
 # TODO: as_0_based_index() utility: as_integer(x + 1)
@@ -148,7 +140,10 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # }
 #
 # TODO: layer_category_encoding()(count_weights) call arg example not working
-
+# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
+#       use `setNames(as.list())`
+#       ## Deferred until upstream bug fixed,
+#       ## model.metrics_names returns wrong result
 
 ## Docs ----
 
