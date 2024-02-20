@@ -1,5 +1,23 @@
 # keras3 (development version)
 
+- New functions:
+  - `config_dtype_policy()`
+  - `config_set_dtype_policy()`
+  - `op_batch_normalization()`
+  - `op_cholesky()`
+  - `op_det()`
+  - `op_divide_no_nan()`
+  - `op_eig()`
+  - `op_erfinv()`
+  - `op_inv()`
+  - `op_lu_factor()`
+  - `op_norm()`
+  - `op_normalize()`
+  - `op_solve_triangular()`
+  - `op_svd()`
+
+- Doc improvements.
+
 # keras3 0.1.0
 
 - The package has been rebuilt for Keras 3.0. Refer to <blogpost> for an overview
