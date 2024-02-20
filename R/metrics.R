@@ -3751,10 +3751,10 @@ py_to_r_wrapper.keras.src.metrics.metric.Metric <- py_to_r_wrapper.keras.src.los
 #' @details
 #' You can provide an arbitrary R function as a custom metric. Note that
 #' the `y_true` and `y_pred` parameters are tensors, so computations on
-#' them should use backend tensor functions.
+#' them should use `op_*` tensor functions.
 #'
 #' Use the `custom_metric()` function to define a custom metric.
-#' Note that a name ('mean_pred') is provided for the custom metric
+#' Note that a name (`'mean_pred'`) is provided for the custom metric
 #' function: this name is used within training progress output.
 #'
 #' If you want to save and load a model with custom metrics, you should

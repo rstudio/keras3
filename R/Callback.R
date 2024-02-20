@@ -412,3 +412,12 @@ import_callback_tools <- function() {
     "kerastools.callback",
     path = system.file("python", package = "keras3"))
 }
+
+#' @export
+# needed so `self$model$stop_training <- TRUE` doesn't try to reset
+# the `model` attr, which is a @property that raises AttributeError
+`$<-.keras.src.callbacks.callback.Callback` <- function(x, name, value) {
+  if(name == "model" && py_is(value, py_get_attr(x, "model", TRUE)))
+    return(x)
+  NextMethod()
+}

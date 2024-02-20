@@ -748,9 +748,8 @@ assert_all_dots_named <- function(envir = parent.frame(), cl) {
 # ---- py helpers ----
 
 py_is <- function(x, y) {
-  if(!inherits(x, "python.builtin.object") ||
-     !inherits(y, "python.builtin.object"))
-    return(FALSE)
+  inherits(x, "python.builtin.object") &&
+  inherits(y, "python.builtin.object") &&
   identical(py_id(x), py_id(y))
 }
 

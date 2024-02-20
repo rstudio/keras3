@@ -5,7 +5,7 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 
 
-## Deferred:
+## ---- Deferred ----
 
 # TODO: k_fft() should really accept and return complex tensors too.
 # TODO: activation_resolve() or activation_get() as alias of keras.activation.get() ?
@@ -21,13 +21,13 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 
 
-## Rejected:
+## Rejected  ----
 # TODO: k_array() should take a 'shape' argument
 # TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
 # TODO: implement dim() S3 generic. (will use shape() instead)
 
 
-## Implemented but Questioning:
+## Implemented but Questioning  ----
 
 
 # TODO: pack_x_y_sample_weight() to return an unconverted py tuple?
@@ -41,149 +41,34 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 #       Exported all.equal S3 methods for KerasTensor and KerasVariable
 
 
-## In progress
+
+## In process  ----
 
 
-## Waiting to be processed:
-
-# Line wrapping for warnings is sorta broken, but can't seem to reprex.
-# neither of these seem to reproduce the no-wrapping behavior for me...
-# py_run_string(r"---(import os; os.system("for i in {1..1000}; do printf 'word '; done"))---")
-# import warnings
-# >>> warnings.warn("word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word")
-# I believe this is a regression in the 2023.12.0 release of RStudio. Console output from reticulate / Python is no longer wrapped.
-# This affects how Exceptions or Warnings from Python are presented (since they often do not include line breaks.)
-# E.g, now I see something like there, where the warning is obscured
-#
-# Maybe there is some funky interaction w/ absl logging?
-
-
-
-
-# TODO: custom_metric -> metric_custom() / loss_custom() / constraint_custom()
-#                        metric_lambda() / loss_lambda() / constraint_lambda()
-# TODO: CallbackList() (1 based) and MetricList() wrappers
-# (and maybe convert LearningRateSchedule to 1 based?)
-#  with offset occuring in the external py_to_r_wrapper (or simlar),
-#  so that it presents in python code as 0 based, but presents in R
-#  as a 1 based fn.
-#
-# TODO: document options(keras.verbose) and other R global options.
-#
-# TODO: add tests for keras_history `history` from fit().
-#   history - also mentions in docs (e.g., in callback_model_checkpoint())
-
-# TODO: export keras.DTypePolicy constructor - maybe module keras.dtype_policies
-
-# TODO: fix links to chunk plots in rendered vignettes - should be relative to
-#   package for R CMD build/pkgdown
-
-# TODO: revisit Model() signature, do we need update_state() and result() methods?
-
-# TODO: For apps, tether encode+decode along w/ constructor:
-# #'  @tether application.foo,
-# #'   application.foo.preprocess_input,
-# #'   application.foo.decode_predictions,
-#
-# TODO: how to pass layer call args through a wrapper that uses compose_layer()?
+## next  ----
 
 # TODO: op_argmax() - returns a 0-based index. convert to 1-based?
-#
-#
-# TODO: tether application process_utils
-#
-# TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
-#       return numpy arrays. We should check preserve np_array convert status in all
-#       op_* functions, and return numpy arrays if we received a numpy array.
-#
-# TODO: WORKON_HOME should reflect an absolute path, not relative path, incase
-#      WORKON_HOME=~/..
-#
-#
-# TODO: add tests for R generator functions in fit()/evaluate()/predict().
-# TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to float32? model input$dtype?
-#
-# TODO: mention / document getOption(keras.*) #i.e., .fit_verbose, .verbose, etc.
-#
-# TODO: what happened to is_keras_tensor() ??
-#
-# TODO: Model.get_compile_config() / Model.get_build_config() ?
-#       Model.get_metrics_result() / Model.reset_metrics() /
-#       Model.metrics / Model.metrics_names ?
-#       Model.losses ?
-#       Model.run_eagerly?
-#       Model.stateless_call() ? Model.symbolic_call() ?
-#
-# TODO: fit()/ + friends, fix sample_weight / as_sample_weight,
-#      - 1 based
-#      - additional arg `sample_names`, to allow usage like
-#        fit(..., class_weight = list(category_name_1 = .5, category_name_2 = .6),
-#                 class_names = c("category_name_1", "category_name_2"))
-#
-# TODO: make sure tfdeploy::serve_savedmodel() works with the new
-#       export_savedmodel() S3 method for keras3 models.
-#       update example in export_savedmodel.keras.models.model.Model S3 method
-#
-# TODO: update application_preprocess_inputs man page: list the models for
-#       which it's a "no-op" or "identity" function because the preprocessing
-#       step is on the graph already.
-
-# TODO: R generator func should be passable to adapt(layer_feature_space(), <r_generator>)
-
-# TODO: custom_metric() / custom_loss() / Loss() / Metric(). remove custom_metric()?
-
-# TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
-
 # TODO: op_arange() returns a 0-based tensor
 
-# TODO: ??? .onLoad(...) if(!interactive()) config_disable_interactive_logging()
+# TODO: R generator func should be passable to
+#   adapt(layer_feature_space(), <r_generator>)
 
-# TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
-#       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
-
-# TODO: Clean up @family tags (partially autogen, derive from module - then use that to autogenerate _pkgdown.yml)
-
-# TODO: self$model$stop_training <- TRUE should work. Need to avoid propogating `$<-` past first.
-
-# TODO: get_custom_objects() needs thinking
-
-# TODO: many of the applications can share a man page, e.g., application_convnext_{large...}
-
-# TODO: op_convert_to_numpy() -> rename to op_convert_to_array() or op_convert_to_r_array()
-#       or just as.array()? remove it?
-#       ?? rename op_array() to ... as_tensor() ?? ... or remove op_array()?
-
-# TODO: "keras.applications.convnext" is a module, filtered out has good stuff
-
-# TODO: BackupAndRestore is broken, doesn't respect current epoch. file/fix upstream.
-#       ~/github/keras-team/keras/keras/callbacks/backup_and_restore_callback.py
-
-# TODO: reticulate, support NO_COLOR (or similar) to disable the link wrapper around `py_last_error()` hint.
-
-# TODO: model_from_saved_model() and model_to_saved_model(), provide guidance for users updating to 3.
-
-# TODO: global search for "axis" in doc text, update to 1 based where appropriate.
+# TODO: op_array(<r_array>) should default to float32, not float64
 #
-# TODO: in reticulate: virtualenv_starter(): check for --enable-shared
+# TODO: op_array(<r_int>) why int64, and not int32?
+#
+# TODO: revisit docs for op_scatter_update and op_scatter, remove python sliceisms
 
-# TODO: fix py_func(), for r_to_py.R6ClassGenerator
-#   can't use __signature__ anymore in keras_core...
-
-# TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
+# TODO: op_vectorized_map() examples don't make sense
 
 # TODO: note in docs for op_logical_and (and friends) that these are dispatched
 #       to from & != and so on.
 
+# TODO: this should work: op_convert_to_tensor(c(1, 3, 2, 0), "int32")
+
 # TODO: op_arange: should it default to produce floats?
 
-# TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
-# Daniel votes:
-#   Yes to `keras_function()` (keras$Function)
-#   Yes to `keras_tensor()` (keras$KerasTensor)
-#   Document on same page for less confsion:
-#      keras_input() adds batch dim to shape, keras_tensor() doesn't.
-#   NO to keras$Variable()
-
+# TODO: "keras.applications.convnext" is a module, filtered out has good stuff
 
 # TODO: to_categorical():
 #    - handle factor/character https://github.com/rstudio/keras/issues/1055
@@ -194,45 +79,15 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 ##     the compile('sparse_categorical') case makes it difficult to apply 1 based
 ##     globally, also, makes it more tricky to translate from python
 
-# TODO: args 2 and 3 to op_svd() are seemingly broken/inconsistent across backends.
-
-# TODO: make the op_* @family tags make sense.
-#
-# TODO: remove any tensorflow imports / DESCRIPTION deps
-#
-# TODO: op_istft op_irfft example is wrong, investigate
-#
-# TODO: this should work: op_convert_to_tensor(c(1, 3, 2, 0), "int32")
-#
+### internal utils ----
 # TODO: as_0_based_index() utility: as_integer(x + 1)
-#
-# TODO: op_array(<r_array>) should default to float32, not float64
-#
-# TODO: op_array(<r_int>) why int64, and not int32?
-#
-# TODO: revisit docs for op_scatter_update and op_scatter, remove python sliceisms
-
-# TODO: op_vectorized_map() examples don't make sense
-#
-# TODO: layer_category_encoding()(count_weights) call arg example not working
-#
-# TODO: LossScaleOptimizer() default wrapper doesn't make sense - revisit
-#
-# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
-#       use `setNames(as.list())`
-#
-#
-# TODO: revisit k_vectorized_map() man page
-#
 # TODO: should as_axis() return a tuple() for lenght(x)>1 ?
 
-# TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b) (Almost DONE except for Tuples)
-#
-# TODO: layer_feature_space() needs many helpers for float_normalized() and friends
-#       output_mode = 'dict' should be 'named list'?
-#
-# TODO: feature_space saving errors
-#
+# TODO: train_on_batch and related methods should be autogen'd and exported. Or maybe we curate those,
+#       and don't export them? (I.e., have the few people that need them access methods via model$train_on_batch())
+
+# TODO: model_from_saved_model() and model_to_saved_model(), provide guidance for users updating to 3.
+
 # TODO: document get_initial_state() method for GRUCell and friends
 #
 # TODO: layer_lambda docs: bring back section on serialization and limitations after
@@ -243,6 +98,38 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 #       also, the example should maybe be nicer, with a named list/dict being passed,
 #       instead of a tuple
 #
+
+# TODO: remove any tensorflow imports / DESCRIPTION deps
+
+
+
+## Testing ----
+
+# TODO: add tests for keras_history `history` from fit().
+#   history - also mentions in docs (e.g., in callback_model_checkpoint())
+
+# TODO: `backend()` used to have a `convert=FALSE` option, and all k_* would
+#       return numpy arrays. We should check preserve np_array convert status in all
+#       op_* functions, and return numpy arrays if we received a numpy array.
+#       add tests for `use_backend("numpy")`
+
+# TODO: add tests for R generator functions in fit()/evaluate()/predict().
+
+# TODO: make sure tfdeploy::serve_savedmodel() works with the new
+#       export_savedmodel() S3 method for keras3 models.
+#       update example in export_savedmodel.keras.models.model.Model S3 method
+
+# TODO: args 2 and 3 to op_svd() are seemingly broken/inconsistent across backends.
+#
+# TODO: op_istft op_irfft example is wrong, investigate
+#
+
+# TODO: feature_space saving errors
+
+## Upstream bugs - add skipped tests
+# TODO: BackupAndRestore is broken, doesn't respect current epoch. file/fix upstream.
+#       ~/github/keras-team/keras/keras/callbacks/backup_and_restore_callback.py
+# TODO: layer_torch_module_wrapper raises an error - maybe incompatible torch version?a
 # TODO: this shouldn't error (empty last arg should be no-op):
 # if(FALSE) {
 # keras$utils$FeatureSpace$cross(
@@ -252,21 +139,138 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # )
 # }
 #
-# TODO: layer_torch_module_wrapper raises an error - maybe incompatible torch version?a
-#
-# TODO: config_{enable,disable,is_enabled}_traceback_filtering have identical docstrings,
-# should all be the same page.
-#
+# TODO: layer_category_encoding()(count_weights) call arg example not working
+# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
+#       use `setNames(as.list())`
+#       ## Deferred until upstream bug fixed,
+#       ## model.metrics_names returns wrong result
+
+## Docs ----
+
+### verbiage  ----
+
+# TODO: global doc search for None/True/False/[Tt]uple/[Dd]ict(ionary|\\b) (Almost DONE except for Tuples)
+# TODO: global search for "axis" in doc text, update to 1 based where appropriate.
+# TODO: Clean up @family tags (partially autogen,
+#       derive from module - then use that to autogenerate _pkgdown.yml)
+# TODO: make the op_* @family tags make sense.
 # TODO: @family tags should be manually managed, not dynamically generated.
 #       perhaps in a yml file
-#
+# TODO: document options(keras.verbose) and other R global options.
+
+# TODO: mention / document getOption(keras.*) #i.e., .fit_verbose, .verbose, etc.
+
+# TODO: update application_preprocess_inputs man page: list the models for
+#       which it's a "no-op" or "identity" function because the preprocessing
+#       step is on the graph already.
+
+# TODO: global search replace in man-src/*.Rmd "([^ ])=([^ ])" "\\1 = \\2"
+
+# TODO: revisit k_vectorized_map() man page
+
+
+
+### pipeline  ----
+
+# TODO: fix links to chunk plots in rendered vignettes - should be relative to
+#   package for R CMD build/pkgdown
+
+# TODO: For apps, tether encode+decode along w/ constructor:
+# #'  @tether application.foo,
+# #'   application.foo.preprocess_input,
+# #'   application.foo.decode_predictions,
+
+# TODO: tether application process_utils
+
+# TODO: many of the applications can share a man page,
+#       e.g., application_convnext_{large...}
+
 # TODO: refactor @tether so 'endpoint' can be a tuple like "keras.losses.Hinge,keras.losses.hinge"
 #       and the tether file is a concatenation of multiple endpoints, separated
 #       by a delimiter so we can do
 #       read_file("0-upstream.md") |>
 #         strsplit(str_c(strrep("~", 80), "\n")) |>
 #         lapply(format_upstream)
+# TODO: config_{enable,disable,is_enabled}_traceback_filtering have identical docstrings,
+# should all be the same page (pending @tether improvements that allow for
+#   multiple tethered endpoints.)
 
+## Pending design decision
+
+# TODO: how to pass layer call args through a wrapper that uses compose_layer()?
+
+# TODO: layer_feature_space() needs many helpers for float_normalized() and friends
+#       output_mode = 'dict' should be 'named list'?
+
+# TODO: LossScaleOptimizer() default wrapper doesn't make sense - revisit
+
+# TODO: fit/predict/eval/fit_on_batch... coerce `x` R arrays to:
+#       float32?  model input$dtype?
+
+# TODO: "keras.layers.InputSpec" - needs to be exported or somehow processed in `Layer()`
+
+# TODO: export keras.DTypePolicy constructor - maybe module keras.dtype_policies
+
+# TODO: ??? .onLoad(...) if(!interactive()) config_disable_interactive_logging()
+
+# TODO: op_convert_to_numpy() -> rename to op_convert_to_array() or op_convert_to_r_array()
+#       or just as.array()? remove it?
+#       ?? rename op_array() to ... as_tensor() ?? ... or remove op_array()?
+
+# TODO: get_custom_objects() needs thinking
+
+# TODO: keras.Function ?? keras.Variable ?? keras.name_scope ??
+# votes:
+#   Yes to `keras_function()` (keras$Function)
+#   Yes to `keras_tensor()` (keras$KerasTensor)
+#   Document on same page for less confsion:
+#      keras_input() adds batch dim to shape, keras_tensor() doesn't.
+#   NO to keras$Variable()
+
+
+
+
+
+
+## Pending need ----
+## waiting for vignette-driven need
+
+# TODO: custom_metric() / custom_loss() / Loss() / Metric(). remove custom_metric()?
+# TODO: custom_metric -> metric_custom() / loss_custom() / constraint_custom()
+#                        metric_lambda() / loss_lambda() / constraint_lambda()
+#   waiting to see where else the need pops up, change maybe unnecessary
+
+# TODO: CallbackList() (1 based) and MetricList() wrappers
+# (and maybe convert LearningRateSchedule to 1 based?)
+#  with offset occurring in the external py_to_r_wrapper (or simlar),
+#  so that it presents in python code as 0 based, but presents in R
+#  as a 1 based fn.
+
+# TODO: revisit Model() signature, do we need update_state() and result() methods?
+
+# TODO: what happened to is_keras_tensor() ??
+
+# TODO: Model.get_compile_config() / Model.get_build_config() ?
+#       Model.get_metrics_result() / Model.reset_metrics() /
+#       Model.metrics / Model.metrics_names ?
+#       Model.losses ?
+#       Model.run_eagerly?
+#       Model.stateless_call() ? Model.symbolic_call() ?
+
+# TODO: fit()/ + friends, fix sample_weight / as_sample_weight,
+#      - 1 based
+#      - additional arg `sample_names`, to allow usage like
+#        fit(..., class_weight = list(category_name_1 = .5, category_name_2 = .6),
+#                 class_names = c("category_name_1", "category_name_2"))
+
+
+
+
+
+# --- reticulate ----
+# TODO: in reticulate: virtualenv_starter(): check for --enable-shared
+# TODO: reticulate, support NO_COLOR (or similar) to disable the link
+#        wrapper around `py_last_error()` hint.
 
 memoise::forget(mk_export)
 
@@ -857,3 +861,18 @@ if(FALSE) {
 
 
 }
+
+
+
+## Waiting to be processed:
+
+# Line wrapping for warnings is sorta broken, but can't seem to reprex.
+# neither of these seem to reproduce the no-wrapping behavior for me...
+# py_run_string(r"---(import os; os.system("for i in {1..1000}; do printf 'word '; done"))---")
+# import warnings
+# >>> warnings.warn("word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word word")
+# I believe this is a regression in the 2023.12.0 release of RStudio. Console output from reticulate / Python is no longer wrapped.
+# This affects how Exceptions or Warnings from Python are presented (since they often do not include line breaks.)
+# E.g, now I see something like there, where the warning is obscured
+#
+# Maybe there is some funky interaction w/ absl logging?
