@@ -2141,6 +2141,8 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 #' @param x
 #' Integer tensor to be encoded. The shape can be
 #' arbitrary, but the dtype should be integer.
+#' R factors are coerced to integer and offset to be 0-based, i.e.,
+#' `as.integer(x) - 1L`.
 #'
 #' @param num_classes
 #' Number of classes for the one-hot encoding.
@@ -2163,8 +2165,15 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 op_one_hot <-
 function (x, num_classes, axis = -1L, dtype = NULL)
 {
-    args <- capture_args(list(x = as_integer, axis = as_axis,
-        num_classes = as_integer))
+    args <- capture_args(list(
+      x = function(x) {
+        if (inherits(x, "factor"))
+          array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
+        else
+          as_integer_array(x)
+      },
+      axis = as_axis,
+      num_classes = as_integer))
     do.call(keras$ops$one_hot, args)
 }
 

@@ -329,6 +329,8 @@ function (x, axis = -1L, order = 2L)
 #' @param x
 #' Array-like with class values to be converted into a matrix
 #' (integers from 0 to `num_classes - 1`).
+#' R factors are coerced to integer and offset to be 0-based, i.e.,
+#' `as.integer(x) - 1L`.
 #'
 #' @param num_classes
 #' Total number of classes. If `NULL`, this would be inferred
@@ -350,7 +352,12 @@ function (x, axis = -1L, order = 2L)
 to_categorical <-
 function (x, num_classes = NULL)
 {
-    args <- capture_args(list(x = as_integer_array, num_classes = as_integer))
+    args <- capture_args(list(x = function(x) {
+      if (inherits(x, "factor"))
+        array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
+      else
+        as_integer_array(x)
+    }, num_classes = as_integer))
     do.call(keras$utils$to_categorical, args)
 }
 
