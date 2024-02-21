@@ -2918,8 +2918,8 @@ function (x1, x2, axis = NULL)
 #' @description
 #' `arange` can be called with a varying number of positional arguments:
 #' * `arange(stop)`: Values are generated within the half-open interval
-#'     `[0, stop)` (in other words, the interval including start but excluding
-#'     stop).
+#'     `[0, stop)` (in other words, the interval including `start` but excluding
+#'     `stop`).
 #' * `arange(start, stop)`: Values are generated within the half-open interval
 #'     `[start, stop)`.
 #' * `arange(start, stop, step)`: Values are generated within the half-open
@@ -2970,11 +2970,12 @@ function (x1, x2, axis = NULL)
 op_arange <-
 function (start, stop = NULL, step = 1L, dtype = NULL)
 {
-    args <- capture_args(list(start = function (x)
-    np_array(x, dtype), stop = function (x)
-    np_array(x, dtype), step = function (x)
-    np_array(x, dtype)))
-    do.call(keras$ops$arange, args)
+  args <- capture_args(list(
+    start = function(x) np_array(x, dtype),
+    stop = function(x) np_array(x, dtype),
+    step = function(x) np_array(x, dtype)
+  ))
+  do.call(keras$ops$arange, args)
 }
 
 
@@ -3207,6 +3208,10 @@ keras$ops$arctanh(x)
 #' op_argmax(x, axis = 2)
 #' ```
 #'
+#' @note
+#' This is similar to R `max.col(x) - 1` for the case of a 2-d array (a matrix),
+#' or for an nd-array, `apply(x, axis, which.max) - 1`
+#'
 #' @returns
 #' Tensor of indices. It has the same shape as `x`, with the dimension
 #' along `axis` removed. Note that the returned integer is 0-based (i.e., if the
@@ -3246,6 +3251,10 @@ function (x, axis = NULL)
 #' op_argmin(x, axis = 1)
 #' op_argmin(x, axis = 2)
 #' ```
+#'
+#' @note
+#' This is similar to an R expression `apply(x, axis, which.min) - 1`, where `x`
+#' is a R array.
 #'
 #' @returns
 #' Tensor of indices. It has the same shape as `x`, with the dimension

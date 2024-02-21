@@ -47,9 +47,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 ## next  ----
 
-# TODO: op_argmax() - returns a 0-based index. convert to 1-based?
-# TODO: op_arange() returns a 0-based tensor
-
 # TODO: R generator func should be passable to
 #   adapt(layer_feature_space(), <r_generator>)
 
@@ -69,15 +66,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # TODO: op_arange: should it default to produce floats?
 
 # TODO: "keras.applications.convnext" is a module, filtered out has good stuff
-
-# TODO: to_categorical():
-#    - handle factor/character https://github.com/rstudio/keras/issues/1055
-#    - make it 1 based, not for bare integers, only for factors?
-#    - also update op_one_hot() w/ same semantics.
-#    - update fit() to special case factors, so they're offset correctly.
-#      convert factor()s to: as.integer(factor)-1
-##     the compile('sparse_categorical') case makes it difficult to apply 1 based
-##     globally, also, makes it more tricky to translate from python
 
 ### internal utils ----
 # TODO: as_0_based_index() utility: as_integer(x + 1)
@@ -195,7 +183,13 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # should all be the same page (pending @tether improvements that allow for
 #   multiple tethered endpoints.)
 
+
+
 ## Pending design decision
+
+# [ method for tensors
+#   make it 1 based?
+#   update op_arange(), op_argmax(), op_argmin() with it to also be 1 based?
 
 # TODO: how to pass layer call args through a wrapper that uses compose_layer()?
 
