@@ -267,19 +267,20 @@ function (indices, values, shape)
 #' Update inputs via updates at scattered (sparse) indices.
 #'
 #' @description
-#' At a high level, this operation does `inputs[indices] = updates`.
+#' At a high level, this operation does `inputs[indices] <- updates`.
 #' Assume `inputs` is a tensor of shape `(D1, D2, ..., Dn)`, there are 2 main
 #' usages of `scatter_update`.
 #'
 #' 1. `indices` is a 2D tensor of shape `(num_updates, n)`, where `num_updates`
 #'     is the number of updates to perform, and `updates` is a 1D tensor of
 #'     shape `(num_updates)`. For example, if `inputs` is `op_zeros(c(4, 4, 4))`,
-#'     and we want to update `inputs[2, 3, 4]` and `inputs[1, 2, 4]` as 1, then
+#'     and we want to update `inputs[2, 3, 4]` and `inputs[1, 2, 4]` as `1`, then
 #'     we can use:
 #'
 #' ```{r}
 #' inputs <- op_zeros(c(4, 4, 4))
-#' indices <- rbind(c(2, 3, 4), c(1, 2, 4))
+#' indices <- rbind(c(2, 3, 4),
+#'                  c(1, 2, 4))
 #' updates <- op_array(c(1, 1), "float32")
 #' op_scatter_update(inputs, indices, updates)
 #' ```
@@ -287,16 +288,19 @@ function (indices, values, shape)
 #' 2 `indices` is a 2D tensor of shape `(num_updates, k)`, where `num_updates`
 #'     is the number of updates to perform, and `k` (`k <= n`) is the size of
 #'     each index in `indices`. `updates` is a `n - k`-D tensor of shape
-#'     `(num_updates, inputs.shape[k:))`. For example, if
-#'     `inputs = op_zeros(c(4, 4, 4))`, and we want to update `inputs[1, 2, ]`
+#'     `(num_updates, shape(inputs)[-(1:k)])`. For example, if
+#'     `inputs <- op_zeros(c(4, 4, 4))`, and we want to update `inputs[1, 2, ]`
 #'     and `inputs[2, 3, ]` as `[1, 1, 1, 1]`, then `indices` would have shape
 #'     `(num_updates, 2)` (`k = 2`), and `updates` would have shape
-#'     `(num_updates, 4)` (`inputs.shape[2:] = 4`). See the code below:
+#'     `(num_updates, 4)` (`shape(inputs)[3:4] == 4`). See the code below:
 #'
 #' ```{r}
 #' inputs <- op_zeros(c(4, 4, 4))
-#' indices <- rbind(c(2, 3), c(3, 4))
-#' updates <- op_array(rbind(c(1, 1, 1, 1), c(1, 1, 1, 1)), "float32")
+#' indices <- rbind(c(2, 3),
+#'                  c(3, 4))
+#' updates <- op_array(rbind(c(1, 1, 1, 1),
+#'                           c(1, 1, 1, 1)),
+#'                     "float32")
 #' op_scatter_update(inputs, indices, updates)
 #' ```
 #'
@@ -3345,6 +3349,8 @@ function (x, axis = -1L)
 #'
 #' @param dtype
 #' The desired data-type for the tensor.
+# ' If `x` is an R double vector or array
+# ' `dtype` defaults to `config_floatx()` ("float32" by default)
 #'
 #' @export
 #' @family numpy ops
@@ -3356,8 +3362,9 @@ function (x, axis = -1L)
 op_array <-
 function (x, dtype = NULL)
 {
-    if (!is.null(dtype) && !inherits(x, "python.builtin.object"))
-        x <- np_array(x, dtype)
+    x <- as_array(x)
+    # if (is.null(dtype) && is.array(x) && is.double(x))
+    #   dtype <- keras$config$floatx()
     keras$ops$array(x, dtype)
 }
 

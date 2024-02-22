@@ -50,11 +50,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # TODO: R generator func should be passable to
 #   adapt(layer_feature_space(), <r_generator>)
 
-# TODO: op_array(<r_array>) should default to float32, not float64
-#
-# TODO: op_array(<r_int>) why int64, and not int32?
-#
-# TODO: revisit docs for op_scatter_update and op_scatter, remove python sliceisms
 
 # TODO: op_vectorized_map() examples don't make sense
 
@@ -192,6 +187,8 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 #   update op_arange(), op_argmax(), op_argmin() with it to also be 1 based?
 
 # TODO: how to pass layer call args through a wrapper that uses compose_layer()?
+
+# TODO: op_array(<r_array>) should default to float32, not float64?
 
 # TODO: layer_feature_space() needs many helpers for float_normalized() and friends
 #       output_mode = 'dict' should be 'named list'?
