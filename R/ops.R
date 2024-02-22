@@ -2661,6 +2661,13 @@ keras$ops$absolute(x)
 #' op_add(x1, x2)
 #' ```
 #'
+#' Note that this function is automatically called when using the R operator `+` with tensors.
+#' ```{r}
+#' x <- op_ones(c(3))
+#' op_add(x, x)
+#' x + x
+#' ```
+#'
 #' @returns
 #' The tensor containing the element-wise sum of `x1` and `x2`.
 #'
@@ -4083,6 +4090,13 @@ function (x, bins)
 
 #' Divide arguments element-wise.
 #'
+#' Note that this function is automatically called when using the R operator `*` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_divide(x, 2)
+#' x / 2
+#' ```
+#'
 #' @returns
 #' Output tensor, the quotient `x1/x2`, element-wise.
 #'
@@ -4257,6 +4271,13 @@ function (shape, dtype = NULL)
 
 
 #' Returns `(x1 == x2)` element-wise.
+#'
+#' Note that this function is automatically called when using the R operator `==` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_equal(x, 2)
+#' x == 2
+#' ```
 #'
 #' @returns
 #' Output tensor, element-wise comparison of `x1` and `x2`.
@@ -4438,6 +4459,13 @@ keras$ops$floor(x)
 
 #' Returns the largest integer smaller or equal to the division of inputs.
 #'
+#' Note that this function is automatically called when using the R operator `%/%` with a tensor.
+#' ```{r}
+#' (x <- op_arange(10))
+#' op_floor_divide(x, 2)
+#' x %/% 2
+#' ```
+#'
 #' @returns
 #' Output tensor, `y <- floor(x1/x2)`
 #'
@@ -4539,6 +4567,13 @@ keras$ops$get_item(x, key)
 
 #' Return the truth value of `x1 > x2` element-wise.
 #'
+#' Note that this function is automatically called when using the R operator `>` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_greater(x, 2)
+#' x > 2
+#' ```
+#'
 #' @returns
 #' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
@@ -4562,6 +4597,12 @@ keras$ops$greater(x1, x2)
 
 #' Return the truth value of `x1 >= x2` element-wise.
 #'
+#' Note that this function is automatically called when using the R operator `>=` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_greater_equal(x, 2)
+#' x >= 2
+#' ```
 #' @returns
 #' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
@@ -4744,6 +4785,13 @@ keras$ops$isnan(x)
 
 #' Return the truth value of `x1 < x2` element-wise.
 #'
+#' Note that this function is automatically called when using the R operator `<` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_less(x, 2)
+#' x < 2
+#' ```
+#'
 #' @returns
 #' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
@@ -4766,6 +4814,13 @@ keras$ops$less(x1, x2)
 
 
 #' Return the truth value of `x1 <= x2` element-wise.
+#'
+#' Note that this function is automatically called when using the R operator `<=` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_less_equal(x, 2)
+#' x <= 2
+#' ```
 #'
 #' @returns
 #' Output tensor, element-wise comparison of `x1` and `x2`.
@@ -4959,6 +5014,8 @@ keras$ops$logaddexp(x1, x2)
 
 #' Computes the element-wise logical AND of the given input tensors.
 #'
+#' Note that this function is automatically called when using the R operator `&` with a tensor.
+#'
 #' @description
 #' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
@@ -4988,6 +5045,8 @@ keras$ops$logical_and(x1, x2)
 #' @description
 #' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
 #'
+#' Note that this function is automatically called when using the R operator `!` with a tensor.
+#'
 #' @returns
 #' Output tensor, element-wise logical NOT of the input.
 #'
@@ -5010,6 +5069,8 @@ keras$ops$logical_not(x)
 #'
 #' @description
 #' Zeros are treated as `FALSE` and non-zeros are treated as `TRUE`.
+#'
+#' Note that this function is automatically called when using the R operator `|` with a tensor.
 #'
 #' @returns
 #' Output tensor, element-wise logical OR of the inputs.
@@ -5405,6 +5466,13 @@ op_pmin <- op_minimum
 
 #' Returns the element-wise remainder of division.
 #'
+#' Note that this function is automatically called when using the R operator `%%` with a tensor.
+#' ```{r}
+#' (x <- op_arange(10))
+#' op_mod(x, 3)
+#' x %% 3
+#' ```
+#'
 #' @returns
 #' Output tensor, element-wise remainder of division.
 #'
@@ -5458,6 +5526,12 @@ keras$ops$moveaxis(x, as_axis(source), as_axis(destination))
 
 #' Multiply arguments element-wise.
 #'
+#' Note that this function is automatically called when using the R operator `*` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_multiply(x, x)
+#' x * x
+#' ```
 #' @returns
 #' Output tensor, element-wise product of `x1` and `x2`.
 #'
@@ -5521,6 +5595,13 @@ keras$ops$ndim(x)
 
 #' Numerical negative, element-wise.
 #'
+#' Note that this function is automatically called when using the unary R operator `-` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_negative(x)
+#' -x
+#' ```
+#'
 #' @returns
 #' Output tensor, `y = -x`.
 #'
@@ -5560,6 +5641,13 @@ keras$ops$nonzero(x)
 
 
 #' Return `(x1 != x2)` element-wise.
+#'
+#' Note that this function is automatically called when using the R operator `!=` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_not_equal(x, 2)
+#' x != 2
+#' ```
 #'
 #' @returns
 #' Output tensor, element-wise comparsion of `x1` and `x2`.
@@ -5717,6 +5805,12 @@ function (x, pad_width, mode = "constant", constant_values = NULL)
 
 #' First tensor elements raised to powers from second tensor, element-wise.
 #'
+#' Note that this function is automatically called when using the R operator `^` with a tensor.
+#' ```{r}
+#' (x <- op_arange(4))
+#' op_power(2, x)
+#' 2 ^ x
+#' ```
 #' @returns
 #' Output tensor, the bases in `x1` raised to the exponents in `x2`.
 #'
@@ -6284,6 +6378,13 @@ function (x, axis = NULL, keepdims = FALSE)
 
 
 #' Subtract arguments element-wise.
+#'
+#' Note that this function is automatically called when using the R operator `-` with a tensor.
+#' ```{r}
+#' x <- op_ones(c(3))
+#' op_subtract(x, x)
+#' x - x
+#' ```
 #'
 #' @returns
 #' Output tensor, element-wise difference of `x1` and `x2`.
