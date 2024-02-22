@@ -124,6 +124,7 @@ keras$ops$convert_to_numpy(x)
 #' x <- array(c(1, 2, 3))
 #' y <- op_convert_to_tensor(x)
 #' y
+#' op_convert_to_tensor(c(1, 3, 2, 0), "int32")
 #' ```
 #'
 #' @returns
@@ -149,8 +150,13 @@ keras$ops$convert_to_numpy(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
 #' @tether keras.ops.convert_to_tensor
 op_convert_to_tensor <-
-function (x, dtype = NULL, sparse = NULL)
-keras$ops$convert_to_tensor(x, dtype, sparse)
+function (x, dtype = NULL, sparse = NULL) {
+  x <- if (is.null(dtype))
+    as_array(x)
+  else
+    np_array(x, dtype)
+  keras$ops$convert_to_tensor(x, dtype, sparse)
+}
 
 
 #' For loop implementation.
