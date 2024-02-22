@@ -548,37 +548,67 @@ function (x, num = NULL, axis = 1L)
 #' Parallel map of function `f` on the first axis of tensor(s) `elements`.
 #'
 #' @description
-#' Schematically, `vectorized_map` implements the following,
-#' in the case of a single tensor input `elements`:
+#' Schematically, `op_vectorized_map()` maps over the first dimension of the provided tensors.
+#' If `elements` is a list of tensors, then each of the tensors are required to
+#' have the same size first dimension, and they are iterated over together.
 #'
-#' ```{r, eval = FALSE}
-#' op_vectorized_map <- function(elements, f) {
-#'   apply(elements, 1, f)
-#' }
-#' ```
-#'
-#' In the case of an iterable of tensors `elements`,
-#' it implements the following:
-#'
-#' ```{r, eval = FALSE}
-#' op_vectorized_map <- function(elements, f) {
-#'     batch_size <- elements[[1]] |> shape() |> _[[1]]
-#'     outputs <- vector("list", batch_size)
-#'     outputs <- lapply(seq(batch_size), \(index) {
-#'         f(lapply(elements, \(e) e[index, all_dims()]))
-#'     }
-#'     op_stack(outputs)
-#' }
-#' ```
-#'
-#' In this case, `function` is expected to take as input
-#' a single list of tensor arguments.
-#'
+#' # Examples
 #'
 #' ```{r}
-#' (x <- op_arange(4*4) |> op_reshape(c(4,4)))
+#' (x <- op_arange(12L) |> op_reshape(c(3, 4)))
 #' x |> op_vectorized_map(\(row) {row + 10})
 #' list(x, x, x) |> op_vectorized_map(\(rows) Reduce(`+`, rows))
+#' ```
+#'
+#' Note that `f` may be traced and compiled. Meaning, the R function may only
+#' evaluated once with symbolic tensors if using Jax or TensorFlow backends, and
+#' not with eager tensors. See the output from `str()` in these examples:
+#' ```{r}
+#' # simplest case, map f over rows of x,
+#' # where .x is 1 row of x
+#' input <- x
+#' output <- op_vectorized_map(input, function(.x) {
+#'   str(.x)
+#'   .x + 10
+#' })
+#' output
+#'
+#' # map f over two tensors simultaneously. Here, # `.x` is a list of two
+#' # tensors. The return values from each call of `f(row)` are stacked to form the
+#' # final output
+#' input <- list(x, x)
+#' output <- op_vectorized_map(input, function(.x) {
+#'   str(.x)
+#'   .x[[1]] + 10
+#' })
+#' output
+#'
+#' # same as above, but now returning two tensors in the final output
+#' output <- op_vectorized_map(input, function(.x) {
+#'   str(.x)
+#'   c(.x1, .x2) %<-% .x
+#'   list(.x1+10, .x2+20)
+#' })
+#' output
+#'
+#' # passing named lists.
+#' # WARNING: if passing a named list, the order of elements of `.x` supplied
+#' # to `f` is not stable. Only retrieve elements by name.
+#' input <- list(name1 = x, name2 = x)
+#' output <- op_vectorized_map(input, function(.x) {
+#'   str(.x)
+#'   list(outname1 = .x$name1 + 10,
+#'        outname2 = .x$name2 + 20)
+#' })
+#' output
+#'
+#' # passing a tuple() is equivalent to passing an unnamed list()
+#' input <- tuple(x, x)
+#' output <- op_vectorized_map(input, function(.x) {
+#'   str(.x)
+#'   list(.x[[1]] + 10)
+#' })
+#' output
 #' ```
 #'
 #' @param elements
@@ -587,7 +617,7 @@ function (x, num = NULL, axis = 1L)
 #' @param f
 #' A function taking either a tensor, or list of tensors.
 #'
-#' @returns A tensor, the result of mapping `f` across `elements.`
+#' @returns A tensor or list of tensors, the result of mapping `f` across `elements.`
 #' @export
 #' @family core ops
 #' @family ops
