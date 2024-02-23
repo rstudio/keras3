@@ -151,10 +151,10 @@ keras$ops$convert_to_numpy(x)
 #' @tether keras.ops.convert_to_tensor
 op_convert_to_tensor <-
 function (x, dtype = NULL, sparse = NULL) {
-  x <- if (is.null(dtype))
-    as_array(x)
-  else
-    np_array(x, dtype)
+  if (!is.null(dtype) && is_string(dtype) &&
+      typeof(x) == "double" &&
+      grepl("int", dtype, fixed = TRUE))
+    storage.mode(x) <- "integer"
   keras$ops$convert_to_tensor(x, dtype, sparse)
 }
 
@@ -3382,6 +3382,7 @@ function (x, axis = -1L)
 #' ```{r}
 #' op_array(c(1, 2, 3))
 #' op_array(c(1, 2, 3), dtype = "float32")
+#' op_array(c(1, 2, 3), dtype = "int32")
 #' ```
 #'
 #' @returns
@@ -3405,10 +3406,11 @@ function (x, axis = -1L)
 op_array <-
 function (x, dtype = NULL)
 {
-    x <- as_array(x)
-    # if (is.null(dtype) && is.array(x) && is.double(x))
-    #   dtype <- keras$config$floatx()
-    keras$ops$array(x, dtype)
+  if (!is.null(dtype) && is_string(dtype) &&
+      typeof(x) == "double" &&
+      grepl("int", dtype, fixed = TRUE))
+    storage.mode(x) <- "integer"
+  keras$ops$array(x, dtype)
 }
 
 

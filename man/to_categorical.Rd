@@ -8,7 +8,9 @@ to_categorical(x, num_classes = NULL)
 }
 \arguments{
 \item{x}{Array-like with class values to be converted into a matrix
-(integers from 0 to \code{num_classes - 1}).}
+(integers from 0 to \code{num_classes - 1}).
+R factors are coerced to integer and offset to be 0-based, i.e.,
+\code{as.integer(x) - 1L}.}
 
 \item{num_classes}{Total number of classes. If \code{NULL}, this would be inferred
 as \code{max(x) + 1}. Defaults to \code{NULL}.}

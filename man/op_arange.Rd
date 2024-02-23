@@ -33,8 +33,8 @@ rule may result in the last element of out being greater than stop.
 \code{arange} can be called with a varying number of positional arguments:
 \itemize{
 \item \code{arange(stop)}: Values are generated within the half-open interval
-\verb{[0, stop)} (in other words, the interval including start but excluding
-stop).
+\verb{[0, stop)} (in other words, the interval including \code{start} but excluding
+\code{stop}).
 \item \code{arange(start, stop)}: Values are generated within the half-open interval
 \verb{[start, stop)}.
 \item \code{arange(start, stop, step)}: Values are generated within the half-open

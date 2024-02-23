@@ -50,16 +50,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # TODO: R generator func should be passable to
 #   adapt(layer_feature_space(), <r_generator>)
 
-
-# TODO: op_vectorized_map() examples don't make sense
-
-# TODO: note in docs for op_logical_and (and friends) that these are dispatched
-#       to from & != and so on.
-
-# TODO: this should work: op_convert_to_tensor(c(1, 3, 2, 0), "int32")
-
-# TODO: op_arange: should it default to produce floats?
-
 # TODO: "keras.applications.convnext" is a module, filtered out has good stuff
 
 ### internal utils ----
