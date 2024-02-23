@@ -98,9 +98,9 @@ that accepts tensors.</p></dd>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>You can provide an arbitrary R function as a custom metric. Note that
 the <code>y_true</code> and <code>y_pred</code> parameters are tensors, so computations on
-them should use backend tensor functions.</p>
+them should use <code>op_*</code> tensor functions.</p>
 <p>Use the <code>custom_metric()</code> function to define a custom metric.
-Note that a name ('mean_pred') is provided for the custom metric
+Note that a name (<code>'mean_pred'</code>) is provided for the custom metric
 function: this name is used within training progress output.</p>
 <p>If you want to save and load a model with custom metrics, you should
 also call <code><a href="register_keras_serializable.html">register_keras_serializable()</a></code>, or

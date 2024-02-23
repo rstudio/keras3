@@ -13,7 +13,28 @@ op_negative(x)
 Output tensor, \code{y = -x}.
 }
 \description{
-Numerical negative, element-wise.
+Note that this function is automatically called when using the unary R operator \code{-} with a tensor.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_negative(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0. -1. -2. -3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{-x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0. -1. -2. -3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \itemize{

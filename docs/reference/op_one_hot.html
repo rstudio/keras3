@@ -90,7 +90,9 @@ all other indices are marked as 0.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>Integer tensor to be encoded. The shape can be
-arbitrary, but the dtype should be integer.</p></dd>
+arbitrary, but the dtype should be integer.
+R factors are coerced to integer and offset to be 0-based, i.e.,
+<code>as.integer(x) - 1L</code>.</p></dd>
 
 
 <dt>num_classes</dt>

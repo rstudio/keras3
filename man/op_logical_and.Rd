@@ -17,6 +17,9 @@ Output tensor, element-wise logical AND of the inputs.
 \description{
 Zeros are treated as \code{FALSE} and non-zeros are treated as \code{TRUE}.
 }
+\details{
+Note that this function is automatically called when using the R operator \code{&} with a tensor.
+}
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#logicaland-function}

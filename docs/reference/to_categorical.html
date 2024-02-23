@@ -81,7 +81,9 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>Array-like with class values to be converted into a matrix
-(integers from 0 to <code>num_classes - 1</code>).</p></dd>
+(integers from 0 to <code>num_classes - 1</code>).
+R factors are coerced to integer and offset to be 0-based, i.e.,
+<code>as.integer(x) - 1L</code>.</p></dd>
 
 
 <dt>num_classes</dt>

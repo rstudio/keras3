@@ -97,6 +97,11 @@ along <code>axis</code> removed. Note that the returned integer is 0-based (i.e.
 argmax is in the first index position, the returned value will be <code>0</code>)</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>This is similar to R <code>max.col(x) - 1</code> for the case of a 2-d array (a matrix),
+or for an nd-array, <code>apply(x, axis, which.max) - 1</code></p>
+    </div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">6L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_add.html">op_add</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">x</span></span></code></pre><p></p></div>

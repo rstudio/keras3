@@ -16,6 +16,8 @@ Output tensor, element-wise logical OR of the inputs.
 }
 \description{
 Zeros are treated as \code{FALSE} and non-zeros are treated as \code{TRUE}.
+
+Note that this function is automatically called when using the R operator \code{|} with a tensor.
 }
 \seealso{
 \itemize{

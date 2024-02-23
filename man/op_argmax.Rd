@@ -20,6 +20,10 @@ argmax is in the first index position, the returned value will be \code{0})
 \description{
 Returns the indices of the maximum values along an axis.
 }
+\note{
+This is similar to R \code{max.col(x) - 1} for the case of a 2-d array (a matrix),
+or for an nd-array, \code{apply(x, axis, which.max) - 1}
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
 x

@@ -19,19 +19,20 @@ equal to the first dimension of \code{updates}.}
 A tensor, has the same shape and dtype as \code{inputs}.
 }
 \description{
-At a high level, this operation does \code{inputs[indices] = updates}.
+At a high level, this operation does \code{inputs[indices] <- updates}.
 Assume \code{inputs} is a tensor of shape \verb{(D1, D2, ..., Dn)}, there are 2 main
 usages of \code{scatter_update}.
 \enumerate{
 \item \code{indices} is a 2D tensor of shape \verb{(num_updates, n)}, where \code{num_updates}
 is the number of updates to perform, and \code{updates} is a 1D tensor of
 shape \code{(num_updates)}. For example, if \code{inputs} is \code{op_zeros(c(4, 4, 4))},
-and we want to update \code{inputs[2, 3, 4]} and \code{inputs[1, 2, 4]} as 1, then
+and we want to update \code{inputs[2, 3, 4]} and \code{inputs[1, 2, 4]} as \code{1}, then
 we can use:
 }
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- op_zeros(c(4, 4, 4))
-indices <- rbind(c(2, 3, 4), c(1, 2, 4))
+indices <- rbind(c(2, 3, 4),
+                 c(1, 2, 4))
 updates <- op_array(c(1, 1), "float32")
 op_scatter_update(inputs, indices, updates)
 }\if{html}{\out{</div>}}
@@ -62,15 +63,18 @@ op_scatter_update(inputs, indices, updates)
 2 \code{indices} is a 2D tensor of shape \verb{(num_updates, k)}, where \code{num_updates}
 is the number of updates to perform, and \code{k} (\code{k <= n}) is the size of
 each index in \code{indices}. \code{updates} is a \code{n - k}-D tensor of shape
-\verb{(num_updates, inputs.shape[k:))}. For example, if
-\code{inputs = op_zeros(c(4, 4, 4))}, and we want to update \code{inputs[1, 2, ]}
+\verb{(num_updates, shape(inputs)[-(1:k)])}. For example, if
+\code{inputs <- op_zeros(c(4, 4, 4))}, and we want to update \code{inputs[1, 2, ]}
 and \code{inputs[2, 3, ]} as \verb{[1, 1, 1, 1]}, then \code{indices} would have shape
 \verb{(num_updates, 2)} (\code{k = 2}), and \code{updates} would have shape
-\verb{(num_updates, 4)} (\verb{inputs.shape[2:] = 4}). See the code below:
+\verb{(num_updates, 4)} (\code{shape(inputs)[3:4] == 4}). See the code below:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- op_zeros(c(4, 4, 4))
-indices <- rbind(c(2, 3), c(3, 4))
-updates <- op_array(rbind(c(1, 1, 1, 1), c(1, 1, 1, 1)), "float32")
+indices <- rbind(c(2, 3),
+                 c(3, 4))
+updates <- op_array(rbind(c(1, 1, 1, 1),
+                          c(1, 1, 1, 1)),
+                    "float32")
 op_scatter_update(inputs, indices, updates)
 }\if{html}{\out{</div>}}
 

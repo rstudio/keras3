@@ -15,7 +15,28 @@ op_power(x1, x2)
 Output tensor, the bases in \code{x1} raised to the exponents in \code{x2}.
 }
 \description{
-First tensor elements raised to powers from second tensor, element-wise.
+Note that this function is automatically called when using the R operator \code{^} with a tensor.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_power(2, x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 4. 8.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{2 ^ x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 4. 8.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \itemize{

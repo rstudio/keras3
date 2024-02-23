@@ -69,7 +69,28 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
-</div>
+<ul><li>
+<p>New functions:</p>
+<ul><li><code><a href="../reference/config_dtype_policy.html">config_dtype_policy()</a></code></li>
+<li><code><a href="../reference/config_set_dtype_policy.html">config_set_dtype_policy()</a></code></li>
+<li><code><a href="../reference/op_batch_normalization.html">op_batch_normalization()</a></code></li>
+<li><code><a href="../reference/op_cholesky.html">op_cholesky()</a></code></li>
+<li><code><a href="../reference/op_det.html">op_det()</a></code></li>
+<li><code><a href="../reference/op_divide_no_nan.html">op_divide_no_nan()</a></code></li>
+<li><code><a href="../reference/op_eig.html">op_eig()</a></code></li>
+<li><code><a href="../reference/op_erfinv.html">op_erfinv()</a></code></li>
+<li><code><a href="../reference/op_inv.html">op_inv()</a></code></li>
+<li><code><a href="../reference/op_lu_factor.html">op_lu_factor()</a></code></li>
+<li><code><a href="../reference/op_norm.html">op_norm()</a></code></li>
+<li><code><a href="../reference/op_normalize.html">op_normalize()</a></code></li>
+<li><code><a href="../reference/op_solve_triangular.html">op_solve_triangular()</a></code></li>
+<li><code><a href="../reference/op_svd.html">op_svd()</a></code></li>
+</ul></li>
+<li><p>Doc improvements.</p></li>
+<li><p><code><a href="../reference/to_categorical.html">to_categorical()</a></code>, <code><a href="../reference/op_one_hot.html">op_one_hot()</a></code>, and <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> can now accept R factors, offset them to be 0-based (reported in <code>#1055</code>).</p></li>
+<li><p><code><a href="../reference/op_convert_to_numpy.html">op_convert_to_numpy()</a></code> now returns unconverted NumPy arrays.</p></li>
+<li><p><code><a href="../reference/op_array.html">op_array()</a></code> and <code><a href="../reference/op_convert_to_tensor.html">op_convert_to_tensor()</a></code> no longer error when casting R doubles to integer types.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="keras3-010">keras3 0.1.0<a class="anchor" aria-label="anchor" href="#keras3-010"></a></h2><p class="text-muted">CRAN release: 2024-02-17</p>
 <ul><li>The package has been rebuilt for Keras 3.0. Refer to <blogpost> for an overview and <a href="https://keras.posit.co" class="uri">https://keras.posit.co</a> for the current up-to-date documentation.</blogpost></li>

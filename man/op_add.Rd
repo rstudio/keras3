@@ -47,6 +47,23 @@ op_add(x1, x2)
 ##  [10. 12.]], shape=(2, 2), dtype=float64)
 
 }\if{html}{\out{</div>}}
+
+Note that this function is automatically called when using the R operator \code{+} with tensors.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_ones(c(3))
+op_add(x, x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2. 2. 2.], shape=(3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x + x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2. 2. 2.], shape=(3), dtype=float32)
+
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
