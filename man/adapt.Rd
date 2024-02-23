@@ -96,7 +96,7 @@ normalized_ds <- input_ds |>
 
 normalized_ds |>
   tfdatasets::as_array_iterator() |>
-  tfdatasets::iterate() |>
+  tfdatasets::iterate(simplify = FALSE) |>
   str()
 }\if{html}{\out{</div>}}
 

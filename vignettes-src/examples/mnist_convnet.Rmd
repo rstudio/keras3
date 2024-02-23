@@ -9,7 +9,7 @@ domain: vision
 category: basic
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/examples/keras_io/vision/mnist_convnet.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/vision/mnist_convnet.py
 ---
 
 ## Setup
@@ -68,15 +68,15 @@ batch_size <- 128
 epochs <- 15
 
 model |> compile(
-  loss = "categorical_crossentropy", 
-  optimizer = "adam", 
+  loss = "categorical_crossentropy",
+  optimizer = "adam",
   metrics = "accuracy"
 )
 
 model |> fit(
-  x_train, y_train, 
-  batch_size = batch_size, 
-  epochs = epochs, 
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
   validation_split = 0.1
 )
 ```
@@ -84,6 +84,6 @@ model |> fit(
 ## Evaluate the trained model
 
 ```{r}
-score <- model |> evaluate(x_test, y_test, verbose=0)
+score <- model |> evaluate(x_test, y_test, verbose = 0)
 score
 ```

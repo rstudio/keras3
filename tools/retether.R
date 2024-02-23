@@ -47,21 +47,21 @@ resolve_rmd_tether <- function(url) {
   tutobook_to_rmd(path, outfile = FALSE)
 }
 
-resolve_rmd_tether <- NULL
+# resolve_rmd_tether <- NULL
 
 # debug(Filter)
 # debugonce(doctether:::get_block_name)
 # debugonce(doctether::retether)
-options(warn = 2)
+# options(warn = 2)
 # options(error = browser)
 # debug(roxygen2:::warn_roxy_tag)
 # unlink(".tether", recursive = TRUE)
 doctether::retether(
   # "keras.ops",
-  # unsafe = TRUE,
+  unsafe = TRUE,
   roxy_tag_eval =
-    resolve_roxy_tether,
-    # NULL,
+    # resolve_roxy_tether,
+    NULL,
   rmd_field_eval =
     resolve_rmd_tether
     # NULL
@@ -73,3 +73,18 @@ doctether::retether(
 
 
 message("DONE!")
+
+
+
+view_vignette_adaptation_diff <- function(rmd_file) {
+  path <- tether_field <- rmarkdown::yaml_front_matter(rmd_file)$tether
+  path <- sub("https://raw.githubusercontent.com/keras-team/keras/master/",
+              "~/github/keras-team/keras/", path, fixed = TRUE)
+  path <- sub("https://raw.githubusercontent.com/keras-team/keras-io/master/",
+              "~/github/keras-team/keras-io/", path, fixed = TRUE)
+  # tether_file <- doctether:::get_tether_file(rmd_file)
+  tether_file <- path
+  system2("code", c("--diff", tether_file, rmd_file))
+}
+
+# view_vignette_adaptation_diff("vignettes-src/writing_a_training_loop_from_scratch.Rmd")

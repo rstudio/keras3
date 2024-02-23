@@ -9,7 +9,7 @@ domain: vision
 category: basic
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/examples/keras_io/vision/autoencoder.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/vision/autoencoder.py
 ---
 
 ## Introduction
@@ -29,7 +29,7 @@ library(keras3)
 preprocess <- function(array) {
   array_reshape(array/255, c(dim(array)[1], 28, 28, 1))
 }
-  
+
 # Adds random noise to each image in the supplied array.
 noise <- function(array) {
   noise_factor <- 0.4
@@ -42,7 +42,7 @@ display <- function(array1, array2) {
   indices <- sample.int(dim(array1)[1], n)
   images1 <- as.array(array1)[indices, , , ]
   images2 <- as.array(array2)[indices, , , ]
-  
+
   par(mfrow = c(2, n), mar = c(0, 0, 0, 0))
   for (i in seq_len(n)) {
     plot(as.raster(images1[i, , ]))
@@ -79,20 +79,20 @@ input <- keras_input(shape = c(28, 28, 1))
 
 # Encoder
 enc <- input |>
-  layer_conv_2d(filters = 32, kernel_size = c(3, 3), 
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3),
                 activation = "relu", padding = "same") |>
   layer_max_pooling_2d(pool_size = c(2, 2), padding = "same") |>
-  layer_conv_2d(filters = 32, kernel_size = c(3, 3), 
+  layer_conv_2d(filters = 32, kernel_size = c(3, 3),
                 activation = "relu", padding = "same") |>
   layer_max_pooling_2d(pool_size = c(2, 2), padding = "same")
 
 # Decoder
 dec <- enc |>
-  layer_conv_2d_transpose(filters = 32, kernel_size = c(3, 3), strides = 2, 
+  layer_conv_2d_transpose(filters = 32, kernel_size = c(3, 3), strides = 2,
                           activation = "relu", padding = "same") |>
-  layer_conv_2d_transpose(filters = 32, kernel_size = c(3, 3), strides = 2, 
+  layer_conv_2d_transpose(filters = 32, kernel_size = c(3, 3), strides = 2,
                           activation = "relu", padding = "same") |>
-  layer_conv_2d(filters = 1, kernel_size = c(3, 3), 
+  layer_conv_2d(filters = 1, kernel_size = c(3, 3),
                 activation = "sigmoid", padding = "same")
 
 # Autoencoder

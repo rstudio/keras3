@@ -7,7 +7,7 @@ description: Complete guide to overriding the training step of the Model class.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/customizing_what_happens_in_fit.py  
+# tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/customizing_what_happens_in_fit.py  
 # hidden upstream
 ---
 

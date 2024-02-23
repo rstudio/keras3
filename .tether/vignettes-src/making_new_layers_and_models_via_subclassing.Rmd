@@ -439,7 +439,7 @@ def from_config(cls, config):
 ```
 
 To learn more about serialization and saving, see the complete
-[guide to saving and serializing models](serialization_and_saving.html).
+[guide to saving and serializing models](/guides/serialization_and_saving/).
 
 ## Privileged `training` argument in the `call()` method
 
@@ -648,3 +648,4 @@ vae.compile(optimizer, loss=keras.losses.MeanSquaredError())
 
 vae.fit(x_train, x_train, epochs=2, batch_size=64)
 ```
+
