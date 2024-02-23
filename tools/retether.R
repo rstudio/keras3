@@ -87,4 +87,4 @@ view_vignette_adaptation_diff <- function(rmd_file) {
   system2("code", c("--diff", tether_file, rmd_file))
 }
 
-view_vignette_adaptation_diff("vignettes-src/writing_a_training_loop_from_scratch.Rmd")
+# view_vignette_adaptation_diff("vignettes-src/writing_a_training_loop_from_scratch.Rmd")

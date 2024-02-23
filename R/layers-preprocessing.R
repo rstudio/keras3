@@ -2405,7 +2405,7 @@ function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
 #'
 #' normalized_ds |>
 #'   tfdatasets::as_array_iterator() |>
-#'   tfdatasets::iterate() |>
+#'   tfdatasets::iterate(simplify = FALSE) |>
 #'   str()
 #' ````
 #'
