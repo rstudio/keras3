@@ -96,6 +96,11 @@ along the specified axis.</p></dd>
 along <code>axis</code> removed.</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>This is similar to an R expression <code>apply(x, axis, which.min) - 1</code>, where <code>x</code>
+is a R array.</p>
+    </div>
+    <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">6L</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_add.html">op_add</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">x</span></span></code></pre><p></p></div>
