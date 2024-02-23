@@ -15,7 +15,28 @@ op_divide(x1, x2)
 Output tensor, the quotient \code{x1/x2}, element-wise.
 }
 \description{
-Divide arguments element-wise.
+Note that this function is automatically called when using the R operator \code{*} with a tensor.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_divide(x, 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.5 1.  1.5], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x / 2
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.5 1.  1.5], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
 }
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_divide(3, 2)

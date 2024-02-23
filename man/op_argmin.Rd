@@ -19,6 +19,10 @@ along \code{axis} removed.
 \description{
 Returns the indices of the minimum values along an axis.
 }
+\note{
+This is similar to an R expression \code{apply(x, axis, which.min) - 1}, where \code{x}
+is a R array.
+}
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
 x

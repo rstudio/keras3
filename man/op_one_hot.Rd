@@ -8,7 +8,9 @@ op_one_hot(x, num_classes, axis = -1L, dtype = NULL)
 }
 \arguments{
 \item{x}{Integer tensor to be encoded. The shape can be
-arbitrary, but the dtype should be integer.}
+arbitrary, but the dtype should be integer.
+R factors are coerced to integer and offset to be 0-based, i.e.,
+\code{as.integer(x) - 1L}.}
 
 \item{num_classes}{Number of classes for the one-hot encoding.}
 

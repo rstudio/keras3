@@ -15,7 +15,28 @@ op_greater(x1, x2)
 Output tensor, element-wise comparison of \code{x1} and \code{x2}.
 }
 \description{
-Return the truth value of \code{x1 > x2} element-wise.
+Note that this function is automatically called when using the R operator \code{>} with a tensor.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_greater(x, 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False False False  True], shape=(4), dtype=bool)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x > 2
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False False False  True], shape=(4), dtype=bool)
+
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \itemize{

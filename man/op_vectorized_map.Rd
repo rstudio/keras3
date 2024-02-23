@@ -12,41 +12,21 @@ op_vectorized_map(elements, f)
 \item{f}{A function taking either a tensor, or list of tensors.}
 }
 \value{
-A tensor, the result of mapping \code{f} across \code{elements.}
+A tensor or list of tensors, the result of mapping \code{f} across \code{elements.}
 }
 \description{
-Schematically, \code{vectorized_map} implements the following,
-in the case of a single tensor input \code{elements}:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_vectorized_map <- function(elements, f) \{
-  apply(elements, 1, f)
-\}
-}\if{html}{\out{</div>}}
-
-In the case of an iterable of tensors \code{elements},
-it implements the following:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_vectorized_map <- function(elements, f) \{
-    batch_size <- elements[[1]] |> shape() |> _[[1]]
-    outputs <- vector("list", batch_size)
-    outputs <- lapply(seq(batch_size), \\(index) \{
-        f(lapply(elements, \\(e) e[index, all_dims()]))
-    \}
-    op_stack(outputs)
-\}
-}\if{html}{\out{</div>}}
-
-In this case, \code{function} is expected to take as input
-a single list of tensor arguments.
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4*4) |> op_reshape(c(4,4)))
+Schematically, \code{op_vectorized_map()} maps over the first dimension of the provided tensors.
+If \code{elements} is a list of tensors, then each of the tensors are required to
+have the same size first dimension, and they are iterated over together.
+}
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(12L) |> op_reshape(c(3, 4)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ 0.  1.  2.  3.]
-##  [ 4.  5.  6.  7.]
-##  [ 8.  9. 10. 11.]
-##  [12. 13. 14. 15.]], shape=(4, 4), dtype=float64)
+## [[ 0  1  2  3]
+##  [ 4  5  6  7]
+##  [ 8  9 10 11]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -54,10 +34,9 @@ a single list of tensor arguments.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[10. 11. 12. 13.]
-##  [14. 15. 16. 17.]
-##  [18. 19. 20. 21.]
-##  [22. 23. 24. 25.]], shape=(4, 4), dtype=float64)
+## [[10 11 12 13]
+##  [14 15 16 17]
+##  [18 19 20 21]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -65,13 +44,156 @@ a single list of tensor arguments.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ 0.  3.  6.  9.]
-##  [12. 15. 18. 21.]
-##  [24. 27. 30. 33.]
-##  [36. 39. 42. 45.]], shape=(4, 4), dtype=float64)
+## [[ 0  3  6  9]
+##  [12 15 18 21]
+##  [24 27 30 33]], shape=(3, 4), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+Note that \code{f} may be traced and compiled. Meaning, the R function may only
+evaluated once with symbolic tensors if using Jax or TensorFlow backends, and
+not with eager tensors. See the output from \code{str()} in these examples:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# simplest case, map f over rows of x,
+# where .x is 1 row of x
+input <- x
+output <- op_vectorized_map(input, function(.x) \{
+  str(.x)
+  .x + 10
+\})
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Tensor 'loop_body/GatherV2:0' shape=(4) dtype=int32>
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[10 11 12 13]
+##  [14 15 16 17]
+##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# map f over two tensors simultaneously. Here, # `.x` is a list of two
+# tensors. The return values from each call of `f(row)` are stacked to form the
+# final output
+input <- list(x, x)
+output <- op_vectorized_map(input, function(.x) \{
+  str(.x)
+  .x[[1]] + 10
+\})
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ :<tf.Tensor 'loop_body/GatherV2:0' shape=(4) dtype=int32>
+##  $ :<tf.Tensor 'loop_body/GatherV2_1:0' shape=(4) dtype=int32>
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[10 11 12 13]
+##  [14 15 16 17]
+##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# same as above, but now returning two tensors in the final output
+output <- op_vectorized_map(input, function(.x) \{
+  str(.x)
+  c(.x1, .x2) \%<-\% .x
+  list(.x1+10, .x2+20)
+\})
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ :<tf.Tensor 'loop_body/GatherV2:0' shape=(4) dtype=int32>
+##  $ :<tf.Tensor 'loop_body/GatherV2_1:0' shape=(4) dtype=int32>
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor(
+## [[10 11 12 13]
+##  [14 15 16 17]
+##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+##
+## [[2]]
+## tf.Tensor(
+## [[20 21 22 23]
+##  [24 25 26 27]
+##  [28 29 30 31]], shape=(3, 4), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# passing named lists.
+# WARNING: if passing a named list, the order of elements of `.x` supplied
+# to `f` is not stable. Only retrieve elements by name.
+input <- list(name1 = x, name2 = x)
+output <- op_vectorized_map(input, function(.x) \{
+  str(.x)
+  list(outname1 = .x$name1 + 10,
+       outname2 = .x$name2 + 20)
+\})
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ name1:<tf.Tensor 'loop_body/GatherV2:0' shape=(4) dtype=int32>
+##  $ name2:<tf.Tensor 'loop_body/GatherV2_1:0' shape=(4) dtype=int32>
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## $outname1
+## tf.Tensor(
+## [[10 11 12 13]
+##  [14 15 16 17]
+##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+##
+## $outname2
+## tf.Tensor(
+## [[20 21 22 23]
+##  [24 25 26 27]
+##  [28 29 30 31]], shape=(3, 4), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# passing a tuple() is equivalent to passing an unnamed list()
+input <- tuple(x, x)
+output <- op_vectorized_map(input, function(.x) \{
+  str(.x)
+  list(.x[[1]] + 10)
+\})
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ :<tf.Tensor 'loop_body/GatherV2:0' shape=(4) dtype=int32>
+##  $ :<tf.Tensor 'loop_body/GatherV2_1:0' shape=(4) dtype=int32>
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor(
+## [[10 11 12 13]
+##  [14 15 16 17]
+##  [18 19 20 21]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }
+
 \seealso{
 Other core ops: \cr
 \code{\link{op_cast}()} \cr

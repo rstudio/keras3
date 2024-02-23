@@ -15,7 +15,28 @@ op_multiply(x1, x2)
 Output tensor, element-wise product of \code{x1} and \code{x2}.
 }
 \description{
-Multiply arguments element-wise.
+Note that this function is automatically called when using the R operator \code{*} with a tensor.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_multiply(x, x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 4. 9.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x * x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 4. 9.], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \itemize{

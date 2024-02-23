@@ -31,6 +31,13 @@ Create a tensor.
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_array(c(1, 2, 3), dtype = "int32")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 3], shape=(3), dtype=int32)
+
+}\if{html}{\out{</div>}}
 }
 
 \seealso{

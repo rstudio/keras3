@@ -50,8 +50,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # TODO: R generator func should be passable to
 #   adapt(layer_feature_space(), <r_generator>)
 
-# TODO: "keras.applications.convnext" is a module, filtered out has good stuff
-
 ### internal utils ----
 # TODO: as_0_based_index() utility: as_integer(x + 1)
 # TODO: should as_axis() return a tuple() for lenght(x)>1 ?
@@ -74,7 +72,7 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 # TODO: remove any tensorflow imports / DESCRIPTION deps
 
-
+# TODO: file upstream: use_backend("numpy") doesn't work if torch jax and tf aren't all installed.
 
 ## Testing ----
 

@@ -30,6 +30,13 @@ y
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
 
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_convert_to_tensor(c(1, 3, 2, 0), "int32")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 3 2 0], shape=(4), dtype=int32)
+
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
