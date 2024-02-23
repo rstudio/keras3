@@ -9,7 +9,7 @@ domain: vision
 category: basic
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/examples/keras_io/vision/mnist_convnet.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/vision/mnist_convnet.py
 ---
 
 ## Setup
