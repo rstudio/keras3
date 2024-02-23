@@ -234,9 +234,9 @@ Once your model architecture is ready, you will want to:
 
 - Train your model, evaluate it, and run inference. See our
 [guide to training & evaluation with the built-in loops](
-    training_with_built_in_methods.html)
+    /guides/training_with_built_in_methods/)
 - Save your model to disk and restore it. See our
-[guide to serialization & saving](serialization_and_saving.html).
+[guide to serialization & saving](/guides/serialization_and_saving/).
 - Speed up model training by leveraging multiple GPUs. See our
 [guide to multi-GPU and distributed training](https://keras.io/guides/distributed_training/).
 
@@ -355,4 +355,5 @@ To find out more about building models in Keras, see:
 
 - [Guide to the Functional API](/guides/functional_api/)
 - [Guide to making new Layers & Models via subclassing](
-    making_new_layers_and_models_via_subclassing.html)
+    /guides/making_new_layers_and_models_via_subclassing/)
+
