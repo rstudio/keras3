@@ -67,7 +67,7 @@ Different model-building options that Keras offers include:
 
 - [The Sequential API](https://keras.io/guides/sequential_model/) (what we use below)
 - [The Functional API](https://keras.io/guides/functional_api/) (most typical)
-- [Writing your own models yourself via subclassing](https://keras.iomaking_new_layers_and_models_via_subclassing.html) (for advanced use cases)
+- [Writing your own models yourself via subclassing](https://keras.io/guides/making_new_layers_and_models_via_subclassing/) (for advanced use cases)
 
 ```python
 # Model parameters
@@ -345,7 +345,7 @@ the power and usability of `fit()`? It's easy to customize
 
 - [Customizing what happens in `fit()` with TensorFlow](http://keras.io/guides/custom_train_step_in_tensorflow/)
 - [Customizing what happens in `fit()` with JAX](http://keras.io/guides/custom_train_step_in_jax/)
-- [Customizing what happens in `fit()` with PyTorch](http://keras.io/guides/custom_train_step_in_pytorch/)
+- [Customizing what happens in `fit()` with PyTorch](http://keras.io/guides/custom_train_step_in_torch/)
 
 ## How to write custom training loops
 
@@ -356,7 +356,8 @@ the power and usability of `fit()`? It's easy to customize
 ## How to distribute training
 
 - [Guide to distributed training with TensorFlow](http://keras.io/guides/distributed_training_with_tensorflow/)
-- [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py)
-- [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py)
+- [JAX distributed training example](https://github.com/keras-team/keras/blob/master/examples/demo_jax_distributed.py)
+- [PyTorch distributed training example](https://github.com/keras-team/keras/blob/master/examples/demo_torch_multi_gpu.py)
 
 Enjoy the library! 🚀
+
