@@ -8,7 +8,7 @@ description: Overview of how to leverage preprocessing layers to create end-to-e
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/preprocessing_layers.py
+# tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/_preprocessing_layers.py
 # hidden upstream
 ---
 
