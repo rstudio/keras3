@@ -1,11 +1,11 @@
 ---
-title: Writing a training loop from scratch
+title: Writing a training loop from scratch in TensorFlow
 date-created: 2019/03/01
-last-modified: 2023/07/10
-description: Complete guide to writing low-level training & evaluation loops.
+last-modified: 2023/07/10/home/tomasz/github/rstudio/keras/vignettes-src/writing_a_training_loop_from_scratch.Rmd
+description: Complete guide to writing low-level training & evaluation loops in TensorFlow.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Writing a training loop from scratch}
+  %\VignetteIndexEntry{Writing a training loop from scratch in TensorFlow}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,9 +14,12 @@ vignette: >
 
 
 ```r
-library(keras3)
 library(tensorflow)
 library(tfdatasets)
+library(keras3, warn.conflicts = FALSE)
+
+# This guide can only be run with the TensorFlow backend.
+use_backend("tensorflow")
 ```
 
 ## Introduction
@@ -40,18 +43,22 @@ your own training & evaluation loops from scratch. This is what this guide is ab
 Calling a model inside a `GradientTape` scope enables you to retrieve the gradients of
 the trainable weights of the layer with respect to a loss value. Using an optimizer
 instance, you can use these gradients to update these variables (which you can
-retrieve using `model.trainable_weights`).
+retrieve using `model$trainable_weights`).
 
 Let's consider a simple MNIST model:
 
 
 ```r
-inputs <- keras_input(shape = 784, name="digits")
-outputs <- inputs %>%
-  layer_dense(units = 64, activation = "relu") %>%
-  layer_dense(units = 64, activation = "relu") %>%
-  layer_dense(units = 10, name = "predictions")
-model <- keras_model(inputs=inputs, outputs=outputs)
+get_model <- function() {
+  inputs <- keras_input(shape = 784, name = "digits")
+  outputs <- inputs |>
+    layer_dense(units = 64, activation = "relu") |>
+    layer_dense(units = 64, activation = "relu") |>
+    layer_dense(units = 10, name = "predictions")
+  keras_model(inputs = inputs, outputs = outputs)
+}
+
+model <- get_model()
 ```
 
 Let's train it using mini-batch gradient with a custom training loop.
@@ -61,9 +68,9 @@ First, we're going to need an optimizer, a loss function, and a dataset:
 
 ```r
 # Instantiate an optimizer.
-optimizer <- optimizer_sgd(learning_rate=1e-3)
+optimizer <- optimizer_adam(learning_rate = 1e-3)
 # Instantiate a loss function.
-loss_fn <- loss_sparse_categorical_crossentropy(from_logits=TRUE)
+loss_fn <- loss_sparse_categorical_crossentropy(from_logits = TRUE)
 
 # Prepare the training dataset.
 batch_size <- 64
@@ -72,27 +79,27 @@ x_train <- array_reshape(x_train, c(-1, 784))
 x_test <- array_reshape(x_test, c(-1, 784))
 
 # Reserve 10,000 samples for validation.
-x_val <- x_train[1:10000,]
+x_val <- x_train[1:10000, ]
 y_val <- y_train[1:10000]
-x_train = x_train[-c(1:10000),]
+x_train = x_train[-c(1:10000), ]
 y_train = y_train[-c(1:10000)]
 
 # Prepare the training dataset.
-train_dataset <- list(x_train, y_train) %>%
-  tensor_slices_dataset() %>%
-  dataset_shuffle(buffer_size=1024) %>%
+train_dataset <- list(x_train, y_train) |>
+  tensor_slices_dataset() |>
+  dataset_shuffle(buffer_size = 1024) |>
   dataset_batch(batch_size)
 
 # Prepare the validation dataset.
-val_dataset <- list(x_val, y_val) %>%
-  tensor_slices_dataset() %>%
+val_dataset <- list(x_val, y_val) |>
+  tensor_slices_dataset() |>
   dataset_batch(batch_size)
 ```
 
 Here's our training loop:
 
 - We open a `for` loop that iterates over epochs
-- For each epoch, we open a `for` loop that iterates over the dataset, in batches
+- For each epoch, we iterate over the dataset, in batches
 - For each batch, we open a `GradientTape()` scope
 - Inside this scope, we call the model (forward pass) and compute the loss
 - Outside the scope, we retrieve the gradients of the weights
@@ -102,13 +109,14 @@ gradients
 
 
 ```r
-epochs <- 2
-
+epochs <- 3
 for (epoch in seq_len(epochs)) {
-  cat("Start of epoch ", epoch, "\n")
+  cat("\nStart of epoch ", epoch, "\n")
    # Iterate over the batches of the dataset.
   step <- 0
-  coro::loop(for(data in train_dataset) {
+  iterator <- as_iterator(train_dataset)
+  while (!is.null(batch <- iter_next(iterator))) {
+    c(x_batch_train, y_batch_train) %<-% batch
     step <- step + 1
     # Open a GradientTape to record the operations run
     # during the forward pass, which enables auto-differentiation.
@@ -117,10 +125,10 @@ for (epoch in seq_len(epochs)) {
       # The operations that the layer applies
       # to its inputs are going to be recorded
       # on the GradientTape.
-      logits <- model(data[[1]], training = TRUE)
+      logits <- model(x_batch_train, training = TRUE) # Logits for this minibatch
 
       # Compute the loss value for this minibatch.
-      loss_value <- loss_fn(data[[2]], logits)
+      loss_value <- loss_fn(y_batch_train, logits)
     })
 
     # Use the gradient tape to automatically retrieve
@@ -129,33 +137,42 @@ for (epoch in seq_len(epochs)) {
 
     # Run one step of gradient descent by updating
     # the value of the variables to minimize the loss.
-    optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
+    optimizer$apply(gradients, model$trainable_weights)
 
     # Log every 200 batches.
     if (step %% 200 == 0) {
-      cat(sprintf(
-        "Training loss (for one batch) at step %d: %.4f\n", step, loss_value
-      ))
-      cat(sprintf("Seen so far: %d samples \n", (step * batch_size)))
+      cat(sprintf("Training loss (for one batch) at step %d: %.4f\n",
+                  step, loss_value))
+      cat(sprintf("Seen so far: %d samples\n", (step * batch_size)))
     }
-  })
+  }
 }
 ```
 
 ```
+##
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.6731
+## Training loss (for one batch) at step 200: 1.9342
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8859
+## Training loss (for one batch) at step 400: 0.8244
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7074
+## Training loss (for one batch) at step 600: 0.8011
 ## Seen so far: 38400 samples
+##
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8335
+## Training loss (for one batch) at step 200: 0.3505
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.8314
+## Training loss (for one batch) at step 400: 0.6878
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.4169
+## Training loss (for one batch) at step 600: 0.3928
+## Seen so far: 38400 samples
+##
+## Start of epoch  3
+## Training loss (for one batch) at step 200: 0.3366
+## Seen so far: 12800 samples
+## Training loss (for one batch) at step 400: 0.1102
+## Seen so far: 25600 samples
+## Training loss (for one batch) at step 600: 0.3629
 ## Seen so far: 38400 samples
 ```
 
@@ -178,17 +195,12 @@ the end of each epoch:
 
 ```r
 # Get model
-inputs <- keras_input(shape = 784, name="digits")
-outputs <- inputs %>%
-  layer_dense(units = 64, activation = "relu") %>%
-  layer_dense(units = 64, activation = "relu") %>%
-  layer_dense(units = 10, name = "predictions")
-model <- keras_model(inputs=inputs, outputs=outputs)
+model <- get_model()
 
 # Instantiate an optimizer to train the model.
-optimizer <- optimizer_sgd(learning_rate=1e-3)
+optimizer <- optimizer_adam(learning_rate = 1e-3)
 # Instantiate a loss function.
-loss_fn <- loss_sparse_categorical_crossentropy(from_logits=TRUE)
+loss_fn <- loss_sparse_categorical_crossentropy(from_logits = TRUE)
 
 # Prepare the metrics.
 train_acc_metric <- metric_sparse_categorical_accuracy()
@@ -205,25 +217,26 @@ for (epoch in seq_len(epochs)) {
   cat("Start of epoch ", epoch, "\n")
    # Iterate over the batches of the dataset.
   step <- 0
-  coro::loop(for(data in train_dataset) {
+  iterator <- as_iterator(train_dataset)
+  while (!is.null(batch <- iter_next(iterator))) {
+    c(x_batch_train, y_batch_train) %<-% batch
     step <- step + 1
+
     with(tf$GradientTape() %as% tape, {
-      logits <- model(data[[1]], training = TRUE)
-      loss_value <- loss_fn(data[[2]], logits)
+      logits <- model(x_batch_train, training = TRUE)
+      loss_value <- loss_fn(y_batch_train, logits)
     })
     gradients <- tape$gradient(loss_value, model$trainable_weights)
-    optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
+    optimizer$apply(gradients, model$trainable_weights)
 
     # Update training metric.
-    train_acc_metric$update_state(data[[2]], logits)
-
+    train_acc_metric$update_state(y_batch_train, logits)
     if (step %% 200 == 0) {
       cat(sprintf(
-        "Training loss (for one batch) at step %d: %.4f\n", step, loss_value
-      ))
+        "Training loss (for one batch) at step %d: %.4f\n", step, loss_value))
       cat(sprintf("Seen so far: %d samples \n", (step * batch_size)))
     }
-  })
+  }
 
   # Display metrics at the end of each epoch.
   train_acc <- train_acc_metric$result()
@@ -232,12 +245,12 @@ for (epoch in seq_len(epochs)) {
   # Reset training metrics at the end of each epoch
   train_acc_metric$reset_state()
 
-  coro::loop(for(data in val_dataset) {
-    val_logits <- model(data[[1]], training=FALSE)
-    # Update val metrics
-    val_acc_metric$update_state(data[[2]], val_logits)
+  # Run a validation loop at the end of each epoch.
+  iterate(val_dataset, function(val_batch) {
+    c(x_batch_val, y_batch_val) %<-% val_batch
+    val_logits <- model(x_batch_val, training = FALSE)
+    val_acc_metric$update_state(y_batch_val, val_logits)
   })
-
   val_acc <- val_acc_metric$result()
   val_acc_metric$reset_state()
   cat(sprintf("Validation acc: %.4f\n", val_acc))
@@ -246,23 +259,23 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 1.4448
+## Training loss (for one batch) at step 200: 2.4070
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.7797
+## Training loss (for one batch) at step 400: 0.8216
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7271
+## Training loss (for one batch) at step 600: 1.2056
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.7030
-## Validation acc: 0.7874
+## Training acc over epoch: 0.8094
+## Validation acc: 0.8687
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8021
+## Training loss (for one batch) at step 200: 0.1857
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.5809
+## Training loss (for one batch) at step 400: 0.3803
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6895
+## Training loss (for one batch) at step 600: 0.3399
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8185
-## Validation acc: 0.8365
+## Training acc over epoch: 0.8859
+## Validation acc: 0.9002
 ```
 
 ```r
@@ -270,10 +283,10 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 21.92153 secs
+## Time difference of 44.61786 secs
 ```
 
-## Speeding-up your training step with `tf_function`
+## Speeding-up your training step with `tf_function()`
 
 The default runtime in TensorFlow 2 is
 [eager execution](https://www.tensorflow.org/guide/eager).
@@ -296,8 +309,9 @@ train_step <- tf_function(function(x, y) {
     loss_value <- loss_fn(y, logits)
   })
   gradients <- tape$gradient(loss_value, model$trainable_weights)
-  optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
+  optimizer$apply(gradients, model$trainable_weights)
   train_acc_metric$update_state(y, logits)
+  invisible(NULL) # return nothing
 })
 ```
 
@@ -308,6 +322,7 @@ Let's do the same with the evaluation step:
 test_step <- tf_function(function(x, y) {
   val_logits <- model(x, training=FALSE)
   val_acc_metric$update_state(y, val_logits)
+  invisible(NULL) # return nothing
 })
 ```
 
@@ -321,9 +336,10 @@ for (epoch in seq_len(epochs)) {
   cat("Start of epoch ", epoch, "\n")
    # Iterate over the batches of the dataset.
   step <- 0
-  coro::loop(for(data in train_dataset) {
+  while (!is.null(batch <- iter_next(iterator))) {
+    c(x_batch_train, y_batch_train) %<-% batch
     step <- step + 1
-    train_step(data[[1]], data[[2]])
+    train_step(x_batch_train, y_batch_train)
 
     if (step %% 200 == 0) {
       cat(sprintf(
@@ -331,15 +347,19 @@ for (epoch in seq_len(epochs)) {
       ))
       cat(sprintf("Seen so far: %d samples \n", (step * batch_size)))
     }
-  })
+  }
 
   # Display metrics at the end of each epoch.
   train_acc <- train_acc_metric$result()
   cat(sprintf("Training acc over epoch: %.4f\n", train_acc))
+
+   # Reset training metrics at the end of each epoch
   train_acc_metric$reset_state()
 
-  coro::loop(for(data in val_dataset) {
-    test_step(data[[1]], data[[2]])
+  # Run a validation loop at the end of each epoch.
+   iterate(val_dataset, function(val_batch) {
+    c(x_batch_val, y_batch_val) %<-% val_batch
+    test_step(x_batch_val, y_batch_val)
   })
 
   val_acc <- val_acc_metric$result()
@@ -350,23 +370,11 @@ for (epoch in seq_len(epochs)) {
 
 ```
 ## Start of epoch  1
-## Training loss (for one batch) at step 200: 0.9179
-## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.9179
-## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9179
-## Seen so far: 38400 samples
-## Training acc over epoch: 0.8616
-## Validation acc: 0.8673
+## Training acc over epoch: 0.0000
+## Validation acc: 0.9002
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.9179
-## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.9179
-## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.9179
-## Seen so far: 38400 samples
-## Training acc over epoch: 0.8828
-## Validation acc: 0.8819
+## Training acc over epoch: 0.0000
+## Validation acc: 0.9002
 ```
 
 ```r
@@ -374,16 +382,16 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 2.417954 secs
+## Time difference of 0.5360565 secs
 ```
 
 Much faster, isn't it?
 
 ## Low-level handling of losses tracked by the model
 
-Layers & models recursively track any losses created during the forward pass
-by layers that call `self.add_loss(value)`. The resulting list of scalar loss
-values are available via the property `model.losses`
+Layers and models recursively track any losses created during the forward pass
+by layers that call `self$add_loss(value)`. The resulting list of scalar loss
+values are available via the property `model$losses`
 at the end of the forward pass.
 
 If you want to be using these loss components, you should sum them
@@ -393,10 +401,10 @@ Consider this layer, that creates an activity regularization loss:
 
 
 ```r
-ActivityRegularizationLayer <- new_layer_class(
+layer_activity_regularization <- Layer(
   "ActivityRegularizationLayer",
   call = function(inputs) {
-    self$add_loss(0.1 * tf$reduce_mean(inputs))
+    self$add_loss(0.1 * op_mean(inputs))
     inputs
   }
 )
@@ -407,10 +415,10 @@ Let's build a really simple model that uses it:
 
 ```r
 inputs <- keras_input(shape = 784, name="digits")
-outputs <- inputs %>%
-  layer_dense(units = 64, activation = "relu") %>%
-  ActivityRegularizationLayer() %>%
-  layer_dense(units = 64, activation = "relu") %>%
+outputs <- inputs |>
+  layer_dense(units = 64, activation = "relu") |>
+  layer_activity_regularization() |>
+  layer_dense(units = 64, activation = "relu") |>
   layer_dense(units = 10, name = "predictions")
 model <- keras_model(inputs = inputs, outputs = outputs)
 ```
@@ -422,12 +430,13 @@ Here's what our training step should look like now:
 train_step <- tf_function(function(x, y) {
   with(tf$GradientTape() %as% tape, {
     logits <- model(x, training = TRUE)
-    loss_value <- loss_fn(y, logits)
-    loss_value <- loss_value + Reduce(`+`, model$losses)
+    loss_value <- Reduce(`+`, c(loss_fn(y, logits),
+                                model$losses))
   })
   gradients <- tape$gradient(loss_value, model$trainable_weights)
-  optimizer$apply_gradients(zip_lists(gradients, model$trainable_weights))
+  optimizer$apply(gradients, model$trainable_weights)
   train_acc_metric$update_state(y, logits)
+  invisible(NULL)
 })
 ```
 
@@ -474,13 +483,18 @@ fake vs real digits:
 
 ```r
 # Create the discriminator
-discriminator <- keras_model_sequential(name = "discriminator", input_shape = c(28, 28, 1)) %>%
-  layer_conv_2d(filters = 64, kernel_size = c(3, 3), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_conv_2d(filters = 128, kernel_size = c(3, 3), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_global_max_pooling_2d() %>%
+discriminator <-
+  keras_model_sequential(name = "discriminator",
+                         input_shape = c(28, 28, 1)) |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3),
+                strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+  layer_conv_2d(filters = 128, kernel_size = c(3, 3),
+                strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+  layer_global_max_pooling_2d() |>
   layer_dense(units = 1)
+
 summary(discriminator)
 ```
 
@@ -515,15 +529,21 @@ MNIST digits):
 ```r
 latent_dim <- 128L
 
-generator <- keras_model_sequential(name = "generator", input_shape = latent_dim) %>%
-  layer_dense(7 * 7 * 128) %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_reshape(target_shape = c(7, 7, 128)) %>%
-  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4), strides = c(2, 2), padding = "same") %>%
-  layer_activation_leaky_relu(negative_slope = 0.2) %>%
-  layer_conv_2d(filters = 1, kernel_size = c(7, 7), padding = "same", activation = "sigmoid")
+generator <-
+  keras_model_sequential(name = "generator",
+                         input_shape = latent_dim) |>
+  layer_dense(7 * 7 * 128) |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+  layer_reshape(target_shape = c(7, 7, 128)) |>
+  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4),
+                          strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+  layer_conv_2d_transpose(filters = 128, kernel_size = c(4, 4),
+                          strides = c(2, 2), padding = "same") |>
+  layer_activation_leaky_relu(negative_slope = 0.2) |>
+  layer_conv_2d(filters = 1, kernel_size = c(7, 7), padding = "same",
+                activation = "sigmoid")
+
 summary(generator)
 ```
 
@@ -561,31 +581,29 @@ training step function only takes 17 lines.
 
 ```r
 # Instantiate one optimizer for the discriminator and another for the generator.
-d_optimizer <- optimizer_adam(learning_rate=0.0003)
-g_optimizer <- optimizer_adam(learning_rate=0.0004)
+d_optimizer <- optimizer_adam(learning_rate = 0.0003)
+g_optimizer <- optimizer_adam(learning_rate = 0.0004)
 
 # Instantiate a loss function.
-loss_fn <- loss_binary_crossentropy(from_logits=TRUE)
+loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
 
 train_step <- tf_function(function(real_images) {
   # Sample random points in the latent space
-  batch_size <- tf$shape(real_images)[1]
+  c(batch_size, ...) %<-% op_shape(real_images)
   random_latent_vectors <-
-    tf$random$normal(shape = c(batch_size, latent_dim))
+    tf$random$normal(shape(batch_size, latent_dim))
 
   # Decode them to fake images
   generated_images <- generator(random_latent_vectors)
 
   # Combine them with real images
-  combined_images <-
-    tf$concat(list(generated_images, real_images),
-              axis = 0L)
+  combined_images <- tf$concat(list(generated_images, real_images),
+                               axis = 0L)
 
   # Assemble labels discriminating real from fake images
-  labels <-
-    tf$concat(list(tf$ones(c(batch_size, 1L)),
-                   tf$zeros(c(batch_size, 1L))),
-              axis = 0L)
+  labels <- tf$concat(list(tf$ones(shape(batch_size, 1)),
+                           tf$zeros(shape(batch_size, 1))),
+                      axis = 0L)
 
   # Add random noise to the labels - important trick!
   labels %<>% `+`(tf$random$uniform(tf$shape(.), maxval = 0.05))
@@ -596,16 +614,14 @@ train_step <- tf_function(function(real_images) {
     d_loss <- loss_fn(labels, predictions)
   })
   grads <- tape$gradient(d_loss, discriminator$trainable_weights)
-  d_optimizer$apply_gradients(
-    zip_lists(grads, discriminator$trainable_weights))
-
+  d_optimizer$apply(grads, discriminator$trainable_weights)
 
   # Sample random points in the latent space
   random_latent_vectors <-
-    tf$random$normal(shape = c(batch_size, latent_dim))
+    tf$random$normal(shape(batch_size, latent_dim))
 
   # Assemble labels that say "all real images"
-  misleading_labels <- tf$zeros(c(batch_size, 1L))
+  misleading_labels <- tf$zeros(shape(batch_size, 1))
 
   # Train the generator (note that we should *not* update the weights
   # of the discriminator)!
@@ -615,10 +631,9 @@ train_step <- tf_function(function(real_images) {
   })
 
   grads <- tape$gradient(g_loss, generator$trainable_weights)
-  g_optimizer$apply_gradients(
-    zip_lists(grads, generator$trainable_weights))
+  g_optimizer$apply(grads, generator$trainable_weights)
 
-  list(d_loss = d_loss, g_loss = g_loss, generated_images = generated_images)
+  list(d_loss, g_loss, generated_images)
 })
 ```
 
@@ -634,19 +649,20 @@ batch_size <- 64
 c(c(x_train, .), c(x_test, .)) %<-% dataset_mnist()
 all_digits <- op_concatenate(list(x_train, x_test))
 all_digits <- op_reshape(all_digits, c(-1, 28, 28, 1))
-dataset <- all_digits %>%
-  tfdatasets::tensor_slices_dataset() %>%
-  tfdatasets::dataset_map(function(x) tf$cast(x, "float")/255) %>%
-  tfdatasets::dataset_shuffle(buffer_size = 1024) %>%
+dataset <- all_digits |>
+  tfdatasets::tensor_slices_dataset() |>
+  tfdatasets::dataset_map(function(x) tf$cast(x, "float") / 255) |>
+  tfdatasets::dataset_shuffle(buffer_size = 1024) |>
   tfdatasets::dataset_batch(batch_size = batch_size)
 
-epochs <- 1  # In practice you need at least 20 epochs to generate nice digits.
+epochs <- 1 # In practice you need at least 20 epochs to generate nice digits.
 save_dir <- "./"
 
 for (epoch in seq_len(epochs)) {
   cat("Start epoch: ", epoch, "\n")
   step <- 0
-  coro::loop(for(real_images in dataset) {
+  train_iterator <- as_iterator(dataset)
+  while (!is.null(real_images <- iter_next(train_iterator))) {
     step <- step + 1
     # Train the discriminator & generator on one batch of real images.
     c(d_loss, g_loss, generated_images) %<-% train_step(real_images)
@@ -660,10 +676,9 @@ for (epoch in seq_len(epochs)) {
 
     # To limit execution time we stop after 10 steps.
     # Remove the lines below to actually train the model!
-    if (step > 10){
+    if (step > 10)
       break
-    }
-  })
+  }
 }
 ```
 
