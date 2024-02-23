@@ -16,8 +16,8 @@ tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/nl
 
 This example shows how to do text classification starting from raw text (as
 a set of text files on disk). We demonstrate the workflow on the IMDB sentiment
-classification dataset (unprocessed version). We use the `TextVectorization` layer for
- word splitting & indexing.
+classification dataset (unprocessed version). We use [`layer_text_vectorization()`] for
+word splitting & indexing.
 
 ## Setup
 
@@ -27,12 +27,6 @@ library(tensorflow)
 library(tfdatasets)
 library(keras3, mask.ok = c("shape", "set_random_seed"))
 use_virtualenv("r-keras")
-```
-
-
-```{r}
-tf_config()
-str(tf$config$list_physical_devices())
 ```
 
 ## Load the data: IMDB movie review sentiment classification
@@ -50,7 +44,7 @@ if (!dir.exists("datasets/aclImdb")) {
   unlink("datasets/aclImdb/train/unsup", recursive = TRUE)
 }
 ```
-  
+
 
 The `aclImdb` folder contains a `train` and `test` subfolder:
 
@@ -72,7 +66,7 @@ We are only interested in the `pos` and `neg` subfolders, so let's delete the ot
 unlink("datasets/aclImdb/train/unsup", recursive = TRUE)
 ```
 
-You can use the utility `text_dataset_from_directory` to
+You can use the utility `text_dataset_from_directory()` to
 generate a labeled `tf_dataset` object from a set of text files on disk filed
  into class-specific folders.
 
@@ -87,7 +81,7 @@ be used.
 Before putting the model out into the real world however, it should be retrained using all
 available training data (without creating a validation dataset), so its performance is maximized.
 
-When using the `validation_split` & `subset` arguments, make sure to either specify a
+When using the `validation_split` and `subset` arguments, make sure to either specify a
 random seed, or to pass `shuffle=FALSE`, so that the validation & training splits you
 get have no overlap.
 
@@ -113,9 +107,9 @@ raw_test_ds <- text_dataset_from_directory(
   batch_size = batch_size
 )
 
-length(raw_train_ds)
-length(raw_val_ds)
-length(raw_test_ds)
+cat("Number of batches in raw_train_ds:", length(raw_train_ds), "\n")
+cat("Number of batches in raw_val_ds:", length(raw_val_ds), "\n")
+cat("Number of batches in raw_test_ds:", length(raw_test_ds), "\n")
 ```
 
 Let's preview a few samples:
@@ -193,7 +187,8 @@ There are 2 ways we can use our text vectorization layer:
  strings, like this:
 
 ```{r}
-x <- keras_input(shape = c(1L), dtype = "string", name = 'text') |>
+text_input <- keras_input(shape = c(1L), dtype = "string", name = 'text')
+x <- text_input |>
   vectorize_layer() |>
   layer_embedding(max_features + 1, embedding_dim)
 ```
@@ -213,7 +208,7 @@ strings as input, like in the code snippet for option 1 above. This can be done 
 ```{r}
 vectorize_text <- function(text, label) {
   text <- text |>
-    tf$expand_dims(-1L) |>
+    op_expand_dims(-1) |>
     vectorize_layer()
   list(text, label)
 }
