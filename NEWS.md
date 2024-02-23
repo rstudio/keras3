@@ -20,6 +20,8 @@
 
 - `to_categorical()`, `op_one_hot()`, and `fit()` can now accept R factors, 
   offset them to be 0-based (reported in `#1055`).
+  
+- `op_convert_to_numpy()` now returns unconverted NumPy arrays.
 
 - `op_array()` and `op_convert_to_tensor()` no longer error when casting R 
    doubles to integer types.

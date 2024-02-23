@@ -112,7 +112,7 @@ keras$ops$cond(pred, true_fn, false_fn)
 #' @tether keras.ops.convert_to_numpy
 op_convert_to_numpy <-
 function (x)
-keras$ops$convert_to_numpy(x)
+r_to_py(keras$ops)$convert_to_numpy(x)
 
 
 #' Convert an array to a tensor.
