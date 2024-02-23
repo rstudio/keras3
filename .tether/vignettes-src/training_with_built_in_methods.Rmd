@@ -31,7 +31,7 @@ when using built-in APIs for training & validation (such as `Model.fit()`,
 
 If you are interested in leveraging `fit()` while specifying your
 own training step function, see the
-[Customizing what happens in `fit()` guide](custom_train_step_in_tensorflow.html).
+[Customizing what happens in `fit()` guide](/guides/customizing_what_happens_in_fit/).
 
 If you are interested in writing your own training & evaluation loops from
 scratch, see the guide
@@ -1130,7 +1130,7 @@ model.fit(x_train, y_train, epochs=1, callbacks=callbacks)
 You call also write your own callback for saving and restoring models.
 
 For a complete guide on serialization and saving, see the
-[guide to saving and serializing Models](serialization_and_saving.html).
+[guide to saving and serializing Models](/guides/serialization_and_saving/).
 
 ## Using learning rate schedules
 
@@ -1205,3 +1205,4 @@ keras.callbacks.TensorBoard(
 
 For more information, see the
 [documentation for the `TensorBoard` callback](https://keras.io/api/callbacks/tensorboard/).
+
