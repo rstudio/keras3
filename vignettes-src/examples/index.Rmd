@@ -6,7 +6,7 @@ knit: ({source(here::here("tools/knit.R")); knit_vignette})
 
 <div class="container">
 ```{r echo=FALSE, results = "asis"}
-examples <- list.files(".", pattern = ".Rmd")
+examples <- list.files(".", pattern = ".Rmd", recursive = TRUE)
 examples <- examples[examples != "index.Rmd"]
 examples <- lapply(examples, function(x) {
   out <- rmarkdown::yaml_front_matter(x)

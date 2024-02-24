@@ -240,7 +240,8 @@ features to predict whether a patient has a heart disease
 </h2>
 <p>Let’s download the data and load it into a Pandas dataframe:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">file_url</span> <span class="op">&lt;-</span> <span class="st">"http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"</span></span>
+<code class="sourceCode R"><span><span class="va">file_url</span> <span class="op">&lt;-</span></span>
+<span>  <span class="st">"http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">file_url</span>, col_types <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html" class="external-link">cols</a></span><span class="op">(</span></span>
 <span>  oldpeak <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_double</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  thal <span class="op">=</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html" class="external-link">col_character</a></span><span class="op">(</span><span class="op">)</span>,</span>

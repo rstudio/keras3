@@ -1938,7 +1938,7 @@ man_src_render_translated <- function(directories = dir_ls("man-src/", type = "d
 
 # ---- vignettes ----
 
-tutobook_to_rmd <- function(path_to_tutobook, outfile = NA, tutobook_text = NULL) {
+tutobook_to_rmd <- function(path_to_tutobook = NULL, outfile = NA, tutobook_text = NULL) {
   if(is.null(tutobook_text))
     tutobook_text <- readLines(path_to_tutobook)
   stopifnot(isTRUE(is.na(outfile)) || is_string(outfile) || is.null(outfile) || isFALSE(outfile))
@@ -1952,7 +1952,7 @@ tutobook_to_rmd <- function(path_to_tutobook, outfile = NA, tutobook_text = NULL
       outfile <- FALSE
   }
 
-  rmd_text <- try({ .tutobook_to_rmd(tutobook_text) }, silent = TRUE)
+  rmd_text <- try({ .tutobook_to_rmd(tutobook_text, tether = path_to_tutobook) }, silent = TRUE)
   if(inherits(rmd_text, "try-error")) {
     message("converting failed: ", path_to_tutobook)
     warning(rmd_text)
@@ -1970,7 +1970,7 @@ tutobook_to_rmd <- function(path_to_tutobook, outfile = NA, tutobook_text = NULL
   invisible(outfile)
 }
 
-.tutobook_to_rmd <- function(tutobook) {
+.tutobook_to_rmd <- function(tutobook, tether = NULL) {
   stopifnot(is.character(tutobook))
 
   df <- tibble(
@@ -1995,7 +1995,8 @@ tutobook_to_rmd <- function(path_to_tutobook, outfile = NA, tutobook_text = NULL
         x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
         x$output <- "rmarkdown::html_vignette"
-        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette)'
+        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette})'
+        x$tether <- x$tether %||% tether
         # # x$repo <- https://github.com/rstudio/keras
 
         frontmatter <- yaml::as.yaml(x) |> str_trim("right")
