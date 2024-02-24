@@ -82,7 +82,8 @@ Let's download the data and load it into a Pandas dataframe:
 
 
 ```r
-file_url <- "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
+file_url <-
+  "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
 df <- read_csv(file_url, col_types = cols(
   oldpeak = col_double(),
   thal = col_character(),
