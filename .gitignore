@@ -27,3 +27,5 @@ man-src/*/translate.patch
 *.keras
 **.weights.h5
 .Rapp.history
+*.csv
+*.zip
