@@ -27,7 +27,7 @@ import numpy as np
 
 Keras provides default training and evaluation loops, `fit()` and `evaluate()`.
 Their usage is covered in the guide
-[Training & evaluation with the built-in methods](https://keras.io/guides/training_with_built_in_methods/).
+[Training & evaluation with the built-in methods](/guides/training_with_built_in_methods/).
 
 If you want to customize the learning algorithm of your model while still leveraging
 the convenience of `fit()`
@@ -116,9 +116,7 @@ for epoch in range(epochs):
             # The operations that the layer applies
             # to its inputs are going to be recorded
             # on the GradientTape.
-            logits = model(
-                x_batch_train, training=True
-            )  # Logits for this minibatch
+            logits = model(x_batch_train, training=True)  # Logits for this minibatch
 
             # Compute the loss value for this minibatch.
             loss_value = loss_fn(y_batch_train, logits)
@@ -404,13 +402,9 @@ generator = keras.Sequential(
         keras.layers.Dense(7 * 7 * 128),
         keras.layers.LeakyReLU(negative_slope=0.2),
         keras.layers.Reshape((7, 7, 128)),
-        keras.layers.Conv2DTranspose(
-            128, (4, 4), strides=(2, 2), padding="same"
-        ),
+        keras.layers.Conv2DTranspose(128, (4, 4), strides=(2, 2), padding="same"),
         keras.layers.LeakyReLU(negative_slope=0.2),
-        keras.layers.Conv2DTranspose(
-            128, (4, 4), strides=(2, 2), padding="same"
-        ),
+        keras.layers.Conv2DTranspose(128, (4, 4), strides=(2, 2), padding="same"),
         keras.layers.LeakyReLU(negative_slope=0.2),
         keras.layers.Conv2D(1, (7, 7), padding="same", activation="sigmoid"),
     ],
@@ -500,9 +494,7 @@ for epoch in range(epochs):
             print(f"adversarial loss at step {step}: {g_loss:.2f}")
 
             # Save one generated image
-            img = keras.utils.array_to_img(
-                generated_images[0] * 255.0, scale=False
-            )
+            img = keras.utils.array_to_img(generated_images[0] * 255.0, scale=False)
             img.save(os.path.join(save_dir, f"generated_img_{step}.png"))
 
         # To limit execution time we stop after 10 steps.
