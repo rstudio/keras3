@@ -13,6 +13,7 @@ articles:
   index: examples/index.html
   mnist_convnet: examples/mnist_convnet.html
   oxford_pets_image_segmentation: examples/oxford_pets_image_segmentation.html
+  imbalanced_classification: examples/structured_data/imbalanced_classification.html
   structured_data_classification_with_feature_space: examples/structured_data_classification_with_feature_space.html
   text_classification_from_scratch: examples/text_classification_from_scratch.html
   functional_api: functional_api.html
@@ -29,7 +30,7 @@ articles:
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-02-24T15:54Z
+last_built: 2024-02-24T20:23Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

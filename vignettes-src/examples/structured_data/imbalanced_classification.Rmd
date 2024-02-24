@@ -12,7 +12,7 @@ knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
 ```{r setup}
-library(keras3, warn.conflicts = FALSE)
+library(keras3)
 use_backend("jax")
 ```
 ## Introduction
@@ -32,8 +32,6 @@ zip::unzip("creditcardfraud.zip", files = "creditcard.csv")
 ```
 
 ## First, load the data
-
-
 
 ```{r, message=FALSE}
 library(readr)
