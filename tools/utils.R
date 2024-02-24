@@ -1995,7 +1995,7 @@ tutobook_to_rmd <- function(path_to_tutobook = NULL, outfile = NA, tutobook_text
         x[,1] %<>% snakecase::to_snake_case() %<>% str_replace_all("_", "-")
         x <- rlang::set_names(nm = x[,1], as.list(x[,2]))
         x$output <- "rmarkdown::html_vignette"
-        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette)'
+        x$knit <- '({source(here::here("tools/knit.R")); knit_vignette})'
         x$tether <- x$tether %||% tether
         # # x$repo <- https://github.com/rstudio/keras
 

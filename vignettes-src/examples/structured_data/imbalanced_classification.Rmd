@@ -8,109 +8,77 @@ accelerator: GPU
 output: rmarkdown::html_vignette
 domain: structured data
 category: basic
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
+```{r setup}
+library(keras3, warn.conflicts = FALSE)
+use_backend("jax")
+```
 ## Introduction
 
 This example looks at the
 [Kaggle Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud/)
 dataset to demonstrate how
 to train a classification model on data with highly imbalanced classes.
-
-```{r}
-library(keras3)
-use_backend("jax")
-```
-
-You can manually download "creditcard.csv" from
-[Kaggle](https://www.kaggle.com/mlg-ulb/creditcardfraud/). Alternatively, you
-can create a Kaggle API key, and then download the dataset using the Kaggle
-command line utility. To do so, navigate to the Kaggle website in a web browser,
-log in, and go to the My Account page. In your account settings, you’ll find an
-API section. Clicking the Create New API Token button will generate a
-kaggle.json key file and will download it to your machine.
+You can download the data by clicking "Download" at
+the link, or if you're setup with a kaggle API key at
+`"~/.kaggle/kagle.json"`, you can run the following:
 
 ```{r, eval = FALSE}
-library(fs)
-dir_create("~/.kaggle")
-file_move("~/Downloads/kaggle.json", "~/.kaggle/")
-file_chmod("~/.kaggle/kaggle.json", "0600") # mark file only readable by yourself
-
-# install the kaggle package
 reticulate::py_install("kaggle", pip = TRUE)
+system("kaggle datasets download -d mlg-ulb/creditcardfraud")
+zip::unzip("creditcardfraud.zip", files = "creditcard.csv")
 ```
-
-Then you can download using `kaggle` from the command line, and unzip it go 
-get "creditcard.csv":
-```{r, eval = FALSE}
-system('kaggle datasets download -d mlg-ulb/creditcardfraud')
-zip::unzip("creditcardfraud.zip")
-```
-The first time you try to download the data, you may get a "403
-Forbidden" error. That's because you need to accept the terms associated
-with the dataset before you download it---you'll have to go to
-<http://www.kaggle.com/mlg-ulb/creditcardfraud/rules> (while logged into your
-Kaggle account) and click the I Understand and Accept button. You only
-need to do this once.
-
-Once you've acquired the data, we'll load it
 
 ## First, load the data
 
-```{r}
-df <- readr::read_csv("creditcard.csv")
-```
 
 
-```{r}
-library(dplyr, warn.conflicts = FALSE)
-glimpse(df)
-features <- df |> select(-last_col()) |> as.matrix() #|> np_array("float32")
-targets <- df |> pull(last_col()) |> as.integer() |> as.matrix()     #|> np_array("uint8")
-
-# storage.mode(targets) <- "integer"
-
-str(features)
-str(targets)
-# features$shape
-# targets$shape
+```{r, message=FALSE}
+library(readr)
+df <- read_csv("creditcard.csv", col_types = cols(
+  Class = col_integer(),
+  .default = col_double()
+))
+tibble::glimpse(df)
 ```
 
 ## Prepare a validation set
 
-```{r, results='hold'}
-num_samples <- nrow(features)
-num_val_samples <- round(num_samples * 0.2)
-val_idx <- sample.int(num_samples, num_val_samples)
+```{r}
+val_idx <- nrow(df) %>% sample.int(., round( . * 0.2))
+val_df <- df[val_idx, ]
+train_df <- df[-val_idx, ]
 
-train_features <- features[-val_idx, ]
-train_targets <- targets[-val_idx, ]
-val_features <- features[val_idx, ]
-val_targets <- targets[val_idx, ]
-
-cat("Number of training samples:", nrow(train_features), "\n")
-cat("Number of validation samples:", nrow(val_features), "\n")
+cat("Number of training samples:", nrow(train_df), "\n")
+cat("Number of validation samples:", nrow(val_df), "\n")
 ```
 
 ## Analyze class imbalance in the targets
 
 ```{r}
-counts <- table(train_targets)
+counts <- table(train_df$Class)
+counts
+
 cat(sprintf("Number of positive samples in training data: %i (%.2f%% of total)",
             counts["1"], 100 * counts["1"] / sum(counts)))
 
 weight_for_0 = 1 / counts["0"]
 weight_for_1 = 1 / counts["1"]
 ```
-```{r}
-library(reticulate)
-py$train_features <- np_array(train_features)
-py$val_features <- np_array(val_features)
-```
 
 ## Normalize the data using training set statistics
+
 ```{r}
+feature_names <- colnames(train_df) %>% setdiff("Class")
+
+train_features <- as.matrix(train_df[feature_names])
+train_targets <- as.matrix(train_df$Class)
+
+val_features <- as.matrix(val_df[feature_names])
+val_targets <- as.matrix(val_df$Class)
+
 train_features %<>% scale()
 val_features %<>% scale(center = attr(train_features, "scaled:center"),
                         scale = attr(train_features, "scaled:scale"))
@@ -142,40 +110,66 @@ metrics <- list(
   metric_precision(name = "precision"),
   metric_recall(name = "recall")
 )
-
-model |> compile(optimizer = optimizer_adam(1e-2),
-                 loss = "binary_crossentropy",
-                 metrics = metrics)
-
+model |> compile(
+  optimizer = optimizer_adam(1e-2),
+  loss = "binary_crossentropy",
+  metrics = metrics
+)
 callbacks <- list(
   callback_model_checkpoint("fraud_model_at_epoch_{epoch}.keras")
 )
 
-class_weight <- list("0" = weight_for_0, "1" = weight_for_1)
+class_weight <- list("0" = weight_for_0,
+                     "1" = weight_for_1)
 
-history <- model |> fit(
-  train_features,
-  train_targets,
+model |> fit(
+  train_features, train_targets,
+  validation_data = list(val_features, val_targets),
+  class_weight = class_weight,
   batch_size = 2048,
   epochs = 30,
-  verbose = 2,
   callbacks = callbacks,
-  validation_data = list(val_features, val_targets),
-  class_weight = class_weight
+  verbose = 2
 )
+```
 
-plot(history)
+```{r}
+val_pred <- model %>%
+  predict(val_features) %>%
+  { as.integer(. > 0.5) }
+
+pred_correct <- val_df$Class == val_pred
+cat(sprintf("Validation accuracy: %.2f", mean(pred_correct)))
+
+fraudulent <- val_df$Class == 1
+
+n_fraudulent_detected <- sum(fraudulent & pred_correct)
+n_fraudulent_missed <- sum(fraudulent & !pred_correct)
+n_legitimate_flagged <- sum(!fraudulent & !pred_correct)
 ```
 
 ## Conclusions
 
-At the end of training, out of 56,961 validation transactions, we are:
+At the end of training, out of
+`r prettyNum(nrow(val_df), big.mark = ",")` validation transactions, we
+are:
 
-- Correctly identifying 66 of them as fraudulent
-- Missing 9 fraudulent transactions
-- At the cost of incorrectly flagging 441 legitimate transactions
+- Correctly identifying
+  `r prettyNum(n_fraudulent_detected, big.mark = ",")` of them as
+  fraudulent
+- Missing `r prettyNum(n_fraudulent_missed, big.mark = ",")`
+  fraudulent transactions
+- At the cost of incorrectly flagging
+  `r prettyNum(n_legitimate_flagged, big.mark = ",")` legitimate
+  transactions
 
 In the real world, one would put an even higher weight on class 1,
 so as to reflect that False Negatives are more costly than False Positives.
 
-Next time your credit card gets  declined in an online purchase -- this is why.
+Next time your credit card gets declined in an online purchase -- this is why.
+
+<!-- | Trained Model                                                                                                                                                          | Demo                                                                                                                                                                             | -->
+<!-- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| -->
+<!-- | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Imbalanced%20Classification-black.svg)](https://huggingface.co/keras-io/imbalanced_classification) | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Spaces-Imbalanced%20Classification-black.svg)](https://huggingface.co/spaces/keras-io/Credit_Card_Fraud_Detection) | -->
+
+<!-- : Example available on HuggingFace. -->
