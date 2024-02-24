@@ -6,8 +6,7 @@ last-modified: 2022/11/09
 description: Classify tabular data in a few lines of code.
 accelerator: GPU
 output: rmarkdown::html_vignette
-tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/structured_data/structured_data_classification_with_feature_space.py
-knit: ({source(here::here("tools/knit.R")); knit_vignette})
+knit: ({source(here::here("tools/knit.R")); knit_vignette)
 ---
 
 ## Introduction
@@ -16,14 +15,14 @@ This example demonstrates how to do structured data classification
 (also known as tabular data classification), starting from a raw
 CSV file. Our data includes numerical features,
 and integer categorical features, and string categorical features.
-We will use the utility `layer_feature_space()` to index,
+We will use the utility `keras.utils.FeatureSpace` to index,
 preprocess, and encode our features.
 
 The code is adapted from the example
 [Structured data classification from scratch](https://keras.io/examples/structured_data/structured_data_classification_from_scratch/).
 While the previous example managed its own low-level feature preprocessing and
 encoding with Keras preprocessing layers, in this example we
-delegate everything to `layer_feature_space()`, making the workflow
+delegate everything to `FeatureSpace`, making the workflow
 extremely quick and easy.
 
 ### The dataset
@@ -56,108 +55,90 @@ Target | Diagnosis of heart disease (1 = true; 0 = false) | Target
 
 ## Setup
 
-```{r}
-library(readr)
-library(dplyr, warn.conflicts = FALSE)
-library(tensorflow)
-library(tfdatasets)
-library(keras3, warn.conflicts = FALSE)
+```python
+import os
 
-conflicted::conflicts_prefer(
-  keras3::shape(),
-  keras3::set_random_seed(),
-  dplyr::filter(),
-  .quiet = TRUE
-)
+os.environ["KERAS_BACKEND"] = "tensorflow"
 
-use_backend("tensorflow")
+import tensorflow as tf
+import pandas as pd
+import keras
+from keras.utils import FeatureSpace
 ```
 
 ## Preparing the data
 
 Let's download the data and load it into a Pandas dataframe:
 
-```{r, include=FALSE}
-file_url <- "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
-df <- read_csv(file_url, col_types = cols(
-  oldpeak = col_double(),
-  thal = col_character(),
-  .default = col_integer()
-))
-
-# the dataset has two malformed rows, filter them out
-df <- df |> filter(!thal %in% c("1", "2"))
+```python
+file_url = "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
+dataframe = pd.read_csv(file_url)
 ```
 
 The dataset includes 303 samples with 14 columns per sample
-(13 features, plus the target label)
+(13 features, plus the target label):
 
-```{r}
-glimpse(df)
+```python
+print(dataframe.shape)
 ```
-
 
 Here's a preview of a few samples:
 
-```{r paged.print=FALSE}
-df
+```python
+dataframe.head()
 ```
-
 
 The last column, "target", indicates whether the patient
 has a heart disease (1) or not (0).
 
 Let's split the data into a training and validation set:
 
-```{r}
-val_idx <- nrow(df) %>% sample.int(., . * 0.2)
-val_df <- df[val_idx, ] 
-train_df <- df[-val_idx, ]
+```python
+val_dataframe = dataframe.sample(frac=0.2, random_state=1337)
+train_dataframe = dataframe.drop(val_dataframe.index)
 
-cat(sprintf(
-  "Using %d samples for training and %d for validation",
-  nrow(train_df), nrow(val_df)
-))
+print(
+    "Using %d samples for training and %d for validation"
+    % (len(train_dataframe), len(val_dataframe))
+)
 ```
 
-Let's generate `tf_dataset` objects for each dataframe:
+Let's generate `tf.data.Dataset` objects for each dataframe:
 
-```{r}
-dataframe_to_dataset <- function(df) {
-  labels <- df |> pull(target) |> as.integer()
-  inputs <- df |> select(-target) |> as.list()
-  
-  ds <- tensor_slices_dataset(list(inputs, labels)) |>
-    dataset_shuffle(nrow(df))
-  
-  ds
-}
+```python
+def dataframe_to_dataset(dataframe):
+    dataframe = dataframe.copy()
+    labels = dataframe.pop("target")
+    ds = tf.data.Dataset.from_tensor_slices((dict(dataframe), labels))
+    ds = ds.shuffle(buffer_size=len(dataframe))
+    return ds
 
-train_ds <- dataframe_to_dataset(train_df)
-val_ds <- dataframe_to_dataset(val_df)
+
+train_ds = dataframe_to_dataset(train_dataframe)
+val_ds = dataframe_to_dataset(val_dataframe)
 ```
 
-Each `tf_dataset` yields a tuple `(input, target)` where `input` is a dictionary (a named list) of features
+Each `Dataset` yields a tuple `(input, target)` where `input` is a dictionary of features
 and `target` is the value `0` or `1`:
 
-```{r}
-c(x, y) %<-% iter_next(as_iterator(train_ds))
-cat("Input: "); str(x)
-cat("Target: "); str(y)
+```python
+for x, y in train_ds.take(1):
+    print("Input:", x)
+    print("Target:", y)
 ```
 
 Let's batch the datasets:
 
-```{r}
-train_ds <- train_ds |> dataset_batch(32)
-val_ds <- val_ds |> dataset_batch(32)
+```python
+train_ds = train_ds.batch(32)
+val_ds = val_ds.batch(32)
 ```
 
 ## Configuring a `FeatureSpace`
 
 To configure how each feature should be preprocessed,
-we instantiate a `layer_feature_space`, and we
-pass to it a dictionary (named list with unique names) that maps the name of our features
+we instantiate a `keras.utils.FeatureSpace`, and we
+pass to it a dictionary that maps the name of our features
 to a string that describes the feature type.
 
 We have a few "integer categorical" features such as `"FBS"`,
@@ -176,42 +157,40 @@ Because the resulting co-occurences are hashed
 into a fixed-sized vector, you don't need to worry about whether
 the co-occurence space is too large.
 
-
-```{r}
-feature_space <- layer_feature_space(
-  features = list(
-    # Categorical features encoded as integers
-    sex = "integer_categorical",
-    cp = "integer_categorical",
-    fbs = "integer_categorical",
-    restecg = "integer_categorical",
-    exang = "integer_categorical",
-    ca = "integer_categorical",
-    # Categorical feature encoded as string
-    thal = "string_categorical",
-    # Numerical features to discretize
-    age = "float_discretized",
-    # Numerical features to normalize
-    trestbps = "float_normalized",
-    chol = "float_normalized",
-    thalach = "float_normalized",
-    oldpeak = "float_normalized",
-    slope = "float_normalized"
-  ),
-  # We create additional features by hashing
-  # value co-occurrences for the
-  # following groups of categorical features.
-  crosses = list(c("sex", "age"), c("thal", "ca")),
-  # The hashing space for these co-occurrences
-  # wil be 32-dimensional.
-  crossing_dim = 32,
-  # Our utility will one-hot encode all categorical
-  # features and concat all features into a single
-  # vector (one vector per sample).
-  output_mode = "concat"
+```python
+feature_space = FeatureSpace(
+    features={
+        # Categorical features encoded as integers
+        "sex": "integer_categorical",
+        "cp": "integer_categorical",
+        "fbs": "integer_categorical",
+        "restecg": "integer_categorical",
+        "exang": "integer_categorical",
+        "ca": "integer_categorical",
+        # Categorical feature encoded as string
+        "thal": "string_categorical",
+        # Numerical features to discretize
+        "age": "float_discretized",
+        # Numerical features to normalize
+        "trestbps": "float_normalized",
+        "chol": "float_normalized",
+        "thalach": "float_normalized",
+        "oldpeak": "float_normalized",
+        "slope": "float_normalized",
+    },
+    # We create additional features by hashing
+    # value co-occurrences for the
+    # following groups of categorical features.
+    crosses=[("sex", "age"), ("thal", "ca")],
+    # The hashing space for these co-occurrences
+    # wil be 32-dimensional.
+    crossing_dim=32,
+    # Our utility will one-hot encode all categorical
+    # features and concat all features into a single
+    # vector (one vector per sample).
+    output_mode="concat",
 )
 ```
-
 
 ## Further customizing a `FeatureSpace`
 
@@ -230,42 +209,38 @@ Other customizations you have access to include specifying the number of
 bins for discretizing features of type `"float_discretized"`,
 or the dimensionality of the hashing space for feature crossing.
 
-```{r}
-feature_space <- layer_feature_space(
-  features = list(
-    # Categorical features encoded as integers
-    sex       = feature_integer_categorical(num_oov_indices = 0),
-    cp        = feature_integer_categorical(num_oov_indices = 0),
-    fbs       = feature_integer_categorical(num_oov_indices = 0),
-    restecg   = feature_integer_categorical(num_oov_indices = 0),
-    exang     = feature_integer_categorical(num_oov_indices = 0),
-    ca        = feature_integer_categorical(num_oov_indices = 0),
-    # Categorical feature encoded as string
-    thal      = feature_string_categorical(num_oov_indices = 0),
-    # Numerical features to discretize
-    age       = feature_float_discretized(num_bins = 30),
-    # Numerical features to normalize
-    trestbps  = feature_float_normalized(),
-    chol      = feature_float_normalized(),
-    thalach   = feature_float_normalized(),
-    oldpeak   = feature_float_normalized(),
-    slope     = feature_float_normalized()
-  ),
-  # Specify feature cross with a custom crossing dim.
-  crosses = list(
-    feature_cross(
-      feature_names = c("sex", "age"),
-      crossing_dim = 64
-    ),
-    feature_cross(
-      feature_names = c("thal", "ca"),
-      crossing_dim = 16
-    )
-  ),
-  output_mode = "concat"
+```python
+feature_space = FeatureSpace(
+    features={
+        # Categorical features encoded as integers
+        "sex": FeatureSpace.integer_categorical(num_oov_indices=0),
+        "cp": FeatureSpace.integer_categorical(num_oov_indices=0),
+        "fbs": FeatureSpace.integer_categorical(num_oov_indices=0),
+        "restecg": FeatureSpace.integer_categorical(num_oov_indices=0),
+        "exang": FeatureSpace.integer_categorical(num_oov_indices=0),
+        "ca": FeatureSpace.integer_categorical(num_oov_indices=0),
+        # Categorical feature encoded as string
+        "thal": FeatureSpace.string_categorical(num_oov_indices=0),
+        # Numerical features to discretize
+        "age": FeatureSpace.float_discretized(num_bins=30),
+        # Numerical features to normalize
+        "trestbps": FeatureSpace.float_normalized(),
+        "chol": FeatureSpace.float_normalized(),
+        "thalach": FeatureSpace.float_normalized(),
+        "oldpeak": FeatureSpace.float_normalized(),
+        "slope": FeatureSpace.float_normalized(),
+    },
+    # Specify feature cross with a custom crossing dim.
+    crosses=[
+        FeatureSpace.cross(feature_names=("sex", "age"), crossing_dim=64),
+        FeatureSpace.cross(
+            feature_names=("thal", "ca"),
+            crossing_dim=16,
+        ),
+    ],
+    output_mode="concat",
 )
 ```
-
 
 ## Adapt the `FeatureSpace` to the training data
 
@@ -276,21 +251,22 @@ to adapt it to the training data. During `adapt()`, the `FeatureSpace` will:
 - Compute the mean and variance for numerical features to normalize.
 - Compute the value boundaries for the different bins for numerical features to discretize.
 
-Note that `adapt()` should be called on a `tf_dataset` which yields dicts (named lists)
+Note that `adapt()` should be called on a `tf.data.Dataset` which yields dicts
 of feature values -- no labels.
 
-```{r}
-train_ds_with_no_labels <- train_ds |> dataset_map(\(x, y) x)
-feature_space |> adapt(train_ds_with_no_labels)
+```python
+train_ds_with_no_labels = train_ds.map(lambda x, _: x)
+feature_space.adapt(train_ds_with_no_labels)
 ```
 
 At this point, the `FeatureSpace` can be called on a dict of raw feature values, and will return a
 single concatenate vector for each sample, combining encoded features and feature crosses.
 
-```{r}
-c(x, y) %<-% iter_next(as_iterator(train_ds))
-preprocessed_x <- feature_space(x)
-preprocessed_x
+```python
+for x, _ in train_ds.take(1):
+    preprocessed_x = feature_space(x)
+    print("preprocessed_x.shape:", preprocessed_x.shape)
+    print("preprocessed_x.dtype:", preprocessed_x.dtype)
 ```
 
 ## Two ways to manage preprocessing: as part of the `tf.data` pipeline, or in the model itself
@@ -319,16 +295,16 @@ do inference with an end-to-end model that includes the `FeatureSpace`.
 
 Let's create a training and validation dataset of preprocessed batches:
 
-```{r}
-preprocessed_train_ds <- train_ds |>
-  dataset_map(\(x, y) list(feature_space(x), y),
-              num_parallel_calls = tf$data$AUTOTUNE) |>
-  dataset_prefetch(tf$data$AUTOTUNE)
+```python
+preprocessed_train_ds = train_ds.map(
+    lambda x, y: (feature_space(x), y), num_parallel_calls=tf.data.AUTOTUNE
+)
+preprocessed_train_ds = preprocessed_train_ds.prefetch(tf.data.AUTOTUNE)
 
-preprocessed_val_ds <- val_ds |>
-  dataset_map(\(x, y) list(feature_space(x), y),
-              num_parallel_calls = tf$data$AUTOTUNE) |>
-  dataset_prefetch(tf$data$AUTOTUNE)
+preprocessed_val_ds = val_ds.map(
+    lambda x, y: (feature_space(x), y), num_parallel_calls=tf.data.AUTOTUNE
+)
+preprocessed_val_ds = preprocessed_val_ds.prefetch(tf.data.AUTOTUNE)
 ```
 
 ## Build a model
@@ -338,36 +314,33 @@ Time to build a model -- or rather two models:
 - A training model that expects preprocessed features (one sample = one vector)
 - An inference model that expects raw features (one sample = dict of raw feature values)
 
-```{r}
-dict_inputs <- feature_space$get_inputs()
-encoded_features <- feature_space$get_encoded_features()
+```python
+dict_inputs = feature_space.get_inputs()
+encoded_features = feature_space.get_encoded_features()
 
-predictions <- encoded_features |>
-  layer_dense(32, activation="relu") |> 
-  layer_dropout(0.5) |>
-  layer_dense(1, activation="sigmoid")
+x = keras.layers.Dense(32, activation="relu")(encoded_features)
+x = keras.layers.Dropout(0.5)(x)
+predictions = keras.layers.Dense(1, activation="sigmoid")(x)
 
-training_model <- keras_model(inputs = encoded_features, 
-                              outputs = predictions)
-training_model |> compile(optimizer = "adam",
-                          loss = "binary_crossentropy",
-                          metrics = "accuracy")
+training_model = keras.Model(inputs=encoded_features, outputs=predictions)
+training_model.compile(
+    optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"]
+)
 
-inference_model <- keras_model(inputs = dict_inputs, 
-                               outputs = predictions)
+inference_model = keras.Model(inputs=dict_inputs, outputs=predictions)
 ```
 
 ## Train the model
 
-Let's train our model for 20 epochs. Note that feature preprocessing is happening
+Let's train our model for 50 epochs. Note that feature preprocessing is happening
 as part of the tf.data pipeline, not as part of the model.
 
-```{r}
-training_model |> fit(
-  preprocessed_train_ds,
-  epochs = 20,
-  validation_data = preprocessed_val_ds,
-  verbose = 2
+```python
+training_model.fit(
+    preprocessed_train_ds,
+    epochs=20,
+    validation_data=preprocessed_val_ds,
+    verbose=2,
 )
 ```
 
@@ -378,28 +351,29 @@ We quickly get to 80% validation accuracy.
 Now, we can use our inference model (which includes the `FeatureSpace`)
 to make predictions based on dicts of raw features values, as follows:
 
-```{r}
-sample <- list(
-  age = 60,
-  sex = 1,
-  cp = 1,
-  trestbps = 145,
-  chol = 233,
-  fbs = 1,
-  restecg = 2,
-  thalach = 150,
-  exang = 0,
-  oldpeak = 2.3,
-  slope = 3,
-  ca = 0,
-  thal = "fixed"
+```python
+sample = {
+    "age": 60,
+    "sex": 1,
+    "cp": 1,
+    "trestbps": 145,
+    "chol": 233,
+    "fbs": 1,
+    "restecg": 2,
+    "thalach": 150,
+    "exang": 0,
+    "oldpeak": 2.3,
+    "slope": 3,
+    "ca": 0,
+    "thal": "fixed",
+}
+
+input_dict = {name: tf.convert_to_tensor([value]) for name, value in sample.items()}
+predictions = inference_model.predict(input_dict)
+
+print(
+    f"This particular patient had a {100 * predictions[0][0]:.2f}% probability "
+    "of having a heart disease, as evaluated by our model."
 )
-
-input_dict <- lapply(sample, \(x) op_convert_to_tensor(array(x)))
-predictions <- inference_model |> predict(input_dict)
-
-glue::glue(r"---(
-  This particular patient had a {(100 * predictions) |> signif(3)}% probability
-  of having a heart disease, as evaluated by our model.
-)---")
 ```
+
