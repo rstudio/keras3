@@ -6,6 +6,8 @@ last-modified: 2022/11/09
 description: Classify tabular data in a few lines of code.
 accelerator: GPU
 output: rmarkdown::html_vignette
+domain: structured data
+category: basic
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/structured_data/structured_data_classification_with_feature_space.py
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
@@ -77,7 +79,7 @@ use_backend("tensorflow")
 
 Let's download the data and load it into a Pandas dataframe:
 
-```{r, include=FALSE}
+```{r, output=FALSE}
 file_url <- "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
 df <- read_csv(file_url, col_types = cols(
   oldpeak = col_double(),

@@ -1,7 +1,7 @@
 ---
 title: Keras examples
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-30; Last Rendered: 2024-02-19'
+date: 'Last Modified: 2023-11-30; Last Rendered: 2024-02-24'
 vignette: >
   %\VignetteIndexEntry{Keras examples}
   %\VignetteEngine{knitr::rmarkdown}
@@ -10,6 +10,18 @@ vignette: >
 
 <div class="container">
 ```{=html}
+
+<h2 class="mt-2">Structured Data</h2><div class="row row-cols-1 row-cols-md-2 g-4"><div class="col">
+<div class="card h-100">
+<h5 class="card-header bg-transparent">Structured data classification with FeatureSpace</h5>
+<div class="card-body d-flex flex-column">
+<span class="badge rounded-pill bg-success mb-1" style="align-self: flex-start">basic</span>
+<p class="card-text">Classify tabular data in a few lines of code.</p>
+<a href="structured_data_classification_with_feature_space.html" class="btn btn-primary mt-auto">See code</a>
+</div>
+</div>
+</div>
+</div>
 
 <h2 class="mt-2">Text</h2><div class="row row-cols-1 row-cols-md-2 g-4"><div class="col">
 <div class="card h-100">

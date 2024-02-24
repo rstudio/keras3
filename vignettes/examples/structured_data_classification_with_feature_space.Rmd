@@ -4,6 +4,8 @@ date-created: 2022/11/09
 last-modified: 2022/11/09
 description: Classify tabular data in a few lines of code.
 output: rmarkdown::html_vignette
+domain: structured data
+category: basic
 vignette: >
   %\VignetteIndexEntry{Structured data classification with FeatureSpace}
   %\VignetteEngine{knitr::rmarkdown}
@@ -79,6 +81,17 @@ use_backend("tensorflow")
 Let's download the data and load it into a Pandas dataframe:
 
 
+```r
+file_url <- "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
+df <- read_csv(file_url, col_types = cols(
+  oldpeak = col_double(),
+  thal = col_character(),
+  .default = col_integer()
+))
+
+# the dataset has two malformed rows, filter them out
+df <- df |> filter(!thal %in% c("1", "2"))
+```
 
 The dataset includes 303 samples with 14 columns per sample
 (13 features, plus the target label)
@@ -461,45 +474,45 @@ training_model |> fit(
 
 ```
 ## Epoch 1/20
-## 8/8 - 2s - 255ms/step - accuracy: 0.5436 - loss: 0.7011 - val_accuracy: 0.6500 - val_loss: 0.6617
+## 8/8 - 2s - 246ms/step - accuracy: 0.5436 - loss: 0.7011 - val_accuracy: 0.6500 - val_loss: 0.6617
 ## Epoch 2/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.7178 - loss: 0.6010 - val_accuracy: 0.6333 - val_loss: 0.6201
+## 8/8 - 0s - 16ms/step - accuracy: 0.7178 - loss: 0.6010 - val_accuracy: 0.6333 - val_loss: 0.6201
 ## Epoch 3/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.7386 - loss: 0.5535 - val_accuracy: 0.6667 - val_loss: 0.5949
+## 8/8 - 0s - 14ms/step - accuracy: 0.7386 - loss: 0.5535 - val_accuracy: 0.6667 - val_loss: 0.5949
 ## Epoch 4/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.7469 - loss: 0.5204 - val_accuracy: 0.6667 - val_loss: 0.5759
+## 8/8 - 0s - 18ms/step - accuracy: 0.7469 - loss: 0.5204 - val_accuracy: 0.6667 - val_loss: 0.5759
 ## Epoch 5/20
-## 8/8 - 0s - 14ms/step - accuracy: 0.7718 - loss: 0.4677 - val_accuracy: 0.6500 - val_loss: 0.5574
+## 8/8 - 0s - 21ms/step - accuracy: 0.7718 - loss: 0.4677 - val_accuracy: 0.6500 - val_loss: 0.5574
 ## Epoch 6/20
-## 8/8 - 0s - 16ms/step - accuracy: 0.7635 - loss: 0.4551 - val_accuracy: 0.6667 - val_loss: 0.5313
+## 8/8 - 0s - 23ms/step - accuracy: 0.7635 - loss: 0.4551 - val_accuracy: 0.6667 - val_loss: 0.5313
 ## Epoch 7/20
-## 8/8 - 0s - 17ms/step - accuracy: 0.7759 - loss: 0.4197 - val_accuracy: 0.6667 - val_loss: 0.5169
+## 8/8 - 0s - 23ms/step - accuracy: 0.7759 - loss: 0.4197 - val_accuracy: 0.6667 - val_loss: 0.5169
 ## Epoch 8/20
-## 8/8 - 0s - 16ms/step - accuracy: 0.8340 - loss: 0.4008 - val_accuracy: 0.6500 - val_loss: 0.5099
+## 8/8 - 0s - 22ms/step - accuracy: 0.8340 - loss: 0.4008 - val_accuracy: 0.6500 - val_loss: 0.5099
 ## Epoch 9/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8382 - loss: 0.3758 - val_accuracy: 0.6667 - val_loss: 0.5011
+## 8/8 - 0s - 18ms/step - accuracy: 0.8382 - loss: 0.3758 - val_accuracy: 0.6667 - val_loss: 0.5011
 ## Epoch 10/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8423 - loss: 0.3605 - val_accuracy: 0.6667 - val_loss: 0.4904
+## 8/8 - 0s - 17ms/step - accuracy: 0.8423 - loss: 0.3605 - val_accuracy: 0.6667 - val_loss: 0.4904
 ## Epoch 11/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8548 - loss: 0.3558 - val_accuracy: 0.6833 - val_loss: 0.4810
+## 8/8 - 0s - 13ms/step - accuracy: 0.8548 - loss: 0.3558 - val_accuracy: 0.6833 - val_loss: 0.4810
 ## Epoch 12/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8382 - loss: 0.3367 - val_accuracy: 0.7000 - val_loss: 0.4807
+## 8/8 - 0s - 13ms/step - accuracy: 0.8382 - loss: 0.3367 - val_accuracy: 0.7000 - val_loss: 0.4807
 ## Epoch 13/20
-## 8/8 - 0s - 14ms/step - accuracy: 0.8589 - loss: 0.3152 - val_accuracy: 0.7333 - val_loss: 0.4727
+## 8/8 - 0s - 13ms/step - accuracy: 0.8589 - loss: 0.3152 - val_accuracy: 0.7333 - val_loss: 0.4727
 ## Epoch 14/20
-## 8/8 - 0s - 16ms/step - accuracy: 0.8714 - loss: 0.3123 - val_accuracy: 0.7500 - val_loss: 0.4717
+## 8/8 - 0s - 13ms/step - accuracy: 0.8714 - loss: 0.3123 - val_accuracy: 0.7500 - val_loss: 0.4717
 ## Epoch 15/20
-## 8/8 - 0s - 14ms/step - accuracy: 0.8465 - loss: 0.3108 - val_accuracy: 0.7500 - val_loss: 0.4783
+## 8/8 - 0s - 13ms/step - accuracy: 0.8465 - loss: 0.3108 - val_accuracy: 0.7500 - val_loss: 0.4783
 ## Epoch 16/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8631 - loss: 0.2844 - val_accuracy: 0.7500 - val_loss: 0.4665
+## 8/8 - 0s - 14ms/step - accuracy: 0.8631 - loss: 0.2844 - val_accuracy: 0.7500 - val_loss: 0.4665
 ## Epoch 17/20
 ## 8/8 - 0s - 14ms/step - accuracy: 0.8589 - loss: 0.3123 - val_accuracy: 0.7667 - val_loss: 0.4750
 ## Epoch 18/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8755 - loss: 0.2879 - val_accuracy: 0.7667 - val_loss: 0.4763
+## 8/8 - 0s - 13ms/step - accuracy: 0.8755 - loss: 0.2879 - val_accuracy: 0.7667 - val_loss: 0.4763
 ## Epoch 19/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8963 - loss: 0.2716 - val_accuracy: 0.7833 - val_loss: 0.4696
+## 8/8 - 0s - 14ms/step - accuracy: 0.8963 - loss: 0.2716 - val_accuracy: 0.7833 - val_loss: 0.4696
 ## Epoch 20/20
-## 8/8 - 0s - 15ms/step - accuracy: 0.8880 - loss: 0.2630 - val_accuracy: 0.7833 - val_loss: 0.4753
+## 8/8 - 0s - 14ms/step - accuracy: 0.8880 - loss: 0.2630 - val_accuracy: 0.7833 - val_loss: 0.4753
 ```
 
 We quickly get to 80% validation accuracy.
@@ -532,7 +545,7 @@ predictions <- inference_model |> predict(input_dict)
 ```
 
 ```
-## 1/1 - 0s - 271ms/step
+## 1/1 - 0s - 336ms/step
 ```
 
 ```r
