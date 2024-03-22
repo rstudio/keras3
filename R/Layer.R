@@ -170,7 +170,7 @@
 #'
 #' # Methods available
 #'
-#' * ```
+#' * ```r
 #'   initialize(...,
 #'              activity_regularizer = NULL,
 #'              trainable = TRUE,
@@ -200,7 +200,7 @@
 #'       which is a `"float32"` policy unless set to different value
 #'       (via `config_set_dtype_policy()`).
 #'
-#' * ```
+#' * ```r
 #'   add_loss(loss)
 #'   ```
 #'   Can be called inside of the `call()` method to add a scalar loss.
@@ -216,16 +216,16 @@
 #'       }
 #'     ```
 #'
-#' * ```
+#' * ```r
 #'   add_metric()
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   add_variable(...)
 #'   ```
 #'   Alias of `add_weight()`.
 #'
-#' * ```
+#' * ```r
 #'   add_weight(shape = NULL,
 #'              initializer = NULL,
 #'              dtype = NULL,
@@ -279,11 +279,11 @@
 #'     - `shape` (calling `shape(<variable>)` is preferred)
 #'     - `trainable`
 #'
-#' * ```
+#' * ```r
 #'   build(input_shape)
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   build_from_config(config)
 #'   ```
 #'   Builds the layer's states with the supplied config (named list of args).
@@ -296,33 +296,33 @@
 #'   Args:
 #'   * `config`: Named list containing the input shape associated with this layer.
 #'
-#' * ```
+#' * ```r
 #'   call(...)
 #'   ```
 #'   See description above
 #'
-#' * ```
+#' * ```r
 #'   compute_mask(inputs, previous_mask)
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   compute_output_shape(...)
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   compute_output_spec(...)
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   count_params()
 #'   ```
 #'   Count the total number of scalars composing the weights.
 #'
 #'   Returns:
 #'   An integer count.
-#'   ```
 #'
-#' * ```
+#'
+#' * ```r
 #'   get_build_config()
 #'   ```
 #'   Returns a named list with the layer's input shape.
@@ -340,7 +340,7 @@
 #'   Returns:
 #'   A named list containing the input shape associated with the layer.
 #'
-#' * ```
+#' * ```r
 #'   get_config()
 #'   ```
 #'   Returns the config of the object.
@@ -351,12 +351,28 @@
 #'   to consist of a (potentially complex, nested) structure of names lists
 #'   consisting of simple objects like strings, ints.
 #'
-#' * ```
+#' * ```r
 #'   get_weights()
 #'   ```
 #'   Return the values of `layer$weights` as a list of R or NumPy arrays.
 #'
-#' * ```
+#' * ```r
+#'   quantize(mode)
+#'   ```
+#'   Currently, only the `Dense` and `EinsumDense` layers support in-place
+#'   quantization via this `quantize()` method.
+#'
+#'   Example:
+#'   ```r
+#'   model$quantize("int8") # quantize model in-place
+#'   model |> predict(data) # faster inference
+#'   ```
+#'
+#' * ```r
+#'   quantized_call(...)
+#'   ```
+#'
+#' * ```r
 #'   load_own_variables(store)
 #'   ```
 #'   Loads the state of the layer.
@@ -367,7 +383,7 @@
 #'   Args:
 #'   * `store`: Named list from which the state of the model will be loaded.
 #'
-#' * ```
+#' * ```r
 #'   save_own_variables(store)
 #'   ```
 #'   Saves the state of the layer.
@@ -378,12 +394,12 @@
 #'   Args:
 #'   * `store`: Named list where the state of the model will be saved.
 #'
-#' * ```
+#' * ```r
 #'   set_weights(weights)
 #'   ```
 #'   Sets the values of `weights` from a list of R or NumPy arrays.
 #'
-#' * ```
+#' * ```r
 #'   stateless_call(trainable_variables, non_trainable_variables,
 #'                  ..., return_losses = FALSE)
 #'   ```
@@ -428,11 +444,11 @@
 #'     \(variable, value) variable$assign(value))
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   symbolic_call(...)
 #'   ```
 #'
-#' * ```
+#' * ```r
 #'   from_config(config)
 #'   ```
 #'
