@@ -262,12 +262,12 @@ layer %>% adapt(c(0, 2))
 input_ds = tfdatasets::range_dataset(0, 3)
 normalized_ds = tfdatasets::dataset_map(input_ds, layer)
 out <- iterate(normalized_ds$as_numpy_iterator())
-expect_equal(out, list(array(-1), array(0), array(1)))
+expect_equal(c(out), c(array(-1), array(0), array(1)))
 
 layer %>% adapt(c(-1, 1))
 normalized_ds = tfdatasets::dataset_map(input_ds, layer) # Re-map over the input dataset.
 out <- iterate(normalized_ds$as_numpy_iterator())
-expect_equal(out, list(array(0), array(1), array(2)))
+expect_equal(c(out), c(array(0), array(1), array(2)))
 
 })
 
