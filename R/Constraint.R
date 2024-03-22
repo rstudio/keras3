@@ -91,3 +91,13 @@ Constraint <- function(classname, call = NULL, get_config = NULL,
     private = private
   )
 }
+
+
+as_constraint <- function(x) {
+  if(inherits(x, "keras.src.constraints.constraints.Constraint"))
+    return(x)
+  if(!is_bare_r_function(x))
+    stop("constraint must be a keras3::Constraint() instance or a bare function")
+  classname <- get_function_name(x) %||% "CustomConstraint"
+  Constraint(classname, call = x)()
+}

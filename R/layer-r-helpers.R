@@ -20,6 +20,14 @@
 #' @noRd
 create_layer <- function(LayerClass, object, args = list()) {
 
+  # Starting in Keras 3.1, constraints can't be simple callable functions, they
+  # *must* inherit from keras.constraints.Constraint()
+  args <- imap(args, function(arg, name) {
+    if (endsWith(name, "_constraint") && is_bare_r_function(arg))
+      arg <- as_constraint(arg)
+    arg
+  })
+
   args <- lapply(args, resolve_py_obj)
 
   if (!inherits(LayerClass, "python.builtin.object")) # e.g., R6ClassGenerator

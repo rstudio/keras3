@@ -388,7 +388,7 @@ resolve_py_obj <- function(x, default_name = "anonymous_R_function",
   # - to resolve args that can come in as callables to `compile()`
   #    (e.g., loss, metrics)
   # - to resolve args that can come in as callables passed to layer_* constructors.
-  #    (e.g., constraints, activations, initializers)
+  #    (e.g., activations, initializers)
   # - to resolve custom_objects supplied to the saving & serialization API,
   #    (e.g., with_custom_object_scope(), load_model(), ...)
 
@@ -465,6 +465,14 @@ as_py_function <- function(fn, default_name = "r_func") {
   py_func2(fn, convert = TRUE, name = name)
 }
 
+get_function_name <- function(fn) {
+  if (inherits(fn, "python.builtin.object"))
+    return(py_to_r(py_get_attr(fn, "__name__")))
+
+  attr(fn, "py_function_name", TRUE) %||%
+  attr(fn, "__name__", TRUE) %||%
+  attr(fn, "name", TRUE)
+}
 
 
 
