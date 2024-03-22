@@ -80,9 +80,8 @@ op_transpose(c)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 3.]
-##  [1. 4.]
-##  [2. 5.]], shape=(3, 2), dtype=float64)
+## [[0. 1. 2.]
+##  [3. 4. 5.]], shape=(2, 3), dtype=float64)
 ## tf.Tensor(
 ## [[0. 3.]
 ##  [1. 4.]
