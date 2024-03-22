@@ -15,6 +15,8 @@ keras.utils.image_dataset_from_directory(
   follow_links=False,
   crop_to_aspect_ratio=False,
   data_format=None
+  data_format=None,
+  verbose=True
 )
 __doc__
 Generates a `tf.data.Dataset` from image files in a directory.
@@ -100,6 +102,8 @@ Args:
         preserved.
     data_format: If None uses keras.config.image_data_format()
         otherwise either 'channel_last' or 'channel_first'.
+    verbose: Whether to display number information on classes and
+        number of files found. Defaults to `True`.
 
 Returns:
 
@@ -130,3 +134,4 @@ Rules regarding number of channels in the yielded images:
     there are 3 channels in the image tensors.
 - if `color_mode` is `"rgba"`,
     there are 4 channels in the image tensors.
+
