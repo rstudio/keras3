@@ -137,6 +137,8 @@ class Metric(builtins.object)
  |      Returns:
  |          A scalar tensor, or a dictionary of scalar tensors.
  |
+ |  stateless_reset_state(self)
+ |
  |  stateless_result(self, metric_variables)
  |
  |  stateless_update_state(
