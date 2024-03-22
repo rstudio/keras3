@@ -424,6 +424,15 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' default (`crop_to_aspect_ratio = FALSE`), aspect ratio may not be
 #' preserved.
 #'
+#' @param pad_to_aspect_ratio
+#' If `TRUE`, resize the images without aspect
+#' ratio distortion. When the original aspect ratio differs from the
+#' target aspect ratio, the output image will be padded so as to
+#' return the largest possible window in the image
+#' (of size `image_size`) that matches the target aspect ratio. By
+#' default (`pad_to_aspect_ratio=FALSE`), aspect ratio may not be
+#' preserved.
+#'
 #' @param data_format
 #' If `NULL` uses [`config_image_data_format()`]
 #' otherwise either `'channel_last'` or `'channel_first'`.
@@ -446,8 +455,8 @@ function (directory, labels = "inferred", label_mode = "int",
           class_names = NULL, color_mode = "rgb", batch_size = 32L,
           image_size = list(256L, 256L), shuffle = TRUE, seed = NULL,
           validation_split = NULL, subset = NULL, interpolation = "bilinear",
-          follow_links = FALSE, crop_to_aspect_ratio = FALSE, data_format = NULL,
-          verbose = TRUE)
+          follow_links = FALSE, crop_to_aspect_ratio = FALSE,
+          pad_to_aspect_ratio = FALSE, data_format = NULL, verbose = TRUE)
 {
   args <- capture_args(list(labels = as_integer, label_mode = as_integer,
                              batch_size = as_integer, seed = as_integer))
