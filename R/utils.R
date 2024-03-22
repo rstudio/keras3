@@ -373,9 +373,10 @@ function (x, num_classes = NULL)
 #'
 #' This sets:
 #' - the R session seed: [`set.seed()`]
-#' - the Python session seed: `import random; random.seed()`
-#' - the Python NumPy seed: `import numpy; numpy.random.seed()`
-#' - the TensorFlow seed: `tf$random$set_seed()`
+#' - the Python session seed: `import random; random.seed(seed)`
+#' - the Python NumPy seed: `import numpy; numpy.random.seed(seed)`
+#' - the TensorFlow seed: `tf$random$set_seed(seed)` (only if using the TensorFlow backend)
+#' - The Torch seed: `import("torch")$manual_seed(seed)`
 #' - and disables Python hash randomization.
 #'
 #' Note that the TensorFlow seed is set even if you're not using TensorFlow
