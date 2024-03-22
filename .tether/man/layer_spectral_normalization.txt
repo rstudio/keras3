@@ -78,3 +78,9 @@ class SpectralNormalization(keras.src.layers.core.wrapper.Wrapper)
  |      This method will update the value of `self.kernel` with the
  |      spectral normalized value, so that the layer is ready for `call()`.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

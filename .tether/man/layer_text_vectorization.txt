@@ -366,4 +366,9 @@ class TextVectorization(keras.src.layers.layer.Layer)
  |  variable_dtype
  |      The dtype of the state (weights) of the layer.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

@@ -128,4 +128,9 @@ class DepthwiseConv2D(keras.src.layers.convolutional.base_depthwise_conv.BaseDep
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

@@ -165,3 +165,9 @@ class ConvLSTM2D(keras.src.layers.rnn.conv_lstm.ConvLSTM)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

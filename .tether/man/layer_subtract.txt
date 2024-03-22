@@ -42,4 +42,9 @@ class Subtract(keras.src.layers.merging.base_merge.Merge)
  |
  |  build(self, input_shape)
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

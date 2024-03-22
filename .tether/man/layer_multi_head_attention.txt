@@ -175,4 +175,9 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |
  |  value_dim
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

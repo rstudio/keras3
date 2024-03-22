@@ -124,4 +124,9 @@ class GRUCell(keras.src.layers.layer.Layer, keras.src.layers.rnn.dropout_rnn_cel
  |
  |  get_initial_state(self, batch_size=None)
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

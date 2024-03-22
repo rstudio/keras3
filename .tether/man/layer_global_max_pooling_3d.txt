@@ -70,3 +70,9 @@ class GlobalMaxPooling3D(keras.src.layers.pooling.base_global_pooling.BaseGlobal
  |
  |  call(self, inputs)
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

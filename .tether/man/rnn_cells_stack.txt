@@ -88,4 +88,9 @@ class StackedRNNCells(keras.src.layers.layer.Layer)
  |
  |  state_size
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

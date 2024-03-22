@@ -83,3 +83,9 @@ class GlobalAveragePooling1D(keras.src.layers.pooling.base_global_pooling.BaseGl
  |    mask=None
  |  )
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

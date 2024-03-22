@@ -167,4 +167,9 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |
  |  kernel
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 
