@@ -74,15 +74,20 @@ op_sum(a, axis = -1)
 
 Compute a matrix transpose or reorder any number of axes:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_einsum("ji", c)
-op_einsum("ij -> ji", c)
-op_transpose(c)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_einsum("ji", c) # return c unchanged
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0. 1. 2.]
 ##  [3. 4. 5.]], shape=(2, 3), dtype=float64)
-## tf.Tensor(
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_einsum("ij -> ji", c) # transpose
+op_transpose(c)          # same as above
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0. 3.]
 ##  [1. 4.]
 ##  [2. 5.]], shape=(3, 2), dtype=float64)

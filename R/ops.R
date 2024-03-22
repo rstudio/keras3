@@ -4213,9 +4213,11 @@ keras$ops$dot(x1, x2)
 #' Compute a matrix transpose or reorder any number of axes:
 #'
 #' ```{r, results = 'hold'}
-#' op_einsum("ji", c)
-#' op_einsum("ij -> ji", c)
-#' op_transpose(c)
+#' op_einsum("ji", c) # return c unchanged
+#' ````
+#' ```{r, results = 'hold'}
+#' op_einsum("ij -> ji", c) # transpose
+#' op_transpose(c)          # same as above
 #' ```
 #'
 #' Matrix vector multiplication:
