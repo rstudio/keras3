@@ -6132,7 +6132,7 @@ function (x)
 keras$ops$sign(x)
 
 
-#' Trigonomeric sine, element-wise.
+#' Trigonometric sine, element-wise.
 #'
 #' @returns
 #' Output tensor of same shape as `x`.
