@@ -79,6 +79,9 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |      LossScaleOptimizer
  |      keras.src.optimizers.optimizer.Optimizer
  |      keras.src.backend.tensorflow.optimizer.TFOptimizer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
  |      keras.src.optimizers.base_optimizer.BaseOptimizer
  |      builtins.object
  |
@@ -173,5 +176,10 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |  Data descriptors defined here:
  |
  |  learning_rate
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
  |
 

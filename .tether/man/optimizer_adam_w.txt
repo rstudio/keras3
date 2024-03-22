@@ -97,6 +97,9 @@ class AdamW(keras.src.optimizers.adam.Adam)
  |      keras.src.optimizers.adam.Adam
  |      keras.src.optimizers.optimizer.Optimizer
  |      keras.src.backend.tensorflow.optimizer.TFOptimizer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
  |      keras.src.optimizers.base_optimizer.BaseOptimizer
  |      builtins.object
  |
@@ -120,5 +123,10 @@ class AdamW(keras.src.optimizers.adam.Adam)
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
  |
 
