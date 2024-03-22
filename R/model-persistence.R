@@ -506,7 +506,7 @@ function (object, name = NULL, package = NULL)
 #' Get/set the currently registered custom objects.
 #'
 #' @description
-#' Custom objects set using using `custom_object_scope()` are not added to the
+#' Custom objects set using `custom_object_scope()` are not added to the
 #' global list of custom objects, and will not appear in the returned
 #' list.
 #'

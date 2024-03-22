@@ -98,6 +98,7 @@ class Attention(keras.src.layers.layer.Layer)
  |  )
  |
  |  compute_output_shape(self, input_shape)
+ |      Returns shape of value tensor dim, but for query tensor length
  |
  |  get_config(self)
  |      Returns the config of the object.

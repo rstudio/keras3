@@ -694,7 +694,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' ```
 #'
 #' To specify the idf weights for oov tokens, you will need to pass the entire
-#' vocabularly including the leading oov token.
+#' vocabulary including the leading oov token.
 #'
 #' ```{r}
 #' vocab <- c(-1, 12, 36, 1138, 42) |> as.integer()
@@ -1882,7 +1882,7 @@ function (object, height, width, interpolation = "bilinear",
 #' ```
 #'
 #' To specify the idf weights for oov values, you will need to pass the entire
-#' vocabularly including the leading oov token.
+#' vocabulary including the leading oov token.
 #'
 #' ```{r}
 #' vocab <- c("[UNK]", "a", "b", "c", "d")

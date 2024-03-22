@@ -1,4 +1,4 @@
-Help on class BackupAndRestore in module keras.src.callbacks.backup_and_restore_callback:
+Help on class BackupAndRestore in module keras.src.callbacks.backup_and_restore:
 
 class BackupAndRestore(keras.src.callbacks.callback.Callback)
  |  BackupAndRestore(backup_dir, save_freq='epoch', delete_checkpoint=True)
@@ -128,3 +128,4 @@ class BackupAndRestore(keras.src.callbacks.callback.Callback)
  |            `on_epoch_end()` is passed to this argument for this method but
  |            that may change in the future.
  |
+
