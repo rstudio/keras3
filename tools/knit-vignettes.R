@@ -1,12 +1,12 @@
 #!/usr/bin/env Rscript
 
+Sys.setenv(CUDA_VISIBLE_DEVICES="")
 envir::attach_source("tools/knit.R")
-
 library(tfdatasets, exclude = c("shape"))
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(keras3)
 
-
+if(!length(files <- commandArgs(TRUE)))
 files <- list.files("vignettes-src",
                     pattern = "^[^_.].+\\.[RrQq]md",
                     full.names = TRUE)
@@ -30,6 +30,11 @@ files <- list.files("vignettes-src",
 
 for (f in files) {
   cli::cli_h1(f)
+  callr::r(function(f) {
+    Sys.setenv(CUDA_VISIBLE_DEVICES = "0")
+    envir::import_from("tools/knit.R", knit_vignette)
+    knit_vignette(f)
+  }, args = list(f))
   knit_vignette(f)
 }
 
