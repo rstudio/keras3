@@ -28,7 +28,9 @@ install_keras <- function(
     has_nvidia_gpu <- function()
       tryCatch(as.logical(length(system("lspci | grep -i nvidia", intern = TRUE))),
                warning = function(w) FALSE)
-    gpu <- (is_linux() && has_nvidia_gpu()) || is_mac_arm64()
+    # don't install tensorflow-metal until it's been updated
+    # https://pypi.org/project/tensorflow-metal/#history
+    gpu <- (is_linux() && has_nvidia_gpu()) ## ||  is_mac_arm64()
   }
 
   # keras requires tensorflow be installed still.
@@ -51,9 +53,9 @@ install_keras <- function(
   }
 
   # The "numpy" backend requires that "jax" be installed
-  if("jax" %in% backend && !is.null(extra_packages))
-    # undeclared dependency, import fails otherwise
-    append(extra_packages) <- "packaging"
+  # if("jax" %in% backend && !is.null(extra_packages))
+  #   # undeclared dependency, import fails otherwise
+  #   append(extra_packages) <- "packaging"
 
   backend <- unlist(lapply(backend, function(name)
     switch(name,
@@ -79,7 +81,11 @@ install_keras <- function(
   if (length(backend))
     reticulate::py_install(backend, envname = envname)
 
-  reticulate::py_install("keras==3.0.*", envname = envname)
+  if(gpu && is_linux()) {
+    configure_cudnn_symlinks(envname = envname)
+  }
+
+  reticulate::py_install("keras==3.*", envname = envname)
                          #, pip_ignore_installed = TRUE)
 
   message("Finished installing Keras!")
@@ -137,3 +143,62 @@ is_keras_loaded <- function() {
   #  removes 'module' from the lazy_loaded PyObjectRef module env)
   !exists("module", envir = keras)
 }
+
+
+
+get_cudnn_path <- function(python) {
+
+  # For TF 2.13, this assumes that someone already has cudn 11-8 installed,
+  # e.g., on ubuntu:
+  # sudo apt install cuda-toolkit-11-8
+  # also, that `python -m pip install 'nvidia-cudnn-cu11==8.6.*'`
+
+  force(python)
+  cudnn_module_path <- suppressWarnings(system2(
+    python, c("-c", shQuote("import nvidia.cudnn;print(nvidia.cudnn.__file__)")),
+    stdout = TRUE, stderr = TRUE))
+  if (!is.null(attr(cudnn_module_path, "status")) ||
+      !is_string(cudnn_module_path) ||
+      !file.exists(cudnn_module_path))
+    return()
+
+  dirname(cudnn_module_path)
+
+}
+
+configure_cudnn_symlinks <- function(envname) {
+  python <- reticulate::virtualenv_python(envname)
+
+  cudnn_path <- get_cudnn_path(python)
+  # "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn"
+
+  cudnn_sos <- Sys.glob(paste0(cudnn_path, "/lib/*.so*"))
+  # [1] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_adv_infer.so.8"
+  # [2] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_adv_train.so.8"
+  # [3] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_cnn_infer.so.8"
+  # [4] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_cnn_train.so.8"
+  # [5] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_ops_infer.so.8"
+  # [6] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_ops_train.so.8"
+  # [7] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn.so.8"
+
+  # "/home/tomasz/.virtualenvs/r-tensorflow/lib/python3.8/site-packages/tensorflow/__init__.py"
+  tf_lib_path <- system2(python, c("-c", shQuote("import tensorflow as tf; print(tf.__file__)")),
+                         stderr = FALSE, stdout = TRUE)
+  tf_lib_path <- dirname(tf_lib_path)
+
+  from <- sub("^.*/site-packages/", "../", cudnn_sos)
+  to <- file.path(tf_lib_path, basename(cudnn_sos))
+  writeLines("creating symlinks:")
+  writeLines(paste("-", shQuote(to), "->", shQuote(from)))
+# creating symlinks:
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_adv_infer.so.8' -> '../nvidia/cudnn/lib/libcudnn_adv_infer.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_adv_train.so.8' -> '../nvidia/cudnn/lib/libcudnn_adv_train.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_cnn_infer.so.8' -> '../nvidia/cudnn/lib/libcudnn_cnn_infer.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_cnn_train.so.8' -> '../nvidia/cudnn/lib/libcudnn_cnn_train.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_ops_infer.so.8' -> '../nvidia/cudnn/lib/libcudnn_ops_infer.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_ops_train.so.8' -> '../nvidia/cudnn/lib/libcudnn_ops_train.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn.so.8' -> '../nvidia/cudnn/lib/libcudnn.so.8'
+  file.symlink(from = from, to = to)
+
+}
+
