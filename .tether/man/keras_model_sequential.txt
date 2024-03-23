@@ -139,4 +139,9 @@ class Sequential(keras.src.models.model.Model)
  |
  |  outputs
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

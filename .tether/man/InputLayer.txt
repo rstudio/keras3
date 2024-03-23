@@ -42,4 +42,9 @@ class InputLayer(keras.src.layers.layer.Layer)
  |  dtype
  |      Alias of `layer.variable_dtype`.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 
