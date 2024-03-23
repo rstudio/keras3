@@ -37,29 +37,8 @@ class Average(keras.src.layers.merging.base_merge.Merge)
  |      keras.src.ops.operation.Operation
  |      builtins.object
  |
- |  Methods inherited from keras.src.layers.merging.base_merge.Merge:
+ |  Data and other attributes defined here:
  |
- |  __init__(self, **kwargs)
- |      Initialize self.  See help(type(self)) for accurate signature.
- |
- |  build(self, input_shape)
- |
- |  call(self, inputs)
- |
- |  compute_mask(
- |    self,
- |    inputs,
- |    mask=None
- |  )
- |
- |  compute_output_shape(self, input_shape)
- |
- |  compute_output_spec(self, inputs)
- |
- |  get_config(self)
- |      Returns the config of the object.
- |
- |      An object config is a Python dictionary (serializable)
- |      containing the information needed to re-instantiate it.
+ |  __annotations__ = {}
  |
 
