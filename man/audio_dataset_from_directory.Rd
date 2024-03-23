@@ -17,7 +17,8 @@ audio_dataset_from_directory(
   seed = NULL,
   validation_split = NULL,
   subset = NULL,
-  follow_links = FALSE
+  follow_links = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -78,6 +79,9 @@ reserve for validation.}
 
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
 Defaults to \code{FALSE}.}
+
+\item{verbose}{Whether to display number information on classes and
+number of files found. Defaults to \code{TRUE}.}
 }
 \value{
 A \code{tf.data.Dataset} object.

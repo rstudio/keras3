@@ -330,7 +330,7 @@ layer(data)
 }\if{html}{\out{</div>}}
 
 To specify the idf weights for oov tokens, you will need to pass the entire
-vocabularly including the leading oov token.
+vocabulary including the leading oov token.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(-1, 12, 36, 1138, 42) |> as.integer()
 idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)

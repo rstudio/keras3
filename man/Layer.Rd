@@ -233,7 +233,7 @@ stopifnot(exprs = \{
 \itemize{
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{initialize(...,
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{initialize(...,
            activity_regularizer = NULL,
            trainable = TRUE,
            dtype = NULL,
@@ -266,7 +266,7 @@ which is a \code{"float32"} policy unless set to different value
 }
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{add_loss(loss)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_loss(loss)
 }\if{html}{\out{</div>}}
 
 Can be called inside of the \code{call()} method to add a scalar loss.
@@ -282,17 +282,17 @@ Example:
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{add_metric()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_metric()
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{add_variable(...)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_variable(...)
 }\if{html}{\out{</div>}}
 
 Alias of \code{add_weight()}.
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{add_weight(shape = NULL,
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_weight(shape = NULL,
            initializer = NULL,
            dtype = NULL,
            trainable = TRUE,
@@ -353,11 +353,11 @@ Properties/Attributes:
 }
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{build(input_shape)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{build(input_shape)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{build_from_config(config)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{build_from_config(config)
 }\if{html}{\out{</div>}}
 
 Builds the layer's states with the supplied config (named list of args).
@@ -373,37 +373,34 @@ Args:
 }
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{call(...)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{call(...)
 }\if{html}{\out{</div>}}
 
 See description above
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{compute_mask(inputs, previous_mask)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{compute_mask(inputs, previous_mask)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_shape(...)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{compute_output_shape(...)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{compute_output_spec(...)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{compute_output_spec(...)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{count_params()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{count_params()
 }\if{html}{\out{</div>}}
 
 Count the total number of scalars composing the weights.
 
 Returns:
 An integer count.
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{
-}\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{get_build_config()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{get_build_config()
 }\if{html}{\out{</div>}}
 
 Returns a named list with the layer's input shape.
@@ -422,7 +419,7 @@ Returns:
 A named list containing the input shape associated with the layer.
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{get_config()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{get_config()
 }\if{html}{\out{</div>}}
 
 Returns the config of the object.
@@ -434,13 +431,30 @@ to consist of a (potentially complex, nested) structure of names lists
 consisting of simple objects like strings, ints.
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{get_weights()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{get_weights()
 }\if{html}{\out{</div>}}
 
 Return the values of \code{layer$weights} as a list of R or NumPy arrays.
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{load_own_variables(store)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode)
+}\if{html}{\out{</div>}}
+
+Currently, only the \code{Dense} and \code{EinsumDense} layers support in-place
+quantization via this \code{quantize()} method.
+
+Example:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model$quantize("int8") # quantize model in-place
+model |> predict(data) # faster inference
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_call(...)
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{load_own_variables(store)
 }\if{html}{\out{</div>}}
 
 Loads the state of the layer.
@@ -454,7 +468,7 @@ Args:
 }
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{save_own_variables(store)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{save_own_variables(store)
 }\if{html}{\out{</div>}}
 
 Saves the state of the layer.
@@ -468,13 +482,13 @@ Args:
 }
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{set_weights(weights)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{set_weights(weights)
 }\if{html}{\out{</div>}}
 
 Sets the values of \code{weights} from a list of R or NumPy arrays.
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{stateless_call(trainable_variables, non_trainable_variables,
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{stateless_call(trainable_variables, non_trainable_variables,
                ..., return_losses = FALSE)
 }\if{html}{\out{</div>}}
 
@@ -521,11 +535,11 @@ purrr::walk2(
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{symbolic_call(...)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{symbolic_call(...)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{from_config(config)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{from_config(config)
 }\if{html}{\out{</div>}}
 
 Creates a layer from its config.

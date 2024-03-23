@@ -202,6 +202,10 @@ A scalar tensor, or a named list of scalar tensors.
 }\if{html}{\out{</div>}}
 \item
 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{stateless_reset_state()
+}\if{html}{\out{</div>}}
+\item
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{stateless_update_state(metric_variables, ...)
 }\if{html}{\out{</div>}}
 \item

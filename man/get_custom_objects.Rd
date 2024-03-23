@@ -21,7 +21,7 @@ An R named list mapping registered names to registered objects.
 \code{set_custom_objects()} returns the registry values before updating, invisibly.
 }
 \description{
-Custom objects set using using \code{custom_object_scope()} are not added to the
+Custom objects set using \code{custom_object_scope()} are not added to the
 global list of custom objects, and will not appear in the returned
 list.
 }
