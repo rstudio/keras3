@@ -447,3 +447,50 @@ function (shape, alpha, beta, dtype = NULL, seed = NULL)
   do.call(keras$random$beta, args)
 }
 
+
+#' Draw samples from a Binomial distribution.
+#'
+#' @description
+#' The values are drawn from a Binomial distribution with
+#' specified trial count and probability of success.
+#'
+#' @param shape
+#' The shape of the random values to generate.
+#'
+#' @param counts
+#' A number or array of numbers representing the
+#' number of trials. It must be broadcastable with `probabilities`.
+#'
+#' @param probabilities
+#' A float or array of floats representing the
+#' probability of success of an individual event.
+#' It must be broadcastable with `counts`.
+#'
+#' @param dtype
+#' Optional dtype of the tensor. Only floating point types are
+#' supported. If not specified, `config_floatx()` is used,
+#' which defaults to `"float32"` unless you configured it otherwise (via
+#' `config_set_floatx(float_dtype)`).
+#'
+#' @param seed
+#' A Python integer or instance of
+#' `random_seed_generator()`.
+#' Used to make the behavior of the initializer
+#' deterministic. Note that an initializer seeded with an integer
+#' or None (unseeded) will produce the same random values
+#' across multiple calls. To get different random values
+#' across multiple calls, use as seed an instance
+#' of `random_seed_generator()`.
+#'
+#' @export
+#' @returns A tensor of random values.
+#' @family random
+#' @tether keras.random.binomial
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/random/binomial>
+random_binomial <-
+function (shape, counts, probabilities, dtype = NULL, seed = NULL)
+{
+    args <- capture_args(list(shape = normalize_shape, seed = as_integer))
+    do.call(keras$random$binomial, args)
+}
