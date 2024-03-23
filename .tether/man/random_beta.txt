@@ -1,0 +1,33 @@
+__signature__
+keras.random.beta(
+  shape,
+  alpha,
+  beta,
+  dtype=None,
+  seed=None
+)
+__doc__
+Draw samples from a Beta distribution.
+
+The values are drawm from a Beta distribution parametrized
+by alpha and beta.
+
+Args:
+    shape: The shape of the random values to generate.
+    alpha: Float or an array of floats representing the first
+        parameter alpha. Must be broadcastable with `beta` and `shape`.
+    beta: Float or an array of floats representing the second
+        parameter beta. Must be broadcastable with `alpha` and `shape`.
+    dtype: Optional dtype of the tensor. Only floating point types are
+        supported. If not specified, `keras.config.floatx()` is used,
+        which defaults to `float32` unless you configured it otherwise (via
+        `keras.config.set_floatx(float_dtype)`).
+    seed: A Python integer or instance of
+        `keras.random.SeedGenerator`.
+        Used to make the behavior of the initializer
+        deterministic. Note that an initializer seeded with an integer
+        or None (unseeded) will produce the same random values
+        across multiple calls. To get different random values
+        across multiple calls, use as seed an instance
+        of `keras.random.SeedGenerator`.
+
