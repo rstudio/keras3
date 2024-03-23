@@ -402,3 +402,48 @@ function (seed = NULL, ...)
     args <- capture_args(list(seed = as_integer))
     do.call(keras$random$SeedGenerator, args)
 }
+
+#' Draw samples from a Beta distribution.
+#'
+#' @description
+#' The values are drawm from a Beta distribution parametrized
+#' by alpha and beta.
+#'
+#' @param shape
+#' The shape of the random values to generate.
+#'
+#' @param alpha
+#' Float or an array of floats representing the first
+#' parameter alpha. Must be broadcastable with `beta` and `shape`.
+#'
+#' @param beta
+#' Float or an array of floats representing the second
+#' parameter beta. Must be broadcastable with `alpha` and `shape`.
+#'
+#' @param dtype
+#' Optional dtype of the tensor. Only floating point types are
+#' supported. If not specified, `config_floatx()` is used,
+#' which defaults to `"float32"` unless you configured it otherwise (via
+#' `config_set_floatx(float_dtype)`).
+#'
+#' @param seed
+#' An integer or instance of
+#' `random_seed_generator()`.
+#' Used to make the behavior of the initializer
+#' deterministic. Note that an initializer seeded with an integer
+#' or NULL (unseeded) will produce the same random values
+#' across multiple calls. To get different random values
+#' across multiple calls, use as seed an instance
+#' of `random_seed_generator()`.
+#'
+#' @export
+#' @returns A tensor of random values.
+#' @family random
+#' @tether keras.random.beta
+random_beta <-
+function (shape, alpha, beta, dtype = NULL, seed = NULL)
+{
+  args <- capture_args(list(shape = normalize_shape, seed = as_integer))
+  do.call(keras$random$beta, args)
+}
+
