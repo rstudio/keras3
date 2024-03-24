@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' This is for advanced use cases where you need to subclass the base Model
+#' This is for advanced use cases where you need to subclass the base `Model`
 #' type, e.g., you want to override the `train_step()` method.
 #'
 #' If you just want to create or define a keras model, prefer [`keras_model()`]

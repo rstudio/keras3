@@ -1,3 +1,9 @@
+AbsMaxQuantizer(
+  axis,
+  value_range=(-127, 127),
+  epsilon=1e-07,
+  output_dtype='int8'
+)
 activations: Module(keras.activations)
 applications: Module(keras.applications)
 backend: Module(keras.backend)
@@ -10,6 +16,7 @@ distribution: Module(keras.distribution)
 dtype_policies: Module(keras.dtype_policies)
 DTypePolicy(name)
 export: Module(keras.export)
+FloatDTypePolicy(name)
 Function(
   inputs,
   outputs,
@@ -63,6 +70,9 @@ ops: Module(keras.ops)
 Optimizer(*args, **kwargs)
 optimizers: Module(keras.optimizers)
 preprocessing: Module(keras.preprocessing)
+QuantizedDTypePolicy(name)
+Quantizer(output_dtype='int8')
+quantizers: Module(keras.quantizers)
 random: Module(keras.random)
 Regularizer()
 regularizers: Module(keras.regularizers)
@@ -78,6 +88,7 @@ StatelessScope(
   collect_losses=False,
   initialize_variables=True
 )
+tree: Module(keras.tree)
 utils: Module(keras.utils)
 Variable(
   initializer,
