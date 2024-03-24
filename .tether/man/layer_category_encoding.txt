@@ -99,7 +99,11 @@ class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  call(self, inputs)
+ |  call(
+ |    self,
+ |    inputs,
+ |    count_weights=None
+ |  )
  |
  |  compute_output_shape(self, input_shape)
  |
