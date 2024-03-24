@@ -1,0 +1,23 @@
+__signature__
+keras.config.set_backend(backend)
+__doc__
+Reload the backend (and the Keras package).
+
+Example:
+
+```python
+keras.config.set_backend("jax")
+```
+
+⚠️ WARNING ⚠️: Using this function is dangerous and should be done
+carefully. Changing the backend will **NOT** convert
+the type of any already-instantiated objects.
+Thus, any layers / tensors / etc. already created will no
+longer be usable without errors. It is strongly recommended **not**
+to keep around **any** Keras-originated objects instances created
+before calling `set_backend()`.
+
+This includes any function or class instance that uses any Keras
+functionality. All such code needs to be re-executed after calling
+`set_backend()`.
+
