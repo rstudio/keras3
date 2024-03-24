@@ -7110,6 +7110,8 @@ keras$ops$hard_swish(x)
 #'     tensor in `y`.
 #'
 #' @export
+#' @family core ops
+#' @family ops
 #' @tether keras.ops.custom_gradient
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/custom_gradient>
