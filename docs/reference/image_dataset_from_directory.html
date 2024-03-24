@@ -127,7 +127,9 @@ Animated gifs are truncated to the first frame.</p>
 <span>  interpolation <span class="op">=</span> <span class="st">"bilinear"</span>,</span>
 <span>  follow_links <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  crop_to_aspect_ratio <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  data_format <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  pad_to_aspect_ratio <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  data_format <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -233,9 +235,24 @@ default (<code>crop_to_aspect_ratio = FALSE</code>), aspect ratio may not be
 preserved.</p></dd>
 
 
+<dt>pad_to_aspect_ratio</dt>
+<dd><p>If <code>TRUE</code>, resize the images without aspect
+ratio distortion. When the original aspect ratio differs from the
+target aspect ratio, the output image will be padded so as to
+return the largest possible window in the image
+(of size <code>image_size</code>) that matches the target aspect ratio. By
+default (<code>pad_to_aspect_ratio=FALSE</code>), aspect ratio may not be
+preserved.</p></dd>
+
+
 <dt>data_format</dt>
 <dd><p>If <code>NULL</code> uses <code><a href="config_image_data_format.html">config_image_data_format()</a></code>
 otherwise either <code>'channel_last'</code> or <code>'channel_first'</code>.</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>Whether to display number information on classes and
+number of files found. Defaults to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

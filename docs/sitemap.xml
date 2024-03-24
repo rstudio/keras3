@@ -391,6 +391,9 @@
     <loc>https://keras.posit.co/reference/config_is_traceback_filtering_enabled.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/config_set_backend.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/config_set_dtype_policy.html</loc>
   </url>
   <url>
@@ -767,6 +770,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_maximum.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/layer_mel_spectrogram.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_minimum.html</loc>
@@ -1252,6 +1258,9 @@
     <loc>https://keras.posit.co/reference/op_cumsum.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_custom_gradient.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_depthwise_conv.html</loc>
   </url>
   <url>
@@ -1367,6 +1376,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_image_affine_transform.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_image_crop.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_image_extract_patches.html</loc>
@@ -1811,6 +1823,15 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/process_utils.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/quantize_weights.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/random_beta.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/random_binomial.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/random_categorical.html</loc>

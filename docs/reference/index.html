@@ -210,6 +210,11 @@
           <code><a href="pop_layer.html">pop_layer()</a></code> 
         </dt>
         <dd>Remove the last layer in a Sequential model</dd>
+      </dl><dl><dt>
+          
+          <code><a href="quantize_weights.html">quantize_weights()</a></code> 
+        </dt>
+        <dd>Quantize the weights of a model.</dd>
       </dl></div><div class="section level2">
       
       <h3 id="save-and-load-models">Save and Load Models<a class="anchor" aria-label="anchor" href="#save-and-load-models"></a></h3>
@@ -855,6 +860,11 @@
         <dd>A preprocessing layer that maps integers to (possibly encoded) indices.</dd>
       </dl><dl><dt>
           
+          <code><a href="layer_mel_spectrogram.html">layer_mel_spectrogram()</a></code> 
+        </dt>
+        <dd>A preprocessing layer to convert raw audio signals to Mel spectrograms.</dd>
+      </dl><dl><dt>
+          
           <code><a href="layer_normalization.html">layer_normalization()</a></code> 
         </dt>
         <dd>A preprocessing layer that normalizes continuous features.</dd>
@@ -1099,6 +1109,11 @@
           <code><a href="op_convert_to_tensor.html">op_convert_to_tensor()</a></code> 
         </dt>
         <dd>Convert an array to a tensor.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_custom_gradient.html">op_custom_gradient()</a></code> 
+        </dt>
+        <dd>Decorator to define a function with a custom gradient.</dd>
       </dl><dl><dt>
           
           <code><a href="op_fori_loop.html">op_fori_loop()</a></code> 
@@ -1785,7 +1800,7 @@
           
           <code><a href="op_sin.html">op_sin()</a></code> 
         </dt>
-        <dd>Trigonomeric sine, element-wise.</dd>
+        <dd>Trigonometric sine, element-wise.</dd>
       </dl><dl><dt>
           
           <code><a href="op_sinh.html">op_sinh()</a></code> 
@@ -2161,6 +2176,11 @@
         <dd>Applies the given transform(s) to the image(s).</dd>
       </dl><dl><dt>
           
+          <code><a href="op_image_crop.html">op_image_crop()</a></code> 
+        </dt>
+        <dd>Crop <code>images</code> to a specified <code>height</code> and <code>width</code>.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_image_extract_patches.html">op_image_extract_patches()</a></code> 
         </dt>
         <dd>Extracts patches from the image(s).</dd>
@@ -2430,7 +2450,7 @@
           
           <code><a href="metric_mean_wrapper.html">metric_mean_wrapper()</a></code> 
         </dt>
-        <dd>Wrap a stateless metric function with the Mean metric.</dd>
+        <dd>Wrap a stateless metric function with the <code>Mean</code> metric.</dd>
       </dl><dl><dt>
           
           <code><a href="metric_one_hot_iou.html">metric_one_hot_iou()</a></code> 
@@ -2759,6 +2779,11 @@
           <code><a href="op_image_affine_transform.html">op_image_affine_transform()</a></code> 
         </dt>
         <dd>Applies the given transform(s) to the image(s).</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_crop.html">op_image_crop()</a></code> 
+        </dt>
+        <dd>Crop <code>images</code> to a specified <code>height</code> and <code>width</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="op_image_extract_patches.html">op_image_extract_patches()</a></code> 
@@ -3265,6 +3290,16 @@
         <dd>Shuffle the elements of a tensor uniformly at random along an axis.</dd>
       </dl><dl><dt>
           
+          <code><a href="random_beta.html">random_beta()</a></code> 
+        </dt>
+        <dd>Draw samples from a Beta distribution.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="random_binomial.html">random_binomial()</a></code> 
+        </dt>
+        <dd>Draw samples from a Binomial distribution.</dd>
+      </dl><dl><dt>
+          
           <code><a href="random_seed_generator.html">random_seed_generator()</a></code> 
         </dt>
         <dd>Generates variable seeds upon each call to a RNG-using function.</dd>
@@ -3385,6 +3420,11 @@
           <code><a href="config_is_traceback_filtering_enabled.html">config_is_traceback_filtering_enabled()</a></code> 
         </dt>
         <dd>Check if traceback filtering is enabled.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="config_set_backend.html">config_set_backend()</a></code> 
+        </dt>
+        <dd>Reload the backend (and the Keras package).</dd>
       </dl><dl><dt>
           
           <code><a href="config_set_dtype_policy.html">config_set_dtype_policy()</a></code> 
