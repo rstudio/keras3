@@ -7065,3 +7065,54 @@ keras$ops$hard_silu(x)
 op_hard_swish <-
 function (x)
 keras$ops$hard_swish(x)
+
+
+#' Decorator to define a function with a custom gradient.
+#'
+#' @description
+#' This decorator allows fine grained control over the gradients of a sequence
+#' for operations. This may be useful for multiple reasons, including providing
+#' a more efficient or numerically stable gradient for a sequence of
+#' operations.
+#'
+#' Note that `custom_gradient` only supports TensorFlow and JAX backends.
+#'
+#' # Examples
+#'
+#' ```r
+#' log1pexp <- op_custom_gradient(\(x) {
+#'
+#'     e <- op_exp(x)
+#'
+#'     grad <- function(upstream) {
+#'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
+#'     }
+#'
+#'     tuple(op_log(1 + e), grad)
+#' })
+#' ```
+#'
+#' @returns
+#' A function `h(x)` which returns the same value as `f(x)[0]` and whose
+#' gradient is determined by `f(x)[1]`.
+#'
+#' @param f
+#' Function `f(...)` that returns a tuple `(y, grad_fn)` where:
+#' - `x` is a sequence of (nested structures of) tensor inputs to the
+#'     function.
+#' - `y` is a (nested structure of) tensor outputs of applying
+#'     operations in `f` to `x`.
+#' - `grad_fn` is a function with the signature `g(...)` which
+#'     returns a list of tensors the same size as (flattened) `x`: the
+#'     derivatives of tensors in `y` with respect to the tensors in
+#'     `x`. Arguments provided to `...` are sequence of tensors the same size as
+#'     (flattened) `y` holding the initial value gradients for each
+#'     tensor in `y`.
+#'
+#' @export
+#' @tether keras.ops.custom_gradient
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/custom_gradient>
+op_custom_gradient <-
+function (f)
+keras$ops$custom_gradient(f)

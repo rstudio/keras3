@@ -149,6 +149,7 @@ cumsum(
   axis=None,
   dtype=None
 )
+custom_gradient(f)
 depthwise_conv(
   inputs,
   kernel,
