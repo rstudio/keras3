@@ -230,6 +230,17 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.la
  |              there is a mismatch in the number of weights, or a mismatch in
  |              the shape of the weights.
  |
+ |  quantize(self, mode)
+ |      Quantize the weights of the model.
+ |
+ |      Note that the model must be built first before calling this method.
+ |      `quantize` will recursively call `quantize(mode)` in all layers and
+ |      will be skipped if the layer doesn't implement the function.
+ |
+ |      Args:
+ |          mode: The mode of the quantization. Only 'int8' is supported at this
+ |              time.
+ |
  |  save(
  |    self,
  |    filepath,
@@ -371,5 +382,10 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.la
  |  Data descriptors defined here:
  |
  |  layers
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
  |
 
