@@ -42,6 +42,8 @@ distribution.
 }
 \seealso{
 Other random: \cr
+\code{\link{random_beta}()} \cr
+\code{\link{random_binomial}()} \cr
 \code{\link{random_dropout}()} \cr
 \code{\link{random_gamma}()} \cr
 \code{\link{random_integer}()} \cr

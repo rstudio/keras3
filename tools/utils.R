@@ -275,7 +275,6 @@ local({
 py_eval("tf.experimental.numpy.experimental_enable_numpy_behavior()")
 
 source_python("tools/common.py") # keras_class_type()
-rm(r) # TODO: fix in reticulate, don't export r
 
 
 # ---- collect endpoints ----

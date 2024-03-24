@@ -46,6 +46,7 @@ Other model functions: \cr
 Other layer methods: \cr
 \code{\link{count_params}()} \cr
 \code{\link{get_weights}()} \cr
+\code{\link{quantize_weights}()} \cr
 \code{\link{reset_state}()} \cr
 }
 \concept{layer methods}

@@ -58,8 +58,8 @@ doctether::retether(
     resolve_roxy_tether,
     # NULL,
   rmd_field_eval =
-    resolve_rmd_tether
-    # NULL
+    # resolve_rmd_tether
+    NULL
 )
 
 # to retether just one vignette:
