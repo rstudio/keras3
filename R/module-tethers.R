@@ -227,3 +227,15 @@ NULL
 #' @tether keras
 #' @noRd
 NULL
+
+
+# tether functions that aren't currently exported, but
+# we might want to currently export in the future.
+
+# Seems like it's only useful for dynamic switching
+# "int" to int32 or int64 depending on backend.
+#' @title standardize_dtype
+#' @name standardize_dtype
+#' @tether keras.utils.standardize_dtype
+#' @noRd
+NULL

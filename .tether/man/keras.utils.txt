@@ -175,6 +175,7 @@ split_dataset(
   shuffle=False,
   seed=None
 )
+standardize_dtype(dtype)
 text_dataset_from_directory(
   directory,
   labels='inferred',
