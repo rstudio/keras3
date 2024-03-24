@@ -364,3 +364,68 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
     args <- capture_args(list(size = as_integer))
     do.call(keras$ops$image$resize, args)
 }
+
+
+#' Crop `images` to a specified `height` and `width`.
+#'
+#' @description
+#'
+#' # Examples
+#' ```r
+#' images <- op_reshape(op_arange(1, 28, dtype="float32"), c(3, 3, 3))
+#' images[, , 1] # print the first channel of the images
+#'
+#' cropped_images <- op_image_crop(images, 0, 0, 2, 2)
+#' cropped_images[, , 1] # print the first channel of the cropped images
+#' ```
+#'
+#' @returns
+#' If `images` were 4D, a 4D float Tensor of shape
+#'     `(batch, target_height, target_width, channels)`
+#' If `images` were 3D, a 3D float Tensor of shape
+#'     `(target_height, target_width, channels)`
+#'
+#' @param images
+#' 4-D batch of images of shape `(batch, height, width, channels)`
+#' or 3-D single image of shape `(height, width, channels)`.
+#'
+#' @param top_cropping
+#' Number of columns to crop from the top.
+#'
+#' @param bottom_cropping
+#' Number of columns to crop from the bottom.
+#'
+#' @param left_cropping
+#' Number of columns to crop from the left.
+#'
+#' @param right_cropping
+#' Number of columns to crop from the right.
+#'
+#' @param target_height
+#' Height of the output images.
+#'
+#' @param target_width
+#' Width of the output images.
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @tether keras.ops.image.crop_images
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/crop_images>
+op_image_crop <-
+function (images, top_cropping = NULL, left_cropping = NULL,
+    target_height = NULL, target_width = NULL, bottom_cropping = NULL,
+    right_cropping = NULL) {
+  args <- capture_args(list(
+      top_cropping = as_integer,
+      left_cropping = as_integer,
+      bottom_cropping = as_integer,
+      right_cropping = as_integer,
+      target_height = as_integer,
+      target_width = as_integer
+  ))
+  do.call(keras$ops$image$crop_images, args)
+}
+
