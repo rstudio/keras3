@@ -6,7 +6,8 @@ last-modified: 2020/05/17
 description: Text sentiment classification starting from raw text files.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras-io/examples/nlp/text_classification_from_scratch.py
 ---
 
 ## Introduction

@@ -6,7 +6,8 @@ last-modified: 2023/06/25
 description: Complete guide to the Sequential model.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras/guides/sequential_model.py
 ---
 
 ## Setup
