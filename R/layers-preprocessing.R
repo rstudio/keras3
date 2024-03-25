@@ -2150,7 +2150,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' ```
 #'
 #' This example instantiates a `TextVectorization` layer by passing a list
-#' of vocabulary terms to the layer's `__init__()` method.
+#' of vocabulary terms to the layer's `initialize()` method.
 #'
 #' ```{r}
 #' vocab_data <- c("earth", "wind", "and", "fire")
