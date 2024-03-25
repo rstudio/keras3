@@ -238,25 +238,25 @@ based on the gradients</li>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 3.3591</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 3.3590</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 1.3602</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 1.3350</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.7650</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 1.0661</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.2881</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.4888</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.2665</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.2022</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.3431</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.4818</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Start of epoch  3</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.1888</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.2061</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.4775</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.6720</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.2158</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.2079</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -344,17 +344,17 @@ each epoch:</p>
 <span><span class="co">## Training acc over epoch: 0.8143</span></span>
 <span><span class="co">## Validation acc: 0.8817</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.5926</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.5871</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.7746</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.8091</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.1383</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.3019</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
-<span><span class="co">## Training acc over epoch: 0.8962</span></span>
-<span><span class="co">## Validation acc: 0.9082</span></span></code></pre>
+<span><span class="co">## Training acc over epoch: 0.8967</span></span>
+<span><span class="co">## Validation acc: 0.8969</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 46.08426 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 42.3063 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf_function">Speeding-up your training step with <code>tf_function()</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf_function"></a>
@@ -428,13 +428,13 @@ step:</p>
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code><span><span class="co">## Start of epoch  1</span></span>
 <span><span class="co">## Training acc over epoch: 0.0000</span></span>
-<span><span class="co">## Validation acc: 0.9082</span></span>
+<span><span class="co">## Validation acc: 0.8969</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
 <span><span class="co">## Training acc over epoch: 0.0000</span></span>
-<span><span class="co">## Validation acc: 0.9082</span></span></code></pre>
+<span><span class="co">## Validation acc: 0.8969</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 0.5402763 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 0.4490769 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">

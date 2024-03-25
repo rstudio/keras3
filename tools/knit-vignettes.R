@@ -35,7 +35,6 @@ for (f in files) {
     envir::import_from("tools/knit.R", knit_vignette)
     knit_vignette(f)
   }, args = list(f))
-  knit_vignette(f)
 }
 
 

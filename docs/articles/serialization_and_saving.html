@@ -174,7 +174,7 @@ uses the <code>.keras</code> extension.</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">get_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="co"># Create a simple model.</span></span>
+<span>    <span class="co"># Create a simple model.</span></span>
 <span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="va">outputs</span> <span class="op">&lt;-</span> <span class="va">inputs</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span>  <span class="va">model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span><span class="op">)</span></span>
@@ -236,7 +236,7 @@ method.</p>
 <span>    <span class="va">sublayer_config</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">sublayer</span></span>
 <span>    <span class="va">sublayer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="va">sublayer_config</span><span class="op">)</span></span>
 <span>    <span class="fu">cls</span><span class="op">(</span><span class="va">sublayer</span>, <span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">config</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
+<span>        <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Please see the <a href="#config_methods">Defining the config methods
 section</a> for more details and examples.</p>
@@ -338,7 +338,7 @@ custom activation function to demonstrate this.</p>
 <span><span class="co"># Upon loading, pass a named list containing the custom objects used in the</span></span>
 <span><span class="co"># `custom_objects` argument of `load_model()`.</span></span>
 <span><span class="va">reconstructed_model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span></span>
-<span>  <span class="st">"custom_model.keras"</span>,</span>
+<span>    <span class="st">"custom_model.keras"</span>,</span>
 <span>  custom_objects <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomLayer <span class="op">=</span> <span class="va">layer_custom</span>,</span>
 <span>                        custom_fn <span class="op">=</span> <span class="va">custom_fn</span><span class="op">)</span>,</span>
 <span><span class="op">)</span></span>
@@ -563,7 +563,7 @@ weight values.</li>
 weights to the values provided (as arrays).</li>
 </ul>
 <p>Examples:</p>
-<p><strong><em>Transfering weights from one layer to another, in
+<p><strong><em>Transferring weights from one layer to another, in
 memory</em></strong></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">create_layer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
@@ -577,7 +577,7 @@ memory</em></strong></p>
 <span></span>
 <span><span class="co"># Copy weights from layer 1 to layer 2</span></span>
 <span><span class="va">layer_2</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer_1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><strong><em>Transfering weights from one model to another model with
+<p><strong><em>Transferring weights from one model to another model with
 a compatible architecture, in memory</em></strong></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a simple functional model</span></span>
@@ -763,7 +763,7 @@ either in <code>initialize</code> itself or overriding the
 <span>    <span class="op">}</span>,</span>
 <span>    get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="va">super</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span>
-<span>      <span class="co"># Update the config with the custom layer's parameters</span></span>
+<span>        <span class="co"># Update the config with the custom layer's parameters</span></span>
 <span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/modifyList.html" class="external-link">modifyList</a></span><span class="op">(</span></span>
 <span>        <span class="va">config</span>,</span>
 <span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -786,8 +786,8 @@ either in <code>initialize</code> itself or overriding the
 <span>    <span class="op">}</span>,</span>
 <span>    call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">kernel</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>  <span class="op">)</span></span>
+<span>            <span class="op">}</span></span>
+<span>        <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -867,8 +867,8 @@ these objects. Let’s take a look at an example of a model where a
 <span>      <span class="va">inputs</span> <span class="op">|&gt;</span></span>
 <span>        <span class="va">self</span><span class="op">$</span><span class="fu">first_layer</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>        <span class="va">self</span><span class="op">$</span><span class="fu">second_layer</span><span class="op">(</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>  <span class="op">)</span></span>
+<span>            <span class="op">}</span></span>
+<span>        <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Let's make our first layer the custom layer from the previous example (MyDense)</span></span>

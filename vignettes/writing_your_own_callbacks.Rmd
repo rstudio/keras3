@@ -568,8 +568,7 @@ callback_early_stopping_at_min_loss <- Callback(
       add(self$wait) <- 1L
       if (self$wait >= self$patience) {
         self$stopped_epoch <- epoch
-        model <- self$model
-        model$stop_training <- TRUE
+        self$model$stop_training <- TRUE
         cat("Restoring model weights from the end of the best epoch.\n")
         model$set_weights(self$best_weights)
       }
