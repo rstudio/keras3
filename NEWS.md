@@ -1,22 +1,39 @@
 # keras3 (development version)
 
-- New functions:
+New functions:
+
+  - `quantize_weights()`: quantize model or layer weights in-place. Currently, 
+    only `Dense` and `EinsumDense` layers are supported (which is enough to 
+    cover the majority of transformers today)
+  - `layer_mel_spectrogram()`
+
+  - `random_beta()`
+  - `random_binomial()`
+
+  - `config_set_backend()`: change the backend after Keras has initialized.
   - `config_dtype_policy()`
   - `config_set_dtype_policy()`
-  - `op_batch_normalization()`
-  - `op_cholesky()`
-  - `op_det()`
-  - `op_divide_no_nan()`
-  - `op_eig()`
-  - `op_erfinv()`
-  - `op_inv()`
-  - `op_lu_factor()`
-  - `op_norm()`
-  - `op_normalize()`
-  - `op_solve_triangular()`
-  - `op_svd()`
+  
+  - New Ops 
+    - `op_custom_gradient()`
+    - `op_batch_normalization()`
+    - `op_image_crop()`
+    - `op_divide_no_nan()`
+    - `op_normalize()`
+  - New family of linear algebra ops
+    - `op_cholesky()`
+    - `op_det()`
+    - `op_eig()`
+    - `op_inv()`
+    - `op_lu_factor()`
+    - `op_norm()`
+    - `op_erfinv()`
+    - `op_solve_triangular()`
+    - `op_svd()`
 
-- Doc improvements.
+- `audio_dataset_from_directory()`, `image_dataset_from_directory()` and `text_dataset_from_directory()` gain a `verbose` argument (default `TRUE`)
+
+- `image_dataset_from_directory()` gains `pad_to_aspect_ratio` argument (default `FALSE`)
 
 - `to_categorical()`, `op_one_hot()`, and `fit()` can now accept R factors, 
   offset them to be 0-based (reported in `#1055`).
@@ -25,6 +42,8 @@
 
 - `op_array()` and `op_convert_to_tensor()` no longer error when casting R 
    doubles to integer types.
+   
+- Doc improvements.
 
 # keras3 0.1.0
 

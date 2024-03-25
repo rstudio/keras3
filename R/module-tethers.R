@@ -227,3 +227,34 @@ NULL
 #' @tether keras
 #' @noRd
 NULL
+
+
+# tether functions that aren't currently exported, but
+# we might want to currently export in the future.
+
+# Seems like it's only useful for dynamic switching
+# "int" to int32 or int64 depending on backend.
+#' @title standardize_dtype
+#' @name standardize_dtype
+#' @tether keras.utils.standardize_dtype
+#' @noRd
+NULL
+
+# These submodules seem not that useful for R users, but keep an eye on them w/ tethers.
+#' @title keras.tree
+#' @name keras.tree
+#' @tether keras.tree
+#' @noRd
+NULL
+
+#' @title keras.quantizers
+#' @name keras.quantizers
+#' @tether keras.quantizers
+#' @noRd
+NULL
+
+#' @title keras.dtype_policies
+#' @name keras.dtype_policies
+#' @tether keras.dtype_policies
+#' @noRd
+NULL

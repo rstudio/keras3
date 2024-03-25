@@ -1,3 +1,17 @@
+beta(
+  shape,
+  alpha,
+  beta,
+  dtype=None,
+  seed=None
+)
+binomial(
+  shape,
+  counts,
+  probabilities,
+  dtype=None,
+  seed=None
+)
 categorical(
   logits,
   num_samples,

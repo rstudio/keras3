@@ -1,10 +1,11 @@
 __signature__
 keras.ops.sin(x)
 __doc__
-Trigonomeric sine, element-wise.
+Trigonometric sine, element-wise.
 
 Arguments:
     x: Input tensor.
 
 Returns:
     Output tensor of same shape as `x`.
+

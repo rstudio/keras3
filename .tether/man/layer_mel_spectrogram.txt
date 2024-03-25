@@ -1,0 +1,195 @@
+Help on class MelSpectrogram in module keras.src.layers.preprocessing.audio_preprocessing:
+
+class MelSpectrogram(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+ |  MelSpectrogram(fft_length=2048, sequence_stride=512, sequence_length=None, window='hann', sampling_rate=16000, num_mel_bins=128, min_freq=20.0, max_freq=None, power_to_db=True, top_db=80.0, mag_exp=2.0, min_power=1e-10, ref_power=1.0, **kwargs)
+ |
+ |  A preprocessing layer to convert raw audio signals to Mel spectrograms.
+ |
+ |  This layer takes `float32`/`float64` single or batched audio signal as
+ |  inputs and computes the Mel spectrogram using Short-Time Fourier Transform
+ |  and Mel scaling. The input should be a 1D (unbatched) or 2D (batched) tensor
+ |  representing audio signals. The output will be a 2D or 3D tensor
+ |  representing Mel spectrograms.
+ |
+ |  A spectrogram is an image-like representation that shows the frequency
+ |  spectrum of a signal over time. It uses x-axis to represent time, y-axis to
+ |  represent frequency, and each pixel to represent intensity.
+ |  Mel spectrograms are a special type of spectrogram that use the mel scale,
+ |  which approximates how humans perceive sound. They are commonly used in
+ |  speech and music processing tasks like speech recognition, speaker
+ |  identification, and music genre classification.
+ |
+ |  References:
+ |  - [Spectrogram](https://en.wikipedia.org/wiki/Spectrogram),
+ |  - [Mel scale](https://en.wikipedia.org/wiki/Mel_scale).
+ |
+ |  Examples:
+ |
+ |  **Unbatched audio signal**
+ |
+ |  >>> layer = keras.layers.MelSpectrogram(num_mel_bins=64,
+ |  ...                                     sampling_rate=8000,
+ |  ...                                     sequence_stride=256,
+ |  ...                                     fft_length=2048)
+ |  >>> layer(keras.random.uniform(shape=(16000,))).shape
+ |  (64, 63)
+ |
+ |  **Batched audio signal**
+ |
+ |  >>> layer = keras.layers.MelSpectrogram(num_mel_bins=80,
+ |  ...                                     sampling_rate=8000,
+ |  ...                                     sequence_stride=128,
+ |  ...                                     fft_length=2048)
+ |  >>> layer(keras.random.uniform(shape=(2, 16000))).shape
+ |  (2, 80, 125)
+ |
+ |  Input shape:
+ |      1D (unbatched) or 2D (batched) tensor with shape:`(..., samples)`.
+ |
+ |  Output shape:
+ |      2D (unbatched) or 3D (batched) tensor with
+ |      shape:`(..., num_mel_bins, time)`.
+ |
+ |  Args:
+ |      fft_length: Integer, size of the FFT window.
+ |      sequence_stride: Integer, number of samples between successive STFT
+ |          columns.
+ |      sequence_length: Integer, size of the window used for applying
+ |          `window` to each audio frame. If `None`, defaults to `fft_length`.
+ |      window: String, name of the window function to use. Available values
+ |          are `"hann"` and `"hamming"`. If `window` is a tensor, it will be
+ |          used directly as the window and its length must be
+ |          `sequence_length`. If `window` is `None`, no windowing is
+ |          used. Defaults to `"hann"`.
+ |      sampling_rate: Integer, sample rate of the input signal.
+ |      num_mel_bins: Integer, number of mel bins to generate.
+ |      min_freq: Float, minimum frequency of the mel bins.
+ |      max_freq: Float, maximum frequency of the mel bins.
+ |          If `None`, defaults to `sampling_rate / 2`.
+ |      power_to_db: If True, convert the power spectrogram to decibels.
+ |      top_db: Float, minimum negative cut-off `max(10 * log10(S)) - top_db`.
+ |      mag_exp: Float, exponent for the magnitude spectrogram.
+ |          1 for magnitude, 2 for power, etc. Default is 2.
+ |      ref_power: Float, the power is scaled relative to it
+ |          `10 * log10(S / ref_power)`.
+ |      min_power: Float, minimum value for power and `ref_power`.
+ |
+ |  Method resolution order:
+ |      MelSpectrogram
+ |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    fft_length=2048,
+ |    sequence_stride=512,
+ |    sequence_length=None,
+ |    window='hann',
+ |    sampling_rate=16000,
+ |    num_mel_bins=128,
+ |    min_freq=20.0,
+ |    max_freq=None,
+ |    power_to_db=True,
+ |    top_db=80.0,
+ |    mag_exp=2.0,
+ |    min_power=1e-10,
+ |    ref_power=1.0,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  linear_to_mel_weight_matrix(
+ |    self,
+ |    num_mel_bins=20,
+ |    num_spectrogram_bins=129,
+ |    sampling_rate=8000,
+ |    lower_edge_hertz=125.0,
+ |    upper_edge_hertz=3800.0,
+ |    dtype='float32'
+ |  )
+ |      Returns a matrix to warp linear scale spectrograms to the mel scale.
+ |
+ |      Returns a weight matrix that can be used to re-weight a tensor
+ |      containing `num_spectrogram_bins` linearly sampled frequency information
+ |      from `[0, sampling_rate / 2]` into `num_mel_bins` frequency information
+ |      from `[lower_edge_hertz, upper_edge_hertz]` on the mel scale.
+ |
+ |      This function follows the [Hidden Markov Model Toolkit (HTK)](
+ |      http://htk.eng.cam.ac.uk/) convention, defining the mel scale in
+ |      terms of a frequency in hertz according to the following formula:
+ |
+ |      ```mel(f) = 2595 * log10( 1 + f/700)```
+ |
+ |      In the returned matrix, all the triangles (filterbanks) have a peak
+ |      value of 1.0.
+ |
+ |      For example, the returned matrix `A` can be used to right-multiply a
+ |      spectrogram `S` of shape `[frames, num_spectrogram_bins]` of linear
+ |      scale spectrum values (e.g. STFT magnitudes) to generate a
+ |      "mel spectrogram" `M` of shape `[frames, num_mel_bins]`.
+ |
+ |      ```
+ |      # `S` has shape [frames, num_spectrogram_bins]
+ |      # `M` has shape [frames, num_mel_bins]
+ |      M = keras.ops.matmul(S, A)
+ |      ```
+ |
+ |      The matrix can be used with `keras.ops.tensordot` to convert an
+ |      arbitrary rank `Tensor` of linear-scale spectral bins into the
+ |      mel scale.
+ |
+ |      ```
+ |      # S has shape [..., num_spectrogram_bins].
+ |      # M has shape [..., num_mel_bins].
+ |      M = keras.ops.tensordot(S, A, 1)
+ |      ```
+ |
+ |      References:
+ |      - [Mel scale (Wikipedia)](https://en.wikipedia.org/wiki/Mel_scale)
+ |
+ |      Args:
+ |          num_mel_bins: Python int. How many bands in the resulting
+ |              mel spectrum.
+ |          num_spectrogram_bins: An integer `Tensor`. How many bins there are
+ |              in the source spectrogram data, which is understood to be
+ |              `fft_size // 2 + 1`, i.e. the spectrogram only contains the
+ |              nonredundant FFT bins.
+ |          sampling_rate: An integer or float `Tensor`. Samples per second of
+ |              the input signal used to create the spectrogram. Used to figure
+ |              out the frequencies corresponding to each spectrogram bin,
+ |              which dictates how they are mapped into the mel scale.
+ |          lower_edge_hertz: Python float. Lower bound on the frequencies to be
+ |              included in the mel spectrum. This corresponds to the lower
+ |              edge of the lowest triangular band.
+ |          upper_edge_hertz: Python float. The desired top edge of the highest
+ |              frequency band.
+ |          dtype: The `DType` of the result matrix. Must be a floating point
+ |              type.
+ |
+ |      Returns:
+ |          A tensor of shape `[num_spectrogram_bins, num_mel_bins]`.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

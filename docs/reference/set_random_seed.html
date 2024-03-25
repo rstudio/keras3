@@ -6,9 +6,10 @@ sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
 This sets:
 the R session seed: set.seed()
-the Python session seed: import random; random.seed()
-the Python NumPy seed: import numpy; numpy.random.seed()
-the TensorFlow seed: tf$random$set_seed()
+the Python session seed: import random; random.seed(seed)
+the Python NumPy seed: import numpy; numpy.random.seed(seed)
+the TensorFlow seed: tf$random$set_seed(seed) (only if TF is installed)
+The Torch seed: import(&quot;torch&quot;)$manual_seed(seed) (only if the backend is torch)
 and disables Python hash randomization.
 
 
@@ -22,9 +23,10 @@ sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
 This sets:
 the R session seed: set.seed()
-the Python session seed: import random; random.seed()
-the Python NumPy seed: import numpy; numpy.random.seed()
-the TensorFlow seed: tf$random$set_seed()
+the Python session seed: import random; random.seed(seed)
+the Python NumPy seed: import numpy; numpy.random.seed(seed)
+the TensorFlow seed: tf$random$set_seed(seed) (only if TF is installed)
+The Torch seed: import(&quot;torch&quot;)$manual_seed(seed) (only if the backend is torch)
 and disables Python hash randomization.
 
 
@@ -107,9 +109,10 @@ are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.</p>
 <p>This sets:</p><ul><li><p>the R session seed: <code><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed()</a></code></p></li>
-<li><p>the Python session seed: <code>import random; random.seed()</code></p></li>
-<li><p>the Python NumPy seed: <code>import numpy; numpy.random.seed()</code></p></li>
-<li><p>the TensorFlow seed: <code>tf$random$set_seed()</code></p></li>
+<li><p>the Python session seed: <code>import random; random.seed(seed)</code></p></li>
+<li><p>the Python NumPy seed: <code>import numpy; numpy.random.seed(seed)</code></p></li>
+<li><p>the TensorFlow seed: <code>tf$random$set_seed(seed)</code> (only if TF is installed)</p></li>
+<li><p>The Torch seed: <code>import("torch")$manual_seed(seed)</code> (only if the backend is torch)</p></li>
 <li><p>and disables Python hash randomization.</p></li>
 </ul><p>Note that the TensorFlow seed is set even if you're not using TensorFlow
 as your backend framework, since many workflows leverage <code>tf$data</code>

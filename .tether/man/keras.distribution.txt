@@ -9,7 +9,7 @@ distribution()
 initialize(
   job_addresses=None,
   num_processes=None,
-  proceed_id=None
+  process_id=None
 )
 LayoutMap(device_mesh=None)
 list_devices(device_type=None)

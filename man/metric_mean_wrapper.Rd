@@ -2,7 +2,7 @@
 % Please edit documentation in R/metrics.R
 \name{metric_mean_wrapper}
 \alias{metric_mean_wrapper}
-\title{Wrap a stateless metric function with the Mean metric.}
+\title{Wrap a stateless metric function with the \code{Mean} metric.}
 \usage{
 metric_mean_wrapper(..., fn, name = NULL, dtype = NULL)
 }

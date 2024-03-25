@@ -153,6 +153,10 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |      Args:
  |          store: Dict from which the state of the model will be loaded.
  |
+ |  quantize(self, mode)
+ |
+ |  quantized_call(self, inputs)
+ |
  |  save_own_variables(self, store)
  |      Saves the state of the layer.
  |
@@ -166,5 +170,10 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |  Readonly properties defined here:
  |
  |  kernel
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
  |
 

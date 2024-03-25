@@ -111,3 +111,9 @@ class Lambda(keras.src.layers.layer.Layer)
  |      Returns:
  |          A layer instance.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

@@ -563,7 +563,7 @@ weight values.</li>
 weights to the values provided (as arrays).</li>
 </ul>
 <p>Examples:</p>
-<p><strong><em>Transfering weights from one layer to another, in
+<p><strong><em>Transferring weights from one layer to another, in
 memory</em></strong></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">create_layer</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
@@ -577,7 +577,7 @@ memory</em></strong></p>
 <span></span>
 <span><span class="co"># Copy weights from layer 1 to layer 2</span></span>
 <span><span class="va">layer_2</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/get_weights.html">set_weights</a></span><span class="op">(</span><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="va">layer_1</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><strong><em>Transfering weights from one model to another model with
+<p><strong><em>Transferring weights from one model to another model with
 a compatible architecture, in memory</em></strong></p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create a simple functional model</span></span>

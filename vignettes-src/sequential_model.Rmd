@@ -148,8 +148,6 @@ model <- keras_model_sequential() |>
 # At this point, you can't do this:
 # model$weights
 
-# You also can't do this:
-# summary(model)
 
 # Call the model on a test input
 x <- op_ones(c(1, 4))
@@ -272,9 +270,9 @@ Here's a similar example that only extract features from one layer:
 ```{r}
 initial_model <-
   keras_model_sequential(input_shape = c(250, 250, 3)) |>
-  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, 
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2,
                 activation = "relu") |>
-  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu", 
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu",
                 name = "my_intermediate_layer") |>
   layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
 

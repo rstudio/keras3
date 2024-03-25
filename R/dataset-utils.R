@@ -200,6 +200,11 @@ function (data)
 #' Whether to visits subdirectories pointed to by symlinks.
 #' Defaults to `FALSE`.
 #'
+#' @param verbose
+#' Whether to display number information on classes and
+#' number of files found. Defaults to `TRUE`.
+#'
+#'
 #' @export
 #' @family dataset utils
 #' @family utils
@@ -211,7 +216,8 @@ audio_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
           class_names = NULL, batch_size = 32L, sampling_rate = NULL,
           output_sequence_length = NULL, ragged = FALSE, shuffle = TRUE,
-          seed = NULL, validation_split = NULL, subset = NULL, follow_links = FALSE)
+          seed = NULL, validation_split = NULL, subset = NULL, follow_links = FALSE,
+          verbose = TRUE)
 {
   args <- capture_args(list(labels = as_integer, label_mode = as_integer,
                              batch_size = as_integer, seed = as_integer))
@@ -418,9 +424,22 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' default (`crop_to_aspect_ratio = FALSE`), aspect ratio may not be
 #' preserved.
 #'
+#' @param pad_to_aspect_ratio
+#' If `TRUE`, resize the images without aspect
+#' ratio distortion. When the original aspect ratio differs from the
+#' target aspect ratio, the output image will be padded so as to
+#' return the largest possible window in the image
+#' (of size `image_size`) that matches the target aspect ratio. By
+#' default (`pad_to_aspect_ratio=FALSE`), aspect ratio may not be
+#' preserved.
+#'
 #' @param data_format
 #' If `NULL` uses [`config_image_data_format()`]
 #' otherwise either `'channel_last'` or `'channel_first'`.
+#'
+#' @param verbose
+#' Whether to display number information on classes and
+#' number of files found. Defaults to `TRUE`.
 #'
 #' @export
 #' @family dataset utils
@@ -436,7 +455,8 @@ function (directory, labels = "inferred", label_mode = "int",
           class_names = NULL, color_mode = "rgb", batch_size = 32L,
           image_size = list(256L, 256L), shuffle = TRUE, seed = NULL,
           validation_split = NULL, subset = NULL, interpolation = "bilinear",
-          follow_links = FALSE, crop_to_aspect_ratio = FALSE, data_format = NULL)
+          follow_links = FALSE, crop_to_aspect_ratio = FALSE,
+          pad_to_aspect_ratio = FALSE, data_format = NULL, verbose = TRUE)
 {
   args <- capture_args(list(labels = as_integer, label_mode = as_integer,
                              batch_size = as_integer, seed = as_integer))
@@ -550,6 +570,10 @@ function (directory, labels = "inferred", label_mode = "int",
 #' Whether to visits subdirectories pointed to by symlinks.
 #' Defaults to `FALSE`.
 #'
+#' @param verbose
+#' Whether to display number information on classes and
+#' number of files found. Defaults to `TRUE`.
+#'
 #' @export
 #' @family dataset utils
 #' @family text dataset utils
@@ -563,7 +587,7 @@ text_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
     class_names = NULL, batch_size = 32L, max_length = NULL,
     shuffle = TRUE, seed = NULL, validation_split = NULL, subset = NULL,
-    follow_links = FALSE)
+    follow_links = FALSE, verbose = TRUE)
 {
     args <- capture_args(list(labels = as_integer, label_mode = as_integer,
         batch_size = as_integer, seed = as_integer))

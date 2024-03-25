@@ -3052,7 +3052,7 @@ function (..., name = "mean", dtype = NULL)
 }
 
 
-#' Wrap a stateless metric function with the Mean metric.
+#' Wrap a stateless metric function with the `Mean` metric.
 #'
 #' @description
 #' You could use this class to quickly build a mean metric from a function. The

@@ -38,6 +38,8 @@ than two standard deviations from the mean.
 }
 \seealso{
 Other random: \cr
+\code{\link{random_beta}()} \cr
+\code{\link{random_binomial}()} \cr
 \code{\link{random_categorical}()} \cr
 \code{\link{random_dropout}()} \cr
 \code{\link{random_gamma}()} \cr

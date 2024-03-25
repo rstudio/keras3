@@ -6,6 +6,15 @@ affine_transform(
   fill_value=0,
   data_format='channels_last'
 )
+crop_images(
+  images,
+  top_cropping=None,
+  left_cropping=None,
+  target_height=None,
+  target_width=None,
+  bottom_cropping=None,
+  right_cropping=None
+)
 extract_patches(
   image,
   size,

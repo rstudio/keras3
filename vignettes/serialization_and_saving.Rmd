@@ -494,7 +494,7 @@ provided (as arrays).
 
 Examples:
 
-***Transfering weights from one layer to another, in memory***
+***Transferring weights from one layer to another, in memory***
 
 
 ```r
@@ -511,7 +511,7 @@ layer_2 <- create_layer()
 layer_2 |> set_weights(get_weights(layer_1))
 ```
 
-***Transfering weights from one model to another model with a compatible architecture, in memory***
+***Transferring weights from one model to another model with a compatible architecture, in memory***
 
 
 ```r

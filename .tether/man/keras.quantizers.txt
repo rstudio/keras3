@@ -1,0 +1,18 @@
+abs_max_quantize(
+  inputs,
+  axis,
+  value_range=(-127, 127),
+  dtype='int8',
+  epsilon=1e-07
+)
+AbsMaxQuantizer(
+  axis,
+  value_range=(-127, 127),
+  epsilon=1e-07,
+  output_dtype='int8'
+)
+deserialize(config, custom_objects=None)
+get(identifier, **kwargs)
+Quantizer(output_dtype='int8')
+serialize(initializer)
+

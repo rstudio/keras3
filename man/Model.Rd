@@ -43,7 +43,7 @@ A model constructor function, which you can call to create an
 instance of the new model type.
 }
 \description{
-This is for advanced use cases where you need to subclass the base Model
+This is for advanced use cases where you need to subclass the base \code{Model}
 type, e.g., you want to override the \code{train_step()} method.
 
 If you just want to create or define a keras model, prefer \code{\link[=keras_model]{keras_model()}}

@@ -22,9 +22,10 @@ involved.
 This sets:
 \itemize{
 \item the R session seed: \code{\link[=set.seed]{set.seed()}}
-\item the Python session seed: \verb{import random; random.seed()}
-\item the Python NumPy seed: \verb{import numpy; numpy.random.seed()}
-\item the TensorFlow seed: \code{tf$random$set_seed()}
+\item the Python session seed: \verb{import random; random.seed(seed)}
+\item the Python NumPy seed: \verb{import numpy; numpy.random.seed(seed)}
+\item the TensorFlow seed: \code{tf$random$set_seed(seed)} (only if TF is installed)
+\item The Torch seed: \code{import("torch")$manual_seed(seed)} (only if the backend is torch)
 \item and disables Python hash randomization.
 }
 

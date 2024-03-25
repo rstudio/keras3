@@ -23,6 +23,8 @@ Randomly set some portion of values in the tensor to 0.
 }
 \seealso{
 Other random: \cr
+\code{\link{random_beta}()} \cr
+\code{\link{random_binomial}()} \cr
 \code{\link{random_categorical}()} \cr
 \code{\link{random_gamma}()} \cr
 \code{\link{random_integer}()} \cr

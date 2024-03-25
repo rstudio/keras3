@@ -74,16 +74,20 @@ op_sum(a, axis = -1)
 
 Compute a matrix transpose or reorder any number of axes:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_einsum("ji", c)
-op_einsum("ij -> ji", c)
-op_transpose(c)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_einsum("ji", c) # return c unchanged
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 3.]
-##  [1. 4.]
-##  [2. 5.]], shape=(3, 2), dtype=float64)
-## tf.Tensor(
+## [[0. 1. 2.]
+##  [3. 4. 5.]], shape=(2, 3), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_einsum("ij -> ji", c) # transpose
+op_transpose(c)          # same as above
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0. 3.]
 ##  [1. 4.]
 ##  [2. 5.]], shape=(3, 2), dtype=float64)
@@ -294,6 +298,7 @@ Other ops: \cr
 \code{\link{op_ctc_loss}()} \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
+\code{\link{op_custom_gradient}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -332,6 +337,7 @@ Other ops: \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr

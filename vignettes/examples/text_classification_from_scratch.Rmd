@@ -17,8 +17,8 @@ vignette: >
 
 This example shows how to do text classification starting from raw text (as
 a set of text files on disk). We demonstrate the workflow on the IMDB sentiment
-classification dataset (unprocessed version). We use the `TextVectorization` layer for
- word splitting & indexing.
+classification dataset (unprocessed version). We use [`layer_text_vectorization()`] for
+word splitting & indexing.
 
 ## Setup
 
@@ -29,27 +29,6 @@ library(tensorflow)
 library(tfdatasets)
 library(keras3, mask.ok = c("shape", "set_random_seed"))
 use_virtualenv("r-keras")
-```
-
-
-
-```r
-tf_config()
-```
-
-```
-## TensorFlow v2.15.0 (~/.virtualenvs/r-keras/lib/python3.11/site-packages/keras)
-## Python v3.11 (~/.virtualenvs/r-keras/bin/python)
-```
-
-```r
-str(tf$config$list_physical_devices())
-```
-
-```
-## List of 2
-##  $ :PhysicalDevice(name='/physical_device:CPU:0', device_type='CPU')
-##  $ :PhysicalDevice(name='/physical_device:GPU:0', device_type='GPU')
 ```
 
 ## Load the data: IMDB movie review sentiment classification
@@ -110,7 +89,7 @@ We are only interested in the `pos` and `neg` subfolders, so let's delete the ot
 unlink("datasets/aclImdb/train/unsup", recursive = TRUE)
 ```
 
-You can use the utility `text_dataset_from_directory` to
+You can use the utility `text_dataset_from_directory()` to
 generate a labeled `tf_dataset` object from a set of text files on disk filed
  into class-specific folders.
 
@@ -125,7 +104,7 @@ be used.
 Before putting the model out into the real world however, it should be retrained using all
 available training data (without creating a validation dataset), so its performance is maximized.
 
-When using the `validation_split` & `subset` arguments, make sure to either specify a
+When using the `validation_split` and `subset` arguments, make sure to either specify a
 random seed, or to pass `shuffle=FALSE`, so that the validation & training splits you
 get have no overlap.
 
@@ -174,27 +153,27 @@ raw_test_ds <- text_dataset_from_directory(
 ```
 
 ```r
-length(raw_train_ds)
+cat("Number of batches in raw_train_ds:", length(raw_train_ds), "\n")
 ```
 
 ```
-## [1] 625
-```
-
-```r
-length(raw_val_ds)
-```
-
-```
-## [1] 157
+## Number of batches in raw_train_ds: 625
 ```
 
 ```r
-length(raw_test_ds)
+cat("Number of batches in raw_val_ds:", length(raw_val_ds), "\n")
 ```
 
 ```
-## [1] 782
+## Number of batches in raw_val_ds: 157
+```
+
+```r
+cat("Number of batches in raw_test_ds:", length(raw_test_ds), "\n")
+```
+
+```
+## Number of batches in raw_test_ds: 782
 ```
 
 Let's preview a few samples:
@@ -291,7 +270,8 @@ There are 2 ways we can use our text vectorization layer:
 
 
 ```r
-x <- keras_input(shape = c(1L), dtype = "string", name = 'text') |>
+text_input <- keras_input(shape = c(1L), dtype = "string", name = 'text')
+x <- text_input |>
   vectorize_layer() |>
   layer_embedding(max_features + 1, embedding_dim)
 ```
@@ -312,7 +292,7 @@ strings as input, like in the code snippet for option 1 above. This can be done 
 ```r
 vectorize_text <- function(text, label) {
   text <- text |>
-    tf$expand_dims(-1L) |>
+    op_expand_dims(-1) |>
     vectorize_layer()
   list(text, label)
 }
@@ -411,11 +391,11 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 6s - 10ms/step - accuracy: 0.7334 - loss: 0.4873 - val_accuracy: 0.8648 - val_loss: 0.3114
+## 625/625 - 6s - 9ms/step - accuracy: 0.7316 - loss: 0.4890 - val_accuracy: 0.8692 - val_loss: 0.3110
 ## Epoch 2/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9126 - loss: 0.2221 - val_accuracy: 0.8722 - val_loss: 0.3154
+## 625/625 - 2s - 2ms/step - accuracy: 0.9128 - loss: 0.2209 - val_accuracy: 0.8726 - val_loss: 0.3050
 ## Epoch 3/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9583 - loss: 0.1133 - val_accuracy: 0.8638 - val_loss: 0.3984
+## 625/625 - 2s - 2ms/step - accuracy: 0.9602 - loss: 0.1112 - val_accuracy: 0.8658 - val_loss: 0.3901
 ```
 
 ## Evaluate the model on the test set
@@ -426,15 +406,15 @@ model |> evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8546 - loss: 0.4242
+## 782/782 - 1s - 2ms/step - accuracy: 0.8601 - loss: 0.4131
 ```
 
 ```
 ## $accuracy
-## [1] 0.85456
+## [1] 0.86012
 ##
 ## $loss
-## [1] 0.4241929
+## [1] 0.4131013
 ```
 
 ## Make an end-to-end model
@@ -464,13 +444,13 @@ end_to_end_model |> evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - accuracy: 0.8546 - loss: 0.4235
+## 782/782 - 4s - 5ms/step - accuracy: 0.8601 - loss: 0.4127
 ```
 
 ```
 ## $accuracy
-## [1] 0.85456
+## [1] 0.86012
 ##
 ## $loss
-## [1] 0.4235309
+## [1] 0.4127359
 ```

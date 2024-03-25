@@ -866,6 +866,22 @@ MaxPooling3D(
   name=None,
   **kwargs
 )
+MelSpectrogram(
+  fft_length=2048,
+  sequence_stride=512,
+  sequence_length=None,
+  window='hann',
+  sampling_rate=16000,
+  num_mel_bins=128,
+  min_freq=20.0,
+  max_freq=None,
+  power_to_db=True,
+  top_db=80.0,
+  mag_exp=2.0,
+  min_power=1e-10,
+  ref_power=1.0,
+  **kwargs
+)
 minimum(inputs, **kwargs)
 Minimum(**kwargs)
 MultiHeadAttention(

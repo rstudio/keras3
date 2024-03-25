@@ -150,3 +150,30 @@ reset_state <- function(object) {
   object$reset_state()
   invisible(object)
 }
+
+
+#' Quantize the weights of a model.
+#'
+#' @description
+#' Note that the model must be built first before calling this method.
+#' `quantize_weights()` will recursively call `layer$quantize(mode)` in all layers and
+#' will be skipped if the layer doesn't implement the function.
+#'
+#' Currently only `Dense` and `EinsumDense` layers support quantization.
+#'
+#' @param object A Keras Model or Layer.
+#' @param mode
+#' The mode of the quantization. Only 'int8' is supported at this
+#' time.
+#'
+#' @export
+#' @returns `model`, invisibly. Note this is just a convenience for usage with `|>`, the
+#'   model is modified in-place.
+#'
+#' @family layer methods
+#' @tether keras.Model.quantize
+quantize_weights <-
+function (object, mode)
+{
+  object$quantize(mode)
+}

@@ -29,4 +29,9 @@ class Identity(keras.src.layers.layer.Layer)
  |
  |  compute_output_spec(self, inputs)
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ops.R
 \name{op_sin}
 \alias{op_sin}
-\title{Trigonomeric sine, element-wise.}
+\title{Trigonometric sine, element-wise.}
 \usage{
 op_sin(x)
 }
@@ -13,7 +13,7 @@ op_sin(x)
 Output tensor of same shape as \code{x}.
 }
 \description{
-Trigonomeric sine, element-wise.
+Trigonometric sine, element-wise.
 }
 \seealso{
 \itemize{
@@ -199,6 +199,7 @@ Other ops: \cr
 \code{\link{op_ctc_loss}()} \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
+\code{\link{op_custom_gradient}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -238,6 +239,7 @@ Other ops: \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr

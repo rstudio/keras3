@@ -132,4 +132,9 @@ class Embedding(keras.src.layers.layer.Layer)
  |
  |  embeddings
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
 

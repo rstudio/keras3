@@ -55,6 +55,7 @@ because we fixed an outstanding bug
 \seealso{
 Other image ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
@@ -66,6 +67,7 @@ Other image utils: \cr
 \code{\link{image_smart_resize}()} \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
@@ -114,6 +116,7 @@ Other ops: \cr
 \code{\link{op_ctc_loss}()} \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
+\code{\link{op_custom_gradient}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -153,6 +156,7 @@ Other ops: \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
+\code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr

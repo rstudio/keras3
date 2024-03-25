@@ -14,7 +14,9 @@ keras.utils.image_dataset_from_directory(
   interpolation='bilinear',
   follow_links=False,
   crop_to_aspect_ratio=False,
-  data_format=None
+  pad_to_aspect_ratio=False,
+  data_format=None,
+  verbose=True
 )
 __doc__
 Generates a `tf.data.Dataset` from image files in a directory.
@@ -98,8 +100,17 @@ Args:
         (of size `image_size`) that matches the target aspect ratio. By
         default (`crop_to_aspect_ratio=False`), aspect ratio may not be
         preserved.
+    pad_to_aspect_ratio: If `True`, resize the images without aspect
+        ratio distortion. When the original aspect ratio differs from the
+        target aspect ratio, the output image will be padded so as to
+        return the largest possible window in the image
+        (of size `image_size`) that matches the target aspect ratio. By
+        default (`pad_to_aspect_ratio=False`), aspect ratio may not be
+        preserved.
     data_format: If None uses keras.config.image_data_format()
         otherwise either 'channel_last' or 'channel_first'.
+    verbose: Whether to display number information on classes and
+        number of files found. Defaults to `True`.
 
 Returns:
 
@@ -130,3 +141,4 @@ Rules regarding number of channels in the yielded images:
     there are 3 channels in the image tensors.
 - if `color_mode` is `"rgba"`,
     there are 4 channels in the image tensors.
+

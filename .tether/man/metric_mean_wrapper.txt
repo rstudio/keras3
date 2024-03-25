@@ -3,7 +3,7 @@ Help on class MeanMetricWrapper in module keras.src.metrics.reduction_metrics:
 class MeanMetricWrapper(Mean)
  |  MeanMetricWrapper(fn, name=None, dtype=None, **kwargs)
  |
- |  Wrap a stateless metric function with the Mean metric.
+ |  Wrap a stateless metric function with the `Mean` metric.
  |
  |  You could use this class to quickly build a mean metric from a function. The
  |  function needs to have the signature `fn(y_true, y_pred)` and return a
@@ -59,3 +59,4 @@ class MeanMetricWrapper(Mean)
  |
  |  from_config(config) from builtins.type
  |
+

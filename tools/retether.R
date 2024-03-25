@@ -5,24 +5,19 @@ library(doctether)
 
 resolve_roxy_tether <- function(endpoint) {
   tryCatch({
-
-
-  tether <- as_tether(py_obj <- py_eval(endpoint),
-                      name = endpoint,
-                      roxify = FALSE)
-  if(inherits(py_obj, "python.builtin.module")) {
-    attr(tether, "roxified") <- NA
-    return(tether)
-  }
-  export <- mk_export(endpoint)
-  attr(tether, "roxified") <- str_flatten_lines(
-    str_c("#' ", str_split_lines(export$roxygen)),
-    deparse(export$r_fn)
-  )
-  tether
+    tether <- as_tether(py_obj <- py_eval(endpoint),
+                        name = endpoint,
+                        roxify = FALSE)
+    if (inherits(py_obj, "python.builtin.module")) {
+      attr(tether, "roxified") <- NA
+      return(tether)
+    }
+    export <- mk_export(endpoint)
+    attr(tether, "roxified") <- str_flatten_lines(str_c("#' ", str_split_lines(export$roxygen)),
+                                                  deparse(export$r_fn))
+    tether
   }, error = function(e) {
-
-  message("endpoint <- ", glue::double_quote(endpoint))
+    message("endpoint <- ", glue::double_quote(endpoint))
   })
 }
 
@@ -60,11 +55,11 @@ doctether::retether(
   # "keras.ops",
   unsafe = TRUE,
   roxy_tag_eval =
-    # resolve_roxy_tether,
-    NULL,
+    resolve_roxy_tether,
+    # NULL,
   rmd_field_eval =
-    resolve_rmd_tether
-    # NULL
+    # resolve_rmd_tether
+    NULL
 )
 
 # to retether just one vignette:

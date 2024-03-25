@@ -19,7 +19,9 @@ image_dataset_from_directory(
   interpolation = "bilinear",
   follow_links = FALSE,
   crop_to_aspect_ratio = FALSE,
-  data_format = NULL
+  pad_to_aspect_ratio = FALSE,
+  data_format = NULL,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -97,8 +99,19 @@ return the largest possible window in the image
 default (\code{crop_to_aspect_ratio = FALSE}), aspect ratio may not be
 preserved.}
 
+\item{pad_to_aspect_ratio}{If \code{TRUE}, resize the images without aspect
+ratio distortion. When the original aspect ratio differs from the
+target aspect ratio, the output image will be padded so as to
+return the largest possible window in the image
+(of size \code{image_size}) that matches the target aspect ratio. By
+default (\code{pad_to_aspect_ratio=FALSE}), aspect ratio may not be
+preserved.}
+
 \item{data_format}{If \code{NULL} uses \code{\link[=config_image_data_format]{config_image_data_format()}}
 otherwise either \code{'channel_last'} or \code{'channel_first'}.}
+
+\item{verbose}{Whether to display number information on classes and
+number of files found. Defaults to \code{TRUE}.}
 }
 \value{
 A \code{tf.data.Dataset} object.

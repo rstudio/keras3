@@ -86,6 +86,9 @@ class Lion(keras.src.optimizers.optimizer.Optimizer)
  |      Lion
  |      keras.src.optimizers.optimizer.Optimizer
  |      keras.src.backend.tensorflow.optimizer.TFOptimizer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
  |      keras.src.optimizers.base_optimizer.BaseOptimizer
  |      builtins.object
  |
@@ -137,5 +140,10 @@ class Lion(keras.src.optimizers.optimizer.Optimizer)
  |    learning_rate
  |  )
  |      Update step given gradient and the associated model variable.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
  |
 

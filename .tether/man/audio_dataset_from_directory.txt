@@ -12,7 +12,8 @@ keras.utils.audio_dataset_from_directory(
   seed=None,
   validation_split=None,
   subset=None,
-  follow_links=False
+  follow_links=False,
+  verbose=True
 )
 __doc__
 Generates a `tf.data.Dataset` from audio files in a directory.
@@ -81,6 +82,8 @@ Args:
         `"validation"` or `"both"`. Only used if `validation_split` is set.
     follow_links: Whether to visits subdirectories pointed to by symlinks.
         Defaults to `False`.
+    verbose: Whether to display number information on classes and
+        number of files found. Defaults to `True`.
 
 Returns:
 
@@ -102,3 +105,4 @@ Rules regarding labels format:
 - if `label_mode` is `categorical`, the labels are a `float32` tensor
   of shape `(batch_size, num_classes)`, representing a one-hot
   encoding of the class index.
+

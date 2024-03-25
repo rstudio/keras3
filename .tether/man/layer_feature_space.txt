@@ -331,3 +331,9 @@ class FeatureSpace(keras.src.layers.layer.Layer)
  |
  |  string_hashed(num_bins, output_mode='one_hot', name=None) from builtins.type
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

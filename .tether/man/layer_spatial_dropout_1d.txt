@@ -54,3 +54,9 @@ class SpatialDropout1D(BaseSpatialDropout)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __annotations__ = {}
+ |
+

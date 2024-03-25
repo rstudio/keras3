@@ -17,7 +17,8 @@ audio_dataset_from_directory(
   seed=None,
   validation_split=None,
   subset=None,
-  follow_links=False
+  follow_links=False,
+  verbose=True
 )
 clear_session()
 custom_object_scope(custom_objects)
@@ -75,7 +76,9 @@ image_dataset_from_directory(
   interpolation='bilinear',
   follow_links=False,
   crop_to_aspect_ratio=False,
-  data_format=None
+  pad_to_aspect_ratio=False,
+  data_format=None,
+  verbose=True
 )
 img_to_array(
   img,
@@ -172,6 +175,7 @@ split_dataset(
   shuffle=False,
   seed=None
 )
+standardize_dtype(dtype)
 text_dataset_from_directory(
   directory,
   labels='inferred',
@@ -183,7 +187,8 @@ text_dataset_from_directory(
   seed=None,
   validation_split=None,
   subset=None,
-  follow_links=False
+  follow_links=False,
+  verbose=True
 )
 timeseries_dataset_from_array(
   data,

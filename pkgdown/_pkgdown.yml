@@ -119,6 +119,7 @@ reference:
     - get_layer
     - count_params
     - pop_layer
+    - quantize_weights
 
   - subtitle: "Save and Load Models"
   - contents:
@@ -250,7 +251,6 @@ reference:
   - subtitle: "Image Operations"
   - contents:
     - has_concept("image ops")
-    - starts_with("k_")
 
   - title: "Losses"
   - contents:
@@ -339,7 +339,6 @@ reference:
     - starts_with("learning_rate_schedule_")
     - LearningRateSchedule
 
-
   - title: "Initializers"
   - contents:
       - has_concept("initializers")
@@ -359,7 +358,6 @@ reference:
     - starts_with("activation")
     - activation_relu
 
-
   - title: "Random Tensor Generators"
   - contents:
 
@@ -371,13 +369,13 @@ reference:
     - random_integer
     - random_dropout
     - random_shuffle
+    - random_beta
+    - random_binomial
     - random_seed_generator
-
 
   - title: "Builtin small datasets"
   - contents:
     - starts_with("dataset_")
-
 
   - title: "Configuration"
   - contents:

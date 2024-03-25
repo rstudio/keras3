@@ -1,0 +1,41 @@
+__signature__
+keras.ops.image.crop_images(
+  images,
+  top_cropping=None,
+  left_cropping=None,
+  target_height=None,
+  target_width=None,
+  bottom_cropping=None,
+  right_cropping=None
+)
+__doc__
+Crop `images` to a specified `height` and `width`.
+
+Args:
+    images: 4-D batch of images of shape `(batch, height, width, channels)`
+         or 3-D single image of shape `(height, width, channels)`.
+    top_cropping: Number of columns to crop from the top.
+    bottom_cropping: Number of columns to crop from the bottom.
+    left_cropping: Number of columns to crop from the left.
+    right_cropping: Number of columns to crop from the right.
+    target_height: Height of the output images.
+    target_width: Width of the output images.
+
+Returns:
+    If `images` were 4D, a 4D float Tensor of shape
+        `(batch, target_height, target_width, channels)`
+    If `images` were 3D, a 3D float Tensor of shape
+        `(target_height, target_width, channels)`
+
+Example:
+
+>>> images = np.reshape(np.arange(1, 28, dtype="float32"), [3, 3, 3])
+>>> images[:,:,0] # print the first channel of the images
+array([[ 1.,  4.,  7.],
+       [10., 13., 16.],
+       [19., 22., 25.]], dtype=float32)
+>>> cropped_images = keras.image.crop_images(images, 0, 0, 2, 2)
+>>> cropped_images[:,:,0] # print the first channel of the cropped images
+array([[ 1.,  4.],
+       [10., 13.]], dtype=float32)
+

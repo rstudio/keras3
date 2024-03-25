@@ -28,6 +28,44 @@ function ()
     keras$config$backend()
 }
 
+#' Reload the backend (and the Keras package).
+#'
+#' @description
+#'
+#' # Examples
+#' ```python
+#' config_set_backend("jax")
+#' ```
+#'
+#' # WARNING
+#' Using this function is dangerous and should be done
+#' carefully. Changing the backend will **NOT** convert
+#' the type of any already-instantiated objects.
+#' Thus, any layers / tensors / etc. already created will no
+#' longer be usable without errors. It is strongly recommended **not**
+#' to keep around **any** Keras-originated objects instances created
+#' before calling `config_set_backend()`.
+#'
+#' This includes any function or class instance that uses any Keras
+#' functionality. All such code needs to be re-executed after calling
+#' `config_set_backend()`.
+#'
+#' @param backend String
+#'
+#' @returns Nothing, this function is called for its side effect.
+#'
+#' @family config
+#' @export
+#' @tether keras.config.set_backend
+config_set_backend <-
+function (backend)
+{
+  if(!is_keras_loaded())
+    return(use_backend(backend))
+  keras$config$set_backend(backend)
+  invisible(backend)
+}
+
 
 #' Return the value of the fuzz factor used in numeric expressions.
 #'
@@ -476,4 +514,5 @@ function (policy)
     args <- capture_args()
     do.call(keras$config$set_dtype_policy, args)
 }
+
 

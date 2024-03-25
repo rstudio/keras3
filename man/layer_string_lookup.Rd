@@ -318,7 +318,7 @@ layer(data)
 }\if{html}{\out{</div>}}
 
 To specify the idf weights for oov values, you will need to pass the entire
-vocabularly including the leading oov token.
+vocabulary including the leading oov token.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c("[UNK]", "a", "b", "c", "d")
 idf_weights <- c(0.9, 0.25, 0.75, 0.6, 0.4)
@@ -404,6 +404,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_hashed_crossing}()} \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_normalization}()} \cr
 \code{\link{layer_random_brightness}()} \cr
 \code{\link{layer_random_contrast}()} \cr
@@ -483,6 +484,7 @@ Other layers: \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
 \code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_minimum}()} \cr
 \code{\link{layer_multi_head_attention}()} \cr
 \code{\link{layer_multiply}()} \cr

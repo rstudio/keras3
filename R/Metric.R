@@ -152,6 +152,9 @@
 #'   stateless_result(metric_variables)
 #'   ```
 #' * ```r
+#'   stateless_reset_state()
+#'   ```
+#' * ```r
 #'   stateless_update_state(metric_variables, ...)
 #'   ```
 #' * ```r

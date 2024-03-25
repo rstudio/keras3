@@ -196,6 +196,7 @@ Other layers: \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
 \code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_minimum}()} \cr
 \code{\link{layer_multi_head_attention}()} \cr
 \code{\link{layer_multiply}()} \cr

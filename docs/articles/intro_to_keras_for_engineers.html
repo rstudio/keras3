@@ -239,25 +239,25 @@ unseen data.</p>
 <span>  callbacks <span class="op">=</span> <span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 399/399 - 9s - 21ms/step - acc: 0.7362 - loss: 0.7765 - val_acc: 0.9598 - val_loss: 0.1386</span></span>
+<span><span class="co">## 399/399 - 7s - 18ms/step - acc: 0.7332 - loss: 0.7843 - val_acc: 0.9599 - val_loss: 0.1413</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9300 - loss: 0.2360 - val_acc: 0.9708 - val_loss: 0.0945</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9279 - loss: 0.2399 - val_acc: 0.9700 - val_loss: 0.0947</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9480 - loss: 0.1751 - val_acc: 0.9788 - val_loss: 0.0685</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9472 - loss: 0.1786 - val_acc: 0.9793 - val_loss: 0.0678</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9589 - loss: 0.1409 - val_acc: 0.9847 - val_loss: 0.0550</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9579 - loss: 0.1445 - val_acc: 0.9830 - val_loss: 0.0562</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9656 - loss: 0.1182 - val_acc: 0.9871 - val_loss: 0.0455</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9640 - loss: 0.1217 - val_acc: 0.9856 - val_loss: 0.0481</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9685 - loss: 0.1041 - val_acc: 0.9862 - val_loss: 0.0478</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9684 - loss: 0.1061 - val_acc: 0.9863 - val_loss: 0.0468</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9732 - loss: 0.0931 - val_acc: 0.9877 - val_loss: 0.0423</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9719 - loss: 0.0962 - val_acc: 0.9871 - val_loss: 0.0430</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0843 - val_acc: 0.9898 - val_loss: 0.0369</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9735 - loss: 0.0885 - val_acc: 0.9893 - val_loss: 0.0404</span></span>
 <span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9780 - loss: 0.0752 - val_acc: 0.9903 - val_loss: 0.0319</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9763 - loss: 0.0802 - val_acc: 0.9904 - val_loss: 0.0337</span></span>
 <span><span class="co">## Epoch 10/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9793 - loss: 0.0697 - val_acc: 0.9887 - val_loss: 0.0396</span></span></code></pre>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9785 - loss: 0.0727 - val_acc: 0.9893 - val_loss: 0.0386</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -271,7 +271,7 @@ can also save the model in its latest state like this:</p>
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 2ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">predictions</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 10000    10</span></span></code></pre>
@@ -386,7 +386,7 @@ layers:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>, <span class="co"># For speed</span></span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 8s - 20ms/step - acc: 0.7398 - loss: 0.7554 - val_acc: 0.9231 - val_loss: 0.2490</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 7s - 18ms/step - acc: 0.7400 - loss: 0.7568 - val_acc: 0.9249 - val_loss: 0.2507</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -454,7 +454,7 @@ your Keras backend.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 9s - 19ms/step - acc: 0.7591 - loss: 0.7132 - val_acc: 0.8997 - val_loss: 0.3169</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 8s - 18ms/step - acc: 0.7580 - loss: 0.7196 - val_acc: 0.9013 - val_loss: 0.3072</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
@@ -497,8 +497,8 @@ a training loop from scratch in TensorFlow</a>
 <li>
 <a href="distributed_training_with_tensorflow.html">Guide to
 distributed training with TensorFlow</a>
-<!-- - [JAX distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_jax_distributed.py) -->
-<!-- - [PyTorch distributed training example](https://github.com/keras-team/keras/blob/main/examples/demo_torch_multi_gpu.py) -->
+<!-- - [JAX distributed training example](https://github.com/keras-team/keras/blob/master/examples/demo_jax_distributed.py) -->
+<!-- - [PyTorch distributed training example](https://github.com/keras-team/keras/blob/master/examples/demo_torch_multi_gpu.py) -->
 </li>
 </ul>
 <p>Enjoy the library! 🚀</p>

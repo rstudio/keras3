@@ -59,8 +59,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   139941849067216: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   139941849069904: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   140679778101632: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   140678974847488: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 
@@ -159,6 +159,7 @@ Other layers: \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
 \code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_minimum}()} \cr
 \code{\link{layer_multi_head_attention}()} \cr
 \code{\link{layer_multiply}()} \cr
