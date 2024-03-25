@@ -136,7 +136,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 # Check that the weights of layer1 have not changed during training
 final_layer1_weights_values <- get_weights(layer1)
 
-all.equal(initial_layer1_weights_values, 
+all.equal(initial_layer1_weights_values,
           final_layer1_weights_values)
 ```
 
@@ -204,7 +204,7 @@ base_model <- application_xception(
   weights = 'imagenet', # Load weights pre-trained on ImageNet.
   input_shape = c(150, 150, 3),
   include_top = FALSE  # Do not include the ImageNet classifier at the top.
-) 
+)
 ```
 
 Then, freeze the base model.
@@ -238,7 +238,7 @@ model |> compile(
   loss = loss_binary_crossentropy(from_logits = TRUE),
   metrics = list(metric_binary_accuracy())
 )
-model |> fit(new_dataset, epochs = 20, 
+model |> fit(new_dataset, epochs = 20,
              callbacks = ..., validation_data = ...)
 ```
 
@@ -278,7 +278,7 @@ model |> compile(
 )
 
 # Train end-to-end. Be careful to stop before you overfit!
-model |> fit(new_dataset, epochs = 10, 
+model |> fit(new_dataset, epochs = 10,
              callbacks = ..., validation_data = ...)
 ```
 
@@ -358,7 +358,7 @@ train_ds |>
     c(image, label) %<-% batch
     plot(as.raster(image, max = 255L))
     title(sprintf(
-      "label: %s   size: %s", 
+      "label: %s   size: %s",
       label, paste(dim(image), collapse = " x ")))
   })
 ```
@@ -426,11 +426,11 @@ train_ds <- train_ds |>
 
 validation_ds <- validation_ds |>
   dataset_batch(batch_size) |>
-  dataset_prefetch() 
+  dataset_prefetch()
 
 test_ds <- test_ds |>
   dataset_batch(batch_size) |>
-  dataset_prefetch() 
+  dataset_prefetch()
 ```
 
 Let's visualize what the first image of the first batch looks like after various random
@@ -481,7 +481,7 @@ base_model <- application_xception(
   weights = "imagenet", # Load weights pre-trained on ImageNet.
   input_shape = c(150, 150, 3),
   include_top = FALSE, # Do not include the ImageNet classifier at the top.
-)  
+)
 
 # Freeze the base_model
 base_model$trainable <- FALSE

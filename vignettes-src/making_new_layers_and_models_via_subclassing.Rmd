@@ -60,7 +60,7 @@ layer_linear <- Layer("Linear",
       trainable = TRUE
     )
   },
-  
+
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
   }
@@ -148,7 +148,7 @@ layer_linear <- Layer("Linear",
       trainable = TRUE
     )
   },
-  
+
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
   }
@@ -337,16 +337,16 @@ layer_outer <- Layer(
 
 layer <- layer_outer()
 # No losses yet since the layer has never been called
-cat("losses:", length(layer$losses), "\n")  
+cat("losses:", length(layer$losses), "\n")
 
 x <- layer(op_zeros(c(1, 1)))
 # We created one loss value
-cat("losses:", length(layer$losses), "\n")  
+cat("losses:", length(layer$losses), "\n")
 
 # `layer$losses` gets reset at the start of each call
 x <- layer(op_zeros(c(1, 1)))
 # This is the loss created during the call above
-cat("losses:", length(layer$losses), "\n") 
+cat("losses:", length(layer$losses), "\n")
 ```
 
 In addition, the `loss` property also contains regularization losses created
@@ -508,7 +508,7 @@ layer_custom_dropout <- Layer(
     self$rate <- rate
   },
   call = function(inputs, training = NULL) {
-    if (isTRUE(training)) 
+    if (isTRUE(training))
       return(random_dropout(inputs, rate = self$rate))
     inputs
   }
@@ -628,7 +628,7 @@ layer_encoder <- Layer(
   "Encoder",
   initialize = function(latent_dim = 32, intermediate_dim = 64, ...) {
     super$initialize(...)
-    self$dense_proj <- 
+    self$dense_proj <-
       layer_dense(units = intermediate_dim,  activation = "relu")
     self$dense_mean <- layer_dense(units = latent_dim)
     self$dense_log_var <- layer_dense(units = latent_dim)
@@ -662,7 +662,7 @@ layer_decoder <- Layer(
 # Combines the encoder and decoder into an end-to-end model for training.
 VariationalAutoEncoder <- Model(
   "VariationalAutoEncoder",
-  
+
   initialize = function(original_dim, intermediate_dim = 64, latent_dim = 32,
                         name = "autoencoder", ...) {
     super$initialize(name = name, ...)
@@ -672,7 +672,7 @@ VariationalAutoEncoder <- Model(
     self$decoder <- layer_decoder(original_dim = original_dim,
                             intermediate_dim = intermediate_dim)
   },
-  
+
   call = function(inputs) {
     c(z_mean, z_log_var, z) %<-% self$encoder(inputs)
     reconstructed <- self$decoder(z)

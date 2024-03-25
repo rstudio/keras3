@@ -6,7 +6,8 @@ last-modified: 2023/06/25
 description: Complete guide to writing new Keras callbacks.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras/guides/writing_your_own_callbacks.py
 ---
 
 ## Introduction
@@ -427,3 +428,4 @@ Be sure to check out the existing Keras callbacks by
 reading the [API docs](https://keras.io/api/callbacks/).
 Applications include logging to CSV, saving
 the model, visualizing metrics in TensorBoard, and a lot more!
+

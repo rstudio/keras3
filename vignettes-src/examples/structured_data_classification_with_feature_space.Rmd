@@ -80,7 +80,7 @@ use_backend("tensorflow")
 Let's download the data and load it into a Pandas dataframe:
 
 ```{r, output=FALSE}
-file_url <- 
+file_url <-
   "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
 df <- read_csv(file_url, col_types = cols(
   oldpeak = col_double(),
@@ -114,7 +114,7 @@ Let's split the data into a training and validation set:
 
 ```{r}
 val_idx <- nrow(df) %>% sample.int(., . * 0.2)
-val_df <- df[val_idx, ] 
+val_df <- df[val_idx, ]
 train_df <- df[-val_idx, ]
 
 cat(sprintf(
@@ -129,10 +129,10 @@ Let's generate `tf_dataset` objects for each dataframe:
 dataframe_to_dataset <- function(df) {
   labels <- df |> pull(target) |> as.integer()
   inputs <- df |> select(-target) |> as.list()
-  
+
   ds <- tensor_slices_dataset(list(inputs, labels)) |>
     dataset_shuffle(nrow(df))
-  
+
   ds
 }
 
@@ -346,17 +346,17 @@ dict_inputs <- feature_space$get_inputs()
 encoded_features <- feature_space$get_encoded_features()
 
 predictions <- encoded_features |>
-  layer_dense(32, activation="relu") |> 
+  layer_dense(32, activation="relu") |>
   layer_dropout(0.5) |>
   layer_dense(1, activation="sigmoid")
 
-training_model <- keras_model(inputs = encoded_features, 
+training_model <- keras_model(inputs = encoded_features,
                               outputs = predictions)
 training_model |> compile(optimizer = "adam",
                           loss = "binary_crossentropy",
                           metrics = "accuracy")
 
-inference_model <- keras_model(inputs = dict_inputs, 
+inference_model <- keras_model(inputs = dict_inputs,
                                outputs = predictions)
 ```
 

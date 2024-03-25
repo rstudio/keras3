@@ -6,7 +6,8 @@ last-modified: 2021/03/01
 description: How to train a deep convolutional autoencoder for image denoising.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras-io/examples/vision/autoencoder.py
 ---
 
 ## Introduction

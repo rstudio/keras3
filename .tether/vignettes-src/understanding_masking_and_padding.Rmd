@@ -6,7 +6,8 @@ last-modified: 2023/06/25
 description: Complete guide to using mask-aware sequence layers in Keras.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras/guides/understanding_masking_and_padding.py
 ---
 
 ## Setup
@@ -358,3 +359,4 @@ automatically.
 manually.
 - You can easily write layers that modify the current mask, that generate a new mask,
 or that consume the mask associated with the inputs.
+

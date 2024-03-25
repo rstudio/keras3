@@ -541,7 +541,7 @@ The filename should end in `.weights.h5`.
 **Example:**
 
 ```{r}
-sequential_model = keras_model_sequential(input_shape = c(784), 
+sequential_model = keras_model_sequential(input_shape = c(784),
                                           input_name = "digits") |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
   layer_dense(64, activation = "relu", name = "dense_2") |>
@@ -579,7 +579,7 @@ freeze_weights(get_layer(nested_model, "nested")$dense_1)
 
 (variable_names_2 <- sapply(nested_model$weights, \(v) v$path))
 cat("variable ordering changed: ", any(variable_names != variable_names_2))
-if(any(variable_names != variable_names_2)) 
+if(any(variable_names != variable_names_2))
   stop("Make this chunk visible again")
 ```
 
@@ -638,7 +638,7 @@ method.
 
 ```{r}
 layer_my_dense <- register_keras_serializable(
-  package = "MyLayers", name = "KernelMult",  
+  package = "MyLayers", name = "KernelMult",
   object = Layer(
     "MyDense",
     initialize = function(units,
@@ -682,8 +682,8 @@ layer_my_dense <- register_keras_serializable(
 )
 
 
-layer <- layer_my_dense(units = 16, 
-                        kernel_regularizer = "l1", 
+layer <- layer_my_dense(units = 16,
+                        kernel_regularizer = "l1",
                         kernel_initializer = "ones")
 layer3 <- layer_my_dense(units = 64, nested_model = layer)
 
@@ -720,17 +720,17 @@ layer_custom_model <- register_keras_serializable(
 
     get_config = function() {
       config <- super$get_config()
-      config <- modifyList(config, list( 
+      config <- modifyList(config, list(
         first_layer = self$first_layer,
         second_layer = self$second_layer
       ))
       config
-    }, 
-    
+    },
+
     from_config = function(config) {
       config$first_layer %<>% deserialize_keras_object()
       config$second_layer %<>% deserialize_keras_object()
-      # note that the class is available in methods under the classname symbol, 
+      # note that the class is available in methods under the classname symbol,
       # (`CustomModel` for this class), and also under the symbol `__class__`
       cls(!!!config)
       # CustomModel(!!!config)
@@ -748,7 +748,7 @@ inputs <- keras_input(c(32))
 outputs <-  inputs |> layer_custom_model(first_layer=layer)
 model <- keras_model(inputs, outputs)
 
-config <- get_config(model) 
+config <- get_config(model)
 new_model <- from_config(config)
 ```
 
@@ -785,6 +785,6 @@ proper re-initialization in `from_config`.
 Additionally, note that the `module` key is `NULL` since this is a custom object.
 
 ```{r, echo=FALSE}
-unlink(c("my_model.keras", "custom_model.keras", 
+unlink(c("my_model.keras", "custom_model.keras",
          "my_model.weights.h5", "pretrained.weights.h5"))
 ```

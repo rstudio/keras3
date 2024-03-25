@@ -6,7 +6,8 @@ last-modified: 2023/06/25
 description: Writing low-level training & evaluation loops in PyTorch.
 accelerator: None
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras/guides/writing_a_custom_training_loop_in_torch.py
 ---
 
 ## Setup
@@ -121,7 +122,7 @@ Here's our training loop, step by step:
 
 - We open a `for` loop that iterates over epochs
 - For each epoch, we open a `for` loop that iterates over the dataset, in batches
-- For each batch, we call the model on the input data to retrive the predictions,
+- For each batch, we call the model on the input data to retrieve the predictions,
 then we use them to compute a loss value
 - We call `loss.backward()` to
 - Outside the scope, we retrieve the gradients of the weights

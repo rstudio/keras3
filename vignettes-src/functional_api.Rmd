@@ -561,7 +561,7 @@ Use these features to create a new feature-extraction model that returns
 the values of the intermediate layer activations:
 
 ```{r}
-feat_extraction_model <- keras_model(inputs = vgg19$input, 
+feat_extraction_model <- keras_model(inputs = vgg19$input,
                                      outputs = features_list)
 
 img <- random_normal(c(1, 224, 224, 3))
@@ -724,7 +724,7 @@ MLP <- Model(
     self$dense_2 <- layer_dense(units = 10)
   },
   call = function(inputs) {
-    inputs |> 
+    inputs |>
       self$dense_1() |>
       self$dense_2()
   }
@@ -757,7 +757,7 @@ layers (as seen in a previous example):
 
 ```{r}
 features_list <- lapply(vgg19$layers, function(x) x$output)
-feat_extraction_model <- keras_model(inputs = vgg19$input, 
+feat_extraction_model <- keras_model(inputs = vgg19$input,
                                      outputs = features_list)
 ```
 

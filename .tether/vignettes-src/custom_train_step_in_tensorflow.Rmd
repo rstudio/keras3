@@ -6,7 +6,8 @@ last-modified: 2023/06/27
 description: Overriding the training step of the Model class with TensorFlow.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras/guides/custom_train_step_in_tensorflow.py
 ---
 
 ## Introduction
@@ -185,7 +186,7 @@ inputs = keras.Input(shape=(32,))
 outputs = keras.layers.Dense(1)(inputs)
 model = CustomModel(inputs, outputs)
 
-# We don't passs a loss or metrics here.
+# We don't pass a loss or metrics here.
 model.compile(optimizer="adam")
 
 # Just use `fit` as usual -- you can use callbacks, etc.
@@ -451,3 +452,4 @@ gan.fit(dataset.take(100), epochs=1)
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?
+

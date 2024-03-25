@@ -6,7 +6,8 @@ last-modified: 2023/07/10
 description: First contact with Keras 3.
 accelerator: GPU
 output: rmarkdown::html_vignette
-knit: ({source(here::here("tools/knit.R")); knit_vignette)
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: ~/github/keras-team/keras-io/guides/intro_to_keras_for_engineers.py
 ---
 
 ## Introduction
