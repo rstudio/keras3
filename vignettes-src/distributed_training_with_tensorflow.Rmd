@@ -174,10 +174,10 @@ with(strategy$scope(), {
   model <- get_compiled_model()
 
   c(train_dataset, val_dataset, test_dataset) %<-% get_dataset()
-  
+
   # Train the model on all available devices.
   model |> fit(train_dataset, epochs = 2, validation_data = val_dataset)
-  
+
   # Test the model on all available devices.
   model |> evaluate(test_dataset)
 

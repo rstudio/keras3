@@ -269,3 +269,4 @@ samples are used to train the model. The next batch will be prefetched in GPU me
 the time the current batch is over.
 
 That's it!
+
