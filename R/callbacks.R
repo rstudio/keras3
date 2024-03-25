@@ -362,13 +362,13 @@ as_callback_lambda_fn_sig_logs <- function(fn) {
 #'
 #' @description
 #' At the beginning of every epoch, this callback gets the updated learning
-#' rate value from `schedule` function provided at `__init__`, with the current
+#' rate value from `schedule` function provided, with the current
 #' epoch and current learning rate, and applies the updated learning rate on
 #' the optimizer.
 #'
 #' # Examples
 #' ```{r}
-#' # This function keeps the initial learning rate for the first ten epochs
+#' # This function keeps the initial learning rate steady for the first ten epochs
 #' # and decreases it exponentially after that.
 #' scheduler <- function(epoch, lr) {
 #'   if (epoch < 10)
@@ -408,7 +408,7 @@ as_callback_lambda_fn_sig_logs <- function(fn) {
 callback_learning_rate_scheduler <-
 function (schedule, verbose = 0L)
 {
-    args <- capture_args(list(schedule = as_integer, verbose = as_integer))
+    args <- capture_args(list(verbose = as_integer))
     do.call(keras$callbacks$LearningRateScheduler, args)
 }
 
