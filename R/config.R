@@ -60,7 +60,10 @@ function ()
 config_set_backend <-
 function (backend)
 {
+  if(!is_keras_loaded())
+    return(use_backend(backend))
   keras$config$set_backend(backend)
+  invisible(backend)
 }
 
 
@@ -511,4 +514,5 @@ function (policy)
     args <- capture_args()
     do.call(keras$config$set_dtype_policy, args)
 }
+
 
