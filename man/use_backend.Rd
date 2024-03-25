@@ -17,10 +17,13 @@ Configure a Keras backend
 }
 \details{
 These functions allow configuring which backend keras will use.
-Note that only one backend can be configured per R session.
+Note that only one backend can be configured at a time.
 
 The function should be called after \code{library(keras3)} and before calling
 other functions within the package (see below for an example).
+
+There is experimental support for changing the backend after keras has initialized.
+using \code{config_set_backend()}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(keras3)
 use_backend("tensorflow")

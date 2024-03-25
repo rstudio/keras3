@@ -2,13 +2,8 @@ pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  custom_train_step_in_jax: custom_train_step_in_jax.html
   custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
-  custom_train_step_in_torch: custom_train_step_in_torch.html
-  customizing_saving_and_serialization: customizing_saving_and_serialization.html
-  distributed_training_with_jax: distributed_training_with_jax.html
   distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
-  distributed_training_with_torch: distributed_training_with_torch.html
   autoencoder: examples/autoencoder.html
   index: examples/index.html
   mnist_convnet: examples/mnist_convnet.html
@@ -26,11 +21,9 @@ articles:
   training_with_built_in_methods: training_with_built_in_methods.html
   transfer_learning: transfer_learning.html
   understanding_masking_and_padding: understanding_masking_and_padding.html
-  writing_a_custom_training_loop_in_jax: writing_a_custom_training_loop_in_jax.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
-  writing_a_custom_training_loop_in_torch: writing_a_custom_training_loop_in_torch.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-03-25T01:31Z
+last_built: 2024-03-25T14:51Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

@@ -18,12 +18,12 @@ A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.mode
 }
 \description{
 At the beginning of every epoch, this callback gets the updated learning
-rate value from \code{schedule} function provided at \verb{__init__}, with the current
+rate value from \code{schedule} function provided, with the current
 epoch and current learning rate, and applies the updated learning rate on
 the optimizer.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# This function keeps the initial learning rate for the first ten epochs
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# This function keeps the initial learning rate steady for the first ten epochs
 # and decreases it exponentially after that.
 scheduler <- function(epoch, lr) \{
   if (epoch < 10)

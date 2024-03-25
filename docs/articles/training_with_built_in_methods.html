@@ -609,14 +609,8 @@ TensorFlow.</strong> You can pass a <code>Dataset</code> instance
 directly to the methods <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##</span></span>
-<span><span class="co">## Attaching package: 'tfdatasets'</span></span></code></pre>
-<pre><code><span><span class="co">## The following object is masked from 'package:keras3':</span></span>
-<span><span class="co">##</span></span>
-<span><span class="co">##     shape</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># First, let's create a training Dataset instance.</span></span>
 <span><span class="co"># For the sake of our example, we'll use the same MNIST data as before.</span></span>
@@ -641,11 +635,11 @@ directly to the methods <code><a href="https://generics.r-lib.org/reference/fit.
 <span><span class="co">## 782/782 - 1s - 723us/step - loss: 0.1602 - sparse_categorical_accuracy: 0.9525</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
 <span><span class="co">## 782/782 - 1s - 717us/step - loss: 0.1166 - sparse_categorical_accuracy: 0.9653</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can also evaluate or predict on a dataset.</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 157/157 - 0s - 3ms/step - loss: 0.1147 - sparse_categorical_accuracy: 0.9632</span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">result</span></span></code></pre></div>
 <pre><code><span><span class="co">## $loss</span></span>
 <span><span class="co">## [1] 0.114668</span></span>
@@ -658,7 +652,7 @@ so it can be reused of the next epoch.</p>
 this Dataset, you can pass the <code>steps_per_epoch</code> argument,
 which specifies how many training steps the model should run using this
 Dataset before moving on to the next epoch.</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Prepare the training dataset</span></span>
@@ -677,7 +671,7 @@ Dataset before moving on to the next epoch.</p>
 <span><span class="co">## 100/100 - 0s - 703us/step - loss: 0.3060 - sparse_categorical_accuracy: 0.9130</span></span></code></pre>
 <p>You can also pass a <code>Dataset</code> instance as the
 <code>validation_data</code> argument in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>:</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Prepare the training dataset</span></span>
@@ -699,7 +693,7 @@ from this dataset, you can pass the <code>validation_steps</code>
 argument, which specifies how many validation steps the model should run
 with the validation dataset before interrupting validation and moving on
 to the next epoch:</p>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span>  <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Prepare the training dataset</span></span>
@@ -861,7 +855,7 @@ your data, you could use
 <p>Here’s an R example where we use class weights or sample weights to
 give more importance to the correct classification of class #5 (which is
 the digit “5” in the MNIST dataset).</p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">class_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>    <span class="st">"0"</span> <span class="op">=</span> <span class="fl">1.0</span>,</span>
 <span>    <span class="st">"1"</span> <span class="op">=</span> <span class="fl">1.0</span>,</span>
@@ -903,7 +897,7 @@ being to give more weight to rarely-seen classes).</p>
 <p>When the weights used are ones and zeros, the array can be used as a
 <em>mask</em> for the loss function (entirely discarding the
 contribution of certain samples to the total loss).</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y_train</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sample_weight</span><span class="op">[</span><span class="va">y_train</span> <span class="op">==</span> <span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2.0</span></span>
 <span></span>
@@ -915,7 +909,7 @@ contribution of certain samples to the total loss).</p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - loss: 0.3685 - sparse_categorical_accuracy: 0.9024</span></span></code></pre>
 <p>Here’s a matching <code>Dataset</code> example:</p>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y_train</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sample_weight</span><span class="op">[</span><span class="va">y_train</span> <span class="op">==</span> <span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">2.0</span></span>
 <span></span>
@@ -949,7 +943,7 @@ and a time series input of shape <code>(NA, 10)</code> (that’s
 computed from the combination of these inputs: a “score” (of shape
 <code>(1)</code>) and a probability distribution over five classes (of
 shape <code>(5)</code>).</p>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">image_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">32</span>, <span class="fl">32</span>, <span class="fl">3</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"img_input"</span><span class="op">)</span></span>
 <span><span class="va">timeseries_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">10</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"ts_input"</span><span class="op">)</span></span>
 <span></span>
@@ -973,7 +967,7 @@ shape <code>(5)</code>).</p>
 <p>Let’s plot this model, so you can clearly see what we’re doing here
 (note that the shapes shown in the plot are batch shapes, rather than
 per-sample shapes).</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <img src="training_with_built_in_methods/unnamed-chunk-26-1.png" alt="plot of chunk unnamed-chunk-26" width="744"><p class="caption">
@@ -982,7 +976,7 @@ plot of chunk unnamed-chunk-26
 </div>
 <p>At compilation time, we can specify different losses to different
 outputs, by passing the loss functions as a list:</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -994,7 +988,7 @@ outputs, by passing the loss functions as a list:</p>
 function would be applied to every output (which is not appropriate
 here).</p>
 <p>Likewise for metrics:</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1011,7 +1005,7 @@ here).</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Since we gave names to our output layers, we could also specify
 per-output losses and metrics via a named list:</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1031,7 +1025,7 @@ per-output losses and metrics via a named list:</p>
 losses (for instance, one might wish to privilege the “score” loss in
 our example, by giving to 2x the importance of the class loss), using
 the <code>loss_weights</code> argument:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1049,7 +1043,7 @@ the <code>loss_weights</code> argument:</p>
 <span><span class="op">)</span></span></code></pre></div>
 <p>You could also choose not to compute a loss for certain outputs, if
 these outputs are meant for prediction but not for training:</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># loss list, positional version</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
@@ -1066,7 +1060,7 @@ these outputs are meant for prediction but not for training:</p>
 in compile: you can pass <strong>lists of arrays</strong> (with 1:1
 mapping to the outputs that received a loss function) or <strong>dicts
 mapping output names to arrays</strong>.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span><span class="fl">1e-3</span><span class="op">)</span>,</span>
 <span>  loss <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1089,7 +1083,7 @@ mapping output names to arrays</strong>.</p>
 <span>    epochs<span class="op">=</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 4/4 - 2s - 509ms/step - loss: 0.5888</span></span></code></pre>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Alternatively, fit on named lists (names matching)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>img_input <span class="op">=</span> <span class="va">img_data</span>, ts_input <span class="op">=</span> <span class="va">ts_data</span><span class="op">)</span>,</span>
@@ -1101,7 +1095,7 @@ mapping output names to arrays</strong>.</p>
 <p>Here’s the <code>Dataset</code> use case: similarly as what we did
 for R arrays, the <code>Dataset</code> should return a tuple of named
 lists (dicts).</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>img_input <span class="op">=</span> <span class="va">img_data</span>, ts_input <span class="op">=</span> <span class="va">ts_data</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>score_output <span class="op">=</span> <span class="va">score_targets</span>, class_output <span class="op">=</span> <span class="va">class_targets</span><span class="op">)</span></span>
@@ -1135,7 +1129,7 @@ where a certain performance threshold is exceeded</li>
 </ul>
 <p>Callbacks can be passed as a list to your call to
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1210,7 +1204,7 @@ model through the class property <code>self$model</code>.</p>
 custom callbacks</a>.</p>
 <p>Here’s a simple example saving a list of per-batch loss values during
 training:</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">callback_loss_history</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Callback.html">Callback</a></span><span class="op">(</span></span>
 <span>  classname <span class="op">=</span> <span class="st">"LossHistory"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">file</span> <span class="op">=</span> <span class="st">"per_training_batch_losses.txt"</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1237,7 +1231,7 @@ training:</p>
 to save checkpoints of your model at frequent intervals.</p>
 <p>The easiest way to achieve this is with
 [<code><a href="../reference/callback_model_checkpoint.html">callback_model_checkpoint()</a></code>]:</p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">callbacks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -1272,7 +1266,7 @@ to save checkpoints of your model at frequent intervals.</p>
 fault-tolerance: the ability to restart training from the last saved
 state of the model in case training gets randomly interrupted. Here’s a
 basic example:</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Prepare a directory to store all the checkpoints.</span></span>
 <span><span class="va">checkpoint_dir</span> <span class="op">&lt;-</span> <span class="st">"./ckpt"</span></span>
 <span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">checkpoint_dir</span><span class="op">)</span></span>
@@ -1324,7 +1318,7 @@ validation loss).</p>
 <p>You can easily use a static learning rate decay schedule by passing a
 schedule object as the <code>learning_rate</code> argument in your
 optimizer:</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">initial_learning_rate</span> <span class="op">&lt;-</span> <span class="fl">0.1</span></span>
 <span><span class="va">lr_schedule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/learning_rate_schedule_exponential_decay.html">learning_rate_schedule_exponential_decay</a></span><span class="op">(</span></span>
 <span>    <span class="va">initial_learning_rate</span>, decay_steps<span class="op">=</span><span class="fl">100000</span>, decay_rate<span class="op">=</span><span class="fl">0.96</span>,</span>
@@ -1369,7 +1363,7 @@ your <code><a href="../reference/layer_embedding.html">layer_embedding()</a></co
 launch TensorBoard from the command line:</p>
 <pre><code>tensorboard --logdir=/full_path_to_your_logs</code></pre>
 <p>or from R using:</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">tensorflow</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tensorboard.html" class="external-link">tensorboard</a></span><span class="op">(</span>logdir <span class="op">=</span> <span class="st">"/full_path_to_your_logs"</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="using-the-tensorboard-callback">Using the TensorBoard callback<a class="anchor" aria-label="anchor" href="#using-the-tensorboard-callback"></a>
@@ -1379,7 +1373,7 @@ launch TensorBoard from the command line:</p>
 [<code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>].</p>
 <p>In the simplest case, just specify where you want the callback to
 write logs, and you’re good to go:</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tb_callback</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/callback_tensorboard.html">callback_tensorboard</a></span><span class="op">(</span></span>
 <span>  log_dir <span class="op">=</span> <span class="st">"/full_path_to_your_logs"</span>,</span>
 <span>  histogram_freq <span class="op">=</span> <span class="fl">0</span>, <span class="co"># How often to log histogram visualizations</span></span>

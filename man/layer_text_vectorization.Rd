@@ -237,7 +237,7 @@ vectorize_layer(input_data)
 }\if{html}{\out{</div>}}
 
 This example instantiates a \code{TextVectorization} layer by passing a list
-of vocabulary terms to the layer's \verb{__init__()} method.
+of vocabulary terms to the layer's \code{initialize()} method.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab_data <- c("earth", "wind", "and", "fire")
 max_len <- 4  # Sequence length to pad the outputs to.
