@@ -31,17 +31,6 @@ as.integer.keras.src.backend.common.variables.KerasVariable <- function(x, ...) 
   as.integer(as_r_value(keras$ops$convert_to_numpy(x)))
 }
 
-## May need to revisit this; either to disable it, or export a custom $<- method
-## for base classes like Layer, so that compound assignment expressions aren't a
-## problem.
-#' @export
-py_to_r.keras.src.utils.tracking.TrackedDict <- function(x) import("builtins")$dict(x)
-
-#' @export
-py_to_r.keras.src.utils.tracking.TrackedList <- function(x) import("builtins")$list(x)
-
-#' @export
-py_to_r.keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$list(x)
 
 #' @exportS3Method base::all.equal
 all.equal.keras.src.backend.common.variables.KerasVariable <-
@@ -67,4 +56,30 @@ function(target, current, ...) {
   inherits(current, "keras.src.backend.common.keras_tensor.KerasTensor") &&
   py_id(target) == py_id(current)
 }
+
+## Conditionally export these py_to_r methods, if tensorflow hasn't already exported them.
+## We do this to keep keras3 and tensorflow decoupled, but to avoid
+## "S3 method overwritten" warnings if both packages are loaded.
+##
+## Note, we still may need to revisit this; either to disable it, or export a custom $<- method
+## for base classes like Layer, so that compound assignment expressions aren't a
+## problem.
+
+#' @rawNamespace
+#' if(is.null(getS3method("py_to_r", "keras.src.utils.tracking.TrackedDict",
+#'                        optional = TRUE, envir = asNamespace("reticulate"))))
+#'   S3method(py_to_r,keras.src.utils.tracking.TrackedDict)
+py_to_r.keras.src.utils.tracking.TrackedDict <- function(x) import("builtins")$dict(x)
+
+#' @rawNamespace
+#' if(is.null(getS3method("py_to_r", "keras.src.utils.tracking.TrackedDict",
+#'                        optional = TRUE, envir = asNamespace("reticulate"))))
+#'   S3method(py_to_r,keras.src.utils.tracking.TrackedList)
+py_to_r.keras.src.utils.tracking.TrackedList <- function(x) import("builtins")$list(x)
+
+#' @rawNamespace
+#' if(is.null(getS3method("py_to_r", "keras.src.utils.tracking.TrackedDict",
+#'                        optional = TRUE, envir = asNamespace("reticulate"))))
+#'   S3method(py_to_r,keras.src.utils.tracking.TrackedSet)
+py_to_r.keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$list(x)
 
