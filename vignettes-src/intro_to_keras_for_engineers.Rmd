@@ -30,7 +30,7 @@ edit the string below to `"jax"` or `"torch"` and hit
 This entire guide is backend-agnostic.
 
 ```{r}
-library(tensorflow)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(keras3)
 
 # Note that you must configure the backend
