@@ -210,8 +210,8 @@ layer_my_dropout <- Layer(
   initialize = function(rate, name = NULL, seed = NULL, ...) {
     super$initialize(name = name)
     self$rate <- rate
-        # Use seed_generator for managing RNG state.
-        # It is a state element and its seed variable is
+    # Use seed_generator for managing RNG state.
+    # It is a state element and its seed variable is
     # tracked as part of `layer$variables`.
     self$seed_generator <- random_seed_generator(seed)
   },
