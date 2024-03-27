@@ -64,22 +64,12 @@ function(target, current, ...) {
 ## Note, we still may need to revisit this; either to disable it, or export a custom $<- method
 ## for base classes like Layer, so that compound assignment expressions aren't a
 ## problem.
+##
+# these S3 methods are conditionally registered in .onLoad() instead of in NAMESPACE.
+# __ instead of . to avoid a roxygen warning about unexported S3 methods when generating NAMESPACE
+py_to_r__keras.src.utils.tracking.TrackedDict <- function(x) import("builtins")$dict(x)
 
-#' @rawNamespace
-#' if(is.null(getS3method("py_to_r", "keras.src.utils.tracking.TrackedDict",
-#'                        optional = TRUE, envir = asNamespace("reticulate"))))
-#'   S3method(py_to_r,keras.src.utils.tracking.TrackedDict)
-py_to_r.keras.src.utils.tracking.TrackedDict <- function(x) import("builtins")$dict(x)
+py_to_r__keras.src.utils.tracking.TrackedList <- function(x) import("builtins")$list(x)
 
-#' @rawNamespace
-#' if(is.null(getS3method("py_to_r", "keras.src.utils.tracking.TrackedDict",
-#'                        optional = TRUE, envir = asNamespace("reticulate"))))
-#'   S3method(py_to_r,keras.src.utils.tracking.TrackedList)
-py_to_r.keras.src.utils.tracking.TrackedList <- function(x) import("builtins")$list(x)
-
-#' @rawNamespace
-#' if(is.null(getS3method("py_to_r", "keras.src.utils.tracking.TrackedDict",
-#'                        optional = TRUE, envir = asNamespace("reticulate"))))
-#'   S3method(py_to_r,keras.src.utils.tracking.TrackedSet)
-py_to_r.keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$list(x)
+py_to_r__keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$list(x)
 

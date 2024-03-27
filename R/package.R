@@ -51,6 +51,12 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
+  # TODO: remove this requireNamespace()
+  # tensorflow:::.onLoad() registers some reticulate class filter hooks
+  # we need to identify tensors reliably.
+  requireNamespace("tensorflow", quietly = TRUE)
+  maybe_register_S3_methods()
+
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
@@ -121,11 +127,6 @@ keras <- NULL
 
   # on_load_make_as_activation()
 
-  # TODO: remove this requireNamespace()
-  # temporarily here to enable passing of tests -
-  # tensorflow:::.onLoad() registers some reticulate class filter hooks
-  # we need to identify tensors reliably.
-  requireNamespace("tensorflow")
 
 }
 
@@ -134,7 +135,25 @@ keras_not_found_message <- function(error_message) {
   message("Use the install_keras() function to install the core Keras library")
 }
 
+maybe_register_S3_methods <- function() {
+  # Tensorflow 2.16 exports these methods, but we don't need to
+  # take a dep on TF>=2.16. So we conditionally export them if installed
+  # tensorflow package is older. This is to avoid a warning about
+  # overwritten S3 methods on package load.
+  .register_no_overwrite <- function(class) {
+    if(is.null(getS3method("py_to_r", class, optional = TRUE,
+                           envir = asNamespace("reticulate")))) {
+      # __ instead of . to avoid a roxygen warning about unexported S3 methods
+      method <- get(paste0("py_to_r__", class))
+      registerS3method("py_to_r", class, method,
+                       envir = asNamespace("reticulate"))
+    }
+  }
 
+  .register_no_overwrite("keras.src.utils.tracking.TrackedDict")
+  .register_no_overwrite("keras.src.utils.tracking.TrackedList")
+  .register_no_overwrite("keras.src.utils.tracking.TrackedSet")
+}
 
 resolve_implementation_module <- function() {
 
