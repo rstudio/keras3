@@ -43,8 +43,8 @@ Sys.unsetenv("CUDA_VISIBLE_DEVICES")
 
 ```{r}
 library(keras3)
-library(tfdatasets, exclude = "shape")
 library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
 ```
 
 ## Single-host, multi-device synchronous training

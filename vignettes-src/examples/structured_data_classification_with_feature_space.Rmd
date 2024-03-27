@@ -57,13 +57,17 @@ Thal | 3 = normal; 6 = fixed defect; 7 = reversible defect | Categorical
 Target | Diagnosis of heart disease (1 = true; 0 = false) | Target
 
 ## Setup
+```{r, include=FALSE}
+options(conflicts.policy = NULL)
+```
+
 
 ```{r}
 library(readr)
 library(dplyr, warn.conflicts = FALSE)
-library(tensorflow)
-library(tfdatasets)
-library(keras3, warn.conflicts = FALSE)
+library(keras3)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
 
 conflicted::conflicts_prefer(
   keras3::shape(),

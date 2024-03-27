@@ -319,7 +319,7 @@ They all work whether you're using TensorFlow, JAX, or PyTorch as your Keras bac
 Let's try this out with `tf_dataset`:
 
 ```{r}
-library(tfdatasets)
+library(tfdatasets, exclude = "shape")
 
 train_dataset <- list(x_train, y_train) |>
   tensor_slices_dataset() |>

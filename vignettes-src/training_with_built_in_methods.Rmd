@@ -467,7 +467,7 @@ You can pass a `Dataset` instance directly to the methods `fit()`, `evaluate()`,
 `predict()`:
 
 ```{r}
-library(tfdatasets)
+library(tfdatasets, exclude = "shape")
 model <- get_compiled_model()
 
 # First, let's create a training Dataset instance.
