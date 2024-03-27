@@ -141,8 +141,9 @@ maybe_register_S3_methods <- function() {
   # tensorflow package is older. This is to avoid a warning about
   # overwritten S3 methods on package load.
   .register_no_overwrite <- function(class) {
-    if(is.null(getS3method("py_to_r", class, optional = TRUE,
-                           envir = asNamespace("reticulate")))) {
+    if (is.null(utils::getS3method("py_to_r", class, optional = TRUE,
+                                   envir = asNamespace("reticulate")))) {
+
       # __ instead of . to avoid a roxygen warning about unexported S3 methods
       method <- get(paste0("py_to_r__", class))
       registerS3method("py_to_r", class, method,
