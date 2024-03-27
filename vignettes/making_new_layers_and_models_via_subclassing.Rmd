@@ -480,7 +480,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 125ms/step - loss: 1.8971
+## 1/1 - 0s - 128ms/step - loss: 1.8971
 ```
 
 ```r
@@ -492,7 +492,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 77ms/step - loss: -3.3344e-03
+## 1/1 - 0s - 74ms/step - loss: -3.3344e-03
 ```
 
 ## You can optionally enable serialization on your layers
@@ -629,10 +629,12 @@ layer_custom_dropout <- Layer(
   initialize = function(rate, ...) {
     super$initialize(...)
     self$rate <- rate
+    self$seed_generator <- random_seed_generator(1337)
   },
   call = function(inputs, training = NULL) {
     if (isTRUE(training))
-      return(random_dropout(inputs, rate = self$rate))
+      return(random_dropout(inputs, rate = self$rate,
+                            seed = self.seed_generator))
     inputs
   }
 )
@@ -739,11 +741,16 @@ that subclass `Layer`. It will feature a regularization loss (KL divergence).
 ```r
 layer_sampling <- Layer(
   "Sampling",
+  initialize = function(...) {
+    super$initialize(...)
+    self$seed_generator <- random_seed_generator(1337)
+  },
   call = function(inputs) {
     c(z_mean, z_log_var) %<-% inputs
     batch <- op_shape(z_mean)[[1]]
     dim <- op_shape(z_mean)[[2]]
-    epsilon <- random_normal(shape = c(batch, dim))
+    epsilon <- random_normal(shape = c(batch, dim),
+                             seed=self$seed_generator)
     z_mean + op_exp(0.5 * z_log_var) * epsilon
   }
 )
@@ -836,5 +843,5 @@ vae |> fit(x_train, x_train, epochs = 2, batch_size = 64)
 ## Epoch 1/2
 ## 938/938 - 5s - 5ms/step - loss: 0.0748
 ## Epoch 2/2
-## 938/938 - 1s - 725us/step - loss: 0.0676
+## 938/938 - 1s - 752us/step - loss: 0.0676
 ```

@@ -214,6 +214,10 @@ models.</p>
 <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> method) and a built-in evaluation loop (the
 <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> method). Note that you can easily <a href="custom_train_step_in_tensorflow.html">customize these loops</a> to
 implement training routines beyond supervised learning (e.g. <a href="https://keras.io/examples/generative/dcgan_overriding_train_step/" class="external-link">GANs</a>).</p>
+<!-- See also the guides on customizing what happens in `fit()`: -->
+<!-- - [Writing a custom train step with TensorFlow](/guides/custom_train_step_in_tensorflow/) -->
+<!-- - [Writing a custom train step with JAX](/guides/custom_train_step_in_jax/) -->
+<!-- - [Writing a custom train step with PyTorch](/guides/custom_train_step_in_torch/) -->
 <p>Here, load the MNIST image data, reshape it into vectors, fit the
 model on the data (while monitoring performance on a validation split),
 then evaluate the model on the test data:</p>
@@ -235,7 +239,7 @@ then evaluate the model on the test data:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 750/750 - 2s - 2ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 783us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 792us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
@@ -716,7 +720,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 407ms/step - acc: 0.1262 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3065</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 5s - 411ms/step - acc: 0.1300 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3082</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

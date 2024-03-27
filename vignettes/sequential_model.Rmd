@@ -364,16 +364,14 @@ Once your model architecture is ready, you will want to:
     training_with_built_in_methods.html)
 - Save your model to disk and restore it. See our
 [guide to serialization & saving](serialization_and_saving.html).
-- Speed up model training by leveraging multiple GPUs. See our
-[guide to multi-GPU and distributed training](distributed_training_with_tensorflow.html).
 
 ## Feature extraction with a Sequential model
 
 Once a Sequential model has been built, it behaves like a [Functional API
-model](functional_api.html). This means that every layer has an `input`
+model](functional_api.html).
+This means that every layer has an `input`
 and `output` attribute. These attributes can be used to do neat things, like
-quickly
-creating a model that extracts the outputs of all intermediate layers in a
+quickly creating a model that extracts the outputs of all intermediate layers in a
 Sequential model:
 
 
@@ -514,5 +512,4 @@ That's about all you need to know about Sequential models!
 To find out more about building models in Keras, see:
 
 - [Guide to the Functional API](functional_api.html)
-- [Guide to making new Layers & Models via subclassing](
-    making_new_layers_and_models_via_subclassing.html)
+- [Guide to making new Layers & Models via subclassing](making_new_layers_and_models_via_subclassing.html)
