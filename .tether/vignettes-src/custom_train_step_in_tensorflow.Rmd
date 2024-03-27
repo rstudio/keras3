@@ -7,7 +7,7 @@ description: Overriding the training step of the Model class with TensorFlow.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: ~/github/keras-team/keras/guides/custom_train_step_in_tensorflow.py
+tether: ~/github/keras-team/keras-io/guides/custom_train_step_in_tensorflow.py
 ---
 
 ## Introduction
@@ -409,9 +409,7 @@ class GAN(keras.Model):
         # Train the generator (note that we should *not* update the weights
         # of the discriminator)!
         with tf.GradientTape() as tape:
-            predictions = self.discriminator(
-                self.generator(random_latent_vectors)
-            )
+            predictions = self.discriminator(self.generator(random_latent_vectors))
             g_loss = self.loss_fn(misleading_labels, predictions)
         grads = tape.gradient(g_loss, self.generator.trainable_weights)
         self.g_optimizer.apply(grads, self.generator.trainable_weights)
@@ -437,9 +435,7 @@ all_digits = np.reshape(all_digits, (-1, 28, 28, 1))
 dataset = tf.data.Dataset.from_tensor_slices(all_digits)
 dataset = dataset.shuffle(buffer_size=1024).batch(batch_size)
 
-gan = GAN(
-    discriminator=discriminator, generator=generator, latent_dim=latent_dim
-)
+gan = GAN(discriminator=discriminator, generator=generator, latent_dim=latent_dim)
 gan.compile(
     d_optimizer=keras.optimizers.Adam(learning_rate=0.0003),
     g_optimizer=keras.optimizers.Adam(learning_rate=0.0003),

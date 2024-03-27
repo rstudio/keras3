@@ -7,7 +7,7 @@ description: Complete guide to transfer learning & fine-tuning in Keras.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: ~/github/keras-team/keras/guides/transfer_learning.py
+tether: ~/github/keras-team/keras-io/guides/transfer_learning.py
 ---
 
 ## Setup
@@ -82,7 +82,7 @@ In general, all weights are trainable weights. The only built-in layer that has
 non-trainable weights is the `BatchNormalization` layer. It uses non-trainable weights
  to keep track of the mean and variance of its inputs during training.
 To learn how to use non-trainable weights in your own custom layers, see the
-[guide to writing new layers from scratch](https://keras.io/guides/making_new_layers_and_models_via_subclassing/).
+[guide to writing new layers from scratch](/guides/making_new_layers_and_models_via_subclassing/).
 
 **Example: the `BatchNormalization` layer has 2 trainable weights and 2 non-trainable
  weights**
@@ -176,9 +176,7 @@ model = keras.Sequential(
 model.trainable = False  # Freeze the outer model
 
 assert inner_model.trainable == False  # All layers in `model` are now frozen
-assert (
-    inner_model.layers[0].trainable == False
-)  # `trainable` is propagated recursively
+assert inner_model.layers[0].trainable == False  # `trainable` is propagated recursively
 ```
 
 ## The typical transfer-learning workflow
@@ -426,9 +424,7 @@ from tensorflow import data as tf_data
 batch_size = 64
 
 train_ds = train_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
-validation_ds = (
-    validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
-)
+validation_ds = validation_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
 test_ds = test_ds.batch(batch_size).prefetch(tf_data.AUTOTUNE).cache()
 ```
 

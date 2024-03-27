@@ -2,12 +2,12 @@
 title: The Functional API
 author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
-last-modified: 2020/04/12
+last-modified: 2023/06/25
 description: Complete guide to the functional API.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: ~/github/keras-team/keras/guides/functional_api.py
+tether: ~/github/keras-team/keras-io/guides/functional_api.py
 ---
 
 ## Setup
@@ -119,9 +119,7 @@ And, optionally, display the input and output shapes of each layer
 in the plotted graph:
 
 ```python
-keras.utils.plot_model(
-    model, "my_first_model_with_shape_info.png", show_shapes=True
-)
+keras.utils.plot_model(model, "my_first_model_with_shape_info.png", show_shapes=True)
 ```
 
 This figure and the code are almost identical. In the code version,
@@ -137,9 +135,12 @@ built using the functional API as for `Sequential` models.
 
 The `Model` class offers a built-in training loop (the `fit()` method)
 and a built-in evaluation loop (the `evaluate()` method). Note
-that you can easily [customize these loops](/guides/customizing_what_happens_in_fit/)
-to implement training routines beyond supervised learning
-(e.g. [GANs](https://keras.io/examples/generative/dcgan_overriding_train_step/)).
+that you can easily customize these loops to implement your own training routines.
+See also the guides on customizing what happens in `fit()`:
+
+- [Writing a custom train step with TensorFlow](/guides/custom_train_step_in_tensorflow/)
+- [Writing a custom train step with JAX](/guides/custom_train_step_in_jax/)
+- [Writing a custom train step with PyTorch](/guides/custom_train_step_in_torch/)
 
 Here, load the MNIST image data, reshape it into vectors,
 fit the model on the data (while monitoring performance on a validation split),
@@ -157,16 +158,15 @@ model.compile(
     metrics=["accuracy"],
 )
 
-history = model.fit(
-    x_train, y_train, batch_size=64, epochs=2, validation_split=0.2
-)
+history = model.fit(x_train, y_train, batch_size=64, epochs=2, validation_split=0.2)
 
 test_scores = model.evaluate(x_test, y_test, verbose=2)
 print("Test loss:", test_scores[0])
 print("Test accuracy:", test_scores[1])
 ```
 
-For further reading, see the [training and evaluation](/guides/training_with_built_in_methods/) guide.
+For further reading, see the
+[training and evaluation](/guides/training_with_built_in_methods/) guide.
 
 ## Save and serialize
 
@@ -189,8 +189,7 @@ del model
 model = keras.models.load_model("my_model.keras")
 ```
 
-For details, read the model [serialization & saving](
-    /guides/serialization_and_saving/) guide.
+For details, read the model [serialization & saving](/guides/serialization_and_saving/) guide.
 
 ## Use the same graph of layers to define multiple models
 
@@ -328,9 +327,7 @@ num_departments = 4  # Number of departments for predictions
 title_input = keras.Input(
     shape=(None,), name="title"
 )  # Variable-length sequence of ints
-body_input = keras.Input(
-    shape=(None,), name="body"
-)  # Variable-length sequence of ints
+body_input = keras.Input(shape=(None,), name="body")  # Variable-length sequence of ints
 tags_input = keras.Input(
     shape=(num_tags,), name="tags"
 )  # Binary vectors of size `num_tags`
@@ -363,9 +360,7 @@ model = keras.Model(
 Now plot the model:
 
 ```python
-keras.utils.plot_model(
-    model, "multi_input_and_output_model.png", show_shapes=True
-)
+keras.utils.plot_model(model, "multi_input_and_output_model.png", show_shapes=True)
 ```
 
 When compiling this model, you can assign different losses to each output.
@@ -422,7 +417,8 @@ tuple of lists like `([title_data, body_data, tags_data], [priority_targets, dep
 or a tuple of dictionaries like
 `({'title': title_data, 'body': body_data, 'tags': tags_data}, {'priority': priority_targets, 'department': dept_targets})`.
 
-For more detailed explanation, refer to the [training and evaluation](/guides/training_with_built_in_methods/) guide.
+For more detailed explanation, refer to the
+[training and evaluation](/guides/training_with_built_in_methods/) guide.
 
 ### A toy ResNet model
 
@@ -637,9 +633,7 @@ outputs = CustomDense(10)(inputs)
 model = keras.Model(inputs, outputs)
 config = model.get_config()
 
-new_model = keras.Model.from_config(
-    config, custom_objects={"CustomDense": CustomDense}
-)
+new_model = keras.Model.from_config(config, custom_objects={"CustomDense": CustomDense})
 ```
 
 Optionally, implement the class method `from_config(cls, config)` which is used

@@ -2,12 +2,12 @@
 title: Training & evaluation with the built-in methods
 author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
-last-modified: 2023/03/25
+last-modified: 2023/06/25
 description: Complete guide to training & evaluation with `fit()` and `evaluate()`.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: ~/github/keras-team/keras/guides/training_with_built_in_methods.py
+tether: ~/github/keras-team/keras-io/guides/training_with_built_in_methods.py
 ---
 
 ## Setup
@@ -31,20 +31,23 @@ when using built-in APIs for training & validation (such as `Model.fit()`,
 `Model.evaluate()` and `Model.predict()`).
 
 If you are interested in leveraging `fit()` while specifying your
-own training step function, see the
-[Customizing what happens in `fit()` guide](/guides/customizing_what_happens_in_fit/).
+own training step function, see the guides on customizing what happens in `fit()`:
+
+- [Writing a custom train step with TensorFlow](/guides/custom_train_step_in_tensorflow/)
+- [Writing a custom train step with JAX](/guides/custom_train_step_in_jax/)
+- [Writing a custom train step with PyTorch](/guides/custom_train_step_in_torch/)
 
 If you are interested in writing your own training & evaluation loops from
-scratch, see the guide
-["writing a training loop from scratch"](/guides/writing_a_training_loop_from_scratch/).
+scratch, see the guides on writing training loops:
+
+- [Writing a training loop with TensorFlow](/guides/writing_a_custom_training_loop_in_tensorflow/)
+- [Writing a training loop with JAX](/guides/writing_a_custom_training_loop_in_jax/)
+- [Writing a training loop with PyTorch](/guides/writing_a_custom_training_loop_in_torch/)
 
 In general, whether you are using built-in loops or writing your own, model training &
 evaluation works strictly in the same way across every kind of Keras model --
 Sequential models, models built with the Functional API, and models written from
 scratch via model subclassing.
-
-This guide doesn't cover distributed training, which is covered in our
-[guide to multi-GPU & distributed training](https://keras.io/guides/distributed_training/).
 
 ## API overview: a first end-to-end example
 
@@ -130,7 +133,7 @@ The returned `history` object holds a record of the loss values and metric value
 during training:
 
 ```python
-history.history
+print(history.history)
 ```
 
 We evaluate the model on the test data via `evaluate()`:
@@ -324,7 +327,7 @@ class CategoricalTruePositives(keras.metrics.Metric):
         self.true_positives.assign_add(ops.sum(values))
 
     def result(self):
-        return self.true_positives
+        return self.true_positives.value
 
     def reset_state(self):
         # The state of the metric will be reset at the start of each epoch.
@@ -606,9 +609,7 @@ the dataset is already batched!
 
 ```python
 model = get_compiled_model()
-model.fit(
-    train_py_dataset, batch_size=64, validation_data=val_py_dataset, epochs=1
-)
+model.fit(train_py_dataset, batch_size=64, validation_data=val_py_dataset, epochs=1)
 ```
 
 Evaluating the model is just as easy:
@@ -647,9 +648,7 @@ train_py_dataset = ExamplePyDataset(x_train, y_train, batch_size=32, workers=4)
 val_py_dataset = ExamplePyDataset(x_val, y_val, batch_size=32, workers=4)
 
 model = get_compiled_model()
-model.fit(
-    train_py_dataset, batch_size=64, validation_data=val_py_dataset, epochs=1
-)
+model.fit(train_py_dataset, batch_size=64, validation_data=val_py_dataset, epochs=1)
 ```
 
 ## Training & evaluation using PyTorch `DataLoader` objects
@@ -695,9 +694,7 @@ Now you can use them in the Keras API just like any other iterator:
 
 ```python
 model = get_compiled_model()
-model.fit(
-    train_dataloader, batch_size=64, validation_data=val_dataloader, epochs=1
-)
+model.fit(train_dataloader, batch_size=64, validation_data=val_dataloader, epochs=1)
 model.evaluate(val_dataloader)
 ```
 
@@ -772,9 +769,7 @@ sample_weight[y_train == 5] = 2.0
 
 print("Fit with sample weight")
 model = get_compiled_model()
-model.fit(
-    x_train, y_train, sample_weight=sample_weight, batch_size=64, epochs=1
-)
+model.fit(x_train, y_train, sample_weight=sample_weight, batch_size=64, epochs=1)
 ```
 
 Here's a matching `Dataset` example:
@@ -785,9 +780,7 @@ sample_weight[y_train == 5] = 2.0
 
 # Create a Dataset that includes sample weights
 # (3rd element in the return tuple).
-train_dataset = tf.data.Dataset.from_tensor_slices(
-    (x_train, y_train, sample_weight)
-)
+train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train, sample_weight))
 
 # Shuffle and slice the dataset.
 train_dataset = train_dataset.shuffle(buffer_size=1024).batch(64)
@@ -832,9 +825,7 @@ Let's plot this model, so you can clearly see what we're doing here (note that t
 shapes shown in the plot are batch shapes, rather than per-sample shapes).
 
 ```python
-keras.utils.plot_model(
-    model, "multi_input_and_output_model.png", show_shapes=True
-)
+keras.utils.plot_model(model, "multi_input_and_output_model.png", show_shapes=True)
 ```
 
 At compilation time, we can specify different losses to different outputs, by passing
@@ -954,9 +945,7 @@ score_targets = np.random.random_sample(size=(100, 1))
 class_targets = np.random.random_sample(size=(100, 5))
 
 # Fit on lists
-model.fit(
-    [img_data, ts_data], [score_targets, class_targets], batch_size=32, epochs=1
-)
+model.fit([img_data, ts_data], [score_targets, class_targets], batch_size=32, epochs=1)
 
 # Alternatively, fit on dicts
 model.fit(
@@ -1106,9 +1095,7 @@ if not os.path.exists(checkpoint_dir):
 def make_or_restore_model():
     # Either restore the latest model, or create a fresh one
     # if there is no checkpoint available.
-    checkpoints = [
-        checkpoint_dir + "/" + name for name in os.listdir(checkpoint_dir)
-    ]
+    checkpoints = [checkpoint_dir + "/" + name for name in os.listdir(checkpoint_dir)]
     if checkpoints:
         latest_checkpoint = max(checkpoints, key=os.path.getctime)
         print("Restoring from", latest_checkpoint)

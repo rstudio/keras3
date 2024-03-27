@@ -2,7 +2,7 @@
 title: The Functional API
 author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
-last-modified: 2020/04/12
+last-modified: 2023/06/25
 description: Complete guide to the functional API.
 accelerator: GPU
 output: rmarkdown::html_vignette
@@ -136,6 +136,12 @@ and a built-in evaluation loop (the `evaluate()` method). Note
 that you can easily [customize these loops](custom_train_step_in_tensorflow.html)
 to implement training routines beyond supervised learning
 (e.g. [GANs](https://keras.io/examples/generative/dcgan_overriding_train_step/)).
+
+<!-- See also the guides on customizing what happens in `fit()`: -->
+
+<!-- - [Writing a custom train step with TensorFlow](/guides/custom_train_step_in_tensorflow/) -->
+<!-- - [Writing a custom train step with JAX](/guides/custom_train_step_in_jax/) -->
+<!-- - [Writing a custom train step with PyTorch](/guides/custom_train_step_in_torch/) -->
 
 Here, load the MNIST image data, reshape it into vectors,
 fit the model on the data (while monitoring performance on a validation split),
