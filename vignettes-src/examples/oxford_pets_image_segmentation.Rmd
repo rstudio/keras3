@@ -86,8 +86,8 @@ target_img_paths[10] |>
 ## Prepare dataset to load & vectorize batches of data
 
 ```{r}
-library(tensorflow)
-library(tfdatasets)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
 
 
 # Returns a tf_dataset

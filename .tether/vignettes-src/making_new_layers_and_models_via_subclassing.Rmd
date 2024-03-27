@@ -7,7 +7,7 @@ description: Complete guide to writing `Layer` and `Model` objects from scratch.
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: ~/github/keras-team/keras/guides/making_new_layers_and_models_via_subclassing.py
+tether: ~/github/keras-team/keras-io/guides/making_new_layers_and_models_via_subclassing.py
 ---
 
 ## Introduction
@@ -54,9 +54,7 @@ class Linear(keras.layers.Layer):
             initializer="random_normal",
             trainable=True,
         )
-        self.b = self.add_weight(
-            shape=(units,), initializer="zeros", trainable=True
-        )
+        self.b = self.add_weight(shape=(units,), initializer="zeros", trainable=True)
 
     def call(self, inputs):
         return ops.matmul(inputs, self.w) + self.b
@@ -132,9 +130,7 @@ class Linear(keras.layers.Layer):
             initializer="random_normal",
             trainable=True,
         )
-        self.b = self.add_weight(
-            shape=(units,), initializer="zeros", trainable=True
-        )
+        self.b = self.add_weight(shape=(units,), initializer="zeros", trainable=True)
 
     def call(self, inputs):
         return ops.matmul(inputs, self.w) + self.b
@@ -206,9 +202,7 @@ class MLPBlock(keras.layers.Layer):
 
 
 mlp = MLPBlock()
-y = mlp(
-    ops.ones(shape=(3, 64))
-)  # The first call to the `mlp` will create the weights
+y = mlp(ops.ones(shape=(3, 64)))  # The first call to the `mlp` will create the weights
 print("weights:", len(mlp.weights))
 print("trainable weights:", len(mlp.trainable_weights))
 ```
@@ -224,7 +218,7 @@ All layers you've seen so far in this guide work with all Keras backends.
 The `keras.ops` namespace gives you access to:
 
 - The NumPy API, e.g. `ops.matmul`, `ops.sum`, `ops.reshape`, `ops.stack`, etc.
-- Neural networks-specific APIs such as `ops.softmax`, `ops.conv`, `ops.binary_crossentropy`, `ops.relu`, etc.
+- Neural networks-specific APIs such as `ops.softmax`, `ops`.conv`, `ops.binary_crossentropy`, `ops.relu`, etc.
 
 You can also use backend-native APIs in your layers (such as `tf.nn` functions),
 but if you do this, then your layer will only be usable with the backend in question.
@@ -302,9 +296,7 @@ class OuterLayer(keras.layers.Layer):
 
 
 layer = OuterLayer()
-assert (
-    len(layer.losses) == 0
-)  # No losses yet since the layer has never been called
+assert len(layer.losses) == 0  # No losses yet since the layer has never been called
 
 _ = layer(ops.zeros((1, 1)))
 assert len(layer.losses) == 1  # We created one loss value
@@ -361,8 +353,8 @@ model.fit(np.random.random((2, 3)), np.random.random((2, 3)))
 ## You can optionally enable serialization on your layers
 
 If you need your custom layers to be serializable as part of a
-[Functional model](/guides/functional_api/), you can optionally implement a `get_config()`
-method:
+[Functional model](/guides/functional_api/),
+you can optionally implement a `get_config()` method:
 
 ```python
 class Linear(keras.layers.Layer):
@@ -458,10 +450,13 @@ class CustomDropout(keras.layers.Layer):
     def __init__(self, rate, **kwargs):
         super().__init__(**kwargs)
         self.rate = rate
+        self.seed_generator = keras.random.SeedGenerator(1337)
 
     def call(self, inputs, training=None):
         if training:
-            return keras.random.dropout(inputs, rate=self.rate)
+            return keras.random.dropout(
+                inputs, rate=self.rate, seed=self.seed_generator
+            )
         return inputs
 ```
 
@@ -563,20 +558,22 @@ that subclass `Layer`. It will feature a regularization loss (KL divergence).
 class Sampling(layers.Layer):
     """Uses (z_mean, z_log_var) to sample z, the vector encoding a digit."""
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.seed_generator = keras.random.SeedGenerator(1337)
+
     def call(self, inputs):
         z_mean, z_log_var = inputs
         batch = ops.shape(z_mean)[0]
         dim = ops.shape(z_mean)[1]
-        epsilon = keras.random.normal(shape=(batch, dim))
+        epsilon = keras.random.normal(shape=(batch, dim), seed=self.seed_generator)
         return z_mean + ops.exp(0.5 * z_log_var) * epsilon
 
 
 class Encoder(layers.Layer):
     """Maps MNIST digits to a triplet (z_mean, z_log_var, z)."""
 
-    def __init__(
-        self, latent_dim=32, intermediate_dim=64, name="encoder", **kwargs
-    ):
+    def __init__(self, latent_dim=32, intermediate_dim=64, name="encoder", **kwargs):
         super().__init__(name=name, **kwargs)
         self.dense_proj = layers.Dense(intermediate_dim, activation="relu")
         self.dense_mean = layers.Dense(latent_dim)
@@ -594,9 +591,7 @@ class Encoder(layers.Layer):
 class Decoder(layers.Layer):
     """Converts z, the encoded digit vector, back into a readable digit."""
 
-    def __init__(
-        self, original_dim, intermediate_dim=64, name="decoder", **kwargs
-    ):
+    def __init__(self, original_dim, intermediate_dim=64, name="decoder", **kwargs):
         super().__init__(name=name, **kwargs)
         self.dense_proj = layers.Dense(intermediate_dim, activation="relu")
         self.dense_output = layers.Dense(original_dim, activation="sigmoid")
@@ -619,9 +614,7 @@ class VariationalAutoEncoder(keras.Model):
     ):
         super().__init__(name=name, **kwargs)
         self.original_dim = original_dim
-        self.encoder = Encoder(
-            latent_dim=latent_dim, intermediate_dim=intermediate_dim
-        )
+        self.encoder = Encoder(latent_dim=latent_dim, intermediate_dim=intermediate_dim)
         self.decoder = Decoder(original_dim, intermediate_dim=intermediate_dim)
 
     def call(self, inputs):

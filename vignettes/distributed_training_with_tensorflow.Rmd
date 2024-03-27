@@ -42,8 +42,8 @@ industry workflows.
 
 ```r
 library(keras3)
-library(tfdatasets, exclude = "shape")
 library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
 ```
 
 ## Single-host, multi-device synchronous training
@@ -193,7 +193,7 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 6s - 8ms/step - loss: 2.9028 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0579 - val_sparse_categorical_accuracy: 0.9140
+## 782/782 - 5s - 7ms/step - loss: 2.9028 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0579 - val_sparse_categorical_accuracy: 0.9140
 ## Epoch 2/2
 ## 782/782 - 3s - 4ms/step - loss: 0.6231 - sparse_categorical_accuracy: 0.9285 - val_loss: 0.7157 - val_sparse_categorical_accuracy: 0.9168
 ## 157/157 - 0s - 2ms/step - loss: 0.7382 - sparse_categorical_accuracy: 0.9134
@@ -274,7 +274,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.3653 - sparse_categorical_accuracy: 0.9357 - val_loss: 0.3699 - val_sparse_categorical_accuracy: 0.9306
+## 782/782 - 5s - 6ms/step - loss: 3.2545 - sparse_categorical_accuracy: 0.8585 - val_loss: 0.9734 - val_sparse_categorical_accuracy: 0.9046
 ```
 
 ```r
@@ -283,7 +283,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.1778 - sparse_categorical_accuracy: 0.9563 - val_loss: 0.2883 - val_sparse_categorical_accuracy: 0.9428
+## 782/782 - 3s - 4ms/step - loss: 0.6964 - sparse_categorical_accuracy: 0.9213 - val_loss: 0.7399 - val_sparse_categorical_accuracy: 0.9138
 ```
 
 ## `tf$data` performance tips

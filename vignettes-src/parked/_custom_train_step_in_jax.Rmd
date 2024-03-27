@@ -7,7 +7,7 @@ description: Overriding the training step of the Model class with JAX.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/custom_train_step_in_jax.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/custom_train_step_in_jax.py
 ---
 
 ## Introduction
@@ -101,9 +101,7 @@ class CustomModel(keras.Model):
         x, y = data
 
         # Get the gradient function.
-        grad_fn = jax.value_and_grad(
-            self.compute_loss_and_updates, has_aux=True
-        )
+        grad_fn = jax.value_and_grad(self.compute_loss_and_updates, has_aux=True)
 
         # Compute the gradients.
         (loss, (y_pred, non_trainable_variables)), grads = grad_fn(
@@ -124,20 +122,18 @@ class CustomModel(keras.Model):
 
         # Update metrics.
         new_metrics_vars = []
+        logs = {}
         for metric in self.metrics:
             this_metric_vars = metrics_variables[
-                len(new_metrics_vars) : len(new_metrics_vars)
-                + len(metric.variables)
+                len(new_metrics_vars) : len(new_metrics_vars) + len(metric.variables)
             ]
             if metric.name == "loss":
-                this_metric_vars = metric.stateless_update_state(
-                    this_metric_vars, loss
-                )
+                this_metric_vars = metric.stateless_update_state(this_metric_vars, loss)
             else:
                 this_metric_vars = metric.stateless_update_state(
                     this_metric_vars, y, y_pred
                 )
-            logs = metric.stateless_result(this_metric_vars)
+            logs[metric.name] = metric.stateless_result(this_metric_vars)
             new_metrics_vars += this_metric_vars
 
         # Return metric logs and updated state variables.
@@ -207,9 +203,7 @@ class CustomModel(keras.Model):
         x, y = data
 
         # Get the gradient function.
-        grad_fn = jax.value_and_grad(
-            self.compute_loss_and_updates, has_aux=True
-        )
+        grad_fn = jax.value_and_grad(self.compute_loss_and_updates, has_aux=True)
 
         # Compute the gradients.
         (loss, (y_pred, non_trainable_variables)), grads = grad_fn(
@@ -229,9 +223,7 @@ class CustomModel(keras.Model):
         )
 
         # Update metrics.
-        loss_tracker_vars = metrics_variables[
-            : len(self.loss_tracker.variables)
-        ]
+        loss_tracker_vars = metrics_variables[: len(self.loss_tracker.variables)]
         mae_metric_vars = metrics_variables[len(self.loss_tracker.variables) :]
 
         loss_tracker_vars = self.loss_tracker.stateless_update_state(
@@ -245,9 +237,7 @@ class CustomModel(keras.Model):
         logs[self.loss_tracker.name] = self.loss_tracker.stateless_result(
             loss_tracker_vars
         )
-        logs[self.mae_metric.name] = self.mae_metric.stateless_result(
-            mae_metric_vars
-        )
+        logs[self.mae_metric.name] = self.mae_metric.stateless_result(mae_metric_vars)
 
         new_metrics_vars = loss_tracker_vars + mae_metric_vars
 
@@ -311,13 +301,10 @@ class CustomModel(keras.Model):
         new_metrics_vars = []
         for metric in self.metrics:
             this_metric_vars = metrics_variables[
-                len(new_metrics_vars) : len(new_metrics_vars)
-                + len(metric.variables)
+                len(new_metrics_vars) : len(new_metrics_vars) + len(metric.variables)
             ]
             if metric.name == "loss":
-                this_metric_vars = metric.stateless_update_state(
-                    this_metric_vars, loss
-                )
+                this_metric_vars = metric.stateless_update_state(this_metric_vars, loss)
             else:
                 this_metric_vars = metric.stateless_update_state(
                     this_metric_vars, y, y_pred

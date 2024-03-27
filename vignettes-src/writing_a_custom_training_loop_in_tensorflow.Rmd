@@ -13,9 +13,9 @@ tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/writ
 ## Setup
 
 ```{r}
-library(tensorflow)
-library(tfdatasets)
-library(keras3, warn.conflicts = FALSE)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
+library(keras3)
 
 # This guide can only be run with the TensorFlow backend.
 use_backend("tensorflow")

@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Multi-GPU distributed training with TensorFlow">
@@ -136,8 +136,8 @@ workflows.</p>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="st">"set_random_seed"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="st">"set_random_seed"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="single-host-multi-device-synchronous-training">Single-host, multi-device synchronous training<a class="anchor" aria-label="anchor" href="#single-host-multi-device-synchronous-training"></a>
@@ -274,7 +274,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 6s - 8ms/step - loss: 2.9028 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0579 - val_sparse_categorical_accuracy: 0.9140</span></span>
+<span><span class="co">## 782/782 - 5s - 7ms/step - loss: 2.9028 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0579 - val_sparse_categorical_accuracy: 0.9140</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.6231 - sparse_categorical_accuracy: 0.9285 - val_loss: 0.7157 - val_sparse_categorical_accuracy: 0.9168</span></span>
 <span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.7382 - sparse_categorical_accuracy: 0.9134</span></span></code></pre>
@@ -347,11 +347,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.3653 - sparse_categorical_accuracy: 0.9357 - val_loss: 0.3699 - val_sparse_categorical_accuracy: 0.9306</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 3.2545 - sparse_categorical_accuracy: 0.8585 - val_loss: 0.9734 - val_sparse_categorical_accuracy: 0.9046</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.1778 - sparse_categorical_accuracy: 0.9563 - val_loss: 0.2883 - val_sparse_categorical_accuracy: 0.9428</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.6964 - sparse_categorical_accuracy: 0.9213 - val_loss: 0.7399 - val_sparse_categorical_accuracy: 0.9138</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">

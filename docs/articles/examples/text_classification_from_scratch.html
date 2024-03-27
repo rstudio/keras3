@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
 <script src="../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet">
+<script src="../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../pkgdown.js"></script><meta property="og:title" content="Text classification from scratch">
@@ -118,9 +118,9 @@ indexing.</p>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>conflicts.policy <span class="op">=</span> <span class="st">"strict"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span>, mask.ok <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="st">"set_random_seed"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="st">"set_random_seed"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/use_python.html" class="external-link">use_virtualenv</a></span><span class="op">(</span><span class="st">"r-keras"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -399,23 +399,23 @@ layer.</p>
 <span><span class="co"># Fit the model using the train and test datasets.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, validation_data <span class="op">=</span> <span class="va">val_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 625/625 - 6s - 9ms/step - accuracy: 0.7316 - loss: 0.4890 - val_accuracy: 0.8692 - val_loss: 0.3110</span></span>
+<span><span class="co">## 625/625 - 5s - 9ms/step - accuracy: 0.7319 - loss: 0.4931 - val_accuracy: 0.8708 - val_loss: 0.3104</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9128 - loss: 0.2209 - val_accuracy: 0.8726 - val_loss: 0.3050</span></span>
+<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9129 - loss: 0.2230 - val_accuracy: 0.8734 - val_loss: 0.3036</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9602 - loss: 0.1112 - val_accuracy: 0.8658 - val_loss: 0.3901</span></span></code></pre>
+<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9579 - loss: 0.1171 - val_accuracy: 0.8732 - val_loss: 0.3350</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-model-on-the-test-set">Evaluate the model on the test set<a class="anchor" aria-label="anchor" href="#evaluate-the-model-on-the-test-set"></a>
 </h2>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8601 - loss: 0.4131</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8643 - loss: 0.3566</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.86012</span></span>
+<span><span class="co">## [1] 0.86428</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4131013</span></span></code></pre>
+<span><span class="co">## [1] 0.3565615</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="make-an-end-to-end-model">Make an end-to-end model<a class="anchor" aria-label="anchor" href="#make-an-end-to-end-model"></a>
@@ -440,12 +440,12 @@ can simply create a new model (using the weights we just trained):</p>
 <span></span>
 <span><span class="co"># Test it with `raw_test_ds`, which yields raw strings</span></span>
 <span><span class="va">end_to_end_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - accuracy: 0.8601 - loss: 0.4127</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - accuracy: 0.8643 - loss: 0.3560</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.86012</span></span>
+<span><span class="co">## [1] 0.86428</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4127359</span></span></code></pre>
+<span><span class="co">## [1] 0.3559878</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

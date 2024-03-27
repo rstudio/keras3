@@ -23,9 +23,9 @@ word splitting & indexing.
 
 ```{r}
 options(conflicts.policy = "strict")
-library(tensorflow)
-library(tfdatasets)
-library(keras3, mask.ok = c("shape", "set_random_seed"))
+library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
+library(keras3)
 use_virtualenv("r-keras")
 ```
 

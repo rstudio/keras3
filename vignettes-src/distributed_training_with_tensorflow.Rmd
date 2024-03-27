@@ -7,7 +7,7 @@ description: Guide to multi-GPU training for Keras models with TensorFlow.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/distributed_training_with_tensorflow.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/distributed_training_with_tensorflow.py
 ---
 
 ## Introduction
@@ -43,8 +43,8 @@ Sys.unsetenv("CUDA_VISIBLE_DEVICES")
 
 ```{r}
 library(keras3)
-library(tfdatasets, exclude = "shape")
 library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
 ```
 
 ## Single-host, multi-device synchronous training

@@ -32,9 +32,10 @@ for (f in files) {
   cli::cli_h1(f)
   callr::r(function(f) {
     Sys.setenv(CUDA_VISIBLE_DEVICES = "0")
+    options(conflicts.policy = "strict")
     envir::import_from("tools/knit.R", knit_vignette)
     knit_vignette(f)
-  }, args = list(f))
+  }, args = list(f), stdout = "", stderr = "")
 }
 
 

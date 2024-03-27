@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.8/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Fira_Mono-0.4.9/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Introduction to Keras for engineers">
@@ -121,7 +121,7 @@ edit the string below to <code>"jax"</code> or <code>"torch"</code> and
 hit “Restart runtime”, and the whole notebook will run just the same!
 This entire guide is backend-agnostic.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tensorflow" class="external-link">tensorflow</a></span>, exclude <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"shape"</span>, <span class="st">"set_random_seed"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras.posit.co/">keras3</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Note that you must configure the backend</span></span>
@@ -239,25 +239,25 @@ unseen data.</p>
 <span>  callbacks <span class="op">=</span> <span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 399/399 - 7s - 18ms/step - acc: 0.7332 - loss: 0.7843 - val_acc: 0.9599 - val_loss: 0.1413</span></span>
+<span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7331 - loss: 0.7834 - val_acc: 0.9593 - val_loss: 0.1409</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9279 - loss: 0.2399 - val_acc: 0.9700 - val_loss: 0.0947</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9286 - loss: 0.2392 - val_acc: 0.9709 - val_loss: 0.0941</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9472 - loss: 0.1786 - val_acc: 0.9793 - val_loss: 0.0678</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9474 - loss: 0.1783 - val_acc: 0.9784 - val_loss: 0.0686</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9579 - loss: 0.1445 - val_acc: 0.9830 - val_loss: 0.0562</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9579 - loss: 0.1450 - val_acc: 0.9840 - val_loss: 0.0564</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9640 - loss: 0.1217 - val_acc: 0.9856 - val_loss: 0.0481</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9642 - loss: 0.1223 - val_acc: 0.9859 - val_loss: 0.0484</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9684 - loss: 0.1061 - val_acc: 0.9863 - val_loss: 0.0468</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9685 - loss: 0.1065 - val_acc: 0.9864 - val_loss: 0.0485</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9719 - loss: 0.0962 - val_acc: 0.9871 - val_loss: 0.0430</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9718 - loss: 0.0946 - val_acc: 0.9887 - val_loss: 0.0394</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9735 - loss: 0.0885 - val_acc: 0.9893 - val_loss: 0.0404</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9739 - loss: 0.0870 - val_acc: 0.9889 - val_loss: 0.0409</span></span>
 <span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9763 - loss: 0.0802 - val_acc: 0.9904 - val_loss: 0.0337</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9759 - loss: 0.0799 - val_acc: 0.9903 - val_loss: 0.0329</span></span>
 <span><span class="co">## Epoch 10/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9785 - loss: 0.0727 - val_acc: 0.9893 - val_loss: 0.0386</span></span></code></pre>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9789 - loss: 0.0726 - val_acc: 0.9889 - val_loss: 0.0372</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -386,7 +386,7 @@ layers:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>, <span class="co"># For speed</span></span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 7s - 18ms/step - acc: 0.7400 - loss: 0.7568 - val_acc: 0.9249 - val_loss: 0.2507</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7396 - loss: 0.7571 - val_acc: 0.9241 - val_loss: 0.2478</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -432,7 +432,7 @@ your Keras backend.</p>
 <!-- ``` -->
 <p>Let’s try this out with <code>tf_dataset</code>:</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">train_dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -454,7 +454,7 @@ your Keras backend.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 8s - 18ms/step - acc: 0.7580 - loss: 0.7196 - val_acc: 0.9013 - val_loss: 0.3072</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 8s - 17ms/step - acc: 0.7591 - loss: 0.7174 - val_acc: 0.9025 - val_loss: 0.3001</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>

@@ -2,12 +2,12 @@
 title: Training & evaluation with the built-in methods
 author: '[fchollet](https://twitter.com/fchollet)'
 date-created: 2019/03/01
-last-modified: 2023/03/25
+last-modified: 2023/06/25
 description: Complete guide to training & evaluation with `fit()` and `evaluate()`.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/training_with_built_in_methods.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/training_with_built_in_methods.py
 ---
 
 ## Setup
@@ -23,20 +23,29 @@ when using built-in APIs for training & validation (such as `fit()`,
 `evaluate()` and `predict()`).
 
 If you are interested in leveraging `fit()` while specifying your
-own training step function, see the
+own training step function, see the 
 [Customizing what happens in `fit()` guide](custom_train_step_in_tensorflow.html).
+
+<!--  guides on customizing what happens in `fit()`: -->
+
+<!-- - [Writing a custom train step with TensorFlow](/guides/custom_train_step_in_tensorflow/) -->
+<!-- - [Writing a custom train step with JAX](/guides/custom_train_step_in_jax/) -->
+<!-- - [Writing a custom train step with PyTorch](/guides/custom_train_step_in_torch/) -->
 
 If you are interested in writing your own training & evaluation loops from
 scratch, see the guide
-["writing a training loop from scratch"](writing_a_custom_training_loop_in_tensorflow.html).
+[Writing a training loop from scratch](writing_a_custom_training_loop_in_tensorflow.html).
+
+<!-- see the guides on writing training loops: -->
+
+<!-- - [Writing a training loop with TensorFlow](/guides/writing_a_custom_training_loop_in_tensorflow/) -->
+<!-- - [Writing a training loop with JAX](/guides/writing_a_custom_training_loop_in_jax/) -->
+<!-- - [Writing a training loop with PyTorch](/guides/writing_a_custom_training_loop_in_torch/) -->
 
 In general, whether you are using built-in loops or writing your own, model training &
 evaluation works strictly in the same way across every kind of Keras model --
 Sequential models, models built with the Functional API, and models written from
 scratch via model subclassing.
-
-This guide doesn't cover distributed training, which is covered in our
-[guide to multi-GPU & distributed training](distributed_training_with_tensorflow.html).
 
 ## API overview: a first end-to-end example
 
@@ -318,7 +327,7 @@ metric_categorical_true_positives <- Metric(
   },
 
   result = function() {
-    self$true_positives
+    self$true_positives$value
   },
 
   reset_state = function() {
@@ -467,7 +476,7 @@ You can pass a `Dataset` instance directly to the methods `fit()`, `evaluate()`,
 `predict()`:
 
 ```{r}
-library(tfdatasets)
+library(tfdatasets, exclude = "shape")
 model <- get_compiled_model()
 
 # First, let's create a training Dataset instance.

@@ -30,7 +30,7 @@ edit the string below to `"jax"` or `"torch"` and hit
 This entire guide is backend-agnostic.
 
 ```{r}
-library(tensorflow)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(keras3)
 
 # Note that you must configure the backend
@@ -183,16 +183,16 @@ layer_my_dense <- Layer(
       initializer = initializer_glorot_normal(),
       name = "kernel",
       trainable = TRUE
-        )
+    )
     self$b <- self$add_weight(
       shape = shape(self$units),
       initializer = initializer_zeros(),
       name = "bias",
       trainable = TRUE
-        )
+    )
   },
   call = function(inputs) {
-        # Use Keras ops to create backend-agnostic layers/metrics/etc.
+    # Use Keras ops to create backend-agnostic layers/metrics/etc.
     x <- op_matmul(inputs, self$w) + self$b
     if (!is.null(self$activation))
       x <- self$activation(x)
@@ -210,8 +210,8 @@ layer_my_dropout <- Layer(
   initialize = function(rate, name = NULL, seed = NULL, ...) {
     super$initialize(name = name)
     self$rate <- rate
-        # Use seed_generator for managing RNG state.
-        # It is a state element and its seed variable is
+    # Use seed_generator for managing RNG state.
+    # It is a state element and its seed variable is
     # tracked as part of `layer$variables`.
     self$seed_generator <- random_seed_generator(seed)
   },
@@ -319,7 +319,7 @@ They all work whether you're using TensorFlow, JAX, or PyTorch as your Keras bac
 Let's try this out with `tf_dataset`:
 
 ```{r}
-library(tfdatasets)
+library(tfdatasets, exclude = "shape")
 
 train_dataset <- list(x_train, y_train) |>
   tensor_slices_dataset() |>

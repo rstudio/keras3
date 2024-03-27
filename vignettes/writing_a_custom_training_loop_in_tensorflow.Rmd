@@ -14,9 +14,9 @@ vignette: >
 
 
 ```r
-library(tensorflow)
-library(tfdatasets)
-library(keras3, warn.conflicts = FALSE)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(tfdatasets, exclude = "shape")
+library(keras3)
 
 # This guide can only be run with the TensorFlow backend.
 use_backend("tensorflow")
@@ -281,7 +281,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 42.3063 secs
+## Time difference of 38.26865 secs
 ```
 
 ## Speeding-up your training step with `tf_function()`
@@ -380,7 +380,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 0.4490769 secs
+## Time difference of 0.4213414 secs
 ```
 
 Much faster, isn't it?

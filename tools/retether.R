@@ -39,6 +39,9 @@ resolve_rmd_tether <- function(url) {
               "~/github/keras-team/keras/", path, fixed = TRUE)
   path <- sub("https://raw.githubusercontent.com/keras-team/keras-io/master/",
               "~/github/keras-team/keras-io/", path, fixed = TRUE)
+
+  # path <- sub("~/github/keras-team/keras/",
+  #             "~/github/keras-team/keras-io/", path, fixed = TRUE)
   tutobook_to_rmd(path, outfile = FALSE)
 }
 
@@ -55,8 +58,8 @@ doctether::retether(
   # "keras.ops",
   unsafe = TRUE,
   roxy_tag_eval =
-    resolve_roxy_tether,
-    # NULL,
+    # resolve_roxy_tether,
+    NULL,
   rmd_field_eval =
     resolve_rmd_tether
     # NULL
@@ -77,6 +80,7 @@ view_vignette_adaptation_diff <- function(rmd_file) {
               "~/github/keras-team/keras/", path, fixed = TRUE)
   path <- sub("https://raw.githubusercontent.com/keras-team/keras-io/master/",
               "~/github/keras-team/keras-io/", path, fixed = TRUE)
+
   # tether_file <- doctether:::get_tether_file(rmd_file)
   tether_file <- path
   system2("code", c("--diff", tether_file, rmd_file))

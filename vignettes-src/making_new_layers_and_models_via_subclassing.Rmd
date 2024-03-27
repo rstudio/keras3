@@ -7,7 +7,7 @@ description: Complete guide to writing `Layer` and `Model` objects from scratch.
 accelerator: None
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/making_new_layers_and_models_via_subclassing.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/making_new_layers_and_models_via_subclassing.py
 ---
 
 ## Introduction
@@ -506,10 +506,12 @@ layer_custom_dropout <- Layer(
   initialize = function(rate, ...) {
     super$initialize(...)
     self$rate <- rate
+    self$seed_generator <- random_seed_generator(1337)
   },
   call = function(inputs, training = NULL) {
     if (isTRUE(training))
-      return(random_dropout(inputs, rate = self$rate))
+      return(random_dropout(inputs, rate = self$rate, 
+                            seed = self.seed_generator))
     inputs
   }
 )
@@ -614,11 +616,16 @@ that subclass `Layer`. It will feature a regularization loss (KL divergence).
 ```{r}
 layer_sampling <- Layer(
   "Sampling",
+  initialize = function(...) {
+    super$initialize(...)
+    self$seed_generator <- random_seed_generator(1337)
+  },
   call = function(inputs) {
     c(z_mean, z_log_var) %<-% inputs
     batch <- op_shape(z_mean)[[1]]
     dim <- op_shape(z_mean)[[2]]
-    epsilon <- random_normal(shape = c(batch, dim))
+    epsilon <- random_normal(shape = c(batch, dim), 
+                             seed=self$seed_generator)
     z_mean + op_exp(0.5 * z_log_var) * epsilon
   }
 )
