@@ -31,7 +31,7 @@ This entire guide is backend-agnostic.
 
 
 ```r
-library(tensorflow)
+library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(keras3)
 
 # Note that you must configure the backend
@@ -174,25 +174,25 @@ model |> fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 7s - 18ms/step - acc: 0.7332 - loss: 0.7843 - val_acc: 0.9599 - val_loss: 0.1413
+## 399/399 - 7s - 17ms/step - acc: 0.7330 - loss: 0.7846 - val_acc: 0.9594 - val_loss: 0.1405
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9279 - loss: 0.2399 - val_acc: 0.9700 - val_loss: 0.0947
+## 399/399 - 2s - 5ms/step - acc: 0.9283 - loss: 0.2401 - val_acc: 0.9706 - val_loss: 0.0964
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9472 - loss: 0.1786 - val_acc: 0.9793 - val_loss: 0.0678
+## 399/399 - 2s - 5ms/step - acc: 0.9473 - loss: 0.1788 - val_acc: 0.9792 - val_loss: 0.0681
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9579 - loss: 0.1445 - val_acc: 0.9830 - val_loss: 0.0562
+## 399/399 - 2s - 5ms/step - acc: 0.9580 - loss: 0.1446 - val_acc: 0.9832 - val_loss: 0.0579
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9640 - loss: 0.1217 - val_acc: 0.9856 - val_loss: 0.0481
+## 399/399 - 2s - 5ms/step - acc: 0.9643 - loss: 0.1226 - val_acc: 0.9857 - val_loss: 0.0488
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9684 - loss: 0.1061 - val_acc: 0.9863 - val_loss: 0.0468
+## 399/399 - 2s - 5ms/step - acc: 0.9684 - loss: 0.1071 - val_acc: 0.9861 - val_loss: 0.0482
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9719 - loss: 0.0962 - val_acc: 0.9871 - val_loss: 0.0430
+## 399/399 - 2s - 5ms/step - acc: 0.9718 - loss: 0.0958 - val_acc: 0.9882 - val_loss: 0.0418
 ## Epoch 8/10
-## 399/399 - 2s - 5ms/step - acc: 0.9735 - loss: 0.0885 - val_acc: 0.9893 - val_loss: 0.0404
+## 399/399 - 2s - 5ms/step - acc: 0.9740 - loss: 0.0879 - val_acc: 0.9897 - val_loss: 0.0399
 ## Epoch 9/10
-## 399/399 - 2s - 5ms/step - acc: 0.9763 - loss: 0.0802 - val_acc: 0.9904 - val_loss: 0.0337
+## 399/399 - 2s - 5ms/step - acc: 0.9762 - loss: 0.0804 - val_acc: 0.9908 - val_loss: 0.0336
 ## Epoch 10/10
-## 399/399 - 2s - 5ms/step - acc: 0.9785 - loss: 0.0727 - val_acc: 0.9893 - val_loss: 0.0386
+## 399/399 - 2s - 5ms/step - acc: 0.9787 - loss: 0.0728 - val_acc: 0.9894 - val_loss: 0.0378
 ```
 
 ```r
@@ -358,7 +358,7 @@ model |> fit(
 ```
 
 ```
-## 399/399 - 7s - 18ms/step - acc: 0.7400 - loss: 0.7568 - val_acc: 0.9249 - val_loss: 0.2507
+## 399/399 - 7s - 17ms/step - acc: 0.7399 - loss: 0.7568 - val_acc: 0.9247 - val_loss: 0.2502
 ```
 
 ## Training models on arbitrary data sources
@@ -410,7 +410,7 @@ Let's try this out with `tf_dataset`:
 
 
 ```r
-library(tfdatasets)
+library(tfdatasets, exclude = "shape")
 
 train_dataset <- list(x_train, y_train) |>
   tensor_slices_dataset() |>
@@ -435,7 +435,7 @@ model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 8s - 18ms/step - acc: 0.7580 - loss: 0.7196 - val_acc: 0.9013 - val_loss: 0.3072
+## 469/469 - 8s - 17ms/step - acc: 0.7588 - loss: 0.7154 - val_acc: 0.9029 - val_loss: 0.2980
 ```
 
 ## Further reading

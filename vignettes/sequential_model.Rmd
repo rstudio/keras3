@@ -187,8 +187,6 @@ model <- keras_model_sequential() |>
 # At this point, you can't do this:
 # model$weights
 
-# You also can't do this:
-# summary(model)
 
 # Call the model on a test input
 x <- op_ones(c(1, 4))

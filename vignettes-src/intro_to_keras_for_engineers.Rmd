@@ -183,16 +183,16 @@ layer_my_dense <- Layer(
       initializer = initializer_glorot_normal(),
       name = "kernel",
       trainable = TRUE
-        )
+    )
     self$b <- self$add_weight(
       shape = shape(self$units),
       initializer = initializer_zeros(),
       name = "bias",
       trainable = TRUE
-        )
+    )
   },
   call = function(inputs) {
-        # Use Keras ops to create backend-agnostic layers/metrics/etc.
+    # Use Keras ops to create backend-agnostic layers/metrics/etc.
     x <- op_matmul(inputs, self$w) + self$b
     if (!is.null(self$activation))
       x <- self$activation(x)
