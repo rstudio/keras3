@@ -7,7 +7,7 @@ description: Complete guide to training & evaluation with `fit()` and `evaluate(
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/training_with_built_in_methods.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/training_with_built_in_methods.py
 ---
 
 ## Setup

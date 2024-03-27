@@ -7,7 +7,7 @@ description: Complete guide to the functional API.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras/master/guides/functional_api.py
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/functional_api.py
 ---
 
 ## Setup
