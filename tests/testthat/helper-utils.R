@@ -67,10 +67,14 @@ local_py_capture_output <- function(type = c("stdout", "stderr")) {
   output_tools <- import("rpytools.output")
   capture_stdout <- "stdout" %in% type
   capture_stderr <- "stderr" %in% type
-  output_tools$start_capture(capture_stdout, capture_stderr)
+  context_manager <- output_tools$CaptureOutputStreams(
+    capture_stdout, capture_stderr
+  )
+  context_manager$`__enter__`()
+
   defer_parent({
-    output_tools$end_capture(capture_stdout, capture_stderr)
-    output_tools$collect_output()
+    context_manager$`__exit__`(NULL, NULL, NULL)
+    context_manager$collect_output()
   })
 }
 

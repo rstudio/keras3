@@ -47,9 +47,9 @@ install_keras <- function(
          "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html")
       tensorflow <- "tensorflow[and-cuda]"
     }
-  } else {
+  } else { # no GPU
     jax <- "jax[cpu]"
-    tensorflow <- "tensorflow-cpu"
+    tensorflow <- if(is_linux()) "tensorflow-cpu" else "tensorflow"
   }
 
   # The "numpy" backend requires that "jax" be installed

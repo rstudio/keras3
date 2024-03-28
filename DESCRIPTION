@@ -29,8 +29,8 @@ Depends:
     R (>= 4.0)
 Imports:
     generics (>= 0.0.1),
-    reticulate (>= 1.35),
-    tensorflow (>= 2.15),
+    reticulate (>= 1.35.0.9000),
+    tensorflow (>= 2.15.0.9000),
     tfruns (>= 1.5.2),
     magrittr,
     zeallot,
@@ -54,3 +54,6 @@ Suggests:
     jpeg
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
+Remotes:  
+    rstudio/reticulate,
+    rstudio/tensorflow
