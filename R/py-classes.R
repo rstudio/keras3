@@ -155,12 +155,14 @@ function(classname,
 #' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call
 #' @export
 r_to_py.R6ClassGenerator <- function(x, convert = TRUE) {
+  members <- c(x$public_fields,
+               x$public_methods,
+               lapply(x$active, active_property))
+  members$clone <- NULL
   new_py_type(
     classname = x$classname,
     inherit = x$get_inherit(),
-    members = c(x$public_fields,
-                x$public_methods,
-                lapply(x$active, active_property)),
+    members = members,
     private = c(x$private_fields,
                 x$private_methods),
     parent_env = x$parent_env
