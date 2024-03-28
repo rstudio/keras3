@@ -147,7 +147,7 @@ val_ds <- dataframe_to_dataset(val_df)
 Each `tf_dataset` yields a tuple `(input, target)` where `input` is a dictionary (a named list) of features
 and `target` is the value `0` or `1`:
 
-```{r}
+```{r, results='hold'}
 c(x, y) %<-% iter_next(as_iterator(train_ds))
 cat("Input: "); str(x)
 cat("Target: "); str(y)
