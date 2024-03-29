@@ -40,8 +40,10 @@ install_keras <- function(
   if (isTRUE(gpu)) {
     message("Installing GPU components")
     if (is_mac_arm64()) {
-      jax <- c("jax-metal", "ml-dtypes==0.2.*")
-      tensorflow <- c("tensorflow", "tensorflow-metal")
+      jax <- c("jax-metal") # ??? do we still need this, "ml-dtypes==0.2.*")
+      ## installation of 'tensorflow-metal' is disabled until a new version that
+      ## is compatible with TF v2.16 is released.
+      # tensorflow <- c("tensorflow", "tensorflow-metal")
     } else if (is_linux()) {
       jax <- c("jax[cuda12_pip]", "-f",
          "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html")
