@@ -58,6 +58,21 @@ invisibly after printing it.
 \description{
 Print a summary of a Keras Model
 }
+\section{Enabling color output in Knitr (RMarkdown, Quarto)}{
+
+
+In order to enable color output in a quarto or rmarkdown document with
+an html output format (include revealjs presentations), then you will need
+to do the following in a setup chunk:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ ```\{r setup, include = FALSE\}
+ options(cli.num_colors = 256)
+ fansi::set_knit_hooks(knitr::knit_hooks)
+ options(width = 75) # adjust as needed for format
+ ```
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other model functions: \cr
 \code{\link{get_config}()} \cr

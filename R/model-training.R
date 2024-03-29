@@ -857,8 +857,6 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #' the last element it matches to `layer_range[[1]]`.
 #' By default `NULL` which considers all layers of model.
 #'
-
-
 #' @param object,x Keras model instance
 #' @param line_length Total length of printed lines
 #' @param positions Relative or absolute positions of log elements in each line.
@@ -878,6 +876,22 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #'   model object invisibly. `summary()` returns the output of `format()`
 #'   invisibly after printing it.
 #'
+#' @section Enabling color output in Knitr (RMarkdown, Quarto):
+#'
+#' In order to enable color output in a quarto or rmarkdown document with
+#' an html output format (include revealjs presentations), then you will need
+#' to do the following in a setup chunk:
+#'
+#'
+#' ````
+#'  ```{r setup, include = FALSE}
+#'  options(cli.num_colors = 256)
+#'  fansi::set_knit_hooks(knitr::knit_hooks)
+#'  options(width = 75) # adjust as needed for format
+#'  ```
+#' ````
+#'
+#'
 #' @export
 summary.keras.src.models.model.Model <- function(object, ...) {
     writeLines(f <- format.keras.src.models.model.Model(object, ...))
@@ -895,6 +909,7 @@ function(x,
          expand_nested = FALSE,
          show_trainable = NA,
          ...,
+         # force_ascii ... (impl in man/roxygen/meta.R)
          # width = getOption("width"),
          # rich = TRUE, ??
          # print_fn = NULL,
@@ -959,30 +974,35 @@ with_rich_config <- function(expr) {
   with_envvar2(vars, expr)
 }
 
-with_envvar2 <- function(vars, expr) {
 
+with_envvar2 <- function(vars, expr) {
   py_environ <- import("os", convert = FALSE)$environ
 
   og_r_vars <- Sys.getenv(names(vars), unset = NA_character_, names = TRUE)
   og_py_vars <- lapply(names(vars), function(key)
-    py_get_item(py_environ, key, silent = TRUE)
-  )
+    py_get_item(py_environ, key, silent = TRUE))
   names(og_py_vars) <- names(vars)
 
-  unset_vars <- names(vars[map_lgl(vars, function(v) is.null(v) || is.na(v))])
-  vars <- vars[setdiff(names(vars), names(unset_vars))]
-  do.call(Sys.setenv, as.list(vars))
-  imap(vars, function(val, key) {
-    py_set_item(py_environ, key, val)
-  })
-  for (name in names(unset_vars)) {
+  names_unset_vars <-
+    names(vars[map_lgl(vars, function(v) is.null(v) || is.na(v))])
+  vars <- vars[setdiff(names(vars), names_unset_vars)]
+  if (length(vars)) {
+    do.call(Sys.setenv, as.list(vars))
+    imap(vars, function(val, key) {
+      py_set_item(py_environ, key, val)
+    })
+  }
+  for (name in names_unset_vars) {
     Sys.unsetenv(name)
     py_del_item(py_environ, name)
   }
 
   on.exit({
-    do.call(Sys.setenv, as.list(og_r_vars[!is.na(og_r_vars)]))
-    for (name in names(og_r_vars)[is.na(og_r_vars)])
+    og_r_var_was_unset <- is.na(og_r_vars)
+    set_r_vars <- og_r_vars[!og_r_var_was_unset]
+    if (length(set_r_vars))
+      do.call(Sys.setenv, as.list(set_r_vars))
+    for (name in names(og_r_vars)[og_r_var_was_unset])
       Sys.unsetenv(name)
 
     imap(og_py_vars, function(val, key) {
@@ -990,6 +1010,7 @@ with_envvar2 <- function(vars, expr) {
         py_del_item(py_environ, key)
       else
         py_set_item(py_environ, key, val)
+      NULL
     })
 
     NULL
@@ -1076,28 +1097,28 @@ as_data_generator <- function(fn, dtype = NULL) {
 # ' @exportS3Method knitr::knit_print
 knit_print__keras.src.models.model.Model <- function(x, ...) {
   #from keras.src.utils.summary_utils
-  #' record_console <- py_run_string(local = TRUE, glue::trim("
-  #' class record_console:
-  #'   def __init__(self):
-  #'     self.last_console = None
-  #'
-  #'   def __enter__(self, *args):
-  #'     import rich
-  #'     self.rich = rich
-  #'     from functools import wraps
-  #'     og_Console =
-  #'     self.og_Console = rich.console.Console
-  #'     @wraps(og_Console)
-  #'     def Console(*args, record = True, **kwargs):
-  #'         kwargs['record'] = record
-  #'         global last_console
-  #'         self.last_console = self.og_Console(*args, **kwargs)
-  #'         return self.last_console
-  #'     rich.console.Console = Console
-  #'
-  #'   def __exit__(self, *args):
-  #'       self.rich.console.Console = self.og_Console
-  #'   "))$record_console
+  # record_console <- py_run_string(local = TRUE, glue::trim("
+  # class record_console:
+  #   def __init__(self):
+  #     self.last_console = None
+  #
+  #   def __enter__(self, *args):
+  #     import rich
+  #     self.rich = rich
+  #     from functools import wraps
+  #     og_Console =
+  #     self.og_Console = rich.console.Console
+  #     @wraps(og_Console)
+  #     def Console(*args, record = True, **kwargs):
+  #         kwargs['record'] = record
+  #         global last_console
+  #         self.last_console = self.og_Console(*args, **kwargs)
+  #         return self.last_console
+  #     rich.console.Console = Console
+  #
+  #   def __exit__(self, *args):
+  #       self.rich.console.Console = self.og_Console
+  #   "))$record_console
 
   knitrtools <- import_kerastools("knitr")
   recorder <- knitrtools$RichConsoleRecorder()
