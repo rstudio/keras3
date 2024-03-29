@@ -405,6 +405,12 @@ wrap_callback_method_sig_logs <- function(fn) {
   tools$wrap_sig_self_logs(fn)
 }
 
+import_kerastools <- function(x) {
+  import_from_path(
+    paste0(c("kerastools", x), collapse = "."),
+    path = system.file("python", package = "keras3")
+  )
+}
 
 
 import_callback_tools <- function() {
