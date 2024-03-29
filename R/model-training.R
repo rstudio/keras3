@@ -881,6 +881,7 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #' @export
 summary.keras.src.models.model.Model <- function(object, ...) {
     writeLines(f <- format.keras.src.models.model.Model(object, ...))
+  # TODO: knit_print...?
     invisible(f)
 }
 
@@ -944,25 +945,56 @@ py_str.keras.src.models.model.Model <- function(object, ...) {
 
 
 with_rich_config <- function(expr) {
-    os <- reticulate::import("os")
 
-    # set the number of columns to the current width.
-    if (is.null(os$environ$get("COLUMNS"))) {
-        os$environ["COLUMNS"] = as.character(getOption("width"))
-        on.exit({ os$environ$pop("COLUMNS") }, add = TRUE)
-    }
+  vars <- list(
+    COLUMNS = as.character(getOption("width"))
+  )
 
-    # allow colored output if the terminal supports it
-    if (cli::num_ansi_colors() >= 256 && is.null(os$environ$get("FORCE_COLOR"))) {
-        os$environ["FORCE_COLOR"] = "yes"
-        os$environ["COLORTERM"] = "truecolor"
-        on.exit({
-            os$environ$pop("FORCE_COLOR")
-            os$environ$pop("COLORTERM")
-        }, add = TRUE)
-    }
+  if (is.na(Sys.getenv("COLORTERM", NA)) &&
+      cli::num_ansi_colors() >= 256L) {
+    vars$COLORTERM <- "truecolor"
+    vars$FORCE_COLOR <- "yes"
+  }
 
-    force(expr)
+  with_envvar2(vars, expr)
+}
+
+with_envvar2 <- function(vars, expr) {
+
+  py_environ <- import("os", convert = FALSE)$environ
+
+  og_r_vars <- Sys.getenv(names(vars), unset = NA_character_, names = TRUE)
+  og_py_vars <- lapply(names(vars), function(key)
+    py_get_item(py_environ, key, silent = TRUE)
+  )
+  names(og_py_vars) <- names(vars)
+
+  unset_vars <- names(vars[map_lgl(vars, function(v) is.null(v) || is.na(v))])
+  vars <- vars[setdiff(names(vars), names(unset_vars))]
+  do.call(Sys.setenv, as.list(vars))
+  imap(vars, function(val, key) {
+    py_set_item(py_environ, key, val)
+  })
+  for (name in names(unset_vars)) {
+    Sys.unsetenv(name)
+    py_del_item(py_environ, name)
+  }
+
+  on.exit({
+    do.call(Sys.setenv, as.list(og_r_vars[!is.na(og_r_vars)]))
+    for (name in names(og_r_vars)[is.na(og_r_vars)])
+      Sys.unsetenv(name)
+
+    imap(og_py_vars, function(val, key) {
+      if (is.null(val))
+        py_del_item(py_environ, key)
+      else
+        py_set_item(py_environ, key, val)
+    })
+
+    NULL
+  }, add = TRUE)
+  force(expr)
 }
 
 
@@ -1033,5 +1065,60 @@ as_data_generator <- function(fn, dtype = NULL) {
     else
       tuple(x)
   }, completed = NULL, prefetch = 1L)
+
+}
+
+
+
+
+
+
+# ' @exportS3Method knitr::knit_print
+knit_print__keras.src.models.model.Model <- function(x, ...) {
+  #from keras.src.utils.summary_utils
+  #' record_console <- py_run_string(local = TRUE, glue::trim("
+  #' class record_console:
+  #'   def __init__(self):
+  #'     self.last_console = None
+  #'
+  #'   def __enter__(self, *args):
+  #'     import rich
+  #'     self.rich = rich
+  #'     from functools import wraps
+  #'     og_Console =
+  #'     self.og_Console = rich.console.Console
+  #'     @wraps(og_Console)
+  #'     def Console(*args, record = True, **kwargs):
+  #'         kwargs['record'] = record
+  #'         global last_console
+  #'         self.last_console = self.og_Console(*args, **kwargs)
+  #'         return self.last_console
+  #'     rich.console.Console = Console
+  #'
+  #'   def __exit__(self, *args):
+  #'       self.rich.console.Console = self.og_Console
+  #'   "))$record_console
+
+  knitrtools <- import_kerastools("knitr")
+  recorder <- knitrtools$RichConsoleRecorder()
+  # restore <- py_local$restore
+  with(recorder, {
+    format.keras.src.models.model.Model(x)
+  })
+
+  if(knitr::is_html_output()) {
+    html <- recorder$console$export_html(
+      inline_styles = TRUE,
+      clear = TRUE
+    )
+    knitr::raw_html(html)
+  } else {
+    text <- recorder$console$export_text(
+      styles = FALSE, # plain text
+      clear = TRUE
+    )
+
+    text
+  }
 
 }
