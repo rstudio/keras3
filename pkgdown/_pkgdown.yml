@@ -81,6 +81,9 @@ navbar:
         - text: "Distributed training with TensorFlow"
           href: articles/distributed_training_with_tensorflow.html
 
+        - text: "Distributed training with Jax"
+          href: articles/distribution.html
+
     - text: Examples
       href: articles/examples/index.html
 
