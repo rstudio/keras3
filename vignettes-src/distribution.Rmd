@@ -7,6 +7,7 @@ description: Complete guide to the distribution API for multi-backend Keras.
 accelerator: GPU
 output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
+backend: jax
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/distribution.py
 ---
 
@@ -77,14 +78,13 @@ You can find more detailed concept explainers in the
 
 ```{r}
 # Retrieve the local available gpu devices.
-devices <- jax$devices()
+devices <- jax$devices() # "gpu"
 str(devices)
-# devices <- jax$devices("gpu")
 
 # Define a 2x4 device mesh with data and model parallel axes
 mesh <- keras$distribution$DeviceMesh(
   shape = shape(2, 4),
-  axis_names = c("data", "model"),
+  axis_names = list("data", "model"),
   devices = devices
 )
 
@@ -93,11 +93,11 @@ mesh <- keras$distribution$DeviceMesh(
 # "data" as columns, and it is a [4, 2] grid when it mapped to the physical
 # devices on the mesh.
 layout_2d <- keras$distribution$TensorLayout(
-  axes=c("model", "data"),
-  device_mesh=mesh
+  axes = c("model", "data"), 
+  device_mesh = mesh
 )
 
-# A 4D layout which could be used for data parallel of a image input.
+# A 4D layout which could be used for data parallelism of an image input.
 replicated_layout_4d <- keras$distribution$TensorLayout(
   axes = list("data", NULL, NULL, NULL),
   device_mesh = mesh
@@ -126,15 +126,16 @@ Here is a sample usage of this class.
 # Create DataParallel with list of devices.
 # As a shortcut, the devices can be skipped,
 # and Keras will detect all local available devices.
-# E.g. data_parallel = DataParallel()
+# E.g. data_parallel <- DataParallel()
 data_parallel <- keras$distribution$DataParallel(devices = devices)
 
 # Or you can choose to create DataParallel with a 1D `DeviceMesh`.
-mesh_1d = keras$distribution$DeviceMesh(shape = shape(8),
-                                        axis_names = list("data"),
-                                        devices = devices)
-data_parallel <-
-  keras$distribution$DataParallel(device_mesh = mesh_1d)
+mesh_1d <- keras$distribution$DeviceMesh(
+  shape = shape(8), 
+  axis_names = list("data"), 
+  devices = devices
+)
+data_parallel <- keras$distribution$DataParallel(device_mesh = mesh_1d)
 
 inputs <- random_normal(c(128, 28, 28, 1))
 labels <- random_normal(c(128, 10))
@@ -146,15 +147,14 @@ keras$distribution$set_distribution(data_parallel)
 
 # Note that all the model weights from here on are replicated to
 # all the devices of the `DeviceMesh`. This includes the RNG
-# state, optimizer states, metrics, etc. The dataset fed into `model.fit` or
-# `model.evaluate` will be split evenly on the batch dimension, and sent to
+# state, optimizer states, metrics, etc. The dataset fed into `model |> fit()` or
+# `model |> evaluate()` will be split evenly on the batch dimension, and sent to
 # all the devices. You don't have to do any manual aggregation of losses,
 # since all the computation happens in a global context.
 inputs <- keras_input(shape = c(28, 28, 1))
 outputs <- inputs |>
   layer_flatten() |>
-  layer_dense(units = 200, use_bias = FALSE,
-              activation = "relu") |>
+  layer_dense(units = 200, use_bias = FALSE, activation = "relu") |>
   layer_dropout(0.4) |>
   layer_dense(units = 10, activation = "softmax")
 
@@ -179,20 +179,20 @@ best performances. We introduce `LayoutMap` to let you specify the
 `TensorLayout` for any weights and intermediate tensors from global perspective.
 
 `LayoutMap` is a dict-like object that maps a string to `TensorLayout`
-instances. It behaves differently from a normal Python dict in that the string
+instances. It behaves differently from a normal dict in that the string
 key is treated as a regex when retrieving the value. The class allows you to
 define the naming schema of `TensorLayout` and then retrieve the corresponding
 `TensorLayout` instance. Typically, the key used to query
-is the `variable.path` attribute,  which is the identifier of the variable.
-As a shortcut, a tuple or list of axis
+is the `variable$path` attribute,  which is the identifier of the variable.
+As a shortcut, a list of axis
 names is also allowed when inserting a value, and it will be converted to
 `TensorLayout`.
 
 The `LayoutMap` can also optionally contain a `DeviceMesh` to populate the
-`TensorLayout.device_mesh` if it is not set. When retrieving a layout with a
+`TensorLayout$device_mesh` if it is not set. When retrieving a layout with a
 key, and if there isn't an exact match, all existing keys in the layout map will
 be treated as regex and matched against the input key again. If there are
-multiple matches, a `ValueError` is raised. If no matches are found, `None` is
+multiple matches, a `ValueError` is raised. If no matches are found, `NULL` is
 returned.
 
 ```{r}
@@ -212,8 +212,9 @@ layout_map["d1/bias"] <- tuple("model")
 # You can also set the layout for the layer output like
 layout_map["d2/output"] <- tuple("data", NULL)
 
-model_parallel <- keras$distribution$ModelParallel(mesh_2d, layout_map, batch_dim_name =
-                                                     "data")
+model_parallel <- keras$distribution$ModelParallel(
+  mesh_2d, layout_map, batch_dim_name = "data"
+)
 
 keras$distribution$set_distribution(model_parallel)
 
