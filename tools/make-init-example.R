@@ -12,7 +12,8 @@ url <- paste0("https://raw.githubusercontent.com/keras-team/keras-io/master/",
 
 outfile <- sub("https://raw.githubusercontent.com/keras-team/keras-io/master/",
                "vignettes-src/", url, fixed = TRUE) |>
-  fs::path_ext_set(".Rmd")
+  fs::path_ext_set(".Rmd") |>
+  sub("/guides/", "/", x = _, fixed = TRUE)
 
 
 tutobook_text <- readLines(url)
