@@ -5,8 +5,10 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 
 
+tutobook_path <- "guides/distribution.py" # ~/github/keras-team/keras-io/
+
 url <- paste0("https://raw.githubusercontent.com/keras-team/keras-io/master/",
-              "examples/structured_data/imbalanced_classification.py")
+              tutobook_path)
 
 outfile <- sub("https://raw.githubusercontent.com/keras-team/keras-io/master/",
                "vignettes-src/", url, fixed = TRUE) |>
