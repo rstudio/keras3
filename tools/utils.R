@@ -853,6 +853,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
                                 "keras" = character(),
                                 "preprocessing" = character(),
                                 "utils" = character(),
+                                "distribution" = "distributed",
                                 # "preprocessing" = character(),
                                 # ops = "k",
                                 .x
