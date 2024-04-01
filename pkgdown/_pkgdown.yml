@@ -47,16 +47,19 @@ navbar:
       menu:
         - text: "Model definition"
 
-        - text: "Functional API"
-          href: articles/functional_api.html
-
         - text: "Sequential Model"
           href: articles/sequential_model.html
+
+        - text: "Functional API"
+          href: articles/functional_api.html
 
         - text: "Extending and customizing"
 
         - text: "Training & evaluation with the built-in methods"
           href: articles/training_with_built_in_methods.html
+
+        - text: "Customizing `fit()` with Tensorflow"
+          href: "articles/custom_train_step_in_tensorflow.html"
 
         - text: "Writing your own callbacks"
           href: articles/writing_your_own_callbacks.html
