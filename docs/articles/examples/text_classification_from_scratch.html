@@ -49,10 +49,11 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-guides">
     <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
-    <a class="dropdown-item" href="../../articles/functional_api.html">Functional API</a>
     <a class="dropdown-item" href="../../articles/sequential_model.html">Sequential Model</a>
+    <a class="dropdown-item" href="../../articles/functional_api.html">Functional API</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
+    <a class="dropdown-item" href="../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
     <a class="dropdown-item" href="../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
@@ -60,6 +61,7 @@
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
+    <a class="dropdown-item" href="../../articles/distribution.html">Distributed training with Jax</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -399,23 +401,23 @@ layer.</p>
 <span><span class="co"># Fit the model using the train and test datasets.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, validation_data <span class="op">=</span> <span class="va">val_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 625/625 - 5s - 9ms/step - accuracy: 0.7319 - loss: 0.4931 - val_accuracy: 0.8708 - val_loss: 0.3104</span></span>
+<span><span class="co">## 625/625 - 6s - 9ms/step - accuracy: 0.7327 - loss: 0.4894 - val_accuracy: 0.8638 - val_loss: 0.3162</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9129 - loss: 0.2230 - val_accuracy: 0.8734 - val_loss: 0.3036</span></span>
+<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9116 - loss: 0.2230 - val_accuracy: 0.8780 - val_loss: 0.3131</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9579 - loss: 0.1171 - val_accuracy: 0.8732 - val_loss: 0.3350</span></span></code></pre>
+<span><span class="co">## 625/625 - 2s - 2ms/step - accuracy: 0.9603 - loss: 0.1118 - val_accuracy: 0.8646 - val_loss: 0.3735</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-model-on-the-test-set">Evaluate the model on the test set<a class="anchor" aria-label="anchor" href="#evaluate-the-model-on-the-test-set"></a>
 </h2>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8643 - loss: 0.3566</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8532 - loss: 0.4071</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.86428</span></span>
+<span><span class="co">## [1] 0.8532</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.3565615</span></span></code></pre>
+<span><span class="co">## [1] 0.407085</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="make-an-end-to-end-model">Make an end-to-end model<a class="anchor" aria-label="anchor" href="#make-an-end-to-end-model"></a>
@@ -440,12 +442,12 @@ can simply create a new model (using the weights we just trained):</p>
 <span></span>
 <span><span class="co"># Test it with `raw_test_ds`, which yields raw strings</span></span>
 <span><span class="va">end_to_end_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - accuracy: 0.8643 - loss: 0.3560</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - accuracy: 0.8532 - loss: 0.4063</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.86428</span></span>
+<span><span class="co">## [1] 0.8532</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.3559878</span></span></code></pre>
+<span><span class="co">## [1] 0.4062699</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

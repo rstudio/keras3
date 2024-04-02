@@ -507,7 +507,7 @@ gan |> fit(
 ```
 
 ```
-## 100/100 - 5s - 53ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+## 100/100 - 5s - 54ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?

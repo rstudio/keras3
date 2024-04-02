@@ -1,7 +1,9 @@
 #!source envir::attach_source(.file)
 
 
-knit_keras_init <- function() {
+knit_keras_init <- function(backend = NULL) {
+  if(!is.null(backend))
+    keras3::use_backend(backend)
   # reticulate::use_virtualenv("r-keras")
   options(width = 76)
   keras3::clear_session()
@@ -139,7 +141,9 @@ knit_vignette <- function(input, ..., output_dir) {
     fig.path = paste0(fig.path, "/")
   )
 
-  knit_keras_init()
+  fm <- yaml_front_matter(input.Rmd)
+
+  knit_keras_init(fm$backend)
 
   withr::with_options(c(cli.num_colors = 256L), {
     knitr::knit(input.Rmd, output.md,
@@ -217,6 +221,12 @@ evalq({
 # on.exit(options(o_knitr.graphics.rel_path), add = TRUE)
 
 
+yaml_front_matter <- function(infile, lines = readLines(infile)) {
+  end_fm_i <- which(lines == "---")[2]
+  x_fm <- lines[2:(end_fm_i-1)]
+  fm <- yaml.load(x_fm)
+  fm
+}
 
 # update absolute figure links so they're relative links to the vignette dir
 # lines <- sub(paste0("](", dirname(fig.path), "/"), "](", lines, fixed = TRUE) # md formatting

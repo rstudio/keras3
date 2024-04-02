@@ -853,6 +853,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
                                 "keras" = character(),
                                 "preprocessing" = character(),
                                 "utils" = character(),
+                                "distribution" = "distributed",
                                 # "preprocessing" = character(),
                                 # ops = "k",
                                 .x
@@ -2323,3 +2324,17 @@ if(FALSE) {
 #   )--")
 # rep <- "`\\1`"
 # str_replace_all(x, rx, rep)
+
+
+if(FALSE) {
+
+  # for(dir in list.dirs("tools/raw"))
+  list.dirs("tools/raw") %>%
+    lapply(function(d) {
+      withr::local_dir(d)
+      if(any(startsWith(dir(), "gpt")))
+        system(paste("code -d r_wrapper.R", dir(pattern = "^gpt-4")[1]))
+    }) %>%
+    invisible()
+
+}

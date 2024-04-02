@@ -965,7 +965,7 @@ with_rich_config <- function(expr) {
     COLUMNS = as.character(getOption("width"))
   )
 
-  if (is.na(Sys.getenv("COLORTERM", NA)) &&
+  if (Sys.getenv("COLORTERM", "truecolor") == "truecolor" &&
       cli::num_ansi_colors() >= 256L) {
     vars$COLORTERM <- "truecolor"
     vars$FORCE_COLOR <- "yes"

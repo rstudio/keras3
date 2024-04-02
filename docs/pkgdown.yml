@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
   distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
+  distribution: distribution.html
   autoencoder: examples/autoencoder.html
   index: examples/index.html
   mnist_convnet: examples/mnist_convnet.html
@@ -23,7 +24,7 @@ articles:
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-03-27T16:45Z
+last_built: 2024-04-02T12:31Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles
