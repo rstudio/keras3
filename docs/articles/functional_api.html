@@ -49,10 +49,11 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-guides">
     <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
-    <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
     <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
+    <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
     <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
     <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
+    <a class="dropdown-item" href="../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
     <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
     <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
     <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
@@ -60,6 +61,7 @@
     <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
     <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
     <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
+    <a class="dropdown-item" href="../articles/distribution.html">Distributed training with Jax</a>
   </div>
 </li>
 <li class="nav-item">
@@ -239,7 +241,7 @@ then evaluate the model on the test data:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 750/750 - 2s - 2ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1921</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 792us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 818us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1423</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9578 - loss: 0.1338</span></span></code></pre>
@@ -605,7 +607,7 @@ targets:</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 2s - 60ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 2s - 61ms/step - loss: 0.3948</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 40/40 - 0s - 5ms/step - loss: 0.1971</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
@@ -720,7 +722,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 411ms/step - acc: 0.1300 - loss: 2.3034 - val_acc: 0.1150 - val_loss: 2.3082</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 5s - 419ms/step - acc: 0.1262 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3078</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

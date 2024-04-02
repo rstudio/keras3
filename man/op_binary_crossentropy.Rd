@@ -36,7 +36,7 @@ output <- op_array(c(0.1, 0.9, 0.8, 0.2))
 op_binary_crossentropy(target, output)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536054 0.10536054 0.22314355 0.22314355], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.10536055 0.10536055 0.22314353 0.22314353], shape=(4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }
