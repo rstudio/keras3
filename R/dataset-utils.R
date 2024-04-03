@@ -313,10 +313,10 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' A `tf.data.Dataset` object.
 #'
 #' - If `label_mode` is `NULL`, it yields `float32` tensors of shape
-#'     `(batch_size, image_size[0], image_size[1], num_channels)`,
+#'     `(batch_size, image_size[1], image_size[2], num_channels)`,
 #'     encoding images (see below for rules regarding `num_channels`).
 #' - Otherwise, it yields a tuple `(images, labels)`, where `images` has
-#'     shape `(batch_size, image_size[0], image_size[1], num_channels)`,
+#'     shape `(batch_size, image_size[1], image_size[2], num_channels)`,
 #'     and `labels` follows the format described below.
 #'
 #' Rules regarding labels format:
@@ -453,13 +453,14 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 image_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
           class_names = NULL, color_mode = "rgb", batch_size = 32L,
-          image_size = list(256L, 256L), shuffle = TRUE, seed = NULL,
+          image_size = c(256L, 256L), shuffle = TRUE, seed = NULL,
           validation_split = NULL, subset = NULL, interpolation = "bilinear",
           follow_links = FALSE, crop_to_aspect_ratio = FALSE,
           pad_to_aspect_ratio = FALSE, data_format = NULL, verbose = TRUE)
 {
   args <- capture_args(list(labels = as_integer, label_mode = as_integer,
-                             batch_size = as_integer, seed = as_integer))
+                            image_size = function(x) lapply(x, as_integer),
+                            batch_size = as_integer, seed = as_integer))
   do.call(keras$utils$image_dataset_from_directory, args)
 }
 
