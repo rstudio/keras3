@@ -5,13 +5,13 @@ articles:
   custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
   distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
   distribution: distribution.html
-  autoencoder: examples/autoencoder.html
   index: examples/index.html
-  mnist_convnet: examples/mnist_convnet.html
-  oxford_pets_image_segmentation: examples/oxford_pets_image_segmentation.html
+  text_classification_from_scratch: examples/nlp/text_classification_from_scratch.html
   imbalanced_classification: examples/structured_data/imbalanced_classification.html
-  structured_data_classification_with_feature_space: examples/structured_data_classification_with_feature_space.html
-  text_classification_from_scratch: examples/text_classification_from_scratch.html
+  structured_data_classification_with_feature_space: examples/structured_data/structured_data_classification_with_feature_space.html
+  autoencoder: examples/vision/autoencoder.html
+  mnist_convnet: examples/vision/mnist_convnet.html
+  oxford_pets_image_segmentation: examples/vision/oxford_pets_image_segmentation.html
   functional_api: functional_api.html
   getting_started: getting_started.html
   intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
@@ -24,7 +24,7 @@ articles:
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-04-03T15:27Z
+last_built: 2024-04-03T17:40Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles
