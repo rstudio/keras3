@@ -617,6 +617,40 @@ function (x, num = NULL, axis = 1L)
 #' output
 #' ```
 #'
+#' # Debugging `f`
+#'
+#' Even in eager contexts, `op_vectorized_map()` may trace `f`. In that case, if
+#' you want to eagerly debug `f` (e.g., with `browser()`), you can swap in a
+#' manual (slow) implementation of `op_vectorized_map()`. Note this example
+#' debug implementation does not handle all the same edge cases as
+#' `op_vectorized_map()`, in particular, if `f` returns a structure of multiple
+#' tensors.
+#'
+#' ```r
+#' op_vectorized_map_debug <- function(elements, fn) {
+#'
+#'   if (!is.list(elements)) {
+#'     # `elements` is a single tensor
+#'     batch_size <- op_shape(elements)[[1]]
+#'     out <- elements |>
+#'       op_split(batch_size) |>
+#'       lapply(fn) |>
+#'       op_stack()
+#'     return(out)
+#'   }
+#'
+#'   # `elements` is a list of tensors
+#'   batch_size <- elements[[1]] |> op_shape() |> _[[1]]
+#'   elements |>
+#'     lapply(\(e) op_split(e, batch_size)) |>
+#'     zip_lists() |>
+#'     lapply(fn) |>
+#'     op_stack()
+#'
+#' }
+#' ```
+#'
+#'
 #' @param elements
 #' see description
 #'
