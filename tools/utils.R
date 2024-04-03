@@ -1155,7 +1155,7 @@ make_r_fn.op <- function(endpoint, py_obj, transformers) {
     # k_array(c(1,2,3), "int32") fails because implicitly casting eager
     # float tensors to int throws a python error. So we explicitly cast first.
     return(function(x, dtype = NULL) {
-      if(!is.null(dtype) && !inherits(x, "python.builtin.object"))
+      if(!is.null(dtype) && !is_py_object(x))
         x <- np_array(x, dtype)
       keras$ops$array(x, dtype)
     })

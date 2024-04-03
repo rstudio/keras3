@@ -26,7 +26,7 @@ py_formals <- function(py_obj) {
 
     default <- param$default
 
-    if (inherits(default, "python.builtin.object")) {
+    if (is_py_object(default)) {
       if (default != inspect$Parameter$empty)
         # must be something complex that failed to convert
         warning(glue::glue(

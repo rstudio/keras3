@@ -577,7 +577,7 @@ input_data_normalizer <- function(model) {
                   keras$config$floatx()
   )
   .normalize <- function(x) {
-    if (is.null(x) || inherits(x, "python.builtin.object"))
+    if (is.null(x) || is_py_object(x))
       return(x)
     if (is.list(x))
       return(lapply(x, .normalize))

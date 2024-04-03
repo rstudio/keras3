@@ -194,6 +194,38 @@ output <- op_vectorized_map(input, function(.x) \{
 }\if{html}{\out{</div>}}
 }
 
+\section{Debugging \code{f}}{
+Even in eager contexts, \code{op_vectorized_map()} may trace \code{f}. In that case, if
+you want to eagerly debug \code{f} (e.g., with \code{browser()}), you can swap in a
+manual (slow) implementation of \code{op_vectorized_map()}. Note this example
+debug implementation does not handle all the same edge cases as
+\code{op_vectorized_map()}, in particular, if \code{f} returns a structure of multiple
+tensors.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_vectorized_map_debug <- function(elements, fn) \{
+
+  if (!is.list(elements)) \{
+    # `elements` is a single tensor
+    batch_size <- op_shape(elements)[[1]]
+    out <- elements |>
+      op_split(batch_size) |>
+      lapply(fn) |>
+      op_stack()
+    return(out)
+  \}
+
+  # `elements` is a list of tensors
+  batch_size <- elements[[1]] |> op_shape() |> _[[1]]
+  elements |>
+    lapply(\\(e) op_split(e, batch_size)) |>
+    zip_lists() |>
+    lapply(fn) |>
+    op_stack()
+
+\}
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other core ops: \cr
 \code{\link{op_cast}()} \cr

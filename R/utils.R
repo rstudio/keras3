@@ -532,7 +532,7 @@ keras_array <- function(x, dtype = NULL) {
 
   # allow passing things like pandas.Series(), for workarounds like
   # https://github.com/rstudio/keras/issues/1341
-  if(inherits(x, "python.builtin.object"))
+  if(is_py_object(x))
     return(x)
 
   if (is.data.frame(x))

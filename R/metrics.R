@@ -76,10 +76,10 @@ function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
 {
     args <- capture_args(list(
       y_true = function (x)
-        if (inherits(x, "python.builtin.object")) x
+        if (is_py_object(x)) x
       else np_array(x),
       y_pred = function (x)
-        if (inherits(x, "python.builtin.object")) x
+        if (is_py_object(x)) x
       else np_array(x), axis = as_axis)
     )
     do.call(keras$metrics$binary_focal_crossentropy, args)
@@ -146,10 +146,10 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
     label_smoothing = 0, axis = -1L)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), axis = as_axis))
     do.call(keras$metrics$categorical_focal_crossentropy, args)
@@ -204,10 +204,10 @@ metric_huber <-
 function (y_true, y_pred, delta = 1)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     do.call(keras$metrics$huber, args)
@@ -256,10 +256,10 @@ metric_log_cosh <-
 function (y_true, y_pred)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     do.call(keras$metrics$log_cosh, args)
@@ -340,10 +340,10 @@ function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -427,10 +427,10 @@ function (y_true, y_pred, ..., name = "categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -511,10 +511,10 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -591,10 +591,10 @@ function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy
     dtype = NULL)
 {
     args <- capture_args(list(k = as_integer, y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -672,9 +672,9 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
     args <- capture_args(list(
         k = as_integer,
         y_true = function(x)
-            if (inherits(x, "python.builtin.object")) x else np_array(x),
+            if (is_py_object(x)) x else np_array(x),
         y_pred = function(x)
-            if (inherits(x, "python.builtin.object")) x else np_array(x)
+            if (is_py_object(x)) x else np_array(x)
     ))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$TopKCategoricalAccuracy
@@ -1892,10 +1892,10 @@ function (y_true, y_pred, ..., name = "categorical_hinge",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -1962,10 +1962,10 @@ metric_hinge <-
 function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -2033,10 +2033,10 @@ function (y_true, y_pred, ..., name = "squared_hinge",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -2635,10 +2635,10 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 {
     args <- capture_args(list(label_smoothing = as_integer,
         y_true = function (x)
-        if (inherits(x, "python.builtin.object"))
+        if (is_py_object(x))
             x
         else np_array(x), y_pred = function (x)
-        if (inherits(x, "python.builtin.object"))
+        if (is_py_object(x))
             x
         else np_array(x), axis = as_axis))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -2738,10 +2738,10 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 {
     args <- capture_args(list(label_smoothing = as_integer,
         axis = as_axis, y_true = function (x)
-        if (inherits(x, "python.builtin.object"))
+        if (is_py_object(x))
             x
         else np_array(x), y_pred = function (x)
-        if (inherits(x, "python.builtin.object"))
+        if (is_py_object(x))
             x
         else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -2814,10 +2814,10 @@ function (y_true, y_pred, ..., name = "kl_divergence",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -2892,10 +2892,10 @@ metric_poisson <-
 function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -2991,10 +2991,10 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), ignore_class = as_integer))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -3342,10 +3342,10 @@ function (y_true, y_pred, ..., name = "mean_absolute_error",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -3421,10 +3421,10 @@ function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -3481,10 +3481,10 @@ function (y_true, y_pred, ..., name = "mean_squared_error",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -3560,10 +3560,10 @@ function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
     dtype = NULL)
 {
     args <- capture_args(list(y_true = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x), y_pred = function (x)
-    if (inherits(x, "python.builtin.object"))
+    if (is_py_object(x))
         x
     else np_array(x)))
     callable <- if (missing(y_true) && missing(y_pred))

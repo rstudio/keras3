@@ -30,7 +30,7 @@ create_layer <- function(LayerClass, object, args = list()) {
 
   args <- lapply(args, resolve_py_obj)
 
-  if (!inherits(LayerClass, "python.builtin.object")) # e.g., R6ClassGenerator
+  if (!is_py_object(LayerClass)) # e.g., R6ClassGenerator
     LayerClass <- r_to_py(LayerClass)
 
   # create layer instance by calling the LayerClass object
