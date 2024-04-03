@@ -20,7 +20,7 @@ is_mac_arm64 <- function() {
 
 is_scalar <- function(x) identical(length(x), 1L)
 
-is_py_object <- function(x) inherits(x, "python.builtin.object")
+# is_py_object <- function(x) is_py_object(x)
 
 split_dots_named_unnamed <- function(dots) {
   nms <- names(dots)
@@ -152,15 +152,15 @@ check_bool <- function(x) {
 # ---- arg transformers ----
 
 as_array <- function(x)
-  if(is.null(x) || is.array(x) || inherits(x, "python.builtin.object"))
+  if(is.null(x) || is.array(x) || is_py_object(x))
     x else as.array(x)
 
 as_py_array <- function(x)
-  if(is.null(x) || inherits(x, "python.builtin.object"))
+  if(is.null(x) || is_py_object(x))
     x else np_array(x)
 
 as_r_value <- function (x)
-  if (inherits(x, "python.builtin.object"))
+  if (is_py_object(x))
     py_to_r(x) else x
 
 as_axis <- function(axis) {
@@ -202,7 +202,7 @@ normalize_shape <- function(shape) {
       # Pass through python objects unmodified, only coerce R objects
       # supplied shapes, e.g., to tf$random$normal, can be a list that's a mix
       # of scalar integer tensors and regular integers
-      if (inherits(value, "python.builtin.object"))
+      if (is_py_object(value))
         return(value)
 
       # accept NA,NA_integer_,NA_real_ as NULL
@@ -420,7 +420,7 @@ resolve_py_obj <- function(x, default_name = "anonymous_R_function",
   if (is.language(x))
     x <- eval(x, env)
 
-  if (is.null(x) || inherits(x, "python.builtin.object"))
+  if (is.null(x) || is_py_object(x))
     return(x)
 
   if (is_bare_r_function(x)) {
@@ -431,7 +431,7 @@ resolve_py_obj <- function(x, default_name = "anonymous_R_function",
       py_obj <- tryCatch(eval(py_obj_expr, environment(x)),
                          error = function(e) NULL)
 
-      if (inherits(py_obj, "python.builtin.object"))
+      if (is_py_object(py_obj))
         return(py_obj)
     }
 
@@ -455,7 +455,7 @@ as_py_name <- function(x) {
 }
 
 as_py_function <- function(fn, default_name = "r_func") {
-  if(inherits(fn, "python.builtin.object"))
+  if(is_py_object(fn))
     return(fn)
 
   name <-
@@ -472,7 +472,7 @@ as_py_function <- function(fn, default_name = "r_func") {
 }
 
 get_function_name <- function(fn) {
-  if (inherits(fn, "python.builtin.object"))
+  if (is_py_object(fn))
     return(py_to_r(py_get_attr(fn, "__name__")))
 
   attr(fn, "py_function_name", TRUE) %||%
@@ -535,7 +535,7 @@ get_function_name <- function(fn) {
 # }
 #
 # .as_activation <- function(x) {
-#   if (is.null(x) || inherits(x, "python.builtin.object"))
+#   if (is.null(x) || is_py_object(x))
 #     return(x)
 #
 #   name <- attr(x, "py_function_name", TRUE)
@@ -762,8 +762,8 @@ assert_all_dots_named <- function(envir = parent.frame(), cl) {
 # ---- py helpers ----
 
 py_is <- function(x, y) {
-  inherits(x, "python.builtin.object") &&
-  inherits(y, "python.builtin.object") &&
+  is_py_object(x) &&
+  is_py_object(y) &&
   identical(py_id(x), py_id(y))
 }
 

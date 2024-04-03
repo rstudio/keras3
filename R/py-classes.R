@@ -217,7 +217,7 @@ new_get_private <- function(members, shared_mask_env) {
     instance_mask_env$self <- self
     instance_mask_env$private <- private
     members <- lapply(members, function(member) {
-      if (is.function(member) && !inherits(member, "python.builtin.object"))
+      if (is.function(member) && !is_py_object(member))
         environment(member) <- instance_mask_env
       member
     })
@@ -271,7 +271,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   names(bases) <- NULL
 
   bases <- lapply(bases, function(cls) {
-    if (!inherits(cls, "python.builtin.object"))
+    if (!is_py_object(cls))
       tryCatch(
         cls <- r_to_py(cls),
         error = function(e)
@@ -291,7 +291,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
 as_py_method <- function(fn, name, env, convert, label) {
 
     # if user did conversion, they're responsible for ensuring it is right.
-    if (inherits(fn, "python.builtin.object")) {
+    if (is_py_object(fn)) {
       #assign("convert", convert, as.environment(fn))
       return(fn)
     }

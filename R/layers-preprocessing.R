@@ -2567,7 +2567,7 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
 #' @returns Returns `object`, invisibly.
 #' @export
 adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
-  if (!inherits(data, "python.builtin.object"))
+  if (!is_py_object(data))
     data <- keras_array(data)
   # TODO: use as_tensor() here
 
