@@ -8,6 +8,7 @@ accelerator: GPU
 output: rmarkdown::html_vignette
 domain: structured data
 category: basic
+backend: jax
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 ---
 
