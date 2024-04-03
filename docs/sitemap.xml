@@ -40,16 +40,31 @@
     <loc>https://keras.posit.co/articles/examples/mnist_convnet.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/articles/examples/nlp/text_classification_from_scratch.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/articles/examples/oxford_pets_image_segmentation.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/examples/structured_data/imbalanced_classification.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/articles/examples/structured_data/structured_data_classification_with_feature_space.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/articles/examples/structured_data_classification_with_feature_space.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/examples/text_classification_from_scratch.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/examples/vision/autoencoder.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/examples/vision/mnist_convnet.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/examples/vision/oxford_pets_image_segmentation.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/functional_api.html</loc>

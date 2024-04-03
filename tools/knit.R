@@ -103,7 +103,16 @@ knit_keras_process_chunk_output <- function(x, options) {
 }
 
 
-knit_vignette <- function(input, ..., output_dir) {
+knit_vignette <- function(input, ..., output_dir, external = FALSE) {
+
+  if(external) {
+    return(callr::r(function(input, ...) {
+      Sys.setenv(CUDA_VISIBLE_DEVICES = "0")
+      options(conflicts.policy = "strict")
+      envir::import_from("tools/knit.R", knit_vignette)
+      knit_vignette(input)
+    }, args = list(input, ...), stdout = "", stderr = ""))
+  }
 
   input.Rmd <- fs::path_real(input)
   pkg_dir <- strsplit(input.Rmd, "/vignettes-src/", fixed = TRUE)[[1]][[1]]
@@ -200,6 +209,8 @@ knit_vignette <- function(input, ..., output_dir) {
   output.Rmd <- sub("/vignettes-src/", "/vignettes/", fs::path_real(input.Rmd),
                     fixed = TRUE)
   message("postprocessed output file: ", output.Rmd)
+  if(!dir.exists(output.Rmd_dir <- dirname(output.Rmd)))
+    dir.create(output.Rmd_dir, recursive = TRUE)
   writeLines(lines, output.Rmd, useBytes = TRUE)
 
   # figures dir
