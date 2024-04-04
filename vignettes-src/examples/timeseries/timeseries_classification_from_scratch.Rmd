@@ -21,11 +21,6 @@ CSV timeseries files on disk. We demonstrate the workflow on the FordA dataset f
 
 ## Setup
 
-```python
-import keras
-import numpy as np
-import matplotlib.pyplot as plt
-```
 ```{r}
 library(keras3)
 use_backend("jax")
@@ -224,8 +219,7 @@ history <- model |> fit(
   batch_size = batch_size,
   epochs = epochs,
   callbacks = callbacks,
-  validation_split = 0.2,
-  verbose = 1
+  validation_split = 0.2
 )
 ```
 
