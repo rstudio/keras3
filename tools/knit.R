@@ -6,8 +6,14 @@ knit_keras_init <- function(backend = NULL) {
     keras3::use_backend(backend)
   # reticulate::use_virtualenv("r-keras")
   options(width = 76)
-  keras3::clear_session()
-  keras3::set_random_seed(1)
+
+  keras_init <- function() {
+    keras3::clear_session()
+    keras3::set_random_seed(1)
+  }
+
+  # this eagerly just runs the hook if keras is already loaded
+  reticulate:::py_register_load_hook("keras", keras_init)
 }
 
 yaml.load <- getExportedValue("yaml", "yaml.load")

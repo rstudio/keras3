@@ -458,7 +458,7 @@ function (directory, labels = "inferred", label_mode = "int",
           follow_links = FALSE, crop_to_aspect_ratio = FALSE,
           pad_to_aspect_ratio = FALSE, data_format = NULL, verbose = TRUE)
 {
-  args <- capture_args(list(labels = as_integer, label_mode = as_integer,
+  args <- capture_args(list(labels = as_integer,
                             image_size = function(x) lapply(x, as_integer),
                             batch_size = as_integer, seed = as_integer))
   do.call(keras$utils$image_dataset_from_directory, args)

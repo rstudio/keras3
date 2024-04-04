@@ -11,7 +11,7 @@ image_dataset_from_directory(
   class_names = NULL,
   color_mode = "rgb",
   batch_size = 32L,
-  image_size = list(256L, 256L),
+  image_size = c(256L, 256L),
   shuffle = TRUE,
   seed = NULL,
   validation_split = NULL,
@@ -117,10 +117,10 @@ number of files found. Defaults to \code{TRUE}.}
 A \code{tf.data.Dataset} object.
 \itemize{
 \item If \code{label_mode} is \code{NULL}, it yields \code{float32} tensors of shape
-\verb{(batch_size, image_size[0], image_size[1], num_channels)},
+\verb{(batch_size, image_size[1], image_size[2], num_channels)},
 encoding images (see below for rules regarding \code{num_channels}).
 \item Otherwise, it yields a tuple \verb{(images, labels)}, where \code{images} has
-shape \verb{(batch_size, image_size[0], image_size[1], num_channels)},
+shape \verb{(batch_size, image_size[1], image_size[2], num_channels)},
 and \code{labels} follows the format described below.
 }
 

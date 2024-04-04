@@ -121,7 +121,7 @@ Animated gifs are truncated to the first frame.</p>
 <span>  class_names <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  color_mode <span class="op">=</span> <span class="st">"rgb"</span>,</span>
 <span>  batch_size <span class="op">=</span> <span class="fl">32L</span>,</span>
-<span>  image_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">256L</span>, <span class="fl">256L</span><span class="op">)</span>,</span>
+<span>  image_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">256L</span>, <span class="fl">256L</span><span class="op">)</span>,</span>
 <span>  shuffle <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -262,10 +262,10 @@ number of files found. Defaults to <code>TRUE</code>.</p></dd>
     
 
 <p>A <code>tf.data.Dataset</code> object.</p><ul><li><p>If <code>label_mode</code> is <code>NULL</code>, it yields <code>float32</code> tensors of shape
-<code>(batch_size, image_size[0], image_size[1], num_channels)</code>,
+<code>(batch_size, image_size[1], image_size[2], num_channels)</code>,
 encoding images (see below for rules regarding <code>num_channels</code>).</p></li>
 <li><p>Otherwise, it yields a tuple <code>(images, labels)</code>, where <code>images</code> has
-shape <code>(batch_size, image_size[0], image_size[1], num_channels)</code>,
+shape <code>(batch_size, image_size[1], image_size[2], num_channels)</code>,
 and <code>labels</code> follows the format described below.</p></li>
 </ul><p>Rules regarding labels format:</p><ul><li><p>if <code>label_mode</code> is <code>"int"</code>, the labels are an <code>int32</code> tensor of shape
 <code>(batch_size,)</code>.</p></li>
