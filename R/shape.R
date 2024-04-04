@@ -108,28 +108,40 @@ shape <- function(...) {
 
   fix <- function(x) {
 
-    if (inherits(x, 'python.builtin.object')) {
+    if (is_py_object(x)) {
       if (inherits(x, "tensorflow.python.framework.tensor_shape.TensorShape"))
         return(map_int(as.list(as_r_value(x$as_list())),
                        function(e) e %||% NA_integer_))
 
       shp <- keras$ops$shape(x)
 
+      # convert subclassed tuples, as encountered in Torch
+      # class(shp): torch.Size, python.builtin.tuple, python.builtin.object
       if(inherits(shp, "python.builtin.tuple"))
-        # class(shp): torch.Size, python.builtin.tuple, python.builtin.object
-        shp <- as_r_value(import_builtins()$tuple(shp))
+        shp <- import("builtins")$tuple(shp)
 
       # scalar integer tensors, unprotected with I(), are treated as an axis value
       if (identical(shp, list()) && keras$backend$is_int_dtype(x$dtype)) {
-        if (inherits(x, "AsIs"))
-          class(x) <- setdiff(class(x), "AsIs")
-        else
+        if (!inherits(x, "AsIs"))
           return(x)
       }
 
       # otherwise, (most common path) shape() is a tensor shape accessor
       return(lapply(shp, function(d) d %||% NA_integer_))
     }
+
+    ## TODO: shape(<R array>)
+    ## Users may pass R arrays to shape(), expecting it to behave like dim().
+    ## If we accept them, the edgecase of 1-d arrays gets tricky (esp because
+    ## numpy vectors arrays get converted to 1d R arrays)
+    ## If we accept simple R arrays and treat them the same as Tensors,
+    ## i.e., shape() is synonym for dim(), return dim(x)
+    # if(!is.object(x) && is.atomic(x) &&
+    #    !is.null(attr(x, "dim", TRUE)))
+    #   return(dim(x))
+    ## or we warn
+    # if (!is.null(dim(x)) && length(x) > 200)
+    #  warning("Did you pass an R array to shape()? Did you mean to use dim()?")
 
     if (!is.atomic(x) || length(x) > 1)
       lapply(x, fix)
