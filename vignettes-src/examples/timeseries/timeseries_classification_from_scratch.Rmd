@@ -80,7 +80,7 @@ str(keras3:::named_list(
 
 Here we visualize one timeseries example for each class in the dataset.
 
-```{r}
+```{r, fig.width=10, fig.cap="Plot of Example Timeseries Data"}
 plot(NULL, main = "Timeseries Data",
      xlab = "Timepoints",  ylab = "Values",
      xlim = c(1, ncol(x_test)),
@@ -90,6 +90,7 @@ lines(x_test[match(-1, y_test), ], col = "blue")
 lines(x_test[match( 1, y_test), ], col = "red")
 legend("topright", legend=c("label -1", "label 1"), col=c("blue", "red"), lty=1)
 ```
+
 
 ## Standardize the data
 
@@ -226,14 +227,6 @@ history <- model |> fit(
 
 ## Evaluate model on test data
 
-```python
-model = keras.models.load_model("best_model.keras")
-
-test_loss, test_acc = model.evaluate(x_test, y_test)
-
-print("Test accuracy", test_acc)
-print("Test loss", test_loss)
-```
 ```{r}
 model <- load_model("best_model.keras")
 
@@ -249,12 +242,12 @@ cat(
 
 ## Plot the model's training history
 
-```{r}
+```{r, fig.width=10, fig.cap="Plot of Training History Metrics"}
 plot(history)
 ```
 
 Plot just the training and validation accuracy:
-```{r, message=FALSE}
+```{r, message=FALSE, fig.width=10, fig.cap="Plot of Accuracy During Training"}
 plot(history, metric = "sparse_categorical_accuracy") +
   # scale x axis to actual number of epochs run before early stopping
   ggplot2::xlim(0, length(history$metrics$loss))
