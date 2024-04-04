@@ -1,7 +1,7 @@
 ---
 title: Keras examples
 output: rmarkdown::html_vignette
-date: 'Last Modified: 2023-11-30; Last Rendered: 2024-04-03'
+date: 'Last Modified: 2023-11-30; Last Rendered: 2024-04-04'
 vignette: >
   %\VignetteIndexEntry{Keras examples}
   %\VignetteEngine{knitr::rmarkdown}
@@ -40,6 +40,18 @@ vignette: >
 <span class="badge rounded-pill bg-success mb-1" style="align-self: flex-start">basic</span>
 <p class="card-text">Text sentiment classification starting from raw text files.</p>
 <a href="nlp/text_classification_from_scratch.html" class="btn btn-primary mt-auto">See code</a>
+</div>
+</div>
+</div>
+</div>
+
+<h2 class="mt-2">Timeseries</h2><div class="row row-cols-1 row-cols-md-2 g-4"><div class="col">
+<div class="card h-100">
+<h5 class="card-header bg-transparent">Timeseries classification from scratch</h5>
+<div class="card-body d-flex flex-column">
+<span class="badge rounded-pill bg-success mb-1" style="align-self: flex-start">basic</span>
+<p class="card-text">Training a timeseries classifier from scratch on the FordA dataset from the UCR/UEA archive.</p>
+<a href="timeseries/timeseries_classification_from_scratch.html" class="btn btn-primary mt-auto">See code</a>
 </div>
 </div>
 </div>

@@ -4,8 +4,9 @@
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 
+tutobook_path <- "examples/timeseries/timeseries_classification_from_scratch.py" # ~/github/keras-team/keras-io/
 
-tutobook_path <- "guides/distribution.py" # ~/github/keras-team/keras-io/
+
 
 url <- paste0("https://raw.githubusercontent.com/keras-team/keras-io/master/",
               tutobook_path)
