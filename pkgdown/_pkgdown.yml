@@ -14,7 +14,14 @@ template:
     navbar-light-color: "white"
     navbar-light-brand-color: "white"
     navbar-light-brand-hover-color: "white"
-    code_font: {google: {family: "Fira Mono", wght: "400;600;700"}}
+    # Google's font CDN isn't serving the box drawing characters
+    # with the fonts. E.g., U+2502 or U+203C.
+    # These are used to dispaly models by print(model)
+    # Default to the system font, which on most modern systems should
+    # support the full unicode range.
+    # this will most likely be Menlo on macOS, Consolas on Windows, DejaVu Sans on Ubuntu
+    code_font: "monospace"
+    #{google: {family: "Fira Mono", wght: "400;600;700"}}
     # https://fonts.google.com/?classification=Monospace&stylecount=5
 
 navbar:

@@ -25,7 +25,7 @@ articles:
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-04-04T20:14Z
+last_built: 2024-04-05T16:47Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles
