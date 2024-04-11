@@ -248,6 +248,8 @@ function (model, filepath, skip_mismatch = FALSE, ...)
 #' create the class object needed to restore the model. See example for how to
 #' extract the `get_config()` value from a saved model.
 #'
+#' # Example
+#'
 #' ```{r}
 #' model <- keras_model_sequential(input_shape = 10) |> layer_dense(10)
 #' file <- tempfile("model-config-", fileext = ".json")

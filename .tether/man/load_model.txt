@@ -17,7 +17,7 @@ Args:
     safe_mode: Boolean, whether to disallow unsafe `lambda` deserialization.
         When `safe_mode=False`, loading an object has the potential to
         trigger arbitrary code execution. This argument is only
-        applicable to the Keras v3 model format. Defaults to True.
+        applicable to the Keras v3 model format. Defaults to `True`.
 
 Returns:
     A Keras model instance. If the original model was compiled,
@@ -40,3 +40,4 @@ Note that the model variables may have different name values
 (`var.name` property, e.g. `"dense_1/kernel:0"`) after being reloaded.
 It is recommended that you use layer attributes to
 access specific variables, e.g. `model.get_layer("dense_1").kernel`.
+
