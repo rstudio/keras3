@@ -152,7 +152,7 @@ check_bool <- function(x) {
 # ---- arg transformers ----
 
 as_array <- function(x)
-  if(is.null(x) || is.array(x) || is_py_object(x))
+  if(is.null(x) || is_py_object(x) || is.array(x))
     x else as.array(x)
 
 as_py_array <- function(x)

@@ -122,6 +122,11 @@ convert_to_tensor(
   sparse=None
 )
 copy(x)
+correlate(
+  x1,
+  x2,
+  mode='valid'
+)
 cos(x)
 cosh(x)
 count_nonzero(x, axis=None)

@@ -3757,6 +3757,33 @@ function (x)
 keras$ops$copy(x)
 
 
+#' Compute the cross-correlation of two 1-dimensional tensors.
+#'
+#' @returns
+#' Output tensor, cross-correlation of `x1` and `x2`.
+#'
+#' @param x1
+#' First 1-dimensional input tensor of length M.
+#'
+#' @param x2
+#' Second 1-dimensional input tensor of length N.
+#'
+#' @param mode
+#' Either `"valid"`, `"same"` or `"full"`.
+#' By default the mode is set to `"valid"`, which returns
+#' an output of length `max(M, N) - min(M, N) + 1`.
+#' `"same"` returns an output of length `max(M, N)`.
+#' `"full"` mode returns the convolution at each point of
+#' overlap, with an output length of `N+M-1`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.correlate
+op_correlate <-
+function (x1, x2, mode = "valid")
+keras$ops$correlate(as_array(x1), as_array(x2), mode)
+
 #' Cosine, element-wise.
 #'
 #' @returns
