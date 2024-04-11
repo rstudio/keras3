@@ -1,7 +1,7 @@
 Help on class LSTM in module keras.src.layers.rnn.lstm:
 
 class LSTM(keras.src.layers.rnn.rnn.RNN)
- |  LSTM(units, activation='tanh', recurrent_activation='sigmoid', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', unit_forget_bias=True, kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, seed=None, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False, **kwargs)
+ |  LSTM(units, activation='tanh', recurrent_activation='sigmoid', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', unit_forget_bias=True, kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, seed=None, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False, use_cudnn='auto', **kwargs)
  |
  |  Long Short-Term Memory layer - Hochreiter 1997.
  |
@@ -98,6 +98,9 @@ class LSTM(keras.src.layers.rnn.rnn.RNN)
  |          Unrolling can speed-up a RNN,
  |          although it tends to be more memory-intensive.
  |          Unrolling is only suitable for short sequences.
+ |      use_cudnn: Whether to use a cuDNN-backed implementation. `"auto"` will
+ |          attempt to use cuDNN when feasible, and will fallback to the
+ |          default implementation if not.
  |
  |  Call arguments:
  |      inputs: A 3D tensor, with shape `(batch, timesteps, feature)`.
@@ -152,6 +155,7 @@ class LSTM(keras.src.layers.rnn.rnn.RNN)
  |    go_backwards=False,
  |    stateful=False,
  |    unroll=False,
+ |    use_cudnn='auto',
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

@@ -1,7 +1,7 @@
 Help on class GRU in module keras.src.layers.rnn.gru:
 
 class GRU(keras.src.layers.rnn.rnn.RNN)
- |  GRU(units, activation='tanh', recurrent_activation='sigmoid', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, seed=None, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False, reset_after=True, **kwargs)
+ |  GRU(units, activation='tanh', recurrent_activation='sigmoid', use_bias=True, kernel_initializer='glorot_uniform', recurrent_initializer='orthogonal', bias_initializer='zeros', kernel_regularizer=None, recurrent_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, recurrent_constraint=None, bias_constraint=None, dropout=0.0, recurrent_dropout=0.0, seed=None, return_sequences=False, return_state=False, go_backwards=False, stateful=False, unroll=False, reset_after=True, use_cudnn='auto', **kwargs)
  |
  |  Gated Recurrent Unit - Cho et al. 2014.
  |
@@ -105,6 +105,9 @@ class GRU(keras.src.layers.rnn.rnn.RNN)
  |      reset_after: GRU convention (whether to apply reset gate after or
  |          before matrix multiplication). `False` is `"before"`,
  |          `True` is `"after"` (default and cuDNN compatible).
+ |      use_cudnn: Whether to use a cuDNN-backed implementation. `"auto"` will
+ |          attempt to use cuDNN when feasible, and will fallback to the
+ |          default implementation if not.
  |
  |  Call arguments:
  |      inputs: A 3D tensor, with shape `(batch, timesteps, feature)`.
@@ -159,6 +162,7 @@ class GRU(keras.src.layers.rnn.rnn.RNN)
  |    stateful=False,
  |    unroll=False,
  |    reset_after=True,
+ |    use_cudnn='auto',
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
