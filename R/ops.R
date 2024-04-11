@@ -7121,39 +7121,64 @@ keras$ops$hard_swish(x)
 #' a more efficient or numerically stable gradient for a sequence of
 #' operations.
 #'
-#' Note that `custom_gradient` only supports TensorFlow and JAX backends.
+#' # Example
 #'
-#' # Examples
-#'
+#' Backend-agnostic example.
 #' ```r
 #' log1pexp <- op_custom_gradient(\(x) {
 #'
 #'     e <- op_exp(x)
 #'
-#'     grad <- function(upstream) {
+#'     grad <- function(..., upstream = NULL) {
+#'       upstream <- upstream %||% ..1
 #'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
 #'     }
 #'
 #'     tuple(op_log(1 + e), grad)
 #' })
+#'
+#' if(config_backend() == "tensorflow") {
+#'   x <- op_convert_to_tensor(100.0)
+#'   with(tf$GradientTape() %as% tape, {
+#'     tape$watch(x)
+#'     y <- log1pexp(x)
+#'   })
+#'   dy_dx <- tape$gradient(y, x)
+#'   stopifnot(as.numeric(dy_dx) == 1)
+#' }
 #' ```
 #'
 #' @returns
-#' A function `h(x)` which returns the same value as `f(x)[0]` and whose
-#' gradient is determined by `f(x)[1]`.
+#' A function `h(...)` which returns the same value as `f(...)[[1]]` and whose
+#' gradient is determined by `f(...)[[2]]`.
 #'
 #' @param f
-#' Function `f(...)` that returns a tuple `(y, grad_fn)` where:
-#' - `x` is a sequence of (nested structures of) tensor inputs to the
-#'     function.
-#' - `y` is a (nested structure of) tensor outputs of applying
-#'     operations in `f` to `x`.
-#' - `grad_fn` is a function with the signature `g(...)` which
-#'     returns a list of tensors the same size as (flattened) `x`: the
-#'     derivatives of tensors in `y` with respect to the tensors in
-#'     `x`. Arguments provided to `...` are sequence of tensors the same size as
-#'     (flattened) `y` holding the initial value gradients for each
-#'     tensor in `y`.
+#' Function `f(...)` that returns a tuple `(output, grad_fn)` where:
+#' - `...` is a sequence of unnamed arguments,
+#'   each a tensor input or nested structure of tensor inputs to the
+#'    function.
+#' - `output` is a (potentially nested structure of) tensor outputs of applying
+#'     operations in forward_fn `f()` to `...`.
+#' - `grad_fn` is a function with the signature `grad_fn(..., upstream)` which
+#'     returns a list of tensors the same size as (flattened) `...`: the
+#'     derivatives of tensors in `output` with respect to the tensors in
+#'     `...`. `upstream` is a tensor or
+#'     sequence of tensors holding the initial value gradients for each
+#'     tensor in `output`.
+#'
+#' @note
+#'
+#' Note that the `grad` function that returns gradient computation
+#' requires `...` as well as an `upstream` named argument, depending
+#' on the backend being set. With the JAX and TensorFlow backends,
+#' it requires only one argument, whereas it might use the `upstream`
+#' argument in the case of the PyTorch backend.
+#'
+#' When working with TensorFlow/JAX backend, `grad(upstream)`
+#' is sufficient. With PyTorch, the `grad` function requires
+#' `...` as well as `upstream`, e.g. `grad <- \(..., upstream)`.
+#' Follow the example above to use `op_custom_gradient()` in
+#' a way that is compatible with all backends.
 #'
 #' @export
 #' @family core ops
