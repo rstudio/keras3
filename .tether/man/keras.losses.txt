@@ -79,6 +79,8 @@ CosineSimilarity(
 ctc(y_true, y_pred)
 CTC(reduction='sum_over_batch_size', name='sparse_categorical_crossentropy')
 deserialize(name, custom_objects=None)
+dice(y_true, y_pred)
+Dice(reduction='sum_over_batch_size', name='dice')
 get(identifier)
 hinge(y_true, y_pred)
 Hinge(reduction='sum_over_batch_size', name='hinge')

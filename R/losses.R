@@ -748,6 +748,53 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
     do.call(callable, args)
 }
 
+#' Computes the Dice loss value between `y_true` and `y_pred`.
+#'
+#' @description
+#' Formula:
+#' ```python
+#' loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
+#' ```
+#'
+#' Formula:
+#' ```python
+#' loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
+#' ```
+#'
+#' @returns
+#' if `y_true` and `y_pred` are provided, Dice loss value. Otherwise,
+#' a `Loss()` instance.
+#'
+#' @param y_true
+#' tensor of true targets.
+#'
+#' @param y_pred
+#' tensor of predicted targets.
+#'
+#' @param reduction
+#' Type of reduction to apply to the loss. In almost all cases
+#' this should be `"sum_over_batch_size"`.
+#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family losses
+#' @tether keras.losses.Dice
+loss_dice <-
+function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice")
+{
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
+    callable <- if (missing(y_true) && missing(y_pred))
+        keras$losses$Dice
+    else keras$losses$dice
+    do.call(callable, args)
+}
+
 
 #' Computes the hinge loss between `y_true` & `y_pred`.
 #'
