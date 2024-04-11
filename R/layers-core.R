@@ -288,7 +288,8 @@ function (object, equation, output_shape, activation = NULL,
 #'
 #' This layer can only be used on positive integer inputs of a fixed range.
 #'
-#' # Examples
+#' # Example
+#'
 #' ```{r}
 #' model <- keras_model_sequential() |>
 #'   layer_embedding(1000, 64)
@@ -318,6 +319,18 @@ function (object, equation, output_shape, activation = NULL,
 #'     a_initializer = 'he_uniform',
 #'     b_initializer = 'zeros'
 #'   )
+#'   ```
+#'
+#' - ```r
+#'   quantize(mode)
+#'   ```
+#'
+#' - ```r
+#'   quantized_build(input_shape, mode)
+#'   ```
+#'
+#' - ```r
+#'   quantized_call(inputs)
 #'   ```
 #'
 #' # Readonly properties:
