@@ -116,6 +116,12 @@ class Dense(keras.src.layers.layer.Layer)
  |
  |  quantize(self, mode)
  |
+ |  quantized_build(
+ |    self,
+ |    input_shape,
+ |    mode
+ |  )
+ |
  |  quantized_call(self, inputs)
  |
  |  save_own_variables(self, store)

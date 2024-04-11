@@ -192,6 +192,10 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #'   )
 #'   ```
 #'
+#' - ```r
+#'   quantize(mode)
+#'   ```
+#'
 #' # Readonly properties:
 #'
 #' - `kernel`
