@@ -1830,7 +1830,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' @description
 #' Used to implement efficient stacked RNNs.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' batch_size <- 3
 #' sentence_length <- 5

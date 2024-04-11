@@ -10,7 +10,7 @@ class StackedRNNCells(keras.src.layers.layer.Layer)
  |  Args:
  |    cells: List of RNN cell instances.
  |
- |  Examples:
+ |  Example:
  |
  |  ```python
  |  batch_size = 3
@@ -87,10 +87,5 @@ class StackedRNNCells(keras.src.layers.layer.Layer)
  |  output_size
  |
  |  state_size
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 
