@@ -5,7 +5,7 @@
 #' @description
 #' It crops along the time dimension (axis 2).
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 3, 2)
 #' x <- op_arange(prod(input_shape)) |> op_reshape(input_shape)
@@ -58,7 +58,7 @@ function (object, cropping = list(1L, 1L), ...)
 #' @description
 #' It crops along spatial dimensions, i.e. height and width.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 28, 28, 3)
 #' x <- op_arange(prod(input_shape), dtype ='int32') |> op_reshape(input_shape)
@@ -131,7 +131,7 @@ function (object, cropping = list(list(0L, 0L), list(0L, 0L)),
 #'
 #' @description
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 28, 28, 10, 3)
 #' x <- input_shape %>% { op_reshape(seq(prod(.)), .) }
@@ -213,7 +213,7 @@ function (object, cropping = list(list(1L, 1L), list(1L, 1L),
 #' If inputs are shaped `(batch)` without a feature axis, then
 #' flattening adds an extra channel dimension and output shape is `(batch, 1)`.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- layer_input(shape=c(10, 64))
 #' y <- x |> layer_flatten()
@@ -266,7 +266,7 @@ function (object, data_format = NULL, ...)
 #' Same as the input shape, but with the dimensions re-ordered according
 #' to the specified pattern.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- layer_input(shape=c(10, 64))
 #' y <- layer_permute(x, c(2, 1))
@@ -309,7 +309,7 @@ function (object, dims, ...)
 #'
 #' @description
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- layer_input(shape = 32)
 #' y <- layer_repeat_vector(x, n = 3)
@@ -410,7 +410,7 @@ function (object, target_shape, ...)
 #' @description
 #' Repeats each temporal step `size` times along the time axis.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 2, 3)
 #' x <- seq_len(prod(input_shape)) %>% op_reshape(input_shape)
@@ -418,11 +418,6 @@ function (object, target_shape, ...)
 #' y <- layer_upsampling_1d(x, size = 2)
 #' y
 #' ```
-#'
-#'  `[[ 6.  7.  8.]`
-#'   `[ 6.  7.  8.]`
-#'   `[ 9. 10. 11.]`
-#'   `[ 9. 10. 11.]]]`
 #'
 #' # Input Shape
 #' 3D tensor with shape: `(batch_size, steps, features)`.
@@ -465,7 +460,7 @@ function (object, size = 2L, ...)
 #' (specified by the `interpolation` argument). Use `interpolation=nearest`
 #' to repeat the rows and columns of the data.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 2, 1, 3)
 #' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
@@ -541,7 +536,7 @@ function (object, size = list(2L, 2L), data_format = NULL, interpolation = "near
 #' Repeats the 1st, 2nd and 3rd dimensions
 #' of the data by `size[0]`, `size[1]` and `size[2]` respectively.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 1, 2, 1, 3)
 #' x <- array(1, dim = input_shape)
@@ -612,7 +607,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #'
 #' @description
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(2, 2, 3)
 #' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
@@ -665,7 +660,7 @@ function (object, padding = 1L, ...)
 #' This layer can add rows and columns of zeros at the top, bottom, left and
 #' right side of an image tensor.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(1, 1, 2, 2)
 #' x <- op_reshape(seq_len(prod(input_shape)), input_shape)
@@ -739,7 +734,7 @@ function (object, padding = list(1L, 1L), data_format = NULL,
 #'
 #' @description
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' input_shape <- c(1, 1, 2, 2, 3)
 #' x <- op_reshape(seq_len(prod(input_shape)), input_shape)

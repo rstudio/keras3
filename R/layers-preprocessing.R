@@ -1013,7 +1013,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #'     the valid range of RGB colors, and
 #'     rescaled based on the `value_range` if needed.
 #'
-#' Sample usage:
+#' # Example
 #'
 #' ```{r}
 #' random_bright <- layer_random_brightness(factor=0.2, seed = 1)
@@ -1274,7 +1274,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #'
 #' By default, random rotations are only applied during training.
 #' At inference time, the layer does nothing. If you need to apply random
-#' rotations at inference time, set `training` to TRUE when calling the layer.
+#' rotations at inference time, pass `training = TRUE` when calling the layer.
 #'
 #' Input pixel values can be of any range (e.g. `[0., 1.)` or `[0, 255]`) and
 #' of integer or floating point dtype.

@@ -7,7 +7,7 @@
 #' `torch.nn.Module` into a Keras layer, in particular by making its
 #' parameters trackable by Keras.
 #'
-#' # Examples
+#' # Example
 #' Here's an example of how the [`layer_torch_module_wrapper()`] can be used with vanilla
 #' PyTorch modules.
 #'
