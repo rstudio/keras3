@@ -26,7 +26,7 @@ class Adafactor(keras.src.optimizers.optimizer.Optimizer)
  |      clip_threshold: float, defaults to 1.0. Clipping threshold. This is a
  |          part of Adafactor algorithm, independent from `clipnorm`,
  |          `clipvalue`, and `global_clipnorm`.
- |      relative_step: bool, defaults to True. If `learning_rate` is a
+ |      relative_step: bool, defaults to `True`. If `learning_rate` is a
  |          constant and `relative_step=True`, learning rate will be adjusted
  |          based on current iterations. This is a default learning rate decay
  |          in Adafactor.
@@ -40,7 +40,8 @@ class Adafactor(keras.src.optimizers.optimizer.Optimizer)
  |          no higher than this value.
  |      global_clipnorm: Float. If set, the gradient of all weights is clipped
  |          so that their global norm is no higher than this value.
- |      use_ema: Boolean, defaults to False. If True, exponential moving average
+ |      use_ema: Boolean, defaults to `False`.
+ |          If `True`, exponential moving average
  |          (EMA) is applied. EMA consists of computing an exponential moving
  |          average of the weights of the model (as the weight values change
  |          after each training batch), and periodically overwriting the
@@ -143,10 +144,5 @@ class Adafactor(keras.src.optimizers.optimizer.Optimizer)
  |    learning_rate
  |  )
  |      Update step given gradient and the associated model variable.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 
