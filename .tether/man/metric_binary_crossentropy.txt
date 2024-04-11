@@ -20,9 +20,9 @@ class BinaryCrossentropy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |          e.g. `label_smoothing=0.2` means that we will use
  |          a value of 0.1 for label "0" and 0.9 for label "1".
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.BinaryCrossentropy()
  |  >>> m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
@@ -65,3 +65,4 @@ class BinaryCrossentropy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

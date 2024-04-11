@@ -17,8 +17,6 @@ class MeanAbsoluteError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |
  |  Examples:
  |
- |  Standalone usage:
- |
  |  >>> m = keras.metrics.MeanAbsoluteError()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
  |  >>> m.result()
@@ -57,3 +55,4 @@ class MeanAbsoluteError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

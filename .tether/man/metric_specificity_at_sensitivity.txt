@@ -37,7 +37,7 @@ class SpecificityAtSensitivity(SensitivitySpecificityBase)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.SpecificityAtSensitivity(0.5)
  |  >>> m.update_state([0, 0, 0, 1, 1], [0, 0.3, 0.8, 0.3, 0.8])

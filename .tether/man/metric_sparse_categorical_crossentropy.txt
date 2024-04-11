@@ -22,9 +22,9 @@ class SparseCategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetr
  |      axis: (Optional) Defaults to `-1`.
  |          The dimension along which entropy is computed.
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> # y_true = one_hot(y_true) = [[0, 1, 0], [0, 0, 1]]
  |  >>> # logits = log(y_pred)
@@ -79,3 +79,4 @@ class SparseCategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetr
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

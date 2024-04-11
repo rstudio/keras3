@@ -10,7 +10,7 @@ Packs user-provided data into a tuple.
 This is a convenience utility for packing data into the tuple formats
 that `Model.fit()` uses.
 
-Standalone usage:
+Example:
 
 >>> x = ops.ones((10, 1))
 >>> data = pack_x_y_sample_weight(x)
@@ -29,3 +29,4 @@ Args:
 
 Returns:
     Tuple in the format used in `Model.fit()`.
+

@@ -16,9 +16,9 @@ class LogCoshError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.LogCoshError()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
@@ -57,3 +57,4 @@ class LogCoshError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

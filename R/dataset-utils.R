@@ -6,8 +6,7 @@
 #' This is a convenience utility for packing data into the list formats
 #' that `fit()` uses.
 #'
-#' # Usage
-#' Standalone usage:
+#' # Example
 #'
 #' ```{r}
 #' x <- op_ones(c(10, 1))

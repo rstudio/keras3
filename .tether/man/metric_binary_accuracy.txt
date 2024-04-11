@@ -19,7 +19,7 @@ class BinaryAccuracy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      threshold: (Optional) Float representing the threshold for deciding
  |      whether prediction values are 1 or 0.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.BinaryAccuracy()
  |  >>> m.update_state([[1], [1], [0], [0]], [[0.98], [1], [0], [0.6]])
@@ -60,3 +60,4 @@ class BinaryAccuracy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

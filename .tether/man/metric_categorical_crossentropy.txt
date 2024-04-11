@@ -24,9 +24,9 @@ class CategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetricWrap
  |      axis: (Optional) Defaults to `-1`.
  |          The dimension along which entropy is computed.
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> # EPSILON = 1e-7, y = y_true, y` = y_pred
  |  >>> # y` = clip_ops.clip_by_value(output, EPSILON, 1. - EPSILON)
@@ -79,3 +79,4 @@ class CategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetricWrap
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+
