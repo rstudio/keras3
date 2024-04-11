@@ -66,9 +66,4 @@ class UpSampling1D(keras.src.layers.layer.Layer)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

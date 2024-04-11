@@ -116,9 +116,4 @@ class Conv1DTranspose(keras.src.layers.convolutional.base_conv_transpose.BaseCon
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

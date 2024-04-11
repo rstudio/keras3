@@ -164,9 +164,4 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  input_dtype
  |      The dtype layer inputs should be converted to.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

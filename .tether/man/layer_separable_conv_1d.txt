@@ -124,9 +124,4 @@ class SeparableConv1D(keras.src.layers.convolutional.base_separable_conv.BaseSep
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

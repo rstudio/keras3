@@ -231,9 +231,4 @@ class LSTM(keras.src.layers.rnn.rnn.RNN)
  |
  |  use_bias
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

@@ -108,9 +108,4 @@ class AveragePooling2D(keras.src.layers.pooling.base_pooling.BasePooling)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

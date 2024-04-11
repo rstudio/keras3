@@ -1,6 +1,6 @@
 Help on class Model in module keras.src.models.model:
 
-class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.layers.layer.Layer)
+class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.trainers.trainer.Trainer, keras.src.layers.layer.Layer)
  |  Model(*args, **kwargs)
  |
  |  A model grouping layers into an object with training/inference features.
@@ -149,10 +149,10 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.la
  |    filepath,
  |    format='tf_saved_model'
  |  )
- |      [TF backend only]* Create a TF SavedModel artifact for inference
- |      (e.g. via TF-Serving).
+ |      Create a TF SavedModel artifact for inference.
  |
- |      **Note:** This can currently only be used with the TF backend.
+ |      **Note:** This can currently only be used with
+ |      the TensorFlow or JAX backends.
  |
  |      This method lets you export a model to a lightweight SavedModel artifact
  |      that contains the model's forward pass only (its `call()` method)
@@ -382,10 +382,5 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.la
  |  Data descriptors defined here:
  |
  |  layers
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

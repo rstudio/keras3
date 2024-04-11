@@ -124,9 +124,4 @@ class Conv1D(keras.src.layers.convolutional.base_conv.BaseConv)
  |
  |  call(self, inputs)
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

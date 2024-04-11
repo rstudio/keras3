@@ -155,9 +155,4 @@ class Bidirectional(keras.src.layers.core.wrapper.Wrapper)
  |
  |  states
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

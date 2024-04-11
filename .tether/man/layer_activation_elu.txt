@@ -39,9 +39,4 @@ class ELU(keras.src.layers.layer.Layer)
  |
  |  compute_output_shape(self, input_shape)
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 
