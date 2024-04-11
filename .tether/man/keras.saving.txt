@@ -19,8 +19,20 @@ load_model(
   compile=True,
   safe_mode=True
 )
+load_weights(
+  model,
+  filepath,
+  skip_mismatch=False,
+  **kwargs
+)
 register_keras_serializable(package='Custom', name=None)
 save_model(
+  model,
+  filepath,
+  overwrite=True,
+  **kwargs
+)
+save_weights(
   model,
   filepath,
   overwrite=True,

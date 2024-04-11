@@ -72,7 +72,8 @@ binary_crossentropy(
 bincount(
   x,
   weights=None,
-  minlength=0
+  minlength=0,
+  sparse=False
 )
 broadcast_to(x, shape)
 cast(x, dtype)
@@ -338,6 +339,7 @@ multi_hot(
   num_classes=None,
   axis=-1,
   dtype=None,
+  sparse=False,
   **kwargs
 )
 multiply(x1, x2)
@@ -363,7 +365,8 @@ one_hot(
   x,
   num_classes,
   axis=-1,
-  dtype=None
+  dtype=None,
+  sparse=False
 )
 ones(shape, dtype=None)
 ones_like(x, dtype=None)

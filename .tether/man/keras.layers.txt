@@ -101,6 +101,7 @@ Bidirectional(
 CategoryEncoding(
   num_tokens=None,
   output_mode='multi_hot',
+  sparse=False,
   **kwargs
 )
 CenterCrop(
@@ -663,6 +664,7 @@ GRU(
   stateful=False,
   unroll=False,
   reset_after=True,
+  use_cudnn='auto',
   **kwargs
 )
 GRUCell(
@@ -793,6 +795,7 @@ LSTM(
   go_backwards=False,
   stateful=False,
   unroll=False,
+  use_cudnn='auto',
   **kwargs
 )
 LSTMCell(
