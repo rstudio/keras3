@@ -2170,6 +2170,10 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' (optional) The data type of the resulting tensor. Default
 #' is backend's float type.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @param ... For forward/backwards compatability
 #'
 #' @export
@@ -2180,7 +2184,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #'
 #' @tether keras.ops.multi_hot
 op_multi_hot <-
-function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
+function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 {
     args <- capture_args(list(inputs = as_integer, num_classes = as_integer,
         axis = as_axis))
@@ -2229,6 +2233,10 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 #' (Optional) Data type of the output tensor. If not
 #' provided, it defaults to the default data type of the backend.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -2237,7 +2245,7 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
 #' @tether keras.ops.one_hot
 op_one_hot <-
-function (x, num_classes, axis = -1L, dtype = NULL)
+function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 {
     args <- capture_args(list(
       x = function(x) {
@@ -3554,6 +3562,10 @@ function (x, axis = NULL, weights = NULL)
 #' `max(x) + 1`, each value of the output at an index higher than
 #' `max(x)` is set to 0.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3562,7 +3574,7 @@ function (x, axis = NULL, weights = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount>
 #' @tether keras.ops.bincount
 op_bincount <-
-function (x, weights = NULL, minlength = 0L)
+function (x, weights = NULL, minlength = 0L, sparse = FALSE)
 {
     args <- capture_args(list(x = as_integer, minlength = as_integer))
     do.call(keras$ops$bincount, args)

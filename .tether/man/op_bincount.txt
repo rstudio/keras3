@@ -2,7 +2,8 @@ __signature__
 keras.ops.bincount(
   x,
   weights=None,
-  minlength=0
+  minlength=0,
+  sparse=False
 )
 __doc__
 Count the number of occurrences of each value in a tensor of integers.
@@ -20,6 +21,8 @@ Args:
         this number of bins in the output tensor. If greater than
         `max(x) + 1`, each value of the output at an index higher than
         `max(x)` is set to 0.
+    sparse: Whether to return a sparse tensor; for backends that support
+        sparse tensors.
 
 Returns:
     1D tensor where each element gives the number of occurrence(s) of its
@@ -38,3 +41,4 @@ array([0., 0.5, 2., 1.5], dtype=float64)
 >>> minlength = (keras.ops.max(x).numpy() + 1) + 2 # 6
 >>> keras.ops.bincount(x, minlength=minlength)
 array([0, 1, 2, 1, 0, 0], dtype=int32)
+
