@@ -85,6 +85,10 @@
 #' supported.
 #' Defaults to `"multi_hot"`.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -102,7 +106,7 @@
 #' @tether keras.layers.CategoryEncoding
 layer_category_encoding <-
 function (object, num_tokens = NULL, output_mode = "multi_hot",
-    ...)
+    sparse = FALSE, ...)
 {
     args <- capture_args(list(output_mode = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,

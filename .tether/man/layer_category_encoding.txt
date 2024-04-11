@@ -1,7 +1,7 @@
 Help on class CategoryEncoding in module keras.src.layers.preprocessing.category_encoding:
 
 class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
- |  CategoryEncoding(num_tokens=None, output_mode='multi_hot', **kwargs)
+ |  CategoryEncoding(num_tokens=None, output_mode='multi_hot', sparse=False, **kwargs)
  |
  |  A preprocessing layer which encodes integer features.
  |
@@ -71,6 +71,8 @@ class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |          For all output modes, currently only output up to rank 2 is
  |          supported.
  |          Defaults to `"multi_hot"`.
+ |      sparse: Whether to return a sparse tensor; for backends that support
+ |          sparse tensors.
  |
  |  Call arguments:
  |      inputs: A 1D or 2D tensor of integer inputs.
@@ -95,6 +97,7 @@ class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |    self,
  |    num_tokens=None,
  |    output_mode='multi_hot',
+ |    sparse=False,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -106,6 +109,12 @@ class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  )
  |
  |  compute_output_shape(self, input_shape)
+ |
+ |  compute_output_spec(
+ |    self,
+ |    inputs,
+ |    count_weights=None
+ |  )
  |
  |  get_config(self)
  |      Returns the config of the object.
