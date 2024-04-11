@@ -679,7 +679,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 #' @param field
 #' String; JSON field under which the data will be stored.
 #' The field is used only if the payload is sent within a form
-#' (i.e. send_as_json is set to `FALSE`).
+#' (i.e. when `send_as_json = FALSE`).
 #'
 #' @param headers
 #' Named list; optional custom HTTP headers.
