@@ -735,7 +735,6 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #' [here](https://www.tensorflow.org/get_started/summaries_and_tensorboard).
 #'
 #' # Examples
-#' Basic usage:
 #'
 #' ```{r, eval = FALSE}
 #' tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
