@@ -300,12 +300,13 @@ load_model_config <- function(filepath, custom_objects = NULL)
 }
 
 
-#' \[TF backend only] Create a TF SavedModel artifact for inference
+#' Create a TF SavedModel artifact for inference (e.g. via TF-Serving).
 #'
 #' @description
 #' (e.g. via TF-Serving).
 #'
-#' **Note:** This can currently only be used with the TF backend.
+#' **Note:** This can currently only be used with
+#' the TensorFlow or JAX backends.
 #'
 #' This method lets you export a model to a lightweight SavedModel artifact
 #' that contains the model's forward pass only (its `call()` method)
