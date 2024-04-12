@@ -153,13 +153,13 @@ function (object, module, name = NULL, ...)
 #' # typical usage:
 #' input <- keras_input(c(28, 28, 3))
 #' output <- input |>
-#'   layer_flax(MyFlaxModule())
+#'   layer_flax_module_wrapper(MyFlaxModule())
 #'
 #' model <- keras_model(input, output)
 #'
 #' # to instantiate the layer before composing:
 #' flax_module <- MyFlaxModule()
-#' keras_layer <- layer_flax(module = flax_module)
+#' keras_layer <- layer_flax_module_wrapper(module = flax_module)
 #'
 #' input <- keras_input(c(28, 28, 3))
 #' output <- input |>
@@ -192,8 +192,8 @@ function (object, module, name = NULL, ...)
 #' }
 #'
 #' flax_module <- MyFlaxModule()
-#' keras_layer <- FlaxLayer(module = flax_module,
-#'                          method = my_flax_module_wrapper)
+#' keras_layer <- layer_flax_module_wrapper(module = flax_module,
+#'                                          method = my_flax_module_wrapper)
 #' ```
 #'
 #' @param module
@@ -232,7 +232,7 @@ function (object, module, name = NULL, ...)
 #' @tether keras.layers.FlaxLayer
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/FlaxLayer>
-layer_flax <-
+layer_flax_module_wrapper <-
 function (object, module, method = NULL, variables = NULL, ...)
 {
     args <- capture_args(list(input_shape = normalize_shape,
@@ -391,8 +391,8 @@ function (object, module, method = NULL, variables = NULL, ...)
 #'   my_model_fn(params, rngs, input1, input2, deterministic)
 #' }
 #'
-#' keras_layer <- layer_jax(call_fn = my_model_wrapper_fn,
-#'                          params = initial_params)
+#' keras_layer <- layer_jax_model_wrapper(call_fn = my_model_wrapper_fn,
+#'                                        params = initial_params)
 #' ```
 #'
 #' ## Usage with Haiku modules
@@ -447,8 +447,9 @@ function (object, module, method = NULL, variables = NULL, ...)
 #'
 #' transformed_module <- hk$transform(my_haiku_module_fn)
 #'
-#' keras_layer = layer_jax(call_fn = transformed_module$apply,
-#'                         init_fn = transformed_module$init)
+#' keras_layer <-
+#'   layer_jax_model_wrapper(call_fn = transformed_module$apply,
+#'                           init_fn = transformed_module$init)
 #' ```
 #'
 #' @param call_fn
@@ -487,7 +488,7 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' @family wrapping layers
 #' @family layers
 #' @tether keras.layers.JaxLayer
-layer_jax <-
+layer_jax_model_wrapper <-
 function (object, call_fn, init_fn = NULL, params = NULL, state = NULL,
     seed = NULL, ...)
 {
