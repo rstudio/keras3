@@ -223,6 +223,8 @@
 #' * ```r
 #'   add_variable(...)
 #'   ```
+#'   Add a weight variable to the layer.
+#'
 #'   Alias of `add_weight()`.
 #'
 #' * ```r
@@ -230,8 +232,10 @@
 #'              initializer = NULL,
 #'              dtype = NULL,
 #'              trainable = TRUE,
+#'              autocast = TRUE,
 #'              regularizer = NULL,
 #'              constraint = NULL,
+#'              aggregation = 'mean',
 #'              name = NULL)
 #'   ```
 #'   Add a weight variable to the layer.
@@ -255,11 +259,21 @@
 #'   * `trainable`: Boolean, whether the variable should
 #'       be trainable via backprop or whether its
 #'       updates are managed manually.
+#'       Defaults to `TRUE`.
+#'   * `autocast`: Boolean, whether to autocast layers variables when
+#'       accessing them. Defaults to `TRUE`.
+#'   * `regularizer`: Regularizer object to call to apply penalty on the
+#'       weight. These penalties are summed into the loss function
+#'       during optimization. Defaults to `NULL`.
 #'   * `constraint`: Constraint object to call on the
 #'       variable after any optimizer update,
 #'       or string name of a built-in constraint.
-#'   * `name`: String name of the variable. Useful
-#'          for debugging purposes.
+#'       Defaults to `NULL`.
+#'   * `aggregation`: String, one of `'mean'`, `'sum'`,
+#'      `'only_first_replica'`. Annotates the variable with the type
+#'       of multi-replica aggregation to be used for this variable
+#'       when writing custom data parallel training loops.
+#'   * `name`: String name of the variable. Useful for debugging purposes.
 #'
 #'   Returns:
 #'

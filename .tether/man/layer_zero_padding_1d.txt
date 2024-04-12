@@ -5,7 +5,7 @@ class ZeroPadding1D(keras.src.layers.layer.Layer)
  |
  |  Zero-padding layer for 1D input (e.g. temporal sequence).
  |
- |  Examples:
+ |  Example:
  |
  |  >>> input_shape = (2, 2, 3)
  |  >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
@@ -70,10 +70,5 @@ class ZeroPadding1D(keras.src.layers.layer.Layer)
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

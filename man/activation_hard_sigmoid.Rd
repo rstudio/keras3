@@ -15,9 +15,9 @@ A tensor, the result from applying the activation to the input tensor \code{x}.
 \description{
 The hard sigmoid activation is defined as:
 \itemize{
-\item \code{0} if \verb{if x < -2.5}
-\item \code{1} if \code{x > 2.5}
-\item \code{0.2 * x + 0.5} if \verb{-2.5 <= x <= 2.5}
+\item \code{0} if \verb{if x <= -3}
+\item \code{1} if \code{x >= 3}
+\item \code{(x/6) + 0.5} if \verb{-3 < x < 3}
 }
 
 It's a faster, piecewise linear approximation

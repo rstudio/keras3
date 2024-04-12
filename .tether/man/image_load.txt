@@ -9,7 +9,7 @@ keras.utils.load_img(
 __doc__
 Loads an image into PIL format.
 
-Usage:
+Example:
 
 ```python
 image = keras.utils.load_img(image_path)
@@ -37,3 +37,4 @@ Args:
 
 Returns:
     A PIL Image instance.
+

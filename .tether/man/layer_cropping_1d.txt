@@ -7,7 +7,7 @@ class Cropping1D(keras.src.layers.layer.Layer)
  |
  |  It crops along the time dimension (axis 1).
  |
- |  Examples:
+ |  Example:
  |
  |  >>> input_shape = (2, 3, 2)
  |  >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
@@ -65,10 +65,5 @@ class Cropping1D(keras.src.layers.layer.Layer)
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

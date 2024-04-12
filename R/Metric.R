@@ -120,7 +120,7 @@
 #'   * `dtype`: (Optional) data type of the metric result.
 #'
 #' * ```r
-#'   add_variable(shape, initializer, dtype=NULL, name=NULL)
+#'   add_variable(shape, initializer, dtype=NULL, aggregation = 'sum', name=NULL)
 #'   ```
 #'
 #' * ```r

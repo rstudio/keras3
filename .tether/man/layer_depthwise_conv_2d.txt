@@ -87,7 +87,7 @@ class DepthwiseConv2D(keras.src.layers.convolutional.base_depthwise_conv.BaseDep
  |  Raises:
  |      ValueError: when both `strides > 1` and `dilation_rate > 1`.
  |
- |  Examples:
+ |  Example:
  |
  |  >>> x = np.random.rand(4, 10, 10, 12)
  |  >>> y = keras.layers.DepthwiseConv2D(3, 3, activation='relu')(x)
@@ -127,10 +127,5 @@ class DepthwiseConv2D(keras.src.layers.convolutional.base_depthwise_conv.BaseDep
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

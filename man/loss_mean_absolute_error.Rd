@@ -54,6 +54,7 @@ Other losses: \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr
+\code{\link{loss_dice}()} \cr
 \code{\link{loss_hinge}()} \cr
 \code{\link{loss_huber}()} \cr
 \code{\link{loss_kl_divergence}()} \cr

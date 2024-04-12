@@ -55,7 +55,8 @@
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change
 #' after each training batch), and periodically overwriting the
@@ -187,7 +188,8 @@ function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change
 #' after each training batch), and periodically overwriting the
@@ -297,7 +299,8 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -419,7 +422,8 @@ function (learning_rate = 0.001, initial_accumulator_value = 0.1,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -547,7 +551,8 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to FALSE. If TRUE, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -682,7 +687,8 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -843,7 +849,8 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to FALSE. If TRUE, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -964,7 +971,8 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -1076,7 +1084,8 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -1190,7 +1199,8 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to `FALSE`. If `TRUE`, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -1318,7 +1328,8 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to FALSE. If TRUE, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with
@@ -1438,7 +1449,8 @@ function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
 #' so that their global norm is no higher than this value.
 #'
 #' @param use_ema
-#' Boolean, defaults to FALSE. If TRUE, exponential moving average
+#' Boolean, defaults to `FALSE`.
+#' If `TRUE`, exponential moving average
 #' (EMA) is applied. EMA consists of computing an exponential moving
 #' average of the weights of the model (as the weight values change after
 #' each training batch), and periodically overwriting the weights with

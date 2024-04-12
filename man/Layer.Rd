@@ -289,6 +289,8 @@ Example:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{add_variable(...)
 }\if{html}{\out{</div>}}
 
+Add a weight variable to the layer.
+
 Alias of \code{add_weight()}.
 \item
 
@@ -296,8 +298,10 @@ Alias of \code{add_weight()}.
            initializer = NULL,
            dtype = NULL,
            trainable = TRUE,
+           autocast = TRUE,
            regularizer = NULL,
            constraint = NULL,
+           aggregation = 'mean',
            name = NULL)
 }\if{html}{\out{</div>}}
 
@@ -323,11 +327,21 @@ variable dtype (which itself defaults to
 \item \code{trainable}: Boolean, whether the variable should
 be trainable via backprop or whether its
 updates are managed manually.
+Defaults to \code{TRUE}.
+\item \code{autocast}: Boolean, whether to autocast layers variables when
+accessing them. Defaults to \code{TRUE}.
+\item \code{regularizer}: Regularizer object to call to apply penalty on the
+weight. These penalties are summed into the loss function
+during optimization. Defaults to \code{NULL}.
 \item \code{constraint}: Constraint object to call on the
 variable after any optimizer update,
 or string name of a built-in constraint.
-\item \code{name}: String name of the variable. Useful
-for debugging purposes.
+Defaults to \code{NULL}.
+\item \code{aggregation}: String, one of \code{'mean'}, \code{'sum'},
+\code{'only_first_replica'}. Annotates the variable with the type
+of multi-replica aggregation to be used for this variable
+when writing custom data parallel training loops.
+\item \code{name}: String name of the variable. Useful for debugging purposes.
 }
 
 Returns:
@@ -692,6 +706,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -707,6 +722,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

@@ -872,6 +872,11 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' before matrix multiplication). `FALSE` is `"before"`,
 #' `TRUE` is `"after"` (default and cuDNN compatible).
 #'
+#' @param use_cudnn
+#' Whether to use a cuDNN-backed implementation. `"auto"` will
+#' attempt to use cuDNN when feasible, and will fallback to the
+#' default implementation if not.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -895,7 +900,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
     recurrent_constraint = NULL, bias_constraint = NULL, dropout = 0,
     recurrent_dropout = 0, seed = NULL, return_sequences = FALSE,
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
-    unroll = FALSE, reset_after = TRUE, ...)
+    unroll = FALSE, reset_after = TRUE, use_cudnn = "auto", ...)
 {
     args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
@@ -1182,6 +1187,11 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' although it tends to be more memory-intensive.
 #' Unrolling is only suitable for short sequences.
 #'
+#' @param use_cudnn
+#' Whether to use a cuDNN-backed implementation. `"auto"` will
+#' attempt to use cuDNN when feasible, and will fallback to the
+#' default implementation if not.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -1205,7 +1215,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
     kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
     dropout = 0, recurrent_dropout = 0, seed = NULL, return_sequences = FALSE,
     return_state = FALSE, go_backwards = FALSE, stateful = FALSE,
-    unroll = FALSE, ...)
+    unroll = FALSE, use_cudnn = "auto", ...)
 {
     args <- capture_args(list(units = as_integer, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
@@ -1830,7 +1840,7 @@ function (units, activation = "tanh", use_bias = TRUE, kernel_initializer = "glo
 #' @description
 #' Used to implement efficient stacked RNNs.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' batch_size <- 3
 #' sentence_length <- 5

@@ -177,9 +177,4 @@ class Normalization(keras.src.layers.layer.Layer)
  |      Args:
  |          store: Dict from which the state of the model will be loaded.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

@@ -70,7 +70,7 @@ class AUC(keras.src.metrics.metric.Metric)
  |          should be flattened into a single label before AUC computation. In
  |          the latter case, when multilabel data is passed to AUC, each
  |          label-prediction pair is treated as an individual data point. Should
- |          be set to False for multi-class data.
+ |          be set to `False` for multi-class data.
  |      num_labels: (Optional) The number of labels, used when `multi_label` is
  |          True. If `num_labels` is not specified, then state variables get
  |          created on the first call to `update_state`.
@@ -89,7 +89,7 @@ class AUC(keras.src.metrics.metric.Metric)
  |      when using a keras loss, the `from_logits` constructor argument of the
  |      loss should match the AUC `from_logits` constructor argument.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.AUC(num_thresholds=3)
  |  >>> m.update_state([0, 0, 1, 1], [0, 0.5, 0.3, 0.9])
@@ -226,3 +226,4 @@ class AUC(keras.src.metrics.metric.Metric)
  |  thresholds
  |      The thresholds used for evaluating AUC.
  |
+

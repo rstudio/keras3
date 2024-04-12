@@ -39,7 +39,7 @@ class Recall(keras.src.metrics.metric.Metric)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.Recall()
  |  >>> m.update_state([0, 1, 1, 1], [1, 0, 1, 1])

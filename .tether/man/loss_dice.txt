@@ -1,0 +1,37 @@
+Help on class Dice in module keras.src.losses.losses:
+
+class Dice(LossFunctionWrapper)
+ |  Dice(reduction='sum_over_batch_size', name='dice')
+ |
+ |  Computes the Dice loss value between `y_true` and `y_pred`.
+ |
+ |  Formula:
+ |  ```python
+ |  loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
+ |  ```
+ |
+ |  Args:
+ |      y_true: tensor of true targets.
+ |      y_pred: tensor of predicted targets.
+ |
+ |  Returns:
+ |      Dice loss value.
+ |
+ |  Method resolution order:
+ |      Dice
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    reduction='sum_over_batch_size',
+ |    name='dice'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |
+

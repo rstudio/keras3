@@ -77,11 +77,7 @@ random: Module(keras.random)
 Regularizer()
 regularizers: Module(keras.regularizers)
 saving: Module(keras.saving)
-Sequential(
-  layers=None,
-  trainable=True,
-  name=None
-)
+Sequential(*args, **kwargs)
 src: Module(keras.src)
 StatelessScope(
   state_mapping=None,
@@ -95,6 +91,8 @@ Variable(
   shape=None,
   dtype=None,
   trainable=True,
+  autocast=True,
+  aggregation='mean',
   name=None
 )
 version()

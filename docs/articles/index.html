@@ -6,7 +6,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
@@ -72,31 +72,21 @@
       <h3>All vignettes</h3>
       <p class="section-desc"></p>
 
-      <dl><dt><a href="custom_train_step_in_tensorflow.html">Customizing what happens in `fit()` with TensorFlow</a></dt>
+      <dl><dt><a href="examples/vision/autoencoder.html">Convolutional autoencoder for image denoising</a></dt>
+        <dd><p>How to train a deep convolutional autoencoder for image denoising.</p>
+        </dd><dt><a href="custom_train_step_in_tensorflow.html">Customizing what happens in `fit()` with TensorFlow</a></dt>
         <dd><p>Overriding the training step of the Model class with TensorFlow.</p>
         </dd><dt><a href="distributed_training_with_tensorflow.html">Multi-GPU distributed training with TensorFlow</a></dt>
         <dd><p>Guide to multi-GPU training for Keras models with TensorFlow.</p>
         </dd><dt><a href="distribution.html">Distributed training with Keras 3</a></dt>
         <dd><p>Complete guide to the distribution API for multi-backend Keras.</p>
-        </dd><dt><a href="examples/index.html">Keras examples</a></dt>
-        <dd>
-        </dd><dt><a href="examples/nlp/text_classification_from_scratch.html">Text classification from scratch</a></dt>
-        <dd><p>Text sentiment classification starting from raw text files.</p>
-        </dd><dt><a href="examples/structured_data/imbalanced_classification.html">Imbalanced classification: credit card fraud detection</a></dt>
-        <dd><p>Demonstration of how to handle highly imbalanced classification problems.</p>
-        </dd><dt><a href="examples/structured_data/structured_data_classification_with_feature_space.html">Structured data classification with FeatureSpace</a></dt>
-        <dd><p>Classify tabular data in a few lines of code.</p>
-        </dd><dt><a href="examples/timeseries/timeseries_classification_from_scratch.html">Timeseries classification from scratch</a></dt>
-        <dd><p>Training a timeseries classifier from scratch on the FordA dataset from the UCR/UEA archive.</p>
-        </dd><dt><a href="examples/vision/autoencoder.html">Convolutional autoencoder for image denoising</a></dt>
-        <dd><p>How to train a deep convolutional autoencoder for image denoising.</p>
-        </dd><dt><a href="examples/vision/mnist_convnet.html">Simple MNIST convnet</a></dt>
-        <dd><p>A simple convnet that achieves ~99% test accuracy on MNIST.</p>
-        </dd><dt><a href="examples/vision/oxford_pets_image_segmentation.html">Image segmentation with a U-Net-like architecture</a></dt>
-        <dd><p>Image segmentation model trained from scratch on the Oxford Pets dataset.</p>
         </dd><dt><a href="functional_api.html">The Functional API</a></dt>
         <dd><p>Complete guide to the functional API.</p>
         </dd><dt><a href="getting_started.html">Getting Started with Keras</a></dt>
+        <dd>
+        </dd><dt><a href="examples/structured_data/imbalanced_classification.html">Imbalanced classification: credit card fraud detection</a></dt>
+        <dd><p>Demonstration of how to handle highly imbalanced classification problems.</p>
+        </dd><dt><a href="examples/index.html">Keras examples</a></dt>
         <dd>
         </dd><dt><a href="intro_to_keras_for_engineers.html">Introduction to Keras for engineers</a></dt>
         <dd><p>First contact with Keras 3.</p>
@@ -104,10 +94,20 @@
         <dd><p>Everything you need to know to use Keras &amp; TensorFlow for deep learning research.</p>
         </dd><dt><a href="making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a></dt>
         <dd><p>Complete guide to writing <code>Layer</code> and <code>Model</code> objects from scratch.</p>
+        </dd><dt><a href="examples/vision/mnist_convnet.html">Simple MNIST convnet</a></dt>
+        <dd><p>A simple convnet that achieves ~99% test accuracy on MNIST.</p>
+        </dd><dt><a href="examples/vision/oxford_pets_image_segmentation.html">Image segmentation with a U-Net-like architecture</a></dt>
+        <dd><p>Image segmentation model trained from scratch on the Oxford Pets dataset.</p>
         </dd><dt><a href="sequential_model.html">The Sequential model</a></dt>
         <dd><p>Complete guide to the Sequential model.</p>
         </dd><dt><a href="serialization_and_saving.html">Save, serialize, and export models</a></dt>
         <dd><p>Complete guide to saving, serializing, and exporting models.</p>
+        </dd><dt><a href="examples/structured_data/structured_data_classification_with_feature_space.html">Structured data classification with FeatureSpace</a></dt>
+        <dd><p>Classify tabular data in a few lines of code.</p>
+        </dd><dt><a href="examples/nlp/text_classification_from_scratch.html">Text classification from scratch</a></dt>
+        <dd><p>Text sentiment classification starting from raw text files.</p>
+        </dd><dt><a href="examples/timeseries/timeseries_classification_from_scratch.html">Timeseries classification from scratch</a></dt>
+        <dd><p>Training a timeseries classifier from scratch on the FordA dataset from the UCR/UEA archive.</p>
         </dd><dt><a href="training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a></dt>
         <dd><p>Complete guide to training &amp; evaluation with <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code> and <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>.</p>
         </dd><dt><a href="transfer_learning.html">Transfer learning &amp; fine-tuning</a></dt>
@@ -127,7 +127,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
     </footer></div>

@@ -82,7 +82,7 @@ class Conv3DTranspose(keras.src.layers.convolutional.base_conv_transpose.BaseCon
  |  - [Deconvolutional Networks](
  |      https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
  |
- |  Examples:
+ |  Example:
  |
  |  >>> x = np.random.rand(4, 10, 8, 12, 128)
  |  >>> y = keras.layers.Conv3DTranspose(32, 2, 2, activation='relu')(x)
@@ -122,10 +122,5 @@ class Conv3DTranspose(keras.src.layers.convolutional.base_conv_transpose.BaseCon
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

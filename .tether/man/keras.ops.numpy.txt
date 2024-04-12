@@ -51,7 +51,8 @@ average(
 bincount(
   x,
   weights=None,
-  minlength=0
+  minlength=0,
+  sparse=False
 )
 broadcast_to(x, shape)
 ceil(x)
@@ -64,6 +65,11 @@ concatenate(xs, axis=0)
 conj(x)
 conjugate(x)
 copy(x)
+correlate(
+  x1,
+  x2,
+  mode='valid'
+)
 cos(x)
 cosh(x)
 count_nonzero(x, axis=None)

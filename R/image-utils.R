@@ -45,7 +45,8 @@ function (x, path, data_format = NULL, file_format = NULL, scale = TRUE,
 #'
 #' @description
 #'
-#' # Usage
+#' # Example
+#'
 #' ```{r}
 #' img <- array(runif(30000), dim = c(100, 100, 3))
 #' pil_img <- image_from_array(img)
@@ -91,7 +92,8 @@ function (x, data_format = NULL, scale = TRUE, dtype = NULL)
 #'
 #' @description
 #'
-#' # Usage
+#' # Example
+#'
 #' ```{r}
 #' image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
 #' (image <- image_load(image_path))
@@ -154,7 +156,8 @@ function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest
 #'
 #' @description
 #'
-#' # Usage
+#' # Example
+#'
 #' ```{r}
 #' image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
 #' (img <- image_load(image_path))

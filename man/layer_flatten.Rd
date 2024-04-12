@@ -39,7 +39,7 @@ If inputs are shaped \code{(batch)} without a feature axis, then
 flattening adds an extra channel dimension and output shape is \verb{(batch, 1)}.
 }
 
-\section{Examples}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- layer_input(shape=c(10, 64))
 y <- x |> layer_flatten()
 shape(y)
@@ -112,6 +112,7 @@ Other layers: \cr
 \code{\link{layer_einsum_dense}()} \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -127,6 +128,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

@@ -71,7 +71,7 @@ e.g. \code{rbind(4L, 20L)} \eqn{\rightarrow}{->} \code{rbind(c(0.25, 0.1), c(0.6
 
 This layer can only be used on positive integer inputs of a fixed range.
 }
-\section{Examples}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential() |>
   layer_embedding(1000, 64)
 
@@ -109,6 +109,18 @@ dim(output_array)    # (32, 10, 64)
   a_initializer = 'he_uniform',
   b_initializer = 'zeros'
 )
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode)
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_build(input_shape, mode)
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_call(inputs)
 }\if{html}{\out{</div>}}
 }
 }
@@ -174,6 +186,7 @@ Other layers: \cr
 \code{\link{layer_einsum_dense}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -189,6 +202,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

@@ -11,7 +11,7 @@ class SparseTopKCategoricalAccuracy(keras.src.metrics.reduction_metrics.MeanMetr
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.SparseTopKCategoricalAccuracy(k=1)
  |  >>> m.update_state([2, 1], [[0.1, 0.9, 0.8], [0.05, 0.95, 0]])

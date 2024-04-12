@@ -1,7 +1,7 @@
 Help on class Sequential in module keras.src.models.sequential:
 
 class Sequential(keras.src.models.model.Model)
- |  Sequential(layers=None, trainable=True, name=None)
+ |  Sequential(*args, **kwargs)
  |
  |  `Sequential` groups a linear stack of layers into a `Model`.
  |
@@ -124,6 +124,16 @@ class Sequential(keras.src.models.model.Model)
  |          A layer instance.
  |
  |  ----------------------------------------------------------------------
+ |  Static methods defined here:
+ |
+ |  __new__(
+ |    cls,
+ |    *args,
+ |    **kwargs
+ |  )
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |
+ |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
  |
  |  input_dtype
@@ -138,10 +148,5 @@ class Sequential(keras.src.models.model.Model)
  |  output_shape
  |
  |  outputs
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

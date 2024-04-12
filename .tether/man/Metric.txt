@@ -9,7 +9,7 @@ class Metric(builtins.object)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  ```python
  |  m = SomeMetric(...)
@@ -111,6 +111,7 @@ class Metric(builtins.object)
  |    shape,
  |    initializer,
  |    dtype=None,
+ |    aggregation='sum',
  |    name=None
  |  )
  |

@@ -39,7 +39,7 @@ class RandomBrightness(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |      the valid range of RGB colors, and
  |      rescaled based on the `value_range` if needed.
  |
- |  Sample usage:
+ |  Example:
  |
  |  ```python
  |  random_bright = keras.layers.RandomBrightness(factor=0.2)
@@ -94,10 +94,5 @@ class RandomBrightness(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

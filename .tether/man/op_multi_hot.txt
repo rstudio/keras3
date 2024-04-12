@@ -4,6 +4,7 @@ keras.ops.multi_hot(
   num_classes=None,
   axis=-1,
   dtype=None,
+  sparse=False,
   **kwargs
 )
 __doc__
@@ -19,6 +20,8 @@ Args:
         added. Defaults to `-1`, which corresponds to the last dimension.
     dtype: (optional) The data type of the resulting tensor. Default
         is backend's float type.
+    sparse: Whether to return a sparse tensor; for backends that support
+        sparse tensors.
 
 Returns:
     Tensor: The multi-hot encoded tensor.

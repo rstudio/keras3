@@ -35,7 +35,8 @@ Note: \code{save_model_config()} serializes the model to JSON using
 returns a superset of \code{get_config()}, with additional information needed to
 create the class object needed to restore the model. See example for how to
 extract the \code{get_config()} value from a saved model.
-
+}
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = 10) |> layer_dense(10)
 file <- tempfile("model-config-", fileext = ".json")
 save_model_config(model, file)
@@ -55,6 +56,7 @@ stopifnot(exprs = \{
 \})
 }\if{html}{\out{</div>}}
 }
+
 \seealso{
 Other saving and loading functions: \cr
 \code{\link{export_savedmodel.keras.src.models.model.Model}()} \cr

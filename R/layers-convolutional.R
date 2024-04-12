@@ -25,7 +25,7 @@
 #' # Raises
 #' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' # The inputs are 128-length vectors with 10 timesteps, and the
 #' # batch size is 4.
@@ -174,7 +174,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' - [Deconvolutional Networks](
 #'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 128))
 #' y <- x |> layer_conv_1d_transpose(32, 3, 2, activation='relu')
@@ -304,7 +304,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' # Raises
 #' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 10, 128))
 #' y <- x |> layer_conv_2d(32, 3, activation='relu')
@@ -449,7 +449,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' - [Deconvolutional Networks](
 #'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 8, 128))
 #' y <- x |> layer_conv_2d_transpose(32, 2, 2, activation='relu')
@@ -589,7 +589,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' # Raises
 #' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 10, 10, 128))
 #' y <- x |> layer_conv_3d(32, 3, activation = 'relu')
@@ -740,7 +740,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' - [Deconvolutional Networks](
 #'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 8, 12, 128))
 #' y <- x |> layer_conv_3d_transpose(32, 2, 2, activation = 'relu')
@@ -887,7 +887,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' # Raises
 #' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 12))
 #' y <- x |> layer_depthwise_conv_1d(
@@ -1038,7 +1038,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 #' # Raises
 #' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 10, 12))
 #' y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
@@ -1169,7 +1169,7 @@ function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
 #' - If `data_format="channels_first"`:
 #'     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 12))
 #' y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
@@ -1320,7 +1320,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' - If `data_format="channels_first"`:
 #'     A 4D tensor with shape: `(batch_size, filters, new_height, new_width)`
 #'
-#' # Examples
+#' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 10, 12))
 #' y <- layer_separable_conv_2d(x, 3, c(4, 3), 2, activation='relu')

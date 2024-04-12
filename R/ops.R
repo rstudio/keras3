@@ -2170,6 +2170,10 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' (optional) The data type of the resulting tensor. Default
 #' is backend's float type.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @param ... For forward/backwards compatability
 #'
 #' @export
@@ -2180,7 +2184,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #'
 #' @tether keras.ops.multi_hot
 op_multi_hot <-
-function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
+function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 {
     args <- capture_args(list(inputs = as_integer, num_classes = as_integer,
         axis = as_axis))
@@ -2229,6 +2233,10 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 #' (Optional) Data type of the output tensor. If not
 #' provided, it defaults to the default data type of the backend.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -2237,7 +2245,7 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, ...)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
 #' @tether keras.ops.one_hot
 op_one_hot <-
-function (x, num_classes, axis = -1L, dtype = NULL)
+function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 {
     args <- capture_args(list(
       x = function(x) {
@@ -3554,6 +3562,10 @@ function (x, axis = NULL, weights = NULL)
 #' `max(x) + 1`, each value of the output at an index higher than
 #' `max(x)` is set to 0.
 #'
+#' @param sparse
+#' Whether to return a sparse tensor; for backends that support
+#' sparse tensors.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3562,7 +3574,7 @@ function (x, axis = NULL, weights = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/bincount>
 #' @tether keras.ops.bincount
 op_bincount <-
-function (x, weights = NULL, minlength = 0L)
+function (x, weights = NULL, minlength = 0L, sparse = FALSE)
 {
     args <- capture_args(list(x = as_integer, minlength = as_integer))
     do.call(keras$ops$bincount, args)
@@ -3744,6 +3756,33 @@ op_copy <-
 function (x)
 keras$ops$copy(x)
 
+
+#' Compute the cross-correlation of two 1-dimensional tensors.
+#'
+#' @returns
+#' Output tensor, cross-correlation of `x1` and `x2`.
+#'
+#' @param x1
+#' First 1-dimensional input tensor of length M.
+#'
+#' @param x2
+#' Second 1-dimensional input tensor of length N.
+#'
+#' @param mode
+#' Either `"valid"`, `"same"` or `"full"`.
+#' By default the mode is set to `"valid"`, which returns
+#' an output of length `max(M, N) - min(M, N) + 1`.
+#' `"same"` returns an output of length `max(M, N)`.
+#' `"full"` mode returns the convolution at each point of
+#' overlap, with an output length of `N+M-1`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.correlate
+op_correlate <-
+function (x1, x2, mode = "valid")
+keras$ops$correlate(as_array(x1), as_array(x2), mode)
 
 #' Cosine, element-wise.
 #'
@@ -7109,39 +7148,66 @@ keras$ops$hard_swish(x)
 #' a more efficient or numerically stable gradient for a sequence of
 #' operations.
 #'
-#' Note that `custom_gradient` only supports TensorFlow and JAX backends.
+#' # Example
 #'
-#' # Examples
-#'
-#' ```r
+#' Backend-agnostic example.
+#' ```{r}
 #' log1pexp <- op_custom_gradient(\(x) {
 #'
 #'     e <- op_exp(x)
 #'
-#'     grad <- function(upstream) {
+#'     grad <- function(..., upstream = NULL) {
+#'       upstream <- upstream %||% ..1
 #'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
 #'     }
 #'
 #'     tuple(op_log(1 + e), grad)
+#'
 #' })
+#'
+#' if(config_backend() == "tensorflow") {
+#'   tf <- tensorflow::tf
+#'   x <- op_convert_to_tensor(100.0)
+#'   with(tf$GradientTape() %as% tape, {
+#'     tape$watch(x)
+#'     y <- log1pexp(x)
+#'   })
+#'   dy_dx <- tape$gradient(y, x)
+#'   stopifnot(as.numeric(dy_dx) == 1)
+#' }
 #' ```
 #'
 #' @returns
-#' A function `h(x)` which returns the same value as `f(x)[0]` and whose
-#' gradient is determined by `f(x)[1]`.
+#' A function `h(...)` which returns the same value as `f(...)[[1]]` and whose
+#' gradient is determined by `f(...)[[2]]`.
 #'
 #' @param f
-#' Function `f(...)` that returns a tuple `(y, grad_fn)` where:
-#' - `x` is a sequence of (nested structures of) tensor inputs to the
-#'     function.
-#' - `y` is a (nested structure of) tensor outputs of applying
-#'     operations in `f` to `x`.
-#' - `grad_fn` is a function with the signature `g(...)` which
-#'     returns a list of tensors the same size as (flattened) `x`: the
-#'     derivatives of tensors in `y` with respect to the tensors in
-#'     `x`. Arguments provided to `...` are sequence of tensors the same size as
-#'     (flattened) `y` holding the initial value gradients for each
-#'     tensor in `y`.
+#' Function `f(...)` that returns a tuple `(output, grad_fn)` where:
+#' - `...` is a sequence of unnamed arguments,
+#'   each a tensor input or nested structure of tensor inputs to the
+#'    function.
+#' - `output` is a (potentially nested structure of) tensor outputs of applying
+#'     operations in forward_fn `f()` to `...`.
+#' - `grad_fn` is a function with the signature `grad_fn(..., upstream)` which
+#'     returns a list of tensors the same size as (flattened) `...`: the
+#'     derivatives of tensors in `output` with respect to the tensors in
+#'     `...`. `upstream` is a tensor or
+#'     sequence of tensors holding the initial value gradients for each
+#'     tensor in `output`.
+#'
+#' @note
+#'
+#' Note that the `grad` function that returns gradient computation
+#' requires `...` as well as an `upstream` named argument, depending
+#' on the backend being set. With the JAX and TensorFlow backends,
+#' it requires only one argument, whereas it might use the `upstream`
+#' argument in the case of the PyTorch backend.
+#'
+#' When working with TensorFlow/JAX backend, `grad(upstream)`
+#' is sufficient. With PyTorch, the `grad` function requires
+#' `...` as well as `upstream`, e.g. `grad <- \(..., upstream)`.
+#' Follow the example above to use `op_custom_gradient()` in
+#' a way that is compatible with all backends.
 #'
 #' @export
 #' @family core ops

@@ -17,9 +17,5 @@ save_model(
   overwrite=True,
   **kwargs
 )
-Sequential(
-  layers=None,
-  trainable=True,
-  name=None
-)
+Sequential(*args, **kwargs)
 

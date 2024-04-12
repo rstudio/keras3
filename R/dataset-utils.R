@@ -6,8 +6,7 @@
 #' This is a convenience utility for packing data into the list formats
 #' that `fit()` uses.
 #'
-#' # Usage
-#' Standalone usage:
+#' # Example
 #'
 #' ```{r}
 #' x <- op_ones(c(10, 1))
@@ -54,8 +53,7 @@ function (x, y = NULL, sample_weight = NULL)
 #' This utility makes it easy to support data of the form `(x,)`,
 #' `(x, y)`, or `(x, y, sample_weight)`.
 #'
-#' # Usage
-#' Standalone usage:
+#' # Example:
 #'
 #' ```{r}
 #' features_batch <- op_ones(c(10, 5))
@@ -65,6 +63,11 @@ function (x, y = NULL, sample_weight = NULL)
 #' c(x, y, sample_weight) %<-% unpack_x_y_sample_weight(data)
 #' ```
 #'
+#' You can also do the equivalent by providing default values to `%<-%`
+#'
+#' ```r
+#' c(x, y = NULL, sample_weight = NULL) %<-% data
+#' ```
 #' @returns
 #' The unpacked list, with `NULL`s for `y` and `sample_weight` if they are
 #' not provided.

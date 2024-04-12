@@ -193,15 +193,15 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 6s - 7ms/step - loss: 2.9028 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0579 - val_sparse_categorical_accuracy: 0.9140
+## 782/782 - 7s - 8ms/step - loss: 2.9056 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0609 - val_sparse_categorical_accuracy: 0.9140
 ## Epoch 2/2
-## 782/782 - 3s - 4ms/step - loss: 0.6231 - sparse_categorical_accuracy: 0.9285 - val_loss: 0.7157 - val_sparse_categorical_accuracy: 0.9168
-## 157/157 - 0s - 2ms/step - loss: 0.7382 - sparse_categorical_accuracy: 0.9134
+## 782/782 - 4s - 5ms/step - loss: 0.6237 - sparse_categorical_accuracy: 0.9285 - val_loss: 0.7154 - val_sparse_categorical_accuracy: 0.9168
+## 157/157 - 0s - 3ms/step - loss: 0.7418 - sparse_categorical_accuracy: 0.9134
 ```
 
 ```
 ## $loss
-## [1] 0.7382208
+## [1] 0.7417642
 ##
 ## $sparse_categorical_accuracy
 ## [1] 0.9134
@@ -274,7 +274,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 5s - 7ms/step - loss: 3.2545 - sparse_categorical_accuracy: 0.8585 - val_loss: 0.9734 - val_sparse_categorical_accuracy: 0.9046
+## 782/782 - 7s - 8ms/step - loss: 3.2576 - sparse_categorical_accuracy: 0.8585 - val_loss: 0.9629 - val_sparse_categorical_accuracy: 0.9046
 ```
 
 ```r
@@ -283,7 +283,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 3s - 4ms/step - loss: 0.6964 - sparse_categorical_accuracy: 0.9213 - val_loss: 0.7399 - val_sparse_categorical_accuracy: 0.9138
+## 782/782 - 4s - 5ms/step - loss: 0.6968 - sparse_categorical_accuracy: 0.9213 - val_loss: 0.7274 - val_sparse_categorical_accuracy: 0.9138
 ```
 
 ## `tf$data` performance tips

@@ -11,7 +11,7 @@ class TopKCategoricalAccuracy(keras.src.metrics.reduction_metrics.MeanMetricWrap
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> m = keras.metrics.TopKCategoricalAccuracy(k=1)
  |  >>> m.update_state([[0, 0, 1], [0, 1, 0]],

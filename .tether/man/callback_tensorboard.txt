@@ -77,8 +77,6 @@ class TensorBoard(keras.src.callbacks.callback.Callback)
  |
  |  Examples:
  |
- |  Basic usage:
- |
  |  ```python
  |  tensorboard_callback = keras.callbacks.TensorBoard(log_dir="./logs")
  |  model.fit(x_train, y_train, epochs=2, callbacks=[tensorboard_callback])
@@ -266,3 +264,4 @@ class TensorBoard(keras.src.callbacks.callback.Callback)
  |
  |  summary
  |
+

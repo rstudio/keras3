@@ -4,7 +4,7 @@
 \alias{op_bincount}
 \title{Count the number of occurrences of each value in a tensor of integers.}
 \usage{
-op_bincount(x, weights = NULL, minlength = 0L)
+op_bincount(x, weights = NULL, minlength = 0L, sparse = FALSE)
 }
 \arguments{
 \item{x}{Input tensor.
@@ -21,6 +21,9 @@ The default value is 0. If specified, there will be at least
 this number of bins in the output tensor. If greater than
 \code{max(x) + 1}, each value of the output at an index higher than
 \code{max(x)} is set to 0.}
+
+\item{sparse}{Whether to return a sparse tensor; for backends that support
+sparse tensors.}
 }
 \value{
 1D tensor where each element gives the number of occurrence(s) of its
@@ -98,6 +101,7 @@ Other numpy ops: \cr
 \code{\link{op_concatenate}()} \cr
 \code{\link{op_conj}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr
@@ -244,6 +248,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr

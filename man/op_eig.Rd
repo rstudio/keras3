@@ -63,6 +63,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr

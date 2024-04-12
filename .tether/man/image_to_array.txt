@@ -7,7 +7,7 @@ keras.utils.img_to_array(
 __doc__
 Converts a PIL Image instance to a NumPy array.
 
-Usage:
+Example:
 
 ```python
 from PIL import Image
@@ -28,3 +28,4 @@ Args:
 
 Returns:
     A 3D NumPy array.
+

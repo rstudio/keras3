@@ -68,9 +68,4 @@ class TimeDistributed(keras.src.layers.core.wrapper.Wrapper)
  |
  |  compute_output_shape(self, input_shape)
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

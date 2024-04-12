@@ -20,9 +20,9 @@ class CosineSimilarity(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      axis: (Optional) Defaults to `-1`. The dimension along which the cosine
  |          similarity is computed.
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> # l2_norm(y_true) = [[0., 1.], [1./1.414, 1./1.414]]
  |  >>> # l2_norm(y_pred) = [[1., 0.], [1./1.414, 1./1.414]]
@@ -68,3 +68,4 @@ class CosineSimilarity(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

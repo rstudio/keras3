@@ -388,6 +388,7 @@ Other layers: \cr
 \code{\link{layer_einsum_dense}()} \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -403,6 +404,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr
@@ -471,7 +473,6 @@ Other utils: \cr
 \code{\link{image_load}()} \cr
 \code{\link{image_smart_resize}()} \cr
 \code{\link{image_to_array}()} \cr
-\code{\link{layer_torch_module_wrapper}()} \cr
 \code{\link{normalize}()} \cr
 \code{\link{pack_x_y_sample_weight}()} \cr
 \code{\link{pad_sequences}()} \cr

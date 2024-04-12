@@ -804,7 +804,7 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
 #' should be flattened into a single label before AUC computation. In
 #' the latter case, when multilabel data is passed to AUC, each
 #' label-prediction pair is treated as an individual data point. Should
-#' be set to FALSE for multi-class data.
+#' be set to `FALSE`` for multi-class data.
 #'
 #' @param num_labels
 #' (Optional) The number of labels, used when `multi_label` is

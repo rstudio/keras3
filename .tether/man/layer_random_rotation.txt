@@ -10,7 +10,7 @@ class RandomRotation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |  By default, random rotations are only applied during training.
  |  At inference time, the layer does nothing. If you need to apply random
- |  rotations at inference time, set `training` to True when calling the layer.
+ |  rotations at inference time, pass `training=True` when calling the layer.
  |
  |  Input pixel values can be of any range (e.g. `[0., 1.)` or `[0, 255]`) and
  |  of integer or floating point dtype.
@@ -100,10 +100,5 @@ class RandomRotation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

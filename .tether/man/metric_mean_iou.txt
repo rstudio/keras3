@@ -41,9 +41,9 @@ class MeanIoU(IoU)
  |          is used to determine each sample's most likely associated label.
  |      axis: (Optional) The dimension containing the logits. Defaults to `-1`.
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> # cm = [[1, 1],
  |  >>> #        [1, 1]]
@@ -94,3 +94,4 @@ class MeanIoU(IoU)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

@@ -206,6 +206,7 @@ function (inputs, ..., axis = -1L)
 #' will result in a tensor with shape `(2, 5, 10)`
 #'
 #' # Examples
+#'
 #' ```{r}
 #' x <- op_reshape(0:9,   c(1, 5, 2))
 #' y <- op_reshape(10:19, c(1, 2, 5))

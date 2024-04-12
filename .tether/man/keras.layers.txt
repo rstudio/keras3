@@ -101,6 +101,7 @@ Bidirectional(
 CategoryEncoding(
   num_tokens=None,
   output_mode='multi_hot',
+  sparse=False,
   **kwargs
 )
 CenterCrop(
@@ -540,6 +541,12 @@ Embedding(
   **kwargs
 )
 Flatten(data_format=None, **kwargs)
+FlaxLayer(
+  module,
+  method=None,
+  variables=None,
+  **kwargs
+)
 GaussianDropout(
   rate,
   seed=None,
@@ -663,6 +670,7 @@ GRU(
   stateful=False,
   unroll=False,
   reset_after=True,
+  use_cudnn='auto',
   **kwargs
 )
 GRUCell(
@@ -746,6 +754,14 @@ IntegerLookup(
   name=None,
   **kwargs
 )
+JaxLayer(
+  call_fn,
+  init_fn=None,
+  params=None,
+  state=None,
+  seed=None,
+  **kwargs
+)
 Lambda(
   function,
   output_shape=None,
@@ -793,6 +809,7 @@ LSTM(
   go_backwards=False,
   stateful=False,
   unroll=False,
+  use_cudnn='auto',
   **kwargs
 )
 LSTMCell(

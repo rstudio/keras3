@@ -29,6 +29,7 @@ layer_gru(
   stateful = FALSE,
   unroll = FALSE,
   reset_after = TRUE,
+  use_cudnn = "auto",
   ...
 )
 }
@@ -114,6 +115,10 @@ Unrolling is only suitable for short sequences.}
 \item{reset_after}{GRU convention (whether to apply reset gate after or
 before matrix multiplication). \code{FALSE} is \code{"before"},
 \code{TRUE} is \code{"after"} (default and cuDNN compatible).}
+
+\item{use_cudnn}{Whether to use a cuDNN-backed implementation. \code{"auto"} will
+attempt to use cuDNN when feasible, and will fallback to the
+default implementation if not.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -270,6 +275,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -284,6 +290,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

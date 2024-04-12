@@ -50,9 +50,9 @@ class OneHotIoU(IoU)
  |          is used to determine each sample's most likely associated label.
  |      axis: (Optional) The dimension containing the logits. Defaults to `-1`.
  |
- |  Examples:
+ |  Example:
  |
- |  Standalone usage:
+ |  Example:
  |
  |  >>> y_true = np.array([[0, 0, 1], [1, 0, 0], [0, 1, 0], [1, 0, 0]])
  |  >>> y_pred = np.array([[0.2, 0.3, 0.5], [0.1, 0.2, 0.7], [0.5, 0.3, 0.1],
@@ -108,3 +108,4 @@ class OneHotIoU(IoU)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

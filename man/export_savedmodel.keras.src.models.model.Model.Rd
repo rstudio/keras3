@@ -2,7 +2,7 @@
 % Please edit documentation in R/model-persistence.R
 \name{export_savedmodel.keras.src.models.model.Model}
 \alias{export_savedmodel.keras.src.models.model.Model}
-\title{[TF backend only] Create a TF SavedModel artifact for inference}
+\title{Create a TF SavedModel artifact for inference (e.g. via TF-Serving).}
 \usage{
 \method{export_savedmodel}{keras.src.models.model.Model}(object, export_dir_base, ...)
 }
@@ -22,7 +22,8 @@ with the pipe.
 \description{
 (e.g. via TF-Serving).
 
-\strong{Note:} This can currently only be used with the TF backend.
+\strong{Note:} This can currently only be used with
+the TensorFlow or JAX backends.
 
 This method lets you export a model to a lightweight SavedModel artifact
 that contains the model's forward pass only (its \code{call()} method)

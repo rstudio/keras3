@@ -70,9 +70,4 @@ class GlobalAveragePooling3D(keras.src.layers.pooling.base_global_pooling.BaseGl
  |
  |  call(self, inputs)
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

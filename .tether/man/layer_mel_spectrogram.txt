@@ -187,9 +187,4 @@ class MelSpectrogram(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |      Returns:
  |          A tensor of shape `[num_spectrogram_bins, num_mel_bins]`.
  |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
- |
 

@@ -41,7 +41,7 @@ returned, invisibly.
 Repeats the 1st, 2nd and 3rd dimensions
 of the data by \code{size[0]}, \code{size[1]} and \code{size[2]} respectively.
 }
-\section{Examples}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 1, 2, 1, 3)
 x <- array(1, dim = input_shape)
 y <- layer_upsampling_3d(x, size = c(2, 2, 2))
@@ -136,6 +136,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -151,6 +152,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

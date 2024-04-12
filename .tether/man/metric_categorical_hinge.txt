@@ -9,7 +9,7 @@ class CategoricalHinge(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Standalone usage:
+ |  Example:
  |  >>> m = keras.metrics.CategoricalHinge()
  |  >>> m.update_state([[0, 1], [0, 0]], [[0.6, 0.4], [0.4, 0.6]])
  |  >>> m.result().numpy()
@@ -39,3 +39,4 @@ class CategoricalHinge(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  get_config(self)
  |      Return the serializable config of the metric.
  |
+

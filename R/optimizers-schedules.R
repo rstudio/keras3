@@ -145,7 +145,7 @@ function (initial_learning_rate, decay_steps, alpha = 0, name = "CosineDecay",
 #' restart is performed. Each new warm restart runs for `t_mul` times more
 #' steps and with `m_mul` times initial learning rate as the new learning rate.
 #'
-#' Example usage:
+#' # Example
 #' ```{r, eval = TRUE}
 #' first_decay_steps <- 1000
 #' lr_decayed_fn <- learning_rate_schedule_cosine_decay_restarts(

@@ -51,7 +51,7 @@ returned, invisibly.
 \description{
 Cropping layer for 3D data (e.g. spatial or spatio-temporal).
 }
-\section{Examples}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 28, 28, 10, 3)
 x <- input_shape \%>\% \{ op_reshape(seq(prod(.)), .) \}
 y <- x |> layer_cropping_3d(cropping = c(2, 4, 2))
@@ -145,6 +145,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -160,6 +161,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

@@ -46,7 +46,8 @@ no higher than this value.}
 \item{global_clipnorm}{Float. If set, the gradient of all weights is clipped
 so that their global norm is no higher than this value.}
 
-\item{use_ema}{Boolean, defaults to \code{FALSE}. If \code{TRUE}, exponential moving average
+\item{use_ema}{Boolean, defaults to \code{FALSE}.
+If \code{TRUE}, exponential moving average
 (EMA) is applied. EMA consists of computing an exponential moving
 average of the weights of the model (as the weight values change after
 each training batch), and periodically overwriting the weights with

@@ -7,7 +7,7 @@ class Cropping2D(keras.src.layers.layer.Layer)
  |
  |  It crops along spatial dimensions, i.e. height and width.
  |
- |  Examples:
+ |  Example:
  |
  |  >>> input_shape = (2, 28, 28, 3)
  |  >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
@@ -77,10 +77,5 @@ class Cropping2D(keras.src.layers.layer.Layer)
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  __annotations__ = {}
  |
 

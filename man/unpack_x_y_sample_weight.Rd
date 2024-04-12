@@ -19,14 +19,17 @@ This is a convenience utility to be used when overriding
 This utility makes it easy to support data of the form \verb{(x,)},
 \verb{(x, y)}, or \verb{(x, y, sample_weight)}.
 }
-\section{Usage}{
-Standalone usage:
-
+\section{Example:}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{features_batch <- op_ones(c(10, 5))
 labels_batch <- op_zeros(c(10, 5))
 data <- list(features_batch, labels_batch)
 # `y` and `sample_weight` will default to `NULL` if not provided.
 c(x, y, sample_weight) \%<-\% unpack_x_y_sample_weight(data)
+}\if{html}{\out{</div>}}
+
+You can also do the equivalent by providing default values to \verb{\%<-\%}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(x, y = NULL, sample_weight = NULL) \%<-\% data
 }\if{html}{\out{</div>}}
 }
 
@@ -53,7 +56,6 @@ Other utils: \cr
 \code{\link{image_smart_resize}()} \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{layer_feature_space}()} \cr
-\code{\link{layer_torch_module_wrapper}()} \cr
 \code{\link{normalize}()} \cr
 \code{\link{pack_x_y_sample_weight}()} \cr
 \code{\link{pad_sequences}()} \cr

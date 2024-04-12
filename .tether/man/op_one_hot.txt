@@ -3,7 +3,8 @@ keras.ops.one_hot(
   x,
   num_classes,
   axis=-1,
-  dtype=None
+  dtype=None,
+  sparse=False
 )
 __doc__
 Converts integer tensor `x` into a one-hot tensor.
@@ -21,6 +22,8 @@ Args:
         `-1`, which represents the last axis.
     dtype: (Optional) Data type of the output tensor. If not
         provided, it defaults to the default data type of the backend.
+    sparse: Whether to return a sparse tensor; for backends that support
+        sparse tensors.
 
 Returns:
     Integer tensor: One-hot encoded tensor with the same shape as `x`
@@ -36,3 +39,4 @@ array([[0. 1. 0. 0.]
        [0. 0. 0. 1.]
        [0. 0. 1. 0.]
        [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
+

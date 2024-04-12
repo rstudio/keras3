@@ -679,7 +679,7 @@ function (monitor = "val_loss", factor = 0.1, patience = 10L,
 #' @param field
 #' String; JSON field under which the data will be stored.
 #' The field is used only if the payload is sent within a form
-#' (i.e. send_as_json is set to `FALSE`).
+#' (i.e. when `send_as_json = FALSE`).
 #'
 #' @param headers
 #' Named list; optional custom HTTP headers.
@@ -735,7 +735,6 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #' [here](https://www.tensorflow.org/get_started/summaries_and_tensorboard).
 #'
 #' # Examples
-#' Basic usage:
 #'
 #' ```{r, eval = FALSE}
 #' tensorboard_callback <- callback_tensorboard(log_dir = "./logs")

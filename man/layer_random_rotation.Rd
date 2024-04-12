@@ -81,7 +81,7 @@ according to \code{fill_mode}.
 
 By default, random rotations are only applied during training.
 At inference time, the layer does nothing. If you need to apply random
-rotations at inference time, set \code{training} to TRUE when calling the layer.
+rotations at inference time, pass \code{training = TRUE} when calling the layer.
 
 Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
 of integer or floating point dtype.
@@ -178,6 +178,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -193,6 +194,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

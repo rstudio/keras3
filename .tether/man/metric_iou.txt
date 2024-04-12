@@ -47,8 +47,6 @@ class IoU(_IoUBase)
  |
  |  Examples:
  |
- |  Standalone usage:
- |
  |  >>> # cm = [[1, 1],
  |  >>> #        [1, 1]]
  |  >>> # sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
@@ -106,3 +104,4 @@ class IoU(_IoUBase)
  |  result(self)
  |      Compute the intersection-over-union via the confusion matrix.
  |
+
