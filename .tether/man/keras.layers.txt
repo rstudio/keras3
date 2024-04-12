@@ -541,6 +541,12 @@ Embedding(
   **kwargs
 )
 Flatten(data_format=None, **kwargs)
+FlaxLayer(
+  module,
+  method=None,
+  variables=None,
+  **kwargs
+)
 GaussianDropout(
   rate,
   seed=None,
