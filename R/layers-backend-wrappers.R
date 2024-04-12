@@ -134,7 +134,7 @@ function (object, module, name = NULL, ...)
 #'
 #' flax <- import("flax")
 #'
-#' MyFlaxModule(flax$linen$Module) %py_class% {
+#' MyFlaxModule(flax$linen$Module) \%py_class\% {
 #'   `__call__` <- flax$linen$compact(\(self, inputs) {
 #'     inputs |>
 #'       (flax$linen$Conv(features = 32L, kernel_size = tuple(3L, 3L)))() |>
@@ -178,7 +178,7 @@ function (object, module, name = NULL, ...)
 #' ```r
 #' flax <- import("flax")
 #'
-#' MyFlaxModule(flax$linen$Module) %py_class% {
+#' MyFlaxModule(flax$linen$Module) \%py_class\% {
 #'   forward <-
 #'     flax$linen$compact(\(self, inputs1, input2, deterministic) {
 #'       # do work ....
@@ -187,7 +187,7 @@ function (object, module, name = NULL, ...)
 #' }
 #'
 #' my_flax_module_wrapper <- function(module, inputs, training) {
-#'   c(input1, input2) %<-% inputs
+#'   c(input1, input2) \%<-\% inputs
 #'   module$forward(input1, input2,!training)
 #' }
 #'
@@ -348,27 +348,6 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' single structure using a `tuple`, the RNG is split and used the populate the
 #' expected `dict`, and the Boolean flag is negated:
 #'
-#' ```python
-#' def my_model_fn(params, rngs, input1, input2, deterministic):
-#'     ...
-#'     if not deterministic:
-#'         dropout_rng = rngs["dropout"]
-#'         keep = jax.random.bernoulli(dropout_rng, dropout_rate, x.shape)
-#'         x = jax.numpy.where(keep, x / dropout_rate, 0)
-#'         ...
-#'     ...
-#'     return outputs
-#'
-#' def my_model_wrapper_fn(params, rng, inputs, training):
-#'     input1, input2 = inputs
-#'     rng1, rng2 = jax.random.split(rng)
-#'     rngs = {"dropout": rng1, "preprocessing": rng2}
-#'     deterministic = not training
-#'     return my_model_fn(params, rngs, input1, input2, deterministic)
-#'
-#' keras_layer = JaxLayer(my_model_wrapper_fn, params=initial_params)
-#' ```
-#'
 #' ```r
 #' jax <- import("jax")
 #' my_model_fn <- function(params, rngs, input1, input2, deterministic) {
@@ -420,8 +399,9 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' training positional argument:
 #'
 #' ```r
+#' # reticulate::py_install("haiku", "r-keras")
 #' hk <- import("haiku")
-#' MyHaikuModule(hk$Module) %py_class% {
+#' MyHaikuModule(hk$Module) \%py_class\% {
 #'
 #'   `__call__` <- \(self, x, training) {
 #'     x <- hk$Conv2D(32L, tuple(3L, 3L))(x)

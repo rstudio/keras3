@@ -7151,22 +7151,23 @@ keras$ops$hard_swish(x)
 #' # Example
 #'
 #' Backend-agnostic example.
-#' ```r
+#' ```{r}
 #' log1pexp <- op_custom_gradient(\(x) {
 #'
 #'     e <- op_exp(x)
 #'
 #'     grad <- function(..., upstream = NULL) {
-#'       upstream <- upstream %||% ..1
+#'       upstream <- upstream \%||\% ..1
 #'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
 #'     }
 #'
 #'     tuple(op_log(1 + e), grad)
+#'
 #' })
 #'
 #' if(config_backend() == "tensorflow") {
 #'   x <- op_convert_to_tensor(100.0)
-#'   with(tf$GradientTape() %as% tape, {
+#'   with(tf$GradientTape() \%as\% tape, {
 #'     tape$watch(x)
 #'     y <- log1pexp(x)
 #'   })
