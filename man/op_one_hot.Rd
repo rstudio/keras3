@@ -4,7 +4,7 @@
 \alias{op_one_hot}
 \title{Converts integer tensor \code{x} into a one-hot tensor.}
 \usage{
-op_one_hot(x, num_classes, axis = -1L, dtype = NULL)
+op_one_hot(x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 }
 \arguments{
 \item{x}{Integer tensor to be encoded. The shape can be
@@ -19,6 +19,9 @@ R factors are coerced to integer and offset to be 0-based, i.e.,
 
 \item{dtype}{(Optional) Data type of the output tensor. If not
 provided, it defaults to the default data type of the backend.}
+
+\item{sparse}{Whether to return a sparse tensor; for backends that support
+sparse tensors.}
 }
 \value{
 Integer tensor: One-hot encoded tensor with the same shape as \code{x}
@@ -125,6 +128,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr

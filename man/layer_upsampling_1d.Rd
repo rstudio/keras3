@@ -27,7 +27,7 @@ returned, invisibly.
 \description{
 Repeats each temporal step \code{size} times along the time axis.
 }
-\section{Examples}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_shape <- c(2, 2, 3)
 x <- seq_len(prod(input_shape)) \%>\% op_reshape(input_shape)
 x
@@ -58,11 +58,6 @@ y
 ##   [10 11 12]]], shape=(2, 4, 3), dtype=int32)
 
 }\if{html}{\out{</div>}}
-
-\verb{[[ 6.  7.  8.]}
-\verb{[ 6.  7.  8.]}
-\verb{[ 9. 10. 11.]}
-\verb{[ 9. 10. 11.]]]}
 }
 
 \section{Input Shape}{
@@ -136,6 +131,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -151,6 +147,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

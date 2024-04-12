@@ -27,7 +27,7 @@ A PIL Image instance.
 \description{
 Converts a 3D array to a PIL Image instance.
 }
-\section{Usage}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{img <- array(runif(30000), dim = c(100, 100, 3))
 pil_img <- image_from_array(img)
 pil_img
@@ -68,7 +68,6 @@ Other utils: \cr
 \code{\link{image_smart_resize}()} \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{layer_feature_space}()} \cr
-\code{\link{layer_torch_module_wrapper}()} \cr
 \code{\link{normalize}()} \cr
 \code{\link{pack_x_y_sample_weight}()} \cr
 \code{\link{pad_sequences}()} \cr

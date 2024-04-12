@@ -29,6 +29,7 @@ layer_lstm(
   go_backwards = FALSE,
   stateful = FALSE,
   unroll = FALSE,
+  use_cudnn = "auto",
   ...
 )
 }
@@ -115,6 +116,10 @@ else a symbolic loop will be used.
 Unrolling can speed-up a RNN,
 although it tends to be more memory-intensive.
 Unrolling is only suitable for short sequences.}
+
+\item{use_cudnn}{Whether to use a cuDNN-backed implementation. \code{"auto"} will
+attempt to use cuDNN when feasible, and will fallback to the
+default implementation if not.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -265,6 +270,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -280,6 +286,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_masking}()} \cr

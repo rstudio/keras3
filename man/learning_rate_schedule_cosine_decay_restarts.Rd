@@ -53,9 +53,8 @@ The learning rate multiplier first decays
 from 1 to \code{alpha} for \code{first_decay_steps} steps. Then, a warm
 restart is performed. Each new warm restart runs for \code{t_mul} times more
 steps and with \code{m_mul} times initial learning rate as the new learning rate.
-
-Example usage:
-
+}
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{first_decay_steps <- 1000
 lr_decayed_fn <- learning_rate_schedule_cosine_decay_restarts(
         0.001,
@@ -67,6 +66,7 @@ as the learning rate. The learning rate schedule is also serializable and
 deserializable using \code{keras$optimizers$schedules$serialize} and
 \code{keras$optimizers$schedules$deserialize}.
 }
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/optimizers/learning_rate_schedules/cosine_decay_restarts#cosinedecayrestarts-class}

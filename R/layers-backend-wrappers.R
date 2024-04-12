@@ -134,7 +134,7 @@ function (object, module, name = NULL, ...)
 #'
 #' flax <- import("flax")
 #'
-#' MyFlaxModule(flax$linen$Module) \%py_class\% {
+#' MyFlaxModule(flax$linen$Module) %py_class% {
 #'   `__call__` <- flax$linen$compact(\(self, inputs) {
 #'     inputs |>
 #'       (flax$linen$Conv(features = 32L, kernel_size = tuple(3L, 3L)))() |>

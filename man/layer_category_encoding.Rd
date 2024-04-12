@@ -8,6 +8,7 @@ layer_category_encoding(
   object,
   num_tokens = NULL,
   output_mode = "multi_hot",
+  sparse = FALSE,
   ...
 )
 }
@@ -37,6 +38,9 @@ appeared in the sample.
 For all output modes, currently only output up to rank 2 is
 supported.
 Defaults to \code{"multi_hot"}.}
+
+\item{sparse}{Whether to return a sparse tensor; for backends that support
+sparse tensors.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -198,6 +202,7 @@ Other layers: \cr
 \code{\link{layer_embedding}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
 \code{\link{layer_gaussian_dropout}()} \cr
 \code{\link{layer_gaussian_noise}()} \cr
 \code{\link{layer_global_average_pooling_1d}()} \cr
@@ -213,6 +218,7 @@ Other layers: \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr

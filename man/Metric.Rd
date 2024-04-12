@@ -166,7 +166,7 @@ Args:
 }
 \item
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_variable(shape, initializer, dtype=NULL, name=NULL)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_variable(shape, initializer, dtype=NULL, aggregation = 'sum', name=NULL)
 }\if{html}{\out{</div>}}
 \item
 

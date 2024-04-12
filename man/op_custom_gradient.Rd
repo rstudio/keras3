@@ -7,43 +7,70 @@
 op_custom_gradient(f)
 }
 \arguments{
-\item{f}{Function \code{f(...)} that returns a tuple \verb{(y, grad_fn)} where:
+\item{f}{Function \code{f(...)} that returns a tuple \verb{(output, grad_fn)} where:
 \itemize{
-\item \code{x} is a sequence of (nested structures of) tensor inputs to the
+\item \code{...} is a sequence of unnamed arguments,
+each a tensor input or nested structure of tensor inputs to the
 function.
-\item \code{y} is a (nested structure of) tensor outputs of applying
-operations in \code{f} to \code{x}.
-\item \code{grad_fn} is a function with the signature \code{g(...)} which
-returns a list of tensors the same size as (flattened) \code{x}: the
-derivatives of tensors in \code{y} with respect to the tensors in
-\code{x}. Arguments provided to \code{...} are sequence of tensors the same size as
-(flattened) \code{y} holding the initial value gradients for each
-tensor in \code{y}.
+\item \code{output} is a (potentially nested structure of) tensor outputs of applying
+operations in forward_fn \code{f()} to \code{...}.
+\item \code{grad_fn} is a function with the signature \code{grad_fn(..., upstream)} which
+returns a list of tensors the same size as (flattened) \code{...}: the
+derivatives of tensors in \code{output} with respect to the tensors in
+\code{...}. \code{upstream} is a tensor or
+sequence of tensors holding the initial value gradients for each
+tensor in \code{output}.
 }}
 }
 \value{
-A function \code{h(x)} which returns the same value as \code{f(x)[0]} and whose
-gradient is determined by \code{f(x)[1]}.
+A function \code{h(...)} which returns the same value as \code{f(...)[[1]]} and whose
+gradient is determined by \code{f(...)[[2]]}.
 }
 \description{
 This decorator allows fine grained control over the gradients of a sequence
 for operations. This may be useful for multiple reasons, including providing
 a more efficient or numerically stable gradient for a sequence of
 operations.
-
-Note that \code{custom_gradient} only supports TensorFlow and JAX backends.
 }
-\section{Examples}{
+\note{
+Note that the \code{grad} function that returns gradient computation
+requires \code{...} as well as an \code{upstream} named argument, depending
+on the backend being set. With the JAX and TensorFlow backends,
+it requires only one argument, whereas it might use the \code{upstream}
+argument in the case of the PyTorch backend.
+
+When working with TensorFlow/JAX backend, \code{grad(upstream)}
+is sufficient. With PyTorch, the \code{grad} function requires
+\code{...} as well as \code{upstream}, e.g. \verb{grad <- \\(..., upstream)}.
+Follow the example above to use \code{op_custom_gradient()} in
+a way that is compatible with all backends.
+}
+\section{Example}{
+Backend-agnostic example.
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{log1pexp <- op_custom_gradient(\\(x) \{
 
     e <- op_exp(x)
 
-    grad <- function(upstream) \{
+    grad <- function(..., upstream = NULL) \{
+      upstream <- upstream \%||\% ..1
       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
     \}
 
     tuple(op_log(1 + e), grad)
+
 \})
+
+if(config_backend() == "tensorflow") \{
+  tf <- tensorflow::tf
+  x <- op_convert_to_tensor(100.0)
+  with(tf$GradientTape() \%as\% tape, \{
+    tape$watch(x)
+    y <- log1pexp(x)
+  \})
+  dy_dx <- tape$gradient(y, x)
+  stopifnot(as.numeric(dy_dx) == 1)
+\}
 }\if{html}{\out{</div>}}
 }
 
@@ -106,6 +133,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr

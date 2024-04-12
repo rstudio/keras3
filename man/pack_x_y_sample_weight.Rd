@@ -20,9 +20,7 @@ List in the format used in \code{fit()}.
 This is a convenience utility for packing data into the list formats
 that \code{fit()} uses.
 }
-\section{Usage}{
-Standalone usage:
-
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_ones(c(10, 1))
 data <- pack_x_y_sample_weight(x)
 
@@ -55,7 +53,6 @@ Other utils: \cr
 \code{\link{image_smart_resize}()} \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{layer_feature_space}()} \cr
-\code{\link{layer_torch_module_wrapper}()} \cr
 \code{\link{normalize}()} \cr
 \code{\link{pad_sequences}()} \cr
 \code{\link{set_random_seed}()} \cr

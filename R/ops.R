@@ -7157,7 +7157,7 @@ keras$ops$hard_swish(x)
 #'     e <- op_exp(x)
 #'
 #'     grad <- function(..., upstream = NULL) {
-#'       upstream <- upstream \%||\% ..1
+#'       upstream <- upstream %||% ..1
 #'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
 #'     }
 #'
@@ -7166,8 +7166,9 @@ keras$ops$hard_swish(x)
 #' })
 #'
 #' if(config_backend() == "tensorflow") {
+#'   tf <- tensorflow::tf
 #'   x <- op_convert_to_tensor(100.0)
-#'   with(tf$GradientTape() \%as\% tape, {
+#'   with(tf$GradientTape() %as% tape, {
 #'     tape$watch(x)
 #'     y <- log1pexp(x)
 #'   })

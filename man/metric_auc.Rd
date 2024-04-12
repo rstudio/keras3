@@ -53,7 +53,7 @@ and then averaged across labels, or (when \code{FALSE}) if the data
 should be flattened into a single label before AUC computation. In
 the latter case, when multilabel data is passed to AUC, each
 label-prediction pair is treated as an individual data point. Should
-be set to FALSE for multi-class data.}
+be set to `FALSE`` for multi-class data.}
 
 \item{num_labels}{(Optional) The number of labels, used when \code{multi_label} is
 TRUE. If \code{num_labels} is not specified, then state variables get

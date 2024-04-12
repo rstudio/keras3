@@ -4,7 +4,14 @@
 \alias{op_multi_hot}
 \title{Encodes integer labels as multi-hot vectors.}
 \usage{
-op_multi_hot(inputs, num_classes, axis = -1L, dtype = NULL, ...)
+op_multi_hot(
+  inputs,
+  num_classes,
+  axis = -1L,
+  dtype = NULL,
+  sparse = FALSE,
+  ...
+)
 }
 \arguments{
 \item{inputs}{Tensor of integer labels to be converted to multi-hot vectors.}
@@ -16,6 +23,9 @@ added. Defaults to \code{-1}, which corresponds to the last dimension.}
 
 \item{dtype}{(optional) The data type of the resulting tensor. Default
 is backend's float type.}
+
+\item{sparse}{Whether to return a sparse tensor; for backends that support
+sparse tensors.}
 
 \item{...}{For forward/backwards compatability}
 }
@@ -105,6 +115,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr

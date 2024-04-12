@@ -19,7 +19,7 @@ callback_remote_monitor(
 
 \item{field}{String; JSON field under which the data will be stored.
 The field is used only if the payload is sent within a form
-(i.e. send_as_json is set to \code{FALSE}).}
+(i.e. when \code{send_as_json = FALSE}).}
 
 \item{headers}{Named list; optional custom HTTP headers.}
 

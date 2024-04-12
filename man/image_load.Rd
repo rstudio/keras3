@@ -39,7 +39,7 @@ A PIL Image instance.
 \description{
 Loads an image into PIL format.
 }
-\section{Usage}{
+\section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{image_path <- get_file(origin = "https://www.r-project.org/logo/Rlogo.png")
 (image <- image_load(image_path))
 }\if{html}{\out{</div>}}
@@ -97,7 +97,6 @@ Other utils: \cr
 \code{\link{image_smart_resize}()} \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{layer_feature_space}()} \cr
-\code{\link{layer_torch_module_wrapper}()} \cr
 \code{\link{normalize}()} \cr
 \code{\link{pack_x_y_sample_weight}()} \cr
 \code{\link{pad_sequences}()} \cr

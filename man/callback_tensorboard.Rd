@@ -100,8 +100,6 @@ You can find more information about TensorBoard
 \href{https://www.tensorflow.org/get_started/summaries_and_tensorboard}{here}.
 }
 \section{Examples}{
-Basic usage:
-
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{tensorboard_callback <- callback_tensorboard(log_dir = "./logs")
 model \%>\% fit(x_train, y_train, epochs = 2, callbacks = list(tensorboard_callback))
 # Then run the tensorboard command to view the visualizations.
