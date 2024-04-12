@@ -6,7 +6,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary"><div class="container">
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
@@ -257,7 +257,7 @@
           
           <code><a href="export_savedmodel.keras.src.models.model.Model.html">export_savedmodel(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code> 
         </dt>
-        <dd>[TF backend only] Create a TF SavedModel artifact for inference</dd>
+        <dd>Create a TF SavedModel artifact for inference (e.g. via TF-Serving).</dd>
       </dl><dl><dt>
           
           <code><a href="layer_tfsm.html">layer_tfsm()</a></code> 
@@ -948,6 +948,16 @@
         <dd>Reload a Keras model/layer that was saved via <code><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel()</a></code>.</dd>
       </dl><dl><dt>
           
+          <code><a href="layer_jax_model_wrapper.html">layer_jax_model_wrapper()</a></code> 
+        </dt>
+        <dd>Keras Layer that wraps a JAX model.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="layer_flax_module_wrapper.html">layer_flax_module_wrapper()</a></code> 
+        </dt>
+        <dd>Keras Layer that wraps a <a href="https://flax.readthedocs.io" class="external-link">Flax</a> module.</dd>
+      </dl><dl><dt>
+          
           <code><a href="layer_torch_module_wrapper.html">layer_torch_module_wrapper()</a></code> 
         </dt>
         <dd>Torch module wrapper layer.</dd>
@@ -1403,6 +1413,11 @@
           <code><a href="op_copy.html">op_copy()</a></code> 
         </dt>
         <dd>Returns a copy of <code>x</code>.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_correlate.html">op_correlate()</a></code> 
+        </dt>
+        <dd>Compute the cross-correlation of two 1-dimensional tensors.</dd>
       </dl><dl><dt>
           
           <code><a href="op_cos.html">op_cos()</a></code> 
@@ -2247,6 +2262,11 @@
           <code><a href="loss_ctc.html">loss_ctc()</a></code> 
         </dt>
         <dd>CTC (Connectionist Temporal Classification) loss.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="loss_dice.html">loss_dice()</a></code> 
+        </dt>
+        <dd>Computes the Dice loss value between <code>y_true</code> and <code>y_pred</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="loss_hinge.html">loss_hinge()</a></code> 
@@ -3983,7 +4003,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
 </div>
 
     </footer></div>

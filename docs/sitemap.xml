@@ -721,6 +721,9 @@
     <loc>https://keras.posit.co/reference/layer_flatten.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/layer_flax_module_wrapper.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/layer_gaussian_dropout.html</loc>
   </url>
   <url>
@@ -767,6 +770,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_integer_lookup.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/layer_jax_model_wrapper.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/layer_lambda.html</loc>
@@ -950,6 +956,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/loss_ctc.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/loss_dice.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/loss_hinge.html</loc>
@@ -1256,6 +1265,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_copy.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_correlate.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_cos.html</loc>

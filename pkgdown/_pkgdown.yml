@@ -204,6 +204,8 @@ reference:
   - subtitle: "Compatability Layers"
   - contents:
     - layer_tfsm
+    - layer_jax_model_wrapper
+    - layer_flax_module_wrapper
     - layer_torch_module_wrapper
 
   - subtitle: "Custom Layers"

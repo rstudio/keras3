@@ -196,7 +196,7 @@ model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9821 - loss: 0.0926
+## 313/313 - 1s - 2ms/step - accuracy: 0.9821 - loss: 0.0928
 ```
 
 ```
@@ -204,7 +204,7 @@ model |> evaluate(x_test, y_test)
 ## [1] 0.9821
 ##
 ## $loss
-## [1] 0.09263836
+## [1] 0.09278659
 ```
 
 Generate predictions on new data:
