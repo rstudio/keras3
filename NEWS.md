@@ -60,6 +60,9 @@ New functions:
 
 - `layer_lstm()` and `layer_gru()` gain arg `use_cudnn`, default `'auto'`.
 
+- Fixed an issue where `application_preprocess_inputs()` would error if supplied
+  an R array as input.
+
 - Doc improvements.
 
 # keras3 0.1.0
