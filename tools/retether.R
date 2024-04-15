@@ -58,8 +58,8 @@ doctether::retether(
   # "keras.ops",
   unsafe = TRUE,
   roxy_tag_eval =
-    # resolve_roxy_tether,
-    NULL,
+    resolve_roxy_tether,
+    # NULL,
   rmd_field_eval =
     resolve_rmd_tether
     # NULL
