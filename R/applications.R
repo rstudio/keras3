@@ -3974,3 +3974,67 @@ set_preprocessing_attributes <- function(object, module) {
   object
 }
 
+
+#' Decodes the prediction of an ImageNet model.
+#'
+#' @param preds Tensor encoding a batch of predictions.
+#' @param top integer, how many top-guesses to return.
+#'
+#' @return List of data frames with variables `class_name`, `class_description`,
+#'   and `score` (one data frame per sample in batch input).
+#'
+#' @export
+#' @keywords internal
+imagenet_decode_predictions <- function(preds, top = 5) {
+
+  # decode predictions
+  decoded <- keras$applications$imagenet_utils$decode_predictions(
+    preds = preds,
+    top = as.integer(top)
+  )
+
+  # convert to a list of data frames
+  lapply(decoded, function(x) {
+    m <- t(sapply(1:length(x), function(n) x[[n]]))
+    data.frame(class_name = as.character(m[,1]),
+               class_description = as.character(m[,2]),
+               score = as.numeric(m[,3]),
+               stringsAsFactors = FALSE)
+  })
+}
+
+
+#' Preprocesses a tensor or array encoding a batch of images.
+#'
+#' @param x Input Numpy or symbolic tensor, 3D or 4D.
+#' @param data_format Data format of the image tensor/array.
+#' @param mode One of "caffe", "tf", or "torch"
+#'   - caffe: will convert the images from RGB to BGR,
+#'     then will zero-center each color channel with
+#'     respect to the ImageNet dataset,
+#'     without scaling.
+#'   - tf: will scale pixels between -1 and 1, sample-wise.
+#'   - torch: will scale pixels between 0 and 1 and then
+#'     will normalize each channel with respect to the
+#'     ImageNet dataset.
+#'
+#' @return Preprocessed tensor or array.
+#'
+#' @export
+#' @keywords internal
+imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
+  args <- capture_args(list(
+    x = function(x) {
+      if (!is_py_object(x))
+        x <- np_array(x)
+      if (inherits(x, "numpy.ndarray") &&
+          !py_bool(x$flags$writeable))
+        x <- x$copy()
+      x
+    }
+  ))
+
+  preprocess_input <- r_to_py(keras$applications$imagenet_utils)$preprocess_input
+  do.call(preprocess_input, args)
+}
+
