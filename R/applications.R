@@ -3953,7 +3953,24 @@ list_model_names <- function() {
 }
 
 set_preprocessing_attributes <- function(object, module) {
-  attr(object, "preprocess_input") <- module$preprocess_input
+  .preprocess_input <- r_to_py(module)$preprocess_input
+
+  attr(object, "preprocess_input") <-
+    as.function.default(c(formals(.preprocess_input), bquote({
+      args <- capture_args(list(
+        x = function(x) {
+          if (!is_py_object(x))
+            x <- np_array(x)
+          if (inherits(x, "numpy.ndarray") &&
+              !py_bool(x$flags$writeable))
+            x <- x$copy()
+          x
+        }
+      ))
+      do.call(.(.preprocess_input), args)
+    })), envir = parent.env(environment()))
+
   attr(object, "decode_predictions") <- module$decode_predictions
   object
 }
+
