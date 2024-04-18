@@ -56,10 +56,10 @@ clean_python_tempdirs <- function() {
     all.files = TRUE
   )
 
-  unlink(detritus, recursive = TRUE)
+  unlink(detritus, recursive = TRUE, force = TRUE)
 
   unlink(unlist(py_to_r(get_py_created_tempdirs())),
-         recursive = TRUE)
+         recursive = TRUE, force = TRUE)
 
 }
 
