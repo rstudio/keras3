@@ -372,7 +372,7 @@ callback_tensorboard <- function(log_dir = NULL, histogram_freq = 0,
     write_images = write_images
   )
 
-  if (tensorflow::tf_version() >= 1.14) {
+  if (tensorflow::tf_version() >= "1.14") {
     args[["profile_batch"]] = as.integer(profile_batch)
   } else if (profile_batch > 0) {
     warning("profile_batch can only be used with TensorFlow >= 1.14", call. = FALSE)
