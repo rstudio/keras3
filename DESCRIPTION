@@ -51,5 +51,3 @@ Suggests:
 Roxygen: list(markdown = TRUE, r6 = FALSE)
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
-Remotes: 
-    rstudio/tensorflow
