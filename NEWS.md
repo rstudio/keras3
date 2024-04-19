@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.15.0
 
 - Default TensorFlow/Keras version installed by `install_keras()` is now 2.15. 
   This is the last Tensorflow version where where Keras 2 is the default. 
