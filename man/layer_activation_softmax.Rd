@@ -55,12 +55,12 @@ It follows: \code{f(x) =  alpha * (exp(x) - 1.0)} for \code{x < 0}, \code{f(x) =
 }
 \seealso{
 Other activation layers: 
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_selu}()},
-\code{\link{layer_activation_thresholded_relu}()},
-\code{\link{layer_activation}()}
+\code{\link{layer_activation_thresholded_relu}()}
 }
 \concept{activation layers}

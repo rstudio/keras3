@@ -109,8 +109,8 @@ gradients, and uses that average to estimate the variance.
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
 \code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
+\code{\link{optimizer_adamax}()},
 \code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_sgd}()}

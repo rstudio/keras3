@@ -550,10 +550,12 @@ compose_layer <- function(object, layer, ...) {
   UseMethod("compose_layer")
 }
 
+#' @export
 compose_layer.default <- function(object, layer, ...) {
   layer(object, ...)
 }
 
+#' @export
 compose_layer.keras.models.Sequential <- function(object, layer, ...) {
   if(length(list(...)) > 0) warning("arguments passed via ellipsis will be ignored")
 

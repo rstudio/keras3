@@ -94,8 +94,8 @@ the smaller the updates.
 
 Other optimizers: 
 \code{\link{optimizer_adadelta}()},
-\code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
+\code{\link{optimizer_adamax}()},
 \code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_rmsprop}()},

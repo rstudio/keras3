@@ -1252,16 +1252,19 @@ as_generator <- function(x) {
   UseMethod("as_generator")
 }
 
+#' @export
 as_generator.default <- function(x) {
   x
 }
 
+#' @export
 as_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
   tools$generator$dataset_generator(x , k_get_session())
 }
 
+#' @export
 as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
 
   if (tensorflow::tf_version() >= "2.0")
@@ -1271,6 +1274,7 @@ as_generator.tensorflow.python.data.ops.dataset_ops.DatasetV2 <- function(x) {
 
 }
 
+#' @export
 as_generator.function <- function(x) {
   python_path <- system.file("python", package = "keras")
   tools <- reticulate::import_from_path("kerastools", path = python_path)
@@ -1287,6 +1291,7 @@ as_generator.function <- function(x) {
 
 }
 
+#' @export
 as_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {
   reticulate::as_iterator(x)
 }
@@ -1295,18 +1300,22 @@ is_main_thread_generator <- function(x) {
   UseMethod("is_main_thread_generator")
 }
 
+#' @export
 is_main_thread_generator.default <- function(x) {
   FALSE
 }
 
+#' @export
 is_main_thread_generator.tensorflow.python.data.ops.dataset_ops.Dataset <- function(x) {
   TRUE
 }
 
+#' @export
 is_main_thread_generator.function <- function(x) {
   TRUE
 }
 
+#' @export
 is_main_thread_generator.keras.preprocessing.image.Iterator <- function(x) {
   if (py_has_attr(x, "image_data_generator")) {
     generator <- x$image_data_generator
@@ -1316,6 +1325,7 @@ is_main_thread_generator.keras.preprocessing.image.Iterator <- function(x) {
   }
 }
 
+#' @export
 is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
 
   if (tensorflow::tf_version() <= "2.0.1")
@@ -1329,9 +1339,11 @@ is_main_thread_generator.keras_preprocessing.image.Iterator <- function(x) {
   }
 }
 
+#' @export
 is_main_thread_generator.keras_preprocessing.image.iterator.Iterator <-
   is_main_thread_generator.keras_preprocessing.image.Iterator
 
+#' @export
 is_main_thread_generator.keras_preprocessing.sequence.TimeseriesGenerator <- function(x) {
   if (tensorflow::tf_version() <= "2.0.1")
     return(TRUE)

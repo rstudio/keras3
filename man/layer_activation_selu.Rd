@@ -68,12 +68,12 @@ Note:
 \href{https://arxiv.org/abs/1706.02515}{Self-Normalizing Neural Networks}, \code{\link{initializer_lecun_normal}}, \code{\link{layer_alpha_dropout}}
 
 Other activation layers: 
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_parametric_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation_thresholded_relu}()},
-\code{\link{layer_activation}()}
+\code{\link{layer_activation_thresholded_relu}()}
 }
 \concept{activation layers}
