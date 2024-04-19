@@ -6,6 +6,8 @@
 
 - Updates to allow both R packages {keras} and {keras3} to be loaded.
 
+- Updates for R-devel (4.4).
+
 
 # keras 2.13.0
 
