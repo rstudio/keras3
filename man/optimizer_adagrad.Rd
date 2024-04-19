@@ -89,7 +89,7 @@ the smaller the updates.
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Adagrad}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad}
 }
 
 Other optimizers: 

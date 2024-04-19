@@ -86,7 +86,6 @@ str(reticulate::iterate(normalized_ds$as_numpy_iterator()))
 \seealso{
 \itemize{
 \item \url{https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method}
-\item \url{https://keras.io/guides/preprocessing_layers/#the-adapt-method}
 }
 }
 \concept{preprocessing layer methods}

@@ -72,7 +72,7 @@
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Adadelta>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adadelta>
 #' @export
 optimizer_adadelta <-
 function(learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
@@ -150,7 +150,7 @@ do.call(keras$optimizers$Adadelta, args)
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Adagrad>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adagrad>
 #' @export
 optimizer_adagrad <-
 function(learning_rate = 0.001, initial_accumulator_value = 0.1,
@@ -340,7 +340,7 @@ do.call(keras$optimizers$Adam, args)
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Adamax>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Adamax>
 #' @export
 optimizer_adamax <-
 function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
@@ -469,7 +469,7 @@ do.call(keras$optimizers$Adamax, args)
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Ftrl>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Ftrl>
 #' @export
 optimizer_ftrl <-
 function(learning_rate = 0.001, learning_rate_power = -0.5,
@@ -552,7 +552,7 @@ do.call(keras$optimizers$Ftrl, args)
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/Nadam>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/Nadam>
 #' @export
 optimizer_nadam <-
 function(learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
@@ -642,7 +642,7 @@ do.call(keras$optimizers$Nadam, args)
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/RMSprop>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/RMSprop>
 #' @export
 optimizer_rmsprop <-
 function(learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
@@ -736,7 +736,7 @@ do.call(keras$optimizers$RMSprop, args)
 #' @return Optimizer for use with \code{\link{compile.keras.engine.training.Model}}.
 #'
 #' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/SGD>
+#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD>
 #' @export
 optimizer_sgd <-
 function(learning_rate = 0.01, momentum = 0, nesterov = FALSE,

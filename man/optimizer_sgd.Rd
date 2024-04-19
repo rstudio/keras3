@@ -102,7 +102,7 @@ w = w + momentum * velocity - learning_rate * g
 }
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/experimental/SGD}
+\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/optimizers/SGD}
 }
 
 Other optimizers: 

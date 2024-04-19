@@ -1544,7 +1544,7 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' @seealso
 #'
 #'  + <https://www.tensorflow.org/guide/keras/preprocessing_layers#the_adapt_method>
-#'  + <https://keras.io/guides/preprocessing_layers/#the-adapt-method>
+#  + <https://keras.io/guides/preprocessing_layers/#the-adapt-method>
 #'
 #' @export
 adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
