@@ -477,7 +477,7 @@ sequences_to_matrix <- function(tokenizer, sequences, mode = c("binary", "count"
 #'
 #' @param path Path to image file
 #' @param grayscale DEPRECATED use `color_mode="grayscale"`
-#' @param color_mode One of {`"grayscale"`, `"rgb"`, `"rgba"`}.
+#' @param color_mode One of `{"grayscale", "rgb", "rgba"}`.
 #'    Default: `"rgb"`. The desired image format.
 #' @param target_size Either `NULL` (default to original size) or integer vector
 #'   `(img_height, img_width)`.

@@ -16,7 +16,7 @@ k_placeholder(
 \item{shape}{Shape of the placeholder (integer list, may include \code{NULL}
 entries).}
 
-\item{ndim}{Number of axes of the tensor. At least one of {\code{shape}, \code{ndim}}
+\item{ndim}{Number of axes of the tensor. At least one of \code{shape} or \code{ndim}
 must be specified. If both are specified, \code{shape} is used.}
 
 \item{dtype}{Placeholder type.}

@@ -1937,7 +1937,7 @@ k_permute_dimensions <- function(x, pattern) {
 #'
 #' @param shape Shape of the placeholder (integer list, may include `NULL`
 #'   entries).
-#' @param ndim Number of axes of the tensor. At least one of {`shape`, `ndim`}
+#' @param ndim Number of axes of the tensor. At least one of `shape` or `ndim`
 #'   must be specified. If both are specified, `shape` is used.
 #' @param dtype Placeholder type.
 #' @param sparse Logical, whether the placeholder should have a sparse type.

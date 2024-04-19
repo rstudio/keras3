@@ -243,7 +243,7 @@ py_metric_wrapper <- function(py_fn, py_cls, formals=NULL, modifiers=NULL,
 #' @param thresholds (Optional) A list of floating point values to use as the
 #'   thresholds for discretizing the curve. If set, the `num_thresholds`
 #'   parameter is ignored. Values should be in `[0, 1]`. Endpoint thresholds equal
-#'   to {-epsilon, 1+epsilon} for a small positive epsilon value will be
+#'   to `{-epsilon, 1+epsilon}` for a small positive epsilon value will be
 #'   automatically included with these to correctly handle predictions equal to
 #'   exactly 0 or 1.
 #'

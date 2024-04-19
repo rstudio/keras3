@@ -37,7 +37,7 @@ increasing intervals and right summation for decreasing intervals;
 \item{thresholds}{(Optional) A list of floating point values to use as the
 thresholds for discretizing the curve. If set, the \code{num_thresholds}
 parameter is ignored. Values should be in \verb{[0, 1]}. Endpoint thresholds equal
-to {-epsilon, 1+epsilon} for a small positive epsilon value will be
+to \verb{\{-epsilon, 1+epsilon\}} for a small positive epsilon value will be
 automatically included with these to correctly handle predictions equal to
 exactly 0 or 1.}
 
