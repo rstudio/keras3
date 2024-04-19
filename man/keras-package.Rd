@@ -3,7 +3,6 @@
 \docType{package}
 \name{keras-package}
 \alias{keras-package}
-\alias{_PACKAGE}
 \title{R interface to Keras}
 \description{
 Keras is a high-level neural networks API, developed with a focus on enabling

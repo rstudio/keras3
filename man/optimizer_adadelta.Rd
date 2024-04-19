@@ -103,8 +103,8 @@ learning rate can be set, as in most other Keras optimizers.
 
 Other optimizers: 
 \code{\link{optimizer_adagrad}()},
-\code{\link{optimizer_adamax}()},
 \code{\link{optimizer_adam}()},
+\code{\link{optimizer_adamax}()},
 \code{\link{optimizer_ftrl}()},
 \code{\link{optimizer_nadam}()},
 \code{\link{optimizer_rmsprop}()},

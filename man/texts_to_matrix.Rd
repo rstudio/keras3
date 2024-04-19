@@ -25,7 +25,7 @@ Other text tokenization:
 \code{\link{save_text_tokenizer}()},
 \code{\link{sequences_to_matrix}()},
 \code{\link{text_tokenizer}()},
-\code{\link{texts_to_sequences_generator}()},
-\code{\link{texts_to_sequences}()}
+\code{\link{texts_to_sequences}()},
+\code{\link{texts_to_sequences_generator}()}
 }
 \concept{text tokenization}

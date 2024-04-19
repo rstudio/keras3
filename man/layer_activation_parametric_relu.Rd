@@ -71,12 +71,12 @@ alpha is a learned array with the same shape as x.
 \href{https://arxiv.org/abs/1502.01852}{Delving Deep into Rectifiers: Surpassing Human-Level Performance on ImageNet Classification}.
 
 Other activation layers: 
+\code{\link{layer_activation}()},
 \code{\link{layer_activation_elu}()},
 \code{\link{layer_activation_leaky_relu}()},
 \code{\link{layer_activation_relu}()},
 \code{\link{layer_activation_selu}()},
 \code{\link{layer_activation_softmax}()},
-\code{\link{layer_activation_thresholded_relu}()},
-\code{\link{layer_activation}()}
+\code{\link{layer_activation_thresholded_relu}()}
 }
 \concept{activation layers}

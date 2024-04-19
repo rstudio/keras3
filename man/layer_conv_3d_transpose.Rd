@@ -139,10 +139,10 @@ When using this layer as the first layer in a model, provide the keyword argumen
 
 \seealso{
 Other convolutional layers: 
-\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
+\code{\link{layer_conv_1d_transpose}()},
 \code{\link{layer_conv_2d}()},
+\code{\link{layer_conv_2d_transpose}()},
 \code{\link{layer_conv_3d}()},
 \code{\link{layer_conv_lstm_2d}()},
 \code{\link{layer_cropping_1d}()},
