@@ -684,17 +684,17 @@ as_r_value <- function (x) {
 
 # internal `[` method that ensures functions in this namespace use one-based
 # indexing in case user has a global option set for zero-based indexing.
-`[.tensorflow.tensor` <-
-  getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
-formals(`[.tensorflow.tensor`)$style <- "R"
-formals(`[.tensorflow.tensor`)$options <-
-  tensorflow::tf_extract_opts(
-    one_based = TRUE,
-    inclusive_stop = TRUE,
-    disallow_out_of_bounds = TRUE,
-    warn_tensors_passed_asis = FALSE,
-    warn_negatives_pythonic = FALSE
-  )
+# `[.tensorflow.tensor` <-
+#   getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
+# formals(`[.tensorflow.tensor`)$style <- "R"
+# formals(`[.tensorflow.tensor`)$options <-
+#   tensorflow::tf_extract_opts(
+#     one_based = TRUE,
+#     inclusive_stop = TRUE,
+#     disallow_out_of_bounds = TRUE,
+#     warn_tensors_passed_asis = FALSE,
+#     warn_negatives_pythonic = FALSE
+#   )
 
 
 
