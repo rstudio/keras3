@@ -153,7 +153,23 @@ keras <- NULL
     classes <- sub(paste0("^", module), "keras", classes)
 
     # All python symbols moved in v2.13 under .src
-    classes <- sub("^keras\\.src\\.", "keras.", classes)
+    # Preserve the original symbols for compatability with keras3,
+    # interleaving the back-compat class names after the originals.
+    # E.g., this:
+    # "keras.src.models.sequential.Sequential"
+    # "keras.src.models.model.Model"
+    # ... "python.builtin.object"
+    #
+    # becomes this:
+    # "keras.src.models.sequential.Sequential" "keras.models.sequential.Sequential"
+    # "keras.src.models.model.Model" "keras.models.model.Model"
+    # ... "python.builtin.object"
+
+    classes <- unique(as.vector(rbind(
+      classes,
+      sub("^keras\\.src\\.", "keras.", classes),
+      deparse.level = 0
+    )))
 
     # let KerasTensor inherit all the S3 methods of tf.Tensor, but
     # KerasTensor methods take precedence.
