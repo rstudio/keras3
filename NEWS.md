@@ -1,6 +1,11 @@
 # keras (development version)
 
-- Updates to allow both R packages {keras} and {keras3} to be loaded. 
+- Default TensorFlow/Keras version installed by `install_keras()` is now 2.15. 
+  This is the last Tensorflow version where where Keras 2 is the default. 
+  To use Keras with Tensorflow v2.16 and up, use the new {keras3} R package.
+
+- Updates to allow both R packages {keras} and {keras3} to be loaded.
+
 
 # keras 2.13.0
 
