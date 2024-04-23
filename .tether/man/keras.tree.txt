@@ -6,6 +6,7 @@ assert_same_structure(
 flatten(structure)
 is_nested(structure)
 lists_to_tuples(structure)
+map_shape_structure(func, structure)
 map_structure(func, *structures)
 map_structure_up_to(
   shallow_structure,
@@ -22,5 +23,4 @@ traverse(
   structure,
   top_down=True
 )
-unflatten_as(structure, flat_sequence)
 

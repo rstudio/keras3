@@ -44,6 +44,10 @@ resize(
   size,
   interpolation='bilinear',
   antialias=False,
+  crop_to_aspect_ratio=False,
+  pad_to_aspect_ratio=False,
+  fill_mode='constant',
+  fill_value=0.0,
   data_format='channels_last'
 )
 

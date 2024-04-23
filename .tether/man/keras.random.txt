@@ -44,7 +44,11 @@ randint(
   dtype='int32',
   seed=None
 )
-SeedGenerator(seed=None, **kwargs)
+SeedGenerator(
+  seed=None,
+  name=None,
+  **kwargs
+)
 shuffle(
   x,
   axis=0,

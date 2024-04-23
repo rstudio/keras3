@@ -39,8 +39,16 @@ arcsinh(x)
 arctan(x)
 arctan2(x1, x2)
 arctanh(x)
-argmax(x, axis=None)
-argmin(x, axis=None)
+argmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+argmin(
+  x,
+  axis=None,
+  keepdims=False
+)
 argsort(x, axis=-1)
 array(x, dtype=None)
 average(
@@ -204,7 +212,12 @@ moveaxis(
   destination
 )
 multiply(x1, x2)
-nan_to_num(x)
+nan_to_num(
+  x,
+  nan=0.0,
+  posinf=None,
+  neginf=None
+)
 ndim(x)
 negative(x)
 nonzero(x)

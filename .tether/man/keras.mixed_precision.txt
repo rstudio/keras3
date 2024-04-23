@@ -1,5 +1,9 @@
 dtype_policy()
-DTypePolicy(name)
+DTypePolicy(
+  name,
+  *args,
+  **kwargs
+)
 global_policy()
 LossScaleOptimizer(
   inner_optimizer,
@@ -7,7 +11,11 @@ LossScaleOptimizer(
   dynamic_growth_steps=2000,
   **kwargs
 )
-Policy(name)
+Policy(
+  name,
+  *args,
+  **kwargs
+)
 set_dtype_policy(policy)
 set_global_policy(policy)
 

@@ -9,6 +9,8 @@ Adadelta(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='adadelta',
   **kwargs
 )
@@ -26,6 +28,8 @@ Adafactor(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='adafactor',
   **kwargs
 )
@@ -40,6 +44,8 @@ Adagrad(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='adagrad',
   **kwargs
 )
@@ -56,6 +62,8 @@ Adam(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='adam',
   **kwargs
 )
@@ -71,6 +79,8 @@ Adamax(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='adamax',
   **kwargs
 )
@@ -87,6 +97,8 @@ AdamW(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='adamw',
   **kwargs
 )
@@ -106,11 +118,13 @@ Ftrl(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='ftrl',
   **kwargs
 )
 get(identifier)
-legacy: Module(keras.optimizers.legacy)
+legacy: Module(keras.api.optimizers.legacy)
 Lion(
   learning_rate=0.001,
   beta_1=0.9,
@@ -122,6 +136,8 @@ Lion(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='lion',
   **kwargs
 )
@@ -143,6 +159,8 @@ Nadam(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='nadam',
   **kwargs
 )
@@ -159,11 +177,13 @@ RMSprop(
   global_clipnorm=None,
   use_ema=False,
   ema_momentum=0.99,
-  ema_overwrite_frequency=100,
+  ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='rmsprop',
   **kwargs
 )
-schedules: Module(keras.optimizers.schedules)
+schedules: Module(keras.api.optimizers.schedules)
 serialize(optimizer)
 SGD(
   learning_rate=0.01,
@@ -176,6 +196,8 @@ SGD(
   use_ema=False,
   ema_momentum=0.99,
   ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
   name='SGD',
   **kwargs
 )
