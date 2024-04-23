@@ -1,4 +1,4 @@
-image: Module(keras.preprocessing.image)
+image: Module(keras.api.preprocessing.image)
 image_dataset_from_directory(
   directory,
   labels='inferred',
@@ -18,7 +18,7 @@ image_dataset_from_directory(
   data_format=None,
   verbose=True
 )
-sequence: Module(keras.preprocessing.sequence)
+sequence: Module(keras.api.preprocessing.sequence)
 text_dataset_from_directory(
   directory,
   labels='inferred',

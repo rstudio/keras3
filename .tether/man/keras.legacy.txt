@@ -1,2 +1,2 @@
-saving: Module(keras.legacy.saving)
+saving: Module(keras.api.legacy.saving)
 

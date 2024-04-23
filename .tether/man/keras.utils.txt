@@ -87,7 +87,7 @@ img_to_array(
 )
 is_interactive_logging_enabled()
 is_keras_tensor(x)
-legacy: Module(keras.utils.legacy)
+legacy: Module(keras.api.utils.legacy)
 load_img(
   path,
   color_mode='rgb',
