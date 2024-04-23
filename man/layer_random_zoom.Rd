@@ -64,7 +64,7 @@ Note that torch backend does not support \code{"wrap"}.
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{fill_value}{a float represents the value to be filled outside
+\item{fill_value}{a float that represents the value to be filled outside
 the boundaries when \code{fill_mode="constant"}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.

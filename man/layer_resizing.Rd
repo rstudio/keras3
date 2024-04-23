@@ -10,6 +10,9 @@ layer_resizing(
   width,
   interpolation = "bilinear",
   crop_to_aspect_ratio = FALSE,
+  pad_to_aspect_ratio = FALSE,
+  fill_mode = "constant",
+  fill_value = 0,
   data_format = NULL,
   ...
 )
@@ -32,6 +35,18 @@ cropped so as to return the
 largest possible window in the image (of size \verb{(height, width)})
 that matches the target aspect ratio. By default
 (\code{crop_to_aspect_ratio=FALSE}), aspect ratio may not be preserved.}
+
+\item{pad_to_aspect_ratio}{If \code{TRUE}, pad the images without aspect
+ratio distortion. When the original aspect ratio differs
+from the target aspect ratio, the output image will be
+evenly padded on the short side.}
+
+\item{fill_mode}{When using \code{pad_to_aspect_ratio=TRUE}, padded areas
+are filled according to the given mode. Only \code{"constant"} is
+supported at this time
+(fill with constant value, equal to \code{fill_value}).}
+
+\item{fill_value}{Float. Padding value to use when \code{pad_to_aspect_ratio=TRUE}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}

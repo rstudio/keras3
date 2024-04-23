@@ -16,7 +16,7 @@ optimizer_rmsprop(
   global_clipnorm = NULL,
   use_ema = FALSE,
   ema_momentum = 0.99,
-  ema_overwrite_frequency = 100L,
+  ema_overwrite_frequency = NULL,
   name = "rmsprop",
   ...,
   loss_scale_factor = NULL,

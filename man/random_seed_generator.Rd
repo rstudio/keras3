@@ -4,10 +4,12 @@
 \alias{random_seed_generator}
 \title{Generates variable seeds upon each call to a RNG-using function.}
 \usage{
-random_seed_generator(seed = NULL, ...)
+random_seed_generator(seed = NULL, name = NULL, ...)
 }
 \arguments{
 \item{seed}{Initial seed for the random number generator}
+
+\item{name}{String, name for the object}
 
 \item{...}{For forward/backward compatability.}
 }

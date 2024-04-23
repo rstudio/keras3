@@ -9,6 +9,10 @@ op_image_resize(
   size,
   interpolation = "bilinear",
   antialias = FALSE,
+  crop_to_aspect_ratio = FALSE,
+  pad_to_aspect_ratio = FALSE,
+  fill_mode = "constant",
+  fill_value = 0,
   data_format = "channels_last"
 )
 }
@@ -22,6 +26,26 @@ op_image_resize(
 
 \item{antialias}{Whether to use an antialiasing filter when downsampling an
 image. Defaults to \code{FALSE}.}
+
+\item{crop_to_aspect_ratio}{If \code{TRUE}, resize the images without aspect
+ratio distortion. When the original aspect ratio differs
+from the target aspect ratio, the output image will be
+cropped so as to return the
+largest possible window in the image (of size \verb{(height, width)})
+that matches the target aspect ratio. By default
+(\code{crop_to_aspect_ratio=FALSE}), aspect ratio may not be preserved.}
+
+\item{pad_to_aspect_ratio}{If \code{TRUE}, pad the images without aspect
+ratio distortion. When the original aspect ratio differs
+from the target aspect ratio, the output image will be
+evenly padded on the short side.}
+
+\item{fill_mode}{When using \code{pad_to_aspect_ratio=TRUE}, padded areas
+are filled according to the given mode. Only \code{"constant"} is
+supported at this time
+(fill with constant value, equal to \code{fill_value}).}
+
+\item{fill_value}{Float. Padding value to use when \code{pad_to_aspect_ratio=TRUE}.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
@@ -78,6 +102,7 @@ Other image ops: \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
+\code{\link{op_image_rgb_to_grayscale}()} \cr
 
 Other image utils: \cr
 \code{\link{image_array_save}()} \cr
@@ -90,6 +115,7 @@ Other image utils: \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
+\code{\link{op_image_rgb_to_grayscale}()} \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
@@ -133,6 +159,7 @@ Other ops: \cr
 \code{\link{op_cosh}()} \cr
 \code{\link{op_count_nonzero}()} \cr
 \code{\link{op_cross}()} \cr
+\code{\link{op_ctc_decode}()} \cr
 \code{\link{op_ctc_loss}()} \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
@@ -147,6 +174,7 @@ Other ops: \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
 \code{\link{op_eig}()} \cr
+\code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
 \code{\link{op_elu}()} \cr
 \code{\link{op_empty}()} \cr
@@ -180,6 +208,7 @@ Other ops: \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
+\code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
@@ -252,6 +281,7 @@ Other ops: \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_segment_max}()} \cr
 \code{\link{op_segment_sum}()} \cr
+\code{\link{op_select}()} \cr
 \code{\link{op_selu}()} \cr
 \code{\link{op_separable_conv}()} \cr
 \code{\link{op_shape}()} \cr
@@ -297,6 +327,7 @@ Other ops: \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vdot}()} \cr
+\code{\link{op_vectorize}()} \cr
 \code{\link{op_vectorized_map}()} \cr
 \code{\link{op_vstack}()} \cr
 \code{\link{op_where}()} \cr

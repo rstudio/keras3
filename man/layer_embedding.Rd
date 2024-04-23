@@ -12,6 +12,7 @@ layer_embedding(
   embeddings_regularizer = NULL,
   embeddings_constraint = NULL,
   mask_zero = FALSE,
+  weights = NULL,
   lora_rank = NULL,
   ...
 )
@@ -42,6 +43,10 @@ to support masking or an exception will be raised.
 If \code{mask_zero} is set to \code{TRUE}, as a consequence,
 index 0 cannot be used in the vocabulary (\code{input_dim} should
 equal size of vocabulary + 1).}
+
+\item{weights}{Optional floating-point matrix of size
+\verb{(input_dim, output_dim)}. The initial embeddings values
+to use.}
 
 \item{lora_rank}{Optional integer. If set, the layer's forward pass
 will implement LoRA (Low-Rank Adaptation)
