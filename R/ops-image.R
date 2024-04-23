@@ -455,3 +455,52 @@ function (images, top_cropping = NULL, left_cropping = NULL,
   do.call(keras$ops$image$crop_images, args)
 }
 
+#' Convert RGB images to grayscale.
+#'
+#' @description
+#' This function converts RGB images to grayscale images. It supports both
+#' 3D and 4D tensors, where the last dimension represents channels.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 4, 4, 3))
+#' y <- op_image_rgb_to_grayscale(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(4, 4, 3)) # Single RGB image
+#' y = op_image_rgb_to_grayscale(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(2, 3, 4, 4))
+#' y <- op_image_rgb_to_grayscale(x, data_format="channels_first")
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' Grayscale image or batch of grayscale images.
+#'
+#' @param image
+#' Input RGB image or batch of RGB images. Must be a 3D tensor
+#' with shape `(height, width, channels)` or a 4D tensor with shape
+#' `(batch, height, width, channels)`.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' Defaults to `"channels_last"`.
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @tether keras.ops.image.rgb_to_grayscale
+op_image_rgb_to_grayscale <-
+function (image, data_format = "channels_last")
+keras$ops$image$rgb_to_grayscale(image, data_format)

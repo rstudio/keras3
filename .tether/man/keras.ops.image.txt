@@ -50,4 +50,5 @@ resize(
   fill_value=0.0,
   data_format='channels_last'
 )
+rgb_to_grayscale(image, data_format='channels_last')
 
