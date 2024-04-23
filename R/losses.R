@@ -944,6 +944,10 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' loss <- y_true * log(y_true / y_pred)
 #' ```
 #'
+#' `y_true` and `y_pred` are expected to be probability
+#' distributions, with values between 0 and 1. They will get
+#' clipped to the `[0, 1]` range.
+#'
 #' # Examples
 #' ```{r}
 #' y_true <- random_uniform(c(2, 3), 0, 2)
