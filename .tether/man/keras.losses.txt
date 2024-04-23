@@ -129,4 +129,16 @@ SparseCategoricalCrossentropy(
 )
 squared_hinge(y_true, y_pred)
 SquaredHinge(reduction='sum_over_batch_size', name='squared_hinge')
+tversky(
+  y_true,
+  y_pred,
+  alpha=0.5,
+  beta=0.5
+)
+Tversky(
+  alpha=0.5,
+  beta=0.5,
+  reduction='sum_over_batch_size',
+  name='tversky'
+)
 
