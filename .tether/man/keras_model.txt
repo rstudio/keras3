@@ -127,6 +127,13 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
+ |  __reduce__(self)
+ |      __reduce__ is used to customize the behavior of `pickle.pickle()`.
+ |
+ |      The method returns a tuple of two elements: a function, and a list of
+ |      arguments to pass to that function.  In this case we just leverage the
+ |      keras saving library.
+ |
  |  build_from_config(self, config)
  |      Builds the layer's states with the supplied config dict.
  |
