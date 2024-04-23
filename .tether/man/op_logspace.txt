@@ -22,7 +22,7 @@ Args:
         are returned.
     num: Number of samples to generate. Defaults to `50`.
     endpoint: If `True`, `stop` is the last sample. Otherwise, it is not
-        included. Defaults to`True`.
+        included. Defaults to `True`.
     base: The base of the log space. Defaults to `10`.
     dtype: The type of the output tensor.
     axis: The axis in the result to store the samples. Relevant only
@@ -33,3 +33,4 @@ Note:
 
 Returns:
     A tensor of evenly spaced samples on a log scale.
+

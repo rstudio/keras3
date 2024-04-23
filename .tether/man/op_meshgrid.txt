@@ -17,7 +17,7 @@ Returns:
     Sequence of N tensors.
 
 Example:
->>> from keras import ops
+>>> from keras.src import ops
 >>> x = ops.array([1, 2, 3])
 >>> y = ops.array([4, 5, 6])
 

@@ -32,7 +32,7 @@ Returns:
     Tensor of diagonals.
 
 Examples:
->>> from keras import ops
+>>> from keras.src import ops
 >>> x = ops.arange(4).reshape((2, 2))
 >>> x
 array([[0, 1],
@@ -51,3 +51,4 @@ array([[[0, 1],
 >>> x.diagonal(0, 0, 1)
 array([[0, 6],
        [1, 7]])
+

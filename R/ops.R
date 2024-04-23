@@ -4956,7 +4956,7 @@ keras$ops$less_equal(x1, x2)
 #'
 #' @param endpoint
 #' If `TRUE`, `stop` is the last sample. Otherwise, it is
-#' not included. Defaults to`TRUE`.
+#' not included. Defaults to `TRUE`.
 #'
 #' @param retstep
 #' If `TRUE`, return `(samples, step)`, where `step` is the
@@ -5224,7 +5224,7 @@ keras$ops$logical_xor(x1, x2)
 #'
 #' @param endpoint
 #' If `TRUE`, `stop` is the last sample. Otherwise, it is not
-#' included. Defaults to`TRUE`.
+#' included. Defaults to `TRUE`.
 #'
 #' @param base
 #' The base of the log space. Defaults to `10`.
@@ -5310,10 +5310,10 @@ keras$ops$matmul(x1, x2)
 #'
 #' @param keepdims
 #' If this is set to `TRUE`, the axes which are reduced are left
-#' in the result as dimensions with size one. Defaults to`FALSE`.
+#' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
 #' @param initial
-#' The minimum value of an output element. Defaults to`NULL`.
+#' The minimum value of an output element. Defaults to `NULL`.
 #'
 #' @export
 #' @aliases op_amax

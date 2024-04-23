@@ -25,7 +25,7 @@ Args:
     num: Number of samples to generate. Defaults to `50`. Must be
         non-negative.
     endpoint: If `True`, `stop` is the last sample. Otherwise, it is
-        not included. Defaults to`True`.
+        not included. Defaults to `True`.
     retstep: If `True`, return `(samples, step)`, where `step` is the
         spacing between samples.
     dtype: The type of the output tensor.
@@ -38,3 +38,4 @@ Note:
 Returns:
     A tensor of evenly spaced numbers.
     If `retstep` is `True`, returns `(samples, step)`
+
