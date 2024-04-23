@@ -1698,6 +1698,21 @@ function (object, scale, offset = 0, ...)
 #' that matches the target aspect ratio. By default
 #' (`crop_to_aspect_ratio=FALSE`), aspect ratio may not be preserved.
 #'
+#' @param pad_to_aspect_ratio
+#' If `TRUE`, pad the images without aspect
+#' ratio distortion. When the original aspect ratio differs
+#' from the target aspect ratio, the output image will be
+#' evenly padded on the short side.
+#'
+#' @param fill_mode
+#' When using `pad_to_aspect_ratio=TRUE`, padded areas
+#' are filled according to the given mode. Only `"constant"` is
+#' supported at this time
+#' (fill with constant value, equal to `fill_value`).
+#'
+#' @param fill_value
+#' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -1725,7 +1740,9 @@ function (object, scale, offset = 0, ...)
 #' @tether keras.layers.Resizing
 layer_resizing <-
 function (object, height, width, interpolation = "bilinear",
-    crop_to_aspect_ratio = FALSE, data_format = NULL, ...)
+    crop_to_aspect_ratio = FALSE,
+    pad_to_aspect_ratio = FALSE, fill_mode = "constant", fill_value = 0,
+    data_format = NULL, ...)
 {
     args <- capture_args(list(height = as_integer, width = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,

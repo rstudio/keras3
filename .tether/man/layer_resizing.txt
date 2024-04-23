@@ -1,7 +1,7 @@
 Help on class Resizing in module keras.src.layers.preprocessing.resizing:
 
 class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
- |  Resizing(height, width, interpolation='bilinear', crop_to_aspect_ratio=False, data_format=None, **kwargs)
+ |  Resizing(height, width, interpolation='bilinear', crop_to_aspect_ratio=False, pad_to_aspect_ratio=False, fill_mode='constant', fill_value=0.0, data_format=None, **kwargs)
  |
  |  A preprocessing layer which resizes images.
  |
@@ -37,6 +37,15 @@ class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |          largest possible window in the image (of size `(height, width)`)
  |          that matches the target aspect ratio. By default
  |          (`crop_to_aspect_ratio=False`), aspect ratio may not be preserved.
+ |      pad_to_aspect_ratio: If `True`, pad the images without aspect
+ |          ratio distortion. When the original aspect ratio differs
+ |          from the target aspect ratio, the output image will be
+ |          evenly padded on the short side.
+ |      fill_mode: When using `pad_to_aspect_ratio=True`, padded areas
+ |          are filled according to the given mode. Only `"constant"` is
+ |          supported at this time
+ |          (fill with constant value, equal to `fill_value`).
+ |      fill_value: Float. Padding value to use when `pad_to_aspect_ratio=True`.
  |      data_format: string, either `"channels_last"` or `"channels_first"`.
  |          The ordering of the dimensions in the inputs. `"channels_last"`
  |          corresponds to inputs with shape `(batch, height, width, channels)`
@@ -66,6 +75,9 @@ class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |    width,
  |    interpolation='bilinear',
  |    crop_to_aspect_ratio=False,
+ |    pad_to_aspect_ratio=False,
+ |    fill_mode='constant',
+ |    fill_value=0.0,
  |    data_format=None,
  |    **kwargs
  |  )
