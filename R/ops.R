@@ -2773,7 +2773,7 @@ keras$ops$add(x1, x2)
 #' @param keepdims
 #' If `TRUE`, axes which are reduced are left in the result as
 #' dimensions with size one. With this option, the result will
-#' broadcast correctly against the input array. Defaults to`FALSE`.
+#' broadcast correctly against the input array. Defaults to `FALSE`.
 #'
 #' @export
 #' @family numpy ops
