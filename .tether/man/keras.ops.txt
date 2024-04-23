@@ -461,6 +461,11 @@ segment_sum(
   num_segments=None,
   sorted=False
 )
+select(
+  condlist,
+  choicelist,
+  default=0
+)
 selu(x)
 separable_conv(
   inputs,

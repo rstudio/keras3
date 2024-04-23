@@ -1297,6 +1297,52 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
     do.call(keras$ops$segment_sum, args)
 }
 
+#' Return elements from `choicelist`, based on conditions in `condlist`.
+#'
+#' @param condlist
+#' List of boolean tensors.
+#' The list of conditions which determine from which array
+#' in choicelist the output elements are taken.
+#' When multiple conditions are satisfied,
+#' the first one encountered in condlist is used.
+#'
+#' @param choicelist
+#' List of tensors.
+#' The list of tensors from which the output elements are taken.
+#' This list has to be of the same length as `condlist`.
+#'
+#' @param default
+#' Optional scalar value.
+#' The element inserted in the output
+#' when all conditions evaluate to `FALSE`.
+#'
+#' @returns
+#' Tensor where the output at position `m` is the `m`-th element
+#' of the tensor in `choicelist` where the `m`-th element of the
+#' corresponding tensor in `condlist` is `TRUE`.
+#'
+#' @description
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_arange(6L)
+#' condlist <- list(x < 3, x > 3)
+#' choicelist <- list(x, x^2)
+#' op_select(condlist, choicelist, 42)
+#' ```
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.select
+op_select <-
+function (condlist, choicelist, default = 0L)
+{
+    args <- capture_args(list(default = as_integer))
+    do.call(keras$ops$select, args)
+}
+
 
 #' Solves a linear system of equations given by `a x = b`.
 #'
