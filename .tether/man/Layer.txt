@@ -442,6 +442,9 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |  losses
  |      List of scalar losses from `add_loss`, regularizers and sublayers.
  |
+ |  metrics
+ |      List of all metrics.
+ |
  |  metrics_variables
  |      List of all metric variables.
  |
@@ -487,6 +490,8 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |
  |  ----------------------------------------------------------------------
  |  Data descriptors defined here:
+ |
+ |  dtype_policy
  |
  |  input_spec
  |
