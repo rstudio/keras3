@@ -3973,8 +3973,6 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @family numpy ops
 #' @family ops
 #' @tether keras.ops.ctc_decode
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_decode>
 op_ctc_decode <-
 function (inputs, sequence_lengths, strategy, beam_width = 100L,
     top_paths = 1L, merge_repeated = TRUE, mask_index = NULL)

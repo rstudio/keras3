@@ -57,6 +57,22 @@ op_eig <-
 function (x)
 keras$ops$eig(x)
 
+#' Computes the eigenvalues and eigenvectors of a complex Hermitian.
+#'
+#' @returns
+#' A list of two tensors: a tensor of shape `(..., M)` containing
+#' eigenvalues and a tensor of shape `(..., M, M)` containing eigenvectors.
+#'
+#' @param x
+#' Input tensor of shape `(..., M, M)`.
+#'
+#' @export
+#' @family linear algebra ops
+#' @family ops
+#' @tether keras.ops.eigh
+op_eigh <-
+function (x)
+keras$ops$eigh(x)
 
 #' Computes the inverse of a square tensor.
 #'
