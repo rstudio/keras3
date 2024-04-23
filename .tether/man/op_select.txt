@@ -1,0 +1,39 @@
+__signature__
+keras.ops.select(
+  condlist,
+  choicelist,
+  default=0
+)
+__doc__
+Return elements from `choicelist`, based on conditions in `condlist`.
+
+Args:
+    condlist: List of boolean tensors.
+        The list of conditions which determine from which array
+        in choicelist the output elements are taken.
+        When multiple conditions are satisfied,
+        the first one encountered in condlist is used.
+    choicelist: List of tensors.
+        The list of tensors from which the output elements are taken.
+        This list has to be of the same length as `condlist`.
+    defaults: Optional scalar value.
+        The element inserted in the output
+        when all conditions evaluate to `False`.
+
+Returns:
+    Tensor where the output at position `m` is the `m`-th element
+    of the tensor in `choicelist` where the `m`-th element of the
+    corresponding tensor in `condlist` is `True`.
+
+Example:
+
+```python
+from keras import ops
+
+x = ops.arange(6)
+condlist = [x<3, x>3]
+choicelist = [x, x**2]
+ops.select(condlist, choicelist, 42)
+# Returns: tensor([0,  1,  2, 42, 16, 25])
+```
+

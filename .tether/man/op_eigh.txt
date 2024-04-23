@@ -1,0 +1,12 @@
+__signature__
+keras.ops.eigh(x)
+__doc__
+Computes the eigenvalues and eigenvectors of a complex Hermitian.
+
+Args:
+    x: Input tensor of shape `(..., M, M)`.
+
+Returns:
+    A tuple of two tensors: a tensor of shape `(..., M)` containing
+    eigenvalues and a tensor of shape `(..., M, M)` containing eigenvectors.
+
