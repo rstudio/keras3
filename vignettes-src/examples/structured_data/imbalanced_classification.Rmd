@@ -28,6 +28,7 @@ the link, or if you're setup with a kaggle API key at
 
 ```{r, eval = FALSE}
 reticulate::py_install("kaggle", pip = TRUE)
+reticulate::py_available(TRUE) # ensure 'kaggle' is on the PATH
 system("kaggle datasets download -d mlg-ulb/creditcardfraud")
 zip::unzip("creditcardfraud.zip", files = "creditcard.csv")
 ```
