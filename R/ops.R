@@ -5644,6 +5644,21 @@ keras$ops$multiply(x1, x2)
 #' @param x
 #' Input data.
 #'
+#' @param nan
+#' Optional float or int. Value to replace `NaN` entries with.
+#'
+#' @param posinf
+#' Optional float or int. Value to replace positive infinity with.
+#'
+#' @param neginf
+#' Optional float or int. Value to replace negative infinity with.
+#'
+#' ```{r}
+#' (x <- op_convert_to_tensor(c(1, NaN, -Inf, Inf)))
+#' op_nan_to_num(x)
+#' op_nan_to_num(x, nan = -1, posinf = 2, neginf = -2)
+#' ```
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -5652,8 +5667,10 @@ keras$ops$multiply(x1, x2)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num>
 #' @tether keras.ops.nan_to_num
 op_nan_to_num <-
-function (x)
-keras$ops$nan_to_num(x)
+function (x, nan = 0, posinf = NULL, neginf = NULL) {
+  args <- capture_args()
+  do.call(keras$ops$nan_to_num, args)
+}
 
 
 #' Return the number of dimensions of a tensor.
