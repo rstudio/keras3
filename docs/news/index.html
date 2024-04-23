@@ -71,7 +71,27 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
-</div>
+<p>User facing changes with upstream Keras v3.3.2:</p>
+<ul><li><p>new function: <code><a href="../reference/op_ctc_decode.html">op_ctc_decode()</a></code></p></li>
+<li><p>new function: <code><a href="../reference/op_eigh.html">op_eigh()</a></code></p></li>
+<li><p>new function: <code><a href="../reference/op_select.html">op_select()</a></code></p></li>
+<li><p>new function: <code><a href="../reference/op_vectorize.html">op_vectorize()</a></code></p></li>
+<li><p>new function: <code><a href="../reference/op_image_rgb_to_grayscale.html">op_image_rgb_to_grayscale()</a></code></p></li>
+<li><p>new function: <code><a href="../reference/loss_tversky.html">loss_tversky()</a></code></p></li>
+<li><p>new args: <code>layer_resizing(pad_to_aspect_ratio, fill_mode, fill_value)</code></p></li>
+<li><p>new arg: <code>layer_embedding(weights)</code> for providing an initial weights matrix</p></li>
+<li><p>new args: <code>op_nan_to_num(nan, posinf, neginf)</code></p></li>
+<li><p>new args: <code>op_image_resize(crop_to_aspect_ratio, pad_to_aspect_ratio, fill_mode, fill_value)</code></p></li>
+<li><p>new args: <code>op_argmax(keepdims)</code> and <code>op_argmin(keepdims)</code></p></li>
+<li><p>new arg: <code>clear_session(free_memory)</code> for clearing without invoking the garbage collector.</p></li>
+<li><p><code><a href="../reference/metric_kl_divergence.html">metric_kl_divergence()</a></code> and <code><a href="../reference/loss_kl_divergence.html">loss_kl_divergence()</a></code> clip inputs (<code>y_true</code> and <code>y_pred</code>) to the <code>[0, 1]</code> range.</p></li>
+<li><p>new <code><a href="../reference/Layer.html">Layer()</a></code> attributes: <code>metrics</code>, <code>dtype_policy</code></p></li>
+<li><p>Added initial support for float8 training</p></li>
+<li><p><code>layer_conv_*d()</code> layers now support LoRa</p></li>
+<li><p><code><a href="../reference/op_digitize.html">op_digitize()</a></code> now supports sparse tensors.</p></li>
+<li><p>Models and layers now return owned metrics recursively.</p></li>
+<li><p>Add pickling support for Keras models. (e.g., via <code><a href="https://rstudio.github.io/reticulate/reference/py_save_object.html" class="external-link">reticulate::py_save_object()</a></code>) Note that pickling is not recommended, prefer using Keras saving APIs.</p></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.2.0" id="keras3-020">keras3 0.2.0<a class="anchor" aria-label="anchor" href="#keras3-020"></a></h2><p class="text-muted">CRAN release: 2024-04-18</p>
 <p>New functions:</p>

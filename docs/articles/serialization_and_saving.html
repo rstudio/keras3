@@ -221,7 +221,7 @@ method.</p>
 <span>  <span class="st">"CustomLayer"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">sublayer</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">super</span><span class="op">$</span><span class="fu">initialize</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span>    <span class="va">self</span><span class="op">$</span><span class="va">sublayer</span> <span class="op">&lt;-</span> <span class="va">layer</span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="va">sublayer</span> <span class="op">&lt;-</span> <span class="va">sublayer</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="fu">sublayer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -339,7 +339,7 @@ custom activation function to demonstrate this.</p>
 <span><span class="co"># Upon loading, pass a named list containing the custom objects used in the</span></span>
 <span><span class="co"># `custom_objects` argument of `load_model()`.</span></span>
 <span><span class="va">reconstructed_model</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/load_model.html">load_model</a></span><span class="op">(</span></span>
-<span>  <span class="st">"custom_model.keras"</span>,</span>
+<span> <span class="st">"custom_model.keras"</span>,</span>
 <span>  custom_objects <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>CustomLayer <span class="op">=</span> <span class="va">layer_custom</span>,</span>
 <span>                        custom_fn <span class="op">=</span> <span class="va">custom_fn</span><span class="op">)</span>,</span>
 <span><span class="op">)</span></span>
@@ -765,15 +765,12 @@ either in <code>initialize</code> itself or overriding the
 <span>    get_config <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="va">super</span><span class="op">$</span><span class="fu">get_config</span><span class="op">(</span><span class="op">)</span></span>
 <span>      <span class="co"># Update the config with the custom layer's parameters</span></span>
-<span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/modifyList.html" class="external-link">modifyList</a></span><span class="op">(</span></span>
-<span>        <span class="va">config</span>,</span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>          units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">hidden_units</span>,</span>
-<span>          kernel_regularizer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_regularizer</span>,</span>
-<span>          kernel_initializer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_initializer</span>,</span>
-<span>          nested_model <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">nested_model</span></span>
-<span>        <span class="op">)</span></span>
-<span>      <span class="op">)</span></span>
+<span>      <span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/modifyList.html" class="external-link">modifyList</a></span><span class="op">(</span><span class="va">config</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        units <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">hidden_units</span>,</span>
+<span>        kernel_regularizer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_regularizer</span>,</span>
+<span>        kernel_initializer <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">kernel_initializer</span>,</span>
+<span>        nested_model <span class="op">=</span> <span class="va">self</span><span class="op">$</span><span class="va">nested_model</span></span>
+<span>      <span class="op">)</span><span class="op">)</span></span>
 <span>      <span class="va">config</span></span>
 <span>    <span class="op">}</span>,</span>
 <span>    build <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">input_shape</span><span class="op">)</span> <span class="op">{</span></span>

@@ -275,9 +275,9 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 7s - 8ms/step - loss: 2.9056 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0609 - val_sparse_categorical_accuracy: 0.9140</span></span>
+<span><span class="co">## 782/782 - 6s - 8ms/step - loss: 2.9056 - sparse_categorical_accuracy: 0.8634 - val_loss: 1.0609 - val_sparse_categorical_accuracy: 0.9140</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.6237 - sparse_categorical_accuracy: 0.9285 - val_loss: 0.7154 - val_sparse_categorical_accuracy: 0.9168</span></span>
+<span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.6237 - sparse_categorical_accuracy: 0.9285 - val_loss: 0.7154 - val_sparse_categorical_accuracy: 0.9168</span></span>
 <span><span class="co">## 157/157 - 0s - 3ms/step - loss: 0.7418 - sparse_categorical_accuracy: 0.9134</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
 <span><span class="co">## [1] 0.7417642</span></span>
@@ -348,11 +348,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 7s - 8ms/step - loss: 3.2576 - sparse_categorical_accuracy: 0.8585 - val_loss: 0.9629 - val_sparse_categorical_accuracy: 0.9046</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 6s - 7ms/step - loss: 3.2576 - sparse_categorical_accuracy: 0.8585 - val_loss: 0.9629 - val_sparse_categorical_accuracy: 0.9046</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.6968 - sparse_categorical_accuracy: 0.9213 - val_loss: 0.7274 - val_sparse_categorical_accuracy: 0.9138</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.6968 - sparse_categorical_accuracy: 0.9213 - val_loss: 0.7274 - val_sparse_categorical_accuracy: 0.9138</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">
