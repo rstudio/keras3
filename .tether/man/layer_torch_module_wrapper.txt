@@ -26,7 +26,7 @@ class TorchModuleWrapper(keras.src.layers.layer.Layer)
  |  import torch.nn.functional as F
  |
  |  import keras
- |  from keras.layers import TorchModuleWrapper
+ |  from keras.src.layers import TorchModuleWrapper
  |
  |  class Classifier(keras.Model):
  |      def __init__(self, **kwargs):

@@ -142,4 +142,9 @@ class Embedding(keras.src.layers.layer.Layer)
  |
  |  embeddings
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  QUANTIZATION_MODE_ERROR_TEMPLATE = "Invalid quantization mode. Expecte...
+ |
 
