@@ -2760,6 +2760,10 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' loss <- y_true * log(y_true / y_pred)
 #' ```
 #'
+#' `y_true` and `y_pred` are expected to be probability
+#' distributions, with values between 0 and 1. They will get
+#' clipped to the `[0, 1]` range.
+#'
 #' # Usage
 #' Standalone usage:
 #'
