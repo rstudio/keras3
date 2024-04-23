@@ -129,7 +129,7 @@ layer_custom <- Layer(
   "CustomLayer",
   initialize = function(sublayer, ...) {
     super$initialize(...)
-    self$sublayer <- layer
+    self$sublayer <- sublayer
   },
   call = function(x) {
     self$sublayer(x)
@@ -251,7 +251,7 @@ model |> save_model("custom_model.keras", overwrite = TRUE)
 # Upon loading, pass a named list containing the custom objects used in the
 # `custom_objects` argument of `load_model()`.
 reconstructed_model <-  load_model(
-  "custom_model.keras",
+ "custom_model.keras",
   custom_objects = list(CustomLayer = layer_custom,
                         custom_fn = custom_fn),
 )
@@ -655,15 +655,12 @@ layer_my_dense <- register_keras_serializable(
     get_config = function() {
       config <- super$get_config()
       # Update the config with the custom layer's parameters
-      config <- modifyList(
-        config,
-        list(
-          units = self$hidden_units,
-          kernel_regularizer = self$kernel_regularizer,
-          kernel_initializer = self$kernel_initializer,
-          nested_model = self$nested_model
-        )
-      )
+      config <- modifyList(config, list(
+        units = self$hidden_units,
+        kernel_regularizer = self$kernel_regularizer,
+        kernel_initializer = self$kernel_initializer,
+        nested_model = self$nested_model
+      ))
       config
     },
     build = function(input_shape) {
