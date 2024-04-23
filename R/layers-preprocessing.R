@@ -1563,7 +1563,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #' Integer. Used to create a random seed.
 #'
 #' @param fill_value
-#' a float represents the value to be filled outside
+#' a float that represents the value to be filled outside
 #' the boundaries when `fill_mode="constant"`.
 #'
 #' @param data_format
