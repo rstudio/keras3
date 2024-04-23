@@ -7110,6 +7110,59 @@ op_vstack <-
 function (xs)
 keras$ops$vstack(xs)
 
+#' Turn a function into a vectorized function.
+#'
+#' @description
+#'
+#' # Examples
+#'
+#' ```{r}
+#' # currently does not work w/ tensorflow backend
+#' if(config_backend() != "tensorflow") {
+#'
+#'   myfunc <- function(a, b) a + b
+#'
+#'   vfunc <- op_vectorize(myfunc)
+#'   y <- vfunc(c(1, 2, 3, 4), 2)
+#'   print(y)
+#'   # with Jax backend, y is:
+#'   # Array([3., 4., 5., 6.], dtype=float32)
+#' }
+#' ```
+#'
+#' @returns
+#' A new function that applies `func` to every element
+#' of its input along axis 1 (the batch axis, the first axis).
+#'
+#' @param func
+#' Callable of a single tensor argument.
+#'
+#' @param excluded
+#' Optional set of integers representing
+#' positional arguments for which the function
+#' will not be vectorized.
+#' These will be passed directly to `func` unmodified.
+#'
+#' @param signature
+#' Optional generalized universal function signature,
+#' e.g., `"(m,n),(n)->(m)"` for vectorized
+#' matrix-vector multiplication. If provided,
+#' `func` will be called with (and expected to return)
+#' arrays with shapes given by the size of corresponding
+#' core dimensions. By default, `func` is assumed
+#' to take scalar tensors as input and output.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.vectorize
+op_vectorize <-
+function (func, ..., excluded = NULL, signature = NULL)
+keras$ops$vectorize(func, ..., excluded = excluded, signature = signature)
+
 
 #' Return elements chosen from `x1` or `x2` depending on `condition`.
 #'

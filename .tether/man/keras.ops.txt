@@ -599,6 +599,12 @@ var(
   keepdims=False
 )
 vdot(x1, x2)
+vectorize(
+  pyfunc,
+  *,
+  excluded=None,
+  signature=None
+)
 vectorized_map(function, elements)
 vstack(xs)
 where(
