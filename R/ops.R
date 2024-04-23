@@ -3931,6 +3931,61 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
     do.call(keras$ops$cross, args)
 }
 
+#' Decodes the output of a CTC model.
+#'
+#' @returns
+#' A list containing:
+#'
+#' - A list of decoded sequences.
+#' - A list of the negative of the sum of the probability logits
+#'   (if strategy is `"greedy"`) or the log probability (if strategy is
+#'   `"beam_search"`) for each sequence.
+#'
+#' @param inputs
+#' A tensor of shape `(batch_size, max_length, num_classes)`
+#' containing the logits (output of the model).
+#'
+#' @param sequence_lengths
+#' A tensor of shape `(batch_size)` containing the
+#' sequence lengths for the batch.
+#'
+#' @param strategy
+#' A string for the decoding strategy. Supported values are
+#' `"greedy"` and `"beam_search"`.
+#'
+#' @param beam_width
+#' An integer scalar beam width used in beam search.
+#' Defaults to `100`.
+#'
+#' @param top_paths
+#' An integer scalar, the number of top paths to return.
+#' Defaults to `1`.
+#'
+#' @param merge_repeated
+#' A boolean scalar, whether to merge repeated
+#' labels in the output. Defaults to `TRUE`.
+#'
+#' @param mask_index
+#' An integer scalar, the index of the mask character in
+#' the vocabulary. Defaults to `NULL`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.ctc_decode
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_decode>
+op_ctc_decode <-
+function (inputs, sequence_lengths, strategy, beam_width = 100L,
+    top_paths = 1L, merge_repeated = TRUE, mask_index = NULL)
+{
+    args <- capture_args(list(
+      sequence_lengths = as_integer_array,
+      beam_width = as_integer,
+      top_paths = as_integer,
+      mask_index = as_integer))
+    do.call(keras$ops$ctc_decode, args)
+}
 
 #' Return the cumulative product of elements along a given axis.
 #'

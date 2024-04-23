@@ -146,6 +146,15 @@ cross(
   axisc=-1,
   axis=None
 )
+ctc_decode(
+  inputs,
+  sequence_lengths,
+  strategy,
+  beam_width=100,
+  top_paths=1,
+  merge_repeated=True,
+  mask_index=None
+)
 ctc_loss(
   target,
   output,
