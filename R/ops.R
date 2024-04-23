@@ -5499,10 +5499,10 @@ function (..., indexing = "xy")
 #'
 #' @param keepdims
 #' If this is set to `TRUE`, the axes which are reduced are left
-#' in the result as dimensions with size one. Defaults to`FALSE`.
+#' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
 #' @param initial
-#' The maximum value of an output element. Defaults to`NULL`.
+#' The maximum value of an output element. Defaults to `NULL`.
 #'
 #' @export
 #' @aliases op_amin
