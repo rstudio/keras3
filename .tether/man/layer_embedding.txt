@@ -1,7 +1,7 @@
 Help on class Embedding in module keras.src.layers.core.embedding:
 
 class Embedding(keras.src.layers.layer.Layer)
- |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, lora_rank=None, **kwargs)
+ |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, weights=None, lora_rank=None, **kwargs)
  |
  |  Turns positive integers (indexes) into dense vectors of fixed size.
  |
@@ -43,6 +43,9 @@ class Embedding(keras.src.layers.layer.Layer)
  |          If `mask_zero` is set to `True`, as a consequence,
  |          index 0 cannot be used in the vocabulary (`input_dim` should
  |          equal size of vocabulary + 1).
+ |      weights: Optional floating-point matrix of size
+ |          `(input_dim, output_dim)`. The initial embeddings values
+ |          to use.
  |      lora_rank: Optional integer. If set, the layer's forward pass
  |          will implement LoRA (Low-Rank Adaptation)
  |          with the provided rank. LoRA sets the layer's embeddings
@@ -79,6 +82,7 @@ class Embedding(keras.src.layers.layer.Layer)
  |    embeddings_regularizer=None,
  |    embeddings_constraint=None,
  |    mask_zero=False,
+ |    weights=None,
  |    lora_rank=None,
  |    **kwargs
  |  )
@@ -141,5 +145,10 @@ class Embedding(keras.src.layers.layer.Layer)
  |  Readonly properties defined here:
  |
  |  embeddings
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  QUANTIZATION_MODE_ERROR_TEMPLATE = "Invalid quantization mode. Expecte...
  |
 

@@ -594,6 +594,8 @@ Alias of \code{layer$variable_dtype}.
 The dtype layer inputs should be converted to.
 \item \code{losses}
 List of scalar losses from \code{add_loss()}, regularizers and sublayers.
+\item \code{metrics}
+List of all metrics.
 \item \code{metrics_variables}
 List of all metric variables.
 \item \code{non_trainable_variables}
@@ -650,6 +652,7 @@ Output tensor or list of output tensors.
 
 \section{Data descriptors (Attributes):}{
 \itemize{
+\item \code{dtype_policy}
 \item \code{input_spec}
 \item \code{supports_masking}
 Whether this layer supports computing a mask using \code{compute_mask}.

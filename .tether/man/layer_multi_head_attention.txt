@@ -144,6 +144,20 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |    key_shape=None
  |  )
  |
+ |  compute_output_spec(
+ |    self,
+ |    query,
+ |    value,
+ |    key=None,
+ |    query_mask=None,
+ |    value_mask=None,
+ |    key_mask=None,
+ |    attention_mask=None,
+ |    return_attention_scores=False,
+ |    training=None,
+ |    use_causal_mask=False
+ |  )
+ |
  |  get_config(self)
  |      Returns the config of the object.
  |

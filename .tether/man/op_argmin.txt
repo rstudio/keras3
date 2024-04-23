@@ -1,5 +1,9 @@
 __signature__
-keras.ops.argmin(x, axis=None)
+keras.ops.argmin(
+  x,
+  axis=None,
+  keepdims=False
+)
 __doc__
 Returns the indices of the minium values along an axis.
 
@@ -7,6 +11,8 @@ Args:
     x: Input tensor.
     axis: By default, the index is into the flattened tensor, otherwise
         along the specified axis.
+    keepdims: If this is set to `True`, the axes which are reduced are left
+        in the result as dimensions with size one. Defaults to `False`.
 
 Returns:
     Tensor of indices. It has the same shape as `x`, with the dimension
@@ -23,3 +29,4 @@ array(0, dtype=int32)
 array([0, 0, 0], dtype=int32)
 >>> keras.ops.argmin(x, axis=1)
 array([0, 0], dtype=int32)
+

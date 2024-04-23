@@ -505,6 +505,9 @@
 #' * `losses`
 #'     List of scalar losses from `add_loss()`, regularizers and sublayers.
 #'
+#' * `metrics`
+#'     List of all metrics.
+#'
 #' * `metrics_variables`
 #'     List of all metric variables.
 #'
@@ -567,6 +570,8 @@
 #'    Output tensor or list of output tensors.
 #'
 #' # Data descriptors (Attributes):
+#'
+#' * `dtype_policy`
 #'
 #' * `input_spec`
 #'

@@ -15,7 +15,7 @@ Returns:
     The calculation based on the Einstein summation convention.
 
 Example:
->>> from keras import ops
+>>> from keras.src import ops
 >>> a = ops.arange(25).reshape(5, 5)
 >>> b = ops.arange(5)
 >>> c = ops.arange(6).reshape(2, 3)
@@ -82,3 +82,4 @@ array([ 30,  80, 130, 180, 230])
 array([ 30,  80, 130, 180, 230])
 >>> ops.einsum("...j, j", a, b)
 array([ 30,  80, 130, 180, 230])
+

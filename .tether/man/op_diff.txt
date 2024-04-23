@@ -21,7 +21,7 @@ Returns:
     Tensor of diagonals.
 
 Examples:
->>> from keras import ops
+>>> from keras.src import ops
 >>> x = ops.convert_to_tensor([1, 2, 4, 7, 0])
 >>> ops.diff(x)
 array([ 1,  2,  3, -7])
@@ -34,3 +34,4 @@ array([[2, 3, 4],
        [5, 1, 2]])
 >>> ops.diff(x, axis=0)
 array([[-1,  2,  0, -2]])
+

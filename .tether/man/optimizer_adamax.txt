@@ -1,7 +1,7 @@
 Help on class Adamax in module keras.src.optimizers.adamax:
 
 class Adamax(keras.src.optimizers.optimizer.Optimizer)
- |  Adamax(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-07, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, name='adamax', **kwargs)
+ |  Adamax(learning_rate=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-07, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='adamax', **kwargs)
  |
  |  Optimizer that implements the Adamax algorithm.
  |
@@ -118,6 +118,8 @@ class Adamax(keras.src.optimizers.optimizer.Optimizer)
  |    use_ema=False,
  |    ema_momentum=0.99,
  |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
  |    name='adamax',
  |    **kwargs
  |  )

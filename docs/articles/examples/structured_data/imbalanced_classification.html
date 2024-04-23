@@ -17,7 +17,7 @@
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><meta property="og:title" content="Imbalanced classification: credit card fraud detection">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><meta property="og:title" content="Imbalanced classification: credit card fraud detection">
 <meta property="og:description" content="Demonstration of how to handle highly imbalanced classification problems.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -32,7 +32,7 @@
     
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,6 +119,7 @@ with a kaggle API key at <code>"~/.kaggle/kagle.json"</code>, you can
 run the following:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_install.html" class="external-link">py_install</a></span><span class="op">(</span><span class="st">"kaggle"</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_available.html" class="external-link">py_available</a></span><span class="op">(</span><span class="cn">TRUE</span><span class="op">)</span> <span class="co"># ensure 'kaggle' is on the PATH</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.html" class="external-link">system</a></span><span class="op">(</span><span class="st">"kaggle datasets download -d mlg-ulb/creditcardfraud"</span><span class="op">)</span></span>
 <span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/zip/reference/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="st">"creditcardfraud.zip"</span>, files <span class="op">=</span> <span class="st">"creditcard.csv"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -188,11 +189,11 @@ run the following:</p>
 <span><span class="va">counts</span></span></code></pre></div>
 <pre><code><span><span class="co">##</span></span>
 <span><span class="co">##      0      1</span></span>
-<span><span class="co">## 227439    407</span></span></code></pre>
+<span><span class="co">## 227462    384</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Number of positive samples in training data: %i (%.2f%% of total)"</span>,</span>
 <span>            <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span>, <span class="fl">100</span> <span class="op">*</span> <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Number of positive samples in training data: 407 (0.18% of total)</span></span></code></pre>
+<pre><code><span><span class="co">## Number of positive samples in training data: 384 (0.17% of total)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_for_0</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">counts</span><span class="op">[</span><span class="st">"0"</span><span class="op">]</span></span>
 <span><span class="va">weight_for_1</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span></span></code></pre></div>
@@ -281,70 +282,70 @@ run the following:</p>
 <span>  verbose <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/30</span></span>
-<span><span class="co">## 112/112 - 3s - 23ms/step - fn: 43.0000 - fp: 25565.0000 - loss: 2.2013e-06 - precision: 0.0140 - recall: 0.8943 - tn: 201874.0000 - tp: 364.0000 - val_fn: 4.0000 - val_fp: 6928.0000 - val_loss: 0.3525 - val_precision: 0.0116 - val_recall: 0.9529 - val_tn: 49948.0000 - val_tp: 81.0000</span></span>
+<span><span class="co">## 112/112 - 3s - 22ms/step - fn: 40.0000 - fp: 24201.0000 - loss: 2.1046e-06 - precision: 0.0140 - recall: 0.8958 - tn: 203261.0000 - tp: 344.0000 - val_fn: 14.0000 - val_fp: 3327.0000 - val_loss: 0.2038 - val_precision: 0.0275 - val_recall: 0.8704 - val_tn: 53526.0000 - val_tp: 94.0000</span></span>
 <span><span class="co">## Epoch 2/30</span></span>
-<span><span class="co">## 112/112 - 0s - 4ms/step - fn: 32.0000 - fp: 7478.0000 - loss: 1.3921e-06 - precision: 0.0478 - recall: 0.9214 - tn: 219961.0000 - tp: 375.0000 - val_fn: 8.0000 - val_fp: 1648.0000 - val_loss: 0.1238 - val_precision: 0.0446 - val_recall: 0.9059 - val_tn: 55228.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 4ms/step - fn: 28.0000 - fp: 8249.0000 - loss: 1.2774e-06 - precision: 0.0414 - recall: 0.9271 - tn: 219213.0000 - tp: 356.0000 - val_fn: 15.0000 - val_fp: 1896.0000 - val_loss: 0.1072 - val_precision: 0.0468 - val_recall: 0.8611 - val_tn: 54957.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 3/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 30.0000 - fp: 8441.0000 - loss: 1.2788e-06 - precision: 0.0428 - recall: 0.9263 - tn: 218998.0000 - tp: 377.0000 - val_fn: 9.0000 - val_fp: 692.0000 - val_loss: 0.0695 - val_precision: 0.0990 - val_recall: 0.8941 - val_tn: 56184.0000 - val_tp: 76.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 20.0000 - fp: 6617.0000 - loss: 9.6224e-07 - precision: 0.0521 - recall: 0.9479 - tn: 220845.0000 - tp: 364.0000 - val_fn: 13.0000 - val_fp: 3453.0000 - val_loss: 0.1746 - val_precision: 0.0268 - val_recall: 0.8796 - val_tn: 53400.0000 - val_tp: 95.0000</span></span>
 <span><span class="co">## Epoch 4/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 30.0000 - fp: 9691.0000 - loss: 1.2447e-06 - precision: 0.0374 - recall: 0.9263 - tn: 217748.0000 - tp: 377.0000 - val_fn: 13.0000 - val_fp: 678.0000 - val_loss: 0.0942 - val_precision: 0.0960 - val_recall: 0.8471 - val_tn: 56198.0000 - val_tp: 72.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 18.0000 - fp: 7294.0000 - loss: 9.3023e-07 - precision: 0.0478 - recall: 0.9531 - tn: 220168.0000 - tp: 366.0000 - val_fn: 17.0000 - val_fp: 660.0000 - val_loss: 0.0478 - val_precision: 0.1212 - val_recall: 0.8426 - val_tn: 56193.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 5/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 24.0000 - fp: 5684.0000 - loss: 8.3151e-07 - precision: 0.0631 - recall: 0.9410 - tn: 221755.0000 - tp: 383.0000 - val_fn: 7.0000 - val_fp: 2048.0000 - val_loss: 0.0853 - val_precision: 0.0367 - val_recall: 0.9176 - val_tn: 54828.0000 - val_tp: 78.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 15.0000 - fp: 6663.0000 - loss: 7.2354e-07 - precision: 0.0525 - recall: 0.9609 - tn: 220799.0000 - tp: 369.0000 - val_fn: 19.0000 - val_fp: 760.0000 - val_loss: 0.0601 - val_precision: 0.1048 - val_recall: 0.8241 - val_tn: 56093.0000 - val_tp: 89.0000</span></span>
 <span><span class="co">## Epoch 6/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 18.0000 - fp: 8310.0000 - loss: 8.5059e-07 - precision: 0.0447 - recall: 0.9558 - tn: 219129.0000 - tp: 389.0000 - val_fn: 6.0000 - val_fp: 2121.0000 - val_loss: 0.0949 - val_precision: 0.0359 - val_recall: 0.9294 - val_tn: 54755.0000 - val_tp: 79.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 16.0000 - fp: 7958.0000 - loss: 7.6664e-07 - precision: 0.0442 - recall: 0.9583 - tn: 219504.0000 - tp: 368.0000 - val_fn: 14.0000 - val_fp: 3309.0000 - val_loss: 0.1274 - val_precision: 0.0276 - val_recall: 0.8704 - val_tn: 53544.0000 - val_tp: 94.0000</span></span>
 <span><span class="co">## Epoch 7/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 15.0000 - fp: 8924.0000 - loss: 7.7659e-07 - precision: 0.0421 - recall: 0.9631 - tn: 218515.0000 - tp: 392.0000 - val_fn: 6.0000 - val_fp: 2995.0000 - val_loss: 0.1355 - val_precision: 0.0257 - val_recall: 0.9294 - val_tn: 53881.0000 - val_tp: 79.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 17.0000 - fp: 7064.0000 - loss: 7.6301e-07 - precision: 0.0494 - recall: 0.9557 - tn: 220398.0000 - tp: 367.0000 - val_fn: 10.0000 - val_fp: 5697.0000 - val_loss: 0.2665 - val_precision: 0.0169 - val_recall: 0.9074 - val_tn: 51156.0000 - val_tp: 98.0000</span></span>
 <span><span class="co">## Epoch 8/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 16.0000 - fp: 8736.0000 - loss: 8.6834e-07 - precision: 0.0428 - recall: 0.9607 - tn: 218703.0000 - tp: 391.0000 - val_fn: 13.0000 - val_fp: 709.0000 - val_loss: 0.0677 - val_precision: 0.0922 - val_recall: 0.8471 - val_tn: 56167.0000 - val_tp: 72.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 14.0000 - fp: 7286.0000 - loss: 7.0213e-07 - precision: 0.0483 - recall: 0.9635 - tn: 220176.0000 - tp: 370.0000 - val_fn: 15.0000 - val_fp: 2301.0000 - val_loss: 0.0911 - val_precision: 0.0388 - val_recall: 0.8611 - val_tn: 54552.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 9/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 16.0000 - fp: 5783.0000 - loss: 6.5229e-07 - precision: 0.0633 - recall: 0.9607 - tn: 221656.0000 - tp: 391.0000 - val_fn: 8.0000 - val_fp: 2718.0000 - val_loss: 0.0990 - val_precision: 0.0275 - val_recall: 0.9059 - val_tn: 54158.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 18.0000 - fp: 10285.0000 - loss: 1.0564e-06 - precision: 0.0344 - recall: 0.9531 - tn: 217177.0000 - tp: 366.0000 - val_fn: 17.0000 - val_fp: 1831.0000 - val_loss: 0.0865 - val_precision: 0.0473 - val_recall: 0.8426 - val_tn: 55022.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 10/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 8519.0000 - loss: 6.6667e-07 - precision: 0.0446 - recall: 0.9779 - tn: 218920.0000 - tp: 398.0000 - val_fn: 8.0000 - val_fp: 1582.0000 - val_loss: 0.0741 - val_precision: 0.0464 - val_recall: 0.9059 - val_tn: 55294.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 15.0000 - fp: 6163.0000 - loss: 6.8741e-07 - precision: 0.0565 - recall: 0.9609 - tn: 221299.0000 - tp: 369.0000 - val_fn: 16.0000 - val_fp: 1289.0000 - val_loss: 0.0596 - val_precision: 0.0666 - val_recall: 0.8519 - val_tn: 55564.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 11/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 6664.0000 - loss: 6.2250e-07 - precision: 0.0558 - recall: 0.9681 - tn: 220775.0000 - tp: 394.0000 - val_fn: 7.0000 - val_fp: 1477.0000 - val_loss: 0.0694 - val_precision: 0.0502 - val_recall: 0.9176 - val_tn: 55399.0000 - val_tp: 78.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 6784.0000 - loss: 5.9445e-07 - precision: 0.0519 - recall: 0.9661 - tn: 220678.0000 - tp: 371.0000 - val_fn: 15.0000 - val_fp: 1634.0000 - val_loss: 0.0654 - val_precision: 0.0539 - val_recall: 0.8611 - val_tn: 55219.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 12/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 6599.0000 - loss: 6.5321e-07 - precision: 0.0572 - recall: 0.9828 - tn: 220840.0000 - tp: 400.0000 - val_fn: 8.0000 - val_fp: 1111.0000 - val_loss: 0.0547 - val_precision: 0.0648 - val_recall: 0.9059 - val_tn: 55765.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 6189.0000 - loss: 5.2899e-07 - precision: 0.0573 - recall: 0.9792 - tn: 221273.0000 - tp: 376.0000 - val_fn: 16.0000 - val_fp: 1274.0000 - val_loss: 0.0567 - val_precision: 0.0673 - val_recall: 0.8519 - val_tn: 55579.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 13/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 14.0000 - fp: 5933.0000 - loss: 5.8126e-07 - precision: 0.0621 - recall: 0.9656 - tn: 221506.0000 - tp: 393.0000 - val_fn: 7.0000 - val_fp: 3095.0000 - val_loss: 0.1440 - val_precision: 0.0246 - val_recall: 0.9176 - val_tn: 53781.0000 - val_tp: 78.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 3787.0000 - loss: 3.5831e-07 - precision: 0.0908 - recall: 0.9844 - tn: 223675.0000 - tp: 378.0000 - val_fn: 16.0000 - val_fp: 913.0000 - val_loss: 0.0410 - val_precision: 0.0915 - val_recall: 0.8519 - val_tn: 55940.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 14/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 6251.0000 - loss: 4.9643e-07 - precision: 0.0600 - recall: 0.9803 - tn: 221188.0000 - tp: 399.0000 - val_fn: 9.0000 - val_fp: 866.0000 - val_loss: 0.0401 - val_precision: 0.0807 - val_recall: 0.8941 - val_tn: 56010.0000 - val_tp: 76.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 4968.0000 - loss: 4.0142e-07 - precision: 0.0709 - recall: 0.9870 - tn: 222494.0000 - tp: 379.0000 - val_fn: 16.0000 - val_fp: 1187.0000 - val_loss: 0.0526 - val_precision: 0.0719 - val_recall: 0.8519 - val_tn: 55666.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 15/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 4591.0000 - loss: 3.5552e-07 - precision: 0.0801 - recall: 0.9828 - tn: 222848.0000 - tp: 400.0000 - val_fn: 7.0000 - val_fp: 1850.0000 - val_loss: 0.1086 - val_precision: 0.0405 - val_recall: 0.9176 - val_tn: 55026.0000 - val_tp: 78.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 1.0000 - fp: 3587.0000 - loss: 2.8496e-07 - precision: 0.0965 - recall: 0.9974 - tn: 223875.0000 - tp: 383.0000 - val_fn: 17.0000 - val_fp: 1361.0000 - val_loss: 0.0620 - val_precision: 0.0627 - val_recall: 0.8426 - val_tn: 55492.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 16/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 7726.0000 - loss: 7.6829e-07 - precision: 0.0490 - recall: 0.9779 - tn: 219713.0000 - tp: 398.0000 - val_fn: 9.0000 - val_fp: 1275.0000 - val_loss: 0.0683 - val_precision: 0.0563 - val_recall: 0.8941 - val_tn: 55601.0000 - val_tp: 76.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4570.0000 - loss: 3.4124e-07 - precision: 0.0768 - recall: 0.9896 - tn: 222892.0000 - tp: 380.0000 - val_fn: 17.0000 - val_fp: 771.0000 - val_loss: 0.0394 - val_precision: 0.1056 - val_recall: 0.8426 - val_tn: 56082.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 17/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 4992.0000 - loss: 6.0069e-07 - precision: 0.0732 - recall: 0.9681 - tn: 222447.0000 - tp: 394.0000 - val_fn: 8.0000 - val_fp: 1448.0000 - val_loss: 0.0636 - val_precision: 0.0505 - val_recall: 0.9059 - val_tn: 55428.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3173.0000 - loss: 2.7646e-07 - precision: 0.1072 - recall: 0.9922 - tn: 224289.0000 - tp: 381.0000 - val_fn: 18.0000 - val_fp: 746.0000 - val_loss: 0.0345 - val_precision: 0.1077 - val_recall: 0.8333 - val_tn: 56107.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 18/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 5037.0000 - loss: 3.7122e-07 - precision: 0.0739 - recall: 0.9877 - tn: 222402.0000 - tp: 402.0000 - val_fn: 9.0000 - val_fp: 740.0000 - val_loss: 0.0315 - val_precision: 0.0931 - val_recall: 0.8941 - val_tn: 56136.0000 - val_tp: 76.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3197.0000 - loss: 2.5855e-07 - precision: 0.1062 - recall: 0.9896 - tn: 224265.0000 - tp: 380.0000 - val_fn: 16.0000 - val_fp: 530.0000 - val_loss: 0.0302 - val_precision: 0.1479 - val_recall: 0.8519 - val_tn: 56323.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 19/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 7327.0000 - loss: 8.8142e-07 - precision: 0.0514 - recall: 0.9754 - tn: 220112.0000 - tp: 397.0000 - val_fn: 8.0000 - val_fp: 1291.0000 - val_loss: 0.0549 - val_precision: 0.0563 - val_recall: 0.9059 - val_tn: 55585.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 2411.0000 - loss: 2.3853e-07 - precision: 0.1365 - recall: 0.9922 - tn: 225051.0000 - tp: 381.0000 - val_fn: 16.0000 - val_fp: 1123.0000 - val_loss: 0.0583 - val_precision: 0.0757 - val_recall: 0.8519 - val_tn: 55730.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 20/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 3999.0000 - loss: 4.6311e-07 - precision: 0.0901 - recall: 0.9730 - tn: 223440.0000 - tp: 396.0000 - val_fn: 5.0000 - val_fp: 2760.0000 - val_loss: 0.1217 - val_precision: 0.0282 - val_recall: 0.9412 - val_tn: 54116.0000 - val_tp: 80.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 5929.0000 - loss: 4.8075e-07 - precision: 0.0601 - recall: 0.9870 - tn: 221533.0000 - tp: 379.0000 - val_fn: 16.0000 - val_fp: 1188.0000 - val_loss: 0.0572 - val_precision: 0.0719 - val_recall: 0.8519 - val_tn: 55665.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 21/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 6132.0000 - loss: 6.7416e-07 - precision: 0.0612 - recall: 0.9828 - tn: 221307.0000 - tp: 400.0000 - val_fn: 9.0000 - val_fp: 741.0000 - val_loss: 0.0516 - val_precision: 0.0930 - val_recall: 0.8941 - val_tn: 56135.0000 - val_tp: 76.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 2963.0000 - loss: 2.7795e-07 - precision: 0.1137 - recall: 0.9896 - tn: 224499.0000 - tp: 380.0000 - val_fn: 15.0000 - val_fp: 1362.0000 - val_loss: 0.0662 - val_precision: 0.0639 - val_recall: 0.8611 - val_tn: 55491.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 22/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 4015.0000 - loss: 3.9863e-07 - precision: 0.0910 - recall: 0.9877 - tn: 223424.0000 - tp: 402.0000 - val_fn: 11.0000 - val_fp: 1298.0000 - val_loss: 0.0688 - val_precision: 0.0539 - val_recall: 0.8706 - val_tn: 55578.0000 - val_tp: 74.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 5019.0000 - loss: 4.0863e-07 - precision: 0.0704 - recall: 0.9896 - tn: 222443.0000 - tp: 380.0000 - val_fn: 16.0000 - val_fp: 1039.0000 - val_loss: 0.0373 - val_precision: 0.0813 - val_recall: 0.8519 - val_tn: 55814.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 23/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 2801.0000 - loss: 2.5872e-07 - precision: 0.1261 - recall: 0.9926 - tn: 224638.0000 - tp: 404.0000 - val_fn: 12.0000 - val_fp: 590.0000 - val_loss: 0.0283 - val_precision: 0.1101 - val_recall: 0.8588 - val_tn: 56286.0000 - val_tp: 73.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 4786.0000 - loss: 3.4249e-07 - precision: 0.0739 - recall: 0.9948 - tn: 222676.0000 - tp: 382.0000 - val_fn: 17.0000 - val_fp: 2260.0000 - val_loss: 0.0826 - val_precision: 0.0387 - val_recall: 0.8426 - val_tn: 54593.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 24/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 2554.0000 - loss: 3.9821e-07 - precision: 0.1363 - recall: 0.9902 - tn: 224885.0000 - tp: 403.0000 - val_fn: 12.0000 - val_fp: 531.0000 - val_loss: 0.0333 - val_precision: 0.1209 - val_recall: 0.8588 - val_tn: 56345.0000 - val_tp: 73.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 4408.0000 - loss: 3.0581e-07 - precision: 0.0796 - recall: 0.9922 - tn: 223054.0000 - tp: 381.0000 - val_fn: 16.0000 - val_fp: 637.0000 - val_loss: 0.0328 - val_precision: 0.1262 - val_recall: 0.8519 - val_tn: 56216.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 25/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 3515.0000 - loss: 3.6621e-07 - precision: 0.1024 - recall: 0.9853 - tn: 223924.0000 - tp: 401.0000 - val_fn: 10.0000 - val_fp: 1171.0000 - val_loss: 0.0493 - val_precision: 0.0602 - val_recall: 0.8824 - val_tn: 55705.0000 - val_tp: 75.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3021.0000 - loss: 2.2939e-07 - precision: 0.1123 - recall: 0.9948 - tn: 224441.0000 - tp: 382.0000 - val_fn: 17.0000 - val_fp: 653.0000 - val_loss: 0.0349 - val_precision: 0.1223 - val_recall: 0.8426 - val_tn: 56200.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 26/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3314.0000 - loss: 4.6681e-07 - precision: 0.1087 - recall: 0.9926 - tn: 224125.0000 - tp: 404.0000 - val_fn: 10.0000 - val_fp: 1191.0000 - val_loss: 0.0550 - val_precision: 0.0592 - val_recall: 0.8824 - val_tn: 55685.0000 - val_tp: 75.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 2628.0000 - loss: 2.1400e-07 - precision: 0.1266 - recall: 0.9922 - tn: 224834.0000 - tp: 381.0000 - val_fn: 18.0000 - val_fp: 669.0000 - val_loss: 0.0359 - val_precision: 0.1186 - val_recall: 0.8333 - val_tn: 56184.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 27/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 4442.0000 - loss: 6.6596e-07 - precision: 0.0830 - recall: 0.9877 - tn: 222997.0000 - tp: 402.0000 - val_fn: 8.0000 - val_fp: 1266.0000 - val_loss: 0.0548 - val_precision: 0.0573 - val_recall: 0.9059 - val_tn: 55610.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 2728.0000 - loss: 2.2770e-07 - precision: 0.1225 - recall: 0.9922 - tn: 224734.0000 - tp: 381.0000 - val_fn: 18.0000 - val_fp: 995.0000 - val_loss: 0.0516 - val_precision: 0.0829 - val_recall: 0.8333 - val_tn: 55858.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 28/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 5031.0000 - loss: 5.4618e-07 - precision: 0.0738 - recall: 0.9853 - tn: 222408.0000 - tp: 401.0000 - val_fn: 11.0000 - val_fp: 807.0000 - val_loss: 0.1112 - val_precision: 0.0840 - val_recall: 0.8706 - val_tn: 56069.0000 - val_tp: 74.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 1.0000 - fp: 2810.0000 - loss: 2.2002e-07 - precision: 0.1199 - recall: 0.9974 - tn: 224652.0000 - tp: 383.0000 - val_fn: 16.0000 - val_fp: 387.0000 - val_loss: 0.0241 - val_precision: 0.1921 - val_recall: 0.8519 - val_tn: 56466.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 29/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 3621.0000 - loss: 8.0734e-07 - precision: 0.0995 - recall: 0.9828 - tn: 223818.0000 - tp: 400.0000 - val_fn: 8.0000 - val_fp: 1691.0000 - val_loss: 0.0849 - val_precision: 0.0436 - val_recall: 0.9059 - val_tn: 55185.0000 - val_tp: 77.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3517.0000 - loss: 3.5872e-07 - precision: 0.0980 - recall: 0.9948 - tn: 223945.0000 - tp: 382.0000 - val_fn: 19.0000 - val_fp: 365.0000 - val_loss: 0.0267 - val_precision: 0.1960 - val_recall: 0.8241 - val_tn: 56488.0000 - val_tp: 89.0000</span></span>
 <span><span class="co">## Epoch 30/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3183.0000 - loss: 2.8399e-07 - precision: 0.1129 - recall: 0.9951 - tn: 224256.0000 - tp: 405.0000 - val_fn: 13.0000 - val_fp: 499.0000 - val_loss: 0.0259 - val_precision: 0.1261 - val_recall: 0.8471 - val_tn: 56377.0000 - val_tp: 72.0000</span></span></code></pre>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3709.0000 - loss: 3.3721e-07 - precision: 0.0932 - recall: 0.9922 - tn: 223753.0000 - tp: 381.0000 - val_fn: 18.0000 - val_fp: 702.0000 - val_loss: 0.0342 - val_precision: 0.1136 - val_recall: 0.8333 - val_tn: 56151.0000 - val_tp: 90.0000</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">val_pred</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">val_features</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1781/1781 - 1s - 314us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1781/1781 - 1s - 281us/step</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_correct</span> <span class="op">&lt;-</span> <span class="va">val_df</span><span class="op">$</span><span class="va">Class</span> <span class="op">==</span> <span class="va">val_pred</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Validation accuracy: %.2f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pred_correct</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -362,9 +363,9 @@ run the following:</p>
 <p>At the end of training, out of 56,961 validation transactions, we
 are:</p>
 <ul>
-<li>Correctly identifying 72 of them as fraudulent</li>
-<li>Missing 13 fraudulent transactions</li>
-<li>At the cost of incorrectly flagging 499 legitimate transactions</li>
+<li>Correctly identifying 90 of them as fraudulent</li>
+<li>Missing 18 fraudulent transactions</li>
+<li>At the cost of incorrectly flagging 702 legitimate transactions</li>
 </ul>
 <p>In the real world, one would put an even higher weight on class 1, so
 as to reflect that False Negatives are more costly than False
@@ -383,13 +384,11 @@ is why.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, Posit Software, PBC, Google.</p>
+  <p>Developed by Tomasz Kalinowski, JJ Allaire, François Chollet, Posit Software, PBC, Google.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.8.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>

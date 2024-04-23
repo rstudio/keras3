@@ -1,0 +1,46 @@
+Help on class Tversky in module keras.src.losses.losses:
+
+class Tversky(LossFunctionWrapper)
+ |  Tversky(alpha=0.5, beta=0.5, reduction='sum_over_batch_size', name='tversky')
+ |
+ |  Computes the Tversky loss value between `y_true` and `y_pred`.
+ |
+ |  This loss function is weighted by the alpha and beta coefficients
+ |  that penalize false positives and false negatives.
+ |
+ |  With `alpha=0.5` and `beta=0.5`, the loss value becomes equivalent to
+ |  Dice Loss.
+ |
+ |  Args:
+ |      y_true: tensor of true targets.
+ |      y_pred: tensor of predicted targets.
+ |      alpha: coefficient controlling incidence of false positives.
+ |      beta: coefficient controlling incidence of false negatives.
+ |
+ |  Returns:
+ |      Tversky loss value.
+ |
+ |  Reference:
+ |
+ |  - [Salehi et al., 2017](https://arxiv.org/abs/1706.05721)
+ |
+ |  Method resolution order:
+ |      Tversky
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    alpha=0.5,
+ |    beta=0.5,
+ |    reduction='sum_over_batch_size',
+ |    name='tversky'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |
+

@@ -1,5 +1,5 @@
 backend()
-clear_session()
+clear_session(free_memory=True)
 epsilon()
 floatx()
 get_uid(prefix='')

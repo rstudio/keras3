@@ -1297,6 +1297,52 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
     do.call(keras$ops$segment_sum, args)
 }
 
+#' Return elements from `choicelist`, based on conditions in `condlist`.
+#'
+#' @param condlist
+#' List of boolean tensors.
+#' The list of conditions which determine from which array
+#' in choicelist the output elements are taken.
+#' When multiple conditions are satisfied,
+#' the first one encountered in condlist is used.
+#'
+#' @param choicelist
+#' List of tensors.
+#' The list of tensors from which the output elements are taken.
+#' This list has to be of the same length as `condlist`.
+#'
+#' @param default
+#' Optional scalar value.
+#' The element inserted in the output
+#' when all conditions evaluate to `FALSE`.
+#'
+#' @returns
+#' Tensor where the output at position `m` is the `m`-th element
+#' of the tensor in `choicelist` where the `m`-th element of the
+#' corresponding tensor in `condlist` is `TRUE`.
+#'
+#' @description
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_arange(6L)
+#' condlist <- list(x < 3, x > 3)
+#' choicelist <- list(x, x^2)
+#' op_select(condlist, choicelist, 42)
+#' ```
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.select
+op_select <-
+function (condlist, choicelist, default = 0L)
+{
+    args <- capture_args(list(default = as_integer))
+    do.call(keras$ops$select, args)
+}
+
 
 #' Solves a linear system of equations given by `a x = b`.
 #'
@@ -2773,7 +2819,7 @@ keras$ops$add(x1, x2)
 #' @param keepdims
 #' If `TRUE`, axes which are reduced are left in the result as
 #' dimensions with size one. With this option, the result will
-#' broadcast correctly against the input array. Defaults to`FALSE`.
+#' broadcast correctly against the input array. Defaults to `FALSE`.
 #'
 #' @export
 #' @family numpy ops
@@ -3313,6 +3359,10 @@ keras$ops$arctanh(x)
 #' By default, the index is into the flattened tensor, otherwise
 #' along the specified axis.
 #'
+#' @param keepdims
+#' If this is set to `TRUE`, the axes which are reduced are left
+#' in the result as dimensions with size one. Defaults to `FALSE`.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3321,7 +3371,7 @@ keras$ops$arctanh(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 #' @tether keras.ops.argmax
 op_argmax <-
-function (x, axis = NULL)
+function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argmax, args)
@@ -3356,6 +3406,10 @@ function (x, axis = NULL)
 #' By default, the index is into the flattened tensor, otherwise
 #' along the specified axis.
 #'
+#' @param keepdims
+#' If this is set to `TRUE`, the axes which are reduced are left
+#' in the result as dimensions with size one. Defaults to `FALSE`.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3364,7 +3418,7 @@ function (x, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 #' @tether keras.ops.argmin
 op_argmin <-
-function (x, axis = NULL)
+function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argmin, args)
@@ -3479,7 +3533,8 @@ function (x, dtype = NULL)
 #'   axis = 2,
 #'   weights = op_array(c(1/4, 3/4))
 #' )
-#' # Error: Axis must be specified when shapes of a and weights differ.
+#'
+#' # Error: Axis must be specified when shapes of x and weights differ.
 #' try(op_average(
 #'   data,
 #'   weights = op_array(c(1/4, 3/4))
@@ -3519,6 +3574,13 @@ op_average <-
 function (x, axis = NULL, weights = NULL)
 {
     args <- capture_args(list(axis = as_axis))
+    # BUG guardrail. In Keras 3.3.2, this started silently (wrongly) succeeding
+    # where it would return the sum of the axis reductions rather than throwing
+    # an exception
+    # We require here that users pass `axis` if passing weights with a different shape.
+    if(!is.null(weights) && is.null(axis) &&
+       !identical(op_shape(weights), op_shape(x)))
+      stop("Axis must be specified when shapes of x and weights differ.")
     do.call(keras$ops$average, args)
 }
 
@@ -3923,6 +3985,59 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
     do.call(keras$ops$cross, args)
 }
 
+#' Decodes the output of a CTC model.
+#'
+#' @returns
+#' A list containing:
+#'
+#' - A list of decoded sequences.
+#' - A list of the negative of the sum of the probability logits
+#'   (if strategy is `"greedy"`) or the log probability (if strategy is
+#'   `"beam_search"`) for each sequence.
+#'
+#' @param inputs
+#' A tensor of shape `(batch_size, max_length, num_classes)`
+#' containing the logits (output of the model).
+#'
+#' @param sequence_lengths
+#' A tensor of shape `(batch_size)` containing the
+#' sequence lengths for the batch.
+#'
+#' @param strategy
+#' A string for the decoding strategy. Supported values are
+#' `"greedy"` and `"beam_search"`.
+#'
+#' @param beam_width
+#' An integer scalar beam width used in beam search.
+#' Defaults to `100`.
+#'
+#' @param top_paths
+#' An integer scalar, the number of top paths to return.
+#' Defaults to `1`.
+#'
+#' @param merge_repeated
+#' A boolean scalar, whether to merge repeated
+#' labels in the output. Defaults to `TRUE`.
+#'
+#' @param mask_index
+#' An integer scalar, the index of the mask character in
+#' the vocabulary. Defaults to `NULL`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.ctc_decode
+op_ctc_decode <-
+function (inputs, sequence_lengths, strategy, beam_width = 100L,
+    top_paths = 1L, merge_repeated = TRUE, mask_index = NULL)
+{
+    args <- capture_args(list(
+      sequence_lengths = as_integer_array,
+      beam_width = as_integer,
+      top_paths = as_integer,
+      mask_index = as_integer))
+    do.call(keras$ops$ctc_decode, args)
+}
 
 #' Return the cumulative product of elements along a given axis.
 #'
@@ -4956,7 +5071,7 @@ keras$ops$less_equal(x1, x2)
 #'
 #' @param endpoint
 #' If `TRUE`, `stop` is the last sample. Otherwise, it is
-#' not included. Defaults to`TRUE`.
+#' not included. Defaults to `TRUE`.
 #'
 #' @param retstep
 #' If `TRUE`, return `(samples, step)`, where `step` is the
@@ -5224,7 +5339,7 @@ keras$ops$logical_xor(x1, x2)
 #'
 #' @param endpoint
 #' If `TRUE`, `stop` is the last sample. Otherwise, it is not
-#' included. Defaults to`TRUE`.
+#' included. Defaults to `TRUE`.
 #'
 #' @param base
 #' The base of the log space. Defaults to `10`.
@@ -5310,10 +5425,10 @@ keras$ops$matmul(x1, x2)
 #'
 #' @param keepdims
 #' If this is set to `TRUE`, the axes which are reduced are left
-#' in the result as dimensions with size one. Defaults to`FALSE`.
+#' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
 #' @param initial
-#' The minimum value of an output element. Defaults to`NULL`.
+#' The minimum value of an output element. Defaults to `NULL`.
 #'
 #' @export
 #' @aliases op_amax
@@ -5499,10 +5614,10 @@ function (..., indexing = "xy")
 #'
 #' @param keepdims
 #' If this is set to `TRUE`, the axes which are reduced are left
-#' in the result as dimensions with size one. Defaults to`FALSE`.
+#' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
 #' @param initial
-#' The maximum value of an output element. Defaults to`NULL`.
+#' The maximum value of an output element. Defaults to `NULL`.
 #'
 #' @export
 #' @aliases op_amin
@@ -5644,6 +5759,24 @@ keras$ops$multiply(x1, x2)
 #' @param x
 #' Input data.
 #'
+#' @param nan
+#' Optional float or int. Value to replace `NaN` entries with.
+#'
+#' @param posinf
+#' Optional float or int. Value to replace positive infinity with.
+#'
+#' @param neginf
+#' Optional float or int. Value to replace negative infinity with.
+#'
+#' @details
+#'
+#' # Example
+#' ```{r}
+#' (x <- op_convert_to_tensor(c(1, NaN, -Inf, Inf)))
+#' op_nan_to_num(x)
+#' op_nan_to_num(x, nan = -1, posinf = 2, neginf = -2)
+#' ```
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -5652,8 +5785,10 @@ keras$ops$multiply(x1, x2)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nan_to_num>
 #' @tether keras.ops.nan_to_num
 op_nan_to_num <-
-function (x)
-keras$ops$nan_to_num(x)
+function (x, nan = 0, posinf = NULL, neginf = NULL) {
+  args <- capture_args()
+  do.call(keras$ops$nan_to_num, args)
+}
 
 
 #' Return the number of dimensions of a tensor.
@@ -6985,6 +7120,59 @@ keras$ops$vdot(x1, x2)
 op_vstack <-
 function (xs)
 keras$ops$vstack(xs)
+
+#' Turn a function into a vectorized function.
+#'
+#' @description
+#'
+#' # Examples
+#'
+#' ```{r}
+#' # currently does not work w/ tensorflow backend
+#' if(config_backend() != "tensorflow") {
+#'
+#'   myfunc <- function(a, b) a + b
+#'
+#'   vfunc <- op_vectorize(myfunc)
+#'   y <- vfunc(c(1, 2, 3, 4), 2)
+#'   print(y)
+#'   # with Jax backend, y is:
+#'   # Array([3., 4., 5., 6.], dtype=float32)
+#' }
+#' ```
+#'
+#' @returns
+#' A new function that applies `func` to every element
+#' of its input along axis 1 (the batch axis, the first axis).
+#'
+#' @param func
+#' Callable of a single tensor argument.
+#'
+#' @param excluded
+#' Optional set of integers representing
+#' positional arguments for which the function
+#' will not be vectorized.
+#' These will be passed directly to `func` unmodified.
+#'
+#' @param signature
+#' Optional generalized universal function signature,
+#' e.g., `"(m,n),(n)->(m)"` for vectorized
+#' matrix-vector multiplication. If provided,
+#' `func` will be called with (and expected to return)
+#' arrays with shapes given by the size of corresponding
+#' core dimensions. By default, `func` is assumed
+#' to take scalar tensors as input and output.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.vectorize
+op_vectorize <-
+function (func, ..., excluded = NULL, signature = NULL)
+keras$ops$vectorize(func, ..., excluded = excluded, signature = signature)
 
 
 #' Return elements chosen from `x1` or `x2` depending on `condition`.

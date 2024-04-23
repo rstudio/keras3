@@ -159,7 +159,7 @@ in the plotted graph:
 plot(model, show_shapes = TRUE)
 ```
 
-<img src="functional_api/unnamed-chunk-11-1.png" width="311" />
+<img src="functional_api/unnamed-chunk-11-1.png" width="580" />
 
 This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.
@@ -210,7 +210,7 @@ history <- model |> fit(
 ## Epoch 1/2
 ## 750/750 - 2s - 3ms/step - accuracy: 0.9015 - loss: 0.3513 - val_accuracy: 0.9442 - val_loss: 0.1924
 ## Epoch 2/2
-## 750/750 - 1s - 1ms/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1426
+## 750/750 - 1s - 880us/step - accuracy: 0.9508 - loss: 0.1643 - val_accuracy: 0.9581 - val_loss: 0.1426
 ```
 
 ```r
@@ -229,7 +229,7 @@ cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
 ```
-## Test loss: 0.1339952
+## Test loss: 0.1339951
 ## Test accuracy: 0.9578
 ```
 
@@ -587,7 +587,7 @@ Now plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-<img src="functional_api/unnamed-chunk-20-1.png" width="1008" />
+<img src="functional_api/unnamed-chunk-20-1.png" width="1637" />
 
 When compiling this model, you can assign different losses to each output.
 You can even assign different weights to each loss -- to modulate
@@ -643,9 +643,9 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 4s - 89ms/step - loss: 0.3948
+## 40/40 - 3s - 77ms/step - loss: 0.3948
 ## Epoch 2/2
-## 40/40 - 0s - 5ms/step - loss: 0.1971
+## 40/40 - 0s - 7ms/step - loss: 0.1971
 ```
 
 When calling fit with a `Dataset` object, it should yield either a
@@ -747,7 +747,7 @@ Plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-<img src="functional_api/unnamed-chunk-25-1.png" width="468" />
+<img src="functional_api/unnamed-chunk-25-1.png" width="953" />
 
 Now train the model:
 
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 8s - 631ms/step - acc: 0.1300 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3023
+## 13/13 - 6s - 434ms/step - acc: 0.1300 - loss: 2.3036 - val_acc: 0.1150 - val_loss: 2.3023
 ```
 
 ## Shared layers

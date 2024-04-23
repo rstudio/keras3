@@ -1,21 +1,19 @@
-AbsMaxQuantizer(
-  axis,
-  value_range=(-127, 127),
-  epsilon=1e-07,
-  output_dtype='int8'
-)
-activations: Module(keras.activations)
-applications: Module(keras.applications)
-backend: Module(keras.backend)
-callbacks: Module(keras.callbacks)
-config: Module(keras.config)
-constraints: Module(keras.constraints)
-datasets: Module(keras.datasets)
+activations: Module(keras.api.activations)
+applications: Module(keras.api.applications)
+backend: Module(keras.api.backend)
+callbacks: Module(keras.api.callbacks)
+config: Module(keras.api.config)
+constraints: Module(keras.api.constraints)
+datasets: Module(keras.api.datasets)
 device(device_name)
-distribution: Module(keras.distribution)
-dtype_policies: Module(keras.dtype_policies)
-DTypePolicy(name)
-export: Module(keras.export)
+distribution: Module(keras.api.distribution)
+dtype_policies: Module(keras.api.dtype_policies)
+DTypePolicy(
+  name,
+  *args,
+  **kwargs
+)
+export: Module(keras.api.export)
 FloatDTypePolicy(name)
 Function(
   inputs,
@@ -23,7 +21,7 @@ Function(
   name=None
 )
 Initializer()
-initializers: Module(keras.initializers)
+initializers: Module(keras.api.initializers)
 Input(
   shape=None,
   batch_size=None,
@@ -51,41 +49,39 @@ KerasTensor(
   name=None
 )
 Layer(*args, **kwargs)
-layers: Module(keras.layers)
-legacy: Module(keras.legacy)
+layers: Module(keras.api.layers)
+legacy: Module(keras.api.legacy)
 Loss(
   name=None,
   reduction='sum_over_batch_size',
   dtype=None
 )
-losses: Module(keras.losses)
+losses: Module(keras.api.losses)
 Metric(dtype=None, name=None)
-metrics: Module(keras.metrics)
-mixed_precision: Module(keras.mixed_precision)
+metrics: Module(keras.api.metrics)
+mixed_precision: Module(keras.api.mixed_precision)
 Model(*args, **kwargs)
-models: Module(keras.models)
+models: Module(keras.api.models)
 name_scope(name, **kwargs)
 Operation(*args, **kwargs)
-ops: Module(keras.ops)
+ops: Module(keras.api.ops)
 Optimizer(*args, **kwargs)
-optimizers: Module(keras.optimizers)
-preprocessing: Module(keras.preprocessing)
-QuantizedDTypePolicy(name)
+optimizers: Module(keras.api.optimizers)
+preprocessing: Module(keras.api.preprocessing)
 Quantizer(output_dtype='int8')
-quantizers: Module(keras.quantizers)
-random: Module(keras.random)
+quantizers: Module(keras.api.quantizers)
+random: Module(keras.api.random)
 Regularizer()
-regularizers: Module(keras.regularizers)
-saving: Module(keras.saving)
+regularizers: Module(keras.api.regularizers)
+saving: Module(keras.api.saving)
 Sequential(*args, **kwargs)
-src: Module(keras.src)
 StatelessScope(
   state_mapping=None,
   collect_losses=False,
   initialize_variables=True
 )
-tree: Module(keras.tree)
-utils: Module(keras.utils)
+tree: Module(keras.api.tree)
+utils: Module(keras.api.utils)
 Variable(
   initializer,
   shape=None,

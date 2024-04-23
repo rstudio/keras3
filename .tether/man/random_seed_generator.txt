@@ -1,7 +1,11 @@
 Help on class SeedGenerator in module keras.src.random.seed_generator:
 
 class SeedGenerator(builtins.object)
- |  SeedGenerator(seed=None, **kwargs)
+ |  SeedGenerator(
+ |    seed=None,
+ |    name=None,
+ |    **kwargs
+ |  )
  |
  |  Generates variable seeds upon each call to a RNG-using function.
  |
@@ -41,6 +45,7 @@ class SeedGenerator(builtins.object)
  |  __init__(
  |    self,
  |    seed=None,
+ |    name=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

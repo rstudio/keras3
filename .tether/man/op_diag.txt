@@ -14,7 +14,7 @@ Returns:
     The extracted diagonal or constructed diagonal tensor.
 
 Examples:
->>> from keras import ops
+>>> from keras.src import ops
 >>> x = ops.arange(9).reshape((3, 3))
 >>> x
 array([[0, 1, 2],
@@ -32,3 +32,4 @@ array([3, 7])
 array([[0, 0, 0],
        [0, 4, 0],
        [0, 0, 8]])
+

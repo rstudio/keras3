@@ -125,8 +125,8 @@ class RNN(keras.src.layers.layer.Layer)
  |  Examples:
  |
  |  ```python
- |  from keras.layers import RNN
- |  from keras import ops
+ |  from keras.src.layers import RNN
+ |  from keras.src import ops
  |
  |  # First, let's define a RNN Cell, as a layer subclass.
  |  class MinimalRNNCell(keras.layers.Layer):

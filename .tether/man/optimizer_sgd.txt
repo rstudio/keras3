@@ -1,7 +1,7 @@
 Help on class SGD in module keras.src.optimizers.sgd:
 
 class SGD(keras.src.optimizers.optimizer.Optimizer)
- |  SGD(learning_rate=0.01, momentum=0.0, nesterov=False, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, name='SGD', **kwargs)
+ |  SGD(learning_rate=0.01, momentum=0.0, nesterov=False, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='SGD', **kwargs)
  |
  |  Gradient descent (with momentum) optimizer.
  |
@@ -106,6 +106,8 @@ class SGD(keras.src.optimizers.optimizer.Optimizer)
  |    use_ema=False,
  |    ema_momentum=0.99,
  |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
  |    name='SGD',
  |    **kwargs
  |  )

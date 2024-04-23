@@ -29,6 +29,10 @@ Formula:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- y_true * log(y_true / y_pred)
 }\if{html}{\out{</div>}}
+
+\code{y_true} and \code{y_pred} are expected to be probability
+distributions, with values between 0 and 1. They will get
+clipped to the \verb{[0, 1]} range.
 }
 \section{Usage}{
 Standalone usage:
@@ -73,6 +77,7 @@ Other losses: \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr
+\code{\link{loss_ctc}()} \cr
 \code{\link{loss_dice}()} \cr
 \code{\link{loss_hinge}()} \cr
 \code{\link{loss_huber}()} \cr
@@ -85,6 +90,7 @@ Other losses: \cr
 \code{\link{loss_poisson}()} \cr
 \code{\link{loss_sparse_categorical_crossentropy}()} \cr
 \code{\link{loss_squared_hinge}()} \cr
+\code{\link{loss_tversky}()} \cr
 \code{\link{metric_binary_crossentropy}()} \cr
 \code{\link{metric_binary_focal_crossentropy}()} \cr
 \code{\link{metric_categorical_crossentropy}()} \cr

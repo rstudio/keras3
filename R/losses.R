@@ -944,6 +944,10 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' loss <- y_true * log(y_true / y_pred)
 #' ```
 #'
+#' `y_true` and `y_pred` are expected to be probability
+#' distributions, with values between 0 and 1. They will get
+#' clipped to the `[0, 1]` range.
+#'
 #' # Examples
 #' ```{r}
 #' y_true <- random_uniform(c(2, 3), 0, 2)
@@ -1584,6 +1588,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @export
 #' @inheritParams loss_hinge
+#' @family losses
 #' @tether keras.losses.CTC
 # @seealso
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>
@@ -1595,6 +1600,59 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$CTC
     else keras$losses$ctc
+    do.call(callable, args)
+}
+
+#' Computes the Tversky loss value between `y_true` and `y_pred`.
+#'
+#' @description
+#' This loss function is weighted by the alpha and beta coefficients
+#' that penalize false positives and false negatives.
+#'
+#' With `alpha=0.5` and `beta=0.5`, the loss value becomes equivalent to
+#' Dice Loss.
+#'
+#' This loss function is weighted by the alpha and beta coefficients
+#' that penalize false positives and false negatives.
+#'
+#' With `alpha=0.5` and `beta=0.5`, the loss value becomes equivalent to
+#' Dice Loss.
+#'
+#' # Reference
+#' - [Salehi et al., 2017](https://arxiv.org/abs/1706.05721)
+#'
+#' @returns
+#' Tversky loss value.
+#'
+#' @param y_true
+#' tensor of true targets.
+#'
+#' @param y_pred
+#' tensor of predicted targets.
+#'
+#' @param alpha
+#' coefficient controlling incidence of false positives.
+#'
+#' @param beta
+#' coefficient controlling incidence of false negatives.
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inheritParams loss_hinge
+#' @family losses
+#' @tether keras.losses.Tversky
+loss_tversky <-
+function (y_true, y_pred, ..., alpha = 0.5, beta = 0.5,
+     reduction = "sum_over_batch_size", name = "tversky")
+{
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
+    callable <- if (missing(y_true) && missing(y_pred))
+      keras$losses$Tversky else keras$losses$tversky
     do.call(callable, args)
 }
 

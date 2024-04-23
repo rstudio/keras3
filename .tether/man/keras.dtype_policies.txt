@@ -1,4 +1,12 @@
-DTypePolicy(name)
+deserialize(config, custom_objects=None)
+DTypePolicy(
+  name,
+  *args,
+  **kwargs
+)
 FloatDTypePolicy(name)
+get(identifier)
 QuantizedDTypePolicy(name)
+QuantizedFloat8DTypePolicy(name, amax_history_length=1024)
+serialize(dtype_policy)
 

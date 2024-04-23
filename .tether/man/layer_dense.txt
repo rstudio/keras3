@@ -138,4 +138,9 @@ class Dense(keras.src.layers.layer.Layer)
  |
  |  kernel
  |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  QUANTIZATION_MODE_ERROR_TEMPLATE = "Invalid quantization mode. Expecte...
+ |
 

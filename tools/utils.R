@@ -522,6 +522,7 @@ split_docstring_into_sections <- function(docstring) {
     is_arg <- m == "arguments"
     w_is_arg <- which(is_arg)
     new_lines_in_section <- which(is_arg & x == "")
+    new_lines_in_section %<>% .[. < (length(x)-1)]
     for (i in new_lines_in_section) {
       if (x[i + 1] == "" || ind_lvl[i + 1] == ind_lvl[w_is_arg[1]]) {
         w_is_arg2 <- w_is_arg %>% .[. < i]

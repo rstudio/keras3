@@ -202,19 +202,19 @@ cat("Target: "); str(y)
 ```
 ## Input: List of 13
 ##  $ age     :<tf.Tensor: shape=(), dtype=int32, numpy=57>
-##  $ sex     :<tf.Tensor: shape=(), dtype=int32, numpy=0>
+##  $ sex     :<tf.Tensor: shape=(), dtype=int32, numpy=1>
 ##  $ cp      :<tf.Tensor: shape=(), dtype=int32, numpy=4>
-##  $ trestbps:<tf.Tensor: shape=(), dtype=int32, numpy=140>
-##  $ chol    :<tf.Tensor: shape=(), dtype=int32, numpy=241>
+##  $ trestbps:<tf.Tensor: shape=(), dtype=int32, numpy=130>
+##  $ chol    :<tf.Tensor: shape=(), dtype=int32, numpy=131>
 ##  $ fbs     :<tf.Tensor: shape=(), dtype=int32, numpy=0>
 ##  $ restecg :<tf.Tensor: shape=(), dtype=int32, numpy=0>
-##  $ thalach :<tf.Tensor: shape=(), dtype=int32, numpy=123>
+##  $ thalach :<tf.Tensor: shape=(), dtype=int32, numpy=115>
 ##  $ exang   :<tf.Tensor: shape=(), dtype=int32, numpy=1>
-##  $ oldpeak :<tf.Tensor: shape=(), dtype=float32, numpy=0.2>
+##  $ oldpeak :<tf.Tensor: shape=(), dtype=float32, numpy=1.2>
 ##  $ slope   :<tf.Tensor: shape=(), dtype=int32, numpy=2>
-##  $ ca      :<tf.Tensor: shape=(), dtype=int32, numpy=0>
+##  $ ca      :<tf.Tensor: shape=(), dtype=int32, numpy=1>
 ##  $ thal    :<tf.Tensor: shape=(), dtype=string, numpy=b'reversible'>
-## Target: <tf.Tensor: shape=(), dtype=int32, numpy=0>
+## Target: <tf.Tensor: shape=(), dtype=int32, numpy=1>
 ```
 
 Let's batch the datasets:
@@ -371,12 +371,12 @@ preprocessed_x
 
 ```
 ## tf.Tensor(
-## [[0. 0. 0. ... 1. 0. 0.]
+## [[0. 0. 0. ... 0. 1. 0.]
 ##  [0. 0. 0. ... 0. 0. 0.]
 ##  [0. 0. 0. ... 0. 0. 0.]
 ##  ...
 ##  [0. 0. 0. ... 0. 0. 0.]
-##  [1. 0. 0. ... 0. 0. 0.]
+##  [0. 0. 0. ... 0. 0. 0.]
 ##  [0. 0. 0. ... 0. 0. 0.]], shape=(32, 136), dtype=float32)
 ```
 
@@ -463,45 +463,45 @@ training_model |> fit(
 
 ```
 ## Epoch 1/20
-## 8/8 - 3s - 359ms/step - accuracy: 0.5560 - loss: 0.7133 - val_accuracy: 0.6667 - val_loss: 0.6269
+## 8/8 - 3s - 335ms/step - accuracy: 0.5643 - loss: 0.6966 - val_accuracy: 0.7000 - val_loss: 0.6137
 ## Epoch 2/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.6598 - loss: 0.6273 - val_accuracy: 0.6833 - val_loss: 0.5756
+## 8/8 - 0s - 13ms/step - accuracy: 0.6390 - loss: 0.6314 - val_accuracy: 0.7500 - val_loss: 0.5615
 ## Epoch 3/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.7220 - loss: 0.5608 - val_accuracy: 0.7167 - val_loss: 0.5331
+## 8/8 - 0s - 13ms/step - accuracy: 0.6929 - loss: 0.5920 - val_accuracy: 0.7667 - val_loss: 0.5222
 ## Epoch 4/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.7552 - loss: 0.5346 - val_accuracy: 0.7333 - val_loss: 0.4975
+## 8/8 - 0s - 12ms/step - accuracy: 0.7510 - loss: 0.5113 - val_accuracy: 0.7500 - val_loss: 0.4901
 ## Epoch 5/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.7427 - loss: 0.5070 - val_accuracy: 0.7500 - val_loss: 0.4682
+## 8/8 - 0s - 13ms/step - accuracy: 0.7344 - loss: 0.4996 - val_accuracy: 0.7333 - val_loss: 0.4627
 ## Epoch 6/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.7303 - loss: 0.4867 - val_accuracy: 0.7333 - val_loss: 0.4431
+## 8/8 - 0s - 12ms/step - accuracy: 0.7759 - loss: 0.4643 - val_accuracy: 0.7333 - val_loss: 0.4430
 ## Epoch 7/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.7552 - loss: 0.4624 - val_accuracy: 0.7500 - val_loss: 0.4225
+## 8/8 - 0s - 12ms/step - accuracy: 0.7801 - loss: 0.4482 - val_accuracy: 0.7167 - val_loss: 0.4261
 ## Epoch 8/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8133 - loss: 0.4146 - val_accuracy: 0.7833 - val_loss: 0.4030
+## 8/8 - 0s - 13ms/step - accuracy: 0.7967 - loss: 0.4108 - val_accuracy: 0.7333 - val_loss: 0.4131
 ## Epoch 9/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.7842 - loss: 0.4159 - val_accuracy: 0.7833 - val_loss: 0.3850
+## 8/8 - 0s - 13ms/step - accuracy: 0.8008 - loss: 0.4294 - val_accuracy: 0.7333 - val_loss: 0.4018
 ## Epoch 10/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8299 - loss: 0.3880 - val_accuracy: 0.8000 - val_loss: 0.3719
+## 8/8 - 0s - 13ms/step - accuracy: 0.7884 - loss: 0.4055 - val_accuracy: 0.8000 - val_loss: 0.3925
 ## Epoch 11/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8174 - loss: 0.3847 - val_accuracy: 0.8000 - val_loss: 0.3609
+## 8/8 - 0s - 13ms/step - accuracy: 0.8589 - loss: 0.3612 - val_accuracy: 0.8167 - val_loss: 0.3851
 ## Epoch 12/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8299 - loss: 0.3639 - val_accuracy: 0.8333 - val_loss: 0.3517
+## 8/8 - 0s - 13ms/step - accuracy: 0.8174 - loss: 0.3886 - val_accuracy: 0.8167 - val_loss: 0.3808
 ## Epoch 13/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8340 - loss: 0.3507 - val_accuracy: 0.8333 - val_loss: 0.3432
+## 8/8 - 0s - 13ms/step - accuracy: 0.7967 - loss: 0.3864 - val_accuracy: 0.8333 - val_loss: 0.3788
 ## Epoch 14/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8340 - loss: 0.3413 - val_accuracy: 0.8333 - val_loss: 0.3366
+## 8/8 - 0s - 13ms/step - accuracy: 0.8589 - loss: 0.3524 - val_accuracy: 0.8333 - val_loss: 0.3764
 ## Epoch 15/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8299 - loss: 0.3499 - val_accuracy: 0.8500 - val_loss: 0.3309
+## 8/8 - 0s - 12ms/step - accuracy: 0.8672 - loss: 0.3340 - val_accuracy: 0.8333 - val_loss: 0.3739
 ## Epoch 16/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8423 - loss: 0.3561 - val_accuracy: 0.8333 - val_loss: 0.3265
+## 8/8 - 0s - 13ms/step - accuracy: 0.8797 - loss: 0.3351 - val_accuracy: 0.8333 - val_loss: 0.3714
 ## Epoch 17/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8465 - loss: 0.3322 - val_accuracy: 0.8333 - val_loss: 0.3224
+## 8/8 - 0s - 13ms/step - accuracy: 0.8797 - loss: 0.3208 - val_accuracy: 0.8167 - val_loss: 0.3694
 ## Epoch 18/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8548 - loss: 0.3308 - val_accuracy: 0.8333 - val_loss: 0.3192
+## 8/8 - 0s - 13ms/step - accuracy: 0.8672 - loss: 0.3311 - val_accuracy: 0.8167 - val_loss: 0.3687
 ## Epoch 19/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8838 - loss: 0.3189 - val_accuracy: 0.8333 - val_loss: 0.3173
+## 8/8 - 0s - 14ms/step - accuracy: 0.8631 - loss: 0.3023 - val_accuracy: 0.8167 - val_loss: 0.3678
 ## Epoch 20/20
-## 8/8 - 0s - 14ms/step - accuracy: 0.8506 - loss: 0.3003 - val_accuracy: 0.8333 - val_loss: 0.3168
+## 8/8 - 0s - 13ms/step - accuracy: 0.8589 - loss: 0.3095 - val_accuracy: 0.8167 - val_loss: 0.3681
 ```
 
 We quickly get to 80% validation accuracy.
@@ -534,7 +534,7 @@ predictions <- inference_model |> predict(input_dict)
 ```
 
 ```
-## 1/1 - 0s - 389ms/step
+## 1/1 - 0s - 266ms/step
 ```
 
 ```r
@@ -545,6 +545,6 @@ glue::glue(r"---(
 ```
 
 ```
-## This particular patient had a 58.3% probability
+## This particular patient had a 48.3% probability
 ## of having a heart disease, as evaluated by our model.
 ```

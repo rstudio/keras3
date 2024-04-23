@@ -39,8 +39,16 @@ arcsinh(x)
 arctan(x)
 arctan2(x1, x2)
 arctanh(x)
-argmax(x, axis=None)
-argmin(x, axis=None)
+argmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+argmin(
+  x,
+  axis=None,
+  keepdims=False
+)
 argsort(x, axis=-1)
 array(x, dtype=None)
 average(
@@ -138,6 +146,15 @@ cross(
   axisc=-1,
   axis=None
 )
+ctc_decode(
+  inputs,
+  sequence_lengths,
+  strategy,
+  beam_width=100,
+  top_paths=1,
+  merge_repeated=True,
+  mask_index=None
+)
 ctc_loss(
   target,
   output,
@@ -182,6 +199,7 @@ divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
 eig(x)
+eigh(x)
 einsum(subscripts, *operands)
 elu(x, alpha=1.0)
 empty(shape, dtype=None)
@@ -233,7 +251,7 @@ hard_swish(x)
 hstack(xs)
 identity(n, dtype=None)
 imag(x)
-image: Module(keras.ops.image)
+image: Module(keras.api.ops.image)
 in_top_k(
   targets,
   predictions,
@@ -258,7 +276,7 @@ istft(
 leaky_relu(x, negative_slope=0.2)
 less(x1, x2)
 less_equal(x1, x2)
-linalg: Module(keras.ops.linalg)
+linalg: Module(keras.api.ops.linalg)
 linspace(
   start,
   stop,
@@ -348,10 +366,15 @@ multi_hot(
   **kwargs
 )
 multiply(x1, x2)
-nan_to_num(x)
+nan_to_num(
+  x,
+  nan=0.0,
+  posinf=None,
+  neginf=None
+)
 ndim(x)
 negative(x)
-nn: Module(keras.ops.nn)
+nn: Module(keras.api.ops.nn)
 nonzero(x)
 norm(
   x,
@@ -365,7 +388,7 @@ normalize(
   order=2
 )
 not_equal(x1, x2)
-numpy: Module(keras.ops.numpy)
+numpy: Module(keras.api.ops.numpy)
 one_hot(
   x,
   num_classes,
@@ -437,6 +460,11 @@ segment_sum(
   segment_ids,
   num_segments=None,
   sorted=False
+)
+select(
+  condlist,
+  choicelist,
+  default=0
 )
 selu(x)
 separable_conv(
@@ -571,6 +599,12 @@ var(
   keepdims=False
 )
 vdot(x1, x2)
+vectorize(
+  pyfunc,
+  *,
+  excluded=None,
+  signature=None
+)
 vectorized_map(function, elements)
 vstack(xs)
 where(

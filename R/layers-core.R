@@ -371,6 +371,11 @@ function (object, equation, output_shape, activation = NULL,
 #' index 0 cannot be used in the vocabulary (`input_dim` should
 #' equal size of vocabulary + 1).
 #'
+#' @param weights
+#' Optional floating-point matrix of size
+#' `(input_dim, output_dim)`. The initial embeddings values
+#' to use.
+#'
 #' @param lora_rank
 #' Optional integer. If set, the layer's forward pass
 #' will implement LoRA (Low-Rank Adaptation)
@@ -399,7 +404,7 @@ function (object, equation, output_shape, activation = NULL,
 layer_embedding <-
 function (object, input_dim, output_dim, embeddings_initializer = "uniform",
     embeddings_regularizer = NULL, embeddings_constraint = NULL,
-    mask_zero = FALSE, lora_rank = NULL, ...)
+    mask_zero = FALSE, weights = NULL, lora_rank = NULL, ...)
 {
     args <- capture_args(list(input_dim = as_integer, output_dim = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,

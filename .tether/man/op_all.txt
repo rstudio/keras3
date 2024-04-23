@@ -16,7 +16,7 @@ Args:
         for the last to the first axis.
     keepdims: If `True`, axes which are reduced are left in the result as
         dimensions with size one. With this option, the result will
-        broadcast correctly against the input array. Defaults to`False`.
+        broadcast correctly against the input array. Defaults to `False`.
 
 Returns:
     The tensor containing the logical AND reduction over the `axis`.
@@ -34,3 +34,4 @@ array([ True False], shape=(2,), dtype=bool)
 >>> x = keras.ops.convert_to_tensor([[True, False], [True, True]])
 >>> keras.ops.all(x, keepdims=True)
 array([[False]], shape=(1, 1), dtype=bool)
+

@@ -50,6 +50,7 @@ Other image utils: \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
+\code{\link{op_image_rgb_to_grayscale}()} \cr
 
 Other utils: \cr
 \code{\link{audio_dataset_from_directory}()} \cr

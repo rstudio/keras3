@@ -33,6 +33,8 @@ resolve_roxy_tether("keras.ops")
 
 
 # url <- "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"
+# withr::with_dir("~/github/keras-team/keras-io/", system("git pull"))
+# withr::with_dir("~/github/keras-team/keras/", system("git pull"))
 resolve_rmd_tether <- function(url) {
   path <- url
   path <- sub("https://raw.githubusercontent.com/keras-team/keras/master/",

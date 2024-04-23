@@ -108,6 +108,7 @@ Other losses: \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr
+\code{\link{loss_ctc}()} \cr
 \code{\link{loss_dice}()} \cr
 \code{\link{loss_hinge}()} \cr
 \code{\link{loss_huber}()} \cr
@@ -120,6 +121,7 @@ Other losses: \cr
 \code{\link{loss_poisson}()} \cr
 \code{\link{loss_sparse_categorical_crossentropy}()} \cr
 \code{\link{loss_squared_hinge}()} \cr
+\code{\link{loss_tversky}()} \cr
 \code{\link{metric_binary_crossentropy}()} \cr
 \code{\link{metric_binary_focal_crossentropy}()} \cr
 \code{\link{metric_categorical_focal_crossentropy}()} \cr

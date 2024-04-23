@@ -20,7 +20,7 @@ audio_dataset_from_directory(
   follow_links=False,
   verbose=True
 )
-clear_session()
+clear_session(free_memory=True)
 custom_object_scope(custom_objects)
 CustomObjectScope(custom_objects)
 deserialize_keras_object(
@@ -87,7 +87,7 @@ img_to_array(
 )
 is_interactive_logging_enabled()
 is_keras_tensor(x)
-legacy: Module(keras.utils.legacy)
+legacy: Module(keras.api.utils.legacy)
 load_img(
   path,
   color_mode='rgb',

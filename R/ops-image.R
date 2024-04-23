@@ -339,6 +339,30 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' Whether to use an antialiasing filter when downsampling an
 #' image. Defaults to `FALSE`.
 #'
+#' @param crop_to_aspect_ratio
+#' If `TRUE`, resize the images without aspect
+#' ratio distortion. When the original aspect ratio differs
+#' from the target aspect ratio, the output image will be
+#' cropped so as to return the
+#' largest possible window in the image (of size `(height, width)`)
+#' that matches the target aspect ratio. By default
+#' (`crop_to_aspect_ratio=FALSE`), aspect ratio may not be preserved.
+#'
+#' @param pad_to_aspect_ratio
+#' If `TRUE`, pad the images without aspect
+#' ratio distortion. When the original aspect ratio differs
+#' from the target aspect ratio, the output image will be
+#' evenly padded on the short side.
+#'
+#' @param fill_mode
+#' When using `pad_to_aspect_ratio=TRUE`, padded areas
+#' are filled according to the given mode. Only `"constant"` is
+#' supported at this time
+#' (fill with constant value, equal to `fill_value`).
+#'
+#' @param fill_value
+#' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -359,6 +383,8 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' @tether keras.ops.image.resize
 op_image_resize <-
 function (image, size, interpolation = "bilinear", antialias = FALSE,
+          crop_to_aspect_ratio = FALSE, pad_to_aspect_ratio = FALSE,
+          fill_mode = "constant", fill_value = 0,
     data_format = "channels_last")
 {
     args <- capture_args(list(size = as_integer))
@@ -429,3 +455,52 @@ function (images, top_cropping = NULL, left_cropping = NULL,
   do.call(keras$ops$image$crop_images, args)
 }
 
+#' Convert RGB images to grayscale.
+#'
+#' @description
+#' This function converts RGB images to grayscale images. It supports both
+#' 3D and 4D tensors, where the last dimension represents channels.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 4, 4, 3))
+#' y <- op_image_rgb_to_grayscale(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(4, 4, 3)) # Single RGB image
+#' y = op_image_rgb_to_grayscale(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(2, 3, 4, 4))
+#' y <- op_image_rgb_to_grayscale(x, data_format="channels_first")
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' Grayscale image or batch of grayscale images.
+#'
+#' @param image
+#' Input RGB image or batch of RGB images. Must be a 3D tensor
+#' with shape `(height, width, channels)` or a 4D tensor with shape
+#' `(batch, height, width, channels)`.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' Defaults to `"channels_last"`.
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @tether keras.ops.image.rgb_to_grayscale
+op_image_rgb_to_grayscale <-
+function (image, data_format = "channels_last")
+keras$ops$image$rgb_to_grayscale(image, data_format)

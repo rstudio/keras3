@@ -1,7 +1,7 @@
 Help on class Ftrl in module keras.src.optimizers.ftrl:
 
 class Ftrl(keras.src.optimizers.optimizer.Optimizer)
- |  Ftrl(learning_rate=0.001, learning_rate_power=-0.5, initial_accumulator_value=0.1, l1_regularization_strength=0.0, l2_regularization_strength=0.0, l2_shrinkage_regularization_strength=0.0, beta=0.0, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, name='ftrl', **kwargs)
+ |  Ftrl(learning_rate=0.001, learning_rate_power=-0.5, initial_accumulator_value=0.1, l1_regularization_strength=0.0, l2_regularization_strength=0.0, l2_shrinkage_regularization_strength=0.0, beta=0.0, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='ftrl', **kwargs)
  |
  |  Optimizer that implements the FTRL algorithm.
  |
@@ -144,6 +144,8 @@ class Ftrl(keras.src.optimizers.optimizer.Optimizer)
  |    use_ema=False,
  |    ema_momentum=0.99,
  |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
  |    name='ftrl',
  |    **kwargs
  |  )
