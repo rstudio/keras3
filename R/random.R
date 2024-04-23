@@ -385,6 +385,8 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #' @param seed
 #' Initial seed for the random number generator
 #'
+#' @param name String, name for the object
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -397,7 +399,7 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #'
 #' @tether keras.random.SeedGenerator
 random_seed_generator <-
-function (seed = NULL, ...)
+function (seed = NULL, name = NULL, ...)
 {
     args <- capture_args(list(seed = as_integer))
     do.call(keras$random$SeedGenerator, args)
