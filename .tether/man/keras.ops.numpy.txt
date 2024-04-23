@@ -260,6 +260,11 @@ roll(
   axis=None
 )
 round(x, decimals=0)
+select(
+  condlist,
+  choicelist,
+  default=0
+)
 sign(x)
 sin(x)
 sinh(x)
@@ -330,6 +335,12 @@ var(
   keepdims=False
 )
 vdot(x1, x2)
+vectorize(
+  pyfunc,
+  *,
+  excluded=None,
+  signature=None
+)
 vstack(xs)
 where(
   condition,
