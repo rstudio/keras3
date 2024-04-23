@@ -529,6 +529,12 @@
     <loc>https://keras.posit.co/reference/image_to_array.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/imagenet_decode_predictions.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/imagenet_preprocess_input.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/index.html</loc>
   </url>
   <url>
@@ -994,6 +1000,9 @@
     <loc>https://keras.posit.co/reference/loss_squared_hinge.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/loss_tversky.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/mark_active.html</loc>
   </url>
   <url>
@@ -1282,6 +1291,9 @@
     <loc>https://keras.posit.co/reference/op_cross.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_ctc_decode.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_ctc_loss.html</loc>
   </url>
   <url>
@@ -1322,6 +1334,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_eig.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_eigh.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_einsum.html</loc>
@@ -1424,6 +1439,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_image_resize.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_image_rgb_to_grayscale.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_in_top_k.html</loc>
@@ -1642,6 +1660,9 @@
     <loc>https://keras.posit.co/reference/op_segment_sum.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_select.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_selu.html</loc>
   </url>
   <url>
@@ -1775,6 +1796,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_vdot.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_vectorize.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_vectorized_map.html</loc>
