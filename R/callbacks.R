@@ -41,6 +41,10 @@
 #'   layer_dense(10)
 #' model %>% compile(optimizer = optimizer_sgd(), loss = 'mse')
 #'
+#' # ensure model is built (i.e., weights are initialized) for
+#' # callback_backup_and_restore()
+#' model(op_ones(c(5, 20))) |> invisible()
+#'
 #' tryCatch({
 #'   model %>% fit(x = op_ones(c(5, 20)),
 #'                 y = op_zeros(5),

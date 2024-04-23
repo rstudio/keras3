@@ -3533,7 +3533,8 @@ function (x, dtype = NULL)
 #'   axis = 2,
 #'   weights = op_array(c(1/4, 3/4))
 #' )
-#' # Error: Axis must be specified when shapes of a and weights differ.
+#'
+#' # Error: Axis must be specified when shapes of x and weights differ.
 #' try(op_average(
 #'   data,
 #'   weights = op_array(c(1/4, 3/4))
@@ -3573,6 +3574,13 @@ op_average <-
 function (x, axis = NULL, weights = NULL)
 {
     args <- capture_args(list(axis = as_axis))
+    # BUG guardrail. In Keras 3.3.2, this started silently (wrongly) succeeding
+    # where it would return the sum of the axis reductions rather than throwing
+    # an exception
+    # We require here that users pass `axis` if passing weights with a different shape.
+    if(!is.null(weights) && is.null(axis) &&
+       !identical(op_shape(weights), op_shape(x)))
+      stop("Axis must be specified when shapes of x and weights differ.")
     do.call(keras$ops$average, args)
 }
 
@@ -5760,6 +5768,9 @@ keras$ops$multiply(x1, x2)
 #' @param neginf
 #' Optional float or int. Value to replace negative infinity with.
 #'
+#' @details
+#'
+#' # Example
 #' ```{r}
 #' (x <- op_convert_to_tensor(c(1, NaN, -Inf, Inf)))
 #' op_nan_to_num(x)
