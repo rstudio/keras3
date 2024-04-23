@@ -20,7 +20,7 @@ audio_dataset_from_directory(
   follow_links=False,
   verbose=True
 )
-clear_session()
+clear_session(free_memory=True)
 custom_object_scope(custom_objects)
 CustomObjectScope(custom_objects)
 deserialize_keras_object(

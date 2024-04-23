@@ -53,6 +53,15 @@
 #' new_layer <- layer_dense(units = 10)
 #' print(new_layer$name)
 #' ```
+#'
+#' @param free_memory
+#' Whether to call Python garbage collection.
+#' It's usually a good practice to call it to make sure
+#' memory used by deleted objects is immediately freed.
+#' However, it may take a few seconds to execute, so
+#' when using `clear_session()` in a short loop,
+#' you may want to skip it.
+#'
 #' @returns `NULL`, invisibly, called for side effects.
 #' @export
 #' @family backend
@@ -62,9 +71,10 @@
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/utils/clear_session>
 #' @tether keras.utils.clear_session
 clear_session <-
-function ()
+function (free_memory = TRUE)
 {
-    keras$utils$clear_session()
+    args <- capture_args()
+    do.call(keras$utils$clear_session, args)
 }
 
 
