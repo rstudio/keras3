@@ -339,6 +339,30 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' Whether to use an antialiasing filter when downsampling an
 #' image. Defaults to `FALSE`.
 #'
+#' @param crop_to_aspect_ratio
+#' If `TRUE`, resize the images without aspect
+#' ratio distortion. When the original aspect ratio differs
+#' from the target aspect ratio, the output image will be
+#' cropped so as to return the
+#' largest possible window in the image (of size `(height, width)`)
+#' that matches the target aspect ratio. By default
+#' (`crop_to_aspect_ratio=FALSE`), aspect ratio may not be preserved.
+#'
+#' @param pad_to_aspect_ratio
+#' If `TRUE`, pad the images without aspect
+#' ratio distortion. When the original aspect ratio differs
+#' from the target aspect ratio, the output image will be
+#' evenly padded on the short side.
+#'
+#' @param fill_mode
+#' When using `pad_to_aspect_ratio=TRUE`, padded areas
+#' are filled according to the given mode. Only `"constant"` is
+#' supported at this time
+#' (fill with constant value, equal to `fill_value`).
+#'
+#' @param fill_value
+#' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -359,6 +383,8 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' @tether keras.ops.image.resize
 op_image_resize <-
 function (image, size, interpolation = "bilinear", antialias = FALSE,
+          crop_to_aspect_ratio = FALSE, pad_to_aspect_ratio = FALSE,
+          fill_mode = "constant", fill_value = 0,
     data_format = "channels_last")
 {
     args <- capture_args(list(size = as_integer))

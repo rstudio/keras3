@@ -4,6 +4,10 @@ keras.ops.image.resize(
   size,
   interpolation='bilinear',
   antialias=False,
+  crop_to_aspect_ratio=False,
+  pad_to_aspect_ratio=False,
+  fill_mode='constant',
+  fill_value=0.0,
   data_format='channels_last'
 )
 __doc__
@@ -16,6 +20,22 @@ Args:
         `"bilinear"`, and `"bicubic"`. Defaults to `"bilinear"`.
     antialias: Whether to use an antialiasing filter when downsampling an
         image. Defaults to `False`.
+    crop_to_aspect_ratio: If `True`, resize the images without aspect
+        ratio distortion. When the original aspect ratio differs
+        from the target aspect ratio, the output image will be
+        cropped so as to return the
+        largest possible window in the image (of size `(height, width)`)
+        that matches the target aspect ratio. By default
+        (`crop_to_aspect_ratio=False`), aspect ratio may not be preserved.
+    pad_to_aspect_ratio: If `True`, pad the images without aspect
+        ratio distortion. When the original aspect ratio differs
+        from the target aspect ratio, the output image will be
+        evenly padded on the short side.
+    fill_mode: When using `pad_to_aspect_ratio=True`, padded areas
+        are filled according to the given mode. Only `"constant"` is
+        supported at this time
+        (fill with constant value, equal to `fill_value`).
+    fill_value: Float. Padding value to use when `pad_to_aspect_ratio=True`.
     data_format: string, either `"channels_last"` or `"channels_first"`.
         The ordering of the dimensions in the inputs. `"channels_last"`
         corresponds to inputs with shape `(batch, height, width, channels)`
@@ -45,3 +65,4 @@ Examples:
 ...     data_format="channels_first")
 >>> y.shape
 (2, 3, 2, 2)
+
