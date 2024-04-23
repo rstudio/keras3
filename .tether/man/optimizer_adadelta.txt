@@ -1,7 +1,7 @@
 Help on class Adadelta in module keras.src.optimizers.adadelta:
 
 class Adadelta(keras.src.optimizers.optimizer.Optimizer)
- |  Adadelta(learning_rate=0.001, rho=0.95, epsilon=1e-07, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, name='adadelta', **kwargs)
+ |  Adadelta(learning_rate=0.001, rho=0.95, epsilon=1e-07, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='adadelta', **kwargs)
  |
  |  Optimizer that implements the Adadelta algorithm.
  |
@@ -104,6 +104,8 @@ class Adadelta(keras.src.optimizers.optimizer.Optimizer)
  |    use_ema=False,
  |    ema_momentum=0.99,
  |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
  |    name='adadelta',
  |    **kwargs
  |  )

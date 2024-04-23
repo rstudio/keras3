@@ -1,7 +1,7 @@
 Help on class Adafactor in module keras.src.optimizers.adafactor:
 
 class Adafactor(keras.src.optimizers.optimizer.Optimizer)
- |  Adafactor(learning_rate=0.001, beta_2_decay=-0.8, epsilon_1=1e-30, epsilon_2=0.001, clip_threshold=1.0, relative_step=True, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, name='adafactor', **kwargs)
+ |  Adafactor(learning_rate=0.001, beta_2_decay=-0.8, epsilon_1=1e-30, epsilon_2=0.001, clip_threshold=1.0, relative_step=True, weight_decay=None, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='adafactor', **kwargs)
  |
  |  Optimizer that implements the Adafactor algorithm.
  |
@@ -109,6 +109,8 @@ class Adafactor(keras.src.optimizers.optimizer.Optimizer)
  |    use_ema=False,
  |    ema_momentum=0.99,
  |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
  |    name='adafactor',
  |    **kwargs
  |  )

@@ -1,7 +1,7 @@
 Help on class AdamW in module keras.src.optimizers.adamw:
 
 class AdamW(keras.src.optimizers.adam.Adam)
- |  AdamW(learning_rate=0.001, weight_decay=0.004, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=False, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, name='adamw', **kwargs)
+ |  AdamW(learning_rate=0.001, weight_decay=0.004, beta_1=0.9, beta_2=0.999, epsilon=1e-07, amsgrad=False, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='adamw', **kwargs)
  |
  |  Optimizer that implements the AdamW algorithm.
  |
@@ -120,6 +120,8 @@ class AdamW(keras.src.optimizers.adam.Adam)
  |    use_ema=False,
  |    ema_momentum=0.99,
  |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
  |    name='adamw',
  |    **kwargs
  |  )
