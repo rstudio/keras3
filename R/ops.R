@@ -3313,6 +3313,10 @@ keras$ops$arctanh(x)
 #' By default, the index is into the flattened tensor, otherwise
 #' along the specified axis.
 #'
+#' @param keepdims
+#' If this is set to `TRUE`, the axes which are reduced are left
+#' in the result as dimensions with size one. Defaults to `FALSE`.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3321,7 +3325,7 @@ keras$ops$arctanh(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 #' @tether keras.ops.argmax
 op_argmax <-
-function (x, axis = NULL)
+function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argmax, args)
@@ -3356,6 +3360,10 @@ function (x, axis = NULL)
 #' By default, the index is into the flattened tensor, otherwise
 #' along the specified axis.
 #'
+#' @param keepdims
+#' If this is set to `TRUE`, the axes which are reduced are left
+#' in the result as dimensions with size one. Defaults to `FALSE`.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3364,7 +3372,7 @@ function (x, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 #' @tether keras.ops.argmin
 op_argmin <-
-function (x, axis = NULL)
+function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$argmin, args)
