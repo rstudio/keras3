@@ -5,10 +5,10 @@
 #' @param envname Name of or path to a Python virtual environment
 #' @param extra_packages Additional Python packages to install alongside Keras
 #' @param python_version Passed on to `reticulate::virtualenv_starter()`
-#' @param backend Which backend(s) to install. Accepted values include `"tensorflow"`, `"jax"` and `"pytorch"`
+#' @param backend Which backend(s) to install. Accepted values include `"tensorflow"`, `"jax"` and `"torch"`
 #' @param gpu whether to install a GPU capable version of the backend.
 #' @param restart_session Whether to restart the R session after installing (note this will only occur within RStudio).
-#' @param ... reserved for future compatability.
+#' @param ... reserved for future compatibility.
 #'
 #' @returns No return value, called for side effects.
 #'
@@ -19,7 +19,7 @@ install_keras <- function(
     extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython", "tensorflow_datasets"),
     python_version = ">=3.9,<=3.11",
     # backend = "tensorflow",
-    backend = c("tensorflow", "jax"),
+    backend = c("tensorflow", "jax", "torch"),
     # backend = "tf-nightly",
     gpu = NA,
     restart_session = TRUE) {

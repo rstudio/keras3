@@ -10,7 +10,7 @@ install_keras(
   extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython",
     "tensorflow_datasets"),
   python_version = ">=3.9,<=3.11",
-  backend = c("tensorflow", "jax"),
+  backend = c("tensorflow", "jax", "torch"),
   gpu = NA,
   restart_session = TRUE
 )
@@ -18,13 +18,13 @@ install_keras(
 \arguments{
 \item{envname}{Name of or path to a Python virtual environment}
 
-\item{...}{reserved for future compatability.}
+\item{...}{reserved for future compatibility.}
 
 \item{extra_packages}{Additional Python packages to install alongside Keras}
 
 \item{python_version}{Passed on to \code{reticulate::virtualenv_starter()}}
 
-\item{backend}{Which backend(s) to install. Accepted values include \code{"tensorflow"}, \code{"jax"} and \code{"pytorch"}}
+\item{backend}{Which backend(s) to install. Accepted values include \code{"tensorflow"}, \code{"jax"} and \code{"torch"}}
 
 \item{gpu}{whether to install a GPU capable version of the backend.}
 
