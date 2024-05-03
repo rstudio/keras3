@@ -19,7 +19,7 @@ install_keras <- function(
     extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython", "tensorflow_datasets"),
     python_version = ">=3.9,<=3.11",
     # backend = "tensorflow",
-    backend = c("tensorflow", "jax", "torch"),
+    backend = c("tensorflow", "jax"),
     # backend = "tf-nightly",
     gpu = NA,
     restart_session = TRUE) {
