@@ -20,6 +20,11 @@
 #' @noRd
 create_layer <- function(LayerClass, object, args = list()) {
 
+  # force `object` before instantiating the layer, so pipe chains create layers
+  # in the the intutitively expected order.
+  # https://github.com/rstudio/keras/issues/1440
+  object <- if (missing(object)) NULL else object
+
   # Starting in Keras 3.1, constraints can't be simple callable functions, they
   # *must* inherit from keras.constraints.Constraint()
   args <- imap(args, function(arg, name) {
@@ -37,7 +42,7 @@ create_layer <- function(LayerClass, object, args = list()) {
   layer <- do.call(LayerClass, args)
 
   # compose if we have an `object`
-  if (missing(object) || is.null(object))
+  if (is.null(object))
     layer
   else
     invisible(compose_layer(object, layer))

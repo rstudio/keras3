@@ -1,5 +1,8 @@
 # keras3 (development version)
 
+- Chains of `layer_*` calls with `|>` now instantiate layers in the 
+  same order as `%>%` pipe chains: left-hand-side first (#1440). 
+
 User facing changes with upstream Keras v3.3.2: 
 
 - new function: `op_ctc_decode()`
