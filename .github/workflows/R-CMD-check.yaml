@@ -23,12 +23,12 @@ jobs:
         include:
 
           ## the happy path - default everything
-          - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
-          - {os: 'windows-latest', python: '3.10', r: 'release'}
-          - {os: 'macOS-latest'  , python: '3.10', r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+          - {os: 'windows-latest', python: '3.11', r: 'release'}
+          - {os: 'macOS-latest'  , python: '3.11', r: 'release'}
 
           ## different python versions
-          - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
           - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
           # - {os: 'ubuntu-20.04'  , python: '3.8' , r: '3.6'} # default R in ubuntu-20.04 # install/pak failure?
 
@@ -54,6 +54,10 @@ jobs:
     steps:
 
       - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
 
       - uses: r-lib/actions/setup-pandoc@v2
 
