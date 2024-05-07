@@ -68,7 +68,9 @@ callback_view_metrics <- Callback(
         }
 
         # pump events
+        utils::process.events()
         Sys.sleep(sleep)
+        utils::process.events()
       }
       # record metrics
       tfruns::write_run_metadata("metrics", metrics)
