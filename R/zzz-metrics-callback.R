@@ -29,7 +29,7 @@ callback_view_metrics <- Callback(
 
       } else {
 
-        sleep <- 0.05 # 0.1
+        sleep <- 0.1
 
       }
 
