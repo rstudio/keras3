@@ -1,9 +1,11 @@
 # keras3 (development version)
 
-- Chains of `layer_*` calls with `|>` now instantiate layers in the 
-  same order as `%>%` pipe chains: left-hand-side first (#1440). 
+- Chains of `layer_*` calls with `|>` now instantiate layers in the
+  same order as `%>%` pipe chains: left-hand-side first (#1440).
 
-User facing changes with upstream Keras v3.3.2: 
+- `iterate()`, `iter_next()` and `as_iterator()` are now reexported from reticulate.
+
+User facing changes with upstream Keras v3.3.2:
 
 - new function: `op_ctc_decode()`
 - new function: `op_eigh()`
@@ -21,9 +23,9 @@ User facing changes with upstream Keras v3.3.2:
 
 - new arg: `clear_session(free_memory)` for clearing without invoking the garbage collector.
 
-- `metric_kl_divergence()` and `loss_kl_divergence()` clip inputs 
+- `metric_kl_divergence()` and `loss_kl_divergence()` clip inputs
   (`y_true` and `y_pred`) to the `[0, 1]` range.
-  
+
 - new `Layer()` attributes: `metrics`, `dtype_policy`
 
 - Added initial support for float8 training
@@ -34,7 +36,7 @@ User facing changes with upstream Keras v3.3.2:
 
 - Models and layers now return owned metrics recursively.
 
-- Add pickling support for Keras models. (e.g., via `reticulate::py_save_object()`) 
+- Add pickling support for Keras models. (e.g., via `reticulate::py_save_object()`)
   Note that pickling is not recommended, prefer using Keras saving APIs.
 
 

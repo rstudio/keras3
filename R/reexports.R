@@ -52,6 +52,15 @@ reticulate::np_array
 #' @export
 reticulate::tuple
 
+#' @export
+reticulate::iter_next
+
+#' @export
+reticulate::iterate
+
+#' @export
+reticulate::as_iterator
+
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard
