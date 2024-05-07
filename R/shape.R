@@ -143,19 +143,19 @@ shape <- function(...) {
     # if (!is.null(dim(x)) && length(x) > 200)
     #  warning("Did you pass an R array to shape()? Did you mean to use dim()?")
 
-    if (!is.atomic(x) || length(x) > 1)
-      lapply(x, fix)
-    else if (is.null(x) ||
-             identical(x, NA_integer_) ||
-             identical(x, NA_real_) ||
-             identical(x, NA) ||
-             (is.numeric(x) && isTRUE(suppressWarnings(x == -1L))))
+    if (is.null(x) ||
+        identical(x, NA_integer_) ||
+        identical(x, NA_real_) ||
+        identical(x, NA) ||
+        (is.numeric(x) && isTRUE(suppressWarnings(x == -1L))))
       NA_integer_ # so we can safely unlist()
+    else if (!is.atomic(x) || length(x) > 1)
+      lapply(x, fix)
     else
       as.integer(x)
   }
 
-  shp <- unlist(fix(list(...)), use.names = FALSE)
+  shp <- unlist(lapply(list(...), fix), use.names = FALSE)
   shp <- lapply(shp, function(x) if (identical(x, NA_integer_)) NULL else x)
   class(shp) <- "keras_shape"
   shp
