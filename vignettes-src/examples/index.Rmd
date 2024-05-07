@@ -13,7 +13,6 @@ examples <- lapply(examples, function(x) {
   out$handle <- gsub("\\.Rmd", ".html", x)
   out
 })
-`%||%` <- function(x,y) if(is.null(x)) y else x
 
 card <- function(x) {
 
