@@ -471,6 +471,7 @@ new_reg
 
 ```
 ## <keras.src.regularizers.regularizers.L1 object>
+##  signature: (x)
 ```
 
 ### Model weights saving
@@ -772,6 +773,7 @@ new_layer
 
 ```
 ## <MyDense name=my_dense_1, built=False>
+##  signature: (*args, **kwargs)
 ```
 
 Note that overriding `from_config` is unnecessary above for `MyDense` because

@@ -115,6 +115,9 @@ knit_vignette <- function(input, ..., output_dir, external = FALSE) {
     return(callr::r(function(input, ...) {
       Sys.setenv(CUDA_VISIBLE_DEVICES = "0")
       options(conflicts.policy = "strict")
+      conflictRules("dplyr", mask.ok = c(
+        "intersect", "setdiff", "setequal", "union",
+        "filter", "lag"))
       envir::import_from("tools/knit.R", knit_vignette)
       knit_vignette(input)
     }, args = list(input, ...), stdout = "", stderr = ""))
