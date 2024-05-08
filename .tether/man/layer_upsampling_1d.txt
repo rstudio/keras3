@@ -1,0 +1,69 @@
+Help on class UpSampling1D in module keras.src.layers.reshaping.up_sampling1d:
+
+class UpSampling1D(keras.src.layers.layer.Layer)
+ |  UpSampling1D(size=2, **kwargs)
+ |
+ |  Upsampling layer for 1D inputs.
+ |
+ |  Repeats each temporal step `size` times along the time axis.
+ |
+ |  Example:
+ |
+ |  >>> input_shape = (2, 2, 3)
+ |  >>> x = np.arange(np.prod(input_shape)).reshape(input_shape)
+ |  >>> x
+ |  [[[ 0  1  2]
+ |    [ 3  4  5]]
+ |   [[ 6  7  8]
+ |    [ 9 10 11]]]
+ |  >>> y = keras.layers.UpSampling1D(size=2)(x)
+ |  >>> y
+ |  [[[ 0.  1.  2.]
+ |    [ 0.  1.  2.]
+ |    [ 3.  4.  5.]
+ |    [ 3.  4.  5.]]
+ |
+ |   [[ 6.  7.  8.]
+ |    [ 6.  7.  8.]
+ |    [ 9. 10. 11.]
+ |    [ 9. 10. 11.]]]
+ |
+ |  Args:
+ |      size: Integer. Upsampling factor.
+ |
+ |  Input shape:
+ |      3D tensor with shape: `(batch_size, steps, features)`.
+ |
+ |  Output shape:
+ |      3D tensor with shape: `(batch_size, upsampled_steps, features)`.
+ |
+ |  Method resolution order:
+ |      UpSampling1D
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    size=2,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

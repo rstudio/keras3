@@ -1,0 +1,64 @@
+Help on class Loss in module keras.src.losses.loss:
+
+class Loss(builtins.object)
+ |  Loss(
+ |    name=None,
+ |    reduction='sum_over_batch_size',
+ |    dtype=None
+ |  )
+ |
+ |  Loss base class.
+ |
+ |  To be implemented by subclasses:
+ |
+ |  * `call()`: Contains the logic for loss calculation using `y_true`,
+ |      `y_pred`.
+ |
+ |  Example subclass implementation:
+ |
+ |  ```python
+ |  class MeanSquaredError(Loss):
+ |      def call(self, y_true, y_pred):
+ |          return ops.mean(ops.square(y_pred - y_true), axis=-1)
+ |  ```
+ |
+ |  Methods defined here:
+ |
+ |  __call__(
+ |    self,
+ |    y_true,
+ |    y_pred,
+ |    sample_weight=None
+ |  )
+ |      Call self as a function.
+ |
+ |  __init__(
+ |    self,
+ |    name=None,
+ |    reduction='sum_over_batch_size',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(
+ |    self,
+ |    y_true,
+ |    y_pred
+ |  )
+ |
+ |  get_config(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config) from builtins.type
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+

@@ -1,0 +1,61 @@
+Help on class Permute in module keras.src.layers.reshaping.permute:
+
+class Permute(keras.src.layers.layer.Layer)
+ |  Permute(dims, **kwargs)
+ |
+ |  Permutes the dimensions of the input according to a given pattern.
+ |
+ |  Useful e.g. connecting RNNs and convnets.
+ |
+ |  Args:
+ |      dims: Tuple of integers. Permutation pattern does not include the
+ |          batch dimension. Indexing starts at 1.
+ |          For instance, `(2, 1)` permutes the first and second dimensions
+ |          of the input.
+ |
+ |  Input shape:
+ |      Arbitrary.
+ |
+ |  Output shape:
+ |      Same as the input shape, but with the dimensions re-ordered according
+ |      to the specified pattern.
+ |
+ |  Example:
+ |
+ |  >>> x = keras.Input(shape=(10, 64))
+ |  >>> y = keras.layers.Permute((2, 1))(x)
+ |  >>> y.shape
+ |  (None, 64, 10)
+ |
+ |  Method resolution order:
+ |      Permute
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    dims,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  compute_output_spec(self, inputs)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

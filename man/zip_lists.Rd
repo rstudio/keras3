@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{zip_lists}
 \alias{zip_lists}
-\title{zip lists}
+\title{Zip lists}
 \usage{
 zip_lists(...)
 }
@@ -37,5 +37,40 @@ str(zip_lists(gradients, weights[c(3, 1, 2)]))
 names(gradients) <- paste0("gradient_", 1:3)
 try(zip_lists(gradients, weights)) # error, names don't match
 # call unname directly for positional matching
-zip_lists(unname(gradients), unname(weights))
+str(zip_lists(unname(gradients), unname(weights)))
 }
+\seealso{
+Other data utils: \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+
+Other utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_file}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
+\code{\link{to_categorical}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+}
+\concept{data utils}
+\concept{utils}

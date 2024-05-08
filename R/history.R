@@ -46,7 +46,7 @@ print.keras_training_history <- function(x, ...) {
 #' Plots metrics recorded during training.
 #'
 #' @param x Training history object returned from
-#'  `fit.keras.engine.training.Model()`.
+#'  [`fit.keras.src.models.model.Model()`].
 #' @param y Unused.
 #' @param metrics One or more metrics to plot (e.g. `c('loss', 'accuracy')`).
 #'   Defaults to plotting all captured metrics.
@@ -58,6 +58,12 @@ print.keras_training_history <- function(x, ...) {
 #' @param theme_bw Use `ggplot2::theme_bw()` to plot the history in
 #'   black and white.
 #' @param ... Additional parameters to pass to the [plot()] method.
+#'
+#' @importFrom rlang .data
+#'
+#' @returns if `method == "ggplot2"`, the ggplot object is returned. If
+#' `method == "base"`, then this function will draw to the graphics device and
+#' return `NULL`, invisibly.
 #'
 #' @export
 plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto", "ggplot2", "base"),
@@ -95,11 +101,11 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 
     if (do_validation) {
       if (theme_bw)
-        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data, linetype = ~data, shape = ~data))
+        p <- ggplot2::ggplot(df, ggplot2::aes(.data$epoch, .data$value, color = .data$data, fill = .data$data, linetype = .data$data, shape = .data$data))
       else
-        p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value, color = ~data, fill = ~data))
+        p <- ggplot2::ggplot(df, ggplot2::aes(.data$epoch, .data$value, color = .data$data, fill = .data$data))
     } else {
-      p <- ggplot2::ggplot(df, ggplot2::aes_(~epoch, ~value))
+      p <- ggplot2::ggplot(df, ggplot2::aes(.data$epoch, .data$value))
     }
 
     smooth_args <- list(se = FALSE, method = 'loess', na.rm = TRUE,
@@ -145,12 +151,13 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       # adjust margins
       top_plot <- i == 1
       bottom_plot <- i == length(metrics)
+
+      mar <- c(1.5, 5, 0.5, 1.5)
       if (top_plot)
-        par(mar = c(1.5, 3, 1.5, 1.5))
-      else if (bottom_plot)
-        par(mar = c(2.5, 3, .5, 1.5))
-      else
-        par(mar = c(1.5, 3, .5, 1.5))
+        mar[3] %<>% `+`(3.5)
+      if (bottom_plot)
+        mar[1] %<>% `+`(3.5)
+      par(mar = mar)
 
       # select data for current panel
       df2 <- df[df$metric == metric, ]
@@ -168,6 +175,7 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
       else
         graphics::legend(legend_location, legend = metric, pch = 1)
     }
+  invisible(NULL)
   }
 }
 
@@ -175,14 +183,8 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
 #' @export
 as.data.frame.keras_training_history <- function(x, ...) {
 
-  # filter out metrics that were collected for callbacks (e.g. lr)
-  if (tensorflow::tf_version() < "2.2")
-    x$metrics <- x$metrics[x$params$metrics]
 
-  if (tensorflow::tf_version() >= "2.1")
-    metric_names <- names(x$metrics)
-  else
-    metric_names <- x$params$metrics
+  metric_names <- names(x$metrics)
 
   # pad to epochs if necessary
   values <- x$metrics
@@ -212,25 +214,16 @@ as.data.frame.keras_training_history <- function(x, ...) {
 to_keras_training_history <- function(history) {
 
 
-  # turn history into an R object so it can be persited and
+  # turn history into an R object so it can be persisted and
   # and give it a class so we can write print/plot methods
   params <- history$params
 
-  # we only see this info before TF 2.2
-  if (tensorflow::tf_version() < "2.2") {
-    if (params$do_validation) {
-      if (!is.null(params$validation_steps))
-        params$validation_samples <- params$validation_steps
-      else
-        params$validation_samples <- dim(history$validation_data[[1]])[[1]]
-    }
-  }
 
   # normalize metrics
   metrics <- history$history
-  metrics <- lapply(metrics, function(metric) {
-    as.numeric(lapply(metric, mean))
-  })
+  # metrics <- lapply(metrics, function(metric) {
+  #   as.numeric(lapply(metric, mean))
+  # })
 
   # create history
   keras_training_history(
@@ -242,14 +235,14 @@ to_keras_training_history <- function(history) {
 keras_training_history <- function(params, metrics) {
 
   # pad missing metrics with NA
-  rows <- max(as.integer(lapply(metrics, length)))
-  for (metric in names(metrics)) {
-    metric_data <- metrics[[metric]]
-    pad <- rows - length(metric_data)
-    pad_data <- rep_len(NA, pad)
-    metric_data <- c(metric_data, pad_data)
-    metrics[[metric]] <- metric_data
-  }
+  # rows <- max(as.integer(lapply(metrics, length)))
+  # for (metric in names(metrics)) {
+  #   metric_data <- metrics[[metric]]
+  #   pad <- rows - length(metric_data)
+  #   pad_data <- rep_len(NA, pad)
+  #   metric_data <- c(metric_data, pad_data)
+  #   metrics[[metric]] <- metric_data
+  # }
 
   # return history
   structure(class = "keras_training_history", list(

@@ -1,0 +1,21 @@
+__signature__
+keras.activations.hard_sigmoid(x)
+__doc__
+Hard sigmoid activation function.
+
+The hard sigmoid activation is defined as:
+
+- `0` if `if x <= -3`
+- `1` if `x >= 3`
+- `(x/6) + 0.5` if `-3 < x < 3`
+
+It's a faster, piecewise linear approximation
+of the sigmoid activation.
+
+Args:
+    x: Input tensor.
+
+Reference:
+
+- [Wikipedia "Hard sigmoid"](https://en.wikipedia.org/wiki/Hard_sigmoid)
+

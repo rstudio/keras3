@@ -2,16 +2,16 @@
 % Please edit documentation in R/layers-convolutional.R
 \name{layer_depthwise_conv_2d}
 \alias{layer_depthwise_conv_2d}
-\title{Depthwise separable 2D convolution.}
+\title{2D depthwise convolution layer.}
 \usage{
 layer_depthwise_conv_2d(
   object,
   kernel_size,
-  strides = c(1, 1),
+  strides = list(1L, 1L),
   padding = "valid",
-  depth_multiplier = 1,
+  depth_multiplier = 1L,
   data_format = NULL,
-  dilation_rate = c(1, 1),
+  dilation_rate = list(1L, 1L),
   activation = NULL,
   use_bias = TRUE,
   depthwise_initializer = "glorot_uniform",
@@ -21,122 +21,255 @@ layer_depthwise_conv_2d(
   activity_regularizer = NULL,
   depthwise_constraint = NULL,
   bias_constraint = NULL,
-  input_shape = NULL,
-  batch_input_shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  name = NULL,
-  trainable = NULL,
-  weights = NULL
+  ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{kernel_size}{An integer or list of 2 integers, specifying the width and
-height of the 2D convolution window. Can be a single integer to specify the
-same value for all spatial dimensions.}
+\item{kernel_size}{int or list of 2 integer, specifying the size of the
+depthwise convolution window.}
 
-\item{strides}{An integer or list of 2 integers, specifying the strides of
-the convolution along the width and height. Can be a single integer to
-specify the same value for all spatial dimensions. Specifying any stride
-value != 1 is incompatible with specifying any \code{dilation_rate} value != 1.}
+\item{strides}{int or list of 2 integer, specifying the stride length
+of the depthwise convolution. \code{strides > 1} is incompatible with
+\code{dilation_rate > 1}.}
 
-\item{padding}{one of \code{"valid"} or \code{"same"} (case-insensitive).}
+\item{padding}{string, either \code{"valid"} or \code{"same"} (case-insensitive).
+\code{"valid"} means no padding. \code{"same"} results in padding evenly to
+the left/right or up/down of the input. When \code{padding="same"} and
+\code{strides=1}, the output has the same size as the input.}
 
 \item{depth_multiplier}{The number of depthwise convolution output channels
-for each input channel. The total number of depthwise convolution output
-channels will be equal to \code{filters_in * depth_multiplier}.}
+for each input channel. The total number of depthwise convolution
+output channels will be equal to \code{input_channel * depth_multiplier}.}
 
-\item{data_format}{A string, one of \code{channels_last} (default) or
-\code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \verb{(batch, height, width, channels)} while \code{channels_first} corresponds to inputs with shape \verb{(batch, channels, height, width)}. It defaults to the \code{image_data_format} value
-found in your Keras config file at \verb{~/.keras/keras.json}. If you never set
-it, then it will be "channels_last".}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file
+at \verb{~/.keras/keras.json}.
+If you never set it, then it will be \code{"channels_last"}.}
 
-\item{dilation_rate}{an integer or list of 2 integers, specifying the
-dilation rate to use for dilated convolution. Can be a single integer to
-specify the same value for all spatial dimensions. Currently, specifying
-any \code{dilation_rate} value != 1 is incompatible with specifying any stride
-value != 1.}
+\item{dilation_rate}{int or list of 2 integers, specifying the dilation
+rate to use for dilated convolution.}
 
-\item{activation}{Activation function to use. If you don't specify anything,
-no activation is applied (ie. "linear" activation: \code{a(x) = x}).}
+\item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
-\item{use_bias}{Boolean, whether the layer uses a bias vector.}
+\item{use_bias}{bool, if \code{TRUE}, bias will be added to the output.}
 
-\item{depthwise_initializer}{Initializer for the depthwise kernel matrix.}
+\item{depthwise_initializer}{Initializer for the convolution kernel.
+If \code{NULL}, the default initializer (\code{"glorot_uniform"})
+will be used.}
 
-\item{bias_initializer}{Initializer for the bias vector.}
+\item{bias_initializer}{Initializer for the bias vector. If \code{NULL}, the
+default initializer (\code{"zeros"}) will be used.}
 
-\item{depthwise_regularizer}{Regularizer function applied to the depthwise
-kernel matrix.}
+\item{depthwise_regularizer}{Optional regularizer for the convolution kernel.}
 
-\item{bias_regularizer}{Regularizer function applied to the bias vector.}
+\item{bias_regularizer}{Optional regularizer for the bias vector.}
 
-\item{activity_regularizer}{Regularizer function applied to the output of the
-layer (its "activation")..}
+\item{activity_regularizer}{Optional regularizer function for the output.}
 
-\item{depthwise_constraint}{Constraint function applied to the depthwise
-kernel matrix.}
+\item{depthwise_constraint}{Optional projection function to be applied to the
+kernel after being updated by an \code{Optimizer} (e.g. used to implement
+norm constraints or value constraints for layer weights). The
+function must take as input the unprojected variable and must return
+the projected variable (which must have the same shape). Constraints
+are not safe to use when doing asynchronous distributed training.}
 
-\item{bias_constraint}{Constraint function applied to the bias vector.}
+\item{bias_constraint}{Optional projection function to be applied to the
+bias after being updated by an \code{Optimizer}.}
 
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
-
-\item{batch_input_shape}{Shapes, including the batch size. For instance,
-\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
-indicates batches of an arbitrary number of 32-dimensional vectors.}
-
-\item{batch_size}{Fixed batch size for layer}
-
-\item{dtype}{The data type expected by the input, as a string (\code{float32},
-\code{float64}, \code{int32}...)}
-
-\item{name}{An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.}
-
-\item{trainable}{Whether the layer weights will be updated during training.}
-
-\item{weights}{Initial weights for layer.}
+\item{...}{For forward/backward compatability.}
+}
+\value{
+A 4D tensor representing
+\code{activation(depthwise_conv2d(inputs, kernel) + bias)}.
 }
 \description{
-Depthwise Separable convolutions consists in performing just the first step
-in a depthwise spatial convolution (which acts on each input channel
-separately). The \code{depth_multiplier} argument controls how many output
-channels are generated per input channel in the depthwise step.
+Depthwise convolution is a type of convolution in which each input channel
+is convolved with a different kernel (called a depthwise kernel). You can
+understand depthwise convolution as the first step in a depthwise separable
+convolution.
+
+It is implemented via the following steps:
+\itemize{
+\item Split the input into individual channels.
+\item Convolve each channel with an individual depthwise kernel with
+\code{depth_multiplier} output channels.
+\item Concatenate the convolved outputs along the channels axis.
 }
+
+Unlike a regular 2D convolution, depthwise convolution does not mix
+information across different input channels.
+
+The \code{depth_multiplier} argument determines how many filters are applied to
+one input channel. As such, it controls the amount of output channels that
+are generated per input channel in the depthwise step.
+}
+\section{Input Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 4D tensor with shape: \verb{(batch_size, height, width, channels)}
+\item If \code{data_format="channels_first"}:
+A 4D tensor with shape: \verb{(batch_size, channels, height, width)}
+}
+}
+
+\section{Output Shape}{
+\itemize{
+\item If \code{data_format="channels_last"}:
+A 4D tensor with shape:
+\verb{(batch_size, new_height, new_width, channels * depth_multiplier)}
+\item If \code{data_format="channels_first"}:
+A 4D tensor with shape:
+\verb{(batch_size, channels * depth_multiplier, new_height, new_width)}
+}
+}
+
+\section{Raises}{
+ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
+}
+
+\section{Example}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 10, 12))
+y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
+shape(y)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 3, 3, 12)
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other convolutional layers: 
-\code{\link{layer_conv_1d_transpose}()},
-\code{\link{layer_conv_1d}()},
-\code{\link{layer_conv_2d_transpose}()},
-\code{\link{layer_conv_2d}()},
-\code{\link{layer_conv_3d_transpose}()},
-\code{\link{layer_conv_3d}()},
-\code{\link{layer_conv_lstm_2d}()},
-\code{\link{layer_cropping_1d}()},
-\code{\link{layer_cropping_2d}()},
-\code{\link{layer_cropping_3d}()},
-\code{\link{layer_depthwise_conv_1d}()},
-\code{\link{layer_separable_conv_1d}()},
-\code{\link{layer_separable_conv_2d}()},
-\code{\link{layer_upsampling_1d}()},
-\code{\link{layer_upsampling_2d}()},
-\code{\link{layer_upsampling_3d}()},
-\code{\link{layer_zero_padding_1d}()},
-\code{\link{layer_zero_padding_2d}()},
-\code{\link{layer_zero_padding_3d}()}
+\itemize{
+\item \url{https://keras.io/api/layers/convolution_layers/depthwise_convolution2d#depthwiseconv2d-class}
+}
+
+Other convolutional layers: \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
 \concept{convolutional layers}
+\concept{layers}

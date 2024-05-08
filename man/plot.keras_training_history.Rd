@@ -16,7 +16,7 @@
 }
 \arguments{
 \item{x}{Training history object returned from
-\code{fit.keras.engine.training.Model()}.}
+\code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.}
 
 \item{y}{Unused.}
 
@@ -34,6 +34,11 @@ than ten, it is forced to false.}
 black and white.}
 
 \item{...}{Additional parameters to pass to the \code{\link[=plot]{plot()}} method.}
+}
+\value{
+if \code{method == "ggplot2"}, the ggplot object is returned. If
+\code{method == "base"}, then this function will draw to the graphics device and
+return \code{NULL}, invisibly.
 }
 \description{
 Plots metrics recorded during training.

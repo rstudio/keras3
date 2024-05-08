@@ -77,11 +77,11 @@ test_image_preprocessing_layer(layer_random_crop, height = 20, width = 20)
 
 test_image_preprocessing_layer(layer_random_flip)
 test_image_preprocessing_layer(layer_random_translation, height_factor = .5, width_factor = .5)
-test_image_preprocessing_layer(layer_random_rotation, factor = 2)
+test_image_preprocessing_layer(layer_random_rotation, factor = .2)
 test_image_preprocessing_layer(layer_random_zoom, height_factor = .5)
 test_image_preprocessing_layer(layer_random_contrast, factor = .5)
-test_image_preprocessing_layer(layer_random_height, factor = .5)
-test_image_preprocessing_layer(layer_random_width, factor = .5)
+# test_image_preprocessing_layer(layer_random_height, factor = .5)
+# test_image_preprocessing_layer(layer_random_width, factor = .5)
 }
 
 
@@ -102,6 +102,7 @@ test_succeeds("layer_category_encoding", {
   layer <- layer_category_encoding(num_tokens=4, output_mode="count")
   inp <- rbind(c(0, 1), c(0, 0), c(1, 2), c(3, 1)) %>% as_tensor("int32")
   count_weights <- rbind(c(.1, .2), c(.1, .1), c(.2, .3), c(.4, .2))
+  skip("layer_category_encoding bug upstream - example errors")
   out <- layer(inp, count_weights = count_weights)
   expect_tensor(out, shape = c(4L, 4L))
 
@@ -201,8 +202,8 @@ if (tf_version() >= "2.6")
 test_succeeds("layer_normalization", {
 
   #Calculate a global mean and variance by analyzing the dataset in adapt().
-adapt_data = c(1, 2, 3, 4, 5)
-input_data = c(1, 2, 3)
+adapt_data = keras_array(c(1, 2, 3, 4, 5))
+input_data = keras_array(c(1, 2, 3))
 layer = layer_normalization(axis=NULL)
 layer %>% adapt(adapt_data)
 out <- layer(input_data)
@@ -245,7 +246,7 @@ expect_equal(as.array(out), rbind(-1.41421353816986, -0.70710676908493, 0),
 # adapt multiple times in a model
 layer = layer_normalization(axis=NULL)
 layer %>% adapt(c(0, 2))
-model = keras_model_sequential(layer)
+model = keras_model_sequential(layers = layer)
 out <- model %>% predict(c(0, 1, 2))
 expect_equal(out, array(c(-1, 0, 1)))
 
@@ -261,12 +262,12 @@ layer %>% adapt(c(0, 2))
 input_ds = tfdatasets::range_dataset(0, 3)
 normalized_ds = tfdatasets::dataset_map(input_ds, layer)
 out <- iterate(normalized_ds$as_numpy_iterator())
-expect_equal(out, list(array(-1), array(0), array(1)))
+expect_equal(unlist(out), unlist(c(array(-1), array(0), array(1))))
 
 layer %>% adapt(c(-1, 1))
 normalized_ds = tfdatasets::dataset_map(input_ds, layer) # Re-map over the input dataset.
 out <- iterate(normalized_ds$as_numpy_iterator())
-expect_equal(out, list(array(0), array(1), array(2)))
+expect_equal(unlist(out), unlist(c(array(0), array(1), array(2))))
 
 })
 

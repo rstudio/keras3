@@ -2,96 +2,104 @@
 % Please edit documentation in R/metrics.R
 \name{metric_mean}
 \alias{metric_mean}
-\title{Computes the (weighted) mean of the given values}
+\title{Compute the (weighted) mean of the given values.}
 \usage{
 metric_mean(..., name = "mean", dtype = NULL)
 }
 \arguments{
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
 \value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
 }
 \description{
-Computes the (weighted) mean of the given values
-}
-\details{
 For example, if values is \code{c(1, 3, 5, 7)} then the mean is 4.
-If the weights were specified as \code{c(1, 1, 0, 0)} then the mean would be 2.
+If \code{sample_weight} was specified as \code{c(1, 1, 0, 0)} then the mean would be 2.
 
-This metric creates two variables, \code{total} and \code{count} that are used to
-compute the average of \code{values}. This average is ultimately returned as \code{mean}
-which is an idempotent operation that simply divides \code{total} by \code{count}.
-
-If \code{sample_weight} is \code{NULL}, weights default to 1.
-Use \code{sample_weight} of 0 to mask values.
+This metric creates two variables, \code{total} and \code{count}.
+The mean value returned is simply \code{total} divided by \code{count}.
 }
-\note{
-Unlike most other metrics, this only takes a single tensor as input to update state.
-
-Example usage with \code{compile()}:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{model$add_metric(metric_mean(name='mean_1')(outputs))
-model \%>\% compile(optimizer='sgd', loss='mse')
-}\if{html}{\out{</div>}}
-
-Example standalone usage:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{m  <- metric_mean()
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_mean()
 m$update_state(c(1, 3, 5, 7))
 m$result()
-
-m$reset_state()
-m$update_state(c(1, 3, 5, 7), sample_weight=c(1, 1, 0, 0))
-m$result()
-as.numeric(m$result())
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(1, 3, 5, 7), sample_weight = c(1, 1, 0, 0))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.0, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{}\if{html}{\out{</div>}}
 }
+
 \seealso{
-Other metrics: 
-\code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
-\code{\link{metric_auc}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
-\code{\link{metric_mean_wrapper}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+Other reduction metrics: \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_sum}()} \cr
+
+Other metrics: \cr
+\code{\link{Metric}()} \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_iou}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
 }
 \concept{metrics}
+\concept{reduction metrics}

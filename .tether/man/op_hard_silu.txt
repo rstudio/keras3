@@ -1,0 +1,25 @@
+__signature__
+keras.ops.hard_silu(x)
+__doc__
+Hard SiLU activation function, also known as Hard Swish.
+
+It is defined as:
+
+- `0` if `if x < -3`
+- `x` if `x > 3`
+- `x * (x + 3) / 6` if `-3 <= x <= 3`
+
+It's a faster, piecewise linear approximation of the silu activation.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    A tensor with the same shape as `x`.
+
+Example:
+
+>>> x = keras.ops.convert_to_tensor([-3.0, -1.0, 0.0, 1.0, 3.0])
+>>> keras.ops.hard_silu(x)
+array([-0.0, -0.3333333, 0.0, 0.6666667, 3.0], shape=(5,), dtype=float32)
+

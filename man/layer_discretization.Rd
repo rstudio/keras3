@@ -9,77 +9,268 @@ layer_discretization(
   bin_boundaries = NULL,
   num_bins = NULL,
   epsilon = 0.01,
-  ...
+  output_mode = "int",
+  sparse = FALSE,
+  dtype = NULL,
+  name = NULL
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{bin_boundaries}{A list of bin boundaries. The leftmost and rightmost bins
-will always extend to \code{-Inf} and \code{Inf}, so \code{bin_boundaries = c(0., 1., 2.)}
-generates bins \verb{(-Inf, 0.)}, \verb{[0., 1.)}, \verb{[1., 2.)}, and \verb{[2., +Inf)}. If
-this option is set, \code{adapt} should not be called.}
+\item{bin_boundaries}{A list of bin boundaries.
+The leftmost and rightmost bins
+will always extend to \code{-Inf} and \code{Inf},
+so \code{bin_boundaries = c(0, 1, 2)}
+generates bins \verb{(-Inf, 0)}, \verb{[0, 1)}, \verb{[1, 2)},
+and \verb{[2, +Inf)}.
+If this option is set, \code{adapt()} should not be called.}
 
-\item{num_bins}{The integer number of bins to compute. If this option is set,
-\code{adapt} should be called to learn the bin boundaries.}
+\item{num_bins}{The integer number of bins to compute.
+If this option is set,
+\code{adapt()} should be called to learn the bin boundaries.}
 
-\item{epsilon}{Error tolerance, typically a small fraction close to zero (e.g.
-0.01). Higher values of epsilon increase the quantile approximation, and
-hence result in more unequal buckets, but could improve performance
+\item{epsilon}{Error tolerance, typically a small fraction
+close to zero (e.g. 0.01). Higher values of epsilon increase
+the quantile approximation, and hence result in more
+unequal buckets, but could improve performance
 and resource consumption.}
 
-\item{...}{standard layer arguments.}
+\item{output_mode}{Specification for the output of the layer.
+Values can be \code{"int"}, \code{"one_hot"}, \code{"multi_hot"}, or
+\code{"count"} configuring the layer as follows:
+\itemize{
+\item \code{"int"}: Return the discretized bin indices directly.
+\item \code{"one_hot"}: Encodes each individual element in the
+input into an array the same size as \code{num_bins},
+containing a 1 at the input's bin
+index. If the last dimension is size 1, will encode on that
+dimension.  If the last dimension is not size 1,
+will append a new dimension for the encoded output.
+\item \code{"multi_hot"}: Encodes each sample in the input into a
+single array the same size as \code{num_bins},
+containing a 1 for each bin index
+index present in the sample.
+Treats the last dimension as the sample
+dimension, if input shape is \verb{(..., sample_length)},
+output shape will be \verb{(..., num_tokens)}.
+\item \code{"count"}: As \code{"multi_hot"}, but the int array contains
+a count of the number of times the bin index appeared
+in the sample.
+Defaults to \code{"int"}.
+}}
+
+\item{sparse}{Boolean. Only applicable to \code{"one_hot"}, \code{"multi_hot"},
+and \code{"count"} output modes. Only supported with TensorFlow
+backend. If \code{TRUE}, returns a \code{SparseTensor} instead of
+a dense \code{Tensor}. Defaults to \code{FALSE}.}
+
+\item{dtype}{datatype (e.g., \code{"float32"}).}
+
+\item{name}{String, name for the object}
+}
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
 }
 \description{
-A preprocessing layer which buckets continuous features by ranges.
-}
-\details{
 This layer will place each element of its input data into one of several
 contiguous ranges and output an integer index indicating which range each
 element was placed in.
 
-Input shape:
-Any \code{tf.Tensor} or \code{tf.RaggedTensor} of dimension 2 or higher.
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
+Any array of dimension 2 or higher.
+}
 
-Output shape:
+\section{Output Shape}{
 Same as input shape.
 }
+
+\section{Examples}{
+Discretize float values based on provided buckets.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input <- op_array(rbind(c(-1.5, 1, 3.4, 0.5),
+                       c(0, 3, 1.3, 0),
+                       c(-.5, 0, .5, 1),
+                       c(1.5, 2, 2.5, 3)))
+output <- input |> layer_discretization(bin_boundaries = c(0, 1, 2))
+output
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 2 3 1]
+##  [1 3 2 1]
+##  [0 1 1 2]
+##  [2 3 3 3]], shape=(4, 4), dtype=int64)
+
+}\if{html}{\out{</div>}}
+
+Discretize float values based on a number of buckets to compute.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_discretization(num_bins = 4, epsilon = 0.01)
+layer |> adapt(input)
+layer(input)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0 2 3 1]
+##  [1 3 2 1]
+##  [0 1 1 2]
+##  [2 3 3 3]], shape=(4, 4), dtype=int64)
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
-\item \code{\link[=adapt]{adapt()}}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Discretization}
-\item \url{https://keras.io/api/layers/preprocessing_layers/numerical/discretization}
+\item \url{https://keras.io/api/layers/preprocessing_layers/numerical/discretization#discretization-class}
 }
 
-Other numerical features preprocessing layers: 
-\code{\link{layer_normalization}()}
+Other numerical features preprocessing layers: \cr
+\code{\link{layer_normalization}()} \cr
 
-Other preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_center_crop}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_normalization}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+Other preprocessing layers: \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
+\concept{layers}
 \concept{numerical features preprocessing layers}
 \concept{preprocessing layers}

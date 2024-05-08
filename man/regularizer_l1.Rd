@@ -2,23 +2,36 @@
 % Please edit documentation in R/regularizers.R
 \name{regularizer_l1}
 \alias{regularizer_l1}
-\alias{regularizer_l2}
-\alias{regularizer_l1_l2}
-\title{L1 and L2 regularization}
+\title{A regularizer that applies a L1 regularization penalty.}
 \usage{
-regularizer_l1(l = 0.01)
-
-regularizer_l2(l = 0.01)
-
-regularizer_l1_l2(l1 = 0.01, l2 = 0.01)
+regularizer_l1(l1 = 0.01)
 }
 \arguments{
-\item{l}{Regularization factor.}
-
-\item{l1}{L1 regularization factor.}
-
-\item{l2}{L2 regularization factor.}
+\item{l1}{float, L1 regularization factor.}
+}
+\value{
+A \code{Regularizer} instance that can be passed to layer constructors or
+used as a standalone object.
 }
 \description{
-L1 and L2 regularization
+The L1 regularization penalty is computed as:
+\code{loss = l1 * reduce_sum(abs(x))}
+
+L1 may be passed to a layer as a string identifier:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{dense <- layer_dense(units = 3, kernel_regularizer = 'l1')
+}\if{html}{\out{</div>}}
+
+In this case, the default value used is \code{l1=0.01}.
 }
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/regularizers#l1-class}
+}
+
+Other regularizers: \cr
+\code{\link{regularizer_l1_l2}()} \cr
+\code{\link{regularizer_l2}()} \cr
+\code{\link{regularizer_orthogonal}()} \cr
+}
+\concept{regularizers}

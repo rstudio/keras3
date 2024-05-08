@@ -1,0 +1,71 @@
+constant(value=0.0)
+Constant(value=0.0)
+deserialize(config, custom_objects=None)
+get(identifier)
+glorot_normal(seed=None)
+glorot_uniform(seed=None)
+GlorotNormal(seed=None)
+GlorotUniform(seed=None)
+he_normal(seed=None)
+he_uniform(seed=None)
+HeNormal(seed=None)
+HeUniform(seed=None)
+identity(gain=1.0)
+Identity(gain=1.0)
+IdentityInitializer(gain=1.0)
+Initializer()
+lecun_normal(seed=None)
+lecun_uniform(seed=None)
+LecunNormal(seed=None)
+LecunUniform(seed=None)
+ones()
+Ones()
+orthogonal(gain=1.0, seed=None)
+Orthogonal(gain=1.0, seed=None)
+OrthogonalInitializer(gain=1.0, seed=None)
+random_normal(
+  mean=0.0,
+  stddev=0.05,
+  seed=None
+)
+random_uniform(
+  minval=-0.05,
+  maxval=0.05,
+  seed=None
+)
+RandomNormal(
+  mean=0.0,
+  stddev=0.05,
+  seed=None
+)
+RandomUniform(
+  minval=-0.05,
+  maxval=0.05,
+  seed=None
+)
+serialize(initializer)
+truncated_normal(
+  mean=0.0,
+  stddev=0.05,
+  seed=None
+)
+TruncatedNormal(
+  mean=0.0,
+  stddev=0.05,
+  seed=None
+)
+variance_scaling(
+  scale=1.0,
+  mode='fan_in',
+  distribution='truncated_normal',
+  seed=None
+)
+VarianceScaling(
+  scale=1.0,
+  mode='fan_in',
+  distribution='truncated_normal',
+  seed=None
+)
+zeros()
+Zeros()
+

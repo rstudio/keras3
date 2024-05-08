@@ -1,0 +1,23 @@
+Constraint()
+deserialize(config, custom_objects=None)
+get(identifier)
+max_norm(max_value=2, axis=0)
+MaxNorm(max_value=2, axis=0)
+min_max_norm(
+  min_value=0.0,
+  max_value=1.0,
+  rate=1.0,
+  axis=0
+)
+MinMaxNorm(
+  min_value=0.0,
+  max_value=1.0,
+  rate=1.0,
+  axis=0
+)
+non_neg()
+NonNeg()
+serialize(constraint)
+unit_norm(axis=0)
+UnitNorm(axis=0)
+

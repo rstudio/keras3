@@ -1,0 +1,13 @@
+deserialize(config, custom_objects=None)
+get(identifier)
+l1(l1=0.01)
+L1(l1=0.01)
+l1_l2(l1=0.0, l2=0.0)
+L1L2(l1=0.0, l2=0.0)
+l2(l2=0.01)
+L2(l2=0.01)
+orthogonal_regularizer(factor=0.01, mode='rows')
+OrthogonalRegularizer(factor=0.01, mode='rows')
+Regularizer()
+serialize(initializer)
+

@@ -2,58 +2,106 @@
 % Please edit documentation in R/callbacks.R
 \name{callback_early_stopping}
 \alias{callback_early_stopping}
-\title{Stop training when a monitored quantity has stopped improving.}
+\title{Stop training when a monitored metric has stopped improving.}
 \usage{
 callback_early_stopping(
   monitor = "val_loss",
-  min_delta = 0,
-  patience = 0,
-  verbose = 0,
-  mode = c("auto", "min", "max"),
+  min_delta = 0L,
+  patience = 0L,
+  verbose = 0L,
+  mode = "auto",
   baseline = NULL,
-  restore_best_weights = FALSE
+  restore_best_weights = FALSE,
+  start_from_epoch = 0L
 )
 }
 \arguments{
-\item{monitor}{quantity to be monitored.}
+\item{monitor}{Quantity to be monitored. Defaults to \code{"val_loss"}.}
 
-\item{min_delta}{minimum change in the monitored quantity to qualify as an
-improvement, i.e. an absolute change of less than min_delta, will count as
-no improvement.}
+\item{min_delta}{Minimum change in the monitored quantity to qualify as an
+improvement, i.e. an absolute change of less than min_delta, will
+count as no improvement. Defaults to \code{0}.}
 
-\item{patience}{number of epochs with no improvement after which training
-will be stopped.}
+\item{patience}{Number of epochs with no improvement after which training will
+be stopped. Defaults to \code{0}.}
 
-\item{verbose}{verbosity mode, 0 or 1.}
+\item{verbose}{Verbosity mode, 0 or 1. Mode 0 is silent, and mode 1 displays
+messages when the callback takes an action. Defaults to \code{0}.}
 
-\item{mode}{one of "auto", "min", "max". In \code{min} mode, training will stop when
-the quantity monitored has stopped decreasing; in \code{max} mode it will stop
-when the quantity monitored has stopped increasing; in \code{auto} mode, the
-direction is automatically inferred from the name of the monitored
-quantity.}
+\item{mode}{One of \verb{\{"auto", "min", "max"\}}. In \code{min} mode, training will stop
+when the quantity monitored has stopped decreasing; in \code{"max"} mode
+it will stop when the quantity monitored has stopped increasing; in
+\code{"auto"} mode, the direction is automatically inferred from the name
+of the monitored quantity. Defaults to \code{"auto"}.}
 
-\item{baseline}{Baseline value for the monitored quantity to reach.
-Training will stop if the model doesn't show improvement
-over the baseline.}
+\item{baseline}{Baseline value for the monitored quantity. If not \code{NULL},
+training will stop if the model doesn't show improvement over the
+baseline. Defaults to \code{NULL}.}
 
-\item{restore_best_weights}{Whether to restore model weights from
-the epoch with the best value of the monitored quantity.
-If \code{FALSE}, the model weights obtained at the last step of
-training are used.}
+\item{restore_best_weights}{Whether to restore model weights from the epoch
+with the best value of the monitored quantity. If \code{FALSE}, the model
+weights obtained at the last step of training are used. An epoch
+will be restored regardless of the performance relative to the
+\code{baseline}. If no epoch improves on \code{baseline}, training will run
+for \code{patience} epochs and restore weights from the best epoch in
+that set. Defaults to \code{FALSE}.}
+
+\item{start_from_epoch}{Number of epochs to wait before starting to monitor
+improvement. This allows for a warm-up period in which no
+improvement is expected and thus training will not be stopped.
+Defaults to \code{0}.}
+}
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
 }
 \description{
-Stop training when a monitored quantity has stopped improving.
+Assuming the goal of a training is to minimize the loss. With this, the
+metric to be monitored would be \code{'loss'}, and mode would be \code{'min'}. A
+\code{model$fit()} training loop will check at end of every epoch whether
+the loss is no longer decreasing, considering the \code{min_delta} and
+\code{patience} if applicable. Once it's found no longer decreasing,
+\code{model$stop_training} is marked \code{TRUE} and the training terminates.
+
+The quantity to be monitored needs to be available in \code{logs} list.
+To make it so, pass the loss or metrics at \code{model$compile()}.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{callback <- callback_early_stopping(monitor = 'loss',
+                                   patience = 3)
+# This callback will stop the training when there is no improvement in
+# the loss for three consecutive epochs.
+model <- keras_model_sequential() \%>\%
+  layer_dense(10)
+model \%>\% compile(optimizer = optimizer_sgd(), loss = 'mse')
+history <- model \%>\% fit(x = op_ones(c(5, 20)),
+                         y = op_zeros(5),
+                         epochs = 10, batch_size = 1,
+                         callbacks = list(callback),
+                         verbose = 0)
+nrow(as.data.frame(history))  # Only 4 epochs are run.
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 10
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other callbacks: 
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\itemize{
+\item \url{https://keras.io/api/callbacks/early_stopping#earlystopping-class}
+}
+
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

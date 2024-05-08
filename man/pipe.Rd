@@ -6,6 +6,11 @@
 \usage{
 lhs \%>\% rhs
 }
+\value{
+Most commonly, the result of calling the right hand side with the
+left hand side as an argument: \code{rhs(lhs)}. See the magritter vignette for
+other, more advanced, usages.
+}
 \description{
 See \code{\link[magrittr]{\%>\%}} for more details.
 }

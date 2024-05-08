@@ -1,0 +1,48 @@
+image: Module(keras.api.preprocessing.image)
+image_dataset_from_directory(
+  directory,
+  labels='inferred',
+  label_mode='int',
+  class_names=None,
+  color_mode='rgb',
+  batch_size=32,
+  image_size=(256, 256),
+  shuffle=True,
+  seed=None,
+  validation_split=None,
+  subset=None,
+  interpolation='bilinear',
+  follow_links=False,
+  crop_to_aspect_ratio=False,
+  pad_to_aspect_ratio=False,
+  data_format=None,
+  verbose=True
+)
+sequence: Module(keras.api.preprocessing.sequence)
+text_dataset_from_directory(
+  directory,
+  labels='inferred',
+  label_mode='int',
+  class_names=None,
+  batch_size=32,
+  max_length=None,
+  shuffle=True,
+  seed=None,
+  validation_split=None,
+  subset=None,
+  follow_links=False,
+  verbose=True
+)
+timeseries_dataset_from_array(
+  data,
+  targets,
+  sequence_length,
+  sequence_stride=1,
+  sampling_rate=1,
+  batch_size=128,
+  shuffle=False,
+  seed=None,
+  start_index=None,
+  end_index=None
+)
+

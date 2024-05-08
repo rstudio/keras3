@@ -1,0 +1,34 @@
+__signature__
+keras.ops.multi_hot(
+  inputs,
+  num_classes=None,
+  axis=-1,
+  dtype=None,
+  sparse=False,
+  **kwargs
+)
+__doc__
+Encodes integer labels as multi-hot vectors.
+
+This function encodes integer labels as multi-hot vectors, where each label
+is mapped to a binary value in the resulting vector.
+
+Args:
+    inputs: Tensor of integer labels to be converted to multi-hot vectors.
+    num_classes: Integer, the total number of unique classes.
+    axis: (optional) Axis along which the multi-hot encoding should be
+        added. Defaults to `-1`, which corresponds to the last dimension.
+    dtype: (optional) The data type of the resulting tensor. Default
+        is backend's float type.
+    sparse: Whether to return a sparse tensor; for backends that support
+        sparse tensors.
+
+Returns:
+    Tensor: The multi-hot encoded tensor.
+
+Example:
+
+>>> data = keras.ops.convert_to_tensor([0, 4])
+>>> keras.ops.multi_hot(data, num_classes=5)
+array([1.0, 0.0, 0.0, 0.0, 1.0], dtype=float32)
+

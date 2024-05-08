@@ -1,0 +1,42 @@
+Help on class ELU in module keras.src.layers.activations.elu:
+
+class ELU(keras.src.layers.layer.Layer)
+ |  ELU(alpha=1.0, **kwargs)
+ |
+ |  Applies an Exponential Linear Unit function to an output.
+ |
+ |  Formula:
+ |
+ |  ```
+ |  f(x) = alpha * (exp(x) - 1.) for x < 0
+ |  f(x) = x for x >= 0
+ |  ```
+ |
+ |  Args:
+ |      alpha: float, slope of negative section. Defaults to `1.0`.
+ |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
+ |
+ |  Method resolution order:
+ |      ELU
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    alpha=1.0,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+

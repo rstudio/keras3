@@ -1,0 +1,19 @@
+Help on class TerminateOnNaN in module keras.src.callbacks.terminate_on_nan:
+
+class TerminateOnNaN(keras.src.callbacks.callback.Callback)
+ |  Callback that terminates training when a NaN loss is encountered.
+ |
+ |  Method resolution order:
+ |      TerminateOnNaN
+ |      keras.src.callbacks.callback.Callback
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  on_batch_end(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      A backwards compatibility alias for `on_train_batch_end`.
+ |

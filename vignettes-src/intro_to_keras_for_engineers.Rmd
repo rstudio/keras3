@@ -1,0 +1,373 @@
+---
+title: Introduction to Keras for engineers
+author: '[fchollet](https://twitter.com/fchollet)'
+date-created: 2023/07/10
+last-modified: 2023/07/10
+description: First contact with Keras 3.
+accelerator: GPU
+output: rmarkdown::html_vignette
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/intro_to_keras_for_engineers.py
+editor_options:
+  chunk_output_type: console
+---
+
+## Introduction
+
+Keras 3 is a deep learning framework
+works with TensorFlow, JAX, and PyTorch interchangeably.
+This notebook will walk you through key Keras 3 workflows.
+
+Let's start by installing Keras 3:
+
+pip install keras --upgrade --quiet
+
+## Setup
+
+We're going to be using the tensorflow backend here -- but you can
+edit the string below to `"jax"` or `"torch"` and hit
+"Restart runtime", and the whole notebook will run just the same!
+This entire guide is backend-agnostic.
+
+```{r}
+library(tensorflow, exclude = c("shape", "set_random_seed"))
+library(keras3)
+
+# Note that you must configure the backend
+# before calling any other keras functions.
+# The backend cannot be changed once the
+# package is imported.
+use_backend("tensorflow")
+```
+
+## A first example: A MNIST convnet
+
+Let's start with the Hello World of ML: training a convnet
+to classify MNIST digits.
+
+Here's the data:
+
+```{r}
+# Load the data and split it between train and test sets
+c(c(x_train, y_train), c(x_test, y_test)) %<-% keras3::dataset_mnist()
+
+# Scale images to the [0, 1] range
+x_train <- x_train / 255
+x_test <- x_test / 255
+# Make sure images have shape (28, 28, 1)
+x_train <- op_expand_dims(x_train, -1)
+x_test <- op_expand_dims(x_test, -1)
+
+dim(x_train)
+dim(x_test)
+```
+
+Here's our model.
+
+Different model-building options that Keras offers include:
+
+- [The Sequential API](sequential_model.html) (what we use below)
+- [The Functional API](functional_api.html) (most typical)
+- [Writing your own models yourself via subclassing](making_new_layers_and_models_via_subclassing.html) (for advanced use cases)
+
+```{r}
+# Model parameters
+num_classes <- 10
+input_shape <- c(28, 28, 1)
+
+model <- keras_model_sequential(input_shape = input_shape)
+model |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") |>
+  layer_conv_2d(filters = 64, kernel_size = c(3, 3), activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(2, 2)) |>
+  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = "relu") |>
+  layer_conv_2d(filters = 128, kernel_size = c(3, 3), activation = "relu") |>
+  layer_global_average_pooling_2d() |>
+  layer_dropout(rate = 0.5) |>
+  layer_dense(units = num_classes, activation = "softmax")
+```
+
+Here's our model summary:
+
+```{r}
+summary(model)
+```
+
+We use the `compile()` method to specify the optimizer, loss function,
+and the metrics to monitor. Note that with the JAX and TensorFlow backends,
+XLA compilation is turned on by default.
+
+```{r}
+model |> compile(
+  optimizer = "adam",
+  loss = "sparse_categorical_crossentropy",
+  metrics = list(
+    metric_sparse_categorical_accuracy(name = "acc")
+  )
+)
+```
+
+Let's train and evaluate the model. We'll set aside a validation split of 15%
+of the data during training to monitor generalization on unseen data.
+
+```{r}
+batch_size <- 128
+epochs <- 10
+
+callbacks <- list(
+  callback_model_checkpoint(filepath="model_at_epoch_{epoch}.keras"),
+  callback_early_stopping(monitor="val_loss", patience=2)
+)
+
+model |> fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  validation_split = 0.15,
+  callbacks = callbacks
+)
+score <- model |> evaluate(x_test, y_test, verbose = 0)
+```
+
+During training, we were saving a model at the end of each epoch. You
+can also save the model in its latest state like this:
+
+```{r}
+save_model(model, "final_model.keras", overwrite=TRUE)
+```
+
+And reload it like this:
+
+```{r}
+model <- load_model("final_model.keras")
+```
+```{r, include = FALSE}
+unlink("final_model.keras")
+```
+
+Next, you can query predictions of class probabilities with `predict()`:
+
+```{r}
+predictions <- model |> predict(x_test)
+dim(predictions)
+```
+
+That's it for the basics!
+
+## Writing cross-framework custom components
+
+Keras enables you to write custom Layers, Models, Metrics, Losses, and Optimizers
+that work across TensorFlow, JAX, and PyTorch with the same codebase. Let's take a look
+at custom layers first.
+
+The `op_` namespace contains:
+
+- An implementation of the NumPy API, e.g. `op_stack` or `op_matmul`.
+- A set of neural network specific ops that are absent from NumPy, such as `op_conv`
+or `op_binary_crossentropy`.
+
+Let's make a custom `Dense` layer that works with all backends:
+
+```{r}
+layer_my_dense <- Layer(
+  classname = "MyDense",
+  initialize = function(units, activation = NULL, name = NULL, ...) {
+    super$initialize(name = name, ...)
+    self$units <- units
+    self$activation <- activation
+  },
+  build = function(input_shape) {
+    input_dim <- tail(input_shape, 1)
+    self$w <- self$add_weight(
+      shape = shape(input_dim, self$units),
+      initializer = initializer_glorot_normal(),
+      name = "kernel",
+      trainable = TRUE
+    )
+    self$b <- self$add_weight(
+      shape = shape(self$units),
+      initializer = initializer_zeros(),
+      name = "bias",
+      trainable = TRUE
+    )
+  },
+  call = function(inputs) {
+    # Use Keras ops to create backend-agnostic layers/metrics/etc.
+    x <- op_matmul(inputs, self$w) + self$b
+    if (!is.null(self$activation))
+      x <- self$activation(x)
+    x
+  }
+)
+```
+
+Next, let's make a custom `Dropout` layer that relies on the `random_*`
+namespace:
+
+```{r}
+layer_my_dropout <- Layer(
+  "MyDropout",
+  initialize = function(rate, name = NULL, seed = NULL, ...) {
+    super$initialize(name = name)
+    self$rate <- rate
+    # Use seed_generator for managing RNG state.
+    # It is a state element and its seed variable is
+    # tracked as part of `layer$variables`.
+    self$seed_generator <- random_seed_generator(seed)
+  },
+  call = function(inputs) {
+    # Use `keras3::random_*` for random ops.
+    random_dropout(inputs, self$rate, seed = self$seed_generator)
+  }
+)
+```
+
+Next, let's write a custom subclassed model that uses our two custom layers:
+
+```{r}
+MyModel <- Model(
+  "MyModel",
+  initialize = function(num_classes, ...) {
+    super$initialize(...)
+    self$conv_base <-
+      keras_model_sequential() |>
+      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") |>
+      layer_conv_2d(64, kernel_size = c(3, 3), activation = "relu") |>
+      layer_max_pooling_2d(pool_size = c(2, 2)) |>
+      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") |>
+      layer_conv_2d(128, kernel_size = c(3, 3), activation = "relu") |>
+      layer_global_average_pooling_2d()
+
+    self$dp <- layer_my_dropout(rate = 0.5)
+    self$dense <- layer_my_dense(units = num_classes,
+                                 activation = activation_softmax)
+  },
+  call = function(inputs) {
+    inputs |>
+      self$conv_base() |>
+      self$dp() |>
+      self$dense()
+  }
+)
+```
+
+Let's compile it and fit it:
+
+```{r}
+model <- MyModel(num_classes = 10)
+model |> compile(
+  loss = loss_sparse_categorical_crossentropy(),
+  optimizer = optimizer_adam(learning_rate = 1e-3),
+  metrics = list(
+    metric_sparse_categorical_accuracy(name = "acc")
+  )
+)
+
+model |> fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = 1, # For speed
+  validation_split = 0.15
+)
+```
+
+## Training models on arbitrary data sources
+
+All Keras models can be trained and evaluated on a wide variety of data sources,
+independently of the backend you're using. This includes:
+
+- Arrays
+- Dataframes
+- TensorFlow `tf_dataset` objects
+- PyTorch `DataLoader` objects
+- Keras `PyDataset` objects
+
+They all work whether you're using TensorFlow, JAX, or PyTorch as your Keras backend.
+
+<!-- Let's try it out with PyTorch `DataLoaders`: -->
+
+<!-- ```python -->
+<!-- import torch -->
+
+<!-- # Create a TensorDataset -->
+<!-- train_torch_dataset = torch.utils.data.TensorDataset( -->
+<!--     torch.from_numpy(x_train), torch.from_numpy(y_train) -->
+<!-- ) -->
+<!-- val_torch_dataset = torch.utils.data.TensorDataset( -->
+<!--     torch.from_numpy(x_test), torch.from_numpy(y_test) -->
+<!-- ) -->
+
+<!-- # Create a DataLoader -->
+<!-- train_dataloader = torch.utils.data.DataLoader( -->
+<!--     train_torch_dataset, batch_size=batch_size, shuffle=True -->
+<!-- ) -->
+<!-- val_dataloader = torch.utils.data.DataLoader( -->
+<!--     val_torch_dataset, batch_size=batch_size, shuffle=False -->
+<!-- ) -->
+
+<!-- model = MyModel(num_classes=10) -->
+<!-- model.compile( -->
+<!--     loss=keras.losses.SparseCategoricalCrossentropy(), -->
+<!--     optimizer=keras.optimizers.Adam(learning_rate=1e-3), -->
+<!--     metrics=[ -->
+<!--         keras.metrics.SparseCategoricalAccuracy(name="acc"), -->
+<!--     ], -->
+<!-- ) -->
+<!-- model.fit(train_dataloader, epochs=1, validation_data=val_dataloader) -->
+<!-- ``` -->
+
+Let's try this out with `tf_dataset`:
+
+```{r}
+library(tfdatasets, exclude = "shape")
+
+train_dataset <- list(x_train, y_train) |>
+  tensor_slices_dataset() |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch(buffer_size = tf$data$AUTOTUNE)
+
+test_dataset <- list(x_test, y_test) |>
+  tensor_slices_dataset() |>
+  dataset_batch(batch_size) |>
+  dataset_prefetch(buffer_size = tf$data$AUTOTUNE)
+
+model <- MyModel(num_classes = 10)
+model |> compile(
+  loss = loss_sparse_categorical_crossentropy(),
+  optimizer = optimizer_adam(learning_rate = 1e-3),
+  metrics = list(
+    metric_sparse_categorical_accuracy(name = "acc")
+  )
+)
+
+model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
+```
+
+## Further reading
+
+This concludes our short overview of the new multi-backend capabilities
+of Keras 3. Next, you can learn about:
+
+### How to customize what happens in `fit()`
+
+Want to implement a non-standard training algorithm yourself but still want to benefit from
+the power and usability of `fit()`? It's easy to customize
+`fit()` to support arbitrary use cases:
+
+- [Customizing what happens in `fit()` with TensorFlow](custom_train_step_in_tensorflow.html)
+<!-- - [Customizing what happens in `fit()` with JAX](https://keras.io/guides/custom_train_step_in_jax/) -->
+<!-- - [Customizing what happens in `fit()` with PyTorch](https://keras.io/guides/custom_train_step_in_pytorch/) -->
+
+## How to write custom training loops
+
+- [Writing a training loop from scratch in TensorFlow](writing_a_custom_training_loop_in_tensorflow.html)
+<!-- - [Writing a training loop from scratch in JAX](https://keras.io/guides/writing_a_custom_training_loop_in_jax/) -->
+<!-- - [Writing a training loop from scratch in PyTorch](https://keras.io/guides/writing_a_custom_training_loop_in_torch/) -->
+
+## How to distribute training
+
+- [Guide to distributed training with TensorFlow](distributed_training_with_tensorflow.html)
+<!-- - [JAX distributed training example](https://github.com/keras-team/keras/blob/master/examples/demo_jax_distributed.py) -->
+<!-- - [PyTorch distributed training example](https://github.com/keras-team/keras/blob/master/examples/demo_torch_multi_gpu.py) -->
+
+Enjoy the library! 🚀

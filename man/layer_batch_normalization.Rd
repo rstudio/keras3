@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-normalization.R
 \name{layer_batch_normalization}
 \alias{layer_batch_normalization}
-\title{Batch normalization layer (Ioffe and Szegedy, 2014).}
+\title{Layer that normalizes its inputs.}
 \usage{
 layer_batch_normalization(
   object,
@@ -19,44 +19,26 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
-  renorm = FALSE,
-  renorm_clipping = NULL,
-  renorm_momentum = 0.99,
-  fused = NULL,
-  virtual_batch_size = NULL,
-  adjustment = NULL,
-  input_shape = NULL,
-  batch_input_shape = NULL,
-  batch_size = NULL,
-  dtype = NULL,
-  name = NULL,
-  trainable = NULL,
-  weights = NULL
+  synchronized = FALSE,
+  ...
 )
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{axis}{Integer, the axis that should be normalized (typically the
-features axis). For instance, after a \code{Conv2D} layer with
-\code{data_format="channels_first"}, set \code{axis=1} in \code{BatchNormalization}.}
+\item{axis}{Integer, the axis that should be normalized
+(typically the features axis). For instance, after a \code{Conv2D} layer
+with \code{data_format = "channels_first"}, use \code{axis = 2}.}
 
-\item{momentum}{Momentum for the moving mean and the moving variance.}
+\item{momentum}{Momentum for the moving average.}
 
 \item{epsilon}{Small float added to variance to avoid dividing by zero.}
 
-\item{center}{If TRUE, add offset of \code{beta} to normalized tensor. If FALSE,
-\code{beta} is ignored.}
+\item{center}{If \code{TRUE}, add offset of \code{beta} to normalized tensor.
+If \code{FALSE}, \code{beta} is ignored.}
 
-\item{scale}{If TRUE, multiply by \code{gamma}. If FALSE, \code{gamma} is not used.
-When the next layer is linear (also e.g. \code{nn.relu}), this can be disabled
+\item{scale}{If \code{TRUE}, multiply by \code{gamma}. If \code{FALSE}, \code{gamma} is not used.
+When the next layer is linear this can be disabled
 since the scaling will be done by the next layer.}
 
 \item{beta_initializer}{Initializer for the beta weight.}
@@ -75,88 +57,239 @@ since the scaling will be done by the next layer.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
 
-\item{renorm}{Whether to use Batch Renormalization
-(https://arxiv.org/abs/1702.03275). This adds extra variables during
-training. The inference is the same for either value of this parameter.}
+\item{synchronized}{Only applicable with the TensorFlow backend.
+If \code{TRUE}, synchronizes the global batch statistics (mean and
+variance) for the layer across all devices at each training step
+in a distributed training strategy.
+If \code{FALSE}, each replica uses its own local batch statistics.}
 
-\item{renorm_clipping}{A named list or dictionary that may map keys \code{rmax},
-\code{rmin}, \code{dmax} to scalar Tensors used to clip the renorm correction. The
-correction \verb{(r, d)} is used as \code{corrected_value = normalized_value * r + d},
-with \code{r} clipped to \verb{[rmin, rmax]}, and \code{d} to \verb{[-dmax, dmax]}. Missing \code{rmax},
-\code{rmin}, \code{dmax} are set to \code{Inf}, \code{0}, \code{Inf}, \code{respectively}.}
-
-\item{renorm_momentum}{Momentum used to update the moving means and standard
-deviations with renorm. Unlike momentum, this affects training and should
-be neither too small (which would add noise) nor too large (which would
-give stale estimates). Note that momentum is still applied to get the means
-and variances for inference.}
-
-\item{fused}{\code{TRUE}, use a faster, fused implementation, or raise a ValueError
-if the fused implementation cannot be used. If \code{NULL}, use the faster
-implementation if possible. If \code{FALSE}, do not use the fused implementation.}
-
-\item{virtual_batch_size}{An integer. By default, virtual_batch_size is \code{NULL},
-which means batch normalization is performed across the whole batch.
-When virtual_batch_size is not \code{NULL}, instead perform "Ghost Batch
-Normalization", which creates virtual sub-batches which are each normalized
-separately (with shared gamma, beta, and moving statistics). Must divide
-the actual \verb{batch size} during execution.}
-
-\item{adjustment}{A function taking the Tensor containing the (dynamic) shape
-of the input tensor and returning a pair \verb{(scale, bias)} to apply to the
-normalized values \verb{(before gamma and beta)}, only during training.
-For example, if \code{axis==-1},
-\code{adjustment <- function(shape) {
-    tuple(tf$random$uniform(shape[-1:NULL, style = "python"], 0.93, 1.07),
-          tf$random$uniform(shape[-1:NULL, style = "python"], -0.1, 0.1))
-   }}
-will scale the normalized value
-by up to 7\% up or down, then shift the result by up to 0.1 (with
-independent scaling and bias for each feature but shared across all examples),
-and finally apply gamma and/or beta. If \code{NULL}, no adjustment is applied.
-Cannot be specified if virtual_batch_size is specified.}
-
-\item{input_shape}{Dimensionality of the input (integer) not including the
-samples axis. This argument is required when using this layer as the first
-layer in a model.}
-
-\item{batch_input_shape}{Shapes, including the batch size. For instance,
-\code{batch_input_shape=c(10, 32)} indicates that the expected input will be
-batches of 10 32-dimensional vectors. \code{batch_input_shape=list(NULL, 32)}
-indicates batches of an arbitrary number of 32-dimensional vectors.}
-
-\item{batch_size}{Fixed batch size for layer}
-
-\item{dtype}{The data type expected by the input, as a string (\code{float32},
-\code{float64}, \code{int32}...)}
-
-\item{name}{An optional name string for the layer. Should be unique in a
-model (do not reuse the same name twice). It will be autogenerated if it
-isn't provided.}
-
-\item{trainable}{Whether the layer weights will be updated during training.}
-
-\item{weights}{Initial weights for layer.}
+\item{...}{Base layer keyword arguments (e.g. \code{name} and \code{dtype}).}
+}
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
 }
 \description{
-Normalize the activations of the previous layer at each batch, i.e. applies a
-transformation that maintains the mean activation close to 0 and the
-activation standard deviation close to 1.
-}
-\section{Input shape}{
- Arbitrary. Use the keyword argument \code{input_shape} (list
-of integers, does not include the samples axis) when using this layer as
-the first layer in a model.
-}
+Batch normalization applies a transformation that maintains the mean output
+close to 0 and the output standard deviation close to 1.
 
-\section{Output shape}{
- Same shape as input.
-}
+Importantly, batch normalization works differently during training and
+during inference.
 
-\section{References}{
-
+\strong{During training} (i.e. when using \code{fit()} or when calling the layer/model
+with the argument \code{training = TRUE}), the layer normalizes its output using
+the mean and standard deviation of the current batch of inputs. That is to
+say, for each channel being normalized, the layer returns
+\code{gamma * (batch - mean(batch)) / sqrt(var(batch) + epsilon) + beta}, where:
 \itemize{
-\item \href{https://arxiv.org/abs/1502.03167}{Batch Normalization: Accelerating Deep Network Training by Reducing Internal Covariate Shift}
+\item \code{epsilon} is small constant (configurable as part of the constructor
+arguments)
+\item \code{gamma} is a learned scaling factor (initialized as 1), which
+can be disabled by passing \code{scale = FALSE} to the constructor.
+\item \code{beta} is a learned offset factor (initialized as 0), which
+can be disabled by passing \code{center = FALSE} to the constructor.
+}
+
+\strong{During inference} (i.e. when using \code{evaluate()} or \code{predict()} or when
+calling the layer/model with the argument \code{training = FALSE} (which is the
+default), the layer normalizes its output using a moving average of the
+mean and standard deviation of the batches it has seen during training. That
+is to say, it returns
+\code{gamma * (batch - self$moving_mean) / sqrt(self$moving_var+epsilon) + beta}.
+
+\code{self$moving_mean} and \code{self$moving_var} are non-trainable variables that
+are updated each time the layer in called in training mode, as such:
+\itemize{
+\item \code{moving_mean = moving_mean * momentum + mean(batch) * (1 - momentum)}
+\item \code{moving_var = moving_var * momentum + var(batch) * (1 - momentum)}
+}
+
+As such, the layer will only normalize its inputs during inference
+\emph{after having been trained on data that has similar statistics as the
+inference data}.
+
+\strong{About setting \code{layer$trainable <- FALSE} on a \code{BatchNormalization} layer:}
+
+The meaning of setting \code{layer$trainable <- FALSE} is to freeze the layer,
+i.e. its internal state will not change during training:
+its trainable weights will not be updated
+during \code{fit()} or \code{train_on_batch()}, and its state updates will not be run.
+
+Usually, this does not necessarily mean that the layer is run in inference
+mode (which is normally controlled by the \code{training} argument that can
+be passed when calling a layer). "Frozen state" and "inference mode"
+are two separate concepts.
+
+However, in the case of the \code{BatchNormalization} layer, \strong{setting
+\code{trainable <- FALSE} on the layer means that the layer will be
+subsequently run in inference mode} (meaning that it will use
+the moving mean and the moving variance to normalize the current batch,
+rather than using the mean and variance of the current batch).
+
+Note that:
+\itemize{
+\item Setting \code{trainable} on an model containing other layers will recursively
+set the \code{trainable} value of all inner layers.
+\item If the value of the \code{trainable} attribute is changed after calling
+\code{compile()} on a model, the new value doesn't take effect for this model
+until \code{compile()} is called again.
+}
+}
+\section{Call Arguments}{
+\itemize{
+\item \code{inputs}: Input tensor (of any rank).
+\item \code{training}: R boolean indicating whether the layer should behave in
+training mode or in inference mode.
+\itemize{
+\item \code{training = TRUE}: The layer will normalize its inputs using
+the mean and variance of the current batch of inputs.
+\item \code{training = FALSE}: The layer will normalize its inputs using
+the mean and variance of its moving statistics, learned during
+training.
+}
+\item \code{mask}: Binary tensor of shape broadcastable to \code{inputs} tensor, with
+\code{TRUE} values indicating the positions for which mean and variance
+should be computed. Masked elements of the current inputs are not
+taken into account for mean and variance computation during
+training. Any prior unmasked element values will be taken into
+account until their momentum expires.
 }
 }
 
+\section{Reference}{
+\itemize{
+\item \href{https://arxiv.org/abs/1502.03167}{Ioffe and Szegedy, 2015}.
+}
+}
+
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/layers/normalization_layers/batch_normalization#batchnormalization-class}
+}
+
+Other normalization layers: \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
+}
+\concept{layers}
+\concept{normalization layers}

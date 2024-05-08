@@ -1,0 +1,22 @@
+__signature__
+keras.ops.correlate(
+  x1,
+  x2,
+  mode='valid'
+)
+__doc__
+Compute the cross-correlation of two 1-dimensional tensors.
+
+Args:
+    x1: First 1-dimensional input tensor of length M.
+    x2: Second 1-dimensional input tensor of length N.
+    mode: Either `valid`, `same` or `full`.
+        By default the mode is set to `valid`, which returns
+        an output of length max(M, N) - min(M, N) + 1.
+        `same` returns an output of length max(M, N).
+        `full` mode returns the convolution at each point of
+        overlap, with an output length of N+M-1
+
+Returns:
+    Output tensor, cross-correlation of `x1` and `x2`.
+

@@ -1,0 +1,51 @@
+Help on class Activation in module keras.src.layers.activations.activation:
+
+class Activation(keras.src.layers.layer.Layer)
+ |  Activation(activation, **kwargs)
+ |
+ |  Applies an activation function to an output.
+ |
+ |  Args:
+ |      activation: Activation function. It could be a callable, or the name of
+ |          an activation from the `keras.activations` namespace.
+ |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
+ |
+ |  Example:
+ |
+ |  >>> layer = keras.layers.Activation('relu')
+ |  >>> layer([-3.0, -1.0, 0.0, 2.0])
+ |  [0.0, 0.0, 0.0, 2.0]
+ |  >>> layer = keras.layers.Activation(keras.activations.relu)
+ |  >>> layer([-3.0, -1.0, 0.0, 2.0])
+ |  [0.0, 0.0, 0.0, 2.0]
+ |
+ |  Method resolution order:
+ |      Activation
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    activation,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

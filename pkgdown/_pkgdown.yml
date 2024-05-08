@@ -1,450 +1,594 @@
 
-destination: website
+# destination: website
+
+# template:
+#   params:
+#     bootswatch: cosmo
+
+url: https://keras.posit.co
 
 template:
-  params:
-    bootswatch: cosmo
+  bootstrap: 5
+  bslib:
+    primary: "#bf281b"
+    navbar-light-color: "white"
+    navbar-light-brand-color: "white"
+    navbar-light-brand-hover-color: "white"
+    # Google's font CDN isn't serving the box drawing characters
+    # with the fonts. E.g., U+2502 or U+203C.
+    # These are used to dispaly models by print(model)
+    # Default to the system font, which on most modern systems should
+    # support the full unicode range.
+    # this will most likely be Menlo on macOS, Consolas on Windows, DejaVu Sans on Ubuntu
+    code_font: "monospace"
+    #{google: {family: "Fira Mono", wght: "400;600;700"}}
+    # https://fonts.google.com/?classification=Monospace&stylecount=5
 
 navbar:
   title: "Keras for R"
+  bg: primary
   type: inverse
   left:
-    - text: "Home"
-      href: index.html
-    - text: "Tutorials"
+    - text: "Getting Started"
+      href: articles/getting_started.html
+
+    # - text: "Getting Started"
+    #   menu:
+    #     - text: "Introduction to Keras for engineers"
+    #       href: articles/intro_to_keras_for_engineers.html
+    #     - text: "Tutorials"
+    #     - text: "Getting Started"
+    #       href: articles/getting_started.html
+    #     - text: "Basic Classification"
+    #       href: articles/tutorial_basic_classification.html
+    #     - text: "Text Classification"
+    #       href: articles/tutorial_basic_text_classification.html
+    #     - text: "Basic Regression"
+    #       href: articles/tutorial_basic_regression.html
+    #     - text: "Overfitting and Underfitting"
+    #       href: articles/tutorial_overfit_underfit.html
+    #     - text: "Save and Restore Models"
+    #       href: articles/tutorial_save_and_restore.html
+
+    - text: "Guides"
       menu:
-        - text: "Getting Started"
-          href: articles/getting_started.html
-        - text: "Basic Classification"
-          href: articles/tutorial_basic_classification.html
-        - text: "Text Classification"
-          href: articles/tutorial_basic_text_classification.html
-        - text: "Basic Regression"
-          href: articles/tutorial_basic_regression.html
-        - text: "Overfitting and Underfitting"
-          href: articles/tutorial_overfit_underfit.html
-        - text: "Save and Restore Models"
-          href: articles/tutorial_save_and_restore.html
-    - text: "Articles"
-      menu:
-        - text: "Guides (New for TF 2.6)"
+        - text: "Model definition"
 
-        - text: "Python Subclasses"
-          href: articles/new-guides/python_subclasses.html
-
-        - text: "Making New Layers and Models via Subclassing"
-          href: articles/new-guides/making_new_layers_and_models_via_subclassing.html
-
-        - text: "Customizing What Happens in Fit"
-          href: articles/new-guides/customizing_what_happens_in_fit.html
-
-        - text: "Writing Your Own Callbacks"
-          href: articles/new-guides/writing_your_own_callbacks.html
-
-        - text: "Working with Preprocessing Layers"
-          href: articles/new-guides/preprocessing_layers.html
-
-        - text: "Working with RNNs"
-          href: argicles/new-guides/working_with_rnns.html
-
-        - text: "--------------------------"
-        - text: "Using Keras"
-        - text: "Guide to Keras Basics"
-          href: articles/guide_keras.html
-        - text: "Sequential Model in Depth"
+        - text: "Sequential Model"
           href: articles/sequential_model.html
-        - text: "Functional API in Depth"
+
+        - text: "Functional API"
           href: articles/functional_api.html
-        - text: "About Keras Models"
-          href: articles/about_keras_models.html
-        - text: "About Keras Layers"
-          href: articles/about_keras_layers.html
-        - text: "Training Visualization"
-          href: articles/training_visualization.html
-        - text: "Pre-Trained Models"
-          href: articles/applications.html
-        - text: "Frequently Asked Questions"
-          href: articles/faq.html
-        - text: "Why Use Keras?"
-          href: articles/why_use_keras.html
-        - text: "--------------------------"
-        - text: "Advanced"
-        - text: "Eager Execution"
-          href: articles/eager_guide.html
-        - text: "Training Callbacks"
-          href: articles/training_callbacks.html
-        - text: "Keras Backend"
-          href: articles/backend.html
-        - text: "Custom Layers"
-          href: articles/custom_layers.html
-        - text: "Custom Models"
-          href: articles/custom_models.html
-        - text: "Saving and serializing"
-          href: articles/saving_serializing.html
-    - text: Learn
-      href: articles/learn.html
-    - text: Tools
-      href: articles/tools.html
+
+        - text: "Extending and customizing"
+
+        - text: "Training & evaluation with the built-in methods"
+          href: articles/training_with_built_in_methods.html
+
+        - text: "Customizing `fit()` with Tensorflow"
+          href: "articles/custom_train_step_in_tensorflow.html"
+
+        - text: "Writing your own callbacks"
+          href: articles/writing_your_own_callbacks.html
+
+        - text: "Making new layers and models via subclassing"
+          href: articles/making_new_layers_and_models_via_subclassing.html
+
+        - text: "Writing a training loop from scratch in TensorFlow"
+          href: articles/writing_a_custom_training_loop_in_tensorflow.html
+
+        - text: "Serialization and Saving"
+          href: articles/serialization_and_saving.html
+
+        - text: "Other topics"
+
+        - text: "Transfer learning and fine tuning"
+          href: articles/transfer_learning.html
+
+        - text: "Distributed training with TensorFlow"
+          href: articles/distributed_training_with_tensorflow.html
+
+        - text: "Distributed training with Jax"
+          href: articles/distribution.html
+
     - text: Examples
       href: articles/examples/index.html
+
     - text: "Reference"
       href: reference/index.html
+
     - text: "News"
       href: news/index.html
 
 reference:
-  - title: "Keras Models"
-    contents:
-      - keras_model
-      - keras_model_sequential
-      - keras_model_custom
-      - multi_gpu_model
-      - summary.keras.engine.training.Model
-      - compile.keras.engine.training.Model
-      - evaluate.keras.engine.training.Model
-      - export_savedmodel.keras.engine.training.Model
-      - fit.keras.engine.training.Model
-      - fit_generator
-      - evaluate_generator
-      - predict.keras.engine.training.Model
-      - predict_proba
-      - predict_classes
-      - predict_on_batch
-      - predict_generator
-      - train_on_batch
-      - get_layer
-      - pop_layer
-      - save_model_hdf5
-      - load_model_hdf5
-      - serialize_model
-      - clone_model
-      - freeze_weights
+  - title: "Models"
 
-  - title: "Core Layers"
-    contents:
-      - layer_input
-      - layer_dense
-      - layer_activation
-      - layer_dropout
-      - layer_reshape
-      - layer_permute
-      - layer_repeat_vector
-      - layer_lambda
-      - layer_activity_regularization
-      - layer_masking
-      - layer_flatten
+  - subtitle: "Create Models"
+  - contents:
+    - keras_model_sequential
+    - keras_model
+    - keras_input
+    - clone_model
+    - Model
 
-  - title: "Convolutional Layers"
-    contents:
-      - starts_with("layer_conv_")
-      - starts_with("layer_separable_conv_")
-      - starts_with("layer_depthwise_conv_")
-      - starts_with("layer_upsampling_")
-      - starts_with("layer_zero_padding_")
-      - starts_with("layer_cropping_")
+  - subtitle: "Train Models"
+  - contents:
+    - compile.keras.src.models.model.Model
+    - fit.keras.src.models.model.Model
+    - plot.keras_training_history
+    - predict.keras.src.models.model.Model
+    - evaluate.keras.src.models.model.Model
+    - train_on_batch
+    - predict_on_batch
+    - test_on_batch
+    - freeze_weights
 
-  - title: "Pooling Layers"
-    contents:
-      - starts_with("layer_max_pooling_")
-      - starts_with("layer_average_pooling_")
-      - layer_global_max_pooling_1d
-      - layer_global_average_pooling_1d
-      - layer_global_max_pooling_2d
-      - layer_global_average_pooling_2d
-      - layer_global_max_pooling_3d
-      - layer_global_average_pooling_3d
+  - subtitle: "Inspect and Modify Models"
+  - contents:
+    - summary.keras.src.models.model.Model
+    - plot.keras.src.models.model.Model
+    - get_config
+    - get_weights
+    - get_layer
+    - count_params
+    - pop_layer
+    - quantize_weights
 
-  - title: "Activation Layers"
-    contents:
-      - layer_activation
-      - layer_activation_relu
-      - layer_activation_leaky_relu
-      - layer_activation_parametric_relu
-      - layer_activation_thresholded_relu
-      - layer_activation_elu
-      - layer_activation_softmax
-      - layer_activation_selu
-
-  - title: "Dropout Layers"
-    contents:
-      - layer_dropout
-      - starts_with("layer_spatial_dropout_")
-
-  - title: "Locally-connected Layers"
-    contents:
-      - layer_locally_connected_1d
-      - layer_locally_connected_2d
-
-  - title: "Recurrent Layers"
-    contents:
-      - layer_simple_rnn
-      - layer_gru
-      - layer_lstm
-
-  - title: "Customize Recurrent Layers"
-    contents:
-      - layer_rnn
-      - layer_simple_rnn_cell
-      - layer_gru_cell
-      - layer_lstm_cell
-      - layer_stacked_rnn_cells
-
-  - title: "Embedding Layers"
-    contents:
-      - layer_embedding
-
-  - title: "Normalization Layers"
-    contents:
-      - layer_batch_normalization
-      - layer_layer_normalization
-
-  - title: "Noise Layers"
-    contents:
-      - layer_gaussian_noise
-      - layer_gaussian_dropout
-      - layer_alpha_dropout
-
-  - title: "Merge Layers"
-    contents:
-      - layer_add
-      - layer_subtract
-      - layer_multiply
-      - layer_average
-      - layer_maximum
-      - layer_minimum
-      - layer_concatenate
-      - layer_dot
-
-  - title: "Image Preprocessing Layers"
-    contents:
-      - layer_resizing
-      - layer_rescaling
-      - layer_center_crop
-
-  - title: "Image Augmentation Layers"
-    contents:
-      -  layer_random_contrast
-      -  layer_random_crop
-      -  layer_random_flip
-      -  layer_random_height
-      -  layer_random_rotation
-      -  layer_random_translation
-      -  layer_random_width
-      -  layer_random_zoom
-
-  - title: "Categorical Features Preprocessing"
-    contents:
-      -  layer_category_encoding
-      -  layer_hashing
-      -  layer_integer_lookup
-      -  layer_string_lookup
-
-  - title: "Numerical Features Preprocessing"
-    contents:
-      -  layer_normalization
-      -  layer_discretization
-
-  - title: "Attention Layers"
-    contents:
-      - layer_attention
-      - layer_multi_head_attention
-      - layer_additive_attention
-
-  - title: "Layer Wrappers"
-    contents:
-      - time_distributed
-      - bidirectional
-
-  - title: "Layer Methods"
-    contents:
-      - get_config
-      - get_weights
-      - get_input_at
-      - count_params
-      - reset_states
-
-  - title: "Custom Layers"
-    contents:
-      - "%py_class%"
-      - Layer
-      - create_layer_wrapper
-      - create_layer
-
-  - title: "Model Persistence"
-    contents:
-      - save_model_hdf5
-      - save_model_weights_hdf5
-      - serialize_model
-      - get_weights
-      - get_config
-      - model_to_saved_model
-      - model_from_saved_model
-      - save_model_tf
-      - save_model_weights_tf
-      - model_to_json
-      - model_to_yaml
-
-  - title: "Datasets"
-    contents:
-      - starts_with("dataset_")
-
-  - title: "Applications"
-    contents:
-      - starts_with("application_")
-      - imagenet_preprocess_input
-      - imagenet_decode_predictions
-      - mobilenet_preprocess_input
-      - mobilenet_decode_predictions
+  - subtitle: "Save and Load Models"
+  - contents:
+    - save_model
+    - load_model
+    - save_model_weights
+    - load_model_weights
+    - save_model_config
+    - load_model_config
+    - export_savedmodel.keras.src.models.model.Model
+    - layer_tfsm
+    - register_keras_serializable
 
 
-  - title: "Sequence Preprocessing"
+  - title: "Layers"
+
+  - subtitle: "Core Layers"
+  - contents:
+    - has_concept("core layers")
+
+  - subtitle: "Reshaping Layers"
+  - contents:
+    - has_concept("reshaping layers")
+
+  - subtitle: "Convolutional Layers"
+  - contents:
+    - has_concept("convolutional layers")
+
+  - subtitle: "Pooling Layers"
+  - contents:
+    - has_concept("pooling layers")
+
+  - subtitle: "Activation Layers"
+  - contents:
+    - has_concept("activation layers")
+    # - starts_with("layer_activation")
+
+  - subtitle: "Recurrent Layers"
+  - contents:
+    - has_concept("rnn layers")
+    - reset_state
+    # - has_concept("conv rnn layers")
+    # - has_concept("recurrent layers")
+
+  - subtitle: "Attention Layers"
+  - contents:
+    - has_concept("attention layers")
+
+  - subtitle: "Normalization Layers"
     contents:
-      - pad_sequences
-      - skipgrams
-      - make_sampling_table
+    - has_concept("normalization layers")
+
+  - subtitle: "Regularization Layers"
+  - contents:
+    - has_concept("regularization layers")
+    # - has_concept("spatial regularization layers")
+    # - has_concept("dropout spatial regularization layers")
+
+  - subtitle: "Merging Layers"
+  - contents:
+    - has_concept("merging layers")
+
+  - subtitle: "Preprocessing Layers"
+  - contents:
+    - has_concept("preprocessing layers")
+    - adapt
+    # - has_concept("random preprocessing layers")
+
+  - subtitle: "Compatability Layers"
+  - contents:
+    - layer_tfsm
+    - layer_jax_model_wrapper
+    - layer_flax_module_wrapper
+    - layer_torch_module_wrapper
+
+  - subtitle: "Custom Layers"
+  - contents:
+    - layer_lambda
+    - Layer
+    # - create_layer_wrapper
+    # - create_layer
+
+  - subtitle: "Layer Methods"
+  - contents:
+    - get_config
+    - get_weights
+    - count_params
+    - reset_state
+
+
+  - title: "Callbacks"
+  - contents:
+    - callback_model_checkpoint
+    - callback_backup_and_restore
+    - callback_early_stopping
+    - callback_terminate_on_nan
+    - callback_learning_rate_scheduler
+    - callback_reduce_lr_on_plateau
+    - callback_csv_logger
+    - callback_tensorboard
+    - callback_remote_monitor
+    - callback_lambda
+    - callback_swap_ema_weights
+    - Callback
+
+
+  - title: "Operations"
+    desc: >
+      Functions that are safe to call with both symbolic and eager tensor.
+
+  - subtitle: Core Operations
+  - contents:
+    - has_concept("core ops")
+
+  - subtitle: Math Operations
+  - contents:
+    - has_concept("math ops")
+
+  - subtitle: General Tensor Operations
+  - contents:
+    - has_concept("numpy ops")
+
+  - subtitle: "Neural Network Operations"
+  - contents:
+    - has_concept("nn ops")
+
+  - subtitle: "Linear Algebra Operations"
+  - contents:
+    - has_concept("linear algebra ops")
+
+  - subtitle: "Image Operations"
+  - contents:
+    - has_concept("image ops")
+
+  - title: "Losses"
+  - contents:
+    - starts_with("loss_")
+    - Loss
+
+  - title: "Metrics"
+  - contents:
+    - starts_with("metric_")
+    - custom_metric
+    - reset_state
+    - Metric
+
+
+  - title: "Data Loading"
+    desc: >
+      Keras data loading utilities help you quickly go from raw data to a TF `Dataset` object
+      that can be used to efficiently train a model. These loading utilites can be
+      combined with preprocessing layers to futher transform your input dataset before training.
+
+  - contents:
+    - image_dataset_from_directory
+    - text_dataset_from_directory
+    - audio_dataset_from_directory
+    - timeseries_dataset_from_array
+
+
+  - title: "Preprocessing"
+  - contents:
+    - layer_feature_space
+    - adapt
+
+  - subtitle: Numerical Features Preprocessing Layers
+  - contents:
+    - layer_normalization
+    - layer_discretization
+
+  - subtitle: Categorical Features Preprocessing Layers
+  - contents:
+    - layer_category_encoding
+    - layer_hashing
+    - layer_hashed_crossing
+    - layer_string_lookup
+    - layer_integer_lookup
+
+  - subtitle: "Text Preprocessing Layers"
+  - contents:
+    - layer_text_vectorization
+
+  - subtitle: "Sequence Preprocessing"
+  - contents:
       - timeseries_dataset_from_array
+      - pad_sequences
 
-  - title: "Text Preprocessing"
-    contents:
-      - text_dataset_from_directory
-      - text_tokenizer
-      - fit_text_tokenizer
-      - save_text_tokenizer
-      - texts_to_sequences
-      - texts_to_sequences_generator
-      - texts_to_matrix
-      - sequences_to_matrix
-      - text_one_hot
-      - text_hashing_trick
-      - text_to_word_sequence
-      - layer_text_vectorization
-      - set_vocabulary
-      - get_vocabulary
-      - adapt
+  - subtitle: Image Preprocessing Layers
+  - contents:
+    - layer_resizing
+    - layer_rescaling
+    - layer_center_crop
 
   - title: "Image Preprocessing"
-    contents:
-      - image_load
-      - image_to_array
-      - image_data_generator
-      - fit_image_data_generator
-      - image_dataset_from_directory
-      - flow_images_from_data
-      - flow_images_from_directory
-      - flow_images_from_dataframe
-      - generator_next
+  - contents:
+    - starts_with("image_")
+    - starts_with("op_image_")
+
+  - subtitle: Image augmentation Layers
+  - contents:
+    - layer_random_crop
+    - layer_random_flip
+    - layer_random_translation
+    - layer_random_rotation
+    - layer_random_zoom
+    - layer_random_contrast
+    - layer_random_brightness
+
+  - subtitle: "Application Preprocessing"
+  - contents:
+    - application_preprocess_inputs
 
   - title: "Optimizers"
     contents:
-      - optimizer_sgd
-      - optimizer_rmsprop
-      - optimizer_adagrad
-      - optimizer_adadelta
-      - optimizer_adam
-      - optimizer_adamax
-      - optimizer_nadam
-
+    - has_concept("optimizers")
 
   - title: "Learning Rate Schedules"
     contents:
-      - starts_with("learning_rate_schedule_")
-      - new_learning_rate_schedule_class
-
-  - title: "Callbacks"
-    contents:
-      - callback_progbar_logger
-      - callback_model_checkpoint
-      - callback_early_stopping
-      - callback_remote_monitor
-      - callback_learning_rate_scheduler
-      - callback_tensorboard
-      - callback_reduce_lr_on_plateau
-      - callback_terminate_on_naan
-      - callback_csv_logger
-      - callback_lambda
-      - KerasCallback
+    - starts_with("learning_rate_schedule_")
+    - LearningRateSchedule
 
   - title: "Initializers"
-    contents:
-      - initializer_zeros
-      - initializer_ones
-      - initializer_constant
-      - initializer_random_normal
-      - initializer_random_uniform
-      - initializer_truncated_normal
-      - initializer_variance_scaling
-      - initializer_orthogonal
-      - initializer_identity
-      - initializer_glorot_normal
-      - initializer_glorot_uniform
-      - initializer_he_normal
-      - initializer_he_uniform
-      - initializer_lecun_uniform
-      - initializer_lecun_normal
-
+  - contents:
+      - has_concept("initializers")
 
   - title: "Constraints"
-    contents:
-      - constraint_maxnorm
-      - KerasConstraint
-
-  - title: "Utils"
-    contents:
-      - plot.keras_training_history
-      - plot.keras.engine.training.Model
-      - zip_lists
-      - mark_active
-      - timeseries_generator
-      - to_categorical
-      - normalize
-      - with_custom_object_scope
-      - keras_array
-      - hdf5_matrix
-      - get_file
-      - use_session_with_seed
-      - install_keras
-      - is_keras_available
-      - backend
-      - implementation
-      - use_implementation
-      - use_backend
-
-  - title: "Losses"
-    contents:
-      - loss_mean_squared_error
-      - starts_with("loss_")
-
-  - title: "Metrics"
-    contents:
-      - Metric
-      - starts_with("metric_")
-      - custom_metric
+  - contents:
+    # - has_concept("constraint")
+    - has_concept("constraints")
+    - Constraint
 
   - title: "Regularizers"
-    contents:
-      - regularizer_l1
-
+  - contents:
+    - starts_with("regularizer")
 
   - title: "Activations"
-    contents:
-      - activation_relu
+  - contents:
+    - starts_with("activation")
+    - activation_relu
 
-  - title: "Backend"
-    contents:
-      - starts_with("k_")
+  - title: "Random Tensor Generators"
+  - contents:
 
-  - title: "Python"
-    contents:
-      - keras
-      - "%py_class%"
-      - "%<-active%"
+    - random_uniform
+    - random_normal
+    - random_truncated_normal
+    - random_gamma
+    - random_categorical
+    - random_integer
+    - random_dropout
+    - random_shuffle
+    - random_beta
+    - random_binomial
+    - random_seed_generator
 
-  - title: "Deprecated"
-    contents:
-      - KerasLayer
-      - KerasWrapper
-      - create_wrapper
-      - loss_cosine_proximity
-      - layer_cudnn_gru
-      - layer_cudnn_lstm
-      - layer_dense_features
+  - title: "Builtin small datasets"
+  - contents:
+    - starts_with("dataset_")
+
+  - title: "Configuration"
+  - contents:
+    - starts_with("config_")
+
+  - title: "Utils"
+  - contents:
+    - install_keras
+    - use_backend
+    - shape
+    - set_random_seed
+    - clear_session
+    # - is_keras_available
+    - get_source_inputs
+    - keras
+
+  - subtitle: Numerical Utils
+  - contents:
+    - normalize
+    - to_categorical
+
+  - subtitle: Data Utils
+  - contents:
+    - zip_lists
+    - get_file
+    - split_dataset
+    - pack_x_y_sample_weight
+    - unpack_x_y_sample_weight
+
+  - subtitle: "Serialization Utils"
+  - contents:
+    - register_keras_serializable
+    - get_custom_objects
+    - get_registered_name
+    - get_registered_object
+    - serialize_keras_object
+    - deserialize_keras_object
+    - with_custom_object_scope
+    - config_enable_unsafe_deserialization
+
+
+
+      # - has_concept("utils")
+
+
+      # - plot.keras_training_history
+      # - plot.keras.src.models.model.Model
+      # - use_session_with_seed
+      # - hdf5_matrix
+      # - keras_array
+
+
+
+
+
+  # - title: "Misc other layers"
+  #   contents:
+  #     - starts_with("layer_")
+
+  - title: "Base Keras Classes"
+    desc: >
+      Define custom object by subclassing base Keras classes.
+  - contents:
+    - Layer
+    - Loss
+    - Metric
+    - Callback
+    - Constraint
+    - Model
+    - LearningRateSchedule
+    - active_property
+
+
+  - title: "Applications"
+
+  - subtitle: "Application utilities"
+  - contents:
+    - application_preprocess_inputs
+
+  - subtitle: "ConvNeXt Applications"
+    contents: [starts_with("application_convnext")]
+
+  - subtitle: "Densenet Applications"
+    contents: [starts_with("application_densenet")]
+
+  - subtitle: "EfficientNet Applications"
+    contents: [starts_with("application_efficientnet")]
+
+  - subtitle: "Inception Applications"
+    contents: [starts_with("application_inception")]
+
+  - subtitle: "MobileNet Applications"
+    contents: [starts_with("application_mobilenet")]
+
+  - subtitle: "NASNet Applications"
+    contents: [starts_with("application_nasnet")]
+
+  - subtitle: "ResNet Applications"
+    contents: [starts_with("application_resnet")]
+
+  - subtitle: "VGG Applications"
+    contents: [starts_with("application_vgg")]
+
+  - subtitle: "Xception Applications"
+    contents: [starts_with("application_xception")]
+
+
+
+  # - title: "Deprecated"
+  #   contents:
+  #     - keras-package
+      # - KerasWrapper
+      # - create_wrapper
+      # - loss_cosine_proximity
+      # - layer_cudnn_gru
+      # - layer_cudnn_lstm
+      # - layer_dense_features
+
+
+      # - adapt
+
+#
+#   - title: "Noise Layers"
+#     contents:
+#       - layer_gaussian_noise
+#       - layer_gaussian_dropout
+#       - layer_alpha_dropout
+#
+#
+#   - title: "Image Preprocessing Layers"
+#     contents:
+#       - layer_resizing
+#       - layer_rescaling
+#       - layer_center_crop
+#
+#   - title: "Image Augmentation Layers"
+#     contents:
+#       -  layer_random_contrast
+#       -  layer_random_crop
+#       -  layer_random_flip
+#       -  layer_random_height
+#       -  layer_random_rotation
+#       -  layer_random_translation
+#       -  layer_random_width
+#       -  layer_random_zoom
+#
+#   - title: "Categorical Features Preprocessing"
+#     contents:
+#       -  layer_category_encoding
+#       -  layer_hashing
+#       -  layer_integer_lookup
+#       -  layer_string_lookup
+#
+#   - title: "Numerical Features Preprocessing"
+#     contents:
+#       -  layer_normalization
+#       -  layer_discretization
+#
+#   - title: "Attention Layers"
+#     contents:
+#       - layer_attention
+#       - layer_multi_head_attention
+#       - layer_additive_attention
+#
+#   - title: "Layer Wrappers"
+#     contents:
+#       - time_distributed
+#       - bidirectional
+
+  # - subtitle: "Other Layers"
+  #   contents:
+  #     - starts_with("layer_")
+
+
+      # - has_concept("ops")
+      # - has_concept("metrics")
+      # - has_concept("utils")
+      # - has_concept("losses")
+      # - has_concept("activations")
+      # - has_concept("random initializers")
+      # - has_concept("confusion metrics")
+      # - has_concept("regression metrics")
+      # - has_concept("backend")
+      # - has_concept("config backend")
+      # - has_concept("schedules optimizers")
+      # - has_concept("schedule rate learning schedules optimizers")
+      # - has_concept("rate learning schedules optimizers")
+      # - has_concept("learning schedules optimizers")
+      # - has_concept("image utils")
+      # - has_concept("probabilistic metrics")
+      # - has_concept("iou metrics")
+      # - has_concept("accuracy metrics")
+      # - has_concept("saving")
+      # - has_concept("regularizers")
+      # - has_concept("constant initializers")
+      # - has_concept("traceback utils")
+      # - has_concept("registration object saving")
+      # - has_concept("reduction metrics")
+      # - has_concept("object saving")
+      # - has_concept("io utils")
+      # - has_concept("hinge metrics")

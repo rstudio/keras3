@@ -1,663 +1,860 @@
+
+
+
 #' 1D convolution layer (e.g. temporal convolution).
 #'
+#' @description
 #' This layer creates a convolution kernel that is convolved with the layer
 #' input over a single spatial (or temporal) dimension to produce a tensor of
-#' outputs. If `use_bias` is TRUE, a bias vector is created and added to the
-#' outputs. Finally, if `activation` is not `NULL`, it is applied to the outputs
-#' as well. When using this layer as the first layer in a model, provide an
-#' `input_shape` argument (list of integers or `NULL `, e.g. `(10, 128)` for
-#' sequences of 10 vectors of 128-dimensional vectors, or `(NULL, 128)` for
-#' variable-length sequences of 128-dimensional vectors.
+#' outputs. If `use_bias` is `TRUE`, a bias vector is created and added to the
+#' outputs. Finally, if `activation` is not `NULL`, it is applied to the
+#' outputs as well.
 #'
-#' @inheritParams layer_dense
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, steps, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, channels, steps)`
 #'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of a single integer, specifying the
-#'   length of the 1D convolution window.
-#' @param strides An integer or list of a single integer, specifying the stride
-#'   length of the convolution. Specifying any stride value != 1 is incompatible
-#'   with specifying any `dilation_rate` value != 1.
-#' @param padding One of `"valid"`, `"causal"` or `"same"` (case-insensitive).
-#'   `"valid"` means "no padding".
-#'   `"same"` results in padding the input such that the output has the same
-#'   length as the original input.
-#'   `"causal"` results in causal (dilated) convolutions, e.g. `output[t]` does
-#'   not depend on `input[t+1:]`. Useful when modeling temporal data where the
-#'   model should not violate the temporal order. See [WaveNet: A Generative
-#'   Model for Raw Audio, section 2.1](https://arxiv.org/abs/1609.03499).
-#' @param data_format A string, one of `"channels_last"` (default) or `"channels_first"`.
-#'   The ordering of the dimensions in the inputs. `"channels_last"` corresponds
-#'   to inputs with shape `(batch, length, channels)` (default format for
-#'   temporal data in Keras) while `"channels_first"` corresponds to inputs
-#'   with shape `(batch, channels, length)`.
-#' @param dilation_rate an integer or list of a single integer, specifying the
-#'   dilation rate to use for dilated convolution. Currently, specifying any
-#'   `dilation_rate` value != 1 is incompatible with specifying any `strides`
-#'   value != 1.
-#' @param groups A positive integer specifying the number of groups in which the
-#'   input is split along the channel axis. Each group is convolved separately
-#'   with `filters / groups` filters. The output is the concatenation of all the
-#'   groups results along the channel axis. Input channels and `filters` must both
-#'   be divisible by `groups`.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix.
-#' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the kernel matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, new_steps, filters)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 #'
-#' @section Input shape: 3D tensor with shape: `(batch_size, steps, input_dim)`
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' @section Output shape: 3D tensor with shape: `(batch_size, new_steps,
-#'   filters)` `steps` value might have changed due to padding or strides.
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_conv_1d <- function(object, filters, kernel_size, strides = 1L, padding = "valid",
-                          data_format = "channels_last",
-                          dilation_rate = 1L, groups = 1L, activation = NULL, use_bias = TRUE,
-                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                          name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    dilation_rate = as_integer_tuple(dilation_rate),
-    activation = activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (tf_version() >= "2.3")
-    args$groups <- as.integer(groups)
-
-  if (keras_version() >= "2.2")
-    args$data_format <- data_format
-
-  create_layer(keras$layers$Conv1D, object, args)
-}
-
-
-#' 2D convolution layer (e.g. spatial convolution over images).
-#'
-#' This layer creates a convolution kernel that is convolved with the layer
-#' input to produce a tensor of outputs. If `use_bias` is TRUE, a bias vector is
-#' created and added to the outputs. Finally, if `activation` is not `NULL`, it
-#' is applied to the outputs as well. When using this layer as the first layer
-#' in a model, provide the keyword argument `input_shape` (list of integers,
-#' does not include the sample axis), e.g. `input_shape=c(128, 128, 3)` for
-#' 128x128 RGB pictures in `data_format="channels_last"`.
-#'
-#' @inheritParams layer_conv_1d
-#'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of 2 integers, specifying the width and
-#'   height of the 2D convolution window. Can be a single integer to specify the
-#'   same value for all spatial dimensions.
-#' @param strides An integer or list of 2 integers, specifying the strides of
-#'   the convolution along the width and height. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Specifying any stride
-#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive). Note that `"same"`
-#'   is slightly inconsistent across backends with `strides` != 1, as described
-#'   [here](https://github.com/keras-team/keras/pull/9473#issuecomment-372166860)
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, height, width,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   channels, height, width)`. It defaults to the `image_data_format` value
-#'   found in your Keras config file at `~/.keras/keras.json`. If you never set
-#'   it, then it will be "channels_last".
-#' @param dilation_rate an integer or list of 2 integers, specifying the
-#'   dilation rate to use for dilated convolution. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Currently, specifying
-#'   any `dilation_rate` value != 1 is incompatible with specifying any stride
-#'   value != 1.
-#' @param groups A positive integer specifying the number of groups in which the
-#'   input is split along the channel axis. Each group is convolved separately
-#'   with `filters / groups` filters. The output is the concatenation of all the
-#'   groups results along the channel axis. Input channels and `filters` must both
-#'   be divisible by `groups`.
-#'
-#' @section Input shape: 4D tensor with shape: `(samples, channels, rows, cols)`
-#'   if data_format='channels_first' or 4D tensor with shape: `(samples, rows,
-#'   cols, channels)` if data_format='channels_last'.
-#'
-#' @section Output shape: 4D tensor with shape: `(samples, filters, new_rows,
-#'   new_cols)` if data_format='channels_first' or 4D tensor with shape:
-#'   `(samples, new_rows, new_cols, filters)` if data_format='channels_last'.
-#'   `rows` and `cols` values might have changed due to padding.
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_conv_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL,
-                          dilation_rate = c(1L, 1L), groups = 1L, activation = NULL, use_bias = TRUE,
-                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                          name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    dilation_rate = as_integer_tuple(dilation_rate),
-    activation = activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (tf_version() >= "2.3")
-    args$groups <- as.integer(groups)
-
-  create_layer(keras$layers$Conv2D, object, args)
-}
-
-#' 3D convolution layer (e.g. spatial convolution over volumes).
-#'
-#' This layer creates a convolution kernel that is convolved with the layer
-#' input to produce a tensor of outputs. If `use_bias` is TRUE, a bias vector is
-#' created and added to the outputs. Finally, if `activation` is not `NULL`, it
-#' is applied to the outputs as well. When using this layer as the first layer
-#' in a model, provide the keyword argument `input_shape` (list of integers,
-#' does not include the sample axis), e.g. `input_shape=c(128L, 128L, 128L, 3L)`
-#' for 128x128x128 volumes with a single channel, in
-#' `data_format="channels_last"`.
-#'
-#' @inheritParams layer_conv_2d
-#'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of 3 integers, specifying the depth,
-#'   height, and width of the 3D convolution window. Can be a single integer
-#'   to specify the same value for all spatial dimensions.
-#' @param strides An integer or list of 3 integers, specifying the strides of
-#'   the convolution along each spatial dimension. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Specifying any stride
-#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
-#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
-#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
-#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
-#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
-#'   will be "channels_last".
-#' @param dilation_rate an integer or list of 3 integers, specifying the
-#'   dilation rate to use for dilated convolution. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Currently, specifying
-#'   any `dilation_rate` value != 1 is incompatible with specifying any stride
-#'   value != 1.
-#' @param groups A positive integer specifying the number of groups in which the
-#'   input is split along the channel axis. Each group is convolved separately
-#'   with `filters / groups` filters. The output is the concatenation of all the
-#'   groups results along the channel axis. Input channels and `filters` must both
-#'   be divisible by `groups`.
-#'
-#' @section Input shape: 5D tensor with shape: `(samples, channels, conv_dim1,
-#'   conv_dim2, conv_dim3)` if data_format='channels_first' or 5D tensor with
-#'   shape: `(samples, conv_dim1, conv_dim2, conv_dim3, channels)` if
-#'   data_format='channels_last'.
-#'
-#' @section Output shape: 5D tensor with shape: `(samples, filters,
-#'   new_conv_dim1, new_conv_dim2, new_conv_dim3)` if
-#'   data_format='channels_first' or 5D tensor with shape: `(samples,
-#'   new_conv_dim1, new_conv_dim2, new_conv_dim3, filters)` if
-#'   data_format='channels_last'. `new_conv_dim1`, `new_conv_dim2` and
-#'   `new_conv_dim3` values might have changed due to padding.
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_conv_3d <- function(object, filters, kernel_size, strides = c(1L, 1L, 1L), padding = "valid",
-                          data_format = NULL, dilation_rate = c(1L, 1L, 1L), groups = 1L,
-                          activation = NULL, use_bias = TRUE,
-                          kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-                          kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                          kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                          batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                          name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    dilation_rate = as_integer_tuple(dilation_rate),
-    activation = activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (tf_version() >= "2.3")
-    args$groups <- as.integer(groups)
-
-  create_layer(keras$layers$Conv3D, object, args)
-}
-
-#' Transposed 1D convolution layer (sometimes called Deconvolution).
-#'
-#' The need for transposed convolutions generally arises from the desire to use
-#' a transformation going in the opposite direction of a normal convolution,
-#' i.e., from something that has the shape of the output of some convolution to
-#' something that has the shape of its input while maintaining a connectivity
-#' pattern that is compatible with said convolution.
-#' When using this layer as the first layer in a model,
-#' provide the keyword argument `input_shape`
-#' (tuple of integers, does not include the sample axis),
-#' e.g. `input_shape=(128, 3)` for data with 128 time steps and 3 channels.
-#'
-#' @inheritParams layer_conv_1d
-#'
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param output_padding An integer specifying the amount of padding along
-#' the time dimension of the output tensor.
-#' The amount of output padding must be lower than the stride.
-#' If set to `NULL` (default), the output shape is inferred.
-#'
-#' @section Input shape: 3D tensor with shape: `(batch, steps, channels)`
-#'
-#' @section Output shape: 3D tensor with shape: `(batch, new_steps, filters)`
-#' If `output_padding` is specified:
-#' ```
-#' new_timesteps = ((timesteps - 1) * strides + kernel_size - 2 * padding + output_padding)
+#' # Example
+#' ```{r}
+#' # The inputs are 128-length vectors with 10 timesteps, and the
+#' # batch size is 4.
+#' x <- random_uniform(c(4, 10, 128))
+#' y <- x |> layer_conv_1d(32, 3, activation='relu')
+#' shape(y)
 #' ```
 #'
-#' @section References:
-#'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1)
+#' @returns
+#' A 3D tensor representing `activation(conv1d(inputs, kernel) + bias)`.
 #'
-#' @family convolutional layers
+#' @param filters
+#' int, the dimension of the output space (the number of filters
+#' in the convolution).
+#'
+#' @param kernel_size
+#' int or list of 1 integer, specifying the size of the
+#' convolution window.
+#'
+#' @param strides
+#' int or list of 1 integer, specifying the stride length
+#' of the convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, `"valid"`, `"same"` or `"causal"`(case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#' `"causal"` results in causal (dilated) convolutions, e.g. `output[t]`
+#' does not depend on`tail(input, t+1)`. Useful when modeling temporal data
+#' where the model should not violate the temporal order.
+#' See [WaveNet: A Generative Model for Raw Audio, section2.1](
+#' https://arxiv.org/abs/1609.03499).
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, steps, features)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, features, steps)`. It defaults to the `image_data_format`
+#' value found in your Keras config file at `~/.keras/keras.json`.
+#' If you never set it, then it will be `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 1 integers, specifying the dilation
+#' rate to use for dilated convolution.
+#'
+#' @param groups
+#' A positive int specifying the number of groups in which the
+#' input is split along the channel axis. Each group is convolved
+#' separately with `filters // groups` filters. The output is the
+#' concatenation of all the `groups` results along the channel axis.
+#' Input channels and `filters` must both be divisible by `groups`.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param kernel_initializer
+#' Initializer for the convolution kernel. If `NULL`,
+#' the default initializer (`"glorot_uniform"`) will be used.
+#'
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
+#'
+#' @param kernel_regularizer
+#' Optional regularizer for the convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param kernel_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
-layer_conv_1d_transpose <- function(object, filters, kernel_size, strides = 1, padding = "valid", output_padding = NULL,
-                                    data_format = NULL, dilation_rate = 1, activation = NULL, use_bias = TRUE,
-                                    kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-                                    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                    name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$Conv1DTranspose, object, list(
-    filters = as.integer(filters),
-    kernel_size = as.integer(kernel_size),
-    strides = as.integer(strides),
-    padding = padding,
-    output_padding = as_nullable_integer(output_padding),
-    data_format = data_format,
-    dilation_rate= as.integer(dilation_rate),
-    activation = activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/convolution1d#conv1d-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1D>
+#' @tether keras.layers.Conv1D
+layer_conv_1d <-
+function (object, filters, kernel_size, strides = 1L, padding = "valid",
+    data_format = NULL, dilation_rate = 1L, groups = 1L, activation = NULL,
+    use_bias = TRUE, kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+    kernel_constraint = NULL, bias_constraint = NULL, ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        groups = as_integer, input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv1D, object, args)
 }
 
 
-#' Transposed 2D convolution layer (sometimes called Deconvolution).
+#' 1D transposed convolution layer.
 #'
-#' The need for transposed convolutions generally arises from the desire to use
+#' @description
+#' The need for transposed convolutions generally arise from the desire to use
 #' a transformation going in the opposite direction of a normal convolution,
-#' i.e., from something that has the shape of the output of some convolution to
-#' something that has the shape of its input while maintaining a connectivity
-#' pattern that is compatible with said convolution. When using this layer as
-#' the first layer in a model, provide the keyword argument `input_shape` (list
-#' of integers, does not include the sample axis), e.g. `input_shape=c(128L,
-#' 128L, 3L)` for 128x128 RGB pictures in `data_format="channels_last"`.
+#' i.e., from something that has the shape of the output of some convolution
+#' to something that has the shape of its input while maintaining a
+#' connectivity pattern that is compatible with said convolution.
 #'
-#' @inheritParams layer_conv_2d
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, steps, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, channels, steps)`
 #'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of 2 integers, specifying the width and
-#'   height of the 2D convolution window. Can be a single integer to specify the
-#'   same value for all spatial dimensions.
-#' @param strides An integer or list of 2 integers, specifying the strides of
-#'   the convolution along the width and height. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Specifying any stride
-#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param output_padding An integer or list of 2 integers,
-#'   specifying the amount of padding along the height and width
-#'   of the output tensor. Can be a single integer to specify the same
-#'   value for all spatial dimensions. The amount of output padding along a
-#'   given dimension must be lower than the stride along that same dimension.
-#'   If set to `NULL` (default), the output shape is inferred.
-#' @param dilation_rate Dialation rate.
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, new_steps, filters)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
 #'
-#' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
-#'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
-#'   cols, channels)` if data_format='channels_last'.
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' @section Output shape: 4D tensor with shape: `(batch, filters, new_rows,
-#'   new_cols)` if data_format='channels_first' or 4D tensor with shape:
-#'   `(batch, new_rows, new_cols, filters)` if data_format='channels_last'.
-#'   `rows` and `cols` values might have changed due to padding.
+#' # References
+#' - [A guide to convolution arithmetic for deep learning](
+#'     https://arxiv.org/abs/1603.07285v1)
+#' - [Deconvolutional Networks](
+#'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 #'
-#' @section References:
-#'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1)
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 128))
+#' y <- x |> layer_conv_1d_transpose(32, 3, 2, activation='relu')
+#' shape(y)
+#' ```
 #'
-#' @family convolutional layers
+#' @returns
+#' A 3D tensor representing
+#' `activation(conv1d_transpose(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimension of the output space (the number of filters
+#' in the transpose convolution).
+#'
+#' @param kernel_size
+#' int or list of 1 integer, specifying the size of the
+#' transposed convolution window.
+#'
+#' @param strides
+#' int or list of 1 integer, specifying the stride length
+#' of the transposed convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input such that output has the same
+#' height/width dimension as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, steps, features)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, features, steps)`. It defaults to the `image_data_format`
+#' value found in your Keras config file at `~/.keras/keras.json`.
+#' If you never set it, then it will be `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 1 integers, specifying the dilation
+#' rate to use for dilated transposed convolution.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param kernel_initializer
+#' Initializer for the convolution kernel. If `NULL`,
+#' the default initializer (`"glorot_uniform"`) will be used.
+#'
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
+#'
+#' @param kernel_regularizer
+#' Optional regularizer for the convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param kernel_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
-layer_conv_2d_transpose <- function(object, filters, kernel_size, strides = c(1, 1), padding = "valid", output_padding = NULL,
-                                    data_format = NULL, dilation_rate = c(1, 1), activation = NULL, use_bias = TRUE,
-                                    kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-                                    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                    name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    activation = activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.2.3") {
-    args$output_padding <- as_integer_tuple(output_padding)
-    args$dilation_rate <- as_integer_tuple(dilation_rate)
-  }
-
-  create_layer(keras$layers$Conv2DTranspose, object, args)
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/convolution1d_transpose#conv1dtranspose-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv1DTranspose>
+#' @tether keras.layers.Conv1DTranspose
+layer_conv_1d_transpose <-
+function (object, filters, kernel_size, strides = 1L, padding = "valid",
+    data_format = NULL, dilation_rate = 1L, activation = NULL,
+    use_bias = TRUE, kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+    kernel_constraint = NULL, bias_constraint = NULL, ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv1DTranspose, object, args)
 }
 
 
-#' Transposed 3D convolution layer (sometimes called Deconvolution).
+#' 2D convolution layer.
 #'
-#' The need for transposed convolutions generally arises from the desire to use
+#' @description
+#' This layer creates a convolution kernel that is convolved with the layer
+#' input over a single spatial (or temporal) dimension to produce a tensor of
+#' outputs. If `use_bias` is `TRUE`, a bias vector is created and added to the
+#' outputs. Finally, if `activation` is not `NULL`, it is applied to the
+#' outputs as well.
+#'
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, height, width, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, channels, height, width)`
+#'
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, new_height, new_width, filters)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, filters, new_height, new_width)`
+#'
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
+#'
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 10, 128))
+#' y <- x |> layer_conv_2d(32, 3, activation='relu')
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' A 4D tensor representing `activation(conv2d(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimension of the output space (the number of filters
+#' in the convolution).
+#'
+#' @param kernel_size
+#' int or list of 2 integer, specifying the size of the
+#' convolution window.
+#'
+#' @param strides
+#' int or list of 2 integer, specifying the stride length
+#' of the convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape
+#' `(batch_size, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch_size, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file at
+#' `~/.keras/keras.json`. If you never set it, then it will be
+#' `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 2 integers, specifying the dilation
+#' rate to use for dilated convolution.
+#'
+#' @param groups
+#' A positive int specifying the number of groups in which the
+#' input is split along the channel axis. Each group is convolved
+#' separately with `filters // groups` filters. The output is the
+#' concatenation of all the `groups` results along the channel axis.
+#' Input channels and `filters` must both be divisible by `groups`.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param kernel_initializer
+#' Initializer for the convolution kernel. If `NULL`,
+#' the default initializer (`"glorot_uniform"`) will be used.
+#'
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
+#'
+#' @param kernel_regularizer
+#' Optional regularizer for the convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param kernel_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/convolution2d#conv2d-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D>
+#' @tether keras.layers.Conv2D
+layer_conv_2d <-
+function (object, filters, kernel_size, strides = list(1L, 1L),
+    padding = "valid", data_format = NULL, dilation_rate = list(
+        1L, 1L), groups = 1L, activation = NULL, use_bias = TRUE,
+    kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+    kernel_constraint = NULL, bias_constraint = NULL, ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        groups = as_integer, input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv2D, object, args)
+}
+
+
+#' 2D transposed convolution layer.
+#'
+#' @description
+#' The need for transposed convolutions generally arise from the desire to use
 #' a transformation going in the opposite direction of a normal convolution,
-#' i.e., from something that has the shape of the output of some convolution to
-#' something that has the shape of its input while maintaining a connectivity
-#' pattern that is compatible with said convolution.
+#' i.e., from something that has the shape of the output of some convolution
+#' to something that has the shape of its input while maintaining a
+#' connectivity pattern that is compatible with said convolution.
 #'
-#' When using this layer as the first layer in a model, provide the keyword argument
-#' `input_shape` (list of integers, does not include the sample axis), e.g.
-#' `input_shape = list(128, 128, 128, 3)` for a 128x128x128 volume with 3 channels if
-#' `data_format="channels_last"`.
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, height, width, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, channels, height, width)`
 #'
-#' @inheritParams layer_conv_2d
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, new_height, new_width, filters)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, filters, new_height, new_width)`
 #'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of 3 integers, specifying the depth,
-#'   height, and width of the 3D convolution window. Can be a single integer
-#'   to specify the same value for all spatial dimensions.
-#' @param strides An integer or list of 3 integers, specifying the strides of
-#'   the convolution along the depth, height and width.. Can be a single integer
-#'   to specify the same value for all spatial dimensions. Specifying any stride
-#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param output_padding An integer or list of 3 integers,
-#'   specifying the amount of padding along the depth, height, and width
-#'   of the output tensor. Can be a single integer to specify the same
-#'   value for all spatial dimensions. The amount of output padding along a
-#'   given dimension must be lower than the stride along that same dimension.
-#'   If set to `NULL` (default), the output shape is inferred.
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, depth, height,
-#'   width, channels)` while `channels_first` corresponds to inputs with shape
-#'   `(batch, channels, depth, height, width)`. It defaults to the
-#'   `image_data_format` value found in your Keras config file at
-#'   `~/.keras/keras.json`. If you never set it, then it will be
-#'   "channels_last".
-#' @param dilation_rate An integer or vector of 3 integers, specifying the
-#'   dilation rate to use for dilated convolution. Can be a single integer to
-#'   specify the same value for all spatial dimensions.
-#' @param activation Activation function to use. If you don't specify anything, no
-#'   activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix.
-#' @param bias_initializer Initializer for the bias vector.
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix,
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation").
-#' @param kernel_constraint Constraint function applied to the kernel matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' @section References:
-#'   - [A guide to convolution arithmetic for deep learning](https://arxiv.org/abs/1603.07285v1)
+#' # References
+#' - [A guide to convolution arithmetic for deep learning](
+#'     https://arxiv.org/abs/1603.07285)
+#' - [Deconvolutional Networks](
+#'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
 #'
-#' @family convolutional layers
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 8, 128))
+#' y <- x |> layer_conv_2d_transpose(32, 2, 2, activation='relu')
+#' shape(y)
+#' # (4, 20, 16, 32)
+#' ```
+#'
+#' @returns
+#' A 4D tensor representing
+#' `activation(conv2d_transpose(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimension of the output space (the number of filters
+#' in the transposed convolution).
+#'
+#' @param kernel_size
+#' int or list of 1 integer, specifying the size of the
+#' transposed convolution window.
+#'
+#' @param strides
+#' int or list of 1 integer, specifying the stride length
+#' of the transposed convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape
+#' `(batch_size, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch_size, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file at
+#' `~/.keras/keras.json`. If you never set it, then it will be
+#' `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 1 integers, specifying the dilation
+#' rate to use for dilated transposed convolution.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param kernel_initializer
+#' Initializer for the convolution kernel. If `NULL`,
+#' the default initializer (`"glorot_uniform"`) will be used.
+#'
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
+#'
+#' @param kernel_regularizer
+#' Optional regularizer for the convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param kernel_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
-layer_conv_3d_transpose <- function(object, filters, kernel_size, strides = c(1, 1, 1),
-                                    padding = "valid", output_padding = NULL,
-                                    data_format = NULL, dilation_rate = c(1L, 1L, 1L),
-                                    activation = NULL, use_bias = TRUE,
-                                    kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
-                                    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                                    kernel_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                    name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    activation = activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    bias_initializer = bias_initializer,
-    kernel_regularizer = kernel_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.2.3")
-    args$output_padding <- as_integer_tuple(output_padding)
-
-  if (tf_version() >= "2.3")
-    args$dilation_rate <- as_integer_tuple(dilation_rate)
-  # TODO: warning should be issued if user supplied dilation_rate and we're
-  # ignoring it
-
-  create_layer(keras$layers$Conv3DTranspose, object, args)
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/convolution2d_transpose#conv2dtranspose-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2DTranspose>
+#' @tether keras.layers.Conv2DTranspose
+layer_conv_2d_transpose <-
+function (object, filters, kernel_size, strides = list(1L, 1L),
+    padding = "valid", data_format = NULL, dilation_rate = list(
+        1L, 1L), activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform",
+    bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
+    activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
+    ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv2DTranspose, object, args)
 }
 
 
-
-#' Separable 2D convolution.
+#' 3D convolution layer.
 #'
-#' Separable convolutions consist in first performing a depthwise spatial
-#' convolution (which acts on each input channel separately) followed by a
-#' pointwise convolution which mixes together the resulting output channels. The
-#' `depth_multiplier` argument controls how many output channels are generated
-#' per input channel in the depthwise step. Intuitively, separable convolutions
-#' can be understood as a way to factorize a convolution kernel into two smaller
-#' kernels, or as an extreme version of an Inception block.
+#' @description
+#' This layer creates a convolution kernel that is convolved with the layer
+#' input over a single spatial (or temporal) dimension to produce a tensor of
+#' outputs. If `use_bias` is `TRUE`, a bias vector is created and added to the
+#' outputs. Finally, if `activation` is not `NULL`, it is applied to the
+#' outputs as well.
 #'
-#' @inheritParams layer_conv_2d
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     5D tensor with shape:
+#'     `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+#' - If `data_format="channels_first"`:
+#'     5D tensor with shape:
+#'     `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`
 #'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of 2 integers, specifying the width and
-#'   height of the 2D convolution window. Can be a single integer to specify the
-#'   same value for all spatial dimensions.
-#' @param strides An integer or list of 2 integers, specifying the strides of
-#'   the convolution along the width and height. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Specifying any stride
-#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param depth_multiplier The number of depthwise convolution output channels
-#'   for each input channel. The total number of depthwise convolution output
-#'   channels will be equal to `filters_in * depth_multiplier`.
-#' @param depthwise_initializer Initializer for the depthwise kernel matrix.
-#' @param pointwise_initializer Initializer for the pointwise kernel matrix.
-#' @param depthwise_regularizer Regularizer function applied to the depthwise
-#'   kernel matrix.
-#' @param pointwise_regularizer Regularizer function applied to the pointwise
-#'   kernel matrix.
-#' @param depthwise_constraint Constraint function applied to the depthwise
-#'   kernel matrix.
-#' @param pointwise_constraint Constraint function applied to the pointwise
-#'   kernel matrix.
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     5D tensor with shape:
+#'     `(batch_size, new_spatial_dim1, new_spatial_dim2, new_spatial_dim3,
+#'     filters)`
+#' - If `data_format="channels_first"`:
+#'     5D tensor with shape:
+#'     `(batch_size, filters, new_spatial_dim1, new_spatial_dim2,
+#'     new_spatial_dim3)`
 #'
-#' @section Input shape: 4D tensor with shape: `(batch, channels, rows, cols)`
-#'   if data_format='channels_first' or 4D tensor with shape: `(batch, rows,
-#'   cols, channels)` if data_format='channels_last'.
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' @section Output shape: 4D tensor with shape: `(batch, filters, new_rows,
-#'   new_cols)` if data_format='channels_first' or 4D tensor with shape:
-#'   `(batch, new_rows, new_cols, filters)` if data_format='channels_last'.
-#'   `rows` and `cols` values might have changed due to padding.
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 10, 10, 128))
+#' y <- x |> layer_conv_3d(32, 3, activation = 'relu')
+#' shape(y)
+#' ```
 #'
-#' @family convolutional layers
+#' @returns
+#' A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimension of the output space (the number of filters
+#' in the convolution).
+#'
+#' @param kernel_size
+#' int or list of 3 integer, specifying the size of the
+#' convolution window.
+#'
+#' @param strides
+#' int or list of 3 integer, specifying the stride length
+#' of the convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape
+#' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
+#' It defaults to the `image_data_format` value found in your Keras
+#' config file at `~/.keras/keras.json`. If you never set it, then it
+#' will be `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 3 integers, specifying the dilation
+#' rate to use for dilated convolution.
+#'
+#' @param groups
+#' A positive int specifying the number of groups in which the
+#' input is split along the channel axis. Each group is convolved
+#' separately with `filters %/% groups` filters. The output is the
+#' concatenation of all the `groups` results along the channel axis.
+#' Input channels and `filters` must both be divisible by `groups`.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param kernel_initializer
+#' Initializer for the convolution kernel. If `NULL`,
+#' the default initializer (`"glorot_uniform"`) will be used.
+#'
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
+#'
+#' @param kernel_regularizer
+#' Optional regularizer for the convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param kernel_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
-layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1, 1), padding = "valid", data_format = NULL,
-                                    dilation_rate = 1, depth_multiplier = 1, activation = NULL, use_bias = TRUE,
-                                    depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",
-                                    depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                    name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    depth_multiplier = as.integer(depth_multiplier),
-    activation = activation,
-    use_bias = use_bias,
-    depthwise_initializer = depthwise_initializer,
-    pointwise_initializer = pointwise_initializer,
-    bias_initializer = bias_initializer,
-    depthwise_regularizer = depthwise_regularizer,
-    pointwise_regularizer = pointwise_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    depthwise_constraint = depthwise_constraint,
-    pointwise_constraint = pointwise_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.1.6")
-    args$dilation_rate <- as.integer(dilation_rate)
-
-  create_layer(keras$layers$SeparableConv2D, object, args)
-
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/convolution3d#conv3d-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv3D>
+#' @tether keras.layers.Conv3D
+layer_conv_3d <-
+function (object, filters, kernel_size, strides = list(1L, 1L,
+    1L), padding = "valid", data_format = NULL, dilation_rate = list(
+    1L, 1L, 1L), groups = 1L, activation = NULL, use_bias = TRUE,
+    kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+    kernel_constraint = NULL, bias_constraint = NULL, ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        groups = as_integer, input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv3D, object, args)
 }
 
 
-#' Depthwise 1D convolution
+#' 3D transposed convolution layer.
 #'
-#' @details
-#' Depthwise convolution is a type of convolution in which each input channel is
-#' convolved with a different kernel (called a depthwise kernel). You
-#' can understand depthwise convolution as the first step in a depthwise
-#' separable convolution.
+#' @description
+#' The need for transposed convolutions generally arise from the desire to use
+#' a transformation going in the opposite direction of a normal convolution,
+#' i.e., from something that has the shape of the output of some convolution
+#' to something that has the shape of its input while maintaining a
+#' connectivity pattern that is compatible with said convolution.
+#'
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     5D tensor with shape:
+#'     `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+#' - If `data_format="channels_first"`:
+#'     5D tensor with shape:
+#'     `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`
+#'
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     5D tensor with shape:
+#'     `(batch_size, new_spatial_dim1, new_spatial_dim2, new_spatial_dim3,
+#'     filters)`
+#' - If `data_format="channels_first"`:
+#'     5D tensor with shape:
+#'     `(batch_size, filters, new_spatial_dim1, new_spatial_dim2,
+#'     new_spatial_dim3)`
+#'
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
+#'
+#' # References
+#' - [A guide to convolution arithmetic for deep learning](
+#'     https://arxiv.org/abs/1603.07285v1)
+#' - [Deconvolutional Networks](
+#'     https://www.matthewzeiler.com/mattzeiler/deconvolutionalnetworks.pdf)
+#'
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 8, 12, 128))
+#' y <- x |> layer_conv_3d_transpose(32, 2, 2, activation = 'relu')
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' A 5D tensor representing `activation(conv3d(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimension of the output space (the number of filters
+#' in the transposed convolution).
+#'
+#' @param kernel_size
+#' int or list of 1 integer, specifying the size of the
+#' transposed convolution window.
+#'
+#' @param strides
+#' int or list of 1 integer, specifying the stride length
+#' of the transposed convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape
+#' `(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)`.
+#' It defaults to the `image_data_format` value found in your Keras
+#' config file at `~/.keras/keras.json`. If you never set it, then it
+#' will be `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 1 integers, specifying the dilation
+#' rate to use for dilated transposed convolution.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param kernel_initializer
+#' Initializer for the convolution kernel. If `NULL`,
+#' the default initializer (`"glorot_uniform"`) will be used.
+#'
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
+#'
+#' @param kernel_regularizer
+#' Optional regularizer for the convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param kernel_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/convolution3d_transpose#conv3dtranspose-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv3DTranspose>
+#' @tether keras.layers.Conv3DTranspose
+layer_conv_3d_transpose <-
+function (object, filters, kernel_size, strides = list(1L, 1L,
+    1L), padding = "valid", data_format = NULL, dilation_rate = list(
+    1L, 1L, 1L), activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform",
+    bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
+    activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
+    ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
+        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$Conv3DTranspose, object, args)
+}
+
+
+#' 1D depthwise convolution layer.
+#'
+#' @description
+#' Depthwise convolution is a type of convolution in which each input channel
+#' is convolved with a different kernel (called a depthwise kernel). You can
+#' understand depthwise convolution as the first step in a depthwise separable
+#' convolution.
 #'
 #' It is implemented via the following steps:
 #'
@@ -669,1052 +866,586 @@ layer_separable_conv_2d <- function(object, filters, kernel_size, strides = c(1,
 #' Unlike a regular 1D convolution, depthwise convolution does not mix
 #' information across different input channels.
 #'
-#' The `depth_multiplier` argument determines how many filter are applied to one
-#' input channel. As such, it controls the amount of output channels that are
-#' generated per input channel in the depthwise step.
+#' The `depth_multiplier` argument determines how many filters are applied to
+#' one input channel. As such, it controls the amount of output channels that
+#' are generated per input channel in the depthwise step.
 #'
-#' @param kernel_size An integer, specifying the height and width of the 1D
-#' convolution window. Can be a single integer to specify the same value for
-#' all spatial dimensions.
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, steps, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, channels, steps)`
 #'
-#' @param strides An integer, specifying the strides of the convolution along the
-#' height and width. Can be a single integer to specify the same value for
-#' all spatial dimensions. Specifying any stride value != 1 is incompatible
-#' with specifying any `dilation_rate` value != 1.
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape:
+#'     `(batch_shape, new_steps, channels * depth_multiplier)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape:
+#'     `(batch_shape, channels * depth_multiplier, new_steps)`
 #'
-#' @param padding one of `'valid'` or `'same'` (case-insensitive). `"valid"` means no
-#' padding. `"same"` results in padding with zeros evenly to the left/right
-#' or up/down of the input such that output has the same height/width
-#' dimension as the input.
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' @param depth_multiplier The number of depthwise convolution output channels for
-#' each input channel. The total number of depthwise convolution output
-#' channels will be equal to `filters_in * depth_multiplier`.
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 12))
+#' y <- x |> layer_depthwise_conv_1d(
+#'   kernel_size = 3,
+#'   depth_multiplier = 3,
+#'   activation = 'relu'
+#' )
+#' shape(y)
+#' ```
 #'
-#' @param data_format A string, one of `"channels_last"` (default) or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `channels_last` corresponds
-#' to inputs with shape `(batch_size, height, width, channels)` while
-#' `channels_first` corresponds to inputs with shape `(batch_size, channels,
-#' height, width)`. It defaults to the `image_data_format` value found in
-#' your Keras config file at `~/.keras/keras.json`. If you never set it, then
-#' it will be 'channels_last'.
+#' @returns
+#' A 3D tensor representing
+#' `activation(depthwise_conv1d(inputs, kernel) + bias)`.
 #'
-#' @param dilation_rate A single integer, specifying the dilation rate to use for
-#' dilated convolution. Currently, specifying any `dilation_rate` value != 1
-#' is incompatible with specifying any stride value != 1.
+#' @param kernel_size
+#' int or list of 1 integer, specifying the size of the
+#' depthwise convolution window.
 #'
-#' @param activation Activation function to use. If you don't specify anything, no
-#' activation is applied (see `?activation_relu`).
+#' @param strides
+#' int or list of 1 integer, specifying the stride length
+#' of the convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
 #'
-#' @param use_bias Boolean, whether the layer uses a bias vector.
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
 #'
-#' @param depthwise_initializer Initializer for the depthwise kernel matrix (see
-#' [`initializer_glorot_uniform`]). If NULL, the default initializer
-#' (`"glorot_uniform"`) will be used.
+#' @param depth_multiplier
+#' The number of depthwise convolution output channels
+#' for each input channel. The total number of depthwise convolution
+#' output channels will be equal to `input_channel * depth_multiplier`.
 #'
-#' @param bias_initializer Initializer for the bias vector (see
-#' `keras.initializers`). If NULL, the default initializer ('zeros') will be
-#' used.
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, steps, features)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, features, steps)`. It defaults to the `image_data_format`
+#' value found in your Keras config file at `~/.keras/keras.json`.
+#' If you never set it, then it will be `"channels_last"`.
 #'
-#' @param depthwise_regularizer Regularizer function applied to the depthwise kernel
-#' matrix (see  [`regularizer_l1()`]).
+#' @param dilation_rate
+#' int or list of 1 integers, specifying the dilation
+#' rate to use for dilated convolution.
 #'
-#' @param bias_regularizer Regularizer function applied to the bias vector (see
-#'  [`regularizer_l1()`]).
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
 #'
-#' @param activity_regularizer Regularizer function applied to the output of the
-#' layer (its 'activation') (see  [`regularizer_l1()`]).
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
 #'
-#' @param depthwise_constraint Constraint function applied to the depthwise kernel
-#' matrix (see [`constraint_maxnorm()`]).
+#' @param depthwise_initializer
+#' Initializer for the convolution kernel.
+#' If `NULL`, the default initializer (`"glorot_uniform"`)
+#' will be used.
 #'
-#' @param bias_constraint Constraint function applied to the bias vector (see
-#' [`constraint_maxnorm()`]).
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
 #'
-#' @param ... standard layer arguments.
+#' @param depthwise_regularizer
+#' Optional regularizer for the convolution kernel.
 #'
-#' @inheritParams layer_depthwise_conv_2d
-#' @family convolutional layers
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
 #'
-#' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D>
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param depthwise_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
 #' @export
+#' @family convolutional layers
+#' @family layers
+# @seealso
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv1D>
+#' @tether keras.layers.DepthwiseConv1D
 layer_depthwise_conv_1d <-
-function(object,
-         kernel_size,
-         strides = 1L,
-         padding = "valid",
-         depth_multiplier = 1L,
-         data_format = NULL,
-         dilation_rate = 1L,
-         activation = NULL,
-         use_bias = TRUE,
-         depthwise_initializer = "glorot_uniform",
-         bias_initializer = "zeros",
-         depthwise_regularizer = NULL,
-         bias_regularizer = NULL,
-         activity_regularizer = NULL,
-         depthwise_constraint = NULL,
-         bias_constraint = NULL,
-         ...) {
-  args <- capture_args(match.call(),
-    list(kernel_size = as.integer,
-         strides = as.integer,
-         depth_multiplier = as.integer,
-         dilation_rate = as.integer),
-    ignore = "object"
-  )
-  create_layer(keras$layers$DepthwiseConv1D, object, args)
-}
-
-#' Depthwise separable 2D convolution.
-#'
-#' Depthwise Separable convolutions consists in performing just the first step
-#' in a depthwise spatial convolution (which acts on each input channel
-#' separately). The `depth_multiplier` argument controls how many output
-#' channels are generated per input channel in the depthwise step.
-#'
-#' @inheritParams layer_separable_conv_2d
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_depthwise_conv_2d <- function(object, kernel_size, strides = c(1, 1), padding = "valid", depth_multiplier = 1,
-                                    data_format = NULL, dilation_rate = c(1, 1), activation = NULL, use_bias = TRUE,
-                                    depthwise_initializer = "glorot_uniform", bias_initializer = "zeros",
-                                    depthwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                                    depthwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                    name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    depth_multiplier = as.integer(depth_multiplier),
-    data_format = data_format,
-    activation = activation,
-    use_bias = use_bias,
-    depthwise_initializer = depthwise_initializer,
-    bias_initializer = bias_initializer,
-    depthwise_regularizer = depthwise_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    depthwise_constraint = depthwise_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if(tf_version() >= "2.3")
-    args$dilation_rate <- as_integer_tuple(dilation_rate)
-
-  create_layer(keras$layers$DepthwiseConv2D, object, args)
-}
-
-
-#' Depthwise separable 1D convolution.
-#'
-#' Separable convolutions consist in first performing a depthwise spatial
-#' convolution (which acts on each input channel separately) followed by a
-#' pointwise convolution which mixes together the resulting output channels. The
-#' `depth_multiplier` argument controls how many output channels are generated
-#' per input channel in the depthwise step. Intuitively, separable convolutions
-#' can be understood as a way to factorize a convolution kernel into two smaller
-#' kernels, or as an extreme version of an Inception block.
-#'
-#' @inheritParams layer_conv_2d
-#'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of 2 integers, specifying the width and
-#'   height of the 2D convolution window. Can be a single integer to specify the
-#'   same value for all spatial dimensions.
-#' @param strides An integer or list of 2 integers, specifying the strides of
-#'   the convolution along the width and height. Can be a single integer to
-#'   specify the same value for all spatial dimensions. Specifying any stride
-#'   value != 1 is incompatible with specifying any `dilation_rate` value != 1.
-#' @param padding one of `"valid"` or `"same"` (case-insensitive).
-#' @param depth_multiplier The number of depthwise convolution output channels
-#'   for each input channel. The total number of depthwise convolution output
-#'   channels will be equal to `filters_in * depth_multiplier`.
-#' @param depthwise_initializer Initializer for the depthwise kernel matrix.
-#' @param pointwise_initializer Initializer for the pointwise kernel matrix.
-#' @param depthwise_regularizer Regularizer function applied to the depthwise
-#'   kernel matrix.
-#' @param pointwise_regularizer Regularizer function applied to the pointwise
-#'   kernel matrix.
-#' @param depthwise_constraint Constraint function applied to the depthwise
-#'   kernel matrix.
-#' @param pointwise_constraint Constraint function applied to the pointwise
-#'   kernel matrix.
-#'
-#' @section Input shape: 3D tensor with shape: `(batch, channels, steps)`
-#'   if data_format='channels_first' or 3D tensor with shape: `(batch, steps, channels)`
-#'   if data_format='channels_last'.
-#'
-#' @section Output shape: 3D tensor with shape: `(batch, filters, new_steps)`
-#'   if data_format='channels_first' or 3D tensor with shape:
-#'   `(batch, new_steps, filters)` if data_format='channels_last'.
-#'   `new_steps` values might have changed due to padding or strides.
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_separable_conv_1d <- function(object, filters, kernel_size, strides = 1, padding = "valid", data_format = "channels_last",
-                                    dilation_rate = 1, depth_multiplier = 1, activation = NULL, use_bias = TRUE,
-                                    depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",
-                                    depthwise_regularizer = NULL, pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-                                    depthwise_constraint = NULL, pointwise_constraint = NULL, bias_constraint = NULL, input_shape = NULL,
-                                    batch_input_shape = NULL, batch_size = NULL, dtype = NULL,
-                                    name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    depth_multiplier = as.integer(depth_multiplier),
-    activation = activation,
-    use_bias = use_bias,
-    depthwise_initializer = depthwise_initializer,
-    pointwise_initializer = pointwise_initializer,
-    bias_initializer = bias_initializer,
-    depthwise_regularizer = depthwise_regularizer,
-    pointwise_regularizer = pointwise_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    depthwise_constraint = depthwise_constraint,
-    pointwise_constraint = pointwise_constraint,
-    bias_constraint = bias_constraint,
-    input_shape = normalize_shape(input_shape),
-    batch_input_shape = normalize_shape(batch_input_shape),
-    batch_size = as_nullable_integer(batch_size),
-    dtype = dtype,
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.1.6")
-    args$dilation_rate <- as.integer(dilation_rate)
-
-  create_layer(keras$layers$SeparableConv1D, object, args)
-
-}
-
-
-#' Upsampling layer for 1D inputs.
-#'
-#' Repeats each temporal step `size` times along the time axis.
-#'
-#' @inheritParams layer_dense
-#'
-#' @param size integer. Upsampling factor.
-#'
-#' @section Input shape: 3D tensor with shape: `(batch, steps, features)`.
-#'
-#' @section Output shape: 3D tensor with shape: `(batch, upsampled_steps,
-#'   features)`.
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_upsampling_1d <- function(object, size = 2L,
-                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$UpSampling1D, object, list(
-    size = as.integer(size),
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-
-#' Upsampling layer for 2D inputs.
-#'
-#' Repeats the rows and columns of the data by `size[[0]]` and `size[[1]]` respectively.
-#'
-#' @inheritParams layer_conv_2d
-#'
-#' @param size int, or list of 2 integers. The upsampling factors for rows and
-#'   columns.
-#' @param interpolation  A string, one of `nearest` or `bilinear`.
-#'   Note that CNTK does not support yet the `bilinear` upscaling
-#'   and that with Theano, only `size=(2, 2)` is possible.
-#'
-#'
-#' @section Input shape:
-#' 4D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, rows, cols)`
-#'
-#' @section Output shape:
-#' 4D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, upsampled_rows, upsampled_cols, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, upsampled_rows, upsampled_cols)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_upsampling_2d <- function(object, size = c(2L, 2L), data_format = NULL, interpolation = "nearest",
-                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  args <- list(
-    size = as.integer(size),
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  )
-
-  if (keras_version() >= "2.2.3")
-    args$interpolation <- interpolation
-
-  create_layer(keras$layers$UpSampling2D, object, args)
-
-}
-
-
-#' Upsampling layer for 3D inputs.
-#'
-#' Repeats the 1st, 2nd and 3rd dimensions of the data by `size[[0]]`, `size[[1]]` and
-#' `size[[2]]` respectively.
-#'
-#' @inheritParams layer_upsampling_1d
-#'
-#' @param size int, or list of 3 integers. The upsampling factors for dim1, dim2
-#'   and dim3.
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
-#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
-#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
-#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
-#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
-#'   will be "channels_last".
-#'
-#' @section Input shape:
-#' 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, dim1, dim2, dim3, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, dim1, dim2, dim3)`
-#'
-#' @section Output shape:
-#' 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, upsampled_dim1, upsampled_dim2, upsampled_dim3, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, upsampled_dim1, upsampled_dim2, upsampled_dim3)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_upsampling_3d <- function(object, size= c(2L, 2L, 2L), data_format = NULL,
-                                batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$UpSampling3D, object, list(
-    size = as.integer(size),
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-#' Zero-padding layer for 1D input (e.g. temporal sequence).
-#'
-#' @inheritParams layer_conv_2d
-#'
-#' @param padding int, or list of int (length 2)
-#' - If int: How many zeros to add at the beginning and end of the padding dimension (axis 1).
-#' - If list of int (length 2): How many zeros to add at the beginning and at the end of the padding dimension (`(left_pad, right_pad)`).
-#'
-#' @section Input shape:
-#' 3D tensor with shape `(batch, axis_to_pad, features)`
-#'
-#' @section Output shape:
-#' 3D tensor with shape `(batch, padded_axis, features)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_zero_padding_1d <- function(object, padding = 1L,
-                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$ZeroPadding1D, object, list(
-    padding = as.integer(padding),
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-}
-
-
-#' Zero-padding layer for 2D input (e.g. picture).
-#'
-#' This layer can add rows and columns of zeros at the top, bottom, left and
-#' right side of an image tensor.
-#'
-#' @inheritParams layer_conv_2d
-#' @inheritParams layer_zero_padding_1d
-#'
-#' @param padding int, or list of 2 ints, or list of 2 lists of 2 ints.
-#' - If int: the same symmetric padding is applied to width and height.
-#' - If list of 2 ints: interpreted as two different symmetric padding values for height
-#'   and width: `(symmetric_height_pad, symmetric_width_pad)`.
-#' - If list of 2 lists of 2 ints: interpreted as `((top_pad, bottom_pad), (left_pad,
-#'   right_pad))`
-#'
-#' @section Input shape: 4D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, rows, cols)`
-#'
-#' @section Output shape: 4D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, padded_rows, padded_cols, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, padded_rows, padded_cols)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_zero_padding_2d <- function(object, padding = c(1L, 1L), data_format = NULL,
-                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$ZeroPadding2D, object, list(
-    padding = normalize_padding(padding, 2L),
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-#' Zero-padding layer for 3D data (spatial or spatio-temporal).
-#'
-#' @inheritParams layer_zero_padding_1d
-#'
-#' @param padding int, or list of 3 ints, or list of 3 lists of 2 ints.
-#' - If int: the same symmetric padding is applied to width and height.
-#' - If list of 3 ints: interpreted as three different symmetric padding values:
-#'   `(symmetric_dim1_pad, symmetric_dim2_pad, symmetric_dim3_pad)`.
-#' - If list of 3 lists of 2 ints: interpreted as `((left_dim1_pad,
-#'   right_dim1_pad), (left_dim2_pad, right_dim2_pad), (left_dim3_pad,
-#'   right_dim3_pad))`
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
-#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
-#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
-#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
-#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
-#'   will be "channels_last".
-#'
-#' @section Input shape: 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, first_axis_to_pad, second_axis_to_pad,
-#'   third_axis_to_pad, depth)`
-#' - If `data_format` is `"channels_first"`: `(batch, depth, first_axis_to_pad, second_axis_to_pad, third_axis_to_pad)`
-#'
-#' @section Output shape: 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, first_padded_axis, second_padded_axis,
-#'   third_axis_to_pad, depth)`
-#' - If `data_format` is `"channels_first"`: `(batch, depth, first_padded_axis, second_padded_axis, third_axis_to_pad)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_zero_padding_3d <- function(object,  padding = c(1L, 1L, 1L), data_format = NULL,
-                                  batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$ZeroPadding3D, object, list(
-    padding = normalize_padding(padding, 3L),
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-
-#' Cropping layer for 1D input (e.g. temporal sequence).
-#'
-#' It crops along the time dimension (axis 1).
-#'
-#' @inheritParams layer_dense
-#'
-#' @param cropping int or list of int (length 2) How many units should be
-#'   trimmed off at the beginning and end of the cropping dimension (axis 1). If
-#'   a single int is provided, the same value will be used for both.
-#'
-#' @section Input shape: 3D tensor with shape `(batch, axis_to_crop, features)`
-#'
-#' @section Output shape: 3D tensor with shape `(batch, cropped_axis, features)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_cropping_1d <- function(object, cropping = c(1L, 1L),
-                              batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$Cropping1D, object, list(
-    cropping = as.integer(cropping),
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-}
-
-
-#' Cropping layer for 2D input (e.g. picture).
-#'
-#' It crops along spatial dimensions, i.e. width and height.
-#'
-#' @inheritParams layer_conv_2d
-#' @inheritParams layer_cropping_1d
-#'
-#' @param cropping int, or list of 2 ints, or list of 2 lists of 2 ints.
-#'   - If int: the same symmetric cropping is applied to width and height.
-#'   - If list of 2 ints: interpreted as two different symmetric cropping values for
-#'   height and width: `(symmetric_height_crop, symmetric_width_crop)`.
-#'   - If list of 2 lists of 2 ints: interpreted as `((top_crop, bottom_crop), (left_crop,
-#'   right_crop))`
-#'
-#' @section Input shape: 4D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, rows, cols, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, rows, cols)`
-#'
-#' @section Output shape: 4D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, cropped_rows, cropped_cols, channels)`
-#' - If `data_format` is `"channels_first"`: `(batch, channels, cropped_rows, cropped_cols)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_cropping_2d <- function(object, cropping = list(c(0L, 0L), c(0L, 0L)), data_format = NULL,
-                              batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-
-  create_layer(keras$layers$Cropping2D, object, list(
-    cropping = normalize_cropping(cropping, 2L),
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-
-}
-
-
-#' Cropping layer for 3D data (e.g. spatial or spatio-temporal).
-#'
-#' @inheritParams layer_cropping_1d
-#'
-#' @param cropping int, or list of 3 ints, or list of 3 lists of 2 ints.
-#'   - If int: the same symmetric cropping
-#'     is applied to depth, height, and width.
-#'   - If list of 3 ints:
-#'     interpreted as two different
-#'     symmetric cropping values for depth, height, and width:
-#'     `(symmetric_dim1_crop, symmetric_dim2_crop, symmetric_dim3_crop)`.
-#'   - If list of 3 list of 2 ints:
-#'     interpreted as
-#'     `((left_dim1_crop, right_dim1_crop), (left_dim2_crop, right_dim2_crop), (left_dim3_crop, right_dim3_crop))`
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, spatial_dim1,
-#'   spatial_dim2, spatial_dim3, channels)` while `channels_first` corresponds
-#'   to inputs with shape `(batch, channels, spatial_dim1, spatial_dim2,
-#'   spatial_dim3)`. It defaults to the `image_data_format` value found in your
-#'   Keras config file at `~/.keras/keras.json`. If you never set it, then it
-#'   will be "channels_last".
-#'
-#' @section Input shape: 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, first_axis_to_crop, second_axis_to_crop,
-#'   third_axis_to_crop, depth)`
-#' - If `data_format` is `"channels_first"`:
-#'   `(batch, depth, first_axis_to_crop, second_axis_to_crop,
-#'   third_axis_to_crop)`
-#'
-#' @section Output shape: 5D tensor with shape:
-#' - If `data_format` is `"channels_last"`: `(batch, first_cropped_axis, second_cropped_axis,
-#'   third_cropped_axis, depth)`
-#' - If `data_format` is `"channels_first"`: `(batch, depth, first_cropped_axis, second_cropped_axis,
-#'   third_cropped_axis)`
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_cropping_3d <- function(object, cropping = list(c(1L, 1L), c(1L, 1L), c(1L, 1L)), data_format = NULL,
-                              batch_size = NULL, name = NULL, trainable = NULL, weights = NULL) {
-  create_layer(keras$layers$Cropping3D, object, list(
-    cropping = normalize_cropping(cropping, 3L),
-    data_format = data_format,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights
-  ))
-}
-
-
-#' Convolutional LSTM.
-#'
-#' It is similar to an LSTM layer, but the input transformations and recurrent
-#' transformations are both convolutional.
-#'
-#' @inheritParams layer_conv_2d
-#'
-#' @param filters Integer, the dimensionality of the output space (i.e. the
-#'   number of output filters in the convolution).
-#' @param kernel_size An integer or list of n integers, specifying the
-#'   dimensions of the convolution window.
-#' @param strides An integer or list of n integers, specifying the strides of
-#'   the convolution. Specifying any stride value != 1 is incompatible with
-#'   specifying any `dilation_rate` value != 1.
-#' @param padding One of `"valid"` or `"same"` (case-insensitive).
-#' @param data_format A string, one of `channels_last` (default) or
-#'   `channels_first`. The ordering of the dimensions in the inputs.
-#'   `channels_last` corresponds to inputs with shape `(batch, time, ...,
-#'   channels)` while `channels_first` corresponds to inputs with shape `(batch,
-#'   time, channels, ...)`. It defaults to the `image_data_format` value found
-#'   in your Keras config file at `~/.keras/keras.json`. If you never set it,
-#'   then it will be "channels_last".
-#' @param dilation_rate An integer or list of n integers, specifying the
-#'   dilation rate to use for dilated convolution. Currently, specifying any
-#'   `dilation_rate` value != 1 is incompatible with specifying any `strides`
-#'   value != 1.
-#' @param activation Activation function to use. If you don't specify anything,
-#'   no activation is applied (ie. "linear" activation: `a(x) = x`).
-#' @param recurrent_activation Activation function to use for the recurrent
-#'   step.
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#' @param kernel_initializer Initializer for the `kernel` weights matrix, used
-#'   for the linear transformation of the inputs..
-#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
-#'   matrix, used for the linear transformation of the recurrent state..
-#' @param bias_initializer Initializer for the bias vector.
-#' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget
-#'   gate at initialization. Use in combination with `bias_initializer="zeros"`.
-#'   This is recommended in [Jozefowicz et
-#'   al.](https://proceedings.mlr.press/v37/jozefowicz15.pdf)
-#' @param kernel_regularizer Regularizer function applied to the `kernel`
-#'   weights matrix.
-#' @param recurrent_regularizer Regularizer function applied to the
-#'   `recurrent_kernel` weights matrix.
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#' @param activity_regularizer Regularizer function applied to the output of the
-#'   layer (its "activation")..
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
-#'   matrix.
-#' @param recurrent_constraint Constraint function applied to the
-#'   `recurrent_kernel` weights matrix.
-#' @param bias_constraint Constraint function applied to the bias vector.
-#' @param return_sequences Boolean. Whether to return the last output in the
-#'   output sequence, or the full sequence.
-#' @param return_state Boolean. Whether to return the last state in addition to the output.
-#' @param go_backwards Boolean (default FALSE). If TRUE, rocess the input
-#'   sequence backwards.
-#' @param stateful Boolean (default FALSE). If TRUE, the last state for each
-#'   sample at index i in a batch will be used as initial state for the sample
-#'   of index i in the following batch.
-#' @param dropout Float between 0 and 1. Fraction of the units to drop for the
-#'   linear transformation of the inputs.
-#' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop
-#'   for the linear transformation of the recurrent state.
-#'
-#' @section Input shape:
-#' - if data_format='channels_first' 5D tensor with shape:
-#'   `(samples,time, channels, rows, cols)`
-#'   - if data_format='channels_last' 5D
-#'   tensor with shape: `(samples,time, rows, cols, channels)`
-#'
-#' @section References:
-#' - [Convolutional LSTM Network: A Machine Learning Approach for Precipitation Nowcasting](https://arxiv.org/abs/1506.04214v1)
-#'   The current implementation does not include the feedback loop on the cells
-#'   output
-#'
-#' @family convolutional layers
-#'
-#' @export
-layer_conv_lstm_2d <- function(object, filters, kernel_size, strides = c(1L, 1L), padding = "valid", data_format = NULL,
-                               dilation_rate = c(1L, 1L), activation = "tanh", recurrent_activation = "hard_sigmoid", use_bias = TRUE,
-                               kernel_initializer = "glorot_uniform", recurrent_initializer = "orthogonal", bias_initializer = "zeros",
-                               unit_forget_bias = TRUE, kernel_regularizer = NULL, recurrent_regularizer = NULL, bias_regularizer = NULL,
-                               activity_regularizer = NULL, kernel_constraint = NULL, recurrent_constraint = NULL, bias_constraint = NULL,
-                               return_sequences = FALSE, return_state = FALSE, go_backwards = FALSE, stateful = FALSE, dropout = 0.0, recurrent_dropout = 0.0,
-                               batch_size = NULL, name = NULL, trainable = NULL, weights = NULL, input_shape = NULL) {
-  args <- list(
-    filters = as.integer(filters),
-    kernel_size = as_integer_tuple(kernel_size),
-    strides = as_integer_tuple(strides),
-    padding = padding,
-    data_format = data_format,
-    dilation_rate = as.integer(dilation_rate),
-    activation = activation,
-    recurrent_activation = recurrent_activation,
-    use_bias = use_bias,
-    kernel_initializer = kernel_initializer,
-    recurrent_initializer = recurrent_initializer,
-    bias_initializer = bias_initializer,
-    unit_forget_bias = unit_forget_bias,
-    kernel_regularizer = kernel_regularizer,
-    recurrent_regularizer = recurrent_regularizer,
-    bias_regularizer = bias_regularizer,
-    activity_regularizer = activity_regularizer,
-    kernel_constraint = kernel_constraint,
-    recurrent_constraint = recurrent_constraint,
-    bias_constraint = bias_constraint,
-    return_sequences = return_sequences,
-    go_backwards = go_backwards,
-    stateful = stateful,
-    dropout = dropout,
-    recurrent_dropout = recurrent_dropout,
-    batch_size = as_nullable_integer(batch_size),
-    name = name,
-    trainable = trainable,
-    weights = weights,
-    input_shape = normalize_shape(input_shape)
-  )
-
-  if(tf_version() >= "2.3")
-    args$return_state <- return_state
-
-  create_layer(keras$layers$ConvLSTM2D, object, args)
-
-}
-
-
-#' 1D Convolutional LSTM
-#'
-#' @details
-#' Similar to an LSTM layer, but the input transformations
-#' and recurrent transformations are both convolutional.
-#'
-#' @inheritParams layer_dense
-#'
-#' @param filters Integer, the dimensionality of the output space (i.e. the number of
-#' output filters in the convolution).
-#'
-#' @param kernel_size An integer or list of n integers, specifying the
-#' dimensions of the convolution window.
-#'
-#' @param strides An integer or list of n integers, specifying the strides of
-#' the convolution. Specifying any stride value != 1 is incompatible with
-#' specifying any `dilation_rate` value != 1.
-#'
-#' @param padding One of `"valid"` or `"same"` (case-insensitive). `"valid"` means no
-#' padding. `"same"` results in padding evenly to the left/right or up/down
-#' of the input such that output has the same height/width dimension as the
-#' input.
-#'
-#' @param data_format A string, one of `channels_last` (default) or `channels_first`.
-#' The ordering of the dimensions in the inputs. `channels_last` corresponds
-#' to inputs with shape `(batch, time, ..., channels)` while `channels_first`
-#' corresponds to inputs with shape `(batch, time, channels, ...)`. It
-#' defaults to the `image_data_format` value found in your Keras config file
-#' at `~/.keras/keras.json`. If you never set it, then it will be
-#' "channels_last".
-#'
-#' @param dilation_rate An integer or list of n integers, specifying the
-#' dilation rate to use for dilated convolution. Currently, specifying any
-#' `dilation_rate` value != 1 is incompatible with specifying any `strides`
-#' value != 1.
-#'
-#' @param activation Activation function to use. By default hyperbolic tangent
-#' activation function is applied (`tanh(x)`).
-#'
-#' @param recurrent_activation Activation function to use for the recurrent step.
-#'
-#' @param use_bias Boolean, whether the layer uses a bias vector.
-#'
-#' @param kernel_initializer Initializer for the `kernel` weights matrix, used for
-#' the linear transformation of the inputs.
-#'
-#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
-#' matrix, used for the linear transformation of the recurrent state.
-#'
-#' @param bias_initializer Initializer for the bias vector.
-#'
-#' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget gate at
-#' initialization. Use in combination with `bias_initializer="zeros"`. This
-#' is recommended in [Jozefowicz et al., 2015](
-#'   https://proceedings.mlr.press/v37/jozefowicz15.pdf)
-#'
-#' @param kernel_regularizer Regularizer function applied to the `kernel` weights
-#' matrix.
-#'
-#' @param recurrent_regularizer Regularizer function applied to the
-#' `recurrent_kernel` weights matrix.
-#'
-#' @param bias_regularizer Regularizer function applied to the bias vector.
-#'
-#' @param activity_regularizer Regularizer function applied to.
-#'
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
-#' matrix.
-#'
-#' @param recurrent_constraint Constraint function applied to the `recurrent_kernel`
-#' weights matrix.
-#'
-#' @param bias_constraint Constraint function applied to the bias vector.
-#'
-#' @param return_sequences Boolean. Whether to return the last output in the output
-#' sequence, or the full sequence. (default FALSE)
-#'
-#' @param return_state Boolean Whether to return the last state in addition to the
-#' output. (default FALSE)
-#'
-#' @param go_backwards Boolean (default FALSE). If TRUE, process the input sequence
-#' backwards.
-#'
-#' @param stateful Boolean (default FALSE). If TRUE, the last state for each sample
-#' at index i in a batch will be used as initial state for the sample of
-#' index i in the following batch.
-#'
-#' @param dropout Float between 0 and 1. Fraction of the units to drop for the linear
-#' transformation of the inputs.
-#'
-#' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop for
-#' the linear transformation of the recurrent state.
-#' @param ... standard layer arguments.
-#'
-#' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM1D>
-#'
-#' @export
-layer_conv_lstm_1d <-
-function(object,
-         filters,
-         kernel_size,
-         strides = 1L,
-         padding = "valid",
-         data_format = NULL,
-         dilation_rate = 1L,
-         activation = "tanh",
-         recurrent_activation = "hard_sigmoid",
-         use_bias = TRUE,
-         kernel_initializer = "glorot_uniform",
-         recurrent_initializer = "orthogonal",
-         bias_initializer = "zeros",
-         unit_forget_bias = TRUE,
-         kernel_regularizer = NULL,
-         recurrent_regularizer = NULL,
-         bias_regularizer = NULL,
-         activity_regularizer = NULL,
-         kernel_constraint = NULL,
-         recurrent_constraint = NULL,
-         bias_constraint = NULL,
-         return_sequences = FALSE,
-         return_state = FALSE,
-         go_backwards = FALSE,
-         stateful = FALSE,
-         dropout = 0,
-         recurrent_dropout = 0,
-         ...)
+function (object, kernel_size, strides = 1L, padding = "valid",
+    depth_multiplier = 1L, data_format = NULL, dilation_rate = 1L,
+    activation = NULL, use_bias = TRUE, depthwise_initializer = "glorot_uniform",
+    bias_initializer = "zeros", depthwise_regularizer = NULL,
+    bias_regularizer = NULL, activity_regularizer = NULL, depthwise_constraint = NULL,
+    bias_constraint = NULL, ...)
 {
-  require_tf_version("2.6", "layer_conv_lstm_1d")
-  args <- capture_args(
-    match.call(),
-    list(
-      filters = as.integer,
-      kernel_size = as_integer_tuple,
-      strides = as_integer_tuple,
-      dilation_rate = as.integer,
-      batch_size = as_nullable_integer,
-      input_shape = normalize_shape
-    ),
-    ignore = "object"
-  )
-  create_layer(keras$layers$ConvLSTM1D, object, args)
+    args <- capture_args(list(kernel_size = as_integer, strides = as_integer,
+        depth_multiplier = as_integer, dilation_rate = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$DepthwiseConv1D, object, args)
 }
 
 
-#' 3D Convolutional LSTM
+#' 2D depthwise convolution layer.
 #'
-#' @details
-#' Similar to an LSTM layer, but the input transformations
-#' and recurrent transformations are both convolutional.
+#' @description
+#' Depthwise convolution is a type of convolution in which each input channel
+#' is convolved with a different kernel (called a depthwise kernel). You can
+#' understand depthwise convolution as the first step in a depthwise separable
+#' convolution.
 #'
-#' @inheritParams layer_dense
+#' It is implemented via the following steps:
 #'
-#' @param filters Integer, the dimensionality of the output space (i.e. the number of
-#' output filters in the convolution).
+#' - Split the input into individual channels.
+#' - Convolve each channel with an individual depthwise kernel with
+#'   `depth_multiplier` output channels.
+#' - Concatenate the convolved outputs along the channels axis.
 #'
-#' @param kernel_size An integer or list of n integers, specifying the
-#' dimensions of the convolution window.
+#' Unlike a regular 2D convolution, depthwise convolution does not mix
+#' information across different input channels.
 #'
-#' @param strides An integer or list of n integers, specifying the strides of
-#' the convolution. Specifying any stride value != 1 is incompatible with
-#' specifying any `dilation_rate` value != 1.
+#' The `depth_multiplier` argument determines how many filters are applied to
+#' one input channel. As such, it controls the amount of output channels that
+#' are generated per input channel in the depthwise step.
 #'
-#' @param padding One of `"valid"` or `"same"` (case-insensitive). `"valid"` means no
-#' padding. `"same"` results in padding evenly to the left/right or up/down
-#' of the input such that output has the same height/width dimension as the
-#' input.
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, height, width, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, channels, height, width)`
 #'
-#' @param data_format A string, one of `channels_last` (default) or `channels_first`.
-#' The ordering of the dimensions in the inputs. `channels_last` corresponds
-#' to inputs with shape `(batch, time, ..., channels)` while `channels_first`
-#' corresponds to inputs with shape `(batch, time, channels, ...)`. It
-#' defaults to the `image_data_format` value found in your Keras config file
-#' at `~/.keras/keras.json`. If you never set it, then it will be
-#' "channels_last".
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape:
+#'     `(batch_size, new_height, new_width, channels * depth_multiplier)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape:
+#'     `(batch_size, channels * depth_multiplier, new_height, new_width)`
 #'
-#' @param dilation_rate An integer or list of n integers, specifying the
-#' dilation rate to use for dilated convolution. Currently, specifying any
-#' `dilation_rate` value != 1 is incompatible with specifying any `strides`
-#' value != 1.
+#' # Raises
+#' ValueError: when both `strides > 1` and `dilation_rate > 1`.
 #'
-#' @param activation Activation function to use. By default hyperbolic tangent
-#' activation function is applied (`tanh(x)`).
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 10, 12))
+#' y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
+#' shape(y)
+#' ```
 #'
-#' @param recurrent_activation Activation function to use for the recurrent step.
+#' @returns
+#' A 4D tensor representing
+#' `activation(depthwise_conv2d(inputs, kernel) + bias)`.
 #'
-#' @param use_bias Boolean, whether the layer uses a bias vector.
+#' @param kernel_size
+#' int or list of 2 integer, specifying the size of the
+#' depthwise convolution window.
 #'
-#' @param kernel_initializer Initializer for the `kernel` weights matrix, used for
-#' the linear transformation of the inputs.
+#' @param strides
+#' int or list of 2 integer, specifying the stride length
+#' of the depthwise convolution. `strides > 1` is incompatible with
+#' `dilation_rate > 1`.
 #'
-#' @param recurrent_initializer Initializer for the `recurrent_kernel` weights
-#' matrix, used for the linear transformation of the recurrent state.
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
 #'
-#' @param bias_initializer Initializer for the bias vector.
+#' @param depth_multiplier
+#' The number of depthwise convolution output channels
+#' for each input channel. The total number of depthwise convolution
+#' output channels will be equal to `input_channel * depth_multiplier`.
 #'
-#' @param unit_forget_bias Boolean. If TRUE, add 1 to the bias of the forget gate at
-#' initialization. Use in combination with `bias_initializer="zeros"`. This
-#' is recommended in [Jozefowicz et al., 2015](
-#'   https://proceedings.mlr.press/v37/jozefowicz15.pdf)
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file
+#' at `~/.keras/keras.json`.
+#' If you never set it, then it will be `"channels_last"`.
 #'
-#' @param kernel_regularizer Regularizer function applied to the `kernel` weights
-#' matrix.
+#' @param dilation_rate
+#' int or list of 2 integers, specifying the dilation
+#' rate to use for dilated convolution.
 #'
-#' @param recurrent_regularizer Regularizer function applied to the
-#' `recurrent_kernel` weights matrix.
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
 #'
-#' @param bias_regularizer Regularizer function applied to the bias vector.
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
 #'
-#' @param activity_regularizer Regularizer function applied to.
+#' @param depthwise_initializer
+#' Initializer for the convolution kernel.
+#' If `NULL`, the default initializer (`"glorot_uniform"`)
+#' will be used.
 #'
-#' @param kernel_constraint Constraint function applied to the `kernel` weights
-#' matrix.
+#' @param bias_initializer
+#' Initializer for the bias vector. If `NULL`, the
+#' default initializer (`"zeros"`) will be used.
 #'
-#' @param recurrent_constraint Constraint function applied to the `recurrent_kernel`
-#' weights matrix.
+#' @param depthwise_regularizer
+#' Optional regularizer for the convolution kernel.
 #'
-#' @param bias_constraint Constraint function applied to the bias vector.
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
 #'
-#' @param return_sequences Boolean. Whether to return the last output in the output
-#' sequence, or the full sequence. (default FALSE)
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
 #'
-#' @param return_state Boolean Whether to return the last state in addition to the
-#' output. (default FALSE)
+#' @param depthwise_constraint
+#' Optional projection function to be applied to the
+#' kernel after being updated by an `Optimizer` (e.g. used to implement
+#' norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape). Constraints
+#' are not safe to use when doing asynchronous distributed training.
 #'
-#' @param go_backwards Boolean (default FALSE). If TRUE, process the input sequence
-#' backwards.
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
 #'
-#' @param stateful Boolean (default FALSE). If TRUE, the last state for each sample
-#' at index i in a batch will be used as initial state for the sample of
-#' index i in the following batch.
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
 #'
-#' @param dropout Float between 0 and 1. Fraction of the units to drop for the linear
-#' transformation of the inputs.
-#'
-#' @param recurrent_dropout Float between 0 and 1. Fraction of the units to drop for
-#' the linear transformation of the recurrent state.
-#' @param ... standard layer arguments.
-#'
-#' @seealso
-#'   +  <https://www.tensorflow.org/api_docs/python/tf/keras/layers/ConvLSTM3D>
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
-layer_conv_lstm_3d <-
-function(object,
-         filters,
-         kernel_size,
-         strides = c(1L, 1L, 1L),
-         padding = "valid",
-         data_format = NULL,
-         dilation_rate = c(1L, 1L, 1L),
-         activation = "tanh",
-         recurrent_activation = "hard_sigmoid",
-         use_bias = TRUE,
-         kernel_initializer = "glorot_uniform",
-         recurrent_initializer = "orthogonal",
-         bias_initializer = "zeros",
-         unit_forget_bias = TRUE,
-         kernel_regularizer = NULL,
-         recurrent_regularizer = NULL,
-         bias_regularizer = NULL,
-         activity_regularizer = NULL,
-         kernel_constraint = NULL,
-         recurrent_constraint = NULL,
-         bias_constraint = NULL,
-         return_sequences = FALSE,
-         return_state = FALSE,
-         go_backwards = FALSE,
-         stateful = FALSE,
-         dropout = 0,
-         recurrent_dropout = 0,
-         ...)
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/depthwise_convolution2d#depthwiseconv2d-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/DepthwiseConv2D>
+#' @tether keras.layers.DepthwiseConv2D
+layer_depthwise_conv_2d <-
+function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
+    depth_multiplier = 1L, data_format = NULL, dilation_rate = list(
+        1L, 1L), activation = NULL, use_bias = TRUE, depthwise_initializer = "glorot_uniform",
+    bias_initializer = "zeros", depthwise_regularizer = NULL,
+    bias_regularizer = NULL, activity_regularizer = NULL, depthwise_constraint = NULL,
+    bias_constraint = NULL, ...)
 {
-  require_tf_version("2.6", "layer_conv_lstm_3d")
-  args <- capture_args(
-    match.call(),
-    list(
-      filters = as.integer,
-      kernel_size = as_integer_tuple,
-      strides = as_integer_tuple,
-      dilation_rate = as.integer,
-      batch_size = as_nullable_integer,
-      input_shape = normalize_shape
-    ),
-    ignore = "object"
-  )
-  create_layer(keras$layers$ConvLSTM3D, object, args)
+    args <- capture_args(list(kernel_size = as_integer, strides = as_integer,
+        depth_multiplier = as_integer, dilation_rate = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$DepthwiseConv2D, object, args)
 }
 
 
-
-
-
-normalize_padding <- function(padding, dims) {
-  normalize_scale("padding", padding, dims)
+#' 1D separable convolution layer.
+#'
+#' @description
+#' This layer performs a depthwise convolution that acts separately on
+#' channels, followed by a pointwise convolution that mixes channels.
+#' If `use_bias` is TRUE and a bias initializer is provided,
+#' it adds a bias vector to the output. It then optionally applies an
+#' activation function to produce the final output.
+#'
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, steps, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, channels, steps)`
+#'
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 3D tensor with shape: `(batch_shape, new_steps, filters)`
+#' - If `data_format="channels_first"`:
+#'     A 3D tensor with shape: `(batch_shape, filters, new_steps)`
+#'
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 12))
+#' y <- layer_separable_conv_1d(x, 3, 2, 2, activation='relu')
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' A 3D tensor representing
+#' `activation(separable_conv1d(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimensionality of the output space (i.e. the number
+#' of filters in the pointwise convolution).
+#'
+#' @param kernel_size
+#' int or list of 1 integers, specifying the size of the
+#' depthwise convolution window.
+#'
+#' @param strides
+#' int or list of 1 integers, specifying the stride length
+#' of the depthwise convolution. If only one int is specified, the same
+#' stride size will be used for all dimensions. `strides > 1` is
+#' incompatible with `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, steps, features)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, features, steps)`. It defaults to the `image_data_format`
+#' value found in your Keras config file at `~/.keras/keras.json`.
+#' If you never set it, then it will be `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 1 integers, specifying the dilation
+#' rate to use for dilated convolution. If only one int is specified,
+#' the same dilation rate will be used for all dimensions.
+#'
+#' @param depth_multiplier
+#' The number of depthwise convolution output channels
+#' for each input channel. The total number of depthwise convolution
+#' output channels will be equal to `input_channel * depth_multiplier`.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param depthwise_initializer
+#' An initializer for the depthwise convolution
+#' kernel. If NULL, then the default initializer (`"glorot_uniform"`)
+#' will be used.
+#'
+#' @param pointwise_initializer
+#' An initializer for the pointwise convolution
+#' kernel. If NULL, then the default initializer (`"glorot_uniform"`)
+#' will be used.
+#'
+#' @param bias_initializer
+#' An initializer for the bias vector. If NULL, the
+#' default initializer ('"zeros"') will be used.
+#'
+#' @param depthwise_regularizer
+#' Optional regularizer for the depthwise
+#' convolution kernel.
+#'
+#' @param pointwise_regularizer
+#' Optional regularizer for the pointwise
+#' convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param depthwise_constraint
+#' Optional projection function to be applied to the
+#' depthwise kernel after being updated by an `Optimizer` (e.g. used
+#' for norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape).
+#'
+#' @param pointwise_constraint
+#' Optional projection function to be applied to the
+#' pointwise kernel after being updated by an `Optimizer`.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/separable_convolution1d#separableconv1d-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv1D>
+#'
+#' @tether keras.layers.SeparableConv1D
+layer_separable_conv_1d <-
+function (object, filters, kernel_size, strides = 1L, padding = "valid",
+    data_format = NULL, dilation_rate = 1L, depth_multiplier = 1L,
+    activation = NULL, use_bias = TRUE, depthwise_initializer = "glorot_uniform",
+    pointwise_initializer = "glorot_uniform", bias_initializer = "zeros",
+    depthwise_regularizer = NULL, pointwise_regularizer = NULL,
+    bias_regularizer = NULL, activity_regularizer = NULL, depthwise_constraint = NULL,
+    pointwise_constraint = NULL, bias_constraint = NULL, ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer,
+        strides = as_integer, dilation_rate = as_integer, depth_multiplier = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$SeparableConv1D, object, args)
 }
 
-normalize_cropping <- function(cropping, dims) {
-  normalize_scale("cropping", cropping, dims)
-}
 
-normalize_scale <- function(name, scale, dims) {
-
-  # validate and marshall scale argument
-  throw_invalid_scale <- function() {
-    stop(name, " must be a list of ", dims, " integers or list of ", dims,  " lists of 2 integers",
-         call. = FALSE)
-  }
-
-  # if all of the individual items are numeric then cast to integer vector
-  if (all(sapply(scale, function(x) length(x) == 1 && is.numeric(x)))) {
-    as.integer(scale)
-  } else if (is.list(scale)) {
-    lapply(scale, function(x) {
-      if (length(x) != 2)
-        throw_invalid_scale()
-      as.integer(x)
-    })
-  } else {
-    throw_invalid_scale()
-  }
+#' 2D separable convolution layer.
+#'
+#' @description
+#' This layer performs a depthwise convolution that acts separately on
+#' channels, followed by a pointwise convolution that mixes channels.
+#' If `use_bias` is TRUE and a bias initializer is provided,
+#' it adds a bias vector to the output. It then optionally applies an
+#' activation function to produce the final output.
+#'
+#' # Input Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, height, width, channels)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, channels, height, width)`
+#'
+#' # Output Shape
+#' - If `data_format="channels_last"`:
+#'     A 4D tensor with shape: `(batch_size, new_height, new_width, filters)`
+#' - If `data_format="channels_first"`:
+#'     A 4D tensor with shape: `(batch_size, filters, new_height, new_width)`
+#'
+#' # Example
+#' ```{r}
+#' x <- random_uniform(c(4, 10, 10, 12))
+#' y <- layer_separable_conv_2d(x, 3, c(4, 3), 2, activation='relu')
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' A 4D tensor representing
+#' `activation(separable_conv2d(inputs, kernel) + bias)`.
+#'
+#' @param filters
+#' int, the dimensionality of the output space (i.e. the number
+#' of filters in the pointwise convolution).
+#'
+#' @param kernel_size
+#' int or list of 2 integers, specifying the size of the
+#' depthwise convolution window.
+#'
+#' @param strides
+#' int or list of 2 integers, specifying the stride length
+#' of the depthwise convolution. If only one int is specified, the same
+#' stride size will be used for all dimensions. `strides > 1` is
+#' incompatible with `dilation_rate > 1`.
+#'
+#' @param padding
+#' string, either `"valid"` or `"same"` (case-insensitive).
+#' `"valid"` means no padding. `"same"` results in padding evenly to
+#' the left/right or up/down of the input. When `padding="same"` and
+#' `strides=1`, the output has the same size as the input.
+#'
+#' @param data_format
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file
+#' at `~/.keras/keras.json`.
+#' If you never set it, then it will be `"channels_last"`.
+#'
+#' @param dilation_rate
+#' int or list of 2 integers, specifying the dilation
+#' rate to use for dilated convolution. If only one int is specified,
+#' the same dilation rate will be used for all dimensions.
+#'
+#' @param depth_multiplier
+#' The number of depthwise convolution output channels
+#' for each input channel. The total number of depthwise convolution
+#' output channels will be equal to `input_channel * depth_multiplier`.
+#'
+#' @param activation
+#' Activation function. If `NULL`, no activation is applied.
+#'
+#' @param use_bias
+#' bool, if `TRUE`, bias will be added to the output.
+#'
+#' @param depthwise_initializer
+#' An initializer for the depthwise convolution
+#' kernel. If NULL, then the default initializer (`"glorot_uniform"`)
+#' will be used.
+#'
+#' @param pointwise_initializer
+#' An initializer for the pointwise convolution
+#' kernel. If NULL, then the default initializer (`"glorot_uniform"`)
+#' will be used.
+#'
+#' @param bias_initializer
+#' An initializer for the bias vector. If NULL, the
+#' default initializer ('"zeros"') will be used.
+#'
+#' @param depthwise_regularizer
+#' Optional regularizer for the depthwise
+#' convolution kernel.
+#'
+#' @param pointwise_regularizer
+#' Optional regularizer for the pointwise
+#' convolution kernel.
+#'
+#' @param bias_regularizer
+#' Optional regularizer for the bias vector.
+#'
+#' @param activity_regularizer
+#' Optional regularizer function for the output.
+#'
+#' @param depthwise_constraint
+#' Optional projection function to be applied to the
+#' depthwise kernel after being updated by an `Optimizer` (e.g. used
+#' for norm constraints or value constraints for layer weights). The
+#' function must take as input the unprojected variable and must return
+#' the projected variable (which must have the same shape).
+#'
+#' @param pointwise_constraint
+#' Optional projection function to be applied to the
+#' pointwise kernel after being updated by an `Optimizer`.
+#'
+#' @param bias_constraint
+#' Optional projection function to be applied to the
+#' bias after being updated by an `Optimizer`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family convolutional layers
+#' @family layers
+#' @seealso
+#' + <https://keras.io/api/layers/convolution_layers/separable_convolution2d#separableconv2d-class>
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/SeparableConv2D>
+#' @tether keras.layers.SeparableConv2D
+layer_separable_conv_2d <-
+function (object, filters, kernel_size, strides = list(1L, 1L),
+    padding = "valid", data_format = NULL, dilation_rate = list(
+        1L, 1L), depth_multiplier = 1L, activation = NULL, use_bias = TRUE,
+    depthwise_initializer = "glorot_uniform", pointwise_initializer = "glorot_uniform",
+    bias_initializer = "zeros", depthwise_regularizer = NULL,
+    pointwise_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+    depthwise_constraint = NULL, pointwise_constraint = NULL,
+    bias_constraint = NULL, ...)
+{
+    args <- capture_args(list(filters = as_integer, kernel_size = as_integer,
+        strides = as_integer, dilation_rate = as_integer, depth_multiplier = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$SeparableConv2D, object, args)
 }

@@ -31,10 +31,16 @@ if (tensorflow::tf_version() <= "2.1")
   test_callback("progbar_logger", callback_progbar_logger())
 
 
-test_callback("model_checkpoint", callback_model_checkpoint(tempfile(fileext = ".h5")), h5py = TRUE)
+test_callback("model_checkpoint",
+              callback_model_checkpoint(tempfile(fileext = ".keras")),
+              h5py = TRUE)
 
-if(tf_version() >= "2.8")
+# test_that("callback_backup_and_restore", {
+  # if(keras_version() >= "3.0")
+  #   skip("callback_backup_and_restore")
   test_callback("backup_and_restore", callback_backup_and_restore(tempfile()))
+# })
+
 
 test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedule = function (index, ...) {
   0.1
@@ -42,12 +48,12 @@ test_callback("learning_rate_scheduler", callback_learning_rate_scheduler(schedu
 if (is_keras_available() && is_backend("tensorflow"))
   test_callback("tensorboard", callback_tensorboard(log_dir = "./tb_logs"))
 
-test_callback("terminate_on_naan", callback_terminate_on_naan(), required_version = "2.0.5")
+test_callback("terminate_on_nan", callback_terminate_on_nan())
 
 test_callback("reduce_lr_on_plateau", callback_reduce_lr_on_plateau(monitor = "loss"))
 
 test_callback("csv_logger", callback_csv_logger(tempfile(fileext = ".csv")))
-test_callback("lambd", callback_lambda(
+test_callback("lambda", callback_lambda(
   on_epoch_begin = function(epoch, logs) {
     cat("Epoch Begin\n")
   },
@@ -80,12 +86,7 @@ test_succeeds("lambda callbacks other args", {
     )
   )
 
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(length(warns), 0)
-  } else {
-    expect_equal(length(warns), 2)
-  }
+  expect_equal(length(warns), 0)
 
   warns <- capture_warnings(
     out <- capture_output(
@@ -93,14 +94,8 @@ test_succeeds("lambda callbacks other args", {
     )
   )
 
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(length(warns), 0)
-    expect_equal(out, "Prediction Begin")
-  } else {
-    expect_equal(length(warns), 1)
-    expect_equal(out, "")
-  }
+  expect_equal(length(warns), 0)
+  expect_equal(out, "Prediction Begin")
 
   warns <- capture_warnings(
     out <- capture_output(
@@ -109,20 +104,14 @@ test_succeeds("lambda callbacks other args", {
     )
   )
 
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(length(warns), 0)
-    expect_equal(out, "Test Begin")
-  } else {
-    expect_equal(length(warns), 1)
-    expect_equal(out, "")
-  }
+  expect_equal(length(warns), 0)
+  expect_equal(out, "Test Begin")
 
 })
 
 
 test_succeeds("custom callbacks", {
-
+  KerasCallback <- keras$callbacks$Callback
   CustomCallback <- R6::R6Class("CustomCallback",
     inherit = KerasCallback,
     public = list(
@@ -146,8 +135,8 @@ test_succeeds("custom callbacks", {
 
     ))
 
-  cc <- CustomCallback$new()
-  lh <- LossHistory$new()
+  cc <- r_to_py(CustomCallback)()
+  lh <- r_to_py(LossHistory)()
 
   define_compile_and_fit(callbacks = list(cc, lh))
 
@@ -157,7 +146,7 @@ test_succeeds("custom callbacks", {
 
 
 test_succeeds("custom callbacks, new-style", {
-
+  skip("creating R6 classes with convert = FALSE no longer needed to modify logs dict")
   CustomMetric <- R6::R6Class(
     "CustomMetric",
     inherit = keras$callbacks$Callback,
@@ -176,6 +165,7 @@ test_succeeds("custom callbacks, new-style", {
     inherit = keras$callbacks$Callback,
     public = list(
       on_epoch_end = function(epoch, logs = NULL) {
+        # skip("callbacks can't modify `logs` in place yet")
         expect_true("my_epoch" %in% names(logs))
         logs[['my_epoch2']] <- epoch
         logs
@@ -196,25 +186,50 @@ test_succeeds("custom callbacks, new-style", {
 })
 
 
+test_succeeds("custom callbacks, new-new-style", {
+
+  callback_custom_metric <- Callback(
+    "CustomMetric",
+    on_epoch_end = function(epoch, logs = NULL) {
+      logs[["my_epoch"]] <- epoch
+      logs
+    }
+  )
+
+
+  callback_custom_metric2 <- Callback(
+    "CustomMetric2",
+    on_epoch_end = function(epoch, logs = NULL) {
+      expect_true("my_epoch" %in% names(logs))
+      logs[['my_epoch2']] <- epoch
+      logs
+    }
+  )
+
+  cm <- callback_custom_metric()
+  cm2 <- callback_custom_metric2()
+
+  hist <- define_compile_and_fit(callbacks = list(cm, cm2))
+
+  expect_type(hist$metrics$my_epoch, "integer")
+  expect_equal(hist$metrics$my_epoch, 1L)
+  expect_contains(names(hist$metrics), "my_epoch2")
+  expect_identical(hist$metrics$my_epoch,
+                   hist$metrics$my_epoch2)
+
+})
+
+
 expect_warns_and_out <- function(warns, out) {
-  if (get_keras_implementation() == "tensorflow" &&
-      tensorflow::tf_version() >= "2.0") {
-    expect_equal(out, c("PREDICT BEGINPREDICT END"))
-    expect_equal(warns, character())
-  } else {
-    expect_equal(out, "")
-    expect_true(warns != "")
-  }
+  expect_equal(out, c("PREDICT BEGINPREDICT END"))
+  expect_equal(warns, character())
 }
 
 test_succeeds("on predict/evaluation callbacks", {
 
-  if (tensorflow::tf_version() <= "2.1")
-    skip("don't work in tf2.1")
-
   CustomCallback <- R6::R6Class(
     "CustomCallback",
-    inherit = KerasCallback,
+    inherit = keras$callbacks$Callback,
     public = list(
       on_predict_begin = function(logs) {
         cat("PREDICT BEGIN")
@@ -236,7 +251,8 @@ test_succeeds("on predict/evaluation callbacks", {
   model <- keras_model(input, output)
   model %>% compile(optimizer = "adam", loss = "mae")
 
-  cc <- CustomCallback$new()
+  cc <- r_to_py(CustomCallback)()
+  # cc <- CustomCallback$new()
 
   # test for prediction
   warns <- capture_warnings(
@@ -252,7 +268,7 @@ test_succeeds("on predict/evaluation callbacks", {
 
   warns <- capture_warnings(
     out <- capture_output(
-      pred <- predict(model, gen, callbacks = cc, steps = 1)
+      pred <- predict(model, gen, callbacks = cc, steps = 5)
     )
   )
   expect_warns_and_out(warns, out)
@@ -282,7 +298,7 @@ test_succeeds("warnings for new callback moment", {
 
   CustomCallback <- R6::R6Class(
     "CustomCallback",
-    inherit = KerasCallback,
+    inherit = keras$callbacks$Callback, # KerasCallback,
     public = list(
       on_predict_begin = function(logs) {
         cat("PREDICT BEGIN")
@@ -299,7 +315,8 @@ test_succeeds("warnings for new callback moment", {
     )
   )
 
-  cc <- CustomCallback$new()
+  cc <- r_to_py(CustomCallback)()
+  # cc <- CustomCallback$new()
 
   input <- layer_input(shape = 1)
   output <- layer_dense(input, 1)
@@ -312,9 +329,6 @@ test_succeeds("warnings for new callback moment", {
           verbose = 0, epochs = 2)
   )
 
-  if (get_keras_implementation() == "tensorflow" && tensorflow::tf_version() < "2.0")
-    expect_equal(length(warns), 4)
-  else
-    expect_equal(length(warns), 0)
+  expect_equal(length(warns), 0)
 
 })

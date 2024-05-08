@@ -1,130 +1,246 @@
-#' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call
-#' @export
-r_to_py.R6ClassGenerator <- function(x, convert = FALSE) {
 
-  inherit <- resolve_py_type_inherits(x$get_inherit(), convert)
 
-  mask_env <- new.env(parent = x$parent_env)
+# TODO: use this in register_keras_serializable()?
+generate_module_name <- function(env) {
+  while((name <- environmentName(env)) == "")
+    env <- parent.env(env)
+  if(isNamespace(env))
+    name <- paste0("namespace:", name)
+  else if (name == "R_GlobalEnv")
+    name <- "globalenv"
+  sprintf("<r-%s>", name)
+}
+
+new_py_class <- function(classname,
+                         members = list(),
+                         inherit = NULL,
+                         parent_env = parent.frame(),
+                         inherit_expr,
+                         convert = TRUE) {
+  if (!missing(inherit_expr))
+    inherit <- eval(inherit_expr, parent_env)
+  new_py_type(
+    classname,
+    members = members,
+    inherit = inherit,
+    parent_env = parent_env
+  )
+}
+
+
+new_wrapped_py_class <-
+function(classname,
+         members = list(),
+         inherit = NULL,
+         parent_env = parent.frame(),
+         private = list(),
+         # modifiers = quote(expr =),
+         default_formals = function(...) {})
+{
+  # force all new_py_type() args
+  classname; members; inherit; parent_env; private;
+
+  delayedAssign(classname,
+    new_py_type(
+      classname = classname,
+      members = members,
+      inherit = resolve_py_obj(inherit, env = parent_env),
+      parent_env = parent_env,
+      private = private
+    )
+  )
+  delayedAssign("__class__", get(classname))
+
+  if (is_keras_loaded()) {
+    # force promise, get actual frmls
+    frmls <- formals(`__class__`)
+  } else {
+    # try to infer frmls
+    frmls <- formals(members$`__init__ ` %||%
+                     members$initialize %||%
+                     default_formals)
+  }
+  frmls$self <- NULL
+
+  bdy <- bquote({
+    args <- capture_args(enforce_all_dots_named = FALSE) # .(modifiers),
+    do.call(.(as.name(classname)), args)
+  })
+  rm(default_formals) # free memory ; rm(modifiers)
+
+  as.function.default(c(frmls, bdy))
+}
+
+new_py_type <-
+function(classname,
+         members = list(),
+         inherit = NULL,
+         parent_env = parent.frame(),
+         private = list())
+{
+
+  if (is.language(inherit))
+    inherit <- eval(inherit, parent_env)
+
+  convert <- TRUE
+  inherit <- resolve_py_type_inherits(inherit, convert)
+  mask_env <- new.env(parent = parent_env)
   # common-mask-env: `super`, `__class__`, classname
 
-  # R6 by default includes this in public methods list, not applicable here.
-  methods <- x$public_methods
-  methods$clone <- NULL
-
-  methods <- as_py_methods(methods, mask_env, convert)
-  active <- as_py_methods(x$active, mask_env, convert)
-
-  # having convert=FALSE here means py callables are not wrapped in R functions
-  # https://github.com/rstudio/reticulate/issues/1024
-  builtins <- import_builtins(convert)
-
-  py_property <- builtins$property
-  active <- lapply(active, function(fn) py_call(py_property, fn, fn))
-
-  namespace <- c(x$public_fields, methods, active)
+  members <- normalize_py_type_members(members, mask_env, convert, classname)
 
   # we need a __module__ because python-keras introspects to see if a layer is
   # subclassed by consulting layer.__module__
   # (not sure why builtins.issubclass() doesn't work over there)
   # `__module__` is used to construct the S3 class() of py_class instances,
   # it needs to be stable (e.g, can't use format(x$parent_env))
-  if(!"__module__" %in% names(namespace))
-    namespace$`__module__` <- "R6type"
+  if (!"__module__" %in% names(members))
+    members$`__module__` <- generate_module_name(parent_env)
 
-  new_exec_body <- py_eval("lambda ns_entries: (lambda ns: ns.update(ns_entries))",
-                           convert=convert)
-  exec_body <- py_call(new_exec_body,
-                       py_dict(names(namespace), unname(namespace), convert))
+  exec_body <- py_eval(
+    "lambda ns_entries: (lambda ns: ns.update(ns_entries))")(members)
 
-  py_class <- py_call(import("types", convert=convert)$new_class,
-    name = x$classname,
+  py_class <- import("types")$new_class(
+    name = classname,
     bases = inherit$bases,
     kwds = inherit$keywords,
     exec_body = exec_body
   )
 
-  # https://github.com/rstudio/reticulate/issues/1024
-  py_class <- py_to_r(py_class)
-  assign("convert", convert, as.environment(py_class))
-
   mask_env$`__class__` <- py_class
-  mask_env[[x$classname]] <- py_class
-  attr(mask_env, "get_private") <-
-    new_get_private(r6_class = x, shared_mask_env = mask_env)
+  mask_env[[classname]] <- py_class
+  if (!is.null(private)) {
+    attr(mask_env, "get_private") <-
+      new_get_private(private, shared_mask_env = mask_env)
+  }
 
-  eval(quote({
-    super <- base::structure(
-      function(type = get("__class__"),
-               object = base::get("self", parent.frame())) {
-        convert <- get("convert", envir = as.environment(object))
-        bt <- reticulate::import_builtins(convert)
-        reticulate::py_call(bt$super, type, object)
-      },
-      class = "python_class_super")
-  }), mask_env)
+  eval(envir = mask_env, quote({
+    super <- function(
+      type = `__class__`,
+      object_or_type = base::get("self", envir = base::parent.frame()))
+      {
+        convert <- base::get("convert", envir = base::as.environment(object_or_type))
+        py_builtins <- reticulate::import_builtins(convert)
+        reticulate::py_call(py_builtins$super, type, object_or_type)
+      }
+    class(super) <- "python_builtin_super_getter"
+  }))
 
-
-  attr(py_class, "r6_class") <- x
-  class(py_class) <- c("py_R6ClassGenerator", class(py_class))
 
   py_class
 }
 
-#' @importFrom reticulate py_id
-new_get_private <- function(r6_class, shared_mask_env) {
-  force(r6_class); force(shared_mask_env)
+# S3 methods for nice access from class methods like
+# - super$initialize()
+# - super()$initialize()
+# - super(Classname, self)$initialize()
+#' @export
+`$.python_builtin_super_getter` <- function(x, name) {
+  super <- do.call(x, list(), envir = parent.frame()) # call super()
+  name <- switch(name, initialize = "__init__", finalize = "__del__", name)
+  out <- py_get_attr(super, name)
+  convert <- get0("convert", as.environment(out), inherits = FALSE,
+                  ifnotfound = TRUE)
+  if (convert) py_to_r(out) else out
+}
 
-  privates <- list()
+#' @export
+`[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
 
-  new_instance_private <- function(self, key) {
+# No .DollarNames.python_builtin_super_getter because the python.builtin.super
+# object doesn't have populated attributes itself, only a dynamic `__getattr__`
+# method that resolves dynamically.
 
+
+#' @importFrom reticulate r_to_py import_builtins py_eval py_dict py_call
+#' @export
+r_to_py.R6ClassGenerator <- function(x, convert = TRUE) {
+  members <- c(x$public_fields,
+               x$public_methods,
+               lapply(x$active, active_property))
+  members$clone <- NULL
+  new_py_type(
+    classname = x$classname,
+    inherit = x$get_inherit(),
+    members = members,
+    private = c(x$private_fields,
+                x$private_methods),
+    parent_env = x$parent_env
+  )
+}
+
+
+normalize_py_type_members <- function(members, env, convert, classname) {
+
+  if (all(c("initialize", "__init__") %in% names(members)))
+    stop("You should not specify both `__init__` and `initialize` methods.")
+
+  if (all(c("finalize", "__del__") %in% names(members)))
+    stop("You should not specify both `__del__` and `finalize` methods.")
+
+  names(members) <- names(members) %>%
+    replace_val("initialize", "__init__") %>%
+    replace_val("finalize", "__del__")
+
+  members <- imap(members, function(x, name) {
+    if (!is.function(x))
+      return(x)
+    as_py_method(x, name, env, convert,
+                 label = sprintf("%s$%s", classname, name))
+  })
+
+  members
+}
+
+
+
+#' @importFrom reticulate py_get_item py_del_item import
+new_get_private <- function(members, shared_mask_env) {
+  force(members); force(shared_mask_env)
+
+  # python should never see privates.
+  # also, avoid invoking __hash__ on the py obj, which
+  # might error or return non-unique values.
+  delayedAssign("class_privates", fastmap::fastmap())
+
+  new_instance_private <- function(self) {
     private <- new.env(parent = emptyenv())
-    privates[[key]] <<- private
+    class_privates$set(py_id(self), private)
 
-    reticulate::import("weakref")$finalize(
-      self, finalize_instance_private, key)
+    import("weakref")$finalize(
+      self, del_instance_private, self)
 
-    if (length(r6_class$private_fields))
-      list2env(r6_class$private_fields, envir = private)
-
-    if (length(r6_class$private_methods)) {
-      instance_mask_env <- new.env(parent = shared_mask_env)
-      instance_mask_env$self <- self
-      instance_mask_env$private <- private
-
-      for (nm in names(r6_class$private_methods)) {
-        method <- r6_class$private_methods[[nm]]
-        environment(method) <- instance_mask_env
-        private[[nm]] <- method
-      }
-    }
-
+    instance_mask_env <- new.env(parent = shared_mask_env)
+    # TODO: is this `self` assignment a circular reference that prevents the
+    # object from being collected? should it be a weakref?
+    # add tests to make sure that the object is collected when it should be.
+    instance_mask_env$self <- self
+    instance_mask_env$private <- private
+    members <- lapply(members, function(member) {
+      if (is.function(member) && !is_py_object(member))
+        environment(member) <- instance_mask_env
+      member
+    })
+    active <- map_lgl(members, is_marked_active)
+    list2env(members[!active], envir = private)
+    imap(members[active], function(fn, name) {
+      makeActiveBinding(name, fn, private)
+    })
     private
   }
 
-  finalize_instance_private <- function(key) {
-    privates[[key]] <<- NULL
+  del_instance_private <- function(self) {
+    class_privates$remove(py_id(self))
   }
 
   function(self) {
-    key <- py_id2(self)
-    .subset2(privates, key) %||% new_instance_private(self, key)
+    class_privates$get(py_id(self)) %||%
+      new_instance_private(self)
   }
 }
 
 
-py_id2 <- local({
-  # temporary workaround py_id() overflowing and returning -1L in R 4.2 on windows
-  .id <- function(x) {
-    .id <- py_eval("lambda x: str(id(x))")
-    assign(".id", .id, envir = environment(sys.function()))
-    .id(x)
-  }
-  function(x) .id(x)
-})
-
-
-
+#' @importFrom reticulate tuple dict
 resolve_py_type_inherits <- function(inherit, convert=FALSE) {
 
   # inherits can be
@@ -137,7 +253,7 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   # (both potentially of length 0)
 
   if(is.null(inherit) || identical(inherit, list()))
-    return(list(bases = tuple(), keywords = list()))
+    return(list(bases = tuple(), keywords = dict()))
 
   bases <-
     if (inherits(inherit, "python.builtin.tuple")) as.list(inherit)
@@ -155,68 +271,53 @@ resolve_py_type_inherits <- function(inherit, convert=FALSE) {
   names(bases) <- NULL
 
   bases <- lapply(bases, function(cls) {
-    if (inherits(cls, "R6ClassGenerator"))
-      return(r_to_py.R6ClassGenerator(cls, convert))
-
-    if (!inherits(cls, "python.builtin.object"))
+    if (!is_py_object(cls))
       tryCatch(
         cls <- r_to_py(cls),
         error = function(e)
           stop(e, "Supplied superclasses must be python objects, not: ",
                paste(class(cls), collapse = ", "))
       )
-
-    if(inherits(cls, "python.builtin.type") && is.function(cls))
-      force(environment(cls)$callable)
-
     cls
   })
-
   bases <- do.call(tuple, bases)
 
   list(bases = bases, keywords = keywords)
 }
 
 
-as_py_methods <- function(x, env, convert) {
-  out <- list()
-
-  if ("initialize" %in% names(x) && "__init__" %in% names(x))
-    stop("You should not specify both `__init__` and `initialize` methods.")
-
-  if ("finalize" %in% names(x) && "__del__" %in% names(x))
-    stop("You should not specify both `__del__` and `finalize` methods.")
-
-  for (name in names(x)) {
-    fn <- x[[name]]
-    name <- switch(name,
-                   initialize = "__init__",
-                   finalize = "__del__",
-                   name)
-    out[[name]]  <- as_py_method(fn, name, env, convert)
-  }
-  out
-}
 
 #' @importFrom reticulate py_func py_clear_last_error
-as_py_method <- function(fn, name, env, convert) {
+as_py_method <- function(fn, name, env, convert, label) {
 
     # if user did conversion, they're responsible for ensuring it is right.
-    if (inherits(fn, "python.builtin.object")) {
+    if (is_py_object(fn)) {
       #assign("convert", convert, as.environment(fn))
       return(fn)
     }
+
+    srcref <- attr(fn, "srcref")
 
     if (!is.function(fn))
       stop("Cannot coerce non-function to a python class method")
 
     environment(fn) <- env
 
-    if (!identical(formals(fn)[1], alist(self =)))
-      formals(fn) <- c(alist(self =), formals(fn))
+    decorators <- attr(fn, "py_decorators", TRUE)
+    # if(is_marked_active(fn))
+
+    if ("staticmethod" %in% decorators) {
+      # do nothing
+    } else if ("classmethod" %in% decorators) {
+      fn <- ensure_first_arg_is(fn, cls = )
+    } else {
+      # standard pathway, ensure the method receives 'self' as first arg
+      fn <- ensure_first_arg_is(fn, self = )
+    }
 
     doc <- NULL
-    if (body(fn)[[1]] == quote(`{`) &&
+    if (is.call(body(fn)) &&
+        body(fn)[[1]] == quote(`{`) &&
         length(body(fn)) > 1 &&
         typeof(body(fn)[[2]]) == "character") {
       doc <- glue::trim(body(fn)[[2]])
@@ -233,11 +334,10 @@ as_py_method <- function(fn, name, env, convert) {
 
     if (!"private" %in% names(formals(fn)) &&
         "private" %in% all.names(body(fn))) {
-      # any benefit to using delayedAssign here?
       body(fn) <- substitute({
-        private <- attr(env, "get_private", TRUE)(self)
+        delayedAssign("private", attr(parent.env(environment()), "get_private", TRUE)(self))
         body
-      }, list(body = body(fn), env = env))
+      }, list(body = body(fn)))
     }
 
     # python tensorflow does quite a bit of introspection on user-supplied
@@ -251,24 +351,39 @@ as_py_method <- function(fn, name, env, convert) {
 
     # Can't use py_func here because it doesn't accept a `convert` argument
 
-    py_sig <- tryCatch(r_formals_to_py__signature__(fn),
-                       error = function(e) NULL)
+   # Can't use __signature__ to communicate w/ the python side anymore
+   # because binding of 'self' for instance methods doesn't update __signature__,
+   # resulting in errors for checks in keras_core for 'build()' method arg names.
 
-    attr(fn, "py_function_name") <- name
+    # attr(fn, "py_function_name") <- name
+    attr(fn, "pillar") <- list(label = label) # for print method of rlang::trace_back()
 
+    fn <- py_func2(fn, convert, name = name)
     # https://github.com/rstudio/reticulate/issues/1024
-    fn <- py_to_r(r_to_py(fn, convert))
-    assign("convert", convert, as.environment(fn))
-
-    if(!is.null(py_sig))
-      fn$`__signature__` <- py_sig
+    # fn <- py_to_r(r_to_py(fn, convert))
+    # assign("convert", convert, as.environment(fn))
 
     if(!is.null(doc))
       fn$`__doc__` <- doc
 
+    attr(fn, "srcref") <- srcref
+    # TODO, maybe also copy over "wholeSrcref". See `removeSource()` as a starting point.
+    # This is used to generate clickable links in rlang traceback printouts.
+    bt <- import_builtins()
+    for (dec in decorators) {
+      if (identical(dec, "property") && length(formals(fn)) > 1) {
+        fn <- bt$property(fn, fn) # getter and setter
+        next
+      }
+      if (is_string(dec)) {
+        dec <- bt[[dec]]
+      }
+      fn <- dec(fn)
+    }
     fn
 }
 
+#' @importFrom rlang is_string
 r_formals_to_py__signature__ <- function(fn) {
   inspect <- import("inspect", convert = FALSE)
   py_repr <- import_builtins(FALSE)$repr
@@ -280,8 +395,7 @@ r_formals_to_py__signature__ <- function(fn) {
   for (nm in names(frmls)) {
     if(nm == "...") {
       params$extend(list(
-        Param("_R_dots_positional_args", Param$VAR_POSITIONAL),
-        Param("_R_dots_keyword_args", Param$VAR_KEYWORD)
+        Param("_R_dots_positional_args", Param$VAR_POSITIONAL)
       ))
       kind <- Param$KEYWORD_ONLY
       next
@@ -299,9 +413,49 @@ r_formals_to_py__signature__ <- function(fn) {
       inspect$Parameter(nm, kind, default=default)
     )
   }
+  if("..." %in% names(frmls))
+    # need to make sure that `**kwarg` is last in signature,
+    # in case there are args after R `...`, we need to reorder
+    # so the py sig looks like `(foo, *args, bar, **kwargs)`
+    params$extend(list(
+      Param("_R_dots_keyword_args", Param$VAR_KEYWORD)
+    ))
+
   inspect$Signature(params)
 }
 
+
+py_func2 <- function(fn, convert, name = deparse(substitute(fn))) {
+  # TODO: wrap this all in a tryCatch() that gives a nice error message
+  # about unsupported signatures
+  sig <- py_to_r(r_formals_to_py__signature__(fn))
+  inspect <- import("inspect")
+  pass_sig <- iterate(sig$parameters$values(), function(p) {
+    if(p$kind == inspect$Parameter$POSITIONAL_ONLY)
+      p$name
+    else if (p$kind == inspect$Parameter$POSITIONAL_OR_KEYWORD)
+    # pass as positional, since there might be a positional args collector up ahead, and
+    # having kwargs before a positional collector is illegal
+      p$name
+    else if (p$kind == inspect$Parameter$VAR_POSITIONAL)
+     paste0("*", p$name)
+    else if (p$kind == inspect$Parameter$VAR_KEYWORD)
+     paste0("**", p$name)
+    else if(p$kind == inspect$Parameter$KEYWORD_ONLY)
+     paste0(p$name, "=", p$name)
+    else
+      stop("Unrecognized function argument type: ", p$name)
+  })
+  pass_sig <- paste0(pass_sig, collapse = ", ")
+  code <- glue::glue("
+def wrap_fn(r_fn):
+  def {name}{py_str(sig)}:
+    return r_fn({pass_sig})
+  return {name}
+  ")
+  util <- reticulate::py_run_string(code, local = TRUE, convert = convert)
+  util$wrap_fn(fn)
+}
 
 
 # TODO: (maybe?) factor out a py_class() function,
@@ -315,7 +469,9 @@ r_formals_to_py__signature__ <- function(fn) {
 # *) `super` can be accessed in both R6 style using `$`, and python-style as a callable
 # *) `super()` can resolve `self` properly when called from a nested scope
 # *) method calls respect user-supplied `convert` values for all args
-#
+
+
+# @seealso <https://tensorflow.rstudio.com/articles/new-guides/python_subclasses.html>
 
 
 #' Make a python class constructor
@@ -324,12 +480,12 @@ r_formals_to_py__signature__ <- function(fn) {
 #' @param body an expression that can be evaluated to construct the class
 #'   methods.
 #'
-#' @return The python class constructor, invisibly. Note, the same constructor is
+#' @returns The python class constructor, invisibly. Note, the same constructor is
 #'   also assigned in the parent frame.
 #' @export
 #' @aliases py_class
-#'
-#' @seealso <https://keras.rstudio.com/articles/new-guides/python_subclasses.html>
+#' @keywords internal
+#' @seealso [`%<-active%()`]
 #'
 #' @examples
 #' \dontrun{
@@ -385,6 +541,17 @@ r_formals_to_py__signature__ <- function(fn) {
 #'
 #'   call_private_method <- function()
 #'     private$a_private_method()
+#'
+#'   # equivalent of @property decorator in python
+#'   an_active_property %<-active% function(x = NULL) {
+#'     if(!is.null(x)) {
+#'       cat("`an_active_property` was assigned", x, "\n")
+#'       return(x)
+#'     } else {
+#'       cat("`an_active_property` was accessed\n")
+#'       return(42)
+#'     }
+#'   }
 #' }
 #'
 #' inst1 <- MyClass(1)
@@ -393,6 +560,8 @@ r_formals_to_py__signature__ <- function(fn) {
 #' inst2$get_private_field()
 #' inst1$call_private_method()
 #' inst2$call_private_method()
+#' inst1$an_active_property
+#' inst1$an_active_property <- 11
 #' }
 `%py_class%` <- function(spec, body) {
   spec <- substitute(spec)
@@ -455,36 +624,29 @@ r_formals_to_py__signature__ <- function(fn) {
       public[[nm]] <- env[[nm]]
   }
 
+  # TODO: re-enable delayed pyclasses.
+  # if (delay_load)
+  #   py_class <- delayed_r_to_py_R6ClassGenerator(r6_class, convert)
+  # else
+  #   py_class <- r_to_py.R6ClassGenerator(r6_class, convert)
 
-  # R6Class() calls substitute() on inherit;
-  r6_class <- eval(as.call(list(
-    quote(R6::R6Class),
+  inherit <- eval(inherit, parent_env)
+  active <- lapply(active, active_property)
+
+  py_class <-  new_py_type(
     classname = classname,
-    public = public,
-    private = private,
-    active = active,
     inherit = inherit,
-    cloneable = FALSE,
+    members = c(public, active),
+    private = private,
     parent_env = parent_env
-  )))
+  )
 
-
-  if (delay_load)
-    py_class <- delayed_r_to_py_R6ClassGenerator(r6_class, convert)
-  else
-    py_class <- r_to_py.R6ClassGenerator(r6_class, convert)
-
-  attr(py_class, "r6_class") <- r6_class
-  class(py_class) <- c("py_converted_R6_class_generator", class(py_class))
+  # attr(py_class, "r6_class") <- r6_class
 
   assign(classname, py_class, envir = parent_env)
   invisible(py_class)
 }
 
-if (getRversion() < "4.0")
-  activeBindingFunction <- function(nm, env) {
-    as.list.environment(env, all.names = TRUE)[[nm]]
-  }
 
 #' @importFrom reticulate py_call py_to_r
 py_callable_as_function2 <- function(callable, convert) {
@@ -545,8 +707,9 @@ delayed_r_to_py_R6ClassGenerator <- function(r6_class, convert) {
   fn
 }
 
-#' @export
-print.py_R6ClassGenerator <- function(x, ...) {
+# @export
+# print.py_R6ClassGenerator <-
+function(x, ...) {
   r6_class <- attr(x, "r6_class")
   if (isTRUE(get0("delayed", attr(x, "py_object"))))
     cat(sprintf("<R6type.%s> (delayed)\n", r6_class$classname))
@@ -556,18 +719,38 @@ print.py_R6ClassGenerator <- function(x, ...) {
   print(r6_class)
 }
 
+# @export
+# `$.py_R6ClassGenerator` <-
+function(x, name) {
+  if (identical(name, "new"))
+    return(x)
+  NextMethod()
+}
+
+# @exportS3Method pillar::type_sum
+# @rawNamespace S3method(pillar::type_sum,py_R6ClassGenerator)
+# type_sum.py_R6ClassGenerator <-
+function(x) {
+  cl <- class(x)[[1L]]
+  if(startsWith(cl, "R6type."))
+    cl <- substr(cl, 8L, 2147483647L)
+  cl
+}
+
+
 #' Make an Active Binding
 #'
 #' @param sym symbol to bind
 #' @param value A function to call when the value of `sym` is accessed.
 #'
-#' @return `value`, invisibly
+#' @returns `value`, invisibly
 #' @export
 #'
 #' @details Active bindings defined in a [`%py_class%`] are converted to
 #'   `@property` decorated methods.
 #'
 #' @seealso [`makeActiveBinding()`]
+#' @keywords internal
 #'
 #' @examples
 #' set.seed(1234)
@@ -600,3 +783,55 @@ maybe_delayed_r_to_py_R6ClassGenerator <-
     else
       delayed_r_to_py_R6ClassGenerator(x, convert)
   }
+
+ensure_first_arg_is <- function(fn, ...) {
+  frmls <- formals(fn)
+  arg <- eval(substitute(alist(...)))
+  if (!identical(frmls[1], arg))
+    formals(fn) <- c(arg, frmls)
+  fn
+}
+
+
+
+#' Create an active property class method
+#'
+#' @param fn An R function
+#'
+#' @description
+#'
+#' # Example
+#' ```r
+#' layer_foo <- Model("Foo", ...,
+#'   metrics = active_property(function() {
+#'     list(self$d_loss_metric,
+#'          self$g_loss_metric)
+#'   }))
+#' ```
+#' @returns `fn`, with an additional R attribute that will cause `fn` to be
+#'   converted to an active property when being converted to a method of a
+#'   custom subclass.
+#' @export
+active_property <- function(fn) {
+  if(!is.function(fn))
+    stop("Only functions can be active properties")
+  append1(attr(fn, "py_decorators")) <- "property"
+  fn
+}
+
+decorate_method <- function(fn, decorator) {
+  append1(attr(fn, "py_decorators")) <- decorator
+  fn
+}
+
+drop_null_defaults <- function(args, fn = sys.function(-1L)) {
+  null_default_args <- names(which(vapply(formals(fn), is.null, TRUE)))
+  drop_nulls(args, null_default_args)
+}
+
+is_marked_active <- function(x) {
+  for (dec in attr(x, "py_decorators", TRUE))
+    if (identical(dec, "property"))
+      return (TRUE)
+  FALSE
+}

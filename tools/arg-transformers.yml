@@ -1,0 +1,207 @@
+
+
+
+
+## If the key is a glob, then arg transformers are only added if the arg name
+## is present in the py_obj formals, UNLESS, the arg name starts with prefix "+",
+## in which case they are added even if not in formals ## (assumed to be valid in ...)
+##
+## If the key is not a glob, then args are added regardless of formals
+
+"*":
+  axis: as_axis
+  axes: as_axis
+  shape: normalize_shape
+  seed: as_integer
+  # output_mode: ~
+
+"keras.losses.*":
+  y_true: if(inherits(x, "python.builtin.object")) x else np_array(x)
+  y_pred: if(inherits(x, "python.builtin.object")) x else np_array(x)
+
+"keras.metrics.*":
+  y_true: if(inherits(x, "python.builtin.object")) x else np_array(x)
+  y_pred: if(inherits(x, "python.builtin.object")) x else np_array(x)
+
+"keras.layers.ZeroPadding2D":
+  padding: normalize_padding(x, 2L)
+
+"keras.layers.ZeroPadding3D":
+  padding: normalize_padding(x, 3L)
+
+"keras.layers.Cropping2D":
+  cropping: normalize_cropping(x, 2L)
+
+"keras.layers.Cropping3D":
+  cropping: normalize_cropping(x, 3L)
+
+"keras.layers.*":
+  +input_shape: normalize_shape
+  +batch_size: as_integer
+  +batch_input_shape: normalize_shape
+
+"keras.layers.Conv*":
+  filters: as_integer
+  kernel_size:   as_integer_tuple
+  dilation_rate: as_integer_tuple
+  strides:       as_integer_tuple
+
+"keras.layers.*Pooling?D":
+  pool_size: as_integer
+  strides: as_integer
+
+keras.layers.Hashing:
+  num_bins: as_integer
+  salt: as_integer
+
+keras.layers.Input:
+  shape: normalize_shape
+  batch_shape: normalize_shape
+
+# TODO: globbing on args?
+# e.g.: *_shape: normalize_shape
+keras.layers.Lambda:
+  output_shape: normalize_shape
+
+keras.layers.Permute:
+  dims: tuple(lapply(x, as_integer))
+
+keras.layers.CategoryEncoding:
+  num_tokens: as_integer
+
+keras.layers.Embedding:
+  input_length: as_integer
+
+keras.layers.MultiHeadAttention:
+  num_heads: as_integer
+  key_dim: as_integer
+  value_dim: as_integer
+  attention_axes: as_integer # Keras 3: as_nullable_axis
+
+keras.layers.AlphaDropout:
+  seed: as_integer
+
+keras.layers.Reshape:
+  target_shape: as_integer
+
+keras.layers.TextVectorization:
+   max_tokens:             as_integer
+   output_sequence_length: as_integer
+   ngrams: if(length(x) > 1) as_integer_tuple(x) else as_integer(x)
+
+
+# in keras 3 we'll make these 1 based
+# in keras 2, keep them 0 based
+# keras.layers.Concatenate:
+#   axis: as_integer
+#
+# keras.layers.Dot:
+#   axes: as_integer
+#
+# keras.layers.LayerNormalization:
+#   axis: as_integer
+#
+# keras.layers.Softmax:
+#   axis: as_integer
+#
+# keras.layers.PReLU:
+#   shared_axes: lapply(x, as_integer)
+
+
+keras.layers.PReLU:
+  shared_axes: as_axis
+
+
+keras.random.randint:
+  dtype: ~
+  maxval: as_integer(ceiling(x))
+  minval: as_integer
+
+keras.random.dropout:
+  noise_shape: normalize_shape
+
+keras.utils.to_categorical:
+  x: as_integer_array
+  num_classes: as_integer
+
+keras.ops.reshape:
+  new_shape: normalize_shape
+
+keras.ops.diagonal:
+  axis1: as_axis
+  axis2: as_axis
+
+keras.ops.digitize:
+  bins: as.array
+
+keras.ops.arange:
+  start: np_array(x, dtype)
+  stop:  np_array(x, dtype)
+  step:  np_array(x, dtype)
+
+keras.ops.istft:
+  x: tuple
+
+keras.ops.image.resize:
+  size: as_integer
+
+keras.ops.image.pad_images:
+  images:         as_integer
+  top_padding:    as_integer
+  bottom_padding: as_integer
+  left_padding:   as_integer
+  right_padding:  as_integer
+  target_height:  as_integer
+  target_width:   as_integer
+
+keras.ops.one_hot:
+  num_classes: as_integer
+
+keras.ops.slice_update:
+  start_indices: as_index
+
+keras.ops.slice:
+  start_indices: as_index
+
+keras.ops.segment_sum:
+  segment_ids: as_index
+
+keras.ops.segment_max:
+  segment_ids: as_index
+
+keras.ops.scatter:
+  indices: as_index
+
+keras.ops.scatter_update:
+  indices: as_index
+
+"keras.ops.*":
+  segment_ids: as_index
+  indices: as_index
+
+# keras.layers.DepthwiseConv1D:
+keras.layers.EinsumDense:
+  output_shape: normalize_shape
+
+keras.utils.FeatureSpace:
+  features: as.list
+
+keras.layers.HashedCrossing:
+  num_bins: as_integer
+
+keras.metrics.MeanIoU:
+  num_classes: as_integer
+
+keras.metrics.OneHotIoU:
+  num_classes: as_integer
+  target_class_ids: lapply(x, as_integer)
+
+keras.metrics.OneHotMeanIoU:
+  num_classes: as_integer
+
+keras.utils.pad_sequences:
+  sequences: lapply(x, as.list)
+
+keras.utils.split_dataset:
+  left_size: ifelse(x < 1, x, as_integer(x))
+  right_size: ifelse(x < 1, x, as_integer(x))

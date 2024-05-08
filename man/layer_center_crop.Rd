@@ -2,70 +2,207 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_center_crop}
 \alias{layer_center_crop}
-\title{Crop the central portion of the images to target height and width}
+\title{A preprocessing layer which crops images.}
 \usage{
-layer_center_crop(object, height, width, ...)
+layer_center_crop(object, height, width, data_format = NULL, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{height}{Integer, the height of the output shape.}
 
 \item{width}{Integer, the width of the output shape.}
 
-\item{...}{standard layer arguments.}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
+
+\item{...}{For forward/backward compatability.}
+}
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
 }
 \description{
-Crop the central portion of the images to target height and width
-}
-\details{
-Input shape:
-3D (unbatched) or 4D (batched) tensor with shape:
-\verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+This layers crops the central portion of the images to a target size. If an
+image is smaller than the target size, it will be resized and cropped
+so as to return the largest possible window in the image that matches
+the target aspect ratio.
 
-Output shape:
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
-\verb{(..., target_height, target_width, channels)}.
+\verb{(..., height, width, channels)}, in \code{"channels_last"} format,
+or \verb{(..., channels, height, width)}, in \code{"channels_first"} format.
+}
+
+\section{Output Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., target_height, target_width, channels)},
+or \verb{(..., channels, target_height, target_width)},
+in \code{"channels_first"} format.
 
 If the input height/width is even and the target height/width is odd (or
 inversely), the input image is left-padded by 1 pixel.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
 }
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/CenterCrop}
-\item \url{https://keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop}
+\item \url{https://keras.io/api/layers/preprocessing_layers/image_preprocessing/center_crop#centercrop-class}
 }
 
-Other image preprocessing layers: 
-\code{\link{layer_rescaling}()},
-\code{\link{layer_resizing}()}
+Other image preprocessing layers: \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_resizing}()} \cr
 
-Other preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_discretization}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_normalization}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+Other preprocessing layers: \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
 \concept{image preprocessing layers}
+\concept{layers}
 \concept{preprocessing layers}

@@ -29,3 +29,4 @@ Preprocessed tensor or array.
 \description{
 Preprocesses a tensor or array encoding a batch of images.
 }
+\keyword{internal}

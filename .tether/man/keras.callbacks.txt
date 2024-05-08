@@ -1,0 +1,82 @@
+BackupAndRestore(
+  backup_dir,
+  save_freq='epoch',
+  delete_checkpoint=True
+)
+Callback()
+CallbackList(
+  callbacks=None,
+  add_history=False,
+  add_progbar=False,
+  model=None,
+  **params
+)
+CSVLogger(
+  filename,
+  separator=',',
+  append=False
+)
+EarlyStopping(
+  monitor='val_loss',
+  min_delta=0,
+  patience=0,
+  verbose=0,
+  mode='auto',
+  baseline=None,
+  restore_best_weights=False,
+  start_from_epoch=0
+)
+History()
+LambdaCallback(
+  on_epoch_begin=None,
+  on_epoch_end=None,
+  on_train_begin=None,
+  on_train_end=None,
+  on_train_batch_begin=None,
+  on_train_batch_end=None,
+  **kwargs
+)
+LearningRateScheduler(schedule, verbose=0)
+ModelCheckpoint(
+  filepath,
+  monitor='val_loss',
+  verbose=0,
+  save_best_only=False,
+  save_weights_only=False,
+  mode='auto',
+  save_freq='epoch',
+  initial_value_threshold=None
+)
+ProgbarLogger()
+ReduceLROnPlateau(
+  monitor='val_loss',
+  factor=0.1,
+  patience=10,
+  verbose=0,
+  mode='auto',
+  min_delta=0.0001,
+  cooldown=0,
+  min_lr=0.0,
+  **kwargs
+)
+RemoteMonitor(
+  root='http://localhost:9000',
+  path='/publish/epoch/end/',
+  field='data',
+  headers=None,
+  send_as_json=False
+)
+SwapEMAWeights(swap_on_epoch=False)
+TensorBoard(
+  log_dir='logs',
+  histogram_freq=0,
+  write_graph=True,
+  write_images=False,
+  write_steps_per_second=False,
+  update_freq='epoch',
+  profile_batch=0,
+  embeddings_freq=0,
+  embeddings_metadata=None
+)
+TerminateOnNaN()
+

@@ -12,7 +12,8 @@ test_call_succeeds("to_categorical", {
 
 test_call_succeeds("get_file", {
   get_file("im.jpg",
-           origin = "https://camo.githubusercontent.com/0d08dc4f9466d347e8d28a951ea51e3430c6f92c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6b657261732e696f2f696d672f6b657261732d6c6f676f2d323031382d6c617267652d313230302e706e67",
+           origin = "https://www.r-project.org/logo/Rlogo.svg",
+           # origin = "https://camo.githubusercontent.com/0d08dc4f9466d347e8d28a951ea51e3430c6f92c/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6b657261732e696f2f696d672f6b657261732d6c6f676f2d323031382d6c617267652d313230302e706e67",
            cache_subdir = "tests")
 })
 
@@ -22,7 +23,7 @@ test_call_succeeds("hdf5_matrix", {
   if (tensorflow::tf_version() >= "2.4")
     skip("hdf5 matrix have been removed in tf >= 2.4")
 
-  if (!keras:::have_h5py())
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
   X_train = hdf5_matrix('test.h5', 'my_data', start=0, end=150)
@@ -38,12 +39,13 @@ test_call_succeeds("normalize", {
 
 test_call_succeeds("with_custom_object_scope", {
 
-  if (!keras:::have_h5py())
+  skip("save_model_hdf5()")
+  if (!keras3:::have_h5py())
     skip("h5py not available for testing")
 
 
   metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-    k_mean(y_pred)
+    op_mean(y_pred)
   })
 
   with_custom_object_scope(c(mean_pred = metric_mean_pred), {

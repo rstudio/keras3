@@ -1,10 +1,11 @@
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
   pull_request:
   schedule:
-    - cron: '51 3 * * MON'
+    - cron: '51 3 * * Fri'
 
 name: R-CMD-check
 
@@ -14,110 +15,68 @@ defaults:
 
 jobs:
   R-CMD-check:
-    name: ${{ matrix.os }}, tf-${{ matrix.tf }}, R-${{ matrix.r }}
+    name: ${{ matrix.os }}, py-${{ matrix.python }}, R-${{ matrix.r }}
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
         include:
-          - {os: 'ubuntu-20.04'  , tf: 'default', r: 'release'}
-          - {os: 'windows-latest', tf: 'default', r: 'release'}
-          - {os: 'macOS-latest'  , tf: 'default', r: 'release'}
 
-          - {os: 'ubuntu-20.04'  , tf: 'default', r: 'oldrel'}
-          - {os: 'windows-latest', tf: 'default', r: 'oldrel'}
-          - {os: 'macOS-latest'  , tf: 'default', r: 'oldrel'}
+          ## the happy path - default everything
+          - {os: 'ubuntu-latest' , python: '3.11', r: 'release'}
+          - {os: 'windows-latest', python: '3.11', r: 'release'}
+          - {os: 'macOS-latest'  , python: '3.11', r: 'release'}
 
-          - {os: 'ubuntu-20.04'  , tf: 'default', r: 'oldrel-1'}
-          - {os: 'ubuntu-20.04', tf: 'default', r: '3.6'} # default R in ubuntu-20.04
-          - {os: 'ubuntu-20.04', tf: 'default', r: '3.5'} #
+          ## different python versions
+          - {os: 'ubuntu-latest' , python: '3.10', r: 'release'}
+          - {os: 'ubuntu-latest' , python: '3.9' , r: 'release'}
+          # - {os: 'ubuntu-20.04'  , python: '3.8' , r: '3.6'} # default R in ubuntu-20.04 # install/pak failure?
 
-          # - {os: 'ubuntu-20.04'  , tf: 'release', r: 'release'}
-          # - {os: 'windows-latest', tf: 'release', r: 'release'}
-          # - {os: 'macOS-latest'  , tf: 'release', r: 'release'}
-
-          - {os: 'ubuntu-20.04', tf: '2.8', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.7', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.6', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.5', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.4', r: 'release'}
-          - {os: 'ubuntu-20.04', tf: '2.3', r: 'release'}
+          ## older R versions
+          # to see the current oldrel-3 (4.0.5):
+          # https://api.r-hub.io/rversions/resolve/oldrel/3
+          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-1'}
+          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-2'}
+          - {os: 'ubuntu-latest' , python: '3.9', r: 'oldrel-3'}
 
           # these are allowed to fail
+          # - {os: 'ubuntu-latest', tf: '2.14.0rc1', r: 'release'}
           # - {os: 'ubuntu-20.04', tf: 'default', r: 'devel'}
-          # - {os: 'ubuntu-20.04', tf: '2.7.0rc1', r: 'release'}
           # - {os: 'ubuntu-20.04', tf: 'nightly' , r: 'release'}
 
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.tf == 'nightly' || contains(matrix.tf, 'rc') || matrix.r == 'devel' }}
+    # continue-on-error: ${{ matrix.tf == 'nightly' || contains(matrix.tf, 'rc') || matrix.r == 'devel' }}
     env:
-      R_REMOTES_NO_ERRORS_FROM_WARNINGS: 'true'
-      # R_COMPILE_AND_INSTALL_PACKAGES: 'never' # commented out until CRAN builds TF 2.8
+      R_KEEP_PKG_SOURCE: yes
+      # R_REMOTES_NO_ERRORS_FROM_WARNINGS: 'true'
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r@v2
         id: setup-r
         with:
           r-version: ${{ matrix.r }}
-          Ncpus: '2L'
           use-public-rspm: true
+          Ncpus: '2L'
 
-      - uses: r-lib/actions/setup-pandoc@v2
-
-      - name: Get Date
-        id: get-date
-        shell: bash
-        run: |
-          echo "::set-output name=year-week::$(date -u "+%Y-%U")"
-          echo "::set-output name=date::$(date -u "+%F")"
-
-      - name: Restore R package cache
-        uses: actions/cache@v2
-        id: r-package-cache
+      - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: ${{ matrix.os }}-${{ steps.setup-r.outputs.installed-r-version }}-${{ steps.get-date.outputs.year-week }}-4
+          extra-packages: any::rcmdcheck, local::.
+          cache-version: 1
+          upgrade: 'TRUE'
 
-      - name: Install remotes
-        if: steps.r-package-cache.outputs.cache-hit != 'true'
-        run: install.packages("remotes")
+      - name: Install Keras
+        run: keras3::install_keras(python_version = '${{ matrix.python }}')
 
-      - name: Install system dependencies
-        if: runner.os == 'Linux'
-        shell: bash
-        run: |
-          . /etc/os-release
-          while read -r cmd
-          do
-            echo "$cmd"
-            sudo $cmd
-          done < <(Rscript -e "writeLines(remotes::system_requirements('$ID-$VERSION_ID'))")
-
-      - name: Install Package + deps
-        run: remotes::install_local(dependencies = TRUE, force = TRUE)
-
-      - name: Install Miniconda
-        run: reticulate::install_miniconda()
-
-      - name: Install Tensorflow + Keras deps
-        run: keras::install_keras(tensorflow = '${{ matrix.tf }}-cpu')
-
-      - name: Install rcmdcheck
-        run: remotes::install_cran("rcmdcheck")
-
-      - name: Check
-        run: rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')
-
-      - name: Show testthat output
-        if: always()
-        shell: bash
-        run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
-
-      - name: Don't use tar from old Rtools to store the cache
-        if: ${{ runner.os == 'Windows' && startsWith(steps.install-r.outputs.installed-r-version, '3') }}
-        shell: bash
-        run: echo "C:/Program Files/Git/usr/bin" >> $GITHUB_PATH
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-snapshots: true

@@ -1,0 +1,71 @@
+Help on class Constant in module keras.src.initializers.constant_initializers:
+
+class Constant(keras.src.initializers.initializer.Initializer)
+ |  Constant(value=0.0)
+ |
+ |  Initializer that generates tensors with constant values.
+ |
+ |  Only scalar values are allowed.
+ |  The constant value provided must be convertible to the dtype requested
+ |  when calling the initializer.
+ |
+ |  Examples:
+ |
+ |  >>> # Standalone usage:
+ |  >>> initializer = Constant(10.)
+ |  >>> values = initializer(shape=(2, 2))
+ |
+ |  >>> # Usage in a Keras layer:
+ |  >>> initializer = Constant(10.)
+ |  >>> layer = Dense(3, kernel_initializer=initializer)
+ |
+ |  Args:
+ |      value: A Python scalar.
+ |
+ |  Method resolution order:
+ |      Constant
+ |      keras.src.initializers.initializer.Initializer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(
+ |    self,
+ |    shape,
+ |    dtype=None
+ |  )
+ |      Returns a tensor object initialized as specified by the initializer.
+ |
+ |      Args:
+ |          shape: Shape of the tensor.
+ |          dtype: Optional dtype of the tensor.
+ |
+ |  __init__(self, value=0.0)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns the initializer's configuration as a JSON-serializable dict.
+ |
+ |      Returns:
+ |          A JSON-serializable Python dict.
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config) from builtins.type
+ |      Instantiates an initializer from a configuration dictionary.
+ |
+ |      Example:
+ |
+ |      ```python
+ |      initializer = RandomUniform(-1, 1)
+ |      config = initializer.get_config()
+ |      initializer = RandomUniform.from_config(config)
+ |      ```
+ |
+ |      Args:
+ |          config: A Python dictionary, the output of `get_config()`.
+ |
+ |      Returns:
+ |          An `Initializer` instance.
+ |

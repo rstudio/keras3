@@ -2,35 +2,77 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_random_uniform}
 \alias{initializer_random_uniform}
-\title{Initializer that generates tensors with a uniform distribution.}
+\title{Random uniform initializer.}
 \usage{
 initializer_random_uniform(minval = -0.05, maxval = 0.05, seed = NULL)
 }
 \arguments{
-\item{minval}{Lower bound of the range of random values to generate.}
+\item{minval}{A numeric scalar or a scalar keras tensor. Lower bound of the
+range of random values to generate (inclusive).}
 
-\item{maxval}{Upper bound of the range of random values to generate. Defaults to 1 for float types.}
+\item{maxval}{A numeric scalar or a scalar keras tensor. Upper bound of the
+range of random values to generate (exclusive).}
 
-\item{seed}{seed}
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or \code{NULL} (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of \code{random_seed_generator()}.}
+}
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
 }
 \description{
-Initializer that generates tensors with a uniform distribution.
+Draws samples from a uniform distribution for given parameters.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_random_uniform(minval = 0.0, maxval = 1.0)
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_random_uniform(minval = 0.0, maxval = 1.0)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other initializers: 
-\code{\link{initializer_constant}()},
-\code{\link{initializer_glorot_normal}()},
-\code{\link{initializer_glorot_uniform}()},
-\code{\link{initializer_he_normal}()},
-\code{\link{initializer_he_uniform}()},
-\code{\link{initializer_identity}()},
-\code{\link{initializer_lecun_normal}()},
-\code{\link{initializer_lecun_uniform}()},
-\code{\link{initializer_ones}()},
-\code{\link{initializer_orthogonal}()},
-\code{\link{initializer_random_normal}()},
-\code{\link{initializer_truncated_normal}()},
-\code{\link{initializer_variance_scaling}()},
-\code{\link{initializer_zeros}()}
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#randomuniform-class}
+}
+
+Other random initializers: \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+
+Other initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+\code{\link{initializer_zeros}()} \cr
 }
 \concept{initializers}
+\concept{random initializers}

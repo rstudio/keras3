@@ -1,0 +1,45 @@
+Help on class InputLayer in module keras.src.layers.core.input_layer:
+
+class InputLayer(keras.src.layers.layer.Layer)
+ |  InputLayer(shape=None, batch_size=None, dtype=None, sparse=None, batch_shape=None, input_tensor=None, name=None, **kwargs)
+ |
+ |  Method resolution order:
+ |      InputLayer
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    shape=None,
+ |    batch_size=None,
+ |    dtype=None,
+ |    sparse=None,
+ |    batch_shape=None,
+ |    input_tensor=None,
+ |    name=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  dtype
+ |      Alias of `layer.variable_dtype`.
+ |
+

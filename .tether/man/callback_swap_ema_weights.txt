@@ -1,0 +1,125 @@
+Help on class SwapEMAWeights in module keras.src.callbacks.swap_ema_weights:
+
+class SwapEMAWeights(keras.src.callbacks.callback.Callback)
+ |  SwapEMAWeights(swap_on_epoch=False)
+ |
+ |  Swaps model weights and EMA weights before and after evaluation.
+ |
+ |  This callbacks replaces the model's weight values with the values of
+ |  the optimizer's EMA weights (the exponential moving average of the past
+ |  model weights values, implementing "Polyak averaging") before model
+ |  evaluation, and restores the previous weights after evaluation.
+ |
+ |  The `SwapEMAWeights` callback is to be used in conjunction with
+ |  an optimizer that sets `use_ema=True`.
+ |
+ |  Note that the weights are swapped in-place in order to save memory.
+ |  The behavior is undefined if you modify the EMA weights
+ |  or model weights in other callbacks.
+ |
+ |  Example:
+ |
+ |  ```python
+ |  # Remember to set `use_ema=True` in the optimizer
+ |  optimizer = SGD(use_ema=True)
+ |  model.compile(optimizer=optimizer, loss=..., metrics=...)
+ |
+ |  # Metrics will be computed with EMA weights
+ |  model.fit(X_train, Y_train, callbacks=[SwapEMAWeights()])
+ |
+ |  # If you want to save model checkpoint with EMA weights, you can set
+ |  # `swap_on_epoch=True` and place ModelCheckpoint after SwapEMAWeights.
+ |  model.fit(
+ |      X_train,
+ |      Y_train,
+ |      callbacks=[SwapEMAWeights(swap_on_epoch=True), ModelCheckpoint(...)]
+ |  )
+ |  ```
+ |
+ |  Args:
+ |      swap_on_epoch: whether to perform swapping at `on_epoch_begin()`
+ |          and `on_epoch_end()`. This is useful if you want to use
+ |          EMA weights for other callbacks such as `ModelCheckpoint`.
+ |          Defaults to `False`.
+ |
+ |  Method resolution order:
+ |      SwapEMAWeights
+ |      keras.src.callbacks.callback.Callback
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, swap_on_epoch=False)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  on_epoch_begin(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the start of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_epoch_end(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the end of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict, metric results for this training epoch, and for the
+ |            validation epoch if validation is performed. Validation result
+ |            keys are prefixed with `val_`. For training epoch, the values of
+ |            the `Model`'s metrics are returned. Example:
+ |            `{'loss': 0.2, 'accuracy': 0.7}`.
+ |
+ |  on_predict_begin(self, logs=None)
+ |      Called at the beginning of prediction.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_predict_end(self, logs=None)
+ |      Called at the end of prediction.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_test_begin(self, logs=None)
+ |      Called at the beginning of evaluation or validation.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_test_end(self, logs=None)
+ |      Called at the end of evaluation or validation.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently the output of the last call to
+ |            `on_test_batch_end()` is passed to this argument for this method
+ |            but that may change in the future.
+ |
+

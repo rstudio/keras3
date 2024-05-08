@@ -1,0 +1,61 @@
+Help on class LeakyReLU in module keras.src.layers.activations.leaky_relu:
+
+class LeakyReLU(keras.src.layers.layer.Layer)
+ |  LeakyReLU(negative_slope=0.3, **kwargs)
+ |
+ |  Leaky version of a Rectified Linear Unit activation layer.
+ |
+ |  This layer allows a small gradient when the unit is not active.
+ |
+ |  Formula:
+ |
+ |  ``` python
+ |  f(x) = alpha * x if x < 0
+ |  f(x) = x if x >= 0
+ |  ```
+ |
+ |  Example:
+ |
+ |  ``` python
+ |  leaky_relu_layer = LeakyReLU(negative_slope=0.5)
+ |  input = np.array([-10, -5, 0.0, 5, 10])
+ |  result = leaky_relu_layer(input)
+ |  # result = [-5. , -2.5,  0. ,  5. , 10.]
+ |  ```
+ |
+ |  Args:
+ |      negative_slope: Float >= 0.0. Negative slope coefficient.
+ |        Defaults to `0.3`.
+ |      **kwargs: Base layer keyword arguments, such as
+ |          `name` and `dtype`.
+ |
+ |  Method resolution order:
+ |      LeakyReLU
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    negative_slope=0.3,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

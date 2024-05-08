@@ -2,82 +2,99 @@
 % Please edit documentation in R/metrics.R
 \name{metric_mean_wrapper}
 \alias{metric_mean_wrapper}
-\title{Wraps a stateless metric function with the Mean metric}
+\title{Wrap a stateless metric function with the \code{Mean} metric.}
 \usage{
 metric_mean_wrapper(..., fn, name = NULL, dtype = NULL)
 }
 \arguments{
-\item{...}{named arguments to pass on to \code{fn}.}
+\item{...}{Keyword arguments to pass on to \code{fn}.}
 
-\item{fn}{The metric function to wrap, with signature \code{fn(y_true, y_pred, ...)}.}
+\item{fn}{The metric function to wrap, with signature
+\code{fn(y_true, y_pred)}.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
 }
 \value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
 }
 \description{
-Wraps a stateless metric function with the Mean metric
-}
-\details{
 You could use this class to quickly build a mean metric from a function. The
 function needs to have the signature \code{fn(y_true, y_pred)} and return a
-per-sample loss array. \code{MeanMetricWrapper$result()} will return
+per-sample loss array. \code{metric_mean_wrapper$result()} will return
 the average metric value across all samples seen so far.
 
 For example:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{accuracy <- function(y_true, y_pred)
-  k_cast(y_true == y_pred, 'float32')
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{mse <- function(y_true, y_pred) \{
+  (y_true - y_pred)^2
+\}
 
-accuracy_metric <- metric_mean_wrapper(fn = accuracy)
+mse_metric <- metric_mean_wrapper(fn = mse)
+mse_metric$update_state(c(0, 1), c(1, 1))
+mse_metric$result()
+}\if{html}{\out{</div>}}
 
-model \%>\% compile(..., metrics=accuracy_metric)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 \seealso{
-Other metrics: 
-\code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
-\code{\link{metric_auc}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
-\code{\link{metric_mean}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+Other reduction metrics: \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_sum}()} \cr
+
+Other metrics: \cr
+\code{\link{Metric}()} \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_iou}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
 }
 \concept{metrics}
+\concept{reduction metrics}

@@ -18,3 +18,4 @@ and \code{score} (one data frame per sample in batch input).
 \description{
 Decodes the prediction of an ImageNet model.
 }
+\keyword{internal}

@@ -1,0 +1,7 @@
+__signature__
+keras.utils.FeatureSpace.integer_hashed(
+  num_bins,
+  output_mode='one_hot',
+  name=None
+)
+__doc__

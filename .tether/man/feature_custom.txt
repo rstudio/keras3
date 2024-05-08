@@ -1,0 +1,7 @@
+__signature__
+keras.utils.FeatureSpace.feature(
+  dtype,
+  preprocessor,
+  output_mode
+)
+__doc__

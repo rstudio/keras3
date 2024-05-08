@@ -2,40 +2,46 @@
 % Please edit documentation in R/regularizers.R
 \name{regularizer_orthogonal}
 \alias{regularizer_orthogonal}
-\title{A regularizer that encourages input vectors to be orthogonal to each other}
+\title{Regularizer that encourages input vectors to be orthogonal to each other.}
 \usage{
-regularizer_orthogonal(factor = 0.01, mode = "rows", ...)
+regularizer_orthogonal(factor = 0.01, mode = "rows")
 }
 \arguments{
-\item{factor}{Float. The regularization factor. The regularization penalty will
-be proportional to \code{factor} times the mean of the dot products between
-the L2-normalized rows (if \code{mode="rows"}, or columns if \code{mode="columns"})
-of the inputs, excluding the product of each row/column with itself.
-Defaults to 0.01.}
+\item{factor}{Float. The regularization factor. The regularization penalty
+will be proportional to \code{factor} times the mean of the dot products
+between the L2-normalized rows (if \code{mode="rows"}, or columns if
+\code{mode="columns"}) of the inputs, excluding the product of each
+row/column with itself.  Defaults to \code{0.01}.}
 
-\item{mode}{String, one of \verb{\{"rows", "columns"\}}. Defaults to \code{"rows"}. In rows
-mode, the regularization effect seeks to make the rows of the input
-orthogonal to each other. In columns mode, it seeks to make the columns
-of the input orthogonal to each other.}
-
-\item{...}{For backwards and forwards compatibility
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_dense(
-  units = 4,
-  kernel_regularizer = regularizer_orthogonal(factor = 0.01))
-}\if{html}{\out{</div>}}}
+\item{mode}{String, one of \verb{\{"rows", "columns"\}}. Defaults to \code{"rows"}. In
+rows mode, the regularization effect seeks to make the rows of the
+input orthogonal to each other. In columns mode, it seeks to make
+the columns of the input orthogonal to each other.}
+}
+\value{
+A \code{Regularizer} instance that can be passed to layer constructors or
+used as a standalone object.
 }
 \description{
-A regularizer that encourages input vectors to be orthogonal to each other
-}
-\details{
 It can be applied to either the rows of a matrix (\code{mode="rows"}) or its
 columns (\code{mode="columns"}). When applied to a \code{Dense} kernel of shape
 \verb{(input_dim, units)}, rows mode will seek to make the feature vectors
 (i.e. the basis of the output space) orthogonal to each other.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{regularizer <- regularizer_orthogonal(factor=0.01)
+layer <- layer_dense(units=4, kernel_regularizer=regularizer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/regularizers/OrthogonalRegularizer}
+\item \url{https://keras.io/api/layers/regularizers#orthogonalregularizer-class}
 }
+
+Other regularizers: \cr
+\code{\link{regularizer_l1}()} \cr
+\code{\link{regularizer_l1_l2}()} \cr
+\code{\link{regularizer_l2}()} \cr
 }
+\concept{regularizers}

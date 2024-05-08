@@ -7,26 +7,48 @@
 initializer_identity(gain = 1)
 }
 \arguments{
-\item{gain}{Multiplicative factor to apply to the identity matrix}
+\item{gain}{Multiplicative factor to apply to the identity matrix.}
+}
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
 }
 \description{
-Only use for square 2D matrices.
+Only usable for generating 2D matrices.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_identity()
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_identity()
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other initializers: 
-\code{\link{initializer_constant}()},
-\code{\link{initializer_glorot_normal}()},
-\code{\link{initializer_glorot_uniform}()},
-\code{\link{initializer_he_normal}()},
-\code{\link{initializer_he_uniform}()},
-\code{\link{initializer_lecun_normal}()},
-\code{\link{initializer_lecun_uniform}()},
-\code{\link{initializer_ones}()},
-\code{\link{initializer_orthogonal}()},
-\code{\link{initializer_random_normal}()},
-\code{\link{initializer_random_uniform}()},
-\code{\link{initializer_truncated_normal}()},
-\code{\link{initializer_variance_scaling}()},
-\code{\link{initializer_zeros}()}
+Other constant initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_zeros}()} \cr
+
+Other initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+\code{\link{initializer_zeros}()} \cr
 }
+\concept{constant initializers}
 \concept{initializers}

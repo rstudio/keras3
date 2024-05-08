@@ -1,0 +1,18 @@
+__signature__
+keras.ops.solve_triangular(
+  a,
+  b,
+  lower=False
+)
+__doc__
+Solves a linear system of equations given by `a x = b`.
+
+Args:
+    a: A tensor of shape `(..., M, M)` representing the coefficients matrix.
+    b: A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+    right-hand side or "dependent variable" matrix.
+
+Returns:
+    A tensor of shape `(..., M)` or `(..., M, N)` representing the solution
+    of the linear system. Returned shape is identical to `b`.
+

@@ -1,0 +1,4 @@
+__signature__
+keras.config.enable_unsafe_deserialization()
+__doc__
+Disables safe mode globally, allowing deserialization of lambdas.

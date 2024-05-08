@@ -1,0 +1,52 @@
+Help on class GlorotUniform in module keras.src.initializers.random_initializers:
+
+class GlorotUniform(VarianceScaling)
+ |  GlorotUniform(seed=None)
+ |
+ |  The Glorot uniform initializer, also called Xavier uniform initializer.
+ |
+ |  Draws samples from a uniform distribution within `[-limit, limit]`, where
+ |  `limit = sqrt(6 / (fan_in + fan_out))` (`fan_in` is the number of input
+ |  units in the weight tensor and `fan_out` is the number of output units).
+ |
+ |  Examples:
+ |
+ |  >>> # Standalone usage:
+ |  >>> initializer = GlorotUniform()
+ |  >>> values = initializer(shape=(2, 2))
+ |
+ |  >>> # Usage in a Keras layer:
+ |  >>> initializer = GlorotUniform()
+ |  >>> layer = Dense(3, kernel_initializer=initializer)
+ |
+ |  Args:
+ |      seed: A Python integer or instance of
+ |          `keras.backend.SeedGenerator`.
+ |          Used to make the behavior of the initializer
+ |          deterministic. Note that an initializer seeded with an integer
+ |          or `None` (unseeded) will produce the same random values
+ |          across multiple calls. To get different random values
+ |          across multiple calls, use as seed an instance
+ |          of `keras.backend.SeedGenerator`.
+ |
+ |  Reference:
+ |
+ |  - [Glorot et al., 2010](http://proceedings.mlr.press/v9/glorot10a.html)
+ |
+ |  Method resolution order:
+ |      GlorotUniform
+ |      VarianceScaling
+ |      keras.src.initializers.initializer.Initializer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, seed=None)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns the initializer's configuration as a JSON-serializable dict.
+ |
+ |      Returns:
+ |          A JSON-serializable Python dict.
+ |

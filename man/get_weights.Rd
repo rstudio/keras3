@@ -12,32 +12,29 @@ set_weights(object, weights)
 \arguments{
 \item{object}{Layer or model object}
 
-\item{trainable}{if \code{NA} (the default), all weights are returned. If \verb{TRUE, }}
+\item{trainable}{if \code{NA} (the default), all weights are returned. If \code{TRUE},
+only weights of trainable variables are returned. If \code{FALSE}, only weights
+of non-trainable variables are returned.}
 
 \item{weights}{Weights as R array}
+}
+\value{
+A list of R arrays.
 }
 \description{
 Layer/Model weights as R arrays
 }
 \note{
-You can access the Layer/Model as \code{tf.Tensors} or \code{tf.Variables} at
-\code{object$weights}, \code{object$trainable_weights}, or
-\code{object$non_trainable_weights}
+You can access the Layer/Model as \code{KerasVariables} (which are also
+backend-native tensors like \code{tf.Variable}) at \code{object$weights},
+\code{object$trainable_weights}, or \code{object$non_trainable_weights}
 }
 \seealso{
-Other model persistence: 
-\code{\link{model_to_json}()},
-\code{\link{model_to_yaml}()},
-\code{\link{save_model_hdf5}()},
-\code{\link{save_model_tf}()},
-\code{\link{save_model_weights_hdf5}()},
-\code{\link{serialize_model}()}
-
-Other layer methods: 
-\code{\link{count_params}()},
-\code{\link{get_config}()},
-\code{\link{get_input_at}()},
-\code{\link{reset_states}()}
+Other layer methods: \cr
+\code{\link{count_params}()} \cr
+\code{\link{get_config}()} \cr
+\code{\link{quantize_weights}()} \cr
+\code{\link{reset_state}()} \cr
 }
 \concept{layer methods}
 \concept{model persistence}

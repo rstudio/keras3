@@ -1,0 +1,261 @@
+---
+title: Timeseries classification from scratch
+author: '[hfawaz](https://github.com/hfawaz/), [Tomasz Kalinowski](https://github.com/t-kalinowski)'
+date-created: 2020/07/21
+last-modified: 2023/11/10
+description: Training a timeseries classifier from scratch on the FordA dataset from
+  the UCR/UEA archive.
+accelerator: GPU
+output: rmarkdown::html_vignette
+domain: timeseries
+category: basic
+knit: ({source(here::here("tools/knit.R")); knit_vignette})
+tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/timeseries/timeseries_classification_from_scratch.py
+---
+
+## Introduction
+
+This example shows how to do timeseries classification from scratch, starting from raw
+CSV timeseries files on disk. We demonstrate the workflow on the FordA dataset from the
+[UCR/UEA archive](https://www.cs.ucr.edu/%7Eeamonn/time_series_data_2018/).
+
+## Setup
+
+```{r}
+library(keras3)
+use_backend("jax")
+```
+
+## Load the data: the FordA dataset
+
+### Dataset description
+
+The dataset we are using here is called FordA.
+The data comes from the UCR archive.
+The dataset contains 3601 training instances and another 1320 testing instances.
+Each timeseries corresponds to a measurement of engine noise captured by a motor sensor.
+For this task, the goal is to automatically detect the presence of a specific issue with
+the engine. The problem is a balanced binary classification task. The full description of
+this dataset can be found [here](http://www.j-wichard.de/publications/FordPaper.pdf).
+
+### Read the TSV data
+
+We will use the `FordA_TRAIN` file for training and the
+`FordA_TEST` file for testing. The simplicity of this dataset
+allows us to demonstrate effectively how to use ConvNets for timeseries classification.
+In this file, the first column corresponds to the label.
+
+
+```{r}
+get_data <- function(path) {
+  if(path |> startsWith("https://"))
+    path <- get_file(origin = path)  # cache file locally
+
+  data <- readr::read_tsv(
+    path, col_names = FALSE,
+    # Each row is: one integer (the label),
+    # followed by 500 doubles (the timeseries)
+    col_types = paste0("i", strrep("d", 500))
+  )
+
+  y <- as.matrix(data[[1]])
+  x <- as.matrix(data[,-1])
+  dimnames(x) <- dimnames(y) <- NULL
+
+  list(x, y)
+}
+
+root_url <- "https://raw.githubusercontent.com/hfawaz/cd-diagram/master/FordA/"
+c(x_train, y_train) %<-% get_data(paste0(root_url, "FordA_TRAIN.tsv"))
+c(x_test, y_test) %<-% get_data(paste0(root_url, "FordA_TEST.tsv"))
+
+str(keras3:::named_list(
+  x_train, y_train,
+  x_test, y_test
+))
+```
+
+
+## Visualize the data
+
+Here we visualize one timeseries example for each class in the dataset.
+
+```{r, fig.width=10, fig.cap="Plot of Example Timeseries Data"}
+plot(NULL, main = "Timeseries Data",
+     xlab = "Timepoints",  ylab = "Values",
+     xlim = c(1, ncol(x_test)),
+     ylim = range(x_test))
+grid()
+lines(x_test[match(-1, y_test), ], col = "blue")
+lines(x_test[match( 1, y_test), ], col = "red")
+legend("topright", legend=c("label -1", "label 1"), col=c("blue", "red"), lty=1)
+```
+
+
+## Standardize the data
+
+Our timeseries are already in a single length (500). However, their values are
+usually in various ranges. This is not ideal for a neural network;
+in general we should seek to make the input values normalized.
+For this specific dataset, the data is already z-normalized: each timeseries sample
+has a mean equal to zero and a standard deviation equal to one. This type of
+normalization is very common for timeseries classification problems, see
+[Bagnall et al. (2016)](https://link.springer.com/article/10.1007/s10618-016-0483-9).
+
+Note that the timeseries data used here are univariate, meaning we only have one channel
+per timeseries example.
+We will therefore transform the timeseries into a multivariate one with one channel
+using a simple reshaping via numpy.
+This will allow us to construct a model that is easily applicable to multivariate time
+series.
+
+```{r}
+dim(x_train) <- c(dim(x_train), 1)
+dim(x_test) <- c(dim(x_test), 1)
+```
+
+
+Finally, in order to use `sparse_categorical_crossentropy`, we will have to count
+the number of classes beforehand.
+
+```{r}
+num_classes <- length(unique(y_train))
+```
+
+
+Now we shuffle the training set because we will be using the `validation_split` option
+later when training.
+
+```{r}
+c(x_train, y_train) %<-% listarrays::shuffle_rows(x_train, y_train)
+# idx <- sample.int(nrow(x_train))
+# x_train %<>% .[idx,, ,drop = FALSE]
+# y_train %<>% .[idx,  ,drop = FALSE]
+```
+
+
+Standardize the labels to positive integers.
+The expected labels will then be 0 and 1.
+
+```{r}
+y_train[y_train == -1L] <- 0L
+y_test[y_test == -1L] <- 0L
+```
+
+
+## Build a model
+
+We build a Fully Convolutional Neural Network originally proposed in
+[this paper](https://arxiv.org/abs/1611.06455).
+The implementation is based on the TF 2 version provided
+[here](https://github.com/hfawaz/dl-4-tsc/).
+The following hyperparameters (kernel_size, filters, the usage of BatchNorm) were found
+via random search using [KerasTuner](https://github.com/keras-team/keras-tuner).
+
+```{r}
+make_model <- function(input_shape) {
+  inputs <- keras_input(input_shape)
+
+  outputs <- inputs |>
+    # conv1
+    layer_conv_1d(filters = 64, kernel_size = 3, padding = "same") |>
+    layer_batch_normalization() |>
+    layer_activation_relu() |>
+    # conv2
+    layer_conv_1d(filters = 64, kernel_size = 3, padding = "same") |>
+    layer_batch_normalization() |>
+    layer_activation_relu() |>
+    # conv3
+    layer_conv_1d(filters = 64, kernel_size = 3, padding = "same") |>
+    layer_batch_normalization() |>
+    layer_activation_relu() |>
+    # pooling
+    layer_global_average_pooling_1d() |>
+    # final output
+    layer_dense(num_classes, activation = "softmax")
+
+  keras_model(inputs, outputs)
+}
+
+model <- make_model(input_shape = dim(x_train)[-1])
+```
+
+```{r}
+model
+plot(model, show_shapes = TRUE)
+```
+
+
+
+## Train the model
+
+```{r}
+epochs <- 500
+batch_size <- 32
+
+callbacks <- c(
+  callback_model_checkpoint(
+    "best_model.keras", save_best_only = TRUE,
+    monitor = "val_loss"
+  ),
+  callback_reduce_lr_on_plateau(
+    monitor = "val_loss", factor = 0.5,
+    patience = 20, min_lr = 0.0001
+  ),
+  callback_early_stopping(
+    monitor = "val_loss", patience = 50,
+    verbose = 1
+  )
+)
+
+
+model |> compile(
+  optimizer = "adam",
+  loss = "sparse_categorical_crossentropy",
+  metrics = "sparse_categorical_accuracy"
+)
+
+history <- model |> fit(
+  x_train, y_train,
+  batch_size = batch_size,
+  epochs = epochs,
+  callbacks = callbacks,
+  validation_split = 0.2
+)
+```
+
+
+## Evaluate model on test data
+
+```{r}
+model <- load_model("best_model.keras")
+
+results <- model |> evaluate(x_test, y_test)
+str(results)
+cat(
+  "Test accuracy: ", results$sparse_categorical_accuracy, "\n",
+  "Test loss: ", results$loss, "\n",
+  sep = ""
+)
+```
+
+
+## Plot the model's training history
+
+```{r, fig.width=10, fig.cap="Plot of Training History Metrics"}
+plot(history)
+```
+
+Plot just the training and validation accuracy:
+```{r, message=FALSE, fig.width=10, fig.cap="Plot of Accuracy During Training"}
+plot(history, metric = "sparse_categorical_accuracy") +
+  # scale x axis to actual number of epochs run before early stopping
+  ggplot2::xlim(0, length(history$metrics$loss))
+```
+
+We can see how the training accuracy reaches almost 0.95 after 100 epochs.
+However, by observing the validation accuracy we can see how the network still needs
+training until it reaches almost 0.97 for both the validation and the training accuracy
+after 200 epochs. Beyond the 200th epoch, if we continue on training, the validation
+accuracy will start decreasing while the training accuracy will continue on increasing:
+the model starts overfitting.

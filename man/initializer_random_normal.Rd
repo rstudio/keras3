@@ -2,35 +2,77 @@
 % Please edit documentation in R/initializers.R
 \name{initializer_random_normal}
 \alias{initializer_random_normal}
-\title{Initializer that generates tensors with a normal distribution.}
+\title{Random normal initializer.}
 \usage{
 initializer_random_normal(mean = 0, stddev = 0.05, seed = NULL)
 }
 \arguments{
-\item{mean}{Mean of the random values to generate.}
+\item{mean}{A numeric scalar. Mean of the random
+values to generate.}
 
-\item{stddev}{Standard deviation of the random values to generate.}
+\item{stddev}{A numeric scalar. Standard deviation of
+the random values to generate.}
 
-\item{seed}{Integer used to seed the random generator.}
+\item{seed}{An integer or instance of
+\code{random_seed_generator()}.
+Used to make the behavior of the initializer
+deterministic. Note that an initializer seeded with an integer
+or \code{NULL} (unseeded) will produce the same random values
+across multiple calls. To get different random values
+across multiple calls, use as seed an instance
+of \code{random_seed_generator()}.}
+}
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
 }
 \description{
-Initializer that generates tensors with a normal distribution.
+Draws samples from a normal distribution for given parameters.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Standalone usage:
+initializer <- initializer_random_normal(mean = 0.0, stddev = 1.0)
+values <- initializer(shape = c(2, 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Usage in a Keras layer:
+initializer <- initializer_random_normal(mean = 0.0, stddev = 1.0)
+layer <- layer_dense(units = 3, kernel_initializer = initializer)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other initializers: 
-\code{\link{initializer_constant}()},
-\code{\link{initializer_glorot_normal}()},
-\code{\link{initializer_glorot_uniform}()},
-\code{\link{initializer_he_normal}()},
-\code{\link{initializer_he_uniform}()},
-\code{\link{initializer_identity}()},
-\code{\link{initializer_lecun_normal}()},
-\code{\link{initializer_lecun_uniform}()},
-\code{\link{initializer_ones}()},
-\code{\link{initializer_orthogonal}()},
-\code{\link{initializer_random_uniform}()},
-\code{\link{initializer_truncated_normal}()},
-\code{\link{initializer_variance_scaling}()},
-\code{\link{initializer_zeros}()}
+\itemize{
+\item \url{https://keras.io/api/layers/initializers#randomnormal-class}
+}
+
+Other random initializers: \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+
+Other initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+\code{\link{initializer_zeros}()} \cr
 }
 \concept{initializers}
+\concept{random initializers}

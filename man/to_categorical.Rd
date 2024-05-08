@@ -4,21 +4,99 @@
 \alias{to_categorical}
 \title{Converts a class vector (integers) to binary class matrix.}
 \usage{
-to_categorical(y, num_classes = NULL, dtype = "float32")
+to_categorical(x, num_classes = NULL)
 }
 \arguments{
-\item{y}{Class vector to be converted into a matrix (integers from 0 to num_classes).}
+\item{x}{Array-like with class values to be converted into a matrix
+(integers from 0 to \code{num_classes - 1}).
+R factors are coerced to integer and offset to be 0-based, i.e.,
+\code{as.integer(x) - 1L}.}
 
-\item{num_classes}{Total number of classes.}
-
-\item{dtype}{The data type expected by the input, as a string}
+\item{num_classes}{Total number of classes. If \code{NULL}, this would be inferred
+as \code{max(x) + 1}. Defaults to \code{NULL}.}
 }
 \value{
-A binary matrix representation of the input.
+A binary matrix representation of the input as an R array. The class
+axis is placed last.
 }
 \description{
-Converts a class vector (integers) to binary class matrix.
-}
-\details{
 E.g. for use with \code{\link[=loss_categorical_crossentropy]{loss_categorical_crossentropy()}}.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{a <- to_categorical(c(0, 1, 2, 3), num_classes=4)
+print(a)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      [,1] [,2] [,3] [,4]
+## [1,]    1    0    0    0
+## [2,]    0    1    0    0
+## [3,]    0    0    1    0
+## [4,]    0    0    0    1
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{b <- array(c(.9, .04, .03, .03,
+              .3, .45, .15, .13,
+              .04, .01, .94, .05,
+              .12, .21, .5, .17),
+              dim = c(4, 4))
+loss <- op_categorical_crossentropy(a, b)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.41284522 0.45601739 0.54430155 0.80437282], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- op_categorical_crossentropy(a, a)
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.00000005e-07 1.00000005e-07 1.00000005e-07 1.00000005e-07], shape=(4), dtype=float64)
+
+}\if{html}{\out{</div>}}
+}
+
+\seealso{
+\itemize{
+\item \code{\link[=op_one_hot]{op_one_hot()}}, which does the same operation as \code{to_categorical()}, but
+operating on tensors.
+\item \code{\link[=loss_sparse_categorical_crossentropy]{loss_sparse_categorical_crossentropy()}}, which can
+accept labels (\code{y_true}) as an integer vector, instead of as a dense one-hot
+matrix.
+\item \url{https://keras.io/api/utils/python_utils#tocategorical-function}
+}
+
+Other numerical utils: \cr
+\code{\link{normalize}()} \cr
+
+Other utils: \cr
+\code{\link{audio_dataset_from_directory}()} \cr
+\code{\link{clear_session}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{get_file}()} \cr
+\code{\link{get_source_inputs}()} \cr
+\code{\link{image_array_save}()} \cr
+\code{\link{image_dataset_from_directory}()} \cr
+\code{\link{image_from_array}()} \cr
+\code{\link{image_load}()} \cr
+\code{\link{image_smart_resize}()} \cr
+\code{\link{image_to_array}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{normalize}()} \cr
+\code{\link{pack_x_y_sample_weight}()} \cr
+\code{\link{pad_sequences}()} \cr
+\code{\link{set_random_seed}()} \cr
+\code{\link{split_dataset}()} \cr
+\code{\link{text_dataset_from_directory}()} \cr
+\code{\link{timeseries_dataset_from_array}()} \cr
+\code{\link{unpack_x_y_sample_weight}()} \cr
+\code{\link{zip_lists}()} \cr
+}
+\concept{numerical utils}
+\concept{utils}

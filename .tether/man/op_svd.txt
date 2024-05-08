@@ -1,0 +1,18 @@
+__signature__
+keras.ops.svd(
+  x,
+  full_matrices=True,
+  compute_uv=True
+)
+__doc__
+Computes the singular value decomposition of a matrix.
+
+Args:
+    x: Input tensor of shape `(..., M, N)`.
+
+Returns:
+    A tuple of three tensors: a tensor of shape `(..., M, M)` containing the
+    left singular vectors, a tensor of shape `(..., M, N)` containing the
+    singular values and a tensor of shape `(..., N, N)` containing the
+    right singular vectors.
+

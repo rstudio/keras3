@@ -1,0 +1,59 @@
+__signature__
+keras.Model.predict(
+  self,
+  x,
+  batch_size=None,
+  verbose='auto',
+  steps=None,
+  callbacks=None
+)
+__doc__
+Generates output predictions for the input samples.
+
+Computation is done in batches. This method is designed for batch
+processing of large numbers of inputs. It is not intended for use inside
+of loops that iterate over your data and process small numbers of inputs
+at a time.
+
+For small numbers of inputs that fit in one batch,
+directly use `__call__()` for faster execution, e.g.,
+`model(x)`, or `model(x, training=False)` if you have layers such as
+`BatchNormalization` that behave differently during
+inference.
+
+Note: See [this FAQ entry](
+https://keras.io/getting_started/faq/#whats-the-difference-between-model-methods-predict-and-call)
+for more details about the difference between `Model` methods
+`predict()` and `__call__()`.
+
+Args:
+    x: Input samples. It could be:
+        - A NumPy array (or array-like), or a list of arrays
+            (in case the model has multiple inputs).
+        - A tensor, or a list of tensors
+            (in case the model has multiple inputs).
+        - A `tf.data.Dataset`.
+        - A `keras.utils.PyDataset` instance.
+    batch_size: Integer or `None`.
+        Number of samples per batch.
+        If unspecified, `batch_size` will default to 32.
+        Do not specify the `batch_size` if your data is in the
+        form of dataset, generators, or `keras.utils.PyDataset`
+        instances (since they generate batches).
+    verbose: `"auto"`, 0, 1, or 2. Verbosity mode.
+        0 = silent, 1 = progress bar, 2 = single line.
+        `"auto"` becomes 1 for most cases. Note that the progress bar
+        is not particularly useful when logged to a file,
+        so `verbose=2` is recommended when not running interactively
+        (e.g. in a production environment). Defaults to `"auto"`.
+    steps: Total number of steps (batches of samples)
+        before declaring the prediction round finished.
+        Ignored with the default value of `None`.
+        If `x` is a `tf.data.Dataset` and `steps` is `None`,
+        `predict()` will run until the input dataset is exhausted.
+    callbacks: List of `keras.callbacks.Callback` instances.
+        List of callbacks to apply during prediction.
+
+Returns:
+    NumPy array(s) of predictions.
+

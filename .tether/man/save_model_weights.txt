@@ -1,0 +1,15 @@
+__signature__
+keras.Model.save_weights(
+  self,
+  filepath,
+  overwrite=True
+)
+__doc__
+Saves all layer weights to a `.weights.h5` file.
+
+Args:
+    filepath: `str` or `pathlib.Path` object.
+        Path where to save the model. Must end in `.weights.h5`.
+    overwrite: Whether we should overwrite any existing model
+        at the target location, or instead ask the user
+        via an interactive prompt.

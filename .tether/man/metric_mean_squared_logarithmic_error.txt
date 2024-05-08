@@ -1,0 +1,60 @@
+Help on class MeanSquaredLogarithmicError in module keras.src.metrics.regression_metrics:
+
+class MeanSquaredLogarithmicError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
+ |  MeanSquaredLogarithmicError(name='mean_squared_logarithmic_error', dtype=None)
+ |
+ |  Computes mean squared logarithmic error between `y_true` and `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  loss = mean(square(log(y_true + 1) - log(y_pred + 1)))
+ |  ```
+ |
+ |  Args:
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |
+ |  Example:
+ |
+ |  Example:
+ |
+ |  >>> m = keras.metrics.MeanSquaredLogarithmicError()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
+ |  >>> m.result()
+ |  0.12011322
+ |  >>> m.reset_state()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
+ |  ...                sample_weight=[1, 0])
+ |  >>> m.result()
+ |  0.24022643
+ |
+ |  Usage with `compile()` API:
+ |
+ |  ```python
+ |  model.compile(
+ |      optimizer='sgd',
+ |      loss='mse',
+ |      metrics=[keras.metrics.MeanSquaredLogarithmicError()])
+ |  ```
+ |
+ |  Method resolution order:
+ |      MeanSquaredLogarithmicError
+ |      keras.src.metrics.reduction_metrics.MeanMetricWrapper
+ |      keras.src.metrics.reduction_metrics.Mean
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    name='mean_squared_logarithmic_error',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Return the serializable config of the metric.
+ |
+

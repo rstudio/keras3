@@ -2,31 +2,47 @@
 % Please edit documentation in R/callbacks.R
 \name{callback_csv_logger}
 \alias{callback_csv_logger}
-\title{Callback that streams epoch results to a csv file}
+\title{Callback that streams epoch results to a CSV file.}
 \usage{
 callback_csv_logger(filename, separator = ",", append = FALSE)
 }
 \arguments{
-\item{filename}{filename of the csv file, e.g. 'run/log.csv'.}
+\item{filename}{Filename of the CSV file, e.g. \code{'run/log.csv'}.}
 
-\item{separator}{string used to separate elements in the csv file.}
+\item{separator}{String used to separate elements in the CSV file.}
 
-\item{append}{\code{TRUE}: append if file exists (useful for continuing training).
-\code{FALSE}: overwrite existing file,}
+\item{append}{Boolean. \code{TRUE}: append if file exists (useful for continuing
+training). \code{FALSE}: overwrite existing file.}
+}
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
 }
 \description{
-Supports all values that can be represented as a string
+Supports all values that can be represented as a string,
+including 1D iterables such as atomic vectors.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{csv_logger <- callback_csv_logger('training.log')
+model \%>\% fit(X_train, Y_train, callbacks = list(csv_logger))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other callbacks: 
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_remote_monitor}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\itemize{
+\item \url{https://keras.io/api/callbacks/csv_logger#csvlogger-class}
+}
+
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_remote_monitor}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

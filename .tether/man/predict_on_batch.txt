@@ -1,0 +1,11 @@
+__signature__
+keras.Model.predict_on_batch(self, x)
+__doc__
+Returns predictions for a single batch of samples.
+
+Args:
+    x: Input data. It must be array-like.
+
+Returns:
+    NumPy array(s) of predictions.
+

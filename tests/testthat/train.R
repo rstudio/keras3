@@ -1,4 +1,4 @@
-library(keras)
+library(keras3)
 
 # create model
 model <- keras_model_sequential()

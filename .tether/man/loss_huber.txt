@@ -1,0 +1,46 @@
+Help on class Huber in module keras.src.losses.losses:
+
+class Huber(LossFunctionWrapper)
+ |  Huber(delta=1.0, reduction='sum_over_batch_size', name='huber_loss')
+ |
+ |  Computes the Huber loss between `y_true` & `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  for x in error:
+ |      if abs(x) <= delta:
+ |          loss.append(0.5 * x^2)
+ |      elif abs(x) > delta:
+ |          loss.append(delta * abs(x) - 0.5 * delta^2)
+ |
+ |  loss = mean(loss, axis=-1)
+ |  ```
+ |  See: [Huber loss](https://en.wikipedia.org/wiki/Huber_loss).
+ |
+ |  Args:
+ |      delta: A float, the point where the Huber loss function changes from a
+ |          quadratic to linear.
+ |      reduction: Type of reduction to apply to loss. Options are `"sum"`,
+ |          `"sum_over_batch_size"` or `None`. Defaults to
+ |          `"sum_over_batch_size"`.
+ |      name: Optional name for the instance.
+ |
+ |  Method resolution order:
+ |      Huber
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    delta=1.0,
+ |    reduction='sum_over_batch_size',
+ |    name='huber_loss'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |

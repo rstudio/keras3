@@ -1,0 +1,13 @@
+__signature__
+keras.ops.lu_factor(x)
+__doc__
+Computes the lower-upper decomposition of a square matrix.
+
+Args:
+    x: A tensor of shape `(..., M, M)`.
+
+Returns:
+    A tuple of two tensors: a tensor of shape `(..., M, M)` containing the
+    lower and upper triangular matrices and a tensor of shape `(..., M)`
+    containing the pivots.
+

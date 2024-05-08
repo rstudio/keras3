@@ -1,0 +1,36 @@
+Help on class MeanSquaredLogarithmicError in module keras.src.losses.losses:
+
+class MeanSquaredLogarithmicError(LossFunctionWrapper)
+ |  MeanSquaredLogarithmicError(reduction='sum_over_batch_size', name='mean_squared_logarithmic_error')
+ |
+ |  Computes the mean squared logarithmic error between `y_true` & `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  loss = mean(square(log(y_true + 1) - log(y_pred + 1)))
+ |  ```
+ |
+ |  Args:
+ |      reduction: Type of reduction to apply to the loss. In almost all cases
+ |          this should be `"sum_over_batch_size"`.
+ |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+ |      name: Optional name for the loss instance.
+ |
+ |  Method resolution order:
+ |      MeanSquaredLogarithmicError
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    reduction='sum_over_batch_size',
+ |    name='mean_squared_logarithmic_error'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |

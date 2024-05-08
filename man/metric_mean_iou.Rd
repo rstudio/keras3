@@ -2,82 +2,164 @@
 % Please edit documentation in R/metrics.R
 \name{metric_mean_iou}
 \alias{metric_mean_iou}
-\title{Computes the mean Intersection-Over-Union metric}
+\title{Computes the mean Intersection-Over-Union metric.}
 \usage{
-metric_mean_iou(..., num_classes, name = NULL, dtype = NULL)
+metric_mean_iou(
+  ...,
+  num_classes,
+  name = NULL,
+  dtype = NULL,
+  ignore_class = NULL,
+  sparse_y_true = TRUE,
+  sparse_y_pred = TRUE,
+  axis = -1L
+)
 }
 \arguments{
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
 \item{num_classes}{The possible number of labels the prediction task can have.
-This value must be provided, since a confusion matrix of \code{dim}
-\code{c(num_classes, num_classes)} will be allocated.}
+This value must be provided, since a confusion matrix of dimension =
+\verb{[num_classes, num_classes]} will be allocated.}
 
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
+
+\item{ignore_class}{Optional integer. The ID of a class to be ignored during
+metric computation. This is useful, for example, in segmentation
+problems featuring a "void" class (commonly -1 or 255) in
+segmentation maps. By default (\code{ignore_class=NULL}), all classes are
+considered.}
+
+\item{sparse_y_true}{Whether labels are encoded using integers or
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
+is used to determine each sample's most likely associated label.}
+
+\item{sparse_y_pred}{Whether predictions are encoded using integers or
+dense floating point vectors. If \code{FALSE}, the \code{argmax} function
+is used to determine each sample's most likely associated label.}
+
+\item{axis}{(Optional) The dimension containing the logits. Defaults to \code{-1}.}
 }
 \value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
 }
 \description{
-Computes the mean Intersection-Over-Union metric
-}
-\details{
-Mean Intersection-Over-Union is a common evaluation metric for semantic image
-segmentation, which first computes the IOU for each semantic class and then
-computes the average over classes. IOU is defined as follows:
+Formula:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{  IOU = true_positive / (true_positive + false_positive + false_negative)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{iou <- true_positives / (true_positives + false_positives + false_negatives)
 }\if{html}{\out{</div>}}
 
-The predictions are accumulated in a confusion matrix, weighted by
-\code{sample_weight} and the metric is then calculated from it.
+Intersection-Over-Union is a common evaluation metric for semantic image
+segmentation.
+
+To compute IoUs, the predictions are accumulated in a confusion matrix,
+weighted by \code{sample_weight} and the metric is then calculated from it.
 
 If \code{sample_weight} is \code{NULL}, weights default to 1.
 Use \code{sample_weight} of 0 to mask values.
+
+Note that this class first computes IoUs for all individual classes, then
+returns the mean of these values.
 }
+\section{Examples}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# cm = [[1, 1],
+#        [1, 1]]
+# sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
+# iou = true_positives / (sum_row + sum_col - true_positives))
+# result = (1 / (2 + 2 - 1) + 1 / (2 + 2 - 1)) / 2 = 0.33
+m <- metric_mean_iou(num_classes = 2)
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
+               sample_weight=c(0.3, 0.3, 0.3, 0.1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.2380952, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+Usage with \code{compile()} API:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_mean_iou(num_classes=2)))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
-Other metrics: 
-\code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
-\code{\link{metric_auc}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_relative_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
-\code{\link{metric_mean_wrapper}()},
-\code{\link{metric_mean}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_precision}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+\itemize{
+\item \url{https://keras.io/api/metrics/segmentation_metrics#meaniou-class}
 }
+
+Other iou metrics: \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+
+Other metrics: \cr
+\code{\link{Metric}()} \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
+}
+\concept{iou metrics}
 \concept{metrics}

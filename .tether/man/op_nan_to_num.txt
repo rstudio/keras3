@@ -1,0 +1,21 @@
+__signature__
+keras.ops.nan_to_num(
+  x,
+  nan=0.0,
+  posinf=None,
+  neginf=None
+)
+__doc__
+Replace NaN with zero and infinity with large finite numbers.
+
+Args:
+    x: Input data.
+    nan: Optional float or int. Value to replace `NaN` entries with.
+    posinf: Optional float or int.
+        Value to replace positive infinity with.
+    neginf: Optional float or int.
+        Value to replace negative infinity with.
+
+Returns:
+    `x`, with non-finite values replaced.
+

@@ -1,0 +1,59 @@
+Help on class Flatten in module keras.src.layers.reshaping.flatten:
+
+class Flatten(keras.src.layers.layer.Layer)
+ |  Flatten(data_format=None, **kwargs)
+ |
+ |  Flattens the input. Does not affect the batch size.
+ |
+ |  Note: If inputs are shaped `(batch,)` without a feature axis, then
+ |  flattening adds an extra channel dimension and output shape is `(batch, 1)`.
+ |
+ |  Args:
+ |      data_format: A string, one of `"channels_last"` (default) or
+ |          `"channels_first"`. The ordering of the dimensions in the inputs.
+ |          `"channels_last"` corresponds to inputs with shape
+ |          `(batch, ..., channels)` while `"channels_first"` corresponds to
+ |          inputs with shape `(batch, channels, ...)`.
+ |          When unspecified, uses `image_data_format` value found in your Keras
+ |          config file at `~/.keras/keras.json` (if exists). Defaults to
+ |          `"channels_last"`.
+ |
+ |  Example:
+ |
+ |  >>> x = keras.Input(shape=(10, 64))
+ |  >>> y = keras.layers.Flatten()(x)
+ |  >>> y.shape
+ |  (None, 640)
+ |
+ |  Method resolution order:
+ |      Flatten
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    data_format=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  compute_output_spec(self, inputs)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

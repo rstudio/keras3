@@ -21,3 +21,11 @@ scratch
 inst/doc
 .Rprofile
 .Renviron
+revdep
+debug.py
+man-src/*/translate.patch
+*.keras
+**.weights.h5
+.Rapp.history
+*.csv
+*.zip

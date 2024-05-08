@@ -5,7 +5,7 @@
 \title{Callback used to stream events to a server.}
 \usage{
 callback_remote_monitor(
-  root = "https://localhost:9000",
+  root = "http://localhost:9000",
   path = "/publish/epoch/end/",
   field = "data",
   headers = NULL,
@@ -13,37 +13,47 @@ callback_remote_monitor(
 )
 }
 \arguments{
-\item{root}{root url of the target server.}
+\item{root}{String; root url of the target server.}
 
-\item{path}{path relative to root to which the events will be sent.}
+\item{path}{String; path relative to \code{root} to which the events will be sent.}
 
-\item{field}{JSON field under which the data will be stored.}
+\item{field}{String; JSON field under which the data will be stored.
+The field is used only if the payload is sent within a form
+(i.e. when \code{send_as_json = FALSE}).}
 
-\item{headers}{Optional named list of custom HTTP headers. Defaults to:
-\verb{list(Accept = "application/json", }Content-Type\verb{ = "application/json")}}
+\item{headers}{Named list; optional custom HTTP headers.}
 
-\item{send_as_json}{Whether the request should be sent as application/json.}
+\item{send_as_json}{Boolean; whether the request should be
+sent as \code{"application/json"}.}
+}
+\value{
+A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
 }
 \description{
-Callback used to stream events to a server.
-}
-\details{
-Events are sent to \code{root + '/publish/epoch/end/'} by default. Calls
-are HTTP POST, with a \code{data} argument which is a JSON-encoded dictionary
-of event data. If send_as_json is set to True, the content type of the
-request will be application/json. Otherwise the serialized JSON will be
-send within a form
+Requires the \code{requests} library.
+Events are sent to \code{root + '/publish/epoch/end/'} by default. Calls are
+HTTP POST, with a \code{data} argument which is a
+JSON-encoded named list of event data.
+If \code{send_as_json = TRUE}, the content type of the request will be
+\code{"application/json"}.
+Otherwise the serialized JSON will be sent within a form.
 }
 \seealso{
-Other callbacks: 
-\code{\link{callback_csv_logger}()},
-\code{\link{callback_early_stopping}()},
-\code{\link{callback_lambda}()},
-\code{\link{callback_learning_rate_scheduler}()},
-\code{\link{callback_model_checkpoint}()},
-\code{\link{callback_progbar_logger}()},
-\code{\link{callback_reduce_lr_on_plateau}()},
-\code{\link{callback_tensorboard}()},
-\code{\link{callback_terminate_on_naan}()}
+\itemize{
+\item \url{https://keras.io/api/callbacks/remote_monitor#remotemonitor-class}
+}
+
+Other callbacks: \cr
+\code{\link{Callback}()} \cr
+\code{\link{callback_backup_and_restore}()} \cr
+\code{\link{callback_csv_logger}()} \cr
+\code{\link{callback_early_stopping}()} \cr
+\code{\link{callback_lambda}()} \cr
+\code{\link{callback_learning_rate_scheduler}()} \cr
+\code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_reduce_lr_on_plateau}()} \cr
+\code{\link{callback_swap_ema_weights}()} \cr
+\code{\link{callback_tensorboard}()} \cr
+\code{\link{callback_terminate_on_nan}()} \cr
 }
 \concept{callbacks}

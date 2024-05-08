@@ -18,8 +18,11 @@
 #'
 #'   Models must be compiled again after weights are frozen or unfrozen.
 #'
-#' @examples \dontrun{
-# instantiate a VGG16 model
+#' @details
+#' # Examples
+#'
+#' ```{r, strip.white = FALSE}
+#' # instantiate a VGG16 model
 #' conv_base <- application_vgg16(
 #'   weights = "imagenet",
 #'   include_top = FALSE,
@@ -29,19 +32,20 @@
 #' # freeze it's weights
 #' freeze_weights(conv_base)
 #'
+#' # Note the "Trainable" column
 #' conv_base
 #'
 #' # create a composite model that includes the base + more layers
-#' model <- keras_model_sequential() %>%
-#'   conv_base() %>%
-#'   layer_flatten() %>%
-#'   layer_dense(units = 256, activation = "relu") %>%
+#' model <- keras_model_sequential(input_batch_shape = shape(conv_base$input)) |>
+#'   conv_base() |>
+#'   layer_flatten() |>
+#'   layer_dense(units = 256, activation = "relu") |>
 #'   layer_dense(units = 1, activation = "sigmoid")
 #'
 #' # compile
-#' model %>% compile(
+#' model |> compile(
 #'   loss = "binary_crossentropy",
-#'   optimizer = optimizer_rmsprop(lr = 2e-5),
+#'   optimizer = optimizer_rmsprop(learning_rate = 2e-5),
 #'   metrics = c("accuracy")
 #' )
 #'
@@ -49,14 +53,13 @@
 #' print(model, expand_nested = TRUE)
 #'
 #'
-#'
 #' # unfreeze weights from "block5_conv1" on
 #' unfreeze_weights(conv_base, from = "block5_conv1")
 #'
 #' # compile again since we froze or unfroze weights
-#' model %>% compile(
+#' model |> compile(
 #'   loss = "binary_crossentropy",
-#'   optimizer = optimizer_rmsprop(lr = 2e-5),
+#'   optimizer = optimizer_rmsprop(learning_rate = 2e-5),
 #'   metrics = c("accuracy")
 #' )
 #'
@@ -66,7 +69,7 @@
 #' # freeze only the last 5 layers
 #' freeze_weights(conv_base, from = -5)
 #' conv_base
-#' # equivalently, also freeze only the last 5 layers
+#' # freeze only the last 5 layers, a different way
 #' unfreeze_weights(conv_base, to = -6)
 #' conv_base
 #'
@@ -76,7 +79,8 @@
 #'
 #' model <- application_efficientnet_b0()
 #' freeze_weights(model, which = is_batch_norm_layer)
-#' model
+#' # print(model)
+#'
 #' # equivalent to:
 #' for(layer in model$layers) {
 #'   if(is_batch_norm_layer(layer))
@@ -84,7 +88,10 @@
 #'   else
 #'     layer$trainable <- TRUE
 #' }
-#' }
+#' ```
+#' @returns The input `object` with frozen weights is returned, invisibly. Note,
+#'   `object` is modified in place, and the return value is only provided to
+#'   make usage with the pipe convenient.
 #' @export
 freeze_weights <- function(object, from = NULL, to = NULL, which = NULL) {
 
@@ -228,4 +235,9 @@ apply_which_trainable <- function(object, which, trainable) {
   }
 
   return(invisible(object))
+}
+
+
+is_layer <- function(object) {
+  inherits(object, "keras.src.layers.layer.Layer")
 }

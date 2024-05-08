@@ -1,0 +1,10 @@
+__signature__
+keras.ops.vstack(xs)
+__doc__
+Stack tensors in sequence vertically (row wise).
+
+Args:
+    xs: Sequence of tensors.
+
+Returns:
+    Tensor formed by stacking the given tensors.

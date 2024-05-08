@@ -2,83 +2,207 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_contrast}
 \alias{layer_random_contrast}
-\title{Adjust the contrast of an image or images by a random factor}
+\title{A preprocessing layer which randomly adjusts contrast during training.}
 \usage{
 layer_random_contrast(object, factor, seed = NULL, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{factor}{a positive float represented as fraction of value, or a list of
-size 2 representing lower and upper bound. When represented as a single
-float, lower = upper. The contrast factor will be randomly picked between
-\verb{[1.0 - lower, 1.0 + upper]}.}
+\item{factor}{a positive float represented as fraction of value, or a tuple of
+size 2 representing lower and upper bound.
+When represented as a single float, lower = upper.
+The contrast factor will be randomly picked between
+\verb{[1.0 - lower, 1.0 + upper]}. For any pixel x in the channel,
+the output will be \code{(x - mean) * factor + mean}
+where \code{mean} is the mean value of the channel.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{standard layer arguments.}
+\item{...}{For forward/backward compatability.}
+}
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
 }
 \description{
-Adjust the contrast of an image or images by a random factor
-}
-\details{
-Contrast is adjusted independently for each channel of each image during
-training.
+This layer will randomly adjust the contrast of an image or images
+by a random factor. Contrast is adjusted independently
+for each channel of each image during training.
 
 For each channel, this layer computes the mean of the image pixels in the
 channel and then adjusts each component \code{x} of each pixel to
 \code{(x - mean) * contrast_factor + mean}.
 
-Input shape:
-3D (unbatched) or 4D (batched) tensor with shape:
-\verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]}) and
+in integer or floating point dtype.
+By default, the layer will output floats.
 
-Output shape:
+\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+(independently of which backend you're using).
+}
+\section{Input Shape}{
 3D (unbatched) or 4D (batched) tensor with shape:
 \verb{(..., height, width, channels)}, in \code{"channels_last"} format.
 }
+
+\section{Output Shape}{
+3D (unbatched) or 4D (batched) tensor with shape:
+\verb{(..., height, width, channels)}, in \code{"channels_last"} format.
+}
+
 \seealso{
 \itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomContrast}
-\item \url{https://keras.io/api/layers/preprocessing_layers/}
+\item \url{https://keras.io/api/layers/preprocessing_layers/image_augmentation/random_contrast#randomcontrast-class}
 }
 
-Other image augmentation layers: 
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()}
+Other image augmentation layers: \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
 
-Other preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_center_crop}()},
-\code{\link{layer_discretization}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_normalization}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+Other preprocessing layers: \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
 \concept{image augmentation layers}
+\concept{layers}
 \concept{preprocessing layers}

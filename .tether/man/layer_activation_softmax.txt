@@ -1,0 +1,67 @@
+Help on class Softmax in module keras.src.layers.activations.softmax:
+
+class Softmax(keras.src.layers.layer.Layer)
+ |  Softmax(axis=-1, **kwargs)
+ |
+ |  Softmax activation layer.
+ |
+ |  Formula:
+ |  ``` python
+ |  exp_x = exp(x - max(x))
+ |  f(x) = exp_x / sum(exp_x)
+ |  ```
+ |
+ |  Example:
+ |  >>>softmax_layer = keras.layers.activations.Softmax()
+ |  >>>input = np.array([1.0, 2.0, 1.0])
+ |  >>>result = softmax_layer(input)
+ |  [0.21194157, 0.5761169, 0.21194157]
+ |
+ |
+ |  Args:
+ |      axis: Integer, or list of Integers, axis along which the softmax
+ |          normalization is applied.
+ |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
+ |
+ |  Call arguments:
+ |      inputs: The inputs (logits) to the softmax layer.
+ |      mask: A boolean mask of the same shape as `inputs`. The mask
+ |          specifies 1 to keep and 0 to mask. Defaults to `None`.
+ |
+ |  Returns:
+ |      Softmaxed output with the same shape as `inputs`.
+ |
+ |  Method resolution order:
+ |      Softmax
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    axis=-1,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(
+ |    self,
+ |    inputs,
+ |    mask=None
+ |  )
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

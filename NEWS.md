@@ -1,6 +1,179 @@
-# keras (development version)
+# keras3 (development version)
+
+- Chains of `layer_*` calls with `|>` now instantiate layers in the
+  same order as `%>%` pipe chains: left-hand-side first (#1440).
+
+- `iterate()`, `iter_next()` and `as_iterator()` are now reexported from reticulate.
+
+User facing changes with upstream Keras v3.3.2:
+
+- new function: `op_ctc_decode()`
+- new function: `op_eigh()`
+- new function: `op_select()`
+- new function: `op_vectorize()`
+- new function: `op_image_rgb_to_grayscale()`
+- new function: `loss_tversky()`
+
+- new args: `layer_resizing(pad_to_aspect_ratio, fill_mode, fill_value)`
+- new arg: `layer_embedding(weights)` for providing an initial weights matrix
+
+- new args: `op_nan_to_num(nan, posinf, neginf)`
+- new args: `op_image_resize(crop_to_aspect_ratio, pad_to_aspect_ratio, fill_mode, fill_value)`
+- new args: `op_argmax(keepdims)` and `op_argmin(keepdims)`
+
+- new arg: `clear_session(free_memory)` for clearing without invoking the garbage collector.
+
+- `metric_kl_divergence()` and `loss_kl_divergence()` clip inputs
+  (`y_true` and `y_pred`) to the `[0, 1]` range.
+
+- new `Layer()` attributes: `metrics`, `dtype_policy`
+
+- Added initial support for float8 training
+
+- `layer_conv_*d()` layers now support LoRa
+
+- `op_digitize()` now supports sparse tensors.
+
+- Models and layers now return owned metrics recursively.
+
+- Add pickling support for Keras models. (e.g., via `reticulate::py_save_object()`)
+  Note that pickling is not recommended, prefer using Keras saving APIs.
+
+
+# keras3 0.2.0
+
+New functions:
+
+  - `quantize_weights()`: quantize model or layer weights in-place. Currently,
+    only `Dense`, `EinsumDense`, and `Embedding` layers are supported (which is enough to
+    cover the majority of transformers today)
+  - `layer_mel_spectrogram()`
+  - `layer_flax_module_wrapper()`
+  - `layer_jax_model_wrapper()`
+
+  - `loss_dice()`
+
+  - `random_beta()`
+  - `random_binomial()`
+
+  - `config_set_backend()`: change the backend after Keras has initialized.
+  - `config_dtype_policy()`
+  - `config_set_dtype_policy()`
+
+  - New Ops
+    - `op_custom_gradient()`
+    - `op_batch_normalization()`
+    - `op_image_crop()`
+    - `op_divide_no_nan()`
+    - `op_normalize()`
+    - `op_correlate()`
+    - `
+  - New family of linear algebra ops
+    - `op_cholesky()`
+    - `op_det()`
+    - `op_eig()`
+    - `op_inv()`
+    - `op_lu_factor()`
+    - `op_norm()`
+    - `op_erfinv()`
+    - `op_solve_triangular()`
+    - `op_svd()`
+
+- `audio_dataset_from_directory()`, `image_dataset_from_directory()` and `text_dataset_from_directory()` gain a `verbose` argument (default `TRUE`)
+
+- `image_dataset_from_directory()` gains `pad_to_aspect_ratio` argument (default `FALSE`)
+
+- `to_categorical()`, `op_one_hot()`, and `fit()` can now accept R factors,
+  offset them to be 0-based (reported in `#1055`).
+
+- `op_convert_to_numpy()` now returns unconverted NumPy arrays.
+
+- `op_array()` and `op_convert_to_tensor()` no longer error when casting R
+   doubles to integer types.
+
+- `export_savedmodel()` now works with a Jax backend.
+
+- `Metric()$add_variable()` method gains arg: `aggregration`.
+- `Layer()$add_weight()` method gains args: `autocast`, `regularizer`, `aggregation`.
+
+- `op_bincount()`, `op_multi_hot()`, `op_one_hot()`, and `layer_category_encoding()` now support sparse tensors.
+
+- `op_custom_gradient()` now supports the PyTorch backend
+
+- `layer_lstm()` and `layer_gru()` gain arg `use_cudnn`, default `'auto'`.
+
+- Fixed an issue where `application_preprocess_inputs()` would error if supplied
+  an R array as input.
+
+- Doc improvements.
+
+# keras3 0.1.0
+
+- The package has been rebuilt for Keras 3.0. Refer to <blogpost> for an overview
+  and https://keras.posit.co for the current up-to-date documentation.
+
+# keras 2.13.0
+
+- Default TF version installed by `install_keras()` is now 2.13.
+
+- Updated layers:
+  - `layer_batch_normalization()` updated signature, with changes to options for distributed training.
+  - `layer_embedding()` gains a `sparse` argument.
+
+- Fixed deadlock when an R generator was passed to `fit()`, `predict()`, and other endpoints.
+
+- When `fit(verbose = "auto")` is evaluated in the context of a knitr document
+  (e.g., quarto or rmarkdown document being rendered), verbose will now
+  default to `2`, showing one line per epoch.
+
+# keras 2.11.1
+
+- Update S3 method formals per new CRAN requirement (`r_to_py.keras_layer_wrapper()`)
+
+- Fixed an issue where `get_file()` would place incorrectly
+  save files in the current working directory. (#1365)
+
+# keras 2.11.0
+
+- Default TensorFlow version installed by `install_keras()` is now 2.11.
+
+- All optimizers have been updated for keras/tensorflow version 2.11.
+  Arguments to all the optimizers have changed. To access the previous
+  optimizer implementations, use the constructors available at
+  `keras$optimizers$legacy`. For example, use `keras$optimizers$legacy$Adam()`
+  for the previous implementation of `optimizer_adam()`.
+
+- New optimizer `optimizer_frtl()`.
+
+- updates to layers:
+  - `layer_attention()` gains `score_mode` and `dropout` arguments.
+  - `layer_discretization()` gains `output_mode` and `sparse` arguments.
+  - `layer_gaussian_dropout()` and `layer_gaussian_noise()` gain a `seed` argument.
+  - `layer_hashing()` gains `output_mode` and `sparse` arguments.
+  - `layer_integer_lookup()` gains `vocabulary_dtype` and `idf_weights` arguments.
+  - `layer_normalization()` gains an `invert` argument.
+  - `layer_string_lookup()` gains an `idf_weights` argument.
+
+- Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`
+  would result in an error (#1338)
 
 - New `callback_backup_and_restore()`, for resuming an interrupted `fit()` call.
+
+- The merging family of layers (`layer_add`, `layer_concatenate`, etc.) gain the ability
+  to accept layers in `...`, allowing for easier composition of residual blocks with the pipe `%>%`.
+  e.g. something like this now works:
+  ```r
+  block_1_output <- ...
+  block_2_output <- block_1_output %>%
+    layer_conv_2d(64, 3, activation = "relu", padding = "same") %>%
+    layer_add(block_1_output)
+  ```
+
+- `model$get_config()` method now returns an R object that can be safely serialized
+  to rds.
+
+- `keras_array()` now reflects unconverted Python objects. This enables passing
+  objects like `pandas.Series()` to `fit()` and `evaluate()` methods. (#1341)
 
 # keras 2.9.0
 
@@ -173,10 +346,10 @@
   processes one step of a sequence.
   New symbols:
     - `layer_rnn()`, which can compose with builtin cells:
-    - `layer_gru_cell()`
-    - `layer_lstm_cell()`
-    - `layer_simple_rnn_cell()`
-    - `layer_stacked_rnn_cells()`
+    - `rnn_cell_gru()`
+    - `rnn_cell_lstm()`
+    - `rnn_cell_simple()`
+    - `rnn_cells_stack()`
   To learn more, including how to make a custom cell layer, see the new vignette:
   "Working with RNNs".
 
@@ -329,7 +502,7 @@ Breaking changes (Tensorflow 2.6):
 - Note: The following breaking changes are specific to Tensorflow version 2.6.0.
   However, the keras R package maintains compatibility with multiple versions of Tensorflow/Keras.
   You can upgrade the R package and still preserve the previous behavior by
-  installing a specific version of Tensorflow: `keras::install_keras(tensorflow="2.4.0")`
+  installing a specific version of Tensorflow: `keras3::install_keras(tensorflow="2.4.0")`
 
 - `predict_proba()` and `predict_classes()` were removed.
 - `model_to_yaml()` and `model_from_yaml()` were removed.

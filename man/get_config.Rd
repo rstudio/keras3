@@ -7,12 +7,15 @@
 \usage{
 get_config(object)
 
-from_config(config)
+from_config(config, custom_objects = NULL)
 }
 \arguments{
 \item{object}{Layer or model object}
 
 \item{config}{Object with layer or model configuration}
+
+\item{custom_objects}{list of custom objects needed to instantiate the layer,
+e.g., custom layers defined by \code{new_layer_class()} or similar.}
 }
 \value{
 \code{get_config()} returns an object with the configuration,
@@ -26,36 +29,25 @@ using \code{from_config()}. The config does not include connectivity information
 nor the class name (those are handled externally).
 }
 \note{
-Objects returned from \code{get_config()} are not serializable. Therefore,
-if you want to save and restore a model across sessions, you can use the
-\code{model_to_json()} function (for model configuration only, not weights) or
-the \code{save_model_tf()} function to save the model configuration and weights
+Objects returned from \code{get_config()} are not serializable via RDS. If
+you want to save and restore a model across sessions, you can use
+\code{\link[=save_model_config]{save_model_config()}} (for model configuration only, not weights)
+or \code{\link[=save_model]{save_model()}} to save the model configuration and weights
 to the filesystem.
 }
 \seealso{
-Other model functions: 
-\code{\link{compile.keras.engine.training.Model}()},
-\code{\link{evaluate.keras.engine.training.Model}()},
-\code{\link{evaluate_generator}()},
-\code{\link{fit.keras.engine.training.Model}()},
-\code{\link{fit_generator}()},
-\code{\link{get_layer}()},
-\code{\link{keras_model_sequential}()},
-\code{\link{keras_model}()},
-\code{\link{multi_gpu_model}()},
-\code{\link{pop_layer}()},
-\code{\link{predict.keras.engine.training.Model}()},
-\code{\link{predict_generator}()},
-\code{\link{predict_on_batch}()},
-\code{\link{predict_proba}()},
-\code{\link{summary.keras.engine.training.Model}()},
-\code{\link{train_on_batch}()}
+Other model functions: \cr
+\code{\link{get_layer}()} \cr
+\code{\link{keras_model}()} \cr
+\code{\link{keras_model_sequential}()} \cr
+\code{\link{pop_layer}()} \cr
+\code{\link{summary.keras.src.models.model.Model}()} \cr
 
-Other layer methods: 
-\code{\link{count_params}()},
-\code{\link{get_input_at}()},
-\code{\link{get_weights}()},
-\code{\link{reset_states}()}
+Other layer methods: \cr
+\code{\link{count_params}()} \cr
+\code{\link{get_weights}()} \cr
+\code{\link{quantize_weights}()} \cr
+\code{\link{reset_state}()} \cr
 }
 \concept{layer methods}
 \concept{model functions}

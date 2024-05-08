@@ -5,28 +5,37 @@ test_call_succeeds("pad_sequences", {
   b <- pad_sequences(a, maxlen=3, padding='pre')
   expect_equal(b, matrix(c(0L, 0L, 1L, 0L, 1L, 2L, 1L, 2L, 3L), nrow = 3, ncol = 3))
 })
-
+# https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/sequence.py
 test_call_succeeds("make_sampling_table", {
+  skip("make_sampling_table")
   make_sampling_table(size = 40)
 })
 
 test_call_succeeds("skipgrams", {
+  skip("skipgrams")
   skipgrams(1:3, vocabulary_size = 3)
 })
 
 test_call_succeeds("text_one_hot", {
+  skip("text_one_hot")
+  # TODO: also deprecated:
+  # https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/text.py
   text <- 'The cat sat on the mat.'
   encoded <- text_one_hot(text, 5)
   expect_equal(length(encoded), 6)
 })
 
 test_call_succeeds("text_hashing_trick", required_version = "2.0.5", {
+  skip("text_hashing_trick")
+  # TODO: also deprecated:
+  # https://github.com/keras-team/keras/blob/master/keras/legacy/preprocessing/text.py
   text <- 'The cat sat on the mat.'
   encoded <- text_hashing_trick(text, 5)
   expect_equal(length(encoded), 6)
 })
 
 test_call_succeeds("missing text data", required_version = "2.0.5", {
+  skip("text_hashing_trick")
   expect_error(text_hashing_trick(letters, 10),
                "`text` should be length 1")
 
@@ -39,6 +48,7 @@ test_call_succeeds("missing text data", required_version = "2.0.5", {
 })
 
 test_succeeds("use of text tokenizer", {
+  skip("text_tokenizer")
   texts <- c(
     'The cat sat on the mat.',
     'The dog sat on the log.',
@@ -61,9 +71,10 @@ test_succeeds("use of text tokenizer", {
 
 test_succeeds("image can be preprocessed", {
   if (have_pillow()) {
-    img <- image_load("digit.jpeg")
+    img <- image_load(test_path("digit.jpeg"))
     img_arr <- image_to_array(img)
     img_arr <- array_reshape(img_arr, c(1, dim(img_arr)))
+    skip("imagenet_preprocess_input")
     img_arr1 <- imagenet_preprocess_input(img_arr)
     img_arr2 <- preprocess_input(img_arr, tensorflow::tf$keras$applications$imagenet_utils$preprocess_input)
     expect_equal(img_arr1, img_arr2)
@@ -72,16 +83,18 @@ test_succeeds("image can be preprocessed", {
 
 test_succeeds("images arrays can be saved", {
   if (have_pillow()) {
-    img <- image_load("digit.jpeg")
+    img <- image_load(test_path("digit.jpeg"))
     img_arr <- image_to_array(img)
-    image_array_save(img_arr, "digit2.jpeg")
+    image_array_save(img_arr, test_path("digit2.jpeg"))
   }
 })
 
 test_succeeds("images arrays can be resized", {
+  skip("image_array_resize")
   if (have_pillow()) {
     img <- image_load("digit.jpeg")
     img_arr <- image_to_array(img)
+    # TODO, consider keeping image_array_resize.
     image_array_resize(img_arr, height = 450, width = 448) %>%
       image_array_save("digit_resized.jpeg")
   }
@@ -92,6 +105,7 @@ test_succeeds("flow images from dataframe works", {
   if (!reticulate::py_module_available("pandas"))
     skip("Needs pandas")
 
+  skip("flow_images_from_dataframe")
 
   if (have_pillow()) {
 
@@ -132,6 +146,7 @@ test_succeeds("flow images from dataframe works", {
 
 test_succeeds("flow images from directory works", {
 
+  skip("image_data_generator")
   if (!have_pillow())
     skip("Pillow required.")
 
@@ -189,18 +204,27 @@ test_succeeds("images_dataset_from_directory", {
   if(!requireNamespace("jpeg", quietly = TRUE))
     skip("'jpeg' package required")
 
+  # if(!requireNamespace("xfun", quietly = TRUE))
+  #   skip("'xfun' package required")
+  # num2word <- xfun::numbers_to_words
+  n2w <- function(x) switch(x+1L, "zero", "one", "two", "three", "four", "five",
+                            "six", "seven", "eight", "nine", stop("not implemented"))
+
   dir <- tempfile()
   dir.create(dir)
-  dir.create(file.path(dir, "0"))
-  dir.create(file.path(dir, "1"))
+  on.exit(unlink(dir, recursive = TRUE))
+
+  for(i in 0:3)
+    dir.create(file.path(dir, n2w(i)))
 
   mnist <- dataset_mnist()
-  ind <- which(mnist$train$y %in% c(0, 1))
+  ind <- which(mnist$train$y %in% 0:3)
 
   for (i in ind) {
     img <- mnist$train$x[i,,]/255
-    rname <- paste(sample(letters, size = 10, replace = TRUE), collapse = "")
-    jpeg::writeJPEG(img, target = paste0(dir, "/", mnist$train$y[i], "/", rname, ".jpeg"))
+    fname <- paste0(c(i, "-", sample(letters, size = 5, replace = TRUE), ".jpeg"),
+                    collapse = "")
+    jpeg::writeJPEG(img, target = file.path(dir, n2w(mnist$train$y[i]), fname))
   }
 
   data <- image_dataset_from_directory(dir)

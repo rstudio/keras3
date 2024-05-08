@@ -1,134 +1,209 @@
-#' Install TensorFlow and Keras, including all Python dependencies
+#' Install Keras
 #'
-#' This function will install Tensorflow and all Keras dependencies. This is a
-#' thin wrapper around [`tensorflow::install_tensorflow()`], with the only
-#' difference being that this includes by default additional extra packages that
-#' keras expects, and the default version of tensorflow installed by
-#' `install_keras()` may at times be different from the default installed
-#' `install_tensorflow()`. The default version of tensorflow installed by
-#' `install_keras()` is "`r default_version`".
+#' This function will install Keras along with a selected backend, including all Python dependencies.
 #'
-#' @details The default additional packages are:
-#' `r paste(default_extra_packages("nightly"), collapse = ", ")`, with their
-#'   versions potentially constrained for compatibility with the
-#'   requested tensorflow version.
+#' @param envname Name of or path to a Python virtual environment
+#' @param extra_packages Additional Python packages to install alongside Keras
+#' @param python_version Passed on to `reticulate::virtualenv_starter()`
+#' @param backend Which backend(s) to install. Accepted values include `"tensorflow"`, `"jax"` and `"torch"`
+#' @param gpu whether to install a GPU capable version of the backend.
+#' @param restart_session Whether to restart the R session after installing (note this will only occur within RStudio).
+#' @param ... reserved for future compatibility.
 #'
-#' @inheritParams tensorflow::install_tensorflow
-#'
-#' @param tensorflow Synonym for `version`. Maintained for backwards.
+#' @returns No return value, called for side effects.
 #'
 #' @seealso [`tensorflow::install_tensorflow()`]
 #' @export
-install_keras <- function(method = c("auto", "virtualenv", "conda"),
-                          conda = "auto",
-                          version = "default",
-                          tensorflow = version,
-                          extra_packages = NULL,
-                          ...,
-                          pip_ignore_installed = TRUE) {
-  method <- match.arg(method)
+install_keras <- function(
+    envname = "r-keras", ...,
+    extra_packages = c("scipy", "pandas", "Pillow", "pydot", "ipython", "tensorflow_datasets"),
+    python_version = ">=3.9,<=3.11",
+    # backend = "tensorflow",
+    backend = c("tensorflow", "jax"),
+    # backend = "tf-nightly",
+    gpu = NA,
+    restart_session = TRUE) {
 
-  if(is_mac_arm64()) {
-    return(tensorflow::install_tensorflow(
-      method = method,
-      conda = conda,
-      version = version,
-      extra_packages = c("pandas", "Pillow",
-                         "pydot",
-                         "tensorflow-hub",
-                         "tensorflow-datasets",
-                         extra_packages),
-      ...))
+  if (is.na(gpu)) {
+    has_nvidia_gpu <- function()
+      tryCatch(as.logical(length(system("lspci | grep -i nvidia", intern = TRUE))),
+               warning = function(w) FALSE)
+    # don't install tensorflow-metal until it's been updated
+    # https://pypi.org/project/tensorflow-metal/#history
+    gpu <- (is_linux() && has_nvidia_gpu()) ## ||  is_mac_arm64()
   }
 
-  pkgs <- default_extra_packages(tensorflow)
-  if(!is.null(extra_packages)) # user supplied package version constraints take precedence
-    pkgs[gsub("[=<>~]{1,2}[0-9.]+$", "", extra_packages)] <- extra_packages
+  # keras requires tensorflow be installed still.
+  if(!any(grepl("tensorflow|tf-nightly", backend)))
+    backend <- c("tensorflow", backend)
 
-  if(tensorflow %in% c("cpu", "gpu"))
-    tensorflow <- paste0("default-", tensorflow)
+  if (isTRUE(gpu)) {
+    message("Installing GPU components")
+    if (is_mac_arm64()) {
+      jax <- c("jax-metal") # ??? do we still need this, "ml-dtypes==0.2.*")
+      ## installation of 'tensorflow-metal' is disabled until a new version that
+      ## is compatible with TF v2.16 is released.
+      # tensorflow <- c("tensorflow", "tensorflow-metal")
+    } else if (is_linux()) {
+      jax <- c("jax[cuda12_pip]", "-f",
+         "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html")
+      tensorflow <- "tensorflow[and-cuda]"
+    }
+  } else { # no GPU
+    jax <- "jax[cpu]"
+    tensorflow <- if(is_linux()) "tensorflow-cpu" else "tensorflow"
+  }
 
-  if(grepl("^default", tensorflow))
-    tensorflow <- sub("^default", as.character(default_version), tensorflow)
+  # The "numpy" backend requires that "jax" be installed
+  # if("jax" %in% backend && !is.null(extra_packages))
+  #   # undeclared dependency, import fails otherwise
+  #   append(extra_packages) <- "packaging"
 
-  tensorflow::install_tensorflow(
-    method = match.arg(method),
-    conda = conda,
-    version = tensorflow,
-    extra_packages = pkgs,
-    pip_ignore_installed = pip_ignore_installed,
-    ...
+  backend <- unlist(lapply(backend, function(name)
+    switch(name,
+           jax = jax,
+           tensorflow = tensorflow,
+           "tf-nightly" = local({
+             tensorflow <- sub("tensorflow", "tf-nightly", x = tensorflow, fixed = TRUE)
+             replace_val(tensorflow, "tf-nightly-metal", "tensorflow-metal")
+           }),
+           name)
+    ))
+
+  reticulate::virtualenv_create(
+    envname = envname,
+    version = python_version,
+    force = identical(envname, "r-keras"),
+    packages = NULL
   )
+  extra_packages <- unique(extra_packages)
+  if (length(extra_packages))
+    reticulate::py_install(extra_packages, envname = envname)
+
+  if (length(backend))
+    reticulate::py_install(backend, envname = envname)
+
+  if(gpu && is_linux()) {
+    configure_cudnn_symlinks(envname = envname)
+  }
+
+  reticulate::py_install("keras==3.*", envname = envname)
+                         #, pip_ignore_installed = TRUE)
+
+  message("Finished installing Keras!")
+  if (restart_session && requireNamespace("rstudioapi", quietly = TRUE) &&
+    rstudioapi::hasFun("restartSession")) {
+    rstudioapi::restartSession()
+  }
+
+  invisible(NULL)
 }
 
-default_version <- numeric_version("2.9")
+is_linux <- function() {
+  unname(Sys.info()[["sysname"]] == "Linux")
+}
 
-default_extra_packages <- function(tensorflow_version = "default") {
-  pkgs <- c(
-    "tensorflow-hub",
-    "scipy",
-    "requests",
-    "pyyaml",
-    "Pillow",
-    "h5py",
-    "pandas",
-    "pydot")
-  names(pkgs) <- pkgs
-  v <- tensorflow_version
+#' Configure a Keras backend
+#'
+#' @param backend string, can be `"tensorflow"`, `"jax"`, `"numpy"`, or `"torch"`.
+#'
+#' @details
+#' These functions allow configuring which backend keras will use.
+#' Note that only one backend can be configured at a time.
+#'
+#' The function should be called after `library(keras3)` and before calling
+#' other functions within the package (see below for an example).
+#'
+#' There is experimental support for changing the backend after keras has initialized.
+#' using `config_set_backend()`.
+#' ```r
+#' library(keras3)
+#' use_backend("tensorflow")
+#' ```
+#' @returns Called primarily for side effects. Returns the provided `backend`, invisibly.
+#' @export
+use_backend <- function(backend) {
 
-  if(grepl("nightly|release", v))
-    return(pkgs)
-
-  ## extract just the version
-  # drop potential suffix
-  v <- sub("-?(gpu|cpu)$", "", v)
-  # treat rc as regular patch release
-  v <- sub("rc[0-9]+", "", v)
-
-  constraint <- sub("^([><=~]{,2}).*", "\\1", v)
-  v <- substr(v, nchar(constraint)+1, nchar(v))
-
-  if(v %in% c("default", "")) # "" might be from cpu|gpu
-    v <- default_version
-
-  v <- numeric_version(v)
-  if(nzchar(constraint)) {
-    # try to accommodate user supplied constraints by bumping `v` up or down
-    l <- length(unclass(v)[[1]])
-    switch(constraint,
-           ">" = v[[1, l + 1]] <- 1,
-           "<" = {
-             v <- unclass(v)[[1]]
-             if(v[l] == 0) l <- l-1
-             v[c(l, l+1)] <- c(v[l] - 1, 9999)
-             v <- numeric_version(paste0(v, collapse = "."))
-           },
-           "~=" = v[[1, l]] <- 9999)
+  if (is_keras_loaded()) {
+    if (config_backend() != backend)
+      stop("The keras backend must be set before keras has inititialized. Please restart the R session.")
   }
+  Sys.setenv(KERAS_BACKEND = backend)
 
-  if (v >= "2.6") {
-    # model.to_yaml/from_yaml removed in 2.6
-    pkgs <- pkgs[names(pkgs) != "pyyaml"]
-    return(pkgs)
-  }
-
-  if (v >= "2.4") {
-    pkgs["Pillow"] <- "Pillow<8.3"
-    return(pkgs)
-  }
-
-  if (v >= "2.1") {
-    pkgs["pyyaml"] <- "pyyaml==3.12"
-    pkgs["h5py"] <- "h5py==2.10.0"
-    return(pkgs)
-  }
-
-  pkgs
+  if (reticulate::py_available())
+    reticulate::import("os")$environ$update(list(KERAS_BACKEND = backend))
+  invisible(backend)
 }
 
 
-#  @inheritSection tensorflow::install_tensorflow "Custom Installation" "Apple Silicon" "Additional Packages"
-#  @inherit tensorflow::install_tensorflow details
-# @inherit tensorflow::install_tensorflow params return references description details sections
-# ## everything except 'seealso' to avoid this warning
-# ## Warning: Link to unknown topic in inherited text: keras::install_keras
+is_keras_loaded <- function() {
+  # package .onLoad() has run (can be FALSE if in devtools::load_all())
+  !is.null(keras) &&
+
+  # python is initialized
+  reticulate::py_available() &&
+
+  # the keras module proxy has been resolved
+  # (reticulate:::py_module_proxy_import()
+  #  removes 'module' from the lazy_loaded PyObjectRef module env)
+  !exists("module", envir = keras)
+}
+
+
+
+get_cudnn_path <- function(python) {
+
+  # For TF 2.13, this assumes that someone already has cudn 11-8 installed,
+  # e.g., on ubuntu:
+  # sudo apt install cuda-toolkit-11-8
+  # also, that `python -m pip install 'nvidia-cudnn-cu11==8.6.*'`
+
+  force(python)
+  cudnn_module_path <- suppressWarnings(system2(
+    python, c("-c", shQuote("import nvidia.cudnn;print(nvidia.cudnn.__file__)")),
+    stdout = TRUE, stderr = TRUE))
+  if (!is.null(attr(cudnn_module_path, "status")) ||
+      !is_string(cudnn_module_path) ||
+      !file.exists(cudnn_module_path))
+    return()
+
+  dirname(cudnn_module_path)
+
+}
+
+configure_cudnn_symlinks <- function(envname) {
+  python <- reticulate::virtualenv_python(envname)
+
+  cudnn_path <- get_cudnn_path(python)
+  # "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn"
+
+  cudnn_sos <- Sys.glob(paste0(cudnn_path, "/lib/*.so*"))
+  # [1] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_adv_infer.so.8"
+  # [2] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_adv_train.so.8"
+  # [3] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_cnn_infer.so.8"
+  # [4] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_cnn_train.so.8"
+  # [5] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_ops_infer.so.8"
+  # [6] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn_ops_train.so.8"
+  # [7] "~/.virtualenvs/r-keras/lib/python3.11/site-packages/nvidia/cudnn/lib/libcudnn.so.8"
+
+  # "/home/tomasz/.virtualenvs/r-tensorflow/lib/python3.8/site-packages/tensorflow/__init__.py"
+  tf_lib_path <- system2(python, c("-c", shQuote("import tensorflow as tf; print(tf.__file__)")),
+                         stderr = FALSE, stdout = TRUE)
+  tf_lib_path <- dirname(tf_lib_path)
+
+  from <- sub("^.*/site-packages/", "../", cudnn_sos)
+  to <- file.path(tf_lib_path, basename(cudnn_sos))
+  writeLines("creating symlinks:")
+  writeLines(paste("-", shQuote(to), "->", shQuote(from)))
+# creating symlinks:
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_adv_infer.so.8' -> '../nvidia/cudnn/lib/libcudnn_adv_infer.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_adv_train.so.8' -> '../nvidia/cudnn/lib/libcudnn_adv_train.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_cnn_infer.so.8' -> '../nvidia/cudnn/lib/libcudnn_cnn_infer.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_cnn_train.so.8' -> '../nvidia/cudnn/lib/libcudnn_cnn_train.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_ops_infer.so.8' -> '../nvidia/cudnn/lib/libcudnn_ops_infer.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn_ops_train.so.8' -> '../nvidia/cudnn/lib/libcudnn_ops_train.so.8'
+# - '~/.virtualenvs/r-keras/lib/python3.11/site-packages/tensorflow/libcudnn.so.8' -> '../nvidia/cudnn/lib/libcudnn.so.8'
+  file.symlink(from = from, to = to)
+
+}
+

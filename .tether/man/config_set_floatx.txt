@@ -1,0 +1,28 @@
+__signature__
+keras.config.set_floatx(value)
+__doc__
+Set the default float dtype.
+
+Note: It is not recommended to set this to `"float16"` for training,
+as this will likely cause numeric stability issues.
+Instead, mixed precision, which leverages
+a mix of `float16` and `float32`. It can be configured by calling
+`keras.mixed_precision.set_dtype_policy('mixed_float16')`.
+
+Args:
+    value: String; `'bfloat16'`, `'float16'`, `'float32'`, or `'float64'`.
+
+Examples:
+>>> keras.config.floatx()
+'float32'
+
+>>> keras.config.set_floatx('float64')
+>>> keras.config.floatx()
+'float64'
+
+>>> # Set it back to float32
+>>> keras.config.set_floatx('float32')
+
+Raises:
+    ValueError: In case of invalid value.
+

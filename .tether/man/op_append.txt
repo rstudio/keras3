@@ -1,0 +1,37 @@
+__signature__
+keras.ops.append(
+  x1,
+  x2,
+  axis=None
+)
+__doc__
+Append tensor `x2` to the end of tensor `x1`.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+    axis: Axis along which tensor `x2` is appended to tensor `x1`.
+        If `None`, both tensors are flattened before use.
+
+Returns:
+    A tensor with the values of `x2` appended to `x1`.
+
+Examples:
+>>> x1 = keras.ops.convert_to_tensor([1, 2, 3])
+>>> x2 = keras.ops.convert_to_tensor([[4, 5, 6], [7, 8, 9]])
+>>> keras.ops.append(x1, x2)
+array([1, 2, 3, 4, 5, 6, 7, 8, 9], dtype=int32)
+
+When `axis` is specified, `x1` and `x2` must have compatible shapes.
+>>> x1 = keras.ops.convert_to_tensor([[1, 2, 3], [4, 5, 6]])
+>>> x2 = keras.ops.convert_to_tensor([[7, 8, 9]])
+>>> keras.ops.append(x1, x2, axis=0)
+array([[1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9]], dtype=int32)
+>>> x3 = keras.ops.convert_to_tensor([7, 8, 9])
+>>> keras.ops.append(x1, x3, axis=0)
+Traceback (most recent call last):
+    ...
+TypeError: Cannot concatenate arrays with different numbers of
+dimensions: got (2, 3), (3,).

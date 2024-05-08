@@ -1,0 +1,55 @@
+Help on class UnitNormalization in module keras.src.layers.normalization.unit_normalization:
+
+class UnitNormalization(keras.src.layers.layer.Layer)
+ |  UnitNormalization(axis=-1, **kwargs)
+ |
+ |  Unit normalization layer.
+ |
+ |  Normalize a batch of inputs so that each input in the batch has a L2 norm
+ |  equal to 1 (across the axes specified in `axis`).
+ |
+ |  Example:
+ |
+ |  >>> data = np.arange(6).reshape(2, 3)
+ |  >>> normalized_data = keras.layers.UnitNormalization()(data)
+ |  >>> print(np.sum(normalized_data[0, :] ** 2)
+ |  1.0
+ |
+ |  Args:
+ |      axis: Integer or list/tuple. The axis or axes to normalize across.
+ |          Typically, this is the features axis or axes. The left-out axes are
+ |          typically the batch axis or axes. `-1` is the last dimension
+ |          in the input. Defaults to `-1`.
+ |
+ |  Method resolution order:
+ |      UnitNormalization
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    axis=-1,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, input_shape)
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

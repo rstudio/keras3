@@ -1,0 +1,53 @@
+Help on class RepeatVector in module keras.src.layers.reshaping.repeat_vector:
+
+class RepeatVector(keras.src.layers.layer.Layer)
+ |  RepeatVector(n, **kwargs)
+ |
+ |  Repeats the input n times.
+ |
+ |  Example:
+ |
+ |  >>> x = keras.Input(shape=(32,))
+ |  >>> y = keras.layers.RepeatVector(3)(x)
+ |  >>> y.shape
+ |  (None, 3, 32)
+ |
+ |  Args:
+ |      n: Integer, repetition factor.
+ |
+ |  Input shape:
+ |      2D tensor with shape `(batch_size, features)`.
+ |
+ |  Output shape:
+ |      3D tensor with shape `(batch_size, n, features)`.
+ |
+ |  Method resolution order:
+ |      RepeatVector
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    n,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

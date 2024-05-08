@@ -1,0 +1,60 @@
+Help on class MeanAbsolutePercentageError in module keras.src.metrics.regression_metrics:
+
+class MeanAbsolutePercentageError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
+ |  MeanAbsolutePercentageError(name='mean_absolute_percentage_error', dtype=None)
+ |
+ |  Computes mean absolute percentage error between `y_true` and `y_pred`.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  loss = 100 * mean(abs((y_true - y_pred) / y_true))
+ |  ```
+ |
+ |  Args:
+ |      name: (Optional) string name of the metric instance.
+ |      dtype: (Optional) data type of the metric result.
+ |
+ |  Example:
+ |
+ |  Example:
+ |
+ |  >>> m = keras.metrics.MeanAbsolutePercentageError()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
+ |  >>> m.result()
+ |  250000000.0
+ |  >>> m.reset_state()
+ |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
+ |  ...                sample_weight=[1, 0])
+ |  >>> m.result()
+ |  500000000.0
+ |
+ |  Usage with `compile()` API:
+ |
+ |  ```python
+ |  model.compile(
+ |      optimizer='sgd',
+ |      loss='mse',
+ |      metrics=[keras.metrics.MeanAbsolutePercentageError()])
+ |  ```
+ |
+ |  Method resolution order:
+ |      MeanAbsolutePercentageError
+ |      keras.src.metrics.reduction_metrics.MeanMetricWrapper
+ |      keras.src.metrics.reduction_metrics.Mean
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    name='mean_absolute_percentage_error',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Return the serializable config of the metric.
+ |
+

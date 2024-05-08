@@ -2,85 +2,272 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_normalization}
 \alias{layer_normalization}
-\title{A preprocessing layer which normalizes continuous features.}
+\title{A preprocessing layer that normalizes continuous features.}
 \usage{
-layer_normalization(object, axis = -1L, mean = NULL, variance = NULL, ...)
+layer_normalization(
+  object,
+  axis = -1L,
+  mean = NULL,
+  variance = NULL,
+  invert = FALSE,
+  ...
+)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
-\itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{axis}{Integer, list of integers, or NULL. The axis or axes that should
-have a separate mean and variance for each index in the shape. For
-example, if shape is \verb{(NULL, 5)} and \code{axis=1}, the layer will track 5
-separate mean and variance values for the last axis. If \code{axis} is set to
-\code{NULL}, the layer will normalize all elements in the input by a scalar
-mean and variance. Defaults to -1, where the last axis of the input is
-assumed to be a feature dimension and is normalized per index. Note that
-in the specific case of batched scalar inputs where the only axis is the
-batch axis, the default will normalize each index in the batch
-separately. In this case, consider passing \code{axis = NULL}.}
+have a separate mean and variance for each index in the shape.
+For example, if shape is \verb{(NULL, 5)} and \code{axis=1}, the layer will
+track 5 separate mean and variance values for the last axis.
+If \code{axis} is set to \code{NULL}, the layer will normalize
+all elements in the input by a scalar mean and variance.
+When \code{-1}, the last axis of the input is assumed to be a
+feature dimension and is normalized per index.
+Note that in the specific case of batched scalar inputs where
+the only axis is the batch axis, the default will normalize
+each index in the batch separately.
+In this case, consider passing \code{axis=NULL}. Defaults to \code{-1}.}
 
 \item{mean}{The mean value(s) to use during normalization. The passed value(s)
-will be broadcast to the shape of the kept axes above; if the value(s)
-cannot be broadcast, an error will be raised when this layer's \code{build()}
-method is called.}
+will be broadcast to the shape of the kept axes above;
+if the value(s) cannot be broadcast, an error will be raised when
+this layer's \code{build()} method is called.}
 
 \item{variance}{The variance value(s) to use during normalization. The passed
-value(s) will be broadcast to the shape of the kept axes above; if the
-value(s) cannot be broadcast, an error will be raised when this layer's
-\code{build()} method is called.}
+value(s) will be broadcast to the shape of the kept axes above;
+if the value(s) cannot be broadcast, an error will be raised when
+this layer's \code{build()} method is called.}
 
-\item{...}{standard layer arguments.}
+\item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
+to its inputs: it would turn a normalized input back into its
+original form.}
+
+\item{...}{For forward/backward compatability.}
+}
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
+\itemize{
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
 }
 \description{
-A preprocessing layer which normalizes continuous features.
-}
-\details{
-This layer will shift and scale inputs into a distribution centered around 0
-with standard deviation 1. It accomplishes this by precomputing the mean and
-variance of the data, and calling \code{(input - mean) / sqrt(var)} at runtime.
+This layer will shift and scale inputs into a distribution centered around
+0 with standard deviation 1. It accomplishes this by precomputing the mean
+and variance of the data, and calling \code{(input - mean) / sqrt(var)} at
+runtime.
 
 The mean and variance values for the layer must be either supplied on
 construction or learned via \code{adapt()}. \code{adapt()} will compute the mean and
 variance of the data and store them as the layer's weights. \code{adapt()} should
 be called before \code{fit()}, \code{evaluate()}, or \code{predict()}.
 }
+\section{Examples}{
+Calculate a global mean and variance by analyzing the dataset in \code{adapt()}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(c(1., 2., 3., 4., 5.), dtype='float32')
+input_data <- op_array(c(1., 2., 3.), dtype='float32')
+layer <- layer_normalization(axis = NULL)
+layer \%>\% adapt(adapt_data)
+layer(input_data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.4142135  -0.70710677  0.        ], shape=(3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+Calculate a mean and variance for each index on the last axis.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(rbind(c(0., 7., 4.),
+                       c(2., 9., 6.),
+                       c(0., 7., 4.),
+                       c(2., 9., 6.)), dtype='float32')
+input_data <- op_array(matrix(c(0., 7., 4.), nrow = 1), dtype='float32')
+layer <- layer_normalization(axis=-1)
+layer \%>\% adapt(adapt_data)
+layer(input_data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[-1. -1. -1.]], shape=(1, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+Pass the mean and variance directly.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{input_data <- op_array(rbind(1, 2, 3), dtype='float32')
+layer <- layer_normalization(mean=3., variance=2.)
+layer(input_data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[-1.4142135 ]
+##  [-0.70710677]
+##  [ 0.        ]], shape=(3, 1), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+Use the layer to de-normalize inputs (after adapting the layer).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{adapt_data <- op_array(rbind(c(0., 7., 4.),
+                       c(2., 9., 6.),
+                       c(0., 7., 4.),
+                       c(2., 9., 6.)), dtype='float32')
+input_data <- op_array(c(1., 2., 3.), dtype='float32')
+layer <- layer_normalization(axis=-1, invert=TRUE)
+layer \%>\% adapt(adapt_data)
+layer(input_data)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ 2. 10.  8.]], shape=(1, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
-\item \code{\link[=adapt]{adapt()}}
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/layers/Normalization}
-\item \url{https://keras.io/api/layers/preprocessing_layers/numerical/normalization}
+\item \url{https://keras.io/api/layers/preprocessing_layers/numerical/normalization#normalization-class}
 }
 
-Other numerical features preprocessing layers: 
-\code{\link{layer_discretization}()}
+Other numerical features preprocessing layers: \cr
+\code{\link{layer_discretization}()} \cr
 
-Other preprocessing layers: 
-\code{\link{layer_category_encoding}()},
-\code{\link{layer_center_crop}()},
-\code{\link{layer_discretization}()},
-\code{\link{layer_hashing}()},
-\code{\link{layer_integer_lookup}()},
-\code{\link{layer_random_brightness}()},
-\code{\link{layer_random_contrast}()},
-\code{\link{layer_random_crop}()},
-\code{\link{layer_random_flip}()},
-\code{\link{layer_random_height}()},
-\code{\link{layer_random_rotation}()},
-\code{\link{layer_random_translation}()},
-\code{\link{layer_random_width}()},
-\code{\link{layer_random_zoom}()},
-\code{\link{layer_rescaling}()},
-\code{\link{layer_resizing}()},
-\code{\link{layer_string_lookup}()},
-\code{\link{layer_text_vectorization}()}
+Other preprocessing layers: \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_global_max_pooling_3d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
 }
+\concept{layers}
 \concept{numerical features preprocessing layers}
 \concept{preprocessing layers}

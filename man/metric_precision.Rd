@@ -2,7 +2,7 @@
 % Please edit documentation in R/metrics.R
 \name{metric_precision}
 \alias{metric_precision}
-\title{Computes the precision of the predictions with respect to the labels}
+\title{Computes the precision of the predictions with respect to the labels.}
 \usage{
 metric_precision(
   ...,
@@ -14,14 +14,17 @@ metric_precision(
 )
 }
 \arguments{
-\item{...}{Passed on to the underlying metric. Used for forwards and backwards compatibility.}
+\item{...}{For forward/backward compatability.}
 
-\item{thresholds}{(Optional) A float value or a list of float
-threshold values in \verb{[0, 1]}. A threshold is compared with prediction values
-to determine the truth value of predictions (i.e., above the threshold is
-\code{true}, below is \code{false}). One metric value is generated for each threshold
-value. If neither thresholds nor top_k are set, the default is to calculate
-precision with \code{thresholds=0.5}.}
+\item{thresholds}{(Optional) A float value, or a Python list of float
+threshold values in \verb{[0, 1]}. A threshold is compared with
+prediction values to determine the truth value of predictions (i.e.,
+above the threshold is \code{TRUE}, below is \code{FALSE}). If used with a
+loss function that sets \code{from_logits=TRUE} (i.e. no sigmoid applied
+to predictions), \code{thresholds} should be set to 0. One metric value
+is generated for each threshold value. If neither \code{thresholds} nor
+\code{top_k} are set, the default is to calculate precision with
+\code{thresholds=0.5}.}
 
 \item{top_k}{(Optional) Unset by default. An int value specifying the top-k
 predictions to consider when calculating precision.}
@@ -35,71 +38,159 @@ This must be in the half-open interval \verb{[0, num_classes)}, where
 \item{dtype}{(Optional) data type of the metric result.}
 }
 \value{
-A (subclassed) \code{Metric} instance that can be passed directly to
-\code{compile(metrics = )}, or used as a standalone object. See \code{?Metric} for
-example usage.
+a \code{Metric} instance is returned. The \code{Metric} instance can be passed
+directly to \code{compile(metrics = )}, or used as a standalone object. See
+\code{?Metric} for example usage.
 }
 \description{
-Computes the precision of the predictions with respect to the labels
-}
-\details{
 The metric creates two local variables, \code{true_positives} and
 \code{false_positives} that are used to compute the precision. This value is
 ultimately returned as \code{precision}, an idempotent operation that simply
 divides \code{true_positives} by the sum of \code{true_positives} and
 \code{false_positives}.
 
-If \code{sample_weight} is \code{NULL}, weights default to 1. Use \code{sample_weight} of 0
-to mask values.
+If \code{sample_weight} is \code{NULL}, weights default to 1.
+Use \code{sample_weight} of 0 to mask values.
 
 If \code{top_k} is set, we'll calculate precision as how often on average a class
-among the top-k classes with the highest predicted values of a batch entry is
-correct and can be found in the label for that entry.
+among the top-k classes with the highest predicted values of a batch entry
+is correct and can be found in the label for that entry.
 
 If \code{class_id} is specified, we calculate precision by considering only the
 entries in the batch for which \code{class_id} is above the threshold and/or in
 the top-k highest predictions, and computing the fraction of them for which
 \code{class_id} is indeed a correct label.
 }
-\seealso{
-Other metrics: 
-\code{\link{custom_metric}()},
-\code{\link{metric_accuracy}()},
-\code{\link{metric_auc}()},
-\code{\link{metric_binary_accuracy}()},
-\code{\link{metric_binary_crossentropy}()},
-\code{\link{metric_categorical_accuracy}()},
-\code{\link{metric_categorical_crossentropy}()},
-\code{\link{metric_categorical_hinge}()},
-\code{\link{metric_cosine_similarity}()},
-\code{\link{metric_false_negatives}()},
-\code{\link{metric_false_positives}()},
-\code{\link{metric_hinge}()},
-\code{\link{metric_kullback_leibler_divergence}()},
-\code{\link{metric_logcosh_error}()},
-\code{\link{metric_mean_absolute_error}()},
-\code{\link{metric_mean_absolute_percentage_error}()},
-\code{\link{metric_mean_iou}()},
-\code{\link{metric_mean_relative_error}()},
-\code{\link{metric_mean_squared_error}()},
-\code{\link{metric_mean_squared_logarithmic_error}()},
-\code{\link{metric_mean_tensor}()},
-\code{\link{metric_mean_wrapper}()},
-\code{\link{metric_mean}()},
-\code{\link{metric_poisson}()},
-\code{\link{metric_precision_at_recall}()},
-\code{\link{metric_recall_at_precision}()},
-\code{\link{metric_recall}()},
-\code{\link{metric_root_mean_squared_error}()},
-\code{\link{metric_sensitivity_at_specificity}()},
-\code{\link{metric_sparse_categorical_accuracy}()},
-\code{\link{metric_sparse_categorical_crossentropy}()},
-\code{\link{metric_sparse_top_k_categorical_accuracy}()},
-\code{\link{metric_specificity_at_sensitivity}()},
-\code{\link{metric_squared_hinge}()},
-\code{\link{metric_sum}()},
-\code{\link{metric_top_k_categorical_accuracy}()},
-\code{\link{metric_true_negatives}()},
-\code{\link{metric_true_positives}()}
+\section{Usage}{
+Standalone usage:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_precision()
+m$update_state(c(0, 1, 1, 1),
+               c(1, 0, 1, 1))
+m$result() |> as.double() |> signif()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 0.666667
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+m$update_state(c(0, 1, 1, 1),
+               c(1, 0, 1, 1),
+               sample_weight = c(0, 0, 1, 0))
+m$result() |> as.double() |> signif()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [1] 1
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=2, it will calculate precision over y_true[1:2]
+# and y_pred[1:2]
+m <- metric_precision(top_k = 2)
+m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# With top_k=4, it will calculate precision over y_true[1:4]
+# and y_pred[1:4]
+m <- metric_precision(top_k = 4)
+m$update_state(c(0, 0, 1, 1), c(1, 1, 1, 1))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+Usage with \code{compile()} API:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'sgd',
+  loss = 'binary_crossentropy',
+  metrics = list(metric_precision())
+)
+}\if{html}{\out{</div>}}
+
+Usage with a loss with \code{from_logits=TRUE}:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'adam',
+  loss = loss_binary_crossentropy(from_logits = TRUE),
+  metrics = list(metric_precision(thresholds = 0))
+)
+}\if{html}{\out{</div>}}
 }
+
+\seealso{
+\itemize{
+\item \url{https://keras.io/api/metrics/classification_metrics#precision-class}
+}
+
+Other confusion metrics: \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
+
+Other metrics: \cr
+\code{\link{Metric}()} \cr
+\code{\link{custom_metric}()} \cr
+\code{\link{metric_auc}()} \cr
+\code{\link{metric_binary_accuracy}()} \cr
+\code{\link{metric_binary_crossentropy}()} \cr
+\code{\link{metric_binary_focal_crossentropy}()} \cr
+\code{\link{metric_binary_iou}()} \cr
+\code{\link{metric_categorical_accuracy}()} \cr
+\code{\link{metric_categorical_crossentropy}()} \cr
+\code{\link{metric_categorical_focal_crossentropy}()} \cr
+\code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_cosine_similarity}()} \cr
+\code{\link{metric_f1_score}()} \cr
+\code{\link{metric_false_negatives}()} \cr
+\code{\link{metric_false_positives}()} \cr
+\code{\link{metric_fbeta_score}()} \cr
+\code{\link{metric_hinge}()} \cr
+\code{\link{metric_huber}()} \cr
+\code{\link{metric_iou}()} \cr
+\code{\link{metric_kl_divergence}()} \cr
+\code{\link{metric_log_cosh}()} \cr
+\code{\link{metric_log_cosh_error}()} \cr
+\code{\link{metric_mean}()} \cr
+\code{\link{metric_mean_absolute_error}()} \cr
+\code{\link{metric_mean_absolute_percentage_error}()} \cr
+\code{\link{metric_mean_iou}()} \cr
+\code{\link{metric_mean_squared_error}()} \cr
+\code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_mean_wrapper}()} \cr
+\code{\link{metric_one_hot_iou}()} \cr
+\code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_poisson}()} \cr
+\code{\link{metric_precision_at_recall}()} \cr
+\code{\link{metric_r2_score}()} \cr
+\code{\link{metric_recall}()} \cr
+\code{\link{metric_recall_at_precision}()} \cr
+\code{\link{metric_root_mean_squared_error}()} \cr
+\code{\link{metric_sensitivity_at_specificity}()} \cr
+\code{\link{metric_sparse_categorical_accuracy}()} \cr
+\code{\link{metric_sparse_categorical_crossentropy}()} \cr
+\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_specificity_at_sensitivity}()} \cr
+\code{\link{metric_squared_hinge}()} \cr
+\code{\link{metric_sum}()} \cr
+\code{\link{metric_top_k_categorical_accuracy}()} \cr
+\code{\link{metric_true_negatives}()} \cr
+\code{\link{metric_true_positives}()} \cr
+}
+\concept{confusion metrics}
 \concept{metrics}

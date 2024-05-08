@@ -1,0 +1,131 @@
+Help on class BackupAndRestore in module keras.src.callbacks.backup_and_restore:
+
+class BackupAndRestore(keras.src.callbacks.callback.Callback)
+ |  BackupAndRestore(backup_dir, save_freq='epoch', delete_checkpoint=True)
+ |
+ |  Callback to back up and restore the training state.
+ |
+ |  `BackupAndRestore` callback is intended to recover training from an
+ |  interruption that has happened in the middle of a `Model.fit` execution, by
+ |  backing up the training states in a temporary checkpoint file, at the end of
+ |  each epoch. Each backup overwrites the previously written checkpoint file,
+ |  so at any given time there is at most one such checkpoint file for
+ |  backup/restoring purpose.
+ |
+ |  If training restarts before completion, the training state (which includes
+ |  the `Model` weights and epoch number) is restored to the most recently saved
+ |  state at the beginning of a new `Model.fit` run. At the completion of a
+ |  `Model.fit` run, the temporary checkpoint file is deleted.
+ |
+ |  Note that the user is responsible to bring jobs back after the interruption.
+ |  This callback is important for the backup and restore mechanism for fault
+ |  tolerance purpose, and the model to be restored from a previous checkpoint
+ |  is expected to be the same as the one used to back up. If user changes
+ |  arguments passed to compile or fit, the checkpoint saved for fault tolerance
+ |  can become invalid.
+ |
+ |  Example:
+ |
+ |  >>> class InterruptingCallback(keras.callbacks.Callback):
+ |  ...   def on_epoch_begin(self, epoch, logs=None):
+ |  ...     if epoch == 4:
+ |  ...       raise RuntimeError('Interrupting!')
+ |  >>> callback = keras.callbacks.BackupAndRestore(backup_dir="/tmp/backup")
+ |  >>> model = keras.models.Sequential([keras.layers.Dense(10)])
+ |  >>> model.compile(keras.optimizers.SGD(), loss='mse')
+ |  >>> try:
+ |  ...   model.fit(np.arange(100).reshape(5, 20), np.zeros(5), epochs=10,
+ |  ...             batch_size=1, callbacks=[callback, InterruptingCallback()],
+ |  ...             verbose=0)
+ |  ... except:
+ |  ...   pass
+ |  >>> history = model.fit(np.arange(100).reshape(5, 20), np.zeros(5),
+ |  ...                     epochs=10, batch_size=1, callbacks=[callback],
+ |  ...                     verbose=0)
+ |  >>> # Only 6 more epochs are run, since first training got interrupted at
+ |  >>> # zero-indexed epoch 4, second training will continue from 4 to 9.
+ |  >>> len(history.history['loss'])
+ |  >>> 6
+ |
+ |  Args:
+ |      backup_dir: String, path of directory where to store the data
+ |          needed to restore the model. The directory
+ |          cannot be reused elsewhere to store other files, e.g. by the
+ |          `BackupAndRestore` callback of another training run,
+ |          or by another callback (e.g. `ModelCheckpoint`)
+ |          of the same training run.
+ |      save_freq: `"epoch"`, integer, or `False`. When set to `"epoch"`
+ |        the callback saves the checkpoint at the end of each epoch.
+ |        When set to an integer, the callback saves the checkpoint every
+ |        `save_freq` batches. Set `save_freq=False` only if using
+ |        preemption checkpointing (i.e. with `save_before_preemption=True`).
+ |      delete_checkpoint: Boolean, defaults to `True`. This `BackupAndRestore`
+ |        callback works by saving a checkpoint to back up the training state.
+ |        If `delete_checkpoint=True`, the checkpoint will be deleted after
+ |        training is finished. Use `False` if you'd like to keep the checkpoint
+ |        for future usage.
+ |
+ |  Method resolution order:
+ |      BackupAndRestore
+ |      keras.src.callbacks.callback.Callback
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    backup_dir,
+ |    save_freq='epoch',
+ |    delete_checkpoint=True
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  on_epoch_end(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the end of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict, metric results for this training epoch, and for the
+ |            validation epoch if validation is performed. Validation result
+ |            keys are prefixed with `val_`. For training epoch, the values of
+ |            the `Model`'s metrics are returned. Example:
+ |            `{'loss': 0.2, 'accuracy': 0.7}`.
+ |
+ |  on_train_batch_end(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      Called at the end of a training batch in `fit` methods.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Note that if the `steps_per_execution` argument to `compile` in
+ |      `Model` is set to `N`, this method will only be called every
+ |      `N` batches.
+ |
+ |      Args:
+ |          batch: Integer, index of batch within the current epoch.
+ |          logs: Dict. Aggregated metric results up until this batch.
+ |
+ |  on_train_begin(self, logs=None)
+ |      Get training state from temporary file and restore it.
+ |
+ |  on_train_end(self, logs=None)
+ |      Called at the end of training.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently the output of the last call to
+ |            `on_epoch_end()` is passed to this argument for this method but
+ |            that may change in the future.
+ |
+

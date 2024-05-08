@@ -31,12 +31,12 @@ Dataset taken from the StatLib library which is maintained at Carnegie Mellon
 University.
 }
 \seealso{
-Other datasets: 
-\code{\link{dataset_cifar100}()},
-\code{\link{dataset_cifar10}()},
-\code{\link{dataset_fashion_mnist}()},
-\code{\link{dataset_imdb}()},
-\code{\link{dataset_mnist}()},
-\code{\link{dataset_reuters}()}
+Other datasets: \cr
+\code{\link{dataset_cifar10}()} \cr
+\code{\link{dataset_cifar100}()} \cr
+\code{\link{dataset_fashion_mnist}()} \cr
+\code{\link{dataset_imdb}()} \cr
+\code{\link{dataset_mnist}()} \cr
+\code{\link{dataset_reuters}()} \cr
 }
 \concept{datasets}

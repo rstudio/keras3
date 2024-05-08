@@ -4,7 +4,7 @@ context("generators")
 
 
 test_succeeds("image data generator can be used for training", {
-
+  skip("image_data_generator()")
   num_classes <- 10
   cifar10 <- dataset_cifar10()
   X_train <- cifar10$train$x
@@ -18,10 +18,9 @@ test_succeeds("image data generator can be used for training", {
   Y_test <- Y_test[1:100,]
 
   # create model
-  model <- keras_model_sequential()
+  model <- keras_model_sequential(input_shape = c(32, 32, 3))
   model %>%
-    layer_conv_2d(filters = 32, kernel_size = c(3,3), padding = 'same',
-                  input_shape = c(32, 32, 3)) %>%
+    layer_conv_2d(filters = 32, kernel_size = c(3,3), padding = 'same') %>%
     layer_activation(activation = 'relu') %>%
     layer_conv_2d(filters = 32, kernel_size = c(3,3)) %>%
     layer_activation(activation = 'relu') %>%
@@ -33,8 +32,7 @@ test_succeeds("image data generator can be used for training", {
   # compile model
   model %>% compile(
     loss='categorical_crossentropy',
-    optimizer = expect_warning(optimizer_rmsprop(lr = 0.0001, decay = 1e-6),
-                               "learning_rate"),
+    optimizer = optimizer_rmsprop(0.0001),
     metrics=c('accuracy')
   )
 
@@ -79,11 +77,11 @@ test_succeeds("R function can be used as custom generator", {
     skip("don't work in tf2.1")
 
   # create model
-  model <- keras_model_sequential()
+  model <- keras_model_sequential(input_shape = c(100))
 
   # add layers and compile the model
   model %>%
-    layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>%
+    layer_dense(units = 32, activation = 'relu', ) %>%
     layer_dense(units = 1, activation = 'sigmoid') %>%
     compile(
       optimizer = 'rmsprop',
@@ -111,21 +109,20 @@ test_succeeds("R function can be used as custom generator", {
 
   # Train the model, iterating on the data in batches of 32 samples
 
-  expect_warning_if(tensorflow::tf_version() >= "2.1", {
     model %>%
-      fit_generator(sampling_generator(X_train, Y_train, batch_size = 32),
-                    steps_per_epoch = 10, epochs = 2, verbose = 1)
+      fit(sampling_generator(X_train, Y_train, batch_size = 32),
+          steps_per_epoch = 10, epochs = 2, verbose = 1,
+          shuffle = FALSE)
 
     # Evaluate the model
     model %>%
-      evaluate_generator(sampling_generator(X_test, Y_test, batch_size = 32),
+      evaluate(sampling_generator(X_test, Y_test, batch_size = 32),
                          steps = 10)
 
     # generate predictions
     model %>%
-      predict_generator(sampling_generator(X_test, batch_size = 32),
+      predict(sampling_generator(X_test, batch_size = 32),
                         steps = 10)
-  })
 
 
 })
@@ -138,23 +135,32 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
   input1 <- layer_input(shape = 1)
   input2 <- layer_input(shape = 1)
 
-  out <- layer_add(list(input1, input2)) %>%
+  out <- layer_add(input1, input2) %>%
     layer_dense(units = 1)
 
   model <- keras_model(list(input1, input2), out)
 
   generator <- function() {
-    list(list(1, 2), 3)
+    list(tuple(keras_array(1), keras_array(2)),
+          keras_array(3))
   }
+  # TODO: this might need a PR up stream, or some chages to as_generator.function()
+  # right now it's very picky about tuple vs lists in generator yielded values.
+  # and tree.map_structure() / tf.next.flatten() are picky too.
 
   model %>% compile(loss = "mse", optimizer = "sgd")
-  expect_warning_if(tensorflow::tf_version() > "2.1", {
-    model %>% fit_generator(generator, steps_per_epoch = 10,
-                            validation_data = generator, validation_steps = 2,
-                            verbose = 1)
-  })
+  model %>% fit(generator, steps_per_epoch = 10,
+                validation_data = generator, validation_steps = 2,
+                verbose = 1)
 
 })
+
+# ([
+#   TensorSpec(shape=(None,), dtype=tf.float32, name=None),
+#   TensorSpec(shape=(None,), dtype=tf.float32, name=None)
+#   ],
+#   TensorSpec(shape=(None,), dtype=tf.float32, name=None)
+# )
 
 test_succeeds("Fixed validation_data instead of generator with fit_generator", {
 
@@ -170,17 +176,16 @@ test_succeeds("Fixed validation_data instead of generator with fit_generator", {
   model <- keras_model(list(input1, input2), out)
 
   generator <- function() {
-    list(list(1, 2), 3)
+    list(tuple(keras_array(1), keras_array(2)),
+               keras_array(3))
   }
 
   model %>% compile(loss = "mse", optimizer = "sgd")
 
-  expect_warning_if(tensorflow::tf_version() >= "2.1", {
-    model %>% fit_generator(
-      generator, steps_per_epoch = 2,
-      validation_data = list(list(1, 2), 3),
-      verbose = 0)
-  })
+  model %>% fit(
+    generator, steps_per_epoch = 2,
+    validation_data = list(list(1, 2), 3),
+    verbose = 0)
 
 })
 
@@ -189,6 +194,7 @@ test_succeeds("Can use a custom preprocessing function in image_data_generator",
   if (tensorflow::tf_version() == "2.1")
     skip("don't work in tf2.1")
 
+  skip("ImageDataGenerator")
   img_gen <- image_data_generator(preprocessing_function = function(x) x/255)
 
   mnist <- dataset_mnist()

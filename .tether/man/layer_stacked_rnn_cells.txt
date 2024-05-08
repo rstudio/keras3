@@ -1,0 +1,90 @@
+Help on class StackedRNNCells in module keras.src.layers.rnn.stacked_rnn_cells:
+
+class StackedRNNCells(keras.src.layers.layer.Layer)
+ |  StackedRNNCells(cells, **kwargs)
+ |
+ |  Wrapper allowing a stack of RNN cells to behave as a single cell.
+ |
+ |  Used to implement efficient stacked RNNs.
+ |
+ |  Args:
+ |    cells: List of RNN cell instances.
+ |
+ |  Examples:
+ |
+ |  ```python
+ |  batch_size = 3
+ |  sentence_length = 5
+ |  num_features = 2
+ |  new_shape = (batch_size, sentence_length, num_features)
+ |  x = np.reshape(np.arange(30), new_shape)
+ |
+ |  rnn_cells = [keras.layers.LSTMCell(128) for _ in range(2)]
+ |  stacked_lstm = keras.layers.StackedRNNCells(rnn_cells)
+ |  lstm_layer = keras.layers.RNN(stacked_lstm)
+ |
+ |  result = lstm_layer(x)
+ |  ```
+ |
+ |  Method resolution order:
+ |      StackedRNNCells
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    cells,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, input_shape)
+ |
+ |  call(
+ |    self,
+ |    inputs,
+ |    states,
+ |    training=False,
+ |    **kwargs
+ |  )
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  get_initial_state(self, batch_size=None)
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config, custom_objects=None) from builtins.type
+ |      Creates a layer from its config.
+ |
+ |      This method is the reverse of `get_config`,
+ |      capable of instantiating the same layer from the config
+ |      dictionary. It does not handle layer connectivity
+ |      (handled by Network), nor weights (handled by `set_weights`).
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the
+ |              output of get_config.
+ |
+ |      Returns:
+ |          A layer instance.
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  output_size
+ |
+ |  state_size
+ |

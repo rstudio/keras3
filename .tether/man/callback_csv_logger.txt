@@ -1,0 +1,70 @@
+Help on class CSVLogger in module keras.src.callbacks.csv_logger:
+
+class CSVLogger(keras.src.callbacks.callback.Callback)
+ |  CSVLogger(filename, separator=',', append=False)
+ |
+ |  Callback that streams epoch results to a CSV file.
+ |
+ |  Supports all values that can be represented as a string,
+ |  including 1D iterables such as `np.ndarray`.
+ |
+ |  Args:
+ |      filename: Filename of the CSV file, e.g. `'run/log.csv'`.
+ |      separator: String used to separate elements in the CSV file.
+ |      append: Boolean. True: append if file exists (useful for continuing
+ |          training). False: overwrite existing file.
+ |
+ |  Example:
+ |
+ |  ```python
+ |  csv_logger = CSVLogger('training.log')
+ |  model.fit(X_train, Y_train, callbacks=[csv_logger])
+ |  ```
+ |
+ |  Method resolution order:
+ |      CSVLogger
+ |      keras.src.callbacks.callback.Callback
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, filename, separator=',', append=False)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  on_epoch_end(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the end of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict, metric results for this training epoch, and for the
+ |            validation epoch if validation is performed. Validation result
+ |            keys are prefixed with `val_`. For training epoch, the values of
+ |            the `Model`'s metrics are returned. Example:
+ |            `{'loss': 0.2, 'accuracy': 0.7}`.
+ |
+ |  on_train_begin(self, logs=None)
+ |      Called at the beginning of training.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
+ |
+ |  on_train_end(self, logs=None)
+ |      Called at the end of training.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently the output of the last call to
+ |            `on_epoch_end()` is passed to this argument for this method but
+ |            that may change in the future.
+ |

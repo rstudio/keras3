@@ -1,0 +1,9 @@
+boston_housing: Module(keras.api.datasets.boston_housing)
+california_housing: Module(keras.api.datasets.california_housing)
+cifar10: Module(keras.api.datasets.cifar10)
+cifar100: Module(keras.api.datasets.cifar100)
+fashion_mnist: Module(keras.api.datasets.fashion_mnist)
+imdb: Module(keras.api.datasets.imdb)
+mnist: Module(keras.api.datasets.mnist)
+reuters: Module(keras.api.datasets.reuters)
+

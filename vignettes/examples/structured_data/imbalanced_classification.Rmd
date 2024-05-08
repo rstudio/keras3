@@ -1,0 +1,343 @@
+---
+title: 'Imbalanced classification: credit card fraud detection'
+date-created: 2019/05/28
+last-modified: 2020/04/17
+description: Demonstration of how to handle highly imbalanced classification problems.
+output: rmarkdown::html_vignette
+domain: structured data
+category: basic
+backend: jax
+vignette: >
+  %\VignetteIndexEntry{Imbalanced classification: credit card fraud detection}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```r
+library(keras3)
+use_backend("jax")
+```
+## Introduction
+
+This example looks at the
+[Kaggle Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud/)
+dataset to demonstrate how
+to train a classification model on data with highly imbalanced classes.
+You can download the data by clicking "Download" at
+the link, or if you're setup with a kaggle API key at
+`"~/.kaggle/kagle.json"`, you can run the following:
+
+
+```r
+reticulate::py_install("kaggle", pip = TRUE)
+reticulate::py_available(TRUE) # ensure 'kaggle' is on the PATH
+system("kaggle datasets download -d mlg-ulb/creditcardfraud")
+zip::unzip("creditcardfraud.zip", files = "creditcard.csv")
+```
+
+## First, load the data
+
+
+```r
+library(readr)
+df <- read_csv("creditcard.csv", col_types = cols(
+  Class = col_integer(),
+  .default = col_double()
+))
+tibble::glimpse(df)
+```
+
+```
+## Rows: 284,807
+## Columns: 31
+## $ Time   [3m[38;5;246m<dbl>[39m[23m 0, 0, 1, 1, 2, 2, 4, 7, 7, 9, 10, 10, 10, 11, 12, 12, 12, 1…
+## $ V1     [3m[38;5;246m<dbl>[39m[23m -1.3598071, 1.1918571, -1.3583541, -0.9662717, -1.1582331, …
+## $ V2     [3m[38;5;246m<dbl>[39m[23m -0.07278117, 0.26615071, -1.34016307, -0.18522601, 0.877736…
+## $ V3     [3m[38;5;246m<dbl>[39m[23m 2.53634674, 0.16648011, 1.77320934, 1.79299334, 1.54871785,…
+## $ V4     [3m[38;5;246m<dbl>[39m[23m 1.37815522, 0.44815408, 0.37977959, -0.86329128, 0.40303393…
+## $ V5     [3m[38;5;246m<dbl>[39m[23m -0.33832077, 0.06001765, -0.50319813, -0.01030888, -0.40719…
+## $ V6     [3m[38;5;246m<dbl>[39m[23m 0.46238778, -0.08236081, 1.80049938, 1.24720317, 0.09592146…
+## $ V7     [3m[38;5;246m<dbl>[39m[23m 0.239598554, -0.078802983, 0.791460956, 0.237608940, 0.5929…
+## $ V8     [3m[38;5;246m<dbl>[39m[23m 0.098697901, 0.085101655, 0.247675787, 0.377435875, -0.2705…
+## $ V9     [3m[38;5;246m<dbl>[39m[23m 0.3637870, -0.2554251, -1.5146543, -1.3870241, 0.8177393, -…
+## $ V10    [3m[38;5;246m<dbl>[39m[23m 0.09079417, -0.16697441, 0.20764287, -0.05495192, 0.7530744…
+## $ V11    [3m[38;5;246m<dbl>[39m[23m -0.55159953, 1.61272666, 0.62450146, -0.22648726, -0.822842…
+## $ V12    [3m[38;5;246m<dbl>[39m[23m -0.61780086, 1.06523531, 0.06608369, 0.17822823, 0.53819555…
+## $ V13    [3m[38;5;246m<dbl>[39m[23m -0.99138985, 0.48909502, 0.71729273, 0.50775687, 1.34585159…
+## $ V14    [3m[38;5;246m<dbl>[39m[23m -0.31116935, -0.14377230, -0.16594592, -0.28792375, -1.1196…
+## $ V15    [3m[38;5;246m<dbl>[39m[23m 1.468176972, 0.635558093, 2.345864949, -0.631418118, 0.1751…
+## $ V16    [3m[38;5;246m<dbl>[39m[23m -0.47040053, 0.46391704, -2.89008319, -1.05964725, -0.45144…
+## $ V17    [3m[38;5;246m<dbl>[39m[23m 0.207971242, -0.114804663, 1.109969379, -0.684092786, -0.23…
+## $ V18    [3m[38;5;246m<dbl>[39m[23m 0.02579058, -0.18336127, -0.12135931, 1.96577500, -0.038194…
+## $ V19    [3m[38;5;246m<dbl>[39m[23m 0.40399296, -0.14578304, -2.26185710, -1.23262197, 0.803486…
+## $ V20    [3m[38;5;246m<dbl>[39m[23m 0.25141210, -0.06908314, 0.52497973, -0.20803778, 0.4085423…
+## $ V21    [3m[38;5;246m<dbl>[39m[23m -0.018306778, -0.225775248, 0.247998153, -0.108300452, -0.0…
+## $ V22    [3m[38;5;246m<dbl>[39m[23m 0.277837576, -0.638671953, 0.771679402, 0.005273597, 0.7982…
+## $ V23    [3m[38;5;246m<dbl>[39m[23m -0.110473910, 0.101288021, 0.909412262, -0.190320519, -0.13…
+## $ V24    [3m[38;5;246m<dbl>[39m[23m 0.06692807, -0.33984648, -0.68928096, -1.17557533, 0.141266…
+## $ V25    [3m[38;5;246m<dbl>[39m[23m 0.12853936, 0.16717040, -0.32764183, 0.64737603, -0.2060095…
+## $ V26    [3m[38;5;246m<dbl>[39m[23m -0.18911484, 0.12589453, -0.13909657, -0.22192884, 0.502292…
+## $ V27    [3m[38;5;246m<dbl>[39m[23m 0.133558377, -0.008983099, -0.055352794, 0.062722849, 0.219…
+## $ V28    [3m[38;5;246m<dbl>[39m[23m -0.021053053, 0.014724169, -0.059751841, 0.061457629, 0.215…
+## $ Amount [3m[38;5;246m<dbl>[39m[23m 149.62, 2.69, 378.66, 123.50, 69.99, 3.67, 4.99, 40.80, 93.…
+## $ Class  [3m[38;5;246m<int>[39m[23m 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…
+```
+
+## Prepare a validation set
+
+
+```r
+val_idx <- nrow(df) %>% sample.int(., round( . * 0.2))
+val_df <- df[val_idx, ]
+train_df <- df[-val_idx, ]
+
+cat("Number of training samples:", nrow(train_df), "\n")
+```
+
+```
+## Number of training samples: 227846
+```
+
+```r
+cat("Number of validation samples:", nrow(val_df), "\n")
+```
+
+```
+## Number of validation samples: 56961
+```
+
+## Analyze class imbalance in the targets
+
+
+```r
+counts <- table(train_df$Class)
+counts
+```
+
+```
+##
+##      0      1
+## 227463    383
+```
+
+```r
+cat(sprintf("Number of positive samples in training data: %i (%.2f%% of total)",
+            counts["1"], 100 * counts["1"] / sum(counts)))
+```
+
+```
+## Number of positive samples in training data: 383 (0.17% of total)
+```
+
+```r
+weight_for_0 = 1 / counts["0"]
+weight_for_1 = 1 / counts["1"]
+```
+
+## Normalize the data using training set statistics
+
+
+```r
+feature_names <- colnames(train_df) %>% setdiff("Class")
+
+train_features <- as.matrix(train_df[feature_names])
+train_targets <- as.matrix(train_df$Class)
+
+val_features <- as.matrix(val_df[feature_names])
+val_targets <- as.matrix(val_df$Class)
+
+train_features %<>% scale()
+val_features %<>% scale(center = attr(train_features, "scaled:center"),
+                        scale = attr(train_features, "scaled:scale"))
+```
+
+## Build a binary classification model
+
+
+```r
+model <-
+  keras_model_sequential(input_shape = ncol(train_features)) |>
+  layer_dense(256, activation = "relu") |>
+  layer_dense(256, activation = "relu") |>
+  layer_dropout(0.3) |>
+  layer_dense(256, activation = "relu") |>
+  layer_dropout(0.3) |>
+  layer_dense(1, activation = "sigmoid")
+
+model
+```
+
+```
+## [1mModel: "sequential"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m256[0m)            │         [38;5;34m7,936[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m256[0m)            │        [38;5;34m65,792[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;34m256[0m)            │             [38;5;34m0[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m256[0m)            │        [38;5;34m65,792[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dropout_1 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;34m256[0m)            │             [38;5;34m0[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dense_3 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)              │           [38;5;34m257[0m │
+## └─────────────────────────────────┴────────────────────────┴───────────────┘
+## [1m Total params: [0m[38;5;34m139,777[0m (546.00 KB)
+## [1m Trainable params: [0m[38;5;34m139,777[0m (546.00 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+## Train the model with `class_weight` argument
+
+
+```r
+metrics <- list(
+  metric_false_negatives(name = "fn"),
+  metric_false_positives(name = "fp"),
+  metric_true_negatives(name = "tn"),
+  metric_true_positives(name = "tp"),
+  metric_precision(name = "precision"),
+  metric_recall(name = "recall")
+)
+model |> compile(
+  optimizer = optimizer_adam(1e-2),
+  loss = "binary_crossentropy",
+  metrics = metrics
+)
+callbacks <- list(
+  callback_model_checkpoint("fraud_model_at_epoch_{epoch}.keras")
+)
+
+class_weight <- list("0" = weight_for_0,
+                     "1" = weight_for_1)
+
+model |> fit(
+  train_features, train_targets,
+  validation_data = list(val_features, val_targets),
+  class_weight = class_weight,
+  batch_size = 2048,
+  epochs = 30,
+  callbacks = callbacks,
+  verbose = 2
+)
+```
+
+```
+## Epoch 1/30
+## 112/112 - 2s - 22ms/step - fn: 42.0000 - fp: 22983.0000 - loss: 2.3302e-06 - precision: 0.0146 - recall: 0.8903 - tn: 204480.0000 - tp: 341.0000 - val_fn: 12.0000 - val_fp: 536.0000 - val_loss: 0.0540 - val_precision: 0.1532 - val_recall: 0.8899 - val_tn: 56316.0000 - val_tp: 97.0000
+## Epoch 2/30
+## 112/112 - 0s - 4ms/step - fn: 36.0000 - fp: 6311.0000 - loss: 1.4468e-06 - precision: 0.0521 - recall: 0.9060 - tn: 221152.0000 - tp: 347.0000 - val_fn: 9.0000 - val_fp: 1081.0000 - val_loss: 0.0956 - val_precision: 0.0847 - val_recall: 0.9174 - val_tn: 55771.0000 - val_tp: 100.0000
+## Epoch 3/30
+## 112/112 - 0s - 2ms/step - fn: 27.0000 - fp: 7704.0000 - loss: 1.2139e-06 - precision: 0.0442 - recall: 0.9295 - tn: 219759.0000 - tp: 356.0000 - val_fn: 11.0000 - val_fp: 631.0000 - val_loss: 0.0443 - val_precision: 0.1344 - val_recall: 0.8991 - val_tn: 56221.0000 - val_tp: 98.0000
+## Epoch 4/30
+## 112/112 - 0s - 1ms/step - fn: 26.0000 - fp: 8933.0000 - loss: 1.1396e-06 - precision: 0.0384 - recall: 0.9321 - tn: 218530.0000 - tp: 357.0000 - val_fn: 4.0000 - val_fp: 3813.0000 - val_loss: 0.1850 - val_precision: 0.0268 - val_recall: 0.9633 - val_tn: 53039.0000 - val_tp: 105.0000
+## Epoch 5/30
+## 112/112 - 0s - 1ms/step - fn: 21.0000 - fp: 6451.0000 - loss: 9.1104e-07 - precision: 0.0531 - recall: 0.9452 - tn: 221012.0000 - tp: 362.0000 - val_fn: 9.0000 - val_fp: 1398.0000 - val_loss: 0.0724 - val_precision: 0.0668 - val_recall: 0.9174 - val_tn: 55454.0000 - val_tp: 100.0000
+## Epoch 6/30
+## 112/112 - 0s - 1ms/step - fn: 16.0000 - fp: 5997.0000 - loss: 7.4602e-07 - precision: 0.0577 - recall: 0.9582 - tn: 221466.0000 - tp: 367.0000 - val_fn: 8.0000 - val_fp: 2379.0000 - val_loss: 0.1421 - val_precision: 0.0407 - val_recall: 0.9266 - val_tn: 54473.0000 - val_tp: 101.0000
+## Epoch 7/30
+## 112/112 - 0s - 1ms/step - fn: 14.0000 - fp: 7075.0000 - loss: 7.6051e-07 - precision: 0.0496 - recall: 0.9634 - tn: 220388.0000 - tp: 369.0000 - val_fn: 10.0000 - val_fp: 888.0000 - val_loss: 0.0525 - val_precision: 0.1003 - val_recall: 0.9083 - val_tn: 55964.0000 - val_tp: 99.0000
+## Epoch 8/30
+## 112/112 - 0s - 2ms/step - fn: 20.0000 - fp: 6333.0000 - loss: 8.2217e-07 - precision: 0.0542 - recall: 0.9478 - tn: 221130.0000 - tp: 363.0000 - val_fn: 6.0000 - val_fp: 3549.0000 - val_loss: 0.1391 - val_precision: 0.0282 - val_recall: 0.9450 - val_tn: 53303.0000 - val_tp: 103.0000
+## Epoch 9/30
+## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 7070.0000 - loss: 8.2005e-07 - precision: 0.0500 - recall: 0.9713 - tn: 220393.0000 - tp: 372.0000 - val_fn: 11.0000 - val_fp: 1307.0000 - val_loss: 0.0807 - val_precision: 0.0698 - val_recall: 0.8991 - val_tn: 55545.0000 - val_tp: 98.0000
+## Epoch 10/30
+## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 6641.0000 - loss: 7.9420e-07 - precision: 0.0528 - recall: 0.9661 - tn: 220822.0000 - tp: 370.0000 - val_fn: 8.0000 - val_fp: 1721.0000 - val_loss: 0.0840 - val_precision: 0.0554 - val_recall: 0.9266 - val_tn: 55131.0000 - val_tp: 101.0000
+## Epoch 11/30
+## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 7348.0000 - loss: 7.5710e-07 - precision: 0.0479 - recall: 0.9661 - tn: 220115.0000 - tp: 370.0000 - val_fn: 9.0000 - val_fp: 1006.0000 - val_loss: 0.0516 - val_precision: 0.0904 - val_recall: 0.9174 - val_tn: 55846.0000 - val_tp: 100.0000
+## Epoch 12/30
+## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 5095.0000 - loss: 5.2767e-07 - precision: 0.0680 - recall: 0.9713 - tn: 222368.0000 - tp: 372.0000 - val_fn: 10.0000 - val_fp: 932.0000 - val_loss: 0.0462 - val_precision: 0.0960 - val_recall: 0.9083 - val_tn: 55920.0000 - val_tp: 99.0000
+## Epoch 13/30
+## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4173.0000 - loss: 4.2331e-07 - precision: 0.0833 - recall: 0.9896 - tn: 223290.0000 - tp: 379.0000 - val_fn: 11.0000 - val_fp: 442.0000 - val_loss: 0.0245 - val_precision: 0.1815 - val_recall: 0.8991 - val_tn: 56410.0000 - val_tp: 98.0000
+## Epoch 14/30
+## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 5914.0000 - loss: 6.4355e-07 - precision: 0.0595 - recall: 0.9765 - tn: 221549.0000 - tp: 374.0000 - val_fn: 8.0000 - val_fp: 1851.0000 - val_loss: 0.0791 - val_precision: 0.0517 - val_recall: 0.9266 - val_tn: 55001.0000 - val_tp: 101.0000
+## Epoch 15/30
+## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 6205.0000 - loss: 5.7546e-07 - precision: 0.0571 - recall: 0.9817 - tn: 221258.0000 - tp: 376.0000 - val_fn: 8.0000 - val_fp: 1595.0000 - val_loss: 0.0678 - val_precision: 0.0596 - val_recall: 0.9266 - val_tn: 55257.0000 - val_tp: 101.0000
+## Epoch 16/30
+## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 6424.0000 - loss: 7.3225e-07 - precision: 0.0552 - recall: 0.9791 - tn: 221039.0000 - tp: 375.0000 - val_fn: 11.0000 - val_fp: 904.0000 - val_loss: 0.0412 - val_precision: 0.0978 - val_recall: 0.8991 - val_tn: 55948.0000 - val_tp: 98.0000
+## Epoch 17/30
+## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4041.0000 - loss: 3.7349e-07 - precision: 0.0857 - recall: 0.9896 - tn: 223422.0000 - tp: 379.0000 - val_fn: 9.0000 - val_fp: 1348.0000 - val_loss: 0.0906 - val_precision: 0.0691 - val_recall: 0.9174 - val_tn: 55504.0000 - val_tp: 100.0000
+## Epoch 18/30
+## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 5602.0000 - loss: 6.0889e-07 - precision: 0.0631 - recall: 0.9843 - tn: 221861.0000 - tp: 377.0000 - val_fn: 8.0000 - val_fp: 935.0000 - val_loss: 0.0487 - val_precision: 0.0975 - val_recall: 0.9266 - val_tn: 55917.0000 - val_tp: 101.0000
+## Epoch 19/30
+## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 5741.0000 - loss: 5.3650e-07 - precision: 0.0615 - recall: 0.9817 - tn: 221722.0000 - tp: 376.0000 - val_fn: 8.0000 - val_fp: 1279.0000 - val_loss: 0.0567 - val_precision: 0.0732 - val_recall: 0.9266 - val_tn: 55573.0000 - val_tp: 101.0000
+## Epoch 20/30
+## 112/112 - 0s - 2ms/step - fn: 1.0000 - fp: 3224.0000 - loss: 2.7791e-07 - precision: 0.1059 - recall: 0.9974 - tn: 224239.0000 - tp: 382.0000 - val_fn: 11.0000 - val_fp: 705.0000 - val_loss: 0.0347 - val_precision: 0.1220 - val_recall: 0.8991 - val_tn: 56147.0000 - val_tp: 98.0000
+## Epoch 21/30
+## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3403.0000 - loss: 2.7057e-07 - precision: 0.1007 - recall: 0.9948 - tn: 224060.0000 - tp: 381.0000 - val_fn: 11.0000 - val_fp: 330.0000 - val_loss: 0.0178 - val_precision: 0.2290 - val_recall: 0.8991 - val_tn: 56522.0000 - val_tp: 98.0000
+## Epoch 22/30
+## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 1904.0000 - loss: 2.0272e-07 - precision: 0.1664 - recall: 0.9922 - tn: 225559.0000 - tp: 380.0000 - val_fn: 10.0000 - val_fp: 1666.0000 - val_loss: 0.1536 - val_precision: 0.0561 - val_recall: 0.9083 - val_tn: 55186.0000 - val_tp: 99.0000
+## Epoch 23/30
+## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 6652.0000 - loss: 7.3955e-07 - precision: 0.0530 - recall: 0.9713 - tn: 220811.0000 - tp: 372.0000 - val_fn: 9.0000 - val_fp: 1633.0000 - val_loss: 0.0681 - val_precision: 0.0577 - val_recall: 0.9174 - val_tn: 55219.0000 - val_tp: 100.0000
+## Epoch 24/30
+## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3458.0000 - loss: 2.8492e-07 - precision: 0.0990 - recall: 0.9922 - tn: 224005.0000 - tp: 380.0000 - val_fn: 12.0000 - val_fp: 635.0000 - val_loss: 0.0299 - val_precision: 0.1325 - val_recall: 0.8899 - val_tn: 56217.0000 - val_tp: 97.0000
+## Epoch 25/30
+## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 5581.0000 - loss: 6.4007e-07 - precision: 0.0631 - recall: 0.9817 - tn: 221882.0000 - tp: 376.0000 - val_fn: 9.0000 - val_fp: 1782.0000 - val_loss: 0.0677 - val_precision: 0.0531 - val_recall: 0.9174 - val_tn: 55070.0000 - val_tp: 100.0000
+## Epoch 26/30
+## 112/112 - 0s - 2ms/step - fn: 1.0000 - fp: 3655.0000 - loss: 2.9078e-07 - precision: 0.0946 - recall: 0.9974 - tn: 223808.0000 - tp: 382.0000 - val_fn: 13.0000 - val_fp: 677.0000 - val_loss: 0.0310 - val_precision: 0.1242 - val_recall: 0.8807 - val_tn: 56175.0000 - val_tp: 96.0000
+## Epoch 27/30
+## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3187.0000 - loss: 2.7425e-07 - precision: 0.1068 - recall: 0.9948 - tn: 224276.0000 - tp: 381.0000 - val_fn: 12.0000 - val_fp: 701.0000 - val_loss: 0.0271 - val_precision: 0.1216 - val_recall: 0.8899 - val_tn: 56151.0000 - val_tp: 97.0000
+## Epoch 28/30
+## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 4659.0000 - loss: 6.8191e-07 - precision: 0.0741 - recall: 0.9739 - tn: 222804.0000 - tp: 373.0000 - val_fn: 11.0000 - val_fp: 1022.0000 - val_loss: 0.0797 - val_precision: 0.0875 - val_recall: 0.8991 - val_tn: 55830.0000 - val_tp: 98.0000
+## Epoch 29/30
+## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4183.0000 - loss: 3.9729e-07 - precision: 0.0831 - recall: 0.9896 - tn: 223280.0000 - tp: 379.0000 - val_fn: 12.0000 - val_fp: 406.0000 - val_loss: 0.0232 - val_precision: 0.1928 - val_recall: 0.8899 - val_tn: 56446.0000 - val_tp: 97.0000
+## Epoch 30/30
+## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 2432.0000 - loss: 2.3592e-07 - precision: 0.1354 - recall: 0.9948 - tn: 225031.0000 - tp: 381.0000 - val_fn: 13.0000 - val_fp: 371.0000 - val_loss: 0.0200 - val_precision: 0.2056 - val_recall: 0.8807 - val_tn: 56481.0000 - val_tp: 96.0000
+```
+
+
+```r
+val_pred <- model %>%
+  predict(val_features) %>%
+  { as.integer(. > 0.5) }
+```
+
+```
+## 1781/1781 - 1s - 286us/step
+```
+
+```r
+pred_correct <- val_df$Class == val_pred
+cat(sprintf("Validation accuracy: %.2f", mean(pred_correct)))
+```
+
+```
+## Validation accuracy: 0.99
+```
+
+```r
+fraudulent <- val_df$Class == 1
+
+n_fraudulent_detected <- sum(fraudulent & pred_correct)
+n_fraudulent_missed <- sum(fraudulent & !pred_correct)
+n_legitimate_flagged <- sum(!fraudulent & !pred_correct)
+```
+
+## Conclusions
+
+At the end of training, out of
+56,961 validation transactions, we
+are:
+
+- Correctly identifying
+  96 of them as
+  fraudulent
+- Missing 13
+  fraudulent transactions
+- At the cost of incorrectly flagging
+  371 legitimate
+  transactions
+
+In the real world, one would put an even higher weight on class 1,
+so as to reflect that False Negatives are more costly than False Positives.
+
+Next time your credit card gets declined in an online purchase -- this is why.
+
+<!-- | Trained Model                                                                                                                                                          | Demo                                                                                                                                                                             | -->
+<!-- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| -->
+<!-- | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Imbalanced%20Classification-black.svg)](https://huggingface.co/keras-io/imbalanced_classification) | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Spaces-Imbalanced%20Classification-black.svg)](https://huggingface.co/spaces/keras-io/Credit_Card_Fraud_Detection) | -->
+
+<!-- : Example available on HuggingFace. -->

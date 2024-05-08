@@ -1,0 +1,11 @@
+__signature__
+keras.ops.det(x)
+__doc__
+Computes the determinant of a square tensor.
+
+Args:
+    x: Input tensor of shape `(..., M, M)`.
+
+Returns:
+    A tensor of shape `(...,)` represeting the determinant of `x`.
+

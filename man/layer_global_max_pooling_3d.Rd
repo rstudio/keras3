@@ -2,62 +2,209 @@
 % Please edit documentation in R/layers-pooling.R
 \name{layer_global_max_pooling_3d}
 \alias{layer_global_max_pooling_3d}
-\title{Global Max pooling operation for 3D data.}
+\title{Global max pooling operation for 3D data.}
 \usage{
 layer_global_max_pooling_3d(object, data_format = NULL, keepdims = FALSE, ...)
 }
 \arguments{
-\item{object}{What to compose the new \code{Layer} instance with. Typically a
-Sequential model or a Tensor (e.g., as returned by \code{layer_input()}).
-The return value depends on \code{object}. If \code{object} is:
+\item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
+
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape
+\verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}.
+It defaults to the \code{image_data_format} value found in your Keras
+config file at \verb{~/.keras/keras.json}. If you never set it, then it
+will be \code{"channels_last"}.}
+
+\item{keepdims}{A boolean, whether to keep the temporal dimension or not.
+If \code{keepdims} is \code{FALSE} (default), the rank of the tensor is
+reduced for spatial dimensions. If \code{keepdims} is \code{TRUE}, the
+spatial dimension are retained with length 1.
+The behavior is the same as for \code{tf$reduce_mean()} or \code{op_mean()}.}
+
+\item{...}{For forward/backward compatability.}
+}
+\value{
+The return value depends on the value provided for the first argument.
+If  \code{object} is:
 \itemize{
-\item missing or \code{NULL}, the \code{Layer} instance is returned.
-\item a \code{Sequential} model, the model with an additional layer is returned.
-\item a Tensor, the output tensor from \code{layer_instance(object)} is returned.
-}}
-
-\item{data_format}{A string, one of \code{channels_last} (default) or
-\code{channels_first}. The ordering of the dimensions in the inputs.
-\code{channels_last} corresponds to inputs with shape \verb{(batch, spatial_dim1, spatial_dim2, spatial_dim3, channels)} while \code{channels_first} corresponds
-to inputs with shape \verb{(batch, channels, spatial_dim1, spatial_dim2, spatial_dim3)}. It defaults to the \code{image_data_format} value found in your
-Keras config file at \verb{~/.keras/keras.json}. If you never set it, then it
-will be "channels_last".}
-
-\item{keepdims}{A boolean, whether to keep the spatial dimensions or not. If
-\code{keepdims} is \code{FALSE} (default), the rank of the tensor is reduced for
-spatial dimensions. If \code{keepdims} is \code{TRUE}, the spatial dimensions are
-retained with length 1. The behavior is the same as for \code{tf.reduce_mean} or
-\code{np.mean}.}
-
-\item{...}{standard layer arguments.}
+\item a \code{keras_model_sequential()}, then the layer is added to the sequential model
+(which is modified in place). To enable piping, the sequential model is also
+returned, invisibly.
+\item a \code{keras_input()}, then the output tensor from calling \code{layer(input)} is returned.
+\item \code{NULL} or missing, then a \code{Layer} instance is returned.
+}
 }
 \description{
-Global Max pooling operation for 3D data.
+Global max pooling operation for 3D data.
 }
-\section{Input shape}{
-
+\section{Input Shape}{
 \itemize{
-\item If \code{data_format='channels_last'}: 5D tensor with shape: \verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
-\item If \code{data_format='channels_first'}: 5D tensor with shape: \verb{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}
+\item If \code{data_format='channels_last'}:
+5D tensor with shape:
+\verb{(batch_size, spatial_dim1, spatial_dim2, spatial_dim3, channels)}
+\item If \code{data_format='channels_first'}:
+5D tensor with shape:
+\verb{(batch_size, channels, spatial_dim1, spatial_dim2, spatial_dim3)}
 }
 }
 
-\section{Output shape}{
- 2D tensor with shape: \verb{(batch_size, channels)}
+\section{Output Shape}{
+\itemize{
+\item If \code{keepdims=FALSE}:
+2D tensor with shape \verb{(batch_size, channels)}.
+\item If \code{keepdims=TRUE}:
+\itemize{
+\item If \code{data_format="channels_last"}:
+5D tensor with shape \verb{(batch_size, 1, 1, 1, channels)}
+\item If \code{data_format="channels_first"}:
+5D tensor with shape \verb{(batch_size, channels, 1, 1, 1)}
+}
+}
+}
+
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(2, 4, 5, 4, 3))
+y <- x |> layer_global_max_pooling_3d()
+shape(y)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3)
+
+}\if{html}{\out{</div>}}
 }
 
 \seealso{
-Other pooling layers: 
-\code{\link{layer_average_pooling_1d}()},
-\code{\link{layer_average_pooling_2d}()},
-\code{\link{layer_average_pooling_3d}()},
-\code{\link{layer_global_average_pooling_1d}()},
-\code{\link{layer_global_average_pooling_2d}()},
-\code{\link{layer_global_average_pooling_3d}()},
-\code{\link{layer_global_max_pooling_1d}()},
-\code{\link{layer_global_max_pooling_2d}()},
-\code{\link{layer_max_pooling_1d}()},
-\code{\link{layer_max_pooling_2d}()},
-\code{\link{layer_max_pooling_3d}()}
+\itemize{
+\item \url{https://keras.io/api/layers/pooling_layers/global_max_pooling3d#globalmaxpooling3d-class}
 }
+
+Other pooling layers: \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+
+Other layers: \cr
+\code{\link{Layer}()} \cr
+\code{\link{layer_activation}()} \cr
+\code{\link{layer_activation_elu}()} \cr
+\code{\link{layer_activation_leaky_relu}()} \cr
+\code{\link{layer_activation_parametric_relu}()} \cr
+\code{\link{layer_activation_relu}()} \cr
+\code{\link{layer_activation_softmax}()} \cr
+\code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_add}()} \cr
+\code{\link{layer_additive_attention}()} \cr
+\code{\link{layer_alpha_dropout}()} \cr
+\code{\link{layer_attention}()} \cr
+\code{\link{layer_average}()} \cr
+\code{\link{layer_average_pooling_1d}()} \cr
+\code{\link{layer_average_pooling_2d}()} \cr
+\code{\link{layer_average_pooling_3d}()} \cr
+\code{\link{layer_batch_normalization}()} \cr
+\code{\link{layer_bidirectional}()} \cr
+\code{\link{layer_category_encoding}()} \cr
+\code{\link{layer_center_crop}()} \cr
+\code{\link{layer_concatenate}()} \cr
+\code{\link{layer_conv_1d}()} \cr
+\code{\link{layer_conv_1d_transpose}()} \cr
+\code{\link{layer_conv_2d}()} \cr
+\code{\link{layer_conv_2d_transpose}()} \cr
+\code{\link{layer_conv_3d}()} \cr
+\code{\link{layer_conv_3d_transpose}()} \cr
+\code{\link{layer_conv_lstm_1d}()} \cr
+\code{\link{layer_conv_lstm_2d}()} \cr
+\code{\link{layer_conv_lstm_3d}()} \cr
+\code{\link{layer_cropping_1d}()} \cr
+\code{\link{layer_cropping_2d}()} \cr
+\code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_dense}()} \cr
+\code{\link{layer_depthwise_conv_1d}()} \cr
+\code{\link{layer_depthwise_conv_2d}()} \cr
+\code{\link{layer_discretization}()} \cr
+\code{\link{layer_dot}()} \cr
+\code{\link{layer_dropout}()} \cr
+\code{\link{layer_einsum_dense}()} \cr
+\code{\link{layer_embedding}()} \cr
+\code{\link{layer_feature_space}()} \cr
+\code{\link{layer_flatten}()} \cr
+\code{\link{layer_flax_module_wrapper}()} \cr
+\code{\link{layer_gaussian_dropout}()} \cr
+\code{\link{layer_gaussian_noise}()} \cr
+\code{\link{layer_global_average_pooling_1d}()} \cr
+\code{\link{layer_global_average_pooling_2d}()} \cr
+\code{\link{layer_global_average_pooling_3d}()} \cr
+\code{\link{layer_global_max_pooling_1d}()} \cr
+\code{\link{layer_global_max_pooling_2d}()} \cr
+\code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_group_query_attention}()} \cr
+\code{\link{layer_gru}()} \cr
+\code{\link{layer_hashed_crossing}()} \cr
+\code{\link{layer_hashing}()} \cr
+\code{\link{layer_identity}()} \cr
+\code{\link{layer_integer_lookup}()} \cr
+\code{\link{layer_jax_model_wrapper}()} \cr
+\code{\link{layer_lambda}()} \cr
+\code{\link{layer_layer_normalization}()} \cr
+\code{\link{layer_lstm}()} \cr
+\code{\link{layer_masking}()} \cr
+\code{\link{layer_max_pooling_1d}()} \cr
+\code{\link{layer_max_pooling_2d}()} \cr
+\code{\link{layer_max_pooling_3d}()} \cr
+\code{\link{layer_maximum}()} \cr
+\code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_minimum}()} \cr
+\code{\link{layer_multi_head_attention}()} \cr
+\code{\link{layer_multiply}()} \cr
+\code{\link{layer_normalization}()} \cr
+\code{\link{layer_permute}()} \cr
+\code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_contrast}()} \cr
+\code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_translation}()} \cr
+\code{\link{layer_random_zoom}()} \cr
+\code{\link{layer_repeat_vector}()} \cr
+\code{\link{layer_rescaling}()} \cr
+\code{\link{layer_reshape}()} \cr
+\code{\link{layer_resizing}()} \cr
+\code{\link{layer_rnn}()} \cr
+\code{\link{layer_separable_conv_1d}()} \cr
+\code{\link{layer_separable_conv_2d}()} \cr
+\code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_spatial_dropout_1d}()} \cr
+\code{\link{layer_spatial_dropout_2d}()} \cr
+\code{\link{layer_spatial_dropout_3d}()} \cr
+\code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_string_lookup}()} \cr
+\code{\link{layer_subtract}()} \cr
+\code{\link{layer_text_vectorization}()} \cr
+\code{\link{layer_tfsm}()} \cr
+\code{\link{layer_time_distributed}()} \cr
+\code{\link{layer_torch_module_wrapper}()} \cr
+\code{\link{layer_unit_normalization}()} \cr
+\code{\link{layer_upsampling_1d}()} \cr
+\code{\link{layer_upsampling_2d}()} \cr
+\code{\link{layer_upsampling_3d}()} \cr
+\code{\link{layer_zero_padding_1d}()} \cr
+\code{\link{layer_zero_padding_2d}()} \cr
+\code{\link{layer_zero_padding_3d}()} \cr
+\code{\link{rnn_cell_gru}()} \cr
+\code{\link{rnn_cell_lstm}()} \cr
+\code{\link{rnn_cell_simple}()} \cr
+\code{\link{rnn_cells_stack}()} \cr
+}
+\concept{layers}
 \concept{pooling layers}

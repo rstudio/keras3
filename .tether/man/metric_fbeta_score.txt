@@ -1,0 +1,100 @@
+Help on class FBetaScore in module keras.src.metrics.f_score_metrics:
+
+class FBetaScore(keras.src.metrics.metric.Metric)
+ |  FBetaScore(average=None, beta=1.0, threshold=None, name='fbeta_score', dtype=None)
+ |
+ |  Computes F-Beta score.
+ |
+ |  Formula:
+ |
+ |  ```python
+ |  b2 = beta ** 2
+ |  f_beta_score = (1 + b2) * (precision * recall) / (precision * b2 + recall)
+ |  ```
+ |  This is the weighted harmonic mean of precision and recall.
+ |  Its output range is `[0, 1]`. It works for both multi-class
+ |  and multi-label classification.
+ |
+ |  Args:
+ |      average: Type of averaging to be performed across per-class results
+ |          in the multi-class case.
+ |          Acceptable values are `None`, `"micro"`, `"macro"` and
+ |          `"weighted"`. Defaults to `None`.
+ |          If `None`, no averaging is performed and `result()` will return
+ |          the score for each class.
+ |          If `"micro"`, compute metrics globally by counting the total
+ |          true positives, false negatives and false positives.
+ |          If `"macro"`, compute metrics for each label,
+ |          and return their unweighted mean.
+ |          This does not take label imbalance into account.
+ |          If `"weighted"`, compute metrics for each label,
+ |          and return their average weighted by support
+ |          (the number of true instances for each label).
+ |          This alters `"macro"` to account for label imbalance.
+ |          It can result in an score that is not between precision and recall.
+ |      beta: Determines the weight of given to recall
+ |          in the harmonic mean between precision and recall (see pseudocode
+ |          equation above). Defaults to `1`.
+ |      threshold: Elements of `y_pred` greater than `threshold` are
+ |          converted to be 1, and the rest 0. If `threshold` is
+ |          `None`, the argmax of `y_pred` is converted to 1, and the rest to 0.
+ |      name: Optional. String name of the metric instance.
+ |      dtype: Optional. Data type of the metric result.
+ |
+ |  Returns:
+ |      F-Beta Score: float.
+ |
+ |  Example:
+ |
+ |  >>> metric = keras.metrics.FBetaScore(beta=2.0, threshold=0.5)
+ |  >>> y_true = np.array([[1, 1, 1],
+ |  ...                    [1, 0, 0],
+ |  ...                    [1, 1, 0]], np.int32)
+ |  >>> y_pred = np.array([[0.2, 0.6, 0.7],
+ |  ...                    [0.2, 0.6, 0.6],
+ |  ...                    [0.6, 0.8, 0.0]], np.float32)
+ |  >>> metric.update_state(y_true, y_pred)
+ |  >>> result = metric.result()
+ |  >>> result
+ |  [0.3846154 , 0.90909094, 0.8333334 ]
+ |
+ |  Method resolution order:
+ |      FBetaScore
+ |      keras.src.metrics.metric.Metric
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    average=None,
+ |    beta=1.0,
+ |    threshold=None,
+ |    name='fbeta_score',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns the serializable config of the metric.
+ |
+ |  reset_state(self)
+ |      Reset all of the metric state variables.
+ |
+ |      This function is called between epochs/steps,
+ |      when a metric is evaluated during training.
+ |
+ |  result(self)
+ |      Compute the current metric value.
+ |
+ |      Returns:
+ |          A scalar tensor, or a dictionary of scalar tensors.
+ |
+ |  update_state(
+ |    self,
+ |    y_true,
+ |    y_pred,
+ |    sample_weight=None
+ |  )
+ |      Accumulate statistics for the metric.
+ |

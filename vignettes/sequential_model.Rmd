@@ -1,492 +1,519 @@
 ---
-title: "Guide to the Sequential Model"
+title: The Sequential model
+date-created: 2020/04/12
+last-modified: 2023/06/25
+description: Complete guide to the Sequential model.
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Guide to the Sequential Model} 
-  %\VignetteEngine{knitr::rmarkdown} 
+  %\VignetteIndexEntry{The Sequential model}
+  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
-type: docs
-repo: https://github.com/rstudio/keras
-menu:
-  main:
-    name: "Sequential API"
-    identifier: "keras-sequential-model"
-    parent: "keras-getting-started-top"
-    weight: 15
-aliases:
-  - /keras/articles/sequential_model.html
 ---
 
-```{r setup, include=FALSE}
-library(keras)
-knitr::opts_chunk$set(eval = FALSE)
+## Setup
+
+
+```r
+library(keras3)
 ```
 
-## Defining a Model
+## When to use a Sequential model
 
-The sequential model is a linear stack of layers.
+A `Sequential` model is appropriate for **a plain stack of layers**
+where each layer has **exactly one input tensor and one output tensor**.
 
-You create a sequential model by calling the `keras_model_sequential()` function then a series of `layer` functions:
+Schematically, the following `Sequential` model:
 
-```{r}
-library(keras)
 
-model <- keras_model_sequential() 
-model %>% 
-  layer_dense(units = 32, input_shape = c(784)) %>% 
-  layer_activation('relu') %>% 
-  layer_dense(units = 10) %>% 
-  layer_activation('softmax')
+```r
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu", name = "layer1") |>
+  layer_dense(units = 3, activation = "relu", name = "layer2") |>
+  layer_dense(units = 4, name = "layer3")
+
+# Call model on a test input
+x <- op_ones(c(3, 3))
+y <- model(x)
 ```
 
-Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place) which is why it's not necessary for `model` to be assigned back to after the layers are added.
+is equivalent to this function:
 
-Print a summary of the model's structure using the `summary()` function:
 
-```{r}
+```r
+# Create 3 layers
+layer1 <- layer_dense(units = 2, activation="relu", name="layer1")
+layer2 <- layer_dense(units = 3, activation="relu", name="layer2")
+layer3 <- layer_dense(units = 4, name="layer3")
+
+# Call layers on a test input
+x <- op_ones(c(3, 3))
+y <- x |> layer1() |> layer2() |> layer3()
+```
+
+A Sequential model is **not appropriate** when:
+
+- Your model has multiple inputs or multiple outputs
+- Any of your layers has multiple inputs or multiple outputs
+- You need to do layer sharing
+- You want non-linear topology (e.g. a residual connection, a multi-branch
+model)
+
+## Creating a Sequential model
+
+You can create a Sequential model by piping layers into the `keras_model_sequential()`
+object:
+
+
+```r
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu") |>
+  layer_dense(units = 4)
+```
+
+or by passing a list of layers to `keras_model_sequential()`:
+
+
+```r
+model <- keras_model_sequential(layers = list(
+  layer_dense(units = 2, activation = "relu"),
+  layer_dense(units = 3, activation = "relu"),
+  layer_dense(units = 4)
+))
+```
+
+Its layers are accessible via the `layers` attribute:
+
+
+```r
+model$layers
+```
+
+```
+## [[1]]
+## <Dense name=dense_3, built=False>
+##  signature: (*args, **kwargs)
+##
+## [[2]]
+## <Dense name=dense_4, built=False>
+##  signature: (*args, **kwargs)
+##
+## [[3]]
+## <Dense name=dense_5, built=False>
+##  signature: (*args, **kwargs)
+```
+
+You can also create a Sequential model incrementally:
+
+
+```r
+model <- keras_model_sequential()
+model |> layer_dense(units = 2, activation="relu")
+model |> layer_dense(units = 3, activation="relu")
+model |> layer_dense(units = 4)
+```
+
+Note that there's also a corresponding `pop_layer()` method to remove layers:
+a Sequential model behaves very much like a stack of layers.
+
+
+```r
+model |> pop_layer()
+length(model$layers)  # 2
+```
+
+```
+## [1] 2
+```
+
+Also note that the Sequential constructor accepts a `name` argument, just like
+any layer or model in Keras. This is useful to annotate TensorBoard graphs
+with semantically meaningful names.
+
+
+```r
+model <- keras_model_sequential(name = "my_sequential")
+model |> layer_dense(units = 2, activation="relu", name = "layer1")
+model |> layer_dense(units = 3, activation="relu", name = "layer2")
+model |> layer_dense(units = 4, name = "layer3")
+```
+
+## Specifying the input shape in advance
+
+Generally, all layers in Keras need to know the shape of their inputs
+in order to be able to create their weights. So when you create a layer like
+this, initially, it has no weights:
+
+
+```r
+layer <- layer_dense(units = 3)
+layer$weights  # Empty
+```
+
+```
+## list()
+```
+
+It creates its weights the first time it is called on an input, since the shape
+of the weights depends on the shape of the inputs:
+
+
+```r
+# Call layer on a test input
+x <- op_ones(c(1, 4))
+y <- layer(x)
+layer$weights  # Now it has weights, of shape (4, 3) and (3,)
+```
+
+```
+## [[1]]
+## <KerasVariable shape=(4, 3), dtype=float32, path=dense_9/kernel>
+##
+## [[2]]
+## <KerasVariable shape=(3), dtype=float32, path=dense_9/bias>
+```
+
+Naturally, this also applies to Sequential models. When you instantiate a
+Sequential model without an input shape, it isn't "built": it has no weights
+(and calling
+`model$weights` results in an error stating just this). The weights are created
+when the model first sees some input data:
+
+
+```r
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu") |>
+  layer_dense(units = 4)
+# No weights at this stage!
+
+# At this point, you can't do this:
+# model$weights
+
+
+# Call the model on a test input
+x <- op_ones(c(1, 4))
+y <- model(x)
+length(model$weights)
+```
+
+```
+## [1] 6
+```
+
+Once a model is "built", you can call its `summary()` method to display its
+contents:
+
+
+```r
 summary(model)
 ```
 
 ```
-Model
-________________________________________________________________________________
-Layer (type)                        Output Shape                    Param #     
-================================================================================
-dense_1 (Dense)                     (None, 256)                     200960      
-________________________________________________________________________________
-dropout_1 (Dropout)                 (None, 256)                     0           
-________________________________________________________________________________
-dense_2 (Dense)                     (None, 128)                     32896       
-________________________________________________________________________________
-dropout_2 (Dropout)                 (None, 128)                     0           
-________________________________________________________________________________
-dense_3 (Dense)                     (None, 10)                      1290        
-================================================================================
-Total params: 235,146
-Trainable params: 235,146
-Non-trainable params: 0
-________________________________________________________________________________
+## [1mModel: "sequential_4"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+## │ dense_10 ([38;5;33mDense[0m)                │ ([38;5;34m1[0m, [38;5;34m2[0m)                 │            [38;5;34m10[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dense_11 ([38;5;33mDense[0m)                │ ([38;5;34m1[0m, [38;5;34m3[0m)                 │             [38;5;34m9[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ dense_12 ([38;5;33mDense[0m)                │ ([38;5;34m1[0m, [38;5;34m4[0m)                 │            [38;5;34m16[0m │
+## └─────────────────────────────────┴────────────────────────┴───────────────┘
+## [1m Total params: [0m[38;5;34m35[0m (140.00 B)
+## [1m Trainable params: [0m[38;5;34m35[0m (140.00 B)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
-### Input Shapes
-
-The model needs to know what input shape it should expect. For this reason, the first layer in a sequential model (and only the first, because following layers can do automatic shape inference) needs to receive information about its input shape. 
-
-As illustrated in the example above, this is done by passing an `input_shape` argument to the first layer. This is a list of integers or `NULL` entries, where `NULL` indicates that any positive integer may be expected. In `input_shape`, the batch dimension is not included.
-
-If you ever need to specify a fixed batch size for your inputs (this is useful for stateful recurrent networks), you can pass a `batch_size` argument to a layer. If you pass both `batch_size=32` and `input_shape=c(6, 8)` to a layer, it will then expect every batch of inputs to have the batch shape `(32, 6, 8)`.
+However, it can be very useful when building a Sequential model incrementally
+to be able to display the summary of the model so far, including the current
+output shape. In this case, you should start your model by passing an `input_shape`
+argument to your model, so that it knows its input shape from the start:
 
 
-## Compilation
+```r
+model <- keras_model_sequential(input_shape = 4) |>
+  layer_dense(units = 2, activation = "relu")
+summary(model)
+```
 
-Before training a model, you need to configure the learning process, which is done via the `compile()` function. It receives three arguments:
+```
+## [1mModel: "sequential_5"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+## │ dense_13 ([38;5;33mDense[0m)                │ ([38;5;45mNone[0m, [38;5;34m2[0m)              │            [38;5;34m10[0m │
+## └─────────────────────────────────┴────────────────────────┴───────────────┘
+## [1m Total params: [0m[38;5;34m10[0m (40.00 B)
+## [1m Trainable params: [0m[38;5;34m10[0m (40.00 B)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
 
-- An optimizer. This could be the string identifier of an existing optimizer (e.g. as "rmsprop" or "adagrad") or a call to an optimizer function (e.g. `optimizer_sgd()`).
 
-- A loss function. This is the objective that the model will try to minimize. It can be the string identifier of an existing loss function (e.g. "categorical_crossentropy" or "mse") or a call to a loss function (e.g. `loss_mean_squared_error()`).
+```r
+model$layers
+```
 
-- A list of metrics. For any classification problem you will want to set this to `metrics = c('accuracy')`. A metric could be the string identifier of an existing metric or a call to metric function (e.g. `metric_binary_crossentropy()`).
+```
+## [[1]]
+## <Dense name=dense_13, built=True>
+##  signature: (*args, **kwargs)
+```
 
-Here's the definition of a model along with the compilation step (the `compile()` function has arguments appropriate for a multi-class classification problem):
+Models built with a predefined input shape like this always have weights (even
+before seeing any data) and always have a defined output shape.
 
-```{r}
-# For a multi-class classification problem
-model <- keras_model_sequential() 
-model %>% 
-  layer_dense(units = 32, input_shape = c(784)) %>% 
-  layer_activation('relu') %>% 
-  layer_dense(units = 10) %>% 
-  layer_activation('softmax')
+In general, it's a recommended best practice to always specify the input shape
+of a Sequential model in advance if you know what it is.
 
-model %>% compile(
-  optimizer = 'rmsprop',
-  loss = 'categorical_crossentropy',
-  metrics = c('accuracy')
+## A common debugging workflow: add layers + `summary()`
+
+When building a new Sequential architecture, it's useful to incrementally stack
+layers with `|>` and frequently print model summaries. For instance, this
+enables you to monitor how a stack of `Conv2D` and `MaxPooling2D` layers is
+downsampling image feature maps:
+
+
+```r
+model <- keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(3, 3))
+
+# Can you guess what the current output shape is at this point? Probably not.
+# Let's just print it:
+summary(model)
+```
+
+```
+## [1mModel: "sequential_6"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m123[0m, [38;5;34m123[0m, [38;5;34m32[0m)   │         [38;5;34m2,432[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m121[0m, [38;5;34m121[0m, [38;5;34m32[0m)   │         [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m40[0m, [38;5;34m40[0m, [38;5;34m32[0m)     │             [38;5;34m0[0m │
+## └─────────────────────────────────┴────────────────────────┴───────────────┘
+## [1m Total params: [0m[38;5;34m11,680[0m (45.62 KB)
+## [1m Trainable params: [0m[38;5;34m11,680[0m (45.62 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+```r
+# The answer was: (40, 40, 32), so we can keep downsampling...
+
+model |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = 3) |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = 2)
+
+# And now?
+summary(model)
+```
+
+```
+## [1mModel: "sequential_6"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m123[0m, [38;5;34m123[0m, [38;5;34m32[0m)   │         [38;5;34m2,432[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m121[0m, [38;5;34m121[0m, [38;5;34m32[0m)   │         [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m40[0m, [38;5;34m40[0m, [38;5;34m32[0m)     │             [38;5;34m0[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m38[0m, [38;5;34m38[0m, [38;5;34m32[0m)     │         [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ conv2d_3 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m36[0m, [38;5;34m36[0m, [38;5;34m32[0m)     │         [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ max_pooling2d_1 ([38;5;33mMaxPooling2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m12[0m, [38;5;34m12[0m, [38;5;34m32[0m)     │             [38;5;34m0[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ conv2d_4 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m10[0m, [38;5;34m10[0m, [38;5;34m32[0m)     │         [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ conv2d_5 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m32[0m)       │         [38;5;34m9,248[0m │
+## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+## │ max_pooling2d_2 ([38;5;33mMaxPooling2D[0m)  │ ([38;5;45mNone[0m, [38;5;34m4[0m, [38;5;34m4[0m, [38;5;34m32[0m)       │             [38;5;34m0[0m │
+## └─────────────────────────────────┴────────────────────────┴───────────────┘
+## [1m Total params: [0m[38;5;34m48,672[0m (190.12 KB)
+## [1m Trainable params: [0m[38;5;34m48,672[0m (190.12 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+```r
+# Now that we have 4x4 feature maps, time to apply global max pooling.
+model |>
+  layer_global_max_pooling_2d()
+
+# Finally, we add a classification layer.
+model |>
+  layer_dense(units = 10, activation = "softmax")
+```
+
+Very practical, right?
+
+Note that `|>` is equivalent to calling `model$add()`, it modifies the model
+in-place, so you don't need to reassign the `model` symbol at each step.
+
+## What to do once you have a model
+
+Once your model architecture is ready, you will want to:
+
+- Train your model, evaluate it, and run inference. See our
+[guide to training & evaluation with the built-in loops](
+    training_with_built_in_methods.html)
+- Save your model to disk and restore it. See our
+[guide to serialization & saving](serialization_and_saving.html).
+
+## Feature extraction with a Sequential model
+
+Once a Sequential model has been built, it behaves like a [Functional API
+model](functional_api.html).
+This means that every layer has an `input`
+and `output` attribute. These attributes can be used to do neat things, like
+quickly creating a model that extracts the outputs of all intermediate layers in a
+Sequential model:
+
+
+```r
+initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
+
+
+feature_extractor <- keras_model(
+    inputs = initial_model$inputs,
+    outputs = lapply(initial_model$layers, function(x) x$output),
 )
+
+# Call feature extractor on test input.
+x <- op_ones(c(1, 250, 250, 3))
+features <- feature_extractor(x)
 ```
 
-Here's what compilation might look like for a mean squared error regression problem:
+Here's a similar example that only extract features from one layer:
 
-```{r}
-model %>% compile(
-  optimizer = optimizer_rmsprop(lr = 0.002),
-  loss = 'mse'
+
+```r
+initial_model <-
+  keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2,
+                activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu",
+                name = "my_intermediate_layer") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
+
+feature_extractor <- keras_model(
+  inputs = initial_model$inputs,
+  outputs = get_layer(initial_model, "my_intermediate_layer")$output,
 )
+
+# Call feature extractor on test input.
+x <- op_ones(c(1, 250, 250, 3))
+features <- feature_extractor(x)
 ```
 
-Here's compilation for a binary classification problem:
+## Transfer learning with a Sequential model
 
-```{r}
-model %>% compile( 
-  optimizer = optimizer_rmsprop(),
-  loss = loss_binary_crossentropy,
-  metrics = metric_binary_accuracy
-)
+Transfer learning consists of freezing the bottom layers in a model and only training
+the top layers. If you aren't familiar with it, make sure to read our [guide
+to transfer learning](transfer_learning.html).
+
+Here are two common transfer learning blueprint involving Sequential models.
+
+First, let's say that you have a Sequential model, and you want to freeze all
+layers except the last one. In this case, you can call `freeze_weights()`. Alternatively, you
+can iterate over
+`model$layers` and set `layer$trainable <- FALSE` on each layer, except the
+last one. Like this:
+
+
+```r
+model <- keras_model_sequential(input_shape = 784) |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 10)
 ```
 
-Here's compilation with a custom metric:
-
-```{r}
-# create metric using backend tensor functions
-metric_mean_pred <- custom_metric("mean_pred", function(y_true, y_pred) {
-  k_mean(y_pred) 
-})
-
-model %>% compile( 
-  optimizer = optimizer_rmsprop(),
-  loss = loss_binary_crossentropy,
-  metrics = c('accuracy', metric_mean_pred)
-)
+```r
+# Presumably you would want to first load pre-trained weights.
+model |> load_model_weights(...)
 ```
 
-## Training
-
-Keras models are trained on R matrices or higher dimensional arrays of input data and labels. For training a model, you will typically use the `fit()` function.
-
-Here's a single-input model with 2 classes (binary classification):
-
-```{r}
-# create model
-model <- keras_model_sequential()
-
-# add layers and compile the model
-model %>% 
-  layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
-  layer_dense(units = 1, activation = 'sigmoid') %>% 
-  compile(
-    optimizer = 'rmsprop',
-    loss = 'binary_crossentropy',
-    metrics = c('accuracy')
-  )
-
-# Generate dummy data
-data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
-labels <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
-
-# Train the model, iterating on the data in batches of 32 samples
-model %>% fit(data, labels, epochs=10, batch_size=32)
+```r
+# Freeze all layers except the last one.
+model |> freeze_weights(from = 1, to = -2)
+model # note the "Trainable" column now visible in the summary table
 ```
 
-Here's a single-input model with 10 classes (categorical classification):
-
-```{r}
-# create model
-model <- keras_model_sequential()
-
-# define and compile the model
-model %>% 
-  layer_dense(units = 32, activation = 'relu', input_shape = c(100)) %>% 
-  layer_dense(units = 10, activation = 'softmax') %>% 
-  compile(
-    optimizer = 'rmsprop',
-    loss = 'categorical_crossentropy',
-    metrics = c('accuracy')
-  )
-
-# Generate dummy data
-data <- matrix(runif(1000*100), nrow = 1000, ncol = 100)
-labels <- matrix(round(runif(1000, min = 0, max = 9)), nrow = 1000, ncol = 1)
-
-# Convert labels to categorical one-hot encoding
-one_hot_labels <- to_categorical(labels, num_classes = 10)
-
-# Train the model, iterating on the data in batches of 32 samples
-model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)
+```
+## [1mModel: "sequential_9"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)               [0m[1m [0m┃[1m [0m[1mOutput Shape         [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+## │ dense_15 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m32[0m)            │     [38;5;34m25,120[0m │   [1;91mN[0m   │
+## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
+## │ dense_16 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m32[0m)            │      [38;5;34m1,056[0m │   [1;91mN[0m   │
+## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
+## │ dense_17 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m32[0m)            │      [38;5;34m1,056[0m │   [1;91mN[0m   │
+## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
+## │ dense_18 ([38;5;33mDense[0m)            │ ([38;5;45mNone[0m, [38;5;34m10[0m)            │        [38;5;34m330[0m │   [1;38;5;34mY[0m   │
+## └─────────────────────────────┴───────────────────────┴────────────┴───────┘
+## [1m Total params: [0m[38;5;34m27,562[0m (107.66 KB)
+## [1m Trainable params: [0m[38;5;34m330[0m (1.29 KB)
+## [1m Non-trainable params: [0m[38;5;34m27,232[0m (106.38 KB)
 ```
 
-## Examples
+```r
+# Another way to freeze all layers except the last one.
+for (layer in model$layers[-length(model$layers)]) {
+  layer$trainable <- FALSE
+}
 
-Here are a few examples to get you started!
+# Recompile and train (this will only update the weights of the last layer).
+model |> compile(...)
+model |> fit(...)
+```
 
-On the [examples](../examples/) page you will also find example models for real datasets:
+Another common blueprint is to use a Sequential model to stack a pre-trained
+model and some freshly initialized classification layers. Like this:
 
-- [CIFAR10 small images classification](../examples/cifar10_cnn) 
 
-- [IMDB movie review sentiment classification](../examples/imdb_cnn_lstm) 
+```r
+# Load a convolutional base with pre-trained weights
+base_model <- application_xception(weights = 'imagenet',
+                                   include_top = FALSE,
+                                   pooling = 'avg')
 
-- [Reuters newswires topic classification](../examples/reuters_mlp) 
+# Freeze the base model
+freeze_weights(base_model)
 
-- [MNIST handwritten digits classification](../examples/mnist_mlp)
-
-- [Character-level text generation with LSTM](../examples/lstm_text_generation)
-
-Some additional examples are provided below.
-
-### Multilayer Perceptron (MLP) for multi-class softmax classification
-
-```{r}
-library(keras)
-
-# generate dummy data
-x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
-
-y_train <- runif(1000, min = 0, max = 9) %>% 
-  round() %>%
-  matrix(nrow = 1000, ncol = 1) %>% 
-  to_categorical(num_classes = 10)
-
-x_test  <- matrix(runif(100*20), nrow = 100, ncol = 20)
-
-y_test <- runif(100, min = 0, max = 9) %>% 
-  round() %>%
-  matrix(nrow = 100, ncol = 1) %>% 
-  to_categorical(num_classes = 10)
-
-# create model
-model <- keras_model_sequential()
-
-# define and compile the model
-model %>% 
-  layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
-  layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 10, activation = 'softmax') %>% 
-  compile(
-    loss = 'categorical_crossentropy',
-    optimizer = optimizer_sgd(lr = 0.01, decay = 1e-6, momentum = 0.9, nesterov = TRUE),
-    metrics = c('accuracy')     
-  )
-
-# train
-model %>% fit(x_train, y_train, epochs = 20, batch_size = 128)
-
-# evaluate
-score <- model %>% evaluate(x_test, y_test, batch_size = 128)
+# Use a Sequential model to add a trainable classifier on top
+model <- keras_model_sequential() |>
+  base_model() |>
+  layer_dense(1000)
 ```
 
 
-
-### MLP for binary classification
-
-```{r}
-library(keras)
-
-# generate dummy data
-x_train <- matrix(runif(1000*20), nrow = 1000, ncol = 20)
-y_train <- matrix(round(runif(1000, min = 0, max = 1)), nrow = 1000, ncol = 1)
-x_test <- matrix(runif(100*20), nrow = 100, ncol = 20)
-y_test <- matrix(round(runif(100, min = 0, max = 1)), nrow = 100, ncol = 1)
-
-# create model
-model <- keras_model_sequential()
-
-# define and compile the model
-model %>% 
-  layer_dense(units = 64, activation = 'relu', input_shape = c(20)) %>% 
-  layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 64, activation = 'relu') %>% 
-  layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 1, activation = 'sigmoid') %>% 
-  compile(
-    loss = 'binary_crossentropy',
-    optimizer = 'rmsprop',
-    metrics = c('accuracy')
-  )
-
-# train 
-model %>% fit(x_train, y_train, epochs = 20, batch_size = 128)
-
-# evaluate
-score = model %>% evaluate(x_test, y_test, batch_size=128)
+```r
+# Compile & train
+model |> compile(...)
+model |> fit(...)
 ```
 
 
-### VGG-like convnet
+If you do transfer learning, you will probably find yourself frequently using
+these two patterns.
 
-```{r}
-library(keras)
+That's about all you need to know about Sequential models!
 
-# generate dummy data
-x_train <- array(runif(100 * 100 * 100 * 3), dim = c(100, 100, 100, 3))
+To find out more about building models in Keras, see:
 
-y_train <- runif(100, min = 0, max = 9) %>% 
-  round() %>%
-  matrix(nrow = 100, ncol = 1) %>% 
-  to_categorical(num_classes = 10)
-
-x_test <- array(runif(20 * 100 * 100 * 3), dim = c(20, 100, 100, 3))
-
-y_test <- runif(20, min = 0, max = 9) %>% 
-  round() %>%
-  matrix(nrow = 20, ncol = 1) %>% 
-  to_categorical(num_classes = 10)
-
-# create model
-model <- keras_model_sequential()
-
-# define and compile model
-# input: 100x100 images with 3 channels -> (100, 100, 3) tensors.
-# this applies 32 convolution filters of size 3x3 each.
-model %>% 
-  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu', 
-                input_shape = c(100,100,3)) %>% 
-  layer_conv_2d(filters = 32, kernel_size = c(3,3), activation = 'relu') %>% 
-  layer_max_pooling_2d(pool_size = c(2,2)) %>% 
-  layer_dropout(rate = 0.25) %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
-  layer_conv_2d(filters = 64, kernel_size = c(3,3), activation = 'relu') %>% 
-  layer_max_pooling_2d(pool_size = c(2,2)) %>% 
-  layer_dropout(rate = 0.25) %>% 
-  layer_flatten() %>% 
-  layer_dense(units = 256, activation = 'relu') %>% 
-  layer_dropout(rate = 0.25) %>% 
-  layer_dense(units = 10, activation = 'softmax') %>% 
-  compile(
-    loss = 'categorical_crossentropy', 
-    optimizer = optimizer_sgd(lr = 0.01, decay = 1e-6, momentum = 0.9, nesterov = TRUE)
-  )
-  
-# train
-model %>% fit(x_train, y_train, batch_size = 32, epochs = 10)
-
-# evaluate
-score <- model %>% evaluate(x_test, y_test, batch_size = 32)
-```
-
-### Sequence classification with LSTM
-
-```{r, eval = FALSE}
-model <- keras_model_sequential() 
-model %>% 
-  layer_embedding(input_dim = max_features, output_dim - 256) %>% 
-  layer_lstm(units = 128) %>% 
-  layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 1, activation = 'sigmoid') %>% 
-  compile(
-    loss = 'binary_crossentropy',
-    optimizer = 'rmsprop',
-    metrics = c('accuracy')
-  )
-
-model %>% fit(x_train, y_train, batch_size = 16, epochs = 10)
-score <- model %>% evaluate(x_test, y_test, batch_size = 16)
-```
-
-### Sequence classification with 1D convolutions:
-
-```{r, eval=FALSE}
-model <- keras_model_sequential()
-model %>% 
-  layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu',
-                input_shape = c(seq_length, 100)) %>% 
-  layer_conv_1d(filters = 64, kernel_size = 3, activation = 'relu') %>% 
-  layer_max_pooling_1d(pool_size = 3) %>% 
-  layer_conv_1d(filters = 128, kernel_size = 3, activation = 'relu') %>% 
-  layer_conv_1d(filters = 128, kernel_size = 3, activation = 'relu') %>% 
-  layer_global_average_pooling_1d() %>% 
-  layer_dropout(rate = 0.5) %>% 
-  layer_dense(units = 1, activation = 'sigmoid') %>% 
-  compile(
-    loss = 'binary_crossentropy',
-    optimizer = 'rmsprop',
-    metrics = c('accuracy')
-  )
-
-model %>% fit(x_train, y_train, batch_size = 16, epochs = 10)
-score <- model %>% evaluate(x_test, y_test, batch_size = 16)
-```
-
-### Stacked LSTM for sequence classification
-
-In this model, we stack 3 LSTM layers on top of each other,
-making the model capable of learning higher-level temporal representations.
-
-The first two LSTMs return their full output sequences, but the last one only returns
-the last step in its output sequence, thus dropping the temporal dimension
-(i.e. converting the input sequence into a single vector).
-
-<img src="images/regular_stacked_lstm.png" alt="stacked LSTM" style="width: 300px;"/>
-
-
-```{r}
-library(keras)
-
-# constants
-data_dim <- 16
-timesteps <- 8
-num_classes <- 10
-
-# define and compile model
-# expected input data shape: (batch_size, timesteps, data_dim)
-model <- keras_model_sequential() 
-model %>% 
-  layer_lstm(units = 32, return_sequences = TRUE, input_shape = c(timesteps, data_dim)) %>% 
-  layer_lstm(units = 32, return_sequences = TRUE) %>% 
-  layer_lstm(units = 32) %>% # return a single vector dimension 32
-  layer_dense(units = 10, activation = 'softmax') %>% 
-  compile(
-    loss = 'categorical_crossentropy',
-    optimizer = 'rmsprop',
-    metrics = c('accuracy')
-  )
-  
-# generate dummy training data
-x_train <- array(runif(1000 * timesteps * data_dim), dim = c(1000, timesteps, data_dim))
-y_train <- matrix(runif(1000 * num_classes), nrow = 1000, ncol = num_classes)
-
-# generate dummy validation data
-x_val <- array(runif(100 * timesteps * data_dim), dim = c(100, timesteps, data_dim))
-y_val <- matrix(runif(100 * num_classes), nrow = 100, ncol = num_classes)
-
-# train
-model %>% fit( 
-  x_train, y_train, batch_size = 64, epochs = 5, validation_data = list(x_val, y_val)
-)
-```
-
-### Same stacked LSTM model, rendered "stateful"
-
-A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences while keeping computational complexity manageable.
-
-[You can read more about stateful RNNs in the FAQ.](../faq#how-can-i-use-stateful-rnns)
-
-```{r}
-library(keras)
-
-# constants
-data_dim <- 16
-timesteps <- 8
-num_classes <- 10
-batch_size <- 32
-
-# define and compile model
-# Expected input batch shape: (batch_size, timesteps, data_dim)
-# Note that we have to provide the full batch_input_shape since the network is stateful.
-# the sample of index i in batch k is the follow-up for the sample i in batch k-1.
-model <- keras_model_sequential()
-model %>% 
-  layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE,
-             batch_input_shape = c(batch_size, timesteps, data_dim)) %>% 
-  layer_lstm(units = 32, return_sequences = TRUE, stateful = TRUE) %>% 
-  layer_lstm(units = 32, stateful = TRUE) %>% 
-  layer_dense(units = 10, activation = 'softmax') %>% 
-  compile(
-    loss = 'categorical_crossentropy',
-    optimizer = 'rmsprop',
-    metrics = c('accuracy')
-  )
-  
-# generate dummy training data
-x_train <- array(runif( (batch_size * 10) * timesteps * data_dim), 
-                 dim = c(batch_size * 10, timesteps, data_dim))
-y_train <- matrix(runif( (batch_size * 10) * num_classes), 
-                  nrow = batch_size * 10, ncol = num_classes)
-
-# generate dummy validation data
-x_val <- array(runif( (batch_size * 3) * timesteps * data_dim), 
-               dim = c(batch_size * 3, timesteps, data_dim))
-y_val <- matrix(runif( (batch_size * 3) * num_classes), 
-                nrow = batch_size * 3, ncol = num_classes)
-
-# train
-model %>% fit( 
-  x_train, 
-  y_train, 
-  batch_size = batch_size, 
-  epochs = 5, 
-  shuffle = FALSE,
-  validation_data = list(x_val, y_val)
-)
-```
-
+- [Guide to the Functional API](functional_api.html)
+- [Guide to making new Layers & Models via subclassing](making_new_layers_and_models_via_subclassing.html)

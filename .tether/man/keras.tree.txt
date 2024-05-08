@@ -1,0 +1,26 @@
+assert_same_structure(
+  a,
+  b,
+  check_types=True
+)
+flatten(structure)
+is_nested(structure)
+lists_to_tuples(structure)
+map_shape_structure(func, structure)
+map_structure(func, *structures)
+map_structure_up_to(
+  shallow_structure,
+  func,
+  *structures
+)
+pack_sequence_as(
+  structure,
+  flat_sequence,
+  sequence_fn=None
+)
+traverse(
+  func,
+  structure,
+  top_down=True
+)
+

@@ -1,0 +1,135 @@
+"keras.applications.*":
+  include_preprocessing: >
+      Boolean, whether to include the preprocessing layer at the bottom of the network.
+
+  model_name: String, name for the model.
+
+"keras.activations.elu":
+  alpha: Numeric. See description for details.
+
+"keras.layers.Input":
+  batch_shape: Shape, including the batch dim.
+
+# merging layers
+# "keras.src.layers.merging.*":
+#    ... : null
+#    "inputs,...": "Inputs to merge"
+
+"keras.layers.*":
+  object: Object to compose the layer with. A tensor, array, or sequential model.
+
+
+"keras.*":
+  name: String, name for the object
+  seed: Initial seed for the random number generator
+  dtype: datatype (e.g., `"float32"`).
+  "...": For forward/backward compatability.
+
+"keras.metrics.*":
+  y_true: Tensor of true targets.
+  y_pred: Tensor of predicted targets.
+
+# TODO: resolve presedence when multiple globs match
+
+keras.layers.Add:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Average:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Concatenate:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+
+keras.layers.Subtract:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Minimum:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Multiply:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+keras.layers.Maximum:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+
+keras.layers.Dot:
+  inputs: layers to combine
+  "...": unnamed arguments are combined with `inputs`. Named arguments are passed on as standard layer args.
+
+
+keras.layers.Bidirectional:
+  weights: see description
+
+
+keras.layers.MultiHeadAttention:
+  inputs: see description
+
+
+keras.layers.RandomCrop:
+  data_format: see description
+
+keras.layers.RandomRotation:
+  value_range: see description
+  data_format: see description
+
+
+keras.layers.TFSMLayer:
+  call_training_endpoint: see description
+  trainable: see description
+
+keras.ops.abs:
+  x: see description
+
+keras.ops.conj:
+  x: see description
+
+keras.ops.get_item:
+  x: see description
+  key: see description
+
+keras.ops.scatter:
+  values: see description
+
+keras.ops.true_divide:
+  x1: see description
+  x2: see description
+
+keras.layers.Masking:
+  mask_value: see description
+
+# keras.metrics.binary_accuracy:
+#   threshold: see description
+#
+# keras.metrics.sparse_top_k_categorical_accuracy:
+#   k: Integer
+#
+# keras.metrics.top_k_categorical_accuracy:
+#   k: Integer
+
+keras.random.dropout:
+  inputs: see description
+  rate: see description
+  noise_shape: see description
+
+keras.utils.FeatureSpace:
+  object: see description
+  features: see description
+  output_mode: see description
+  crosses: see description
+  crossing_dim: see description
+  hashing_dim: see description
+  num_discretization_bins: Integer
+
+keras.ops.vectorized_map:
+  function: a function
+  elements: see description
+
