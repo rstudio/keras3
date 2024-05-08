@@ -1,0 +1,239 @@
+---
+title: "Keras 3"
+format: html
+editor: visual
+---
+
+We are excited to announce the release of `keras3` to CRAN. `keras3` is
+a ground-up rebuild of the `keras` R package for Keras 3.
+
+Keras provides a complete toolkit for building deep learning models in
+R.
+
+## Installation
+
+To install Keras 3:
+
+``` r
+install.packages("keras3")
+library(keras3)
+install_keras()
+```
+
+### What's new:
+
+### Website
+
+-   All new website with greatly improved docs, rendered examples,
+    updated guides, tutorials, and a new examples gallery
+    <https://keras.posit.co>
+
+### Multi-backend support
+
+New multi-backend support. Configure a preferred backend by calling.
+
+``` r
+use_backend("jax") # or "tensorflow", "torch", "numpy"
+```
+
+### The 'Ops' family
+
+`keras3` introduces a new "Operations" family of function. The Ops
+family, currently with over 200 functions, provides a comprehensive
+suite of operations typically needed when operating on nd-arrays for
+deep learning. The Operation family supersedes and greatly expands on
+the former family of backend functions prefixed with `k_` in the `keras`
+package.
+
+The Ops functions let you write backend-agnostic code. They provide a
+uniform API, regardless of if you're working with TensorFlow Tensors,
+Jax Arrays, Torch Tensors, Keras Symbolic Tensors, NumPy arrays, or R
+arrays.
+
+The Ops functions:
+
+-   all start with prefix `op_` (e.g., `op_stack()`)
+-   all are pure functions (they produce no side-effects).
+-   all use consistent 1 based indexing, and coerce doubles to integers
+    as needed.
+-   all are safe to use with any backend (tensorflow, jax, torch, numpy)
+-   all are safe to use in both eager and graph/jit/tracing modes.
+
+The Ops API includes:
+
+-   The entirety of the NumPy API (`numpy.*`).
+-   The TensorFlow NN API (`tf.nn.*`) .
+-   Common linear algebra functions (A subset of `scipy.linalg.*`).
+-   A subfamily of image transformers
+-   A comprehensive set of loss functions.
+-   And more!
+
+### Ingest tabular data with `layer_feature_space()`
+
+`keras3` provides a new set of functions for building models that ingest
+tabular data: `layer_feature_space()` and a family of feature
+transformer functions (prefix, `feature_`) for building keras model that
+can work with tabular data, either as inputs to a keras model, or as
+preprocessing steps in a data loading pipeline (e.g., a
+`tfdatasets::dataset_map()`).
+
+See the [reference
+page](https://keras.posit.co/reference/layer_feature_space.html) and a
+example usage in a full [end-to-end
+example](https://keras.posit.co/articles/examples/structured_data/structured_data_classification_with_feature_space.html)
+to learn more.
+
+### New Subclassing API
+
+The subclassing API has been refined and extended to [more Keras
+types](https://keras.posit.co/reference/index.html#base-keras-classes).
+Define subclasses simply by calling: `Layer()`, `Loss()`, `Metric()`,
+`Callback()`, `Constraint()`, `Model()`, and `LearningRateSchedule()`.
+Defining `{R6}` proxy classes is no longer necessary.
+
+Additionally the documentation page for each of the subclassing
+functions now contains a comprehensive listing of all the available
+attributes and methods for that type. Check out
+[`?Layer`](https://keras.posit.co/reference/Layer.html) to see what's
+possible.
+
+### Saving and Export
+
+Keras 3 brings a new model serialization and export API. It is now much
+simpler to save and restore models, and also, to export them for
+serving.
+
+-   `save_model()`/`load_model()`:\
+    A new high-level file format (extension: `.keras`) for saving and
+    restoring a full model.
+
+    The file format is backend-agnostic. This means that you can convert
+    trained models between backends, simply by saving with one backend,
+    and then loading with another. For example, train a model using
+    using Jax, and then convert to Tensorflow for export.
+
+-   `export_savedmodel()`:\
+    Export just the forward pass of a model as a compiled artifact for
+    inference with [TF
+    Serving](https://www.tensorflow.org/tfx/guide/serving) or (soon)
+    [Posit Connect](https://posit.co/products/enterprise/connect/). This
+    is the easiest way to deploy a Keras model for efficient and
+    concurrent inference serving, all without any R or Python runtime
+    dependency.
+
+-   Lower level entry points
+
+    -   `save_model_weights()` / `load_model_weights()`:\
+        save just the weights as `.h5` files.
+    -   `save_model_config()` / `load_model_config()`:\
+        save just the model architecture as a json file.
+
+-   `register_keras_serializable()`: Registering custom objects to
+    enable them to be serialized and deserialized.
+
+-   `serialize_keras_object()` / `deserialize_keras_object()`: Convert
+    any Keras object as an R list of simple types that is safe to
+    convert to JSON or rds.
+
+-   See the new [Serialization and Saving
+    vignette](https://keras.posit.co/articles/serialization_and_saving.html)
+    for more details and examples.
+
+### New `random` family
+
+A new family of [random tensor
+generators](https://keras.posit.co/reference/index.html#random-tensor-generators).
+Like the Ops family, these work with all backends. Additionally, all the
+RNG-using methods have support for stateless usage when you pass in a
+seed generator. This enables tracing and compilation by frameworks that
+have special support for stateless, pure, functions, like Jax. See
+[`?random_seed_generator()`](https://keras.posit.co/reference/random_seed_generator.html)
+for example usage.
+
+### Other additions:
+
+-   New [`shape()`](https://keras.posit.co/reference/shape.html)
+    function, one-stop utility for working with tensor shapes in all
+    contexts.
+
+-   New and improved `print(model)` and `plot(model)` method. See some
+    examples of output in the [Functional API
+    guide](https://keras.posit.co/articles/functional_api.html#extract-and-reuse-nodes-in-the-graph-of-layers)
+
+-   All new `fit()` progress bar and live metrics viewer output,
+    including new dark-mode support in the RStudio IDE.
+
+-   New [`config`
+    family](https://keras.posit.co/reference/index.html#configuration),
+    a curated set of functions for getting and setting Keras global
+    configurations.
+
+-   All of the other function families have expanded with new members:
+
+    -   [Layers](https://keras.posit.co/reference/index.html#layers)
+        (prefix, `layer_`)
+    -   [Activation
+        functions](https://keras.posit.co/reference/index.html#activations)
+        (prefix, `activation_`)
+    -   [Optimizers](https://keras.posit.co/reference/index.html#optimizers)
+        (prefix, `optimizer_`)
+    -   [Metrics](https://keras.posit.co/reference/index.html#metrics)
+        (prefix `metric_`)
+    -   [Losses](https://keras.posit.co/reference/index.html#losses)
+        (prefix `loss_)`
+    -   [Image
+        preprocesing](https://keras.posit.co/reference/index.html#image-preprocessing)
+        (prefixes `image_` and `op_image_`)
+    -   [Applications](https://keras.posit.co/reference/index.html#applications)
+        (prefix, `application_`)
+
+Finally, the new package version comes with two new "maintainer"
+features, which will make it substantially easier to maintain feature
+parity and up-to-date documentation with the Python API to Keras.
+
+-   We now periodically take snapshots of the upstream documentation and
+    API surface. All R documentation and wrappers are rebased on
+    upstream updates with each release. This workflow ensures that all R
+    docs (guides, examples, vignettes, and reference pages) stay
+    up-to-date with upstream.
+
+-   All examples and vignettes can now be evaluated and rendered during
+    a package build. This ensures that no stale or broken examples make
+    it into a release. The user facing examples in roxygen blocks now
+    additionally serve as extended suite of snapshot unit tests, and all
+    the vignettes and examples serve as an extended suite of integration
+    tests. Previously, all vignettes and examples were disabled due to
+    CRAN restrictions. (The CRAN restrictions are still in place, but
+    the package now has workarounds.)
+
+### Migrating from `{keras}` to `{keras3}`
+
+`{keras3}` is ultimately a preview of the future `{keras}` package.
+
+If you're writing new code today, you can start using `{keras3}` right
+away.
+
+If you have legacy code that uses `{keras}`, you are encouraged to
+update the code for `{keras3}`. For most uses of the high-level API,
+only minimal changes will be needed when switching to `{keras3}`.
+However there is a long tail of small changes that you might encounter
+when updating code that made use of the lower-level keras API. Some of
+those are documented here:
+https://keras.io/guides/migrating_to_keras_3/. no doubt, there are
+others.
+
+If you're running into issues or have questions about updating, don't
+hesitate to ask on https://github.com/rstudio/keras/issues or
+https://github.com/rstudio/keras/discussions.
+
+The `{keras}` and `{keras3}` packages will coexist while the community
+transitions. During the transition, `{keras}` will continue to receive
+patch updates for compatability with Keras v2, which continues to be
+published to PyPi under the package name `tf-keras`.
+
+`{keras3}` is intended as a transition package name. In a future update,
+the `{keras}` package will begin emitting a package startup message,
+announcing a deprecation period. After a notice period in the `{keras}`
+package, `{keras3}` will be renamed to `{keras}`. At that time `{keras}`
+(v2) will no longer be supported, and `{keras3}` will be an alias for
+`{keras}`.
