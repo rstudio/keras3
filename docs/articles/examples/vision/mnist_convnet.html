@@ -17,7 +17,8 @@
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><meta property="og:title" content="Simple MNIST convnet">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
+<meta property="og:title" content="Simple MNIST convnet">
 <meta property="og:description" content="A simple convnet that achieves ~99% test accuracy on MNIST.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -159,13 +160,13 @@
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
 <span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">32</span>)     │           <span style="color: #00AF00;">320</span> │</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">32</span>)     │           <span style="color: #00AF00;">320</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">32</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">32</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">64</span>)     │        <span style="color: #00AF00;">18,496</span> │</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">64</span>)     │        <span style="color: #00AF00;">18,496</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">64</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">64</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
 <span><span class="co">## │ flatten (<span style="color: #0087FF;">Flatten</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
@@ -197,35 +198,35 @@
 <span>  validation_split <span class="op">=</span> <span class="fl">0.1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/15</span></span>
-<span><span class="co">## 422/422 - 5s - 11ms/step - accuracy: 0.8846 - loss: 0.3816 - val_accuracy: 0.9778 - val_loss: 0.0807</span></span>
+<span><span class="co">## 422/422 - 4s - 10ms/step - accuracy: 0.8895 - loss: 0.3636 - val_accuracy: 0.9787 - val_loss: 0.0793</span></span>
 <span><span class="co">## Epoch 2/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9644 - loss: 0.1151 - val_accuracy: 0.9865 - val_loss: 0.0545</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9666 - loss: 0.1112 - val_accuracy: 0.9852 - val_loss: 0.0550</span></span>
 <span><span class="co">## Epoch 3/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9735 - loss: 0.0839 - val_accuracy: 0.9875 - val_loss: 0.0453</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9743 - loss: 0.0824 - val_accuracy: 0.9882 - val_loss: 0.0439</span></span>
 <span><span class="co">## Epoch 4/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9780 - loss: 0.0691 - val_accuracy: 0.9893 - val_loss: 0.0411</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9786 - loss: 0.0695 - val_accuracy: 0.9897 - val_loss: 0.0399</span></span>
 <span><span class="co">## Epoch 5/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9811 - loss: 0.0609 - val_accuracy: 0.9905 - val_loss: 0.0372</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9803 - loss: 0.0626 - val_accuracy: 0.9900 - val_loss: 0.0354</span></span>
 <span><span class="co">## Epoch 6/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9822 - loss: 0.0562 - val_accuracy: 0.9910 - val_loss: 0.0358</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9823 - loss: 0.0557 - val_accuracy: 0.9912 - val_loss: 0.0332</span></span>
 <span><span class="co">## Epoch 7/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9849 - loss: 0.0490 - val_accuracy: 0.9920 - val_loss: 0.0321</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9837 - loss: 0.0499 - val_accuracy: 0.9918 - val_loss: 0.0310</span></span>
 <span><span class="co">## Epoch 8/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9844 - loss: 0.0484 - val_accuracy: 0.9918 - val_loss: 0.0327</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9849 - loss: 0.0481 - val_accuracy: 0.9920 - val_loss: 0.0310</span></span>
 <span><span class="co">## Epoch 9/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9860 - loss: 0.0440 - val_accuracy: 0.9922 - val_loss: 0.0313</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9861 - loss: 0.0444 - val_accuracy: 0.9917 - val_loss: 0.0302</span></span>
 <span><span class="co">## Epoch 10/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9866 - loss: 0.0405 - val_accuracy: 0.9925 - val_loss: 0.0317</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9863 - loss: 0.0439 - val_accuracy: 0.9913 - val_loss: 0.0297</span></span>
 <span><span class="co">## Epoch 11/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9876 - loss: 0.0389 - val_accuracy: 0.9920 - val_loss: 0.0311</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9872 - loss: 0.0393 - val_accuracy: 0.9917 - val_loss: 0.0306</span></span>
 <span><span class="co">## Epoch 12/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9882 - loss: 0.0370 - val_accuracy: 0.9923 - val_loss: 0.0303</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9874 - loss: 0.0372 - val_accuracy: 0.9922 - val_loss: 0.0289</span></span>
 <span><span class="co">## Epoch 13/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9879 - loss: 0.0362 - val_accuracy: 0.9930 - val_loss: 0.0274</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9888 - loss: 0.0344 - val_accuracy: 0.9918 - val_loss: 0.0293</span></span>
 <span><span class="co">## Epoch 14/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9889 - loss: 0.0334 - val_accuracy: 0.9935 - val_loss: 0.0284</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9890 - loss: 0.0343 - val_accuracy: 0.9918 - val_loss: 0.0282</span></span>
 <span><span class="co">## Epoch 15/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9898 - loss: 0.0309 - val_accuracy: 0.9928 - val_loss: 0.0285</span></span></code></pre>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9894 - loss: 0.0322 - val_accuracy: 0.9915 - val_loss: 0.0284</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-trained-model">Evaluate the trained model<a class="anchor" aria-label="anchor" href="#evaluate-the-trained-model"></a>
@@ -234,10 +235,10 @@
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">score</span></span></code></pre></div>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.9911</span></span>
+<span><span class="co">## [1] 0.9912</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.02562383</span></span></code></pre>
+<span><span class="co">## [1] 0.02448307</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
