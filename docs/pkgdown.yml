@@ -19,13 +19,14 @@ articles:
   serialization_and_saving: serialization_and_saving.html
   structured_data_classification_with_feature_space: examples/structured_data/structured_data_classification_with_feature_space.html
   text_classification_from_scratch: examples/nlp/text_classification_from_scratch.html
+  timeseries_anomaly_detection: examples/timeseries/timeseries_anomaly_detection.html
   timeseries_classification_from_scratch: examples/timeseries/timeseries_classification_from_scratch.html
   training_with_built_in_methods: training_with_built_in_methods.html
   transfer_learning: transfer_learning.html
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-04-23T18:44Z
+last_built: 2024-05-07T23:02Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

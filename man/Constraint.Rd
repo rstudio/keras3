@@ -92,6 +92,7 @@ Usage in a layer:
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <Dense name=dense, built=False>
+##  signature: (*args, **kwargs)
 
 }\if{html}{\out{</div>}}
 }
