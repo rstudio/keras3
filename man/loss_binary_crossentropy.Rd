@@ -137,6 +137,7 @@ loss_binary_crossentropy() # OR ...('from_logits=FALSE')
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.losses.losses.BinaryCrossentropy object>
+##  signature: (y_true, y_pred, sample_weight=None)
 
 }\if{html}{\out{</div>}}
 

@@ -102,6 +102,7 @@ get_custom_objects()
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## $`keras3>ModifiedMeanSquaredError`
 ## <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>
+##  signature: (reduction='sum_over_batch_size', name='mean_squared_error')
 
 }\if{html}{\out{</div>}}
 
@@ -134,6 +135,7 @@ deserialize_keras_object(full_config)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## <<r-namespace:keras3>.ModifiedMeanSquaredError object>
+##  signature: (y_true, y_pred, sample_weight=None)
 
 }\if{html}{\out{</div>}}
 
