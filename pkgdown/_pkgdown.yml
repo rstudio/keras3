@@ -21,8 +21,6 @@ template:
     # support the full unicode range.
     # this will most likely be Menlo on macOS, Consolas on Windows, DejaVu Sans on Ubuntu
     code_font: "monospace"
-    #{google: {family: "Fira Mono", wght: "400;600;700"}}
-    # https://fonts.google.com/?classification=Monospace&stylecount=5
 
 navbar:
   title: "Keras for R"
