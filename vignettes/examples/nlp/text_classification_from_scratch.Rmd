@@ -17,7 +17,7 @@ vignette: >
 
 This example shows how to do text classification starting from raw text (as
 a set of text files on disk). We demonstrate the workflow on the IMDB sentiment
-classification dataset (unprocessed version). We use [`layer_text_vectorization()`] for
+classification dataset (unprocessed version). We use `layer_text_vectorization()` for
 word splitting & indexing.
 
 ## Setup
