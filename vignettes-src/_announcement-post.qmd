@@ -5,10 +5,13 @@ editor: visual
 ---
 
 We are excited to announce the release of `keras3` to CRAN. `keras3` is
-a ground-up rebuild of the `keras` R package for Keras 3.
+a ground-up rebuild of the `keras` R package for Keras 3. It keeps
+everything that was already great the same, and refines and simplifies
+parts of the API based on lessons accumulated over the past few years.
 
 Keras provides a complete toolkit for building deep learning models in
-R.
+R---it's never been easier to build, train, evaluate and deploy deep
+learning models.
 
 ## Installation
 
@@ -22,19 +25,75 @@ install_keras()
 
 ### What's new:
 
-### Website
+### Documentation
 
--   All new website with greatly improved docs, rendered examples,
-    updated guides, tutorials, and a new examples gallery
-    <https://keras.posit.co>
+Great documentation is essential, and we've worked hard to make sure
+that `keras3` has excellent documentation, both now, and in the future.
+
+Keras 3 comes with a full refresh of the website:
+<https://keras.posit.co>. There, you will find guides, tutorials,
+reference pages with rendered examples, and a new examples gallery. All
+the reference pages and guide are also available via R's built-in help
+system.
+
+In a fast moving ecosystem like deep learning, creating great
+documentation and wrappers once is not enough. There also need to be
+workflows that ensure the documentation is up-to-date with upstream
+dependencies. To accomplish this, {keras3} includes two new "maintainer"
+features that ensure the R documentation and function wrappers will stay
+up-to-date:
+
+-   We now take snapshots of the upstream documentation and API surface.
+    With with each release, all R documentation is rebased on upstream
+    updates with each release. This workflow ensures that all R
+    documentation (guides, examples, vignettes, and reference pages) and
+    R function signatures stay up-to-date with upstream. This
+    snapshot+rebase functionality is also implemented in a standalone R
+    package <https://github.com/t-kalinowski/doctether>
+
+-   All examples and vignettes can now be evaluated and rendered during
+    a package build. This ensures that no stale or broken examples make
+    it into a release. The also means that all user facing examples now
+    additionally serve as an extended suite of snapshot unit and
+    integration tests.
+
+    Previously, evaluating code in vignettes and examples was disabled
+    due to CRAN restrictions. The CRAN restrictions are still in place,
+    but the package now has an additional pre-rendering build-step,
+    implemented as roxygen
+    [hooks](https://github.com/rstudio/keras/blob/main/man/roxygen/meta.R)
+    and vignette pre-rendering
+    [`knit()`](https://github.com/rstudio/keras/blob/main/tools/knit.R)
+    implementation.
+
+Combined, these two features will make it substantially easier for the
+Keras in R to maintain feature parity and up-to-date documentation with
+the Python API to Keras.
 
 ### Multi-backend support
 
-New multi-backend support. Configure a preferred backend by calling.
+Keras 3 brings the return of multi-backend support. Choose a backend by
+calling:
 
 ``` r
 use_backend("jax") # or "tensorflow", "torch", "numpy"
 ```
+
+The default backend continues to be TensorFlow, which is the best choice
+for most users today; for small-to-medium sized models this is still the
+fastest backend. However, each backend has different strengths, and
+being able to switch easily will let you adapt to changes as your
+project, or the frameworks themselves, evolve.
+
+Today, switching to the Jax backend can, for some model types, bring
+substantial speed improvements. Jax is also the only backend that has
+support for a new model parallelism distributed training API. Switching
+to Torch can be helpful during development, often producing simpler
+trackbacks while debugging.
+
+Keras 3 also let's you incorporate any pre-existing Torch, Jax, or Flax
+module as a standard Keras layer by using the appropriate wrapper,
+letting you build atop existing projects with Keras.
 
 ### The 'Ops' family
 
@@ -187,25 +246,6 @@ for example usage.
     -   [Applications](https://keras.posit.co/reference/index.html#applications)
         (prefix, `application_`)
 
-Finally, the new package version comes with two new "maintainer"
-features, which will make it substantially easier to maintain feature
-parity and up-to-date documentation with the Python API to Keras.
-
--   We now periodically take snapshots of the upstream documentation and
-    API surface. All R documentation and wrappers are rebased on
-    upstream updates with each release. This workflow ensures that all R
-    docs (guides, examples, vignettes, and reference pages) stay
-    up-to-date with upstream.
-
--   All examples and vignettes can now be evaluated and rendered during
-    a package build. This ensures that no stale or broken examples make
-    it into a release. The user facing examples in roxygen blocks now
-    additionally serve as extended suite of snapshot unit tests, and all
-    the vignettes and examples serve as an extended suite of integration
-    tests. Previously, all vignettes and examples were disabled due to
-    CRAN restrictions. (The CRAN restrictions are still in place, but
-    the package now has workarounds.)
-
 ### Migrating from `{keras}` to `{keras3}`
 
 `{keras3}` is ultimately a preview of the future `{keras}` package.
@@ -216,11 +256,10 @@ away.
 If you have legacy code that uses `{keras}`, you are encouraged to
 update the code for `{keras3}`. For most uses of the high-level API,
 only minimal changes will be needed when switching to `{keras3}`.
-However there is a long tail of small changes that you might encounter
-when updating code that made use of the lower-level keras API. Some of
-those are documented here:
-https://keras.io/guides/migrating_to_keras_3/. no doubt, there are
-others.
+However there is a long tail of small changes that you might need to
+make when updating code that made use of the lower-level Keras API. Some
+of those are documented here:
+https://keras.io/guides/migrating_to_keras_3/.
 
 If you're running into issues or have questions about updating, don't
 hesitate to ask on https://github.com/rstudio/keras/issues or
@@ -228,7 +267,7 @@ https://github.com/rstudio/keras/discussions.
 
 The `{keras}` and `{keras3}` packages will coexist while the community
 transitions. During the transition, `{keras}` will continue to receive
-patch updates for compatability with Keras v2, which continues to be
+patch updates for compatibility with Keras v2, which continues to be
 published to PyPi under the package name `tf-keras`.
 
 `{keras3}` is intended as a transition package name. In a future update,
