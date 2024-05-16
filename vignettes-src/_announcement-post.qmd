@@ -48,7 +48,7 @@ up-to-date:
     updates. This workflow ensures that all R documentation (guides,
     examples, vignettes, and reference pages) and R function signatures
     stay up-to-date with upstream. This snapshot+rebase functionality is
-    implemented in in a standalone R package,
+    implemented in a standalone R package,
     [{doctether}](https://github.com/t-kalinowski/doctether)
 
 -   All examples and vignettes can now be evaluated and rendered during
@@ -264,11 +264,11 @@ If you're writing new code today, you can start using `{keras3}` right
 away.
 
 If you have legacy code that uses `{keras}`, you are encouraged to
-update the code for `{keras3}`. For most uses of the high-level API,
-only minimal changes will be needed when switching to `{keras3}`.
-However there is a long tail of small changes that you might need to
-make when updating code that made use of the lower-level Keras API. Some
-of those are documented here:
+update the code for `{keras3}`. For many high-level API functions, such
+as **`layer_dense()`**, **`fit()`**, and **`keras_model()`**, minimal to
+no changes are required. However there is a long tail of small changes
+that you might need to make when updating code that made use of the
+lower-level Keras API. Some of those are documented here:
 https://keras.io/guides/migrating_to_keras_3/.
 
 If you're running into issues or have questions about updating, don't
@@ -286,3 +286,22 @@ announcing a deprecation period. After a notice period in the `{keras}`
 package, `{keras3}` will be renamed to `{keras}`. At that time `{keras}`
 (v2) will no longer be supported, and `{keras3}` will be an alias for
 `{keras}`.
+
+## Summary
+
+In summary, `{keras3}` is a robust update to the Keras R package,
+incorporating new features while preserving the ease of use and
+functionality of the original. The new multi-backend support,
+comprehensive suite of Ops functions, refined model serialization API,
+and updated documentation workflows enable users to easily take
+advantage of the latest developments in the deep learning community.
+
+Whether you are a seasoned Keras user or just starting your deep
+learning journey, Keras 3 provides the tools and flexibility to build,
+train, and deploy models with ease and confidence. As we transition from
+Keras 2 to Keras 3, we are committed to supporting the community and
+ensuring a smooth migration. We invite you to explore the new features,
+check out the updated documentation, and join the conversation on our
+GitHub discussions page. Welcome to the next chapter of deep learning in
+R with Keras 3!
+
