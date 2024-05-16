@@ -3105,11 +3105,15 @@ function (x1, x2, axis = NULL)
 op_arange <-
 function (start, stop = NULL, step = 1L, dtype = NULL)
 {
-  args <- capture_args(list(
-    start = function(x) np_array(x, dtype),
-    stop = function(x) np_array(x, dtype),
-    step = function(x) np_array(x, dtype)
-  ))
+  transformers <- list()
+  if (!is.null(dtype) && keras$backend$is_int_dtype(dtype))
+    transformers[c("start", "stop", "step")] <- list(function(x) {
+      if (is.double(x))
+        storage.mode(x) <- "integer"
+      x
+    })
+
+  args <- capture_args(transformers)
   do.call(keras$ops$arange, args)
 }
 
