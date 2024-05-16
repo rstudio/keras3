@@ -4,10 +4,10 @@ format: html
 editor: visual
 ---
 
-We are excited to announce the release of `keras3` to CRAN. `keras3` is
-a ground-up rebuild of the `keras` R package for Keras 3. It keeps
-everything that was already great the same, and refines and simplifies
-parts of the API based on lessons accumulated over the past few years.
+We are thrilled to introduce `keras3`, the next version of the Keras R
+package. `keras3` is a ground-up rebuild of `{keras}`, maintaining the
+beloved features of the original while refining and simplifying the API
+based on valuable insights gathered over the past few years.
 
 Keras provides a complete toolkit for building deep learning models in
 R---it's never been easier to build, train, evaluate and deploy deep
@@ -23,7 +23,7 @@ library(keras3)
 install_keras()
 ```
 
-### What's new:
+## What's new:
 
 ### Documentation
 
@@ -33,44 +33,50 @@ that `keras3` has excellent documentation, both now, and in the future.
 Keras 3 comes with a full refresh of the website:
 <https://keras.posit.co>. There, you will find guides, tutorials,
 reference pages with rendered examples, and a new examples gallery. All
-the reference pages and guide are also available via R's built-in help
+the reference pages and guides are also available via R's built-in help
 system.
 
 In a fast moving ecosystem like deep learning, creating great
 documentation and wrappers once is not enough. There also need to be
 workflows that ensure the documentation is up-to-date with upstream
-dependencies. To accomplish this, {keras3} includes two new "maintainer"
+dependencies. To accomplish this, {keras3} includes two new maintainer
 features that ensure the R documentation and function wrappers will stay
 up-to-date:
 
 -   We now take snapshots of the upstream documentation and API surface.
-    With with each release, all R documentation is rebased on upstream
-    updates with each release. This workflow ensures that all R
-    documentation (guides, examples, vignettes, and reference pages) and
-    R function signatures stay up-to-date with upstream. This
-    snapshot+rebase functionality is also implemented in a standalone R
-    package <https://github.com/t-kalinowski/doctether>
+    With each release, all R documentation is rebased on upstream
+    updates. This workflow ensures that all R documentation (guides,
+    examples, vignettes, and reference pages) and R function signatures
+    stay up-to-date with upstream. This snapshot+rebase functionality is
+    implemented in in a standalone R package,
+    [{doctether}](https://github.com/t-kalinowski/doctether)
 
 -   All examples and vignettes can now be evaluated and rendered during
-    a package build. This ensures that no stale or broken examples make
-    it into a release. The also means that all user facing examples now
-    additionally serve as an extended suite of snapshot unit and
-    integration tests.
+    a package build. This ensures that no stale or broken example code
+    makes it into a release. The also means that all user facing example
+    code now additionally serves as an extended suite of snapshot unit
+    and integration tests.
 
-    Previously, evaluating code in vignettes and examples was disabled
-    due to CRAN restrictions. The CRAN restrictions are still in place,
-    but the package now has an additional pre-rendering build-step,
-    implemented as roxygen
-    [hooks](https://github.com/rstudio/keras/blob/main/man/roxygen/meta.R)
-    and vignette pre-rendering
-    [`knit()`](https://github.com/rstudio/keras/blob/main/tools/knit.R)
-    implementation.
+    Evaluating code in vignettes and examples continues to be forbidden
+    by to CRAN restrictions. We work around the CRAN restriction by
+    adding additional package build steps that pre-render
+    [examples](https://github.com/rstudio/keras/blob/main/man/roxygen/meta.R)
+    and
+    [vignettes](https://github.com/rstudio/keras/blob/main/tools/knit.R).
 
-Combined, these two features will make it substantially easier for the
-Keras in R to maintain feature parity and up-to-date documentation with
-the Python API to Keras.
+Combined, these two features will make it substantially easier for Keras
+in R to maintain feature parity and up-to-date documentation with the
+Python API to Keras.
 
 ### Multi-backend support
+
+Keras v1 started life as a library that worked with multiple backends.
+Back then, TensorFlow, Theano, and Caffe were the most popular
+frameworks for deep learning, and the frameworks that Keras supported.
+Over time, the landscape shifted; Theano and Caffe were retired, and
+TensorFlow surged in popularity. With Keras v2, TensorFlow became the
+premier and only supported backend. Now, the landscape has shifted
+again.
 
 Keras 3 brings the return of multi-backend support. Choose a backend by
 calling:
@@ -91,18 +97,22 @@ support for a new model parallelism distributed training API. Switching
 to Torch can be helpful during development, often producing simpler
 trackbacks while debugging.
 
-Keras 3 also let's you incorporate any pre-existing Torch, Jax, or Flax
+Keras 3 also lets you incorporate any pre-existing Torch, Jax, or Flax
 module as a standard Keras layer by using the appropriate wrapper,
-letting you build atop existing projects with Keras.
+letting you build atop existing projects with Keras. For example, train
+a Torch model using the Keras high-level training (`compile()` +
+`fit()`), or include a Flax module as a component of a larger Keras
+model. The new multi-backend support lets you use Keras a la carte.
 
 ### The 'Ops' family
 
 `keras3` introduces a new "Operations" family of function. The Ops
-family, currently with over 200 functions, provides a comprehensive
-suite of operations typically needed when operating on nd-arrays for
-deep learning. The Operation family supersedes and greatly expands on
-the former family of backend functions prefixed with `k_` in the `keras`
-package.
+family, currently with over [200
+functions](https://keras.posit.co/reference/index.html#operations),
+provides a comprehensive suite of operations typically needed when
+operating on nd-arrays for deep learning. The Operation family
+supersedes and greatly expands on the former family of backend functions
+prefixed with `k_` in the `keras` package.
 
 The Ops functions let you write backend-agnostic code. They provide a
 uniform API, regardless of if you're working with TensorFlow Tensors,
@@ -112,32 +122,32 @@ arrays.
 The Ops functions:
 
 -   all start with prefix `op_` (e.g., `op_stack()`)
--   all are pure functions (they produce no side-effects).
--   all use consistent 1 based indexing, and coerce doubles to integers
-    as needed.
+-   all are pure functions (they produce no side-effects)
+-   all use consistent 1-based indexing, and coerce doubles to integers
+    as needed
 -   all are safe to use with any backend (tensorflow, jax, torch, numpy)
--   all are safe to use in both eager and graph/jit/tracing modes.
+-   all are safe to use in both eager and graph/jit/tracing modes
 
 The Ops API includes:
 
--   The entirety of the NumPy API (`numpy.*`).
--   The TensorFlow NN API (`tf.nn.*`) .
--   Common linear algebra functions (A subset of `scipy.linalg.*`).
+-   The entirety of the NumPy API (`numpy.*`)
+-   The TensorFlow NN API (`tf.nn.*`)
+-   Common linear algebra functions (A subset of `scipy.linalg.*`)
 -   A subfamily of image transformers
--   A comprehensive set of loss functions.
+-   A comprehensive set of loss functions
 -   And more!
 
 ### Ingest tabular data with `layer_feature_space()`
 
 `keras3` provides a new set of functions for building models that ingest
 tabular data: `layer_feature_space()` and a family of feature
-transformer functions (prefix, `feature_`) for building keras model that
-can work with tabular data, either as inputs to a keras model, or as
-preprocessing steps in a data loading pipeline (e.g., a
+transformer functions (prefix, `feature_`) for building keras models
+that can work with tabular data, either as inputs to a keras model, or
+as preprocessing steps in a data loading pipeline (e.g., a
 `tfdatasets::dataset_map()`).
 
 See the [reference
-page](https://keras.posit.co/reference/layer_feature_space.html) and a
+page](https://keras.posit.co/reference/layer_feature_space.html) and an
 example usage in a full [end-to-end
 example](https://keras.posit.co/articles/examples/structured_data/structured_data_classification_with_feature_space.html)
 to learn more.
@@ -168,8 +178,8 @@ serving.
 
     The file format is backend-agnostic. This means that you can convert
     trained models between backends, simply by saving with one backend,
-    and then loading with another. For example, train a model using
-    using Jax, and then convert to Tensorflow for export.
+    and then loading with another. For example, train a model using Jax,
+    and then convert to Tensorflow for export.
 
 -   `export_savedmodel()`:\
     Export just the forward pass of a model as a compiled artifact for
@@ -180,7 +190,7 @@ serving.
     concurrent inference serving, all without any R or Python runtime
     dependency.
 
--   Lower level entry points
+-   Lower level entry points:
 
     -   `save_model_weights()` / `load_model_weights()`:\
         save just the weights as `.h5` files.
