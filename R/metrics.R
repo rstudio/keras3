@@ -74,14 +74,9 @@ metric_binary_focal_crossentropy <-
 function (y_true, y_pred, apply_class_balancing = FALSE, alpha = 0.25,
     gamma = 2, from_logits = FALSE, label_smoothing = 0, axis = -1L)
 {
-    args <- capture_args(list(
-      y_true = function (x)
-        if (is_py_object(x)) x
-      else np_array(x),
-      y_pred = function (x)
-        if (is_py_object(x)) x
-      else np_array(x), axis = as_axis)
-    )
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     do.call(keras$metrics$binary_focal_crossentropy, args)
 }
 
@@ -145,13 +140,9 @@ metric_categorical_focal_crossentropy <-
 function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
     label_smoothing = 0, axis = -1L)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), axis = as_axis))
+  args <- capture_args(list(axis = as_axis,
+                            y_true = as_py_array,
+                            y_pred = as_py_array))
     do.call(keras$metrics$categorical_focal_crossentropy, args)
 }
 
@@ -203,13 +194,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2, from_logits = FALSE,
 metric_huber <-
 function (y_true, y_pred, delta = 1)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     do.call(keras$metrics$huber, args)
 }
 
@@ -255,13 +240,7 @@ function (y_true, y_pred, delta = 1)
 metric_log_cosh <-
 function (y_true, y_pred)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     do.call(keras$metrics$log_cosh, args)
 }
 
@@ -339,13 +318,7 @@ metric_binary_accuracy <-
 function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$BinaryAccuracy
     else keras$metrics$binary_accuracy
@@ -426,13 +399,7 @@ metric_categorical_accuracy <-
 function (y_true, y_pred, ..., name = "categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$CategoricalAccuracy
     else keras$metrics$categorical_accuracy
@@ -510,13 +477,8 @@ metric_sparse_categorical_accuracy <-
 function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$SparseCategoricalAccuracy
     else keras$metrics$sparse_categorical_accuracy
@@ -590,13 +552,9 @@ metric_sparse_top_k_categorical_accuracy <-
 function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args(list(k = as_integer, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(k = as_integer,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$SparseTopKCategoricalAccuracy
     else keras$metrics$sparse_top_k_categorical_accuracy
@@ -669,13 +627,9 @@ metric_top_k_categorical_accuracy <-
 function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
     dtype = NULL)
 {
-    args <- capture_args(list(
-        k = as_integer,
-        y_true = function(x)
-            if (is_py_object(x)) x else np_array(x),
-        y_pred = function(x)
-            if (is_py_object(x)) x else np_array(x)
-    ))
+    args <- capture_args(list(k = as_integer,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$TopKCategoricalAccuracy
     else keras$metrics$top_k_categorical_accuracy
@@ -1891,13 +1845,7 @@ metric_categorical_hinge <-
 function (y_true, y_pred, ..., name = "categorical_hinge",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$CategoricalHinge
     else keras$metrics$categorical_hinge
@@ -1961,13 +1909,7 @@ function (y_true, y_pred, ..., name = "categorical_hinge",
 metric_hinge <-
 function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$Hinge
     else keras$metrics$hinge
@@ -2032,13 +1974,7 @@ metric_squared_hinge <-
 function (y_true, y_pred, ..., name = "squared_hinge",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$SquaredHinge
     else keras$metrics$squared_hinge
@@ -2450,9 +2386,10 @@ metric_one_hot_iou <-
 function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
     ignore_class = NULL, sparse_y_pred = FALSE, axis = -1L)
 {
-    args <- capture_args(list(ignore_class = as_integer, axis = as_axis,
-        num_classes = as_integer, target_class_ids = function (x)
-        lapply(x, as_integer)))
+    args <- capture_args(list(
+      ignore_class = as_integer,
+      axis = as_axis, num_classes = as_integer,
+      target_class_ids = function (x) lapply(x, as_integer)))
     do.call(keras$metrics$OneHotIoU, args)
 }
 
@@ -2633,14 +2570,9 @@ metric_binary_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., name = "binary_crossentropy", dtype = NULL)
 {
-    args <- capture_args(list(label_smoothing = as_integer,
-        y_true = function (x)
-        if (is_py_object(x))
-            x
-        else np_array(x), y_pred = function (x)
-        if (is_py_object(x))
-            x
-        else np_array(x), axis = as_axis))
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$BinaryCrossentropy
     else keras$metrics$binary_crossentropy
@@ -2736,14 +2668,9 @@ metric_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., name = "categorical_crossentropy", dtype = NULL)
 {
-    args <- capture_args(list(label_smoothing = as_integer,
-        axis = as_axis, y_true = function (x)
-        if (is_py_object(x))
-            x
-        else np_array(x), y_pred = function (x)
-        if (is_py_object(x))
-            x
-        else np_array(x)))
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$CategoricalCrossentropy
     else keras$metrics$categorical_crossentropy
@@ -2817,13 +2744,7 @@ metric_kl_divergence <-
 function (y_true, y_pred, ..., name = "kl_divergence",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$KLDivergence
     else keras$metrics$kl_divergence
@@ -2895,13 +2816,7 @@ function (y_true, y_pred, ..., name = "kl_divergence",
 metric_poisson <-
 function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$Poisson
     else keras$metrics$poisson
@@ -2994,13 +2909,10 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., name = "sparse_categorical_crossentropy",
     dtype = NULL)
 {
-    args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), ignore_class = as_integer))
+    args <- capture_args(list(axis = as_axis,
+                              ignore_class = as_integer,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$SparseCategoricalCrossentropy
     else keras$metrics$sparse_categorical_crossentropy
@@ -3345,13 +3257,7 @@ metric_mean_absolute_error <-
 function (y_true, y_pred, ..., name = "mean_absolute_error",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$MeanAbsoluteError
     else keras$metrics$mean_absolute_error
@@ -3424,13 +3330,8 @@ metric_mean_absolute_percentage_error <-
 function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$MeanAbsolutePercentageError
     else keras$metrics$mean_absolute_percentage_error
@@ -3484,13 +3385,8 @@ metric_mean_squared_error <-
 function (y_true, y_pred, ..., name = "mean_squared_error",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$MeanSquaredError
     else keras$metrics$mean_squared_error
@@ -3563,13 +3459,8 @@ metric_mean_squared_logarithmic_error <-
 function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
     dtype = NULL)
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$metrics$MeanSquaredLogarithmicError
     else keras$metrics$mean_squared_logarithmic_error
@@ -3782,11 +3673,3 @@ py_to_r_wrapper.keras.src.metrics.metric.Metric <- py_to_r_wrapper.keras.src.los
 custom_metric <- function(name, metric_fn) {
   py_func2(metric_fn, convert = TRUE, name = name)
 }
-
-# TODO: export ??
-# can be used w/ activations, regularizers, metrics, loss, anything else
-# where it helps to have a name
-custom_fn <- function(name, fn) {
-  py_func2(fn, TRUE, name)
-}
-

@@ -118,13 +118,9 @@ loss_binary_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_crossentropy")
 {
-    args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$BinaryCrossentropy
     else keras$losses$binary_crossentropy
@@ -330,13 +326,9 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
     alpha = 0.25, gamma = 2, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy")
 {
-    args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$BinaryFocalCrossentropy
     else keras$losses$binary_focal_crossentropy
@@ -440,13 +432,9 @@ loss_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "categorical_crossentropy")
 {
-    args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$CategoricalCrossentropy
     else keras$losses$categorical_crossentropy
@@ -597,13 +585,9 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
     from_logits = FALSE, label_smoothing = 0, axis = -1L, ...,
     reduction = "sum_over_batch_size", name = "categorical_focal_crossentropy")
 {
-    args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$CategoricalFocalCrossentropy
     else keras$losses$categorical_focal_crossentropy
@@ -662,13 +646,8 @@ loss_categorical_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "categorical_hinge")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$CategoricalHinge
     else keras$losses$categorical_hinge
@@ -735,13 +714,9 @@ loss_cosine_similarity <-
 function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
     name = "cosine_similarity")
 {
-    args <- capture_args(list(axis = as_axis, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(axis = as_axis,
+                            y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$CosineSimilarity
     else keras$losses$cosine_similarity
@@ -849,13 +824,8 @@ loss_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "hinge")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$Hinge
     else keras$losses$hinge
@@ -921,13 +891,8 @@ loss_huber <-
 function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
     name = "huber_loss")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$Huber
     else keras$losses$huber
@@ -987,13 +952,9 @@ loss_kl_divergence <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "kl_divergence")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(axis = as_axis,
+                            y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$KLDivergence
     else keras$losses$kl_divergence
@@ -1053,13 +1014,8 @@ loss_log_cosh <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "log_cosh")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$LogCosh
     else keras$losses$log_cosh
@@ -1114,13 +1070,8 @@ loss_mean_absolute_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_error")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$MeanAbsoluteError
     else keras$losses$mean_absolute_error
@@ -1180,13 +1131,8 @@ loss_mean_absolute_percentage_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_absolute_percentage_error")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+    args <- capture_args(list(y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$MeanAbsolutePercentageError
     else keras$losses$mean_absolute_percentage_error
@@ -1241,13 +1187,8 @@ loss_mean_squared_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_error")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$MeanSquaredError
     else keras$losses$mean_squared_error
@@ -1306,13 +1247,8 @@ loss_mean_squared_logarithmic_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "mean_squared_logarithmic_error")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$MeanSquaredLogarithmicError
     else keras$losses$mean_squared_logarithmic_error
@@ -1368,13 +1304,8 @@ loss_poisson <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "poisson")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$Poisson
     else keras$losses$poisson
@@ -1485,13 +1416,10 @@ loss_sparse_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
     axis = -1L, ..., reduction = "sum_over_batch_size", name = "sparse_categorical_crossentropy")
 {
-    args <- capture_args(list(ignore_class = as_integer, y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), axis = as_axis))
+    args <- capture_args(list(ignore_class = as_integer,
+                              axis = as_axis,
+                              y_true = as_py_array,
+                              y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$SparseCategoricalCrossentropy
     else keras$losses$sparse_categorical_crossentropy
@@ -1551,13 +1479,8 @@ loss_squared_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
     name = "squared_hinge")
 {
-    args <- capture_args(list(y_true = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x), y_pred = function (x)
-    if (is_py_object(x))
-        x
-    else np_array(x)))
+  args <- capture_args(list(y_true = as_py_array,
+                            y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$SquaredHinge
     else keras$losses$squared_hinge

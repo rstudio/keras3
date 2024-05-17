@@ -51,7 +51,6 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
-  # TODO: remove this requireNamespace()
   # tensorflow:::.onLoad() registers some reticulate class filter hooks
   # we need to identify tensors reliably.
   requireNamespace("tensorflow", quietly = TRUE)

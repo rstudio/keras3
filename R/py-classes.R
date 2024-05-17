@@ -458,6 +458,14 @@ def wrap_fn(r_fn):
 }
 
 
+# Export this if the API calls for a bare named function somewhere
+custom_fn <- function(name, fn) {
+  py_func2(fn, TRUE, name)
+}
+
+
+
+
 # TODO: (maybe?) factor out a py_class() function,
 # funnel r_to_py.R6ClassGenerator() and %py_class%() to go through py_class()
 # export py_class()

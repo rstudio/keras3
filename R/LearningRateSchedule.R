@@ -1,7 +1,7 @@
 #' Define a custom `LearningRateSchedule` class
 #'
 #' @description
-#' Subclass the keras learning rate schedule base class.
+#' Subclass the Keras `LearningRateSchedule` base class.
 #'
 #' You can use a learning rate schedule to modulate how the learning rate
 #' of your optimizer changes over time.
@@ -35,18 +35,16 @@
 #' ```{r}
 #' my_custom_learning_rate_schedule <- LearningRateSchedule(
 #'   classname = "MyLRSchedule",
-#'   initialize = function( initial_learning_rate) {
 #'
+#'   initialize = function(initial_learning_rate) {
 #'     self$initial_learning_rate <- initial_learning_rate
 #'   },
-#'
 #'
 #'   call = function(step) {
 #'     # note that `step` is a tensor
 #'     # and call() will be traced via tf_function() or similar.
 #'
 #'     str(step) # <KerasVariable shape=(), dtype=int64, path=SGD/iteration>
-#'
 #'
 #'     # print 'step' every 1000 steps
 #'     op_cond((step %% 1000) == 0,
@@ -116,5 +114,3 @@ LearningRateSchedule <- function(classname,
   )
 
 }
-
-# TODO: should all optimizer accept a plain R function to `learning_rate`?

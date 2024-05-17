@@ -1,8 +1,3 @@
-# defered TODOs:
-# TODO: consider using quilt or stgit instead of the manual git calls
-# https://stacked-git.github.io   https://savannah.nongnu.org/projects/quilt/ https://blog.tfnico.com/2020/07/git-tools-for-keeping-patches-on-top-of.html
-
-
 
 
 # filter out function handles that also have class handles

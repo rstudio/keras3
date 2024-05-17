@@ -5,26 +5,8 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 
 
-## ---- Deferred ----
-
-# TODO: k_fft() should really accept and return complex tensors too.
-# TODO: activation_resolve() or activation_get() as alias of keras.activation.get() ?
-# TODO: the 2-translated.Rmd should include a chunk w/ the function def (for easy seeing while editing)
-#       with chunk options (include = FALSE)
-# TODO: add PR for purrr::rate_throttle("3 per minute")
 # TODO: layer_feature_space should take a formula, and dispatch to the features as required.
 #       ~ scale(foo) * bar
-# TODO: layer_feature_space() needs massaging.
-# TODO: Add arg Layer(composing = TRUE)?
-# TODO: custom keras.Model wrapper that patches add_weight(), build(), etc
-#      with proper shape() coercion
-
-
-
-## Rejected  ----
-# TODO: k_array() should take a 'shape' argument
-# TODO: r_name autogen: move "set" to tail, so have config_floatx(), config_floatx_set()
-# TODO: implement dim() S3 generic. (will use shape() instead)
 
 
 ## Implemented but Questioning  ----
@@ -111,10 +93,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # }
 #
 # TODO: layer_category_encoding()(count_weights) call arg example not working
-# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
-#       use `setNames(as.list())`
-#       ## Deferred until upstream bug fixed,
-#       ## model.metrics_names returns wrong result
 
 ## Docs ----
 

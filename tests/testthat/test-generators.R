@@ -144,9 +144,6 @@ test_succeeds("R function can be used as custom generator with multiple inputs",
     list(tuple(keras_array(1), keras_array(2)),
           keras_array(3))
   }
-  # TODO: this might need a PR up stream, or some chages to as_generator.function()
-  # right now it's very picky about tuple vs lists in generator yielded values.
-  # and tree.map_structure() / tf.next.flatten() are picky too.
 
   model %>% compile(loss = "mse", optimizer = "sgd")
   model %>% fit(generator, steps_per_epoch = 10,

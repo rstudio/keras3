@@ -51,7 +51,7 @@ data
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -62,7 +62,7 @@ data
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0. 1.]
 ##  [2. 3.]
-##  [4. 5.]], shape=(3, 2), dtype=float64)
+##  [4. 5.]], shape=(3, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -73,7 +73,7 @@ data
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

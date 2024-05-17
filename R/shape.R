@@ -130,29 +130,20 @@ shape <- function(...) {
       return(lapply(shp, function(d) d %||% NA_integer_))
     }
 
-    ## TODO: shape(<R array>)
-    ## Users may pass R arrays to shape(), expecting it to behave like dim().
-    ## If we accept them, the edgecase of 1-d arrays gets tricky (esp because
-    ## numpy vectors arrays get converted to 1d R arrays)
-    ## If we accept simple R arrays and treat them the same as Tensors,
-    ## i.e., shape() is synonym for dim(), return dim(x)
-    # if(!is.object(x) && is.atomic(x) &&
-    #    !is.null(attr(x, "dim", TRUE)))
-    #   return(dim(x))
-    ## or we warn
-    # if (!is.null(dim(x)) && length(x) > 200)
-    #  warning("Did you pass an R array to shape()? Did you mean to use dim()?")
+    if(is.array(x))
+      return(dim(x))
 
     if (is.null(x) ||
         identical(x, NA_integer_) ||
         identical(x, NA_real_) ||
         identical(x, NA) ||
         (is.numeric(x) && isTRUE(suppressWarnings(x == -1L))))
-      NA_integer_ # so we can safely unlist()
-    else if (!is.atomic(x) || length(x) > 1)
-      lapply(x, fix)
-    else
-      as.integer(x)
+      return(NA_integer_) # so we can safely unlist()
+
+    if (!is.atomic(x) || length(x) > 1)
+      return(lapply(x, fix)) # recurse
+
+    as.integer(x)
   }
 
   shp <- unlist(lapply(list(...), fix), use.names = FALSE)

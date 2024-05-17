@@ -464,10 +464,6 @@ as_py_function <- function(fn, default_name = "r_func") {
     attr(fn, "name", TRUE) %||%
     default_name
 
-  # TODO: try to generate a pretty name using deparse(substitute(x)) would need
-  # to update capture_args() to construct calls to transformers so that
-  # substitute will work here.
-  # if(is.null(name)) { name <- as_py_name(deparse1(substitute(x)))}
   py_func2(fn, convert = TRUE, name = name)
 }
 

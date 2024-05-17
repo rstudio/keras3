@@ -23,7 +23,7 @@ when using built-in APIs for training & validation (such as `fit()`,
 `evaluate()` and `predict()`).
 
 If you are interested in leveraging `fit()` while specifying your
-own training step function, see the 
+own training step function, see the
 [Customizing what happens in `fit()` guide](custom_train_step_in_tensorflow.html).
 
 <!--  guides on customizing what happens in `fit()`: -->
@@ -134,7 +134,7 @@ We evaluate the model on the test data via `evaluate()`:
 ```{r}
 # Evaluate the model on the test data using `evaluate`
 results <- model |> evaluate(x_test, y_test, batch_size=128)
-results
+str(results)
 
 # Generate predictions (probabilities -- the output of the last layer)
 # on new data using `predict`

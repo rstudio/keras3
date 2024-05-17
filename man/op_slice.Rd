@@ -32,7 +32,7 @@ via other tensor operations.
 ##  [ 5.  6.  7.  8.  9.]
 ##  [10. 11. 12. 13. 14.]
 ##  [15. 16. 17. 18. 19.]
-##  [20. 21. 22. 23. 24.]], shape=(5, 5), dtype=float64)
+##  [20. 21. 22. 23. 24.]], shape=(5, 5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -43,7 +43,7 @@ op_slice(inputs, start_indices, shape)
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[12. 13.]
-##  [17. 18.]], shape=(2, 2), dtype=float64)
+##  [17. 18.]], shape=(2, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

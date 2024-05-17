@@ -2337,11 +2337,6 @@ function (object, max_tokens = NULL, standardize = "lower_and_strip_punctuation"
 }
 
 
-
-# TODO: add tests/ confirm that `get_vocabulary()` returns an R character
-# vector. In older TF versions it used to return python byte objects, which
-# needed `x.decode("UTF-8") for x in vocab]`
-
 #' @param include_special_tokens If TRUE, the returned vocabulary will include
 #'   the padding and OOV tokens, and a term's index in the vocabulary will equal
 #'   the term's index when calling the layer. If FALSE, the returned vocabulary
@@ -2362,15 +2357,6 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
   args <- capture_args(ignore = "object")
   do.call(object$set_vocabulary, args)
   invisible(object)
-}
-
-
-## TODO: TextVectorization has a compile() method. investigate if this is
-## actually useful to export
-#compile.keras.engine.base_preprocessing_layer.PreprocessingLayer <-
-function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
-  args <- capture_args(ignore="object")
-  do.call(object$compile, args)
 }
 
 
@@ -2590,11 +2576,12 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
 adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
   if (!is_py_object(data))
     data <- keras_array(data)
-  # TODO: use as_tensor() here
 
-  args <- capture_args(list(batch_size = as_nullable_integer,
-                             step = as_nullable_integer),
-                        ignore = c("object", "data"))
+  args <- capture_args(
+    list(batch_size = as_nullable_integer,
+         step = as_nullable_integer),
+    ignore = c("object", "data")
+  )
   # `data` named to `dataset` in keras3 keras.utils.FeatureSpace
   # pass it as a positional arg
   args <- c(list(data), args)
