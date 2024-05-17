@@ -1618,6 +1618,9 @@
     <loc>https://keras.posit.co/reference/op_prod.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/reference/op_psnr.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/reference/op_qr.html</loc>
   </url>
   <url>
@@ -1703,6 +1706,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_slice_update.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/reference/op_slogdet.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/reference/op_softmax.html</loc>

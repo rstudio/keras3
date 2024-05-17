@@ -39,6 +39,7 @@ class FalseNegatives(_ConfusionMatrixConditionCount)
  |      FalseNegatives
  |      _ConfusionMatrixConditionCount
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

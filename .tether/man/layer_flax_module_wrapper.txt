@@ -100,6 +100,7 @@ class FlaxLayer(JaxLayer)
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -122,7 +123,7 @@ class FlaxLayer(JaxLayer)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |      Creates a layer from its config.
  |
  |      This method is the reverse of `get_config`,

@@ -57,7 +57,7 @@ class SeedGenerator(builtins.object)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |
  |  ----------------------------------------------------------------------
  |  Data descriptors defined here:

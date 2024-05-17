@@ -149,7 +149,7 @@ cross(
 ctc_decode(
   inputs,
   sequence_lengths,
-  strategy,
+  strategy='greedy',
   beam_width=100,
   top_paths=1,
   merge_repeated=True,
@@ -412,6 +412,11 @@ prod(
   keepdims=False,
   dtype=None
 )
+psnr(
+  x1,
+  x2,
+  max_val
+)
 qr(x, mode='reduced')
 quantile(
   x,
@@ -493,6 +498,7 @@ slice_update(
   start_indices,
   updates
 )
+slogdet(x)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)

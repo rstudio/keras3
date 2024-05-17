@@ -1,6 +1,6 @@
 Help on class Layer in module keras.src.layers.layer:
 
-class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.Operation)
+class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.Operation, keras.src.saving.keras_saveable.KerasSaveable)
  |  Layer(*args, **kwargs)
  |
  |  This is the class from which all layers inherit.
@@ -161,6 +161,7 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

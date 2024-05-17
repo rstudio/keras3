@@ -23,6 +23,7 @@ class LogCosh(LossFunctionWrapper)
  |      LogCosh
  |      LossFunctionWrapper
  |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -36,3 +37,4 @@ class LogCosh(LossFunctionWrapper)
  |
  |  get_config(self)
  |
+

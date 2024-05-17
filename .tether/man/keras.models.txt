@@ -1,7 +1,10 @@
 clone_model(
   model,
   input_tensors=None,
-  clone_function=None
+  clone_function=None,
+  call_function=None,
+  recursive=False,
+  **kwargs
 )
 load_model(
   filepath,

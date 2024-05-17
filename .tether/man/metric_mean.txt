@@ -31,6 +31,7 @@ class Mean(keras.src.metrics.metric.Metric)
  |  Method resolution order:
  |      Mean
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -61,3 +62,4 @@ class Mean(keras.src.metrics.metric.Metric)
  |  )
  |      Accumulate statistics for the metric.
  |
+

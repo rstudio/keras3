@@ -251,3 +251,25 @@ keras$ops$solve_triangular(a, b, lower)
 op_svd <-
 function (x, full_matrices = TRUE, compute_uv = TRUE)
 keras$ops$svd(x, full_matrices, compute_uv)
+
+
+
+#' Compute the sign and natural logarithm of the determinant of a matrix.
+#'
+#' @returns
+#' A list: `(sign, logabsdet)`. `sign` is a number representing
+#' the sign of the determinant. For a real matrix, this is 1, 0, or -1.
+#' For a complex matrix, this is a complex number with absolute value 1
+#' (i.e., it is on the unit circle), or else 0.
+#' `logabsdet` is the natural log of the absolute value of the determinant.
+#'
+#' @param x
+#' Input matrix. It must 2D and square.
+#'
+#' @export
+#' @family linear algebra ops
+#' @family ops
+#' @tether keras.ops.slogdet
+op_slogdet <-
+function (x)
+keras$ops$slogdet(x)

@@ -116,6 +116,7 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -126,13 +127,6 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
- |
- |  __reduce__(self)
- |      __reduce__ is used to customize the behavior of `pickle.pickle()`.
- |
- |      The method returns a tuple of two elements: a function, and a list of
- |      arguments to pass to that function.  In this case we just leverage the
- |      keras saving library.
  |
  |  build_from_config(self, config)
  |      Builds the layer's states with the supplied config dict.
@@ -360,7 +354,7 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config, custom_objects=None) from builtins.type
+ |  from_config(config, custom_objects=None)
  |      Creates a layer from its config.
  |
  |      This method is the reverse of `get_config`,

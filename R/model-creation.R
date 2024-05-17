@@ -275,33 +275,147 @@ function(input_shape = NULL,
   do.call(keras$layers$InputLayer, args)
 }
 
-#' Clone a model instance.
+#' Clone a Functional or Sequential `Model` instance.
 #'
-#' Model cloning is similar to calling a model on new inputs, except that it
-#' creates new layers (and thus new weights) instead of sharing the weights of
-#' the existing layers.
+#' @description
+#' Model cloning is similar to calling a model on new inputs,
+#' except that it creates new layers (and thus new weights) instead
+#' of sharing the weights of the existing layers.
 #'
-#' @param model Instance of Keras model (could be a functional model or a
-#'   Sequential model).
-#' @param input_tensors Optional list of input tensors to build the model upon.
-#'   If not provided, placeholders will be created.
-#' @param clone_function Callable to be used to clone each layer in the target
-#'   model (except `InputLayer` instances). It takes as argument the layer
-#'   instance to be cloned, and returns the corresponding layer instance to be
-#'   used in the model copy. If unspecified, this callable defaults to the
-#'   following serialization/deserialization function:
+#' Note that
+#' `clone_model()` will not preserve the uniqueness of shared objects within the
+#' model (e.g. a single variable attached to two distinct layers will be
+#' restored as two separate variables).
 #'
-#'   ```function(layer) layer$`__class__`$from_config(layer$get_config())```
 #'
-#'   By passing a custom callable, you can customize your copy of the model,
-#'   e.g. by wrapping certain layers of interest (you might want to replace all
-#'   LSTM instances with equivalent `Bidirectional(LSTM(...))` instances, for
-#'   example).
+#' # Examples
+#' ```{r}
+#' # Create a test Sequential model.
+#' model <- keras_model_sequential(input_shape = c(728)) |>
+#'   layer_dense(32, activation = 'relu') |>
+#'   layer_dense(1, activation = 'sigmoid')
 #'
-#' @returns A new model instance.
+#' # Create a copy of the test model (with freshly initialized weights).
+#' new_model <- clone_model(model)
+#' ```
+#'
+#' Using a `clone_function` to make a model deterministic by setting the
+#' random seed everywhere:
+#'
+#' ```{r}
+#' clone_function <- function(layer) {
+#'   config <- layer$get_config()
+#'   if ("seed" %in% names(config))
+#'     config$seed <- 1337L
+#'   layer$`__class__`$from_config(config)
+#' }
+#'
+#' new_model <- clone_model(model, clone_function = clone_function)
+#' ```
+#'
+#' Using a `call_function` to add a `Dropout` layer after each `Dense` layer
+#' (without recreating new layers):
+#'
+#' ```{r}
+#' call_function <- function(layer, ...) {
+#'   out <- layer(...)
+#'   if (inherits(layer, keras$layers$Dense))
+#'     out <- out |> layer_dropout(0.5)
+#'   out
+#' }
+#'
+#' inputs <- keras_input(c(728))
+#' outputs <- inputs |>
+#'   layer_dense(32, activation = 'relu') |>
+#'   layer_dense(1, activation = 'sigmoid')
+#' model <- keras_model(inputs, outputs)
+#'
+#' new_model <- clone_model(
+#'   model,
+#'   clone_function = function(x) x, # Reuse the same layers.
+#'   call_function = call_function,
+#' )
+#' new_model
+#' ```
+#'
+#' Note that subclassed models cannot be cloned by default,
+#' since their internal layer structure is not known.
+#' To achieve equivalent functionality
+#' as `clone_model` in the case of a subclassed model, simply make sure
+#' that the model class implements `get_config()`
+#' (and optionally `from_config()`), and call:
+#'
+#' ```r
+#' new_model <- model$`__class__`$from_config(model$get_config())
+#' ```
+#'
+#' In the case of a subclassed model, you cannot using a custom
+#' `clone_function`.
+#'
+#' @returns
+#' An instance of `Model` reproducing the behavior
+#' of the original model, on top of new inputs tensors,
+#' using newly instantiated weights. The cloned model may behave
+#' differently from the original model if a custom `clone_function`
+#' or `call_function` modifies a layer or layer call.
+#'
+#' @param model
+#' Instance of `Model`
+#' (could be a Functional model or a Sequential model).
+#'
+#' @param input_tensors
+#' Optional list of input tensors
+#' to build the model upon. If not provided,
+#' new `keras_input()` objects will be created.
+#'
+#' @param clone_function
+#' Callable with signature `function(layer)`
+#' to be used to clone each layer in the target
+#' model (except `Input` instances). It takes as argument the
+#' layer instance to be cloned, and returns the corresponding layer
+#' instance to be used in the model copy. If unspecified, this callable
+#' defaults to the following serialization/deserialization function:
+#' ``` function(layer) layer$`__class__`$from_config(layer$get_config()) ```.
+#' By passing a custom callable, you can customize your copy of the
+#' model, e.g. by wrapping certain layers of interest (you might want
+#' to replace all `LSTM` instances with equivalent
+#' `Bidirectional(LSTM(...))` instances, for example).
+#' Defaults to `NULL`.
+#'
+#' @param call_function
+#' Callable with signature
+#' `function(layer, ...)` to be used to call each
+#' cloned layer and a set of inputs. It takes the layer instance,
+#' and the call arguments, and returns the
+#' call outputs. If unspecified, this callable defaults to
+#' the regular `call()` method:
+#' `function(layer, ...) do.call(layer, list(...))`.
+#' By passing a custom callable, you can insert new layers before or
+#' after a given layer.
+#'
+#' @param recursive
+#' Note, This argument can only be used with
+#' Functional models.
+#' Boolean. Whether to recursively clone any Sequential
+#' or Functional models encountered in the original
+#' Sequential/Functional model. If `FALSE`,
+#' then inner models are cloned by calling `clone_function()`.
+#' If `TRUE`, then inner models are cloned by calling `clone_model()`
+#' with the same `clone_function`, `call_function`, and `recursive`
+#' arguments. Note that in this case, `call_function`
+#' will not be propagated to any Sequential model
+#' (since it is not applicable to Sequential models).
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
 #'
 #' @export
-clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
+#' @tether keras.models.clone_model
+clone_model <-
+function(model, input_tensors = NULL, clone_function = NULL,
+         call_function = NULL, recursive = FALSE, ...)
+{
   args <- capture_args()
   do.call(keras$models$clone_model, args)
 }

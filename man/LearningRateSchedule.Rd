@@ -39,7 +39,7 @@ A function that returns \code{LearningRateSchedule} instances, similar to the
 built-in \verb{learning_rate_schedule_*} family of functions.
 }
 \description{
-Subclass the keras learning rate schedule base class.
+Subclass the Keras \code{LearningRateSchedule} base class.
 
 You can use a learning rate schedule to modulate how the learning rate
 of your optimizer changes over time.
@@ -70,11 +70,10 @@ and \code{from_config()} methods.
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{my_custom_learning_rate_schedule <- LearningRateSchedule(
   classname = "MyLRSchedule",
-  initialize = function( initial_learning_rate) \{
 
+  initialize = function(initial_learning_rate) \{
     self$initial_learning_rate <- initial_learning_rate
   \},
-
 
   call = function(step) \{
     # note that `step` is a tensor

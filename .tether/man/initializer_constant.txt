@@ -52,7 +52,7 @@ class Constant(keras.src.initializers.initializer.Initializer)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |      Instantiates an initializer from a configuration dictionary.
  |
  |      Example:
@@ -69,3 +69,4 @@ class Constant(keras.src.initializers.initializer.Initializer)
  |      Returns:
  |          An `Initializer` instance.
  |
+

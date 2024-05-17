@@ -34,6 +34,7 @@ class StackedRNNCells(keras.src.layers.layer.Layer)
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -66,7 +67,7 @@ class StackedRNNCells(keras.src.layers.layer.Layer)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config, custom_objects=None) from builtins.type
+ |  from_config(config, custom_objects=None)
  |      Creates a layer from its config.
  |
  |      This method is the reverse of `get_config`,

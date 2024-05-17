@@ -1,0 +1,31 @@
+__signature__
+keras.ops.psnr(
+  x1,
+  x2,
+  max_val
+)
+__doc__
+Peak Signal-to-Noise Ratio (PSNR) function.
+
+This function computes the Peak Signal-to-Noise Ratio between two signals,
+`x1` and `x2`. PSNR is a measure of the quality of a reconstructed signal.
+The higher the PSNR, the closer the reconstructed signal is to the original
+signal. Note that it can become negative when the signal power is
+smaller that the noise power.
+
+Args:
+    x1: The first input signal.
+    x2: The second input signal. Must have the same shape as `x1`.
+    max_val: The maximum possible value in the signals.
+
+Returns:
+    float: The PSNR value between `x1` and `x2`.
+
+Examples:
+
+>>> x1 = keras.random.normal((2, 4, 4, 3))
+>>> x2 = keras.random.normal((2, 4, 4, 3))
+>>> max_val = 1.0
+>>> keras.ops.nn.psnr(x1, x2, max_val)
+-3.1697404
+

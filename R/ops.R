@@ -3994,14 +3994,22 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @returns
 #' A list containing:
 #'
-#' - A list of decoded sequences.
-#' - A list of the negative of the sum of the probability logits
-#'   (if strategy is `"greedy"`) or the log probability (if strategy is
-#'   `"beam_search"`) for each sequence.
+#' - The tensor representing the list of decoded sequences. If
+#'   `strategy="greedy"`, the shape is `(1, batch_size, max_length)`. If
+#'   `strategy="beam_seatch"`, the shape is
+#'   `(top_paths, batch_size, max_length)`. Note that: `-1` indicates the
+#'   blank label.
+#'
+#' - If `strategy="greedy"`, a tensor of shape `(batch_size, 1)`
+#'     representing the negative of the sum of the probability logits for
+#'     each sequence. If `strategy="beam_seatch"`, a tensor of shape
+#'     `(batch_size, top_paths)` representing the log probability for each
+#'     sequence.
 #'
 #' @param inputs
 #' A tensor of shape `(batch_size, max_length, num_classes)`
-#' containing the logits (output of the model).
+#' containing the logits (the output of the model).
+#' They should *not* be normalized via softmax.
 #'
 #' @param sequence_lengths
 #' A tensor of shape `(batch_size)` containing the
@@ -4032,7 +4040,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @family ops
 #' @tether keras.ops.ctc_decode
 op_ctc_decode <-
-function (inputs, sequence_lengths, strategy, beam_width = 100L,
+function (inputs, sequence_lengths, strategy = "greedy", beam_width = 100L,
     top_paths = 1L, merge_repeated = TRUE, mask_index = NULL)
 {
     args <- capture_args(list(

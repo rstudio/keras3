@@ -207,6 +207,7 @@ class FeatureSpace(keras.src.layers.layer.Layer)
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -296,19 +297,36 @@ class FeatureSpace(keras.src.layers.layer.Layer)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  cross(feature_names, crossing_dim, output_mode='one_hot') from builtins.type
+ |  cross(
+ |    feature_names,
+ |    crossing_dim,
+ |    output_mode='one_hot'
+ |  )
  |
- |  feature(dtype, preprocessor, output_mode) from builtins.type
+ |  feature(
+ |    dtype,
+ |    preprocessor,
+ |    output_mode
+ |  )
  |
- |  float(name=None) from builtins.type
+ |  float(name=None)
  |
- |  float_discretized(num_bins, bin_boundaries=None, output_mode='one_hot', name=None) from builtins.type
+ |  float_discretized(
+ |    num_bins,
+ |    bin_boundaries=None,
+ |    output_mode='one_hot',
+ |    name=None
+ |  )
  |
- |  float_normalized(name=None) from builtins.type
+ |  float_normalized(name=None)
  |
- |  float_rescaled(scale=1.0, offset=0.0, name=None) from builtins.type
+ |  float_rescaled(
+ |    scale=1.0,
+ |    offset=0.0,
+ |    name=None
+ |  )
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |      Creates a layer from its config.
  |
  |      This method is the reverse of `get_config`,
@@ -323,12 +341,30 @@ class FeatureSpace(keras.src.layers.layer.Layer)
  |      Returns:
  |          A layer instance.
  |
- |  integer_categorical(max_tokens=None, num_oov_indices=1, output_mode='one_hot', name=None) from builtins.type
+ |  integer_categorical(
+ |    max_tokens=None,
+ |    num_oov_indices=1,
+ |    output_mode='one_hot',
+ |    name=None
+ |  )
  |
- |  integer_hashed(num_bins, output_mode='one_hot', name=None) from builtins.type
+ |  integer_hashed(
+ |    num_bins,
+ |    output_mode='one_hot',
+ |    name=None
+ |  )
  |
- |  string_categorical(max_tokens=None, num_oov_indices=1, output_mode='one_hot', name=None) from builtins.type
+ |  string_categorical(
+ |    max_tokens=None,
+ |    num_oov_indices=1,
+ |    output_mode='one_hot',
+ |    name=None
+ |  )
  |
- |  string_hashed(num_bins, output_mode='one_hot', name=None) from builtins.type
+ |  string_hashed(
+ |    num_bins,
+ |    output_mode='one_hot',
+ |    name=None
+ |  )
  |
 

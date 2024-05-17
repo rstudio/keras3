@@ -24,6 +24,7 @@ class Hinge(LossFunctionWrapper)
  |      Hinge
  |      LossFunctionWrapper
  |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -37,3 +38,4 @@ class Hinge(LossFunctionWrapper)
  |
  |  get_config(self)
  |
+

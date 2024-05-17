@@ -55,6 +55,7 @@ class R2Score(keras.src.metrics.metric.Metric)
  |  Method resolution order:
  |      R2Score
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -102,3 +103,4 @@ class R2Score(keras.src.metrics.metric.Metric)
  |      Returns:
  |          Update op.
  |
+

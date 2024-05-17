@@ -4,13 +4,7 @@
 \alias{loss_ctc}
 \title{CTC (Connectionist Temporal Classification) loss.}
 \usage{
-loss_ctc(
-  y_true,
-  y_pred,
-  ...,
-  reduction = "sum_over_batch_size",
-  name = "sparse_categorical_crossentropy"
-)
+loss_ctc(y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "ctc")
 }
 \arguments{
 \item{y_true}{A tensor of shape \verb{(batch_size, target_max_length)} containing

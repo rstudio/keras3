@@ -88,6 +88,7 @@ class Adadelta(keras.src.optimizers.optimizer.Optimizer)
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.optimizers.base_optimizer.BaseOptimizer
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

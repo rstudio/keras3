@@ -84,6 +84,7 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.optimizers.base_optimizer.BaseOptimizer
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -154,7 +155,7 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config, custom_objects=None) from builtins.type
+ |  from_config(config, custom_objects=None)
  |      Creates an optimizer from its config.
  |
  |      This method is the reverse of `get_config`, capable of instantiating the

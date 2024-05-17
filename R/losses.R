@@ -1517,7 +1517,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>
 loss_ctc <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "sparse_categorical_crossentropy")
+    name = "ctc")
 {
     args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))

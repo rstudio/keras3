@@ -1,6 +1,6 @@
 Help on class Metric in module keras.src.metrics.metric:
 
-class Metric(builtins.object)
+class Metric(keras.src.saving.keras_saveable.KerasSaveable)
  |  Metric(dtype=None, name=None)
  |
  |  Encapsulates metric logic and state.
@@ -76,6 +76,11 @@ class Metric(builtins.object)
  |      def result(self):
  |          return self.true_positives
  |  ```
+ |
+ |  Method resolution order:
+ |      Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
  |
  |  Methods defined here:
  |
@@ -159,7 +164,7 @@ class Metric(builtins.object)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |
  |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
@@ -168,12 +173,4 @@ class Metric(builtins.object)
  |
  |  variables
  |
- |  ----------------------------------------------------------------------
- |  Data descriptors defined here:
- |
- |  __dict__
- |      dictionary for instance variables
- |
- |  __weakref__
- |      list of weak references to the object
 

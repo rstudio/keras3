@@ -21,6 +21,7 @@ class MeanSquaredError(LossFunctionWrapper)
  |      MeanSquaredError
  |      LossFunctionWrapper
  |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -34,3 +35,4 @@ class MeanSquaredError(LossFunctionWrapper)
  |
  |  get_config(self)
  |
+
