@@ -1,6 +1,6 @@
 Help on class Bidirectional in module keras.src.layers.rnn.bidirectional:
 
-class Bidirectional(keras.src.layers.core.wrapper.Wrapper)
+class Bidirectional(keras.src.layers.layer.Layer)
  |  Bidirectional(layer, merge_mode='concat', weights=None, backward_layer=None, **kwargs)
  |
  |  Bidirectional wrapper for RNNs.
@@ -75,13 +75,13 @@ class Bidirectional(keras.src.layers.core.wrapper.Wrapper)
  |
  |  Method resolution order:
  |      Bidirectional
- |      keras.src.layers.core.wrapper.Wrapper
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -135,7 +135,7 @@ class Bidirectional(keras.src.layers.core.wrapper.Wrapper)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config, custom_objects=None) from builtins.type
+ |  from_config(config, custom_objects=None)
  |      Creates a layer from its config.
  |
  |      This method is the reverse of `get_config`,

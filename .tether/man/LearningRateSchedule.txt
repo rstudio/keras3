@@ -52,7 +52,7 @@ class LearningRateSchedule(builtins.object)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |      Instantiates a `LearningRateSchedule` from its config.
  |
  |      Args:

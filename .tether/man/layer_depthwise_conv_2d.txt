@@ -103,6 +103,7 @@ class DepthwiseConv2D(keras.src.layers.convolutional.base_depthwise_conv.BaseDep
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

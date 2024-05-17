@@ -81,6 +81,7 @@ class LSTMCell(keras.src.layers.layer.Layer, keras.src.layers.rnn.dropout_rnn_ce
  |      tensorflow.python.trackable.autotrackable.AutoTrackable
  |      tensorflow.python.trackable.base.Trackable
  |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      keras.src.layers.rnn.dropout_rnn_cell.DropoutRNNCell
  |      builtins.object
  |

@@ -52,7 +52,7 @@ class Constraint(builtins.object)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |      Instantiates a weight constraint from a configuration dictionary.
  |
  |      Example:

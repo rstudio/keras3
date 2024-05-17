@@ -56,6 +56,7 @@ class F1Score(FBetaScore)
  |      F1Score
  |      FBetaScore
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -72,3 +73,4 @@ class F1Score(FBetaScore)
  |  get_config(self)
  |      Returns the serializable config of the metric.
  |
+

@@ -85,6 +85,7 @@ class OneHotMeanIoU(MeanIoU)
  |      IoU
  |      _IoUBase
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

@@ -136,6 +136,7 @@ class BinaryFocalCrossentropy(LossFunctionWrapper)
  |      BinaryFocalCrossentropy
  |      LossFunctionWrapper
  |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -155,3 +156,4 @@ class BinaryFocalCrossentropy(LossFunctionWrapper)
  |
  |  get_config(self)
  |
+

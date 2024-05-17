@@ -44,7 +44,6 @@ class EarlyStopping(keras.src.callbacks.callback.Callback)
  |          improvement is expected and thus training will not be stopped.
  |          Defaults to `0`.
  |
- |
  |  Example:
  |
  |  >>> callback = keras.callbacks.EarlyStopping(monitor='loss',
@@ -118,3 +117,4 @@ class EarlyStopping(keras.src.callbacks.callback.Callback)
  |            `on_epoch_end()` is passed to this argument for this method but
  |            that may change in the future.
  |
+

@@ -1,11 +1,7 @@
 Help on class Loss in module keras.src.losses.loss:
 
-class Loss(builtins.object)
- |  Loss(
- |    name=None,
- |    reduction='sum_over_batch_size',
- |    dtype=None
- |  )
+class Loss(keras.src.saving.keras_saveable.KerasSaveable)
+ |  Loss(name=None, reduction='sum_over_batch_size', dtype=None)
  |
  |  Loss base class.
  |
@@ -21,6 +17,11 @@ class Loss(builtins.object)
  |      def call(self, y_true, y_pred):
  |          return ops.mean(ops.square(y_pred - y_true), axis=-1)
  |  ```
+ |
+ |  Method resolution order:
+ |      Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
  |
  |  Methods defined here:
  |
@@ -51,14 +52,6 @@ class Loss(builtins.object)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config) from builtins.type
+ |  from_config(config)
  |
- |  ----------------------------------------------------------------------
- |  Data descriptors defined here:
- |
- |  __dict__
- |      dictionary for instance variables
- |
- |  __weakref__
- |      list of weak references to the object
 

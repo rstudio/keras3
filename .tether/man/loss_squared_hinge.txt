@@ -24,6 +24,7 @@ class SquaredHinge(LossFunctionWrapper)
  |      SquaredHinge
  |      LossFunctionWrapper
  |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -37,3 +38,4 @@ class SquaredHinge(LossFunctionWrapper)
  |
  |  get_config(self)
  |
+

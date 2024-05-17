@@ -30,6 +30,7 @@ class Sum(keras.src.metrics.metric.Metric)
  |  Method resolution order:
  |      Sum
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -60,3 +61,4 @@ class Sum(keras.src.metrics.metric.Metric)
  |  )
  |      Accumulate statistics for the metric.
  |
+

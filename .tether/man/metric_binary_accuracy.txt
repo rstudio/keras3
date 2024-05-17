@@ -45,6 +45,7 @@ class BinaryAccuracy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      keras.src.metrics.reduction_metrics.MeanMetricWrapper
  |      keras.src.metrics.reduction_metrics.Mean
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

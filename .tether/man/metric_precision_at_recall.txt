@@ -54,6 +54,7 @@ class PrecisionAtRecall(SensitivitySpecificityBase)
  |      PrecisionAtRecall
  |      SensitivitySpecificityBase
  |      keras.src.metrics.metric.Metric
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:

@@ -30,6 +30,7 @@ class Huber(LossFunctionWrapper)
  |      Huber
  |      LossFunctionWrapper
  |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
  |      builtins.object
  |
  |  Methods defined here:
@@ -44,3 +45,4 @@ class Huber(LossFunctionWrapper)
  |
  |  get_config(self)
  |
+
