@@ -14,6 +14,8 @@ articles:
   intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
   making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
   mnist_convnet: examples/vision/mnist_convnet.html
+  mnist_siamese_graph: examples/vision/mnist_siamese_graph.html
+  neural_machine_translation_with_transformer: examples/nlp/neural_machine_translation_with_transformer.html
   oxford_pets_image_segmentation: examples/vision/oxford_pets_image_segmentation.html
   sequential_model: sequential_model.html
   serialization_and_saving: serialization_and_saving.html
@@ -26,7 +28,7 @@ articles:
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-05-07T23:02Z
+last_built: 2024-05-16T21:34Z
 urls:
   reference: https://keras.posit.co/reference
   article: https://keras.posit.co/articles

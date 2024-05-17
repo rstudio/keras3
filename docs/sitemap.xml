@@ -40,6 +40,9 @@
     <loc>https://keras.posit.co/articles/examples/mnist_convnet.html</loc>
   </url>
   <url>
+    <loc>https://keras.posit.co/articles/examples/nlp/neural_machine_translation_with_transformer.html</loc>
+  </url>
+  <url>
     <loc>https://keras.posit.co/articles/examples/nlp/text_classification_from_scratch.html</loc>
   </url>
   <url>
@@ -68,6 +71,9 @@
   </url>
   <url>
     <loc>https://keras.posit.co/articles/examples/vision/mnist_convnet.html</loc>
+  </url>
+  <url>
+    <loc>https://keras.posit.co/articles/examples/vision/mnist_siamese_graph.html</loc>
   </url>
   <url>
     <loc>https://keras.posit.co/articles/examples/vision/oxford_pets_image_segmentation.html</loc>
