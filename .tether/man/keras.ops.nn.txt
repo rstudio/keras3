@@ -45,7 +45,7 @@ conv_transpose(
 ctc_decode(
   inputs,
   sequence_lengths,
-  strategy,
+  strategy='greedy',
   beam_width=100,
   top_paths=1,
   merge_repeated=True,

@@ -2,7 +2,7 @@ __signature__
 keras.ops.ctc_decode(
   inputs,
   sequence_lengths,
-  strategy,
+  strategy='greedy',
   beam_width=100,
   top_paths=1,
   merge_repeated=True,
@@ -13,7 +13,8 @@ Decodes the output of a CTC model.
 
 Args:
     inputs: A tensor of shape `(batch_size, max_length, num_classes)`
-        containing the logits (output of the model).
+        containing the logits (the output of the model).
+        They should *not* be normalized via softmax.
     sequence_lengths: A tensor of shape `(batch_size,)` containing the
         sequence lengths for the batch.
     strategy: A string for the decoding strategy. Supported values are
@@ -29,9 +30,14 @@ Args:
 
 Returns:
     A tuple containing:
-
-    - A list of decoded sequences.
-    - A list of the negative of the sum of the probability logits
-    (if strategy is `"greedy"`) or the log probability (if strategy is
-    `"beam_search"`) for each sequence.
+    - The tensor representing the list of decoded sequences. If
+        `strategy="greedy"`, the shape is `(1, batch_size, max_length)`. If
+        `strategy="beam_seatch"`, the shape is
+        `(top_paths, batch_size, max_length)`. Note that: `-1` indicates the
+        blank label.
+    - If `strategy="greedy"`, a tensor of shape `(batch_size, 1)`
+        representing the negative of the sum of the probability logits for
+        each sequence. If `strategy="beam_seatch"`, a tensor of shape
+        `(batch_size, top_paths)` representing the log probability for each
+        sequence.
 
