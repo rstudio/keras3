@@ -263,7 +263,6 @@ test_succeeds("custom layers can accept standard layer args like input_shape", {
 
 })
 
-# TODO: document change: inputs to the keras api being tensors/arrays now strictly enforced
 
 test_that("calling Layer() doesn't initialize Python", {
   expect_no_error(callr::r(function() {

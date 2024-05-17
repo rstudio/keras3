@@ -530,12 +530,6 @@ keras_array <- function(x, dtype = NULL) {
   if (is.null(x))
     return(x)
 
-  # reflect HDF5
-  # TODO: is this still relevent? Is it still the correct S3 class?
-  # keras 3 (and tf.keras 2) seems to not export a HDF5 wrapper ...
-  if (inherits(x, "keras.utils.io_utils.HDF5Matrix"))
-    return(x)
-
   # reflect tensors
   if (keras$ops$is_tensor(x))
     return(x)
