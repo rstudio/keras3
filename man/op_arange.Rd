@@ -52,7 +52,7 @@ interval \verb{[start, stop)}, with spacing between values given by step.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_arange(3) # float
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2.], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2.], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
