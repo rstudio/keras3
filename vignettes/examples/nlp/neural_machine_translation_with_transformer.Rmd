@@ -1,16 +1,16 @@
 ---
 title: English-to-Spanish translation with a sequence-to-sequence Transformer
-author: '[fchollet](https://twitter.com/fchollet), t-kalinowski'
 date-created: 2021/05/26
 last-modified: 2023/02/25
 description: Implementing a sequence-to-sequence Transformer and training it on a
   machine translation task.
-accelerator: GPU
 output: rmarkdown::html_vignette
 domain: text
 category: intermediate
-knit: ({source(here::here("tools/knit.R")); knit_vignette})
-tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/nlp/neural_machine_translation_with_transformer.py
+vignette: >
+  %\VignetteIndexEntry{English-to-Spanish translation with a sequence-to-sequence Transformer}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ## Introduction
@@ -36,7 +36,8 @@ I recommend reading the book.
 
 ## Setup
 
-```{r}
+
+``` r
 library(glue)
 
 library(tensorflow, exclude = c("set_random_seed", "shape"))
@@ -49,11 +50,26 @@ library(keras3)
 We'll be working with an English-to-Spanish translation dataset
 provided by [Anki](https://www.manythings.org/anki/). Let's download it:
 
-```{r}
+
+``` r
 zipfile <- get_file("spa-eng.zip", origin =
   "http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip")
 
 zip::zip_list(zipfile) # See what's in the zipfile
+```
+
+```
+##             filename compressed_size uncompressed_size           timestamp
+## 1           spa-eng/               0                 0 2018-06-13 12:21:20
+## 2 spa-eng/_about.txt             685              1441 2018-05-13 19:50:34
+## 3    spa-eng/spa.txt         2637619           8042772 2018-05-13 19:50:34
+##   permissions    crc32 offset
+## 1         755 00000000      0
+## 2         644 4b18349d     38
+## 3         644 63c5c4a2    771
+```
+
+``` r
 zip::unzip(zipfile, exdir = ".") # unzip into the current directory
 
 text_file <- fs::path("./spa-eng/spa.txt")
@@ -65,7 +81,8 @@ Each line contains an English sentence and its corresponding Spanish sentence.
 The English sentence is the *source sequence* and Spanish one is the *target sequence*.
 We prepend the token `"[start]"` and we append the token `"[end]"` to the Spanish sentence.
 
-```{r}
+
+``` r
 text_file <- "spa-eng/spa.txt"
 text_pairs <- text_file %>%
   readr::read_tsv(col_names = c("english", "spanish"),
@@ -76,17 +93,33 @@ text_pairs <- text_file %>%
 
 Here's what our sentence pairs look like:
 
-```{r, include=FALSE}
-set.seed(1)
-```
 
 
-```{r}
+
+
+``` r
 df <- text_pairs[sample(nrow(text_pairs), 5), ]
 glue::glue_data(df, r"(
   english: {english}
   spanish: {spanish}
 )") |> cat(sep = "\n\n")
+```
+
+```
+## english: I'm staying in Italy.
+## spanish: [start] Me estoy quedando en Italia. [end]
+##
+## english: What's so strange about that?
+## spanish: [start] ¿Qué es tan extraño acerca de eso? [end]
+##
+## english: All of the buses are full.
+## spanish: [start] Todos los bondis están llenos. [end]
+##
+## english: Is this where your mother works?
+## spanish: [start] ¿Es aquí donde trabaja tu madre? [end]
+##
+## english: Take precautions.
+## spanish: [start] Ten cuidado. [end]
 ```
 
 
@@ -106,7 +139,8 @@ print(f"{len(train_pairs)} training pairs")
 print(f"{len(val_pairs)} validation pairs")
 print(f"{len(test_pairs)} test pairs")
 ```
-```{r}
+
+``` r
 num_test_samples <- num_val_samples <-
   round(0.15 * nrow(text_pairs))
 num_train_samples <- nrow(text_pairs) - num_val_samples - num_test_samples
@@ -131,6 +165,13 @@ glue(r"(
 })
 ```
 
+```
+## 118,493 total pairs
+## 82,945 training pairs
+## 17,774 validation pairs
+## 17,774 test pairs
+```
+
 
 ## Vectorizing the text data
 
@@ -149,7 +190,8 @@ stripping the punctuation characters in either language. Instead, I would recomm
 each punctuation character into its own token,
 which you could achieve by providing a custom `split` function to `layer_text_vectorization()`.
 
-```{r}
+
+``` r
 punctuation_regex <- "[¡¿]|[^[:^punct:][\\]]"
 # the regex explained: Match ¡, or ¿, or any punctuation character except ]
 #
@@ -171,7 +213,12 @@ input_string <- as_tensor("[start] ¡corre! [end]")
 custom_standardization(input_string)
 ```
 
-```{r}
+```
+## tf.Tensor(b'[start] corre [end]', shape=(), dtype=string)
+```
+
+
+``` r
 vocab_size <- 15000
 sequence_length <- 20
 
@@ -207,7 +254,8 @@ that is to say, the words 0 to N used to predict word N+1 (and beyond) in the ta
 - `target` is the target sentence offset by one step:
 it provides the next words in the target sentence -- what the model will try to predict.
 
-```{r}
+
+``` r
 format_pair <- function(pair) {
   # the vectorization layers requrie batched inputs,
   # reshape scalar string tensor to add a batch dim
@@ -240,6 +288,15 @@ make_dataset <- function(pairs) {
     dataset_prefetch(2)
 }
 train_ds <- make_dataset(train_pairs)
+```
+
+```
+## Warning: Negative numbers are interpreted python-style when subsetting tensorflow tensors.
+## See: ?`[.tensorflow.tensor` for details.
+## To turn off this warning, set `options(tensorflow.extract.warn_negatives_pythonic = FALSE)`
+```
+
+``` r
 val_ds <- make_dataset(val_pairs)
 ```
 
@@ -247,10 +304,24 @@ val_ds <- make_dataset(val_pairs)
 Let's take a quick look at the sequence shapes
 (we have batches of 64 pairs, and all sequences are 20 steps long):
 
-```{r}
+
+``` r
 c(inputs, targets) %<-% iter_next(as_iterator(train_ds))
 str(inputs)
+```
+
+```
+## List of 2
+##  $ encoder_inputs:<tf.Tensor: shape=(64, 20), dtype=int64, numpy=…>
+##  $ decoder_inputs:<tf.Tensor: shape=(64, 20), dtype=int64, numpy=…>
+```
+
+``` r
 str(targets)
+```
+
+```
+## <tf.Tensor: shape=(64, 20), dtype=int64, numpy=…>
 ```
 
 
@@ -273,7 +344,8 @@ sure that it only uses information from target tokens 0 to N when predicting tok
 (otherwise, it could use information from the future, which would
 result in a model that cannot be used at inference time).
 
-```{r}
+
+``` r
 layer_transformer_encoder <- Layer(
   classname = "TransformerEncoder",
   initialize = function(embed_dim, dense_dim, num_heads, ...) {
@@ -421,7 +493,8 @@ layer_positional_embedding <- Layer(
 
 Next, we assemble the end-to-end model.
 
-```{r}
+
+``` r
 embed_dim <- 256
 latent_dim <- 2048
 num_heads <- 8
@@ -467,10 +540,39 @@ Note that machine translation typically uses BLEU scores as well as other metric
 Here we only train for 1 epoch, but to get the model to actually converge
 you should train for at least 30 epochs.
 
-```{r}
+
+``` r
 epochs <- 1  # This should be at least 30 for convergence
 
 transformer
+```
+
+```
+## [1mModel: "transformer"[0m
+## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+## ┃[1m [0m[1mLayer (type)       [0m[1m [0m┃[1m [0m[1mOutput Shape     [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃[1m [0m[1mConnected to     [0m[1m [0m┃
+## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+## │ encoder_inputs      │ ([38;5;45mNone[0m, [38;5;45mNone[0m)      │          [38;5;34m0[0m │ -                 │
+## │ ([38;5;33mInputLayer[0m)        │                   │            │                   │
+## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+## │ positional_embeddi… │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m256[0m) │  [38;5;34m3,845,120[0m │ encoder_inputs[[38;5;34m0[0m… │
+## │ ([38;5;33mPositionalEmbeddi…[0m │                   │            │                   │
+## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+## │ decoder_inputs      │ ([38;5;45mNone[0m, [38;5;45mNone[0m)      │          [38;5;34m0[0m │ -                 │
+## │ ([38;5;33mInputLayer[0m)        │                   │            │                   │
+## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+## │ transformer_encoder │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m256[0m) │  [38;5;34m3,155,456[0m │ positional_embed… │
+## │ ([38;5;33mTransformerEncode…[0m │                   │            │                   │
+## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+## │ functional_5        │ ([38;5;45mNone[0m, [38;5;45mNone[0m,      │ [38;5;34m12,959,640[0m │ decoder_inputs[[38;5;34m0[0m… │
+## │ ([38;5;33mFunctional[0m)        │ [38;5;34m15000[0m)            │            │ transformer_enco… │
+## └─────────────────────┴───────────────────┴────────────┴───────────────────┘
+## [1m Total params: [0m[38;5;34m19,960,216[0m (76.14 MB)
+## [1m Trainable params: [0m[38;5;34m19,960,216[0m (76.14 MB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+```
+
+``` r
 transformer |> compile(
   "rmsprop",
   loss = "sparse_categorical_crossentropy",
@@ -478,6 +580,10 @@ transformer |> compile(
 )
 transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
+```
+
+```
+## 1297/1297 - 56s - 43ms/step - accuracy: 0.7708 - loss: 1.5755 - val_accuracy: 0.7784 - val_loss: 1.3806
 ```
 
 
@@ -488,7 +594,8 @@ We simply feed into the model the vectorized English sentence
 as well as the target token `"[start]"`, then we repeatedly generated the next token, until
 we hit the token `"[end]"`.
 
-```{r, eval = FALSE}
+
+``` r
 spa_vocab <- spa_vectorization |> get_vocabulary()
 max_decoded_sentence_length <- 20
 tf_decode_sequence <- tf_function(function(input_sentence) {
@@ -533,7 +640,6 @@ for (i in seq(20)) {
     cat("  Model Translation:", input_sentence %>% as_tensor() %>%
           tf_decode_sequence() %>% as.character(), "\n")
 }
-
 ```
 
 
