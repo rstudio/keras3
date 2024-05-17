@@ -163,7 +163,7 @@ val_ds <- val_ds |> dataset_batch(32)
 ## Configuring a `FeatureSpace`
 
 To configure how each feature should be preprocessed,
-we instantiate a `layer_feature_space`, and we
+we instantiate a `layer_feature_space()`, and we
 pass to it a dictionary (named list with unique names) that maps the name of our features
 to a string that describes the feature type.
 

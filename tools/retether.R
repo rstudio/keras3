@@ -24,12 +24,11 @@ resolve_roxy_tether <- function(endpoint) {
 resolve_roxy_tether("keras.ops")
 
 # endpoint <- 'keras.layers.BatchNormalization'
-# resolve_roxy_tether(endpoint)
-#
-# stop()
-# x <- resolve_roxy_tether('keras.layers.Conv1D')
+# x <- resolve_roxy_tether(endpoint)
+# x
 # cat(x)
 # cat(attr(x, "roxified"))
+# stop()
 
 
 # url <- "https://raw.githubusercontent.com/keras-team/keras/master/guides/writing_your_own_callbacks.py"
@@ -48,26 +47,18 @@ resolve_rmd_tether <- function(url) {
 }
 
 # resolve_rmd_tether <- NULL
+# resolve_roxy_tether <- NULL
 
-# debug(Filter)
-# debugonce(doctether:::get_block_name)
-# debugonce(doctether::retether)
+
 # options(warn = 2)
-# options(error = browser)
-# debug(roxygen2:::warn_roxy_tag)
-# unlink(".tether", recursive = TRUE)
 doctether::retether(
   # "keras.ops",
-  unsafe = TRUE,
-  roxy_tag_eval =
-    resolve_roxy_tether,
-    # NULL,
-  rmd_field_eval =
-    resolve_rmd_tether
-    # NULL
+  # unsafe = TRUE,
+  roxy_tag_eval = resolve_roxy_tether,
+  rmd_field_eval = resolve_rmd_tether
 )
 
-# to retether just one vignette:
+## To retether just one vignette:
 # doctether:::retether_rmd("~/github/rstudio/keras/vignettes-src/serialization_and_saving.Rmd",
 #               eval_tether_field = resolve_rmd_tether)
 

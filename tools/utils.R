@@ -45,213 +45,195 @@ library(reticulate)
 library(assertthat, include.only = c("assert_that"))
 
 import_from(roxygen2, block_has_tags)
+import_from(memoise, memoise)
+import_from(reticulate, system2t)
 
-attach_eval({
 
-  import_from(memoise, memoise)
-  import_from(reticulate, system2t)
+# ---- utils utils ----
+is_scalar <- function(x) identical(length(x), 1L)
 
-  is_scalar <- function(x) identical(length(x), 1L)
+replace_val <- function (x, old, new) {
+  if (!is_scalar(new))
+    stop("Unexpected length of replacement value in replace_val().\n",
+         "`new` must be length 1, not ", length(new))
+  x[x %in% old] <- new
+  x
+}
 
-  replace_val <- function (x, old, new) {
-    if (!is_scalar(new))
-      stop("Unexpected length of replacement value in replace_val().\n",
-           "`new` must be length 1, not ", length(new))
-    x[x %in% old] <- new
-    x
-  }
+`%error%` <- rlang::zap_srcref(function(x, y)  tryCatch(x, error = function(e) y))
 
-  `%error%` <- rlang::zap_srcref(function(x, y)  tryCatch(x, error = function(e) y))
+py_is <- function(x, y) identical(py_id(x), py_id(y))
 
-  py_is <- function(x, y) identical(py_id(x), py_id(y))
+str_split1_on_first <- function(x, pattern, ...) {
+  stopifnot(length(x) == 1, is.character(x))
+  regmatches(x, regexpr(pattern, x, ...), invert = TRUE)[[1L]]
+}
 
-  str_split1_on_first <- function(x, pattern, ...) {
-    stopifnot(length(x) == 1, is.character(x))
-    regmatches(x, regexpr(pattern, x, ...), invert = TRUE)[[1L]]
-  }
+str_flatten_lines <- function(..., na.rm = FALSE) {
+  stringr::str_flatten(unlist(c(...)), na.rm = na.rm, collapse = "\n")
+}
 
-  str_flatten_lines <- function(..., na.rm = FALSE) {
-    stringr::str_flatten(unlist(c(...)), na.rm = na.rm, collapse = "\n")
-  }
+str_split_lines <- function(...) {
+  x <- c(...)
+  if(length(x) > 1)
+    x <- str_flatten_lines(x)
+  stringr::str_split_1(x, "\n")
+}
 
-  str_split_lines <- function(...) {
-    x <- c(...)
-    if(length(x) > 1)
-      x <- str_flatten_lines(x)
-    stringr::str_split_1(x, "\n")
-  }
+str_flatten_and_compact_lines <- function(..., roxygen = FALSE) {
+  out <- str_split_lines(...) |>
+    str_trim("right") |>
+    str_flatten_lines() |>
+    str_replace_all("\n{4,}", "\n\n\n")
+  if(roxygen)
+    out <- out |> str_replace_all("\n(#'\n){3,}", "\n#'\n#'\n")
+  out
+}
 
-  str_flatten_and_compact_lines <- function(..., roxygen = FALSE) {
-    out <- str_split_lines(...) |>
-      str_trim("right") |>
-      str_flatten_lines() |>
-      str_replace_all("\n{4,}", "\n\n\n")
-    if(roxygen)
-      out <- out |> str_replace_all("\n(#'\n){3,}", "\n#'\n#'\n")
-    out
-  }
+# str_compact_newlines <- function(x, max_consecutive_new_lines = 2) {
+#   x <- x |> str_flatten_lines()
+#   while (nchar(x) != nchar(x <- gsub(
+#     strrep("\n", max_consecutive_new_lines + 1),
+#     strrep("\n", max_consecutive_new_lines),
+#     x, fixed = TRUE))) {}
+#   x
+# }
 
-  # str_compact_newlines <- function(x, max_consecutive_new_lines = 2) {
-  #   x <- x |> str_flatten_lines()
-  #   while (nchar(x) != nchar(x <- gsub(
-  #     strrep("\n", max_consecutive_new_lines + 1),
-  #     strrep("\n", max_consecutive_new_lines),
-  #     x, fixed = TRUE))) {}
-  #   x
-  # }
+str_detect_non_ascii <- function(chr) {
+  map_lgl(chr, \(x) {
+    if (Encoding(x) == "unknown") {
+      Encoding(x) <- "UTF-8"
+    }
+    !isTRUE(Encoding(x) == "unknown")
+  })
+}
 
-  str_detect_non_ascii <- function(chr) {
-    map_lgl(chr, \(x) {
-      if (Encoding(x) == "unknown") {
-        Encoding(x) <- "UTF-8"
-      }
-      !isTRUE(Encoding(x) == "unknown")
+str_remove_non_ascii <- function(chr) {
+  chr <- str_split_lines(chr)
+  i <- str_detect_non_ascii(chr)
+  if (any(i)) {
+    chr[i] <- chr[i] |> map_chr(\(x) {
+      iconv(x, to = "ASCII", sub = "")
     })
   }
+  chr
+}
 
-  str_remove_non_ascii <- function(chr) {
-    chr <- str_split_lines(chr)
-    i <- str_detect_non_ascii(chr)
-    if (any(i)) {
-      chr[i] <- chr[i] |> map_chr(\(x) {
-        iconv(x, to = "ASCII", sub = "")
-      })
+trimws_file <- function(...) {
+  for(f in Sys.glob(c(...))) {
+    txt <- f |> readLines() |> trimws("right")
+    length(txt) <- Position(nzchar, txt, right = TRUE)
+    writeLines(txt, f, useBytes = TRUE)
+  }
+}
+
+`append<-` <- function(x, after = length(x), value) {
+  append(x, value, after)
+}
+
+unwhich <- function(x, len) {
+  lgl <- logical(len)
+  lgl[x] <- TRUE
+  lgl
+}
+
+in_recursive_call <- function() {
+  fn <- sys.call(-1)[[1]]
+  for(cl in head(sys.calls(), -2))
+    if(identical(cl[[1]], fn))
+      return(TRUE)
+  return(FALSE)
+}
+
+# use like:
+# chat_messages(system = "optional",
+#               user = "question",
+#               assistant = "answer",
+#               user = "question")
+chat_messages <- function(...) {
+  x <- rlang::dots_list(..., .named = TRUE, .ignore_empty = "all")
+  stopifnot(all(names(x) %in% c("system", "user", "assistant")))
+  unname(imap(x, \(content, role)
+              list(role = role,
+                   content = trim(str_flatten_lines(content)))))
+}
+
+dput_cb <- function (x, echo = TRUE)  {
+  obj_nm <- deparse(substitute(x))
+  out <- clipr::write_clip(capture.output(dput(x)))
+  if (echo)
+    cat("Object", sQuote(obj_nm), "is now in clipboard:\n",
+      glue::glue_collapse(out, sep = "\n", width = 160), "\n")
+  invisible(x)
+}
+
+cat_cb <- function(x, echo = TRUE, trunc_echo = TRUE, obj_nm = deparse(substitute(x))) {
+  force(obj_nm)
+  catted <- capture.output(cat(x))
+  tryCatch({
+    out <- clipr::write_clip(catted)
+    if (echo) {
+      width <- if (trunc_echo) 160 else Inf
+      message("output of 'cat(", obj_nm, ")' is now in clipboard:\n",
+          glue::glue_collapse(out, sep = "\n", width = width), "\n")
     }
-    chr
+  }, error = function(e) {
+    warning("Could not write to clipboard")
+    print(e)
+    cat("This is what would have been written to clipboard:\n\n",
+        catted, "\n", sep = "")
+  })
+  invisible(x)
+}
+
+split_by <- function (.data, ..., .drop = FALSE, .sep = ".") {
+  if (!missing(...))
+    .data <- group_by(.data, ..., .add = FALSE)
+  if (is_grouped_df(.data)) {
+    idx <- group_indices(.data)
+    vars_chr <- group_vars(.data)
+    .data <- ungroup(.data)
   }
-
-  trimws_file <- function(...) {
-    for(f in Sys.glob(c(...))) {
-      txt <- f |> readLines() |> trimws("right")
-      length(txt) <- Position(nzchar, txt, right = TRUE)
-      writeLines(txt, f, useBytes = TRUE)
-    }
+  else {
+    idx <- seq_len(nrow(.data))
+    vars_chr <- NULL
   }
-
-  .trimws_file <- function(...) {
-    # temp utils for specific interactive man/*.Rd munging
-    for(f in Sys.glob(c(...)))
-      # f |> readLines() |> trimws("right") |> writeLines(f)
-      f |> readLines() |>
-      (\(l) {
-        l <- replace_val(l, "## ", "##")
-        l[startsWith(l, "\\") & endsWith(l, ": ")] %<>% trimws("right")
-        l
-        # ifelse(l == "## ", "##", l)
-      })() |>
-      # trimws(l, "right")))() |>
-      # (\(l) ifelse(grepl("^Other ", l),
-      #              l,
-      #              trimws(l, "right")))() |>
-      writeLines(f)
+  out <- split.data.frame(.data, idx)
+  if (!is.null(vars_chr)) {
+    names(out) <- vapply(out, function(df)
+      do.call(paste, c(unclass(as.data.frame(df[1L, vars_chr, drop = FALSE])),
+                       sep = .sep)), "")
   }
+  if (isTRUE(.drop))
+    for (i in seq_along(out))
+      for (v in vars_chr)
+        out[[i]][[v]] <- NULL
+  out
+}
 
+# attach_eval({
+# }, mask.ok = "c")
+.conflicts.OK <- "c"
+# ignore empty trailing arg
+c <- function(...)
+  base::do.call(base::c, rlang::list2(...), quote = TRUE)
 
-  `append<-` <- function(x, after = length(x), value) {
-    append(x, value, after)
+.sprintf_transformer <- function(text, envir) {
+  m <- regexpr(":.+$", text)
+  if (m != -1L) {
+    format <- substring(regmatches(text, m), 2)
+    regmatches(text, m) <- ""
+  } else {
+    format <- "s"
   }
+  res <- eval(str2lang(text), envir)
+  sprintf(paste0("%", format), res)
+}
 
-  unwhich <- function(x, len) {
-    lgl <- logical(len)
-    lgl[x] <- TRUE
-    lgl
-  }
+glue_fmt <- function(..., .envir = parent.frame()) {
+  glue(..., .transformer = .sprintf_transformer, .envir = .envir)
+}
 
-  in_recursive_call <- function() {
-    fn <- sys.call(-1)[[1]]
-    for(cl in head(sys.calls(), -2))
-      if(identical(cl[[1]], fn))
-        return(TRUE)
-    return(FALSE)
-  }
-
-  # use like:
-  # chat_messages(system = "optional",
-  #               user = "question",
-  #               assistant = "answer",
-  #               user = "question")
-  chat_messages <- function(...) {
-    x <- rlang::dots_list(..., .named = TRUE, .ignore_empty = "all")
-    stopifnot(all(names(x) %in% c("system", "user", "assistant")))
-    unname(imap(x, \(content, role)
-                list(role = role,
-                     content = trim(str_flatten_lines(content)))))
-  }
-
-  dput_cb <- function (x, echo = TRUE)  {
-    obj_nm <- deparse(substitute(x))
-    out <- clipr::write_clip(capture.output(dput(x)))
-    if (echo)
-      cat("Object", sQuote(obj_nm), "is now in clipboard:\n",
-        glue::glue_collapse(out, sep = "\n", width = 160), "\n")
-    invisible(x)
-  }
-
-  cat_cb <- function(x, echo = TRUE, trunc_echo = TRUE, obj_nm = deparse(substitute(x))) {
-    force(obj_nm)
-    catted <- capture.output(cat(x))
-    tryCatch({
-      out <- clipr::write_clip(catted)
-      if (echo) {
-        width <- if (trunc_echo) 160 else Inf
-        message("output of 'cat(", obj_nm, ")' is now in clipboard:\n",
-            glue::glue_collapse(out, sep = "\n", width = width), "\n")
-      }
-    }, error = function(e) {
-      warning("Could not write to clipboard")
-      print(e)
-      cat("This is what would have been written to clipboard:\n\n",
-          catted, "\n", sep = "")
-    })
-    invisible(x)
-  }
-
-  split_by <- function (.data, ..., .drop = FALSE, .sep = ".") {
-    if (!missing(...))
-      .data <- group_by(.data, ..., .add = FALSE)
-    if (is_grouped_df(.data)) {
-      idx <- group_indices(.data)
-      vars_chr <- group_vars(.data)
-      .data <- ungroup(.data)
-    }
-    else {
-      idx <- seq_len(nrow(.data))
-      vars_chr <- NULL
-    }
-    out <- split.data.frame(.data, idx)
-    if (!is.null(vars_chr)) {
-      names(out) <- vapply(out, function(df)
-        do.call(paste, c(unclass(as.data.frame(df[1L, vars_chr, drop = FALSE])),
-                         sep = .sep)), "")
-    }
-    if (isTRUE(.drop))
-      for (i in seq_along(out))
-        for (v in vars_chr)
-          out[[i]][[v]] <- NULL
-    out
-  }
-
-  # ignore empty trailing arg
-  c <- function(...)
-    base::do.call(base::c, rlang::list2(...), quote = TRUE)
-
-  .sprintf_transformer <- function(text, envir) {
-    m <- regexpr(":.+$", text)
-    if (m != -1L) {
-      format <- substring(regmatches(text, m), 2)
-      regmatches(text, m) <- ""
-    } else {
-      format <- "s"
-    }
-    res <- eval(str2lang(text), envir)
-    sprintf(paste0("%", format), res)
-  }
-
-  glue_fmt <- function(..., .envir = parent.frame()) {
-    glue(..., .transformer = .sprintf_transformer, .envir = .envir)
-  }
-
-}, mask.ok = "c")
 
 # ---- venv ----
 # reticulate::virtualenv_remove("r-keras")
@@ -261,14 +243,11 @@ use_virtualenv("r-keras", required = TRUE)
 
 inspect <- import("inspect")
 
-# keras <- import("keras_core")
-# keras <- import("tensorflow.keras")
 keras <- import("keras")
 tf <- import("tensorflow")
 local({
   `__main__` <- reticulate::import_main()
   `__main__`$keras <- keras
-  `__main__`$keras_core <- keras
   `__main__`$tf <- tf
   `__main__`$tensorflow <- tf
 })
@@ -278,7 +257,6 @@ source_python("tools/common.py") # keras_class_type()
 
 
 # ---- collect endpoints ----
-
 
 list_endpoints <- function(
     module = "keras", max_depth = 4,
@@ -335,7 +313,6 @@ filter_out_endpoint_aliases <- function(endpoints) {
     # filter out literal aliases, i.e., identical py ids.
     dplyr::group_split(id) %>%
     map(\(df) {
-      # browser()
       if(nrow(df) == 1) return(df)
       # for the pooling layer aliases, pick the longer/clearer name
       if(all(grepl(r"(keras\.layers\.(Global)?(Avg|Average|Max)Pool(ing)?[1234]D)",
@@ -392,8 +369,6 @@ filter_out_endpoint_aliases <- function(endpoints) {
 
 
 if(FALSE) {
-  list_endpoints(c("keras.activations", "keras.regularizers"))
-
   list_endpoints(c("keras.activations", "keras.regularizers"))
 
   all_endpoints <- list_endpoints()
@@ -453,9 +428,6 @@ tidy_section_headings <- known_section_headings |>
   # replace_val("Outputs", "Output shape") |>
   snakecase::to_snake_case()
 
-`append<-` <- function(x, after = length(x), value) {
-  append(x, value, after)
-}
 
 split_docstring_into_sections <- function(docstring) {
 
@@ -740,6 +712,7 @@ backtick_not_links <- function(d) {
 # ---- roxygen -----
 
 import_from("tools/family-maps.R", r_name_to_family_map)
+
 get_family <- function(endpoint, r_name = make_r_name(endpoint)) {
   r_name_to_family_map[[r_name]]
 }
@@ -827,13 +800,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.layers.LayerNormalization" = "layer_layer_normalization"
 
     "keras.utils.FeatureSpace" = "layer_feature_space"
-    # TODO: why is FeatureSpace not exported to keras.layers.FeatureSpace?
-    # Does instantiation and composition in one call make sense, or
-    # does the need for adapt() throw a wrench in the works (and mean that
-    # using compose_layer() doesn't make sense)...
-    # maybe this should have a name like "preprocess_feature_space()" or
-    # layer_preprocess_feature_space()? or
-
 
     "keras.ops.in_top_k" = "op_in_top_k"
     "keras.ops.top_k" = "op_top_k"
@@ -845,20 +811,18 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
     "keras.random.randint" = "random_integer"
 
     "keras.layers.Bidirectional" = "bidirectional"
-    # "keras.losses.LogCosh" = "loss_logcosh"
     NULL
   })) return(r_name)
 
   x <- endpoint |> str_split_1(fixed("."))
-  x <- lapply(x, function(.x) switch(.x,
-                                "keras" = character(),
-                                "preprocessing" = character(),
-                                "utils" = character(),
-                                "distribution" = "distributed",
-                                # "preprocessing" = character(),
-                                # ops = "k",
-                                .x
-                                ))
+  x <- lapply(x, function(.x) switch(
+      .x,
+      "keras" = character(),
+      "preprocessing" = character(),
+      "utils" = character(),
+      "distribution" = "distributed",
+      .x
+    ))
 
   name <- x[length(x)]
   prefix <- x[-length(x)] |> unlist() |>
@@ -866,13 +830,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   if(type == "learning_rate_schedule")
     prefix <- "learning_rate_schedule"
-
-  prefix <- switch(prefix,
-                   # "random" = "k_random",
-                   # "config" = "k_config",
-                   # "ops" = "k",
-                   prefix)
-
 
   name <- name |>
     str_replace("NaN", "Nan") |>
@@ -884,8 +841,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
     str_replace("IoU", "Iou") |>
     str_replace("FBeta", "Fbeta")
-    # str_replace("FBeta", "Fbeta") |>
-    # str_replace("EfficientNet", "Efficientnet") |>
 
   if(str_detect(name, "[[:upper:]]"))
     name %<>% snakecase::to_snake_case()
@@ -893,9 +848,7 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   name <- name |>
 
     str_replace("_([0-9])_d(_|$)", "_\\1d\\2") |>  # conv_1_d  ->  conv_1d
-    # str_replace("efficient_net_(.+)$", "efficientnet_\\1") |>
 
-    # str_replace("re_lu", "relu") |>
     str_replace_all("(^|_)l_([12])", "\\1l\\2") |> # l_1_l_2 -> l1_l2
 
     # applications
@@ -944,8 +897,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
   name <- name |>
     replace_val("layer_activation_p_relu", "layer_activation_parametric_relu") |>
     replace_val("regularizer_orthogonal_regularizer", "regularizer_orthogonal") |>
-    # replace_val("callback_lambda_callback", "callback_lambda") |>
-    # replace_val("callback_callback_list", "callback_list") |>
     identity()
 
   if(grepl("^layer_.*_cell$", name))
@@ -953,10 +904,6 @@ make_r_name <- function(endpoint, module = py_eval(endpoint)$`__module__`) {
 
   name
 }
-
-#TODO: revisit application helpers like xception_preprocess_input()
-#TODO: KerasCallback and other R6 classes for subclassing...
-#TODO: implementation() - fix up docs / actual
 
 transformers_registry <-
   yaml::read_yaml("tools/arg-transformers.yml") %>%
@@ -1489,7 +1436,6 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
             str_detect(paste0(module, ".", name), glob2rx(names(.)))] %>%
         unname() %>% unlist(recursive = FALSE)
 
-      # TODO:, handle 'inputs,...'
       for(new_param_name in intersect(names(maybe_add_params), undocumented_params))
         params[[new_param_name]] <<- maybe_add_params[[new_param_name]]
 
@@ -1502,9 +1448,6 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
                  setdiff(names(formals(r_fn)),
                          unlist(strsplit(names(params) %||% character(), ","))))) {
         x <- list2("{endpoint}" := map(set_names(undocumented_params), ~"see description"))
-       ## writeLines(yaml::as.yaml(x))
-        # message(endpoint, ":")
-        # writeLines(paste("  ", undocumented_params, ":", "see description"))
       }
     })
 
@@ -1518,13 +1461,6 @@ mk_export <- memoise(.mk_export <- function(endpoint, quiet = FALSE) {
   })
 
 
-
-  #
-  # fixes for special cases
-  # if (endpoint == "keras.layers.Lambda") {
-  #   names(formals(r_fn)) %<>% replace_val("function", "f")
-  #   names(params)        %<>% replace_val("function", "f")
-  # }
 
   # finish
   roxygen <- dump_roxygen(doc, params, tags)
@@ -1720,7 +1656,6 @@ get_fixed_docstring <- function(endpoint) {
 
 
 # ---- man-src ----
-
 
 
 format_py_signature <- function(x, name = NULL) {
