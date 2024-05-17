@@ -2360,15 +2360,6 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 }
 
 
-## TODO: TextVectorization has a compile() method. investigate if this is
-## actually useful to export
-#compile.keras.engine.base_preprocessing_layer.PreprocessingLayer <-
-function(object, run_eagerly = NULL, steps_per_execution = NULL, ...) {
-  args <- capture_args(ignore="object")
-  do.call(object$compile, args)
-}
-
-
 #' A preprocessing layer to convert raw audio signals to Mel spectrograms.
 #'
 #' @description
@@ -2585,11 +2576,12 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
 adapt <- function(object, data, ..., batch_size=NULL, steps=NULL) {
   if (!is_py_object(data))
     data <- keras_array(data)
-  # TODO: use as_tensor() here
 
-  args <- capture_args(list(batch_size = as_nullable_integer,
-                             step = as_nullable_integer),
-                        ignore = c("object", "data"))
+  args <- capture_args(
+    list(batch_size = as_nullable_integer,
+         step = as_nullable_integer),
+    ignore = c("object", "data")
+  )
   # `data` named to `dataset` in keras3 keras.utils.FeatureSpace
   # pass it as a positional arg
   args <- c(list(data), args)

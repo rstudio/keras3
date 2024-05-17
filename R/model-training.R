@@ -913,7 +913,6 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
 #' @export
 summary.keras.src.models.model.Model <- function(object, ...) {
     writeLines(f <- format.keras.src.models.model.Model(object, ...))
-  # TODO: knit_print...?
     invisible(f)
 }
 
@@ -927,6 +926,7 @@ function(x,
          expand_nested = FALSE,
          show_trainable = NA,
          ...,
+         # TODO: add force_ascii arg
          # force_ascii ... (impl in man/roxygen/meta.R)
          # width = getOption("width"),
          # rich = TRUE, ??
@@ -945,9 +945,6 @@ function(x,
       args$show_trainable <- built && as.logical(length(x$non_trainable_weights))
     }
 
-    # args$print_fn <- function(x, ...) {browser(); x}
-
-    # Do we need to check for model$built before calling summary?
     with_rich_config(
       out <- trimws(py_capture_output(do.call(x$summary, args)))
     )

@@ -3673,11 +3673,3 @@ py_to_r_wrapper.keras.src.metrics.metric.Metric <- py_to_r_wrapper.keras.src.los
 custom_metric <- function(name, metric_fn) {
   py_func2(metric_fn, convert = TRUE, name = name)
 }
-
-# TODO: export ??
-# can be used w/ activations, regularizers, metrics, loss, anything else
-# where it helps to have a name
-custom_fn <- function(name, fn) {
-  py_func2(fn, TRUE, name)
-}
-
