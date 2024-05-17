@@ -299,9 +299,11 @@ function(input_shape = NULL,
 #'   example).
 #'
 #' @returns A new model instance.
+#' @tether keras.models.clone_model
 #'
 #' @export
-clone_model <- function(model, input_tensors = NULL, clone_function = NULL) {
+clone_model <- function(model, input_tensors = NULL, clone_function = NULL,
+                        call_function = NULL, recursive = FALSE, ...) {
   args <- capture_args()
   do.call(keras$models$clone_model, args)
 }
