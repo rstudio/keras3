@@ -16,7 +16,7 @@ tether: https://raw.githubusercontent.com/keras-team/keras-io/master/examples/nl
 
 This example shows how to do text classification starting from raw text (as
 a set of text files on disk). We demonstrate the workflow on the IMDB sentiment
-classification dataset (unprocessed version). We use [`layer_text_vectorization()`] for
+classification dataset (unprocessed version). We use `layer_text_vectorization()` for
 word splitting & indexing.
 
 ## Setup
@@ -57,7 +57,7 @@ The `aclImdb/train/pos` and `aclImdb/train/neg` folders contain text files, each
  which represents one review (either positive or negative):
 
 ```{r, warning=FALSE}
-cat(readLines("datasets/aclImdb/train/pos/6248_7.txt"))
+writeLines(strwrap(readLines("datasets/aclImdb/train/pos/6248_7.txt")))
 ```
 
 We are only interested in the `pos` and `neg` subfolders, so let's delete the other subfolder that has text files in it:
