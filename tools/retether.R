@@ -21,8 +21,9 @@ resolve_roxy_tether <- function(endpoint) {
   })
 }
 
-resolve_roxy_tether("keras.ops")
 
+# resolve_roxy_tether("keras.ops")
+#
 # endpoint <- 'keras.layers.BatchNormalization'
 # x <- resolve_roxy_tether(endpoint)
 # x
