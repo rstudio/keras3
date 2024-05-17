@@ -70,7 +70,7 @@ compose_layer <- function(object, layer, ...) {
 
 # TODO: use formals(x) in py_to_r_wrapper.Layer() to construct a better wrapper fn
 # (( though, all layer.__call__ signatures are generally (...), unless user
-#     implemented __call__() directly insteald of call() ))
+#     implemented __call__() directly instead of call() ))
 
 # This is used for:
 # - ALL layer instances (custom and builtin) and

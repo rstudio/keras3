@@ -3961,8 +3961,7 @@ set_preprocessing_attributes <- function(object, module) {
         x = function(x) {
           if (!is_py_object(x))
             x <- np_array(x)
-          if (inherits(x, "numpy.ndarray") &&
-              !py_bool(x$flags$writeable))
+          if (inherits(x, "numpy.ndarray") && !py_bool(x$flags$writeable))
             x <- x$copy()
           x
         }
