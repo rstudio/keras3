@@ -7,7 +7,7 @@
 op_ctc_decode(
   inputs,
   sequence_lengths,
-  strategy,
+  strategy = "greedy",
   beam_width = 100L,
   top_paths = 1L,
   merge_repeated = TRUE,
@@ -16,7 +16,8 @@ op_ctc_decode(
 }
 \arguments{
 \item{inputs}{A tensor of shape \verb{(batch_size, max_length, num_classes)}
-containing the logits (output of the model).}
+containing the logits (the output of the model).
+They should \emph{not} be normalized via softmax.}
 
 \item{sequence_lengths}{A tensor of shape \code{(batch_size)} containing the
 sequence lengths for the batch.}
@@ -39,10 +40,16 @@ the vocabulary. Defaults to \code{NULL}.}
 \value{
 A list containing:
 \itemize{
-\item A list of decoded sequences.
-\item A list of the negative of the sum of the probability logits
-(if strategy is \code{"greedy"}) or the log probability (if strategy is
-\code{"beam_search"}) for each sequence.
+\item The tensor representing the list of decoded sequences. If
+\code{strategy="greedy"}, the shape is \verb{(1, batch_size, max_length)}. If
+\code{strategy="beam_seatch"}, the shape is
+\verb{(top_paths, batch_size, max_length)}. Note that: \code{-1} indicates the
+blank label.
+\item If \code{strategy="greedy"}, a tensor of shape \verb{(batch_size, 1)}
+representing the negative of the sum of the probability logits for
+each sequence. If \code{strategy="beam_seatch"}, a tensor of shape
+\verb{(batch_size, top_paths)} representing the log probability for each
+sequence.
 }
 }
 \description{
@@ -335,6 +342,7 @@ Other ops: \cr
 \code{\link{op_pad}()} \cr
 \code{\link{op_power}()} \cr
 \code{\link{op_prod}()} \cr
+\code{\link{op_psnr}()} \cr
 \code{\link{op_qr}()} \cr
 \code{\link{op_quantile}()} \cr
 \code{\link{op_ravel}()} \cr
@@ -364,6 +372,7 @@ Other ops: \cr
 \code{\link{op_size}()} \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
+\code{\link{op_slogdet}()} \cr
 \code{\link{op_softmax}()} \cr
 \code{\link{op_softplus}()} \cr
 \code{\link{op_softsign}()} \cr

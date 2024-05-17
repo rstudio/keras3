@@ -346,6 +346,7 @@ Other ops: \cr
 \code{\link{op_pad}()} \cr
 \code{\link{op_power}()} \cr
 \code{\link{op_prod}()} \cr
+\code{\link{op_psnr}()} \cr
 \code{\link{op_qr}()} \cr
 \code{\link{op_quantile}()} \cr
 \code{\link{op_ravel}()} \cr
@@ -375,6 +376,7 @@ Other ops: \cr
 \code{\link{op_size}()} \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
+\code{\link{op_slogdet}()} \cr
 \code{\link{op_softmax}()} \cr
 \code{\link{op_softplus}()} \cr
 \code{\link{op_softsign}()} \cr
