@@ -107,6 +107,11 @@ one_hot(
   dtype=None,
   sparse=False
 )
+psnr(
+  x1,
+  x2,
+  max_val
+)
 relu(x)
 relu6(x)
 selu(x)

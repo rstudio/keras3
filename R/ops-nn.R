@@ -105,3 +105,41 @@ function (x, axis = -1L, order = 2L)
     args <- capture_args(list(axis = as_axis, order = as_integer))
     do.call(keras$ops$normalize, args)
 }
+
+
+#' Peak Signal-to-Noise Ratio (PSNR) function.
+#'
+#' @description
+#' This function computes the Peak Signal-to-Noise Ratio between two signals,
+#' `x1` and `x2`. PSNR is a measure of the quality of a reconstructed signal.
+#' The higher the PSNR, the closer the reconstructed signal is to the original
+#' signal. Note that it can become negative when the signal power is
+#' smaller that the noise power.
+#'
+#' # Examples
+#' ```{r}
+#' x1 <- random_normal(c(2, 4, 4, 3))
+#' x2 <- random_normal(c(2, 4, 4, 3))
+#' max_val <- 1.0
+#' op_psnr(x1, x2, max_val)
+#' ```
+#'
+#' @returns
+#' float: The PSNR value between `x1` and `x2`.
+#'
+#' @param x1
+#' The first input signal.
+#'
+#' @param x2
+#' The second input signal. Must have the same shape as `x1`.
+#'
+#' @param max_val
+#' The maximum possible value in the signals.
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @tether keras.ops.psnr
+op_psnr <-
+function (x1, x2, max_val)
+keras$ops$psnr(x1, x2, max_val)

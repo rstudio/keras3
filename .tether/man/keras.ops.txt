@@ -412,6 +412,11 @@ prod(
   keepdims=False,
   dtype=None
 )
+psnr(
+  x1,
+  x2,
+  max_val
+)
 qr(x, mode='reduced')
 quantile(
   x,
