@@ -111,10 +111,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 # }
 #
 # TODO: layer_category_encoding()(count_weights) call arg example not working
-# TODO: backout usage of `return_dict=TRUE` in evaluate() and friends - the output order is not stable.
-#       use `setNames(as.list())`
-#       ## Deferred until upstream bug fixed,
-#       ## model.metrics_names returns wrong result
 
 ## Docs ----
 
