@@ -1,7 +1,7 @@
 Help on class CTC in module keras.src.losses.losses:
 
 class CTC(LossFunctionWrapper)
- |  CTC(reduction='sum_over_batch_size', name='sparse_categorical_crossentropy')
+ |  CTC(reduction='sum_over_batch_size', name='ctc')
  |
  |  CTC (Connectionist Temporal Classification) loss.
  |
@@ -25,7 +25,7 @@ class CTC(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='sparse_categorical_crossentropy'
+ |    name='ctc'
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
