@@ -269,6 +269,7 @@ sign(x)
 sin(x)
 sinh(x)
 size(x)
+slogdet(x)
 sort(x, axis=-1)
 split(
   x,

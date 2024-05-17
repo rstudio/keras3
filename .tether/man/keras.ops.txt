@@ -493,6 +493,7 @@ slice_update(
   start_indices,
   updates
 )
+slogdet(x)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)
