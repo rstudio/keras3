@@ -114,3 +114,18 @@ test_call_succeeds("can create a tf-idf layer", {
   expect_s3_class(x, "tensorflow.tensor")
 
 })
+
+
+
+test_call_succeeds("get_vocabulary() returns R character vector", {
+
+  text_vectorization <- layer_text_vectorization()
+  with(tf$device("/cpu:0"), {
+    text_vectorization %>% adapt(c("hello world", "hello"))
+  })
+  vocab <- get_vocabulary(text_vectorization)
+
+  expect_type(vocab, "character")
+  expect_contains(vocab, c("hello", "world"))
+
+})

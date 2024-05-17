@@ -2337,11 +2337,6 @@ function (object, max_tokens = NULL, standardize = "lower_and_strip_punctuation"
 }
 
 
-
-# TODO: add tests/ confirm that `get_vocabulary()` returns an R character
-# vector. In older TF versions it used to return python byte objects, which
-# needed `x.decode("UTF-8") for x in vocab]`
-
 #' @param include_special_tokens If TRUE, the returned vocabulary will include
 #'   the padding and OOV tokens, and a term's index in the vocabulary will equal
 #'   the term's index when calling the layer. If FALSE, the returned vocabulary
