@@ -5,6 +5,19 @@
 
 - `iterate()`, `iter_next()` and `as_iterator()` are now reexported from reticulate.
 
+
+User facing changes with upstream Keras v3.3.3:
+
+- new functions: `op_slogdet()`, `op_psnr()`
+
+- `clone_model()` gains new args: `call_function`, `recursive`
+  Updated example usage. 
+
+- `op_ctc_decode()` strategy argument has new default: `"greedy"`.
+  Updated docs. 
+
+- `loss_ctc()` default name fixed, changed to `"ctc"`
+
 User facing changes with upstream Keras v3.3.2:
 
 - new function: `op_ctc_decode()`
