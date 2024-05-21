@@ -44,7 +44,7 @@ Binary focal crossentropy loss value
 with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 \description{
-According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
+According to \href{https://arxiv.org/pdf/1708.02002}{Lin et al., 2018}, it
 helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. By default, the focal tensor is computed as follows:
 

@@ -99,7 +99,7 @@ Instantiates the MobileNetV3Small architecture.
 }
 \section{Reference}{
 \itemize{
-\item \href{https://arxiv.org/pdf/1905.02244.pdf}{Searching for MobileNetV3} (ICCV 2019)
+\item \href{https://arxiv.org/pdf/1905.02244}{Searching for MobileNetV3} (ICCV 2019)
 }
 \subsection{The following table describes the performance of MobileNets v3:}{
 
