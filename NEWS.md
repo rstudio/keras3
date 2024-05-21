@@ -1,4 +1,4 @@
-# keras3 (development version)
+# keras3 1.0.0
 
 - Chains of `layer_*` calls with `|>` now instantiate layers in the
   same order as `%>%` pipe chains: left-hand-side first (#1440).
