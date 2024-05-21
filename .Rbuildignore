@@ -13,6 +13,7 @@
 ^issues$
 ^external$
 ^vignettes-src$
+^tools$
 ^vignettes/examples$
 ^vignettes/new-guides$
 ^vignettes/learn\.Rmd$

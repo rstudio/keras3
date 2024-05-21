@@ -6,7 +6,7 @@ withr::with_dir("..", {
   system("R CMD check --as-cran keras3_*.tar.gz")
 })
 
-r"(
+cat(r"(
 
 tools/make-man.R && \
 tools/knit-vignettes.R && \
@@ -16,4 +16,4 @@ tools/make-website.R
 
 tools/make-man.R && tools/make-website.R
 
-)"
+)")
