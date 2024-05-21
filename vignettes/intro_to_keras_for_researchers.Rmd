@@ -1106,7 +1106,7 @@ CustomModel <- new_model_class(
     self$optimizer <- optimizer_adam(learning_rate=1e-3)
   },
   train_step = function(data) {
-    c(x, y, sample_weight) %<-% unpack_x_y_sample_weight(data)
+    c(x, y = NULL, sample_weight = NULL) %<-% data
     with(tf$GradientTape() %as% tape, {
       y_pred <- self(x, training=TRUE)
       loss <- self$loss_fn(y = y, y_pred = y_pred, sample_weight=sample_weight)
