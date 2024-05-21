@@ -40,10 +40,6 @@ try(zip_lists(gradients, weights)) # error, names don't match
 str(zip_lists(unname(gradients), unname(weights)))
 }
 \seealso{
-Other data utils: \cr
-\code{\link{pack_x_y_sample_weight}()} \cr
-\code{\link{unpack_x_y_sample_weight}()} \cr
-
 Other utils: \cr
 \code{\link{audio_dataset_from_directory}()} \cr
 \code{\link{clear_session}()} \cr
@@ -63,14 +59,12 @@ Other utils: \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{normalize}()} \cr
-\code{\link{pack_x_y_sample_weight}()} \cr
 \code{\link{pad_sequences}()} \cr
 \code{\link{set_random_seed}()} \cr
 \code{\link{split_dataset}()} \cr
 \code{\link{text_dataset_from_directory}()} \cr
 \code{\link{timeseries_dataset_from_array}()} \cr
 \code{\link{to_categorical}()} \cr
-\code{\link{unpack_x_y_sample_weight}()} \cr
 }
 \concept{data utils}
 \concept{utils}

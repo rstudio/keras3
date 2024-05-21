@@ -1,8 +1,8 @@
 
 # destination: website
 
-development:
-  mode: auto
+# development:
+#   mode: auto
 
 url: https://keras.posit.co
 

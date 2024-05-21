@@ -28,19 +28,19 @@ Tensors are dispatched to \code{op_shape()} to extract the tensor shape. Values
 wrapped in \code{I()} are used asis (see examples). All other objects are coerced
 via \code{as.integer()}.}
 
-\item{x}{A 'keras_shape' object}
+\item{x}{A \code{keras_shape} object.}
 
 \item{prefix}{Whether to format the shape object with a prefix. Defaults to
 \code{"shape"}.}
 }
 \value{
 A list with a \code{"keras_shape"} class attribute. Each element of the
-list will be either a) \code{NULL}, b) an integer or c) a scalar integer tensor
-(e.g., when supplied a TF tensor with a unspecified dimension in a function
+list will be either a) \code{NULL}, b) an R integer or c) a scalar integer tensor
+(e.g., when supplied a TF tensor with an unspecified dimension in a function
 being traced).
 }
 \description{
-This function can be used to create or get the shape of an object.
+This function can be used to get or create a tensor shape.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{shape(1, 2, 3)
@@ -135,6 +135,15 @@ invisible(tfn(op_ones(shape(1, 2, 3))))
 A useful pattern is to unpack the \code{shape()} with \verb{\%<-\%}, like this:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{c(batch_size, seq_len, channels) \%<-\% shape(x)
+
+# `\%<-\%` also has support for skipping values
+# during unpacking with `.` and `...`. For example,
+# To retrieve just the first and/or last dim:
+c(batch_size, ...) \%<-\% shape(x)
+c(batch_size, ., .) \%<-\% shape(x)
+c(..., channels) \%<-\% shape(x)
+c(batch_size, ..., channels) \%<-\% shape(x)
+c(batch_size, ., channels) \%<-\% shape(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{echo_print <- function(x) \{
