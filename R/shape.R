@@ -1,7 +1,7 @@
 
 #' Tensor shape utility
 #'
-#' This function can be used to create or get the shape of an object.
+#' This function can be used to get or create a tensor shape.
 #'
 #' # Examples
 #' ```{r}
@@ -53,6 +53,15 @@
 #' A useful pattern is to unpack the `shape()` with `%<-%`, like this:
 #' ```r
 #' c(batch_size, seq_len, channels) %<-% shape(x)
+#'
+#' # `%<-%` also has support for skipping values
+#' # during unpacking with `.` and `...`. For example,
+#' # To retrieve just the first and/or last dim:
+#' c(batch_size, ...) %<-% shape(x)
+#' c(batch_size, ., .) %<-% shape(x)
+#' c(..., channels) %<-% shape(x)
+#' c(batch_size, ..., channels) %<-% shape(x)
+#' c(batch_size, ., channels) %<-% shape(x)
 #' ```
 #'
 #' ```{r}
@@ -98,8 +107,8 @@
 #'   via `as.integer()`.
 #'
 #' @returns A list with a `"keras_shape"` class attribute. Each element of the
-#'   list will be either a) `NULL`, b) an integer or c) a scalar integer tensor
-#'   (e.g., when supplied a TF tensor with a unspecified dimension in a function
+#'   list will be either a) `NULL`, b) an R integer or c) a scalar integer tensor
+#'   (e.g., when supplied a TF tensor with an unspecified dimension in a function
 #'   being traced).
 #'
 #' @export
@@ -154,7 +163,7 @@ shape <- function(...) {
 
 #' @export
 #' @rdname shape
-#' @param x A 'keras_shape' object
+#' @param x A `keras_shape` object.
 #' @param prefix Whether to format the shape object with a prefix. Defaults to
 #'   `"shape"`.
 format.keras_shape <- function(x, ..., prefix = TRUE) {
