@@ -14,7 +14,7 @@ vignette: >
 ## Setup
 
 
-```r
+``` r
 library(keras3)
 ```
 
@@ -36,7 +36,7 @@ When processing sequence data, it is very common for individual samples to have
 different lengths. Consider the following example (text tokenized as words):
 
 
-```r
+``` r
 data <- list(
   c("Hello", "world", "!"),
   c("How", "are", "you", "doing", "today"),
@@ -47,7 +47,7 @@ data <- list(
 After vocabulary lookup, the data might be vectorized as integers, e.g.:
 
 
-```r
+``` r
 data <- list(
   c(71, 1331, 4231),
   c(73, 8, 3215, 55, 927),
@@ -65,7 +65,7 @@ Keras provides a utility function to truncate and pad Python lists to a common l
 `pad_sequences`.
 
 
-```r
+``` r
 raw_inputs <- list(
   c(711, 632, 71),
   c(73, 8, 3215, 55, 927),
@@ -109,7 +109,7 @@ sequence_length)`), and attach it to the tensor output returned by the `Masking`
 `Embedding` layer.
 
 
-```r
+``` r
 embedding <- layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE)
 masked_output <- embedding(padded_inputs)
 
@@ -123,7 +123,7 @@ masked_output$`_keras_mask`
 ##  [ True  True  True  True  True  True]], shape=(3, 6), dtype=bool)
 ```
 
-```r
+``` r
 masking_layer <- layer_masking()
 # Simulate the embedding lookup by expanding the 2D input to 3D,
 # with embedding dimension of 10.
@@ -158,7 +158,7 @@ For instance, in the following Sequential model, the `LSTM` layer will automatic
 receive a mask, which means it will ignore padded values:
 
 
-```r
+``` r
 model <- keras_model_sequential() %>%
   layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
   layer_lstm(units=32)
@@ -167,7 +167,7 @@ model <- keras_model_sequential() %>%
 This is also the case for the following Functional API model:
 
 
-```r
+``` r
 inputs <- keras_input(shape = shape(NULL), dtype="int32")
 outputs <- inputs %>%
   layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
@@ -188,7 +188,7 @@ Thus, you can pass the output of the `compute_mask()` method of a mask-producing
 to the `call` method of a mask-consuming layer, like this:
 
 
-```r
+``` r
 MyLayer <- new_layer_class(
   "MyLayer",
   initialize = function(...) {
@@ -246,7 +246,7 @@ produces a new mask given the input and the current mask.
 Here is an example of a `TemporalSplit` layer that needs to modify the current mask.
 
 
-```r
+``` r
 TemporalSplit <- new_layer_class(
   "TemporalSplit",
   call = function(inputs) {
@@ -275,7 +275,7 @@ first_half$`_keras_mask`
 ##  [ True  True  True]], shape=(3, 3), dtype=bool)
 ```
 
-```r
+``` r
 second_half$`_keras_mask`
 ```
 
@@ -290,7 +290,7 @@ Here is another example of a `CustomEmbedding` layer that is capable of generati
 mask from input values:
 
 
-```r
+``` r
 CustomEmbedding <- new_layer_class(
   "CustomEmbedding",
   initialize = function(input_dim, output_dim, mask_zero=FALSE, ...) {
@@ -354,7 +354,7 @@ to be able to propagate the current input mask, you should set `self.supports_ma
 Here's an example of a layer that is whitelisted for mask propagation:
 
 
-```r
+``` r
 MyActivation <- new_layer_class(
   "MyActivation",
   initialize = function(...) {
@@ -372,7 +372,7 @@ and a mask-consuming layer (like `LSTM`), and it will pass the mask along so tha
 reaches the mask-consuming layer.
 
 
-```r
+``` r
 inputs <- keras_input(shape = shape(NULL), dtype="int32")
 outputs <- inputs %>%
   layer_embedding(input_dim=5000, output_dim=16, mask_zero=TRUE) %>%
@@ -396,7 +396,7 @@ Here's a simple example below: a layer that computes a softmax over the time dim
 (axis 1) of an input sequence, while discarding masked timesteps.
 
 
-```r
+``` r
 TemporalSoftmax <- new_layer_class(
   "TemporalSoftmax",
   initialize = function(...) {

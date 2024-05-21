@@ -25,7 +25,7 @@ started.
 ## Setup
 
 
-```r
+``` r
 library(keras3)
 ```
 
@@ -82,7 +82,7 @@ Let's take a look at a concrete example. To get started, let's import tensorflow
 define a simple Sequential Keras model:
 
 
-```r
+``` r
 # Define the Keras model to add callbacks to
 get_model <- function() {
   model <- keras_model_sequential()
@@ -99,7 +99,7 @@ get_model <- function() {
 Then, load the MNIST data for training and testing from Keras datasets API:
 
 
-```r
+``` r
 # Load example MNIST data and pre-process it
 mnist <- dataset_mnist()
 
@@ -129,7 +129,7 @@ Now, define a simple custom callback that logs:
 - When each inference (prediction) batch starts & ends
 
 
-```r
+``` r
 show <- function(msg, logs) {
   cat(glue::glue(msg, .envir = parent.frame()),
       "got logs: ", sep = "; ")
@@ -160,7 +160,7 @@ callback_custom <- Callback(
 
 Let's try it out:
 
-```r
+``` r
 model <- get_model()
 model |> fit(
   mnist$train$x, mnist$train$y,
@@ -306,7 +306,7 @@ model |> fit(
 ##  $ val_mean_absolute_error: num 1.82
 ```
 
-```r
+``` r
 res <- model |> evaluate(
   mnist$test$x, mnist$test$y,
   batch_size = 128, verbose = 0,
@@ -370,7 +370,7 @@ res <- model |> evaluate(
 ##  $ mean_absolute_error: num 1.75
 ```
 
-```r
+``` r
 res <- model |> predict(
   mnist$test$x,
   batch_size = 128, verbose = 0,
@@ -428,7 +428,7 @@ res <- model |> predict(
 The `logs` named list contains the loss value, and all the metrics at the end of a batch or
 epoch. Example includes the loss and mean absolute error.
 
-```r
+``` r
 callback_print_loss_and_mae <- Callback(
   "LossAndErrorPrintingCallback",
 
@@ -477,7 +477,7 @@ model |> fit(
 ## The average loss for epoch  2 is      5.51 and mean absolute error is    1.90.
 ```
 
-```r
+``` r
 res = model |> evaluate(
   mnist$test$x, mnist$test$y,
   verbose = 0, batch_size = 128,
@@ -530,7 +530,7 @@ epochs we should wait before stopping after having reached a local minimum.
 `callback_early_stopping()` provides a more complete and general implementation.
 
 
-```r
+``` r
 callback_early_stopping_at_min_loss <- Callback(
   "EarlyStoppingAtMinLoss",
   `__doc__` =
@@ -659,7 +659,7 @@ learning rate of the optimizer during the course of training.
 See `keras$callbacks$LearningRateScheduler` for a more general implementations (in RStudio, press F1 while the cursor is over `LearningRateScheduler` and a browser will open to [this page](https://www.tensorflow.org/versions/r2.5/api_docs/python/tf/keras/callbacks/LearningRateScheduler)).
 
 
-```r
+``` r
 callback_custom_learning_rate_scheduler <- Callback(
   "CustomLearningRateScheduler",
   `__doc__` =

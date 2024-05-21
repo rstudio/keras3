@@ -42,7 +42,7 @@ Let's see how that works.
 ## Setup
 
 
-```r
+``` r
 library(reticulate)
 library(tensorflow, exclude = c("set_random_seed", "shape"))
 library(keras3)
@@ -74,11 +74,10 @@ to update the state of the metrics that were passed in `compile()`,
 and we query results from `self$metrics` at the end to retrieve their current value.
 
 
-```r
+``` r
 CustomModel <- new_model_class(
   "CustomModel",
   train_step = function(data) {
-    # unpack data into x, y, and sample_weight
     c(x, y = NULL, sample_weight = NULL) %<-% data
 
     with(tf$GradientTape() %as% tape, {
@@ -113,7 +112,7 @@ CustomModel <- new_model_class(
 Let's try this out:
 
 
-```r
+``` r
 # Construct and compile an instance of CustomModel
 inputs <- keras_input(shape = 32)
 outputs <- layer_dense(inputs, 1)
@@ -128,7 +127,7 @@ model |> fit(x, y, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 23ms/step - loss: 2.9118 - mae: 1.3597
+## 32/32 - 1s - 19ms/step - loss: 2.9118 - mae: 1.3597
 ## Epoch 2/3
 ## 32/32 - 0s - 1ms/step - loss: 2.6026 - mae: 1.2856
 ## Epoch 3/3
@@ -154,7 +153,7 @@ on any object listed here at the beginning of each `fit()` epoch or at the begin
 `evaluate()`.
 
 
-```r
+``` r
 CustomModel <- new_model_class(
   "CustomModel",
   initialize = function(...) {
@@ -164,7 +163,6 @@ CustomModel <- new_model_class(
     self$loss_fn <- loss_mean_squared_error()
   },
   train_step = function(data) {
-    # unpack data into x, y, and sample_weight
     c(x, y = NULL, sample_weight = NULL) %<-% data
 
     with(tf$GradientTape() %as% tape, {
@@ -214,11 +212,11 @@ model |> fit(x, y, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 19ms/step - loss: 2.6540 - mae: 1.2901
+## 32/32 - 1s - 16ms/step - loss: 2.6540 - mae: 1.2901
 ## Epoch 2/3
-## 32/32 - 0s - 2ms/step - loss: 2.4139 - mae: 1.2303
+## 32/32 - 0s - 1ms/step - loss: 2.4139 - mae: 1.2303
 ## Epoch 3/3
-## 32/32 - 0s - 2ms/step - loss: 2.2080 - mae: 1.1761
+## 32/32 - 0s - 1ms/step - loss: 2.2080 - mae: 1.1761
 ```
 
 ## Supporting `sample_weight` & `class_weight`
@@ -233,11 +231,10 @@ it manually if you don't rely on `compile()` for losses & metrics)
 - That's it.
 
 
-```r
+``` r
 CustomModel <- new_model_class(
   "CustomModel",
   train_step = function(data) {
-    # unpack data into x, y, and sample_weight
     c(x, y = NULL, sample_weight = NULL) %<-% data
 
     with(tf$GradientTape() %as% tape, {
@@ -285,11 +282,11 @@ model |> fit(x, y, sample_weight = sw, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 21ms/step - loss: 0.1607 - mae: 1.3018
+## 32/32 - 1s - 18ms/step - loss: 0.1607 - mae: 1.3018
 ## Epoch 2/3
 ## 32/32 - 0s - 1ms/step - loss: 0.1452 - mae: 1.2999
 ## Epoch 3/3
-## 32/32 - 0s - 2ms/step - loss: 0.1335 - mae: 1.2986
+## 32/32 - 0s - 1ms/step - loss: 0.1335 - mae: 1.2986
 ```
 
 ## Providing your own evaluation step
@@ -298,7 +295,7 @@ What if you want to do the same for calls to `model.evaluate()`? Then you would
 override `test_step` in exactly the same way. Here's what it looks like:
 
 
-```r
+``` r
 CustomModel <- new_model_class(
   "CustomModel",
   test_step = function(data) {
@@ -335,7 +332,7 @@ model |> evaluate(x, y)
 ```
 
 ```
-## 32/32 - 0s - 9ms/step - loss: 0.0000e+00 - mae: 1.3947
+## 32/32 - 0s - 8ms/step - loss: 0.0000e+00 - mae: 1.3947
 ```
 
 ```
@@ -359,7 +356,7 @@ Let's consider:
 - A loss function to train the discriminator.
 
 
-```r
+``` r
 # Create the discriminator
 discriminator <-
   keras_model_sequential(name = "discriminator", input_shape = c(28, 28, 1)) |>
@@ -402,7 +399,7 @@ Here's a feature-complete GAN class, overriding `compile()` to use its own signa
 and implementing the entire GAN algorithm in 17 lines in `train_step`:
 
 
-```r
+``` r
 GAN <- Model(
   classname = "GAN",
 
@@ -480,7 +477,7 @@ GAN <- Model(
 Let's test-drive it:
 
 
-```r
+``` r
 batch_size <- 64
 c(c(x_train, .), c(x_test, .)) %<-% dataset_mnist()
 all_digits <- op_concatenate(list(x_train, x_test))
@@ -510,7 +507,7 @@ gan |> fit(
 ```
 
 ```
-## 100/100 - 5s - 53ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+## 100/100 - 5s - 47ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?

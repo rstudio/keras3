@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1014,7 +1014,7 @@ guide</a>.</p>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-3</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  train_step <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">sample_weight</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/unpack_x_y_sample_weight.html">unpack_x_y_sample_weight</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, y <span class="op">=</span> <span class="cn">NULL</span>, sample_weight <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">data</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>      <span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu">self</span><span class="op">(</span><span class="va">x</span>, training<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span>      <span class="va">loss</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">loss_fn</span><span class="op">(</span>y <span class="op">=</span> <span class="va">y</span>, y_pred <span class="op">=</span> <span class="va">y_pred</span>, sample_weight<span class="op">=</span><span class="va">sample_weight</span><span class="op">)</span></span>

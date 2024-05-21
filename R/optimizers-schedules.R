@@ -7,7 +7,7 @@
 #' SGDR: Stochastic Gradient Descent with Warm Restarts.
 #'
 #' For the idea of a linear warmup of our learning rate,
-#' see [Goyal et al.](https://arxiv.org/pdf/1706.02677.pdf).
+#' see [Goyal et al.](https://arxiv.org/pdf/1706.02677).
 #'
 #' When we begin training a model, we often want an initial increase in our
 #' learning rate followed by a decay. If `warmup_target` is an int, this

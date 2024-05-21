@@ -27,12 +27,12 @@ loss_binary_focal_crossentropy(
 binary classes 0 and 1.}
 
 \item{alpha}{A weight balancing factor for class 1, default is \code{0.25} as
-mentioned in reference \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}.  The weight for class 0 is
+mentioned in reference \href{https://arxiv.org/pdf/1708.02002}{Lin et al., 2018}.  The weight for class 0 is
 \code{1.0 - alpha}.}
 
 \item{gamma}{A focusing parameter used to compute the focal factor, default is
 \code{2.0} as mentioned in the reference
-\href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}.}
+\href{https://arxiv.org/pdf/1708.02002}{Lin et al., 2018}.}
 
 \item{from_logits}{Whether to interpret \code{y_pred} as a tensor of
 \href{https://en.wikipedia.org/wiki/Logit}{logit} values. By default, we
@@ -60,7 +60,7 @@ Binary focal crossentropy loss value
 with shape = \verb{[batch_size, d0, .. dN-1]}.
 }
 \description{
-According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
+According to \href{https://arxiv.org/pdf/1708.02002}{Lin et al., 2018}, it
 helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. By default, the focal tensor is computed as follows:
 
@@ -87,7 +87,7 @@ when \code{from_logits=TRUE}) or a probability (i.e, value in \verb{[0., 1.]} wh
 \code{from_logits=FALSE}).
 }
 
-According to \href{https://arxiv.org/pdf/1708.02002.pdf}{Lin et al., 2018}, it
+According to \href{https://arxiv.org/pdf/1708.02002}{Lin et al., 2018}, it
 helps to apply a "focal factor" to down-weight easy examples and focus more
 on hard examples. By default, the focal tensor is computed as follows:
 

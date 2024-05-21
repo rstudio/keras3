@@ -3,7 +3,7 @@
 #' Computes the binary focal crossentropy loss.
 #'
 #' @description
-#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
+#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002), it
 #' helps to apply a focal factor to down-weight easy examples and focus more on
 #' hard examples. By default, the focal tensor is computed as follows:
 #'

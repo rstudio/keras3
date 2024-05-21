@@ -13,7 +13,7 @@ vignette: >
 ## Setup
 
 
-```r
+``` r
 library(keras3)
 ```
 
@@ -47,7 +47,7 @@ This is a basic graph with three layers.
 To build this model using the functional API, start by creating an input node:
 
 
-```r
+``` r
 inputs <- keras_input(shape = c(784))
 ```
 
@@ -58,7 +58,7 @@ If, for example, you have an image input with a shape of `(32, 32, 3)`,
 you would use:
 
 
-```r
+``` r
 # Just for demonstration purposes.
 img_inputs <- keras_input(shape = c(32, 32, 3))
 ```
@@ -68,7 +68,7 @@ of the input data that you feed to your model.
 Here's the shape:
 
 
-```r
+``` r
 shape(inputs)
 ```
 
@@ -79,7 +79,7 @@ shape(inputs)
 Here's the dtype:
 
 
-```r
+``` r
 inputs$dtype
 ```
 
@@ -91,7 +91,7 @@ You create a new node in the graph of layers by calling a layer on this `inputs`
 object:
 
 
-```r
+``` r
 dense <- layer_dense(units = 64, activation="relu")
 x <- dense(inputs)
 ```
@@ -103,7 +103,7 @@ You're "passing" the inputs to the `dense` layer, and you get `x` as the output.
 Let's add a few more layers to the graph of layers:
 
 
-```r
+``` r
 outputs <- x |>
   layer_dense(units = 64, activation = "relu") |>
   layer_dense(units = 10)
@@ -113,14 +113,14 @@ At this point, you can create a `Model` by specifying its inputs and outputs
 in the graph of layers:
 
 
-```r
+``` r
 model <- keras_model(inputs = inputs, outputs = outputs, name = "mnist_model")
 ```
 
 Let's check out what the model summary looks like:
 
 
-```r
+``` r
 summary(model)
 ```
 
@@ -145,7 +145,7 @@ summary(model)
 You can also plot the model as a graph:
 
 
-```r
+``` r
 plot(model)
 ```
 
@@ -155,7 +155,7 @@ And, optionally, display the input and output shapes of each layer
 in the plotted graph:
 
 
-```r
+``` r
 plot(model, show_shapes = TRUE)
 ```
 
@@ -189,7 +189,7 @@ fit the model on the data (while monitoring performance on a validation split),
 then evaluate the model on the test data:
 
 
-```r
+``` r
 c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
 
 x_train <- array_reshape(x_train, c(60000, 784)) / 255
@@ -208,29 +208,29 @@ history <- model |> fit(
 
 ```
 ## Epoch 1/2
-## 750/750 - 2s - 3ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
+## 750/750 - 2s - 2ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
 ## Epoch 2/2
-## 750/750 - 1s - 920us/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397
+## 750/750 - 1s - 773us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386
 ```
 
-```r
+``` r
 test_scores <- model |> evaluate(x_test, y_test, verbose=2)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9595 - loss: 0.1328
+## 313/313 - 0s - 980us/step - accuracy: 0.9593 - loss: 0.1323
 ```
 
 
 
-```r
+``` r
 cat("Test loss:", test_scores$loss, "\n")
 cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
 ```
-## Test loss: 0.132778
-## Test accuracy: 0.9595
+## Test loss: 0.1323339
+## Test accuracy: 0.9593
 ```
 
 For further reading, see the [training and evaluation](training_with_built_in_methods.html) guide.
@@ -250,7 +250,7 @@ This saved file includes the:
 - optimizer and its state, if any (to restart training where you left off)
 
 
-```r
+``` r
 model |> save_model("my_model.keras")
 rm(model)
 # Recreate the exact same model purely from the file:
@@ -273,7 +273,7 @@ an `encoder` model that turns image inputs into 16-dimensional vectors,
 and an end-to-end `autoencoder` model for training.
 
 
-```r
+``` r
 encoder_input <- keras_input(shape = c(28, 28, 1), name="img")
 encoder_output <- encoder_input |>
   layer_conv_2d(16, 3, activation = "relu") |>
@@ -312,7 +312,7 @@ summary(encoder)
 ## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
-```r
+``` r
 decoder_output <- encoder_output |>
   layer_reshape(c(4, 4, 1)) |>
   layer_conv_2d_transpose(16, 3, activation = "relu") |>
@@ -384,7 +384,7 @@ creates an encoder model, a decoder model, and chains them in two calls
 to obtain the autoencoder model:
 
 
-```r
+``` r
 encoder_input <- keras_input(shape = c(28, 28, 1), name="img")
 encoder_output <- encoder_input |>
   layer_conv_2d(16, 3, activation = "relu") |>
@@ -423,7 +423,7 @@ summary(encoder)
 ## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
-```r
+``` r
 decoder_input <- keras_input(shape = c(16), name = "encoded_img")
 decoder_output <- decoder_input |>
   layer_reshape(c(4, 4, 1)) |>
@@ -465,7 +465,7 @@ summary(decoder)
 ## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
-```r
+``` r
 autoencoder_input <- keras_input(shape = c(28, 28, 1), name = "img")
 encoded_img <- encoder(autoencoder_input)
 decoded_img <- decoder(encoded_img)
@@ -497,7 +497,7 @@ For example, here's how to ensemble a set of models into a single model
 that averages their predictions:
 
 
-```r
+``` r
 get_model <- function() {
   inputs <- keras_input(shape = 128)
   outputs <- inputs |> layer_dense(1)
@@ -540,7 +540,7 @@ over the set of departments).
 You can build this model in a few lines with the functional API:
 
 
-```r
+``` r
 num_tags <- 12  # Number of unique issue tags
 num_words <- 10000  # Size of vocabulary obtained when preprocessing text data
 num_departments <- 4  # Number of departments for predictions
@@ -583,7 +583,7 @@ model <- keras_model(
 Now plot the model:
 
 
-```r
+``` r
 plot(model, show_shapes = TRUE)
 ```
 
@@ -594,7 +594,7 @@ You can even assign different weights to each loss -- to modulate
 their contribution to the total training loss.
 
 
-```r
+``` r
 model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
@@ -609,7 +609,7 @@ Since the output layers have different names, you could also specify
 the losses and loss weights with the corresponding layer names:
 
 
-```r
+``` r
 model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
@@ -623,7 +623,7 @@ model |> compile(
 Train the model by passing lists of NumPy arrays of inputs and targets:
 
 
-```r
+``` r
 # Dummy input data
 title_data <- random_integer(c(1280, 10), 0, num_words)
 body_data <- random_integer(c(1280, 100), 0, num_words)
@@ -643,9 +643,9 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 69ms/step - loss: 0.3948
+## 40/40 - 2s - 57ms/step - loss: 0.3948
 ## Epoch 2/2
-## 40/40 - 0s - 6ms/step - loss: 0.1971
+## 40/40 - 0s - 5ms/step - loss: 0.1971
 ```
 
 When calling fit with a `Dataset` object, it should yield either a
@@ -666,7 +666,7 @@ A common use case for this is residual connections.
 Let's build a toy ResNet model for CIFAR10 to demonstrate this:
 
 
-```r
+``` r
 inputs <- keras_input(shape = c(32, 32, 3), name = "img")
 block_1_output <- inputs |>
   layer_conv_2d(32, kernel_size = 3, activation = "relu") |>
@@ -743,7 +743,7 @@ summary(model)
 Plot the model:
 
 
-```r
+``` r
 plot(model, show_shapes = TRUE)
 ```
 
@@ -752,7 +752,7 @@ plot(model, show_shapes = TRUE)
 Now train the model:
 
 
-```r
+``` r
 c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_cifar10()
 
 x_train <- x_train / 255.0
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 6s - 478ms/step - acc: 0.1250 - loss: 2.2998 - val_acc: 0.1250 - val_loss: 2.2939
+## 13/13 - 5s - 373ms/step - acc: 0.1238 - loss: 2.2995 - val_acc: 0.1300 - val_loss: 2.2957
 ```
 
 ## Shared layers
@@ -796,7 +796,7 @@ To share a layer in the functional API, call the same layer instance multiple ti
 For instance, here's an `Embedding` layer shared across two different text inputs:
 
 
-```r
+``` r
 # Embedding for 1000 unique words mapped to 128-dimensional vectors
 shared_embedding <- layer_embedding(input_dim = 1000, output_dim = 128)
 
@@ -825,7 +825,7 @@ Let's look at an example. This is a VGG19 model with weights pretrained on Image
 
 
 
-```r
+``` r
 vgg19 <- application_vgg19()
 ```
 
@@ -833,7 +833,7 @@ And these are the intermediate activations of the model,
 obtained by querying the graph data structure:
 
 
-```r
+``` r
 features_list <- lapply(vgg19$layers, function(x) x$output)
 ```
 
@@ -841,7 +841,7 @@ Use these features to create a new feature-extraction model that returns
 the values of the intermediate layer activations:
 
 
-```r
+``` r
 feat_extraction_model <- keras_model(inputs = vgg19$input,
                                      outputs = features_list)
 
@@ -875,7 +875,7 @@ To learn more about creating layers from scratch, read
 The following is a basic implementation of `layer_dense()`:
 
 
-```r
+``` r
 custom_dense <- Layer(
   classname = "CustomDense",
   initialize = function(units = 32) {
@@ -909,7 +909,7 @@ For serialization support in your custom layer, define a `get_config()`
 method that returns the constructor arguments of the layer instance:
 
 
-```r
+``` r
 custom_dense <- Layer(
   classname = "CustomDense",
 
@@ -955,7 +955,7 @@ when recreating a layer instance given its config dictionary.
 The default implementation of `from_config` is:
 
 
-```r
+``` r
 from_config <- function(cls, config) {
   do.call(cls, config)
 }
@@ -990,7 +990,7 @@ There is no `super$initialize(...)`, no `call = function(...)`, no  `self$...`, 
 Compare:
 
 
-```r
+``` r
 inputs <- keras_input(shape = shape(32))
 outputs <- inputs |>
   layer_dense(64, activation = "relu") |>
@@ -1001,7 +1001,7 @@ mlp <- keras_model(inputs, outputs)
 With the subclassed version:
 
 
-```r
+``` r
 MLP <- Model(
   classname = "MLP",
   initialize = function(...) {
@@ -1042,7 +1042,7 @@ in this graph. For example, to extract and reuse the activations of intermediate
 layers (as seen in a previous example):
 
 
-```r
+``` r
 features_list <- lapply(vgg19$layers, function(x) x$output)
 feat_extraction_model <- keras_model(inputs = vgg19$input,
                                      outputs = features_list)
@@ -1081,7 +1081,7 @@ You can always use a functional model or `Sequential` model
 as part of a subclassed model or layer:
 
 
-```r
+``` r
 units <- 32
 timesteps <- 10
 input_dim <- 5
@@ -1143,7 +1143,7 @@ Here's a quick example of a custom RNN, written from scratch,
 being used in a functional model:
 
 
-```r
+``` r
 units <- 32
 timesteps <- 10
 input_dim <- 5

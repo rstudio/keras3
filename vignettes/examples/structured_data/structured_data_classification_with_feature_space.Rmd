@@ -61,7 +61,7 @@ Target | Diagnosis of heart disease (1 = true; 0 = false) | Target
 
 
 
-```r
+``` r
 library(readr)
 library(dplyr, warn.conflicts = FALSE)
 library(keras3)
@@ -83,7 +83,7 @@ use_backend("tensorflow")
 Let's download the data and load it into a Pandas dataframe:
 
 
-```r
+``` r
 file_url <-
   "http://storage.googleapis.com/download.tensorflow.org/data/heart.csv"
 df <- read_csv(file_url, col_types = cols(
@@ -100,7 +100,7 @@ The dataset includes 303 samples with 14 columns per sample
 (13 features, plus the target label)
 
 
-```r
+``` r
 glimpse(df)
 ```
 
@@ -127,7 +127,7 @@ glimpse(df)
 Here's a preview of a few samples:
 
 
-```r
+``` r
 df
 ```
 
@@ -156,7 +156,7 @@ has a heart disease (1) or not (0).
 Let's split the data into a training and validation set:
 
 
-```r
+``` r
 val_idx <- nrow(df) %>% sample.int(., . * 0.2)
 val_df <- df[val_idx, ]
 train_df <- df[-val_idx, ]
@@ -174,7 +174,7 @@ cat(sprintf(
 Let's generate `tf_dataset` objects for each dataframe:
 
 
-```r
+``` r
 dataframe_to_dataset <- function(df) {
   labels <- df |> pull(target) |> as.integer()
   inputs <- df |> select(-target) |> as.list()
@@ -193,7 +193,7 @@ Each `tf_dataset` yields a tuple `(input, target)` where `input` is a dictionary
 and `target` is the value `0` or `1`:
 
 
-```r
+``` r
 c(x, y) %<-% iter_next(as_iterator(train_ds))
 cat("Input: "); str(x)
 cat("Target: "); str(y)
@@ -201,26 +201,26 @@ cat("Target: "); str(y)
 
 ```
 ## Input: List of 13
-##  $ age     :<tf.Tensor: shape=(), dtype=int32, numpy=41>
+##  $ age     :<tf.Tensor: shape=(), dtype=int32, numpy=59>
 ##  $ sex     :<tf.Tensor: shape=(), dtype=int32, numpy=1>
-##  $ cp      :<tf.Tensor: shape=(), dtype=int32, numpy=2>
-##  $ trestbps:<tf.Tensor: shape=(), dtype=int32, numpy=120>
-##  $ chol    :<tf.Tensor: shape=(), dtype=int32, numpy=157>
-##  $ fbs     :<tf.Tensor: shape=(), dtype=int32, numpy=0>
-##  $ restecg :<tf.Tensor: shape=(), dtype=int32, numpy=0>
-##  $ thalach :<tf.Tensor: shape=(), dtype=int32, numpy=182>
+##  $ cp      :<tf.Tensor: shape=(), dtype=int32, numpy=4>
+##  $ trestbps:<tf.Tensor: shape=(), dtype=int32, numpy=164>
+##  $ chol    :<tf.Tensor: shape=(), dtype=int32, numpy=176>
+##  $ fbs     :<tf.Tensor: shape=(), dtype=int32, numpy=1>
+##  $ restecg :<tf.Tensor: shape=(), dtype=int32, numpy=2>
+##  $ thalach :<tf.Tensor: shape=(), dtype=int32, numpy=90>
 ##  $ exang   :<tf.Tensor: shape=(), dtype=int32, numpy=0>
-##  $ oldpeak :<tf.Tensor: shape=(), dtype=float32, numpy=0.0>
-##  $ slope   :<tf.Tensor: shape=(), dtype=int32, numpy=1>
-##  $ ca      :<tf.Tensor: shape=(), dtype=int32, numpy=0>
-##  $ thal    :<tf.Tensor: shape=(), dtype=string, numpy=b'normal'>
-## Target: <tf.Tensor: shape=(), dtype=int32, numpy=0>
+##  $ oldpeak :<tf.Tensor: shape=(), dtype=float32, numpy=1.0>
+##  $ slope   :<tf.Tensor: shape=(), dtype=int32, numpy=2>
+##  $ ca      :<tf.Tensor: shape=(), dtype=int32, numpy=2>
+##  $ thal    :<tf.Tensor: shape=(), dtype=string, numpy=b'fixed'>
+## Target: <tf.Tensor: shape=(), dtype=int32, numpy=1>
 ```
 
 Let's batch the datasets:
 
 
-```r
+``` r
 train_ds <- train_ds |> dataset_batch(32)
 val_ds <- val_ds |> dataset_batch(32)
 ```
@@ -228,7 +228,7 @@ val_ds <- val_ds |> dataset_batch(32)
 ## Configuring a `FeatureSpace`
 
 To configure how each feature should be preprocessed,
-we instantiate a `layer_feature_space`, and we
+we instantiate a `layer_feature_space()`, and we
 pass to it a dictionary (named list with unique names) that maps the name of our features
 to a string that describes the feature type.
 
@@ -250,7 +250,7 @@ the co-occurence space is too large.
 
 
 
-```r
+``` r
 feature_space <- layer_feature_space(
   features = list(
     # Categorical features encoded as integers
@@ -304,7 +304,7 @@ bins for discretizing features of type `"float_discretized"`,
 or the dimensionality of the hashing space for feature crossing.
 
 
-```r
+``` r
 feature_space <- layer_feature_space(
   features = list(
     # Categorical features encoded as integers
@@ -354,7 +354,7 @@ Note that `adapt()` should be called on a `tf_dataset` which yields dicts (named
 of feature values -- no labels.
 
 
-```r
+``` r
 train_ds_with_no_labels <- train_ds |> dataset_map(\(x, y) x)
 feature_space |> adapt(train_ds_with_no_labels)
 ```
@@ -363,7 +363,7 @@ At this point, the `FeatureSpace` can be called on a dict of raw feature values,
 single concatenate vector for each sample, combining encoded features and feature crosses.
 
 
-```r
+``` r
 c(x, y) %<-% iter_next(as_iterator(train_ds))
 preprocessed_x <- feature_space(x)
 preprocessed_x
@@ -371,7 +371,7 @@ preprocessed_x
 
 ```
 ## tf.Tensor(
-## [[0. 0. 0. ... 0. 1. 0.]
+## [[0. 0. 1. ... 0. 0. 0.]
 ##  [0. 0. 0. ... 0. 0. 0.]
 ##  [0. 0. 0. ... 0. 0. 0.]
 ##  ...
@@ -407,7 +407,7 @@ do inference with an end-to-end model that includes the `FeatureSpace`.
 Let's create a training and validation dataset of preprocessed batches:
 
 
-```r
+``` r
 preprocessed_train_ds <- train_ds |>
   dataset_map(\(x, y) list(feature_space(x), y),
               num_parallel_calls = tf$data$AUTOTUNE) |>
@@ -427,7 +427,7 @@ Time to build a model -- or rather two models:
 - An inference model that expects raw features (one sample = dict of raw feature values)
 
 
-```r
+``` r
 dict_inputs <- feature_space$get_inputs()
 encoded_features <- feature_space$get_encoded_features()
 
@@ -452,7 +452,7 @@ Let's train our model for 20 epochs. Note that feature preprocessing is happenin
 as part of the tf.data pipeline, not as part of the model.
 
 
-```r
+``` r
 training_model |> fit(
   preprocessed_train_ds,
   epochs = 20,
@@ -463,45 +463,45 @@ training_model |> fit(
 
 ```
 ## Epoch 1/20
-## 8/8 - 3s - 320ms/step - accuracy: 0.4564 - loss: 0.7517 - val_accuracy: 0.4833 - val_loss: 0.7192
+## 8/8 - 3s - 326ms/step - accuracy: 0.4315 - loss: 0.7427 - val_accuracy: 0.5333 - val_loss: 0.7048
 ## Epoch 2/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.5436 - loss: 0.6978 - val_accuracy: 0.6167 - val_loss: 0.6730
+## 8/8 - 0s - 13ms/step - accuracy: 0.5311 - loss: 0.6984 - val_accuracy: 0.6500 - val_loss: 0.6438
 ## Epoch 3/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.6473 - loss: 0.6429 - val_accuracy: 0.6500 - val_loss: 0.6319
+## 8/8 - 0s - 13ms/step - accuracy: 0.6473 - loss: 0.6316 - val_accuracy: 0.6833 - val_loss: 0.5937
 ## Epoch 4/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.6639 - loss: 0.6126 - val_accuracy: 0.6833 - val_loss: 0.5965
+## 8/8 - 0s - 13ms/step - accuracy: 0.6639 - loss: 0.6134 - val_accuracy: 0.7500 - val_loss: 0.5524
 ## Epoch 5/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.7137 - loss: 0.5854 - val_accuracy: 0.7167 - val_loss: 0.5653
+## 8/8 - 0s - 12ms/step - accuracy: 0.7178 - loss: 0.5820 - val_accuracy: 0.7667 - val_loss: 0.5176
 ## Epoch 6/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.7386 - loss: 0.5565 - val_accuracy: 0.7667 - val_loss: 0.5353
+## 8/8 - 0s - 13ms/step - accuracy: 0.7718 - loss: 0.5573 - val_accuracy: 0.7500 - val_loss: 0.4897
 ## Epoch 7/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.7718 - loss: 0.5237 - val_accuracy: 0.7667 - val_loss: 0.5086
+## 8/8 - 0s - 12ms/step - accuracy: 0.7718 - loss: 0.5200 - val_accuracy: 0.8167 - val_loss: 0.4640
 ## Epoch 8/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.7718 - loss: 0.5098 - val_accuracy: 0.8167 - val_loss: 0.4835
+## 8/8 - 0s - 14ms/step - accuracy: 0.7759 - loss: 0.5068 - val_accuracy: 0.8167 - val_loss: 0.4388
 ## Epoch 9/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8091 - loss: 0.4921 - val_accuracy: 0.8500 - val_loss: 0.4621
+## 8/8 - 0s - 12ms/step - accuracy: 0.8174 - loss: 0.4724 - val_accuracy: 0.8333 - val_loss: 0.4162
 ## Epoch 10/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8050 - loss: 0.4562 - val_accuracy: 0.8333 - val_loss: 0.4435
+## 8/8 - 0s - 12ms/step - accuracy: 0.8050 - loss: 0.4545 - val_accuracy: 0.8167 - val_loss: 0.3960
 ## Epoch 11/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8091 - loss: 0.4398 - val_accuracy: 0.8333 - val_loss: 0.4261
+## 8/8 - 0s - 13ms/step - accuracy: 0.8091 - loss: 0.4514 - val_accuracy: 0.8500 - val_loss: 0.3786
 ## Epoch 12/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8257 - loss: 0.4272 - val_accuracy: 0.8167 - val_loss: 0.4095
+## 8/8 - 0s - 12ms/step - accuracy: 0.8423 - loss: 0.4291 - val_accuracy: 0.8500 - val_loss: 0.3647
 ## Epoch 13/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8050 - loss: 0.4381 - val_accuracy: 0.8333 - val_loss: 0.3949
+## 8/8 - 0s - 12ms/step - accuracy: 0.8465 - loss: 0.4028 - val_accuracy: 0.8667 - val_loss: 0.3499
 ## Epoch 14/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8091 - loss: 0.4118 - val_accuracy: 0.8333 - val_loss: 0.3828
+## 8/8 - 0s - 13ms/step - accuracy: 0.8340 - loss: 0.4037 - val_accuracy: 0.8667 - val_loss: 0.3369
 ## Epoch 15/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8382 - loss: 0.3797 - val_accuracy: 0.8500 - val_loss: 0.3712
+## 8/8 - 0s - 12ms/step - accuracy: 0.8548 - loss: 0.3928 - val_accuracy: 0.8667 - val_loss: 0.3289
 ## Epoch 16/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8423 - loss: 0.3884 - val_accuracy: 0.8500 - val_loss: 0.3610
+## 8/8 - 0s - 12ms/step - accuracy: 0.8589 - loss: 0.3745 - val_accuracy: 0.8667 - val_loss: 0.3206
 ## Epoch 17/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8548 - loss: 0.3654 - val_accuracy: 0.8500 - val_loss: 0.3511
+## 8/8 - 0s - 12ms/step - accuracy: 0.8257 - loss: 0.3820 - val_accuracy: 0.8667 - val_loss: 0.3129
 ## Epoch 18/20
-## 8/8 - 0s - 12ms/step - accuracy: 0.8299 - loss: 0.3726 - val_accuracy: 0.8667 - val_loss: 0.3434
+## 8/8 - 0s - 14ms/step - accuracy: 0.8631 - loss: 0.3650 - val_accuracy: 0.8667 - val_loss: 0.3079
 ## Epoch 19/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8672 - loss: 0.3472 - val_accuracy: 0.8667 - val_loss: 0.3365
+## 8/8 - 0s - 12ms/step - accuracy: 0.8382 - loss: 0.3635 - val_accuracy: 0.8667 - val_loss: 0.3024
 ## Epoch 20/20
-## 8/8 - 0s - 13ms/step - accuracy: 0.8714 - loss: 0.3380 - val_accuracy: 0.8667 - val_loss: 0.3301
+## 8/8 - 0s - 13ms/step - accuracy: 0.8631 - loss: 0.3524 - val_accuracy: 0.8833 - val_loss: 0.2970
 ```
 
 We quickly get to 80% validation accuracy.
@@ -512,7 +512,7 @@ Now, we can use our inference model (which includes the `FeatureSpace`)
 to make predictions based on dicts of raw features values, as follows:
 
 
-```r
+``` r
 sample <- list(
   age = 60,
   sex = 1,
@@ -537,7 +537,7 @@ predictions <- inference_model |> predict(input_dict)
 ## 1/1 - 0s - 257ms/step
 ```
 
-```r
+``` r
 glue::glue(r"---(
   This particular patient had a {(100 * predictions) |> signif(3)}% probability
   of having a heart disease, as evaluated by our model.
@@ -545,6 +545,6 @@ glue::glue(r"---(
 ```
 
 ```
-## This particular patient had a 48.9% probability
+## This particular patient had a 49.7% probability
 ## of having a heart disease, as evaluated by our model.
 ```

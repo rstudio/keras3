@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -269,11 +269,11 @@ input data.</p>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 8/8 - 0s - 47ms/step - loss: 1.0629</span></span>
+<span><span class="co">## 8/8 - 0s - 37ms/step - loss: 1.0629</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 8/8 - 0s - 7ms/step - loss: 0.9712</span></span>
+<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 0.9712</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 8/8 - 0s - 7ms/step - loss: 0.9322</span></span></code></pre>
+<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 0.9322</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 8/8 - 0s - 7ms/step - loss: 0.8859</span></span></code></pre>
@@ -354,12 +354,12 @@ input key again. If there are multiple matches, a
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
 <span><span class="co">## 8/8 - 0s - 29ms/step - loss: 1.0714</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 8/8 - 0s - 4ms/step - loss: 0.9744</span></span>
+<span><span class="co">## 8/8 - 0s - 3ms/step - loss: 0.9744</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 0.9280</span></span></code></pre>
+<span><span class="co">## 8/8 - 0s - 4ms/step - loss: 0.9280</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 8/8 - 0s - 9ms/step - loss: 0.8802</span></span></code></pre>
+<pre><code><span><span class="co">## 8/8 - 0s - 7ms/step - loss: 0.8802</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
 <span><span class="co">## [1] 0.8802156</span></span></code></pre>
 <p>It is also easy to change the mesh structure to tune the computation

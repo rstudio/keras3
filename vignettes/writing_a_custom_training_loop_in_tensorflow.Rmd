@@ -13,7 +13,7 @@ vignette: >
 ## Setup
 
 
-```r
+``` r
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(tfdatasets, exclude = "shape")
 library(keras3)
@@ -48,7 +48,7 @@ retrieve using `model$trainable_weights`).
 Let's consider a simple MNIST model:
 
 
-```r
+``` r
 get_model <- function() {
   inputs <- keras_input(shape = 784, name = "digits")
   outputs <- inputs |>
@@ -66,7 +66,7 @@ Let's train it using mini-batch gradient with a custom training loop.
 First, we're going to need an optimizer, a loss function, and a dataset:
 
 
-```r
+``` r
 # Instantiate an optimizer.
 optimizer <- optimizer_adam(learning_rate = 1e-3)
 # Instantiate a loss function.
@@ -109,7 +109,7 @@ of the model with regard to the loss
 gradients
 
 
-```r
+``` r
 epochs <- 3
 for (epoch in seq_len(epochs)) {
   cat("Start of epoch ", epoch, "\n")
@@ -191,7 +191,7 @@ Let's use this knowledge to compute `SparseCategoricalAccuracy` on validation da
 the end of each epoch:
 
 
-```r
+``` r
 # Get a fresh model
 model <- get_model()
 
@@ -208,7 +208,7 @@ val_acc_metric <- metric_sparse_categorical_accuracy()
 Here's our training & evaluation loop:
 
 
-```r
+``` r
 epochs <- 2
 time <- Sys.time()
 for (epoch in seq_len(epochs)) {
@@ -276,12 +276,12 @@ for (epoch in seq_len(epochs)) {
 ## Validation acc: 0.9031
 ```
 
-```r
+``` r
 Sys.time() - time
 ```
 
 ```
-## Time difference of 40.01661 secs
+## Time difference of 44.04362 secs
 ```
 
 ## Speeding-up your training step with `tf_function()`
@@ -300,7 +300,7 @@ You can compile into a static graph any function that takes tensors as input.
 Just add a `@tf.function` decorator on it, like this:
 
 
-```r
+``` r
 train_step <- tf_function(function(x, y) {
   with(tf$GradientTape() %as% tape, {
     logits <- model(x, training = TRUE)
@@ -316,7 +316,7 @@ train_step <- tf_function(function(x, y) {
 Let's do the same with the evaluation step:
 
 
-```r
+``` r
 test_step <- tf_function(function(x, y) {
   val_logits <- model(x, training=FALSE)
   val_acc_metric$update_state(y, val_logits)
@@ -327,7 +327,7 @@ test_step <- tf_function(function(x, y) {
 Now, let's re-run our training loop with this compiled training step:
 
 
-```r
+``` r
 epochs <- 2
 time <- Sys.time()
 for (epoch in seq_len(epochs)) {
@@ -375,12 +375,12 @@ for (epoch in seq_len(epochs)) {
 ## Validation acc: 0.9031
 ```
 
-```r
+``` r
 Sys.time() - time
 ```
 
 ```
-## Time difference of 0.3914127 secs
+## Time difference of 0.4195933 secs
 ```
 
 Much faster, isn't it?
@@ -398,7 +398,7 @@ and add them to the main loss in your training step.
 Consider this layer, that creates an activity regularization loss:
 
 
-```r
+``` r
 layer_activity_regularization <- Layer(
   "ActivityRegularizationLayer",
   call = function(inputs) {
@@ -411,7 +411,7 @@ layer_activity_regularization <- Layer(
 Let's build a really simple model that uses it:
 
 
-```r
+``` r
 inputs <- keras_input(shape = 784, name="digits")
 outputs <- inputs |>
   layer_dense(units = 64, activation = "relu") |>
@@ -424,7 +424,7 @@ model <- keras_model(inputs = inputs, outputs = outputs)
 Here's what our training step should look like now:
 
 
-```r
+``` r
 train_step <- tf_function(function(x, y) {
   with(tf$GradientTape() %as% tape, {
     logits <- model(x, training = TRUE)
@@ -479,7 +479,7 @@ Let's implement this training loop. First, create the discriminator meant to cla
 fake vs real digits:
 
 
-```r
+``` r
 # Create the discriminator
 discriminator <-
   keras_model_sequential(name = "discriminator",
@@ -524,7 +524,7 @@ that turns latent vectors into outputs of shape `(28, 28, 1)` (representing
 MNIST digits):
 
 
-```r
+``` r
 latent_dim <- 128L
 
 generator <-
@@ -577,7 +577,7 @@ Here's the key bit: the training loop. As you can see it is quite straightforwar
 training step function only takes 17 lines.
 
 
-```r
+``` r
 # Instantiate one optimizer for the discriminator and another for the generator.
 d_optimizer <- optimizer_adam(learning_rate = 0.0003)
 g_optimizer <- optimizer_adam(learning_rate = 0.0004)
@@ -641,7 +641,7 @@ Since our discriminator and generator are convnets, you're going to want to
 run this code on a GPU.
 
 
-```r
+``` r
 # Prepare the dataset. We use both the training & test MNIST digits.
 batch_size <- 64
 c(c(x_train, .), c(x_test, .)) %<-% dataset_mnist()

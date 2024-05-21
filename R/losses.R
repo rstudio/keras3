@@ -131,7 +131,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Computes focal cross-entropy loss between true labels and predictions.
 #'
 #' @description
-#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
+#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002), it
 #' helps to apply a focal factor to down-weight easy examples and focus more on
 #' hard examples. By default, the focal tensor is computed as follows:
 #'
@@ -157,7 +157,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'     when `from_logits=TRUE`) or a probability (i.e, value in `[0., 1.]` when
 #'     `from_logits=FALSE`).
 #'
-#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
+#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002), it
 #' helps to apply a "focal factor" to down-weight easy examples and focus more
 #' on hard examples. By default, the focal tensor is computed as follows:
 #'
@@ -274,13 +274,13 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @param alpha
 #' A weight balancing factor for class 1, default is `0.25` as
 #' mentioned in reference [Lin et al., 2018](
-#' https://arxiv.org/pdf/1708.02002.pdf).  The weight for class 0 is
+#' https://arxiv.org/pdf/1708.02002).  The weight for class 0 is
 #' `1.0 - alpha`.
 #'
 #' @param gamma
 #' A focusing parameter used to compute the focal factor, default is
 #' `2.0` as mentioned in the reference
-#' [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf).
+#' [Lin et al., 2018](https://arxiv.org/pdf/1708.02002).
 #'
 #' @param from_logits
 #' Whether to interpret `y_pred` as a tensor of
@@ -450,7 +450,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' `class_weights`. We expect labels to be provided in a `one_hot`
 #' representation.
 #'
-#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002.pdf), it
+#' According to [Lin et al., 2018](https://arxiv.org/pdf/1708.02002), it
 #' helps to apply a focal factor to down-weight easy examples and focus more on
 #' hard examples. The general formula for the focal loss (FL)
 #' is as follows:

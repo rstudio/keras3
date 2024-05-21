@@ -42,7 +42,7 @@ clients, while preserving its global semantics.
 ## Setup
 
 
-```r
+``` r
 # This guide assumes there are 8 GPUs available for testing. If you don't have
 # 8 gpus available locally, you can set the following envvar to
 # make xla initialize the CPU as 8 devices, to enable local testing
@@ -52,7 +52,7 @@ Sys.setenv("XLA_FLAGS" = "--xla_force_host_platform_device_count=8")
 
 
 
-```r
+``` r
 library(keras3)
 
 # The distribution API is only implemented for the JAX backend for now.
@@ -79,7 +79,7 @@ You can find more detailed concept explainers in the
 [TensorFlow DTensor guide](https://www.tensorflow.org/guide/dtensor_overview#dtensors_model_of_distributed_tensors).
 
 
-```r
+``` r
 # Retrieve the local available gpu devices.
 devices <- jax$devices() # "gpu"
 str(devices)
@@ -97,7 +97,7 @@ str(devices)
 ##  $ :TFRT_CPU_7
 ```
 
-```r
+``` r
 # Define a 2x4 device mesh with data and model parallel axes
 mesh <- keras$distribution$DeviceMesh(
   shape = shape(2, 4),
@@ -140,7 +140,7 @@ portion of the input data.
 
 Here is a sample usage of this class.
 
-```r
+``` r
 # Create DataParallel with list of devices.
 # As a shortcut, the devices can be skipped,
 # and Keras will detect all local available devices.
@@ -184,14 +184,14 @@ model |> fit(dataset, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 8/8 - 0s - 47ms/step - loss: 1.0629
+## 8/8 - 0s - 37ms/step - loss: 1.0629
 ## Epoch 2/3
-## 8/8 - 0s - 7ms/step - loss: 0.9712
+## 8/8 - 0s - 5ms/step - loss: 0.9712
 ## Epoch 3/3
-## 8/8 - 0s - 7ms/step - loss: 0.9322
+## 8/8 - 0s - 5ms/step - loss: 0.9322
 ```
 
-```r
+``` r
 model |> evaluate(dataset)
 ```
 
@@ -235,7 +235,7 @@ multiple matches, a `ValueError` is raised. If no matches are found, `NULL` is
 returned.
 
 
-```r
+``` r
 mesh_2d <- keras$distribution$DeviceMesh(
   shape = shape(2, 4),
   axis_names = c("data", "model"),
@@ -280,17 +280,17 @@ model |> fit(dataset, epochs = 3)
 ## Epoch 1/3
 ## 8/8 - 0s - 29ms/step - loss: 1.0714
 ## Epoch 2/3
-## 8/8 - 0s - 4ms/step - loss: 0.9744
+## 8/8 - 0s - 3ms/step - loss: 0.9744
 ## Epoch 3/3
-## 8/8 - 0s - 5ms/step - loss: 0.9280
+## 8/8 - 0s - 4ms/step - loss: 0.9280
 ```
 
-```r
+``` r
 model |> evaluate(dataset)
 ```
 
 ```
-## 8/8 - 0s - 9ms/step - loss: 0.8802
+## 8/8 - 0s - 7ms/step - loss: 0.8802
 ```
 
 ```
@@ -304,7 +304,7 @@ more data parallel or model parallel. You can do this by adjusting the shape of
 the mesh. And no changes are needed for any other code.
 
 
-```r
+``` r
 full_data_parallel_mesh <- keras$distribution$DeviceMesh(
   shape = shape(8, 1),
   axis_names = list("data", "model"),

@@ -41,3 +41,6 @@ cr_family <- function(rd_file) {
 Sys.glob("man/*.Rd") %>%
   walk(cr_family)
   # walk(itemize_family)
+
+
+remotes::install_local(force = TRUE)

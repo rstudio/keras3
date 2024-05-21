@@ -42,7 +42,7 @@ See \href{https://arxiv.org/abs/1608.03983}{Loshchilov & Hutter, ICLR2016},
 SGDR: Stochastic Gradient Descent with Warm Restarts.
 
 For the idea of a linear warmup of our learning rate,
-see \href{https://arxiv.org/pdf/1706.02677.pdf}{Goyal et al.}.
+see \href{https://arxiv.org/pdf/1706.02677}{Goyal et al.}.
 
 When we begin training a model, we often want an initial increase in our
 learning rate followed by a decay. If \code{warmup_target} is an int, this

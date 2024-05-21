@@ -66,7 +66,7 @@ equivalent to the binary crossentropy loss."><!-- mathjax --><script src="https:
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,7 +127,7 @@ equivalent to the binary crossentropy loss."><!-- mathjax --><script src="https:
     </div>
 
     <div class="ref-description section level2">
-    <p>According to <a href="https://arxiv.org/pdf/1708.02002.pdf" class="external-link">Lin et al., 2018</a>, it
+    <p>According to <a href="https://arxiv.org/pdf/1708.02002" class="external-link">Lin et al., 2018</a>, it
 helps to apply a focal factor to down-weight easy examples and focus more on
 hard examples. By default, the focal tensor is computed as follows:</p>
 <p><code>focal_factor = (1 - output)^gamma</code> for class 1
@@ -146,7 +146,7 @@ floating-point value which either represents a
 <a href="https://en.wikipedia.org/wiki/Logit" class="external-link">logit</a>, (i.e, value in <code>[-inf, inf]</code>
 when <code>from_logits=TRUE</code>) or a probability (i.e, value in <code>[0., 1.]</code> when
 <code>from_logits=FALSE</code>).</p></li>
-</ul><p>According to <a href="https://arxiv.org/pdf/1708.02002.pdf" class="external-link">Lin et al., 2018</a>, it
+</ul><p>According to <a href="https://arxiv.org/pdf/1708.02002" class="external-link">Lin et al., 2018</a>, it
 helps to apply a "focal factor" to down-weight easy examples and focus more
 on hard examples. By default, the focal tensor is computed as follows:</p>
 <p><code>focal_factor = (1 - output) ** gamma</code> for class 1
@@ -189,14 +189,14 @@ binary classes 0 and 1.</p></dd>
 
 <dt>alpha</dt>
 <dd><p>A weight balancing factor for class 1, default is <code>0.25</code> as
-mentioned in reference <a href="https://arxiv.org/pdf/1708.02002.pdf" class="external-link">Lin et al., 2018</a>.  The weight for class 0 is
+mentioned in reference <a href="https://arxiv.org/pdf/1708.02002" class="external-link">Lin et al., 2018</a>.  The weight for class 0 is
 <code>1.0 - alpha</code>.</p></dd>
 
 
 <dt>gamma</dt>
 <dd><p>A focusing parameter used to compute the focal factor, default is
 <code>2.0</code> as mentioned in the reference
-<a href="https://arxiv.org/pdf/1708.02002.pdf" class="external-link">Lin et al., 2018</a>.</p></dd>
+<a href="https://arxiv.org/pdf/1708.02002" class="external-link">Lin et al., 2018</a>.</p></dd>
 
 
 <dt>from_logits</dt>
