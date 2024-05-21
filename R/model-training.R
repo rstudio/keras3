@@ -269,17 +269,20 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
                                verbose = as_model_verbose_arg),
                           ignore = "object",
                           force = "verbose")
-    args[["return_dict"]] <- FALSE
+
+    ## return_dict=TRUE because object$metrics_names returns wrong value
+    ## (e.g., "compile_metrics" instead of "mae")
+    args[["return_dict"]] <- TRUE
 
     if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
        !is.null(args$batch_size))
       stop("batch_size can not be specified with a TF Dataset")
 
     result <- do.call(object$evaluate, args)
-    if (length(result) > 1L) {
-      result <- as.list(result)
-      names(result) <- object$metrics_names
-    }
+    # if (length(result) > 1L) { ## if return_dict=FALSE
+    #   result <- as.list(result)
+    #   names(result) <- object$metrics_names
+    # }
 
     tfruns::write_run_metadata("evaluation", unlist(result))
 
@@ -761,11 +764,12 @@ function (object, x, y = NULL, sample_weight = NULL, ...)
     result <- object$test_on_batch(as_array(x),
                                    as_array(y),
                                    as_array(sample_weight), ...,
-                                   return_dict = FALSE)
-    if (length(result) > 1L) {
-      result <- as.list(result)
-      names(result) <- object$metrics_names
-    } else if (is_scalar(result)) {
+                                   return_dict = TRUE)
+    # if (length(result) > 1L) {
+    #   result <- as.list(result)
+    #   names(result) <- object$metrics_names
+    # } else
+    if (is_scalar(result)) {
       result <- result[[1L]]
     }
     result
@@ -824,11 +828,12 @@ function (object, x, y = NULL, sample_weight = NULL, class_weight = NULL)
                                     as_array(y),
                                     as_array(sample_weight),
                                     class_weight = as_class_weight(class_weight),
-                                    return_dict = FALSE)
-    if (length(result) > 1L) {
-      result <- as.list(result)
-      names(result) <- object$metrics_names
-    } else if (is_scalar(result)) {
+                                    return_dict = TRUE)
+    # if (length(result) > 1L) {
+    #   result <- as.list(result)
+    #   names(result) <- object$metrics_names
+    # } else
+    if (is_scalar(result)) {
       result <- result[[1L]]
     }
 
