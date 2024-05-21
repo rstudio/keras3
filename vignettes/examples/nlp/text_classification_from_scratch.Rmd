@@ -23,8 +23,7 @@ word splitting & indexing.
 ## Setup
 
 
-```r
-options(conflicts.policy = "strict")
+``` r
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(tfdatasets, exclude = "shape")
 library(keras3)
@@ -36,7 +35,7 @@ use_virtualenv("r-keras")
 Let's download the data and inspect its structure.
 
 
-```r
+``` r
 if (!dir.exists("datasets/aclImdb")) {
   dir.create("datasets")
   download.file(
@@ -52,7 +51,7 @@ if (!dir.exists("datasets/aclImdb")) {
 The `aclImdb` folder contains a `train` and `test` subfolder:
 
 
-```r
+``` r
 head(list.files("datasets/aclImdb/test"))
 ```
 
@@ -61,7 +60,7 @@ head(list.files("datasets/aclImdb/test"))
 ## [5] "urls_pos.txt"
 ```
 
-```r
+``` r
 head(list.files("datasets/aclImdb/train"))
 ```
 
@@ -74,18 +73,30 @@ The `aclImdb/train/pos` and `aclImdb/train/neg` folders contain text files, each
  which represents one review (either positive or negative):
 
 
-```r
-cat(readLines("datasets/aclImdb/train/pos/6248_7.txt"))
+``` r
+writeLines(strwrap(readLines("datasets/aclImdb/train/pos/4229_10.txt")))
 ```
 
 ```
-## Being an Austrian myself this has been a straight knock in my face. Fortunately I don't live nowhere near the place where this movie takes place but unfortunately it portrays everything that the rest of Austria hates about Viennese people (or people close to that region). And it is very easy to read that this is exactly the directors intention: to let your head sink into your hands and say "Oh my god, how can THAT be possible!". No, not with me, the (in my opinion) totally exaggerated uncensored swinger club scene is not necessary, I watch porn, sure, but in this context I was rather disgusted than put in the right context.<br /><br />This movie tells a story about how misled people who suffer from lack of education or bad company try to survive and live in a world of redundancy and boring horizons. A girl who is treated like a whore by her super-jealous boyfriend (and still keeps coming back), a female teacher who discovers her masochism by putting the life of her super-cruel "lover" on the line, an old couple who has an almost mathematical daily cycle (she is the "official replacement" of his ex wife), a couple that has just divorced and has the ex husband suffer under the acts of his former wife obviously having a relationship with her masseuse and finally a crazy hitchhiker who asks her drivers the most unusual questions and stretches their nerves by just being super-annoying.<br /><br />After having seen it you feel almost nothing. You're not even shocked, sad, depressed or feel like doing anything... Maybe that's why I gave it 7 points, it made me react in a way I never reacted before. If that's good or bad is up to you!
+## Don't waste time reading my review. Go out and see this
+## astonishingly good episode, which may very well be the best Columbo
+## ever written! Ruth Gordon is perfectly cast as the scheming yet
+## charming mystery writer who murders her son-in-law to avenge his
+## murder of her daughter. Columbo is his usual rumpled, befuddled and
+## far-cleverer-than-he-seems self, and this particular installment
+## features fantastic chemistry between Gordon and Falk. Ironically,
+## this was not written by heralded creators Levinson or Link yet is
+## possibly the densest, most thoroughly original and twist-laden
+## Columbo plot ever. Utterly satisfying in nearly every department
+## and overflowing with droll and witty dialogue and thinking. Truly
+## unexpected and inventive climax tops all. 10/10...seek this one out
+## on Netflix!
 ```
 
 We are only interested in the `pos` and `neg` subfolders, so let's delete the other subfolder that has text files in it:
 
 
-```r
+``` r
 unlink("datasets/aclImdb/train/unsup", recursive = TRUE)
 ```
 
@@ -109,7 +120,7 @@ random seed, or to pass `shuffle=FALSE`, so that the validation & training split
 get have no overlap.
 
 
-```r
+``` r
 batch_size <- 32
 
 raw_train_ds <- text_dataset_from_directory(
@@ -126,7 +137,7 @@ raw_train_ds <- text_dataset_from_directory(
 ## Using 20000 files for training.
 ```
 
-```r
+``` r
 raw_val_ds <- text_dataset_from_directory(
   "datasets/aclImdb/train",
   batch_size = batch_size,
@@ -141,7 +152,7 @@ raw_val_ds <- text_dataset_from_directory(
 ## Using 5000 files for validation.
 ```
 
-```r
+``` r
 raw_test_ds <- text_dataset_from_directory(
   "datasets/aclImdb/test",
   batch_size = batch_size
@@ -152,7 +163,7 @@ raw_test_ds <- text_dataset_from_directory(
 ## Found 25000 files belonging to 2 classes.
 ```
 
-```r
+``` r
 cat("Number of batches in raw_train_ds:", length(raw_train_ds), "\n")
 ```
 
@@ -160,7 +171,7 @@ cat("Number of batches in raw_train_ds:", length(raw_train_ds), "\n")
 ## Number of batches in raw_train_ds: 625
 ```
 
-```r
+``` r
 cat("Number of batches in raw_val_ds:", length(raw_val_ds), "\n")
 ```
 
@@ -168,7 +179,7 @@ cat("Number of batches in raw_val_ds:", length(raw_val_ds), "\n")
 ## Number of batches in raw_val_ds: 157
 ```
 
-```r
+``` r
 cat("Number of batches in raw_test_ds:", length(raw_test_ds), "\n")
 ```
 
@@ -179,7 +190,7 @@ cat("Number of batches in raw_test_ds:", length(raw_test_ds), "\n")
 Let's preview a few samples:
 
 
-```r
+``` r
 # It's important to take a look at your raw data to ensure your normalization
 # and tokenization will work as expected. We can do that by taking a few
 # examples from the training set and looking at them.
@@ -196,7 +207,7 @@ str(batch)
 ##  $ :<tf.Tensor: shape=(32), dtype=int32, numpy=…>
 ```
 
-```r
+``` r
 c(text_batch, label_batch) %<-% batch
 for (i in 1:3) {
   print(text_batch[i])
@@ -218,7 +229,7 @@ for (i in 1:3) {
 In particular, we remove `<br />` tags.
 
 
-```r
+``` r
 # Having looked at our data above, we see that the raw text contains HTML break
 # tags of the form '<br />'. These tags will not be removed by the default
 # standardizer (which doesn't strip HTML). Because of this, we will need to
@@ -269,7 +280,7 @@ There are 2 ways we can use our text vectorization layer:
  strings, like this:
 
 
-```r
+``` r
 text_input <- keras_input(shape = c(1L), dtype = "string", name = 'text')
 x <- text_input |>
   vectorize_layer() |>
@@ -289,7 +300,7 @@ strings as input, like in the code snippet for option 1 above. This can be done 
  training. We do this in the last section.
 
 
-```r
+``` r
 vectorize_text <- function(text, label) {
   text <- text |>
     op_expand_dims(-1) |>
@@ -319,7 +330,7 @@ test_ds <- test_ds |>
 We choose a simple 1D convnet starting with an `Embedding` layer.
 
 
-```r
+``` r
 # A integer input for vocab indices.
 inputs <- keras_input(shape = c(NA), dtype = "int64")
 
@@ -372,7 +383,7 @@ summary(model)
 ## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
-```r
+``` r
 # Compile the model with binary crossentropy loss and an adam optimizer.
 model |> compile(loss = "binary_crossentropy",
                  optimizer = "adam",
@@ -382,7 +393,7 @@ model |> compile(loss = "binary_crossentropy",
 ## Train the model
 
 
-```r
+``` r
 epochs <- 3
 
 # Fit the model using the train and test datasets.
@@ -391,30 +402,30 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 5s - 8ms/step - accuracy: 0.6944 - loss: 0.5248 - val_accuracy: 0.8624 - val_loss: 0.3150
+## 625/625 - 6s - 10ms/step - accuracy: 0.6909 - loss: 0.5300 - val_accuracy: 0.8658 - val_loss: 0.3229
 ## Epoch 2/3
-## 625/625 - 2s - 2ms/step - accuracy: 0.9046 - loss: 0.2403 - val_accuracy: 0.8730 - val_loss: 0.3135
+## 625/625 - 2s - 3ms/step - accuracy: 0.9047 - loss: 0.2412 - val_accuracy: 0.8742 - val_loss: 0.3202
 ## Epoch 3/3
-## 625/625 - 2s - 2ms/step - accuracy: 0.9524 - loss: 0.1275 - val_accuracy: 0.8716 - val_loss: 0.3424
+## 625/625 - 2s - 3ms/step - accuracy: 0.9573 - loss: 0.1237 - val_accuracy: 0.8704 - val_loss: 0.3551
 ```
 
 ## Evaluate the model on the test set
 
 
-```r
+``` r
 model |> evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8608 - loss: 0.3672
+## 782/782 - 1s - 2ms/step - accuracy: 0.8594 - loss: 0.3818
 ```
 
 ```
 ## $accuracy
-## [1] 0.86084
+## [1] 0.85936
 ##
 ## $loss
-## [1] 0.3671538
+## [1] 0.381799
 ```
 
 ## Make an end-to-end model
@@ -423,7 +434,7 @@ If you want to obtain a model capable of processing raw strings, you can simply
 create a new model (using the weights we just trained):
 
 
-```r
+``` r
 # A string input
 inputs <- keras_input(shape = c(1), dtype = "string")
 # Turn strings into vocab indices
@@ -444,12 +455,12 @@ end_to_end_model |> evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 3s - 4ms/step - accuracy: 0.8608 - loss: 0.0000e+00
+## 782/782 - 3s - 4ms/step - accuracy: 0.8594 - loss: 0.0000e+00
 ```
 
 ```
 ## $accuracy
-## [1] 0.86084
+## [1] 0.85936
 ##
 ## $loss
 ## [1] 0
