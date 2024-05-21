@@ -15,14 +15,14 @@ vignette: >
 ## Setup
 
 
-```r
+``` r
 library(keras3)
 ```
 
 ## Prepare the data
 
 
-```r
+``` r
 # Model / data parameters
 num_classes <- 10
 input_shape <- c(28, 28, 1)
@@ -45,7 +45,7 @@ dim(x_train)
 ## [1] 60000    28    28     1
 ```
 
-```r
+``` r
 dim(x_test)
 ```
 
@@ -53,7 +53,7 @@ dim(x_test)
 ## [1] 10000    28    28     1
 ```
 
-```r
+``` r
 # convert class vectors to binary class matrices
 y_train <- to_categorical(y_train, num_classes)
 y_test <- to_categorical(y_test, num_classes)
@@ -62,7 +62,7 @@ y_test <- to_categorical(y_test, num_classes)
 ## Build the model
 
 
-```r
+``` r
 model <- keras_model_sequential(input_shape = input_shape)
 model |>
   layer_conv_2d(filters = 32, kernel_size = c(3, 3), activation = "relu") |>
@@ -103,7 +103,7 @@ summary(model)
 ## Train the model
 
 
-```r
+``` r
 batch_size <- 128
 epochs <- 15
 
@@ -123,49 +123,49 @@ model |> fit(
 
 ```
 ## Epoch 1/15
-## 422/422 - 4s - 10ms/step - accuracy: 0.8895 - loss: 0.3636 - val_accuracy: 0.9787 - val_loss: 0.0793
+## 422/422 - 5s - 11ms/step - accuracy: 0.8895 - loss: 0.3636 - val_accuracy: 0.9787 - val_loss: 0.0792
 ## Epoch 2/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9666 - loss: 0.1112 - val_accuracy: 0.9852 - val_loss: 0.0550
+## 422/422 - 1s - 2ms/step - accuracy: 0.9664 - loss: 0.1111 - val_accuracy: 0.9850 - val_loss: 0.0550
 ## Epoch 3/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9743 - loss: 0.0824 - val_accuracy: 0.9882 - val_loss: 0.0439
+## 422/422 - 1s - 2ms/step - accuracy: 0.9743 - loss: 0.0824 - val_accuracy: 0.9882 - val_loss: 0.0441
 ## Epoch 4/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9786 - loss: 0.0695 - val_accuracy: 0.9897 - val_loss: 0.0399
+## 422/422 - 1s - 2ms/step - accuracy: 0.9786 - loss: 0.0695 - val_accuracy: 0.9895 - val_loss: 0.0400
 ## Epoch 5/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9803 - loss: 0.0626 - val_accuracy: 0.9900 - val_loss: 0.0354
+## 422/422 - 1s - 2ms/step - accuracy: 0.9804 - loss: 0.0626 - val_accuracy: 0.9900 - val_loss: 0.0355
 ## Epoch 6/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9823 - loss: 0.0557 - val_accuracy: 0.9912 - val_loss: 0.0332
+## 422/422 - 1s - 2ms/step - accuracy: 0.9824 - loss: 0.0558 - val_accuracy: 0.9912 - val_loss: 0.0333
 ## Epoch 7/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9837 - loss: 0.0499 - val_accuracy: 0.9918 - val_loss: 0.0310
+## 422/422 - 1s - 2ms/step - accuracy: 0.9835 - loss: 0.0501 - val_accuracy: 0.9918 - val_loss: 0.0310
 ## Epoch 8/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9849 - loss: 0.0481 - val_accuracy: 0.9920 - val_loss: 0.0310
+## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0479 - val_accuracy: 0.9922 - val_loss: 0.0310
 ## Epoch 9/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9861 - loss: 0.0444 - val_accuracy: 0.9917 - val_loss: 0.0302
+## 422/422 - 1s - 2ms/step - accuracy: 0.9862 - loss: 0.0444 - val_accuracy: 0.9920 - val_loss: 0.0300
 ## Epoch 10/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9863 - loss: 0.0439 - val_accuracy: 0.9913 - val_loss: 0.0297
+## 422/422 - 1s - 2ms/step - accuracy: 0.9863 - loss: 0.0438 - val_accuracy: 0.9912 - val_loss: 0.0294
 ## Epoch 11/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9872 - loss: 0.0393 - val_accuracy: 0.9917 - val_loss: 0.0306
+## 422/422 - 1s - 2ms/step - accuracy: 0.9873 - loss: 0.0394 - val_accuracy: 0.9913 - val_loss: 0.0304
 ## Epoch 12/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9874 - loss: 0.0372 - val_accuracy: 0.9922 - val_loss: 0.0289
+## 422/422 - 1s - 2ms/step - accuracy: 0.9875 - loss: 0.0371 - val_accuracy: 0.9927 - val_loss: 0.0287
 ## Epoch 13/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9888 - loss: 0.0344 - val_accuracy: 0.9918 - val_loss: 0.0293
+## 422/422 - 1s - 2ms/step - accuracy: 0.9891 - loss: 0.0346 - val_accuracy: 0.9920 - val_loss: 0.0292
 ## Epoch 14/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9890 - loss: 0.0343 - val_accuracy: 0.9918 - val_loss: 0.0282
+## 422/422 - 1s - 2ms/step - accuracy: 0.9891 - loss: 0.0343 - val_accuracy: 0.9922 - val_loss: 0.0284
 ## Epoch 15/15
-## 422/422 - 1s - 2ms/step - accuracy: 0.9894 - loss: 0.0322 - val_accuracy: 0.9915 - val_loss: 0.0284
+## 422/422 - 1s - 2ms/step - accuracy: 0.9895 - loss: 0.0320 - val_accuracy: 0.9920 - val_loss: 0.0282
 ```
 
 ## Evaluate the trained model
 
 
-```r
+``` r
 score <- model |> evaluate(x_test, y_test, verbose = 0)
 score
 ```
 
 ```
 ## $accuracy
-## [1] 0.9912
+## [1] 0.9914
 ##
 ## $loss
-## [1] 0.02448307
+## [1] 0.02402576
 ```

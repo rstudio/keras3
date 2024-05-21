@@ -40,7 +40,7 @@ industry workflows.
 
 
 
-```r
+``` r
 library(keras3)
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(tfdatasets, exclude = "shape")
@@ -90,7 +90,7 @@ in a multi-device or distributed workflow.
 Schematically, it looks like this:
 
 
-```r
+``` r
 # Create a MirroredStrategy.
 strategy <- tf$distribute$MirroredStrategy()
 cat(sprintf('Number of devices: %d\n', strategy$num_replicas_in_sync))
@@ -113,7 +113,7 @@ with(startegy$scope(), {
 Here's a simple end-to-end runnable example:
 
 
-```r
+``` r
 get_compiled_model <- function() {
   inputs <- keras_input(shape = 784)
   outputs <- inputs |>
@@ -173,7 +173,7 @@ cat(sprintf('Number of devices: %d\n', strategy$num_replicas_in_sync))
 ## Number of devices: 2
 ```
 
-```r
+``` r
 # Open a strategy scope.
 with(strategy$scope(), {
   # Everything that creates variables should be under the strategy scope.
@@ -193,10 +193,10 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 6s - 7ms/step - loss: 3.0622 - sparse_categorical_accuracy: 0.8615 - val_loss: 1.1367 - val_sparse_categorical_accuracy: 0.9006
+## 782/782 - 5s - 7ms/step - loss: 3.0622 - sparse_categorical_accuracy: 0.8615 - val_loss: 1.1367 - val_sparse_categorical_accuracy: 0.9006
 ## Epoch 2/2
 ## 782/782 - 3s - 4ms/step - loss: 0.5774 - sparse_categorical_accuracy: 0.9259 - val_loss: 0.6612 - val_sparse_categorical_accuracy: 0.9210
-## 157/157 - 0s - 3ms/step - loss: 0.6729 - sparse_categorical_accuracy: 0.9150
+## 157/157 - 0s - 2ms/step - loss: 0.6729 - sparse_categorical_accuracy: 0.9150
 ```
 
 ```
@@ -218,7 +218,7 @@ training from your saved model.
 Here's a simple example:
 
 
-```r
+``` r
 # Prepare a directory to store all the checkpoints.
 checkpoint_dir <- "./ckpt"
 if (!dir.exists(checkpoint_dir)) {
@@ -274,10 +274,10 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 6s - 7ms/step - loss: 2.9519 - sparse_categorical_accuracy: 0.8655 - val_loss: 1.3110 - val_sparse_categorical_accuracy: 0.8836
+## 782/782 - 4s - 6ms/step - loss: 2.9519 - sparse_categorical_accuracy: 0.8655 - val_loss: 1.3110 - val_sparse_categorical_accuracy: 0.8836
 ```
 
-```r
+``` r
 # Calling the same function again will resume from where we left off
 run_training(epochs = 1)
 ```

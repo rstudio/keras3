@@ -583,7 +583,7 @@ transformer |> fit(train_ds, epochs = epochs,
 ```
 
 ```
-## 1297/1297 - 56s - 43ms/step - accuracy: 0.7708 - loss: 1.5755 - val_accuracy: 0.7784 - val_loss: 1.3806
+## 1297/1297 - 58s - 44ms/step - accuracy: 0.7709 - loss: 1.5752 - val_accuracy: 0.7731 - val_loss: 1.4209
 ```
 
 

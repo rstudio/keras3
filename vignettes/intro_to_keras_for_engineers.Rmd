@@ -30,7 +30,7 @@ edit the string below to `"jax"` or `"torch"` and hit
 This entire guide is backend-agnostic.
 
 
-```r
+``` r
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(keras3)
 
@@ -49,7 +49,7 @@ to classify MNIST digits.
 Here's the data:
 
 
-```r
+``` r
 # Load the data and split it between train and test sets
 c(c(x_train, y_train), c(x_test, y_test)) %<-% keras3::dataset_mnist()
 
@@ -67,7 +67,7 @@ dim(x_train)
 ## [1] 60000    28    28     1
 ```
 
-```r
+``` r
 dim(x_test)
 ```
 
@@ -84,7 +84,7 @@ Different model-building options that Keras offers include:
 - [Writing your own models yourself via subclassing](making_new_layers_and_models_via_subclassing.html) (for advanced use cases)
 
 
-```r
+``` r
 # Model parameters
 num_classes <- 10
 input_shape <- c(28, 28, 1)
@@ -104,7 +104,7 @@ model |>
 Here's our model summary:
 
 
-```r
+``` r
 summary(model)
 ```
 
@@ -140,7 +140,7 @@ and the metrics to monitor. Note that with the JAX and TensorFlow backends,
 XLA compilation is turned on by default.
 
 
-```r
+``` r
 model |> compile(
   optimizer = "adam",
   loss = "sparse_categorical_crossentropy",
@@ -154,7 +154,7 @@ Let's train and evaluate the model. We'll set aside a validation split of 15%
 of the data during training to monitor generalization on unseen data.
 
 
-```r
+``` r
 batch_size <- 128
 epochs <- 10
 
@@ -174,26 +174,26 @@ model |> fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 7s - 18ms/step - acc: 0.7445 - loss: 0.7534 - val_acc: 0.9630 - val_loss: 0.1260
+## 399/399 - 6s - 16ms/step - acc: 0.7450 - loss: 0.7521 - val_acc: 0.9642 - val_loss: 0.1234
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9362 - loss: 0.2103 - val_acc: 0.9774 - val_loss: 0.0762
+## 399/399 - 2s - 5ms/step - acc: 0.9387 - loss: 0.2054 - val_acc: 0.9769 - val_loss: 0.0751
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9560 - loss: 0.1492 - val_acc: 0.9830 - val_loss: 0.0607
+## 399/399 - 2s - 5ms/step - acc: 0.9575 - loss: 0.1455 - val_acc: 0.9824 - val_loss: 0.0609
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9650 - loss: 0.1187 - val_acc: 0.9859 - val_loss: 0.0494
+## 399/399 - 2s - 5ms/step - acc: 0.9662 - loss: 0.1148 - val_acc: 0.9863 - val_loss: 0.0483
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9716 - loss: 0.1003 - val_acc: 0.9866 - val_loss: 0.0485
+## 399/399 - 2s - 5ms/step - acc: 0.9726 - loss: 0.0972 - val_acc: 0.9869 - val_loss: 0.0479
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9744 - loss: 0.0878 - val_acc: 0.9888 - val_loss: 0.0381
+## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0857 - val_acc: 0.9892 - val_loss: 0.0379
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9763 - loss: 0.0799 - val_acc: 0.9896 - val_loss: 0.0378
+## 399/399 - 2s - 5ms/step - acc: 0.9768 - loss: 0.0768 - val_acc: 0.9906 - val_loss: 0.0358
 ## Epoch 8/10
-## 399/399 - 2s - 5ms/step - acc: 0.9791 - loss: 0.0686 - val_acc: 0.9862 - val_loss: 0.0454
+## 399/399 - 2s - 5ms/step - acc: 0.9794 - loss: 0.0671 - val_acc: 0.9876 - val_loss: 0.0422
 ## Epoch 9/10
-## 399/399 - 2s - 5ms/step - acc: 0.9800 - loss: 0.0665 - val_acc: 0.9889 - val_loss: 0.0412
+## 399/399 - 2s - 5ms/step - acc: 0.9808 - loss: 0.0639 - val_acc: 0.9887 - val_loss: 0.0387
 ```
 
-```r
+``` r
 score <- model |> evaluate(x_test, y_test, verbose = 0)
 ```
 
@@ -201,14 +201,14 @@ During training, we were saving a model at the end of each epoch. You
 can also save the model in its latest state like this:
 
 
-```r
+``` r
 save_model(model, "final_model.keras", overwrite=TRUE)
 ```
 
 And reload it like this:
 
 
-```r
+``` r
 model <- load_model("final_model.keras")
 ```
 
@@ -216,15 +216,15 @@ model <- load_model("final_model.keras")
 Next, you can query predictions of class probabilities with `predict()`:
 
 
-```r
+``` r
 predictions <- model |> predict(x_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step
+## 313/313 - 0s - 1ms/step
 ```
 
-```r
+``` r
 dim(predictions)
 ```
 
@@ -249,7 +249,7 @@ or `op_binary_crossentropy`.
 Let's make a custom `Dense` layer that works with all backends:
 
 
-```r
+``` r
 layer_my_dense <- Layer(
   classname = "MyDense",
   initialize = function(units, activation = NULL, name = NULL, ...) {
@@ -286,7 +286,7 @@ Next, let's make a custom `Dropout` layer that relies on the `random_*`
 namespace:
 
 
-```r
+``` r
 layer_my_dropout <- Layer(
   "MyDropout",
   initialize = function(rate, name = NULL, seed = NULL, ...) {
@@ -307,7 +307,7 @@ layer_my_dropout <- Layer(
 Next, let's write a custom subclassed model that uses our two custom layers:
 
 
-```r
+``` r
 MyModel <- Model(
   "MyModel",
   initialize = function(num_classes, ...) {
@@ -337,7 +337,7 @@ MyModel <- Model(
 Let's compile it and fit it:
 
 
-```r
+``` r
 model <- MyModel(num_classes = 10)
 model |> compile(
   loss = loss_sparse_categorical_crossentropy(),
@@ -356,7 +356,7 @@ model |> fit(
 ```
 
 ```
-## 399/399 - 8s - 19ms/step - acc: 0.7347 - loss: 0.7746 - val_acc: 0.9247 - val_loss: 0.2487
+## 399/399 - 6s - 16ms/step - acc: 0.7356 - loss: 0.7726 - val_acc: 0.9301 - val_loss: 0.2358
 ```
 
 ## Training models on arbitrary data sources
@@ -407,7 +407,7 @@ They all work whether you're using TensorFlow, JAX, or PyTorch as your Keras bac
 Let's try this out with `tf_dataset`:
 
 
-```r
+``` r
 library(tfdatasets, exclude = "shape")
 
 train_dataset <- list(x_train, y_train) |>
@@ -433,7 +433,7 @@ model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 9s - 20ms/step - acc: 0.7534 - loss: 0.7366 - val_acc: 0.8981 - val_loss: 0.3329
+## 469/469 - 7s - 16ms/step - acc: 0.7542 - loss: 0.7342 - val_acc: 0.9026 - val_loss: 0.3192
 ```
 
 ## Further reading

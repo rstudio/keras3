@@ -58,7 +58,7 @@ Now, let's look at the details.
 ## Setup
 
 
-```r
+``` r
 library(keras3)
 ```
 
@@ -83,7 +83,7 @@ which uses the `.keras` extension.
 **Example:**
 
 
-```r
+``` r
 get_model <- function() {
   # Create a simple model.
   inputs <- keras_input(shape(32))
@@ -128,7 +128,7 @@ class method.
 Like this:
 
 
-```r
+``` r
 layer_custom <- Layer(
   "CustomLayer",
   initialize = function(sublayer, ...) {
@@ -179,7 +179,7 @@ function to demonstrate this.
 **Example:**
 
 
-```r
+``` r
 # Clear all previously registered custom objects
 set_custom_objects(clear = TRUE)
 ```
@@ -188,7 +188,7 @@ set_custom_objects(clear = TRUE)
 ## named list()
 ```
 
-```r
+``` r
 layer_custom <- Layer(
   "CustomLayer",
   initialize = function(self, factor) {
@@ -253,7 +253,7 @@ stopifnot(all.equal(
 #### Passing custom objects to `load_model()`
 
 
-```r
+``` r
 model <- get_model() |> train_model()
 
 # Calling `save_model('my_model.keras')` creates a zip archive `my_model.keras`.
@@ -283,7 +283,7 @@ the loading of our custom objects.
 **Example:**
 
 
-```r
+``` r
 model <- get_model() |> train_model()
 model |> save_model("custom_model.keras", overwrite = TRUE)
 
@@ -330,7 +330,7 @@ This is equivalent to getting the config then recreating the model from its conf
 **Example:**
 
 
-```r
+``` r
 new_model <- clone_model(model)
 ```
 
@@ -345,7 +345,7 @@ reconstruct the model or layer.
 **Layer example:**
 
 
-```r
+``` r
 layer <- layer_dense(, 3, activation="relu")
 layer_config <- get_config(layer)
 str(layer_config)
@@ -380,14 +380,14 @@ str(layer_config)
 Now let's reconstruct the layer using the `from_config()` method:
 
 
-```r
+``` r
 new_layer <- from_config(layer_config)
 ```
 
 **Sequential model example:**
 
 
-```r
+``` r
 model <- keras_model_sequential(input_shape = c(32)) |>
   layer_dense(1)
 config <- get_config(model)
@@ -397,7 +397,7 @@ new_model <- from_config(config)
 **Functional model example:**
 
 
-```r
+``` r
 inputs <- keras_input(c(32))
 outputs <- inputs |> layer_dense(1)
 model <- keras_model(inputs, outputs)
@@ -416,14 +416,14 @@ It is also specific to models, it isn't meant for layers.
 **Example:**
 
 
-```r
+``` r
 model <- keras_model_sequential(input_shape = c(32)) |>
   layer_dense(1)
 save_model_config(model, "model_config.json")
 new_model <- load_model_config("model_config.json")
 ```
 
-```r
+``` r
 unlink("model_config.json")
 ```
 
@@ -437,7 +437,7 @@ behind all `serialize()`/`deserialize()` calls in keras.
 **Example**:
 
 
-```r
+``` r
 my_reg <- regularizer_l1(0.005)
 config <- serialize_keras_object(my_reg)
 str(config)
@@ -464,7 +464,7 @@ comes from
 Now we can reconstruct the regularizer.
 
 
-```r
+``` r
 new_reg <- deserialize_keras_object(config)
 new_reg
 ```
@@ -498,7 +498,7 @@ Examples:
 ***Transferring weights from one layer to another, in memory***
 
 
-```r
+``` r
 create_layer <- function() {
   layer <- layer_dense(, 64, activation = "relu", name = "dense_2")
   layer$build(shape(NA, 784))
@@ -515,7 +515,7 @@ layer_2 |> set_weights(get_weights(layer_1))
 ***Transferring weights from one model to another model with a compatible architecture, in memory***
 
 
-```r
+``` r
 # Create a simple functional model
 inputs <- keras_input(shape=c(784), name="digits")
 outputs <- inputs |>
@@ -573,7 +573,7 @@ models can have compatible architectures even if there are extra/missing
 stateless layers.
 
 
-```r
+``` r
 input <- keras_input(shape = c(784), name = "digits")
 output <- input |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
@@ -605,7 +605,7 @@ The filename should end in `.weights.h5`.
 **Example:**
 
 
-```r
+``` r
 sequential_model = keras_model_sequential(input_shape = c(784),
                                           input_name = "digits") |>
   layer_dense(64, activation = "relu", name = "dense_1") |>
@@ -629,7 +629,7 @@ the desired weights/layers into a new model.
 **Example:**
 
 
-```r
+``` r
 create_functional_model <- function() {
   inputs <- keras_input(shape = c(784), name = "digits")
   outputs <- inputs |>
@@ -691,7 +691,7 @@ method.
 **Example:**
 
 
-```r
+``` r
 layer_my_dense <- register_keras_serializable(
   package = "MyLayers", name = "KernelMult",
   object = Layer(
@@ -766,7 +766,7 @@ str(config)
 ##  $ registered_name: chr "MyLayers>KernelMult"
 ```
 
-```r
+``` r
 new_layer <- deserialize_keras_object(config)
 new_layer
 ```
@@ -789,7 +789,7 @@ of a model where a `from_config` override is necessary.
 <!-- <a name="registration_example"></a> -->
 
 
-```r
+``` r
 `%||%` <- \(x, y) if(is.null(x)) y else x
 layer_custom_model <- register_keras_serializable(
   package = "ComplexModels",
@@ -848,7 +848,7 @@ above.
 **Example**:
 
 
-```r
+``` r
 layer <- layer_my_dense(
   units = 16,
   kernel_regularizer = regularizer_l1_l2(l1 = 1e-5, l2 = 1e-4),

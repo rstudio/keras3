@@ -13,7 +13,7 @@ vignette: >
 ## Setup
 
 
-```r
+``` r
 library(keras3)
 ```
 
@@ -67,7 +67,7 @@ Layers & models have three weight attributes:
 **Example: the `Dense` layer has 2 trainable weights (kernel & bias)**
 
 
-```r
+``` r
 layer <- layer_dense(units = 3)
 layer$build(shape(NULL, 4))  # Create the weights
 
@@ -78,7 +78,7 @@ length(layer$weights)
 ## [1] 2
 ```
 
-```r
+``` r
 length(layer$trainable_weights)
 ```
 
@@ -86,7 +86,7 @@ length(layer$trainable_weights)
 ## [1] 2
 ```
 
-```r
+``` r
 length(layer$non_trainable_weights)
 ```
 
@@ -104,7 +104,7 @@ To learn how to use non-trainable weights in your own custom layers, see the
  weights**
 
 
-```r
+``` r
 layer <- layer_batch_normalization()
 layer$build(shape(NA, 4))  # Create the weights
 
@@ -115,7 +115,7 @@ length(layer$weights)
 ## [1] 4
 ```
 
-```r
+``` r
 length(layer$trainable_weights)
 ```
 
@@ -123,7 +123,7 @@ length(layer$trainable_weights)
 ## [1] 2
 ```
 
-```r
+``` r
 length(layer$non_trainable_weights)
 ```
 
@@ -140,7 +140,7 @@ be updated during training (either when training with `fit()` or when training w
 **Example: setting `trainable` to `False`**
 
 
-```r
+``` r
 layer <- layer_dense(units = 3)
 layer$build(shape(NULL, 4))  # Create the weights
 layer$trainable <- FALSE  # Freeze the layer
@@ -152,7 +152,7 @@ length(layer$weights)
 ## [1] 2
 ```
 
-```r
+``` r
 length(layer$trainable_weights)
 ```
 
@@ -160,7 +160,7 @@ length(layer$trainable_weights)
 ## [1] 0
 ```
 
-```r
+``` r
 length(layer$non_trainable_weights)
 ```
 
@@ -172,7 +172,7 @@ When a trainable weight becomes non-trainable, its value is no longer updated du
 training.
 
 
-```r
+``` r
 # Make a model with 2 layers
 layer1 <- layer_dense(units = 3, activation = "relu")
 layer2 <- layer_dense(units = 3, activation = "sigmoid")
@@ -194,10 +194,10 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 1s - 567ms/step - loss: 2.1868
+## 1/1 - 1s - 544ms/step - loss: 2.1868
 ```
 
-```r
+``` r
 # Check that the weights of layer1 have not changed during training
 final_layer1_weights_values <- get_weights(layer1)
 
@@ -223,7 +223,7 @@ all children layers become non-trainable as well.
 **Example:**
 
 
-```r
+``` r
 inner_model <- keras_model_sequential(input_shape = 3) |>
   layer_dense(units = 3, activation = "relu") |>
   layer_dense(units = 3, activation = "relu")
@@ -241,7 +241,7 @@ inner_model$trainable  # All layers in `model` are now frozen
 ## [1] FALSE
 ```
 
-```r
+``` r
 inner_model$layers[[1]]$trainable  # `trainable` is propagated recursively
 ```
 
@@ -281,7 +281,7 @@ Here's what the first workflow looks like in Keras:
 First, instantiate a base model with pre-trained weights.
 
 
-```r
+``` r
 base_model <- application_xception(
   weights = 'imagenet', # Load weights pre-trained on ImageNet.
   input_shape = c(150, 150, 3),
@@ -292,14 +292,14 @@ base_model <- application_xception(
 Then, freeze the base model.
 
 
-```r
+``` r
 base_model$trainable <- FALSE
 ```
 
 Create a new model on top.
 
 
-```r
+``` r
 inputs <- keras_input(shape = c(150, 150, 3))
 # We make sure that the base_model is running in inference mode here,
 # by passing `training <- FALSE`. This is important for fine-tuning, as you will
@@ -317,7 +317,7 @@ model <- keras_model(inputs, outputs)
 Train the model on new data.
 
 
-```r
+``` r
 model |> compile(
   optimizer = optimizer_adam(),
   loss = loss_binary_crossentropy(from_logits = TRUE),
@@ -350,7 +350,7 @@ As a result, you are at risk of overfitting very quickly if you apply large weig
 This is how to implement fine-tuning of the whole base model:
 
 
-```r
+``` r
 # Unfreeze the base model
 base_model$trainable <- TRUE
 
@@ -417,7 +417,7 @@ dataset small, we will use 40% of the original training data (25,000 images) for
  training, 10% for validation, and 10% for testing.
 
 
-```r
+``` r
 # reticulate::py_install("tensorflow-datasets")
 tfds <- reticulate::import("tensorflow_datasets")
 
@@ -439,7 +439,7 @@ These are the first 9 images in the training dataset -- as you can see, they're 
 different sizes.
 
 
-```r
+``` r
 library(tfdatasets, exclude = "shape")
 
 par(mfrow = c(3, 3), mar = c(1,0,1.5,0))
@@ -483,7 +483,7 @@ of the model, when we create it.
 Let's resize images to 150x150:
 
 
-```r
+``` r
 resize_fn <- layer_resizing(width = 150, height = 150)
 resize_pair <- function(x, y) list(resize_fn(x), y)
 
@@ -501,7 +501,7 @@ helps expose the model to different aspects of the training data while slowing d
 overfitting.
 
 
-```r
+``` r
 data_augmentation <- keras_model_sequential() |>
   layer_random_flip("horizontal") |>
   layer_random_rotation(.1)
@@ -513,7 +513,7 @@ train_ds <- train_ds %>%
 Let's batch the data and use prefetching to optimize loading speed.
 
 
-```r
+``` r
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 batch_size <- 64
 
@@ -534,7 +534,7 @@ Let's visualize what the first image of the first batch looks like after various
  transformations:
 
 
-```r
+``` r
 batch <- train_ds |>
   dataset_take(1) |>
   as_iterator() |>
@@ -577,7 +577,7 @@ it runs in inference mode, so that batchnorm statistics don't get updated
 even after we unfreeze the base model for fine-tuning.
 
 
-```r
+``` r
 base_model <- application_xception(
   weights = "imagenet", # Load weights pre-trained on ImageNet.
   input_shape = c(150, 150, 3),
@@ -636,7 +636,7 @@ summary(model, show_trainable = TRUE)
 ## Train the top layer
 
 
-```r
+``` r
 model |> compile(
   optimizer = optimizer_adam(),
   loss = loss_binary_crossentropy(from_logits = TRUE),
@@ -648,7 +648,7 @@ model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ```
-## 146/146 - 45s - 307ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
+## 146/146 - 45s - 306ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -663,7 +663,7 @@ statistics. If they did, they would wreck havoc on the representations learned b
  model so far.
 
 
-```r
+``` r
 # Unfreeze the base_model. Note that it keeps running in inference mode
 # since we passed `training=FALSE` when calling it. This means that
 # the batchnorm layers will not update their batch statistics.
@@ -697,7 +697,7 @@ summary(model, show_trainable = TRUE)
 ## [1m Optimizer params: [0m[38;5;34m4,100[0m (16.02 KB)
 ```
 
-```r
+``` r
 model |> compile(
   optimizer = optimizer_adam(1e-5), # Low learning rate
   loss = loss_binary_crossentropy(from_logits = TRUE),
@@ -709,19 +709,19 @@ model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ```
-## 146/146 - 77s - 524ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
+## 146/146 - 82s - 564ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
 Let's evaluate the model on the test dataset:
 
 
-```r
+``` r
 model |> evaluate(test_ds)
 ```
 
 ```
-## 37/37 - 2s - 41ms/step - binary_accuracy: 0.9540 - loss: 0.1103
+## 37/37 - 2s - 42ms/step - binary_accuracy: 0.9540 - loss: 0.1103
 ```
 
 ```
@@ -729,5 +729,5 @@ model |> evaluate(test_ds)
 ## [1] 0.9539983
 ##
 ## $loss
-## [1] 0.1102595
+## [1] 0.1102556
 ```

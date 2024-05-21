@@ -39,21 +39,21 @@ This website provides documentation for the R interface to Keras. See the main K
 First, install the keras R package:
 
 
-```r
+``` r
 install.packages("keras3")
 ```
 
 or install the development version with:
 
 
-```r
+``` r
 remotes::install_github("rstudio/keras")
 ```
 
 The Keras R interface requires that a backend engine be installed. This is [TensorFlow](https://www.tensorflow.org/) by default.
 
 
-```r
+``` r
 keras3::install_keras(backend = "tensorflow")
 ```
 
@@ -72,7 +72,7 @@ The dataset also includes labels for each image, telling us which digit it is. F
 The MNIST dataset is included with Keras and can be accessed using the `dataset_mnist()` function. Here we load the dataset then create variables for our test and training data:
 
 
-```r
+``` r
 library(keras3)
 mnist <- dataset_mnist()
 x_train <- mnist$train$x
@@ -84,7 +84,7 @@ y_test <- mnist$test$y
 The `x` data is a 3-d array `(images, width, height)` of grayscale values. To prepare the data for training we convert the 3-d arrays into matrices by reshaping width and height into a single dimension (28x28 images are flattened into length 784 vectors). Then, we convert the grayscale values from integers ranging between 0 to 255 into floating point values ranging between 0 and 1:
 
 
-```r
+``` r
 # reshape
 x_train <- array_reshape(x_train, c(nrow(x_train), 784))
 x_test <- array_reshape(x_test, c(nrow(x_test), 784))
@@ -98,7 +98,7 @@ Note that we use the `array_reshape()` function rather than the `dim<-()` functi
 The `y` data is an integer vector with values ranging from 0 to 9. To prepare this data for training we one-hot encode the vectors into binary class matrices using the Keras `to_categorical()` function:
 
 
-```r
+``` r
 y_train <- to_categorical(y_train, 10)
 y_test <- to_categorical(y_test, 10)
 ```
@@ -110,7 +110,7 @@ The core data structure of Keras is a model, a way to organize layers. The simpl
 We begin by creating a sequential model and then adding layers using the pipe (`|>`) operator:
 
 
-```r
+``` r
 model <- keras_model_sequential(input_shape = c(784))
 model |>
   layer_dense(units = 256, activation = 'relu') |>
@@ -125,7 +125,7 @@ The `input_shape` argument to the first layer specifies the shape of the input d
 Use the `summary()` function to print the details of the model:
 
 
-```r
+``` r
 summary(model)
 ```
 
@@ -150,7 +150,7 @@ summary(model)
 ```
 
 
-```r
+``` r
 plot(model)
 ```
 
@@ -158,7 +158,7 @@ plot(model)
 Next, compile the model with appropriate loss function, optimizer, and metrics:
 
 
-```r
+``` r
 model |> compile(
   loss = 'categorical_crossentropy',
   optimizer = optimizer_rmsprop(),
@@ -171,7 +171,7 @@ model |> compile(
 Use the `fit()` function to train the model for 30 epochs using batches of 128 images:
 
 
-```r
+``` r
 history <- model |> fit(
   x_train, y_train,
   epochs = 30, batch_size = 128,
@@ -182,7 +182,7 @@ history <- model |> fit(
 The `history` object returned by `fit()` includes loss and accuracy metrics which we can plot:
 
 
-```r
+``` r
 plot(history)
 ```
 
@@ -191,26 +191,26 @@ plot(history)
 Evaluate the model's performance on the test data:
 
 
-```r
+``` r
 model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9808 - loss: 0.0869
+## 313/313 - 1s - 2ms/step - accuracy: 0.9814 - loss: 0.0844
 ```
 
 ```
 ## $accuracy
-## [1] 0.9808
+## [1] 0.9814
 ##
 ## $loss
-## [1] 0.08689082
+## [1] 0.08441389
 ```
 
 Generate predictions on new data:
 
 
-```r
+``` r
 probs <- model |> predict(x_test)
 ```
 
@@ -218,7 +218,7 @@ probs <- model |> predict(x_test)
 ## 313/313 - 0s - 1ms/step
 ```
 
-```r
+``` r
 max.col(probs) - 1L
 ```
 
@@ -233,7 +233,7 @@ Keras provides a vocabulary for building deep learning models that is simple, el
 
 ### Deep Learning with R Book
 
-If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](https://www.manning.com/books/deep-learning-with-r-second-edition) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
+If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R, 2nd Edition](https://rstd.io/dlwr-2e) book from Manning. This book is a collaboration between François Chollet, the creator of (Python) Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, the maintainer of the R interface to Keras.
 
 The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras.
 
