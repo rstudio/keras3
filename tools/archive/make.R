@@ -12,12 +12,6 @@ if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 ## Implemented but Questioning  ----
 
 
-# TODO: pack_x_y_sample_weight() to return an unconverted py tuple?
-#       Marked @internal for now
-#       or just remove pack_x_y_sample_weight/unpack_x_y_sample_weight from the namespace?
-#       No real utility in R since zeallot supports:
-#         c(x, y = NULL, sample_weight = NULL) %<-% data
-
 # TODO: remove usage of all.equal(<pyobj>, <pyobj>) in examples/code,
 #       export a better way.
 #       Exported all.equal S3 methods for KerasTensor and KerasVariable

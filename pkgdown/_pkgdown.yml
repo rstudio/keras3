@@ -1,8 +1,8 @@
 
 # destination: website
 
-development:
-  mode: auto
+# development:
+#   mode: auto
 
 url: https://keras.posit.co
 
@@ -414,8 +414,8 @@ reference:
     - zip_lists
     - get_file
     - split_dataset
-    - pack_x_y_sample_weight
-    - unpack_x_y_sample_weight
+    # - pack_x_y_sample_weight
+    # - unpack_x_y_sample_weight
 
   - subtitle: "Serialization Utils"
   - contents:

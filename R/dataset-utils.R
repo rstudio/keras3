@@ -29,7 +29,8 @@
 #' @param sample_weight
 #' Sample weight for each element.
 #'
-#' @export
+#' @noRd
+# @export
 #' @family data utils
 #' @family utils
 # @seealso
@@ -75,7 +76,10 @@ function (x, y = NULL, sample_weight = NULL)
 #' @param data
 #' A list of the form `(x)`, `(x, y)`, or `(x, y, sample_weight)`.
 #'
-#' @export
+#' @noRd
+# This is removed because it has no real purpose in R. Use this instead:
+# c(x, y = NULL, sample_weight = NULL) %<-% data
+#  @export
 #' @family data utils
 #' @family utils
 #' @keywords internal
