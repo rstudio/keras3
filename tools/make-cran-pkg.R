@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 
 devtools::build(manual = TRUE)
 
