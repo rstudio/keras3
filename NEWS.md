@@ -1,3 +1,5 @@
+# keras3 (development version)
+
 # keras3 1.0.0
 
 - Chains of `layer_*` calls with `|>` now instantiate layers in the
