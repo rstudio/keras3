@@ -1,5 +1,8 @@
 # keras3 (development version)
 
+- Fixed issue where GPUs would not be found when running on Windows under WSL Linux.
+  (reported in #1456, fixed in #1459)
+
 # keras3 1.0.0
 
 - Chains of `layer_*` calls with `|>` now instantiate layers in the
