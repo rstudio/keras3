@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
       <ul class="navbar-nav"><li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/rstudio/keras/" aria-label="github">
+  <a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="github">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -66,7 +66,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Reload a Keras model/layer that was saved via <code>export_savedmodel()</code>.</h1>
-      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras/blob/HEAD/R/model-persistence.R" class="external-link"><code>R/model-persistence.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/R/model-persistence.R" class="external-link"><code>R/model-persistence.R</code></a></small>
       <div class="d-none name"><code>layer_tfsm.Rd</code></div>
     </div>
 
@@ -143,8 +143,8 @@ returned, invisibly.</p></li>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">## Output Type:</span></span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)</span></span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">## Captures:</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">##   128695884597376: TensorSpec(shape=(), dtype=tf.resource, name=None)</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">##   128695884598080: TensorSpec(shape=(), dtype=tf.resource, name=None)</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">##   139431551250176: TensorSpec(shape=(), dtype=tf.resource, name=None)</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">##   139431551250528: TensorSpec(shape=(), dtype=tf.resource, name=None)</span></span>
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">reloaded_layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_tfsm.html">layer_tfsm</a></span><span class="op">(</span>filepath <span class="op">=</span> <span class="st">"path/to/artifact"</span><span class="op">)</span></span>
 <span><span class="va">input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">784</span><span class="op">)</span><span class="op">)</span></span>

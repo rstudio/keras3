@@ -16,7 +16,7 @@
 #'   [Jax](https://github.com/google/jax),
 #'   or [PyTorch](https://github.com/pytorch/pytorch).
 #'
-#' See the package website at <https://keras.posit.co> for complete documentation.
+#' See the package website at <https://keras3.posit.co> for complete documentation.
 #'
 #' @importFrom reticulate
 #'   import import_from_path py_install

@@ -26,22 +26,22 @@ Turing machine.
 or \href{https://github.com/pytorch/pytorch}{PyTorch}.
 }
 
-See the package website at \url{https://keras.posit.co} for complete documentation.
+See the package website at \url{https://keras3.posit.co} for complete documentation.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://keras.posit.co/}
-  \item \url{https://github.com/rstudio/keras}
-  \item Report bugs at \url{https://github.com/rstudio/keras/issues}
+  \item \url{https://keras3.posit.co/}
+  \item \url{https://github.com/rstudio/keras3}
+  \item Report bugs at \url{https://github.com/rstudio/keras3/issues}
 }
 
 
 Useful links:
 \itemize{
-  \item \url{https://keras.posit.co/}
-  \item \url{https://github.com/rstudio/keras}
-  \item Report bugs at \url{https://github.com/rstudio/keras/issues}
+  \item \url{https://keras3.posit.co/}
+  \item \url{https://github.com/rstudio/keras3}
+  \item Report bugs at \url{https://github.com/rstudio/keras3/issues}
 }
 
 }
