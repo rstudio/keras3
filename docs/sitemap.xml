@@ -1,2022 +1,2022 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://keras.posit.co/404.html</loc>
+    <loc>https://keras3.posit.co/404.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/LICENSE-text.html</loc>
+    <loc>https://keras3.posit.co/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/custom_train_step_in_jax.html</loc>
+    <loc>https://keras3.posit.co/articles/custom_train_step_in_jax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/custom_train_step_in_tensorflow.html</loc>
+    <loc>https://keras3.posit.co/articles/custom_train_step_in_tensorflow.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/custom_train_step_in_torch.html</loc>
+    <loc>https://keras3.posit.co/articles/custom_train_step_in_torch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/customizing_saving_and_serialization.html</loc>
+    <loc>https://keras3.posit.co/articles/customizing_saving_and_serialization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/distributed_training_with_jax.html</loc>
+    <loc>https://keras3.posit.co/articles/distributed_training_with_jax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/distributed_training_with_tensorflow.html</loc>
+    <loc>https://keras3.posit.co/articles/distributed_training_with_tensorflow.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/distributed_training_with_torch.html</loc>
+    <loc>https://keras3.posit.co/articles/distributed_training_with_torch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/distribution.html</loc>
+    <loc>https://keras3.posit.co/articles/distribution.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/autoencoder.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/autoencoder.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/index.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/index.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/mnist_convnet.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/mnist_convnet.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/nlp/neural_machine_translation_with_transformer.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/nlp/neural_machine_translation_with_transformer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/nlp/text_classification_from_scratch.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/nlp/text_classification_from_scratch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/oxford_pets_image_segmentation.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/oxford_pets_image_segmentation.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/structured_data/imbalanced_classification.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/structured_data/imbalanced_classification.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/structured_data/structured_data_classification_with_feature_space.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/structured_data/structured_data_classification_with_feature_space.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/structured_data_classification_with_feature_space.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/structured_data_classification_with_feature_space.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/text_classification_from_scratch.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/text_classification_from_scratch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries/timeseries_anomaly_detection.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/timeseries/timeseries_anomaly_detection.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/timeseries/timeseries_classification_from_scratch.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/timeseries/timeseries_classification_from_scratch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/vision/autoencoder.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/vision/autoencoder.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/vision/mnist_convnet.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/vision/mnist_convnet.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/vision/mnist_siamese_graph.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/vision/mnist_siamese_graph.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/examples/vision/oxford_pets_image_segmentation.html</loc>
+    <loc>https://keras3.posit.co/articles/examples/vision/oxford_pets_image_segmentation.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/functional_api.html</loc>
+    <loc>https://keras3.posit.co/articles/functional_api.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/getting_started.html</loc>
+    <loc>https://keras3.posit.co/articles/getting_started.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/index.html</loc>
+    <loc>https://keras3.posit.co/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/intro_to_keras_for_engineers.html</loc>
+    <loc>https://keras3.posit.co/articles/intro_to_keras_for_engineers.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/intro_to_keras_for_researchers.html</loc>
+    <loc>https://keras3.posit.co/articles/intro_to_keras_for_researchers.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/making_new_layers_and_models_via_subclassing.html</loc>
+    <loc>https://keras3.posit.co/articles/making_new_layers_and_models_via_subclassing.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/sequential_model.html</loc>
+    <loc>https://keras3.posit.co/articles/sequential_model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/serialization_and_saving.html</loc>
+    <loc>https://keras3.posit.co/articles/serialization_and_saving.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/training_with_built_in_methods.html</loc>
+    <loc>https://keras3.posit.co/articles/training_with_built_in_methods.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/transfer_learning.html</loc>
+    <loc>https://keras3.posit.co/articles/transfer_learning.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/understanding_masking_and_padding.html</loc>
+    <loc>https://keras3.posit.co/articles/understanding_masking_and_padding.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/writing_a_custom_training_loop_in_jax.html</loc>
+    <loc>https://keras3.posit.co/articles/writing_a_custom_training_loop_in_jax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/writing_a_custom_training_loop_in_tensorflow.html</loc>
+    <loc>https://keras3.posit.co/articles/writing_a_custom_training_loop_in_tensorflow.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/writing_a_custom_training_loop_in_torch.html</loc>
+    <loc>https://keras3.posit.co/articles/writing_a_custom_training_loop_in_torch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/writing_a_training_loop_from_scratch.html</loc>
+    <loc>https://keras3.posit.co/articles/writing_a_training_loop_from_scratch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/articles/writing_your_own_callbacks.html</loc>
+    <loc>https://keras3.posit.co/articles/writing_your_own_callbacks.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/authors.html</loc>
+    <loc>https://keras3.posit.co/authors.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/index.html</loc>
+    <loc>https://keras3.posit.co/index.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/news/index.html</loc>
+    <loc>https://keras3.posit.co/news/index.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/Callback.html</loc>
+    <loc>https://keras3.posit.co/reference/Callback.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/Constraint.html</loc>
+    <loc>https://keras3.posit.co/reference/Constraint.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/Layer.html</loc>
+    <loc>https://keras3.posit.co/reference/Layer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/LearningRateSchedule.html</loc>
+    <loc>https://keras3.posit.co/reference/LearningRateSchedule.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/Loss.html</loc>
+    <loc>https://keras3.posit.co/reference/Loss.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/Metric.html</loc>
+    <loc>https://keras3.posit.co/reference/Metric.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/Model.html</loc>
+    <loc>https://keras3.posit.co/reference/Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_elu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_elu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_exponential.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_exponential.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_gelu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_gelu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_hard_sigmoid.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_hard_sigmoid.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_hard_silu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_hard_silu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_leaky_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_leaky_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_linear.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_linear.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_log_softmax.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_log_softmax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_mish.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_mish.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_relu6.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_relu6.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_selu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_selu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_sigmoid.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_sigmoid.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_silu.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_silu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_softmax.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_softmax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_softplus.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_softplus.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_softsign.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_softsign.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/activation_tanh.html</loc>
+    <loc>https://keras3.posit.co/reference/activation_tanh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/active_property.html</loc>
+    <loc>https://keras3.posit.co/reference/active_property.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/adapt.html</loc>
+    <loc>https://keras3.posit.co/reference/adapt.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_convnext_base.html</loc>
+    <loc>https://keras3.posit.co/reference/application_convnext_base.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_convnext_large.html</loc>
+    <loc>https://keras3.posit.co/reference/application_convnext_large.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_convnext_small.html</loc>
+    <loc>https://keras3.posit.co/reference/application_convnext_small.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_convnext_tiny.html</loc>
+    <loc>https://keras3.posit.co/reference/application_convnext_tiny.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_convnext_xlarge.html</loc>
+    <loc>https://keras3.posit.co/reference/application_convnext_xlarge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_densenet121.html</loc>
+    <loc>https://keras3.posit.co/reference/application_densenet121.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_densenet169.html</loc>
+    <loc>https://keras3.posit.co/reference/application_densenet169.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_densenet201.html</loc>
+    <loc>https://keras3.posit.co/reference/application_densenet201.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b0.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b0.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b1.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b1.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b3.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b3.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b4.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b4.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b5.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b5.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b6.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b6.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_b7.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_b7.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2b0.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2b0.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2b1.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2b1.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2b2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2b2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2b3.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2b3.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2l.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2l.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2m.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2m.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_efficientnet_v2s.html</loc>
+    <loc>https://keras3.posit.co/reference/application_efficientnet_v2s.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_inception_resnet_v2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_inception_resnet_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_inception_v3.html</loc>
+    <loc>https://keras3.posit.co/reference/application_inception_v3.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_mobilenet.html</loc>
+    <loc>https://keras3.posit.co/reference/application_mobilenet.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_mobilenet_v2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_mobilenet_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_mobilenet_v3_large.html</loc>
+    <loc>https://keras3.posit.co/reference/application_mobilenet_v3_large.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_mobilenet_v3_small.html</loc>
+    <loc>https://keras3.posit.co/reference/application_mobilenet_v3_small.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_nasnetlarge.html</loc>
+    <loc>https://keras3.posit.co/reference/application_nasnetlarge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_nasnetmobile.html</loc>
+    <loc>https://keras3.posit.co/reference/application_nasnetmobile.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_resnet101.html</loc>
+    <loc>https://keras3.posit.co/reference/application_resnet101.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_resnet101_v2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_resnet101_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_resnet152.html</loc>
+    <loc>https://keras3.posit.co/reference/application_resnet152.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_resnet152_v2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_resnet152_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_resnet50.html</loc>
+    <loc>https://keras3.posit.co/reference/application_resnet50.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_resnet50_v2.html</loc>
+    <loc>https://keras3.posit.co/reference/application_resnet50_v2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_vgg16.html</loc>
+    <loc>https://keras3.posit.co/reference/application_vgg16.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_vgg19.html</loc>
+    <loc>https://keras3.posit.co/reference/application_vgg19.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/application_xception.html</loc>
+    <loc>https://keras3.posit.co/reference/application_xception.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/audio_dataset_from_directory.html</loc>
+    <loc>https://keras3.posit.co/reference/audio_dataset_from_directory.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/bidirectional.html</loc>
+    <loc>https://keras3.posit.co/reference/bidirectional.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_backup_and_restore.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_backup_and_restore.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_csv_logger.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_csv_logger.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_early_stopping.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_early_stopping.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_lambda.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_lambda.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_learning_rate_scheduler.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_learning_rate_scheduler.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_model_checkpoint.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_model_checkpoint.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_reduce_lr_on_plateau.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_reduce_lr_on_plateau.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_remote_monitor.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_remote_monitor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_swap_ema_weights.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_swap_ema_weights.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_tensorboard.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_tensorboard.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/callback_terminate_on_nan.html</loc>
+    <loc>https://keras3.posit.co/reference/callback_terminate_on_nan.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/clear_session.html</loc>
+    <loc>https://keras3.posit.co/reference/clear_session.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/clone_model.html</loc>
+    <loc>https://keras3.posit.co/reference/clone_model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/compile.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/compile.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_backend.html</loc>
+    <loc>https://keras3.posit.co/reference/config_backend.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_disable_interactive_logging.html</loc>
+    <loc>https://keras3.posit.co/reference/config_disable_interactive_logging.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_disable_traceback_filtering.html</loc>
+    <loc>https://keras3.posit.co/reference/config_disable_traceback_filtering.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_dtype_policy.html</loc>
+    <loc>https://keras3.posit.co/reference/config_dtype_policy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_enable_interactive_logging.html</loc>
+    <loc>https://keras3.posit.co/reference/config_enable_interactive_logging.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_enable_traceback_filtering.html</loc>
+    <loc>https://keras3.posit.co/reference/config_enable_traceback_filtering.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_enable_unsafe_deserialization.html</loc>
+    <loc>https://keras3.posit.co/reference/config_enable_unsafe_deserialization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_epsilon.html</loc>
+    <loc>https://keras3.posit.co/reference/config_epsilon.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_floatx.html</loc>
+    <loc>https://keras3.posit.co/reference/config_floatx.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_image_data_format.html</loc>
+    <loc>https://keras3.posit.co/reference/config_image_data_format.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_is_interactive_logging_enabled.html</loc>
+    <loc>https://keras3.posit.co/reference/config_is_interactive_logging_enabled.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_is_traceback_filtering_enabled.html</loc>
+    <loc>https://keras3.posit.co/reference/config_is_traceback_filtering_enabled.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_set_backend.html</loc>
+    <loc>https://keras3.posit.co/reference/config_set_backend.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_set_dtype_policy.html</loc>
+    <loc>https://keras3.posit.co/reference/config_set_dtype_policy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_set_epsilon.html</loc>
+    <loc>https://keras3.posit.co/reference/config_set_epsilon.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_set_floatx.html</loc>
+    <loc>https://keras3.posit.co/reference/config_set_floatx.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/config_set_image_data_format.html</loc>
+    <loc>https://keras3.posit.co/reference/config_set_image_data_format.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/constraint_maxnorm.html</loc>
+    <loc>https://keras3.posit.co/reference/constraint_maxnorm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/constraint_minmaxnorm.html</loc>
+    <loc>https://keras3.posit.co/reference/constraint_minmaxnorm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/constraint_nonneg.html</loc>
+    <loc>https://keras3.posit.co/reference/constraint_nonneg.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/constraint_unitnorm.html</loc>
+    <loc>https://keras3.posit.co/reference/constraint_unitnorm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/count_params.html</loc>
+    <loc>https://keras3.posit.co/reference/count_params.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/custom_metric.html</loc>
+    <loc>https://keras3.posit.co/reference/custom_metric.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_boston_housing.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_boston_housing.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_cifar10.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_cifar10.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_cifar100.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_cifar100.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_fashion_mnist.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_fashion_mnist.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_imdb.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_imdb.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_mnist.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_mnist.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/dataset_reuters.html</loc>
+    <loc>https://keras3.posit.co/reference/dataset_reuters.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/deserialize_keras_object.html</loc>
+    <loc>https://keras3.posit.co/reference/deserialize_keras_object.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/evaluate.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/evaluate.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/export_savedmodel.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/export_savedmodel.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/fit.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/fit.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/freeze_weights.html</loc>
+    <loc>https://keras3.posit.co/reference/freeze_weights.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_config.html</loc>
+    <loc>https://keras3.posit.co/reference/get_config.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_custom_objects.html</loc>
+    <loc>https://keras3.posit.co/reference/get_custom_objects.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_file.html</loc>
+    <loc>https://keras3.posit.co/reference/get_file.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_layer.html</loc>
+    <loc>https://keras3.posit.co/reference/get_layer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_registered_name.html</loc>
+    <loc>https://keras3.posit.co/reference/get_registered_name.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_registered_object.html</loc>
+    <loc>https://keras3.posit.co/reference/get_registered_object.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_source_inputs.html</loc>
+    <loc>https://keras3.posit.co/reference/get_source_inputs.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/get_weights.html</loc>
+    <loc>https://keras3.posit.co/reference/get_weights.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/grapes-py_class-grapes.html</loc>
+    <loc>https://keras3.posit.co/reference/grapes-py_class-grapes.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/grapes-set-active-grapes.html</loc>
+    <loc>https://keras3.posit.co/reference/grapes-set-active-grapes.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/image_array_save.html</loc>
+    <loc>https://keras3.posit.co/reference/image_array_save.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/image_dataset_from_directory.html</loc>
+    <loc>https://keras3.posit.co/reference/image_dataset_from_directory.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/image_from_array.html</loc>
+    <loc>https://keras3.posit.co/reference/image_from_array.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/image_load.html</loc>
+    <loc>https://keras3.posit.co/reference/image_load.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/image_smart_resize.html</loc>
+    <loc>https://keras3.posit.co/reference/image_smart_resize.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/image_to_array.html</loc>
+    <loc>https://keras3.posit.co/reference/image_to_array.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/imagenet_decode_predictions.html</loc>
+    <loc>https://keras3.posit.co/reference/imagenet_decode_predictions.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/imagenet_preprocess_input.html</loc>
+    <loc>https://keras3.posit.co/reference/imagenet_preprocess_input.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/index.html</loc>
+    <loc>https://keras3.posit.co/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_constant.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_constant.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_glorot_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_glorot_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_glorot_uniform.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_glorot_uniform.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_he_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_he_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_he_uniform.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_he_uniform.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_identity.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_identity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_lecun_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_lecun_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_lecun_uniform.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_lecun_uniform.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_ones.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_ones.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_orthogonal.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_orthogonal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_random_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_random_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_random_uniform.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_random_uniform.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_truncated_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_truncated_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_variance_scaling.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_variance_scaling.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/initializer_zeros.html</loc>
+    <loc>https://keras3.posit.co/reference/initializer_zeros.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/install_keras.html</loc>
+    <loc>https://keras3.posit.co/reference/install_keras.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/keras.html</loc>
+    <loc>https://keras3.posit.co/reference/keras.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/keras3-package.html</loc>
+    <loc>https://keras3.posit.co/reference/keras3-package.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/keras_input.html</loc>
+    <loc>https://keras3.posit.co/reference/keras_input.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/keras_model.html</loc>
+    <loc>https://keras3.posit.co/reference/keras_model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/keras_model_sequential.html</loc>
+    <loc>https://keras3.posit.co/reference/keras_model_sequential.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activation.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation_elu.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activation_elu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation_leaky_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activation_leaky_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation_parametric_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activation_parametric_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activation_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activation_softmax.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activation_softmax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_activity_regularization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_activity_regularization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_add.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_add.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_additive_attention.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_additive_attention.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_alpha_dropout.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_alpha_dropout.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_attention.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_attention.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_average.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_average.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_average_pooling_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_average_pooling_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_average_pooling_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_average_pooling_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_average_pooling_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_average_pooling_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_batch_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_batch_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_bidirectional.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_bidirectional.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_category_encoding.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_category_encoding.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_center_crop.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_center_crop.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_concatenate.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_concatenate.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_1d_transpose.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_1d_transpose.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_2d_transpose.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_2d_transpose.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_3d_transpose.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_3d_transpose.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_lstm_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_lstm_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_lstm_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_lstm_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_conv_lstm_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_conv_lstm_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_cropping_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_cropping_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_cropping_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_cropping_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_cropping_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_cropping_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_dense.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_dense.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_depthwise_conv_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_depthwise_conv_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_depthwise_conv_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_depthwise_conv_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_discretization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_discretization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_dot.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_dot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_dropout.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_dropout.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_einsum_dense.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_einsum_dense.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_embedding.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_embedding.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_feature_space.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_feature_space.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_flatten.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_flatten.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_flax_module_wrapper.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_flax_module_wrapper.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_gaussian_dropout.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_gaussian_dropout.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_gaussian_noise.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_gaussian_noise.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_global_average_pooling_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_global_average_pooling_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_global_average_pooling_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_global_average_pooling_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_global_average_pooling_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_global_average_pooling_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_global_max_pooling_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_global_max_pooling_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_global_max_pooling_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_global_max_pooling_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_global_max_pooling_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_global_max_pooling_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_group_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_group_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_group_query_attention.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_group_query_attention.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_gru.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_gru.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_hashed_crossing.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_hashed_crossing.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_hashing.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_hashing.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_identity.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_identity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_input.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_input.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_integer_lookup.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_integer_lookup.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_jax_model_wrapper.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_jax_model_wrapper.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_lambda.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_lambda.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_layer_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_layer_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_lstm.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_lstm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_masking.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_masking.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_max_pooling_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_max_pooling_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_max_pooling_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_max_pooling_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_max_pooling_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_max_pooling_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_maximum.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_maximum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_mel_spectrogram.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_mel_spectrogram.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_minimum.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_minimum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_multi_head_attention.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_multi_head_attention.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_multiply.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_multiply.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_permute.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_permute.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_brightness.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_brightness.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_contrast.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_contrast.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_crop.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_crop.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_flip.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_flip.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_rotation.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_rotation.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_translation.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_translation.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_random_zoom.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_random_zoom.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_repeat_vector.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_repeat_vector.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_rescaling.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_rescaling.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_reshape.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_reshape.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_resizing.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_resizing.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_rnn.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_rnn.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_separable_conv_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_separable_conv_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_separable_conv_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_separable_conv_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_simple_rnn.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_simple_rnn.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_spatial_dropout_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_spatial_dropout_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_spatial_dropout_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_spatial_dropout_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_spatial_dropout_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_spatial_dropout_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_spectral_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_spectral_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_string_lookup.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_string_lookup.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_subtract.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_subtract.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_text_vectorization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_text_vectorization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_tfsm.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_tfsm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_time_distributed.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_time_distributed.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_torch_module_wrapper.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_torch_module_wrapper.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_unit_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_unit_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_upsampling_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_upsampling_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_upsampling_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_upsampling_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_upsampling_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_upsampling_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_zero_padding_1d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_zero_padding_1d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_zero_padding_2d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_zero_padding_2d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/layer_zero_padding_3d.html</loc>
+    <loc>https://keras3.posit.co/reference/layer_zero_padding_3d.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/learning_rate_schedule_cosine_decay.html</loc>
+    <loc>https://keras3.posit.co/reference/learning_rate_schedule_cosine_decay.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/learning_rate_schedule_cosine_decay_restarts.html</loc>
+    <loc>https://keras3.posit.co/reference/learning_rate_schedule_cosine_decay_restarts.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/learning_rate_schedule_exponential_decay.html</loc>
+    <loc>https://keras3.posit.co/reference/learning_rate_schedule_exponential_decay.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/learning_rate_schedule_inverse_time_decay.html</loc>
+    <loc>https://keras3.posit.co/reference/learning_rate_schedule_inverse_time_decay.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/learning_rate_schedule_piecewise_constant_decay.html</loc>
+    <loc>https://keras3.posit.co/reference/learning_rate_schedule_piecewise_constant_decay.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/learning_rate_schedule_polynomial_decay.html</loc>
+    <loc>https://keras3.posit.co/reference/learning_rate_schedule_polynomial_decay.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/load_model.html</loc>
+    <loc>https://keras3.posit.co/reference/load_model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/load_model_weights.html</loc>
+    <loc>https://keras3.posit.co/reference/load_model_weights.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_binary_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_binary_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_binary_focal_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_binary_focal_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_categorical_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_categorical_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_categorical_focal_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_categorical_focal_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_categorical_hinge.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_categorical_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_cosine_similarity.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_cosine_similarity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_ctc.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_ctc.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_dice.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_dice.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_hinge.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_huber.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_huber.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_kl_divergence.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_kl_divergence.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_log_cosh.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_log_cosh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_mean_absolute_error.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_mean_absolute_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_mean_absolute_percentage_error.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_mean_absolute_percentage_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_mean_squared_error.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_mean_squared_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_mean_squared_logarithmic_error.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_mean_squared_logarithmic_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_poisson.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_poisson.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_sparse_categorical_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_sparse_categorical_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_squared_hinge.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_squared_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/loss_tversky.html</loc>
+    <loc>https://keras3.posit.co/reference/loss_tversky.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/mark_active.html</loc>
+    <loc>https://keras3.posit.co/reference/mark_active.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_auc.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_auc.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_binary_accuracy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_binary_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_binary_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_binary_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_binary_focal_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_binary_focal_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_binary_iou.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_binary_iou.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_categorical_accuracy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_categorical_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_categorical_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_categorical_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_categorical_focal_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_categorical_focal_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_categorical_hinge.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_categorical_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_cosine_similarity.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_cosine_similarity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_f1_score.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_f1_score.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_false_negatives.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_false_negatives.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_false_positives.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_false_positives.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_fbeta_score.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_fbeta_score.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_hinge.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_huber.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_huber.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_iou.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_iou.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_kl_divergence.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_kl_divergence.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_log_cosh.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_log_cosh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_log_cosh_error.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_log_cosh_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_absolute_error.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean_absolute_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_absolute_percentage_error.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean_absolute_percentage_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_iou.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean_iou.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_squared_error.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean_squared_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_squared_logarithmic_error.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean_squared_logarithmic_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_mean_wrapper.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_mean_wrapper.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_one_hot_iou.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_one_hot_iou.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_one_hot_mean_iou.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_one_hot_mean_iou.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_poisson.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_poisson.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_precision.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_precision.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_precision_at_recall.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_precision_at_recall.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_r2_score.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_r2_score.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_recall.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_recall.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_recall_at_precision.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_recall_at_precision.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_root_mean_squared_error.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_root_mean_squared_error.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_sensitivity_at_specificity.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_sensitivity_at_specificity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_sparse_categorical_accuracy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_sparse_categorical_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_sparse_categorical_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_sparse_categorical_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_sparse_top_k_categorical_accuracy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_sparse_top_k_categorical_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_specificity_at_sensitivity.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_specificity_at_sensitivity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_squared_hinge.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_squared_hinge.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_sum.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_sum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_top_k_categorical_accuracy.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_top_k_categorical_accuracy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_true_negatives.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_true_negatives.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/metric_true_positives.html</loc>
+    <loc>https://keras3.posit.co/reference/metric_true_positives.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/multi-assign.html</loc>
+    <loc>https://keras3.posit.co/reference/multi-assign.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/new_callback_class.html</loc>
+    <loc>https://keras3.posit.co/reference/new_callback_class.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/new_layer_class.html</loc>
+    <loc>https://keras3.posit.co/reference/new_layer_class.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/new_learning_rate_schedule_class.html</loc>
+    <loc>https://keras3.posit.co/reference/new_learning_rate_schedule_class.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/new_loss_class.html</loc>
+    <loc>https://keras3.posit.co/reference/new_loss_class.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/new_metric_class.html</loc>
+    <loc>https://keras3.posit.co/reference/new_metric_class.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/new_model_class.html</loc>
+    <loc>https://keras3.posit.co/reference/new_model_class.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/normalize.html</loc>
+    <loc>https://keras3.posit.co/reference/normalize.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_abs.html</loc>
+    <loc>https://keras3.posit.co/reference/op_abs.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_add.html</loc>
+    <loc>https://keras3.posit.co/reference/op_add.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_all.html</loc>
+    <loc>https://keras3.posit.co/reference/op_all.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_any.html</loc>
+    <loc>https://keras3.posit.co/reference/op_any.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_append.html</loc>
+    <loc>https://keras3.posit.co/reference/op_append.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arange.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arange.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arccos.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arccos.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arccosh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arccosh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arcsin.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arcsin.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arcsinh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arcsinh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arctan.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arctan.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arctan2.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arctan2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_arctanh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_arctanh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_argmax.html</loc>
+    <loc>https://keras3.posit.co/reference/op_argmax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_argmin.html</loc>
+    <loc>https://keras3.posit.co/reference/op_argmin.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_argsort.html</loc>
+    <loc>https://keras3.posit.co/reference/op_argsort.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_array.html</loc>
+    <loc>https://keras3.posit.co/reference/op_array.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_average.html</loc>
+    <loc>https://keras3.posit.co/reference/op_average.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_average_pool.html</loc>
+    <loc>https://keras3.posit.co/reference/op_average_pool.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_batch_normalization.html</loc>
+    <loc>https://keras3.posit.co/reference/op_batch_normalization.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_binary_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/op_binary_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_bincount.html</loc>
+    <loc>https://keras3.posit.co/reference/op_bincount.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_broadcast_to.html</loc>
+    <loc>https://keras3.posit.co/reference/op_broadcast_to.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cast.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cast.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_categorical_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/op_categorical_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ceil.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ceil.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cholesky.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cholesky.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_clip.html</loc>
+    <loc>https://keras3.posit.co/reference/op_clip.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_concatenate.html</loc>
+    <loc>https://keras3.posit.co/reference/op_concatenate.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cond.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cond.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_conj.html</loc>
+    <loc>https://keras3.posit.co/reference/op_conj.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_conv.html</loc>
+    <loc>https://keras3.posit.co/reference/op_conv.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_conv_transpose.html</loc>
+    <loc>https://keras3.posit.co/reference/op_conv_transpose.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_convert_to_numpy.html</loc>
+    <loc>https://keras3.posit.co/reference/op_convert_to_numpy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_convert_to_tensor.html</loc>
+    <loc>https://keras3.posit.co/reference/op_convert_to_tensor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_copy.html</loc>
+    <loc>https://keras3.posit.co/reference/op_copy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_correlate.html</loc>
+    <loc>https://keras3.posit.co/reference/op_correlate.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cos.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cos.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cosh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cosh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_count_nonzero.html</loc>
+    <loc>https://keras3.posit.co/reference/op_count_nonzero.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cross.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cross.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ctc_decode.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ctc_decode.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ctc_loss.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ctc_loss.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cumprod.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cumprod.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_cumsum.html</loc>
+    <loc>https://keras3.posit.co/reference/op_cumsum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_custom_gradient.html</loc>
+    <loc>https://keras3.posit.co/reference/op_custom_gradient.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_depthwise_conv.html</loc>
+    <loc>https://keras3.posit.co/reference/op_depthwise_conv.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_det.html</loc>
+    <loc>https://keras3.posit.co/reference/op_det.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_diag.html</loc>
+    <loc>https://keras3.posit.co/reference/op_diag.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_diagonal.html</loc>
+    <loc>https://keras3.posit.co/reference/op_diagonal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_diff.html</loc>
+    <loc>https://keras3.posit.co/reference/op_diff.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_digitize.html</loc>
+    <loc>https://keras3.posit.co/reference/op_digitize.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_divide.html</loc>
+    <loc>https://keras3.posit.co/reference/op_divide.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_divide_no_nan.html</loc>
+    <loc>https://keras3.posit.co/reference/op_divide_no_nan.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_dot.html</loc>
+    <loc>https://keras3.posit.co/reference/op_dot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_eig.html</loc>
+    <loc>https://keras3.posit.co/reference/op_eig.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_eigh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_eigh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_einsum.html</loc>
+    <loc>https://keras3.posit.co/reference/op_einsum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_elu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_elu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_empty.html</loc>
+    <loc>https://keras3.posit.co/reference/op_empty.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_equal.html</loc>
+    <loc>https://keras3.posit.co/reference/op_equal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_erf.html</loc>
+    <loc>https://keras3.posit.co/reference/op_erf.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_erfinv.html</loc>
+    <loc>https://keras3.posit.co/reference/op_erfinv.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_exp.html</loc>
+    <loc>https://keras3.posit.co/reference/op_exp.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_expand_dims.html</loc>
+    <loc>https://keras3.posit.co/reference/op_expand_dims.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_expm1.html</loc>
+    <loc>https://keras3.posit.co/reference/op_expm1.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_extract_sequences.html</loc>
+    <loc>https://keras3.posit.co/reference/op_extract_sequences.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_eye.html</loc>
+    <loc>https://keras3.posit.co/reference/op_eye.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_fft.html</loc>
+    <loc>https://keras3.posit.co/reference/op_fft.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_fft2.html</loc>
+    <loc>https://keras3.posit.co/reference/op_fft2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_flip.html</loc>
+    <loc>https://keras3.posit.co/reference/op_flip.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_floor.html</loc>
+    <loc>https://keras3.posit.co/reference/op_floor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_floor_divide.html</loc>
+    <loc>https://keras3.posit.co/reference/op_floor_divide.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_fori_loop.html</loc>
+    <loc>https://keras3.posit.co/reference/op_fori_loop.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_full.html</loc>
+    <loc>https://keras3.posit.co/reference/op_full.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_full_like.html</loc>
+    <loc>https://keras3.posit.co/reference/op_full_like.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_gelu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_gelu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_get_item.html</loc>
+    <loc>https://keras3.posit.co/reference/op_get_item.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_greater.html</loc>
+    <loc>https://keras3.posit.co/reference/op_greater.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_greater_equal.html</loc>
+    <loc>https://keras3.posit.co/reference/op_greater_equal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_hard_sigmoid.html</loc>
+    <loc>https://keras3.posit.co/reference/op_hard_sigmoid.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_hard_silu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_hard_silu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_hstack.html</loc>
+    <loc>https://keras3.posit.co/reference/op_hstack.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_identity.html</loc>
+    <loc>https://keras3.posit.co/reference/op_identity.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_imag.html</loc>
+    <loc>https://keras3.posit.co/reference/op_imag.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_affine_transform.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_affine_transform.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_crop.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_crop.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_extract_patches.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_extract_patches.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_map_coordinates.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_map_coordinates.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_pad.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_pad.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_resize.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_resize.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_image_rgb_to_grayscale.html</loc>
+    <loc>https://keras3.posit.co/reference/op_image_rgb_to_grayscale.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_in_top_k.html</loc>
+    <loc>https://keras3.posit.co/reference/op_in_top_k.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_inv.html</loc>
+    <loc>https://keras3.posit.co/reference/op_inv.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_irfft.html</loc>
+    <loc>https://keras3.posit.co/reference/op_irfft.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_is_tensor.html</loc>
+    <loc>https://keras3.posit.co/reference/op_is_tensor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_isclose.html</loc>
+    <loc>https://keras3.posit.co/reference/op_isclose.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_isfinite.html</loc>
+    <loc>https://keras3.posit.co/reference/op_isfinite.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_isinf.html</loc>
+    <loc>https://keras3.posit.co/reference/op_isinf.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_isnan.html</loc>
+    <loc>https://keras3.posit.co/reference/op_isnan.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_istft.html</loc>
+    <loc>https://keras3.posit.co/reference/op_istft.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_leaky_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_leaky_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_less.html</loc>
+    <loc>https://keras3.posit.co/reference/op_less.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_less_equal.html</loc>
+    <loc>https://keras3.posit.co/reference/op_less_equal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_linspace.html</loc>
+    <loc>https://keras3.posit.co/reference/op_linspace.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_log.html</loc>
+    <loc>https://keras3.posit.co/reference/op_log.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_log10.html</loc>
+    <loc>https://keras3.posit.co/reference/op_log10.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_log1p.html</loc>
+    <loc>https://keras3.posit.co/reference/op_log1p.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_log2.html</loc>
+    <loc>https://keras3.posit.co/reference/op_log2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_log_sigmoid.html</loc>
+    <loc>https://keras3.posit.co/reference/op_log_sigmoid.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_log_softmax.html</loc>
+    <loc>https://keras3.posit.co/reference/op_log_softmax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logaddexp.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logaddexp.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logical_and.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logical_and.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logical_not.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logical_not.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logical_or.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logical_or.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logical_xor.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logical_xor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logspace.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logspace.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_logsumexp.html</loc>
+    <loc>https://keras3.posit.co/reference/op_logsumexp.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_lu_factor.html</loc>
+    <loc>https://keras3.posit.co/reference/op_lu_factor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_matmul.html</loc>
+    <loc>https://keras3.posit.co/reference/op_matmul.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_max.html</loc>
+    <loc>https://keras3.posit.co/reference/op_max.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_max_pool.html</loc>
+    <loc>https://keras3.posit.co/reference/op_max_pool.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_maximum.html</loc>
+    <loc>https://keras3.posit.co/reference/op_maximum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_mean.html</loc>
+    <loc>https://keras3.posit.co/reference/op_mean.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_median.html</loc>
+    <loc>https://keras3.posit.co/reference/op_median.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_meshgrid.html</loc>
+    <loc>https://keras3.posit.co/reference/op_meshgrid.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_min.html</loc>
+    <loc>https://keras3.posit.co/reference/op_min.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_minimum.html</loc>
+    <loc>https://keras3.posit.co/reference/op_minimum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_mod.html</loc>
+    <loc>https://keras3.posit.co/reference/op_mod.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_moments.html</loc>
+    <loc>https://keras3.posit.co/reference/op_moments.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_moveaxis.html</loc>
+    <loc>https://keras3.posit.co/reference/op_moveaxis.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_multi_hot.html</loc>
+    <loc>https://keras3.posit.co/reference/op_multi_hot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_multiply.html</loc>
+    <loc>https://keras3.posit.co/reference/op_multiply.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_nan_to_num.html</loc>
+    <loc>https://keras3.posit.co/reference/op_nan_to_num.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ndim.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ndim.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_negative.html</loc>
+    <loc>https://keras3.posit.co/reference/op_negative.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_nonzero.html</loc>
+    <loc>https://keras3.posit.co/reference/op_nonzero.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_norm.html</loc>
+    <loc>https://keras3.posit.co/reference/op_norm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_normalize.html</loc>
+    <loc>https://keras3.posit.co/reference/op_normalize.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_not_equal.html</loc>
+    <loc>https://keras3.posit.co/reference/op_not_equal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_one_hot.html</loc>
+    <loc>https://keras3.posit.co/reference/op_one_hot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ones.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ones.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ones_like.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ones_like.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_outer.html</loc>
+    <loc>https://keras3.posit.co/reference/op_outer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_pad.html</loc>
+    <loc>https://keras3.posit.co/reference/op_pad.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_power.html</loc>
+    <loc>https://keras3.posit.co/reference/op_power.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_prod.html</loc>
+    <loc>https://keras3.posit.co/reference/op_prod.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_psnr.html</loc>
+    <loc>https://keras3.posit.co/reference/op_psnr.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_qr.html</loc>
+    <loc>https://keras3.posit.co/reference/op_qr.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_quantile.html</loc>
+    <loc>https://keras3.posit.co/reference/op_quantile.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_ravel.html</loc>
+    <loc>https://keras3.posit.co/reference/op_ravel.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_real.html</loc>
+    <loc>https://keras3.posit.co/reference/op_real.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_reciprocal.html</loc>
+    <loc>https://keras3.posit.co/reference/op_reciprocal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_relu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_relu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_relu6.html</loc>
+    <loc>https://keras3.posit.co/reference/op_relu6.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_repeat.html</loc>
+    <loc>https://keras3.posit.co/reference/op_repeat.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_reshape.html</loc>
+    <loc>https://keras3.posit.co/reference/op_reshape.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_rfft.html</loc>
+    <loc>https://keras3.posit.co/reference/op_rfft.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_roll.html</loc>
+    <loc>https://keras3.posit.co/reference/op_roll.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_round.html</loc>
+    <loc>https://keras3.posit.co/reference/op_round.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_rsqrt.html</loc>
+    <loc>https://keras3.posit.co/reference/op_rsqrt.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_scatter.html</loc>
+    <loc>https://keras3.posit.co/reference/op_scatter.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_scatter_update.html</loc>
+    <loc>https://keras3.posit.co/reference/op_scatter_update.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_segment_max.html</loc>
+    <loc>https://keras3.posit.co/reference/op_segment_max.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_segment_sum.html</loc>
+    <loc>https://keras3.posit.co/reference/op_segment_sum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_select.html</loc>
+    <loc>https://keras3.posit.co/reference/op_select.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_selu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_selu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_separable_conv.html</loc>
+    <loc>https://keras3.posit.co/reference/op_separable_conv.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_shape.html</loc>
+    <loc>https://keras3.posit.co/reference/op_shape.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sigmoid.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sigmoid.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sign.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sign.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_silu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_silu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sin.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sin.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sinh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sinh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_size.html</loc>
+    <loc>https://keras3.posit.co/reference/op_size.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_slice.html</loc>
+    <loc>https://keras3.posit.co/reference/op_slice.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_slice_update.html</loc>
+    <loc>https://keras3.posit.co/reference/op_slice_update.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_slogdet.html</loc>
+    <loc>https://keras3.posit.co/reference/op_slogdet.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_softmax.html</loc>
+    <loc>https://keras3.posit.co/reference/op_softmax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_softplus.html</loc>
+    <loc>https://keras3.posit.co/reference/op_softplus.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_softsign.html</loc>
+    <loc>https://keras3.posit.co/reference/op_softsign.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_solve.html</loc>
+    <loc>https://keras3.posit.co/reference/op_solve.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_solve_triangular.html</loc>
+    <loc>https://keras3.posit.co/reference/op_solve_triangular.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sort.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sort.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sparse_categorical_crossentropy.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sparse_categorical_crossentropy.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_split.html</loc>
+    <loc>https://keras3.posit.co/reference/op_split.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sqrt.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sqrt.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_square.html</loc>
+    <loc>https://keras3.posit.co/reference/op_square.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_squeeze.html</loc>
+    <loc>https://keras3.posit.co/reference/op_squeeze.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_stack.html</loc>
+    <loc>https://keras3.posit.co/reference/op_stack.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_std.html</loc>
+    <loc>https://keras3.posit.co/reference/op_std.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_stft.html</loc>
+    <loc>https://keras3.posit.co/reference/op_stft.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_stop_gradient.html</loc>
+    <loc>https://keras3.posit.co/reference/op_stop_gradient.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_subtract.html</loc>
+    <loc>https://keras3.posit.co/reference/op_subtract.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_sum.html</loc>
+    <loc>https://keras3.posit.co/reference/op_sum.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_svd.html</loc>
+    <loc>https://keras3.posit.co/reference/op_svd.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_swapaxes.html</loc>
+    <loc>https://keras3.posit.co/reference/op_swapaxes.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_take.html</loc>
+    <loc>https://keras3.posit.co/reference/op_take.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_take_along_axis.html</loc>
+    <loc>https://keras3.posit.co/reference/op_take_along_axis.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_tan.html</loc>
+    <loc>https://keras3.posit.co/reference/op_tan.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_tanh.html</loc>
+    <loc>https://keras3.posit.co/reference/op_tanh.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_tensordot.html</loc>
+    <loc>https://keras3.posit.co/reference/op_tensordot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_tile.html</loc>
+    <loc>https://keras3.posit.co/reference/op_tile.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_top_k.html</loc>
+    <loc>https://keras3.posit.co/reference/op_top_k.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_trace.html</loc>
+    <loc>https://keras3.posit.co/reference/op_trace.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_transpose.html</loc>
+    <loc>https://keras3.posit.co/reference/op_transpose.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_tri.html</loc>
+    <loc>https://keras3.posit.co/reference/op_tri.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_tril.html</loc>
+    <loc>https://keras3.posit.co/reference/op_tril.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_triu.html</loc>
+    <loc>https://keras3.posit.co/reference/op_triu.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_unstack.html</loc>
+    <loc>https://keras3.posit.co/reference/op_unstack.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_var.html</loc>
+    <loc>https://keras3.posit.co/reference/op_var.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_vdot.html</loc>
+    <loc>https://keras3.posit.co/reference/op_vdot.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_vectorize.html</loc>
+    <loc>https://keras3.posit.co/reference/op_vectorize.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_vectorized_map.html</loc>
+    <loc>https://keras3.posit.co/reference/op_vectorized_map.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_vstack.html</loc>
+    <loc>https://keras3.posit.co/reference/op_vstack.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_where.html</loc>
+    <loc>https://keras3.posit.co/reference/op_where.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_while_loop.html</loc>
+    <loc>https://keras3.posit.co/reference/op_while_loop.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_zeros.html</loc>
+    <loc>https://keras3.posit.co/reference/op_zeros.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/op_zeros_like.html</loc>
+    <loc>https://keras3.posit.co/reference/op_zeros_like.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_adadelta.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_adadelta.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_adafactor.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_adafactor.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_adagrad.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_adagrad.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_adam.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_adam.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_adam_w.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_adam_w.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_adamax.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_adamax.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_ftrl.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_ftrl.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_lion.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_lion.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_loss_scale.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_loss_scale.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_nadam.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_nadam.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_rmsprop.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_rmsprop.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/optimizer_sgd.html</loc>
+    <loc>https://keras3.posit.co/reference/optimizer_sgd.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/pack_x_y_sample_weight.html</loc>
+    <loc>https://keras3.posit.co/reference/pack_x_y_sample_weight.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/pad_sequences.html</loc>
+    <loc>https://keras3.posit.co/reference/pad_sequences.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/pipe.html</loc>
+    <loc>https://keras3.posit.co/reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/plot.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/plot.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/plot.keras_training_history.html</loc>
+    <loc>https://keras3.posit.co/reference/plot.keras_training_history.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/pop_layer.html</loc>
+    <loc>https://keras3.posit.co/reference/pop_layer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/predict.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/predict.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/predict_on_batch.html</loc>
+    <loc>https://keras3.posit.co/reference/predict_on_batch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/process_utils.html</loc>
+    <loc>https://keras3.posit.co/reference/process_utils.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/quantize_weights.html</loc>
+    <loc>https://keras3.posit.co/reference/quantize_weights.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_beta.html</loc>
+    <loc>https://keras3.posit.co/reference/random_beta.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_binomial.html</loc>
+    <loc>https://keras3.posit.co/reference/random_binomial.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_categorical.html</loc>
+    <loc>https://keras3.posit.co/reference/random_categorical.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_dropout.html</loc>
+    <loc>https://keras3.posit.co/reference/random_dropout.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_gamma.html</loc>
+    <loc>https://keras3.posit.co/reference/random_gamma.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_integer.html</loc>
+    <loc>https://keras3.posit.co/reference/random_integer.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/random_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_seed_generator.html</loc>
+    <loc>https://keras3.posit.co/reference/random_seed_generator.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_shuffle.html</loc>
+    <loc>https://keras3.posit.co/reference/random_shuffle.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_truncated_normal.html</loc>
+    <loc>https://keras3.posit.co/reference/random_truncated_normal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/random_uniform.html</loc>
+    <loc>https://keras3.posit.co/reference/random_uniform.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/reexports.html</loc>
+    <loc>https://keras3.posit.co/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/register_keras_serializable.html</loc>
+    <loc>https://keras3.posit.co/reference/register_keras_serializable.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/regularizer_l1.html</loc>
+    <loc>https://keras3.posit.co/reference/regularizer_l1.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/regularizer_l1_l2.html</loc>
+    <loc>https://keras3.posit.co/reference/regularizer_l1_l2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/regularizer_l2.html</loc>
+    <loc>https://keras3.posit.co/reference/regularizer_l2.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/regularizer_orthogonal.html</loc>
+    <loc>https://keras3.posit.co/reference/regularizer_orthogonal.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/reset_state.html</loc>
+    <loc>https://keras3.posit.co/reference/reset_state.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cell_gru.html</loc>
+    <loc>https://keras3.posit.co/reference/rnn_cell_gru.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cell_lstm.html</loc>
+    <loc>https://keras3.posit.co/reference/rnn_cell_lstm.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cell_simple.html</loc>
+    <loc>https://keras3.posit.co/reference/rnn_cell_simple.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/rnn_cells_stack.html</loc>
+    <loc>https://keras3.posit.co/reference/rnn_cells_stack.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/save_model.html</loc>
+    <loc>https://keras3.posit.co/reference/save_model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/save_model_config.html</loc>
+    <loc>https://keras3.posit.co/reference/save_model_config.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/save_model_weights.html</loc>
+    <loc>https://keras3.posit.co/reference/save_model_weights.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/serialize_keras_object.html</loc>
+    <loc>https://keras3.posit.co/reference/serialize_keras_object.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/set_random_seed.html</loc>
+    <loc>https://keras3.posit.co/reference/set_random_seed.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/shape.html</loc>
+    <loc>https://keras3.posit.co/reference/shape.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/split_dataset.html</loc>
+    <loc>https://keras3.posit.co/reference/split_dataset.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/summary.keras.src.models.model.Model.html</loc>
+    <loc>https://keras3.posit.co/reference/summary.keras.src.models.model.Model.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/test_on_batch.html</loc>
+    <loc>https://keras3.posit.co/reference/test_on_batch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/text_dataset_from_directory.html</loc>
+    <loc>https://keras3.posit.co/reference/text_dataset_from_directory.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/time_distributed.html</loc>
+    <loc>https://keras3.posit.co/reference/time_distributed.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/timeseries_dataset_from_array.html</loc>
+    <loc>https://keras3.posit.co/reference/timeseries_dataset_from_array.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/to_categorical.html</loc>
+    <loc>https://keras3.posit.co/reference/to_categorical.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/train_on_batch.html</loc>
+    <loc>https://keras3.posit.co/reference/train_on_batch.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/unpack_x_y_sample_weight.html</loc>
+    <loc>https://keras3.posit.co/reference/unpack_x_y_sample_weight.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/use_backend.html</loc>
+    <loc>https://keras3.posit.co/reference/use_backend.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/with_custom_object_scope.html</loc>
+    <loc>https://keras3.posit.co/reference/with_custom_object_scope.html</loc>
   </url>
   <url>
-    <loc>https://keras.posit.co/reference/zip_lists.html</loc>
+    <loc>https://keras3.posit.co/reference/zip_lists.html</loc>
   </url>
 </urlset>

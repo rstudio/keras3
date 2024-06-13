@@ -1,7 +1,7 @@
 Package: keras3
 Type: Package
 Title: R Interface to 'Keras'
-Version: 1.0.0.9000
+Version: 1.0.0
 Authors@R: c(
   person("Tomasz", "Kalinowski", role = c("aut", "cph", "cre"),
          email = "tomasz@posit.co"),
@@ -23,14 +23,14 @@ Description: Interface to 'Keras' <https://keras.io>, a high-level neural
   combinations of the two), and runs seamlessly on both CPU and GPU devices.
 Encoding: UTF-8
 License: MIT + file LICENSE
-URL: https://keras.posit.co/, https://github.com/rstudio/keras
-BugReports: https://github.com/rstudio/keras/issues
+URL: https://keras3.posit.co/, https://github.com/rstudio/keras3
+BugReports: https://github.com/rstudio/keras3/issues
 Depends:
     R (>= 4.0)
 Imports:
     generics (>= 0.0.1),
-    reticulate (>= 1.35.0.9000),
-    tensorflow (>= 2.15.0.9000),
+    reticulate (>= 1.36.0),
+    tensorflow (>= 2.16.0),
     tfruns (>= 1.5.2),
     magrittr,
     zeallot,
