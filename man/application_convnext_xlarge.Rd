@@ -29,7 +29,7 @@ layer at the top of the network. Defaults to \code{TRUE}.}
 file to be loaded. Defaults to \code{"imagenet"}.}
 
 \item{input_tensor}{Optional Keras tensor
-(i.e. output of \code{layers.Input()})
+(i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{Optional shape tuple, only to be specified

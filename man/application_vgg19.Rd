@@ -23,7 +23,7 @@ layers at the top of the network.}
 or the path to the weights file to be loaded.}
 
 \item{input_tensor}{optional Keras tensor
-(i.e. output of \code{layers.Input()})
+(i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{optional shape tuple, only to be specified

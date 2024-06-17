@@ -22,7 +22,7 @@ layer at the top of the network.}
 \code{"imagenet"} (pre-training on ImageNet), or the path to the weights
 file to be loaded.}
 
-\item{input_tensor}{optional Keras tensor (i.e. output of \code{layers.Input()})
+\item{input_tensor}{optional Keras tensor (i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{optional shape tuple, only to be specified if \code{include_top}

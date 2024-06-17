@@ -43,7 +43,7 @@ at the top of the network. Defaults to \code{TRUE}.}
 (pre-training on ImageNet), or the path to the weights file
 to be loaded. Defaults to \code{"imagenet"}.}
 
-\item{input_tensor}{Optional Keras tensor (i.e. output of \code{layers.Input()})
+\item{input_tensor}{Optional Keras tensor (i.e. output of \code{keras_input()})
 to use as image input for the model. \code{input_tensor} is useful
 for sharing inputs between multiple different networks.
 Defaults to \code{NULL}.}

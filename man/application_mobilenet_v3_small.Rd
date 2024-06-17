@@ -58,7 +58,7 @@ layer at the top of the network. Defaults to \code{TRUE}.}
 or the path to the weights file to be loaded.}
 
 \item{input_tensor}{Optional Keras tensor (i.e. output of
-\code{layers.Input()})
+\code{keras_input()})
 to use as image input for the model.}
 
 \item{classes}{Integer, optional number of classes to classify images
