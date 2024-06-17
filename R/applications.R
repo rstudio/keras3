@@ -3001,7 +3001,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' + <https://keras.io/api/applications/nasnet#nasnetlarge-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/NASNetLarge>
 #' @tether keras.applications.NASNetLarge
-application_nasnetlarge <-
+application_nasnet_large <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
     input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
@@ -3010,6 +3010,17 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
     set_preprocessing_attributes(model, keras$applications$nasnet)
 }
 
+#' Backward compatibility
+#'
+#' @param ... passed on to `application_nasnet_large()` or `application_nasnet_mobile()`.
+#'
+#' @rdname back-compat
+#' @export
+#' @keywords internal
+application_nasnetlarge <- function(...) {
+    warning("`application_nasnetlarge()` has been renamed to `application_nasnet_large()`")
+    application_nasnet_large(...)
+}
 
 #' Instantiates a Mobile NASNet model in ImageNet mode.
 #'
@@ -3084,13 +3095,25 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' + <https://keras.io/api/applications/nasnet#nasnetmobile-function>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/NASNetMobile>
 #' @tether keras.applications.NASNetMobile
-application_nasnetmobile <-
+application_nasnet_mobile <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
     input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
 {
     args <- capture_args(list(classes = as_integer))
     model <- do.call(keras$applications$NASNetMobile, args)
     set_preprocessing_attributes(model, keras$applications$nasnet)
+}
+
+
+#' Backward compatibility
+#'
+#'
+#' @export
+#' @rdname back-compat
+#' @keywords internal
+application_nasnetmobile <- function(...) {
+    warning("`application_nasnetlarge()` has been renamed to `application_nasnet_large()`")
+    application_nasnet_mobile(...)
 }
 
 
@@ -4036,4 +4059,3 @@ imagenet_preprocess_input <- function(x, data_format = NULL, mode = "caffe") {
   preprocess_input <- r_to_py(keras$applications$imagenet_utils)$preprocess_input
   do.call(preprocess_input, args)
 }
-
