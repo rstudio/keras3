@@ -45,7 +45,7 @@
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -148,7 +148,7 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -251,7 +251,7 @@ function (model_name = "convnext_large", include_top = TRUE,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -354,7 +354,7 @@ function (model_name = "convnext_small", include_top = TRUE,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -457,7 +457,7 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -544,7 +544,7 @@ function (model_name = "convnext_xlarge", include_top = TRUE,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -628,7 +628,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -712,7 +712,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -807,7 +807,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -903,7 +903,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -999,7 +999,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1095,7 +1095,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1191,7 +1191,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1287,7 +1287,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1383,7 +1383,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1479,7 +1479,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1578,7 +1578,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1677,7 +1677,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1776,7 +1776,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1875,7 +1875,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -1974,7 +1974,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -2073,7 +2073,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -2172,7 +2172,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' Optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -2268,7 +2268,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -2361,7 +2361,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' Defaults to `"imagenet"`.
 #'
 #' @param input_tensor
-#' Optional Keras tensor (i.e. output of `layers.Input()`)
+#' Optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model. `input_tensor` is useful for
 #' sharing inputs between multiple different networks.
 #' Defaults to `NULL`.
@@ -2481,7 +2481,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' to be loaded. Defaults to `"imagenet"`.
 #'
 #' @param input_tensor
-#' Optional Keras tensor (i.e. output of `layers.Input()`)
+#' Optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model. `input_tensor` is useful
 #' for sharing inputs between multiple different networks.
 #' Defaults to `NULL`.
@@ -2592,7 +2592,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' to be loaded. Defaults to `"imagenet"`.
 #'
 #' @param input_tensor
-#' Optional Keras tensor (i.e. output of `layers.Input()`)
+#' Optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model. `input_tensor` is useful
 #' for sharing inputs between multiple different networks.
 #' Defaults to `NULL`.
@@ -2729,7 +2729,7 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #'
 #' @param input_tensor
 #' Optional Keras tensor (i.e. output of
-#' `layers.Input()`)
+#' `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param pooling
@@ -2875,7 +2875,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #'
 #' @param input_tensor
 #' Optional Keras tensor (i.e. output of
-#' `layers.Input()`)
+#' `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param pooling
@@ -2967,7 +2967,7 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #'
 #' @param input_tensor
 #' Optional Keras tensor (i.e. output of
-#' `layers.Input()`)
+#' `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param pooling
@@ -3050,7 +3050,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #'
 #' @param input_tensor
 #' Optional Keras tensor (i.e. output of
-#' `layers.Input()`)
+#' `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param pooling
@@ -3129,7 +3129,7 @@ function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
 #' file to be loaded.
 #'
 #' @param input_tensor
-#' optional Keras tensor (i.e. output of `layers.Input()`)
+#' optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3212,7 +3212,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' file to be loaded.
 #'
 #' @param input_tensor
-#' optional Keras tensor (i.e. output of `layers.Input()`)
+#' optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3295,7 +3295,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' file to be loaded.
 #'
 #' @param input_tensor
-#' optional Keras tensor (i.e. output of `layers.Input()`)
+#' optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3377,7 +3377,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' file to be loaded.
 #'
 #' @param input_tensor
-#' optional Keras tensor (i.e. output of `layers.Input()`)
+#' optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3459,7 +3459,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' file to be loaded.
 #'
 #' @param input_tensor
-#' optional Keras tensor (i.e. output of `layers.Input()`)
+#' optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3541,7 +3541,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' file to be loaded.
 #'
 #' @param input_tensor
-#' optional Keras tensor (i.e. output of `layers.Input()`)
+#' optional Keras tensor (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3629,7 +3629,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3722,7 +3722,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
@@ -3813,7 +3813,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #'
 #' @param input_tensor
 #' optional Keras tensor
-#' (i.e. output of `layers.Input()`)
+#' (i.e. output of `keras_input()`)
 #' to use as image input for the model.
 #'
 #' @param input_shape
