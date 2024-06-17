@@ -517,7 +517,7 @@ function (object, f, output_shape = NULL, mask = NULL, arguments = NULL,
 #' Masks a sequence by using a mask value to skip timesteps.
 #'
 #' @description
-#' For each timestep in the input tensor (dimension #1 in the tensor),
+#' For each timestep in the input tensor (the second dimension in the tensor),
 #' if all values in the input tensor at that timestep
 #' are equal to `mask_value`, then the timestep will be masked (skipped)
 #' in all downstream layers (as long as they support masking).
