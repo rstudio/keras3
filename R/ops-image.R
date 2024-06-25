@@ -99,10 +99,9 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
     fill_value = 0L, data_format = NULL)
 {
     args <- capture_args(list(fill_value = as_integer))
-    # pass 'images' as unnamed positional arg (was renamed in Keras 3.4.0)
-    images <- args[["images"]] %||% args[["image"]]
-    args[["images"]] <- args[["image"]] <- NULL
-    args <- c(list(images), args)
+
+    # pass 'images' as unnamed positional arg (was renamed from 'image' in Keras 3.4.0)
+    args <- args_to_positional(args, "images")
 
     do.call(keras$ops$image$affine_transform, args)
 }
