@@ -276,7 +276,7 @@ function (object, data_format = NULL, ...)
 #' @param dims
 #' List of integers. Permutation pattern does not include the
 #' batch dimension. Indexing starts at 1.
-#' For instance, `c(2, 1)` permutes the first and second dimensions
+#' For instance, `(1, 3, 2)` permutes the second and third dimensions
 #' of the input.
 #'
 #' @param object
@@ -299,8 +299,8 @@ function (object, dims, ...)
 {
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
-        dims = function (x)
-        tuple(lapply(x, as_integer))), ignore = "object")
+        dims = function (x) tuple(lapply(x, as_integer))),
+        ignore = "object")
     create_layer(keras$layers$Permute, object, args)
 }
 
