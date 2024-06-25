@@ -917,6 +917,7 @@ MultiHeadAttention(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  seed=None,
   **kwargs
 )
 multiply(inputs, **kwargs)
