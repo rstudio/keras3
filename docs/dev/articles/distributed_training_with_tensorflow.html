@@ -277,10 +277,10 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 5s - 7ms/step - loss: 3.0622 - sparse_categorical_accuracy: 0.8615 - val_loss: 1.1367 - val_sparse_categorical_accuracy: 0.9006</span></span>
+<span><span class="co">## 782/782 - 7s - 9ms/step - loss: 3.0622 - sparse_categorical_accuracy: 0.8615 - val_loss: 1.1367 - val_sparse_categorical_accuracy: 0.9006</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.5774 - sparse_categorical_accuracy: 0.9259 - val_loss: 0.6612 - val_sparse_categorical_accuracy: 0.9210</span></span>
-<span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.6729 - sparse_categorical_accuracy: 0.9150</span></span></code></pre>
+<span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.5774 - sparse_categorical_accuracy: 0.9259 - val_loss: 0.6612 - val_sparse_categorical_accuracy: 0.9210</span></span>
+<span><span class="co">## 157/157 - 1s - 3ms/step - loss: 0.6729 - sparse_categorical_accuracy: 0.9150</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
 <span><span class="co">## [1] 0.6728871</span></span>
 <span><span class="co">##</span></span>
@@ -307,7 +307,7 @@ saved model.</p>
 <span><span class="va">make_or_restore_model</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Either restore the latest model, or create a fresh one</span></span>
 <span>  <span class="co"># if there is no checkpoint available.</span></span>
-<span>  <span class="va">checkpoints</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">checkpoint_dir</span>, <span class="co">#pattern = "ckpt-.*\\.keras",</span></span>
+<span>  <span class="va">checkpoints</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="va">checkpoint_dir</span>, pattern <span class="op">=</span> <span class="st">"ckpt-.*\\.keras"</span>,</span>
 <span>                            full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">checkpoints</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
@@ -350,11 +350,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 4s - 6ms/step - loss: 2.9519 - sparse_categorical_accuracy: 0.8655 - val_loss: 1.3110 - val_sparse_categorical_accuracy: 0.8836</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.2194 - sparse_categorical_accuracy: 0.9532 - val_loss: 0.3217 - val_sparse_categorical_accuracy: 0.9456</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.5998 - sparse_categorical_accuracy: 0.9270 - val_loss: 0.8736 - val_sparse_categorical_accuracy: 0.9128</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.1876 - sparse_categorical_accuracy: 0.9584 - val_loss: 0.3629 - val_sparse_categorical_accuracy: 0.9396</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">
