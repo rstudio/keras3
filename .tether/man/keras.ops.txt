@@ -329,6 +329,7 @@ lstsq(
   rcond=None
 )
 lu_factor(x)
+map(f, xs)
 matmul(x1, x2)
 max(
   x,

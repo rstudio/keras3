@@ -7458,3 +7458,57 @@ keras$ops$custom_gradient(f)
 #' @export
 #' @tether keras.ops.dtype
 op_dtype <- function(x) keras$ops$dtype(x)
+
+
+#' Map a function over leading array axes.
+#'
+#' @description
+#' Like `purrr::map()` or `base::lapply()`, except inputs and outputs are in the form of
+#' stacked arrays. Consider using the `op_vectorized_map()` transform instead,
+#' unless you need to apply a function element by element for reduced memory
+#' usage or heterogeneous computation with other control flow primitives.
+#'
+#' When `xs` is an array type, the semantics of `op_map()` match this
+#' implementation:
+#'
+#' ```r
+#' op_map <- function(xs, f) {
+#'   xs |>
+#'     op_unstack() |>
+#'     lapply(f) |>
+#'     op_stack()
+#' }
+#' ```
+#'
+#' # Examples
+#' ```{r}
+#' f <- function(x) x^2
+#' xs <- op_arange(10)
+#' ys <- op_map(xs, f)
+#' ys
+#' ```
+#'
+#' ```{r}
+#' f <- function(x) list(y1 = x^2, y2 = x * 10)  # Can have nested outputs
+#' ys <- op_map(xs, f)
+#' ys$y1
+#' ys$y2
+#' ```
+#'
+#' @returns
+#' Mapped values.
+#'
+#' @param f
+#' Callable defines the function to apply element-wise over the first
+#' axis or axes of `xs`.
+#'
+#' @param xs
+#' Values over which to map along the leading axis.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.map
+op_map <-
+function (xs, f)
+keras$ops$map(f, xs)
