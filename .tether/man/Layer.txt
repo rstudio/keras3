@@ -462,6 +462,14 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |      training. Unlike, `layer.non_trainable_variables` this excludes metric
  |      state and random seeds.
  |
+ |  path
+ |      The path of the layer.
+ |
+ |      If the layer has not been built yet, it will be `None`.
+ |
+ |  quantization_mode
+ |      The quantization mode of this layer, `None` if not quantized.
+ |
  |  trainable_variables
  |      List of all trainable layer state.
  |
