@@ -7,6 +7,9 @@
 #' `torch.nn.Module` into a Keras layer, in particular by making its
 #' parameters trackable by Keras.
 #'
+#' `layer_torch_module_wrapper()` is only compatible with the PyTorch backend and
+#' cannot be used with the TensorFlow or JAX backends.
+#'
 #' # Example
 #' Here's an example of how the [`layer_torch_module_wrapper()`] can be used with vanilla
 #' PyTorch modules.
