@@ -7432,3 +7432,29 @@ keras$ops$hard_swish(x)
 op_custom_gradient <-
 function (f)
 keras$ops$custom_gradient(f)
+
+
+#' Return the dtype of the tensor input as a standardized string.
+#'
+#' @description
+#' Note that due to the standardization, the dtype will not compare equal
+#' to the backend-specific version of the dtype.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_zeros(c(8, 12))
+#' op_dtype(x)
+#' ```
+#'
+#' @returns
+#' A string indicating the dtype of the input tensor, e.g. `"float32"`.
+#'
+#' @param x
+#' A tensor. This function will try to access the `dtype` attribute of
+#' the input tensor.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.dtype
+op_dtype <- function(x) keras$ops$dtype(x)
