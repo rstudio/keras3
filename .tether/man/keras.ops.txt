@@ -49,6 +49,11 @@ argmin(
   axis=None,
   keepdims=False
 )
+argpartition(
+  x,
+  kth,
+  axis=-1
+)
 argsort(x, axis=-1)
 array(x, dtype=None)
 average(
