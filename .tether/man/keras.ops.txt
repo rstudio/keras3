@@ -462,6 +462,14 @@ roll(
 )
 round(x, decimals=0)
 rsqrt(x)
+scan(
+  f,
+  init,
+  xs=None,
+  length=None,
+  reverse=False,
+  unroll=1
+)
 scatter(
   indices,
   values,

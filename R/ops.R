@@ -7512,3 +7512,96 @@ op_dtype <- function(x) keras$ops$dtype(x)
 op_map <-
 function (xs, f)
 keras$ops$map(f, xs)
+
+
+#' Scan a function over leading array axes while carrying along state.
+#'
+#' @description
+#' When the type of `xs` is an array type or `NULL`, and the type of `ys` is an
+#' array type, the semantics of `op_scan()` are given roughly by this
+#' implementation:
+#'
+#' ```r
+#' op_scan <- function(f, init, xs = NULL, length = NULL) {
+#'   xs <- xs %||% vector("list", length)
+#'   if(!is.list(xs))
+#'     xs <- op_unstack(xs)
+#'   ys <- vector("list", length(xs))
+#'   carry <- init
+#'   for (i in seq_along(xs)) {
+#'     c(carry, y) %<-% f(carry, xs[[i]])
+#'     ys[[i]] <- y
+#'   }
+#'   list(carry, op_stack(ys))
+#' }
+#' ```
+#'
+#' The loop-carried value `carry` (`init`) must hold a fixed shape and dtype
+#' across all iterations.
+#'
+#' In TensorFlow, `y` must match `carry` in shape and dtype. This is not
+#' required in other backends.
+#'
+#' # Examples
+#' ```{r}
+#' sum_fn <- function(c, x) list(c + x, c + x)
+#' init <- op_array(0L)
+#' xs <- op_array(1:5)
+#' c(carry, result) %<-% op_scan(sum_fn, init, xs)
+#' carry
+#' result
+#' ```
+#'
+#' @returns
+#' A pair where the first element represents the final loop carry value and
+#' the second element represents the stacked outputs of `f` when scanned
+#' over the leading axis of the inputs.
+#'
+#' @param f
+#' Callable defines the logic for each loop iteration. This accepts two
+#' arguments where the first is a value of the loop carry and the
+#' second is a slice of `xs` along its leading axis.
+#' This callable returns a pair where the first represents a new value
+#' for the loop carry and the second represents a slice of the output.
+#'
+#' @param init
+#' The initial loop carry value. This can be a scalar, tensor, or any
+#' nested structure. It must match the structure of the first element
+#' returned by `f`.
+#'
+#' @param xs
+#' Optional value to scan along its leading axis. This can be a tensor
+#' or any nested structure. If `xs` is not provided, you must specify
+#' `length` to define the number of loop iterations.
+#' Defaults to `NULL`.
+#'
+#' @param length
+#' Optional integer specifying the number of loop iterations.
+#' If `length` is not provided, it defaults to the sizes of leading
+#' axis of the arrays in `xs`. Defaults to `NULL`.
+#'
+#' @param reverse
+#' Optional boolean specifying whether to run the scan iteration
+#' forward or in reverse, equivalent to reversing the leading axes of
+#' the arrays in both `xs` and in `ys`.
+#'
+#' @param unroll
+#' Optional positive integer or boolean specifying how many scan
+#' iterations to unroll within a single iteration of a loop. If an
+#' integer is provided, it determines how many unrolled loop iterations
+#' to run within a single rolled iteration of the loop. If a boolean is
+#' provided, it will determine if the loop is completely unrolled
+#' (`unroll=TRUE`) or left completely unrolled (`unroll=FALSE`).
+#' Note that unrolling is only supported by JAX and TensorFlow
+#' backends.
+#'
+#' @export
+#' @tether keras.ops.scan
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scan>
+op_scan <-
+function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
+{
+    args <- capture_args(list(length = as_integer, unroll = as_integer))
+    do.call(keras$ops$scan, args)
+}
