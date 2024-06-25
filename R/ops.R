@@ -4032,8 +4032,8 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' labels in the output. Defaults to `TRUE`.
 #'
 #' @param mask_index
-#' An integer scalar, the index of the mask character in
-#' the vocabulary. Defaults to `NULL`.
+#' An integer scalar, the (0-based) index of the mask character in
+#' the vocabulary. Defaults to `0`.
 #'
 #' @export
 #' @family numpy ops
@@ -4041,7 +4041,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @tether keras.ops.ctc_decode
 op_ctc_decode <-
 function (inputs, sequence_lengths, strategy = "greedy", beam_width = 100L,
-    top_paths = 1L, merge_repeated = TRUE, mask_index = NULL)
+    top_paths = 1L, merge_repeated = TRUE, mask_index = 0L)
 {
     args <- capture_args(list(
       sequence_lengths = as_integer_array,
