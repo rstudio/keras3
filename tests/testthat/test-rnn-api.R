@@ -32,8 +32,8 @@ test_succeeds("rnn_cell_gru", {
                   return_state = TRUE)
  c(whole_sequence_output, final_state) %<-% rnn(inputs)
 
-  expect_true(whole_sequence_output$shape == shape(32, 10, 4))
-  expect_true(final_state$shape           == shape(32, 4))
+  expect_identical(as.list(whole_sequence_output$shape), as.list(shape(32, 10, 4)))
+  expect_identical(as.list(final_state$shape),           as.list(shape(32, 4)))
 })
 
 test_succeeds("layer_rnn", {
