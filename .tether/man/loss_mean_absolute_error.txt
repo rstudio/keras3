@@ -1,7 +1,7 @@
 Help on class MeanAbsoluteError in module keras.src.losses.losses:
 
 class MeanAbsoluteError(LossFunctionWrapper)
- |  MeanAbsoluteError(reduction='sum_over_batch_size', name='mean_absolute_error')
+ |  MeanAbsoluteError(reduction='sum_over_batch_size', name='mean_absolute_error', dtype=None)
  |
  |  Computes the mean of absolute difference between labels and predictions.
  |
@@ -16,6 +16,10 @@ class MeanAbsoluteError(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      MeanAbsoluteError
@@ -29,7 +33,8 @@ class MeanAbsoluteError(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='mean_absolute_error'
+ |    name='mean_absolute_error',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

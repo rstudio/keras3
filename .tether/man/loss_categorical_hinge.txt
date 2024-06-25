@@ -1,7 +1,7 @@
 Help on class CategoricalHinge in module keras.src.losses.losses:
 
 class CategoricalHinge(LossFunctionWrapper)
- |  CategoricalHinge(reduction='sum_over_batch_size', name='categorical_hinge')
+ |  CategoricalHinge(reduction='sum_over_batch_size', name='categorical_hinge', dtype=None)
  |
  |  Computes the categorical hinge loss between `y_true` & `y_pred`.
  |
@@ -18,6 +18,10 @@ class CategoricalHinge(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      CategoricalHinge
@@ -31,7 +35,8 @@ class CategoricalHinge(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='categorical_hinge'
+ |    name='categorical_hinge',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

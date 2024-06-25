@@ -1,7 +1,7 @@
 Help on class CategoricalFocalCrossentropy in module keras.src.losses.losses:
 
 class CategoricalFocalCrossentropy(LossFunctionWrapper)
- |  CategoricalFocalCrossentropy(alpha=0.25, gamma=2.0, from_logits=False, label_smoothing=0.0, axis=-1, reduction='sum_over_batch_size', name='categorical_focal_crossentropy')
+ |  CategoricalFocalCrossentropy(alpha=0.25, gamma=2.0, from_logits=False, label_smoothing=0.0, axis=-1, reduction='sum_over_batch_size', name='categorical_focal_crossentropy', dtype=None)
  |
  |  Computes the alpha balanced focal crossentropy loss.
  |
@@ -66,6 +66,10 @@ class CategoricalFocalCrossentropy(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Examples:
  |
@@ -118,7 +122,8 @@ class CategoricalFocalCrossentropy(LossFunctionWrapper)
  |    label_smoothing=0.0,
  |    axis=-1,
  |    reduction='sum_over_batch_size',
- |    name='categorical_focal_crossentropy'
+ |    name='categorical_focal_crossentropy',
+ |    dtype=None
  |  )
  |      Initializes `CategoricalFocalCrossentropy` instance.
  |

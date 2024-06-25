@@ -1,7 +1,7 @@
 Help on class MeanSquaredLogarithmicError in module keras.src.losses.losses:
 
 class MeanSquaredLogarithmicError(LossFunctionWrapper)
- |  MeanSquaredLogarithmicError(reduction='sum_over_batch_size', name='mean_squared_logarithmic_error')
+ |  MeanSquaredLogarithmicError(reduction='sum_over_batch_size', name='mean_squared_logarithmic_error', dtype=None)
  |
  |  Computes the mean squared logarithmic error between `y_true` & `y_pred`.
  |
@@ -16,6 +16,10 @@ class MeanSquaredLogarithmicError(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      MeanSquaredLogarithmicError
@@ -29,7 +33,8 @@ class MeanSquaredLogarithmicError(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='mean_squared_logarithmic_error'
+ |    name='mean_squared_logarithmic_error',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

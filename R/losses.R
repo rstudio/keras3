@@ -98,6 +98,12 @@
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values. shape = `[batch_size, d0, .. dN]`.
 #'
@@ -116,7 +122,8 @@
 #' @tether keras.losses.BinaryCrossentropy
 loss_binary_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
-    axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_crossentropy")
+    axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_crossentropy",
+    dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis,
                               y_true = as_py_array,
@@ -306,6 +313,12 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values, of shape `(batch_size, d0, .. dN)`.
 #'
@@ -324,7 +337,8 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 loss_binary_focal_crossentropy <-
 function (y_true, y_pred, apply_class_balancing = FALSE,
     alpha = 0.25, gamma = 2, from_logits = FALSE, label_smoothing = 0,
-    axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy")
+    axis = -1L, ..., reduction = "sum_over_batch_size", name = "binary_focal_crossentropy",
+    dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis,
                               y_true = as_py_array,
@@ -412,6 +426,12 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Tensor of one-hot true targets.
 #'
@@ -430,7 +450,8 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
 #' @tether keras.losses.CategoricalCrossentropy
 loss_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
-    axis = -1L, ..., reduction = "sum_over_batch_size", name = "categorical_crossentropy")
+    axis = -1L, ..., reduction = "sum_over_batch_size",
+    name = "categorical_crossentropy", dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis,
                               y_true = as_py_array,
@@ -565,6 +586,12 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Tensor of one-hot true targets.
 #'
@@ -583,7 +610,8 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 loss_categorical_focal_crossentropy <-
 function (y_true, y_pred, alpha = 0.25, gamma = 2,
     from_logits = FALSE, label_smoothing = 0, axis = -1L, ...,
-    reduction = "sum_over_batch_size", name = "categorical_focal_crossentropy")
+    reduction = "sum_over_batch_size", name = "categorical_focal_crossentropy",
+    dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis,
                               y_true = as_py_array,
@@ -624,6 +652,12 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' The ground truth values. `y_true` values are expected to be
 #' either `{-1, +1}` or `{0, 1}` (i.e. a one-hot-encoded tensor) with
@@ -644,7 +678,7 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
 #' @tether keras.losses.CategoricalHinge
 loss_categorical_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "categorical_hinge")
+    name = "categorical_hinge", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array,
                               y_pred = as_py_array))
@@ -694,6 +728,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Tensor of true targets.
 #'
@@ -712,7 +752,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.CosineSimilarity
 loss_cosine_similarity <-
 function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
-    name = "cosine_similarity")
+    name = "cosine_similarity", dtype = NULL)
 {
   args <- capture_args(list(axis = as_axis,
                             y_true = as_py_array,
@@ -802,6 +842,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice")
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' The ground truth values. `y_true` values are expected to be -1
 #' or 1. If binary (0 or 1) labels are provided they will be converted
@@ -822,7 +868,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice")
 #' @tether keras.losses.Hinge
 loss_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "hinge")
+    name = "hinge", dtype = NULL)
 {
   args <- capture_args(list(y_true = as_py_array,
                             y_pred = as_py_array))
@@ -871,6 +917,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' tensor of true targets.
 #'
@@ -889,7 +941,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.Huber
 loss_huber <-
 function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
-    name = "huber_loss")
+    name = "huber_loss", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array,
                               y_pred = as_py_array))
@@ -932,6 +984,12 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Tensor of true targets.
 #'
@@ -950,7 +1008,7 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.KLDivergence
 loss_kl_divergence <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "kl_divergence")
+    name = "kl_divergence", dtype = NULL)
 {
   args <- capture_args(list(axis = as_axis,
                             y_true = as_py_array,
@@ -994,6 +1052,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
 #'
@@ -1012,7 +1076,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.LogCosh
 loss_log_cosh <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "log_cosh")
+    name = "log_cosh", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array,
                               y_pred = as_py_array))
@@ -1050,6 +1114,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
 #'
@@ -1068,7 +1138,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.MeanAbsoluteError
 loss_mean_absolute_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "mean_absolute_error")
+    name = "mean_absolute_error", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array,
                               y_pred = as_py_array))
@@ -1111,6 +1181,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
 #'
@@ -1129,7 +1205,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.MeanAbsolutePercentageError
 loss_mean_absolute_percentage_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "mean_absolute_percentage_error")
+    name = "mean_absolute_percentage_error", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array,
                               y_pred = as_py_array))
@@ -1167,6 +1243,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
 #'
@@ -1185,7 +1267,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.MeanSquaredError
 loss_mean_squared_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "mean_squared_error")
+    name = "mean_squared_error", dtype = NULL)
 {
   args <- capture_args(list(y_true = as_py_array,
                             y_pred = as_py_array))
@@ -1227,6 +1309,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
 #'
@@ -1245,7 +1333,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.MeanSquaredLogarithmicError
 loss_mean_squared_logarithmic_error <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "mean_squared_logarithmic_error")
+    name = "mean_squared_logarithmic_error", dtype = NULL)
 {
   args <- capture_args(list(y_true = as_py_array,
                             y_pred = as_py_array))
@@ -1284,6 +1372,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values. shape = `[batch_size, d0, .. dN]`.
 #'
@@ -1302,7 +1396,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.Poisson
 loss_poisson <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "poisson")
+    name = "poisson", dtype = NULL)
 {
   args <- capture_args(list(y_true = as_py_array,
                             y_pred = as_py_array))
@@ -1385,6 +1479,12 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' Ground truth values.
 #'
@@ -1414,7 +1514,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.SparseCategoricalCrossentropy
 loss_sparse_categorical_crossentropy <-
 function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
-    axis = -1L, ..., reduction = "sum_over_batch_size", name = "sparse_categorical_crossentropy")
+    axis = -1L, ..., reduction = "sum_over_batch_size", name = "sparse_categorical_crossentropy",
+    dtype = NULL)
 {
     args <- capture_args(list(ignore_class = as_integer,
                               axis = as_axis,
@@ -1457,6 +1558,12 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' @param name
 #' Optional name for the loss instance.
 #'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param y_true
 #' The ground truth values. `y_true` values are expected to be -1
 #' or 1. If binary (0 or 1) labels are provided we will convert them
@@ -1477,7 +1584,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' @tether keras.losses.SquaredHinge
 loss_squared_hinge <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "squared_hinge")
+    name = "squared_hinge", dtype = NULL)
 {
   args <- capture_args(list(y_true = as_py_array,
                             y_pred = as_py_array))
@@ -1500,8 +1607,19 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' containing logits (the output of your model).
 #' They should *not* be normalized via softmax.
 #'
+#' @param reduction
+#' Type of reduction to apply to the loss. In almost all cases
+#' this should be `"sum_over_batch_size"`.
+#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#'
 #' @param name
-#' String, name for the object
+#' Optional name for the loss instance.
+#'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1517,7 +1635,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/losses/CTC>
 loss_ctc <-
 function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
-    name = "ctc")
+    name = "ctc", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))
@@ -1554,13 +1672,21 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' tensor of predicted targets.
 #'
 #' @param alpha
-#' coefficient controlling incidence of false positives.
+#' The coefficient controlling incidence of false positives.
+#' Defaults to `0.5`.
 #'
 #' @param beta
-#' coefficient controlling incidence of false negatives.
+#' The coefficient controlling incidence of false negatives.
+#' Defaults to `0.5`.
 #'
 #' @param name
-#' String, name for the object
+#' Optional name for the loss instance. (string)
+#'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1571,7 +1697,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.Tversky
 loss_tversky <-
 function (y_true, y_pred, ..., alpha = 0.5, beta = 0.5,
-     reduction = "sum_over_batch_size", name = "tversky")
+     reduction = "sum_over_batch_size", name = "tversky", dtype = NULL)
 {
     args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
     callable <- if (missing(y_true) && missing(y_pred))

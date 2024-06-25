@@ -1,7 +1,7 @@
 Help on class Poisson in module keras.src.losses.losses:
 
 class Poisson(LossFunctionWrapper)
- |  Poisson(reduction='sum_over_batch_size', name='poisson')
+ |  Poisson(reduction='sum_over_batch_size', name='poisson', dtype=None)
  |
  |  Computes the Poisson loss between `y_true` & `y_pred`.
  |
@@ -16,6 +16,10 @@ class Poisson(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      Poisson
@@ -29,7 +33,8 @@ class Poisson(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='poisson'
+ |    name='poisson',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

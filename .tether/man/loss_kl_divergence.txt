@@ -1,7 +1,7 @@
 Help on class KLDivergence in module keras.src.losses.losses:
 
 class KLDivergence(LossFunctionWrapper)
- |  KLDivergence(reduction='sum_over_batch_size', name='kl_divergence')
+ |  KLDivergence(reduction='sum_over_batch_size', name='kl_divergence', dtype=None)
  |
  |  Computes Kullback-Leibler divergence loss between `y_true` & `y_pred`.
  |
@@ -20,6 +20,10 @@ class KLDivergence(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      KLDivergence
@@ -33,7 +37,8 @@ class KLDivergence(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='kl_divergence'
+ |    name='kl_divergence',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

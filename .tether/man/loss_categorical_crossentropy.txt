@@ -1,7 +1,7 @@
 Help on class CategoricalCrossentropy in module keras.src.losses.losses:
 
 class CategoricalCrossentropy(LossFunctionWrapper)
- |  CategoricalCrossentropy(from_logits=False, label_smoothing=0.0, axis=-1, reduction='sum_over_batch_size', name='categorical_crossentropy')
+ |  CategoricalCrossentropy(from_logits=False, label_smoothing=0.0, axis=-1, reduction='sum_over_batch_size', name='categorical_crossentropy', dtype=None)
  |
  |  Computes the crossentropy loss between the labels and predictions.
  |
@@ -25,6 +25,10 @@ class CategoricalCrossentropy(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Examples:
  |
@@ -75,7 +79,8 @@ class CategoricalCrossentropy(LossFunctionWrapper)
  |    label_smoothing=0.0,
  |    axis=-1,
  |    reduction='sum_over_batch_size',
- |    name='categorical_crossentropy'
+ |    name='categorical_crossentropy',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

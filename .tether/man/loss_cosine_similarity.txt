@@ -1,7 +1,7 @@
 Help on class CosineSimilarity in module keras.src.losses.losses:
 
 class CosineSimilarity(LossFunctionWrapper)
- |  CosineSimilarity(axis=-1, reduction='sum_over_batch_size', name='cosine_similarity')
+ |  CosineSimilarity(axis=-1, reduction='sum_over_batch_size', name='cosine_similarity', dtype=None)
  |
  |  Computes the cosine similarity between `y_true` & `y_pred`.
  |
@@ -25,6 +25,10 @@ class CosineSimilarity(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      CosineSimilarity
@@ -39,7 +43,8 @@ class CosineSimilarity(LossFunctionWrapper)
  |    self,
  |    axis=-1,
  |    reduction='sum_over_batch_size',
- |    name='cosine_similarity'
+ |    name='cosine_similarity',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

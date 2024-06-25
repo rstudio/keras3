@@ -1,7 +1,7 @@
 Help on class Huber in module keras.src.losses.losses:
 
 class Huber(LossFunctionWrapper)
- |  Huber(delta=1.0, reduction='sum_over_batch_size', name='huber_loss')
+ |  Huber(delta=1.0, reduction='sum_over_batch_size', name='huber_loss', dtype=None)
  |
  |  Computes the Huber loss between `y_true` & `y_pred`.
  |
@@ -25,6 +25,10 @@ class Huber(LossFunctionWrapper)
  |          `"sum_over_batch_size"` or `None`. Defaults to
  |          `"sum_over_batch_size"`.
  |      name: Optional name for the instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Method resolution order:
  |      Huber
@@ -39,7 +43,8 @@ class Huber(LossFunctionWrapper)
  |    self,
  |    delta=1.0,
  |    reduction='sum_over_batch_size',
- |    name='huber_loss'
+ |    name='huber_loss',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
