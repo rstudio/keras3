@@ -146,7 +146,13 @@ greater_equal(x1, x2)
 hstack(xs)
 identity(n, dtype=None)
 imag(x)
-isclose(x1, x2)
+isclose(
+  x1,
+  x2,
+  rtol=1e-05,
+  atol=1e-08,
+  equal_nan=False
+)
 isfinite(x)
 isinf(x)
 isnan(x)

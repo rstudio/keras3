@@ -153,7 +153,7 @@ ctc_decode(
   beam_width=100,
   top_paths=1,
   merge_repeated=True,
-  mask_index=None
+  mask_index=0
 )
 ctc_loss(
   target,
@@ -260,7 +260,13 @@ in_top_k(
 inv(x)
 irfft(x, fft_length=None)
 is_tensor(x)
-isclose(x1, x2)
+isclose(
+  x1,
+  x2,
+  rtol=1e-05,
+  atol=1e-08,
+  equal_nan=False
+)
 isfinite(x)
 isinf(x)
 isnan(x)

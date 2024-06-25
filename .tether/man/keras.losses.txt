@@ -20,7 +20,8 @@ BinaryCrossentropy(
   label_smoothing=0.0,
   axis=-1,
   reduction='sum_over_batch_size',
-  name='binary_crossentropy'
+  name='binary_crossentropy',
+  dtype=None
 )
 BinaryFocalCrossentropy(
   apply_class_balancing=False,
@@ -30,7 +31,8 @@ BinaryFocalCrossentropy(
   label_smoothing=0.0,
   axis=-1,
   reduction='sum_over_batch_size',
-  name='binary_focal_crossentropy'
+  name='binary_focal_crossentropy',
+  dtype=None
 )
 categorical_crossentropy(
   y_true,
@@ -54,7 +56,8 @@ CategoricalCrossentropy(
   label_smoothing=0.0,
   axis=-1,
   reduction='sum_over_batch_size',
-  name='categorical_crossentropy'
+  name='categorical_crossentropy',
+  dtype=None
 )
 CategoricalFocalCrossentropy(
   alpha=0.25,
@@ -63,9 +66,14 @@ CategoricalFocalCrossentropy(
   label_smoothing=0.0,
   axis=-1,
   reduction='sum_over_batch_size',
-  name='categorical_focal_crossentropy'
+  name='categorical_focal_crossentropy',
+  dtype=None
 )
-CategoricalHinge(reduction='sum_over_batch_size', name='categorical_hinge')
+CategoricalHinge(
+  reduction='sum_over_batch_size',
+  name='categorical_hinge',
+  dtype=None
+)
 cosine_similarity(
   y_true,
   y_pred,
@@ -74,16 +82,34 @@ cosine_similarity(
 CosineSimilarity(
   axis=-1,
   reduction='sum_over_batch_size',
-  name='cosine_similarity'
+  name='cosine_similarity',
+  dtype=None
 )
 ctc(y_true, y_pred)
-CTC(reduction='sum_over_batch_size', name='ctc')
+CTC(
+  reduction='sum_over_batch_size',
+  name='ctc',
+  dtype=None
+)
 deserialize(name, custom_objects=None)
-dice(y_true, y_pred)
-Dice(reduction='sum_over_batch_size', name='dice')
+dice(
+  y_true,
+  y_pred,
+  axis=None
+)
+Dice(
+  reduction='sum_over_batch_size',
+  name='dice',
+  axis=None,
+  dtype=None
+)
 get(identifier)
 hinge(y_true, y_pred)
-Hinge(reduction='sum_over_batch_size', name='hinge')
+Hinge(
+  reduction='sum_over_batch_size',
+  name='hinge',
+  dtype=None
+)
 huber(
   y_true,
   y_pred,
@@ -92,12 +118,21 @@ huber(
 Huber(
   delta=1.0,
   reduction='sum_over_batch_size',
-  name='huber_loss'
+  name='huber_loss',
+  dtype=None
 )
 kl_divergence(y_true, y_pred)
-KLDivergence(reduction='sum_over_batch_size', name='kl_divergence')
+KLDivergence(
+  reduction='sum_over_batch_size',
+  name='kl_divergence',
+  dtype=None
+)
 log_cosh(y_true, y_pred)
-LogCosh(reduction='sum_over_batch_size', name='log_cosh')
+LogCosh(
+  reduction='sum_over_batch_size',
+  name='log_cosh',
+  dtype=None
+)
 Loss(
   name=None,
   reduction='sum_over_batch_size',
@@ -107,12 +142,32 @@ mean_absolute_error(y_true, y_pred)
 mean_absolute_percentage_error(y_true, y_pred)
 mean_squared_error(y_true, y_pred)
 mean_squared_logarithmic_error(y_true, y_pred)
-MeanAbsoluteError(reduction='sum_over_batch_size', name='mean_absolute_error')
-MeanAbsolutePercentageError(reduction='sum_over_batch_size', name='mean_absolute_percentage_error')
-MeanSquaredError(reduction='sum_over_batch_size', name='mean_squared_error')
-MeanSquaredLogarithmicError(reduction='sum_over_batch_size', name='mean_squared_logarithmic_error')
+MeanAbsoluteError(
+  reduction='sum_over_batch_size',
+  name='mean_absolute_error',
+  dtype=None
+)
+MeanAbsolutePercentageError(
+  reduction='sum_over_batch_size',
+  name='mean_absolute_percentage_error',
+  dtype=None
+)
+MeanSquaredError(
+  reduction='sum_over_batch_size',
+  name='mean_squared_error',
+  dtype=None
+)
+MeanSquaredLogarithmicError(
+  reduction='sum_over_batch_size',
+  name='mean_squared_logarithmic_error',
+  dtype=None
+)
 poisson(y_true, y_pred)
-Poisson(reduction='sum_over_batch_size', name='poisson')
+Poisson(
+  reduction='sum_over_batch_size',
+  name='poisson',
+  dtype=None
+)
 serialize(loss)
 sparse_categorical_crossentropy(
   y_true,
@@ -125,10 +180,15 @@ SparseCategoricalCrossentropy(
   from_logits=False,
   ignore_class=None,
   reduction='sum_over_batch_size',
-  name='sparse_categorical_crossentropy'
+  name='sparse_categorical_crossentropy',
+  dtype=None
 )
 squared_hinge(y_true, y_pred)
-SquaredHinge(reduction='sum_over_batch_size', name='squared_hinge')
+SquaredHinge(
+  reduction='sum_over_batch_size',
+  name='squared_hinge',
+  dtype=None
+)
 tversky(
   y_true,
   y_pred,
@@ -139,6 +199,7 @@ Tversky(
   alpha=0.5,
   beta=0.5,
   reduction='sum_over_batch_size',
-  name='tversky'
+  name='tversky',
+  dtype=None
 )
 

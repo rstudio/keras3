@@ -1,12 +1,13 @@
 deserialize(config, custom_objects=None)
-DTypePolicy(
-  name,
-  *args,
-  **kwargs
-)
-FloatDTypePolicy(name)
+DTypePolicy(name=None)
+DTypePolicyMap(default_policy=None, policy_map=None)
+FloatDTypePolicy(name=None)
 get(identifier)
-QuantizedDTypePolicy(name)
-QuantizedFloat8DTypePolicy(name, amax_history_length=1024)
+QuantizedDTypePolicy(mode, source_name=None)
+QuantizedFloat8DTypePolicy(
+  mode,
+  source_name=None,
+  amax_history_length=1024
+)
 serialize(dtype_policy)
 
