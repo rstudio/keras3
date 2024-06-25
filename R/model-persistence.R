@@ -324,7 +324,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' # Create the artifact
 #' model |> tensorflow::export_savedmodel("path/to/location")
 #'
-#' # Later, in a different process / environment...
+#' # Later, in a different process/environment...
 #' library(tensorflow)
 #' reloaded_artifact <- tf$saved_model$load("path/to/location")
 #' predictions <- reloaded_artifact$serve(input_data)
