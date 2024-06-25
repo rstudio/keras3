@@ -4916,6 +4916,15 @@ keras$ops$imag(x)
 #' @param x2
 #' Second input tensor.
 #'
+#' @param rtol
+#' Relative tolerance.
+#'
+#' @param atol
+#' Absolute tolerance.
+#'
+#' @param equal_nan
+#' If `TRUE`, element-wise `NaN`s are considered equal.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -4924,8 +4933,13 @@ keras$ops$imag(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose>
 #' @tether keras.ops.isclose
 op_isclose <-
-function (x1, x2)
-keras$ops$isclose(x1, x2)
+function (x1, x2,
+          rtol = 1e-05,
+          atol = 1e-08,
+          equal_nan = FALSE) {
+  args <- capture_args()
+  do.call(keras$ops$isclose, args)
+}
 
 
 #' Return whether a tensor is finite, element-wise.
