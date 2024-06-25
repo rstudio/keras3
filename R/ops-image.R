@@ -76,14 +76,14 @@
 #' `fill_mode = "constant"`. Defaults to `0`.
 #'
 #' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, weight)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#'
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
 #'
 #' @export
 #' @family image ops
@@ -95,10 +95,15 @@
 #'
 #' @tether keras.ops.image.affine_transform
 op_image_affine_transform <-
-function (image, transform, interpolation = "bilinear", fill_mode = "constant",
-    fill_value = 0L, data_format = "channels_last")
+function (images, transform, interpolation = "bilinear", fill_mode = "constant",
+    fill_value = 0L, data_format = NULL)
 {
     args <- capture_args(list(fill_value = as_integer))
+    # pass 'images' as unnamed positional arg (was renamed in Keras 3.4.0)
+    images <- args[["images"]] %||% args[["image"]]
+    args[["images"]] <- args[["image"]] <- NULL
+    args <- c(list(images), args)
+
     do.call(keras$ops$image$affine_transform, args)
 }
 
