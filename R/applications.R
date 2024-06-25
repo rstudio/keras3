@@ -587,6 +587,9 @@ function (include_top = TRUE,
 #' of the "top" layer. When loading pretrained weights,
 #' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/densenet#densenet121-function>
@@ -594,7 +597,8 @@ function (include_top = TRUE,
 #' @tether keras.applications.DenseNet121
 application_densenet121 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name = 'densenet121')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$DenseNet121, args)
@@ -671,6 +675,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' of the "top" layer. When loading pretrained weights,
 #' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/densenet#densenet169-function>
@@ -678,7 +685,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.DenseNet169
 application_densenet169 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='densenet169')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$DenseNet169, args)
@@ -755,6 +763,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' of the "top" layer. When loading pretrained weights,
 #' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/densenet#densenet201-function>
@@ -762,7 +773,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.DenseNet201
 application_densenet201 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='densenet201')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$DenseNet201, args)
