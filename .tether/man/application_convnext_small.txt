@@ -1,6 +1,5 @@
 __signature__
 keras.applications.ConvNeXtSmall(
-  model_name='convnext_small',
   include_top=True,
   include_preprocessing=True,
   weights='imagenet',
@@ -8,7 +7,8 @@ keras.applications.ConvNeXtSmall(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='convnext_small'
 )
 __doc__
 Instantiates the ConvNeXtSmall architecture.
@@ -73,6 +73,8 @@ Args:
         Defaults to `"softmax"`.
         When loading pretrained weights, `classifier_activation` can only
         be `None` or `"softmax"`.
+    name: The name of the model (string).
 
 Returns:
     A model instance.
+

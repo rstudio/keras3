@@ -82,8 +82,8 @@
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
-#' @param model_name
-#' String, name for the model.
+#' @param name
+#' The name of the model (string).
 #'
 #' @export
 #' @seealso
@@ -91,9 +91,10 @@
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtBase>
 #' @tether keras.applications.ConvNeXtBase
 application_convnext_base <-
-function (model_name = "convnext_base", include_top = TRUE, include_preprocessing = TRUE,
+function (include_top = TRUE, include_preprocessing = TRUE,
     weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-    pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name = "convnext_base")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtBase, args)
@@ -185,8 +186,8 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
-#' @param model_name
-#' String, name for the model.
+#' @param name
+#' The name of the model (string).
 #'
 #' @export
 #' @seealso
@@ -194,9 +195,10 @@ function (model_name = "convnext_base", include_top = TRUE, include_preprocessin
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtLarge>
 #' @tether keras.applications.ConvNeXtLarge
 application_convnext_large <-
-function (model_name = "convnext_large", include_top = TRUE,
+function (include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name = "convnext_large")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtLarge, args)
@@ -288,8 +290,8 @@ function (model_name = "convnext_large", include_top = TRUE,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
-#' @param model_name
-#' String, name for the model.
+#' @param name
+#' The name of the model (string).
 #'
 #' @export
 #' @seealso
@@ -297,9 +299,10 @@ function (model_name = "convnext_large", include_top = TRUE,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtSmall>
 #' @tether keras.applications.ConvNeXtSmall
 application_convnext_small <-
-function (model_name = "convnext_small", include_top = TRUE,
+function (include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    model_name = "convnext_small")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtSmall, args)
@@ -391,8 +394,8 @@ function (model_name = "convnext_small", include_top = TRUE,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
-#' @param model_name
-#' String, name for the model.
+#' @param name
+#' The name of the model (string).
 #'
 #' @export
 #' @seealso
@@ -400,9 +403,10 @@ function (model_name = "convnext_small", include_top = TRUE,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtTiny>
 #' @tether keras.applications.ConvNeXtTiny
 application_convnext_tiny <-
-function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessing = TRUE,
+function (include_top = TRUE, include_preprocessing = TRUE,
     weights = "imagenet", input_tensor = NULL, input_shape = NULL,
-    pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    model_name = "convnext_tiny")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtTiny, args)
@@ -494,8 +498,8 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
-#' @param model_name
-#' String, name for the model.
+#' @param name
+#' The name of the model (string).
 #'
 #' @export
 #' @seealso
@@ -503,9 +507,10 @@ function (model_name = "convnext_tiny", include_top = TRUE, include_preprocessin
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/applications/ConvNeXtXLarge>
 #' @tether keras.applications.ConvNeXtXLarge
 application_convnext_xlarge <-
-function (model_name = "convnext_xlarge", include_top = TRUE,
+function (include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    model_name = "convnext_xlarge")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtXLarge, args)
@@ -842,6 +847,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -853,7 +861,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b0 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb0', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB0, args)
@@ -938,6 +946,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -949,7 +960,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b1 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb1', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB1, args)
@@ -1034,6 +1045,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1045,7 +1059,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb2', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB2, args)
@@ -1130,6 +1144,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1141,7 +1158,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb3', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB3, args)
@@ -1226,6 +1243,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1237,7 +1257,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b4 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb4', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB4, args)
@@ -1322,6 +1342,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1333,7 +1356,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b5 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb5', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB5, args)
@@ -1418,6 +1441,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1429,7 +1455,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b6 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb6', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB6, args)
@@ -1514,6 +1540,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1525,7 +1554,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_b7 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    ...)
+    name = 'efficientnetb7', ...)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetB7, args)
@@ -1616,6 +1645,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b0-function>
@@ -1624,7 +1656,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2b0 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = 'efficientnetv2-b0')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B0, args)
@@ -1715,6 +1747,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b1-function>
@@ -1723,7 +1758,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2b1 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = 'efficientnetv2-b1')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B1, args)
@@ -1814,6 +1849,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b2-function>
@@ -1822,7 +1860,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2b2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = 'efficientnetv2-b2')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B2, args)
@@ -1913,6 +1951,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2b3-function>
@@ -1921,7 +1962,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2b3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = 'efficientnetv2-b3')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2B3, args)
@@ -2012,6 +2053,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2l-function>
@@ -2020,7 +2064,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2l <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = "efficientnetv2-l")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2L, args)
@@ -2111,6 +2155,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2m-function>
@@ -2119,7 +2166,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2m <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = "efficientnetv2-m")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2M, args)
@@ -2210,6 +2257,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param include_preprocessing
 #' Boolean, whether to include the preprocessing layer at the bottom of the network.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/efficientnet_v2#efficientnetv2s-function>
@@ -2218,7 +2268,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_efficientnet_v2s <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = "efficientnetv2-s")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$EfficientNetV2S, args)
@@ -2305,6 +2355,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' of the "top" layer. When loading pretrained weights,
 #' `classifier_activation` can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/inceptionresnetv2#inceptionresnetv2-function>
@@ -2312,7 +2365,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.InceptionResNetV2
 application_inception_resnet_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name = 'inception_resnet_v2')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$InceptionResNetV2, args)
@@ -2399,6 +2453,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer. When loading pretrained weights, `classifier_activation`
 #' can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/inceptionv3#inceptionv3-function>
@@ -2406,7 +2463,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.InceptionV3
 application_inception_v3 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='inception_v3')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$InceptionV3, args)
@@ -2509,6 +2567,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer. When loading pretrained weights, `classifier_activation`
 #' can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenet-function>
@@ -2517,7 +2578,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 application_mobilenet <-
 function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
     dropout = 0.001, include_top = TRUE, weights = "imagenet",
-    input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name = NULL)
 {
     args <- capture_args(list(depth_multiplier = as_integer,
         classes = as_integer, input_shape = normalize_shape))
@@ -2620,6 +2682,9 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 #' layer. When loading pretrained weights, `classifier_activation`
 #' can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenetv2-function>
@@ -2628,7 +2693,7 @@ function (input_shape = NULL, alpha = 1, depth_multiplier = 1L,
 application_mobilenet_v2 <-
 function (input_shape = NULL, alpha = 1, include_top = TRUE,
     weights = "imagenet", input_tensor = NULL, pooling = NULL,
-    classes = 1000L, classifier_activation = "softmax")
+    classes = 1000L, classifier_activation = "softmax", name = NULL)
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNetV2, args)
@@ -2765,6 +2830,9 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' Boolean, whether to include the preprocessing
 #' layer (`Rescaling`) at the bottom of the network. Defaults to `TRUE`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenetv3large-function>
@@ -2774,7 +2842,7 @@ application_mobilenet_v3_large <-
 function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
     include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     classes = 1000L, pooling = NULL, dropout_rate = 0.2, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = "MobileNetV3Large")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNetV3Large, args)
@@ -2911,6 +2979,9 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' Boolean, whether to include the preprocessing
 #' layer (`Rescaling`) at the bottom of the network. Defaults to `TRUE`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/mobilenet#mobilenetv3small-function>
@@ -2920,7 +2991,7 @@ application_mobilenet_v3_small <-
 function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
     include_top = TRUE, weights = "imagenet", input_tensor = NULL,
     classes = 1000L, pooling = NULL, dropout_rate = 0.2, classifier_activation = "softmax",
-    include_preprocessing = TRUE)
+    include_preprocessing = TRUE, name = "MobileNetV3Small")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$MobileNetV3Small, args)
@@ -2996,6 +3067,9 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' layer.  When loading pretrained weights, `classifier_activation`
 #' can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/nasnet#nasnetlarge-function>
@@ -3003,7 +3077,8 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' @tether keras.applications.NASNetLarge
 application_nasnet_large <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
-    input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name = "nasnet_large")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$NASNetLarge, args)
@@ -3090,6 +3165,9 @@ application_nasnetlarge <- function(...) {
 #' layer.  When loading pretrained weights, `classifier_activation` can
 #' only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/nasnet#nasnetmobile-function>
@@ -3097,7 +3175,8 @@ application_nasnetlarge <- function(...) {
 #' @tether keras.applications.NASNetMobile
 application_nasnet_mobile <-
 function (input_shape = NULL, include_top = TRUE, weights = "imagenet",
-    input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_tensor = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='nasnet_mobile')
 {
     args <- capture_args(list(classes = as_integer))
     model <- do.call(keras$applications$NASNetMobile, args)
@@ -3185,6 +3264,9 @@ application_nasnetmobile <- function(...) {
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet101-function>
@@ -3192,7 +3274,8 @@ application_nasnetmobile <- function(...) {
 #' @tether keras.applications.ResNet101
 application_resnet101 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='resnet101')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet101, args)
@@ -3268,6 +3351,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet152-function>
@@ -3275,7 +3361,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.ResNet152
 application_resnet152 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='resnet152')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet152, args)
@@ -3351,6 +3438,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet50-function>
@@ -3358,7 +3448,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.ResNet50
 application_resnet50 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='resnet50')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet50, args)
@@ -3433,6 +3524,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet101v2-function>
@@ -3440,7 +3534,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.ResNet101V2
 application_resnet101_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='resnet101v2')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet101V2, args)
@@ -3515,6 +3610,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet152v2-function>
@@ -3522,7 +3620,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.ResNet152V2
 application_resnet152_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='resnet152v2')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet152V2, args)
@@ -3597,6 +3696,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' When loading pretrained weights, `classifier_activation` can only
 #' be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/resnet#resnet50v2-function>
@@ -3604,7 +3706,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.ResNet50V2
 application_resnet50_v2 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='resnet50v2')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ResNet50V2, args)
@@ -3639,7 +3742,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' dataset, without scaling.
 #'
 #' @returns
-#' A model instance.
+#' A `Model` instance.
 #'
 #' @param include_top
 #' whether to include the 3 fully-connected
@@ -3690,6 +3793,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer.  When loading pretrained weights, `classifier_activation`
 #' can only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/vgg#vgg16-function>
@@ -3697,7 +3803,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.VGG16
 application_vgg16 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='vgg16')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$VGG16, args)
@@ -3783,6 +3890,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer.  When loading pretrained weights, `classifier_activation` can
 #' only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/vgg#vgg19-function>
@@ -3790,7 +3900,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.VGG19
 application_vgg19 <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='vgg19')
 {
     args <- capture_args(list(classes = as_integer))
     model <- do.call(keras$applications$VGG19, args)
@@ -3872,6 +3983,9 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' layer.  When loading pretrained weights, `classifier_activation` can
 #' only be `NULL` or `"softmax"`.
 #'
+#' @param name
+#' The name of the model (string).
+#'
 #' @export
 #' @seealso
 #' + <https://keras.io/api/applications/xception#xception-function>
@@ -3879,7 +3993,8 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @tether keras.applications.Xception
 application_xception <-
 function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
-    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax")
+    input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
+    name='xception')
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$Xception, args)
