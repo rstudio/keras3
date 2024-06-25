@@ -12,7 +12,7 @@ equal to 1 (across the axes specified in axis)."><meta name="robots" content="no
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@ returned, invisibly.</p></li>
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_reshape.html">op_reshape</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, newshape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">normalized_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_unit_normalization.html">layer_unit_normalization</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/op_sum.html">op_sum</a></span><span class="op">(</span><span class="va">normalized_data</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="fu"><a href="../reference/op_sum.html">op_sum</a></span><span class="op">(</span><span class="va">normalized_data</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(0.9999999, shape=(), dtype=float32)</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
     </div>

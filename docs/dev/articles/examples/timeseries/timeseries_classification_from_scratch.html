@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -223,7 +223,7 @@ number of classes beforehand.</p>
 <p>Now we shuffle the training set because we will be using the
 <code>validation_split</code> option later when training.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">listarrays</span><span class="fu">::</span><span class="fu">shuffle_rows</span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu">listarrays</span><span class="fu">::</span><span class="fu"><a href="https://t-kalinowski.github.io/listarrays/reference/shuffle_rows.html" class="external-link">shuffle_rows</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span></span>
 <span><span class="co"># idx &lt;- sample.int(nrow(x_train))</span></span>
 <span><span class="co"># x_train %&lt;&gt;% .[idx,, ,drop = FALSE]</span></span>
 <span><span class="co"># y_train %&lt;&gt;% .[idx,  ,drop = FALSE]</span></span></code></pre></div>

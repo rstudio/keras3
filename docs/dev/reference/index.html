@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1128,6 +1128,11 @@
         <dd>Decorator to define a function with a custom gradient.</dd>
       </dl><dl><dt>
           
+          <code><a href="op_dtype.html">op_dtype()</a></code> 
+        </dt>
+        <dd>Return the dtype of the tensor input as a standardized string.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_fori_loop.html">op_fori_loop()</a></code> 
         </dt>
         <dd>For loop implementation.</dd>
@@ -1136,6 +1141,16 @@
           <code><a href="op_is_tensor.html">op_is_tensor()</a></code> 
         </dt>
         <dd>Check whether the given object is a tensor.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_map.html">op_map()</a></code> 
+        </dt>
+        <dd>Map a function over leading array axes.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_scan.html">op_scan()</a></code> 
+        </dt>
+        <dd>Scan a function over leading array axes while carrying along state.</dd>
       </dl><dl><dt>
           
           <code><a href="op_scatter.html">op_scatter()</a></code> 
@@ -1166,6 +1181,11 @@
           <code><a href="op_stop_gradient.html">op_stop_gradient()</a></code> 
         </dt>
         <dd>Stops gradient computation.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_switch.html">op_switch()</a></code> 
+        </dt>
+        <dd>Apply exactly one of the <code>branches</code> given by <code>index</code>.</dd>
       </dl><dl><dt>
           
           <code><a href="op_unstack.html">op_unstack()</a></code> 
@@ -1363,6 +1383,11 @@
           <code><a href="op_argmin.html">op_argmin()</a></code> 
         </dt>
         <dd>Returns the indices of the minimum values along an axis.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_argpartition.html">op_argpartition()</a></code> 
+        </dt>
+        <dd>Performs an indirect partition along the given axis.</dd>
       </dl><dl><dt>
           
           <code><a href="op_argsort.html">op_argsort()</a></code> 
@@ -1663,6 +1688,11 @@
           <code><a href="op_logspace.html">op_logspace()</a></code> 
         </dt>
         <dd>Returns numbers spaced evenly on a log scale.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_lstsq.html">op_lstsq()</a></code> 
+        </dt>
+        <dd>Return the least-squares solution to a linear matrix equation.</dd>
       </dl><dl><dt>
           
           <code><a href="op_matmul.html">op_matmul()</a></code> 
@@ -2182,6 +2212,11 @@
         <dd>Computes the inverse of a square tensor.</dd>
       </dl><dl><dt>
           
+          <code><a href="op_lstsq.html">op_lstsq()</a></code> 
+        </dt>
+        <dd>Return the least-squares solution to a linear matrix equation.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_lu_factor.html">op_lu_factor()</a></code> 
         </dt>
         <dd>Computes the lower-upper decomposition of a square matrix.</dd>
@@ -2233,9 +2268,14 @@
         <dd>Extracts patches from the image(s).</dd>
       </dl><dl><dt>
           
+          <code><a href="op_image_hsv_to_rgb.html">op_image_hsv_to_rgb()</a></code> 
+        </dt>
+        <dd>Convert HSV images to RGB.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_image_map_coordinates.html">op_image_map_coordinates()</a></code> 
         </dt>
-        <dd>Map the input array to new coordinates by interpolation..</dd>
+        <dd>Map the input array to new coordinates by interpolation.</dd>
       </dl><dl><dt>
           
           <code><a href="op_image_pad.html">op_image_pad()</a></code> 
@@ -2251,6 +2291,11 @@
           <code><a href="op_image_rgb_to_grayscale.html">op_image_rgb_to_grayscale()</a></code> 
         </dt>
         <dd>Convert RGB images to grayscale.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_rgb_to_hsv.html">op_image_rgb_to_hsv()</a></code> 
+        </dt>
+        <dd>Convert RGB images to HSV.</dd>
       </dl></div><div class="section level2">
       <h2 id="losses">Losses<a class="anchor" aria-label="anchor" href="#losses"></a></h2>
       
@@ -2853,9 +2898,14 @@
         <dd>Extracts patches from the image(s).</dd>
       </dl><dl><dt>
           
+          <code><a href="op_image_hsv_to_rgb.html">op_image_hsv_to_rgb()</a></code> 
+        </dt>
+        <dd>Convert HSV images to RGB.</dd>
+      </dl><dl><dt>
+          
           <code><a href="op_image_map_coordinates.html">op_image_map_coordinates()</a></code> 
         </dt>
-        <dd>Map the input array to new coordinates by interpolation..</dd>
+        <dd>Map the input array to new coordinates by interpolation.</dd>
       </dl><dl><dt>
           
           <code><a href="op_image_pad.html">op_image_pad()</a></code> 
@@ -2871,6 +2921,11 @@
           <code><a href="op_image_rgb_to_grayscale.html">op_image_rgb_to_grayscale()</a></code> 
         </dt>
         <dd>Convert RGB images to grayscale.</dd>
+      </dl><dl><dt>
+          
+          <code><a href="op_image_rgb_to_hsv.html">op_image_rgb_to_hsv()</a></code> 
+        </dt>
+        <dd>Convert RGB images to HSV.</dd>
       </dl></div><div class="section level2">
       
       <h3 id="image-augmentation-layers">Image augmentation Layers<a class="anchor" aria-label="anchor" href="#image-augmentation-layers"></a></h3>
@@ -3535,7 +3590,7 @@
         <dd>Configure a Keras backend</dd>
       </dl><dl><dt>
           
-          <code><a href="shape.html">shape()</a></code> <code><a href="shape.html">format(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">print(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`[`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.integer(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.list(<i>&lt;keras_shape&gt;</i>)</a></code> 
+          <code><a href="shape.html">shape()</a></code> <code><a href="shape.html">format(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">print(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`[`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.integer(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.list(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`==`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`!=`(<i>&lt;keras_shape&gt;</i>)</a></code> 
         </dt>
         <dd>Tensor shape utility</dd>
       </dl><dl><dt>

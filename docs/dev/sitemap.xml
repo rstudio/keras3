@@ -1183,6 +1183,9 @@
     <loc>https://keras3.posit.co/dev/reference/op_argmin.html</loc>
   </url>
   <url>
+    <loc>https://keras3.posit.co/dev/reference/op_argpartition.html</loc>
+  </url>
+  <url>
     <loc>https://keras3.posit.co/dev/reference/op_argsort.html</loc>
   </url>
   <url>
@@ -1303,6 +1306,9 @@
     <loc>https://keras3.posit.co/dev/reference/op_dot.html</loc>
   </url>
   <url>
+    <loc>https://keras3.posit.co/dev/reference/op_dtype.html</loc>
+  </url>
+  <url>
     <loc>https://keras3.posit.co/dev/reference/op_eig.html</loc>
   </url>
   <url>
@@ -1402,6 +1408,9 @@
     <loc>https://keras3.posit.co/dev/reference/op_image_extract_patches.html</loc>
   </url>
   <url>
+    <loc>https://keras3.posit.co/dev/reference/op_image_hsv_to_rgb.html</loc>
+  </url>
+  <url>
     <loc>https://keras3.posit.co/dev/reference/op_image_map_coordinates.html</loc>
   </url>
   <url>
@@ -1412,6 +1421,9 @@
   </url>
   <url>
     <loc>https://keras3.posit.co/dev/reference/op_image_rgb_to_grayscale.html</loc>
+  </url>
+  <url>
+    <loc>https://keras3.posit.co/dev/reference/op_image_rgb_to_hsv.html</loc>
   </url>
   <url>
     <loc>https://keras3.posit.co/dev/reference/op_in_top_k.html</loc>
@@ -1492,7 +1504,13 @@
     <loc>https://keras3.posit.co/dev/reference/op_logsumexp.html</loc>
   </url>
   <url>
+    <loc>https://keras3.posit.co/dev/reference/op_lstsq.html</loc>
+  </url>
+  <url>
     <loc>https://keras3.posit.co/dev/reference/op_lu_factor.html</loc>
+  </url>
+  <url>
+    <loc>https://keras3.posit.co/dev/reference/op_map.html</loc>
   </url>
   <url>
     <loc>https://keras3.posit.co/dev/reference/op_matmul.html</loc>
@@ -1621,6 +1639,9 @@
     <loc>https://keras3.posit.co/dev/reference/op_rsqrt.html</loc>
   </url>
   <url>
+    <loc>https://keras3.posit.co/dev/reference/op_scan.html</loc>
+  </url>
+  <url>
     <loc>https://keras3.posit.co/dev/reference/op_scatter.html</loc>
   </url>
   <url>
@@ -1727,6 +1748,9 @@
   </url>
   <url>
     <loc>https://keras3.posit.co/dev/reference/op_swapaxes.html</loc>
+  </url>
+  <url>
+    <loc>https://keras3.posit.co/dev/reference/op_switch.html</loc>
   </url>
   <url>
     <loc>https://keras3.posit.co/dev/reference/op_take.html</loc>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +76,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">save_model</span><span class="op">(</span><span class="va">model</span>, filepath <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">save_model</span><span class="op">(</span><span class="va">model</span>, filepath <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, zipped <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -94,6 +94,11 @@ Path where to save the model. Must end in <code>.keras</code>.</p></dd>
 <dd><p>Whether we should overwrite any existing model
 at the target location, or instead ask the user
 via an interactive prompt.</p></dd>
+
+
+<dt>zipped</dt>
+<dd><p>Whether to save the model as a zipped <code>.keras</code>
+archive (default), or as an unzipped directory.</p></dd>
 
 
 <dt>...</dt>
@@ -122,7 +127,7 @@ vector.</p>
 <span>  <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
 <span>  <span class="va">loaded_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p>The saved <code>.keras</code> file contains:</p><ul><li><p>The model's configuration (architecture)</p></li>
+<p>The saved <code>.keras</code> file is a <code>zip</code> archive that contains:</p><ul><li><p>The model's configuration (architecture)</p></li>
 <li><p>The model's weights</p></li>
 <li><p>The model's optimizer's state (if any)</p></li>
 </ul><p>Thus models can be reinstantiated in the exact same state.</p>

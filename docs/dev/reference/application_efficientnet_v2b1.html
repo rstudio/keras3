@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,7 +84,8 @@
 <span>  pooling <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  classes <span class="op">=</span> <span class="fl">1000L</span>,</span>
 <span>  classifier_activation <span class="op">=</span> <span class="st">"softmax"</span>,</span>
-<span>  include_preprocessing <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  include_preprocessing <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"efficientnetv2-b1"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -145,6 +146,10 @@ be <code>NULL</code> or <code>"softmax"</code>.</p></dd>
 
 <dt>include_preprocessing</dt>
 <dd><p>Boolean, whether to include the preprocessing layer at the bottom of the network.</p></dd>
+
+
+<dt>name</dt>
+<dd><p>The name of the model (string).</p></dd>
 
 </dl></div>
     <div class="section level2">

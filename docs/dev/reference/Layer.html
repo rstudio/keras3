@@ -38,7 +38,7 @@ Users will just instantiate a layer and then treat it as a callable."><meta name
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -588,6 +588,11 @@ List of all trainable layer state.</p>
 <li><p><code>trainable_weights</code>
 List of all trainable weight variables of the layer.</p>
 <p>These are the weights that get updated by the optimizer during training.</p></li>
+<li><p><code>path</code>
+The path of the layer.</p>
+<p>If the layer has not been built yet, it will be <code>NULL</code>.</p></li>
+<li><p><code>quantization_mode</code>
+The quantization mode of this layer, <code>NULL</code> if not quantized.</p></li>
 <li><p><code>variable_dtype</code>
 The dtype of the state (weights) of the layer.</p></li>
 <li><p><code>variables</code>

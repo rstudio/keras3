@@ -34,7 +34,7 @@
     
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -244,7 +244,7 @@ values from the training data.</p>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
 <span>  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/timeseries_dataset_from_array.html">timeseries_dataset_from_array</a></span><span class="op">(</span><span class="va">x</span>, <span class="cn">NULL</span>, sequence_length <span class="op">=</span> <span class="va">TIME_STEPS</span><span class="op">)</span></span>
 <span>  <span class="co"># Because the dataset is small, cast TF Dataset to an R array for convenience.</span></span>
-<span>  <span class="va">ds</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/as_array_iterator.html" class="external-link">as_array_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">bind_on_rows</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">ds</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/as_array_iterator.html" class="external-link">as_array_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://t-kalinowski.github.io/listarrays/reference/bind-arrays.html" class="external-link">bind_on_rows</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu">as_dataset</span><span class="op">(</span><span class="va">df_train</span><span class="op">)</span></span>

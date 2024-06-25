@@ -20,7 +20,7 @@ loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,18 +94,20 @@ loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
 <span>  <span class="va">y_pred</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  reduction <span class="op">=</span> <span class="st">"sum_over_batch_size"</span>,</span>
-<span>  name <span class="op">=</span> <span class="st">"dice"</span></span>
+<span>  name <span class="op">=</span> <span class="st">"dice"</span>,</span>
+<span>  axis <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  dtype <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>y_true</dt>
-<dd><p>tensor of true targets.</p></dd>
+<dd><p>Tensor of true targets.</p></dd>
 
 
 <dt>y_pred</dt>
-<dd><p>tensor of predicted targets.</p></dd>
+<dd><p>Tensor of predicted targets.</p></dd>
 
 
 <dt>...</dt>
@@ -121,6 +123,18 @@ Supported options are <code>"sum"</code>, <code>"sum_over_batch_size"</code> or 
 <dt>name</dt>
 <dd><p>String, name for the object</p></dd>
 
+
+<dt>axis</dt>
+<dd><p>List of which dimensions the loss is calculated. Defaults to
+<code>NULL</code>.</p></dd>
+
+
+<dt>dtype</dt>
+<dd><p>The dtype of the loss's computations. Defaults to <code>NULL</code>, which
+means using <code><a href="config_floatx.html">config_floatx()</a></code>. <code><a href="config_floatx.html">config_floatx()</a></code> is a
+<code>"float32"</code> unless set to different value
+(via <code><a href="config_set_floatx.html">config_set_floatx()</a></code>).</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -128,6 +142,25 @@ Supported options are <code>"sum"</code>, <code>"sum_over_batch_size"</code> or 
 
 <p>if <code>y_true</code> and <code>y_pred</code> are provided, Dice loss value. Otherwise,
 a <code><a href="Loss.html">Loss()</a></code> instance.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a></h2>
+    <p></p><div class="sourceCode r"><pre><code><span><span class="va">y_true</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>,</span>
+<span>                  <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">y_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.4</span>, <span class="fl">0</span>,   <span class="fl">0</span>,</span>
+<span>                  <span class="fl">1</span>,   <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.9</span><span class="op">)</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">axis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loss_dice.html">loss_dice</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span>, axis <span class="op">=</span> <span class="va">axis</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">loss</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([0.50000001 0.75757576], shape=(2), dtype=float64)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">loss</span> <span class="op">=</span> <span class="fu"><a href="../reference/loss_dice.html">loss_dice</a></span><span class="op">(</span><span class="va">y_true</span>, <span class="va">y_pred</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">loss</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">loss</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(0.6164383614186526, shape=(), dtype=float64)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

@@ -42,7 +42,7 @@ a linear projection and return.'><meta name="robots" content="noindex"><!-- math
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -140,6 +140,7 @@ a linear projection and return.</p>
 <span>  activity_regularizer <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  kernel_constraint <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  bias_constraint <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -207,6 +208,10 @@ attention over all axes, but batch, heads, and features.</p></dd>
 
 <dt>bias_constraint</dt>
 <dd><p>Constraint for dense layer kernels.</p></dd>
+
+
+<dt>seed</dt>
+<dd><p>Optional integer to seed the dropout layer.</p></dd>
 
 
 <dt>...</dt>

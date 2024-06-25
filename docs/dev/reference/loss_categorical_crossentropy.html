@@ -20,7 +20,7 @@ point values per feature, i.e., the shape of both y_pred and y_true are
     
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,8 @@ point values per feature, i.e., the shape of both <code>y_pred</code> and <code>
 <span>  axis <span class="op">=</span> <span class="op">-</span><span class="fl">1L</span>,</span>
 <span>  <span class="va">...</span>,</span>
 <span>  reduction <span class="op">=</span> <span class="st">"sum_over_batch_size"</span>,</span>
-<span>  name <span class="op">=</span> <span class="st">"categorical_crossentropy"</span></span>
+<span>  name <span class="op">=</span> <span class="st">"categorical_crossentropy"</span>,</span>
+<span>  dtype <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -142,6 +143,13 @@ Supported options are <code>"sum"</code>, <code>"sum_over_batch_size"</code> or 
 
 <dt>name</dt>
 <dd><p>Optional name for the loss instance.</p></dd>
+
+
+<dt>dtype</dt>
+<dd><p>The dtype of the loss's computations. Defaults to <code>NULL</code>, which
+means using <code><a href="config_floatx.html">config_floatx()</a></code>. <code><a href="config_floatx.html">config_floatx()</a></code> is a
+<code>"float32"</code> unless set to different value
+(via <code><a href="config_set_floatx.html">config_set_floatx()</a></code>).</p></dd>
 
 </dl></div>
     <div class="section level2">
