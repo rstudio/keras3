@@ -323,6 +323,11 @@ logsumexp(
   axis=None,
   keepdims=False
 )
+lstsq(
+  a,
+  b,
+  rcond=None
+)
 lu_factor(x)
 matmul(x1, x2)
 max(
