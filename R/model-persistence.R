@@ -20,7 +20,7 @@
 #' ))
 #' ```
 #'
-#' The saved `.keras` file contains:
+#' The saved `.keras` file is a `zip` archive that contains:
 #'
 #' - The model's configuration (architecture)
 #' - The model's weights
@@ -47,6 +47,10 @@
 #' at the target location, or instead ask the user
 #' via an interactive prompt.
 #'
+#' @param zipped
+#' Whether to save the model as a zipped `.keras`
+#' archive (default), or as an unzipped directory.
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -63,7 +67,7 @@
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save>
 save_model <-
-function (model, filepath = NULL, overwrite = FALSE, ...)
+function (model, filepath = NULL, overwrite = FALSE, zipped = TRUE, ...)
 {
   if(is.null(filepath) -> return_serialized) {
     filepath <- tempfile(pattern = "keras_model-", fileext = ".keras")
@@ -71,7 +75,10 @@ function (model, filepath = NULL, overwrite = FALSE, ...)
   }
 
   overwrite <- confirm_overwrite(filepath, overwrite)
-  keras$saving$save_model(model, filepath, overwrite = overwrite)
+  args <- list(model, filepath, overwrite = overwrite)
+  if (!isTRUE(zipped))
+    args[["zipped"]] <- zipped # arg added in Keras 3.4.0
+  do.call(keras$saving$save_model, args)
 
   if(return_serialized)
     readBin(filepath, what = "raw", n = file.size(filepath))
