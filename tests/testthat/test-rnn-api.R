@@ -25,7 +25,7 @@ test_succeeds("rnn_cell_gru", {
   # GRUCell
  inputs <- random_uniform(c(32, 10, 8))
  output <- inputs %>% layer_rnn(rnn_cell_gru(4))
- expect_true(output$shape == shape(32, 4))
+ expect_identical(as.list(output$shape), as.list(shape(32, 4)))
 
  rnn <- layer_rnn(cell = rnn_cell_gru(4),
                   return_sequences = TRUE,
