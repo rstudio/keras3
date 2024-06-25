@@ -13,7 +13,7 @@ application_convnext_small(
   pooling = NULL,
   classes = 1000L,
   classifier_activation = "softmax",
-  model_name = "convnext_small"
+  name = "convnext_small"
 )
 }
 \arguments{

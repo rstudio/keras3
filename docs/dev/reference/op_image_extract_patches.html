@@ -88,7 +88,11 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>size</dt>
+    <dl><dt>images</dt>
+<dd><p>Input image or batch of images. Must be 3D or 4D.</p></dd>
+
+
+<dt>size</dt>
 <dd><p>Patch size int or list (patch_height, patch_width)</p></dd>
 
 
@@ -116,10 +120,6 @@ It can be either <code>"channels_last"</code> or <code>"channels_first"</code>.
 corresponds to inputs with shape <code>(batch, channels, height, width)</code>.
 If not specified, the value will default to
 <code><a href="config_image_data_format.html">config_image_data_format()</a></code>.</p></dd>
-
-
-<dt>image</dt>
-<dd><p>Input image or batch of images. Must be 3D or 4D.</p></dd>
 
 </dl></div>
     <div class="section level2">

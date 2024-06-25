@@ -14,6 +14,8 @@ op_image_affine_transform(
 )
 }
 \arguments{
+\item{images}{Input image or batch of images. Must be 3D or 4D.}
+
 \item{transform}{Projective transform matrix/matrices. A vector of length 8 or
 tensor of size N x 8. If one row of transform is
 \verb{[a0, a1, a2, b0, b1, b2, c0, c1]}, then it maps the output point
@@ -56,8 +58,6 @@ corresponds to inputs with shape \verb{(batch, channels, height, width)}.
 
 If not specified, the value will default to
 \code{config_image_data_format()}.}
-
-\item{image}{Input image or batch of images. Must be 3D or 4D.}
 }
 \value{
 Applied affine transform image or batch of images.

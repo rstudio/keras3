@@ -17,6 +17,8 @@ op_image_resize(
 )
 }
 \arguments{
+\item{images}{Input image or batch of images. Must be 3D or 4D.}
+
 \item{size}{Size of output image in \verb{(height, width)} format.}
 
 \item{interpolation}{Interpolation method. Available methods are \code{"nearest"},
@@ -52,8 +54,6 @@ It can be either \code{"channels_last"} or \code{"channels_first"}.
 corresponds to inputs with shape \verb{(batch, channels, height, width)}.
 If not specified, the value will default to
 \code{config_image_data_format()}.}
-
-\item{image}{Input image or batch of images. Must be 3D or 4D.}
 }
 \value{
 Resized image or batch of images.

@@ -14,6 +14,8 @@ op_image_extract_patches(
 )
 }
 \arguments{
+\item{images}{Input image or batch of images. Must be 3D or 4D.}
+
 \item{size}{Patch size int or list (patch_height, patch_width)}
 
 \item{strides}{strides along height and width. If not specified, or
@@ -33,8 +35,6 @@ It can be either \code{"channels_last"} or \code{"channels_first"}.
 corresponds to inputs with shape \verb{(batch, channels, height, width)}.
 If not specified, the value will default to
 \code{config_image_data_format()}.}
-
-\item{image}{Input image or batch of images. Must be 3D or 4D.}
 }
 \value{
 Extracted patches 3D (if not batched) or 4D (if batched)
