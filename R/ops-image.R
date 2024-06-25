@@ -503,10 +503,8 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' @returns
 #' Grayscale image or batch of grayscale images.
 #'
-#' @param image
-#' Input RGB image or batch of RGB images. Must be a 3D tensor
-#' with shape `(height, width, channels)` or a 4D tensor with shape
-#' `(batch, height, width, channels)`.
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param data_format
 #' A string specifying the data format of the input tensor.
@@ -514,7 +512,8 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' `"channels_last"` corresponds to inputs with shape
 #' `(batch, height, width, channels)`, while `"channels_first"`
 #' corresponds to inputs with shape `(batch, channels, height, width)`.
-#' Defaults to `"channels_last"`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
 #'
 #' @export
 #' @family image ops
@@ -522,5 +521,6 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' @family ops
 #' @tether keras.ops.image.rgb_to_grayscale
 op_image_rgb_to_grayscale <-
-function (image, data_format = "channels_last")
-keras$ops$image$rgb_to_grayscale(image, data_format)
+function (images, data_format = NULL) {
+  keras$ops$image$rgb_to_grayscale(images, data_format)
+}
