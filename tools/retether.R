@@ -47,7 +47,7 @@ resolve_rmd_tether <- function(url) {
   tutobook_to_rmd(path, outfile = FALSE)
 }
 
-resolve_rmd_tether <- NULL
+# resolve_rmd_tether <- NULL
 # resolve_roxy_tether <- NULL
 
 
