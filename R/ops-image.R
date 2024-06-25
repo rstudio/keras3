@@ -378,14 +378,14 @@ function (images, top_padding = NULL, left_padding = NULL,
 #' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
 #'
 #' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, weight)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
 #'
 #' @export
 #' @family image ops
@@ -396,12 +396,12 @@ function (images, top_padding = NULL, left_padding = NULL,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>
 #' @tether keras.ops.image.resize
 op_image_resize <-
-function (image, size, interpolation = "bilinear", antialias = FALSE,
+function (images, size, interpolation = "bilinear", antialias = FALSE,
           crop_to_aspect_ratio = FALSE, pad_to_aspect_ratio = FALSE,
-          fill_mode = "constant", fill_value = 0,
-    data_format = "channels_last")
+          fill_mode = "constant", fill_value = 0, data_format = NULL)
 {
     args <- capture_args(list(size = as_integer))
+    args <- args_to_positional(args, "images")
     do.call(keras$ops$image$resize, args)
 }
 

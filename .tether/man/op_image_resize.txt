@@ -1,6 +1,6 @@
 __signature__
 keras.ops.image.resize(
-  image,
+  images,
   size,
   interpolation='bilinear',
   antialias=False,
@@ -8,13 +8,13 @@ keras.ops.image.resize(
   pad_to_aspect_ratio=False,
   fill_mode='constant',
   fill_value=0.0,
-  data_format='channels_last'
+  data_format=None
 )
 __doc__
 Resize images to size using the specified interpolation method.
 
 Args:
-    image: Input image or batch of images. Must be 3D or 4D.
+    images: Input image or batch of images. Must be 3D or 4D.
     size: Size of output image in `(height, width)` format.
     interpolation: Interpolation method. Available methods are `"nearest"`,
         `"bilinear"`, and `"bicubic"`. Defaults to `"bilinear"`.
@@ -36,14 +36,13 @@ Args:
         supported at this time
         (fill with constant value, equal to `fill_value`).
     fill_value: Float. Padding value to use when `pad_to_aspect_ratio=True`.
-    data_format: string, either `"channels_last"` or `"channels_first"`.
-        The ordering of the dimensions in the inputs. `"channels_last"`
-        corresponds to inputs with shape `(batch, height, width, channels)`
-        while `"channels_first"` corresponds to inputs with shape
-        `(batch, channels, height, weight)`. It defaults to the
-        `image_data_format` value found in your Keras config file at
-        `~/.keras/keras.json`. If you never set it, then it will be
-        `"channels_last"`.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
 
 Returns:
     Resized image or batch of images.
