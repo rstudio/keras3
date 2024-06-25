@@ -1,0 +1,41 @@
+__signature__
+keras.ops.switch(
+  index,
+  branches,
+  *operands
+)
+__doc__
+Apply exactly one of the `branches` given by `index`.
+
+If `index` is out of bounds, it is clamped to within bounds.
+
+The semantics of `switch` are given roughly by this Python implementation:
+
+```python
+def switch(index, branches, *operands):
+    index = clamp(0, index, len(branches) - 1)
+    return branches[index](*operands)
+```
+
+Args:
+    index: An integer scalar indicating which branch function to apply.
+    branches: A sequence of functions to be applied based on `index`.
+    operands: Inputs to whichever branch is applied.
+
+Returns:
+    The outputs of `branch(*operands)` for the branch that was selected
+    based on `index`.
+
+Examples:
+
+>>> add_fn = lambda x, y: x + y
+>>> substract_fn = lambda x, y: x - y
+>>> x = keras.ops.array(2.0)
+>>> y = keras.ops.array(0.5)
+>>> branches = [add_fn, substract_fn]
+>>> keras.ops.switch(0, branches, x, y)
+2.5
+
+>>> keras.ops.switch(1, branches, x, y)
+1.5
+
