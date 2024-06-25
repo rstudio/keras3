@@ -2840,27 +2840,27 @@ function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 #'
 #' ```{r}
 #' m <- metric_sparse_categorical_crossentropy()
-#' m$update_state(c(1, 2),
+#' m$update_state(array(c(1, 2)),
 #'                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 #' m$result()
 #' ```
 #'
 #' ```{r}
 #' m$reset_state()
-#' m$update_state(c(1, 2),
+#' m$update_state(array(c(1, 2)),
 #'                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
 #'                sample_weight = c(0.3, 0.7))
 #' m$result()
-#' # 1.6271976
 #' ```
 #'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(
-#'     optimizer = 'sgd',
-#'     loss = 'mse',
-#'     metrics = list(metric_sparse_categorical_crossentropy()))
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'mse',
+#'   metrics = list(metric_sparse_categorical_crossentropy())
+#' )
 #' ```
 #'
 #' @param name
