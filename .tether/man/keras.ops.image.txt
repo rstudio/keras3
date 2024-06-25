@@ -24,6 +24,7 @@ extract_patches(
   padding='valid',
   data_format=None
 )
+hsv_to_rgb(images, data_format=None)
 map_coordinates(
   inputs,
   coordinates,
@@ -53,4 +54,5 @@ resize(
   data_format=None
 )
 rgb_to_grayscale(images, data_format=None)
+rgb_to_hsv(images, data_format=None)
 

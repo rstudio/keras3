@@ -524,3 +524,102 @@ op_image_rgb_to_grayscale <-
 function (images, data_format = NULL) {
   keras$ops$image$rgb_to_grayscale(images, data_format)
 }
+
+
+
+#' Convert HSV images to RGB.
+#'
+#' @description
+#' `images` must be of float dtype, and the output is only well defined if the
+#' values in `images` are in `[0, 1]`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 4, 4, 3))
+#' y <- op_image_hsv_to_rgb(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(4, 4, 3)) # Single HSV image
+#' y <- op_image_hsv_to_rgb(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(2, 3, 4, 4))
+#' y <- op_image_hsv_to_rgb(x, data_format="channels_first")
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' RGB image or batch of RGB images.
+#'
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
+#' @export
+#' @tether keras.ops.image.hsv_to_rgb
+op_image_hsv_to_rgb <-
+function (images, data_format = NULL) {
+  keras$ops$image$hsv_to_rgb(images, data_format)
+}
+
+#' Convert RGB images to HSV.
+#'
+#' @description
+#' `images` must be of float dtype, and the output is only well defined if the
+#' values in `images` are in `[0, 1]`.
+#'
+#' All HSV values are in `[0, 1]`. A hue of `0` corresponds to pure red, `1/3`
+#' is pure green, and `2/3` is pure blue.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 4, 4, 3))
+#' y <- op_image_rgb_to_hsv(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(4, 4, 3)) # Single RGB image
+#' y <- op_image_rgb_to_hsv(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(2, 3, 4, 4))
+#' y <- op_image_rgb_to_hsv(x, data_format = "channels_first")
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' HSV image or batch of HSV images.
+#'
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
+#' @export
+#' @tether keras.ops.image.rgb_to_hsv
+op_image_rgb_to_hsv <-
+function (images, data_format = NULL) {
+  keras$ops$image$rgb_to_hsv(images, data_format)
+}
