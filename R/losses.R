@@ -776,15 +776,33 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #' loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
 #' ```
 #'
+#' # Example
+#' ```{r}
+#' y_true <- array(c(1, 1, 0, 0,
+#'                   1, 1, 0, 0), dim = c(2, 2, 2, 1))
+#' y_pred <- array(c(0, 0.4, 0,   0,
+#'                   1,   0, 1, 0.9), dim = c(2, 2, 2, 1))
+#'
+#' axis <- c(2, 3, 4)
+#' loss <- loss_dice(y_true, y_pred, axis = axis)
+#' stopifnot(shape(loss) == shape(2))
+#' loss
+#'
+#'
+#' loss = loss_dice(y_true, y_pred)
+#' stopifnot(shape(loss) == shape())
+#' loss
+#' ```
+#'
 #' @returns
 #' if `y_true` and `y_pred` are provided, Dice loss value. Otherwise,
 #' a `Loss()` instance.
 #'
 #' @param y_true
-#' tensor of true targets.
+#' Tensor of true targets.
 #'
 #' @param y_pred
-#' tensor of predicted targets.
+#' Tensor of predicted targets.
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
@@ -794,6 +812,16 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #' @param name
 #' String, name for the object
 #'
+#' @param axis
+#' List of which dimensions the loss is calculated. Defaults to
+#' `NULL`.
+#'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`).
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -801,9 +829,10 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #' @family losses
 #' @tether keras.losses.Dice
 loss_dice <-
-function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice")
+function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice",
+          axis = NULL, dtype = NULL)
 {
-    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array, axis = as_axis))
     callable <- if (missing(y_true) && missing(y_pred))
         keras$losses$Dice
     else keras$losses$dice
