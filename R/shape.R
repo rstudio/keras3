@@ -210,6 +210,23 @@ destructure.keras_shape <- function(x) unclass(x)
 #' @export
 as.list.keras_shape <- function(x, ...) unclass(x)
 
+#' @rdname shape
+#' @export
+`==.keras_shape` <- function(e1, e2) {
+  if(!inherits(e1, "keras_shape"))
+    e1 <- shape(e1)
+  if(!inherits(e2, "keras_shape"))
+    e2 <- shape(e2)
+  identical(e1, e2)
+}
+
+#' @rdname shape
+#' @export
+`!=.keras_shape` <- function(e1, e2) {
+  !`==.keras_shape`(e1, e2)
+}
+
+
 # ' @rdname shape
 # ' @export
 # c.keras_shape <- function(...) shape(...)
