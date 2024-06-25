@@ -411,14 +411,10 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
 #' ```
 #'
 #' @returns
-#' If `images` were 4D, a 4D float Tensor of shape
-#'     `(batch, target_height, target_width, channels)`
-#' If `images` were 3D, a 3D float Tensor of shape
-#'     `(target_height, target_width, channels)`
+#' Cropped image or batch of images.
 #'
 #' @param images
-#' 4-D batch of images of shape `(batch, height, width, channels)`
-#' or 3-D single image of shape `(height, width, channels)`.
+#' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param top_cropping
 #' Number of columns to crop from the top.
@@ -438,6 +434,15 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
 #' @param target_width
 #' Width of the output images.
 #'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
 #' @export
 #' @family image ops
 #' @family image utils
@@ -447,8 +452,9 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/crop_images>
 op_image_crop <-
 function (images, top_cropping = NULL, left_cropping = NULL,
-    target_height = NULL, target_width = NULL, bottom_cropping = NULL,
-    right_cropping = NULL) {
+          bottom_cropping = NULL, right_cropping = NULL,
+          target_height = NULL, target_width = NULL,
+          data_format = NULL) {
   args <- capture_args(list(
       top_cropping = as_integer,
       left_cropping = as_integer,
