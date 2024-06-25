@@ -7595,6 +7595,8 @@ keras$ops$map(f, xs)
 #' Note that unrolling is only supported by JAX and TensorFlow
 #' backends.
 #'
+#' @family core ops
+#' @family ops
 #' @export
 #' @tether keras.ops.scan
 #' @seealso
@@ -7604,4 +7606,56 @@ function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
 {
     args <- capture_args(list(length = as_integer, unroll = as_integer))
     do.call(keras$ops$scan, args)
+}
+
+
+#' Apply exactly one of the `branches` given by `index`.
+#'
+#' @description
+#' If `index` is out of bounds, it is clamped to within bounds.
+#'
+#' The semantics of `switch` are given roughly by this implementation:
+#'
+#' ```r
+#' op_switch <- function(index, branches, ...) {
+#'   index <- op_clip(index, 1, length(branches))
+#'   branches[[index]](...)
+#' }
+#' ```
+#'
+#' # Examples
+#' ```{r}
+#' add_fn <- function(x, y) x + y
+#' substract_fn <- function(x, y) x - y
+#' x <- op_array(2.0)
+#' y <- op_array(0.5)
+#' branches <- list(add_fn, substract_fn)
+#' op_switch(1, branches, x, y)
+#' op_switch(2, branches, x, y)
+#' ```
+#'
+#' @returns
+#' The outputs of `branch(...)` for the branch that was selected
+#' based on `index`.
+#'
+#' @param index
+#' An integer scalar indicating which branch function to apply (1-based).
+#'
+#' @param branches
+#' A list of functions to be applied based on `index`.
+#'
+#' @param ...
+#' Inputs to whichever branch is applied.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.switch
+op_switch <-
+function (index, branches, ...)
+{
+  if (!is.null(names(list(...))))
+    stop("Arguments supplied to ... must be unnamed")
+  index <- op_convert_to_tensor(index, "int32") - 1L
+  keras$ops$switch(index, branches, ...)
 }

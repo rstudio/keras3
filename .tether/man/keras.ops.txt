@@ -581,6 +581,11 @@ swapaxes(
   axis2
 )
 swish(x)
+switch(
+  index,
+  branches,
+  *operands
+)
 take(
   x,
   indices,
