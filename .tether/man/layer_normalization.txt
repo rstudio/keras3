@@ -1,6 +1,6 @@
 Help on class Normalization in module keras.src.layers.preprocessing.normalization:
 
-class Normalization(keras.src.layers.layer.Layer)
+class Normalization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  Normalization(axis=-1, mean=None, variance=None, invert=False, **kwargs)
  |
  |  A preprocessing layer that normalizes continuous features.
@@ -86,6 +86,7 @@ class Normalization(keras.src.layers.layer.Layer)
  |
  |  Method resolution order:
  |      Normalization
+ |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
