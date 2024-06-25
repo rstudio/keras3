@@ -147,14 +147,13 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
 #' The type of padding algorithm to use: `"same"` or `"valid"`.
 #'
 #' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, weight)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
 #'
 #' @export
 #' @family image ops
@@ -166,10 +165,13 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
 #'
 #' @tether keras.ops.image.extract_patches
 op_image_extract_patches <-
-function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
+function (images, size, strides = NULL, dilation_rate = 1L, padding = "valid",
     data_format = "channels_last")
 {
     args <- capture_args(list(size = as_integer, dilation_rate = as_integer))
+    # pass 'images' as unnamed positional arg (was renamed from 'image' in Keras 3.4.0)
+    args <- args_to_positional(args, "images")
+
     do.call(keras$ops$image$extract_patches, args)
 }
 

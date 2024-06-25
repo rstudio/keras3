@@ -118,6 +118,38 @@ rename <- function(x, ..., .skip_existing = TRUE) {
   x
 }
 
+# arg_to_positional <- function(args, name, pos = 1L) {
+#   idx <- match(name, names(args))
+#   if(is.na(idx))
+#     return(args)
+#   arg <- args[idx]
+#   args <- args[-idx]
+#
+#   head <- args[seq_len(pos-1)]
+#   tail <- args[seq.int(from = pos, to = length(args))]
+#   if((length(head)+1) != pos)
+#     stop("Not enough argument supplied")
+#   names(arg) <- NULL
+#   c(head, arg, tail)
+# }
+
+
+args_to_positional <- function(args, nms) {
+  idxs <- match(nms, names(args))
+  if(all(is.na(idxs)))
+    return(args)
+  if(any(is.na(idxs)))
+    stop("Required positional arguments not supplied: ",
+         paste0(nms, collapse = ", "))
+
+  positional_args <- args[idxs]
+  names(positional_args) <- NULL
+
+  named_args <- args[-idxs]
+  c(positional_args, named_args)
+}
+
+
 `%""%` <- function (x, y) {
   if(!is.character(x))
     stop("x must be character")
