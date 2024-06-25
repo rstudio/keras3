@@ -475,7 +475,7 @@ function (object, layer, power_iterations = 1L, ...)
 #' ```{r}
 #' data <- op_reshape(1:6, newshape = c(2, 3))
 #' normalized_data <- layer_unit_normalization(data)
-#' op_sum(normalized_data[1,]^2)
+#' op_sum(normalized_data[1, ]^2)
 #' ```
 #'
 #' @param axis
