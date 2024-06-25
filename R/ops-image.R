@@ -567,6 +567,9 @@ function (images, data_format = NULL) {
 #' If not specified, the value will default to
 #' `config_image_data_format()`.
 #'
+#' @family image ops
+#' @family image utils
+#' @family ops
 #' @export
 #' @tether keras.ops.image.hsv_to_rgb
 op_image_hsv_to_rgb <-
@@ -617,6 +620,9 @@ function (images, data_format = NULL) {
 #' If not specified, the value will default to
 #' `config_image_data_format()`.
 #'
+#' @family image ops
+#' @family image utils
+#' @family ops
 #' @export
 #' @tether keras.ops.image.rgb_to_hsv
 op_image_rgb_to_hsv <-
