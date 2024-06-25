@@ -36,7 +36,7 @@
 #' @returns
 #' Applied affine transform image or batch of images.
 #'
-#' @param image
+#' @param images
 #' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param transform
@@ -126,7 +126,7 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
 #' @returns
 #' Extracted patches 3D (if not batched) or 4D (if batched)
 #'
-#' @param image
+#' @param images
 #' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param size
@@ -339,7 +339,7 @@ function (images, top_padding = NULL, left_padding = NULL,
 #' @returns
 #' Resized image or batch of images.
 #'
-#' @param image
+#' @param images
 #' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param size

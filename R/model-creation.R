@@ -160,6 +160,10 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' If set, the layer will use this tensor rather
 #' than creating a new placeholder tensor.
 #'
+#' @param input_optional
+#' Boolean, whether the input is optional or not.
+#' An optional input can accept `NULL` values.
+#'
 #' @param ... additional arguments passed on to `keras.layers.InputLayer`.
 #'
 #' @param layers List of layers to add to the model.

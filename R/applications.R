@@ -302,7 +302,7 @@ application_convnext_small <-
 function (include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    model_name = "convnext_small")
+    name = "convnext_small")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtSmall, args)
@@ -406,7 +406,7 @@ application_convnext_tiny <-
 function (include_top = TRUE, include_preprocessing = TRUE,
     weights = "imagenet", input_tensor = NULL, input_shape = NULL,
     pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    model_name = "convnext_tiny")
+    name = "convnext_tiny")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtTiny, args)
@@ -510,7 +510,7 @@ application_convnext_xlarge <-
 function (include_top = TRUE,
     include_preprocessing = TRUE, weights = "imagenet", input_tensor = NULL,
     input_shape = NULL, pooling = NULL, classes = 1000L, classifier_activation = "softmax",
-    model_name = "convnext_xlarge")
+    name = "convnext_xlarge")
 {
     args <- capture_args(list(classes = as_integer, input_shape = normalize_shape))
     model <- do.call(keras$applications$ConvNeXtXLarge, args)
