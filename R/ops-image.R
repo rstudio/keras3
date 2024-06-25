@@ -259,14 +259,10 @@ function (inputs, coordinates, order, fill_mode = "constant",
 #' ```
 #'
 #' @returns
-#' - If `images` were 4D, a 4D float Tensor of shape
-#'   `(batch, target_height, target_width, channels)`
-#' - If `images` were 3D, a 3D float Tensor of shape
-#'   `(target_height, target_width, channels)`
+#' Padded image or batch of images.
 #'
 #' @param images
-#' 4D Tensor of shape `(batch, height, width, channels)` or 3D
-#' Tensor of shape `(height, width, channels)`.
+#' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param top_padding
 #' Number of rows of zeros to add on top.
@@ -286,6 +282,15 @@ function (inputs, coordinates, order, fill_mode = "constant",
 #' @param target_width
 #' Width of output images.
 #'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
 #' @export
 #' @family image ops
 #' @family image utils
@@ -295,8 +300,9 @@ function (inputs, coordinates, order, fill_mode = "constant",
 #'
 #' @tether keras.ops.image.pad_images
 op_image_pad <-
-function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
-    target_width = NULL, bottom_padding = NULL, right_padding = NULL)
+function (images, top_padding = NULL, left_padding = NULL,
+          bottom_padding = NULL, right_padding = NULL,
+          target_height = NULL, target_width = NULL, data_format = NULL)
 {
     args <- capture_args(list(images = as_integer, top_padding = as_integer,
         bottom_padding = as_integer, left_padding = as_integer,
