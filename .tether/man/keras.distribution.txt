@@ -11,12 +11,13 @@ initialize(
   num_processes=None,
   process_id=None
 )
-LayoutMap(device_mesh=None)
+LayoutMap(device_mesh)
 list_devices(device_type=None)
 ModelParallel(
-  device_mesh,
-  layout_map,
-  batch_dim_name=None
+  *,
+  layout_map=None,
+  batch_dim_name=None,
+  **kwargs
 )
 set_distribution(value)
 TensorLayout(axes, device_mesh=None)
