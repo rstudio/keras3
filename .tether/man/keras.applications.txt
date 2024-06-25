@@ -1,6 +1,5 @@
 convnext: Module(keras.api.applications.convnext)
 ConvNeXtBase(
-  model_name='convnext_base',
   include_top=True,
   include_preprocessing=True,
   weights='imagenet',
@@ -8,10 +7,10 @@ ConvNeXtBase(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='convnext_base'
 )
 ConvNeXtLarge(
-  model_name='convnext_large',
   include_top=True,
   include_preprocessing=True,
   weights='imagenet',
@@ -19,10 +18,10 @@ ConvNeXtLarge(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='convnext_large'
 )
 ConvNeXtSmall(
-  model_name='convnext_small',
   include_top=True,
   include_preprocessing=True,
   weights='imagenet',
@@ -30,10 +29,10 @@ ConvNeXtSmall(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='convnext_small'
 )
 ConvNeXtTiny(
-  model_name='convnext_tiny',
   include_top=True,
   include_preprocessing=True,
   weights='imagenet',
@@ -41,10 +40,10 @@ ConvNeXtTiny(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='convnext_tiny'
 )
 ConvNeXtXLarge(
-  model_name='convnext_xlarge',
   include_top=True,
   include_preprocessing=True,
   weights='imagenet',
@@ -52,7 +51,8 @@ ConvNeXtXLarge(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='convnext_xlarge'
 )
 densenet: Module(keras.api.applications.densenet)
 DenseNet121(
@@ -62,7 +62,8 @@ DenseNet121(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='densenet121'
 )
 DenseNet169(
   include_top=True,
@@ -71,7 +72,8 @@ DenseNet169(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='densenet169'
 )
 DenseNet201(
   include_top=True,
@@ -80,7 +82,8 @@ DenseNet201(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='densenet201'
 )
 efficientnet: Module(keras.api.applications.efficientnet)
 efficientnet_v2: Module(keras.api.applications.efficientnet_v2)
@@ -92,7 +95,7 @@ EfficientNetB0(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb0'
 )
 EfficientNetB1(
   include_top=True,
@@ -102,7 +105,7 @@ EfficientNetB1(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb1'
 )
 EfficientNetB2(
   include_top=True,
@@ -112,7 +115,7 @@ EfficientNetB2(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb2'
 )
 EfficientNetB3(
   include_top=True,
@@ -122,7 +125,7 @@ EfficientNetB3(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb3'
 )
 EfficientNetB4(
   include_top=True,
@@ -132,7 +135,7 @@ EfficientNetB4(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb4'
 )
 EfficientNetB5(
   include_top=True,
@@ -142,7 +145,7 @@ EfficientNetB5(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb5'
 )
 EfficientNetB6(
   include_top=True,
@@ -152,7 +155,7 @@ EfficientNetB6(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb6'
 )
 EfficientNetB7(
   include_top=True,
@@ -162,7 +165,7 @@ EfficientNetB7(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb7'
 )
 EfficientNetV2B0(
   include_top=True,
@@ -172,7 +175,8 @@ EfficientNetV2B0(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-b0'
 )
 EfficientNetV2B1(
   include_top=True,
@@ -182,7 +186,8 @@ EfficientNetV2B1(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-b1'
 )
 EfficientNetV2B2(
   include_top=True,
@@ -192,7 +197,8 @@ EfficientNetV2B2(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-b2'
 )
 EfficientNetV2B3(
   include_top=True,
@@ -202,7 +208,8 @@ EfficientNetV2B3(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-b3'
 )
 EfficientNetV2L(
   include_top=True,
@@ -212,7 +219,8 @@ EfficientNetV2L(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-l'
 )
 EfficientNetV2M(
   include_top=True,
@@ -222,7 +230,8 @@ EfficientNetV2M(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-m'
 )
 EfficientNetV2S(
   include_top=True,
@@ -232,7 +241,8 @@ EfficientNetV2S(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-s'
 )
 imagenet_utils: Module(keras.api.applications.imagenet_utils)
 inception_resnet_v2: Module(keras.api.applications.inception_resnet_v2)
@@ -244,7 +254,8 @@ InceptionResNetV2(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='inception_resnet_v2'
 )
 InceptionV3(
   include_top=True,
@@ -253,7 +264,8 @@ InceptionV3(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='inception_v3'
 )
 mobilenet: Module(keras.api.applications.mobilenet)
 MobileNet(
@@ -266,7 +278,8 @@ MobileNet(
   input_tensor=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name=None
 )
 mobilenet_v2: Module(keras.api.applications.mobilenet_v2)
 mobilenet_v3: Module(keras.api.applications.mobilenet_v3)
@@ -278,7 +291,8 @@ MobileNetV2(
   input_tensor=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name=None
 )
 MobileNetV3Large(
   input_shape=None,
@@ -291,7 +305,8 @@ MobileNetV3Large(
   pooling=None,
   dropout_rate=0.2,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='MobileNetV3Large'
 )
 MobileNetV3Small(
   input_shape=None,
@@ -304,7 +319,8 @@ MobileNetV3Small(
   pooling=None,
   dropout_rate=0.2,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='MobileNetV3Small'
 )
 nasnet: Module(keras.api.applications.nasnet)
 NASNetLarge(
@@ -314,7 +330,8 @@ NASNetLarge(
   input_tensor=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='nasnet_large'
 )
 NASNetMobile(
   input_shape=None,
@@ -323,7 +340,8 @@ NASNetMobile(
   input_tensor=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='nasnet_mobile'
 )
 resnet: Module(keras.api.applications.resnet)
 resnet_v2: Module(keras.api.applications.resnet_v2)
@@ -334,7 +352,8 @@ ResNet101(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='resnet101'
 )
 ResNet101V2(
   include_top=True,
@@ -343,7 +362,8 @@ ResNet101V2(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='resnet101v2'
 )
 ResNet152(
   include_top=True,
@@ -352,7 +372,8 @@ ResNet152(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='resnet152'
 )
 ResNet152V2(
   include_top=True,
@@ -361,7 +382,8 @@ ResNet152V2(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='resnet152v2'
 )
 resnet50: Module(keras.api.applications.resnet50)
 ResNet50(
@@ -371,7 +393,8 @@ ResNet50(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='resnet50'
 )
 ResNet50V2(
   include_top=True,
@@ -380,7 +403,8 @@ ResNet50V2(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='resnet50v2'
 )
 vgg16: Module(keras.api.applications.vgg16)
 VGG16(
@@ -390,7 +414,8 @@ VGG16(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='vgg16'
 )
 vgg19: Module(keras.api.applications.vgg19)
 VGG19(
@@ -400,7 +425,8 @@ VGG19(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='vgg19'
 )
 xception: Module(keras.api.applications.xception)
 Xception(
@@ -410,6 +436,7 @@ Xception(
   input_shape=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name='xception'
 )
 
