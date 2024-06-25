@@ -9,7 +9,8 @@ loss_poisson(
   y_pred,
   ...,
   reduction = "sum_over_batch_size",
-  name = "poisson"
+  name = "poisson",
+  dtype = NULL
 )
 }
 \arguments{
@@ -24,6 +25,11 @@ this should be \code{"sum_over_batch_size"}.
 Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{Optional name for the loss instance.}
+
+\item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
+means using \code{config_floatx()}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{config_set_floatx()}).}
 }
 \value{
 Poisson loss values with shape = \verb{[batch_size, d0, .. dN-1]}.

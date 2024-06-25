@@ -12,6 +12,7 @@ application_efficientnet_b3(
   pooling = NULL,
   classes = 1000L,
   classifier_activation = "softmax",
+  name = "efficientnetb3",
   ...
 )
 }
@@ -57,6 +58,8 @@ on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
 Defaults to \code{'softmax'}.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 
 \item{...}{For forward/backward compatability.}
 }

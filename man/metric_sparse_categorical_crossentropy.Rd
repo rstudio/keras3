@@ -58,33 +58,23 @@ and a single floating point value per feature for \code{y_true}.
 \section{Examples}{
 Standalone usage:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_crossentropy()
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{m <- metric_sparse_categorical_crossentropy()
 m$update_state(c(1, 2),
                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{m$reset_state()
 m$update_state(c(1, 2),
                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
                sample_weight = c(0.3, 0.7))
 m$result()
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.6271976, shape=(), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.6271976
+# 1.6271976
 }\if{html}{\out{</div>}}
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
+\if{html}{\out{<div class="sourceCode {r, eval = FALSE}">}}\preformatted{model \%>\% compile(
     optimizer = 'sgd',
     loss = 'mse',
     metrics = list(metric_sparse_categorical_crossentropy()))

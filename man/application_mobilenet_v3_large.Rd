@@ -15,7 +15,8 @@ application_mobilenet_v3_large(
   pooling = NULL,
   dropout_rate = 0.2,
   classifier_activation = "softmax",
-  include_preprocessing = TRUE
+  include_preprocessing = TRUE,
+  name = "MobileNetV3Large"
 )
 }
 \arguments{
@@ -90,6 +91,8 @@ be \code{NULL} or \code{"softmax"}.}
 
 \item{include_preprocessing}{Boolean, whether to include the preprocessing
 layer (\code{Rescaling}) at the bottom of the network. Defaults to \code{TRUE}.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A model instance.

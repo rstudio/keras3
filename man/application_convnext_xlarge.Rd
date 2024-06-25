@@ -5,7 +5,6 @@
 \title{Instantiates the ConvNeXtXLarge architecture.}
 \usage{
 application_convnext_xlarge(
-  model_name = "convnext_xlarge",
   include_top = TRUE,
   include_preprocessing = TRUE,
   weights = "imagenet",
@@ -13,12 +12,11 @@ application_convnext_xlarge(
   input_shape = NULL,
   pooling = NULL,
   classes = 1000L,
-  classifier_activation = "softmax"
+  classifier_activation = "softmax",
+  model_name = "convnext_xlarge"
 )
 }
 \arguments{
-\item{model_name}{String, name for the model.}
-
 \item{include_top}{Whether to include the fully-connected
 layer at the top of the network. Defaults to \code{TRUE}.}
 
@@ -60,6 +58,8 @@ on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
 Defaults to \code{"softmax"}.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A model instance.

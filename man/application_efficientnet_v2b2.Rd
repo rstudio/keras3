@@ -12,7 +12,8 @@ application_efficientnet_v2b2(
   pooling = NULL,
   classes = 1000L,
   classifier_activation = "softmax",
-  include_preprocessing = TRUE
+  include_preprocessing = TRUE,
+  name = "efficientnetv2-b2"
 )
 }
 \arguments{
@@ -58,6 +59,8 @@ When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
 
 \item{include_preprocessing}{Boolean, whether to include the preprocessing layer at the bottom of the network.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A model instance.

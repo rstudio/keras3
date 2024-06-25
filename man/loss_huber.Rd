@@ -10,7 +10,8 @@ loss_huber(
   delta = 1,
   ...,
   reduction = "sum_over_batch_size",
-  name = "huber_loss"
+  name = "huber_loss",
+  dtype = NULL
 )
 }
 \arguments{
@@ -28,6 +29,11 @@ quadratic to linear. Defaults to \code{1.0}.}
 \code{"sum_over_batch_size"}.}
 
 \item{name}{Optional name for the instance.}
+
+\item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
+means using \code{config_floatx()}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{config_set_floatx()}).}
 }
 \value{
 Tensor with one scalar loss entry per sample.

@@ -4,19 +4,18 @@
 \alias{op_image_rgb_to_grayscale}
 \title{Convert RGB images to grayscale.}
 \usage{
-op_image_rgb_to_grayscale(image, data_format = "channels_last")
+op_image_rgb_to_grayscale(images, data_format = NULL)
 }
 \arguments{
-\item{image}{Input RGB image or batch of RGB images. Must be a 3D tensor
-with shape \verb{(height, width, channels)} or a 4D tensor with shape
-\verb{(batch, height, width, channels)}.}
+\item{images}{Input image or batch of images. Must be 3D or 4D.}
 
 \item{data_format}{A string specifying the data format of the input tensor.
 It can be either \code{"channels_last"} or \code{"channels_first"}.
 \code{"channels_last"} corresponds to inputs with shape
 \verb{(batch, height, width, channels)}, while \code{"channels_first"}
 corresponds to inputs with shape \verb{(batch, channels, height, width)}.
-Defaults to \code{"channels_last"}.}
+If not specified, the value will default to
+\code{config_image_data_format()}.}
 }
 \value{
 Grayscale image or batch of grayscale images.
@@ -59,9 +58,11 @@ Other image ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other image utils: \cr
 \code{\link{image_array_save}()} \cr
@@ -72,9 +73,11 @@ Other image utils: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
@@ -92,6 +95,7 @@ Other ops: \cr
 \code{\link{op_arctanh}()} \cr
 \code{\link{op_argmax}()} \cr
 \code{\link{op_argmin}()} \cr
+\code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
@@ -132,6 +136,7 @@ Other ops: \cr
 \code{\link{op_divide}()} \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
+\code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
@@ -165,9 +170,11 @@ Other ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
@@ -194,7 +201,9 @@ Other ops: \cr
 \code{\link{op_logical_xor}()} \cr
 \code{\link{op_logspace}()} \cr
 \code{\link{op_logsumexp}()} \cr
+\code{\link{op_lstsq}()} \cr
 \code{\link{op_lu_factor}()} \cr
+\code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
@@ -237,6 +246,7 @@ Other ops: \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
+\code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_segment_max}()} \cr
@@ -273,6 +283,7 @@ Other ops: \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr
 \code{\link{op_swapaxes}()} \cr
+\code{\link{op_switch}()} \cr
 \code{\link{op_take}()} \cr
 \code{\link{op_take_along_axis}()} \cr
 \code{\link{op_tan}()} \cr

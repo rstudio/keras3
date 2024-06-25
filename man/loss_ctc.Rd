@@ -4,7 +4,14 @@
 \alias{loss_ctc}
 \title{CTC (Connectionist Temporal Classification) loss.}
 \usage{
-loss_ctc(y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "ctc")
+loss_ctc(
+  y_true,
+  y_pred,
+  ...,
+  reduction = "sum_over_batch_size",
+  name = "ctc",
+  dtype = NULL
+)
 }
 \arguments{
 \item{y_true}{A tensor of shape \verb{(batch_size, target_max_length)} containing
@@ -21,7 +28,12 @@ They should \emph{not} be normalized via softmax.}
 this should be \code{"sum_over_batch_size"}.
 Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
-\item{name}{String, name for the object}
+\item{name}{Optional name for the loss instance.}
+
+\item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
+means using \code{config_floatx()}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{config_set_floatx()}).}
 }
 \value{
 CTC loss value.

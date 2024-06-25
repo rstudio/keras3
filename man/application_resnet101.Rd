@@ -11,7 +11,8 @@ application_resnet101(
   input_shape = NULL,
   pooling = NULL,
   classes = 1000L,
-  classifier_activation = "softmax"
+  classifier_activation = "softmax",
+  name = "resnet101"
 )
 }
 \arguments{
@@ -52,6 +53,8 @@ use on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
 \code{classifier_activation=NULL} to return the logits of the "top" layer.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A Model instance.

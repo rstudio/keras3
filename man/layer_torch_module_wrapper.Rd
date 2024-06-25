@@ -33,6 +33,9 @@ returned, invisibly.
 \code{layer_torch_module_wrapper} is a wrapper class that can turn any
 \code{torch.nn.Module} into a Keras layer, in particular by making its
 parameters trackable by Keras.
+
+\code{layer_torch_module_wrapper()} is only compatible with the PyTorch backend and
+cannot be used with the TensorFlow or JAX backends.
 }
 \section{Example}{
 Here's an example of how the \code{\link[=layer_torch_module_wrapper]{layer_torch_module_wrapper()}} can be used with vanilla

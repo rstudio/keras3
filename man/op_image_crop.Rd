@@ -8,33 +8,38 @@ op_image_crop(
   images,
   top_cropping = NULL,
   left_cropping = NULL,
+  bottom_cropping = NULL,
+  right_cropping = NULL,
   target_height = NULL,
   target_width = NULL,
-  bottom_cropping = NULL,
-  right_cropping = NULL
+  data_format = NULL
 )
 }
 \arguments{
-\item{images}{4-D batch of images of shape \verb{(batch, height, width, channels)}
-or 3-D single image of shape \verb{(height, width, channels)}.}
+\item{images}{Input image or batch of images. Must be 3D or 4D.}
 
 \item{top_cropping}{Number of columns to crop from the top.}
 
 \item{left_cropping}{Number of columns to crop from the left.}
 
+\item{bottom_cropping}{Number of columns to crop from the bottom.}
+
+\item{right_cropping}{Number of columns to crop from the right.}
+
 \item{target_height}{Height of the output images.}
 
 \item{target_width}{Width of the output images.}
 
-\item{bottom_cropping}{Number of columns to crop from the bottom.}
-
-\item{right_cropping}{Number of columns to crop from the right.}
+\item{data_format}{A string specifying the data format of the input tensor.
+It can be either \code{"channels_last"} or \code{"channels_first"}.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch, height, width, channels)}, while \code{"channels_first"}
+corresponds to inputs with shape \verb{(batch, channels, height, width)}.
+If not specified, the value will default to
+\code{config_image_data_format()}.}
 }
 \value{
-If \code{images} were 4D, a 4D float Tensor of shape
-\verb{(batch, target_height, target_width, channels)}
-If \code{images} were 3D, a 3D float Tensor of shape
-\verb{(target_height, target_width, channels)}
+Cropped image or batch of images.
 }
 \description{
 Crop \code{images} to a specified \code{height} and \code{width}.
@@ -56,10 +61,12 @@ cropped_images[, , 1] # print the first channel of the cropped images
 Other image ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other image utils: \cr
 \code{\link{image_array_save}()} \cr
@@ -69,10 +76,12 @@ Other image utils: \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
@@ -90,6 +99,7 @@ Other ops: \cr
 \code{\link{op_arctanh}()} \cr
 \code{\link{op_argmax}()} \cr
 \code{\link{op_argmin}()} \cr
+\code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
@@ -130,6 +140,7 @@ Other ops: \cr
 \code{\link{op_divide}()} \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
+\code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
@@ -162,10 +173,12 @@ Other ops: \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
@@ -192,7 +205,9 @@ Other ops: \cr
 \code{\link{op_logical_xor}()} \cr
 \code{\link{op_logspace}()} \cr
 \code{\link{op_logsumexp}()} \cr
+\code{\link{op_lstsq}()} \cr
 \code{\link{op_lu_factor}()} \cr
+\code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
@@ -235,6 +250,7 @@ Other ops: \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
+\code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_segment_max}()} \cr
@@ -271,6 +287,7 @@ Other ops: \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr
 \code{\link{op_swapaxes}()} \cr
+\code{\link{op_switch}()} \cr
 \code{\link{op_take}()} \cr
 \code{\link{op_take_along_axis}()} \cr
 \code{\link{op_tan}()} \cr

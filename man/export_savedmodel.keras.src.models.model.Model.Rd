@@ -38,7 +38,7 @@ entirely standalone.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Create the artifact
 model |> tensorflow::export_savedmodel("path/to/location")
 
-# Later, in a different process / environment...
+# Later, in a different process/environment...
 library(tensorflow)
 reloaded_artifact <- tf$saved_model$load("path/to/location")
 predictions <- reloaded_artifact$serve(input_data)

@@ -4,12 +4,18 @@
 \alias{op_isclose}
 \title{Return whether two tensors are element-wise almost equal.}
 \usage{
-op_isclose(x1, x2)
+op_isclose(x1, x2, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE)
 }
 \arguments{
 \item{x1}{First input tensor.}
 
 \item{x2}{Second input tensor.}
+
+\item{rtol}{Relative tolerance.}
+
+\item{atol}{Absolute tolerance.}
+
+\item{equal_nan}{If \code{TRUE}, element-wise \code{NaN}s are considered equal.}
 }
 \value{
 Output boolean tensor.
@@ -38,6 +44,7 @@ Other numpy ops: \cr
 \code{\link{op_arctanh}()} \cr
 \code{\link{op_argmax}()} \cr
 \code{\link{op_argmin}()} \cr
+\code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
@@ -97,6 +104,7 @@ Other numpy ops: \cr
 \code{\link{op_logical_or}()} \cr
 \code{\link{op_logical_xor}()} \cr
 \code{\link{op_logspace}()} \cr
+\code{\link{op_lstsq}()} \cr
 \code{\link{op_matmul}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_maximum}()} \cr
@@ -177,6 +185,7 @@ Other ops: \cr
 \code{\link{op_arctanh}()} \cr
 \code{\link{op_argmax}()} \cr
 \code{\link{op_argmin}()} \cr
+\code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
@@ -217,6 +226,7 @@ Other ops: \cr
 \code{\link{op_divide}()} \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
+\code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
@@ -250,10 +260,12 @@ Other ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
@@ -279,7 +291,9 @@ Other ops: \cr
 \code{\link{op_logical_xor}()} \cr
 \code{\link{op_logspace}()} \cr
 \code{\link{op_logsumexp}()} \cr
+\code{\link{op_lstsq}()} \cr
 \code{\link{op_lu_factor}()} \cr
+\code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
@@ -322,6 +336,7 @@ Other ops: \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
+\code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_segment_max}()} \cr
@@ -358,6 +373,7 @@ Other ops: \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr
 \code{\link{op_swapaxes}()} \cr
+\code{\link{op_switch}()} \cr
 \code{\link{op_take}()} \cr
 \code{\link{op_take_along_axis}()} \cr
 \code{\link{op_tan}()} \cr

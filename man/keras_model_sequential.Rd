@@ -14,6 +14,7 @@ keras_model_sequential(
   input_batch_shape = NULL,
   input_name = NULL,
   input_tensor = NULL,
+  input_optional = FALSE,
   trainable = TRUE,
   layers = list()
 )
