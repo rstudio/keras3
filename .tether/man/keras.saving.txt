@@ -30,6 +30,7 @@ save_model(
   model,
   filepath,
   overwrite=True,
+  zipped=True,
   **kwargs
 )
 save_weights(
