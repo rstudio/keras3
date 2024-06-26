@@ -617,6 +617,12 @@ This is equivalent to \code{layer$trainable_weights}.
 List of all trainable weight variables of the layer.
 
 These are the weights that get updated by the optimizer during training.
+\item \code{path}
+The path of the layer.
+
+If the layer has not been built yet, it will be \code{NULL}.
+\item \code{quantization_mode}
+The quantization mode of this layer, \code{NULL} if not quantized.
 \item \code{variable_dtype}
 The dtype of the state (weights) of the layer.
 \item \code{variables}

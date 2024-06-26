@@ -11,7 +11,7 @@ layer_permute(object, dims, ...)
 
 \item{dims}{List of integers. Permutation pattern does not include the
 batch dimension. Indexing starts at 1.
-For instance, \code{c(2, 1)} permutes the first and second dimensions
+For instance, \verb{(1, 3, 2)} permutes the second and third dimensions
 of the input.}
 
 \item{...}{For forward/backward compatability.}

@@ -128,7 +128,11 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |
  |  build(self, input_shape)
  |
- |  call(self, inputs)
+ |  call(
+ |    self,
+ |    inputs,
+ |    training=None
+ |  )
  |
  |  compute_output_shape(self, _)
  |
@@ -162,7 +166,11 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |    mode
  |  )
  |
- |  quantized_call(self, inputs)
+ |  quantized_call(
+ |    self,
+ |    inputs,
+ |    training=None
+ |  )
  |
  |  save_own_variables(self, store)
  |      Saves the state of the layer.
@@ -177,10 +185,5 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |  Readonly properties defined here:
  |
  |  kernel
- |
- |  ----------------------------------------------------------------------
- |  Data and other attributes defined here:
- |
- |  QUANTIZATION_MODE_ERROR_TEMPLATE = "Invalid quantization mode. Expecte...
  |
 

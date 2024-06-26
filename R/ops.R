@@ -4032,8 +4032,8 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' labels in the output. Defaults to `TRUE`.
 #'
 #' @param mask_index
-#' An integer scalar, the index of the mask character in
-#' the vocabulary. Defaults to `NULL`.
+#' An integer scalar, the (0-based) index of the mask character in
+#' the vocabulary. Defaults to `0`.
 #'
 #' @export
 #' @family numpy ops
@@ -4041,7 +4041,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @tether keras.ops.ctc_decode
 op_ctc_decode <-
 function (inputs, sequence_lengths, strategy = "greedy", beam_width = 100L,
-    top_paths = 1L, merge_repeated = TRUE, mask_index = NULL)
+    top_paths = 1L, merge_repeated = TRUE, mask_index = 0L)
 {
     args <- capture_args(list(
       sequence_lengths = as_integer_array,
@@ -4916,6 +4916,15 @@ keras$ops$imag(x)
 #' @param x2
 #' Second input tensor.
 #'
+#' @param rtol
+#' Relative tolerance.
+#'
+#' @param atol
+#' Absolute tolerance.
+#'
+#' @param equal_nan
+#' If `TRUE`, element-wise `NaN`s are considered equal.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -4924,8 +4933,13 @@ keras$ops$imag(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/isclose>
 #' @tether keras.ops.isclose
 op_isclose <-
-function (x1, x2)
-keras$ops$isclose(x1, x2)
+function (x1, x2,
+          rtol = 1e-05,
+          atol = 1e-08,
+          equal_nan = FALSE) {
+  args <- capture_args()
+  do.call(keras$ops$isclose, args)
+}
 
 
 #' Return whether a tensor is finite, element-wise.
@@ -7418,3 +7432,230 @@ keras$ops$hard_swish(x)
 op_custom_gradient <-
 function (f)
 keras$ops$custom_gradient(f)
+
+
+#' Return the dtype of the tensor input as a standardized string.
+#'
+#' @description
+#' Note that due to the standardization, the dtype will not compare equal
+#' to the backend-specific version of the dtype.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_zeros(c(8, 12))
+#' op_dtype(x)
+#' ```
+#'
+#' @returns
+#' A string indicating the dtype of the input tensor, e.g. `"float32"`.
+#'
+#' @param x
+#' A tensor. This function will try to access the `dtype` attribute of
+#' the input tensor.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.dtype
+op_dtype <- function(x) keras$ops$dtype(x)
+
+
+#' Map a function over leading array axes.
+#'
+#' @description
+#' Like `purrr::map()` or `base::lapply()`, except inputs and outputs are in the form of
+#' stacked arrays. Consider using the `op_vectorized_map()` transform instead,
+#' unless you need to apply a function element by element for reduced memory
+#' usage or heterogeneous computation with other control flow primitives.
+#'
+#' When `xs` is an array type, the semantics of `op_map()` match this
+#' implementation:
+#'
+#' ```r
+#' op_map <- function(xs, f) {
+#'   xs |>
+#'     op_unstack() |>
+#'     lapply(f) |>
+#'     op_stack()
+#' }
+#' ```
+#'
+#' # Examples
+#' ```{r}
+#' f <- function(x) x^2
+#' xs <- op_arange(10)
+#' ys <- op_map(xs, f)
+#' ys
+#' ```
+#'
+#' ```{r}
+#' f <- function(x) list(y1 = x^2, y2 = x * 10)  # Can have nested outputs
+#' ys <- op_map(xs, f)
+#' ys$y1
+#' ys$y2
+#' ```
+#'
+#' @returns
+#' Mapped values.
+#'
+#' @param f
+#' Callable defines the function to apply element-wise over the first
+#' axis or axes of `xs`.
+#'
+#' @param xs
+#' Values over which to map along the leading axis.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.map
+op_map <-
+function (xs, f)
+keras$ops$map(f, xs)
+
+
+#' Scan a function over leading array axes while carrying along state.
+#'
+#' @description
+#' When the type of `xs` is an array type or `NULL`, and the type of `ys` is an
+#' array type, the semantics of `op_scan()` are given roughly by this
+#' implementation:
+#'
+#' ```r
+#' op_scan <- function(f, init, xs = NULL, length = NULL) {
+#'   xs <- xs %||% vector("list", length)
+#'   if(!is.list(xs))
+#'     xs <- op_unstack(xs)
+#'   ys <- vector("list", length(xs))
+#'   carry <- init
+#'   for (i in seq_along(xs)) {
+#'     c(carry, y) %<-% f(carry, xs[[i]])
+#'     ys[[i]] <- y
+#'   }
+#'   list(carry, op_stack(ys))
+#' }
+#' ```
+#'
+#' The loop-carried value `carry` (`init`) must hold a fixed shape and dtype
+#' across all iterations.
+#'
+#' In TensorFlow, `y` must match `carry` in shape and dtype. This is not
+#' required in other backends.
+#'
+#' # Examples
+#' ```{r}
+#' sum_fn <- function(c, x) list(c + x, c + x)
+#' init <- op_array(0L)
+#' xs <- op_array(1:5)
+#' c(carry, result) %<-% op_scan(sum_fn, init, xs)
+#' carry
+#' result
+#' ```
+#'
+#' @returns
+#' A pair where the first element represents the final loop carry value and
+#' the second element represents the stacked outputs of `f` when scanned
+#' over the leading axis of the inputs.
+#'
+#' @param f
+#' Callable defines the logic for each loop iteration. This accepts two
+#' arguments where the first is a value of the loop carry and the
+#' second is a slice of `xs` along its leading axis.
+#' This callable returns a pair where the first represents a new value
+#' for the loop carry and the second represents a slice of the output.
+#'
+#' @param init
+#' The initial loop carry value. This can be a scalar, tensor, or any
+#' nested structure. It must match the structure of the first element
+#' returned by `f`.
+#'
+#' @param xs
+#' Optional value to scan along its leading axis. This can be a tensor
+#' or any nested structure. If `xs` is not provided, you must specify
+#' `length` to define the number of loop iterations.
+#' Defaults to `NULL`.
+#'
+#' @param length
+#' Optional integer specifying the number of loop iterations.
+#' If `length` is not provided, it defaults to the sizes of leading
+#' axis of the arrays in `xs`. Defaults to `NULL`.
+#'
+#' @param reverse
+#' Optional boolean specifying whether to run the scan iteration
+#' forward or in reverse, equivalent to reversing the leading axes of
+#' the arrays in both `xs` and in `ys`.
+#'
+#' @param unroll
+#' Optional positive integer or boolean specifying how many scan
+#' iterations to unroll within a single iteration of a loop. If an
+#' integer is provided, it determines how many unrolled loop iterations
+#' to run within a single rolled iteration of the loop. If a boolean is
+#' provided, it will determine if the loop is completely unrolled
+#' (`unroll=TRUE`) or left completely unrolled (`unroll=FALSE`).
+#' Note that unrolling is only supported by JAX and TensorFlow
+#' backends.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.scan
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scan>
+op_scan <-
+function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
+{
+    args <- capture_args(list(length = as_integer, unroll = as_integer))
+    do.call(keras$ops$scan, args)
+}
+
+
+#' Apply exactly one of the `branches` given by `index`.
+#'
+#' @description
+#' If `index` is out of bounds, it is clamped to within bounds.
+#'
+#' The semantics of `switch` are given roughly by this implementation:
+#'
+#' ```r
+#' op_switch <- function(index, branches, ...) {
+#'   index <- op_clip(index, 1, length(branches))
+#'   branches[[index]](...)
+#' }
+#' ```
+#'
+#' # Examples
+#' ```{r}
+#' add_fn <- function(x, y) x + y
+#' substract_fn <- function(x, y) x - y
+#' x <- op_array(2.0)
+#' y <- op_array(0.5)
+#' branches <- list(add_fn, substract_fn)
+#' op_switch(1, branches, x, y)
+#' op_switch(2, branches, x, y)
+#' ```
+#'
+#' @returns
+#' The outputs of `branch(...)` for the branch that was selected
+#' based on `index`.
+#'
+#' @param index
+#' An integer scalar indicating which branch function to apply (1-based).
+#'
+#' @param branches
+#' A list of functions to be applied based on `index`.
+#'
+#' @param ...
+#' Inputs to whichever branch is applied.
+#'
+#' @family core ops
+#' @family ops
+#' @export
+#' @tether keras.ops.switch
+op_switch <-
+function (index, branches, ...)
+{
+  if (!is.null(names(list(...))))
+    stop("Arguments supplied to ... must be unnamed")
+  index <- op_convert_to_tensor(index, "int32") - 1L
+  keras$ops$switch(index, branches, ...)
+}

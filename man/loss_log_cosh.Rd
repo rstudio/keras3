@@ -9,7 +9,8 @@ loss_log_cosh(
   y_pred,
   ...,
   reduction = "sum_over_batch_size",
-  name = "log_cosh"
+  name = "log_cosh",
+  dtype = NULL
 )
 }
 \arguments{
@@ -24,6 +25,11 @@ loss_log_cosh(
 \code{"sum_over_batch_size"}.}
 
 \item{name}{Optional name for the instance.}
+
+\item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
+means using \code{config_floatx()}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{config_set_floatx()}).}
 }
 \value{
 Logcosh error values with shape = \verb{[batch_size, d0, .. dN-1]}.

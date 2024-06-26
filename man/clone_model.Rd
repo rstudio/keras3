@@ -122,7 +122,7 @@ new_model <- clone_model(
 new_model
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## Model: "functional_5"
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Model: "functional_4"
 ## +-----------------------------------+--------------------------+---------------+
 ## | Layer (type)                      | Output Shape             |       Param # |
 ## +===================================+==========================+===============+

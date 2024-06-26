@@ -12,7 +12,8 @@ application_efficientnet_v2l(
   pooling = NULL,
   classes = 1000L,
   classifier_activation = "softmax",
-  include_preprocessing = TRUE
+  include_preprocessing = TRUE,
+  name = "efficientnetv2-l"
 )
 }
 \arguments{
@@ -24,7 +25,7 @@ layer at the top of the network. Defaults to \code{TRUE}.}
 or the path to the weights file to be loaded. Defaults to \code{"imagenet"}.}
 
 \item{input_tensor}{Optional Keras tensor
-(i.e. output of \code{layers.Input()})
+(i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{Optional shape tuple, only to be specified
@@ -58,6 +59,8 @@ When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
 
 \item{include_preprocessing}{Boolean, whether to include the preprocessing layer at the bottom of the network.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A model instance.

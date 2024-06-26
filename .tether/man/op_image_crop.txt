@@ -3,29 +3,33 @@ keras.ops.image.crop_images(
   images,
   top_cropping=None,
   left_cropping=None,
+  bottom_cropping=None,
+  right_cropping=None,
   target_height=None,
   target_width=None,
-  bottom_cropping=None,
-  right_cropping=None
+  data_format=None
 )
 __doc__
 Crop `images` to a specified `height` and `width`.
 
 Args:
-    images: 4-D batch of images of shape `(batch, height, width, channels)`
-         or 3-D single image of shape `(height, width, channels)`.
+    images: Input image or batch of images. Must be 3D or 4D.
     top_cropping: Number of columns to crop from the top.
-    bottom_cropping: Number of columns to crop from the bottom.
     left_cropping: Number of columns to crop from the left.
+    bottom_cropping: Number of columns to crop from the bottom.
     right_cropping: Number of columns to crop from the right.
     target_height: Height of the output images.
     target_width: Width of the output images.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
 
 Returns:
-    If `images` were 4D, a 4D float Tensor of shape
-        `(batch, target_height, target_width, channels)`
-    If `images` were 3D, a 3D float Tensor of shape
-        `(target_height, target_width, channels)`
+    Cropped image or batch of images.
 
 Example:
 

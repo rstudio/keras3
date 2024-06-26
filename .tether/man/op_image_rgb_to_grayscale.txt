@@ -1,21 +1,20 @@
 __signature__
-keras.ops.image.rgb_to_grayscale(image, data_format='channels_last')
+keras.ops.image.rgb_to_grayscale(images, data_format=None)
 __doc__
 Convert RGB images to grayscale.
 
 This function converts RGB images to grayscale images. It supports both
-3D and 4D tensors, where the last dimension represents channels.
+3D and 4D tensors.
 
 Args:
-    image: Input RGB image or batch of RGB images. Must be a 3D tensor
-        with shape `(height, width, channels)` or a 4D tensor with shape
-        `(batch, height, width, channels)`.
+    images: Input image or batch of images. Must be 3D or 4D.
     data_format: A string specifying the data format of the input tensor.
         It can be either `"channels_last"` or `"channels_first"`.
         `"channels_last"` corresponds to inputs with shape
         `(batch, height, width, channels)`, while `"channels_first"`
         corresponds to inputs with shape `(batch, channels, height, width)`.
-        Defaults to `"channels_last"`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
 
 Returns:
     Grayscale image or batch of grayscale images.
@@ -23,7 +22,7 @@ Returns:
 Examples:
 
 >>> import numpy as np
->>> from keras.src import ops
+>>> from keras import ops
 >>> x = np.random.random((2, 4, 4, 3))
 >>> y = ops.image.rgb_to_grayscale(x)
 >>> y.shape

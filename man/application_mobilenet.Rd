@@ -14,7 +14,8 @@ application_mobilenet(
   input_tensor = NULL,
   pooling = NULL,
   classes = 1000L,
-  classifier_activation = "softmax"
+  classifier_activation = "softmax",
+  name = NULL
 )
 }
 \arguments{
@@ -51,7 +52,7 @@ at the top of the network. Defaults to \code{TRUE}.}
 (pre-training on ImageNet), or the path to the weights file
 to be loaded. Defaults to \code{"imagenet"}.}
 
-\item{input_tensor}{Optional Keras tensor (i.e. output of \code{layers.Input()})
+\item{input_tensor}{Optional Keras tensor (i.e. output of \code{keras_input()})
 to use as image input for the model. \code{input_tensor} is useful
 for sharing inputs between multiple different networks.
 Defaults to \code{NULL}.}
@@ -77,6 +78,8 @@ to use on the "top" layer. Ignored unless \code{include_top=TRUE}.
 Set \code{classifier_activation=NULL} to return the logits of the "top"
 layer. When loading pretrained weights, \code{classifier_activation}
 can only be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A model instance.

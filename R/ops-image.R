@@ -36,7 +36,7 @@
 #' @returns
 #' Applied affine transform image or batch of images.
 #'
-#' @param image
+#' @param images
 #' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param transform
@@ -76,14 +76,14 @@
 #' `fill_mode = "constant"`. Defaults to `0`.
 #'
 #' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, weight)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#'
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
 #'
 #' @export
 #' @family image ops
@@ -95,10 +95,14 @@
 #'
 #' @tether keras.ops.image.affine_transform
 op_image_affine_transform <-
-function (image, transform, interpolation = "bilinear", fill_mode = "constant",
-    fill_value = 0L, data_format = "channels_last")
+function (images, transform, interpolation = "bilinear", fill_mode = "constant",
+    fill_value = 0L, data_format = NULL)
 {
     args <- capture_args(list(fill_value = as_integer))
+
+    # pass 'images' as unnamed positional arg (was renamed from 'image' in Keras 3.4.0)
+    args <- args_to_positional(args, "images")
+
     do.call(keras$ops$image$affine_transform, args)
 }
 
@@ -122,7 +126,7 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #' @returns
 #' Extracted patches 3D (if not batched) or 4D (if batched)
 #'
-#' @param image
+#' @param images
 #' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param size
@@ -142,14 +146,13 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #' The type of padding algorithm to use: `"same"` or `"valid"`.
 #'
 #' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, weight)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
 #'
 #' @export
 #' @family image ops
@@ -161,15 +164,18 @@ function (image, transform, interpolation = "bilinear", fill_mode = "constant",
 #'
 #' @tether keras.ops.image.extract_patches
 op_image_extract_patches <-
-function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
+function (images, size, strides = NULL, dilation_rate = 1L, padding = "valid",
     data_format = "channels_last")
 {
     args <- capture_args(list(size = as_integer, dilation_rate = as_integer))
+    # pass 'images' as unnamed positional arg (was renamed from 'image' in Keras 3.4.0)
+    args <- args_to_positional(args, "images")
+
     do.call(keras$ops$image$extract_patches, args)
 }
 
 
-#' Map the input array to new coordinates by interpolation..
+#' Map the input array to new coordinates by interpolation.
 #'
 #' @description
 #' Note that interpolation near boundaries differs from the scipy function,
@@ -177,13 +183,13 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #' [scipy/issues/2640](https://github.com/scipy/scipy/issues/2640).
 #'
 #' @returns
-#' Output image or batch of images.
+#' Output input or batch of inputs.
 #'
-#' @param input
+#' @param inputs
 #' The input array.
 #'
 #' @param coordinates
-#' The coordinates at which input is evaluated.
+#' The coordinates at which `inputs` is evaluated.
 #'
 #' @param order
 #' The order of the spline interpolation. The order must be `0` or
@@ -191,27 +197,27 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #' interpolation.
 #'
 #' @param fill_mode
-#' Points outside the boundaries of the input are filled
+#' Points outside the boundaries of the inputs are filled
 #' according to the given mode. Available methods are `"constant"`,
 #' `"nearest"`, `"wrap"` and `"mirror"` and `"reflect"`. Defaults to
 #' `"constant"`.
 #' - `"constant"`: `(k k k k | a b c d | k k k k)`
-#'     The input is extended by filling all values beyond
+#'     inputs is extended by filling all values beyond
 #'     the edge with the same constant value k specified by
 #'     `fill_value`.
 #' - `"nearest"`: `(a a a a | a b c d | d d d d)`
-#'     The input is extended by the nearest pixel.
+#'     inputs is extended by the nearest pixel.
 #' - `"wrap"`: `(a b c d | a b c d | a b c d)`
-#'     The input is extended by wrapping around to the opposite edge.
+#'     inputs is extended by wrapping around to the opposite edge.
 #' - `"mirror"`: `(c d c b | a b c d | c b a b)`
-#'     The input is extended by mirroring about the edge.
+#'     inputs is extended by mirroring about the edge.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
-#'     The input is extended by reflecting about the edge of the last
+#'     inputs is extended by reflecting about the edge of the last
 #'     pixel.
 #'
 #' @param fill_value
-#' Value used for points outside the boundaries of the input if
-#' `fill_mode = "constant"`. Defaults to `0`.
+#' Value used for points outside the boundaries of the inputs
+#' if `fill_mode = "constant"`. Defaults to `0`.
 #'
 #' @export
 #' @family image ops
@@ -221,10 +227,12 @@ function (image, size, strides = NULL, dilation_rate = 1L, padding = "valid",
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/map_coordinates>
 #' @tether keras.ops.image.map_coordinates
 op_image_map_coordinates <-
-function (input, coordinates, order, fill_mode = "constant",
+function (inputs, coordinates, order, fill_mode = "constant",
     fill_value = 0L)
 {
     args <- capture_args(list(fill_value = as_integer))
+    # "inputs" renamed from "input" in Keras 3.4.0
+    args <- args_to_positional(args, "inputs")
     do.call(keras$ops$image$map_coordinates, args)
 }
 
@@ -251,14 +259,10 @@ function (input, coordinates, order, fill_mode = "constant",
 #' ```
 #'
 #' @returns
-#' - If `images` were 4D, a 4D float Tensor of shape
-#'   `(batch, target_height, target_width, channels)`
-#' - If `images` were 3D, a 3D float Tensor of shape
-#'   `(target_height, target_width, channels)`
+#' Padded image or batch of images.
 #'
 #' @param images
-#' 4D Tensor of shape `(batch, height, width, channels)` or 3D
-#' Tensor of shape `(height, width, channels)`.
+#' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param top_padding
 #' Number of rows of zeros to add on top.
@@ -278,6 +282,15 @@ function (input, coordinates, order, fill_mode = "constant",
 #' @param target_width
 #' Width of output images.
 #'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
 #' @export
 #' @family image ops
 #' @family image utils
@@ -287,8 +300,9 @@ function (input, coordinates, order, fill_mode = "constant",
 #'
 #' @tether keras.ops.image.pad_images
 op_image_pad <-
-function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
-    target_width = NULL, bottom_padding = NULL, right_padding = NULL)
+function (images, top_padding = NULL, left_padding = NULL,
+          bottom_padding = NULL, right_padding = NULL,
+          target_height = NULL, target_width = NULL, data_format = NULL)
 {
     args <- capture_args(list(images = as_integer, top_padding = as_integer,
         bottom_padding = as_integer, left_padding = as_integer,
@@ -325,7 +339,7 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' @returns
 #' Resized image or batch of images.
 #'
-#' @param image
+#' @param images
 #' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param size
@@ -364,14 +378,14 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
 #'
 #' @param data_format
-#' string, either `"channels_last"` or `"channels_first"`.
-#' The ordering of the dimensions in the inputs. `"channels_last"`
-#' corresponds to inputs with shape `(batch, height, width, channels)`
-#' while `"channels_first"` corresponds to inputs with shape
-#' `(batch, channels, height, weight)`. It defaults to the
-#' `image_data_format` value found in your Keras config file at
-#' `~/.keras/keras.json`. If you never set it, then it will be
-#' `"channels_last"`.
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
 #'
 #' @export
 #' @family image ops
@@ -382,12 +396,12 @@ function (images, top_padding = NULL, left_padding = NULL, target_height = NULL,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/resize>
 #' @tether keras.ops.image.resize
 op_image_resize <-
-function (image, size, interpolation = "bilinear", antialias = FALSE,
+function (images, size, interpolation = "bilinear", antialias = FALSE,
           crop_to_aspect_ratio = FALSE, pad_to_aspect_ratio = FALSE,
-          fill_mode = "constant", fill_value = 0,
-    data_format = "channels_last")
+          fill_mode = "constant", fill_value = 0, data_format = NULL)
 {
     args <- capture_args(list(size = as_integer))
+    args <- args_to_positional(args, "images")
     do.call(keras$ops$image$resize, args)
 }
 
@@ -406,14 +420,10 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
 #' ```
 #'
 #' @returns
-#' If `images` were 4D, a 4D float Tensor of shape
-#'     `(batch, target_height, target_width, channels)`
-#' If `images` were 3D, a 3D float Tensor of shape
-#'     `(target_height, target_width, channels)`
+#' Cropped image or batch of images.
 #'
 #' @param images
-#' 4-D batch of images of shape `(batch, height, width, channels)`
-#' or 3-D single image of shape `(height, width, channels)`.
+#' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param top_cropping
 #' Number of columns to crop from the top.
@@ -433,6 +443,15 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
 #' @param target_width
 #' Width of the output images.
 #'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
 #' @export
 #' @family image ops
 #' @family image utils
@@ -442,8 +461,9 @@ function (image, size, interpolation = "bilinear", antialias = FALSE,
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/crop_images>
 op_image_crop <-
 function (images, top_cropping = NULL, left_cropping = NULL,
-    target_height = NULL, target_width = NULL, bottom_cropping = NULL,
-    right_cropping = NULL) {
+          bottom_cropping = NULL, right_cropping = NULL,
+          target_height = NULL, target_width = NULL,
+          data_format = NULL) {
   args <- capture_args(list(
       top_cropping = as_integer,
       left_cropping = as_integer,
@@ -483,10 +503,8 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' @returns
 #' Grayscale image or batch of grayscale images.
 #'
-#' @param image
-#' Input RGB image or batch of RGB images. Must be a 3D tensor
-#' with shape `(height, width, channels)` or a 4D tensor with shape
-#' `(batch, height, width, channels)`.
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
 #'
 #' @param data_format
 #' A string specifying the data format of the input tensor.
@@ -494,7 +512,8 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' `"channels_last"` corresponds to inputs with shape
 #' `(batch, height, width, channels)`, while `"channels_first"`
 #' corresponds to inputs with shape `(batch, channels, height, width)`.
-#' Defaults to `"channels_last"`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
 #'
 #' @export
 #' @family image ops
@@ -502,5 +521,111 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' @family ops
 #' @tether keras.ops.image.rgb_to_grayscale
 op_image_rgb_to_grayscale <-
-function (image, data_format = "channels_last")
-keras$ops$image$rgb_to_grayscale(image, data_format)
+function (images, data_format = NULL) {
+  keras$ops$image$rgb_to_grayscale(images, data_format)
+}
+
+
+
+#' Convert HSV images to RGB.
+#'
+#' @description
+#' `images` must be of float dtype, and the output is only well defined if the
+#' values in `images` are in `[0, 1]`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 4, 4, 3))
+#' y <- op_image_hsv_to_rgb(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(4, 4, 3)) # Single HSV image
+#' y <- op_image_hsv_to_rgb(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(2, 3, 4, 4))
+#' y <- op_image_hsv_to_rgb(x, data_format="channels_first")
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' RGB image or batch of RGB images.
+#'
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @export
+#' @tether keras.ops.image.hsv_to_rgb
+op_image_hsv_to_rgb <-
+function (images, data_format = NULL) {
+  keras$ops$image$hsv_to_rgb(images, data_format)
+}
+
+#' Convert RGB images to HSV.
+#'
+#' @description
+#' `images` must be of float dtype, and the output is only well defined if the
+#' values in `images` are in `[0, 1]`.
+#'
+#' All HSV values are in `[0, 1]`. A hue of `0` corresponds to pure red, `1/3`
+#' is pure green, and `2/3` is pure blue.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 4, 4, 3))
+#' y <- op_image_rgb_to_hsv(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(4, 4, 3)) # Single RGB image
+#' y <- op_image_rgb_to_hsv(x)
+#' shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- random_uniform(c(2, 3, 4, 4))
+#' y <- op_image_rgb_to_hsv(x, data_format = "channels_first")
+#' shape(y)
+#' ```
+#'
+#' @returns
+#' HSV image or batch of HSV images.
+#'
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `config_image_data_format()`.
+#'
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @export
+#' @tether keras.ops.image.rgb_to_hsv
+op_image_rgb_to_hsv <-
+function (images, data_format = NULL) {
+  keras$ops$image$rgb_to_hsv(images, data_format)
+}

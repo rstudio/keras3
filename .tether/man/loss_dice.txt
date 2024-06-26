@@ -1,7 +1,7 @@
 Help on class Dice in module keras.src.losses.losses:
 
 class Dice(LossFunctionWrapper)
- |  Dice(reduction='sum_over_batch_size', name='dice')
+ |  Dice(reduction='sum_over_batch_size', name='dice', axis=None, dtype=None)
  |
  |  Computes the Dice loss value between `y_true` and `y_pred`.
  |
@@ -11,11 +11,43 @@ class Dice(LossFunctionWrapper)
  |  ```
  |
  |  Args:
- |      y_true: tensor of true targets.
- |      y_pred: tensor of predicted targets.
+ |      reduction: Type of reduction to apply to the loss. In almost all cases
+ |          this should be `"sum_over_batch_size"`.
+ |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+ |      name: Optional name for the loss instance.
+ |      axis: Tuple for which dimensions the loss is calculated. Defaults to
+ |          `None`.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Returns:
  |      Dice loss value.
+ |
+ |  Example:
+ |
+ |  >>> y_true = [[[[1.0], [1.0]], [[0.0], [0.0]]],
+ |  ...           [[[1.0], [1.0]], [[0.0], [0.0]]]]
+ |  >>> y_pred = [[[[0.0], [1.0]], [[0.0], [1.0]]],
+ |  ...           [[[0.4], [0.0]], [[0.0], [0.9]]]]
+ |  >>> axis = (1, 2, 3)
+ |  >>> loss = keras.losses.dice(y_true, y_pred, axis=axis)
+ |  >>> assert loss.shape == (2,)
+ |  >>> loss
+ |  array([0.5, 0.75757575], shape=(2,), dtype=float32)
+ |
+ |  >>> loss = keras.losses.dice(y_true, y_pred)
+ |  >>> assert loss.shape == ()
+ |  >>> loss
+ |  array(0.6164384, shape=(), dtype=float32)
+ |
+ |  >>> y_true = np.array(y_true)
+ |  >>> y_pred = np.array(y_pred)
+ |  >>> loss = keras.losses.Dice(axis=axis, reduction=None)(y_true, y_pred)
+ |  >>> assert loss.shape == (2,)
+ |  >>> loss
+ |  array([0.5, 0.75757575], shape=(2,), dtype=float32)
  |
  |  Method resolution order:
  |      Dice
@@ -29,7 +61,9 @@ class Dice(LossFunctionWrapper)
  |  __init__(
  |    self,
  |    reduction='sum_over_batch_size',
- |    name='dice'
+ |    name='dice',
+ |    axis=None,
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

@@ -12,6 +12,7 @@ application_efficientnet_b2(
   pooling = NULL,
   classes = 1000L,
   classifier_activation = "softmax",
+  name = "efficientnetb2",
   ...
 )
 }
@@ -25,7 +26,7 @@ or the path to the weights file to be loaded.
 Defaults to \code{"imagenet"}.}
 
 \item{input_tensor}{Optional Keras tensor
-(i.e. output of \code{layers.Input()})
+(i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{Optional shape tuple, only to be specified
@@ -57,6 +58,8 @@ on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
 Defaults to \code{'softmax'}.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 
 \item{...}{For forward/backward compatability.}
 }

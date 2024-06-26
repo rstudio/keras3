@@ -3,6 +3,46 @@
 - Fixed issue where GPUs would not be found when running on Windows under WSL Linux.
   (reported in #1456, fixed in #1459)
 
+- `keras_shape` objects (as returned by `keras3::shape()`) gain `==` and `!=` methods.
+
+User facing changes with upstream Keras v3.4.0:
+
+- New function:
+  - `op_argpartition()`
+  - `op_map()`
+  - `op_scan()`
+  - `op_switch()`
+  - `op_dtype()`
+  - `op_lstsq()`
+  - `op_image_hsv_to_rgb()`
+  - `op_image_rgb_to_hsv()`
+
+- Changes:
+  - Added support for arbitrary, deeply nested input/output structures in 
+    Functional models  (e.g. lists of lists of lists of inputs or outputs...)
+  - Add support for `optional` Functional inputs.
+    - `keras_input()` gains an `optional` argument.
+    - `keras_model_sequential()` gains a `input_optional` argument.
+  - Add support for `float8` inference for `Dense` and `EinsumDense` layers.
+  - Enable `layer_feature_space()` to be used in a `{tfdatasets}` pipeline even 
+    when the backend isn't TensorFlow.
+  - `layer_string_lookup()` can now take `tf$SparseTensor()` as input.
+  - `layer_string_lookup()` returns `"int64"` dtype by default in more modes now.
+  - `Layer()` instances gain attributes `path` and `quantization_mode`.
+  - `Metric()$variables` is now recursive.
+  - Add `training` argument to `Model$compute_loss()`.
+  - `split_dataset()` now supports nested structures in dataset.
+  - All applications gain a `name` argument, accept a custom name.
+  - `layer_multi_head_attention()` gains a `seed` argument.
+  - All losses gain a `dtype` argument.
+  - `loss_dice()` gains an `axis` argument.
+  - `op_ctc_decode()`, new default for `mask_index = 0`
+  - All `op_image_*` functions now use default `data_format` value
+    to `config_image_data_format()`
+  - `op_isclose()` gains arguments `rtol`, `atol`, `equal_nan`.
+  - `save_model()` gains argument `zipped`.
+  - Bugs fixes and performance improvements.
+
 # keras3 1.0.0
 
 - Chains of `layer_*` calls with `|>` now instantiate layers in the
@@ -16,10 +56,10 @@ User facing changes with upstream Keras v3.3.3:
 - new functions: `op_slogdet()`, `op_psnr()`
 
 - `clone_model()` gains new args: `call_function`, `recursive`
-  Updated example usage. 
+  Updated example usage.
 
 - `op_ctc_decode()` strategy argument has new default: `"greedy"`.
-  Updated docs. 
+  Updated docs.
 
 - `loss_ctc()` default name fixed, changed to `"ctc"`
 

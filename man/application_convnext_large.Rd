@@ -5,7 +5,6 @@
 \title{Instantiates the ConvNeXtLarge architecture.}
 \usage{
 application_convnext_large(
-  model_name = "convnext_large",
   include_top = TRUE,
   include_preprocessing = TRUE,
   weights = "imagenet",
@@ -13,12 +12,11 @@ application_convnext_large(
   input_shape = NULL,
   pooling = NULL,
   classes = 1000L,
-  classifier_activation = "softmax"
+  classifier_activation = "softmax",
+  name = "convnext_large"
 )
 }
 \arguments{
-\item{model_name}{String, name for the model.}
-
 \item{include_top}{Whether to include the fully-connected
 layer at the top of the network. Defaults to \code{TRUE}.}
 
@@ -29,7 +27,7 @@ layer at the top of the network. Defaults to \code{TRUE}.}
 file to be loaded. Defaults to \code{"imagenet"}.}
 
 \item{input_tensor}{Optional Keras tensor
-(i.e. output of \code{layers.Input()})
+(i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{Optional shape tuple, only to be specified
@@ -60,6 +58,8 @@ on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
 Defaults to \code{"softmax"}.
 When loading pretrained weights, \code{classifier_activation} can only
 be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A model instance.

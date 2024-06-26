@@ -534,6 +534,14 @@
 #'
 #'     These are the weights that get updated by the optimizer during training.
 #'
+#' * `path`
+#'     The path of the layer.
+#'
+#'     If the layer has not been built yet, it will be `NULL`.
+#'
+#' * `quantization_mode`
+#'     The quantization mode of this layer, `NULL` if not quantized.
+#'
 #' * `variable_dtype`
 #'     The dtype of the state (weights) of the layer.
 #'

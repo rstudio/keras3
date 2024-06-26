@@ -7,7 +7,7 @@ keras.applications.EfficientNetB1(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  **kwargs
+  name='efficientnetb1'
 )
 __doc__
 Instantiates the EfficientNetB1 architecture.
@@ -68,6 +68,8 @@ Args:
         Defaults to `'softmax'`.
         When loading pretrained weights, `classifier_activation` can only
         be `None` or `"softmax"`.
+    name: The name of the model (string).
 
 Returns:
     A model instance.
+

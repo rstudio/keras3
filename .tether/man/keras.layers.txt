@@ -718,7 +718,8 @@ Input(
   sparse=None,
   batch_shape=None,
   name=None,
-  tensor=None
+  tensor=None,
+  optional=False
 )
 InputLayer(
   shape=None,
@@ -727,6 +728,7 @@ InputLayer(
   sparse=None,
   batch_shape=None,
   input_tensor=None,
+  optional=False,
   name=None,
   **kwargs
 )
@@ -738,7 +740,8 @@ InputSpec(
   min_ndim=None,
   axes=None,
   allow_last_axis_squeeze=False,
-  name=None
+  name=None,
+  optional=False
 )
 IntegerLookup(
   max_tokens=None,
@@ -917,6 +920,7 @@ MultiHeadAttention(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  seed=None,
   **kwargs
 )
 multiply(inputs, **kwargs)

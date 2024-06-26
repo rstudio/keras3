@@ -1,0 +1,40 @@
+__signature__
+keras.ops.image.hsv_to_rgb(images, data_format=None)
+__doc__
+Convert HSV images to RGB.
+
+`images` must be of float dtype, and the output is only well defined if the
+values in `images` are in `[0, 1]`.
+
+Args:
+    images: Input image or batch of images. Must be 3D or 4D.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
+
+Returns:
+    RGB image or batch of RGB images.
+
+Examples:
+
+>>> import numpy as np
+>>> from keras import ops
+>>> x = np.random.random((2, 4, 4, 3))
+>>> y = ops.image.hsv_to_rgb(x)
+>>> y.shape
+(2, 4, 4, 3)
+
+>>> x = np.random.random((4, 4, 3)) # Single HSV image
+>>> y = ops.image.hsv_to_rgb(x)
+>>> y.shape
+(4, 4, 3)
+
+>>> x = np.random.random((2, 3, 4, 4))
+>>> y = ops.image.hsv_to_rgb(x, data_format="channels_first")
+>>> y.shape
+(2, 3, 4, 4)
+

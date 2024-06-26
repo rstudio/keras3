@@ -1,7 +1,7 @@
 Help on class MultiHeadAttention in module keras.src.layers.attention.multi_head_attention:
 
 class MultiHeadAttention(keras.src.layers.layer.Layer)
- |  MultiHeadAttention(num_heads, key_dim, value_dim=None, dropout=0.0, use_bias=True, output_shape=None, attention_axes=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, **kwargs)
+ |  MultiHeadAttention(num_heads, key_dim, value_dim=None, dropout=0.0, use_bias=True, output_shape=None, attention_axes=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, seed=None, **kwargs)
  |
  |  MultiHeadAttention layer.
  |
@@ -44,6 +44,7 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |      activity_regularizer: Regularizer for dense layer activity.
  |      kernel_constraint: Constraint for dense layer kernels.
  |      bias_constraint: Constraint for dense layer kernels.
+ |      seed: Optional integer to seed the dropout layer.
  |
  |  Call arguments:
  |      query: Query tensor of shape `(B, T, dim)`, where `B` is the batch size,
@@ -107,6 +108,7 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |    activity_regularizer=None,
  |    kernel_constraint=None,
  |    bias_constraint=None,
+ |    seed=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

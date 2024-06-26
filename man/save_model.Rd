@@ -4,7 +4,7 @@
 \alias{save_model}
 \title{Saves a model as a \code{.keras} file.}
 \usage{
-save_model(model, filepath = NULL, overwrite = FALSE, ...)
+save_model(model, filepath = NULL, overwrite = FALSE, zipped = TRUE, ...)
 }
 \arguments{
 \item{model}{A keras model.}
@@ -15,6 +15,9 @@ Path where to save the model. Must end in \code{.keras}.}
 \item{overwrite}{Whether we should overwrite any existing model
 at the target location, or instead ask the user
 via an interactive prompt.}
+
+\item{zipped}{Whether to save the model as a zipped \code{.keras}
+archive (default), or as an unzipped directory.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -43,7 +46,7 @@ stopifnot(all.equal(
 ))
 }\if{html}{\out{</div>}}
 
-The saved \code{.keras} file contains:
+The saved \code{.keras} file is a \code{zip} archive that contains:
 \itemize{
 \item The model's configuration (architecture)
 \item The model's weights

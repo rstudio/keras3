@@ -9,5 +9,5 @@ L2(l2=0.01)
 orthogonal_regularizer(factor=0.01, mode='rows')
 OrthogonalRegularizer(factor=0.01, mode='rows')
 Regularizer()
-serialize(initializer)
+serialize(regularizer)
 

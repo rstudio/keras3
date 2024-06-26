@@ -6,7 +6,8 @@ keras.layers.Input(
   sparse=None,
   batch_shape=None,
   name=None,
-  tensor=None
+  tensor=None,
+  optional=False
 )
 __doc__
 Used to instantiate a Keras tensor.
@@ -40,6 +41,8 @@ Args:
     tensor: Optional existing tensor to wrap into the `Input` layer.
         If set, the layer will use this tensor rather
         than creating a new placeholder tensor.
+    optional: Boolean, whether the input is optional or not.
+        An optional input can accept `None` values.
 
 Returns:
   A Keras tensor.

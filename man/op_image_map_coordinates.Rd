@@ -2,10 +2,10 @@
 % Please edit documentation in R/ops-image.R
 \name{op_image_map_coordinates}
 \alias{op_image_map_coordinates}
-\title{Map the input array to new coordinates by interpolation..}
+\title{Map the input array to new coordinates by interpolation.}
 \usage{
 op_image_map_coordinates(
-  input,
+  inputs,
   coordinates,
   order,
   fill_mode = "constant",
@@ -13,39 +13,39 @@ op_image_map_coordinates(
 )
 }
 \arguments{
-\item{input}{The input array.}
+\item{inputs}{The input array.}
 
-\item{coordinates}{The coordinates at which input is evaluated.}
+\item{coordinates}{The coordinates at which \code{inputs} is evaluated.}
 
 \item{order}{The order of the spline interpolation. The order must be \code{0} or
 \code{1}. \code{0} indicates the nearest neighbor and \code{1} indicates the linear
 interpolation.}
 
-\item{fill_mode}{Points outside the boundaries of the input are filled
+\item{fill_mode}{Points outside the boundaries of the inputs are filled
 according to the given mode. Available methods are \code{"constant"},
 \code{"nearest"}, \code{"wrap"} and \code{"mirror"} and \code{"reflect"}. Defaults to
 \code{"constant"}.
 \itemize{
 \item \code{"constant"}: \verb{(k k k k | a b c d | k k k k)}
-The input is extended by filling all values beyond
+inputs is extended by filling all values beyond
 the edge with the same constant value k specified by
 \code{fill_value}.
 \item \code{"nearest"}: \verb{(a a a a | a b c d | d d d d)}
-The input is extended by the nearest pixel.
+inputs is extended by the nearest pixel.
 \item \code{"wrap"}: \verb{(a b c d | a b c d | a b c d)}
-The input is extended by wrapping around to the opposite edge.
+inputs is extended by wrapping around to the opposite edge.
 \item \code{"mirror"}: \verb{(c d c b | a b c d | c b a b)}
-The input is extended by mirroring about the edge.
+inputs is extended by mirroring about the edge.
 \item \code{"reflect"}: \verb{(d c b a | a b c d | d c b a)}
-The input is extended by reflecting about the edge of the last
+inputs is extended by reflecting about the edge of the last
 pixel.
 }}
 
-\item{fill_value}{Value used for points outside the boundaries of the input if
-\code{fill_mode = "constant"}. Defaults to \code{0}.}
+\item{fill_value}{Value used for points outside the boundaries of the inputs
+if \code{fill_mode = "constant"}. Defaults to \code{0}.}
 }
 \value{
-Output image or batch of images.
+Output input or batch of inputs.
 }
 \description{
 Note that interpolation near boundaries differs from the scipy function,
@@ -57,9 +57,11 @@ Other image ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other image utils: \cr
 \code{\link{image_array_save}()} \cr
@@ -70,9 +72,11 @@ Other image utils: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
@@ -90,6 +94,7 @@ Other ops: \cr
 \code{\link{op_arctanh}()} \cr
 \code{\link{op_argmax}()} \cr
 \code{\link{op_argmin}()} \cr
+\code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
@@ -130,6 +135,7 @@ Other ops: \cr
 \code{\link{op_divide}()} \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
+\code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
@@ -163,9 +169,11 @@ Other ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
@@ -192,7 +200,9 @@ Other ops: \cr
 \code{\link{op_logical_xor}()} \cr
 \code{\link{op_logspace}()} \cr
 \code{\link{op_logsumexp}()} \cr
+\code{\link{op_lstsq}()} \cr
 \code{\link{op_lu_factor}()} \cr
+\code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
@@ -235,6 +245,7 @@ Other ops: \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
+\code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_segment_max}()} \cr
@@ -271,6 +282,7 @@ Other ops: \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr
 \code{\link{op_swapaxes}()} \cr
+\code{\link{op_switch}()} \cr
 \code{\link{op_take}()} \cr
 \code{\link{op_take_along_axis}()} \cr
 \code{\link{op_tan}()} \cr

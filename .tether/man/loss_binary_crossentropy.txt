@@ -1,7 +1,7 @@
 Help on class BinaryCrossentropy in module keras.src.losses.losses:
 
 class BinaryCrossentropy(LossFunctionWrapper)
- |  BinaryCrossentropy(from_logits=False, label_smoothing=0.0, axis=-1, reduction='sum_over_batch_size', name='binary_crossentropy')
+ |  BinaryCrossentropy(from_logits=False, label_smoothing=0.0, axis=-1, reduction='sum_over_batch_size', name='binary_crossentropy', dtype=None)
  |
  |  Computes the cross-entropy loss between true labels and predicted labels.
  |
@@ -30,6 +30,10 @@ class BinaryCrossentropy(LossFunctionWrapper)
  |          this should be `"sum_over_batch_size"`.
  |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
  |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`).
  |
  |  Examples:
  |
@@ -97,7 +101,8 @@ class BinaryCrossentropy(LossFunctionWrapper)
  |    label_smoothing=0.0,
  |    axis=-1,
  |    reduction='sum_over_batch_size',
- |    name='binary_crossentropy'
+ |    name='binary_crossentropy',
+ |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

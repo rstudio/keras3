@@ -7,6 +7,8 @@
 \alias{[.keras_shape}
 \alias{as.integer.keras_shape}
 \alias{as.list.keras_shape}
+\alias{==.keras_shape}
+\alias{!=.keras_shape}
 \title{Tensor shape utility}
 \usage{
 shape(...)
@@ -20,6 +22,10 @@ shape(...)
 \method{as.integer}{keras_shape}(x, ...)
 
 \method{as.list}{keras_shape}(x, ...)
+
+\method{==}{keras_shape}(x, y)
+
+\method{!=}{keras_shape}(x, y)
 }
 \arguments{
 \item{...}{A shape specification. Numerics, \code{NULL} and tensors are valid.
@@ -28,7 +34,7 @@ Tensors are dispatched to \code{op_shape()} to extract the tensor shape. Values
 wrapped in \code{I()} are used asis (see examples). All other objects are coerced
 via \code{as.integer()}.}
 
-\item{x}{A \code{keras_shape} object.}
+\item{x, y}{A \code{keras_shape} object.}
 
 \item{prefix}{Whether to format the shape object with a prefix. Defaults to
 \code{"shape"}.}

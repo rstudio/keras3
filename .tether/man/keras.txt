@@ -8,13 +8,9 @@ datasets: Module(keras.api.datasets)
 device(device_name)
 distribution: Module(keras.api.distribution)
 dtype_policies: Module(keras.api.dtype_policies)
-DTypePolicy(
-  name,
-  *args,
-  **kwargs
-)
+DTypePolicy(name=None)
 export: Module(keras.api.export)
-FloatDTypePolicy(name)
+FloatDTypePolicy(name=None)
 Function(
   inputs,
   outputs,
@@ -29,7 +25,8 @@ Input(
   sparse=None,
   batch_shape=None,
   name=None,
-  tensor=None
+  tensor=None,
+  optional=False
 )
 InputSpec(
   dtype=None,
@@ -39,7 +36,8 @@ InputSpec(
   min_ndim=None,
   axes=None,
   allow_last_axis_squeeze=False,
-  name=None
+  name=None,
+  optional=False
 )
 KerasTensor(
   shape,

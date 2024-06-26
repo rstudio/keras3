@@ -5,7 +5,7 @@
 \title{Extracts patches from the image(s).}
 \usage{
 op_image_extract_patches(
-  image,
+  images,
   size,
   strides = NULL,
   dilation_rate = 1L,
@@ -14,7 +14,7 @@ op_image_extract_patches(
 )
 }
 \arguments{
-\item{image}{Input image or batch of images. Must be 3D or 4D.}
+\item{images}{Input image or batch of images. Must be 3D or 4D.}
 
 \item{size}{Patch size int or list (patch_height, patch_width)}
 
@@ -28,14 +28,13 @@ conjunction with \code{dilation_rate > 1}}
 
 \item{padding}{The type of padding algorithm to use: \code{"same"} or \code{"valid"}.}
 
-\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
-The ordering of the dimensions in the inputs. \code{"channels_last"}
-corresponds to inputs with shape \verb{(batch, height, width, channels)}
-while \code{"channels_first"} corresponds to inputs with shape
-\verb{(batch, channels, height, weight)}. It defaults to the
-\code{image_data_format} value found in your Keras config file at
-\verb{~/.keras/keras.json}. If you never set it, then it will be
-\code{"channels_last"}.}
+\item{data_format}{A string specifying the data format of the input tensor.
+It can be either \code{"channels_last"} or \code{"channels_first"}.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch, height, width, channels)}, while \code{"channels_first"}
+corresponds to inputs with shape \verb{(batch, channels, height, width)}.
+If not specified, the value will default to
+\code{config_image_data_format()}.}
 }
 \value{
 Extracted patches 3D (if not batched) or 4D (if batched)
@@ -75,10 +74,12 @@ shape(patches)
 Other image ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other image utils: \cr
 \code{\link{image_array_save}()} \cr
@@ -88,10 +89,12 @@ Other image utils: \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
@@ -109,6 +112,7 @@ Other ops: \cr
 \code{\link{op_arctanh}()} \cr
 \code{\link{op_argmax}()} \cr
 \code{\link{op_argmin}()} \cr
+\code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
@@ -149,6 +153,7 @@ Other ops: \cr
 \code{\link{op_divide}()} \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
+\code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
@@ -181,10 +186,12 @@ Other ops: \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
+\code{\link{op_image_rgb_to_hsv}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
@@ -211,7 +218,9 @@ Other ops: \cr
 \code{\link{op_logical_xor}()} \cr
 \code{\link{op_logspace}()} \cr
 \code{\link{op_logsumexp}()} \cr
+\code{\link{op_lstsq}()} \cr
 \code{\link{op_lu_factor}()} \cr
+\code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
@@ -254,6 +263,7 @@ Other ops: \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
+\code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_segment_max}()} \cr
@@ -290,6 +300,7 @@ Other ops: \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr
 \code{\link{op_swapaxes}()} \cr
+\code{\link{op_switch}()} \cr
 \code{\link{op_take}()} \cr
 \code{\link{op_take_along_axis}()} \cr
 \code{\link{op_tan}()} \cr

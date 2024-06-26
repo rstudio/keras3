@@ -29,7 +29,7 @@ Example:
 # Create the artifact
 model.export("path/to/location")
 
-# Later, in a different process / environment...
+# Later, in a different process/environment...
 reloaded_artifact = tf.saved_model.load("path/to/location")
 predictions = reloaded_artifact.serve(input_data)
 ```

@@ -9,7 +9,8 @@ keras.applications.MobileNet(
   input_tensor=None,
   pooling=None,
   classes=1000,
-  classifier_activation='softmax'
+  classifier_activation='softmax',
+  name=None
 )
 __doc__
 Instantiates the MobileNet architecture.
@@ -82,6 +83,8 @@ Args:
         Set `classifier_activation=None` to return the logits of the "top"
         layer. When loading pretrained weights, `classifier_activation`
         can only be `None` or `"softmax"`.
+    name: String, the name of the model.
 
 Returns:
     A model instance.
+

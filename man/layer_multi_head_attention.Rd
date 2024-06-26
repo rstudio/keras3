@@ -20,6 +20,7 @@ layer_multi_head_attention(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
+  seed = NULL,
   ...
 )
 }
@@ -56,6 +57,8 @@ attention over all axes, but batch, heads, and features.}
 \item{kernel_constraint}{Constraint for dense layer kernels.}
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
+
+\item{seed}{Optional integer to seed the dropout layer.}
 
 \item{...}{For forward/backward compatability.}
 }

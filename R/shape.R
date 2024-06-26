@@ -163,7 +163,7 @@ shape <- function(...) {
 
 #' @export
 #' @rdname shape
-#' @param x A `keras_shape` object.
+#' @param x,y A `keras_shape` object.
 #' @param prefix Whether to format the shape object with a prefix. Defaults to
 #'   `"shape"`.
 format.keras_shape <- function(x, ..., prefix = TRUE) {
@@ -209,6 +209,23 @@ destructure.keras_shape <- function(x) unclass(x)
 #' @rdname shape
 #' @export
 as.list.keras_shape <- function(x, ...) unclass(x)
+
+#' @rdname shape
+#' @export
+`==.keras_shape` <- function(x, y) {
+  if(!inherits(x, "keras_shape"))
+    x <- shape(x)
+  if(!inherits(y, "keras_shape"))
+    y <- shape(y)
+  identical(x, y)
+}
+
+#' @rdname shape
+#' @export
+`!=.keras_shape` <- function(x, y) {
+  !`==.keras_shape`(x, y)
+}
+
 
 # ' @rdname shape
 # ' @export

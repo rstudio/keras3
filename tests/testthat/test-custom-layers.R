@@ -107,7 +107,7 @@ test_succeeds("Custom layer with time distributed layer", {
   td <- time_distributed(layer = layer_custom(output_dim = 32))
   o <- td(x)
 
-  expect_equal(o$shape$as_list(), c(100, 4,4,32))
+  expect_equal(unlist(as.list(o$shape)), c(100, 4,4,32))
 
 })
 

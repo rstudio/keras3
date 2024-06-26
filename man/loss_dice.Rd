@@ -9,13 +9,15 @@ loss_dice(
   y_pred,
   ...,
   reduction = "sum_over_batch_size",
-  name = "dice"
+  name = "dice",
+  axis = NULL,
+  dtype = NULL
 )
 }
 \arguments{
-\item{y_true}{tensor of true targets.}
+\item{y_true}{Tensor of true targets.}
 
-\item{y_pred}{tensor of predicted targets.}
+\item{y_pred}{Tensor of predicted targets.}
 
 \item{...}{For forward/backward compatability.}
 
@@ -24,6 +26,14 @@ this should be \code{"sum_over_batch_size"}.
 Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
 
 \item{name}{String, name for the object}
+
+\item{axis}{List of which dimensions the loss is calculated. Defaults to
+\code{NULL}.}
+
+\item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
+means using \code{config_floatx()}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{config_set_floatx()}).}
 }
 \value{
 if \code{y_true} and \code{y_pred} are provided, Dice loss value. Otherwise,
@@ -40,6 +50,32 @@ Formula:
 \if{html}{\out{<div class="sourceCode python">}}\preformatted{loss = 1 - (2 * sum(y_true * y_pred)) / (sum(y_true) + sum(y_pred))
 }\if{html}{\out{</div>}}
 }
+\section{Example}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- array(c(1, 1, 0, 0,
+                  1, 1, 0, 0), dim = c(2, 2, 2, 1))
+y_pred <- array(c(0, 0.4, 0,   0,
+                  1,   0, 1, 0.9), dim = c(2, 2, 2, 1))
+
+axis <- c(2, 3, 4)
+loss <- loss_dice(y_true, y_pred, axis = axis)
+stopifnot(shape(loss) == shape(2))
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.50000001 0.75757576], shape=(2), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss = loss_dice(y_true, y_pred)
+stopifnot(shape(loss) == shape())
+loss
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6164383614186526, shape=(), dtype=float64)
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other losses: \cr
 \code{\link{Loss}()} \cr

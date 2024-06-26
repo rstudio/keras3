@@ -59,7 +59,7 @@ and a single floating point value per feature for \code{y_true}.
 Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_crossentropy()
-m$update_state(c(1, 2),
+m$update_state(array(c(1, 2)),
                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 m$result()
 }\if{html}{\out{</div>}}
@@ -69,7 +69,7 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
-m$update_state(c(1, 2),
+m$update_state(array(c(1, 2)),
                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)),
                sample_weight = c(0.3, 0.7))
 m$result()
@@ -79,15 +79,13 @@ m$result()
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.6271976
-}\if{html}{\out{</div>}}
-
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(
-    optimizer = 'sgd',
-    loss = 'mse',
-    metrics = list(metric_sparse_categorical_crossentropy()))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
+  optimizer = 'sgd',
+  loss = 'mse',
+  metrics = list(metric_sparse_categorical_crossentropy())
+)
 }\if{html}{\out{</div>}}
 }
 

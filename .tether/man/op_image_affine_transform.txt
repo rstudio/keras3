@@ -1,17 +1,17 @@
 __signature__
 keras.ops.image.affine_transform(
-  image,
+  images,
   transform,
   interpolation='bilinear',
   fill_mode='constant',
   fill_value=0,
-  data_format='channels_last'
+  data_format=None
 )
 __doc__
 Applies the given transform(s) to the image(s).
 
 Args:
-    image: Input image or batch of images. Must be 3D or 4D.
+    images: Input image or batch of images. Must be 3D or 4D.
     transform: Projective transform matrix/matrices. A vector of length 8 or
         tensor of size N x 8. If one row of transform is
         `[a0, a1, a2, b0, b1, b2, c0, c1]`, then it maps the output point
@@ -40,14 +40,13 @@ Args:
             The input is extended by the nearest pixel.
     fill_value: Value used for points outside the boundaries of the input if
         `fill_mode="constant"`. Defaults to `0`.
-    data_format: string, either `"channels_last"` or `"channels_first"`.
-        The ordering of the dimensions in the inputs. `"channels_last"`
-        corresponds to inputs with shape `(batch, height, width, channels)`
-        while `"channels_first"` corresponds to inputs with shape
-        `(batch, channels, height, weight)`. It defaults to the
-        `image_data_format` value found in your Keras config file at
-        `~/.keras/keras.json`. If you never set it, then it will be
-        `"channels_last"`.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
 
 Returns:
     Applied affine transform image or batch of images.
@@ -82,3 +81,4 @@ Examples:
 ...     data_format="channels_first")
 >>> y.shape
 (2, 3, 64, 80)
+

@@ -7,7 +7,8 @@ keras.applications.EfficientNetV2B2(
   pooling=None,
   classes=1000,
   classifier_activation='softmax',
-  include_preprocessing=True
+  include_preprocessing=True,
+  name='efficientnetv2-b2'
 )
 __doc__
 Instantiates the EfficientNetV2B2 architecture.
@@ -71,6 +72,8 @@ Args:
         Defaults to `"softmax"`.
         When loading pretrained weights, `classifier_activation` can only
         be `None` or `"softmax"`.
+    name: The name of the model (string).
 
 Returns:
     A model instance.
+

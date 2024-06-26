@@ -11,7 +11,7 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |
  |  You start from `Input`,
  |  you chain layer calls to specify the model's forward pass,
- |  and finally you create your model from inputs and outputs:
+ |  and finally, you create your model from inputs and outputs:
  |
  |  ```python
  |  inputs = keras.Input(shape=(37,))
@@ -174,7 +174,7 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |      # Create the artifact
  |      model.export("path/to/location")
  |
- |      # Later, in a different process / environment...
+ |      # Later, in a different process/environment...
  |      reloaded_artifact = tf.saved_model.load("path/to/location")
  |      predictions = reloaded_artifact.serve(input_data)
  |      ```
@@ -246,19 +246,21 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |    self,
  |    filepath,
  |    overwrite=True,
+ |    zipped=True,
  |    **kwargs
  |  )
  |      Saves a model as a `.keras` file.
  |
  |      Args:
- |          filepath: `str` or `pathlib.Path` object. Path where to save
- |              the model. Must end in `.keras`.
+ |          filepath: `str` or `pathlib.Path` object.
+ |              The path where to save the model. Must end in `.keras`
+ |              (unless saving the model as an unzipped directory
+ |              via `zipped=False`).
  |          overwrite: Whether we should overwrite any existing model at
  |              the target location, or instead ask the user via
  |              an interactive prompt.
- |          save_format: The `save_format` argument is deprecated in Keras 3.
- |              Format to use, as a string. Only the `"keras"` format is
- |              supported at this time.
+ |          zipped: Whether to save the model as a zipped `.keras`
+ |              archive (default), or as an unzipped directory.
  |
  |      Example:
  |
@@ -330,10 +332,11 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |              which is the starting layer name and ending layer name
  |              (both inclusive) indicating the range of layers to be printed
  |              in summary. It also accepts regex patterns instead of exact
- |              name. In such case, start predicate will be the first element
- |              it matches to `layer_range[0]` and the end predicate will be
- |              the last element it matches to `layer_range[1]`.
- |              By default `None` which considers all layers of model.
+ |              names. In this case, the start predicate will be
+ |              the first element that matches `layer_range[0]`
+ |              and the end predicate will be the last element
+ |              that matches `layer_range[1]`.
+ |              By default `None` considers all layers of the model.
  |
  |      Raises:
  |          ValueError: if `summary()` is called before the model is built.
@@ -355,19 +358,24 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |  Class methods defined here:
  |
  |  from_config(config, custom_objects=None)
- |      Creates a layer from its config.
+ |      Creates an operation from its config.
  |
- |      This method is the reverse of `get_config`,
- |      capable of instantiating the same layer from the config
- |      dictionary. It does not handle layer connectivity
- |      (handled by Network), nor weights (handled by `set_weights`).
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same operation from the config dictionary.
+ |
+ |      Note: If you override this method, you might receive a serialized dtype
+ |      config, which is a `dict`. You can deserialize it as follows:
+ |
+ |      ```python
+ |      if "dtype" in config and isinstance(config["dtype"], dict):
+ |          policy = dtype_policies.deserialize(config["dtype"])
+ |      ```
  |
  |      Args:
- |          config: A Python dictionary, typically the
- |              output of get_config.
+ |          config: A Python dictionary, typically the output of `get_config`.
  |
  |      Returns:
- |          A layer instance.
+ |          An operation instance.
  |
  |  ----------------------------------------------------------------------
  |  Static methods defined here:

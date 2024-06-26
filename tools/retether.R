@@ -66,6 +66,9 @@ doctether::retether(
 
 message("DONE!")
 
+if(FALSE) {
+  mk_export("keras.ops.image.hsv_to_rgb")$dump |> cat_cb()
+}
 
 
 view_vignette_adaptation_diff <- function(rmd_file) {

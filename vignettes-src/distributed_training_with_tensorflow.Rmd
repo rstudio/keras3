@@ -204,7 +204,7 @@ if (!dir.exists(checkpoint_dir)) {
 make_or_restore_model <- function() {
   # Either restore the latest model, or create a fresh one
   # if there is no checkpoint available.
-  checkpoints <- list.files(checkpoint_dir, #pattern = "ckpt-.*\\.keras",
+  checkpoints <- list.files(checkpoint_dir, pattern = "ckpt-.*\\.keras",
                             full.names = TRUE)
 
   if (length(checkpoints) > 0) {
@@ -286,3 +286,7 @@ samples are used to train the model. The next batch will be prefetched in GPU me
 the time the current batch is over.
 
 That's it!
+```{r}
+
+```
+

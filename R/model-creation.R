@@ -96,6 +96,10 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #' If set, the layer will use this tensor rather
 #' than creating a new placeholder tensor.
 #'
+#' @param optional
+#' Boolean, whether the input is optional or not.
+#' An optional input can accept `NULL` values.
+#'
 #' @param batch_shape
 #' Shape, including the batch dim.
 #'
@@ -107,7 +111,7 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #' @tether keras.layers.Input
 keras_input <-
 function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
-    batch_shape = NULL, name = NULL, tensor = NULL)
+    batch_shape = NULL, name = NULL, tensor = NULL, optional = FALSE)
 {
     args <- capture_args(list(shape = normalize_shape, batch_size = as_integer,
         input_shape = normalize_shape, batch_input_shape = normalize_shape,
@@ -155,6 +159,10 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' Optional existing tensor to wrap into the `InputLayer`.
 #' If set, the layer will use this tensor rather
 #' than creating a new placeholder tensor.
+#'
+#' @param input_optional
+#' Boolean, whether the input is optional or not.
+#' An optional input can accept `NULL` values.
 #'
 #' @param ... additional arguments passed on to `keras.layers.InputLayer`.
 #'
@@ -207,6 +215,7 @@ function(input_shape = NULL, name = NULL,
          input_batch_shape = NULL,
          input_name = NULL,
          input_tensor = NULL,
+         input_optional = FALSE,
          trainable = TRUE,
          layers = list())
 {
@@ -241,7 +250,8 @@ function(input_shape = NULL,
          input_sparse = NULL,
          input_batch_shape = NULL,
          input_name = NULL,
-         input_tensor = NULL)
+         input_tensor = NULL,
+         input_optional = FALSE)
 {
   args <- capture_args(list(
     input_shape = normalize_shape,
@@ -269,6 +279,8 @@ function(input_shape = NULL,
                  dtype = "input_dtype",
 
                  sparse = "input_sparse",
+
+                 optional = "input_optional",
 
                  .skip_existing = TRUE)
 

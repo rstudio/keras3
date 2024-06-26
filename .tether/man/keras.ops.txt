@@ -49,6 +49,11 @@ argmin(
   axis=None,
   keepdims=False
 )
+argpartition(
+  x,
+  kth,
+  axis=-1
+)
 argsort(x, axis=-1)
 array(x, dtype=None)
 average(
@@ -153,7 +158,7 @@ ctc_decode(
   beam_width=100,
   top_paths=1,
   merge_repeated=True,
-  mask_index=None
+  mask_index=0
 )
 ctc_loss(
   target,
@@ -198,6 +203,7 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
+dtype(x)
 eig(x)
 eigh(x)
 einsum(subscripts, *operands)
@@ -260,7 +266,13 @@ in_top_k(
 inv(x)
 irfft(x, fft_length=None)
 is_tensor(x)
-isclose(x1, x2)
+isclose(
+  x1,
+  x2,
+  rtol=1e-05,
+  atol=1e-08,
+  equal_nan=False
+)
 isfinite(x)
 isinf(x)
 isnan(x)
@@ -311,7 +323,13 @@ logsumexp(
   axis=None,
   keepdims=False
 )
+lstsq(
+  a,
+  b,
+  rcond=None
+)
 lu_factor(x)
+map(f, xs)
 matmul(x1, x2)
 max(
   x,
@@ -444,6 +462,14 @@ roll(
 )
 round(x, decimals=0)
 rsqrt(x)
+scan(
+  f,
+  init,
+  xs=None,
+  length=None,
+  reverse=False,
+  unroll=1
+)
 scatter(
   indices,
   values,
@@ -555,6 +581,11 @@ swapaxes(
   axis2
 )
 swish(x)
+switch(
+  index,
+  branches,
+  *operands
+)
 take(
   x,
   indices,

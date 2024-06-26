@@ -11,7 +11,8 @@ application_densenet169(
   input_shape = NULL,
   pooling = NULL,
   classes = 1000L,
-  classifier_activation = "softmax"
+  classifier_activation = "softmax",
+  name = "densenet169"
 )
 }
 \arguments{
@@ -23,7 +24,7 @@ layer at the top of the network.}
 or the path to the weights file to be loaded.}
 
 \item{input_tensor}{optional Keras tensor
-(i.e. output of \code{layers.Input()})
+(i.e. output of \code{keras_input()})
 to use as image input for the model.}
 
 \item{input_shape}{optional shape tuple, only to be specified
@@ -58,6 +59,8 @@ on the "top" layer. Ignored unless \code{include_top=TRUE}. Set
 \code{classifier_activation=NULL} to return the logits
 of the "top" layer. When loading pretrained weights,
 \code{classifier_activation} can only be \code{NULL} or \code{"softmax"}.}
+
+\item{name}{The name of the model (string).}
 }
 \value{
 A Keras model instance.

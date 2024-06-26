@@ -193,10 +193,10 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 5s - 7ms/step - loss: 3.0622 - sparse_categorical_accuracy: 0.8615 - val_loss: 1.1367 - val_sparse_categorical_accuracy: 0.9006
+## 782/782 - 7s - 9ms/step - loss: 3.0622 - sparse_categorical_accuracy: 0.8615 - val_loss: 1.1367 - val_sparse_categorical_accuracy: 0.9006
 ## Epoch 2/2
-## 782/782 - 3s - 4ms/step - loss: 0.5774 - sparse_categorical_accuracy: 0.9259 - val_loss: 0.6612 - val_sparse_categorical_accuracy: 0.9210
-## 157/157 - 0s - 2ms/step - loss: 0.6729 - sparse_categorical_accuracy: 0.9150
+## 782/782 - 4s - 5ms/step - loss: 0.5774 - sparse_categorical_accuracy: 0.9259 - val_loss: 0.6612 - val_sparse_categorical_accuracy: 0.9210
+## 157/157 - 1s - 3ms/step - loss: 0.6729 - sparse_categorical_accuracy: 0.9150
 ```
 
 ```
@@ -228,7 +228,7 @@ if (!dir.exists(checkpoint_dir)) {
 make_or_restore_model <- function() {
   # Either restore the latest model, or create a fresh one
   # if there is no checkpoint available.
-  checkpoints <- list.files(checkpoint_dir, #pattern = "ckpt-.*\\.keras",
+  checkpoints <- list.files(checkpoint_dir, pattern = "ckpt-.*\\.keras",
                             full.names = TRUE)
 
   if (length(checkpoints) > 0) {
@@ -274,7 +274,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 6ms/step - loss: 2.9519 - sparse_categorical_accuracy: 0.8655 - val_loss: 1.3110 - val_sparse_categorical_accuracy: 0.8836
+## 782/782 - 3s - 4ms/step - loss: 0.2194 - sparse_categorical_accuracy: 0.9532 - val_loss: 0.3217 - val_sparse_categorical_accuracy: 0.9456
 ```
 
 ``` r
@@ -283,7 +283,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 3s - 4ms/step - loss: 0.5998 - sparse_categorical_accuracy: 0.9270 - val_loss: 0.8736 - val_sparse_categorical_accuracy: 0.9128
+## 782/782 - 3s - 4ms/step - loss: 0.1876 - sparse_categorical_accuracy: 0.9584 - val_loss: 0.3629 - val_sparse_categorical_accuracy: 0.9396
 ```
 
 ## `tf$data` performance tips
@@ -320,3 +320,4 @@ samples are used to train the model. The next batch will be prefetched in GPU me
 the time the current batch is over.
 
 That's it!
+
