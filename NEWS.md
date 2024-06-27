@@ -5,6 +5,8 @@
 
 - `keras_shape` objects (as returned by `keras3::shape()`) gain `==` and `!=` methods.
 
+- Added compatibility with Keras v3.4.1 (no R user facing changes).
+
 User facing changes with upstream Keras v3.4.0:
 
 - New function:
