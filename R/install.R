@@ -95,6 +95,10 @@ install_keras <- function(
     packages = NULL
   )
   extra_packages <- unique(extra_packages)
+
+  if(!any(grepl("^numpy[=><!]?", extra_packages)))
+    extra_packages <- c(extra_packages, "numpy<2")
+
   if (length(extra_packages))
     reticulate::py_install(extra_packages, envname = envname)
 
