@@ -8,77 +8,6 @@ df_new
 
 source("tools/translate-tools.R")
 
-# game plan:
-#
-# for each r_wrapper, write out:
-# tools/raw
-#   layer_dense/
-#     docstring.txt                      - the raw docstring(s) for the python endpoints
-#     r_wrapper_intermediate.R           - the manually transformed docstring to roxygen
-#     r_wrapper.R                        - The final pass w/ first pass by llm + human massaging before checkin to git.
-#                                          Only calls out to openai as needed from updates for the first pass- but up to the
-#                                          user (me) to make sure it's correct, or to manually correct it, before checking it in.
-
-# Two workflows to consider here:
-#   Setup the initial scaffolding - generate the R wrapper, parse docstring to extract out
-#   params for building the wrapper, etc.
-#   Updates.
-#
-#   Can LLMs do the whole thing?
-#   maybe the workflow is some kind of button to generate? The key is to limit the interaction w/ the LLM because it's
-#   expensive, and also, it needs to be deliberate, managed with a specific prompt.
-#
-#   The alternative of course it to work with layers
-#   the docstring + literal docstring2roxygen is one layer, and then llm modifications are patches atop that.
-#   Then, patches can be edited by hand somehow? there needs to be a nice workflow for "fixing up" llm output,
-#   but then in such a way that patches can easily be layered atop
-#   e.g., 3.1 - we don't want to have to call out to llm for every change,
-#   we want to see a diff where the updates are added to roxygen, and then
-#   former "fixes" are applied atop (or if fails), then calls out to llm for a fresh
-#   first pass.
-#   Maybe, instead of a patch file, we instead dynamically generate the patch file
-#   from files on the filesystem, then attempt to layer it atop.
-#   So, sequence of updating a wrapper is
-#   1. compare docstring in fs vs in live object. if not same, then:
-#   2. take the old docstring
-#     - write out a temporary intermediate r wrapper from the old docstring.
-#     - compare it to the current r_wrapper of record and generate an intermediate
-#       patch file that contains just the llm/manual changes.
-#   2. write out new docstring
-#   3. write out a new temporary intermediate r wrapper
-#   4. attempt to apply the patch from step 2 to the new intermediate r wrapper
-#     if successful, just replace the successfully applied patch. If not,
-#     then resolve it as a regular git merge conflict.
-#
-# # TO IMPLEMENT:
-# # Workflow Steps for Updating/Generating a Wrapper
-# 1. Compare Current and Live Docstrings
-#    Check if the docstring in the file system (fs) is the same as in the live
-#    Python object. If they are the same, just reuse the previous wrapper.
-#    If not the same, proceed to the next steps.
-
-# 2. Generate Intermediate Patch File
-#    - Use the old docstring to write out a temporary intermediate R wrapper
-#      using programmatic parsing + code gen only.
-#    - Compare this temporary R wrapper with the current R wrapper of record.
-#    - Generate an intermediate "fixups.patch" file containing only changes made
-#      post programmatic roxygen+wrapper autogen.
-#      (that is, by an LLM or manually)
-
-# 3. Write Out New Docstring
-#    Save the new docstring from the live Python object to the file system.
-
-# 4. Generate New Intermediate R Wrapper
-#    Write out a new temporary intermediate R wrapper based on the new docstring.
-
-# 5. Apply Patch
-#    - Attempt to apply the patch generated in Step 2 to the new temporary
-#      intermediate R wrapper.
-#    - If successful, replace the R wrapper with the patched version.
-#    - If it fails, resolve it as a regular Git merge conflict.
-
-
-## What about tests?
 if(FALSE) {
 
 gptrd_files <- Sys.glob("tools/raw/*/gpt-4*") %>%
@@ -692,4 +621,3 @@ for(e in endpoints) {
 #     #' + <https://www.tensorflow.org/api_docs/python/tf/keras/activations/selu>
 #     )---"
 ###
-
