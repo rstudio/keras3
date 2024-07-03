@@ -1,35 +1,34 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
-pkgdown_sha: ~
+pkgdown: 2.0.9.9000
+pkgdown_sha: a98c134518cc9f5006f9ce17d4b6fc29ea37b56b
 articles:
-  autoencoder: examples/vision/autoencoder.html
+  examples/vision/autoencoder: examples/vision/autoencoder.html
   custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
   distributed_training_with_tensorflow: distributed_training_with_tensorflow.html
   distribution: distribution.html
   functional_api: functional_api.html
   getting_started: getting_started.html
-  imbalanced_classification: examples/structured_data/imbalanced_classification.html
-  index: examples/index.html
+  examples/structured_data/imbalanced_classification: examples/structured_data/imbalanced_classification.html
+  examples/index: examples/index.html
   intro_to_keras_for_engineers: intro_to_keras_for_engineers.html
   intro_to_keras_for_researchers: intro_to_keras_for_researchers.html
   making_new_layers_and_models_via_subclassing: making_new_layers_and_models_via_subclassing.html
-  mnist_convnet: examples/vision/mnist_convnet.html
-  mnist_siamese_graph: examples/vision/mnist_siamese_graph.html
-  neural_machine_translation_with_transformer: examples/nlp/neural_machine_translation_with_transformer.html
-  oxford_pets_image_segmentation: examples/vision/oxford_pets_image_segmentation.html
+  examples/vision/mnist_convnet: examples/vision/mnist_convnet.html
+  examples/vision/mnist_siamese_graph: examples/vision/mnist_siamese_graph.html
+  examples/nlp/neural_machine_translation_with_transformer: examples/nlp/neural_machine_translation_with_transformer.html
+  examples/vision/oxford_pets_image_segmentation: examples/vision/oxford_pets_image_segmentation.html
   sequential_model: sequential_model.html
   serialization_and_saving: serialization_and_saving.html
-  structured_data_classification_with_feature_space: examples/structured_data/structured_data_classification_with_feature_space.html
-  text_classification_from_scratch: examples/nlp/text_classification_from_scratch.html
-  timeseries_anomaly_detection: examples/timeseries/timeseries_anomaly_detection.html
-  timeseries_classification_from_scratch: examples/timeseries/timeseries_classification_from_scratch.html
+  examples/structured_data/structured_data_classification_with_feature_space: examples/structured_data/structured_data_classification_with_feature_space.html
+  examples/nlp/text_classification_from_scratch: examples/nlp/text_classification_from_scratch.html
+  examples/timeseries/timeseries_anomaly_detection: examples/timeseries/timeseries_anomaly_detection.html
+  examples/timeseries/timeseries_classification_from_scratch: examples/timeseries/timeseries_classification_from_scratch.html
   training_with_built_in_methods: training_with_built_in_methods.html
   transfer_learning: transfer_learning.html
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-06-25T23:01Z
+last_built: 2024-07-03T14:16Z
 urls:
   reference: https://keras3.posit.co/reference
   article: https://keras3.posit.co/articles
-

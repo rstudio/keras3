@@ -52,5 +52,5 @@ Suggests:
     rstudioapi,
     R6,
     jpeg
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 VignetteBuilder: knitr
