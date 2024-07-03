@@ -119,7 +119,7 @@ callback_view_metrics <- Callback(
         optimizer <- model$optimizer
         if (!is.null(optimizer)) {
           model_info$optimizer <- py_str(optimizer)
-          model_info$learning_rate <- as.double(optimizer$lr)
+          model_info$learning_rate <- as.double(optimizer$learning_rate)
         }
         tfruns::write_run_metadata("properties", model_info)
       }, error = function(e) {
