@@ -414,7 +414,7 @@ Train the model by passing lists of NumPy arrays of inputs and targets:
 
 ```{r}
 # Dummy input data
-title_data <- random_integer(c(1280, 10), 0, num_words)
+title_data <- random_integer(c(1280, 12), 0, num_words)
 body_data <- random_integer(c(1280, 100), 0, num_words)
 tags_data <- random_integer(c(1280, num_tags), 0, 2)
 
@@ -614,9 +614,9 @@ custom_dense <- Layer(
     )
     self$b <- self$add_weight(
       shape = shape(self$units),
-      initializer="random_normal",
+            initializer="random_normal",
       trainable = TRUE
-    )
+        )
   },
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
@@ -649,9 +649,9 @@ custom_dense <- Layer(
     )
     self$b <- self$add_weight(
       shape = shape(self$units),
-      initializer="random_normal",
+            initializer="random_normal",
       trainable = TRUE
-    )
+        )
   },
 
   call = function(inputs) {

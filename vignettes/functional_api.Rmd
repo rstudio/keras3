@@ -210,7 +210,7 @@ history <- model |> fit(
 ## Epoch 1/2
 ## 750/750 - 2s - 2ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
 ## Epoch 2/2
-## 750/750 - 1s - 773us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386
+## 750/750 - 1s - 785us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386
 ```
 
 ``` r
@@ -218,7 +218,7 @@ test_scores <- model |> evaluate(x_test, y_test, verbose=2)
 ```
 
 ```
-## 313/313 - 0s - 980us/step - accuracy: 0.9593 - loss: 0.1323
+## 313/313 - 0s - 1ms/step - accuracy: 0.9593 - loss: 0.1323
 ```
 
 
@@ -625,7 +625,7 @@ Train the model by passing lists of NumPy arrays of inputs and targets:
 
 ``` r
 # Dummy input data
-title_data <- random_integer(c(1280, 10), 0, num_words)
+title_data <- random_integer(c(1280, 12), 0, num_words)
 body_data <- random_integer(c(1280, 100), 0, num_words)
 tags_data <- random_integer(c(1280, num_tags), 0, 2)
 
@@ -643,9 +643,9 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 2s - 57ms/step - loss: 0.3948
+## 40/40 - 2s - 60ms/step - loss: 348.4560
 ## Epoch 2/2
-## 40/40 - 0s - 5ms/step - loss: 0.1971
+## 40/40 - 0s - 6ms/step - loss: 255.0283
 ```
 
 When calling fit with a `Dataset` object, it should yield either a
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 5s - 373ms/step - acc: 0.1238 - loss: 2.2995 - val_acc: 0.1300 - val_loss: 2.2957
+## 13/13 - 5s - 380ms/step - acc: 0.1213 - loss: 2.3001 - val_acc: 0.1250 - val_loss: 2.2895
 ```
 
 ## Shared layers
@@ -890,9 +890,9 @@ custom_dense <- Layer(
     )
     self$b <- self$add_weight(
       shape = shape(self$units),
-      initializer="random_normal",
+            initializer="random_normal",
       trainable = TRUE
-    )
+        )
   },
   call = function(inputs) {
     op_matmul(inputs, self$w) + self$b
@@ -926,9 +926,9 @@ custom_dense <- Layer(
     )
     self$b <- self$add_weight(
       shape = shape(self$units),
-      initializer="random_normal",
+            initializer="random_normal",
       trainable = TRUE
-    )
+        )
   },
 
   call = function(inputs) {
