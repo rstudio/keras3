@@ -5,7 +5,7 @@ last-modified: 2023/07/10
 description: First contact with Keras 3.
 output: rmarkdown::html_vignette
 editor_options:
-  chunk_output_type: console
+  chunk_output_type: inline
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for engineers}
   %\VignetteEngine{knitr::rmarkdown}
@@ -56,9 +56,10 @@ c(c(x_train, y_train), c(x_test, y_test)) %<-% keras3::dataset_mnist()
 # Scale images to the [0, 1] range
 x_train <- x_train / 255
 x_test <- x_test / 255
+
 # Make sure images have shape (28, 28, 1)
-x_train <- op_expand_dims(x_train, -1)
-x_test <- op_expand_dims(x_test, -1)
+x_train <- array_reshape(x_train, c(-1, 28, 28, 1))
+x_test <- array_reshape(x_test, c(-1, 28, 28, 1))
 
 dim(x_train)
 ```
@@ -174,23 +175,25 @@ model |> fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 7s - 17ms/step - acc: 0.7448 - loss: 0.7526 - val_acc: 0.9630 - val_loss: 0.1252
+## 399/399 - 6s - 16ms/step - acc: 0.7484 - loss: 0.7436 - val_acc: 0.9646 - val_loss: 0.1215
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9371 - loss: 0.2103 - val_acc: 0.9769 - val_loss: 0.0769
+## 399/399 - 2s - 5ms/step - acc: 0.9389 - loss: 0.2054 - val_acc: 0.9779 - val_loss: 0.0757
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9559 - loss: 0.1481 - val_acc: 0.9823 - val_loss: 0.0617
+## 399/399 - 2s - 5ms/step - acc: 0.9574 - loss: 0.1439 - val_acc: 0.9826 - val_loss: 0.0613
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9654 - loss: 0.1177 - val_acc: 0.9863 - val_loss: 0.0484
+## 399/399 - 2s - 5ms/step - acc: 0.9657 - loss: 0.1157 - val_acc: 0.9868 - val_loss: 0.0480
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9715 - loss: 0.0994 - val_acc: 0.9868 - val_loss: 0.0460
+## 399/399 - 2s - 5ms/step - acc: 0.9720 - loss: 0.0975 - val_acc: 0.9883 - val_loss: 0.0431
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0866 - val_acc: 0.9893 - val_loss: 0.0370
+## 399/399 - 2s - 5ms/step - acc: 0.9758 - loss: 0.0843 - val_acc: 0.9890 - val_loss: 0.0396
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9766 - loss: 0.0788 - val_acc: 0.9901 - val_loss: 0.0368
+## 399/399 - 2s - 5ms/step - acc: 0.9774 - loss: 0.0765 - val_acc: 0.9888 - val_loss: 0.0389
 ## Epoch 8/10
-## 399/399 - 2s - 5ms/step - acc: 0.9785 - loss: 0.0696 - val_acc: 0.9877 - val_loss: 0.0441
+## 399/399 - 2s - 5ms/step - acc: 0.9797 - loss: 0.0674 - val_acc: 0.9883 - val_loss: 0.0422
 ## Epoch 9/10
-## 399/399 - 2s - 5ms/step - acc: 0.9798 - loss: 0.0664 - val_acc: 0.9893 - val_loss: 0.0390
+## 399/399 - 2s - 5ms/step - acc: 0.9809 - loss: 0.0648 - val_acc: 0.9894 - val_loss: 0.0388
+## Epoch 10/10
+## 399/399 - 2s - 5ms/step - acc: 0.9834 - loss: 0.0561 - val_acc: 0.9918 - val_loss: 0.0326
 ```
 
 ``` r
@@ -356,7 +359,7 @@ model |> fit(
 ```
 
 ```
-## 399/399 - 7s - 18ms/step - acc: 0.7357 - loss: 0.7709 - val_acc: 0.9298 - val_loss: 0.2355
+## 399/399 - 6s - 14ms/step - acc: 0.7346 - loss: 0.7744 - val_acc: 0.9241 - val_loss: 0.2455
 ```
 
 ## Training models on arbitrary data sources
@@ -433,7 +436,7 @@ model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 8s - 17ms/step - acc: 0.7542 - loss: 0.7322 - val_acc: 0.9013 - val_loss: 0.3236
+## 469/469 - 6s - 14ms/step - acc: 0.7515 - loss: 0.7419 - val_acc: 0.9114 - val_loss: 0.2975
 ```
 
 ## Further reading

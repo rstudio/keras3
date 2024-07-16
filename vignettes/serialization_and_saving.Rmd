@@ -357,7 +357,7 @@ str(layer_config)
 ##  $ trainable         : logi TRUE
 ##  $ dtype             :List of 4
 ##   ..$ module         : chr "keras"
-##   ..$ class_name     : chr "FloatDTypePolicy"
+##   ..$ class_name     : chr "DTypePolicy"
 ##   ..$ config         :List of 1
 ##   .. ..$ name: chr "float32"
 ##   ..$ registered_name: NULL
@@ -757,7 +757,7 @@ str(config)
 ##   ..$ trainable   : logi TRUE
 ##   ..$ dtype       :List of 4
 ##   .. ..$ module         : chr "keras"
-##   .. ..$ class_name     : chr "FloatDTypePolicy"
+##   .. ..$ class_name     : chr "DTypePolicy"
 ##   .. ..$ config         :List of 1
 ##   .. .. ..$ name: chr "float32"
 ##   .. ..$ registered_name: NULL
@@ -770,7 +770,7 @@ str(config)
 ##   .. .. ..$ trainable         : logi TRUE
 ##   .. .. ..$ dtype             :List of 4
 ##   .. .. .. ..$ module         : chr "keras"
-##   .. .. .. ..$ class_name     : chr "FloatDTypePolicy"
+##   .. .. .. ..$ class_name     : chr "DTypePolicy"
 ##   .. .. .. ..$ config         :List of 1
 ##   .. .. .. .. ..$ name: chr "float32"
 ##   .. .. .. ..$ registered_name: NULL
@@ -882,7 +882,7 @@ str(config)
 ##   ..$ trainable         : logi TRUE
 ##   ..$ dtype             :List of 4
 ##   .. ..$ module         : chr "keras"
-##   .. ..$ class_name     : chr "FloatDTypePolicy"
+##   .. ..$ class_name     : chr "DTypePolicy"
 ##   .. ..$ config         :List of 1
 ##   .. .. ..$ name: chr "float32"
 ##   .. ..$ registered_name: NULL
