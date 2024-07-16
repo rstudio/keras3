@@ -42,7 +42,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../articles/getting_started.html">Getting Started</a></li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
 <li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
@@ -227,10 +227,10 @@ then evaluate the model on the test data:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 750/750 - 2s - 2ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 773us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 801us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 980us/step - accuracy: 0.9593 - loss: 0.1323</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9593 - loss: 0.1323</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -578,7 +578,7 @@ the losses and loss weights with the corresponding layer names:</p>
 targets:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Dummy input data</span></span>
-<span><span class="va">title_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="fl">10</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">num_words</span><span class="op">)</span></span>
+<span><span class="va">title_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="fl">12</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">num_words</span><span class="op">)</span></span>
 <span><span class="va">body_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="fl">100</span><span class="op">)</span>, <span class="fl">0</span>, <span class="va">num_words</span><span class="op">)</span></span>
 <span><span class="va">tags_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_integer.html">random_integer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1280</span>, <span class="va">num_tags</span><span class="op">)</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span></span>
 <span></span>
@@ -593,9 +593,9 @@ targets:</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 2s - 57ms/step - loss: 0.3948</span></span>
+<span><span class="co">## 40/40 - 2s - 62ms/step - loss: 348.4560</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 0s - 5ms/step - loss: 0.1971</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 6ms/step - loss: 255.0283</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -708,7 +708,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 373ms/step - acc: 0.1238 - loss: 2.2995 - val_acc: 0.1300 - val_loss: 2.2957</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 5s - 364ms/step - acc: 0.1312 - loss: 2.3010 - val_acc: 0.1200 - val_loss: 2.2964</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -820,9 +820,9 @@ and models</a> guide.</p>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
 <span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
-<span>      initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
+<span>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>    <span class="op">)</span></span>
+<span>        <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="../reference/op_matmul.html">op_matmul</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">self</span><span class="op">$</span><span class="va">w</span><span class="op">)</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="va">b</span></span>
@@ -853,9 +853,9 @@ of the layer instance:</p>
 <span>    <span class="op">)</span></span>
 <span>    <span class="va">self</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">add_weight</span><span class="op">(</span></span>
 <span>      shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">self</span><span class="op">$</span><span class="va">units</span><span class="op">)</span>,</span>
-<span>      initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
+<span>            initializer<span class="op">=</span><span class="st">"random_normal"</span>,</span>
 <span>      trainable <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span>    <span class="op">)</span></span>
+<span>        <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1115,7 +1115,7 @@ used in a functional model:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>

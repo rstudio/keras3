@@ -42,7 +42,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../articles/getting_started.html">Getting Started</a></li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
 <li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
@@ -257,7 +257,7 @@ input data.</p>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
 <span><span class="co">## 8/8 - 0s - 37ms/step - loss: 1.0629</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 0.9712</span></span>
+<span><span class="co">## 8/8 - 0s - 4ms/step - loss: 0.9712</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
 <span><span class="co">## 8/8 - 0s - 5ms/step - loss: 0.9322</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -316,7 +316,8 @@ input key again. If there are multiple matches, a
 <span><span class="va">layout_map</span><span class="op">[</span><span class="st">"d2/output"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/tuple.html" class="external-link">tuple</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model_parallel</span> <span class="op">&lt;-</span> <span class="va">keras</span><span class="op">$</span><span class="va">distribution</span><span class="op">$</span><span class="fu">ModelParallel</span><span class="op">(</span></span>
-<span>  <span class="va">mesh_2d</span>, <span class="va">layout_map</span>, batch_dim_name <span class="op">=</span> <span class="st">"data"</span></span>
+<span>  layout_map <span class="op">=</span> <span class="va">layout_map</span>,</span>
+<span>  batch_dim_name <span class="op">=</span> <span class="st">"data"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">keras</span><span class="op">$</span><span class="va">distribution</span><span class="op">$</span><span class="fu">set_distribution</span><span class="op">(</span><span class="va">model_parallel</span><span class="op">)</span></span>
@@ -340,12 +341,12 @@ input key again. If there are multiple matches, a
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
 <span><span class="co">## 8/8 - 0s - 29ms/step - loss: 1.0714</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 8/8 - 0s - 3ms/step - loss: 0.9744</span></span>
+<span><span class="co">## 8/8 - 0s - 4ms/step - loss: 0.9744</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 8/8 - 0s - 4ms/step - loss: 0.9280</span></span></code></pre>
+<span><span class="co">## 8/8 - 0s - 3ms/step - loss: 0.9280</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 8/8 - 0s - 7ms/step - loss: 0.8802</span></span></code></pre>
+<pre><code><span><span class="co">## 8/8 - 0s - 9ms/step - loss: 0.8802</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
 <span><span class="co">## [1] 0.8802156</span></span></code></pre>
 <p>It is also easy to change the mesh structure to tune the computation
@@ -401,7 +402,7 @@ DTensors with tf.keras</a></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>

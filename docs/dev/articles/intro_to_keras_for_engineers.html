@@ -131,9 +131,10 @@ classify MNIST digits.</p>
 <span><span class="co"># Scale images to the [0, 1] range</span></span>
 <span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="va">x_train</span> <span class="op">/</span> <span class="fl">255</span></span>
 <span><span class="va">x_test</span> <span class="op">&lt;-</span> <span class="va">x_test</span> <span class="op">/</span> <span class="fl">255</span></span>
+<span></span>
 <span><span class="co"># Make sure images have shape (28, 28, 1)</span></span>
-<span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_expand_dims.html">op_expand_dims</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_expand_dims.html">op_expand_dims</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">x_test</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/array_reshape.html" class="external-link">array_reshape</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">x_train</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 60000    28    28     1</span></span></code></pre>
@@ -227,23 +228,25 @@ unseen data.</p>
 <span>  callbacks <span class="op">=</span> <span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7448 - loss: 0.7526 - val_acc: 0.9630 - val_loss: 0.1252</span></span>
+<span><span class="co">## 399/399 - 6s - 16ms/step - acc: 0.7484 - loss: 0.7436 - val_acc: 0.9646 - val_loss: 0.1215</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9371 - loss: 0.2103 - val_acc: 0.9769 - val_loss: 0.0769</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9389 - loss: 0.2054 - val_acc: 0.9779 - val_loss: 0.0757</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9559 - loss: 0.1481 - val_acc: 0.9823 - val_loss: 0.0617</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9574 - loss: 0.1439 - val_acc: 0.9826 - val_loss: 0.0613</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9654 - loss: 0.1177 - val_acc: 0.9863 - val_loss: 0.0484</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9657 - loss: 0.1157 - val_acc: 0.9868 - val_loss: 0.0480</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9715 - loss: 0.0994 - val_acc: 0.9868 - val_loss: 0.0460</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9720 - loss: 0.0975 - val_acc: 0.9883 - val_loss: 0.0431</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0866 - val_acc: 0.9893 - val_loss: 0.0370</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9758 - loss: 0.0843 - val_acc: 0.9890 - val_loss: 0.0396</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9766 - loss: 0.0788 - val_acc: 0.9901 - val_loss: 0.0368</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9774 - loss: 0.0765 - val_acc: 0.9888 - val_loss: 0.0389</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9785 - loss: 0.0696 - val_acc: 0.9877 - val_loss: 0.0441</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9797 - loss: 0.0674 - val_acc: 0.9883 - val_loss: 0.0422</span></span>
 <span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9798 - loss: 0.0664 - val_acc: 0.9893 - val_loss: 0.0390</span></span></code></pre>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9809 - loss: 0.0648 - val_acc: 0.9894 - val_loss: 0.0388</span></span>
+<span><span class="co">## Epoch 10/10</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9834 - loss: 0.0561 - val_acc: 0.9918 - val_loss: 0.0326</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -372,7 +375,7 @@ layers:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>, <span class="co"># For speed</span></span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 7s - 18ms/step - acc: 0.7357 - loss: 0.7709 - val_acc: 0.9298 - val_loss: 0.2355</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 6s - 14ms/step - acc: 0.7346 - loss: 0.7744 - val_acc: 0.9241 - val_loss: 0.2455</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -440,7 +443,7 @@ your Keras backend.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 8s - 17ms/step - acc: 0.7542 - loss: 0.7322 - val_acc: 0.9013 - val_loss: 0.3236</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 6s - 14ms/step - acc: 0.7515 - loss: 0.7419 - val_acc: 0.9114 - val_loss: 0.2975</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
@@ -500,7 +503,7 @@ distributed training with TensorFlow</a>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>

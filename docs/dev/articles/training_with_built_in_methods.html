@@ -42,7 +42,7 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../articles/getting_started.html">Getting Started</a></li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
 <li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
@@ -214,33 +214,33 @@ iterating over the entire dataset for a given number of
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 782/782 - 2s - 3ms/step - loss: 0.3410 - sparse_categorical_accuracy: 0.9035 - val_loss: 0.1869 - val_sparse_categorical_accuracy: 0.9455</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 1s - 860us/step - loss: 0.1588 - sparse_categorical_accuracy: 0.9532 - val_loss: 0.1303 - val_sparse_categorical_accuracy: 0.9626</span></span></code></pre>
+<span><span class="co">## 782/782 - 1s - 793us/step - loss: 0.1589 - sparse_categorical_accuracy: 0.9531 - val_loss: 0.1316 - val_sparse_categorical_accuracy: 0.9625</span></span></code></pre>
 <p>The returned <code>history</code> object holds a record of the loss
 values and metric values during training:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">history</span></span></code></pre></div>
 <pre><code><span><span class="co">##</span></span>
 <span><span class="co">## Final epoch (plot to see history):</span></span>
-<span><span class="co">##                            loss: 0.1588</span></span>
-<span><span class="co">##     sparse_categorical_accuracy: 0.9532</span></span>
-<span><span class="co">##                        val_loss: 0.1303</span></span>
-<span><span class="co">## val_sparse_categorical_accuracy: 0.9626</span></span></code></pre>
+<span><span class="co">##                            loss: 0.1589</span></span>
+<span><span class="co">##     sparse_categorical_accuracy: 0.9531</span></span>
+<span><span class="co">##                        val_loss: 0.1316</span></span>
+<span><span class="co">## val_sparse_categorical_accuracy: 0.9625</span></span></code></pre>
 <p>We evaluate the model on the test data via
 <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Evaluate the model on the test data using `evaluate`</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, batch_size<span class="op">=</span><span class="fl">128</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 79/79 - 0s - 3ms/step - loss: 0.1258 - sparse_categorical_accuracy: 0.9625</span></span></code></pre>
+<pre><code><span><span class="co">## 79/79 - 0s - 3ms/step - loss: 0.1267 - sparse_categorical_accuracy: 0.9616</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## List of 2</span></span>
-<span><span class="co">##  $ loss                       : num 0.126</span></span>
+<span><span class="co">##  $ loss                       : num 0.127</span></span>
 <span><span class="co">##  $ sparse_categorical_accuracy: num 0.962</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate predictions (probabilities -- the output of the last layer)</span></span>
 <span><span class="co"># on new data using `predict`</span></span>
 <span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 129ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 123ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">predictions</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1]  2 10</span></span></code></pre>
@@ -350,7 +350,7 @@ data and the predictions:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 782/782 - 2s - 2ms/step - loss: 0.0161</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 1s - 687us/step - loss: 0.0078</span></span></code></pre>
+<span><span class="co">## 782/782 - 0s - 638us/step - loss: 0.0078</span></span></code></pre>
 <p>If you need a loss function that takes in parameters beside
 <code>y_true</code> and <code>y_pred</code>, you can subclass the Keras
 base <code>Loss</code> class using [<code><a href="../reference/Loss.html">Loss()</a></code>] and implement
@@ -461,9 +461,9 @@ samples were correctly classified as belonging to a given class:</p>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
 <span><span class="co">## 782/782 - 1s - 2ms/step - categorical_true_positives: 360502.0000 - loss: 0.3444</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 782/782 - 1s - 703us/step - categorical_true_positives: 362638.0000 - loss: 0.1656</span></span>
+<span><span class="co">## 782/782 - 1s - 679us/step - categorical_true_positives: 362638.0000 - loss: 0.1656</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 782/782 - 1s - 681us/step - categorical_true_positives: 363173.0000 - loss: 0.1200</span></span></code></pre>
+<span><span class="co">## 782/782 - 1s - 658us/step - categorical_true_positives: 363173.0000 - loss: 0.1200</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="handling-losses-and-metrics-that-dont-fit-the-standard-signature">Handling losses and metrics that don’t fit the standard
@@ -547,7 +547,7 @@ compiled without a <code>loss</code> argument, like this:</p>
 <span>  targets <span class="op">=</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">data</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 468ms/step - loss: 1.0566</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 420ms/step - loss: 1.0566</span></span></code></pre>
 <p>For more information about training multi-input models, see the
 section <strong>Passing data to multi-input, multi-output
 models</strong>.</p>
@@ -623,9 +623,9 @@ directly to the methods <code><a href="https://generics.r-lib.org/reference/fit.
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
 <span><span class="co">## 782/782 - 1s - 2ms/step - loss: 0.3365 - sparse_categorical_accuracy: 0.9041</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 782/782 - 1s - 714us/step - loss: 0.1605 - sparse_categorical_accuracy: 0.9524</span></span>
+<span><span class="co">## 782/782 - 1s - 684us/step - loss: 0.1605 - sparse_categorical_accuracy: 0.9524</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 782/782 - 1s - 696us/step - loss: 0.1185 - sparse_categorical_accuracy: 0.9647</span></span></code></pre>
+<span><span class="co">## 782/782 - 1s - 659us/step - loss: 0.1185 - sparse_categorical_accuracy: 0.9647</span></span></code></pre>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># You can also evaluate or predict on a dataset.</span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
@@ -657,9 +657,9 @@ Dataset before moving on to the next epoch.</p>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
 <span><span class="co">## 100/100 - 1s - 7ms/step - loss: 0.8017 - sparse_categorical_accuracy: 0.7806</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 100/100 - 0s - 740us/step - loss: 0.3661 - sparse_categorical_accuracy: 0.9006</span></span>
+<span><span class="co">## 100/100 - 0s - 642us/step - loss: 0.3661 - sparse_categorical_accuracy: 0.9006</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 100/100 - 0s - 787us/step - loss: 0.3009 - sparse_categorical_accuracy: 0.9106</span></span></code></pre>
+<span><span class="co">## 100/100 - 0s - 706us/step - loss: 0.3009 - sparse_categorical_accuracy: 0.9106</span></span></code></pre>
 <p>You can also pass a <code>Dataset</code> instance as the
 <code>validation_data</code> argument in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
@@ -1073,7 +1073,7 @@ mapping output names to arrays</strong>.</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span>    epochs<span class="op">=</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 4/4 - 2s - 443ms/step - loss: 1.3788</span></span></code></pre>
+<pre><code><span><span class="co">## 4/4 - 2s - 525ms/step - loss: 1.3788</span></span></code></pre>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Alternatively, fit on named lists (names matching)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span></span>
@@ -1082,7 +1082,7 @@ mapping output names to arrays</strong>.</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 4/4 - 1s - 230ms/step - loss: 0.2857</span></span></code></pre>
+<pre><code><span><span class="co">## 4/4 - 1s - 312ms/step - loss: 0.2857</span></span></code></pre>
 <p>Here’s the <code>Dataset</code> use case: similarly as what we did
 for R arrays, the <code>Dataset</code> should return a tuple of named
 lists (dicts).</p>
@@ -1096,7 +1096,7 @@ lists (dicts).</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 2/2 - 1s - 622ms/step - loss: 0.5599</span></span></code></pre>
+<pre><code><span><span class="co">## 2/2 - 1s - 748ms/step - loss: 0.5601</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks">Using callbacks<a class="anchor" aria-label="anchor" href="#using-callbacks"></a>
@@ -1143,21 +1143,21 @@ where a certain performance threshold is exceeded</li>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span>,</span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/20</span></span>
-<span><span class="co">## 625/625 - 1s - 2ms/step - loss: 0.3695 - sparse_categorical_accuracy: 0.8961 - val_loss: 0.1873 - val_sparse_categorical_accuracy: 0.9469</span></span>
+<span><span class="co">## 625/625 - 2s - 3ms/step - loss: 0.3695 - sparse_categorical_accuracy: 0.8961 - val_loss: 0.1873 - val_sparse_categorical_accuracy: 0.9469</span></span>
 <span><span class="co">## Epoch 2/20</span></span>
-<span><span class="co">## 625/625 - 1s - 923us/step - loss: 0.1751 - sparse_categorical_accuracy: 0.9489 - val_loss: 0.1403 - val_sparse_categorical_accuracy: 0.9579</span></span>
+<span><span class="co">## 625/625 - 1s - 913us/step - loss: 0.1751 - sparse_categorical_accuracy: 0.9489 - val_loss: 0.1403 - val_sparse_categorical_accuracy: 0.9579</span></span>
 <span><span class="co">## Epoch 3/20</span></span>
-<span><span class="co">## 625/625 - 1s - 853us/step - loss: 0.1277 - sparse_categorical_accuracy: 0.9625 - val_loss: 0.1218 - val_sparse_categorical_accuracy: 0.9651</span></span>
+<span><span class="co">## 625/625 - 1s - 872us/step - loss: 0.1277 - sparse_categorical_accuracy: 0.9625 - val_loss: 0.1218 - val_sparse_categorical_accuracy: 0.9651</span></span>
 <span><span class="co">## Epoch 4/20</span></span>
-<span><span class="co">## 625/625 - 1s - 891us/step - loss: 0.1007 - sparse_categorical_accuracy: 0.9700 - val_loss: 0.1153 - val_sparse_categorical_accuracy: 0.9661</span></span>
+<span><span class="co">## 625/625 - 1s - 931us/step - loss: 0.1007 - sparse_categorical_accuracy: 0.9700 - val_loss: 0.1153 - val_sparse_categorical_accuracy: 0.9661</span></span>
 <span><span class="co">## Epoch 5/20</span></span>
-<span><span class="co">## 625/625 - 1s - 921us/step - loss: 0.0822 - sparse_categorical_accuracy: 0.9760 - val_loss: 0.1104 - val_sparse_categorical_accuracy: 0.9670</span></span>
+<span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.0822 - sparse_categorical_accuracy: 0.9760 - val_loss: 0.1104 - val_sparse_categorical_accuracy: 0.9670</span></span>
 <span><span class="co">## Epoch 6/20</span></span>
-<span><span class="co">## 625/625 - 1s - 908us/step - loss: 0.0683 - sparse_categorical_accuracy: 0.9801 - val_loss: 0.1098 - val_sparse_categorical_accuracy: 0.9689</span></span>
+<span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.0683 - sparse_categorical_accuracy: 0.9801 - val_loss: 0.1098 - val_sparse_categorical_accuracy: 0.9689</span></span>
 <span><span class="co">## Epoch 7/20</span></span>
-<span><span class="co">## 625/625 - 1s - 874us/step - loss: 0.0571 - sparse_categorical_accuracy: 0.9838 - val_loss: 0.1116 - val_sparse_categorical_accuracy: 0.9698</span></span>
+<span><span class="co">## 625/625 - 1s - 884us/step - loss: 0.0571 - sparse_categorical_accuracy: 0.9838 - val_loss: 0.1116 - val_sparse_categorical_accuracy: 0.9698</span></span>
 <span><span class="co">## Epoch 8/20</span></span>
-<span><span class="co">## 625/625 - 1s - 916us/step - loss: 0.0485 - sparse_categorical_accuracy: 0.9864 - val_loss: 0.1126 - val_sparse_categorical_accuracy: 0.9702</span></span>
+<span><span class="co">## 625/625 - 1s - 927us/step - loss: 0.0485 - sparse_categorical_accuracy: 0.9864 - val_loss: 0.1126 - val_sparse_categorical_accuracy: 0.9702</span></span>
 <span><span class="co">## Epoch 8: early stopping</span></span></code></pre>
 <div class="section level3">
 <h3 id="many-built-in-callbacks-are-available">Many built-in callbacks are available<a class="anchor" aria-label="anchor" href="#many-built-in-callbacks-are-available"></a>
@@ -1246,11 +1246,11 @@ to save checkpoints of your model at frequent intervals.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 1: val_loss improved from inf to 0.19344, saving model to mymodel_1.keras</span></span>
-<span><span class="co">## 625/625 - 1s - 2ms/step - loss: 0.3787 - sparse_categorical_accuracy: 0.8940 - val_loss: 0.1934 - val_sparse_categorical_accuracy: 0.9441</span></span>
+<span><span class="co">## 625/625 - 2s - 2ms/step - loss: 0.3787 - sparse_categorical_accuracy: 0.8940 - val_loss: 0.1934 - val_sparse_categorical_accuracy: 0.9441</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 2: val_loss improved from 0.19344 to 0.14251, saving model to mymodel_2.keras</span></span>
-<span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.1768 - sparse_categorical_accuracy: 0.9478 - val_loss: 0.1425 - val_sparse_categorical_accuracy: 0.9600</span></span></code></pre>
+<span><span class="co">## 625/625 - 1s - 881us/step - loss: 0.1768 - sparse_categorical_accuracy: 0.9478 - val_loss: 0.1425 - val_sparse_categorical_accuracy: 0.9600</span></span></code></pre>
 <p>The <code>ModelCheckpoint</code> callback can be used to implement
 fault-tolerance: the ability to restart training from the last saved
 state of the model in case training gets randomly interrupted. Here’s a
@@ -1383,7 +1383,7 @@ write logs, and you’re good to go:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
