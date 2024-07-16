@@ -355,7 +355,7 @@ summary(model)
 ```
 
 ```
-## [1mModel: "functional_1"[0m
+## [1mModel: "functional"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
@@ -402,11 +402,11 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 6s - 10ms/step - accuracy: 0.6909 - loss: 0.5300 - val_accuracy: 0.8658 - val_loss: 0.3229
+## 625/625 - 5s - 8ms/step - accuracy: 0.6903 - loss: 0.5292 - val_accuracy: 0.8612 - val_loss: 0.3235
 ## Epoch 2/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9047 - loss: 0.2412 - val_accuracy: 0.8742 - val_loss: 0.3202
+## 625/625 - 1s - 2ms/step - accuracy: 0.9054 - loss: 0.2398 - val_accuracy: 0.8698 - val_loss: 0.3342
 ## Epoch 3/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9573 - loss: 0.1237 - val_accuracy: 0.8704 - val_loss: 0.3551
+## 625/625 - 1s - 2ms/step - accuracy: 0.9553 - loss: 0.1253 - val_accuracy: 0.8744 - val_loss: 0.3402
 ```
 
 ## Evaluate the model on the test set
@@ -417,15 +417,15 @@ model |> evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8594 - loss: 0.3818
+## 782/782 - 1s - 2ms/step - accuracy: 0.8630 - loss: 0.3716
 ```
 
 ```
 ## $accuracy
-## [1] 0.85936
+## [1] 0.86296
 ##
 ## $loss
-## [1] 0.381799
+## [1] 0.3716201
 ```
 
 ## Make an end-to-end model
@@ -455,12 +455,12 @@ end_to_end_model |> evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 3s - 4ms/step - accuracy: 0.8594 - loss: 0.0000e+00
+## 782/782 - 3s - 4ms/step - accuracy: 0.8630 - loss: 0.0000e+00
 ```
 
 ```
 ## $accuracy
-## [1] 0.85936
+## [1] 0.86296
 ##
 ## $loss
 ## [1] 0
