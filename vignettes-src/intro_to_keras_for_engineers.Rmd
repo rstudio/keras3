@@ -20,7 +20,10 @@ This notebook will walk you through key Keras 3 workflows.
 
 Let's start by installing Keras 3:
 
-pip install keras --upgrade --quiet
+```r
+install.packages("keras3")
+keras3::install_keras()
+```
 
 ## Setup
 
