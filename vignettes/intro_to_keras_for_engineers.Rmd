@@ -5,7 +5,7 @@ last-modified: 2023/07/10
 description: First contact with Keras 3.
 output: rmarkdown::html_vignette
 editor_options:
-  chunk_output_type: console
+  chunk_output_type: inline
 vignette: >
   %\VignetteIndexEntry{Introduction to Keras for engineers}
   %\VignetteEngine{knitr::rmarkdown}
@@ -20,7 +20,10 @@ This notebook will walk you through key Keras 3 workflows.
 
 Let's start by installing Keras 3:
 
-pip install keras --upgrade --quiet
+```r
+install.packages("keras3")
+keras3::install_keras()
+```
 
 ## Setup
 
@@ -28,6 +31,9 @@ We're going to be using the tensorflow backend here -- but you can
 edit the string below to `"jax"` or `"torch"` and hit
 "Restart runtime", and the whole notebook will run just the same!
 This entire guide is backend-agnostic.
+
+
+
 
 
 ``` r
@@ -56,9 +62,10 @@ c(c(x_train, y_train), c(x_test, y_test)) %<-% keras3::dataset_mnist()
 # Scale images to the [0, 1] range
 x_train <- x_train / 255
 x_test <- x_test / 255
+
 # Make sure images have shape (28, 28, 1)
-x_train <- op_expand_dims(x_train, -1)
-x_test <- op_expand_dims(x_test, -1)
+x_train <- array_reshape(x_train, c(-1, 28, 28, 1))
+x_test <- array_reshape(x_test, c(-1, 28, 28, 1))
 
 dim(x_train)
 ```
@@ -174,23 +181,25 @@ model |> fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 7s - 17ms/step - acc: 0.7448 - loss: 0.7526 - val_acc: 0.9630 - val_loss: 0.1252
+## 399/399 - 7s - 16ms/step - acc: 0.7495 - loss: 0.7390 - val_acc: 0.9644 - val_loss: 0.1219
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9371 - loss: 0.2103 - val_acc: 0.9769 - val_loss: 0.0769
+## 399/399 - 2s - 5ms/step - acc: 0.9384 - loss: 0.2051 - val_acc: 0.9758 - val_loss: 0.0794
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9559 - loss: 0.1481 - val_acc: 0.9823 - val_loss: 0.0617
+## 399/399 - 2s - 5ms/step - acc: 0.9567 - loss: 0.1468 - val_acc: 0.9809 - val_loss: 0.0632
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9654 - loss: 0.1177 - val_acc: 0.9863 - val_loss: 0.0484
+## 399/399 - 2s - 5ms/step - acc: 0.9656 - loss: 0.1167 - val_acc: 0.9857 - val_loss: 0.0479
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9715 - loss: 0.0994 - val_acc: 0.9868 - val_loss: 0.0460
+## 399/399 - 2s - 5ms/step - acc: 0.9716 - loss: 0.0984 - val_acc: 0.9883 - val_loss: 0.0427
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0866 - val_acc: 0.9893 - val_loss: 0.0370
+## 399/399 - 2s - 5ms/step - acc: 0.9756 - loss: 0.0852 - val_acc: 0.9879 - val_loss: 0.0412
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9766 - loss: 0.0788 - val_acc: 0.9901 - val_loss: 0.0368
+## 399/399 - 2s - 5ms/step - acc: 0.9765 - loss: 0.0786 - val_acc: 0.9894 - val_loss: 0.0394
 ## Epoch 8/10
-## 399/399 - 2s - 5ms/step - acc: 0.9785 - loss: 0.0696 - val_acc: 0.9877 - val_loss: 0.0441
+## 399/399 - 2s - 5ms/step - acc: 0.9794 - loss: 0.0672 - val_acc: 0.9884 - val_loss: 0.0415
 ## Epoch 9/10
-## 399/399 - 2s - 5ms/step - acc: 0.9798 - loss: 0.0664 - val_acc: 0.9893 - val_loss: 0.0390
+## 399/399 - 2s - 5ms/step - acc: 0.9808 - loss: 0.0647 - val_acc: 0.9901 - val_loss: 0.0369
+## Epoch 10/10
+## 399/399 - 2s - 5ms/step - acc: 0.9836 - loss: 0.0571 - val_acc: 0.9911 - val_loss: 0.0325
 ```
 
 ``` r
@@ -221,7 +230,7 @@ predictions <- model |> predict(x_test)
 ```
 
 ```
-## 313/313 - 0s - 2ms/step
+## 313/313 - 1s - 2ms/step
 ```
 
 ``` r
@@ -356,7 +365,7 @@ model |> fit(
 ```
 
 ```
-## 399/399 - 7s - 18ms/step - acc: 0.7357 - loss: 0.7709 - val_acc: 0.9298 - val_loss: 0.2355
+## 399/399 - 6s - 15ms/step - acc: 0.7355 - loss: 0.7722 - val_acc: 0.9272 - val_loss: 0.2380
 ```
 
 ## Training models on arbitrary data sources
@@ -433,7 +442,7 @@ model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 8s - 17ms/step - acc: 0.7542 - loss: 0.7322 - val_acc: 0.9013 - val_loss: 0.3236
+## 469/469 - 7s - 15ms/step - acc: 0.7492 - loss: 0.7481 - val_acc: 0.9112 - val_loss: 0.3002
 ```
 
 ## Further reading

@@ -9,7 +9,7 @@ output: rmarkdown::html_vignette
 knit: ({source(here::here("tools/knit.R")); knit_vignette})
 tether: https://raw.githubusercontent.com/keras-team/keras-io/master/guides/intro_to_keras_for_engineers.py
 editor_options:
-  chunk_output_type: console
+  chunk_output_type: inline
 ---
 
 ## Introduction
@@ -20,7 +20,10 @@ This notebook will walk you through key Keras 3 workflows.
 
 Let's start by installing Keras 3:
 
-pip install keras --upgrade --quiet
+```r
+install.packages("keras3")
+keras3::install_keras()
+```
 
 ## Setup
 
@@ -54,9 +57,10 @@ c(c(x_train, y_train), c(x_test, y_test)) %<-% keras3::dataset_mnist()
 # Scale images to the [0, 1] range
 x_train <- x_train / 255
 x_test <- x_test / 255
+
 # Make sure images have shape (28, 28, 1)
-x_train <- op_expand_dims(x_train, -1)
-x_test <- op_expand_dims(x_test, -1)
+x_train <- array_reshape(x_train, c(-1, 28, 28, 1))
+x_test <- array_reshape(x_test, c(-1, 28, 28, 1))
 
 dim(x_train)
 dim(x_test)

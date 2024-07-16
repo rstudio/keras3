@@ -210,7 +210,7 @@ history <- model |> fit(
 ## Epoch 1/2
 ## 750/750 - 2s - 2ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
 ## Epoch 2/2
-## 750/750 - 1s - 785us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386
+## 750/750 - 1s - 801us/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386
 ```
 
 ``` r
@@ -643,7 +643,7 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 2s - 60ms/step - loss: 348.4560
+## 40/40 - 2s - 62ms/step - loss: 348.4560
 ## Epoch 2/2
 ## 40/40 - 0s - 6ms/step - loss: 255.0283
 ```
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 5s - 380ms/step - acc: 0.1213 - loss: 2.3001 - val_acc: 0.1250 - val_loss: 2.2895
+## 13/13 - 5s - 364ms/step - acc: 0.1312 - loss: 2.3010 - val_acc: 0.1200 - val_loss: 2.2964
 ```
 
 ## Shared layers

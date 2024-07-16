@@ -1,6 +1,6 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9.9000
-pkgdown_sha: a98c134518cc9f5006f9ce17d4b6fc29ea37b56b
+pkgdown: 2.1.0
+pkgdown_sha: ~
 articles:
   examples/vision/autoencoder: examples/vision/autoencoder.html
   custom_train_step_in_tensorflow: custom_train_step_in_tensorflow.html
@@ -28,7 +28,7 @@ articles:
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-07-03T14:48Z
+last_built: 2024-07-16T18:26Z
 urls:
   reference: https://keras3.posit.co/reference
   article: https://keras3.posit.co/articles

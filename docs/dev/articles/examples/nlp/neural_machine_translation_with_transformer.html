@@ -61,7 +61,7 @@
     <li><a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a></li>
   </ul>
 </li>
-<li class="nav-item"><a class="nav-link" href="../../../articles/examples/index.html">Examples</a></li>
+<li class="active nav-item"><a class="nav-link" href="../../../articles/examples/index.html">Examples</a></li>
 <li class="nav-item"><a class="nav-link" href="../../../reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="../../../news/index.html">News</a></li>
       </ul>
@@ -580,7 +580,7 @@ converge you should train for at least 30 epochs.</p>
 <span><span class="co">## │ transformer_encoder │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>) │  <span style="color: #00AF00;">3,155,456</span> │ positional_embed… │</span></span>
 <span><span class="co">## │ (<span style="color: #0087FF;">TransformerEncode…</span> │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ functional_5        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>,      │ <span style="color: #00AF00;">12,959,640</span> │ decoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
+<span><span class="co">## │ functional_3        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>,      │ <span style="color: #00AF00;">12,959,640</span> │ decoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
 <span><span class="co">## │ (<span style="color: #0087FF;">Functional</span>)        │ <span style="color: #00AF00;">15000</span>)            │            │ transformer_enco… │</span></span>
 <span><span class="co">## └─────────────────────┴───────────────────┴────────────┴───────────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">19,960,216</span> (76.14 MB)</span></span>
@@ -594,7 +594,7 @@ converge you should train for at least 30 epochs.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>,</span>
 <span>                   validation_data <span class="op">=</span> <span class="va">val_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1297/1297 - 58s - 44ms/step - accuracy: 0.7709 - loss: 1.5752 - val_accuracy: 0.7731 - val_loss: 1.4209</span></span></code></pre>
+<pre><code><span><span class="co">## 1297/1297 - 43s - 33ms/step - accuracy: 0.7229 - loss: 1.9745 - val_accuracy: 0.7338 - val_loss: 1.7418</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="decoding-test-sentences">Decoding test sentences<a class="anchor" aria-label="anchor" href="#decoding-test-sentences"></a>
@@ -665,7 +665,7 @@ Correct Translation: [start] estoy segura de que todo irá bien. [end]
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
