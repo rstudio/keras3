@@ -1,4 +1,4 @@
-# keras3 (development version)
+# keras3 1.1.0
 
 - Fixed issue where GPUs would not be found when running on Windows under WSL Linux.
   (reported in #1456, fixed in #1459)
