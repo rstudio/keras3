@@ -7599,8 +7599,6 @@ keras$ops$map(f, xs)
 #' @family ops
 #' @export
 #' @tether keras.ops.scan
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scan>
 op_scan <-
 function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
 {

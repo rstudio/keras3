@@ -1284,7 +1284,7 @@ metrics.
 - `callback_csv_logger()`: streams loss and metrics data to a CSV file.
 - etc.
 
-See the [callbacks documentation](https://keras.posit.co/reference/index.html#callbacks) for the complete list.
+See the [callbacks documentation](https://keras3.posit.co/reference/index.html#callbacks) for the complete list.
 
 ### Writing your own callback
 

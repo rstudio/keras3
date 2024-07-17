@@ -495,7 +495,7 @@ res = model |> evaluate(
 ## Up to batch 7, the average loss is   16.61.
 ## Up to batch 8, the average loss is   16.54.
 ```
-For more information about callbacks, you can check out the [Keras callback API documentation](https://keras.posit.co/reference/index.html#callbacks).
+For more information about callbacks, you can check out the [Keras callback API documentation](https://keras3.posit.co/reference/index.html#callbacks).
 
 
 ## Usage of `self$model` attribute
@@ -997,6 +997,6 @@ model |> fit(
 ### Built-in Keras callbacks
 
 Be sure to check out the existing Keras callbacks by
-reading the [API docs](https://keras.posit.co/reference/index.html#callbacks).
+reading the [API docs](https://keras3.posit.co/reference/index.html#callbacks).
 Applications include logging to CSV, saving
 the model, visualizing metrics in TensorBoard, and a lot more!

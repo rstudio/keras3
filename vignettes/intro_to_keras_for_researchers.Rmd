@@ -1016,14 +1016,14 @@ Note that the `Model` class also features built-in training & evaluation loops:
 These built-in functions give you access to the
 following built-in training infrastructure features:
 
-* [Callbacks](https://keras.posit.co/reference/index.html#callbacks). You can leverage built-in
+* [Callbacks](https://keras3.posit.co/reference/index.html#callbacks). You can leverage built-in
 callbacks for early-stopping, model checkpointing,
 and monitoring training with TensorBoard. You can also
 [implement custom callbacks](writing_your_own_callbacks.html) if needed.
 * [Distributed training](distributed_training_with_tensorflow.html). You
 can easily scale up your training to multiple GPUs, TPU, or even multiple machines
 with the `tf.distribute` API -- with no changes to your code.
-* [Step fusing](https://keras.posit.co/reference/compile.keras.src.models.model.Model.html).
+* [Step fusing](https://keras3.posit.co/reference/compile.keras.src.models.model.Model.html).
 With the `steps_per_execution` argument in `Model.compile()`, you can process
 multiple batches in a single `tf.function` call, which greatly improves
 device utilization on TPUs.

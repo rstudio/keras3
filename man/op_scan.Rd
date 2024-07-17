@@ -90,10 +90,6 @@ carry
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/ops/scan}
-}
-
 Other core ops: \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_cond}()} \cr
