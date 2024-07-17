@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="keras3">
 <title>Train a Siamese MLP on pairs of digits from the MNIST dataset. • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
@@ -15,80 +14,63 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
+<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../../../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../../deps/search-1.0.0/fuse.min.js"></script><script src="../../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Train a Siamese MLP on pairs of digits from the MNIST dataset.">
-<meta property="og:description" content="keras3">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
+    <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
-    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
-    <a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a>
-    <a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a>
-    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
-    <a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
-    <a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
-    <a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
-    <a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
-    <a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a>
-    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
-    <a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a>
-    <a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
-    <a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
+<li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a></li>
+    <li><a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a></li>
+    <li><a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a></li>
+    <li><a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a></li>
+    <li><a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Other topics</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a></li>
+    <li><a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a></li>
+  </ul>
 </li>
-<li class="active nav-item">
-  <a class="nav-link" href="../../../articles/examples/index.html">Examples</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../../reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../../news/index.html">News</a>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../../../articles/examples/index.html">Examples</a></li>
+<li class="nav-item"><a class="nav-link" href="../../../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../../../news/index.html">News</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../../../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -97,7 +79,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Train a Siamese MLP on pairs of digits from the MNIST dataset.</h1>
+
+      <h1>Train a Siamese MLP on pairs of digits from the MNIST dataset.</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/vignettes/examples/vision/mnist_siamese_graph.Rmd" class="external-link"><code>vignettes/examples/vision/mnist_siamese_graph.Rmd</code></a></small>
@@ -238,45 +221,45 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <span>    <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/20</span></span>
-<span><span class="co">## 469/469 - 17s - 36ms/step - binary_accuracy: 0.7566 - loss: 0.1644 - val_binary_accuracy: 0.8753 - val_loss: 0.1001</span></span>
+<span><span class="co">## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7572 - loss: 0.1639 - val_binary_accuracy: 0.8790 - val_loss: 0.0980</span></span>
 <span><span class="co">## Epoch 2/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.8896 - loss: 0.0867 - val_binary_accuracy: 0.9248 - val_loss: 0.0614</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.8907 - loss: 0.0858 - val_binary_accuracy: 0.9241 - val_loss: 0.0607</span></span>
 <span><span class="co">## Epoch 3/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9261 - loss: 0.0579 - val_binary_accuracy: 0.9409 - val_loss: 0.0461</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9244 - loss: 0.0592 - val_binary_accuracy: 0.9369 - val_loss: 0.0496</span></span>
 <span><span class="co">## Epoch 4/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9474 - loss: 0.0419 - val_binary_accuracy: 0.9529 - val_loss: 0.0382</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9436 - loss: 0.0447 - val_binary_accuracy: 0.9506 - val_loss: 0.0396</span></span>
 <span><span class="co">## Epoch 5/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9589 - loss: 0.0328 - val_binary_accuracy: 0.9603 - val_loss: 0.0316</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9558 - loss: 0.0355 - val_binary_accuracy: 0.9601 - val_loss: 0.0322</span></span>
 <span><span class="co">## Epoch 6/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9660 - loss: 0.0272 - val_binary_accuracy: 0.9617 - val_loss: 0.0297</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9643 - loss: 0.0291 - val_binary_accuracy: 0.9642 - val_loss: 0.0284</span></span>
 <span><span class="co">## Epoch 7/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9708 - loss: 0.0234 - val_binary_accuracy: 0.9665 - val_loss: 0.0270</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9692 - loss: 0.0245 - val_binary_accuracy: 0.9652 - val_loss: 0.0268</span></span>
 <span><span class="co">## Epoch 8/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9747 - loss: 0.0201 - val_binary_accuracy: 0.9674 - val_loss: 0.0259</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9736 - loss: 0.0212 - val_binary_accuracy: 0.9686 - val_loss: 0.0250</span></span>
 <span><span class="co">## Epoch 9/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9787 - loss: 0.0175 - val_binary_accuracy: 0.9697 - val_loss: 0.0247</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9769 - loss: 0.0188 - val_binary_accuracy: 0.9675 - val_loss: 0.0268</span></span>
 <span><span class="co">## Epoch 10/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9807 - loss: 0.0157 - val_binary_accuracy: 0.9684 - val_loss: 0.0251</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9786 - loss: 0.0172 - val_binary_accuracy: 0.9701 - val_loss: 0.0241</span></span>
 <span><span class="co">## Epoch 11/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9810 - loss: 0.0152 - val_binary_accuracy: 0.9710 - val_loss: 0.0230</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9803 - loss: 0.0160 - val_binary_accuracy: 0.9699 - val_loss: 0.0234</span></span>
 <span><span class="co">## Epoch 12/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9831 - loss: 0.0138 - val_binary_accuracy: 0.9726 - val_loss: 0.0224</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9827 - loss: 0.0141 - val_binary_accuracy: 0.9713 - val_loss: 0.0229</span></span>
 <span><span class="co">## Epoch 13/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9854 - loss: 0.0121 - val_binary_accuracy: 0.9724 - val_loss: 0.0224</span></span>
+<span><span class="co">## 469/469 - 0s - 1ms/step - binary_accuracy: 0.9849 - loss: 0.0126 - val_binary_accuracy: 0.9697 - val_loss: 0.0233</span></span>
 <span><span class="co">## Epoch 14/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9861 - loss: 0.0114 - val_binary_accuracy: 0.9738 - val_loss: 0.0217</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9844 - loss: 0.0127 - val_binary_accuracy: 0.9717 - val_loss: 0.0224</span></span>
 <span><span class="co">## Epoch 15/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9864 - loss: 0.0110 - val_binary_accuracy: 0.9738 - val_loss: 0.0213</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9854 - loss: 0.0116 - val_binary_accuracy: 0.9771 - val_loss: 0.0194</span></span>
 <span><span class="co">## Epoch 16/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9881 - loss: 0.0101 - val_binary_accuracy: 0.9754 - val_loss: 0.0206</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9864 - loss: 0.0110 - val_binary_accuracy: 0.9751 - val_loss: 0.0207</span></span>
 <span><span class="co">## Epoch 17/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9883 - loss: 0.0097 - val_binary_accuracy: 0.9733 - val_loss: 0.0214</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9880 - loss: 0.0102 - val_binary_accuracy: 0.9764 - val_loss: 0.0198</span></span>
 <span><span class="co">## Epoch 18/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9881 - loss: 0.0097 - val_binary_accuracy: 0.9723 - val_loss: 0.0216</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9714 - val_loss: 0.0234</span></span>
 <span><span class="co">## Epoch 19/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9891 - loss: 0.0090 - val_binary_accuracy: 0.9749 - val_loss: 0.0202</span></span>
+<span><span class="co">## 469/469 - 0s - 1ms/step - binary_accuracy: 0.9880 - loss: 0.0098 - val_binary_accuracy: 0.9754 - val_loss: 0.0196</span></span>
 <span><span class="co">## Epoch 20/20</span></span>
-<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9898 - loss: 0.0085 - val_binary_accuracy: 0.9752 - val_loss: 0.0205</span></span></code></pre>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9888 - loss: 0.0090 - val_binary_accuracy: 0.9771 - val_loss: 0.0190</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">history</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
@@ -290,7 +273,7 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <code class="sourceCode R"><span><span class="co"># compute final accuracy on training and test sets</span></span>
 <span></span>
 <span><span class="va">tr_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tr</span><span class="op">$</span><span class="va">pair1</span>, <span class="va">tr</span><span class="op">$</span><span class="va">pair2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1875/1875 - 1s - 793us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1875/1875 - 1s - 772us/step</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tr_acc</span>  <span class="op">&lt;-</span> <span class="fu">compute_accuracy</span><span class="op">(</span><span class="va">tr_pred</span>, <span class="va">tr</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">te_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">te</span><span class="op">$</span><span class="va">pair1</span>, <span class="va">te</span><span class="op">$</span><span class="va">pair2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
@@ -299,10 +282,10 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <code class="sourceCode R"><span><span class="va">te_acc</span>  <span class="op">&lt;-</span> <span class="fu">compute_accuracy</span><span class="op">(</span><span class="va">te_pred</span>, <span class="va">te</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">'* Accuracy on training set: %0.2f%%'</span>, <span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">tr_acc</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "* Accuracy on training set: 99.63%"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "* Accuracy on training set: 99.62%"</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">'* Accuracy on test set: %0.2f%%'</span>, <span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="va">te_acc</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "* Accuracy on test set: 97.93%"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "* Accuracy on test set: 98.42%"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="plots">Plots<a class="anchor" aria-label="anchor" href="#plots"></a>
@@ -351,7 +334,7 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <span><span class="co">## [[9]]</span></span>
 <span><span class="co">## NULL</span></span></code></pre>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -362,15 +345,15 @@ remaining classes for the rest of the digits (from <code>1</code> until
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

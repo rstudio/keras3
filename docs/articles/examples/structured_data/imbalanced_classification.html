@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Demonstration of how to handle highly imbalanced classification problems.">
 <title>Imbalanced classification: credit card fraud detection • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
@@ -15,80 +14,65 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
+<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../../../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../../deps/search-1.0.0/fuse.min.js"></script><script src="../../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Imbalanced classification: credit card fraud detection">
+<meta name="description" content="Demonstration of how to handle highly imbalanced classification problems.">
 <meta property="og:description" content="Demonstration of how to handle highly imbalanced classification problems.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
+    <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
-    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
-    <a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a>
-    <a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a>
-    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
-    <a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
-    <a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
-    <a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
-    <a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
-    <a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a>
-    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
-    <a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a>
-    <a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
-    <a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
+<li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a></li>
+    <li><a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a></li>
+    <li><a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a></li>
+    <li><a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a></li>
+    <li><a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Other topics</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a></li>
+    <li><a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a></li>
+  </ul>
 </li>
-<li class="active nav-item">
-  <a class="nav-link" href="../../../articles/examples/index.html">Examples</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../../reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../../news/index.html">News</a>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../../../articles/examples/index.html">Examples</a></li>
+<li class="nav-item"><a class="nav-link" href="../../../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../../../news/index.html">News</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../../../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -97,7 +81,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Imbalanced classification: credit card fraud detection</h1>
+
+      <h1>Imbalanced classification: credit card fraud detection</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/vignettes/examples/structured_data/imbalanced_classification.Rmd" class="external-link"><code>vignettes/examples/structured_data/imbalanced_classification.Rmd</code></a></small>
@@ -190,11 +175,11 @@ run the following:</p>
 <span><span class="va">counts</span></span></code></pre></div>
 <pre><code><span><span class="co">##</span></span>
 <span><span class="co">##      0      1</span></span>
-<span><span class="co">## 227450    396</span></span></code></pre>
+<span><span class="co">## 227455    391</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Number of positive samples in training data: %i (%.2f%% of total)"</span>,</span>
 <span>            <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span>, <span class="fl">100</span> <span class="op">*</span> <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Number of positive samples in training data: 396 (0.17% of total)</span></span></code></pre>
+<pre><code><span><span class="co">## Number of positive samples in training data: 391 (0.17% of total)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_for_0</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">counts</span><span class="op">[</span><span class="st">"0"</span><span class="op">]</span></span>
 <span><span class="va">weight_for_1</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span></span></code></pre></div>
@@ -283,74 +268,74 @@ run the following:</p>
 <span>  verbose <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/30</span></span>
-<span><span class="co">## 112/112 - 3s - 27ms/step - fn: 40.0000 - fp: 23705.0000 - loss: 2.2728e-06 - precision: 0.0148 - recall: 0.8990 - tn: 203745.0000 - tp: 356.0000 - val_fn: 8.0000 - val_fp: 1502.0000 - val_loss: 0.1089 - val_precision: 0.0553 - val_recall: 0.9167 - val_tn: 55363.0000 - val_tp: 88.0000</span></span>
+<span><span class="co">## 112/112 - 3s - 27ms/step - fn: 48.0000 - fp: 25075.0000 - loss: 2.4315e-06 - precision: 0.0135 - recall: 0.8772 - tn: 202380.0000 - tp: 343.0000 - val_fn: 6.0000 - val_fp: 1675.0000 - val_loss: 0.1624 - val_precision: 0.0537 - val_recall: 0.9406 - val_tn: 55185.0000 - val_tp: 95.0000</span></span>
 <span><span class="co">## Epoch 2/30</span></span>
-<span><span class="co">## 112/112 - 1s - 6ms/step - fn: 33.0000 - fp: 8009.0000 - loss: 1.4949e-06 - precision: 0.0434 - recall: 0.9167 - tn: 219441.0000 - tp: 363.0000 - val_fn: 10.0000 - val_fp: 1176.0000 - val_loss: 0.0912 - val_precision: 0.0681 - val_recall: 0.8958 - val_tn: 55689.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 1s - 6ms/step - fn: 32.0000 - fp: 8352.0000 - loss: 1.3447e-06 - precision: 0.0412 - recall: 0.9182 - tn: 219103.0000 - tp: 359.0000 - val_fn: 7.0000 - val_fp: 1734.0000 - val_loss: 0.1158 - val_precision: 0.0514 - val_recall: 0.9307 - val_tn: 55126.0000 - val_tp: 94.0000</span></span>
 <span><span class="co">## Epoch 3/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 32.0000 - fp: 7704.0000 - loss: 1.3369e-06 - precision: 0.0451 - recall: 0.9192 - tn: 219746.0000 - tp: 364.0000 - val_fn: 9.0000 - val_fp: 1202.0000 - val_loss: 0.0870 - val_precision: 0.0675 - val_recall: 0.9062 - val_tn: 55663.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 30.0000 - fp: 8111.0000 - loss: 1.1916e-06 - precision: 0.0426 - recall: 0.9233 - tn: 219344.0000 - tp: 361.0000 - val_fn: 9.0000 - val_fp: 774.0000 - val_loss: 0.0782 - val_precision: 0.1062 - val_recall: 0.9109 - val_tn: 56086.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 4/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 28.0000 - fp: 8366.0000 - loss: 1.2269e-06 - precision: 0.0421 - recall: 0.9293 - tn: 219084.0000 - tp: 368.0000 - val_fn: 10.0000 - val_fp: 1560.0000 - val_loss: 0.0967 - val_precision: 0.0522 - val_recall: 0.8958 - val_tn: 55305.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 26.0000 - fp: 7593.0000 - loss: 1.0158e-06 - precision: 0.0459 - recall: 0.9335 - tn: 219862.0000 - tp: 365.0000 - val_fn: 6.0000 - val_fp: 2726.0000 - val_loss: 0.1151 - val_precision: 0.0337 - val_recall: 0.9406 - val_tn: 54134.0000 - val_tp: 95.0000</span></span>
 <span><span class="co">## Epoch 5/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 19.0000 - fp: 6217.0000 - loss: 8.5492e-07 - precision: 0.0572 - recall: 0.9520 - tn: 221233.0000 - tp: 377.0000 - val_fn: 9.0000 - val_fp: 2626.0000 - val_loss: 0.1236 - val_precision: 0.0321 - val_recall: 0.9062 - val_tn: 54239.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 20.0000 - fp: 8398.0000 - loss: 9.4607e-07 - precision: 0.0423 - recall: 0.9488 - tn: 219057.0000 - tp: 371.0000 - val_fn: 10.0000 - val_fp: 603.0000 - val_loss: 0.0334 - val_precision: 0.1311 - val_recall: 0.9010 - val_tn: 56257.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 6/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 18.0000 - fp: 6566.0000 - loss: 7.4300e-07 - precision: 0.0544 - recall: 0.9545 - tn: 220884.0000 - tp: 378.0000 - val_fn: 8.0000 - val_fp: 2302.0000 - val_loss: 0.1081 - val_precision: 0.0368 - val_recall: 0.9167 - val_tn: 54563.0000 - val_tp: 88.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 16.0000 - fp: 7796.0000 - loss: 8.3846e-07 - precision: 0.0459 - recall: 0.9591 - tn: 219659.0000 - tp: 375.0000 - val_fn: 8.0000 - val_fp: 2267.0000 - val_loss: 0.0939 - val_precision: 0.0394 - val_recall: 0.9208 - val_tn: 54593.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 7/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 14.0000 - fp: 6819.0000 - loss: 7.1838e-07 - precision: 0.0530 - recall: 0.9646 - tn: 220631.0000 - tp: 382.0000 - val_fn: 7.0000 - val_fp: 1376.0000 - val_loss: 0.0800 - val_precision: 0.0608 - val_recall: 0.9271 - val_tn: 55489.0000 - val_tp: 89.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 6677.0000 - loss: 5.8589e-07 - precision: 0.0540 - recall: 0.9744 - tn: 220778.0000 - tp: 381.0000 - val_fn: 8.0000 - val_fp: 2472.0000 - val_loss: 0.0961 - val_precision: 0.0363 - val_recall: 0.9208 - val_tn: 54388.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 8/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 19.0000 - fp: 7345.0000 - loss: 8.3921e-07 - precision: 0.0488 - recall: 0.9520 - tn: 220105.0000 - tp: 377.0000 - val_fn: 10.0000 - val_fp: 416.0000 - val_loss: 0.0406 - val_precision: 0.1713 - val_recall: 0.8958 - val_tn: 56449.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 8095.0000 - loss: 7.6202e-07 - precision: 0.0448 - recall: 0.9719 - tn: 219360.0000 - tp: 380.0000 - val_fn: 10.0000 - val_fp: 1295.0000 - val_loss: 0.0809 - val_precision: 0.0657 - val_recall: 0.9010 - val_tn: 55565.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 9/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 6282.0000 - loss: 8.3488e-07 - precision: 0.0575 - recall: 0.9672 - tn: 221168.0000 - tp: 383.0000 - val_fn: 10.0000 - val_fp: 933.0000 - val_loss: 0.0450 - val_precision: 0.0844 - val_recall: 0.8958 - val_tn: 55932.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 5626.0000 - loss: 5.2205e-07 - precision: 0.0639 - recall: 0.9821 - tn: 221829.0000 - tp: 384.0000 - val_fn: 9.0000 - val_fp: 1014.0000 - val_loss: 0.0509 - val_precision: 0.0832 - val_recall: 0.9109 - val_tn: 55846.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 10/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 15.0000 - fp: 7597.0000 - loss: 1.1098e-06 - precision: 0.0478 - recall: 0.9621 - tn: 219853.0000 - tp: 381.0000 - val_fn: 10.0000 - val_fp: 2417.0000 - val_loss: 0.4261 - val_precision: 0.0344 - val_recall: 0.8958 - val_tn: 54448.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 6099.0000 - loss: 5.7624e-07 - precision: 0.0589 - recall: 0.9770 - tn: 221356.0000 - tp: 382.0000 - val_fn: 10.0000 - val_fp: 1141.0000 - val_loss: 0.0485 - val_precision: 0.0739 - val_recall: 0.9010 - val_tn: 55719.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 11/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 24.0000 - fp: 10269.0000 - loss: 1.9062e-06 - precision: 0.0350 - recall: 0.9394 - tn: 217181.0000 - tp: 372.0000 - val_fn: 9.0000 - val_fp: 1434.0000 - val_loss: 0.1261 - val_precision: 0.0572 - val_recall: 0.9062 - val_tn: 55431.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 5545.0000 - loss: 5.0995e-07 - precision: 0.0646 - recall: 0.9795 - tn: 221910.0000 - tp: 383.0000 - val_fn: 9.0000 - val_fp: 1951.0000 - val_loss: 0.0903 - val_precision: 0.0450 - val_recall: 0.9109 - val_tn: 54909.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 12/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 17.0000 - fp: 6634.0000 - loss: 1.0711e-06 - precision: 0.0540 - recall: 0.9571 - tn: 220816.0000 - tp: 379.0000 - val_fn: 8.0000 - val_fp: 2263.0000 - val_loss: 0.1654 - val_precision: 0.0374 - val_recall: 0.9167 - val_tn: 54602.0000 - val_tp: 88.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 8476.0000 - loss: 1.0215e-06 - precision: 0.0427 - recall: 0.9668 - tn: 218979.0000 - tp: 378.0000 - val_fn: 9.0000 - val_fp: 2929.0000 - val_loss: 0.1346 - val_precision: 0.0305 - val_recall: 0.9109 - val_tn: 53931.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 13/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 5620.0000 - loss: 5.3600e-07 - precision: 0.0643 - recall: 0.9747 - tn: 221830.0000 - tp: 386.0000 - val_fn: 12.0000 - val_fp: 914.0000 - val_loss: 0.0414 - val_precision: 0.0842 - val_recall: 0.8750 - val_tn: 55951.0000 - val_tp: 84.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 7170.0000 - loss: 8.1795e-07 - precision: 0.0501 - recall: 0.9668 - tn: 220285.0000 - tp: 378.0000 - val_fn: 10.0000 - val_fp: 1355.0000 - val_loss: 0.0592 - val_precision: 0.0629 - val_recall: 0.9010 - val_tn: 55505.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 14/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 5103.0000 - loss: 5.1168e-07 - precision: 0.0707 - recall: 0.9798 - tn: 222347.0000 - tp: 388.0000 - val_fn: 11.0000 - val_fp: 1382.0000 - val_loss: 0.0660 - val_precision: 0.0579 - val_recall: 0.8854 - val_tn: 55483.0000 - val_tp: 85.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 4084.0000 - loss: 3.7254e-07 - precision: 0.0864 - recall: 0.9872 - tn: 223371.0000 - tp: 386.0000 - val_fn: 11.0000 - val_fp: 428.0000 - val_loss: 0.0233 - val_precision: 0.1737 - val_recall: 0.8911 - val_tn: 56432.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 15/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 4497.0000 - loss: 4.4632e-07 - precision: 0.0796 - recall: 0.9823 - tn: 222953.0000 - tp: 389.0000 - val_fn: 10.0000 - val_fp: 1805.0000 - val_loss: 0.0786 - val_precision: 0.0455 - val_recall: 0.8958 - val_tn: 55060.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 4073.0000 - loss: 4.3721e-07 - precision: 0.0864 - recall: 0.9847 - tn: 223382.0000 - tp: 385.0000 - val_fn: 12.0000 - val_fp: 659.0000 - val_loss: 0.0302 - val_precision: 0.1190 - val_recall: 0.8812 - val_tn: 56201.0000 - val_tp: 89.0000</span></span>
 <span><span class="co">## Epoch 16/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 5056.0000 - loss: 6.1038e-07 - precision: 0.0718 - recall: 0.9874 - tn: 222394.0000 - tp: 391.0000 - val_fn: 13.0000 - val_fp: 889.0000 - val_loss: 0.0676 - val_precision: 0.0854 - val_recall: 0.8646 - val_tn: 55976.0000 - val_tp: 83.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 5797.0000 - loss: 5.6359e-07 - precision: 0.0615 - recall: 0.9719 - tn: 221658.0000 - tp: 380.0000 - val_fn: 9.0000 - val_fp: 2041.0000 - val_loss: 0.1492 - val_precision: 0.0431 - val_recall: 0.9109 - val_tn: 54819.0000 - val_tp: 92.0000</span></span>
 <span><span class="co">## Epoch 17/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 4639.0000 - loss: 4.5763e-07 - precision: 0.0781 - recall: 0.9924 - tn: 222811.0000 - tp: 393.0000 - val_fn: 11.0000 - val_fp: 1185.0000 - val_loss: 0.0669 - val_precision: 0.0669 - val_recall: 0.8854 - val_tn: 55680.0000 - val_tp: 85.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 6758.0000 - loss: 6.8748e-07 - precision: 0.0536 - recall: 0.9795 - tn: 220697.0000 - tp: 383.0000 - val_fn: 8.0000 - val_fp: 2855.0000 - val_loss: 0.1215 - val_precision: 0.0315 - val_recall: 0.9208 - val_tn: 54005.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 18/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4355.0000 - loss: 4.5299e-07 - precision: 0.0826 - recall: 0.9899 - tn: 223095.0000 - tp: 392.0000 - val_fn: 9.0000 - val_fp: 1405.0000 - val_loss: 0.0772 - val_precision: 0.0583 - val_recall: 0.9062 - val_tn: 55460.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 4190.0000 - loss: 3.8817e-07 - precision: 0.0842 - recall: 0.9847 - tn: 223265.0000 - tp: 385.0000 - val_fn: 13.0000 - val_fp: 615.0000 - val_loss: 0.0280 - val_precision: 0.1252 - val_recall: 0.8713 - val_tn: 56245.0000 - val_tp: 88.0000</span></span>
 <span><span class="co">## Epoch 19/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 5779.0000 - loss: 4.8324e-07 - precision: 0.0632 - recall: 0.9848 - tn: 221671.0000 - tp: 390.0000 - val_fn: 10.0000 - val_fp: 1135.0000 - val_loss: 0.0546 - val_precision: 0.0704 - val_recall: 0.8958 - val_tn: 55730.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 4748.0000 - loss: 5.6549e-07 - precision: 0.0755 - recall: 0.9923 - tn: 222707.0000 - tp: 388.0000 - val_fn: 10.0000 - val_fp: 1481.0000 - val_loss: 0.1558 - val_precision: 0.0579 - val_recall: 0.9010 - val_tn: 55379.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 20/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 4748.0000 - loss: 3.7424e-07 - precision: 0.0764 - recall: 0.9924 - tn: 222702.0000 - tp: 393.0000 - val_fn: 9.0000 - val_fp: 895.0000 - val_loss: 0.0396 - val_precision: 0.0886 - val_recall: 0.9062 - val_tn: 55970.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 5168.0000 - loss: 7.1889e-07 - precision: 0.0685 - recall: 0.9719 - tn: 222287.0000 - tp: 380.0000 - val_fn: 10.0000 - val_fp: 994.0000 - val_loss: 0.0616 - val_precision: 0.0839 - val_recall: 0.9010 - val_tn: 55866.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 21/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3798.0000 - loss: 3.1417e-07 - precision: 0.0938 - recall: 0.9924 - tn: 223652.0000 - tp: 393.0000 - val_fn: 10.0000 - val_fp: 652.0000 - val_loss: 0.0309 - val_precision: 0.1165 - val_recall: 0.8958 - val_tn: 56213.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3523.0000 - loss: 3.6302e-07 - precision: 0.0990 - recall: 0.9898 - tn: 223932.0000 - tp: 387.0000 - val_fn: 10.0000 - val_fp: 577.0000 - val_loss: 0.0370 - val_precision: 0.1362 - val_recall: 0.9010 - val_tn: 56283.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 22/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 0.0000e+00 - fp: 2188.0000 - loss: 1.8112e-07 - precision: 0.1533 - recall: 1.0000 - tn: 225262.0000 - tp: 396.0000 - val_fn: 10.0000 - val_fp: 427.0000 - val_loss: 0.0250 - val_precision: 0.1676 - val_recall: 0.8958 - val_tn: 56438.0000 - val_tp: 86.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 2947.0000 - loss: 3.0530e-07 - precision: 0.1161 - recall: 0.9898 - tn: 224508.0000 - tp: 387.0000 - val_fn: 11.0000 - val_fp: 822.0000 - val_loss: 0.0355 - val_precision: 0.0987 - val_recall: 0.8911 - val_tn: 56038.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 23/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3066.0000 - loss: 3.4932e-07 - precision: 0.1134 - recall: 0.9899 - tn: 224384.0000 - tp: 392.0000 - val_fn: 11.0000 - val_fp: 1053.0000 - val_loss: 0.0494 - val_precision: 0.0747 - val_recall: 0.8854 - val_tn: 55812.0000 - val_tp: 85.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 2258.0000 - loss: 2.1487e-07 - precision: 0.1470 - recall: 0.9949 - tn: 225197.0000 - tp: 389.0000 - val_fn: 10.0000 - val_fp: 839.0000 - val_loss: 0.0462 - val_precision: 0.0978 - val_recall: 0.9010 - val_tn: 56021.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 24/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3175.0000 - loss: 5.1994e-07 - precision: 0.1099 - recall: 0.9899 - tn: 224275.0000 - tp: 392.0000 - val_fn: 11.0000 - val_fp: 1012.0000 - val_loss: 0.0997 - val_precision: 0.0775 - val_recall: 0.8854 - val_tn: 55853.0000 - val_tp: 85.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3157.0000 - loss: 2.5914e-07 - precision: 0.1097 - recall: 0.9949 - tn: 224298.0000 - tp: 389.0000 - val_fn: 10.0000 - val_fp: 667.0000 - val_loss: 0.0316 - val_precision: 0.1201 - val_recall: 0.9010 - val_tn: 56193.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 25/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 5874.0000 - loss: 6.5862e-07 - precision: 0.0621 - recall: 0.9823 - tn: 221576.0000 - tp: 389.0000 - val_fn: 9.0000 - val_fp: 3090.0000 - val_loss: 0.1296 - val_precision: 0.0274 - val_recall: 0.9062 - val_tn: 53775.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3326.0000 - loss: 3.8410e-07 - precision: 0.1042 - recall: 0.9898 - tn: 224129.0000 - tp: 387.0000 - val_fn: 8.0000 - val_fp: 1191.0000 - val_loss: 0.0587 - val_precision: 0.0724 - val_recall: 0.9208 - val_tn: 55669.0000 - val_tp: 93.0000</span></span>
 <span><span class="co">## Epoch 26/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 5395.0000 - loss: 5.9253e-07 - precision: 0.0674 - recall: 0.9848 - tn: 222055.0000 - tp: 390.0000 - val_fn: 9.0000 - val_fp: 1320.0000 - val_loss: 0.0928 - val_precision: 0.0618 - val_recall: 0.9062 - val_tn: 55545.0000 - val_tp: 87.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 4168.0000 - loss: 3.8526e-07 - precision: 0.0848 - recall: 0.9872 - tn: 223287.0000 - tp: 386.0000 - val_fn: 11.0000 - val_fp: 670.0000 - val_loss: 0.0311 - val_precision: 0.1184 - val_recall: 0.8911 - val_tn: 56190.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 27/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3887.0000 - loss: 7.1278e-07 - precision: 0.0916 - recall: 0.9899 - tn: 223563.0000 - tp: 392.0000 - val_fn: 12.0000 - val_fp: 572.0000 - val_loss: 0.0352 - val_precision: 0.1280 - val_recall: 0.8750 - val_tn: 56293.0000 - val_tp: 84.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3433.0000 - loss: 4.0116e-07 - precision: 0.1018 - recall: 0.9949 - tn: 224022.0000 - tp: 389.0000 - val_fn: 10.0000 - val_fp: 1393.0000 - val_loss: 0.1997 - val_precision: 0.0613 - val_recall: 0.9010 - val_tn: 55467.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 28/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 2209.0000 - loss: 5.8153e-07 - precision: 0.1510 - recall: 0.9924 - tn: 225241.0000 - tp: 393.0000 - val_fn: 11.0000 - val_fp: 1373.0000 - val_loss: 0.0808 - val_precision: 0.0583 - val_recall: 0.8854 - val_tn: 55492.0000 - val_tp: 85.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 5294.0000 - loss: 6.9852e-07 - precision: 0.0676 - recall: 0.9821 - tn: 222161.0000 - tp: 384.0000 - val_fn: 11.0000 - val_fp: 1467.0000 - val_loss: 0.1060 - val_precision: 0.0578 - val_recall: 0.8911 - val_tn: 55393.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 29/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 1.0000 - fp: 2506.0000 - loss: 2.9031e-07 - precision: 0.1362 - recall: 0.9975 - tn: 224944.0000 - tp: 395.0000 - val_fn: 11.0000 - val_fp: 690.0000 - val_loss: 0.0401 - val_precision: 0.1097 - val_recall: 0.8854 - val_tn: 56175.0000 - val_tp: 85.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4214.0000 - loss: 4.4154e-07 - precision: 0.0841 - recall: 0.9898 - tn: 223241.0000 - tp: 387.0000 - val_fn: 11.0000 - val_fp: 729.0000 - val_loss: 0.0520 - val_precision: 0.1099 - val_recall: 0.8911 - val_tn: 56131.0000 - val_tp: 90.0000</span></span>
 <span><span class="co">## Epoch 30/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 2719.0000 - loss: 6.1097e-07 - precision: 0.1260 - recall: 0.9899 - tn: 224731.0000 - tp: 392.0000 - val_fn: 13.0000 - val_fp: 861.0000 - val_loss: 0.0362 - val_precision: 0.0879 - val_recall: 0.8646 - val_tn: 56004.0000 - val_tp: 83.0000</span></span></code></pre>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 2367.0000 - loss: 3.0825e-07 - precision: 0.1408 - recall: 0.9923 - tn: 225088.0000 - tp: 388.0000 - val_fn: 12.0000 - val_fp: 1998.0000 - val_loss: 0.1274 - val_precision: 0.0426 - val_recall: 0.8812 - val_tn: 54862.0000 - val_tp: 89.0000</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">val_pred</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">val_features</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1781/1781 - 1s - 311us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1781/1781 - 1s - 314us/step</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_correct</span> <span class="op">&lt;-</span> <span class="va">val_df</span><span class="op">$</span><span class="va">Class</span> <span class="op">==</span> <span class="va">val_pred</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Validation accuracy: %.2f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pred_correct</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Validation accuracy: 0.98</span></span></code></pre>
+<pre><code><span><span class="co">## Validation accuracy: 0.96</span></span></code></pre>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fraudulent</span> <span class="op">&lt;-</span> <span class="va">val_df</span><span class="op">$</span><span class="va">Class</span> <span class="op">==</span> <span class="fl">1</span></span>
 <span></span>
@@ -364,9 +349,10 @@ run the following:</p>
 <p>At the end of training, out of 56,961 validation transactions, we
 are:</p>
 <ul>
-<li>Correctly identifying 83 of them as fraudulent</li>
-<li>Missing 13 fraudulent transactions</li>
-<li>At the cost of incorrectly flagging 861 legitimate transactions</li>
+<li>Correctly identifying 89 of them as fraudulent</li>
+<li>Missing 12 fraudulent transactions</li>
+<li>At the cost of incorrectly flagging 1,998 legitimate
+transactions</li>
 </ul>
 <p>In the real world, one would put an even higher weight on class 1, so
 as to reflect that False Negatives are more costly than False
@@ -378,7 +364,7 @@ is why.</p>
 <!-- | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Imbalanced%20Classification-black.svg)](https://huggingface.co/keras-io/imbalanced_classification) | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Spaces-Imbalanced%20Classification-black.svg)](https://huggingface.co/spaces/keras-io/Credit_Card_Fraud_Detection) | -->
 <!-- : Example available on HuggingFace. -->
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -389,15 +375,15 @@ is why.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

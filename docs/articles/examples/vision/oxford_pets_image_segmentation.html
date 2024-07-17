@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Image segmentation model trained from scratch on the Oxford Pets dataset.">
 <title>Image segmentation with a U-Net-like architecture • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
@@ -15,80 +14,65 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
+<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../../../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../../deps/search-1.0.0/fuse.min.js"></script><script src="../../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Image segmentation with a U-Net-like architecture">
+<meta name="description" content="Image segmentation model trained from scratch on the Oxford Pets dataset.">
 <meta property="og:description" content="Image segmentation model trained from scratch on the Oxford Pets dataset.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
+    <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
-    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
-    <a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a>
-    <a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a>
-    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
-    <a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
-    <a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
-    <a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
-    <a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
-    <a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a>
-    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
-    <a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a>
-    <a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
-    <a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
+<li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a></li>
+    <li><a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a></li>
+    <li><a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a></li>
+    <li><a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a></li>
+    <li><a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Other topics</h6></li>
+    <li><a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a></li>
+    <li><a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a></li>
+  </ul>
 </li>
-<li class="active nav-item">
-  <a class="nav-link" href="../../../articles/examples/index.html">Examples</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../../reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../../../news/index.html">News</a>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../../../articles/examples/index.html">Examples</a></li>
+<li class="nav-item"><a class="nav-link" href="../../../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../../../news/index.html">News</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../../../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -97,7 +81,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Image segmentation with a U-Net-like architecture</h1>
+
+      <h1>Image segmentation with a U-Net-like architecture</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/vignettes/examples/vision/oxford_pets_image_segmentation.Rmd" class="external-link"><code>vignettes/examples/vision/oxford_pets_image_segmentation.Rmd</code></a></small>
@@ -292,7 +277,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span><span class="co"># Build model</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="va">img_size</span>, <span class="va">num_classes</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional_1"</span></span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━┓</span></span>
 <span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)      </span>┃<span style="font-weight: bold;"> Output Shape    </span>┃<span style="font-weight: bold;">   Param # </span>┃<span style="font-weight: bold;"> Connected to   </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━┩</span></span>
@@ -572,105 +557,105 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>    verbose<span class="op">=</span><span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/50</span></span>
-<span><span class="co">## 32/32 - 29s - 914ms/step - loss: 1.4283 - val_loss: 1.5499</span></span>
+<span><span class="co">## 32/32 - 30s - 936ms/step - loss: 1.4284 - val_loss: 1.5497</span></span>
 <span><span class="co">## Epoch 2/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.9221 - val_loss: 1.9887</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.9222 - val_loss: 1.9871</span></span>
 <span><span class="co">## Epoch 3/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.7764 - val_loss: 2.5144</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.7764 - val_loss: 2.5113</span></span>
 <span><span class="co">## Epoch 4/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.7200 - val_loss: 3.0185</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.7200 - val_loss: 3.0139</span></span>
 <span><span class="co">## Epoch 5/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.6847 - val_loss: 3.2947</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.6848 - val_loss: 3.2923</span></span>
 <span><span class="co">## Epoch 6/50</span></span>
-<span><span class="co">## 32/32 - 2s - 68ms/step - loss: 0.6556 - val_loss: 3.4559</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.6558 - val_loss: 3.4509</span></span>
 <span><span class="co">## Epoch 7/50</span></span>
-<span><span class="co">## 32/32 - 2s - 76ms/step - loss: 0.6303 - val_loss: 3.5671</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.6304 - val_loss: 3.5562</span></span>
 <span><span class="co">## Epoch 8/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.6083 - val_loss: 3.6620</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.6083 - val_loss: 3.6437</span></span>
 <span><span class="co">## Epoch 9/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.5895 - val_loss: 3.7374</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.5895 - val_loss: 3.7206</span></span>
 <span><span class="co">## Epoch 10/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.5726 - val_loss: 3.8015</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.5727 - val_loss: 3.7855</span></span>
 <span><span class="co">## Epoch 11/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.5567 - val_loss: 3.8311</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.5568 - val_loss: 3.8159</span></span>
 <span><span class="co">## Epoch 12/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.5407 - val_loss: 3.8089</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.5409 - val_loss: 3.7932</span></span>
 <span><span class="co">## Epoch 13/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.5242 - val_loss: 3.7293</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.5243 - val_loss: 3.7030</span></span>
 <span><span class="co">## Epoch 14/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.5062 - val_loss: 3.5953</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.5062 - val_loss: 3.5752</span></span>
 <span><span class="co">## Epoch 15/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4860 - val_loss: 3.4506</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.4860 - val_loss: 3.4146</span></span>
 <span><span class="co">## Epoch 16/50</span></span>
-<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.4637 - val_loss: 3.2588</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.4637 - val_loss: 3.2376</span></span>
 <span><span class="co">## Epoch 17/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4396 - val_loss: 3.0063</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.4396 - val_loss: 2.9867</span></span>
 <span><span class="co">## Epoch 18/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.4140 - val_loss: 2.7031</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.4140 - val_loss: 2.6917</span></span>
 <span><span class="co">## Epoch 19/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3877 - val_loss: 2.3504</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.3876 - val_loss: 2.3454</span></span>
 <span><span class="co">## Epoch 20/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3623 - val_loss: 1.9645</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.3622 - val_loss: 1.9716</span></span>
 <span><span class="co">## Epoch 21/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.3392 - val_loss: 1.6364</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.3391 - val_loss: 1.6262</span></span>
 <span><span class="co">## Epoch 22/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3203 - val_loss: 1.3376</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3202 - val_loss: 1.3245</span></span>
 <span><span class="co">## Epoch 23/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.3082 - val_loss: 1.0917</span></span>
+<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.3087 - val_loss: 1.0861</span></span>
 <span><span class="co">## Epoch 24/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3084 - val_loss: 1.0189</span></span>
+<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3101 - val_loss: 1.0151</span></span>
 <span><span class="co">## Epoch 25/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3461 - val_loss: 0.9181</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3455 - val_loss: 0.9407</span></span>
 <span><span class="co">## Epoch 26/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3649 - val_loss: 1.0231</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.3589 - val_loss: 1.0089</span></span>
 <span><span class="co">## Epoch 27/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3294 - val_loss: 0.8574</span></span>
+<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.3259 - val_loss: 0.8719</span></span>
 <span><span class="co">## Epoch 28/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2891 - val_loss: 1.0065</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2871 - val_loss: 1.0167</span></span>
 <span><span class="co">## Epoch 29/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2731 - val_loss: 1.1668</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2709 - val_loss: 1.1747</span></span>
 <span><span class="co">## Epoch 30/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2681 - val_loss: 1.1974</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2650 - val_loss: 1.1738</span></span>
 <span><span class="co">## Epoch 31/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2723 - val_loss: 1.1259</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2672 - val_loss: 1.1156</span></span>
 <span><span class="co">## Epoch 32/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2872 - val_loss: 1.1112</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2807 - val_loss: 1.1371</span></span>
 <span><span class="co">## Epoch 33/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3146 - val_loss: 1.2479</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.3121 - val_loss: 1.2544</span></span>
 <span><span class="co">## Epoch 34/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.3034 - val_loss: 1.1946</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.3046 - val_loss: 1.2516</span></span>
 <span><span class="co">## Epoch 35/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2880 - val_loss: 1.0699</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2885 - val_loss: 1.0993</span></span>
 <span><span class="co">## Epoch 36/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2770 - val_loss: 1.0195</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2786 - val_loss: 0.9742</span></span>
 <span><span class="co">## Epoch 37/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2669 - val_loss: 1.2986</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2817 - val_loss: 1.3683</span></span>
 <span><span class="co">## Epoch 38/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2544 - val_loss: 1.0411</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2696 - val_loss: 1.2035</span></span>
 <span><span class="co">## Epoch 39/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2383 - val_loss: 1.3622</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2457 - val_loss: 1.1915</span></span>
 <span><span class="co">## Epoch 40/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2378 - val_loss: 1.3429</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2407 - val_loss: 1.2162</span></span>
 <span><span class="co">## Epoch 41/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2439 - val_loss: 1.2881</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2419 - val_loss: 1.2704</span></span>
 <span><span class="co">## Epoch 42/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2406 - val_loss: 1.5361</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2316 - val_loss: 1.5048</span></span>
 <span><span class="co">## Epoch 43/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2417 - val_loss: 1.2444</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2307 - val_loss: 1.2770</span></span>
 <span><span class="co">## Epoch 44/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2275 - val_loss: 1.1713</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2227 - val_loss: 1.1434</span></span>
 <span><span class="co">## Epoch 45/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2168 - val_loss: 1.0482</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.2185 - val_loss: 1.0805</span></span>
 <span><span class="co">## Epoch 46/50</span></span>
-<span><span class="co">## 32/32 - 2s - 62ms/step - loss: 0.2096 - val_loss: 1.1095</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2136 - val_loss: 1.0870</span></span>
 <span><span class="co">## Epoch 47/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.2026 - val_loss: 1.1017</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2094 - val_loss: 1.0590</span></span>
 <span><span class="co">## Epoch 48/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.1986 - val_loss: 1.1087</span></span>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.2012 - val_loss: 1.1019</span></span>
 <span><span class="co">## Epoch 49/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.1924 - val_loss: 1.1055</span></span>
+<span><span class="co">## 32/32 - 2s - 60ms/step - loss: 0.1920 - val_loss: 1.0324</span></span>
 <span><span class="co">## Epoch 50/50</span></span>
-<span><span class="co">## 32/32 - 2s - 61ms/step - loss: 0.1846 - val_loss: 1.0708</span></span></code></pre>
+<span><span class="co">## 32/32 - 2s - 59ms/step - loss: 0.1828 - val_loss: 1.1106</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-predictions">Visualize predictions<a class="anchor" aria-label="anchor" href="#visualize-predictions"></a>
@@ -716,7 +701,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <img src="oxford_pets_image_segmentation/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9"><div class="figcaption">plot of chunk unnamed-chunk-9</div>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -727,15 +712,15 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
