@@ -2684,7 +2684,7 @@ keras$ops$softsign(x)
 #' or probabilities.
 #' Set it to `TRUE` if `output` represents logits; otherwise,
 #' set it to `FALSE` if `output` represents probabilities.
-#' Defaults to`FALSE`.
+#' Defaults to `FALSE`.
 #'
 #' @param axis
 #' (optional) The axis along which the sparse categorical

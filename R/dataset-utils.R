@@ -549,17 +549,19 @@ function (directory, labels = "inferred", label_mode = "int",
 #' of the classes (otherwise alphanumerical order is used).
 #'
 #' @param batch_size
-#' Size of the batches of data. Defaults to 32.
+#' Size of the batches of data.
 #' If `NULL`, the data will not be batched
 #' (the dataset will yield individual samples).
+#' Defaults to `32`.
 #'
 #' @param max_length
 #' Maximum size of a text string. Texts longer than this will
 #' be truncated to `max_length`.
 #'
 #' @param shuffle
-#' Whether to shuffle the data. Defaults to `TRUE`.
+#' Whether to shuffle the data.
 #' If set to `FALSE`, sorts the data in alphanumeric order.
+#' Defaults to `TRUE`.
 #'
 #' @param seed
 #' Optional random seed for shuffling and transformations.
