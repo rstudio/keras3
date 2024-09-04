@@ -116,8 +116,12 @@
 #'   Initialize self.
 #'
 #'   Args:
-#'   * `name`: (Optional) string name of the metric instance.
-#'   * `dtype`: (Optional) data type of the metric result.
+#'   * `name`: Optional name for the metric instance.
+#'   * `dtype`: The dtype of the metric's computations. Defaults to `NULL`, which
+#'       means using [`config_floatx()`]. `config_floatx()` is a
+#'       `"float32"` unless set to different value
+#'       (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#'       provided, then the `compute_dtype` will be utilized.
 #'
 #' * ```r
 #'   add_variable(shape, initializer, dtype=NULL, aggregation = 'sum', name=NULL)
