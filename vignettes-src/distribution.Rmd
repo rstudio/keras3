@@ -93,7 +93,7 @@ mesh <- keras$distribution$DeviceMesh(
 # "data" as columns, and it is a [4, 2] grid when it mapped to the physical
 # devices on the mesh.
 layout_2d <- keras$distribution$TensorLayout(
-  axes = c("model", "data"), 
+  axes = c("model", "data"),
   device_mesh = mesh
 )
 
@@ -131,8 +131,8 @@ data_parallel <- keras$distribution$DataParallel(devices = devices)
 
 # Or you can choose to create DataParallel with a 1D `DeviceMesh`.
 mesh_1d <- keras$distribution$DeviceMesh(
-  shape = shape(8), 
-  axis_names = list("data"), 
+  shape = shape(8),
+  axis_names = list("data"),
   devices = devices
 )
 data_parallel <- keras$distribution$DataParallel(device_mesh = mesh_1d)
@@ -213,8 +213,7 @@ layout_map["d1/bias"] <- tuple("model")
 layout_map["d2/output"] <- tuple("data", NULL)
 
 model_parallel <- keras$distribution$ModelParallel(
-  layout_map = layout_map, 
-  batch_dim_name = "data"
+  layout_map, batch_dim_name = "data"
 )
 
 keras$distribution$set_distribution(model_parallel)
