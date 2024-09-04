@@ -217,7 +217,7 @@
 #'     ```
 #'
 #' * ```r
-#'   add_metric()
+#'   add_metric(...)
 #'   ```
 #'
 #' * ```r
@@ -371,15 +371,19 @@
 #'   Return the values of `layer$weights` as a list of R or NumPy arrays.
 #'
 #' * ```r
-#'   quantize(mode)
+#'   quantize(mode, type_check = TRUE)
 #'   ```
-#'   Currently, only the `Dense` and `EinsumDense` layers support in-place
+#'   Currently, only the `Dense`, `EinsumDense` and `Embedding` layers support in-place
 #'   quantization via this `quantize()` method.
 #'
 #'   Example:
 #'   ```r
 #'   model$quantize("int8") # quantize model in-place
 #'   model |> predict(data) # faster inference
+#'   ```
+#'
+#' * ```r
+#'   quantized_build(input_shape, mode)
 #'   ```
 #'
 #' * ```r

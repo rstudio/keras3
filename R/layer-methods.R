@@ -165,6 +165,7 @@ reset_state <- function(object) {
 #' @param mode
 #' The mode of the quantization. Only 'int8' is supported at this
 #' time.
+#' @param ... Passed on to the `object` quantization method.
 #'
 #' @export
 #' @returns `model`, invisibly. Note this is just a convenience for usage with `|>`, the
@@ -173,7 +174,7 @@ reset_state <- function(object) {
 #' @family layer methods
 #' @tether keras.Model.quantize
 quantize_weights <-
-function (object, mode)
+function (object, mode, ...)
 {
-  object$quantize(mode)
+  object$quantize(mode, ...)
 }
