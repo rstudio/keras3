@@ -3,7 +3,7 @@ keras.saving.save_model(
   model,
   filepath,
   overwrite=True,
-  zipped=True,
+  zipped=None,
   **kwargs
 )
 __doc__
@@ -15,7 +15,8 @@ Args:
     overwrite: Whether we should overwrite any existing model at the target
         location, or instead ask the user via an interactive prompt.
     zipped: Whether to save the model as a zipped `.keras`
-        archive (default), or as an unzipped directory.
+        archive (default when saving locally), or as an unzipped directory
+        (default when saving on the Hugging Face Hub).
 
 Example:
 

@@ -49,7 +49,8 @@
 #'
 #' @param zipped
 #' Whether to save the model as a zipped `.keras`
-#' archive (default), or as an unzipped directory.
+#' archive (default when saving locally), or as an unzipped directory
+#' (default when saving on the Hugging Face Hub).
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -67,7 +68,7 @@
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/models/Model/save>
 save_model <-
-function (model, filepath = NULL, overwrite = FALSE, zipped = TRUE, ...)
+function (model, filepath = NULL, overwrite = FALSE, zipped = NULL, ...)
 {
   if(is.null(filepath) -> return_serialized) {
     filepath <- tempfile(pattern = "keras_model-", fileext = ".keras")
