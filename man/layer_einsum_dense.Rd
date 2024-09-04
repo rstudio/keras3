@@ -161,7 +161,7 @@ output  # shape(NA, 32, 64)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode, type_check = TRUE)
 }\if{html}{\out{</div>}}
 }
 }

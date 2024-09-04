@@ -4,13 +4,15 @@
 \alias{quantize_weights}
 \title{Quantize the weights of a model.}
 \usage{
-quantize_weights(object, mode)
+quantize_weights(object, mode, ...)
 }
 \arguments{
 \item{object}{A Keras Model or Layer.}
 
 \item{mode}{The mode of the quantization. Only 'int8' is supported at this
 time.}
+
+\item{...}{Passed on to the \code{object} quantization method.}
 }
 \value{
 \code{model}, invisibly. Note this is just a convenience for usage with \verb{|>}, the

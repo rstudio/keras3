@@ -105,9 +105,15 @@ stopifnot(all.equal(as.array(weighted_loss),
 
 Args:
 \itemize{
-\item \code{name}
-\item \code{reduction}: Valid values are one of \verb{\{"sum_over_batch_size", "sum", NULL, "none"\}}
-\item \code{dtype}
+\item \code{name}: Optional name for the loss instance.
+\item \code{reduction}: Type of reduction to apply to the loss. In almost all cases
+this should be \code{"sum_over_batch_size"}.
+Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.
+\item \code{dtype}: The dtype of the loss's computations. Defaults to \code{NULL}, which
+means using \code{\link[=config_floatx]{config_floatx()}}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{\link[=config_set_floatx]{config_set_floatx()}}). If a \code{keras$DTypePolicy} is
+provided, then the \code{compute_dtype} will be utilized.
 }
 \item
 
@@ -118,6 +124,15 @@ Call the loss instance as a function, optionally with \code{sample_weight}.
 \item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{get_config()
+}\if{html}{\out{</div>}}
+}
+}
+
+\section{Readonly properties:}{
+\itemize{
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{dtype
 }\if{html}{\out{</div>}}
 }
 }
