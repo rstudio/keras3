@@ -61,9 +61,15 @@
 #'   initialize(name=NULL, reduction="sum_over_batch_size", dtype=NULL)
 #'   ```
 #'   Args:
-#'   * `name`
-#'   * `reduction`: Valid values are one of `{"sum_over_batch_size", "sum", NULL, "none"}`
-#'   * `dtype`
+#'   * `name`: Optional name for the loss instance.
+#'   * `reduction`: Type of reduction to apply to the loss. In almost all cases
+#'       this should be `"sum_over_batch_size"`.
+#'       Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#'   * `dtype`: The dtype of the loss's computations. Defaults to `NULL`, which
+#'       means using [`config_floatx()`]. `config_floatx()` is a
+#'       `"float32"` unless set to different value
+#'       (via [`config_set_floatx()`]). If a `keras$DTypePolicy` is
+#'       provided, then the `compute_dtype` will be utilized.
 #'
 #' * ```
 #'   __call__(y_true, y_pred, sample_weight=NULL)
@@ -72,6 +78,12 @@
 #'
 #' * ```r
 #'   get_config()
+#'   ```
+#'
+#' # Readonly properties:
+#'
+#' * ```r
+#'   dtype
 #'   ```
 #'
 #' @returns A function that returns `Loss` instances, similar to the
