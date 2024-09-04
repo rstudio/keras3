@@ -144,6 +144,7 @@ Other optimizers: \cr
 \code{\link{optimizer_adam}()} \cr
 \code{\link{optimizer_adamax}()} \cr
 \code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lamb}()} \cr
 \code{\link{optimizer_lion}()} \cr
 \code{\link{optimizer_loss_scale}()} \cr
 \code{\link{optimizer_nadam}()} \cr

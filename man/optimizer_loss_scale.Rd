@@ -122,6 +122,7 @@ Other optimizers: \cr
 \code{\link{optimizer_adam_w}()} \cr
 \code{\link{optimizer_adamax}()} \cr
 \code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lamb}()} \cr
 \code{\link{optimizer_lion}()} \cr
 \code{\link{optimizer_nadam}()} \cr
 \code{\link{optimizer_rmsprop}()} \cr

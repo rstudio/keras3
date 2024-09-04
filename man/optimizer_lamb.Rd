@@ -101,6 +101,9 @@ the optimizer.}
 
 \item{...}{For forward/backward compatability.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Lamb is a stochastic gradient descent method that
 uses layer-wise adaptive moments to adjusts the
@@ -115,3 +118,19 @@ especially for large batch sizes.
 }
 }
 
+\seealso{
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adafactor}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lion}()} \cr
+\code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_sgd}()} \cr
+}
+\concept{optimizers}

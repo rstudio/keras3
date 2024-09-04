@@ -1023,6 +1023,8 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @family optimizers
+#' @returns an `Optimizer` instance
 #' @tether keras.optimizers.Lamb
 optimizer_lamb <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
