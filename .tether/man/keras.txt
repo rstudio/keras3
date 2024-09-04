@@ -78,6 +78,7 @@ StatelessScope(
   collect_losses=False,
   initialize_variables=True
 )
+SymbolicScope()
 tree: Module(keras.api.tree)
 utils: Module(keras.api.utils)
 Variable(

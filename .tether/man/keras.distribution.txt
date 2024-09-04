@@ -1,4 +1,8 @@
-DataParallel(device_mesh=None, devices=None)
+DataParallel(
+  device_mesh=None,
+  devices=None,
+  auto_shard_dataset=True
+)
 DeviceMesh(
   shape,
   axis_names,

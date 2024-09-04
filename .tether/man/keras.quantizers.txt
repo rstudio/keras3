@@ -3,7 +3,8 @@ abs_max_quantize(
   axis,
   value_range=(-127, 127),
   dtype='int8',
-  epsilon=1e-07
+  epsilon=1e-07,
+  to_numpy=False
 )
 AbsMaxQuantizer(
   axis,
