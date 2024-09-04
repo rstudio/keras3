@@ -477,7 +477,7 @@ function (seed)
 #' `maxlen`, either at the beginning or at the end of the sequences.
 #'
 #' @param value
-#' Float or String, padding value. (Optional, defaults to 0.)
+#' Float or String, padding value. (Optional, defaults to `0`)
 #'
 #' @export
 #' @family utils

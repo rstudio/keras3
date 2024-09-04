@@ -22,7 +22,7 @@ Args:
         probabilities.
         Set it to `True` if `output` represents logits; otherwise,
         set it to `False` if `output` represents probabilities.
-        Defaults to`False`.
+        Defaults to `False`.
 
 Returns:
     Integer tensor: The computed binary cross-entropy loss between
@@ -35,3 +35,4 @@ Example:
 >>> binary_crossentropy(target, output)
 array([0.10536054 0.10536054 0.22314355 0.22314355],
       shape=(4,), dtype=float32)
+

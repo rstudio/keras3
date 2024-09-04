@@ -1054,11 +1054,11 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 #' @param axis
 #' An integer or a list of integers specifying the axis/axes
 #' along which to compute the sum. If `NULL`, the sum is computed
-#' over all elements. Defaults to`NULL`.
+#' over all elements. Defaults to `NULL`.
 #'
 #' @param keepdims
 #' A boolean indicating whether to keep the dimensions of
-#' the input tensor when computing the sum. Defaults to`FALSE`.
+#' the input tensor when computing the sum. Defaults to `FALSE`.
 #'
 #' @export
 #' @family math ops
@@ -1224,8 +1224,10 @@ keras$ops$rsqrt(x)
 #' Input tensor.
 #'
 #' @param segment_ids
-#' A 1-D tensor containing segment indices for each
+#' A N-D tensor containing segment indices for each
 #' element in `data`.
+#' `head(shape(data), length(shape(segment_ids)))` should match
+#' `shape(segment_ids)`
 #'
 #' @param num_segments
 #' An integer representing the total number of
@@ -1234,7 +1236,7 @@ keras$ops$rsqrt(x)
 #'
 #' @param sorted
 #' A boolean indicating whether `segment_ids` is sorted.
-#' Defaults to`FALSE`.
+#' Defaults to `FALSE`.
 #'
 #' @export
 #' @family math ops
@@ -1271,8 +1273,9 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' Input tensor.
 #'
 #' @param segment_ids
-#' A 1-D tensor containing segment indices for each
-#' element in `data`.
+#' A N-D tensor containing segment indices for each
+#' element in `data`. Num dims for segment ids should be strictly
+#' smaller or equal to number of dims in data.
 #'
 #' @param num_segments
 #' An integer representing the total number of
@@ -1281,7 +1284,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #'
 #' @param sorted
 #' A boolean indicating whether `segment_ids` is sorted.
-#' Defaults to`FALSE`.
+#' Defaults to `FALSE`.
 #'
 #' @export
 #' @family math ops
@@ -1468,7 +1471,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #'
 #' @param sorted
 #' A boolean indicating whether to sort the output in
-#' descending order. Defaults to`TRUE`.
+#' descending order. Defaults to `TRUE`.
 #'
 #' @export
 #' @family math ops
@@ -2272,8 +2275,8 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #' Number of classes for the one-hot encoding.
 #'
 #' @param axis
-#' Axis along which the encoding is performed. Defaults to
-#' `-1`, which represents the last axis.
+#' Axis along which the encoding is performed.
+#' `-1` represents the last axis. Defaults to `-1`.
 #'
 #' @param dtype
 #' (Optional) Data type of the output tensor. If not
@@ -6025,7 +6028,7 @@ keras$ops$outer(x1, x2)
 #' One of `"constant"`, `"edge"`, `"linear_ramp"`,
 #' `"maximum"`, `"mean"`, `"median"`, `"minimum"`,
 #' `"reflect"`, `"symmetric"`, `"wrap"`, `"empty"`,
-#' `"circular"`. Defaults to`"constant"`.
+#' `"circular"`. Defaults to `"constant"`.
 #'
 #' @param constant_values
 #' Value to pad with if `mode == "constant"`.
