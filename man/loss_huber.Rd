@@ -33,7 +33,8 @@ quadratic to linear. Defaults to \code{1.0}.}
 \item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
 means using \code{config_floatx()}. \code{config_floatx()} is a
 \code{"float32"} unless set to different value
-(via \code{config_set_floatx()}).}
+(via \code{config_set_floatx()}). If a \code{keras$DTypePolicy} is
+provided, then the \code{compute_dtype} will be utilized.}
 }
 \value{
 Tensor with one scalar loss entry per sample.
