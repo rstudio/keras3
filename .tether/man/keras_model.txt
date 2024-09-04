@@ -231,7 +231,11 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |              there is a mismatch in the number of weights, or a mismatch in
  |              the shape of the weights.
  |
- |  quantize(self, mode)
+ |  quantize(
+ |    self,
+ |    mode,
+ |    **kwargs
+ |  )
  |      Quantize the weights of the model.
  |
  |      Note that the model must be built first before calling this method.
@@ -246,7 +250,7 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |    self,
  |    filepath,
  |    overwrite=True,
- |    zipped=True,
+ |    zipped=None,
  |    **kwargs
  |  )
  |      Saves a model as a `.keras` file.
@@ -260,7 +264,9 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |              the target location, or instead ask the user via
  |              an interactive prompt.
  |          zipped: Whether to save the model as a zipped `.keras`
- |              archive (default), or as an unzipped directory.
+ |              archive (default when saving locally), or as an
+ |              unzipped directory (default when saving on the
+ |              Hugging Face Hub).
  |
  |      Example:
  |

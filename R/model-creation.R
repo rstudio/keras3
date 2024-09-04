@@ -86,6 +86,10 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #' value of 0. This feature is only supported with the TensorFlow
 #' backend. Defaults to `FALSE`.
 #'
+#' @param batch_shape
+#' Optional shape list (list of integers or `NULL` objects),
+#' including the batch size.
+#'
 #' @param name
 #' Optional name string for the layer.
 #' Should be unique in a model (do not reuse the same name twice).
@@ -99,9 +103,6 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #' @param optional
 #' Boolean, whether the input is optional or not.
 #' An optional input can accept `NULL` values.
-#'
-#' @param batch_shape
-#' Shape, including the batch dim.
 #'
 #' @export
 #' @family model creation
