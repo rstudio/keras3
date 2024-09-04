@@ -1756,8 +1756,8 @@ function (object, height, width, interpolation = "bilinear",
 #' @description
 #' This layer translates a set of arbitrary strings into integer output via a
 #' table-based vocabulary lookup. This layer will perform no splitting or
-#' transformation of input strings. For a layer than can split and tokenize
-#' natural language, see the `layer_text_vectorization` layer.
+#' transformation of input strings. For a layer that can split and tokenize
+#' natural language, see [`layer_text_vectorization`].
 #'
 #' The vocabulary for the layer must be either supplied on construction or
 #' learned via `adapt()`. During `adapt()`, the layer will analyze a data set,
