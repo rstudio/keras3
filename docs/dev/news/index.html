@@ -56,16 +56,19 @@
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
 <ul><li>
 <p>Added compatibility with Keras v3.5.0. User facing changes:</p>
-<ul><li>New function:
+<ul><li>New functions:
 <ul><li><code><a href="../reference/op_associative_scan.html">op_associative_scan()</a></code></li>
 <li><code><a href="../reference/op_searchsorted.html">op_searchsorted()</a></code></li>
 <li><code><a href="../reference/optimizer_lamb.html">optimizer_lamb()</a></code></li>
 </ul></li>
 <li>
 <code>keras$DTypePolicy</code> instances can now be supplied to <code>dtype</code> argument for losses, metrics, and layers.</li>
-<li>
-<code><a href="../reference/save_model.html">save_model()</a></code> gains support for saving models to the Hugging Face registry.</li>
-<li>Misc documentation improvements</li>
+<li>Add integration with the Hugging Face Hub. You can now save models to Hugging Face Hub directly <code><a href="../reference/save_model.html">save_model()</a></code> and load .keras models directly from Hugging Face Hub with <code><a href="../reference/load_model.html">load_model()</a></code>.</li>
+<li>Added compatibility with NumPy 2.0.</li>
+<li>Improved <code>keras$distribution</code> API support for very large models.</li>
+<li>Bug fixes and performance improvements.</li>
+<li>Add <code>data_format</code> argument to <code><a href="../reference/layer_zero_padding_1d.html">layer_zero_padding_1d()</a></code> layer.</li>
+<li>Miscellaneous documentation improvements.</li>
 <li>Bug fixes and performance improvements.</li>
 </ul></li>
 </ul></div>
