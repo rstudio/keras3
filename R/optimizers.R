@@ -93,13 +93,16 @@
 #' automatically set a loss scale factor.
 #'
 #' @param gradient_accumulation_steps
-#' Int or `NULL`. If an int, model & optimizer
+#' Int or `NULL`. If an int, model and optimizer
 #' variables will not be updated at every step; instead they will be
 #' updated every `gradient_accumulation_steps` steps, using the average
 #' value of the gradients since the last update. This is known as
 #' "gradient accumulation". This can be useful
 #' when your batch size is very small, in order to reduce gradient
-#' noise at each update step.
+#' noise at each update step. EMA frequency will look at "accumulated"
+#' iterations value (optimizer steps // gradient_accumulation_steps).
+#' Learning rate schedules will look at "real" iterations value
+#' (optimizer steps).
 #'
 #' @param ...
 #' For forward/backward compatability.

@@ -75,7 +75,10 @@ class Adafactor(keras.src.optimizers.optimizer.Optimizer)
  |          value of the gradients since the last update. This is known as
  |          "gradient accumulation". This can be useful
  |          when your batch size is very small, in order to reduce gradient
- |          noise at each update step.
+ |          noise at each update step. EMA frequency will look at "accumulated"
+ |          iterations value (optimizer steps // gradient_accumulation_steps).
+ |          Learning rate schedules will look at "real" iterations value
+ |          (optimizer steps).
  |
  |
  |  Reference:
