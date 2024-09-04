@@ -36,7 +36,7 @@ is doubled.
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -206,13 +206,16 @@ automatically set a loss scale factor.</p></dd>
 
 
 <dt id="arg-gradient-accumulation-steps">gradient_accumulation_steps<a class="anchor" aria-label="anchor" href="#arg-gradient-accumulation-steps"></a></dt>
-<dd><p>Int or <code>NULL</code>. If an int, model &amp; optimizer
+<dd><p>Int or <code>NULL</code>. If an int, model and optimizer
 variables will not be updated at every step; instead they will be
 updated every <code>gradient_accumulation_steps</code> steps, using the average
 value of the gradients since the last update. This is known as
 "gradient accumulation". This can be useful
 when your batch size is very small, in order to reduce gradient
-noise at each update step.</p></dd>
+noise at each update step. EMA frequency will look at "accumulated"
+iterations value (optimizer steps // gradient_accumulation_steps).
+Learning rate schedules will look at "real" iterations value
+(optimizer steps).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -221,7 +224,7 @@ noise at each update step.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other optimizers: <br><code><a href="optimizer_adadelta.html">optimizer_adadelta</a>()</code> <br><code><a href="optimizer_adafactor.html">optimizer_adafactor</a>()</code> <br><code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code> <br><code><a href="optimizer_adam.html">optimizer_adam</a>()</code> <br><code><a href="optimizer_adam_w.html">optimizer_adam_w</a>()</code> <br><code><a href="optimizer_adamax.html">optimizer_adamax</a>()</code> <br><code><a href="optimizer_ftrl.html">optimizer_ftrl</a>()</code> <br><code><a href="optimizer_lion.html">optimizer_lion</a>()</code> <br><code><a href="optimizer_nadam.html">optimizer_nadam</a>()</code> <br><code><a href="optimizer_rmsprop.html">optimizer_rmsprop</a>()</code> <br><code><a href="optimizer_sgd.html">optimizer_sgd</a>()</code> <br></p></div>
+    <div class="dont-index"><p>Other optimizers: <br><code><a href="optimizer_adadelta.html">optimizer_adadelta</a>()</code> <br><code><a href="optimizer_adafactor.html">optimizer_adafactor</a>()</code> <br><code><a href="optimizer_adagrad.html">optimizer_adagrad</a>()</code> <br><code><a href="optimizer_adam.html">optimizer_adam</a>()</code> <br><code><a href="optimizer_adam_w.html">optimizer_adam_w</a>()</code> <br><code><a href="optimizer_adamax.html">optimizer_adamax</a>()</code> <br><code><a href="optimizer_ftrl.html">optimizer_ftrl</a>()</code> <br><code><a href="optimizer_lamb.html">optimizer_lamb</a>()</code> <br><code><a href="optimizer_lion.html">optimizer_lion</a>()</code> <br><code><a href="optimizer_nadam.html">optimizer_nadam</a>()</code> <br><code><a href="optimizer_rmsprop.html">optimizer_rmsprop</a>()</code> <br><code><a href="optimizer_sgd.html">optimizer_sgd</a>()</code> <br></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

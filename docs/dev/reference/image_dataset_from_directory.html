@@ -34,7 +34,7 @@ Animated gifs are truncated to the first frame."><meta name="robots" content="no
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -161,8 +161,8 @@ of the classes (otherwise alphanumerical order is used).</p></dd>
 
 <dt id="arg-color-mode">color_mode<a class="anchor" aria-label="anchor" href="#arg-color-mode"></a></dt>
 <dd><p>One of <code>"grayscale"</code>, <code>"rgb"</code>, <code>"rgba"</code>.
-Defaults to <code>"rgb"</code>. Whether the images will be converted to
-have 1, 3, or 4 channels.</p></dd>
+Whether the images will be converted to
+have 1, 3, or 4 channels. Defaults to <code>"rgb"</code>.</p></dd>
 
 
 <dt id="arg-batch-size">batch_size<a class="anchor" aria-label="anchor" href="#arg-batch-size"></a></dt>
@@ -173,9 +173,9 @@ If <code>NULL</code>, the data will not be batched
 
 <dt id="arg-image-size">image_size<a class="anchor" aria-label="anchor" href="#arg-image-size"></a></dt>
 <dd><p>Size to resize images to after they are read from disk,
-specified as <code>(height, width)</code>. Defaults to <code>(256, 256)</code>.
+specified as <code>(height, width)</code>.
 Since the pipeline processes batches of images that must all have
-the same size, this must be provided.</p></dd>
+the same size, this must be provided. Defaults to <code>(256, 256)</code>.</p></dd>
 
 
 <dt id="arg-shuffle">shuffle<a class="anchor" aria-label="anchor" href="#arg-shuffle"></a></dt>
@@ -202,9 +202,10 @@ When <code>subset = "both"</code>, the utility returns a tuple of two datasets
 
 <dt id="arg-interpolation">interpolation<a class="anchor" aria-label="anchor" href="#arg-interpolation"></a></dt>
 <dd><p>String, the interpolation method used when
-resizing images. Defaults to <code>"bilinear"</code>.
+resizing images.
 Supports <code>"bilinear"</code>, <code>"nearest"</code>, <code>"bicubic"</code>, <code>"area"</code>,
-<code>"lanczos3"</code>, <code>"lanczos5"</code>, <code>"gaussian"</code>, <code>"mitchellcubic"</code>.</p></dd>
+<code>"lanczos3"</code>, <code>"lanczos5"</code>, <code>"gaussian"</code>, <code>"mitchellcubic"</code>.
+Defaults to <code>"bilinear"</code>.</p></dd>
 
 
 <dt id="arg-follow-links">follow_links<a class="anchor" aria-label="anchor" href="#arg-follow-links"></a></dt>

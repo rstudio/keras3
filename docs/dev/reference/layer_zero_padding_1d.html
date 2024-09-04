@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,7 +59,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layer_zero_padding_1d</span><span class="op">(</span><span class="va">object</span>, padding <span class="op">=</span> <span class="fl">1L</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">layer_zero_padding_1d</span><span class="op">(</span><span class="va">object</span>, padding <span class="op">=</span> <span class="fl">1L</span>, data_format <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -71,11 +71,23 @@
 
 
 <dt id="arg-padding">padding<a class="anchor" aria-label="anchor" href="#arg-padding"></a></dt>
-<dd><p>Int, or list of int (length 2), or named listionary.</p><ul><li><p>If int: how many zeros to add at the beginning and end of
-the padding dimension (axis 1).</p></li>
+<dd><p>Int, or list of int (length 2).</p><ul><li><p>If int: how many zeros to add at the beginning and end of
+the padding dimension (axis 2).</p></li>
 <li><p>If list of 2 ints: how many zeros to add at the beginning and the
 end of the padding dimension (<code>(left_pad, right_pad)</code>).</p></li>
 </ul></dd>
+
+
+<dt id="arg-data-format">data_format<a class="anchor" aria-label="anchor" href="#arg-data-format"></a></dt>
+<dd><p>A string, one of <code>"channels_last"</code> (default) or
+<code>"channels_first"</code>. The ordering of the dimensions in the inputs.
+<code>"channels_last"</code> corresponds to inputs with shape
+<code>(batch_size, axis_to_pad, channels)</code> while <code>"channels_first"</code>
+corresponds to inputs with shape
+<code>(batch_size, channels, axis_to_pad)</code>.
+When unspecified, uses <code>image_data_format</code> value found in your Keras
+config file at <code>~/.keras/keras.json</code> (if exists). Defaults to
+<code>"channels_last"</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -123,12 +135,18 @@ returned, invisibly.</p></li>
     </div>
     <div class="section level2">
     <h2 id="input-shape">Input Shape<a class="anchor" aria-label="anchor" href="#input-shape"></a></h2>
-    <p>3D tensor with shape <code>(batch_size, axis_to_pad, features)</code></p>
-    </div>
+    <p>3D tensor with shape:</p><ul><li><p>If <code>data_format</code> is <code>"channels_last"</code>:
+<code>(batch_size, axis_to_pad, features)</code></p></li>
+<li><p>If <code>data_format</code> is <code>"channels_first"</code>:
+<code>(batch_size, features, axis_to_pad)</code></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="output-shape">Output Shape<a class="anchor" aria-label="anchor" href="#output-shape"></a></h2>
-    <p>3D tensor with shape <code>(batch_size, padded_axis, features)</code></p>
-    </div>
+    <p>3D tensor with shape:</p><ul><li><p>If <code>data_format</code> is <code>"channels_last"</code>:
+<code>(batch_size, padded_axis, features)</code></p></li>
+<li><p>If <code>data_format</code> is <code>"channels_first"</code>:
+<code>(batch_size, features, padded_axis)</code></p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index">

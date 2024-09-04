@@ -38,7 +38,7 @@ can become invalid."><meta name="robots" content="noindex"><!-- Google Tag Manag
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,11 +133,11 @@ preemption checkpointing (i.e. with <code>save_before_preemption = TRUE</code>).
 
 
 <dt id="arg-delete-checkpoint">delete_checkpoint<a class="anchor" aria-label="anchor" href="#arg-delete-checkpoint"></a></dt>
-<dd><p>Boolean, defaults to <code>TRUE</code>. This <code>backup_and_restore</code>
+<dd><p>Boolean. This <code>backup_and_restore</code>
 callback works by saving a checkpoint to back up the training state.
 If <code>delete_checkpoint = TRUE</code>, the checkpoint will be deleted after
 training is finished. Use <code>FALSE</code> if you'd like to keep the checkpoint
-for future usage.</p></dd>
+for future usage. Defaults to <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
