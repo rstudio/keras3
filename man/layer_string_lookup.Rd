@@ -130,8 +130,8 @@ returned, invisibly.
 \description{
 This layer translates a set of arbitrary strings into integer output via a
 table-based vocabulary lookup. This layer will perform no splitting or
-transformation of input strings. For a layer than can split and tokenize
-natural language, see the \code{layer_text_vectorization} layer.
+transformation of input strings. For a layer that can split and tokenize
+natural language, see \code{\link{layer_text_vectorization}}.
 
 The vocabulary for the layer must be either supplied on construction or
 learned via \code{adapt()}. During \code{adapt()}, the layer will analyze a data set,
