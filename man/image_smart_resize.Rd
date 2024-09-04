@@ -20,9 +20,9 @@ or \verb{(batch_size, height, width, channels)}.}
 \item{size}{Tuple of \verb{(height, width)} integer. Target size.}
 
 \item{interpolation}{String, interpolation to use for resizing.
-Defaults to \code{'bilinear'}.
-Supports \code{bilinear}, \code{nearest}, \code{bicubic},
-\code{lanczos3}, \code{lanczos5}.}
+Supports \code{"bilinear"}, \code{"nearest"}, \code{"bicubic"},
+\code{"lanczos3"}, \code{"lanczos5"}.
+Defaults to \code{'bilinear'}.}
 
 \item{data_format}{\code{"channels_last"} or \code{"channels_first"}.}
 

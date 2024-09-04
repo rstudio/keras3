@@ -57,17 +57,17 @@ This is the explicit list of class names
 of the classes (otherwise alphanumerical order is used).}
 
 \item{color_mode}{One of \code{"grayscale"}, \code{"rgb"}, \code{"rgba"}.
-Defaults to \code{"rgb"}. Whether the images will be converted to
-have 1, 3, or 4 channels.}
+Whether the images will be converted to
+have 1, 3, or 4 channels. Defaults to \code{"rgb"}.}
 
 \item{batch_size}{Size of the batches of data. Defaults to 32.
 If \code{NULL}, the data will not be batched
 (the dataset will yield individual samples).}
 
 \item{image_size}{Size to resize images to after they are read from disk,
-specified as \verb{(height, width)}. Defaults to \verb{(256, 256)}.
+specified as \verb{(height, width)}.
 Since the pipeline processes batches of images that must all have
-the same size, this must be provided.}
+the same size, this must be provided. Defaults to \verb{(256, 256)}.}
 
 \item{shuffle}{Whether to shuffle the data. Defaults to \code{TRUE}.
 If set to \code{FALSE}, sorts the data in alphanumeric order.}
@@ -84,9 +84,10 @@ When \code{subset = "both"}, the utility returns a tuple of two datasets
 (the training and validation datasets respectively).}
 
 \item{interpolation}{String, the interpolation method used when
-resizing images. Defaults to \code{"bilinear"}.
+resizing images.
 Supports \code{"bilinear"}, \code{"nearest"}, \code{"bicubic"}, \code{"area"},
-\code{"lanczos3"}, \code{"lanczos5"}, \code{"gaussian"}, \code{"mitchellcubic"}.}
+\code{"lanczos3"}, \code{"lanczos5"}, \code{"gaussian"}, \code{"mitchellcubic"}.
+Defaults to \code{"bilinear"}.}
 
 \item{follow_links}{Whether to visit subdirectories pointed to by symlinks.
 Defaults to \code{FALSE}.}
