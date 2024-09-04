@@ -1226,8 +1226,8 @@ keras$ops$rsqrt(x)
 #' @param segment_ids
 #' A N-D tensor containing segment indices for each
 #' element in `data`.
-#' `head(shape(data), length(shape(segment_ids)))` should match
-#' `shape(segment_ids)`
+#' `head(op_shape(data), length(op_shape(segment_ids)))` should match
+#' `op_shape(segment_ids)`
 #'
 #' @param num_segments
 #' An integer representing the total number of

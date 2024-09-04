@@ -11,8 +11,8 @@ op_segment_max(data, segment_ids, num_segments = NULL, sorted = FALSE)
 
 \item{segment_ids}{A N-D tensor containing segment indices for each
 element in \code{data}.
-\code{head(shape(data), length(shape(segment_ids)))} should match
-\code{shape(segment_ids)}}
+\code{head(op_shape(data), length(op_shape(segment_ids)))} should match
+\code{op_shape(segment_ids)}}
 
 \item{num_segments}{An integer representing the total number of
 segments. If not specified, it is inferred from the maximum
