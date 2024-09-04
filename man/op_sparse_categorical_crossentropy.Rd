@@ -25,7 +25,7 @@ for the last dimension.}
 or probabilities.
 Set it to \code{TRUE} if \code{output} represents logits; otherwise,
 set it to \code{FALSE} if \code{output} represents probabilities.
-Defaults to\code{FALSE}.}
+Defaults to \code{FALSE}.}
 
 \item{axis}{(optional) The axis along which the sparse categorical
 cross-entropy is computed.

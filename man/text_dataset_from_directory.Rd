@@ -51,15 +51,17 @@ This is the explicit list of class names
 (must match names of subdirectories). Used to control the order
 of the classes (otherwise alphanumerical order is used).}
 
-\item{batch_size}{Size of the batches of data. Defaults to 32.
+\item{batch_size}{Size of the batches of data.
 If \code{NULL}, the data will not be batched
-(the dataset will yield individual samples).}
+(the dataset will yield individual samples).
+Defaults to \code{32}.}
 
 \item{max_length}{Maximum size of a text string. Texts longer than this will
 be truncated to \code{max_length}.}
 
-\item{shuffle}{Whether to shuffle the data. Defaults to \code{TRUE}.
-If set to \code{FALSE}, sorts the data in alphanumeric order.}
+\item{shuffle}{Whether to shuffle the data.
+If set to \code{FALSE}, sorts the data in alphanumeric order.
+Defaults to \code{TRUE}.}
 
 \item{seed}{Optional random seed for shuffling and transformations.}
 
