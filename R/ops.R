@@ -3516,6 +3516,79 @@ function (x, dtype = NULL)
   keras$ops$array(x, dtype)
 }
 
+#' Performs a scan with an associative binary operation, in parallel.
+#'
+#' @description
+#' This operation his similar to [`op_scan()`], with the key difference that
+#' `op_associative_scan()` is a parallel implementation with
+#' potentially significant performance benefits, especially when jit compiled.
+#' The catch is that it can only be used when `f` is a binary associative
+#' operation (i.e. it must verify `f(a, f(b, c)) == f(f(a, b), c)`).
+#'
+#' For an introduction to associative scans, refer to this paper:
+#' Blelloch, Guy E. 1990.
+#' [Prefix Sums and Their Applications](
+#'     https://www.cs.cmu.edu/~guyb/papers/Ble93.pdf).
+#'
+#' # Examples
+#' ```{r}
+#' sum_fn <- function(x, y) x + y
+#' xs <- op_arange(5L)
+#' op_associative_scan(sum_fn, xs)
+#' ```
+#'
+#' ```{r}
+#' sum_fn <- function(x, y) {
+#'   str(list(x = x, y = y))
+#'   map2(x, y, \(.x, .y) .x + .y)
+#' }
+#'
+#' xs <- list(op_array(1:2),
+#'            op_array(1:2),
+#'            op_array(1:2))
+#' ys <- op_associative_scan(sum_fn, xs, axis = 1)
+#' ys
+#' ```
+#'
+#' @returns
+#' A (possibly nested tree structure of) array(s) of the same shape
+#' and structure as `elems`, in which the `k`'th element of `axis` is
+#' the result of recursively applying `f` to combine the first `k`
+#' elements of `elems` along `axis`. For example, given
+#' `elems = list(a, b, c, ...)`, the result would be
+#' `list(a, f(a, b), f(f(a, b), c), ...)`.
+#'
+#' @param f
+#' A callable implementing an associative binary operation with
+#' signature `r = f(a, b)`. Function `f` must be associative, i.e.,
+#' it must satisfy the equation
+#' `f(a, f(b, c)) == f(f(a, b), c)`.
+#' The inputs and result are (possibly nested tree structures
+#' of) array(s) matching `elems`. Each array has a dimension in place
+#' of the `axis` dimension. `f` should be applied elementwise over
+#' the `axis` dimension.
+#' The result `r` has the same shape (and structure) as the
+#' two inputs `a` and `b`.
+#'
+#' @param elems
+#' A (possibly nested tree structure of) array(s), each with
+#' an `axis` dimension of size `num_elems`.
+#'
+#' @param reverse
+#' A boolean stating if the scan should be reversed with respect
+#' to the `axis` dimension.
+#'
+#' @param axis
+#' an integer identifying the axis over which the scan should occur.
+#'
+#' @export
+#' @tether keras.ops.associative_scan
+op_associative_scan <-
+function(f, elems, reverse = FALSE, axis = 1L)
+{
+  args <- capture_args(list(axis = as_axis))
+  do.call(keras$ops$associative_scan, args)
+}
 
 #' Compute the weighted average along the specified axis.
 #'
