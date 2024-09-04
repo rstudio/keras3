@@ -380,8 +380,8 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #'
 #' @param color_mode
 #' One of `"grayscale"`, `"rgb"`, `"rgba"`.
-#' Defaults to `"rgb"`. Whether the images will be converted to
-#' have 1, 3, or 4 channels.
+#' Whether the images will be converted to
+#' have 1, 3, or 4 channels. Defaults to `"rgb"`.
 #'
 #' @param batch_size
 #' Size of the batches of data. Defaults to 32.
@@ -390,9 +390,9 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #'
 #' @param image_size
 #' Size to resize images to after they are read from disk,
-#' specified as `(height, width)`. Defaults to `(256, 256)`.
+#' specified as `(height, width)`.
 #' Since the pipeline processes batches of images that must all have
-#' the same size, this must be provided.
+#' the same size, this must be provided. Defaults to `(256, 256)`.
 #'
 #' @param shuffle
 #' Whether to shuffle the data. Defaults to `TRUE`.
@@ -414,9 +414,10 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #'
 #' @param interpolation
 #' String, the interpolation method used when
-#' resizing images. Defaults to `"bilinear"`.
+#' resizing images.
 #' Supports `"bilinear"`, `"nearest"`, `"bicubic"`, `"area"`,
 #' `"lanczos3"`, `"lanczos5"`, `"gaussian"`, `"mitchellcubic"`.
+#' Defaults to `"bilinear"`.
 #'
 #' @param follow_links
 #' Whether to visit subdirectories pointed to by symlinks.
