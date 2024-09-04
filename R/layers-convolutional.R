@@ -284,10 +284,10 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #'
 #' @description
 #' This layer creates a convolution kernel that is convolved with the layer
-#' input over a single spatial (or temporal) dimension to produce a tensor of
-#' outputs. If `use_bias` is `TRUE`, a bias vector is created and added to the
-#' outputs. Finally, if `activation` is not `NULL`, it is applied to the
-#' outputs as well.
+#' input over a 2D spatial (or temporal) dimension (height and width) to
+#' produce a tensor of outputs. If `use_bias` is `TRUE`, a bias vector is created
+#' and added to the outputs. Finally, if `activation` is not `NULL`, it is
+#' applied to the outputs as well.
 #'
 #' # Input Shape
 #' - If `data_format="channels_last"`:
@@ -563,10 +563,10 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #'
 #' @description
 #' This layer creates a convolution kernel that is convolved with the layer
-#' input over a single spatial (or temporal) dimension to produce a tensor of
-#' outputs. If `use_bias` is `TRUE`, a bias vector is created and added to the
-#' outputs. Finally, if `activation` is not `NULL`, it is applied to the
-#' outputs as well.
+#' input over a 3D spatial (or temporal) dimension (width,height and depth) to
+#' produce a tensor of outputs. If `use_bias` is `TRUE`, a bias vector is created
+#' and added to the outputs. Finally, if `activation` is not `NULL`, it is
+#' applied to the outputs as well.
 #'
 #' # Input Shape
 #' - If `data_format="channels_last"`:
