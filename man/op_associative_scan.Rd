@@ -8,7 +8,7 @@ op_associative_scan(f, elems, reverse = FALSE, axis = 1L)
 }
 \arguments{
 \item{f}{A callable implementing an associative binary operation with
-signature \code{r = f(a, b)}. Function \code{f} must be associative, i.e.,
+signature \code{ r = f(a, b)}. Function \code{f} must be associative, i.e.,
 it must satisfy the equation
 \code{f(a, f(b, c)) == f(f(a, b), c)}.
 The inputs and result are (possibly nested tree structures
