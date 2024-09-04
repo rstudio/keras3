@@ -2319,13 +2319,20 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' Standalone usage:
 #'
 #' ```{r}
-#' y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
-#' y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
+#' y_true <- rbind(c(0, 0, 1),
+#'                 c(1, 0, 0),
+#'                 c(0, 1, 0),
+#'                 c(1, 0, 0))
+#' y_pred <- rbind(c(0.2, 0.3, 0.5),
+#'                 c(0.1, 0.2, 0.7),
+#'                 c(0.5, 0.3, 0.1),
 #'                 c(0.1, 0.4, 0.5))
 #' sample_weight <- c(0.1, 0.2, 0.3, 0.4)
+#'
 #' m <- metric_one_hot_iou(num_classes = 3, target_class_ids = c(0, 2))
-#' m$update_state(
-#'     y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
+#' m$update_state(y_true = y_true,
+#'                y_pred = y_pred,
+#'                sample_weight = sample_weight)
 #' m$result()
 #' ```
 #'
@@ -2599,6 +2606,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' #      = -((log 0.95), (log 0.1))
 #' #      = [0.051, 2.302]
 #' # Reduced xent = (0.051 + 2.302) / 2
+#'
 #' m <- metric_categorical_crossentropy()
 #' m$update_state(rbind(c(0, 1, 0), c(0, 0, 1)),
 #'                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
