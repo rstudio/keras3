@@ -338,6 +338,32 @@ function (inputs, indices, updates)
     do.call(keras$ops$scatter_update, args)
 }
 
+#' Perform a binary search
+#'
+#' @description
+#' Perform a binary search, returning indices for insertion of `values`
+#' into `sorted_sequence` that maintain the sorting order.
+#'
+#' @returns
+#' Tensor of insertion indices of same shape as `values`.
+#'
+#' @param sorted_sequence
+#' 1-D input tensor, sorted along the innermost
+#' dimension.
+#'
+#' @param values
+#' N-D tensor of query insertion values.
+#'
+#' @param side
+#' `'left'` or `'right'`, specifying the direction in which to insert
+#' for the equality case (tie-breaker).
+#'
+#' @export
+#' @tether keras.ops.searchsorted
+op_searchsorted <-
+function (sorted_sequence, values, side = "left")
+keras$ops$searchsorted(sorted_sequence, values, side)
+
 
 #' Gets the shape of the tensor input.
 #'
