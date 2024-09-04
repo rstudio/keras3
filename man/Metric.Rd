@@ -161,8 +161,12 @@ Initialize self.
 
 Args:
 \itemize{
-\item \code{name}: (Optional) string name of the metric instance.
-\item \code{dtype}: (Optional) data type of the metric result.
+\item \code{name}: Optional name for the metric instance.
+\item \code{dtype}: The dtype of the metric's computations. Defaults to \code{NULL}, which
+means using \code{\link[=config_floatx]{config_floatx()}}. \code{config_floatx()} is a
+\code{"float32"} unless set to different value
+(via \code{config_set_floatx()}). If a \code{keras$DTypePolicy} is
+provided, then the \code{compute_dtype} will be utilized.
 }
 \item
 

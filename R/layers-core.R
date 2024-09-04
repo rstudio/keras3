@@ -40,6 +40,10 @@
 #'   )
 #'   ```
 #'
+#' - ```r
+#'   quantize(mode, type_check = TRUE)
+#'   ```
+#'
 #' # Readonly properties:
 #'
 #' - `kernel`
@@ -193,7 +197,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #'   ```
 #'
 #' - ```r
-#'   quantize(mode)
+#'   quantize(mode, type_check = TRUE)
 #'   ```
 #'
 #' # Readonly properties:
@@ -326,7 +330,7 @@ function (object, equation, output_shape, activation = NULL,
 #'   ```
 #'
 #' - ```r
-#'   quantize(mode)
+#'   quantize(mode, type_check = TRUE)
 #'   ```
 #'
 #' - ```r
@@ -334,7 +338,7 @@ function (object, equation, output_shape, activation = NULL,
 #'   ```
 #'
 #' - ```r
-#'   quantized_call(inputs)
+#'   quantized_call(...)
 #'   ```
 #'
 #' # Readonly properties:

@@ -60,9 +60,9 @@
 #'
 #' @param interpolation
 #' String, interpolation to use for resizing.
+#' Supports `"bilinear"`, `"nearest"`, `"bicubic"`,
+#' `"lanczos3"`, `"lanczos5"`.
 #' Defaults to `'bilinear'`.
-#' Supports `bilinear`, `nearest`, `bicubic`,
-#' `lanczos3`, `lanczos5`.
 #'
 #' @param data_format
 #' `"channels_last"` or `"channels_first"`.

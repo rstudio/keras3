@@ -1,5 +1,9 @@
 __signature__
-keras.Model.quantize(self, mode)
+keras.Model.quantize(
+  self,
+  mode,
+  **kwargs
+)
 __doc__
 Quantize the weights of the model.
 

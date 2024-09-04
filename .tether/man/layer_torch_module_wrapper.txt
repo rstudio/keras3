@@ -94,6 +94,7 @@ class TorchModuleWrapper(keras.src.layers.layer.Layer)
  |  call(
  |    self,
  |    *args,
+ |    training=None,
  |    **kwargs
  |  )
  |

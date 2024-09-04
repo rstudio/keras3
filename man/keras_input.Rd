@@ -34,7 +34,8 @@ be passed into the input - they will be densified with a default
 value of 0. This feature is only supported with the TensorFlow
 backend. Defaults to \code{FALSE}.}
 
-\item{batch_shape}{Shape, including the batch dim.}
+\item{batch_shape}{Optional shape list (list of integers or \code{NULL} objects),
+including the batch size.}
 
 \item{name}{Optional name string for the layer.
 Should be unique in a model (do not reuse the same name twice).

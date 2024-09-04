@@ -102,7 +102,8 @@
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values. shape = `[batch_size, d0, .. dN]`.
@@ -317,7 +318,8 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values, of shape `(batch_size, d0, .. dN)`.
@@ -430,7 +432,8 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Tensor of one-hot true targets.
@@ -590,7 +593,8 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Tensor of one-hot true targets.
@@ -656,7 +660,8 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' The ground truth values. `y_true` values are expected to be
@@ -732,7 +737,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Tensor of true targets.
@@ -820,7 +826,8 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -875,7 +882,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' The ground truth values. `y_true` values are expected to be -1
@@ -950,7 +958,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' tensor of true targets.
@@ -1017,7 +1026,8 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Tensor of true targets.
@@ -1085,7 +1095,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
@@ -1147,7 +1158,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
@@ -1214,7 +1226,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
@@ -1276,7 +1289,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
@@ -1342,7 +1356,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values with shape = `[batch_size, d0, .. dN]`.
@@ -1405,7 +1420,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values. shape = `[batch_size, d0, .. dN]`.
@@ -1512,7 +1528,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' Ground truth values.
@@ -1591,7 +1608,8 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param y_true
 #' The ground truth values. `y_true` values are expected to be -1
@@ -1648,7 +1666,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -1657,7 +1676,6 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' CTC loss value.
 #'
 #' @export
-#' @inheritParams loss_hinge
 #' @family losses
 #' @tether keras.losses.CTC
 # @seealso
@@ -1715,7 +1733,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The dtype of the loss's computations. Defaults to `NULL`, which
 #' means using `config_floatx()`. `config_floatx()` is a
 #' `"float32"` unless set to different value
-#' (via `config_set_floatx()`).
+#' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param ...
 #' For forward/backward compatability.

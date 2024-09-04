@@ -26,7 +26,7 @@ from_logits=FALSE).
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,7 +145,8 @@ Supported options are <code>"sum"</code>, <code>"sum_over_batch_size"</code> or 
 <dd><p>The dtype of the loss's computations. Defaults to <code>NULL</code>, which
 means using <code><a href="config_floatx.html">config_floatx()</a></code>. <code><a href="config_floatx.html">config_floatx()</a></code> is a
 <code>"float32"</code> unless set to different value
-(via <code><a href="config_set_floatx.html">config_set_floatx()</a></code>).</p></dd>
+(via <code><a href="config_set_floatx.html">config_set_floatx()</a></code>). If a <code>keras$DTypePolicy</code> is
+provided, then the <code>compute_dtype</code> will be utilized.</p></dd>
 
 </dl></div>
     <div class="section level2">

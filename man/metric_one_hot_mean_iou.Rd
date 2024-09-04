@@ -81,7 +81,16 @@ sample_weight <- c(0.1, 0.2, 0.3, 0.4)
 m <- metric_one_hot_mean_iou(num_classes = 3L)
 m$update_state(
     y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0.  0.  0.6]
+##  [0.3 0.  0. ]
+##  [0.  0.  0.1]], shape=(3, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.047619034, shape=(), dtype=float32)

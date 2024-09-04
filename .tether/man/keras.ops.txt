@@ -56,6 +56,12 @@ argpartition(
 )
 argsort(x, axis=-1)
 array(x, dtype=None)
+associative_scan(
+  f,
+  elems,
+  reverse=False,
+  axis=0
+)
 average(
   x,
   axis=None,
@@ -479,6 +485,11 @@ scatter_update(
   inputs,
   indices,
   updates
+)
+searchsorted(
+  sorted_sequence,
+  values,
+  side='left'
 )
 segment_max(
   data,

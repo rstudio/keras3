@@ -29,7 +29,8 @@ Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.
 \item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
 means using \code{config_floatx()}. \code{config_floatx()} is a
 \code{"float32"} unless set to different value
-(via \code{config_set_floatx()}).}
+(via \code{config_set_floatx()}). If a \code{keras$DTypePolicy} is
+provided, then the \code{compute_dtype} will be utilized.}
 }
 \value{
 Poisson loss values with shape = \verb{[batch_size, d0, .. dN-1]}.
@@ -47,7 +48,7 @@ loss <- loss_poisson(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2.5907533  0.66836613], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.6422468  0.81166863], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

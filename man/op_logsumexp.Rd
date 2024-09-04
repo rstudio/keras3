@@ -11,10 +11,10 @@ op_logsumexp(x, axis = NULL, keepdims = FALSE)
 
 \item{axis}{An integer or a list of integers specifying the axis/axes
 along which to compute the sum. If \code{NULL}, the sum is computed
-over all elements. Defaults to\code{NULL}.}
+over all elements. Defaults to \code{NULL}.}
 
 \item{keepdims}{A boolean indicating whether to keep the dimensions of
-the input tensor when computing the sum. Defaults to\code{FALSE}.}
+the input tensor when computing the sum. Defaults to \code{FALSE}.}
 }
 \value{
 A tensor containing the logarithm of the sum of exponentials of
@@ -75,6 +75,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
 \code{\link{op_batch_normalization}()} \cr
@@ -226,6 +227,7 @@ Other ops: \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
+\code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_max}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr

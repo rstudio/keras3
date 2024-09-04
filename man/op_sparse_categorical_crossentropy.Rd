@@ -25,7 +25,7 @@ for the last dimension.}
 or probabilities.
 Set it to \code{TRUE} if \code{output} represents logits; otherwise,
 set it to \code{FALSE} if \code{output} represents probabilities.
-Defaults to\code{FALSE}.}
+Defaults to \code{FALSE}.}
 
 \item{axis}{(optional) The axis along which the sparse categorical
 cross-entropy is computed.
@@ -111,6 +111,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
 \code{\link{op_batch_normalization}()} \cr
@@ -263,6 +264,7 @@ Other ops: \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
+\code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_max}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr

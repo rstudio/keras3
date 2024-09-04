@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,14 +84,14 @@
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Introduction to Keras for Researchers</h1>
-
-
+            
+      
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/vignettes/intro_to_keras_for_researchers.Rmd" class="external-link"><code>vignettes/intro_to_keras_for_researchers.Rmd</code></a></small>
       <div class="d-none name"><code>intro_to_keras_for_researchers.Rmd</code></div>
     </div>
 
-
-
+    
+    
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
 </h2>
@@ -926,7 +926,7 @@ training &amp; evaluation loops: <code><a href="https://generics.r-lib.org/refer
 to the following built-in training infrastructure features:</p>
 <ul>
 <li>
-<a href="https://keras3.posit.co/reference/index.html#callbacks" class="external-link">Callbacks</a>.
+<a href="https://keras3.posit.co/reference/index.html#callbacks">Callbacks</a>.
 You can leverage built-in callbacks for early-stopping, model
 checkpointing, and monitoring training with TensorBoard. You can also <a href="writing_your_own_callbacks.html">implement custom callbacks</a> if
 needed.</li>
@@ -936,7 +936,7 @@ training</a>. You can easily scale up your training to multiple GPUs,
 TPU, or even multiple machines with the <code>tf.distribute</code> API –
 with no changes to your code.</li>
 <li>
-<a href="https://keras3.posit.co/reference/compile.keras.src.models.model.Model.html" class="external-link">Step
+<a href="https://keras3.posit.co/reference/compile.keras.src.models.model.Model.html">Step
 fusing</a>. With the <code>steps_per_execution</code> argument in
 <code>Model.compile()</code>, you can process multiple batches in a
 single <code>tf.function</code> call, which greatly improves device

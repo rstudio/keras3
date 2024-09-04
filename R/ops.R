@@ -338,6 +338,34 @@ function (inputs, indices, updates)
     do.call(keras$ops$scatter_update, args)
 }
 
+#' Perform a binary search
+#'
+#' @description
+#' Perform a binary search, returning indices for insertion of `values`
+#' into `sorted_sequence` that maintain the sorting order.
+#'
+#' @returns
+#' Tensor of insertion indices of same shape as `values`.
+#'
+#' @param sorted_sequence
+#' 1-D input tensor, sorted along the innermost
+#' dimension.
+#'
+#' @param values
+#' N-D tensor of query insertion values.
+#'
+#' @param side
+#' `'left'` or `'right'`, specifying the direction in which to insert
+#' for the equality case (tie-breaker).
+#'
+#' @export
+#' @family core ops
+#' @family ops
+#' @tether keras.ops.searchsorted
+op_searchsorted <-
+function (sorted_sequence, values, side = "left")
+keras$ops$searchsorted(sorted_sequence, values, side)
+
 
 #' Gets the shape of the tensor input.
 #'
@@ -1054,11 +1082,11 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
 #' @param axis
 #' An integer or a list of integers specifying the axis/axes
 #' along which to compute the sum. If `NULL`, the sum is computed
-#' over all elements. Defaults to`NULL`.
+#' over all elements. Defaults to `NULL`.
 #'
 #' @param keepdims
 #' A boolean indicating whether to keep the dimensions of
-#' the input tensor when computing the sum. Defaults to`FALSE`.
+#' the input tensor when computing the sum. Defaults to `FALSE`.
 #'
 #' @export
 #' @family math ops
@@ -1224,8 +1252,10 @@ keras$ops$rsqrt(x)
 #' Input tensor.
 #'
 #' @param segment_ids
-#' A 1-D tensor containing segment indices for each
+#' A N-D tensor containing segment indices for each
 #' element in `data`.
+#' `head(op_shape(data), length(op_shape(segment_ids)))` should match
+#' `op_shape(segment_ids)`
 #'
 #' @param num_segments
 #' An integer representing the total number of
@@ -1234,7 +1264,7 @@ keras$ops$rsqrt(x)
 #'
 #' @param sorted
 #' A boolean indicating whether `segment_ids` is sorted.
-#' Defaults to`FALSE`.
+#' Defaults to `FALSE`.
 #'
 #' @export
 #' @family math ops
@@ -1271,8 +1301,9 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #' Input tensor.
 #'
 #' @param segment_ids
-#' A 1-D tensor containing segment indices for each
-#' element in `data`.
+#' A N-D tensor containing segment indices for each
+#' element in `data`. Num dims for segment ids should be strictly
+#' smaller or equal to number of dims in data.
 #'
 #' @param num_segments
 #' An integer representing the total number of
@@ -1281,7 +1312,7 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 #'
 #' @param sorted
 #' A boolean indicating whether `segment_ids` is sorted.
-#' Defaults to`FALSE`.
+#' Defaults to `FALSE`.
 #'
 #' @export
 #' @family math ops
@@ -1468,7 +1499,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #'
 #' @param sorted
 #' A boolean indicating whether to sort the output in
-#' descending order. Defaults to`TRUE`.
+#' descending order. Defaults to `TRUE`.
 #'
 #' @export
 #' @family math ops
@@ -2272,8 +2303,8 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #' Number of classes for the one-hot encoding.
 #'
 #' @param axis
-#' Axis along which the encoding is performed. Defaults to
-#' `-1`, which represents the last axis.
+#' Axis along which the encoding is performed.
+#' `-1` represents the last axis. Defaults to `-1`.
 #'
 #' @param dtype
 #' (Optional) Data type of the output tensor. If not
@@ -2684,7 +2715,7 @@ keras$ops$softsign(x)
 #' or probabilities.
 #' Set it to `TRUE` if `output` represents logits; otherwise,
 #' set it to `FALSE` if `output` represents probabilities.
-#' Defaults to`FALSE`.
+#' Defaults to `FALSE`.
 #'
 #' @param axis
 #' (optional) The axis along which the sparse categorical
@@ -3513,6 +3544,81 @@ function (x, dtype = NULL)
   keras$ops$array(x, dtype)
 }
 
+#' Performs a scan with an associative binary operation, in parallel.
+#'
+#' @description
+#' This operation his similar to [`op_scan()`], with the key difference that
+#' `op_associative_scan()` is a parallel implementation with
+#' potentially significant performance benefits, especially when jit compiled.
+#' The catch is that it can only be used when `f` is a binary associative
+#' operation (i.e. it must verify `f(a, f(b, c)) == f(f(a, b), c)`).
+#'
+#' For an introduction to associative scans, refer to this paper:
+#' Blelloch, Guy E. 1990.
+#' [Prefix Sums and Their Applications](
+#'     https://www.cs.cmu.edu/~guyb/papers/Ble93.pdf).
+#'
+#' # Examples
+#' ```{r}
+#' sum_fn <- function(x, y) x + y
+#' xs <- op_arange(5L)
+#' op_associative_scan(sum_fn, xs)
+#' ```
+#'
+#' ```{r}
+#' sum_fn <- function(x, y) {
+#'   str(list(x = x, y = y))
+#'   map2(x, y, \(.x, .y) .x + .y)
+#' }
+#'
+#' xs <- list(op_array(1:2),
+#'            op_array(1:2),
+#'            op_array(1:2))
+#' ys <- op_associative_scan(sum_fn, xs, axis = 1)
+#' ys
+#' ```
+#'
+#' @returns
+#' A (possibly nested tree structure of) array(s) of the same shape
+#' and structure as `elems`, in which the `k`'th element of `axis` is
+#' the result of recursively applying `f` to combine the first `k`
+#' elements of `elems` along `axis`. For example, given
+#' `elems = list(a, b, c, ...)`, the result would be
+#' `list(a, f(a, b), f(f(a, b), c), ...)`.
+#'
+#' @param f
+#' A callable implementing an associative binary operation with
+#' signature `r = f(a, b)`. Function `f` must be associative, i.e.,
+#' it must satisfy the equation
+#' `f(a, f(b, c)) == f(f(a, b), c)`.
+#' The inputs and result are (possibly nested tree structures
+#' of) array(s) matching `elems`. Each array has a dimension in place
+#' of the `axis` dimension. `f` should be applied elementwise over
+#' the `axis` dimension.
+#' The result `r` has the same shape (and structure) as the
+#' two inputs `a` and `b`.
+#'
+#' @param elems
+#' A (possibly nested tree structure of) array(s), each with
+#' an `axis` dimension of size `num_elems`.
+#'
+#' @param reverse
+#' A boolean stating if the scan should be reversed with respect
+#' to the `axis` dimension.
+#'
+#' @param axis
+#' an integer identifying the axis over which the scan should occur.
+#'
+#' @export
+#' @family core ops
+#' @family ops
+#' @tether keras.ops.associative_scan
+op_associative_scan <-
+function(f, elems, reverse = FALSE, axis = 1L)
+{
+  args <- capture_args(list(axis = as_axis))
+  do.call(keras$ops$associative_scan, args)
+}
 
 #' Compute the weighted average along the specified axis.
 #'
@@ -6025,7 +6131,7 @@ keras$ops$outer(x1, x2)
 #' One of `"constant"`, `"edge"`, `"linear_ramp"`,
 #' `"maximum"`, `"mean"`, `"median"`, `"minimum"`,
 #' `"reflect"`, `"symmetric"`, `"wrap"`, `"empty"`,
-#' `"circular"`. Defaults to`"constant"`.
+#' `"circular"`. Defaults to `"constant"`.
 #'
 #' @param constant_values
 #' Value to pad with if `mode == "constant"`.

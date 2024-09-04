@@ -21,6 +21,7 @@ Convert a tensor to a NumPy array.
 }
 
 Other core ops: \cr
+\code{\link{op_associative_scan}()} \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_cond}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
@@ -32,6 +33,7 @@ Other core ops: \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
+\code{\link{op_searchsorted}()} \cr
 \code{\link{op_shape}()} \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
@@ -60,6 +62,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
 \code{\link{op_batch_normalization}()} \cr
@@ -211,6 +214,7 @@ Other ops: \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
+\code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_max}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr

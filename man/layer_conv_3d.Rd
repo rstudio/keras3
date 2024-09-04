@@ -95,10 +95,10 @@ A 5D tensor representing \code{activation(conv3d(inputs, kernel) + bias)}.
 }
 \description{
 This layer creates a convolution kernel that is convolved with the layer
-input over a single spatial (or temporal) dimension to produce a tensor of
-outputs. If \code{use_bias} is \code{TRUE}, a bias vector is created and added to the
-outputs. Finally, if \code{activation} is not \code{NULL}, it is applied to the
-outputs as well.
+input over a 3D spatial (or temporal) dimension (width,height and depth) to
+produce a tensor of outputs. If \code{use_bias} is \code{TRUE}, a bias vector is created
+and added to the outputs. Finally, if \code{activation} is not \code{NULL}, it is
+applied to the outputs as well.
 }
 \section{Input Shape}{
 \itemize{

@@ -75,7 +75,15 @@ Standalone usage:
 # result = (1 / (2 + 2 - 1) + 1 / (2 + 2 - 1)) / 2 = 0.33
 m <- metric_mean_iou(num_classes = 2)
 m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 1.]
+##  [1. 1.]], shape=(2, 2), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
@@ -85,7 +93,15 @@ m$result()
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
                sample_weight=c(0.3, 0.3, 0.3, 0.1))
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0.3 0.3]
+##  [0.3 0.1]], shape=(2, 2), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.2380952, shape=(), dtype=float32)

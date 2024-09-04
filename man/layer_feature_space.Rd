@@ -222,13 +222,13 @@ preprocessed_ds <- labeled_dataset |>
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## $float_values
-## <KerasTensor shape=(None, 1), dtype=float32, sparse=None, name=float_values>
+## <KerasTensor shape=(None, 1), dtype=float32, sparse=False, name=float_values>
 ##
 ## $string_values
-## <KerasTensor shape=(None, 1), dtype=string, sparse=None, name=string_values>
+## <KerasTensor shape=(None, 1), dtype=string, sparse=False, name=string_values>
 ##
 ## $int_values
-## <KerasTensor shape=(None, 1), dtype=int32, sparse=None, name=int_values>
+## <KerasTensor shape=(None, 1), dtype=int32, sparse=False, name=int_values>
 
 }\if{html}{\out{</div>}}
 

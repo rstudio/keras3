@@ -117,7 +117,7 @@ dim(output_array)    # (32, 10, 64)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode, type_check = TRUE)
 }\if{html}{\out{</div>}}
 \item
 
@@ -125,7 +125,7 @@ dim(output_array)    # (32, 10, 64)
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_call(inputs)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_call(...)
 }\if{html}{\out{</div>}}
 }
 }

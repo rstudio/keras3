@@ -396,6 +396,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_argpartition.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_argsort.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_array.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_associative_scan.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_average.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_average_pool.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_batch_normalization.html</loc></url>
@@ -548,6 +549,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_scan.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_scatter.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_scatter_update.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_searchsorted.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_segment_max.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_segment_sum.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_select.html</loc></url>
@@ -612,6 +614,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/optimizer_adam_w.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/optimizer_adamax.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/optimizer_ftrl.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/optimizer_lamb.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/optimizer_lion.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/optimizer_loss_scale.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/optimizer_nadam.html</loc></url>

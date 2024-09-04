@@ -967,7 +967,7 @@ model |> compile(
   optimizer = optimizer_rmsprop(1e-3),
   loss = list(
     loss_mean_squared_error(),
-    loss_categorical_crossentropy()
+    loss_binary_crossentropy()
   )
 )
 
@@ -986,6 +986,18 @@ model |> fit(
 )
 
 # Alternatively, fit on named lists (names matching)
+model <- keras_model(
+  inputs = list(image_input, timeseries_input),
+  outputs = list(score_output = score_output, 
+                 class_output = class_output)
+) |> compile(
+  optimizer = optimizer_rmsprop(1e-3),
+  loss = list(
+    loss_mean_squared_error(),
+    loss_binary_crossentropy()
+  )
+)
+
 model |> fit(
   list(img_input = img_data, ts_input = ts_data),
   list(score_output = score_targets, class_output = class_targets),

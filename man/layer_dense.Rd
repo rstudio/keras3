@@ -112,6 +112,10 @@ the output would have shape \verb{(batch_size, units)}.
   b_initializer = 'zeros'
 )
 }\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode, type_check = TRUE)
+}\if{html}{\out{</div>}}
 }
 }
 

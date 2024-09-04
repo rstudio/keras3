@@ -60,4 +60,27 @@ class Rescaling(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config, custom_objects=None)
+ |      Creates an operation from its config.
+ |
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same operation from the config dictionary.
+ |
+ |      Note: If you override this method, you might receive a serialized dtype
+ |      config, which is a `dict`. You can deserialize it as follows:
+ |
+ |      ```python
+ |      if "dtype" in config and isinstance(config["dtype"], dict):
+ |          policy = dtype_policies.deserialize(config["dtype"])
+ |      ```
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the output of `get_config`.
+ |
+ |      Returns:
+ |          An operation instance.
+ |
 

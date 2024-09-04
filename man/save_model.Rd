@@ -4,7 +4,7 @@
 \alias{save_model}
 \title{Saves a model as a \code{.keras} file.}
 \usage{
-save_model(model, filepath = NULL, overwrite = FALSE, zipped = TRUE, ...)
+save_model(model, filepath = NULL, overwrite = FALSE, zipped = NULL, ...)
 }
 \arguments{
 \item{model}{A keras model.}
@@ -17,7 +17,8 @@ at the target location, or instead ask the user
 via an interactive prompt.}
 
 \item{zipped}{Whether to save the model as a zipped \code{.keras}
-archive (default), or as an unzipped directory.}
+archive (default when saving locally), or as an unzipped directory
+(default when saving on the Hugging Face Hub).}
 
 \item{...}{For forward/backward compatability.}
 }

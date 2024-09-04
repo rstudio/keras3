@@ -20,7 +20,7 @@ Args:
     mode: One of `"constant"`, `"edge"`, `"linear_ramp"`,
         `"maximum"`, `"mean"`, `"median"`, `"minimum"`,
         `"reflect"`, `"symmetric"`, `"wrap"`, `"empty"`,
-        `"circular"`. Defaults to`"constant"`.
+        `"circular"`. Defaults to `"constant"`.
     constant_values: value to pad with if `mode == "constant"`.
         Defaults to `0`. A `ValueError` is raised if not None and
         `mode != "constant"`.
@@ -36,3 +36,4 @@ Note:
 
 Returns:
     Padded tensor.
+

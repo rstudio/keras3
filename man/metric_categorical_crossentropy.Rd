@@ -62,6 +62,7 @@ Standalone usage:
 #      = -((log 0.95), (log 0.1))
 #      = [0.051, 2.302]
 # Reduced xent = (0.051 + 2.302) / 2
+
 m <- metric_categorical_crossentropy()
 m$update_state(rbind(c(0, 1, 0), c(0, 0, 1)),
                rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))

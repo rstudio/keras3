@@ -173,6 +173,9 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |  )
  |      Call self as a function.
  |
+ |  __delattr__(self, name)
+ |      Implement delattr(self, name).
+ |
  |  __init__(
  |    self,
  |    *,
@@ -211,7 +214,11 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |              return x
  |      ```
  |
- |  add_metric(self)
+ |  add_metric(
+ |    self,
+ |    *args,
+ |    **kwargs
+ |  )
  |
  |  add_variable(
  |    self,
@@ -347,7 +354,17 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |      Args:
  |          store: Dict from which the state of the model will be loaded.
  |
- |  quantize(self, mode)
+ |  quantize(
+ |    self,
+ |    mode,
+ |    type_check=True
+ |  )
+ |
+ |  quantized_build(
+ |    self,
+ |    input_shape,
+ |    mode
+ |  )
  |
  |  quantized_call(
  |    self,

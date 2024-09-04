@@ -480,7 +480,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 141ms/step - loss: 1.8971
+## 1/1 - 0s - 144ms/step - loss: 1.9081
 ```
 
 ``` r
@@ -492,7 +492,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 76ms/step - loss: -3.3344e-03
+## 1/1 - 0s - 78ms/step - loss: -2.2532e-03
 ```
 
 ## You can optionally enable serialization on your layers
@@ -843,5 +843,5 @@ vae |> fit(x_train, x_train, epochs = 2, batch_size = 64)
 ## Epoch 1/2
 ## 938/938 - 4s - 4ms/step - loss: 0.0748
 ## Epoch 2/2
-## 938/938 - 1s - 868us/step - loss: 0.0676
+## 938/938 - 1s - 810us/step - loss: 0.0676
 ```

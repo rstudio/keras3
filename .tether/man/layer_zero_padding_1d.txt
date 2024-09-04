@@ -1,7 +1,7 @@
 Help on class ZeroPadding1D in module keras.src.layers.reshaping.zero_padding1d:
 
 class ZeroPadding1D(keras.src.layers.layer.Layer)
- |  ZeroPadding1D(padding=1, **kwargs)
+ |  ZeroPadding1D(padding=1, data_format=None, **kwargs)
  |
  |  Zero-padding layer for 1D input (e.g. temporal sequence).
  |
@@ -35,12 +35,29 @@ class ZeroPadding1D(keras.src.layers.layer.Layer)
  |            the padding dimension (axis 1).
  |          - If tuple of 2 ints: how many zeros to add at the beginning and the
  |            end of the padding dimension (`(left_pad, right_pad)`).
+ |      data_format: A string, one of `"channels_last"` (default) or
+ |          `"channels_first"`. The ordering of the dimensions in the inputs.
+ |          `"channels_last"` corresponds to inputs with shape
+ |          `(batch_size, axis_to_pad, channels)` while `"channels_first"`
+ |          corresponds to inputs with shape
+ |          `(batch_size, channels, axis_to_pad)`.
+ |          When unspecified, uses `image_data_format` value found in your Keras
+ |          config file at `~/.keras/keras.json` (if exists). Defaults to
+ |          `"channels_last"`.
  |
  |  Input shape:
- |      3D tensor with shape `(batch_size, axis_to_pad, features)`
+ |      3D tensor with shape:
+ |      - If `data_format` is `"channels_last"`:
+ |        `(batch_size, axis_to_pad, features)`
+ |      - If `data_format` is `"channels_first"`:
+ |        `(batch_size, features, axis_to_pad)`
  |
  |  Output shape:
- |      3D tensor with shape `(batch_size, padded_axis, features)`
+ |      3D tensor with shape:
+ |      - If `data_format` is `"channels_last"`:
+ |        `(batch_size, padded_axis, features)`
+ |      - If `data_format` is `"channels_first"`:
+ |        `(batch_size, features, padded_axis)`
  |
  |  Method resolution order:
  |      ZeroPadding1D
@@ -58,6 +75,7 @@ class ZeroPadding1D(keras.src.layers.layer.Layer)
  |  __init__(
  |    self,
  |    padding=1,
+ |    data_format=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

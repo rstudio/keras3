@@ -12,7 +12,7 @@ op_top_k(x, k, sorted = TRUE)
 \item{k}{An integer representing the number of top elements to retrieve.}
 
 \item{sorted}{A boolean indicating whether to sort the output in
-descending order. Defaults to\code{TRUE}.}
+descending order. Defaults to \code{TRUE}.}
 }
 \value{
 A list containing two tensors. The first tensor contains the
@@ -93,6 +93,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
 \code{\link{op_batch_normalization}()} \cr
@@ -245,6 +246,7 @@ Other ops: \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
+\code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_max}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr

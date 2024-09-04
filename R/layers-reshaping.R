@@ -617,17 +617,36 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #' ```
 #'
 #' # Input Shape
-#' 3D tensor with shape `(batch_size, axis_to_pad, features)`
+#' 3D tensor with shape:
+#' - If `data_format` is `"channels_last"`:
+#'   `(batch_size, axis_to_pad, features)`
+#' - If `data_format` is `"channels_first"`:
+#'   `(batch_size, features, axis_to_pad)`
 #'
 #' # Output Shape
-#' 3D tensor with shape `(batch_size, padded_axis, features)`
+#' 3D tensor with shape:
+#' - If `data_format` is `"channels_last"`:
+#'   `(batch_size, padded_axis, features)`
+#' - If `data_format` is `"channels_first"`:
+#'   `(batch_size, features, padded_axis)`
 #'
 #' @param padding
-#' Int, or list of int (length 2), or named listionary.
+#' Int, or list of int (length 2).
 #' - If int: how many zeros to add at the beginning and end of
-#'   the padding dimension (axis 1).
+#'   the padding dimension (axis 2).
 #' - If list of 2 ints: how many zeros to add at the beginning and the
 #'   end of the padding dimension (`(left_pad, right_pad)`).
+#'
+#' @param data_format
+#' A string, one of `"channels_last"` (default) or
+#' `"channels_first"`. The ordering of the dimensions in the inputs.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch_size, axis_to_pad, channels)` while `"channels_first"`
+#' corresponds to inputs with shape
+#' `(batch_size, channels, axis_to_pad)`.
+#' When unspecified, uses `image_data_format` value found in your Keras
+#' config file at `~/.keras/keras.json` (if exists). Defaults to
+#' `"channels_last"`.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -645,7 +664,7 @@ function (object, size = list(2L, 2L, 2L), data_format = NULL,
 #'
 #' @tether keras.layers.ZeroPadding1D
 layer_zero_padding_1d <-
-function (object, padding = 1L, ...)
+function (object, padding = 1L, data_format = NULL, ...)
 {
     args <- capture_args(list(padding = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),

@@ -119,18 +119,16 @@ class Dense(keras.src.layers.layer.Layer)
  |      Args:
  |          store: Dict from which the state of the model will be loaded.
  |
- |  quantize(self, mode)
+ |  quantize(
+ |    self,
+ |    mode,
+ |    type_check=True
+ |  )
  |
  |  quantized_build(
  |    self,
  |    input_shape,
  |    mode
- |  )
- |
- |  quantized_call(
- |    self,
- |    inputs,
- |    training=None
  |  )
  |
  |  save_own_variables(self, store)

@@ -282,7 +282,7 @@ Example:
 }\if{html}{\out{</div>}}
 \item
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_metric()
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_metric(...)
 }\if{html}{\out{</div>}}
 \item
 
@@ -451,16 +451,20 @@ consisting of simple objects like strings, ints.
 Return the values of \code{layer$weights} as a list of R or NumPy arrays.
 \item
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantize(mode, type_check = TRUE)
 }\if{html}{\out{</div>}}
 
-Currently, only the \code{Dense} and \code{EinsumDense} layers support in-place
+Currently, only the \code{Dense}, \code{EinsumDense} and \code{Embedding} layers support in-place
 quantization via this \code{quantize()} method.
 
 Example:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model$quantize("int8") # quantize model in-place
 model |> predict(data) # faster inference
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_build(input_shape, mode)
 }\if{html}{\out{</div>}}
 \item
 

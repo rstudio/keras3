@@ -67,7 +67,7 @@ doctether::retether(
 message("DONE!")
 
 if(FALSE) {
-  mk_export("keras.ops.image.hsv_to_rgb")$dump |> cat_cb()
+  mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
 }
 
 

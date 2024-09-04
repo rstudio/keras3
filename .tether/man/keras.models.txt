@@ -18,7 +18,7 @@ save_model(
   model,
   filepath,
   overwrite=True,
-  zipped=True,
+  zipped=None,
   **kwargs
 )
 Sequential(*args, **kwargs)

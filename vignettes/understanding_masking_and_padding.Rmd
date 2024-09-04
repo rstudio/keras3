@@ -331,8 +331,8 @@ mask
 ```
 ## tf.Tensor(
 ## [[ True  True  True  True  True  True  True  True  True  True]
-##  [ True  True  True  True  True  True  True  True  True  True]
-##  [False False  True  True  True  True  True  True  True  True]], shape=(3, 10), dtype=bool)
+##  [ True  True  True  True  True  True  True  True False  True]
+##  [ True  True  True  True False  True  True  True  True  True]], shape=(3, 10), dtype=bool)
 ```
 
 Note: For more details about format limitations related to masking, see the

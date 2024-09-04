@@ -9,15 +9,17 @@ op_segment_max(data, segment_ids, num_segments = NULL, sorted = FALSE)
 \arguments{
 \item{data}{Input tensor.}
 
-\item{segment_ids}{A 1-D tensor containing segment indices for each
-element in \code{data}.}
+\item{segment_ids}{A N-D tensor containing segment indices for each
+element in \code{data}.
+\code{head(op_shape(data), length(op_shape(segment_ids)))} should match
+\code{op_shape(segment_ids)}}
 
 \item{num_segments}{An integer representing the total number of
 segments. If not specified, it is inferred from the maximum
 value in \code{segment_ids}.}
 
 \item{sorted}{A boolean indicating whether \code{segment_ids} is sorted.
-Defaults to\code{FALSE}.}
+Defaults to \code{FALSE}.}
 }
 \value{
 A tensor containing the max of segments, where each element
@@ -83,6 +85,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
 \code{\link{op_batch_normalization}()} \cr
@@ -235,6 +238,7 @@ Other ops: \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
+\code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr
 \code{\link{op_selu}()} \cr

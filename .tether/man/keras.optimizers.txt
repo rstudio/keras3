@@ -124,6 +124,23 @@ Ftrl(
   **kwargs
 )
 get(identifier)
+Lamb(
+  learning_rate=0.001,
+  beta_1=0.9,
+  beta_2=0.999,
+  epsilon=1e-07,
+  weight_decay=None,
+  clipnorm=None,
+  clipvalue=None,
+  global_clipnorm=None,
+  use_ema=False,
+  ema_momentum=0.99,
+  ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
+  name='lamb',
+  **kwargs
+)
 legacy: Module(keras.api.optimizers.legacy)
 Lion(
   learning_rate=0.001,

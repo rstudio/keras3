@@ -123,7 +123,11 @@ class Embedding(keras.src.layers.layer.Layer)
  |      Args:
  |          store: Dict from which the state of the model will be loaded.
  |
- |  quantize(self, mode)
+ |  quantize(
+ |    self,
+ |    mode,
+ |    type_check=True
+ |  )
  |
  |  quantized_build(
  |    self,
@@ -131,7 +135,11 @@ class Embedding(keras.src.layers.layer.Layer)
  |    mode
  |  )
  |
- |  quantized_call(self, inputs)
+ |  quantized_call(
+ |    self,
+ |    *args,
+ |    **kwargs
+ |  )
  |
  |  save_own_variables(self, store)
  |      Saves the state of the layer.

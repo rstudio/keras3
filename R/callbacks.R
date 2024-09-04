@@ -83,11 +83,11 @@
 #' preemption checkpointing (i.e. with `save_before_preemption = TRUE`).
 #'
 #' @param delete_checkpoint
-#' Boolean, defaults to `TRUE`. This `backup_and_restore`
+#' Boolean. This `backup_and_restore`
 #' callback works by saving a checkpoint to back up the training state.
 #' If `delete_checkpoint = TRUE`, the checkpoint will be deleted after
 #' training is finished. Use `FALSE` if you'd like to keep the checkpoint
-#' for future usage.
+#' for future usage. Defaults to `TRUE`.
 #'
 #' @returns A `Callback` instance that can be passed to [`fit.keras.src.models.model.Model()`].
 #' @export

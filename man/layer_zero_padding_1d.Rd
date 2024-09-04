@@ -4,18 +4,28 @@
 \alias{layer_zero_padding_1d}
 \title{Zero-padding layer for 1D input (e.g. temporal sequence).}
 \usage{
-layer_zero_padding_1d(object, padding = 1L, ...)
+layer_zero_padding_1d(object, padding = 1L, data_format = NULL, ...)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{padding}{Int, or list of int (length 2), or named listionary.
+\item{padding}{Int, or list of int (length 2).
 \itemize{
 \item If int: how many zeros to add at the beginning and end of
-the padding dimension (axis 1).
+the padding dimension (axis 2).
 \item If list of 2 ints: how many zeros to add at the beginning and the
 end of the padding dimension (\verb{(left_pad, right_pad)}).
 }}
+
+\item{data_format}{A string, one of \code{"channels_last"} (default) or
+\code{"channels_first"}. The ordering of the dimensions in the inputs.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch_size, axis_to_pad, channels)} while \code{"channels_first"}
+corresponds to inputs with shape
+\verb{(batch_size, channels, axis_to_pad)}.
+When unspecified, uses \code{image_data_format} value found in your Keras
+config file at \verb{~/.keras/keras.json} (if exists). Defaults to
+\code{"channels_last"}.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -71,11 +81,23 @@ y
 }
 
 \section{Input Shape}{
-3D tensor with shape \verb{(batch_size, axis_to_pad, features)}
+3D tensor with shape:
+\itemize{
+\item If \code{data_format} is \code{"channels_last"}:
+\verb{(batch_size, axis_to_pad, features)}
+\item If \code{data_format} is \code{"channels_first"}:
+\verb{(batch_size, features, axis_to_pad)}
+}
 }
 
 \section{Output Shape}{
-3D tensor with shape \verb{(batch_size, padded_axis, features)}
+3D tensor with shape:
+\itemize{
+\item If \code{data_format} is \code{"channels_last"}:
+\verb{(batch_size, padded_axis, features)}
+\item If \code{data_format} is \code{"channels_first"}:
+\verb{(batch_size, features, padded_axis)}
+}
 }
 
 \seealso{

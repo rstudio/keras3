@@ -25,7 +25,7 @@ Args:
         or probabilities.
         Set it to `True` if `output` represents logits; otherwise,
         set it to `False` if `output` represents probabilities.
-        Defaults to`False`.
+        Defaults to `False`.
     axis: (optional) The axis along which the sparse categorical
         cross-entropy is computed.
         Defaults to `-1`, which corresponds to the last dimension
@@ -44,3 +44,4 @@ Example:
 ...  [0.2, 0.3, 0.5]])
 >>> sparse_categorical_crossentropy(target, output)
 array([0.10536056 0.22314355 0.6931472 ], shape=(3,), dtype=float32)
+

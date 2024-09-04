@@ -67,7 +67,15 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_binary_iou(target_class_ids=c(0L, 1L), threshold = 0.3)
 m$update_state(c(0, 1, 0, 1), c(0.1, 0.2, 0.4, 0.7))
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 1.]
+##  [1. 1.]], shape=(2, 2), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333334, shape=(), dtype=float32)
@@ -77,7 +85,15 @@ m$result()
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0, 1, 0, 1), c(0.1, 0.2, 0.4, 0.7),
                sample_weight = c(0.2, 0.3, 0.4, 0.1))
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0.2 0.4]
+##  [0.3 0.1]], shape=(2, 2), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.17361109, shape=(), dtype=float32)

@@ -24,11 +24,11 @@ When set to an integer, the callback saves the checkpoint every
 \code{save_freq} batches. Set \code{save_freq = FALSE} only if using
 preemption checkpointing (i.e. with \code{save_before_preemption = TRUE}).}
 
-\item{delete_checkpoint}{Boolean, defaults to \code{TRUE}. This \code{backup_and_restore}
+\item{delete_checkpoint}{Boolean. This \code{backup_and_restore}
 callback works by saving a checkpoint to back up the training state.
 If \code{delete_checkpoint = TRUE}, the checkpoint will be deleted after
 training is finished. Use \code{FALSE} if you'd like to keep the checkpoint
-for future usage.}
+for future usage. Defaults to \code{TRUE}.}
 }
 \value{
 A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
