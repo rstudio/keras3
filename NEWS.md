@@ -1,5 +1,24 @@
 # keras3 (development version)
 
+- Added compatibility with Keras v3.5.0. User facing changes:
+
+  - New functions:
+    - `op_associative_scan()`
+    - `op_searchsorted()`
+    - `optimizer_lamb()`
+  - `keras$DTypePolicy` instances can now be supplied to `dtype` argument for
+    losses, metrics, and layers.
+  - Add integration with the Hugging Face Hub. You can now save models to
+    Hugging Face Hub directly `save_model()` and load .keras models directly
+    from Hugging Face Hub with `load_model()`.
+  - Added compatibility with NumPy 2.0.
+  - Improved `keras$distribution` API support for very large models.
+  - Bug fixes and performance improvements.
+  - Add `data_format` argument to `layer_zero_padding_1d()` layer.
+  - Miscellaneous documentation improvements.
+  - Bug fixes and performance improvements.
+
+
 # keras3 1.1.0
 
 - Fixed issue where GPUs would not be found when running on Windows under WSL Linux.
