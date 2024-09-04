@@ -12,7 +12,7 @@ op_top_k(x, k, sorted = TRUE)
 \item{k}{An integer representing the number of top elements to retrieve.}
 
 \item{sorted}{A boolean indicating whether to sort the output in
-descending order. Defaults to\code{TRUE}.}
+descending order. Defaults to \code{TRUE}.}
 }
 \value{
 A list containing two tensors. The first tensor contains the

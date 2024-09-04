@@ -9,15 +9,17 @@ op_segment_max(data, segment_ids, num_segments = NULL, sorted = FALSE)
 \arguments{
 \item{data}{Input tensor.}
 
-\item{segment_ids}{A 1-D tensor containing segment indices for each
-element in \code{data}.}
+\item{segment_ids}{A N-D tensor containing segment indices for each
+element in \code{data}.
+\code{head(shape(data), length(shape(segment_ids)))} should match
+\code{shape(segment_ids)}}
 
 \item{num_segments}{An integer representing the total number of
 segments. If not specified, it is inferred from the maximum
 value in \code{segment_ids}.}
 
 \item{sorted}{A boolean indicating whether \code{segment_ids} is sorted.
-Defaults to\code{FALSE}.}
+Defaults to \code{FALSE}.}
 }
 \value{
 A tensor containing the max of segments, where each element

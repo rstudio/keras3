@@ -30,7 +30,7 @@ pad either before or after each sequence.}
 remove values from sequences larger than
 \code{maxlen}, either at the beginning or at the end of the sequences.}
 
-\item{value}{Float or String, padding value. (Optional, defaults to 0.)}
+\item{value}{Float or String, padding value. (Optional, defaults to \code{0})}
 }
 \value{
 Array with shape \verb{(len(sequences), maxlen)}

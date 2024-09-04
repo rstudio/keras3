@@ -14,8 +14,8 @@ R factors are coerced to integer and offset to be 0-based, i.e.,
 
 \item{num_classes}{Number of classes for the one-hot encoding.}
 
-\item{axis}{Axis along which the encoding is performed. Defaults to
-\code{-1}, which represents the last axis.}
+\item{axis}{Axis along which the encoding is performed.
+\code{-1} represents the last axis. Defaults to \code{-1}.}
 
 \item{dtype}{(Optional) Data type of the output tensor. If not
 provided, it defaults to the default data type of the backend.}

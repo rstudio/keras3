@@ -20,7 +20,7 @@ width for all axes.}
 \item{mode}{One of \code{"constant"}, \code{"edge"}, \code{"linear_ramp"},
 \code{"maximum"}, \code{"mean"}, \code{"median"}, \code{"minimum"},
 \code{"reflect"}, \code{"symmetric"}, \code{"wrap"}, \code{"empty"},
-\code{"circular"}. Defaults to\code{"constant"}.}
+\code{"circular"}. Defaults to \code{"constant"}.}
 
 \item{constant_values}{Value to pad with if \code{mode == "constant"}.
 Defaults to \code{0}. A \code{ValueError} is raised if not \code{NULL} and
