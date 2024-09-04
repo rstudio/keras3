@@ -30,7 +30,7 @@ max_val <- 1.0
 op_psnr(x1, x2, max_val)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(-3.433579, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(-3.5293808, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

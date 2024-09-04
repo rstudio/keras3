@@ -47,7 +47,7 @@ loss <- loss_poisson(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2.5907533  0.66836613], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.6422468  0.81166863], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

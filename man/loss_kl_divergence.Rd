@@ -51,7 +51,7 @@ loss <- loss_kl_divergence(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.5312676 0.2128672], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 2.4290292 -0.6284211], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }
