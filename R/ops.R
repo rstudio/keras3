@@ -359,6 +359,8 @@ function (inputs, indices, updates)
 #' for the equality case (tie-breaker).
 #'
 #' @export
+#' @family core ops
+#' @family ops
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left")
@@ -3608,6 +3610,8 @@ function (x, dtype = NULL)
 #' an integer identifying the axis over which the scan should occur.
 #'
 #' @export
+#' @family core ops
+#' @family ops
 #' @tether keras.ops.associative_scan
 op_associative_scan <-
 function(f, elems, reverse = FALSE, axis = 1L)
