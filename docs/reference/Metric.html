@@ -14,7 +14,7 @@ returned by custom metrics defined with Metric()."><!-- Google Tag Manager --><s
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -226,8 +226,12 @@ for the metric from the state variables.</p></li>
 <li><p></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">initialize</span><span class="op">(</span>dtype<span class="op">=</span><span class="cn">NULL</span>, name<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Initialize self.</p>
-<p>Args:</p><ul><li><p><code>name</code>: (Optional) string name of the metric instance.</p></li>
-<li><p><code>dtype</code>: (Optional) data type of the metric result.</p></li>
+<p>Args:</p><ul><li><p><code>name</code>: Optional name for the metric instance.</p></li>
+<li><p><code>dtype</code>: The dtype of the metric's computations. Defaults to <code>NULL</code>, which
+means using <code><a href="config_floatx.html">config_floatx()</a></code>. <code><a href="config_floatx.html">config_floatx()</a></code> is a
+<code>"float32"</code> unless set to different value
+(via <code><a href="config_set_floatx.html">config_set_floatx()</a></code>). If a <code>keras$DTypePolicy</code> is
+provided, then the <code>compute_dtype</code> will be utilized.</p></li>
 </ul></li>
 <li><p></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">add_variable</span><span class="op">(</span><span class="va">shape</span>, <span class="va">initializer</span>, dtype<span class="op">=</span><span class="cn">NULL</span>, aggregation <span class="op">=</span> <span class="st">'sum'</span>, name<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span></span></code></pre><p></p></div></li>
