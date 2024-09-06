@@ -36,7 +36,7 @@ Users will just instantiate a layer and then treat it as a callable."><!-- Googl
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -339,7 +339,7 @@ which is a <code>"float32"</code> policy unless set to different value
   }
 </code></pre><p></p></div></li>
 <li><p></p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu">add_metric</span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div></li>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">add_metric</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre><p></p></div></li>
 <li><p></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">add_variable</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Add a weight variable to the layer.</p>
@@ -451,12 +451,14 @@ consisting of simple objects like strings, ints.</p></li>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/get_weights.html">get_weights</a></span><span class="op">(</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Return the values of <code>layer$weights</code> as a list of R or NumPy arrays.</p></li>
 <li><p></p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu">quantize</span><span class="op">(</span><span class="va">mode</span><span class="op">)</span></span></code></pre><p></p></div>
-<p>Currently, only the <code>Dense</code> and <code>EinsumDense</code> layers support in-place
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">quantize</span><span class="op">(</span><span class="va">mode</span>, type_check <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Currently, only the <code>Dense</code>, <code>EinsumDense</code> and <code>Embedding</code> layers support in-place
 quantization via this <code>quantize()</code> method.</p>
 <p>Example:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span><span class="op">$</span><span class="fu">quantize</span><span class="op">(</span><span class="st">"int8"</span><span class="op">)</span> <span class="co"># quantize model in-place</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span> <span class="co"># faster inference</span></span></code></pre><p></p></div></li>
+<li><p></p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">quantized_build</span><span class="op">(</span><span class="va">input_shape</span>, <span class="va">mode</span><span class="op">)</span></span></code></pre><p></p></div></li>
 <li><p></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">quantized_call</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre><p></p></div></li>
 <li><p></p>

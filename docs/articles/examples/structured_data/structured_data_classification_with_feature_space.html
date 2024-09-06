@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -312,19 +312,19 @@ named list) of features and <code>target</code> is the value
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Input: "</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Target: "</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Input: List of 13</span></span>
-<span><span class="co">##  $ age     :&lt;tf.Tensor: shape=(), dtype=int32, numpy=63&gt;</span></span>
-<span><span class="co">##  $ sex     :&lt;tf.Tensor: shape=(), dtype=int32, numpy=0&gt;</span></span>
-<span><span class="co">##  $ cp      :&lt;tf.Tensor: shape=(), dtype=int32, numpy=4&gt;</span></span>
-<span><span class="co">##  $ trestbps:&lt;tf.Tensor: shape=(), dtype=int32, numpy=124&gt;</span></span>
-<span><span class="co">##  $ chol    :&lt;tf.Tensor: shape=(), dtype=int32, numpy=197&gt;</span></span>
+<span><span class="co">##  $ age     :&lt;tf.Tensor: shape=(), dtype=int32, numpy=45&gt;</span></span>
+<span><span class="co">##  $ sex     :&lt;tf.Tensor: shape=(), dtype=int32, numpy=1&gt;</span></span>
+<span><span class="co">##  $ cp      :&lt;tf.Tensor: shape=(), dtype=int32, numpy=1&gt;</span></span>
+<span><span class="co">##  $ trestbps:&lt;tf.Tensor: shape=(), dtype=int32, numpy=110&gt;</span></span>
+<span><span class="co">##  $ chol    :&lt;tf.Tensor: shape=(), dtype=int32, numpy=264&gt;</span></span>
 <span><span class="co">##  $ fbs     :&lt;tf.Tensor: shape=(), dtype=int32, numpy=0&gt;</span></span>
 <span><span class="co">##  $ restecg :&lt;tf.Tensor: shape=(), dtype=int32, numpy=0&gt;</span></span>
-<span><span class="co">##  $ thalach :&lt;tf.Tensor: shape=(), dtype=int32, numpy=136&gt;</span></span>
-<span><span class="co">##  $ exang   :&lt;tf.Tensor: shape=(), dtype=int32, numpy=1&gt;</span></span>
-<span><span class="co">##  $ oldpeak :&lt;tf.Tensor: shape=(), dtype=float32, numpy=0.0&gt;</span></span>
+<span><span class="co">##  $ thalach :&lt;tf.Tensor: shape=(), dtype=int32, numpy=132&gt;</span></span>
+<span><span class="co">##  $ exang   :&lt;tf.Tensor: shape=(), dtype=int32, numpy=0&gt;</span></span>
+<span><span class="co">##  $ oldpeak :&lt;tf.Tensor: shape=(), dtype=float32, numpy=1.2&gt;</span></span>
 <span><span class="co">##  $ slope   :&lt;tf.Tensor: shape=(), dtype=int32, numpy=2&gt;</span></span>
 <span><span class="co">##  $ ca      :&lt;tf.Tensor: shape=(), dtype=int32, numpy=0&gt;</span></span>
-<span><span class="co">##  $ thal    :&lt;tf.Tensor: shape=(), dtype=string, numpy=b'normal'&gt;</span></span>
+<span><span class="co">##  $ thal    :&lt;tf.Tensor: shape=(), dtype=string, numpy=b'reversible'&gt;</span></span>
 <span><span class="co">## Target: &lt;tf.Tensor: shape=(), dtype=int32, numpy=0&gt;</span></span></code></pre>
 <p>Let’s batch the datasets:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -465,7 +465,7 @@ each sample, combining encoded features and feature crosses.</p>
 <span><span class="va">preprocessed_x</span> <span class="op">&lt;-</span> <span class="fu">feature_space</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">preprocessed_x</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(</span></span>
-<span><span class="co">## [[0. 0. 0. ... 0. 1. 0.]</span></span>
+<span><span class="co">## [[0. 0. 0. ... 0. 0. 0.]</span></span>
 <span><span class="co">##  [0. 0. 0. ... 0. 0. 0.]</span></span>
 <span><span class="co">##  [0. 0. 0. ... 0. 0. 0.]</span></span>
 <span><span class="co">##  ...</span></span>
@@ -560,45 +560,45 @@ model.</p>
 <span>  verbose <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/20</span></span>
-<span><span class="co">## 8/8 - 2s - 270ms/step - accuracy: 0.4357 - loss: 0.7353 - val_accuracy: 0.5000 - val_loss: 0.7068</span></span>
+<span><span class="co">## 8/8 - 2s - 280ms/step - accuracy: 0.4689 - loss: 0.7471 - val_accuracy: 0.5167 - val_loss: 0.7019</span></span>
 <span><span class="co">## Epoch 2/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.5851 - loss: 0.6719 - val_accuracy: 0.6000 - val_loss: 0.6625</span></span>
+<span><span class="co">## 8/8 - 1s - 140ms/step - accuracy: 0.5602 - loss: 0.6785 - val_accuracy: 0.6333 - val_loss: 0.6491</span></span>
 <span><span class="co">## Epoch 3/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.6100 - loss: 0.6419 - val_accuracy: 0.7000 - val_loss: 0.6241</span></span>
+<span><span class="co">## 8/8 - 0s - 46ms/step - accuracy: 0.6307 - loss: 0.6478 - val_accuracy: 0.7000 - val_loss: 0.6053</span></span>
 <span><span class="co">## Epoch 4/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.6639 - loss: 0.5998 - val_accuracy: 0.7000 - val_loss: 0.5919</span></span>
+<span><span class="co">## 8/8 - 0s - 12ms/step - accuracy: 0.6432 - loss: 0.6246 - val_accuracy: 0.7667 - val_loss: 0.5692</span></span>
 <span><span class="co">## Epoch 5/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7593 - loss: 0.5628 - val_accuracy: 0.7000 - val_loss: 0.5648</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7178 - loss: 0.5813 - val_accuracy: 0.7667 - val_loss: 0.5359</span></span>
 <span><span class="co">## Epoch 6/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7635 - loss: 0.5405 - val_accuracy: 0.7000 - val_loss: 0.5414</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7344 - loss: 0.5371 - val_accuracy: 0.7833 - val_loss: 0.5067</span></span>
 <span><span class="co">## Epoch 7/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7759 - loss: 0.4975 - val_accuracy: 0.7167 - val_loss: 0.5204</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7884 - loss: 0.5158 - val_accuracy: 0.8333 - val_loss: 0.4810</span></span>
 <span><span class="co">## Epoch 8/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7842 - loss: 0.4926 - val_accuracy: 0.7167 - val_loss: 0.5008</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7759 - loss: 0.5011 - val_accuracy: 0.8500 - val_loss: 0.4569</span></span>
 <span><span class="co">## Epoch 9/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8133 - loss: 0.4600 - val_accuracy: 0.7167 - val_loss: 0.4849</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7676 - loss: 0.4865 - val_accuracy: 0.8500 - val_loss: 0.4354</span></span>
 <span><span class="co">## Epoch 10/20</span></span>
-<span><span class="co">## 8/8 - 0s - 14ms/step - accuracy: 0.8008 - loss: 0.4498 - val_accuracy: 0.7167 - val_loss: 0.4730</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7925 - loss: 0.4601 - val_accuracy: 0.8333 - val_loss: 0.4161</span></span>
 <span><span class="co">## Epoch 11/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8299 - loss: 0.4408 - val_accuracy: 0.7333 - val_loss: 0.4608</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7967 - loss: 0.4617 - val_accuracy: 0.8667 - val_loss: 0.3976</span></span>
 <span><span class="co">## Epoch 12/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8008 - loss: 0.4297 - val_accuracy: 0.7667 - val_loss: 0.4508</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.7967 - loss: 0.4316 - val_accuracy: 0.8667 - val_loss: 0.3796</span></span>
 <span><span class="co">## Epoch 13/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8299 - loss: 0.3921 - val_accuracy: 0.7833 - val_loss: 0.4404</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8506 - loss: 0.4058 - val_accuracy: 0.8833 - val_loss: 0.3643</span></span>
 <span><span class="co">## Epoch 14/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8506 - loss: 0.3890 - val_accuracy: 0.8000 - val_loss: 0.4324</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8174 - loss: 0.4197 - val_accuracy: 0.8833 - val_loss: 0.3510</span></span>
 <span><span class="co">## Epoch 15/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8382 - loss: 0.3783 - val_accuracy: 0.8333 - val_loss: 0.4243</span></span>
+<span><span class="co">## 8/8 - 0s - 14ms/step - accuracy: 0.8299 - loss: 0.3888 - val_accuracy: 0.8833 - val_loss: 0.3405</span></span>
 <span><span class="co">## Epoch 16/20</span></span>
-<span><span class="co">## 8/8 - 0s - 14ms/step - accuracy: 0.8465 - loss: 0.3651 - val_accuracy: 0.8333 - val_loss: 0.4160</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8257 - loss: 0.3820 - val_accuracy: 0.8833 - val_loss: 0.3294</span></span>
 <span><span class="co">## Epoch 17/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8340 - loss: 0.3545 - val_accuracy: 0.8333 - val_loss: 0.4076</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8299 - loss: 0.3746 - val_accuracy: 0.8833 - val_loss: 0.3223</span></span>
 <span><span class="co">## Epoch 18/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8589 - loss: 0.3493 - val_accuracy: 0.8500 - val_loss: 0.4017</span></span>
+<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8506 - loss: 0.3487 - val_accuracy: 0.8833 - val_loss: 0.3153</span></span>
 <span><span class="co">## Epoch 19/20</span></span>
-<span><span class="co">## 8/8 - 0s - 14ms/step - accuracy: 0.8506 - loss: 0.3227 - val_accuracy: 0.8500 - val_loss: 0.3967</span></span>
+<span><span class="co">## 8/8 - 0s - 14ms/step - accuracy: 0.8465 - loss: 0.3558 - val_accuracy: 0.8667 - val_loss: 0.3093</span></span>
 <span><span class="co">## Epoch 20/20</span></span>
-<span><span class="co">## 8/8 - 0s - 13ms/step - accuracy: 0.8299 - loss: 0.3377 - val_accuracy: 0.8500 - val_loss: 0.3936</span></span></code></pre>
+<span><span class="co">## 8/8 - 0s - 14ms/step - accuracy: 0.8672 - loss: 0.3570 - val_accuracy: 0.8667 - val_loss: 0.3036</span></span></code></pre>
 <p>We quickly get to 80% validation accuracy.</p>
 </div>
 <div class="section level2">
@@ -626,13 +626,13 @@ features values, as follows:</p>
 <span></span>
 <span><span class="va">input_dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">sample</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../../../reference/op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">inference_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">input_dict</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 273ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 394ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">r"---(</span></span>
 <span><span class="st">  This particular patient had a {(100 * predictions) |&gt; signif(3)}% probability</span></span>
 <span><span class="st">  of having a heart disease, as evaluated by our model.</span></span>
 <span><span class="st">)---"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## This particular patient had a 42% probability</span></span>
+<pre><code><span><span class="co">## This particular patient had a 44.8% probability</span></span>
 <span><span class="co">## of having a heart disease, as evaluated by our model.</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

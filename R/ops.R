@@ -3588,7 +3588,7 @@ function (x, dtype = NULL)
 #'
 #' @param f
 #' A callable implementing an associative binary operation with
-#' signature `r = f(a, b)`. Function `f` must be associative, i.e.,
+#' signature ` r = f(a, b)`. Function `f` must be associative, i.e.,
 #' it must satisfy the equation
 #' `f(a, f(b, c)) == f(f(a, b), c)`.
 #' The inputs and result are (possibly nested tree structures
