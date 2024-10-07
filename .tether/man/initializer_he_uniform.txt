@@ -36,6 +36,7 @@ class HeUniform(VarianceScaling)
  |  Method resolution order:
  |      HeUniform
  |      VarianceScaling
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -50,3 +51,4 @@ class HeUniform(VarianceScaling)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

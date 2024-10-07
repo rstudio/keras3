@@ -1,6 +1,6 @@
 Help on class TruncatedNormal in module keras.src.initializers.random_initializers:
 
-class TruncatedNormal(keras.src.initializers.initializer.Initializer)
+class TruncatedNormal(RandomInitializer)
  |  TruncatedNormal(mean=0.0, stddev=0.05, seed=None)
  |
  |  Initializer that generates a truncated normal distribution.
@@ -36,6 +36,7 @@ class TruncatedNormal(keras.src.initializers.initializer.Initializer)
  |
  |  Method resolution order:
  |      TruncatedNormal
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -66,3 +67,4 @@ class TruncatedNormal(keras.src.initializers.initializer.Initializer)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

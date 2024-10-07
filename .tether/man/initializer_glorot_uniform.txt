@@ -36,6 +36,7 @@ class GlorotUniform(VarianceScaling)
  |  Method resolution order:
  |      GlorotUniform
  |      VarianceScaling
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -50,3 +51,4 @@ class GlorotUniform(VarianceScaling)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

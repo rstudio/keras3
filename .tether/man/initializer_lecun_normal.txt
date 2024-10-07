@@ -40,6 +40,7 @@ class LecunNormal(VarianceScaling)
  |  Method resolution order:
  |      LecunNormal
  |      VarianceScaling
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -54,3 +55,4 @@ class LecunNormal(VarianceScaling)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+
