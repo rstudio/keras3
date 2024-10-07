@@ -3441,7 +3441,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' @param classes
 #' optional number of classes to classify images into, only to be
 #' specified if `include_top` is `TRUE`, and if no `weights` argument is
-#' specified.
+#' specified. Defaults to `1000`.
 #'
 #' @param classifier_activation
 #' A `str` or callable. The activation function to

@@ -41,8 +41,6 @@ class UnitNormalization(keras.src.layers.layer.Layer)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  build(self, input_shape)
- |
  |  call(self, inputs)
  |
  |  compute_output_shape(self, input_shape)
