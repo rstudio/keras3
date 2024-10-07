@@ -1,6 +1,6 @@
 Help on class RandomNormal in module keras.src.initializers.random_initializers:
 
-class RandomNormal(keras.src.initializers.initializer.Initializer)
+class RandomNormal(RandomInitializer)
  |  RandomNormal(mean=0.0, stddev=0.05, seed=None)
  |
  |  Random normal initializer.
@@ -33,6 +33,7 @@ class RandomNormal(keras.src.initializers.initializer.Initializer)
  |
  |  Method resolution order:
  |      RandomNormal
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -63,3 +64,4 @@ class RandomNormal(keras.src.initializers.initializer.Initializer)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

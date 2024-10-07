@@ -63,9 +63,8 @@ install_keras <- function(
       ## is compatible with TF v2.16 is released.
       # tensorflow <- c("tensorflow", "tensorflow-metal")
     } else if (is_linux()) {
-      jax <- c("jax[cuda12_pip]", "-f",
-         "https://storage.googleapis.com/jax-releases/jax_cuda_releases.html")
-      tensorflow <- "tensorflow[and-cuda]"
+      jax <- c("jax[cuda12]")
+      tensorflow <- "tensorflow-cpu"
     }
   } else { # no GPU
     jax <- "jax[cpu]"
@@ -107,7 +106,7 @@ install_keras <- function(
 
   reticulate::py_install("keras==3.*", envname = envname)
 
-  if(gpu && is_linux()) {
+  if (gpu && is_linux() && !any(startsWith(tensorflow, "tensorflow-cpu"))) {
     configure_nvidia_symlinks(envname = envname)
     configure_ptxas_symlink(envname = envname)
   }

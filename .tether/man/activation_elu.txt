@@ -3,7 +3,7 @@ keras.activations.elu(x, alpha=1.0)
 __doc__
 Exponential Linear Unit.
 
-The exponential linear unit (ELU) with `alpha > 0` is define as:
+The exponential linear unit (ELU) with `alpha > 0` is defined as:
 
 - `x` if `x > 0`
 - alpha * `exp(x) - 1` if `x < 0`
@@ -23,3 +23,4 @@ Args:
 Reference:
 
 - [Clevert et al., 2016](https://arxiv.org/abs/1511.07289)
+

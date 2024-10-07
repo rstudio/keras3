@@ -145,20 +145,24 @@ function (tensor)
 #' are getting is the one you expect.
 #'
 #' @param fname
-#' Name of the file. If an absolute path, e.g. `"/path/to/file.txt"`
-#' is specified, the file will be saved at that location.
+#' If the target is a single file, this is your desired
+#' local name for the file.
 #' If `NULL`, the name of the file at `origin` will be used.
+#' If downloading and extracting a directory archive,
+#' the provided `fname` will be used as extraction directory
+#' name (only if it doesn't have an extension).
 #'
 #' @param origin
 #' Original URL of the file.
 #'
 #  @param untar
 #  Deprecated in favor of `extract` argument.
-#  boolean, whether the file should be decompressed
-#'
+#  Boolean, whether the file is a tar archive that should
+#  be extracted.
+#
 #  @param md5_hash
 #  Deprecated in favor of `file_hash` argument.
-#  md5 hash of the file for verification
+#  md5 hash of the file for file integrity verification.
 #'
 #' @param file_hash
 #' The expected hash string of the file after download.
@@ -175,7 +179,8 @@ function (tensor)
 #' The default 'auto' detects the hash algorithm in use.
 #'
 #' @param extract
-#' `TRUE` tries extracting the file as an Archive, like tar or zip.
+#' If `TRUE`, extracts the archive. Only applicable to compressed
+#' archive files like tar or zip.
 #'
 #' @param archive_format
 #' Archive format to try for extracting the file.

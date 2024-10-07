@@ -37,6 +37,7 @@ class GlorotNormal(VarianceScaling)
  |  Method resolution order:
  |      GlorotNormal
  |      VarianceScaling
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -51,3 +52,4 @@ class GlorotNormal(VarianceScaling)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

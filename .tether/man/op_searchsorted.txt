@@ -1,0 +1,20 @@
+__signature__
+keras.ops.searchsorted(
+  sorted_sequence,
+  values,
+  side='left'
+)
+__doc__
+Perform a binary search, returning indices for insertion of `values`
+into `sorted_sequence` that maintain the sorting order.
+
+Args:
+    sorted_sequence: 1-D input tensor, sorted along the innermost
+        dimension.
+    values: N-D tensor of query insertion values.
+    side: 'left' or 'right', specifying the direction in which to insert
+        for the equality case (tie-breaker).
+
+Returns:
+    Tensor of insertion indices of same shape as `values`.
+

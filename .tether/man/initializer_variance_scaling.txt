@@ -1,6 +1,6 @@
 Help on class VarianceScaling in module keras.src.initializers.random_initializers:
 
-class VarianceScaling(keras.src.initializers.initializer.Initializer)
+class VarianceScaling(RandomInitializer)
  |  VarianceScaling(scale=1.0, mode='fan_in', distribution='truncated_normal', seed=None)
  |
  |  Initializer that adapts its scale to the shape of its input tensors.
@@ -45,6 +45,7 @@ class VarianceScaling(keras.src.initializers.initializer.Initializer)
  |
  |  Method resolution order:
  |      VarianceScaling
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -76,3 +77,4 @@ class VarianceScaling(keras.src.initializers.initializer.Initializer)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

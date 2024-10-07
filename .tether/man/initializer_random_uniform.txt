@@ -1,6 +1,6 @@
 Help on class RandomUniform in module keras.src.initializers.random_initializers:
 
-class RandomUniform(keras.src.initializers.initializer.Initializer)
+class RandomUniform(RandomInitializer)
  |  RandomUniform(minval=-0.05, maxval=0.05, seed=None)
  |
  |  Random uniform initializer.
@@ -33,6 +33,7 @@ class RandomUniform(keras.src.initializers.initializer.Initializer)
  |
  |  Method resolution order:
  |      RandomUniform
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -63,3 +64,4 @@ class RandomUniform(keras.src.initializers.initializer.Initializer)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+

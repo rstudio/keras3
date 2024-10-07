@@ -1,6 +1,6 @@
 Help on class OrthogonalInitializer in module keras.src.initializers.random_initializers:
 
-class OrthogonalInitializer(keras.src.initializers.initializer.Initializer)
+class OrthogonalInitializer(RandomInitializer)
  |  OrthogonalInitializer(gain=1.0, seed=None)
  |
  |  Initializer that generates an orthogonal matrix.
@@ -37,6 +37,7 @@ class OrthogonalInitializer(keras.src.initializers.initializer.Initializer)
  |
  |  Method resolution order:
  |      OrthogonalInitializer
+ |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
  |
@@ -66,3 +67,4 @@ class OrthogonalInitializer(keras.src.initializers.initializer.Initializer)
  |      Returns:
  |          A JSON-serializable Python dict.
  |
+
