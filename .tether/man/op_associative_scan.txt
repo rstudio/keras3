@@ -1,0 +1,60 @@
+__signature__
+keras.ops.associative_scan(
+  f,
+  elems,
+  reverse=False,
+  axis=0
+)
+__doc__
+Performs a scan with an associative binary operation, in parallel.
+
+This operation his similar to `scan`, with the key difference that
+`associative_scan` is a parallel implementation with
+potentially significant performance benefits, especially when jit compiled.
+The catch is that it can only be used when `f` is a binary associative
+operation (i.e. it must verify `f(a, f(b, c)) == f(f(a, b), c)`).
+
+For an introduction to associative scans, refer to this paper:
+Blelloch, Guy E. 1990.
+[Prefix Sums and Their Applications](
+    https://www.cs.cmu.edu/~guyb/papers/Ble93.pdf).
+
+Args:
+    f: A Python callable implementing an associative binary operation with
+        signature `r = f(a, b)`. Function `f` must be associative, i.e.,
+        it must satisfy the equation
+        `f(a, f(b, c)) == f(f(a, b), c)`.
+        The inputs and result are (possibly nested Python tree structures
+        of) array(s) matching `elems`. Each array has a dimension in place
+        of the `axis` dimension. `f` should be applied elementwise over
+        the `axis` dimension.
+        The result `r` has the same shape (and structure) as the
+        two inputs `a` and `b`.
+    elems: A (possibly nested Python tree structure of) array(s), each with
+        an `axis` dimension of size `num_elems`.
+    reverse: A boolean stating if the scan should be reversed with respect
+        to the `axis` dimension.
+    axis: an integer identifying the axis over which the scan should occur.
+
+Returns:
+    A (possibly nested Python tree structure of) array(s) of the same shape
+    and structure as `elems`, in which the `k`'th element of `axis` is
+    the result of recursively applying `f` to combine the first `k`
+    elements of `elems` along `axis`. For example, given
+    `elems = [a, b, c, ...]`, the result would be
+    `[a, f(a, b), f(f(a, b), c), ...]`.
+
+Examples:
+
+>>> sum_fn = lambda x, y: x + y
+>>> xs = keras.ops.arange(5)
+>>> ys = keras.ops.associative_scan(sum_fn, xs, axis=0)
+>>> ys
+[0, 1, 3, 6, 10]
+
+>>> sum_fn = lambda x, y: [x[0] + y[0], x[1] + y[1], x[2] + y[2]]
+>>> xs = [keras.ops.array([[1, 2]]) for _ in range(3)]
+>>> ys = keras.ops.associative_scan(sum_fn, xs, axis=0)
+>>> ys
+[[1, 3], [1, 3], [1, 3]]
+
