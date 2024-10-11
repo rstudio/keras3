@@ -10,7 +10,7 @@ op_det(x)
 \item{x}{Input tensor of shape \verb{(..., M, M)}.}
 }
 \value{
-A tensor of shape \code{(...)} represeting the determinant of \code{x}.
+A tensor of shape \code{(...)} representing the determinant of \code{x}.
 }
 \description{
 Computes the determinant of a square tensor.

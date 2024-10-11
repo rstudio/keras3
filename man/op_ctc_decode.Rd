@@ -42,12 +42,12 @@ A list containing:
 \itemize{
 \item The tensor representing the list of decoded sequences. If
 \code{strategy="greedy"}, the shape is \verb{(1, batch_size, max_length)}. If
-\code{strategy="beam_seatch"}, the shape is
+\code{strategy="beam_search"}, the shape is
 \verb{(top_paths, batch_size, max_length)}. Note that: \code{-1} indicates the
 blank label.
 \item If \code{strategy="greedy"}, a tensor of shape \verb{(batch_size, 1)}
 representing the negative of the sum of the probability logits for
-each sequence. If \code{strategy="beam_seatch"}, a tensor of shape
+each sequence. If \code{strategy="beam_search"}, a tensor of shape
 \verb{(batch_size, top_paths)} representing the log probability for each
 sequence.
 }

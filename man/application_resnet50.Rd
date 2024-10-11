@@ -46,7 +46,7 @@ model will be a 2D tensor.
 
 \item{classes}{optional number of classes to classify images into, only to be
 specified if \code{include_top} is \code{TRUE}, and if no \code{weights} argument is
-specified.}
+specified. Defaults to \code{1000}.}
 
 \item{classifier_activation}{A \code{str} or callable. The activation function to
 use on the "top" layer. Ignored unless \code{include_top=TRUE}. Set

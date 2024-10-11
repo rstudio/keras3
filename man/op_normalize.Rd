@@ -4,7 +4,7 @@
 \alias{op_normalize}
 \title{Normalizes \code{x} over the specified axis.}
 \usage{
-op_normalize(x, axis = -1L, order = 2L)
+op_normalize(x, axis = -1L, order = 2L, epsilon = NULL)
 }
 \arguments{
 \item{x}{Input tensor.}
@@ -14,12 +14,15 @@ Default to -1.}
 
 \item{order}{The exponent value in the norm formulation.
 Defaults to 2.}
+
+\item{epsilon}{A lower bound value for the norm.
+Defaults to \code{config_epsilon()}.}
 }
 \value{
 The normalized array.
 }
 \description{
-It is defined as: \code{normalize(x) = x / max(norm(x), epsilon)}.
+It is defined as: \code{op_normalize(x) = x / max(norm(x), epsilon)}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_convert_to_tensor(rbind(c(1, 2, 3), c(4, 5, 6)))

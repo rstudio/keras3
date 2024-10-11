@@ -30,10 +30,10 @@ The semantics of \code{switch} are given roughly by this implementation:
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{add_fn <- function(x, y) x + y
-substract_fn <- function(x, y) x - y
+subtract_fn <- function(x, y) x - y
 x <- op_array(2.0)
 y <- op_array(0.5)
-branches <- list(add_fn, substract_fn)
+branches <- list(add_fn, subtract_fn)
 op_switch(1, branches, x, y)
 }\if{html}{\out{</div>}}
 

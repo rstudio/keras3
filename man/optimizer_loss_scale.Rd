@@ -108,7 +108,7 @@ scaling to it. This loss scale is dynamically updated over time as follows:
 \itemize{
 \item On any train step, if a nonfinite gradient is encountered, the loss scale
 is halved, and the train step is skipped.
-\item If \code{dynamic_growth_steps} have ocurred since the last time the loss scale
+\item If \code{dynamic_growth_steps} have occurred since the last time the loss scale
 was updated, and no nonfinite gradients have occurred, the loss scale
 is doubled.
 }

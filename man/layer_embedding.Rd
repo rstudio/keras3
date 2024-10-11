@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-core.R
 \name{layer_embedding}
 \alias{layer_embedding}
-\title{Turns positive integers (indexes) into dense vectors of fixed size.}
+\title{Turns nonnegative integers (indexes) into dense vectors of fixed size.}
 \usage{
 layer_embedding(
   object,
@@ -74,7 +74,7 @@ returned, invisibly.
 \description{
 e.g. \code{rbind(4L, 20L)} \eqn{\rightarrow}{->} \code{rbind(c(0.25, 0.1), c(0.6, -0.2))}
 
-This layer can only be used on positive integer inputs of a fixed range.
+This layer can only be used on nonnegative integer inputs of a fixed range.
 }
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential() |>
