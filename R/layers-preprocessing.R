@@ -782,7 +782,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' @param vocabulary
 #' Optional. Either an array of integers or a string path to a
 #' text file. If passing an array, can pass a list, list,
-#' 1D NumPy array, or 1D tensor containing the integer vocbulary terms.
+#' 1D NumPy array, or 1D tensor containing the integer vocabulary terms.
 #' If passing a file path, the file should contain one line per term
 #' in the vocabulary. If this argument is set,
 #' there is no need to `adapt()` the layer.
@@ -1983,7 +1983,7 @@ function (object, height, width, interpolation = "bilinear",
 #' @param vocabulary
 #' Optional. Either an array of integers or a string path to a
 #' text file. If passing an array, can pass a list, list,
-#' 1D NumPy array, or 1D tensor containing the integer vocbulary terms.
+#' 1D NumPy array, or 1D tensor containing the integer vocabulary terms.
 #' If passing a file path, the file should contain one line per term
 #' in the vocabulary. If this argument is set,
 #' there is no need to `adapt()` the layer.
