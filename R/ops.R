@@ -7730,10 +7730,10 @@ function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
 #' # Examples
 #' ```{r}
 #' add_fn <- function(x, y) x + y
-#' substract_fn <- function(x, y) x - y
+#' subtract_fn <- function(x, y) x - y
 #' x <- op_array(2.0)
 #' y <- op_array(0.5)
-#' branches <- list(add_fn, substract_fn)
+#' branches <- list(add_fn, subtract_fn)
 #' op_switch(1, branches, x, y)
 #' op_switch(2, branches, x, y)
 #' ```

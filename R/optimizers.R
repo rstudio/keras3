@@ -505,7 +505,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #' ```
 #'
 #' The update rule for parameter `w` with gradient `g` is described at the end
-#' of section 7.1 of the paper (see the referenece section):
+#' of section 7.1 of the paper (see the reference section):
 #'
 #' ```{r, eval=FALSE}
 #' t <-  t + 1
@@ -1171,7 +1171,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
 #' scaling to it. This loss scale is dynamically updated over time as follows:
 #' - On any train step, if a nonfinite gradient is encountered, the loss scale
 #'   is halved, and the train step is skipped.
-#' - If `dynamic_growth_steps` have ocurred since the last time the loss scale
+#' - If `dynamic_growth_steps` have occurred since the last time the loss scale
 #'   was updated, and no nonfinite gradients have occurred, the loss scale
 #'   is doubled.
 #'

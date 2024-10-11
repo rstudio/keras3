@@ -19,7 +19,7 @@
 #'
 #' @param logits
 #' 2-D Tensor with shape (batch_size, num_classes). Each row
-#' should define a categorical distibution with the unnormalized
+#' should define a categorical distribution with the unnormalized
 #' log-probabilities for all classes.
 #'
 #' @param num_samples
