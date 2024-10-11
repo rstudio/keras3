@@ -2,7 +2,8 @@ __signature__
 keras.ops.normalize(
   x,
   axis=-1,
-  order=2
+  order=2,
+  epsilon=None
 )
 __doc__
 Normalizes `x` over the specified axis.
@@ -15,6 +16,8 @@ Args:
         Default to -1.
     order: The exponent value in the norm formulation.
         Defaults to 2.
+    epsilon: A lower bound value for the norm.
+        Defaults to `backend.epsilon()`.
 
 Returns:
     The normalized array.

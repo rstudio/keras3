@@ -70,7 +70,7 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' Normalizes `x` over the specified axis.
 #'
 #' @description
-#' It is defined as: `normalize(x) = x / max(norm(x), epsilon)`.
+#' It is defined as: `op_normalize(x) = x / max(norm(x), epsilon)`.
 #'
 #' # Examples
 #' ```{r}
@@ -93,6 +93,10 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' The exponent value in the norm formulation.
 #' Defaults to 2.
 #'
+#' @param epsilon
+#' A lower bound value for the norm.
+#' Defaults to `config_epsilon()`.
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -100,7 +104,7 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/normalize>
 op_normalize <-
-function (x, axis = -1L, order = 2L)
+function (x, axis = -1L, order = 2L, epsilon = NULL)
 {
     args <- capture_args(list(axis = as_axis, order = as_integer))
     do.call(keras$ops$normalize, args)
