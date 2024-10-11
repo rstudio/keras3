@@ -366,7 +366,9 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
 export_savedmodel.keras.src.models.model.Model <-
 function(object, export_dir_base, ..., verbose = TRUE) {
-  args <- capture_args(ignore = "object")
+  args <- capture_args(ignore = c("object", "export_dir_base"))
+  # export_dir_base is called 'filename' in method. Pass it as a positional arg
+  args <- c(list(export_dir_base), args)
   do.call(object$export, args)
   invisible(object)
 }

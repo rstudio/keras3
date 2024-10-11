@@ -51,7 +51,7 @@ be applied.
 
 \item{classes}{optional number of classes to classify images
 into, only to be specified if \code{include_top} is \code{TRUE}, and
-if no \code{weights} argument is specified.}
+if no \code{weights} argument is specified. Defaults to 1000.}
 
 \item{classifier_activation}{A \code{str} or callable.
 The activation function to use
