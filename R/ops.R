@@ -4102,13 +4102,13 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #'
 #' - The tensor representing the list of decoded sequences. If
 #'   `strategy="greedy"`, the shape is `(1, batch_size, max_length)`. If
-#'   `strategy="beam_seatch"`, the shape is
+#'   `strategy="beam_search"`, the shape is
 #'   `(top_paths, batch_size, max_length)`. Note that: `-1` indicates the
 #'   blank label.
 #'
 #' - If `strategy="greedy"`, a tensor of shape `(batch_size, 1)`
 #'     representing the negative of the sum of the probability logits for
-#'     each sequence. If `strategy="beam_seatch"`, a tensor of shape
+#'     each sequence. If `strategy="beam_search"`, a tensor of shape
 #'     `(batch_size, top_paths)` representing the log probability for each
 #'     sequence.
 #'
