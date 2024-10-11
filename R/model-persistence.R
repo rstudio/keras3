@@ -352,6 +352,9 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #'
 #' @param object A keras model.
 #'
+#' @param verbose
+#' whether to print all the variables of the exported model.
+#'
 #' @returns This is called primarily for the side effect of exporting `object`.
 #'   The first argument, `object` is also returned, invisibly, to enable usage
 #'   with the pipe.
@@ -361,11 +364,12 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' @family saving and loading functions
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
-export_savedmodel.keras.src.models.model.Model <- function(object, export_dir_base, ...) {
-  object$export(export_dir_base, ...)
+export_savedmodel.keras.src.models.model.Model <-
+function(object, export_dir_base, ..., verbose = TRUE) {
+  args <- capture_args(ignore = "object")
+  do.call(object$export, args)
   invisible(object)
 }
-
 
 
 
