@@ -409,7 +409,8 @@ norm(
 normalize(
   x,
   axis=-1,
-  order=2
+  order=2,
+  epsilon=None
 )
 not_equal(x1, x2)
 numpy: Module(keras.api.ops.numpy)

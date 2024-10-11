@@ -98,7 +98,8 @@ multi_hot(
 normalize(
   x,
   axis=-1,
-  order=2
+  order=2,
+  epsilon=None
 )
 one_hot(
   x,
