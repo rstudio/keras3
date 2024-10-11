@@ -32,9 +32,13 @@ Normalize a batch of inputs so that each input in the batch has a L2 norm
 equal to 1 (across the axes specified in \code{axis}).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{data <- op_reshape(1:6, newshape = c(2, 3))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- 1:6 |> op_array("float32") |> op_reshape(c(2, 3))
 normalized_data <- layer_unit_normalization(data)
 op_sum(normalized_data[1, ]^2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.9999999, shape=(), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

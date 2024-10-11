@@ -128,6 +128,7 @@ function (tensor)
 #' # Examples
 #' ```{r}
 #' path_to_downloaded_file <- get_file(
+#'     "flower_photos",
 #'     origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
 #'     extract = TRUE
 #' )
