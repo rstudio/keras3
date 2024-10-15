@@ -325,6 +325,7 @@ reloaded_feature_space <- keras$models$load_model("featurespace.keras")
 }
 
 Other preprocessing layers: \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_discretization}()} \cr
@@ -358,6 +359,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr

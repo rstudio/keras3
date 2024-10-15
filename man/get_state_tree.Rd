@@ -34,7 +34,7 @@ model |> compile(optimizer="adam", loss="mse", metrics=c("mae"))
 model |> fit(matrix(1), matrix(1))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 311ms/step - loss: 0.4863 - mae: 0.6974
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## 1/1 - 0s - 292ms/step - loss: 0.4863 - mae: 0.6974
 
 }\if{html}{\out{</div>}}
 

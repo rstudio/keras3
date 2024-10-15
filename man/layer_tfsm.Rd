@@ -59,8 +59,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   126549669984976: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   126549669975760: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   125480693907280: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   125480693896336: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 
@@ -105,6 +105,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr
