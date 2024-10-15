@@ -71,6 +71,7 @@ Other image preprocessing layers: \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_solarization}()} \cr
 
 Other preprocessing layers: \cr
 \code{\link{layer_auto_contrast}()} \cr
@@ -91,6 +92,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_text_vectorization}()} \cr
 
@@ -184,6 +186,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr

@@ -59,8 +59,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   125480693907280: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   125480693896336: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   136940671117712: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   136940671114832: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 
@@ -183,6 +183,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr
