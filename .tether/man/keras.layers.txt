@@ -934,6 +934,7 @@ Normalization(
   **kwargs
 )
 Permute(dims, **kwargs)
+Pipeline(layers, name=None)
 PReLU(
   alpha_initializer='Zeros',
   alpha_regularizer=None,
