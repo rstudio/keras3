@@ -67,7 +67,27 @@ doctether::retether(
 message("DONE!")
 
 if(FALSE) {
-  mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
+  # mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
+
+  catched <- character()
+  catch <- function(...) catched <<- c(catched, "\n\n", ...)
+  mk_export("keras.ops.bitwise_and")$dump               |> catch()
+  mk_export("keras.ops.bitwise_invert")$dump            |> catch()
+  mk_export("keras.ops.bitwise_left_shift")$dump        |> catch()
+  mk_export("keras.ops.bitwise_not")$dump               |> catch()
+  mk_export("keras.ops.bitwise_or")$dump                |> catch()
+  mk_export("keras.ops.bitwise_right_shift")$dump       |> catch()
+  mk_export("keras.ops.bitwise_xor")$dump               |> catch()
+  mk_export("keras.ops.dot_product_attention")$dump     |> catch()
+  mk_export("keras.ops.histogram")$dump                 |> catch()
+  mk_export("keras.ops.left_shift")$dump                |> catch()
+  mk_export("keras.ops.right_shift")$dump               |> catch()
+  mk_export("keras.ops.logdet")$dump                    |> catch()
+  mk_export("keras.ops.saturate_cast")$dump             |> catch()
+  mk_export("keras.ops.trunc")$dump                     |> catch()
+
+
+  catched |>  str_flatten_and_compact_lines(roxygen = TRUE) |> cat_cb()
 }
 
 

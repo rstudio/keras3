@@ -94,6 +94,13 @@ bincount(
   minlength=0,
   sparse=False
 )
+bitwise_and(x, y)
+bitwise_invert(x)
+bitwise_left_shift(x, y)
+bitwise_not(x)
+bitwise_or(x, y)
+bitwise_right_shift(x, y)
+bitwise_xor(x, y)
 broadcast_to(x, shape)
 cast(x, dtype)
 categorical_crossentropy(
@@ -209,6 +216,15 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
+dot_product_attention(
+  query,
+  key,
+  value,
+  bias=None,
+  mask=None,
+  scale=None,
+  is_causal=False
+)
 dtype(x)
 eig(x)
 eigh(x)
@@ -260,6 +276,11 @@ greater_equal(x1, x2)
 hard_sigmoid(x)
 hard_silu(x)
 hard_swish(x)
+histogram(
+  x,
+  bins=10,
+  range=None
+)
 hstack(xs)
 identity(n, dtype=None)
 imag(x)
@@ -292,6 +313,7 @@ istft(
   center=True
 )
 leaky_relu(x, negative_slope=0.2)
+left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
 linalg: Module(keras.api.ops.linalg)
@@ -311,6 +333,7 @@ log10(x)
 log1p(x)
 log2(x)
 logaddexp(x1, x2)
+logdet(x)
 logical_and(x1, x2)
 logical_not(x)
 logical_or(x1, x2)
@@ -462,6 +485,7 @@ repeat(
 )
 reshape(x, newshape)
 rfft(x, fft_length=None)
+right_shift(x, y)
 roll(
   x,
   shift,
@@ -469,6 +493,7 @@ roll(
 )
 round(x, decimals=0)
 rsqrt(x)
+saturate_cast(x, dtype)
 scan(
   f,
   init,
@@ -637,6 +662,7 @@ tri(
 tril(x, k=0)
 triu(x, k=0)
 true_divide(x1, x2)
+trunc(x)
 unstack(
   x,
   num=None,
