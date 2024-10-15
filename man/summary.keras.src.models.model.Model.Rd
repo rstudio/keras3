@@ -77,8 +77,10 @@ to do the following in a setup chunk:
 Other model functions: \cr
 \code{\link{get_config}()} \cr
 \code{\link{get_layer}()} \cr
+\code{\link{get_state_tree}()} \cr
 \code{\link{keras_model}()} \cr
 \code{\link{keras_model_sequential}()} \cr
 \code{\link{pop_layer}()} \cr
+\code{\link{set_state_tree}()} \cr
 }
 \concept{model functions}

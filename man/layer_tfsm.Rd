@@ -59,8 +59,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   125230782671632: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   125230779099344: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   126549669984976: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   126549669975760: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 

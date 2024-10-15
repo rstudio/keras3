@@ -45,8 +45,10 @@ model |> compile(
 Other model functions: \cr
 \code{\link{get_config}()} \cr
 \code{\link{get_layer}()} \cr
+\code{\link{get_state_tree}()} \cr
 \code{\link{keras_model_sequential}()} \cr
 \code{\link{pop_layer}()} \cr
+\code{\link{set_state_tree}()} \cr
 \code{\link{summary.keras.src.models.model.Model}()} \cr
 
 Other model creation: \cr
