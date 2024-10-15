@@ -4,7 +4,13 @@
 \alias{layer_random_flip}
 \title{A preprocessing layer which randomly flips images during training.}
 \usage{
-layer_random_flip(object, mode = "horizontal_and_vertical", seed = NULL, ...)
+layer_random_flip(
+  object,
+  mode = "horizontal_and_vertical",
+  seed = NULL,
+  data_format = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
@@ -15,6 +21,15 @@ left-right flip and \code{"vertical"} is a top-bottom flip. Defaults to
 \code{"horizontal_and_vertical"}}
 
 \item{seed}{Integer. Used to create a random seed.}
+
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
 
 \item{...}{Base layer keyword arguments, such as
 \code{name} and \code{dtype}.}

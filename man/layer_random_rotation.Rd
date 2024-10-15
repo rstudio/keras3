@@ -11,7 +11,6 @@ layer_random_rotation(
   interpolation = "bilinear",
   seed = NULL,
   fill_value = 0,
-  value_range = list(0L, 255L),
   data_format = NULL,
   ...
 )
@@ -58,9 +57,14 @@ The input is extended by the nearest pixel.
 \item{fill_value}{a float represents the value to be filled outside
 the boundaries when \code{fill_mode="constant"}.}
 
-\item{value_range}{see description}
-
-\item{data_format}{see description}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
 
 \item{...}{For forward/backward compatability.}
 }
