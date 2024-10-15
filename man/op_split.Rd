@@ -53,6 +53,13 @@ Other numpy ops: \cr
 \code{\link{op_array}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_bincount}()} \cr
+\code{\link{op_bitwise_and}()} \cr
+\code{\link{op_bitwise_invert}()} \cr
+\code{\link{op_bitwise_left_shift}()} \cr
+\code{\link{op_bitwise_not}()} \cr
+\code{\link{op_bitwise_or}()} \cr
+\code{\link{op_bitwise_right_shift}()} \cr
+\code{\link{op_bitwise_xor}()} \cr
 \code{\link{op_broadcast_to}()} \cr
 \code{\link{op_ceil}()} \cr
 \code{\link{op_clip}()} \cr
@@ -89,6 +96,7 @@ Other numpy ops: \cr
 \code{\link{op_get_item}()} \cr
 \code{\link{op_greater}()} \cr
 \code{\link{op_greater_equal}()} \cr
+\code{\link{op_histogram}()} \cr
 \code{\link{op_hstack}()} \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_imag}()} \cr
@@ -96,6 +104,7 @@ Other numpy ops: \cr
 \code{\link{op_isfinite}()} \cr
 \code{\link{op_isinf}()} \cr
 \code{\link{op_isnan}()} \cr
+\code{\link{op_left_shift}()} \cr
 \code{\link{op_less}()} \cr
 \code{\link{op_less_equal}()} \cr
 \code{\link{op_linspace}()} \cr
@@ -104,6 +113,7 @@ Other numpy ops: \cr
 \code{\link{op_log1p}()} \cr
 \code{\link{op_log2}()} \cr
 \code{\link{op_logaddexp}()} \cr
+\code{\link{op_logdet}()} \cr
 \code{\link{op_logical_and}()} \cr
 \code{\link{op_logical_not}()} \cr
 \code{\link{op_logical_or}()} \cr
@@ -138,8 +148,10 @@ Other numpy ops: \cr
 \code{\link{op_reciprocal}()} \cr
 \code{\link{op_repeat}()} \cr
 \code{\link{op_reshape}()} \cr
+\code{\link{op_right_shift}()} \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
+\code{\link{op_saturate_cast}()} \cr
 \code{\link{op_select}()} \cr
 \code{\link{op_sign}()} \cr
 \code{\link{op_sin}()} \cr
@@ -165,6 +177,7 @@ Other numpy ops: \cr
 \code{\link{op_tri}()} \cr
 \code{\link{op_tril}()} \cr
 \code{\link{op_triu}()} \cr
+\code{\link{op_trunc}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vdot}()} \cr
 \code{\link{op_vectorize}()} \cr
@@ -198,6 +211,13 @@ Other ops: \cr
 \code{\link{op_batch_normalization}()} \cr
 \code{\link{op_binary_crossentropy}()} \cr
 \code{\link{op_bincount}()} \cr
+\code{\link{op_bitwise_and}()} \cr
+\code{\link{op_bitwise_invert}()} \cr
+\code{\link{op_bitwise_left_shift}()} \cr
+\code{\link{op_bitwise_not}()} \cr
+\code{\link{op_bitwise_or}()} \cr
+\code{\link{op_bitwise_right_shift}()} \cr
+\code{\link{op_bitwise_xor}()} \cr
 \code{\link{op_broadcast_to}()} \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_categorical_crossentropy}()} \cr
@@ -231,6 +251,7 @@ Other ops: \cr
 \code{\link{op_divide}()} \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
+\code{\link{op_dot_product_attention}()} \cr
 \code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
@@ -259,6 +280,7 @@ Other ops: \cr
 \code{\link{op_greater_equal}()} \cr
 \code{\link{op_hard_sigmoid}()} \cr
 \code{\link{op_hard_silu}()} \cr
+\code{\link{op_histogram}()} \cr
 \code{\link{op_hstack}()} \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_imag}()} \cr
@@ -281,6 +303,7 @@ Other ops: \cr
 \code{\link{op_isnan}()} \cr
 \code{\link{op_istft}()} \cr
 \code{\link{op_leaky_relu}()} \cr
+\code{\link{op_left_shift}()} \cr
 \code{\link{op_less}()} \cr
 \code{\link{op_less_equal}()} \cr
 \code{\link{op_linspace}()} \cr
@@ -291,6 +314,7 @@ Other ops: \cr
 \code{\link{op_log_sigmoid}()} \cr
 \code{\link{op_log_softmax}()} \cr
 \code{\link{op_logaddexp}()} \cr
+\code{\link{op_logdet}()} \cr
 \code{\link{op_logical_and}()} \cr
 \code{\link{op_logical_not}()} \cr
 \code{\link{op_logical_or}()} \cr
@@ -339,9 +363,11 @@ Other ops: \cr
 \code{\link{op_repeat}()} \cr
 \code{\link{op_reshape}()} \cr
 \code{\link{op_rfft}()} \cr
+\code{\link{op_right_shift}()} \cr
 \code{\link{op_roll}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
+\code{\link{op_saturate_cast}()} \cr
 \code{\link{op_scan}()} \cr
 \code{\link{op_scatter}()} \cr
 \code{\link{op_scatter_update}()} \cr
@@ -392,6 +418,7 @@ Other ops: \cr
 \code{\link{op_tri}()} \cr
 \code{\link{op_tril}()} \cr
 \code{\link{op_triu}()} \cr
+\code{\link{op_trunc}()} \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vdot}()} \cr
