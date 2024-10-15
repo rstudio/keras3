@@ -1,0 +1,11 @@
+__signature__
+keras.ops.logdet(x)
+__doc__
+Computes log of the determinant of a hermitian positive definite matrix.
+
+Args:
+    x: Input matrix. It must 2D and square.
+
+Returns:
+    The natural log of the determinant of matrix.
+

@@ -1,0 +1,16 @@
+__signature__
+keras.ops.bitwise_left_shift(x, y)
+__doc__
+Shift the bits of an integer to the left.
+
+Bits are shifted to the left by appending `y` 0s at the right of `x`.
+Since the internal representation of numbers is in binary format, this
+operation is equivalent to multiplying `x` by `2**y`.
+
+Args:
+    x: Input integer tensor.
+    y: Input integer tensor.
+
+Returns:
+    Result tensor.
+

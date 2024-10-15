@@ -1,0 +1,16 @@
+__signature__
+keras.ops.right_shift(x, y)
+__doc__
+Shift the bits of an integer to the right.
+
+Bits are shifted to the right `y`. Because the internal representation of
+numbers is in binary format, this operation is equivalent to dividing `x` by
+`2**y`.
+
+Args:
+    x: Input integer tensor.
+    y: Input integer tensor.
+
+Returns:
+    Result tensor.
+
