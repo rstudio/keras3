@@ -963,6 +963,7 @@ RandomCrop(
 RandomFlip(
   mode='horizontal_and_vertical',
   seed=None,
+  data_format=None,
   **kwargs
 )
 RandomRotation(
@@ -971,7 +972,6 @@ RandomRotation(
   interpolation='bilinear',
   seed=None,
   fill_value=0.0,
-  value_range=(0, 255),
   data_format=None,
   **kwargs
 )
