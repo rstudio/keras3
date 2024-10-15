@@ -1,6 +1,6 @@
-Help on class RandomContrast in module keras.src.layers.preprocessing.random_contrast:
+Help on class RandomContrast in module keras.src.layers.preprocessing.image_preprocessing.random_contrast:
 
-class RandomContrast(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class RandomContrast(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
  |  RandomContrast(factor, seed=None, **kwargs)
  |
  |  A preprocessing layer which randomly adjusts contrast during training.

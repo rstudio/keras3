@@ -1,7 +1,7 @@
-Help on class RandomFlip in module keras.src.layers.preprocessing.random_flip:
+Help on class RandomFlip in module keras.src.layers.preprocessing.image_preprocessing.random_flip:
 
-class RandomFlip(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
- |  RandomFlip(mode='horizontal_and_vertical', seed=None, **kwargs)
+class RandomFlip(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
+ |  RandomFlip(mode='horizontal_and_vertical', seed=None, data_format=None, **kwargs)
  |
  |  A preprocessing layer which randomly flips images during training.
  |
@@ -51,6 +51,7 @@ class RandomFlip(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |    self,
  |    mode='horizontal_and_vertical',
  |    seed=None,
+ |    data_format=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

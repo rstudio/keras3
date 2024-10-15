@@ -1,6 +1,6 @@
-Help on class RandomCrop in module keras.src.layers.preprocessing.random_crop:
+Help on class RandomCrop in module keras.src.layers.preprocessing.image_preprocessing.random_crop:
 
-class RandomCrop(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class RandomCrop(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
  |  RandomCrop(height, width, seed=None, data_format=None, name=None, **kwargs)
  |
  |  A preprocessing layer which randomly crops images during training.

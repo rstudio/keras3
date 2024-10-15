@@ -1190,8 +1190,7 @@ function (object, factor, seed = NULL, ...)
 #' @param name
 #' String, name for the object
 #'
-#' @param data_format
-#' see description
+#' @inheritParams layer_center_crop
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1250,6 +1249,8 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inheritParams layer_center_crop
+#'
 #' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
@@ -1261,7 +1262,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' @tether keras.layers.RandomFlip
 layer_random_flip <-
 function (object, mode = "horizontal_and_vertical", seed = NULL,
-    ...)
+     data_format = NULL, ...)
 {
     args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
