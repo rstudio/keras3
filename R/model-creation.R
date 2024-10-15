@@ -473,3 +473,96 @@ pop_layer <- function(object) {
   object$pop()
   invisible(object)
 }
+
+
+#' Retrieves tree-like structure of model variables.
+#'
+#' @description
+#' This method allows retrieval of different model variables (trainable,
+#' non-trainable, optimizer, and metrics). The variables are returned in a
+#' nested dictionary format, where the keys correspond to the variable
+#' names and the values are the nested representations of the variables.
+#'
+#' # Examples
+#' ```{r}
+#' model <- keras_model_sequential(name = "my_sequential",
+#'                                 input_shape = c(1),
+#'                                 input_name = "my_input") |>
+#'   layer_dense(1, activation = "sigmoid", name = "my_dense")
+#'
+#' model |> compile(optimizer="adam", loss="mse", metrics=c("mae"))
+#' model |> fit(matrix(1), matrix(1))
+#' state_tree <- model |> get_state_tree()
+#' ```
+#'
+#' The `state_tree` list returned looks like:
+#'
+#' ```r
+#' list(
+#'   metrics_variables = list(
+#'     loss = list(
+#'       count = ...,
+#'       total = ...
+#'     ),
+#'     mean_absolute_error = list(
+#'       count = ...,
+#'       total = ...
+#'     )
+#'   ),
+#'   trainable_variables = list(
+#'     my_sequential = list(
+#'       my_dense = list(
+#'         bias = ...,
+#'         kernel = ...
+#'       )
+#'     )
+#'   ),
+#'   non_trainable_variables = list(),
+#'   optimizer_variables = list(
+#'     adam = list(
+#'       iteration = ...,
+#'       learning_rate = ...,
+#'       my_sequential_my_dense_bias_momentum = ...,
+#'       my_sequential_my_dense_bias_velocity = ...,
+#'       my_sequential_my_dense_kernel_momentum = ...,
+#'       my_sequential_my_dense_kernel_velocity = ...
+#'     )
+#'   )
+#' )
+#' ```
+#'
+#' For example:
+#' ```{r}
+#' str(state_tree)
+#' ```
+#'
+#' @returns
+#' dict: A dictionary containing the nested representations of the
+#'     requested variables. The keys are the variable names, and the
+#'     values are the corresponding nested dictionaries.
+#' @param value_format
+#' One of `"backend_tensor"`, `"numpy_array"`, `"array"`.
+#' The kind of array to return as the leaves of the nested
+#' state tree.
+#'
+#' @export
+#' @tether keras.Model.get_state_tree
+#' @family model functions
+get_state_tree <- function (object, value_format = "backend_tensor")
+{
+  switch(
+    value_format,
+    "numpy_array" = {
+      getter <- object$get_state_tree
+      r_to_py(getter)("numpy_array")
+    },
+    "r_array" = ,
+    "array" = {
+      object$get_state_tree("numpy_array")
+    },
+    # "backend_tensor" =
+    {
+      object$get_state_tree(value_format)
+    }
+  )
+}
