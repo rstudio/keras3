@@ -1343,11 +1343,15 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
-#' @param value_range
-#' see description
-#'
 #' @param data_format
-#' see description
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file at
+#' `~/.keras/keras.json`. If you never set it, then it will be
+#' `"channels_last"`.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1360,7 +1364,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' @tether keras.layers.RandomRotation
 layer_random_rotation <-
 function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
-    seed = NULL, fill_value = 0, value_range = list(0L, 255L),
+    seed = NULL, fill_value = 0,
     data_format = NULL, ...)
 {
     args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,

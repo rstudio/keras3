@@ -1,7 +1,7 @@
-Help on class RandomRotation in module keras.src.layers.preprocessing.random_rotation:
+Help on class RandomRotation in module keras.src.layers.preprocessing.image_preprocessing.random_rotation:
 
-class RandomRotation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
- |  RandomRotation(factor, fill_mode='reflect', interpolation='bilinear', seed=None, fill_value=0.0, value_range=(0, 255), data_format=None, **kwargs)
+class RandomRotation(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
+ |  RandomRotation(factor, fill_mode='reflect', interpolation='bilinear', seed=None, fill_value=0.0, data_format=None, **kwargs)
  |
  |  A preprocessing layer which randomly rotates images during training.
  |
@@ -60,6 +60,14 @@ class RandomRotation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |      seed: Integer. Used to create a random seed.
  |      fill_value: a float represents the value to be filled outside
  |          the boundaries when `fill_mode="constant"`.
+ |      data_format: string, either `"channels_last"` or `"channels_first"`.
+ |          The ordering of the dimensions in the inputs. `"channels_last"`
+ |          corresponds to inputs with shape `(batch, height, width, channels)`
+ |          while `"channels_first"` corresponds to inputs with shape
+ |          `(batch, channels, height, width)`. It defaults to the
+ |          `image_data_format` value found in your Keras config file at
+ |          `~/.keras/keras.json`. If you never set it, then it will be
+ |          `"channels_last"`.
  |
  |  Method resolution order:
  |      RandomRotation
@@ -83,7 +91,6 @@ class RandomRotation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |    interpolation='bilinear',
  |    seed=None,
  |    fill_value=0.0,
- |    value_range=(0, 255),
  |    data_format=None,
  |    **kwargs
  |  )
