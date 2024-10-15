@@ -374,6 +374,21 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |              at the target location, or instead ask the user
  |              via an interactive prompt.
  |
+ |  set_state_tree(self, state_tree)
+ |      Assigns values to variables of the model.
+ |
+ |      This method takes a dictionary of nested variable values, which
+ |      represents the state tree of the model, and assigns them to the
+ |      corresponding variables of the model. The dictionary keys represent the
+ |      variable names (e.g., `'trainable_variables'`, `'optimizer_variables'`),
+ |      and the values are nested dictionaries containing the variable
+ |      paths and their corresponding values.
+ |
+ |      Args:
+ |          state_tree: A dictionary representing the state tree of the model.
+ |              The keys are the variable names, and the values are nested
+ |              dictionaries representing the variable paths and their values.
+ |
  |  summary(
  |    self,
  |    line_length=None,

@@ -69,6 +69,9 @@ message("DONE!")
 if(FALSE) {
   # mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
 
+  mk_export("keras.Model.get_state_tree")$dump |> writeLines()
+  mk_export("keras.Model.set_state_tree")$dump |> cat_cb()
+
   catched <- character()
   catch <- function(...) catched <<- c(catched, "\n\n", ...)
   mk_export("keras.ops.bitwise_and")$dump               |> catch()

@@ -537,9 +537,12 @@ pop_layer <- function(object) {
 #' ```
 #'
 #' @returns
-#' dict: A dictionary containing the nested representations of the
-#'     requested variables. The keys are the variable names, and the
-#'     values are the corresponding nested dictionaries.
+#' A named list containing the nested representations of the
+#' requested variables. The names are the variable names, and the
+#' values are the corresponding nested named lists.
+#'
+#' @param object A Keras Model.
+#'
 #' @param value_format
 #' One of `"backend_tensor"`, `"numpy_array"`, `"array"`.
 #' The kind of array to return as the leaves of the nested
@@ -565,4 +568,30 @@ get_state_tree <- function (object, value_format = "backend_tensor")
       object$get_state_tree(value_format)
     }
   )
+}
+
+#' Assigns values to variables of the model.
+#'
+#' @description
+#' This method takes a dictionary (named list) of nested variable values, which
+#' represents the state tree of the model, and assigns them to the
+#' corresponding variables of the model. The keys (list names) represent the
+#' variable names (e.g., `'trainable_variables'`, `'optimizer_variables'`),
+#' and the values are nested dictionaries containing the variable
+#' paths and their corresponding values.
+#'
+#' @param object A keras model.
+#'
+#' @param state_tree
+#' A dictionary representing the state tree of the model.
+#' The keys are the variable names, and the values are nested
+#' dictionaries representing the variable paths and their values.
+#'
+#' @export
+#' @family model functions
+#' @tether keras.Model.set_state_tree
+set_state_tree <-
+function (object, state_tree)
+{
+    object$set_state_tree(state_tree)
 }
