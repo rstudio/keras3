@@ -1162,6 +1162,13 @@ SimpleRNNCell(
   **kwargs
 )
 Softmax(axis=-1, **kwargs)
+Solarization(
+  addition_factor=0.0,
+  threshold_factor=0.0,
+  value_range=(0, 255),
+  seed=None,
+  **kwargs
+)
 SpatialDropout1D(
   rate,
   seed=None,

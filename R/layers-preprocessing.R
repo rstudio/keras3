@@ -1798,6 +1798,78 @@ function (object, value_range = tuple(0L, 255L), ...)
 }
 
 
+#' Applies `(max_value - pixel + min_value)` for each pixel in the image.
+#'
+#' @description
+#' When created without `threshold` parameter, the layer performs solarization
+#' to all values. When created with specified `threshold` the layer only
+#' augments pixels that are above the `threshold` value.
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' str(images)
+#' str(images[1, 1, 1, ])
+#'
+#' # Note that images are Tensor with values in the range [0, 255]
+#' solarization <- layer_solarization(value_range = c(0, 255))
+#' images <- solarization(images) |> as.array()
+#' str(images[1, 1, 1, ])
+#' ```
+#'
+#' @param addition_factor
+#' (Optional)  A tuple of two floats or a single float,
+#' between 0 and 1.
+#' For each augmented image a value is
+#' sampled from the provided range. If a float is passed, the range is
+#' interpreted as `(0, addition_factor)`. If specified, this value
+#' (times the value range of input images, e.g. 255), is
+#' added to each pixel before solarization and thresholding.
+#' Defaults to `0.0`.
+#'
+#' @param threshold_factor
+#' (Optional)  A tuple of two floats or a single float.
+#' For each augmented image a value is
+#' sampled from the provided range. If a float is passed, the range is
+#' interpreted as `(0, threshold_factor)`. If specified, only pixel
+#' values above this threshold will be solarized.
+#'
+#' @param value_range
+#' a tuple or a list of two elements. The first value
+#' represents the lower bound for values in input images, the second
+#' represents the upper bound. Images passed to the layer should have
+#' values within `value_range`. Typical values to pass
+#' are `(0, 255)` (RGB image) or `(0., 1.)` (scaled image).
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @export
+#' @tether keras.layers.Solarization
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_solarization <-
+function (object, addition_factor = 0, threshold_factor = 0,
+    value_range = tuple(0L, 255L), seed = NULL, ...)
+{
+    args <- capture_args(list(
+      value_range = as_tuple,
+      addition_factor = as_scalar_or_tuple,
+      threshold_factor = as_scalar_or_tuple,
+      seed = as_integer
+    ), ignore = "object")
+    create_layer(keras$layers$Solarization, object, args)
+}
+
+
+
 #' Applies a series of layers to an input.
 #'
 #' @description
