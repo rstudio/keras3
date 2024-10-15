@@ -491,7 +491,7 @@ pop_layer <- function(object) {
 #'   layer_dense(1, activation = "sigmoid", name = "my_dense")
 #'
 #' model |> compile(optimizer="adam", loss="mse", metrics=c("mae"))
-#' model |> fit(matrix(1), matrix(1))
+#' model |> fit(matrix(1), matrix(1), verbose = 0)
 #' state_tree <- model |> get_state_tree()
 #' ```
 #'
