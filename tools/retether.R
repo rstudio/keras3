@@ -71,6 +71,7 @@ if(FALSE) {
 
   mk_export("keras.Model.get_state_tree")$dump |> writeLines()
   mk_export("keras.Model.set_state_tree")$dump |> cat_cb()
+  mk_export("keras.layers.AutoContrast")$dump |> cat_cb()
 
   catched <- character()
   catch <- function(...) catched <<- c(catched, "\n\n", ...)

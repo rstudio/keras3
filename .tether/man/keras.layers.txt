@@ -24,6 +24,7 @@ Attention(
   seed=None,
   **kwargs
 )
+AutoContrast(value_range=(0, 255), **kwargs)
 average(inputs, **kwargs)
 Average(**kwargs)
 AveragePooling1D(

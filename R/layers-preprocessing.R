@@ -1756,6 +1756,49 @@ function (object, height, width, interpolation = "bilinear",
 }
 
 
+#' Performs the auto-contrast operation on an image.
+#'
+#' @description
+#' Auto contrast stretches the values of an image across the entire available
+#' `value_range`. This makes differences between pixels more obvious. An
+#' example of this is if an image only has values `[0, 1]` out of the range
+#' `[0, 255]`, auto contrast will change the `1` values to be `255`.
+#'
+#' This layer is active at both training and inference time.
+#'
+#' @param value_range
+#' Range of values the incoming images will have.
+#' Represented as a two number tuple written `(low, high)`.
+#' This is typically either `(0, 1)` or `(0, 255)` depending
+#' on how your preprocessing pipeline is set up.
+#' Defaults to `(0, 255)`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+#' @tether keras.layers.AutoContrast
+layer_auto_contrast <-
+function (object, value_range = tuple(0L, 255L), ...)
+{
+    args <- capture_args(list(
+      value_range = as_tuple,
+
+      input_shape = normalize_shape,
+      batch_size = as_integer,
+      batch_input_shape = normalize_shape
+    ), ignore = "object")
+    create_layer(keras$layers$AutoContrast, object, args)
+}
+
+
+
 #' A preprocessing layer that maps strings to (possibly encoded) indices.
 #'
 #' @description
@@ -2492,8 +2535,6 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
         ignore = "object")
     create_layer(keras$layers$MelSpectrogram, object, args)
 }
-
-
 
 
 # ---- adapt ----
