@@ -1,6 +1,6 @@
-Help on class RandomTranslation in module keras.src.layers.preprocessing.random_translation:
+Help on class RandomTranslation in module keras.src.layers.preprocessing.image_preprocessing.random_translation:
 
-class RandomTranslation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class RandomTranslation(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
  |  RandomTranslation(height_factor, width_factor, fill_mode='reflect', interpolation='bilinear', seed=None, fill_value=0.0, data_format=None, **kwargs)
  |
  |  A preprocessing layer which randomly translates images during training.
@@ -79,6 +79,7 @@ class RandomTranslation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
  |
  |  Method resolution order:
  |      RandomTranslation
+ |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
  |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
@@ -104,12 +105,6 @@ class RandomTranslation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  call(
- |    self,
- |    inputs,
- |    training=True
- |  )
- |
  |  compute_output_shape(self, input_shape)
  |
  |  get_config(self)
@@ -117,5 +112,40 @@ class RandomTranslation(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
+ |
+ |  get_random_transformation(
+ |    self,
+ |    data,
+ |    training=True,
+ |    seed=None
+ |  )
+ |
+ |  transform_bounding_boxes(
+ |    self,
+ |    bounding_boxes,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_images(
+ |    self,
+ |    images,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_labels(
+ |    self,
+ |    labels,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_segmentation_masks(
+ |    self,
+ |    segmentation_masks,
+ |    transformation,
+ |    training=True
+ |  )
  |
 
