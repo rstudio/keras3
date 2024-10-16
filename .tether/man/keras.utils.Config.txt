@@ -1,0 +1,155 @@
+Help on class Config in module keras.src.utils.config:
+
+class Config(builtins.object)
+ |  Config(**kwargs)
+ |
+ |  A Config is a dict-like container for named values.
+ |
+ |  It offers a few advantages over a plain dict:
+ |
+ |  - Setting and retrieving values via attribute setting / getting.
+ |  - Ability to freeze the config to ensure no accidental config modifications
+ |      occur past a certain point in your program.
+ |  - Easy serialization of the whole config as JSON.
+ |
+ |  Examples:
+ |
+ |  ```python
+ |  # Create a config via constructor arguments
+ |  config = Config("learning_rate"=0.1, "momentum"=0.9)
+ |
+ |  # Then keep adding to it via attribute-style setting
+ |  config.use_ema = True
+ |  config.ema_overwrite_frequency = 100
+ |
+ |  # You can also add attributes via dict-like access
+ |  config["seed"] = 123
+ |
+ |  # You can retrieve entries both via attribute-style
+ |  # access and dict-style access
+ |  assert config.seed == 100
+ |  assert config["learning_rate"] == 0.1
+ |  ```
+ |
+ |  A config behaves like a dict:
+ |
+ |  ```python
+ |  config = Config("learning_rate"=0.1, "momentum"=0.9)
+ |  for k, v in config.items():
+ |      print(f"{k}={v}")
+ |
+ |  print(f"keys: {list(config.keys())}")
+ |  print(f"values: {list(config.values())}")
+ |  ```
+ |
+ |  In fact, it can be turned into one:
+ |
+ |  ```python
+ |  config = Config("learning_rate"=0.1, "momentum"=0.9)
+ |  dict_config = config.as_dict()
+ |  ```
+ |
+ |  You can easily serialize a config to JSON:
+ |
+ |  ```python
+ |  config = Config("learning_rate"=0.1, "momentum"=0.9)
+ |
+ |  json_str = config.to_json()
+ |  ```
+ |
+ |  You can also freeze a config to prevent further changes:
+ |
+ |  ```python
+ |  config = Config()
+ |  config.optimizer = "adam"
+ |  config.seed = 123
+ |
+ |  # Freeze the config to prevent changes.
+ |  config.freeze()
+ |  assert config.frozen
+ |
+ |  config.foo = "bar"  # This will raise an error.
+ |  ```
+ |
+ |  Methods defined here:
+ |
+ |  __contains__(self, item)
+ |
+ |  __delitem__(self, key)
+ |
+ |  __getattr__(self, name)
+ |
+ |  __getitem__(self, key)
+ |
+ |  __init__(self, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  __iter__(self)
+ |
+ |  __len__(self)
+ |
+ |  __repr__(self)
+ |      Return repr(self).
+ |
+ |  __setattr__(
+ |    self,
+ |    name,
+ |    value
+ |  )
+ |      Implement setattr(self, name, value).
+ |
+ |  __setitem__(
+ |    self,
+ |    key,
+ |    item
+ |  )
+ |
+ |  as_dict(self)
+ |
+ |  freeze(self)
+ |      Marks the config as frozen, preventing any ulterior modification.
+ |
+ |  get(
+ |    self,
+ |    keyname,
+ |    value=None
+ |  )
+ |
+ |  items(self)
+ |
+ |  keys(self)
+ |
+ |  pop(self, *args)
+ |
+ |  to_json(self)
+ |
+ |  unfreeze(self)
+ |
+ |  update(
+ |    self,
+ |    *args,
+ |    **kwargs
+ |  )
+ |
+ |  values(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  frozen
+ |      Returns True if the config is frozen.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __attrs__ = None
+

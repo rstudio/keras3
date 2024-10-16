@@ -1,0 +1,138 @@
+Help on class KerasFileEditor in module keras.src.saving.file_editor:
+
+class KerasFileEditor(builtins.object)
+ |  KerasFileEditor(filepath)
+ |
+ |  Utility to inspect, edit, and resave Keras weights files.
+ |
+ |  You will find this class useful when adapting
+ |  an old saved weights file after having made
+ |  architecture changes to a model.
+ |
+ |  Args:
+ |      filepath: The path to a local file to inspect and edit.
+ |
+ |  Examples:
+ |
+ |  ```python
+ |  editor = KerasFileEditor("my_model.weights.h5")
+ |
+ |  # Displays current contents
+ |  editor.summary()
+ |
+ |  # Remove the weights of an existing layer
+ |  editor.delete_object("layers/dense_2")
+ |
+ |  # Add the weights of a new layer
+ |  editor.add_object("layers/einsum_dense", weights={"0": ..., "1": ...})
+ |
+ |  # Save the weights of the edited model
+ |  editor.resave_weights("edited_model.weights.h5")
+ |  ```
+ |
+ |  Methods defined here:
+ |
+ |  __init__(self, filepath)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  add_object(
+ |    self,
+ |    object_path,
+ |    weights
+ |  )
+ |      Add a new object to the file (e.g. a layer).
+ |
+ |      Args:
+ |          object_path: String, full path of the
+ |              object to add (e.g. `"layers/dense_2"`).
+ |          weights: Dict mapping weight names to weight
+ |              values (arrays),
+ |              e.g. `{"0": kernel_value, "1": bias_value}`.
+ |
+ |  add_weights(
+ |    self,
+ |    object_name,
+ |    weights
+ |  )
+ |      Add one or more new weights to an existing object.
+ |
+ |      Args:
+ |          object_name: String, name or path of the
+ |              object to add the weights to
+ |              (e.g. `"dense_2"` or `"layers/dense_2"`).
+ |          weights: Dict mapping weight names to weight
+ |              values (arrays),
+ |              e.g. `{"0": kernel_value, "1": bias_value}`.
+ |
+ |  compare(self, reference_model)
+ |      Compares the opened file to a reference model.
+ |
+ |      This method will list all mismatches between the
+ |      currently opened file and the provided reference model.
+ |
+ |      Args:
+ |          reference_model: Model instance to compare to.
+ |
+ |      Returns:
+ |          Dict with the following keys:
+ |          `'status'`, `'error_count'`, `'match_count'`.
+ |          Status can be `'success'` or `'error'`.
+ |          `'error_count'` is the number of mismatches found.
+ |          `'match_count'` is the number of matching weights found.
+ |
+ |  delete_object(self, object_name)
+ |      Removes an object from the file (e.g. a layer).
+ |
+ |      Args:
+ |          object_name: String, name or path of the
+ |              object to delete (e.g. `"dense_2"` or
+ |              `"layers/dense_2"`).
+ |
+ |  delete_weight(
+ |    self,
+ |    object_name,
+ |    weight_name
+ |  )
+ |      Removes a weight from an existing object.
+ |
+ |      Args:
+ |          object_name: String, name or path of the
+ |              object from which to remove the weight
+ |              (e.g. `"dense_2"` or `"layers/dense_2"`).
+ |          weight_name: String, name of the weight to
+ |              delete (e.g. `"0"`).
+ |
+ |  rename_object(
+ |    self,
+ |    object_name,
+ |    new_name
+ |  )
+ |      Rename an object in the file (e.g. a layer).
+ |
+ |      Args:
+ |          object_name: String, name or path of the
+ |              object to rename (e.g. `"dense_2"` or
+ |              `"layers/dense_2"`).
+ |          new_name: String, new name of the object.
+ |
+ |  resave_weights(self, filepath)
+ |
+ |  save(self, filepath)
+ |      Save the edited weights file.
+ |
+ |      Args:
+ |          filepath: Path to save the file to.
+ |              Must be a `.weights.h5` file.
+ |
+ |  summary(self)
+ |      Prints the weight structure of the opened file.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+
