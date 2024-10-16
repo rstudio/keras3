@@ -417,7 +417,7 @@ keras$ops$saturate_cast(x, dtype)
 #'
 #' # Examples
 #' ```{r}
-#' x <- op_array(c[-1.7, -1.5, -0.2, 0.2, 1.5, 1.7, 2.0))
+#' x <- op_array(c(-1.7, -1.5, -0.2, 0.2, 1.5, 1.7, 2.0))
 #' op_trunc(x)
 #' ```
 #'

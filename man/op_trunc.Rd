@@ -18,8 +18,12 @@ closer to zero than \code{x} is. In short, the fractional part of the signed
 number \code{x} is discarded.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{x <- op_array(c[-1.7, -1.5, -0.2, 0.2, 1.5, 1.7, 2.0))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(-1.7, -1.5, -0.2, 0.2, 1.5, 1.7, 2.0))
 op_trunc(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1. -1. -0.  0.  1.  1.  2.], shape=(7), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 

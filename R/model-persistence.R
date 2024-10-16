@@ -1041,7 +1041,7 @@ with_custom_object_scope <- function(objects, expr) {
 #' @param filepath
 #' The path to a local file to inspect and edit.
 #'
-#' @export
+# @export
 #' @tether keras.saving.KerasFileEditor
 #'
 saved_keras_file_editor <-
