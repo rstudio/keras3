@@ -892,10 +892,7 @@ with_custom_object_scope <- function(objects, expr) {
 }
 
 
-## attempting to use keras.saving.KerasFileEditor with the most basic example raised an error -
-## it seem not ready for primetime. Revisit in next release.
-## Also, when exporting, add a `print()` method that calls summary.
-#' @noRd
+
 #'
 #'
 #' Utility to inspect, edit, and resave Keras weights files.
@@ -906,23 +903,21 @@ with_custom_object_scope <- function(objects, expr) {
 #' architecture changes to a model.
 #'
 #' # Examples
-#' ```{r}
+#' ```r
 #' model <- keras_model_sequential(name = "my_sequential",
-#'                                 input_shape = c(2, 2),
+#'                                 input_shape = c(1),
 #'                                 input_name = "my_input") |>
 #'   layer_dense(2, activation = "sigmoid", name = "my_dense") |>
 #'   layer_dense(2, activation = "sigmoid", name = "my_dense2")
 #'
 #' model |> compile(optimizer="adam", loss="mse", metrics=c("mae"))
-#' model |> fit(matrix(1:2, nrow = 1), matrix(1:2, nrow = 1), verbose = 0)
+#' model |> fit(matrix(1), matrix(1), verbose = 0)
 #'
 #' path.keras <- tempfile("model-", fileext = ".keras")
 #' path.weights.h5 <-  tempfile("model-", fileext = ".weights.h5")
 #' model |> save_model(path.keras)
 #' model |> save_model_weights(path.weights.h5)
-#' #' #'
-#' #' #'
-#' #' #'
+#'
 #' editor = saved_keras_file_editor(path.keras)
 #' editor = saved_keras_file_editor(path.weights.h5)
 #'
@@ -1043,7 +1038,10 @@ with_custom_object_scope <- function(objects, expr) {
 #'
 # @export
 #' @tether keras.saving.KerasFileEditor
-#'
+## attempting to use keras.saving.KerasFileEditor with the most basic example raised an error -
+## it seem not ready for primetime. Revisit in next release.
+## Also, when exporting, add a `print()` method that calls summary.
+#' @noRd
 saved_keras_file_editor <-
 function (filepath)
 {

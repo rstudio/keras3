@@ -27,22 +27,23 @@ Computes a histogram of the data tensor \code{x}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{input_tensor <- random_uniform(8)
-op_histogram(input_tensor)
+c(counts, edges) \%<-\% op_histogram(input_tensor)
+
+counts
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
-## tf.Tensor([2. 1. 1. 1. 0. 1. 0. 0. 0. 2.], shape=(10), dtype=float32)
-##
-## [[2]]
-## tf.Tensor(
-## [0.01647806 0.10867032 0.20086257 0.29305482 0.38524708 0.47743934
-##  0.5696316  0.66182387 0.7540161  0.84620833 0.9384006 ], shape=(11), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> tf.Tensor([2. 1. 1. 1. 0. 1. 0. 0. 0. 2.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
-[0.01647806 0.10867032 0.20086257 0.29305482 0.38524708 0.47743934
-\subsection{0.5696316  0.66182387 0.7540161  0.84620833 0.9384006 ]: R:0.01647806\%200.10867032\%200.20086257\%200.29305482\%200.38524708\%200.47743934\%0A##\%20\%200.5696316\%20\%200.66182387\%200.7540161\%20\%200.84620833\%200.9384006\%20}{
-}
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{edges
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> tf.Tensor(
+#> [0.01647806 0.10867032 0.20086257 0.29305482 0.38524708 0.47743934
+#>  0.5696316  0.66182387 0.7540161  0.84620833 0.9384006 ], shape=(11), dtype=float32)
+
+}\if{html}{\out{</div>}}
 }
 
 \seealso{

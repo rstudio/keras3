@@ -245,15 +245,17 @@ function (x, y)
 }
 
 
-
 #' Computes a histogram of the data tensor `x`.
 #'
 #' @description
 #'
 #' # Examples
-#' ```{r}
+#' ```{r, comment = "#>", strip.white = FALSE}
 #' input_tensor <- random_uniform(8)
-#' op_histogram(input_tensor)
+#' c(counts, edges) %<-% op_histogram(input_tensor)
+#'
+#' counts
+#' edges
 #' ```
 #'
 #' @returns
