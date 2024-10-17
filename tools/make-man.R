@@ -44,3 +44,4 @@ Sys.glob("man/*.Rd") %>%
 
 
 remotes::install_local(force = TRUE)
+
