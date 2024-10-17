@@ -22,7 +22,7 @@ keras$ops$cholesky(x)
 #' Computes the determinant of a square tensor.
 #'
 #' @returns
-#' A tensor of shape `(...)` represeting the determinant of `x`.
+#' A tensor of shape `(...)` representing the determinant of `x`.
 #'
 #' @param x
 #' Input tensor of shape `(..., M, M)`.

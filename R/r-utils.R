@@ -279,6 +279,20 @@ as_integer_tuple <- function(x, force_tuple = FALSE) {
     as.integer(x)
 }
 
+as_scalar_or_tuple <- function(x) {
+  if(is_py_object(x))
+    return(x)
+  if(is.atomic(x) && is_scalar(x))
+    return(x)
+  tuple(as.list(x))
+}
+
+as_tuple <- function(x) {
+  if(is_py_object(x))
+    return(x)
+  tuple(as.list(x))
+}
+
 as_nullable_integer <- function(x) {
   if (is.null(x))
     x

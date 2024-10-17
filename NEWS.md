@@ -1,5 +1,64 @@
 # keras3 (development version)
 
+- `install_keras()` changes: if a GPU is available, the default is now to 
+  install a CPU build of TensorFlow and a GPU build of JAX. To use a GPU in the 
+  current session, call `use_backend("jax")`.
+
+## Added compatibility with Keras v3.6.0. User-facing changes:
+
+#### Breaking changes:
+
+- When using `get_file()` with `extract = TRUE` or `untar = TRUE`, the return value 
+  is now the path of the extracted directory, rather than the path of the archive.
+
+#### Other changes and additions:
+
+- Logging is now asynchronous in `fit()`, `evaluate()`, and `predict()`. This 
+  enables 100% compact stacking of `train_step` calls on accelerators (e.g. when 
+  running small models on TPU).
+  - If you are using custom callbacks that rely on `on_batch_end`, this will 
+    disable async logging. You can re-enable it by adding 
+    `self$async_safe <- TRUE` to your callbacks. Note that the TensorBoard 
+    callback is not considered async-safe by default. Default callbacks like the 
+    progress bar are async-safe.
+
+- New bitwise operations:
+  - `op_bitwise_and()`
+  - `op_bitwise_invert()`
+  - `op_bitwise_left_shift()`
+  - `op_bitwise_not()`
+  - `op_bitwise_or()`
+  - `op_bitwise_right_shift()`
+  - `op_bitwise_xor()`
+
+- New math operations:
+  - `op_logdet()`
+  - `op_trunc()`
+  - `op_histogram()`
+
+- New neural network operation: `op_dot_product_attention()`
+
+- New image preprocessing layers:
+  - `layer_auto_contrast()`
+  - `layer_solarization()`
+
+- New Model functions `get_state_tree()` and `set_state_tree()`, for retrieving 
+  all model variables, including trainable, non-trainable, optimizer variables, 
+  and metric variables.
+
+- New `layer_pipeline()` for composing a sequence of layers. This class is useful 
+  for building a preprocessing pipeline. Compared to a `keras_model_sequential()`, 
+  `layer_pipeline()` has a few key differences:
+  - It's not a Model, just a plain layer.
+  - When the layers in the pipeline are compatible with `tf.data`, the pipeline 
+    will also remain `tf.data` compatible, regardless of the backend you use.
+
+- New argument: `export_savedmodel(verbose = )`
+- New argument: `op_normalize(epsilon = )`
+
+- Various documentation improvements and bug fixes.
+
+
 # keras3 1.2.0
 
 - Added compatibility with Keras v3.5.0. User facing changes:

@@ -130,6 +130,7 @@ shape:\verb{(..., num_mel_bins, time)}.
 
 \seealso{
 Other preprocessing layers: \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_discretization}()} \cr
@@ -147,6 +148,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_text_vectorization}()} \cr
 
@@ -163,6 +165,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr
@@ -239,6 +242,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr

@@ -8,7 +8,7 @@ random_categorical(logits, num_samples, dtype = "int32", seed = NULL)
 }
 \arguments{
 \item{logits}{2-D Tensor with shape (batch_size, num_classes). Each row
-should define a categorical distibution with the unnormalized
+should define a categorical distribution with the unnormalized
 log-probabilities for all classes.}
 
 \item{num_samples}{Int, the number of independent samples to draw for each

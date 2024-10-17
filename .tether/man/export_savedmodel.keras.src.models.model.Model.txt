@@ -2,7 +2,8 @@ __signature__
 keras.Model.export(
   self,
   filepath,
-  format='tf_saved_model'
+  format='tf_saved_model',
+  verbose=True
 )
 __doc__
 Create a TF SavedModel artifact for inference.
@@ -22,6 +23,7 @@ entirely standalone.
 Args:
     filepath: `str` or `pathlib.Path` object. Path where to save
         the artifact.
+    verbose: whether to print all the variables of the exported model.
 
 Example:
 

@@ -3,11 +3,11 @@ Help on class Embedding in module keras.src.layers.core.embedding:
 class Embedding(keras.src.layers.layer.Layer)
  |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, weights=None, lora_rank=None, **kwargs)
  |
- |  Turns positive integers (indexes) into dense vectors of fixed size.
+ |  Turns nonnegative integers (indexes) into dense vectors of fixed size.
  |
  |  e.g. `[[4], [20]] -> [[0.25, 0.1], [0.6, -0.2]]`
  |
- |  This layer can only be used on positive integer inputs of a fixed range.
+ |  This layer can only be used on nonnegative integer inputs of a fixed range.
  |
  |  Example:
  |

@@ -13,6 +13,7 @@ get_registered_object(
   custom_objects=None,
   module_objects=None
 )
+KerasFileEditor(filepath)
 load_model(
   filepath,
   custom_objects=None,

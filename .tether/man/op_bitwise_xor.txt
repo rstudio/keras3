@@ -1,0 +1,16 @@
+__signature__
+keras.ops.bitwise_xor(x, y)
+__doc__
+Compute the bit-wise XOR of two arrays element-wise.
+
+Computes the bit-wise XOR of the underlying binary representation of the
+integers in the input arrays. This ufunc implements the C/Python operator
+`^`.
+
+Args:
+    x: Input integer tensor.
+    y: Input integer tensor.
+
+Returns:
+    Result tensor.
+

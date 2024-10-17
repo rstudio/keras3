@@ -258,3 +258,11 @@ NULL
 #' @tether keras.dtype_policies
 #' @noRd
 NULL
+
+
+#' @title keras.utils.Config
+#' @name keras.utils.Config
+#' @tether keras.utils.Config
+#' @noRd
+NULL
+

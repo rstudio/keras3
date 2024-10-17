@@ -4,7 +4,7 @@
 \alias{export_savedmodel.keras.src.models.model.Model}
 \title{Create a TF SavedModel artifact for inference (e.g. via TF-Serving).}
 \usage{
-\method{export_savedmodel}{keras.src.models.model.Model}(object, export_dir_base, ...)
+\method{export_savedmodel}{keras.src.models.model.Model}(object, export_dir_base, ..., verbose = TRUE)
 }
 \arguments{
 \item{object}{A keras model.}
@@ -13,6 +13,8 @@
 the artifact.}
 
 \item{...}{For forward/backward compatability.}
+
+\item{verbose}{whether to print all the variables of the exported model.}
 }
 \value{
 This is called primarily for the side effect of exporting \code{object}.

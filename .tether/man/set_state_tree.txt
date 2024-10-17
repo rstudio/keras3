@@ -1,0 +1,17 @@
+__signature__
+keras.Model.set_state_tree(self, state_tree)
+__doc__
+Assigns values to variables of the model.
+
+This method takes a dictionary of nested variable values, which
+represents the state tree of the model, and assigns them to the
+corresponding variables of the model. The dictionary keys represent the
+variable names (e.g., `'trainable_variables'`, `'optimizer_variables'`),
+and the values are nested dictionaries containing the variable
+paths and their corresponding values.
+
+Args:
+    state_tree: A dictionary representing the state tree of the model.
+        The keys are the variable names, and the values are nested
+        dictionaries representing the variable paths and their values.
+

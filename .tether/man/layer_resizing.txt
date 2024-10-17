@@ -1,6 +1,6 @@
-Help on class Resizing in module keras.src.layers.preprocessing.resizing:
+Help on class Resizing in module keras.src.layers.preprocessing.image_preprocessing.resizing:
 
-class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class Resizing(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
  |  Resizing(height, width, interpolation='bilinear', crop_to_aspect_ratio=False, pad_to_aspect_ratio=False, fill_mode='constant', fill_value=0.0, data_format=None, **kwargs)
  |
  |  A preprocessing layer which resizes images.
@@ -58,6 +58,7 @@ class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |  Method resolution order:
  |      Resizing
+ |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
  |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
@@ -84,8 +85,6 @@ class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
- |  call(self, inputs)
- |
  |  compute_output_shape(self, input_shape)
  |
  |  get_config(self)
@@ -93,5 +92,33 @@ class Resizing(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
+ |
+ |  transform_bounding_boxes(
+ |    self,
+ |    bounding_boxes,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_images(
+ |    self,
+ |    images,
+ |    transformation=None,
+ |    training=True
+ |  )
+ |
+ |  transform_labels(
+ |    self,
+ |    labels,
+ |    transformation=None,
+ |    training=True
+ |  )
+ |
+ |  transform_segmentation_masks(
+ |    self,
+ |    segmentation_masks,
+ |    transformation=None,
+ |    training=True
+ |  )
  |
 

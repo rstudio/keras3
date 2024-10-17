@@ -70,7 +70,7 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' Normalizes `x` over the specified axis.
 #'
 #' @description
-#' It is defined as: `normalize(x) = x / max(norm(x), epsilon)`.
+#' It is defined as: `op_normalize(x) = x / max(norm(x), epsilon)`.
 #'
 #' # Examples
 #' ```{r}
@@ -93,6 +93,10 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' The exponent value in the norm formulation.
 #' Defaults to 2.
 #'
+#' @param epsilon
+#' A lower bound value for the norm.
+#' Defaults to `config_epsilon()`.
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -100,7 +104,7 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/normalize>
 op_normalize <-
-function (x, axis = -1L, order = 2L)
+function (x, axis = -1L, order = 2L, epsilon = NULL)
 {
     args <- capture_args(list(axis = as_axis, order = as_integer))
     do.call(keras$ops$normalize, args)
@@ -143,3 +147,75 @@ function (x, axis = -1L, order = 2L)
 op_psnr <-
 function (x1, x2, max_val)
 keras$ops$psnr(x1, x2, max_val)
+
+
+
+#' Scaled dot product attention function.
+#'
+#' @description
+#' Computes the attention function on Q (`query`), K (`key`), and V(`value`):
+#' `attention(Q, K, V) = softmax(Q * K / sqrt(d)) * V`. If we define `logits`
+#' as the output of `Q * K` and the `probs` as the output of `softmax`.
+#'
+#' Throughout this function, we utilize the following notation to represent the
+#' shape of array:
+#' - B: batch size
+#' - S: length of the key/value
+#' - T: length of the query
+#' - N: number of attention heads
+#' - H: dimensions of each attention head
+#' - K: number of key/value heads
+#' - G: number of groups, which equals to `N // K`
+#'
+#' # Examples
+#' ```{r}
+#' query = random_normal(c(2, 4, 8, 16))
+#' key = random_normal(c(2, 6, 8, 16))
+#' value = random_normal(c(2, 6, 8, 16))
+#' op_dot_product_attention(query, key, value) |> op_shape()
+#' ```
+#'
+#' @returns
+#' An array of the attention output with the same shape of `query`.
+#'
+#' @param query
+#' The query array with the shape of `(B, T, N, H)`.
+#'
+#' @param key
+#' The key array with the shape of `(B, S, K, H)`. When `K` equals
+#' `N`, multi-headed attention (MHA) is performed. Otherwise, grouped
+#' query attention (GQA) is performed if `N` is a multiple of `K`. and
+#' multi-query attention (MQA) is performed if `K==1` (a special case
+#' of GQA).
+#'
+#' @param value
+#' The value array with the same shape of `key`.
+#'
+#' @param bias
+#' Optional bias array to be added to logits. The shape must be
+#' broadcastable to `(B, N, T, S)`.
+#'
+#' @param mask
+#' Optional mask array used to filter out logits. It is a boolean
+#' mask where `TRUE` indicates the element should take part in
+#' attention. For an additive mask, users should pass it to bias. The
+#' shape must be broadcastable to `(B, N, T, S)`.
+#'
+#' @param scale
+#' Optional scale for the logits. If `NULL`, the scale will be set
+#' to `1.0 / sqrt(H)`.
+#'
+#' @param is_causal
+#' Whether to apply causal mask.
+#'
+#' @export
+#' @tether keras.ops.dot_product_attention
+#' @family nn ops
+#' @family ops
+op_dot_product_attention <-
+function (query, key, value, bias = NULL, mask = NULL, scale = NULL,
+          is_causal = FALSE)
+{
+  args <- capture_args()
+  do.call(keras$ops$dot_product_attention, args)
+}

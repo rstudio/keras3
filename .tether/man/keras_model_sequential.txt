@@ -151,10 +151,13 @@ class Sequential(keras.src.models.model.Model)
  |
  |  inputs
  |
- |  layers
- |
  |  output_shape
  |
  |  outputs
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  layers
  |
 

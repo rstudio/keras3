@@ -32,7 +32,7 @@ Normalize a batch of inputs so that each input in the batch has a L2 norm
 equal to 1 (across the axes specified in \code{axis}).
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_reshape(1:6, newshape = c(2, 3))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- 1:6 |> op_array("float32") |> op_reshape(c(2, 3))
 normalized_data <- layer_unit_normalization(data)
 op_sum(normalized_data[1, ]^2)
 }\if{html}{\out{</div>}}
@@ -66,6 +66,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr
@@ -143,6 +144,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr

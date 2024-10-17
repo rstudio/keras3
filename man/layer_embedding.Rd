@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-core.R
 \name{layer_embedding}
 \alias{layer_embedding}
-\title{Turns positive integers (indexes) into dense vectors of fixed size.}
+\title{Turns nonnegative integers (indexes) into dense vectors of fixed size.}
 \usage{
 layer_embedding(
   object,
@@ -74,7 +74,7 @@ returned, invisibly.
 \description{
 e.g. \code{rbind(4L, 20L)} \eqn{\rightarrow}{->} \code{rbind(c(0.25, 0.1), c(0.6, -0.2))}
 
-This layer can only be used on positive integer inputs of a fixed range.
+This layer can only be used on nonnegative integer inputs of a fixed range.
 }
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential() |>
@@ -161,6 +161,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr
@@ -237,6 +238,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr

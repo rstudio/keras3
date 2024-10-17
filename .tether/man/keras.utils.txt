@@ -21,6 +21,7 @@ audio_dataset_from_directory(
   verbose=True
 )
 clear_session(free_memory=True)
+Config(**kwargs)
 custom_object_scope(custom_objects)
 CustomObjectScope(custom_objects)
 deserialize_keras_object(

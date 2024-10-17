@@ -18,9 +18,12 @@ get_file(
 )
 }
 \arguments{
-\item{fname}{Name of the file. If an absolute path, e.g. \code{"/path/to/file.txt"}
-is specified, the file will be saved at that location.
-If \code{NULL}, the name of the file at \code{origin} will be used.}
+\item{fname}{If the target is a single file, this is your desired
+local name for the file.
+If \code{NULL}, the name of the file at \code{origin} will be used.
+If downloading and extracting a directory archive,
+the provided \code{fname} will be used as extraction directory
+name (only if it doesn't have an extension).}
 
 \item{origin}{Original URL of the file.}
 
@@ -37,7 +40,8 @@ specified, the file will be saved at that location.}
 options are \verb{"md5'}, \verb{"sha256'}, and \verb{"auto'}.
 The default 'auto' detects the hash algorithm in use.}
 
-\item{extract}{\code{TRUE} tries extracting the file as an Archive, like tar or zip.}
+\item{extract}{If \code{TRUE}, extracts the archive. Only applicable to compressed
+archive files like tar or zip.}
 
 \item{archive_format}{Archive format to try for extracting the file.
 Options are \verb{"auto'}, \verb{"tar'}, \verb{"zip'}, and \code{NULL}.
@@ -75,6 +79,7 @@ programs \code{shasum} and \code{sha256sum} can compute the hash.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{path_to_downloaded_file <- get_file(
+    "flower_photos",
     origin = "https://storage.googleapis.com/download.tensorflow.org/example_images/flower_photos.tgz",
     extract = TRUE
 )

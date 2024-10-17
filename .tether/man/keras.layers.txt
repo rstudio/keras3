@@ -24,6 +24,7 @@ Attention(
   seed=None,
   **kwargs
 )
+AutoContrast(value_range=(0, 255), **kwargs)
 average(inputs, **kwargs)
 Average(**kwargs)
 AveragePooling1D(
@@ -933,6 +934,7 @@ Normalization(
   **kwargs
 )
 Permute(dims, **kwargs)
+Pipeline(layers, name=None)
 PReLU(
   alpha_initializer='Zeros',
   alpha_regularizer=None,
@@ -962,6 +964,7 @@ RandomCrop(
 RandomFlip(
   mode='horizontal_and_vertical',
   seed=None,
+  data_format=None,
   **kwargs
 )
 RandomRotation(
@@ -970,7 +973,6 @@ RandomRotation(
   interpolation='bilinear',
   seed=None,
   fill_value=0.0,
-  value_range=(0, 255),
   data_format=None,
   **kwargs
 )
@@ -1160,6 +1162,13 @@ SimpleRNNCell(
   **kwargs
 )
 Softmax(axis=-1, **kwargs)
+Solarization(
+  addition_factor=0.0,
+  threshold_factor=0.0,
+  value_range=(0, 255),
+  seed=None,
+  **kwargs
+)
 SpatialDropout1D(
   rate,
   seed=None,

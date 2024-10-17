@@ -1,0 +1,67 @@
+__signature__
+keras.Model.get_state_tree(self, value_format='backend_tensor')
+__doc__
+Retrieves tree-like structure of model variables.
+
+This method allows retrieval of different model variables (trainable,
+non-trainable, optimizer, and metrics). The variables are returned in a
+nested dictionary format, where the keys correspond to the variable
+names and the values are the nested representations of the variables.
+
+Returns:
+    dict: A dictionary containing the nested representations of the
+        requested variables. The keys are the variable names, and the
+        values are the corresponding nested dictionaries.
+    value_format: One of `"backend_tensor"`, `"numpy_array"`.
+        The kind of array to return as the leaves of the nested
+            state tree.
+
+Example:
+
+```python
+model = keras.Sequential([
+    keras.Input(shape=(1,), name="my_input"),
+    keras.layers.Dense(1, activation="sigmoid", name="my_dense"),
+], name="my_sequential")
+model.compile(optimizer="adam", loss="mse", metrics=["mae"])
+model.fit(np.array([[1.0]]), np.array([[1.0]]))
+state_tree = model.get_state_tree()
+```
+
+The `state_tree` dictionary returned looks like:
+
+```
+{
+    'metrics_variables': {
+        'loss': {
+            'count': ...,
+            'total': ...,
+        },
+        'mean_absolute_error': {
+            'count': ...,
+            'total': ...,
+        }
+    },
+    'trainable_variables': {
+        'my_sequential': {
+            'my_dense': {
+                'bias': ...,
+                'kernel': ...,
+            }
+        }
+    },
+    'non_trainable_variables': {},
+    'optimizer_variables': {
+        'adam': {
+                'iteration': ...,
+                'learning_rate': ...,
+                'my_sequential_my_dense_bias_momentum': ...,
+                'my_sequential_my_dense_bias_velocity': ...,
+                'my_sequential_my_dense_kernel_momentum': ...,
+                'my_sequential_my_dense_kernel_velocity': ...,
+            }
+        }
+    }
+}
+```
+

@@ -782,7 +782,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' @param vocabulary
 #' Optional. Either an array of integers or a string path to a
 #' text file. If passing an array, can pass a list, list,
-#' 1D NumPy array, or 1D tensor containing the integer vocbulary terms.
+#' 1D NumPy array, or 1D tensor containing the integer vocabulary terms.
 #' If passing a file path, the file should contain one line per term
 #' in the vocabulary. If this argument is set,
 #' there is no need to `adapt()` the layer.
@@ -1190,8 +1190,7 @@ function (object, factor, seed = NULL, ...)
 #' @param name
 #' String, name for the object
 #'
-#' @param data_format
-#' see description
+#' @inheritParams layer_center_crop
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1250,6 +1249,8 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inheritParams layer_center_crop
+#'
 #' @inherit layer_dense return
 #' @export
 #' @family image augmentation layers
@@ -1261,7 +1262,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' @tether keras.layers.RandomFlip
 layer_random_flip <-
 function (object, mode = "horizontal_and_vertical", seed = NULL,
-    ...)
+     data_format = NULL, ...)
 {
     args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
@@ -1343,11 +1344,15 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
-#' @param value_range
-#' see description
-#'
 #' @param data_format
-#' see description
+#' string, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, channels, height, width)`. It defaults to the
+#' `image_data_format` value found in your Keras config file at
+#' `~/.keras/keras.json`. If you never set it, then it will be
+#' `"channels_last"`.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1360,7 +1365,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' @tether keras.layers.RandomRotation
 layer_random_rotation <-
 function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
-    seed = NULL, fill_value = 0, value_range = list(0L, 255L),
+    seed = NULL, fill_value = 0,
     data_format = NULL, ...)
 {
     args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
@@ -1751,6 +1756,174 @@ function (object, height, width, interpolation = "bilinear",
 }
 
 
+#' Performs the auto-contrast operation on an image.
+#'
+#' @description
+#' Auto contrast stretches the values of an image across the entire available
+#' `value_range`. This makes differences between pixels more obvious. An
+#' example of this is if an image only has values `[0, 1]` out of the range
+#' `[0, 255]`, auto contrast will change the `1` values to be `255`.
+#'
+#' This layer is active at both training and inference time.
+#'
+#' @param value_range
+#' Range of values the incoming images will have.
+#' Represented as a two number tuple written `(low, high)`.
+#' This is typically either `(0, 1)` or `(0, 255)` depending
+#' on how your preprocessing pipeline is set up.
+#' Defaults to `(0, 255)`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+#' @tether keras.layers.AutoContrast
+layer_auto_contrast <-
+function (object, value_range = tuple(0L, 255L), ...)
+{
+    args <- capture_args(list(
+      value_range = as_tuple,
+
+      input_shape = normalize_shape,
+      batch_size = as_integer,
+      batch_input_shape = normalize_shape
+    ), ignore = "object")
+    create_layer(keras$layers$AutoContrast, object, args)
+}
+
+
+#' Applies `(max_value - pixel + min_value)` for each pixel in the image.
+#'
+#' @description
+#' When created without `threshold` parameter, the layer performs solarization
+#' to all values. When created with specified `threshold` the layer only
+#' augments pixels that are above the `threshold` value.
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' str(images)
+#' str(images[1, 1, 1, ])
+#'
+#' # Note that images are Tensor with values in the range [0, 255]
+#' solarization <- layer_solarization(value_range = c(0, 255))
+#' images <- solarization(images) |> as.array()
+#' str(images[1, 1, 1, ])
+#' ```
+#'
+#' @param addition_factor
+#' (Optional)  A tuple of two floats or a single float,
+#' between 0 and 1.
+#' For each augmented image a value is
+#' sampled from the provided range. If a float is passed, the range is
+#' interpreted as `(0, addition_factor)`. If specified, this value
+#' (times the value range of input images, e.g. 255), is
+#' added to each pixel before solarization and thresholding.
+#' Defaults to `0.0`.
+#'
+#' @param threshold_factor
+#' (Optional)  A tuple of two floats or a single float.
+#' For each augmented image a value is
+#' sampled from the provided range. If a float is passed, the range is
+#' interpreted as `(0, threshold_factor)`. If specified, only pixel
+#' values above this threshold will be solarized.
+#'
+#' @param value_range
+#' a tuple or a list of two elements. The first value
+#' represents the lower bound for values in input images, the second
+#' represents the upper bound. Images passed to the layer should have
+#' values within `value_range`. Typical values to pass
+#' are `(0, 255)` (RGB image) or `(0., 1.)` (scaled image).
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param ...
+#' Base layer keyword arguments, such as `name` and `dtype`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @export
+#' @tether keras.layers.Solarization
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_solarization <-
+function (object, addition_factor = 0, threshold_factor = 0,
+    value_range = tuple(0L, 255L), seed = NULL, ...)
+{
+    args <- capture_args(list(
+      value_range = as_tuple,
+      addition_factor = as_scalar_or_tuple,
+      threshold_factor = as_scalar_or_tuple,
+      seed = as_integer
+    ), ignore = "object")
+    create_layer(keras$layers$Solarization, object, args)
+}
+
+
+
+#' Applies a series of layers to an input.
+#'
+#' @description
+#' This class is useful to build a preprocessing pipeline,
+#' in particular an image data augmentation pipeline.
+#' Compared to a `Sequential` model, `Pipeline` features
+#' a few important differences:
+#'
+#' - It's not a `Model`, just a plain layer.
+#' - When the layers in the pipeline are compatible
+#'     with `tf.data`, the pipeline will also
+#'     remain `tf.data` compatible. That is to say,
+#'     the pipeline will not attempt to convert
+#'     its inputs to backend-native tensors
+#'     when in a tf.data context (unlike a `Sequential`
+#'     model).
+#'
+#' # Examples
+#' ```{r}
+#' preprocessing_pipeline <- layer_pipeline(c(
+#'   layer_auto_contrast(, ),
+#'   layer_random_zoom(, 0.2),
+#'   layer_random_rotation(, 0.2)
+#' ))
+#'
+#' # `ds` is a tf.data.Dataset of images
+#' ds <- tfdatasets::tensor_slices_dataset(1:100) |>
+#'   tfdatasets::dataset_map(\(.x) {
+#'     random_normal(c(28, 28))
+#'   }) |>
+#'   tfdatasets::dataset_batch(32)
+#'   #|>
+#'   # tfdatasets::dataset_take(4) |>
+#'   # iterate() |> str()
+#'
+#' preprocessed_ds <- ds |>
+#'   tfdatasets::dataset_map(preprocessing_pipeline, num_parallel_calls = 4)
+#' ```
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @param layers
+#' A list of layers.
+#'
+#' @export
+#' @tether keras.layers.Pipeline
+layer_pipeline <-
+function (layers, name = NULL)
+{
+    keras$layers$Pipeline(layers, name = name)
+}
+
+
 #' A preprocessing layer that maps strings to (possibly encoded) indices.
 #'
 #' @description
@@ -1983,7 +2156,7 @@ function (object, height, width, interpolation = "bilinear",
 #' @param vocabulary
 #' Optional. Either an array of integers or a string path to a
 #' text file. If passing an array, can pass a list, list,
-#' 1D NumPy array, or 1D tensor containing the integer vocbulary terms.
+#' 1D NumPy array, or 1D tensor containing the integer vocabulary terms.
 #' If passing a file path, the file should contain one line per term
 #' in the vocabulary. If this argument is set,
 #' there is no need to `adapt()` the layer.
@@ -2487,8 +2660,6 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
         ignore = "object")
     create_layer(keras$layers$MelSpectrogram, object, args)
 }
-
-
 
 
 # ---- adapt ----

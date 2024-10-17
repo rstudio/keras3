@@ -23,7 +23,14 @@ layer_random_crop(
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{data_format}{see description}
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
 
 \item{name}{String, name for the object}
 
@@ -83,6 +90,7 @@ Other image augmentation layers: \cr
 \code{\link{layer_random_zoom}()} \cr
 
 Other preprocessing layers: \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_discretization}()} \cr
@@ -100,6 +108,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_text_vectorization}()} \cr
 
@@ -116,6 +125,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr
@@ -192,6 +202,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr

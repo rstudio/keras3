@@ -115,7 +115,7 @@ t <- 0  # Initialize timestep
 }\if{html}{\out{</div>}}
 
 The update rule for parameter \code{w} with gradient \code{g} is described at the end
-of section 7.1 of the paper (see the referenece section):
+of section 7.1 of the paper (see the reference section):
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{t <-  t + 1
 m <- beta1 * m + (1 - beta) * g

@@ -48,7 +48,7 @@ for OOV indices. Defaults to \code{-1}.}
 
 \item{vocabulary}{Optional. Either an array of integers or a string path to a
 text file. If passing an array, can pass a list, list,
-1D NumPy array, or 1D tensor containing the integer vocbulary terms.
+1D NumPy array, or 1D tensor containing the integer vocabulary terms.
 If passing a file path, the file should contain one line per term
 in the vocabulary. If this argument is set,
 there is no need to \code{adapt()} the layer.}
@@ -413,6 +413,7 @@ Other categorical features preprocessing layers: \cr
 \code{\link{layer_string_lookup}()} \cr
 
 Other preprocessing layers: \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_discretization}()} \cr
@@ -430,6 +431,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_text_vectorization}()} \cr
 
@@ -446,6 +448,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
 \code{\link{layer_average_pooling_2d}()} \cr
@@ -522,6 +525,7 @@ Other layers: \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
 \code{\link{layer_simple_rnn}()} \cr
+\code{\link{layer_solarization}()} \cr
 \code{\link{layer_spatial_dropout_1d}()} \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr

@@ -67,6 +67,13 @@ bincount(
   minlength=0,
   sparse=False
 )
+bitwise_and(x, y)
+bitwise_invert(x)
+bitwise_left_shift(x, y)
+bitwise_not(x)
+bitwise_or(x, y)
+bitwise_right_shift(x, y)
+bitwise_xor(x, y)
 broadcast_to(x, shape)
 ceil(x)
 clip(
@@ -148,6 +155,11 @@ full_like(
 get_item(x, key)
 greater(x1, x2)
 greater_equal(x1, x2)
+histogram(
+  x,
+  bins=10,
+  range=None
+)
 hstack(xs)
 identity(n, dtype=None)
 imag(x)
@@ -161,6 +173,7 @@ isclose(
 isfinite(x)
 isinf(x)
 isnan(x)
+left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
 linspace(
@@ -265,6 +278,7 @@ repeat(
   axis=None
 )
 reshape(x, newshape)
+right_shift(x, y)
 roll(
   x,
   shift,
@@ -341,6 +355,7 @@ tri(
 tril(x, k=0)
 triu(x, k=0)
 true_divide(x1, x2)
+trunc(x)
 var(
   x,
   axis=None,
