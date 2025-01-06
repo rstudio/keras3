@@ -1203,6 +1203,19 @@ SpectralNormalization(
   **kwargs
 )
 StackedRNNCells(cells, **kwargs)
+STFTSpectrogram(
+  mode='log',
+  frame_length=256,
+  frame_step=None,
+  fft_length=None,
+  window='hann',
+  periodic=False,
+  scaling='density',
+  padding='valid',
+  expand_dims=False,
+  data_format=None,
+  **kwargs
+)
 StringLookup(
   max_tokens=None,
   num_oov_indices=1,

@@ -2692,6 +2692,180 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
 }
 
 
+#' Layer to compute the Short-Time Fourier Transform (STFT) on a 1D signal.
+#'
+#' @description
+#' A layer that computes Spectrograms of the input signal to produce
+#' a spectrogram. This layers by
+#' The layer computes Spectrograms based on Short-Time Fourier Transform (STFT)
+#' by utilizing convolution
+#' kernels, which allows parallelization on GPUs and trainable kernels for
+#' fine-tuning support. This layer allows different modes of output
+#' (e.g., log-scaled magnitude, phase, power spectral density, etc.) and
+#' provides flexibility in windowing, padding, and scaling options for the
+#' STFT calculation.
+#'
+#' # Examples
+#' Apply it as a non-trainable preprocessing layer on 3 audio tracks of
+#' 1 channel, 10 seconds and sampled at 16 kHz.
+#'
+#' ```{r}
+#' layer <- layer_stft_spectrogram(
+#'   mode = 'log',
+#'   frame_length = 256,
+#'   frame_step = 128, # 50% overlap
+#'   fft_length = 512,
+#'   window = "hann",
+#'   padding = "valid",
+#'   trainable = FALSE # non-trainable, preprocessing only)
+#' )
+#' random_uniform(shape=c(3, 160000, 1)) |> layer() |> op_shape()
+#' ```
+#'
+#' Apply it as a trainable processing layer on 3 stereo audio tracks of
+#' 2 channels, 10 seconds and sampled at 16 kHz. This is initialized as the
+#' non-trainable layer, but then can be trained jointly within a model.
+#'
+#' ```{r}
+#' layer <- layer_stft_spectrogram(
+#'   mode = 'log',
+#'   frame_length = 256,
+#'   frame_step = 128,   # 50% overlap
+#'   fft_length = 512,
+#'   window = "hamming", # hamming windowing function
+#'   padding = "same",   # padding to preserve the time dimension
+#'   trainable = TRUE,   # trainable, this is the default in keras
+#' )
+#' random_uniform(shape=c(3, 160000, 2)) |> layer() |> op_shape()
+#' ```
+#'
+#' Similar to the last example, but add an extra dimension so the output is
+#' an image to be used with image models. We apply this here on a signal of
+#' 3 input channels to output an image tensor, hence is directly applicable
+#' with an image model.
+#'
+#' ```{r}
+#' layer <- layer_stft_spectrogram(
+#'   mode = 'log',
+#'   frame_length = 256,
+#'   frame_step = 128,
+#'   fft_length = 512,
+#'   padding = "same",
+#'   expand_dims = TRUE  # this adds the extra dimension
+#' )
+#' random_uniform(shape=c(3, 160000, 3)) |> layer() |> op_shape()
+#' ```
+#'
+#' # Raises
+#' ValueError: If an invalid value is provided for `"mode`", `"scaling`",
+#'     `"padding`", or other input arguments.
+#' TypeError: If the input data type is not one of `"float16`",
+#'     `"float32`", or `"float64`".
+#'
+#' # Input Shape
+#' A 3D tensor of shape `(batch_size, time_length, input_channels)`, if
+#' `data_format=="channels_last"`, and of shape
+#' `(batch_size, input_channels, time_length)` if
+#' `data_format=="channels_first"`, where `time_length` is the length of
+#' the input signal, and `input_channels` is the number of input channels.
+#' The same kernels are applied to each channel independently.
+#'
+#' # Output Shape
+#' If `data_format=="channels_first" && !expand_dims`, a 3D tensor:
+#'     `(batch_size, input_channels * freq_channels, new_time_length)`
+#' If `data_format=="channels_last" && !expand_dims`, a 3D tensor:
+#'     `(batch_size, new_time_length, input_channels * freq_channels)`
+#' If `data_format=="channels_first" && expand_dims`, a 4D tensor:
+#'     `(batch_size, input_channels, new_time_length, freq_channels)`
+#' If `data_format=="channels_last" && expand_dims`, a 4D tensor:
+#'     `(batch_size, new_time_length, freq_channels, input_channels)`
+#'
+#' where `new_time_length` depends on the padding, and `freq_channels` is
+#' the number of FFT bins `(fft_length %/% 2 + 1)`.
+#'
+#' @param mode
+#' String, the output type of the spectrogram. Can be one of
+#' `"log"`, `"magnitude`", `"psd"`, `"real`", `"imag`", `"angle`",
+#' `"stft`". Defaults to `"log`".
+#'
+#' @param frame_length
+#' Integer, The length of each frame (window) for STFT in
+#' samples. Defaults to `256`.
+#'
+#' @param frame_step
+#' Integer, the step size (hop length) between
+#' consecutive frames. If not provided, defaults to half the
+#' frame_length. Defaults to `frame_length %/% 2`.
+#'
+#' @param fft_length
+#' Integer, the size of frequency bins used in the Fast-Fourier
+#' Transform (FFT) to apply to each frame. Should be greater than or
+#' equal to `frame_length`.  Recommended to be a power of two. Defaults
+#' to the smallest power of two that is greater than or equal
+#' to `frame_length`.
+#'
+#' @param window
+#' (String or array_like), the windowing function to apply to each
+#' frame. Can be `"hann`" (default), `"hamming`", or a custom window
+#' provided as an array_like.
+#'
+#' @param periodic
+#' Boolean, if `TRUE`, the window function will be treated as
+#' periodic. Defaults to `FALSE`.
+#'
+#' @param scaling
+#' String, type of scaling applied to the window. Can be
+#' `"density`", `"spectrum`", or None. Default is `"density`".
+#'
+#' @param padding
+#' String, padding strategy. Can be `"valid`" or `"same`".
+#' Defaults to `"valid"`.
+#'
+#' @param expand_dims
+#' Boolean, if `TRUE`, will expand the output into spectrograms
+#' into two dimensions to be compatible with image models.
+#' Defaults to `FALSE`.
+#'
+#' @param data_format
+#' String, either `"channels_last"` or `"channels_first"`.
+#' The ordering of the dimensions in the inputs. `"channels_last"`
+#' corresponds to inputs with shape `(batch, height, width, channels)`
+#' while `"channels_first"` corresponds to inputs with shape
+#' `(batch, channels, height, weight)`. Defaults to `"channels_last"`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inherit layer_dense return
+#' @family audio preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+#' @export
+#' @tether keras.layers.STFTSpectrogram
+layer_stft_spectrogram <-
+function (object, mode = "log", frame_length = 256L, frame_step = NULL,
+    fft_length = NULL, window = "hann", periodic = FALSE, scaling = "density",
+    padding = "valid", expand_dims = FALSE, data_format = NULL,
+    ...)
+{
+  args <- capture_args(
+    list(
+      frame_length = as_integer,
+      frame_step = as_integer,
+      fft_length = as_integer,
+      input_shape = normalize_shape,
+      batch_size = as_integer,
+      batch_input_shape = normalize_shape
+    ),
+    ignore = "object"
+  )
+    create_layer(keras$layers$STFTSpectrogram, object, args)
+}
+
+
 # ---- adapt ----
 
 
