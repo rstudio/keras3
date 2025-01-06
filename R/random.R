@@ -408,7 +408,7 @@ function (seed = NULL, name = NULL, ...)
 #' Draw samples from a Beta distribution.
 #'
 #' @description
-#' The values are drawm from a Beta distribution parametrized
+#' The values are drawn from a Beta distribution parametrized
 #' by alpha and beta.
 #'
 #' @param shape

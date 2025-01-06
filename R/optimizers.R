@@ -629,7 +629,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
 #'
 #' According to
 #' [Kingma et al., 2014](https://arxiv.org/abs/1412.6980),
-#' the underying Adam method is "*computationally
+#' the underlying Adam method is "*computationally
 #' efficient, has little memory requirement, invariant to diagonal rescaling of
 #' gradients, and is well suited for problems that are large in terms of
 #' data/parameters*".

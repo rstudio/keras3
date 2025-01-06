@@ -128,13 +128,13 @@ r_to_py(keras$ops)$convert_to_numpy(x)
 #' ```
 #'
 #' @returns
-#' A tensor of the specified `dtype`.
+#' A backend tensor of the specified `dtype` and sparseness.
 #'
 #' @param x
-#' An array.
+#' An array (can be nested) or a backend tensor.
 #'
 #' @param dtype
-#' The target type.
+#' The target type. If `NULL`, the type of `x` is used.
 #'
 #' @param sparse
 #' Whether to keep sparse tensors. `FALSE` will cause sparse

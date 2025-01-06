@@ -208,13 +208,19 @@ keras$ops$psnr(x1, x2, max_val)
 #' @param is_causal
 #' Whether to apply causal mask.
 #'
+#' @param flash_attention
+#' Whether to use flash attention. If `NULL`, it will
+#' attempt to use flash attention if the required conditions are met.
+#' Typically, the inputs must be in float16 and bfloat16 dtype and the
+#' input layout requirements may vary depending on the backend.
+#'
 #' @export
 #' @tether keras.ops.dot_product_attention
 #' @family nn ops
 #' @family ops
 op_dot_product_attention <-
 function (query, key, value, bias = NULL, mask = NULL, scale = NULL,
-          is_causal = FALSE)
+          is_causal = FALSE, flash_attention = NULL)
 {
   args <- capture_args()
   do.call(keras$ops$dot_product_attention, args)
