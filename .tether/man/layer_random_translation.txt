@@ -120,6 +120,20 @@ class RandomTranslation(keras.src.layers.preprocessing.image_preprocessing.base_
  |    seed=None
  |  )
  |
+ |  get_shifted_bbox(
+ |    self,
+ |    bounding_boxes,
+ |    w_shift_factor,
+ |    h_shift_factor
+ |  )
+ |
+ |  get_transformed_x_y(
+ |    self,
+ |    x,
+ |    y,
+ |    transform
+ |  )
+ |
  |  transform_bounding_boxes(
  |    self,
  |    bounding_boxes,

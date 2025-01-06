@@ -113,6 +113,15 @@ class RandomZoom(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |
  |  compute_output_shape(self, input_shape)
  |
+ |  get_clipped_bbox(
+ |    self,
+ |    bounding_boxes,
+ |    h_end,
+ |    h_start,
+ |    w_end,
+ |    w_start
+ |  )
+ |
  |  get_config(self)
  |      Returns the config of the object.
  |
@@ -124,6 +133,13 @@ class RandomZoom(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |    data,
  |    training=True,
  |    seed=None
+ |  )
+ |
+ |  get_transformed_x_y(
+ |    self,
+ |    x,
+ |    y,
+ |    transform
  |  )
  |
  |  transform_bounding_boxes(

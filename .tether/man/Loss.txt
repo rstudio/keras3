@@ -5,6 +5,8 @@ class Loss(keras.src.saving.keras_saveable.KerasSaveable)
  |
  |  Loss base class.
  |
+ |  This is the class to subclass in order to create new custom losses.
+ |
  |  Args:
  |      reduction: Type of reduction to apply to the loss. In almost all cases
  |          this should be `"sum_over_batch_size"`. Supported options are
