@@ -570,3 +570,32 @@ activation_hard_swish <-
     args <- capture_args(NULL)
     do.call(keras$activations$hard_swish, args)
   }, py_function_name = "hard_silu")
+
+
+#' Gated Linear Unit (GLU) activation function.
+#'
+#' @description
+#' The GLU activation function is defined as:
+#'
+#' `glu(x) = a * sigmoid(b)`,
+#'
+#' where `x` is split into two equal parts `a` and `b` along the given axis.
+#'
+#' # Reference
+#' - [Dauphin et al., 2017](https://arxiv.org/abs/1612.08083)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' The axis along which to split the input tensor. Defaults to `-1`.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.glu
+activation_glu <- function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$activations$glu, args)
+}
