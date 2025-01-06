@@ -1395,7 +1395,7 @@ function (condlist, choicelist, default = 0L)
 #' A tensor of shape `(..., M, M)` representing the coefficients matrix.
 #'
 #' @param b
-#' A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+#' A tensor of shape `(..., M)` or `(..., M, N)` representing the
 #' right-hand side or "dependent variable" matrix.
 #'
 #' @export
@@ -3663,7 +3663,7 @@ function(f, elems, reverse = FALSE, axis = 1L)
 #' is negative it counts from the last to the first axis.
 #'
 #' @param weights
-#' Tensor of wieghts associated with the values in `x`. Each
+#' Tensor of weights associated with the values in `x`. Each
 #' value in `x` contributes to the average according to its
 #' associated weight. The weights array can either be 1-D (in which
 #' case its length must be the size of a along the given axis) or of
@@ -6000,7 +6000,7 @@ keras$ops$nonzero(x)
 #' ```
 #'
 #' @returns
-#' Output tensor, element-wise comparsion of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -6220,10 +6220,10 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 #' Compute the q-th quantile(s) of the data along the specified axis.
 #'
 #' @returns
-#' The quantile(s). If `q` is a single probability and `axis=NULL`, then
-#' the result is a scalar. If multiple probabilies levels are given, first
-#' axis of the result corresponds to the quantiles. The other axes are the
-#' axes that remain after the reduction of `x`.
+#' The quantile(s). If `q` is a single probability and `axis = NULL`, then
+#' the result is a scalar. If multiple probabilities levels are given,
+#' first axis of the result corresponds to the quantiles. The other axes
+#' are the axes that remain after the reduction of `x`.
 #'
 #' @param x
 #' Input tensor.

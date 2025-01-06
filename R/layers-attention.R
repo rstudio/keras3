@@ -133,7 +133,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' attention scores. Defaults to `0.0`.
 #'
 #' @param seed
-#' An integer to use as random seed incase of `dropout`.
+#' An integer to use as random seed in case of `dropout`.
 #'
 #' @param score_mode
 #' Function to use to compute attention scores, one of

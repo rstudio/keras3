@@ -9,7 +9,7 @@ Solves a linear system of equations given by `a x = b`.
 
 Args:
     a: A tensor of shape `(..., M, M)` representing the coefficients matrix.
-    b: A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+    b: A tensor of shape `(..., M)` or `(..., M, N)` representing the
     right-hand side or "dependent variable" matrix.
 
 Returns:

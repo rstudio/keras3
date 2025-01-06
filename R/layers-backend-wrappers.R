@@ -441,7 +441,7 @@ function (object, module, method = NULL, variables = NULL, ...)
 #'
 #' @param init_fn
 #' the function to call to initialize the model. See description
-#' above for the list of arguments it takes and the ouputs it returns.
+#' above for the list of arguments it takes and the outputs it returns.
 #' If `NULL`, then `params` and/or `state` must be provided.
 #'
 #' @param params

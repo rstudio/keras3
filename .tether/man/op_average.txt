@@ -12,7 +12,7 @@ Args:
     axis: Integer along which to average `x`. The default, `axis=None`,
         will average over all of the elements of the input tensor. If axis
         is negative it counts from the last to the first axis.
-    weights: Tensor of wieghts associated with the values in `x`. Each
+    weights: Tensor of weights associated with the values in `x`. Each
         value in `x` contributes to the average according to its
         associated weight. The weights array can either be 1-D (in which
         case its length must be the size of a along the given axis) or of
@@ -55,3 +55,4 @@ array([0.75, 2.75, 4.75], dtype=float32)
 Traceback (most recent call last):
     ...
 ValueError: Axis must be specified when shapes of a and weights differ.
+
