@@ -29,22 +29,23 @@
 \arguments{
 \item{object}{Keras model object}
 
-\item{x}{Input data. It could be:
+\item{x}{Input data. It can be:
 \itemize{
 \item An array (or array-like), or a list of arrays
 (in case the model has multiple inputs).
-\item A tensor, or a list of tensors
+\item A backend-native tensor, or a list of tensors
 (in case the model has multiple inputs).
 \item A named list mapping input names to the corresponding array/tensors,
 if the model has named inputs.
 \item A \code{tf.data.Dataset}. Should return a tuple
 of either \verb{(inputs, targets)} or
 \verb{(inputs, targets, sample_weights)}.
-\item A generator returning \verb{(inputs, targets)} or \verb{(inputs, targets, sample_weights)}.
+\item A generator returning \verb{(inputs, targets)} or
+\verb{(inputs, targets, sample_weights)}.
 }}
 
 \item{y}{Target data. Like the input data \code{x},
-it could be either array(s) or backend-native tensor(s).
+it can be either array(s) or backend-native tensor(s).
 If \code{x} is a TF Dataset or generator,
 \code{y} should
 not be specified (since targets will be obtained from \code{x}).}
@@ -73,15 +74,14 @@ of index \code{epochs} is reached.}
 List of callbacks to apply during training.
 See \verb{callback_*}.}
 
-\item{validation_split}{Float between 0 and 1.
-Fraction of the training data to be used as validation data.
+\item{validation_split}{Fraction of the training data to be used as validation data.
 The model will set apart this fraction of the training data,
-will not train on it, and will evaluate
-the loss and any model metrics
-on this data at the end of each epoch.
-The validation data is selected from the last samples
-in the \code{x} and \code{y} data provided, before shuffling. This
-argument is not supported when \code{x} is a TF Dataset or generator.
+will not train on it, and will evaluate the loss and any model
+metrics on this data at the end of each epoch. The validation
+data is selected from the last samples in the \code{x} and \code{y} data
+provided, before shuffling.
+This argument is only supported when \code{x} and \code{y} are made of
+arrays or tensors.
 If both \code{validation_data} and \code{validation_split} are provided,
 \code{validation_data} will override \code{validation_split}.}
 
@@ -92,7 +92,7 @@ that the validation loss of data provided using
 \code{validation_split} or \code{validation_data} is not affected by
 regularization layers like noise and dropout.
 \code{validation_data} will override \code{validation_split}.
-It could be:
+It can be:
 \itemize{
 \item A tuple \verb{(x_val, y_val)} of arrays or tensors.
 \item A tuple \verb{(x_val, y_val, val_sample_weights)} of
@@ -115,18 +115,17 @@ and targets have a rank of 2 or greater, either \code{y} must be
 one-hot encoded, or an explicit final dimension of \code{1} must
 be included for sparse class labels.}
 
-\item{sample_weight}{Optional array of weights for
+\item{sample_weight}{Optional array or tensor of weights for
 the training samples, used for weighting the loss function
 (during training only). You can either pass a flat (1D)
-array/vector with the same length as the input samples
-(1:1 mapping between weights and samples),
-or in the case of temporal data,
-you can pass a 2D array (matrix) with shape
-\verb{(samples, sequence_length)},
-to apply a different weight to every timestep of every sample.
-This argument is not supported when \code{x} is a TF Dataset or generator,
-instead provide the
-sample_weights as the third element of \code{x}.
+array or tensor with the same length as the input samples
+(1:1 mapping between weights and samples), or in the case of
+temporal data, you can pass a 2D array or tensor with
+shape \verb{(samples, sequence_length)} to apply a different weight
+to every timestep of every sample.
+This argument is not supported when \code{x} is a
+\code{tf.data.Dataset}, or Python generator function.
+Instead, provide \code{sample_weights} as the third element of \code{x}.
 Note that sample weighting does not apply to metrics specified
 via the \code{metrics} argument in \code{compile()}. To apply sample
 weighting to your metrics, you can specify them via the
@@ -137,30 +136,28 @@ Epoch at which to start training
 (useful for resuming a previous training run).}
 
 \item{steps_per_epoch}{Integer or \code{NULL}.
-Total number of steps (batches of samples)
-before declaring one epoch finished and starting the
-next epoch. When training with input tensors such as
-backend-native tensors, the default \code{NULL} is equal to
-the number of samples in your dataset divided by
-the batch size, or \code{1} if that cannot be determined. If \code{x} is a
-TF Dataset, and \code{steps_per_epoch}
-is \code{NULL}, the epoch will run until the input dataset is
-exhausted.  When passing an infinitely repeating dataset, you
-must specify the \code{steps_per_epoch} argument. If
-\code{steps_per_epoch = -1} the training will run indefinitely with an
-infinitely repeating dataset.}
+Total number of steps (batches of samples) before declaring one
+epoch finished and starting the next epoch. When training with
+input tensors or arrays, the default \code{NULL} means that the
+value used is the number of samples in your dataset divided by
+the batch size, or \code{1} if that cannot be determined.
+If \code{x} is a \code{tf.data.Dataset}
+or Python generator function, the
+epoch will run until the input dataset is exhausted. When
+passing an infinitely repeating dataset, you must specify the
+\code{steps_per_epoch} argument, otherwise the training will run
+indefinitely.}
 
 \item{validation_steps}{Only relevant if \code{validation_data} is provided.
-Total number of steps (batches of
-samples) to draw before stopping when performing validation
-at the end of every epoch. If \code{validation_steps} is \code{NULL},
-validation will run until the \code{validation_data} dataset is
-exhausted. In the case of an infinitely repeated dataset, it
-will run into an infinite loop. If \code{validation_steps} is
-specified and only part of the dataset will be consumed, the
-evaluation will start from the beginning of the dataset at each
-epoch. This ensures that the same validation samples are used
-every time.}
+Total number of steps (batches of samples) to draw before
+stopping when performing validation at the end of every epoch.
+If \code{validation_steps} is \code{NULL}, validation will run until the
+\code{validation_data} dataset is exhausted. In the case of an
+infinitely repeating dataset, it will run indefinitely. If
+\code{validation_steps} is specified and only part of the dataset
+is consumed, the evaluation will start from the beginning of the
+dataset at each epoch. This ensures that the same validation
+samples are used every time.}
 
 \item{validation_batch_size}{Integer or \code{NULL}.
 Number of samples per validation batch.

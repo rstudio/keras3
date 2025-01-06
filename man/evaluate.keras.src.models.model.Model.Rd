@@ -19,11 +19,11 @@
 \arguments{
 \item{object}{Keras model object}
 
-\item{x}{Input data. It could be:
+\item{x}{Input data. It can be:
 \itemize{
 \item An R array (or array-like), or a list of arrays
 (in case the model has multiple inputs).
-\item A tensor, or a list of tensors
+\item A backend-native tensor, or a list of tensors
 (in case the model has multiple inputs).
 \item A named list mapping input names to the corresponding array/tensors,
 if the model has named inputs.
@@ -57,20 +57,29 @@ particularly useful when logged to a file, so \code{verbose=2} is
 recommended when not running interactively
 (e.g. in a production environment). Defaults to \code{"auto"}.}
 
-\item{sample_weight}{Optional array of weights for the test samples,
-used for weighting the loss function. You can either pass a flat
-(1D) R array with the same length as the input samples
+\item{sample_weight}{Optional array or tensor of weights for
+the training samples, used for weighting the loss function
+(during training only). You can either pass a flat (1D)
+array or tensor with the same length as the input samples
 (1:1 mapping between weights and samples), or in the case of
-temporal data, you can pass a 2D array with shape \verb{(samples, sequence_length)}, to apply a different weight to every
-timestep of every sample. This argument is not supported when
-\code{x} is a tfdataset, instead pass sample weights as the third
-element of \code{x}.}
+temporal data, you can pass a 2D array or tensor with
+shape \verb{(samples, sequence_length)} to apply a different weight
+to every timestep of every sample.
+This argument is not supported when \code{x} is a
+\code{tf.data.Dataset},
+or Python generator function.
+Instead, provide \code{sample_weights} as the third element of \code{x}.
+Note that sample weighting does not apply to metrics specified
+via the \code{metrics} argument in \code{compile()}. To apply sample
+weighting to your metrics, you can specify them via the
+\code{weighted_metrics} in \code{compile()} instead.}
 
 \item{steps}{Integer or \code{NULL}. Total number of steps (batches of samples)
 before declaring the evaluation round finished. Ignored with the
 default value of \code{NULL}. If \code{x} is a \code{tf.data.Dataset} and
 \code{steps} is \code{NULL}, evaluation will run until the dataset
-is exhausted.}
+is exhausted. In the case of an infinitely
+repeating dataset, it will run indefinitely.}
 
 \item{callbacks}{List of \code{Callback} instances.
 List of callbacks to apply during evaluation.}

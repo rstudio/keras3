@@ -276,7 +276,7 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @family layers
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention>
-#' @tether keras.layers.GroupedQueryAttention
+#' @tether keras.layers.GroupQueryAttention
 layer_group_query_attention <-
 function (object, head_dim, num_query_heads, num_key_value_heads,
     dropout = 0, use_bias = TRUE, flash_attention = NULL, kernel_initializer = "glorot_uniform",
@@ -287,7 +287,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
-    create_layer(keras$layers$GroupedQueryAttention, object, args)
+    create_layer(keras$layers$GroupQueryAttention, object, args)
 }
 
 

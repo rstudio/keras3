@@ -17,21 +17,22 @@
 \arguments{
 \item{object}{Keras model object}
 
-\item{x}{Input samples. It could be:
+\item{x}{Input samples. It can be:
 \itemize{
 \item A array (or array-like), or a list of arrays
 (in case the model has multiple inputs).
-\item A tensor, or a list of tensors
+\item A backend-native tensor, or a list of tensors
 (in case the model has multiple inputs).
 \item A TF Dataset.
+\item A Python generator function.
 }}
 
 \item{...}{For forward/backward compatability.}
 
 \item{batch_size}{Integer or \code{NULL}.
-Number of samples per batch.
+Number of samples per batch of computation.
 If unspecified, \code{batch_size} will default to \code{32}.
-Do not specify the \code{batch_size} if your data is in the
+Do not specify the \code{batch_size} if your input data \code{x} is in the
 form of a TF Dataset or a generator
 (since they generate batches).}
 
@@ -44,11 +45,10 @@ particularly useful when logged to a file,
 so \code{verbose=2} is recommended when not running interactively
 (e.g., in a production environment). Defaults to \code{"auto"}.}
 
-\item{steps}{Total number of steps (batches of samples)
-before declaring the prediction round finished.
-Ignored with the default value of \code{NULL}.
-If \code{x} is a TF Dataset and \code{steps} is \code{NULL},
-\code{predict()} will run until the input dataset is exhausted.}
+\item{steps}{Total number of steps (batches of samples) to draw before
+declaring the prediction round finished. If \code{steps} is \code{NULL},
+\code{predict()} will run until \code{x} is exhausted. In the case of an infinitely
+repeating dataset, \code{predict()} will run indefinitely.}
 
 \item{callbacks}{List of \code{Callback} instances.
 List of callbacks to apply during prediction.}

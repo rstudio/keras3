@@ -10,7 +10,8 @@ metric_sparse_top_k_categorical_accuracy(
   k = 5L,
   ...,
   name = "sparse_top_k_categorical_accuracy",
-  dtype = NULL
+  dtype = NULL,
+  from_sorted_ids = FALSE
 )
 }
 \arguments{
@@ -26,6 +27,11 @@ Defaults to \code{5}.}
 \item{name}{(Optional) string name of the metric instance.}
 
 \item{dtype}{(Optional) data type of the metric result.}
+
+\item{from_sorted_ids}{(Optional) When \code{FALSE}, the default, the tensor passed
+in \code{y_pred} contains the unsorted scores of all possible categories.
+When \code{TRUE}, \code{y_pred} contains the indices or IDs for the top
+categories.}
 }
 \value{
 If \code{y_true} and \code{y_pred} are missing, a \code{Metric}
@@ -36,6 +42,28 @@ the computed value is returned.
 }
 \description{
 Computes how often integer targets are in the top \code{K} predictions.
+
+By default, the arguments expected by \code{update_state()} are:
+\itemize{
+\item \code{y_true}: a tensor of shape \code{(batch_size)} representing indices of true
+categories.
+\item \code{y_pred}: a tensor of shape \verb{(batch_size, num_categories)} containing the
+scores for each sample for all possible categories.
+}
+
+With \code{from_sorted_ids=TRUE}, the arguments expected by \code{update_state} are:
+\itemize{
+\item \code{y_true}: a tensor of shape \code{(batch_size)} representing indices or IDs of
+true categories.
+\item \code{y_pred}: a tensor of shape \verb{(batch_size, N)} containing the indices or
+IDs of the top \code{N} categories sorted in order from highest score to
+lowest score. \code{N} must be greater or equal to \code{k}.
+}
+
+The \code{from_sorted_ids=TRUE} option can be more efficient when the set of
+categories is very large and the model has an optimized way to retrieve the
+top ones either without scoring or without maintaining the scores for all
+the possible categories.
 }
 \section{Usage}{
 Standalone usage:
@@ -62,6 +90,16 @@ m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_top_k_categorical_accuracy(k = 1, from_sorted_ids = TRUE)
+m$update_state(array(c(2, 1)), rbind(c(1, 0, 3),
+                                     c(1, 2, 3)))
+m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
