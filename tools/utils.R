@@ -239,7 +239,7 @@ glue_fmt <- function(..., .envir = parent.frame()) {
 # reticulate::virtualenv_remove("r-keras")
 # if(!virtualenv_exists("r-keras")) install_keras()
 
-use_virtualenv("r-keras", required = TRUE)
+# use_virtualenv("r-keras", required = TRUE)
 
 inspect <- import("inspect")
 

@@ -85,17 +85,17 @@ For example:
 ##  $ optimizer_variables    :List of 1
 ##   ..$ adam:List of 6
 ##   .. ..$ iteration                             :<tf.Variable 'adam/iteration:0' shape=() dtype=int64, numpy=1>
-##   .. ..$ learning_rate                         :<tf.Variable 'adam/learning_rate:0' shape=() dtype=float32, numpy=0.001>
+##   .. ..$ learning_rate                         :<tf.Variable 'adam/learning_rate:0' shape=() dtype=float32, numpy=0.0010000000474974513>
 ##   .. ..$ my_sequential_my_dense_kernel_momentum:<tf.Variable 'adam/my_sequential_my_dense_kernel_momentum:0' shape=(1, 1) dtype=float32, numpy=array([[-0.02943518]], dtype=float32)>
 ##   .. ..$ my_sequential_my_dense_kernel_velocity:<tf.Variable 'adam/my_sequential_my_dense_kernel_velocity:0' shape=(1, 1) dtype=float32, numpy=array([[8.664299e-05]], dtype=float32)>
 ##   .. ..$ my_sequential_my_dense_bias_momentum  :<tf.Variable 'adam/my_sequential_my_dense_bias_momentum:0' shape=(1) dtype=float32, numpy=array([-0.02943518], dtype=float32)>
 ##   .. ..$ my_sequential_my_dense_bias_velocity  :<tf.Variable 'adam/my_sequential_my_dense_bias_velocity:0' shape=(1) dtype=float32, numpy=array([8.664299e-05], dtype=float32)>
 ##  $ metrics_variables      :List of 2
 ##   ..$ loss               :List of 2
-##   .. ..$ total:<tf.Variable 'loss/total:0' shape=() dtype=float32, numpy=0.48633778>
+##   .. ..$ total:<tf.Variable 'loss/total:0' shape=() dtype=float32, numpy=0.4863377809524536>
 ##   .. ..$ count:<tf.Variable 'loss/count:0' shape=() dtype=float32, numpy=1.0>
 ##   ..$ mean_absolute_error:List of 2
-##   .. ..$ total:<tf.Variable 'mean_absolute_error/total:0' shape=() dtype=float32, numpy=0.69737923>
+##   .. ..$ total:<tf.Variable 'mean_absolute_error/total:0' shape=() dtype=float32, numpy=0.6973792314529419>
 ##   .. ..$ count:<tf.Variable 'mean_absolute_error_1/count:0' shape=() dtype=float32, numpy=1.0>
 
 }\if{html}{\out{</div>}}
