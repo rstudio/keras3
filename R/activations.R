@@ -654,3 +654,24 @@ function (x, alpha = 1)
     args <- capture_args(NULL)
     do.call(keras$activations$celu, args)
 }
+
+#' HardTanh activation function.
+#'
+#' @description
+#' It is defined as:
+#' `hard_tanh(x) = -1 for x < -1`,
+#' `hard_tanh(x) = x for -1 <= x <= 1`,
+#' `hard_tanh(x) = 1 for x > 1`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.hard_tanh
+activation_hard_tanh <-
+function (x) {
+  args <- capture_args(NULL)
+  do.call(keras$activations$hard_tanh, args)
+}
