@@ -1839,6 +1839,116 @@ function (y_true, y_pred, ..., alpha = 0.5, beta = 0.5,
 }
 
 
+#' Computes Circle Loss between integer labels and L2-normalized embeddings.
+#'
+#' @description
+#' It is designed to minimize within-class distances and maximize between-class
+#' distances in L2 normalized embedding space.
+#'
+#' This is a metric learning loss designed to minimize within-class distance
+#' and maximize between-class distance in a flexible manner by dynamically
+#' adjusting the penalty strength based on optimization status of each
+#' similarity score.
+#'
+#' To use Circle Loss effectively, the model should output embeddings without
+#' an activation function (such as a `Dense` layer with `activation=NULL`)
+#' followed by `UnitNormalization` layer to ensure unit-norm embeddings.
+#'
+#' # Examples
+#' Usage with the `compile()` API:
+#'
+#' ```{r}
+#' model <- keras_model_sequential(input_shape = c(224, 224, 3)) |>
+#'   layer_conv_2d(16, c(3, 3), activation = 'relu') |>
+#'   layer_flatten() |>
+#'   layer_dense(64, activation = NULL) |>   # No activation
+#'   layer_unit_normalization()  # L2 normalization
+#'
+#' model |>
+#'   compile(optimizer = "adam", loss = loss_circle())
+#' ```
+#'
+#' # Reference
+#' - [Yifan Sun et al., 2020](https://arxiv.org/abs/2002.10857)
+#'
+#' @returns
+#' Circle loss value.
+#'
+#' @param gamma
+#' Scaling factor that determines the largest scale of each
+#' similarity score. Defaults to `80`.
+#'
+#' @param margin
+#' The relaxation factor, below this distance, negatives are
+#' up weighted and positives are down weighted. Similarly, above this
+#' distance negatives are down weighted and positive are up weighted.
+#' Defaults to `0.4`.
+#'
+#' @param remove_diagonal
+#' Boolean, whether to remove self-similarities from the
+#' positive mask. Defaults to `TRUE`.
+#'
+#' @param reduction
+#' Type of reduction to apply to the loss. In almost all cases
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
+#'
+#' @param name
+#' Optional name for the loss instance.
+#'
+#' @param dtype
+#' The dtype of the loss's computations. Defaults to `NULL`, which
+#' means using `config_floatx()`. `config_floatx()` is a
+#' `"float32"` unless set to different value
+#' (via `config_set_floatx()`). If a `keras.DTypePolicy` is
+#' provided, then the `compute_dtype` will be utilized.
+#'
+#' @param y_true
+#' Tensor with ground truth labels in integer format.
+#'
+#' @param y_pred
+#' Tensor with predicted L2 normalized embeddings.
+#'
+#' @param ref_labels
+#' Optional integer tensor with labels for reference
+#' embeddings. If `NULL`, defaults to `y_true`.
+#'
+#' @param ref_embeddings
+#' Optional tensor with L2 normalized reference embeddings.
+#' If `NULL`, defaults to `y_pred`.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams loss_hinge
+#' @family losses
+#' @export
+#' @tether keras.losses.Circle
+loss_circle <-
+function (y_true, y_pred, ref_labels = NULL, ref_embeddings = NULL,
+    remove_diagonal = TRUE, gamma = 80L, margin = 0.4, ..., reduction = "sum_over_batch_size",
+    name = "circle", dtype = NULL)
+{
+  args <- capture_args(
+    list(
+      y_true = as_py_array,
+      y_pred = as_py_array,
+      ref_labels = as_integer,
+      gamma = as_integer
+    )
+  )
+  callable <- if (missing(y_true) && missing(y_pred))
+    keras$losses$Circle
+  else
+    keras$losses$circle
+  do.call(callable, args)
+}
+
 
 
 #' @importFrom reticulate py_to_r_wrapper
