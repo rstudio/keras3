@@ -186,10 +186,10 @@ as_metrics <- function(x) as_list(as_loss(x, default_name = "custom_metric"))
 #' the display labels for the scalar outputs.
 #'
 #' @param x
-#' Input data. It could be:
+#' Input data. It can be:
 #' - An R array (or array-like), or a list of arrays
 #'     (in case the model has multiple inputs).
-#' - A tensor, or a list of tensors
+#' - A backend-native tensor, or a list of tensors
 #'     (in case the model has multiple inputs).
 #' - A named list mapping input names to the corresponding array/tensors,
 #'     if the model has named inputs.
@@ -224,22 +224,30 @@ as_metrics <- function(x) as_list(as_loss(x, default_name = "custom_metric"))
 #' (e.g. in a production environment). Defaults to `"auto"`.
 #'
 #' @param sample_weight
-#' Optional array of weights for the test samples,
-#' used for weighting the loss function. You can either pass a flat
-#' (1D) R array with the same length as the input samples
+#' Optional array or tensor of weights for
+#' the training samples, used for weighting the loss function
+#' (during training only). You can either pass a flat (1D)
+#' array or tensor with the same length as the input samples
 #' (1:1 mapping between weights and samples), or in the case of
-#' temporal data, you can pass a 2D array with shape `(samples,
-#' sequence_length)`, to apply a different weight to every
-#' timestep of every sample. This argument is not supported when
-#' `x` is a tfdataset, instead pass sample weights as the third
-#' element of `x`.
+#' temporal data, you can pass a 2D array or tensor with
+#' shape `(samples, sequence_length)` to apply a different weight
+#' to every timestep of every sample.
+#' This argument is not supported when `x` is a
+#' `tf.data.Dataset`,
+#' or Python generator function.
+#' Instead, provide `sample_weights` as the third element of `x`.
+#' Note that sample weighting does not apply to metrics specified
+#' via the `metrics` argument in `compile()`. To apply sample
+#' weighting to your metrics, you can specify them via the
+#' `weighted_metrics` in `compile()` instead.
 #'
 #' @param steps
 #' Integer or `NULL`. Total number of steps (batches of samples)
 #' before declaring the evaluation round finished. Ignored with the
 #' default value of `NULL`. If `x` is a `tf.data.Dataset` and
 #' `steps` is `NULL`, evaluation will run until the dataset
-#' is exhausted.
+#' is exhausted. In the case of an infinitely
+#' repeating dataset, it will run indefinitely.
 #'
 #' @param callbacks
 #' List of `Callback` instances.
@@ -321,22 +329,22 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' and validation metrics values (if applicable).
 #'
 #' @param x
-#' Input data. It could be:
+#' Input data. It can be:
 #' - An array (or array-like), or a list of arrays
 #'   (in case the model has multiple inputs).
-#' - A tensor, or a list of tensors
+#' - A backend-native tensor, or a list of tensors
 #'   (in case the model has multiple inputs).
 #' - A named list mapping input names to the corresponding array/tensors,
 #'   if the model has named inputs.
 #' - A `tf.data.Dataset`. Should return a tuple
 #'   of either `(inputs, targets)` or
 #'   `(inputs, targets, sample_weights)`.
-#' - A generator returning `(inputs,
-#'   targets)` or `(inputs, targets, sample_weights)`.
+#' - A generator returning `(inputs, targets)` or
+#'   `(inputs, targets, sample_weights)`.
 #'
 #' @param y
 #' Target data. Like the input data `x`,
-#' it could be either array(s) or backend-native tensor(s).
+#' it can be either array(s) or backend-native tensor(s).
 #' If `x` is a TF Dataset or generator,
 #' `y` should
 #' not be specified (since targets will be obtained from `x`).
@@ -377,15 +385,14 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' See `callback_*`.
 #'
 #' @param validation_split
-#' Float between 0 and 1.
 #' Fraction of the training data to be used as validation data.
 #' The model will set apart this fraction of the training data,
-#' will not train on it, and will evaluate
-#' the loss and any model metrics
-#' on this data at the end of each epoch.
-#' The validation data is selected from the last samples
-#' in the `x` and `y` data provided, before shuffling. This
-#' argument is not supported when `x` is a TF Dataset or generator.
+#' will not train on it, and will evaluate the loss and any model
+#' metrics on this data at the end of each epoch. The validation
+#' data is selected from the last samples in the `x` and `y` data
+#' provided, before shuffling.
+#' This argument is only supported when `x` and `y` are made of
+#' arrays or tensors.
 #' If both `validation_data` and `validation_split` are provided,
 #' `validation_data` will override `validation_split`.
 #'
@@ -397,7 +404,7 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #' `validation_split` or `validation_data` is not affected by
 #' regularization layers like noise and dropout.
 #' `validation_data` will override `validation_split`.
-#' It could be:
+#' It can be:
 #'   - A tuple `(x_val, y_val)` of arrays or tensors.
 #'   - A tuple `(x_val, y_val, val_sample_weights)` of
 #'     arrays.
@@ -423,18 +430,17 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 # @param class_names
 #'
 #' @param sample_weight
-#' Optional array of weights for
+#' Optional array or tensor of weights for
 #' the training samples, used for weighting the loss function
 #' (during training only). You can either pass a flat (1D)
-#' array/vector with the same length as the input samples
-#' (1:1 mapping between weights and samples),
-#' or in the case of temporal data,
-#' you can pass a 2D array (matrix) with shape
-#' `(samples, sequence_length)`,
-#' to apply a different weight to every timestep of every sample.
-#' This argument is not supported when `x` is a TF Dataset or generator,
-#' instead provide the
-#' sample_weights as the third element of `x`.
+#' array or tensor with the same length as the input samples
+#' (1:1 mapping between weights and samples), or in the case of
+#' temporal data, you can pass a 2D array or tensor with
+#' shape `(samples, sequence_length)` to apply a different weight
+#' to every timestep of every sample.
+#' This argument is not supported when `x` is a
+#' `tf.data.Dataset`, or Python generator function.
+#' Instead, provide `sample_weights` as the third element of `x`.
 #' Note that sample weighting does not apply to metrics specified
 #' via the `metrics` argument in `compile()`. To apply sample
 #' weighting to your metrics, you can specify them via the
@@ -447,31 +453,29 @@ function (object, x = NULL, y = NULL, ..., batch_size = NULL,
 #'
 #' @param steps_per_epoch
 #' Integer or `NULL`.
-#' Total number of steps (batches of samples)
-#' before declaring one epoch finished and starting the
-#' next epoch. When training with input tensors such as
-#' backend-native tensors, the default `NULL` is equal to
-#' the number of samples in your dataset divided by
-#' the batch size, or `1` if that cannot be determined. If `x` is a
-#' TF Dataset, and `steps_per_epoch`
-#' is `NULL`, the epoch will run until the input dataset is
-#' exhausted.  When passing an infinitely repeating dataset, you
-#' must specify the `steps_per_epoch` argument. If
-#' `steps_per_epoch = -1` the training will run indefinitely with an
-#' infinitely repeating dataset.
+#' Total number of steps (batches of samples) before declaring one
+#' epoch finished and starting the next epoch. When training with
+#' input tensors or arrays, the default `NULL` means that the
+#' value used is the number of samples in your dataset divided by
+#' the batch size, or `1` if that cannot be determined.
+#' If `x` is a `tf.data.Dataset`
+#' or Python generator function, the
+#' epoch will run until the input dataset is exhausted. When
+#' passing an infinitely repeating dataset, you must specify the
+#' `steps_per_epoch` argument, otherwise the training will run
+#' indefinitely.
 #'
 #' @param validation_steps
 #' Only relevant if `validation_data` is provided.
-#' Total number of steps (batches of
-#' samples) to draw before stopping when performing validation
-#' at the end of every epoch. If `validation_steps` is `NULL`,
-#' validation will run until the `validation_data` dataset is
-#' exhausted. In the case of an infinitely repeated dataset, it
-#' will run into an infinite loop. If `validation_steps` is
-#' specified and only part of the dataset will be consumed, the
-#' evaluation will start from the beginning of the dataset at each
-#' epoch. This ensures that the same validation samples are used
-#' every time.
+#' Total number of steps (batches of samples) to draw before
+#' stopping when performing validation at the end of every epoch.
+#' If `validation_steps` is `NULL`, validation will run until the
+#' `validation_data` dataset is exhausted. In the case of an
+#' infinitely repeating dataset, it will run indefinitely. If
+#' `validation_steps` is specified and only part of the dataset
+#' is consumed, the evaluation will start from the beginning of the
+#' dataset at each epoch. This ensures that the same validation
+#' samples are used every time.
 #'
 #' @param validation_batch_size
 #' Integer or `NULL`.
@@ -634,18 +638,19 @@ input_data_normalizer <- function(model) {
 #' R array(s) of predictions.
 #'
 #' @param x
-#' Input samples. It could be:
+#' Input samples. It can be:
 #' - A array (or array-like), or a list of arrays
 #'     (in case the model has multiple inputs).
-#' - A tensor, or a list of tensors
+#' - A backend-native tensor, or a list of tensors
 #'     (in case the model has multiple inputs).
 #' - A TF Dataset.
+#' - A Python generator function.
 #'
 #' @param batch_size
 #' Integer or `NULL`.
-#' Number of samples per batch.
+#' Number of samples per batch of computation.
 #' If unspecified, `batch_size` will default to `32`.
-#' Do not specify the `batch_size` if your data is in the
+#' Do not specify the `batch_size` if your input data `x` is in the
 #' form of a TF Dataset or a generator
 #' (since they generate batches).
 #'
@@ -660,11 +665,10 @@ input_data_normalizer <- function(model) {
 #' (e.g., in a production environment). Defaults to `"auto"`.
 #'
 #' @param steps
-#' Total number of steps (batches of samples)
-#' before declaring the prediction round finished.
-#' Ignored with the default value of `NULL`.
-#' If `x` is a TF Dataset and `steps` is `NULL`,
-#' `predict()` will run until the input dataset is exhausted.
+#' Total number of steps (batches of samples) to draw before
+#' declaring the prediction round finished. If `steps` is `NULL`,
+#' `predict()` will run until `x` is exhausted. In the case of an infinitely
+#' repeating dataset, `predict()` will run indefinitely.
 #'
 #' @param callbacks
 #' List of `Callback` instances.
