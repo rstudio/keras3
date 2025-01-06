@@ -1,7 +1,7 @@
-Help on class OrthogonalInitializer in module keras.src.initializers.random_initializers:
+Help on class Orthogonal in module keras.src.initializers.random_initializers:
 
-class OrthogonalInitializer(RandomInitializer)
- |  OrthogonalInitializer(gain=1.0, seed=None)
+class Orthogonal(RandomInitializer)
+ |  Orthogonal(gain=1.0, seed=None)
  |
  |  Initializer that generates an orthogonal matrix.
  |
@@ -36,7 +36,7 @@ class OrthogonalInitializer(RandomInitializer)
  |  - [Saxe et al., 2014](https://openreview.net/forum?id=_wzZwKpTDF_9C)
  |
  |  Method resolution order:
- |      OrthogonalInitializer
+ |      Orthogonal
  |      RandomInitializer
  |      keras.src.initializers.initializer.Initializer
  |      builtins.object
