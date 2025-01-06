@@ -69,7 +69,19 @@ message("DONE!")
 if(FALSE) {
   # mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
 
-  mk_export("keras.Model.get_state_tree")$dump |> writeLines()
+  mk_export("keras.layers.MaxNumBoundingBoxes")$dump |> cat_cb()
+  mk_export("keras.layers.STFTSpectrogram")$dump |> cat_cb()
+  mk_export("keras.activations.glu")$dump |> cat_cb()
+  mk_export("keras.activations.hard_shrink")$dump |> cat_cb()
+  mk_export("keras.activations.celu")$dump |> cat_cb()
+  mk_export("keras.activations.hard_tanh")$dump |> cat_cb()
+  mk_export("keras.activations.log_sigmoid")$dump |> cat_cb()
+  mk_export("keras.activations.soft_shrink")$dump |> cat_cb()
+  mk_export("keras.activations.squareplus")$dump |> cat_cb()
+  mk_export("keras.activations.tanh_shrink")$dump |> cat_cb()
+  mk_export("keras.config.is_flash_attention_enabled")$dump |> cat_cb()
+
+
   mk_export("keras.Model.set_state_tree")$dump |> cat_cb()
   mk_export("keras.layers.Solarization")$dump |> cat_cb()
 
