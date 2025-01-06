@@ -599,3 +599,28 @@ activation_glu <- function (x, axis = -1L)
     args <- capture_args(list(axis = as_axis))
     do.call(keras$activations$glu, args)
 }
+
+#' Hard Shrink activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `hard_shrink(x) = x` if `|x| > threshold`,
+#' `hard_shrink(x) = 0` otherwise.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' Threshold value. Defaults to `0.5`.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.hard_shrink
+activation_hard_shrink <-
+function (x, threshold = 0.5)
+{
+  args <- capture_args(NULL)
+  do.call(keras$activations$hard_shrink, args)
+}
