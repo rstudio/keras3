@@ -1,15 +1,37 @@
 Help on class SparseTopKCategoricalAccuracy in module keras.src.metrics.accuracy_metrics:
 
 class SparseTopKCategoricalAccuracy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
- |  SparseTopKCategoricalAccuracy(k=5, name='sparse_top_k_categorical_accuracy', dtype=None)
+ |  SparseTopKCategoricalAccuracy(k=5, name='sparse_top_k_categorical_accuracy', dtype=None, from_sorted_ids=False)
  |
  |  Computes how often integer targets are in the top `K` predictions.
+ |
+ |  By default, the arguments expected by `update_state()` are:
+ |  - `y_true`: a tensor of shape `(batch_size)` representing indices of true
+ |      categories.
+ |  - `y_pred`: a tensor of shape `(batch_size, num_categories)` containing the
+ |      scores for each sample for all possible categories.
+ |
+ |  With `from_sorted_ids=True`, the arguments expected by `update_state` are:
+ |  - `y_true`: a tensor of shape `(batch_size)` representing indices or IDs of
+ |      true categories.
+ |  - `y_pred`: a tensor of shape `(batch_size, N)` containing the indices or
+ |      IDs of the top `N` categories sorted in order from highest score to
+ |      lowest score. `N` must be greater or equal to `k`.
+ |
+ |  The `from_sorted_ids=True` option can be more efficient when the set of
+ |  categories is very large and the model has an optimized way to retrieve the
+ |  top ones either without scoring or without maintaining the scores for all
+ |  the possible categories.
  |
  |  Args:
  |      k: (Optional) Number of top elements to look at for computing accuracy.
  |          Defaults to `5`.
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
+ |      from_sorted_ids: (Optional) When `False`, the default, the tensor passed
+ |          in `y_pred` contains the unsorted scores of all possible categories.
+ |          When `True`, `y_pred` contains a the indices or IDs for the top
+ |          categories.
  |
  |  Example:
  |
@@ -23,6 +45,12 @@ class SparseTopKCategoricalAccuracy(keras.src.metrics.reduction_metrics.MeanMetr
  |  ...                sample_weight=[0.7, 0.3])
  |  >>> m.result()
  |  0.3
+ |
+ |  >>> m = keras.metrics.SparseTopKCategoricalAccuracy(k=1,
+ |  ...                                                from_sorted_ids=True)
+ |  >>> m.update_state([2, 1], [[1, 0, 3], [1, 2, 3]])
+ |  >>> m.result()
+ |  0.5
  |
  |  Usage with `compile()` API:
  |
@@ -46,7 +74,8 @@ class SparseTopKCategoricalAccuracy(keras.src.metrics.reduction_metrics.MeanMetr
  |    self,
  |    k=5,
  |    name='sparse_top_k_categorical_accuracy',
- |    dtype=None
+ |    dtype=None,
+ |    from_sorted_ids=False
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |

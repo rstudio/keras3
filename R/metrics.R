@@ -490,6 +490,26 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #'
 #' @description
 #'
+#' Computes how often integer targets are in the top `K` predictions.
+#'
+#' By default, the arguments expected by `update_state()` are:
+#' - `y_true`: a tensor of shape `(batch_size)` representing indices of true
+#'     categories.
+#' - `y_pred`: a tensor of shape `(batch_size, num_categories)` containing the
+#'     scores for each sample for all possible categories.
+#'
+#' With `from_sorted_ids=TRUE`, the arguments expected by `update_state` are:
+#' - `y_true`: a tensor of shape `(batch_size)` representing indices or IDs of
+#'     true categories.
+#' - `y_pred`: a tensor of shape `(batch_size, N)` containing the indices or
+#'     IDs of the top `N` categories sorted in order from highest score to
+#'     lowest score. `N` must be greater or equal to `k`.
+#'
+#' The `from_sorted_ids=TRUE` option can be more efficient when the set of
+#' categories is very large and the model has an optimized way to retrieve the
+#' top ones either without scoring or without maintaining the scores for all
+#' the possible categories.
+#'
 #' # Usage
 #' Standalone usage:
 #'
@@ -512,6 +532,13 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' m$result()
 #' ```
 #'
+#' ```{r}
+#' m <- metric_sparse_top_k_categorical_accuracy(k = 1, from_sorted_ids = TRUE)
+#' m$update_state(array(c(2, 1)), rbind(c(1, 0, 3),
+#'                                      c(1, 2, 3)))
+#' m$result()
+#' ```
+#'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
@@ -529,6 +556,12 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #'
 #' @param dtype
 #' (Optional) data type of the metric result.
+#'
+#' @param from_sorted_ids
+#' (Optional) When `FALSE`, the default, the tensor passed
+#' in `y_pred` contains the unsorted scores of all possible categories.
+#' When `TRUE`, `y_pred` contains the indices or IDs for the top
+#' categories.
 #'
 #' @param y_true
 #' Tensor of true targets.
@@ -550,7 +583,7 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' @tether keras.metrics.SparseTopKCategoricalAccuracy
 metric_sparse_top_k_categorical_accuracy <-
 function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
-    dtype = NULL)
+    dtype = NULL, from_sorted_ids = FALSE)
 {
     args <- capture_args(list(k = as_integer,
                               y_true = as_py_array,
