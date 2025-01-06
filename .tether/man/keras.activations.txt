@@ -33,4 +33,5 @@ softsign(x)
 squareplus(x, b=4)
 swish(x)
 tanh(x)
+tanh_shrink(x)
 

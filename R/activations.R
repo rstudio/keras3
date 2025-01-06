@@ -749,3 +749,23 @@ function (x, b = 4L)
     args <- capture_args()
     do.call(keras$activations$squareplus, args)
 }
+
+#' Tanh shrink activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `f(x) = x - tanh(x)`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.tanh_shrink
+activation_tanh_shrink <-
+function (x)
+{
+  keras$activations$tanh_shrink(x)
+}
