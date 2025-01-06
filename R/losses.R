@@ -92,8 +92,13 @@
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -308,8 +313,13 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -422,8 +432,13 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -583,8 +598,13 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -650,8 +670,13 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -727,8 +752,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -812,8 +842,13 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' String, name for the object
@@ -872,8 +907,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1016,8 +1056,13 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1148,8 +1193,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1216,8 +1266,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1279,8 +1334,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1346,8 +1406,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1410,8 +1475,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1518,8 +1588,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1598,8 +1673,13 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.
@@ -1656,8 +1736,13 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' @param reduction
 #' Type of reduction to apply to the loss. In almost all cases
-#' this should be `"sum_over_batch_size"`.
-#' Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'
 #' @param name
 #' Optional name for the loss instance.

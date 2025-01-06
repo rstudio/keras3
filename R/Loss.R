@@ -63,8 +63,13 @@
 #'   Args:
 #'   * `name`: Optional name for the loss instance.
 #'   * `reduction`: Type of reduction to apply to the loss. In almost all cases
-#'       this should be `"sum_over_batch_size"`.
-#'       Supported options are `"sum"`, `"sum_over_batch_size"` or `NULL`.
+#'       this should be `"sum_over_batch_size"`. Supported options are
+#'       `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#'       `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#'       `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#'       sample size, and `"mean_with_sample_weight"` sums the loss and
+#'       divides by the sum of the sample weights. `"none"` and `NULL`
+#'       perform no aggregation. Defaults to `"sum_over_batch_size"`.
 #'   * `dtype`: The dtype of the loss's computations. Defaults to `NULL`, which
 #'       means using [`config_floatx()`]. `config_floatx()` is a
 #'       `"float32"` unless set to different value
