@@ -639,6 +639,7 @@ GroupQueryAttention(
   num_key_value_heads,
   dropout=0.0,
   use_bias=True,
+  flash_attention=None,
   kernel_initializer='glorot_uniform',
   bias_initializer='zeros',
   kernel_regularizer=None,
@@ -646,6 +647,7 @@ GroupQueryAttention(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  seed=None,
   **kwargs
 )
 GRU(
@@ -914,6 +916,7 @@ MultiHeadAttention(
   use_bias=True,
   output_shape=None,
   attention_axes=None,
+  flash_attention=None,
   kernel_initializer='glorot_uniform',
   bias_initializer='zeros',
   kernel_regularizer=None,
