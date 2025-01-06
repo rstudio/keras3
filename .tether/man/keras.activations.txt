@@ -1,3 +1,4 @@
+celu(x, alpha=1.0)
 deserialize(config, custom_objects=None)
 elu(x, alpha=1.0)
 exponential(x)

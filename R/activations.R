@@ -624,3 +624,33 @@ function (x, threshold = 0.5)
   args <- capture_args(NULL)
   do.call(keras$activations$hard_shrink, args)
 }
+
+
+#' Continuously Differentiable Exponential Linear Unit.
+#'
+#' @description
+#' The CeLU activation function is defined as:
+#'
+#' `celu(x) = alpha * (exp(x / alpha) - 1) for x < 0`,`celu(x) = x for x >= 0`.
+#'
+#' where `alpha` is a scaling parameter that controls the activation's shape.
+#'
+#' # Reference
+#' - [Barron, J. T., 2017](https://arxiv.org/abs/1704.07483)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param alpha
+#' The  value for the CeLU formulation. Defaults to `1.0`.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.celu
+activation_celu <-
+function (x, alpha = 1)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$celu, args)
+}
