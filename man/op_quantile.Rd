@@ -33,10 +33,10 @@ fractional part of the index surrounded by \code{i} and \code{j}.
 are left in the result as dimensions with size one.}
 }
 \value{
-The quantile(s). If \code{q} is a single probability and \code{axis=NULL}, then
-the result is a scalar. If multiple probabilies levels are given, first
-axis of the result corresponds to the quantiles. The other axes are the
-axes that remain after the reduction of \code{x}.
+The quantile(s). If \code{q} is a single probability and \code{axis = NULL}, then
+the result is a scalar. If multiple probabilities levels are given,
+first axis of the result corresponds to the quantiles. The other axes
+are the axes that remain after the reduction of \code{x}.
 }
 \description{
 Compute the q-th quantile(s) of the data along the specified axis.

@@ -50,17 +50,16 @@ down your training, especially when used with distribution
 strategies as it will incur additional synchronization overhead.
 Batch-level summary writing is also available via \code{train_step}
 override. Please see
-\href{https://www.tensorflow.org/tensorboard/scalars_and_keras#batch-level_logging}{TensorBoard Scalars tutorial}  # noqa: E501
+\href{https://www.tensorflow.org/tensorboard/scalars_and_keras#batch-level_logging}{TensorBoard Scalars tutorial}
 for more details.}
 
-\item{profile_batch}{(Not supported at this time)
-Profile the batch(es) to sample compute characteristics.
+\item{profile_batch}{Profile the batch(es) to sample compute characteristics.
 profile_batch must be a non-negative integer or a tuple of integers.
 A pair of positive integers signify a range of batches to profile.
 By default, profiling is disabled.}
 
 \item{embeddings_freq}{frequency (in epochs) at which embedding layers will be
-visualized. If set to 0, embeddings won't be visualized.}
+visualized. If set to \code{0}, embeddings won't be visualized.}
 
 \item{embeddings_metadata}{Named list which maps embedding layer names to the
 filename of a file in which to save metadata for the embedding layer.

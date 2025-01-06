@@ -21,7 +21,7 @@ layer_jax_model_wrapper(
 list of arguments it takes and the outputs it returns.}
 
 \item{init_fn}{the function to call to initialize the model. See description
-above for the list of arguments it takes and the ouputs it returns.
+above for the list of arguments it takes and the outputs it returns.
 If \code{NULL}, then \code{params} and/or \code{state} must be provided.}
 
 \item{params}{A \code{PyTree} containing all the model trainable parameters. This

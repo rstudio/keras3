@@ -7,6 +7,7 @@
 callback_backup_and_restore(
   backup_dir,
   save_freq = "epoch",
+  double_checkpoint = FALSE,
   delete_checkpoint = TRUE
 )
 }
@@ -23,6 +24,13 @@ the callback saves the checkpoint at the end of each epoch.
 When set to an integer, the callback saves the checkpoint every
 \code{save_freq} batches. Set \code{save_freq = FALSE} only if using
 preemption checkpointing (i.e. with \code{save_before_preemption = TRUE}).}
+
+\item{double_checkpoint}{Boolean. If enabled, \code{BackupAndRestore} callback
+will save 2 last training states (current and previous). After
+interruption if current state can't be loaded due to IO error
+(e.g. file corrupted) it will try to restore previous one. Such
+behaviour will consume twice more space on disk, but increase fault
+tolerance. Defaults to \code{FALSE}.}
 
 \item{delete_checkpoint}{Boolean. This \code{backup_and_restore}
 callback works by saving a checkpoint to back up the training state.

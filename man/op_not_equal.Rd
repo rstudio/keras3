@@ -12,7 +12,7 @@ op_not_equal(x1, x2)
 \item{x2}{Second input tensor.}
 }
 \value{
-Output tensor, element-wise comparsion of \code{x1} and \code{x2}.
+Output tensor, element-wise comparison of \code{x1} and \code{x2}.
 }
 \description{
 Note that this function is automatically called when using the R operator \code{!=} with a tensor.

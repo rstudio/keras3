@@ -13,7 +13,7 @@ op_average(x, axis = NULL, weights = NULL)
 will average over all of the elements of the input tensor. If axis
 is negative it counts from the last to the first axis.}
 
-\item{weights}{Tensor of wieghts associated with the values in \code{x}. Each
+\item{weights}{Tensor of weights associated with the values in \code{x}. Each
 value in \code{x} contributes to the average according to its
 associated weight. The weights array can either be 1-D (in which
 case its length must be the size of a along the given axis) or of

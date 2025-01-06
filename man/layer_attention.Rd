@@ -27,7 +27,7 @@ of the concatenation of the \code{query} and \code{key} vectors.}
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 attention scores. Defaults to \code{0.0}.}
 
-\item{seed}{An integer to use as random seed incase of \code{dropout}.}
+\item{seed}{An integer to use as random seed in case of \code{dropout}.}
 
 \item{...}{For forward/backward compatability.}
 }

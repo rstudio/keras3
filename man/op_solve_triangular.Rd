@@ -9,7 +9,7 @@ op_solve_triangular(a, b, lower = FALSE)
 \arguments{
 \item{a}{A tensor of shape \verb{(..., M, M)} representing the coefficients matrix.}
 
-\item{b}{A tensor of shape \verb{(..., M)} or \verb{(..., M, N)} represeting the
+\item{b}{A tensor of shape \verb{(..., M)} or \verb{(..., M, N)} representing the
 right-hand side or "dependent variable" matrix.}
 
 \item{lower}{logical.
