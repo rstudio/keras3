@@ -30,6 +30,7 @@ soft_shrink(x, threshold=0.5)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)
+squareplus(x, b=4)
 swish(x)
 tanh(x)
 

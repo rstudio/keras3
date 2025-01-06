@@ -720,3 +720,32 @@ function (x, threshold = 0.5)
     args <- capture_args(NULL)
     do.call(keras$activations$soft_shrink, args)
 }
+
+#' Squareplus activation function.
+#'
+#' @description
+#' The Squareplus activation function is defined as:
+#'
+#' `f(x) = (x + sqrt(x^2 + b)) / 2`
+#'
+#' Where `b` is a smoothness parameter.
+#'
+#' # Reference
+#' - [Ramachandran et al., 2021](https://arxiv.org/abs/2112.11687)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param b
+#' Smoothness parameter. Defaults to 4.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.squareplus
+activation_squareplus <-
+function (x, b = 4L)
+{
+    args <- capture_args()
+    do.call(keras$activations$squareplus, args)
+}
