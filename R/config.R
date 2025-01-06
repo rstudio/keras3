@@ -516,3 +516,48 @@ function (policy)
 }
 
 
+#' Enable flash attention.
+#'
+#' @description
+#' Flash attention offers performance optimization for attention layers,
+#' making it especially useful for large language models (LLMs) that
+#' benefit from faster and more memory-efficient attention computations.
+#'
+#' Once enabled, supported layers like `layer_multi_head_attention` will **attempt** to
+#' use flash attention for faster computations. By default, this feature is
+#' enabled.
+#'
+#' Note that enabling flash attention does not guarantee it will always be
+#' used. Typically, the inputs must be in `float16` or `bfloat16` dtype, and
+#' input layout requirements may vary depending on the backend.
+#'
+#' @export
+#' @tether keras.config.enable_flash_attention
+#  @seealso
+#  + <https://www.tensorflow.org/api_docs/python/tf/keras/config/enable_flash_attention>
+config_enable_flash_attention <-
+function ()
+{
+  keras$config$enable_flash_attention()
+}
+
+
+#' Disable flash attention.
+#'
+#' @description
+#' Flash attention offers performance optimization for attention layers,
+#' making it especially useful for large language models (LLMs) that
+#' benefit from faster and more memory-efficient attention computations.
+#'
+#' Once disabled, supported layers like `MultiHeadAttention` will not
+#' use flash attention for faster computations.
+#'
+#' @export
+#' @tether keras.config.disable_flash_attention
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_flash_attention>
+config_disable_flash_attention <-
+function ()
+{
+  keras$config$disable_flash_attention()
+}
