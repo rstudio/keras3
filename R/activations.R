@@ -694,3 +694,29 @@ function (x)
     args <- capture_args(NULL)
     do.call(keras$activations$log_sigmoid, args)
 }
+
+#' Soft Shrink activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `soft_shrink(x) = x - threshold` if `x > threshold`,
+#' `soft_shrink(x) = x + threshold` if `x < -threshold`,
+#' `soft_shrink(x) = 0` otherwise.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' Threshold value. Defaults to 0.5.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.soft_shrink
+activation_soft_shrink <-
+function (x, threshold = 0.5)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$soft_shrink, args)
+}
