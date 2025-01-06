@@ -13,6 +13,7 @@ layer_multi_head_attention(
   use_bias = TRUE,
   output_shape = NULL,
   attention_axes = NULL,
+  flash_attention = NULL,
   kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros",
   kernel_regularizer = NULL,
@@ -43,6 +44,12 @@ feature dim (the query input's last dimension).}
 
 \item{attention_axes}{axes over which the attention is applied. \code{NULL} means
 attention over all axes, but batch, heads, and features.}
+
+\item{flash_attention}{If \code{NULL}, the layer attempts to use flash
+attention for faster and more memory-efficient attention
+computations when possible. This behavior can be configured using
+\code{config_enable_flash_attention()} or
+\code{config_disable_flash_attention()}.}
 
 \item{kernel_initializer}{Initializer for dense layer kernels.}
 
