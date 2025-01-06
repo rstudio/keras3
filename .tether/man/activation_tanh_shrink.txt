@@ -1,0 +1,12 @@
+__signature__
+keras.activations.tanh_shrink(x)
+__doc__
+Tanh shrink activation function.
+
+It is defined as:
+
+`f(x) = x - tanh(x)`.
+
+Args:
+    x: Input tensor.
+

@@ -1,0 +1,10 @@
+__signature__
+keras.activations.log_sigmoid(x)
+__doc__
+Logarithm of the sigmoid activation function.
+
+It is defined as `f(x) = log(1 / (1 + exp(-x)))`.
+
+Args:
+    x: Input tensor.
+

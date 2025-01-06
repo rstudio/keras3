@@ -1,0 +1,19 @@
+__signature__
+keras.activations.squareplus(x, b=4)
+__doc__
+Squareplus activation function.
+
+The Squareplus activation function is defined as:
+
+`f(x) = (x + sqrt(x^2 + b)) / 2`
+
+Where `b` is a smoothness parameter.
+
+Args:
+    x: Input tensor.
+    b: Smoothness parameter. Defaults to 4.
+
+Reference:
+
+- [Ramachandran et al., 2021](https://arxiv.org/abs/2112.11687)
+

@@ -1,0 +1,13 @@
+__signature__
+keras.activations.hard_tanh(x)
+__doc__
+HardTanh activation function.
+
+It is defined as:
+`hard_tanh(x) = -1 for x < -1`,
+`hard_tanh(x) = x for -1 <= x <= 1`,
+`hard_tanh(x) = 1 for x > 1`.
+
+Args:
+    x: Input tensor.
+
