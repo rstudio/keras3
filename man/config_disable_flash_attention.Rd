@@ -15,7 +15,26 @@ Once disabled, supported layers like \code{MultiHeadAttention} will not
 use flash attention for faster computations.
 }
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/config/disable_flash_attention}
+\code{\link[=config_is_flash_attention_enabled]{config_is_flash_attention_enabled()}} \code{\link[=config_enable_flash_attention]{config_enable_flash_attention()}}
+
+Other config: \cr
+\code{\link{config_backend}()} \cr
+\code{\link{config_disable_interactive_logging}()} \cr
+\code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_dtype_policy}()} \cr
+\code{\link{config_enable_flash_attention}()} \cr
+\code{\link{config_enable_interactive_logging}()} \cr
+\code{\link{config_enable_traceback_filtering}()} \cr
+\code{\link{config_enable_unsafe_deserialization}()} \cr
+\code{\link{config_epsilon}()} \cr
+\code{\link{config_floatx}()} \cr
+\code{\link{config_image_data_format}()} \cr
+\code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{config_set_backend}()} \cr
+\code{\link{config_set_dtype_policy}()} \cr
+\code{\link{config_set_epsilon}()} \cr
+\code{\link{config_set_floatx}()} \cr
+\code{\link{config_set_image_data_format}()} \cr
 }
-}
+\concept{config}
