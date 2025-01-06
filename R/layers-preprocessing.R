@@ -182,6 +182,36 @@ function (object, height, width, data_format = NULL, ...)
     create_layer(keras$layers$CenterCrop, object, args)
 }
 
+#' Ensure the maximum number of bounding boxes.
+#'
+#' @param max_number
+#' Desired output number of bounding boxes.
+#'
+#' @param fill_value
+#' The fill value of the `boxes` and `labels` in
+#' `bounding_boxes`. Defaults to `-1`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inherit layer_dense return
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+#' @tether keras.layers.MaxNumBoundingBoxes
+layer_max_num_bounding_boxes <-
+function (object, max_number, fill_value = -1L, ..., padding_value = NULL)
+{
+    args <- capture_args(list(fill_value = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$MaxNumBoundingBoxes, object, args)
+}
+
 
 #' A preprocessing layer which buckets continuous features by ranges.
 #'

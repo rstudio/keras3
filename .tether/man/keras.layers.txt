@@ -842,6 +842,11 @@ LSTMCell(
 Masking(mask_value=0.0, **kwargs)
 maximum(inputs, **kwargs)
 Maximum(**kwargs)
+MaxNumBoundingBoxes(
+  max_number,
+  fill_value=-1,
+  **kwargs
+)
 MaxPool1D(
   pool_size=2,
   strides=None,
