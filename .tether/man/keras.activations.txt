@@ -12,6 +12,7 @@ hard_swish(x)
 hard_tanh(x)
 leaky_relu(x, negative_slope=0.2)
 linear(x)
+log_sigmoid(x)
 log_softmax(x, axis=-1)
 mish(x)
 relu(

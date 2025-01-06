@@ -675,3 +675,22 @@ function (x) {
   args <- capture_args(NULL)
   do.call(keras$activations$hard_tanh, args)
 }
+
+#' Logarithm of the sigmoid activation function.
+#'
+#' @description
+#' It is defined as `f(x) = log(1 / (1 + exp(-x)))`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.log_sigmoid
+activation_log_sigmoid <-
+function (x)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$log_sigmoid, args)
+}
