@@ -234,6 +234,13 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param use_bias
 #' Boolean, whether the dense layers use bias vectors/matrices.
 #'
+#' @param flash_attention
+#' If `NULL`, the layer attempts to use flash
+#' attention for faster and more memory-efficient attention
+#' computations when possible. This behavior can be configured using
+#' `config_enable_flash_attention()` or
+#' `config_disable_flash_attention()`.
+#'
 #' @param kernel_initializer
 #' Initializer for dense layer kernels.
 #'
@@ -255,6 +262,9 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param bias_constraint
 #' Constraint for dense layer kernels.
 #'
+#' @param seed
+#' Optional integer to seed the dropout layer.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -266,18 +276,18 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @family layers
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/GroupQueryAttention>
-#' @tether keras.layers.GroupQueryAttention
+#' @tether keras.layers.GroupedQueryAttention
 layer_group_query_attention <-
 function (object, head_dim, num_query_heads, num_key_value_heads,
-    dropout = 0, use_bias = TRUE, kernel_initializer = "glorot_uniform",
+    dropout = 0, use_bias = TRUE, flash_attention = NULL, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
-    ...)
+    seed = NULL, ...)
 {
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
-    create_layer(keras$layers$GroupQueryAttention, object, args)
+    create_layer(keras$layers$GroupedQueryAttention, object, args)
 }
 
 
