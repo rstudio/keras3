@@ -82,6 +82,13 @@
 #' `save_freq` batches. Set `save_freq = FALSE` only if using
 #' preemption checkpointing (i.e. with `save_before_preemption = TRUE`).
 #'
+#' @param double_checkpoint: Boolean. If enabled, `BackupAndRestore` callback
+#' will save 2 last training states (current and previous). After
+#' interruption if current state can't be loaded due to IO error
+#' (e.g. file corrupted) it will try to restore previous one. Such
+#' behaviour will consume twice more space on disk, but increase fault
+#' tolerance. Defaults to `FALSE`.
+#'
 #' @param delete_checkpoint
 #' Boolean. This `backup_and_restore`
 #' callback works by saving a checkpoint to back up the training state.
@@ -97,7 +104,7 @@
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore>
 #' @tether keras.callbacks.BackupAndRestore
 callback_backup_and_restore <-
-function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
+function (backup_dir, save_freq = "epoch", double_checkpoint = FALSE, delete_checkpoint = TRUE)
 {
     args <- capture_args(list(save_freq = as_integer))
     do.call(keras$callbacks$BackupAndRestore, args)

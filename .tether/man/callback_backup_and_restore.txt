@@ -1,7 +1,7 @@
 Help on class BackupAndRestore in module keras.src.callbacks.backup_and_restore:
 
 class BackupAndRestore(keras.src.callbacks.callback.Callback)
- |  BackupAndRestore(backup_dir, save_freq='epoch', delete_checkpoint=True)
+ |  BackupAndRestore(backup_dir, save_freq='epoch', double_checkpoint=False, delete_checkpoint=True)
  |
  |  Callback to back up and restore the training state.
  |
@@ -59,6 +59,12 @@ class BackupAndRestore(keras.src.callbacks.callback.Callback)
  |        When set to an integer, the callback saves the checkpoint every
  |        `save_freq` batches. Set `save_freq=False` only if using
  |        preemption checkpointing (i.e. with `save_before_preemption=True`).
+ |      double_checkpoint: Boolean. If enabled, `BackupAndRestore` callback
+ |        will save 2 last training states (current and previous). After
+ |        interruption if current state can't be loaded due to IO error
+ |        (e.g. file corrupted) it will try to restore previous one. Such
+ |        behaviour will consume twice more space on disk, but increase fault
+ |        tolerance. Defaults to `False`.
  |      delete_checkpoint: Boolean. This `BackupAndRestore`
  |        callback works by saving a checkpoint to back up the training state.
  |        If `delete_checkpoint=True`, the checkpoint will be deleted after
@@ -76,6 +82,7 @@ class BackupAndRestore(keras.src.callbacks.callback.Callback)
  |    self,
  |    backup_dir,
  |    save_freq='epoch',
+ |    double_checkpoint=False,
  |    delete_checkpoint=True
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -116,7 +123,13 @@ class BackupAndRestore(keras.src.callbacks.callback.Callback)
  |          logs: Dict. Aggregated metric results up until this batch.
  |
  |  on_train_begin(self, logs=None)
- |      Get training state from temporary file and restore it.
+ |      Called at the beginning of training.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
  |
  |  on_train_end(self, logs=None)
  |      Called at the end of training.
