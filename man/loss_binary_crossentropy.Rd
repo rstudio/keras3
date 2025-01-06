@@ -143,7 +143,7 @@ bce(y_true, y_pred)
 loss_binary_crossentropy() # OR ...('from_logits=FALSE')
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.losses.losses.BinaryCrossentropy object>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <LossFunctionWrapper(<function binary_crossentropy at 0x75d828f3b560>, kwargs=\{'from_logits': False, 'label_smoothing': 0.0, 'axis': -1\})>
 ##  signature: (y_true, y_pred, sample_weight=None)
 
 }\if{html}{\out{</div>}}

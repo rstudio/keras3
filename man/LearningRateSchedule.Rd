@@ -102,7 +102,7 @@ step <- keras$Variable(initializer = op_ones,
 schedule(step)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasVariable shape=(), dtype=int64, path=variable>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <Variable path=variable, shape=(), dtype=int64, value=1>
 
 }\if{html}{\out{</div>}}
 
