@@ -1397,7 +1397,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' To enable statefulness:
 #'
-#' - Specify `stateful = TRUE` in the layer constructor.
+#' - Specify `stateful=TRUE` in the layer constructor.
 #' - Specify a fixed batch size for your model, by passing
 #'   `batch_size=...` to the `layer_input()` layer(s) of your model.
 #'   Remember to also specify the same `batch_size=...` when

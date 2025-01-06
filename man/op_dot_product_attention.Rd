@@ -11,7 +11,8 @@ op_dot_product_attention(
   bias = NULL,
   mask = NULL,
   scale = NULL,
-  is_causal = FALSE
+  is_causal = FALSE,
+  flash_attention = NULL
 )
 }
 \arguments{
@@ -37,6 +38,11 @@ shape must be broadcastable to \verb{(B, N, T, S)}.}
 to \code{1.0 / sqrt(H)}.}
 
 \item{is_causal}{Whether to apply causal mask.}
+
+\item{flash_attention}{Whether to use flash attention. If \code{NULL}, it will
+attempt to use flash attention if the required conditions are met.
+Typically, the inputs must be in float16 and bfloat16 dtype and the
+input layout requirements may vary depending on the backend.}
 }
 \value{
 An array of the attention output with the same shape of \code{query}.

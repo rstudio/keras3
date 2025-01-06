@@ -7,16 +7,16 @@
 op_convert_to_tensor(x, dtype = NULL, sparse = NULL)
 }
 \arguments{
-\item{x}{An array.}
+\item{x}{An array (can be nested) or a backend tensor.}
 
-\item{dtype}{The target type.}
+\item{dtype}{The target type. If \code{NULL}, the type of \code{x} is used.}
 
 \item{sparse}{Whether to keep sparse tensors. \code{FALSE} will cause sparse
 tensors to be densified. The default value of \code{NULL} means that
 sparse tensors are kept only if the backend supports them.}
 }
 \value{
-A tensor of the specified \code{dtype}.
+A backend tensor of the specified \code{dtype} and sparseness.
 }
 \description{
 Convert an array to a tensor.
