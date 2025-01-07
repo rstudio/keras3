@@ -899,6 +899,35 @@ function (x)
 keras$ops$fft2(x)
 
 
+#' Computes the 2D Inverse Fast Fourier Transform along the last two axes of
+#'
+#' @description
+#' input.
+#'
+#' # Examples
+#' ```{r}
+#' x <- list(op_array(rbind(c(1, 2), c(2, 1))),
+#'           op_array(rbind(c(0, 1), c(1, 0))))
+#' op_ifft2(x)
+#' ```
+#'
+#' @returns
+#' A tuple containing two tensors - the real and imaginary parts of the
+#' output.
+#'
+#' @param x
+#' Tuple of the real and imaginary parts of the input tensor. Both
+#' tensors in the tuple should be of floating type.
+#'
+#' @export
+#' @family math ops
+#' @family ops
+#' @tether keras.ops.ifft2
+op_ifft2 <-
+function (x)
+keras$ops$ifft2(tuple(x))
+
+
 #' Checks if the targets are in the top-k predictions.
 #'
 #' @description

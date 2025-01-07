@@ -88,6 +88,7 @@ if(FALSE) {
 
   mk_export("keras.Model.set_state_tree")$dump |> cat_cb()
   mk_export("keras.layers.Solarization")$dump |> cat_cb()
+  mk_export("keras.ops.ifft2")$dump |> cat_cb()
 
   catched <- character()
   catch <- function(...) catched <<- c(catched, "\n\n", ...)
