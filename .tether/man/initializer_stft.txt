@@ -1,0 +1,80 @@
+Help on class STFT in module keras.src.initializers.constant_initializers:
+
+class STFT(keras.src.initializers.initializer.Initializer)
+ |  STFT(side='real', window='hann', scaling='density', periodic=False)
+ |
+ |  Initializer of Conv kernels for Short-term Fourier Transformation (STFT).
+ |
+ |  Since the formula involves complex numbers, this class compute either the
+ |  real or the imaginary components of the final output.
+ |
+ |  Additionally, this initializer supports windowing functions across the time
+ |  dimension as commonly used in STFT. Windowing functions from the module
+ |  `scipy.signal.windows` are supported, including the common `hann` and
+ |  `hamming` windowing functions. This layer supports periodic windows and
+ |  scaling-based normalization.
+ |
+ |  This is primarily intended for use in the `STFTSpectrogram` layer.
+ |
+ |  Examples:
+ |
+ |  >>> # Standalone usage:
+ |  >>> initializer = STFTInitializer("real", "hann", "density", False)
+ |  >>> values = initializer(shape=(128, 1, 513))
+ |
+ |  Args:
+ |      side: String, `"real"` or `"imag"` deciding if the kernel will compute
+ |          the real side or the imaginary side of the output. Defaults to
+ |          `"real"`.
+ |      window: String for the name of the windowing function in the
+ |          `scipy.signal.windows` module, or array_like for the window values,
+ |          or `None` for no windowing.
+ |      scaling: String, `"density"` or `"spectrum"` for scaling of the window
+ |          for normalization, either L2 or L1 normalization.
+ |          `None` for no scaling.
+ |      periodic: Boolean, if True, the window function will be treated as
+ |          periodic. Defaults to `False`.
+ |
+ |  Method resolution order:
+ |      STFT
+ |      keras.src.initializers.initializer.Initializer
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(
+ |    self,
+ |    shape,
+ |    dtype=None
+ |  )
+ |      Returns a tensor object initialized as specified by the initializer.
+ |
+ |      The shape is assumed to be `(T, 1, F // 2 + 1)`, where `T` is the size
+ |      of the given window, and `F` is the number of frequency bands. Only half
+ |      the frequency bands are used, which is a common practice in STFT,
+ |      because the second half are the conjugates of the first half in
+ |      a reversed order.
+ |
+ |      Args:
+ |          shape: Shape of the tensor.
+ |          dtype: Optional dtype of the tensor. Only numeric or boolean dtypes
+ |              are supported. If not specified, `keras.backend.floatx()`
+ |              is used, which default to `float32` unless you configured it
+ |              otherwise (via `keras.backend.set_floatx(float_dtype)`).
+ |
+ |  __init__(
+ |    self,
+ |    side='real',
+ |    window='hann',
+ |    scaling='density',
+ |    periodic=False
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |      Returns the initializer's configuration as a JSON-serializable dict.
+ |
+ |      Returns:
+ |          A JSON-serializable Python dict.
+ |
+

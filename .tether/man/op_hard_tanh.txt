@@ -1,0 +1,23 @@
+__signature__
+keras.ops.hard_tanh(x)
+__doc__
+Applies the HardTanh function element-wise.
+
+It is defined as:
+
+`f(x) = -1 for x < -1`, `f(x) = x for -1 <= x <= 1`, `f(x) = 1 for x > 1`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output tensor of same shape as `x`
+    where values are clamped between -1 and 1.
+
+Example:
+
+>>> x = np.array([-2., -1., 0., 1., 2.])
+>>> x_hard_tanh = keras.ops.hard_tanh(x)
+>>> print(x_hard_tanh)
+array([-1. -1.  0.  1.  1.], shape=(5,), dtype=float64)
+

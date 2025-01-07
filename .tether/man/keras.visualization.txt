@@ -1,0 +1,69 @@
+draw_bounding_boxes(
+  images,
+  bounding_boxes,
+  bounding_box_format,
+  class_mapping=None,
+  color=(128, 128, 128),
+  line_thickness=2,
+  text_thickness=1,
+  font_scale=1.0,
+  data_format=None
+)
+draw_segmentation_masks(
+  images,
+  segmentation_masks,
+  num_classes=None,
+  color_mapping=None,
+  alpha=0.8,
+  blend=True,
+  ignore_index=-1,
+  data_format=None
+)
+plot_bounding_box_gallery(
+  images,
+  bounding_box_format,
+  y_true=None,
+  y_pred=None,
+  value_range=(0, 255),
+  true_color=(0, 188, 212),
+  pred_color=(255, 235, 59),
+  line_thickness=2,
+  font_scale=1.0,
+  text_thickness=None,
+  class_mapping=None,
+  ground_truth_mapping=None,
+  prediction_mapping=None,
+  legend=False,
+  legend_handles=None,
+  rows=None,
+  cols=None,
+  data_format=None,
+  **kwargs
+)
+plot_image_gallery(
+  images,
+  rows=None,
+  cols=None,
+  value_range=(0, 255),
+  scale=2,
+  path=None,
+  show=None,
+  transparent=True,
+  dpi=60,
+  legend_handles=None,
+  data_format=None
+)
+plot_segmentation_mask_gallery(
+  images,
+  num_classes,
+  value_range=(0, 255),
+  y_true=None,
+  y_pred=None,
+  color_mapping=None,
+  blend=True,
+  alpha=0.8,
+  ignore_index=-1,
+  data_format=None,
+  **kwargs
+)
+

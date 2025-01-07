@@ -1,0 +1,25 @@
+__signature__
+keras.ops.soft_shrink(x, threshold=0.5)
+__doc__
+Soft Shrink activation function.
+
+It is defined as
+
+`f(x) = x - threshold` if `x > threshold`,
+`f(x) = x + threshold` if `x < -threshold`,
+`f(x) = 0` otherwise.
+
+Args:
+    x: Input tensor.
+    threshold: Threshold value. Defaults to 0.5.
+
+Returns:
+    A tensor with the same shape as `x`.
+
+Example:
+
+>>> x = np.array([-1.0, 0.0, 1.0])
+>>> x_soft_shrink = keras.ops.soft_shrink(x)
+>>> print(x_soft_shrink)
+array([-0.5  0.   0.5], shape=(3,), dtype=float64)
+

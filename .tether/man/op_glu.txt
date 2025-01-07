@@ -1,0 +1,24 @@
+__signature__
+keras.ops.glu(x, axis=-1)
+__doc__
+Gated Linear Unit (GLU) activation function.
+
+It is defined as:
+
+`f(x) = a * sigmoid(b)`
+where `x` is split into `a` and `b` along the given axis.
+
+Args:
+    x: Input tensor.
+    axis: The axis along which to split the input tensor. Defaults to `-1`.
+
+Returns:
+    A tensor with the same shape as half of the input.
+
+Example:
+
+>>> x = np.array([-1., 0., 1. , 1.])
+>>> x_glu = keras.ops.glu(x)
+>>> print(x_glu)
+array([-0.73105858, 0. ], shape=(2,), dtype=float64)
+

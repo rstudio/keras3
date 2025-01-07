@@ -1,0 +1,11 @@
+__signature__
+keras.ops.exp2(x)
+__doc__
+Calculate the base-2 exponential of all elements in the input tensor.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output tensor, element-wise base-2 exponential of `x`.
+

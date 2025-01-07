@@ -1,0 +1,43 @@
+affine_transform(
+  boxes,
+  angle,
+  translate_x,
+  translate_y,
+  scale,
+  shear_x,
+  shear_y,
+  height,
+  width,
+  center_x=None,
+  center_y=None,
+  format='xyxy'
+)
+clip_to_image_size(
+  bounding_boxes,
+  height=None,
+  width=None,
+  format='xyxy'
+)
+convert_format(
+  boxes,
+  source,
+  target,
+  height=None,
+  width=None,
+  dtype='float32'
+)
+crop(
+  boxes,
+  top,
+  left,
+  height,
+  width,
+  format='xyxy'
+)
+pad(
+  boxes,
+  top,
+  left,
+  format='xyxy'
+)
+
