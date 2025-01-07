@@ -73,11 +73,13 @@ Usage with \code{compile()} API:
 }
 
 Other regression metrics: \cr
+\code{\link{metric_concordance_correlation}()} \cr
 \code{\link{metric_log_cosh_error}()} \cr
 \code{\link{metric_mean_absolute_error}()} \cr
 \code{\link{metric_mean_absolute_percentage_error}()} \cr
 \code{\link{metric_mean_squared_error}()} \cr
 \code{\link{metric_mean_squared_logarithmic_error}()} \cr
+\code{\link{metric_pearson_correlation}()} \cr
 \code{\link{metric_r2_score}()} \cr
 \code{\link{metric_root_mean_squared_error}()} \cr
 
@@ -93,6 +95,7 @@ Other metrics: \cr
 \code{\link{metric_categorical_crossentropy}()} \cr
 \code{\link{metric_categorical_focal_crossentropy}()} \cr
 \code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_concordance_correlation}()} \cr
 \code{\link{metric_f1_score}()} \cr
 \code{\link{metric_false_negatives}()} \cr
 \code{\link{metric_false_positives}()} \cr
@@ -112,6 +115,7 @@ Other metrics: \cr
 \code{\link{metric_mean_wrapper}()} \cr
 \code{\link{metric_one_hot_iou}()} \cr
 \code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_pearson_correlation}()} \cr
 \code{\link{metric_poisson}()} \cr
 \code{\link{metric_precision}()} \cr
 \code{\link{metric_precision_at_recall}()} \cr

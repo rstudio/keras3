@@ -75,6 +75,7 @@ Other losses: \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
+\code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr
 \code{\link{loss_ctc}()} \cr
 \code{\link{loss_dice}()} \cr

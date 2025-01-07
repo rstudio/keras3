@@ -70,6 +70,7 @@ Other math ops: \cr
 \code{\link{op_extract_sequences}()} \cr
 \code{\link{op_fft}()} \cr
 \code{\link{op_fft2}()} \cr
+\code{\link{op_ifft2}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_irfft}()} \cr
 \code{\link{op_logsumexp}()} \cr
@@ -118,6 +119,7 @@ Other ops: \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_categorical_crossentropy}()} \cr
 \code{\link{op_ceil}()} \cr
+\code{\link{op_celu}()} \cr
 \code{\link{op_cholesky}()} \cr
 \code{\link{op_clip}()} \cr
 \code{\link{op_concatenate}()} \cr
@@ -158,6 +160,7 @@ Other ops: \cr
 \code{\link{op_erf}()} \cr
 \code{\link{op_erfinv}()} \cr
 \code{\link{op_exp}()} \cr
+\code{\link{op_exp2}()} \cr
 \code{\link{op_expand_dims}()} \cr
 \code{\link{op_expm1}()} \cr
 \code{\link{op_extract_sequences}()} \cr
@@ -172,13 +175,17 @@ Other ops: \cr
 \code{\link{op_full_like}()} \cr
 \code{\link{op_gelu}()} \cr
 \code{\link{op_get_item}()} \cr
+\code{\link{op_glu}()} \cr
 \code{\link{op_greater}()} \cr
 \code{\link{op_greater_equal}()} \cr
+\code{\link{op_hard_shrink}()} \cr
 \code{\link{op_hard_sigmoid}()} \cr
 \code{\link{op_hard_silu}()} \cr
+\code{\link{op_hard_tanh}()} \cr
 \code{\link{op_histogram}()} \cr
 \code{\link{op_hstack}()} \cr
 \code{\link{op_identity}()} \cr
+\code{\link{op_ifft2}()} \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
@@ -190,6 +197,7 @@ Other ops: \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
 \code{\link{op_in_top_k}()} \cr
+\code{\link{op_inner}()} \cr
 \code{\link{op_inv}()} \cr
 \code{\link{op_irfft}()} \cr
 \code{\link{op_is_tensor}()} \cr
@@ -282,6 +290,7 @@ Other ops: \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
 \code{\link{op_slogdet}()} \cr
+\code{\link{op_soft_shrink}()} \cr
 \code{\link{op_softmax}()} \cr
 \code{\link{op_softplus}()} \cr
 \code{\link{op_softsign}()} \cr
@@ -292,6 +301,7 @@ Other ops: \cr
 \code{\link{op_split}()} \cr
 \code{\link{op_sqrt}()} \cr
 \code{\link{op_square}()} \cr
+\code{\link{op_squareplus}()} \cr
 \code{\link{op_squeeze}()} \cr
 \code{\link{op_stack}()} \cr
 \code{\link{op_std}()} \cr
@@ -306,6 +316,7 @@ Other ops: \cr
 \code{\link{op_take_along_axis}()} \cr
 \code{\link{op_tan}()} \cr
 \code{\link{op_tanh}()} \cr
+\code{\link{op_tanh_shrink}()} \cr
 \code{\link{op_tensordot}()} \cr
 \code{\link{op_tile}()} \cr
 \code{\link{op_top_k}()} \cr
