@@ -1,9 +1,11 @@
+assert_same_paths(a, b)
 assert_same_structure(
   a,
   b,
   check_types=True
 )
 flatten(structure)
+flatten_with_path(structure)
 is_nested(structure)
 lists_to_tuples(structure)
 map_shape_structure(func, structure)
