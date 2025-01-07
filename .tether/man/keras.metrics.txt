@@ -180,6 +180,16 @@ OneHotMeanIoU(
   sparse_y_pred=False,
   axis=-1
 )
+pearson_correlation(
+  y_true,
+  y_pred,
+  axis=-1
+)
+PearsonCorrelation(
+  name='pearson_correlation',
+  dtype=None,
+  axis=-1
+)
 poisson(y_true, y_pred)
 Poisson(name='poisson', dtype=None)
 Precision(

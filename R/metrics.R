@@ -3706,7 +3706,6 @@ function (..., name = "root_mean_squared_error", dtype = NULL)
 #' @param ...
 #' For forward/backward compatability.
 #'
-#' @export
 #' @family regression metrics
 #' @family metrics
 #' @export
@@ -3727,6 +3726,89 @@ function (y_true, y_pred, axis = -1L, ...,
   do.call(callable, args)
 }
 
+#' Calculates the Pearson Correlation Coefficient (PCC).
+#'
+#' @description
+#' Formula:
+#'
+#' ```r
+#' loss = mean(l2norm(y_true - mean(y_true) * l2norm(y_pred - mean(y_pred)))
+#' ```
+#'
+#' PCC measures the linear relationship between the true values (`y_true`) and
+#' the predicted values (`y_pred`). The coefficient ranges from -1 to 1, where
+#' a value of 1 implies a perfect positive linear correlation, 0 indicates no
+#' linear correlation, and -1 indicates a perfect negative linear correlation.
+#'
+#' This metric is widely used in regression tasks where the strength of the
+#' linear relationship between predictions and true labels is an
+#' important evaluation criterion.
+#'
+#' # Examples
+#' ```{r}
+#' pcc <- metric_pearson_correlation(axis = -1)
+#' y_true <- rbind(c(0, 1, 0.5),
+#'                 c(1, 1, 0.2))
+#' y_pred <- rbind(c(0.1, 0.9, 0.5),
+#'                 c(1, 0.9, 0.2))
+#' pcc$update_state(y_true, y_pred)
+#' pcc$result()
+#' # equivalent operation using R's stats::cor()
+#' mean(sapply(1:nrow(y_true), function(i) {
+#'   cor(y_true[i, ], y_pred[i, ])
+#' }))
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```r
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'mean_squared_error',
+#'   metrics = c(keras.metrics.PearsonCorrelation())
+#' )
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param axis
+#' (Optional) integer or tuple of integers of the axis/axes along
+#' which to compute the metric. Defaults to `-1`.
+#'
+#' @param y_true
+#' Tensor of true targets.
+#'
+#' @param y_pred
+#' Tensor of predicted targets.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @family regression metrics
+#' @family metrics
+#' @export
+#' @tether keras.metrics.PearsonCorrelation
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/PearsonCorrelation>
+metric_pearson_correlation <-
+function (y_true, y_pred, axis = -1L, ..., name = "pearson_correlation",
+    dtype = NULL)
+{
+  args <- capture_args(list(
+    axis = as_axis,
+    y_true = as_py_array,
+    y_pred = as_py_array
+  ))
+  callable <- if (missing(y_true) && missing(y_pred))
+    keras$metrics$PearsonCorrelation
+  else
+    keras$metrics$pearson_correlation
+  do.call(callable, args)
+}
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
