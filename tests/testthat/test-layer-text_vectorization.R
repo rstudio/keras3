@@ -37,7 +37,8 @@ test_call_succeeds("can use layer_text_vectorization in a functional model", {
   if (tensorflow::tf_version() < "2.1")
     skip("TextVectorization requires TF version >= 2.1")
 
-  x <- matrix(c("hello world", "hello world"), ncol = 1)
+  # x <- matrix(c("hello world", "hello world"), ncol = 1)
+  x <- c("hello world", "hello world")
 
   layer <- layer_text_vectorization()
   layer %>% adapt(x)
@@ -55,7 +56,8 @@ test_call_succeeds("can set and get the vocabulary of layer_text_vectorization",
   if (tensorflow::tf_version() < "2.1")
     skip("TextVectorization requires TF version >= 2.1")
 
-  x <- matrix(c("hello world", "hello world"), ncol = 1)
+#   x <- matrix(c("hello world", "hello world"), ncol = 1)
+  x <- c("hello world", "hello world")
 
   layer <- layer_text_vectorization()
 

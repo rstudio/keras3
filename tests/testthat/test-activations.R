@@ -4,14 +4,17 @@ context("activations")
 
 test_activation <- function(name, required_version = NULL, required_tf_version=tf_version()) {
   test_succeeds(paste("use activation", name), {
+    # browser()
     skip_if_no_keras(required_version)
     skip_if_not_tensorflow_version(required_tf_version)
     activation_fn <- eval(parse(text = name))
-    test_call_succeeds(name, {
-      keras_model_sequential(input_shape = 784) %>%
-        layer_dense(32) %>%
-        layer_activation(activation = activation_fn)
-    })
+
+    # test in a model
+    keras_model_sequential(input_shape = 784) %>%
+      layer_dense(32) %>%
+      layer_activation(activation = activation_fn)
+
+    # test stand alone
     tensor <- op_array(matrix(runif(100), nrow = 10, ncol = 10))
     activation_fn(tensor)
   })
