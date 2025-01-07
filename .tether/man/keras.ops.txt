@@ -110,6 +110,7 @@ categorical_crossentropy(
   axis=-1
 )
 ceil(x)
+celu(x, alpha=1.0)
 cholesky(x)
 clip(
   x,
@@ -223,7 +224,8 @@ dot_product_attention(
   bias=None,
   mask=None,
   scale=None,
-  is_causal=False
+  is_causal=False,
+  flash_attention=None
 )
 dtype(x)
 eig(x)
@@ -235,6 +237,7 @@ equal(x1, x2)
 erf(x)
 erfinv(x)
 exp(x)
+exp2(x)
 expand_dims(x, axis)
 expm1(x)
 extract_sequences(
@@ -271,11 +274,14 @@ full_like(
 )
 gelu(x, approximate=True)
 get_item(x, key)
+glu(x, axis=-1)
 greater(x1, x2)
 greater_equal(x1, x2)
+hard_shrink(x, threshold=0.5)
 hard_sigmoid(x)
 hard_silu(x)
 hard_swish(x)
+hard_tanh(x)
 histogram(
   x,
   bins=10,
@@ -290,6 +296,7 @@ in_top_k(
   predictions,
   k
 )
+inner(x1, x2)
 inv(x)
 irfft(x, fft_length=None)
 is_tensor(x)
@@ -562,6 +569,7 @@ slice_update(
   updates
 )
 slogdet(x)
+soft_shrink(x, threshold=0.5)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)
@@ -585,6 +593,7 @@ split(
 )
 sqrt(x)
 square(x)
+squareplus(x, b=4)
 squeeze(x, axis=None)
 stack(x, axis=0)
 std(
@@ -635,6 +644,7 @@ take_along_axis(
 )
 tan(x)
 tanh(x)
+tanh_shrink(x)
 tensordot(
   x1,
   x2,
