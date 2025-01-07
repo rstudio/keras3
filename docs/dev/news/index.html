@@ -54,9 +54,76 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
+<div class="section level3">
+<h3 id="added-compatibility-with-keras-v370-user-facing-changes-development-version">Added compatibility with Keras v3.7.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v370-user-facing-changes-development-version"></a></h3>
+<div class="section level4">
+<h4 id="new-functions-development-version">New functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h4>
+<div class="section level5">
+<h5 id="activations-development-version">Activations<a class="anchor" aria-label="anchor" href="#activations-development-version"></a></h5>
+<ul><li><code><a href="../reference/activation_celu.html">activation_celu()</a></code></li>
+<li><code><a href="../reference/activation_glu.html">activation_glu()</a></code></li>
+<li><code><a href="../reference/activation_hard_shrink.html">activation_hard_shrink()</a></code></li>
+<li><code><a href="../reference/activation_hard_tanh.html">activation_hard_tanh()</a></code></li>
+<li><code><a href="../reference/activation_log_sigmoid.html">activation_log_sigmoid()</a></code></li>
+<li><code><a href="../reference/activation_soft_shrink.html">activation_soft_shrink()</a></code></li>
+<li><code><a href="../reference/activation_squareplus.html">activation_squareplus()</a></code></li>
+<li><code><a href="../reference/activation_tanh_shrink.html">activation_tanh_shrink()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="configuration-development-version">Configuration<a class="anchor" aria-label="anchor" href="#configuration-development-version"></a></h5>
+<ul><li><code><a href="../reference/config_disable_flash_attention.html">config_disable_flash_attention()</a></code></li>
+<li><code><a href="../reference/config_enable_flash_attention.html">config_enable_flash_attention()</a></code></li>
+<li><code><a href="../reference/config_is_flash_attention_enabled.html">config_is_flash_attention_enabled()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="layers-and-initializers-development-version">Layers and Initializers<a class="anchor" aria-label="anchor" href="#layers-and-initializers-development-version"></a></h5>
+<ul><li><code><a href="../reference/initializer_stft.html">initializer_stft()</a></code></li>
+<li><code><a href="../reference/layer_max_num_bounding_boxes.html">layer_max_num_bounding_boxes()</a></code></li>
+<li><code><a href="../reference/layer_stft_spectrogram.html">layer_stft_spectrogram()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="losses-and-metrics-development-version">Losses and Metrics<a class="anchor" aria-label="anchor" href="#losses-and-metrics-development-version"></a></h5>
+<ul><li><code><a href="../reference/loss_circle.html">loss_circle()</a></code></li>
+<li><code><a href="../reference/metric_concordance_correlation.html">metric_concordance_correlation()</a></code></li>
+<li><code><a href="../reference/metric_pearson_correlation.html">metric_pearson_correlation()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="operations-development-version">Operations<a class="anchor" aria-label="anchor" href="#operations-development-version"></a></h5>
+<ul><li><code><a href="../reference/op_celu.html">op_celu()</a></code></li>
+<li><code><a href="../reference/op_exp2.html">op_exp2()</a></code></li>
+<li><code><a href="../reference/op_glu.html">op_glu()</a></code></li>
+<li><code><a href="../reference/op_hard_shrink.html">op_hard_shrink()</a></code></li>
+<li><code><a href="../reference/op_hard_tanh.html">op_hard_tanh()</a></code></li>
+<li><code><a href="../reference/op_ifft2.html">op_ifft2()</a></code></li>
+<li><code><a href="../reference/op_inner.html">op_inner()</a></code></li>
+<li><code><a href="../reference/op_soft_shrink.html">op_soft_shrink()</a></code></li>
+<li><code><a href="../reference/op_squareplus.html">op_squareplus()</a></code></li>
+<li><code><a href="../reference/op_tanh_shrink.html">op_tanh_shrink()</a></code></li>
+</ul></div>
+<div class="section level5">
+<h5 id="new-arguments-development-version">New arguments<a class="anchor" aria-label="anchor" href="#new-arguments-development-version"></a></h5>
 <ul><li>
-<code><a href="../reference/install_keras.html">install_keras()</a></code> changes: if a GPU is available, the default is now to install a CPU build of TensorFlow and a GPU build of JAX. To use a GPU in the current session, call <code>use_backend("jax")</code>.</li>
-</ul><div class="section level3">
+<code><a href="../reference/callback_backup_and_restore.html">callback_backup_and_restore()</a></code>: Added <code>double_checkpoint</code> argument to save a fallback checkpoint</li>
+<li>
+<code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>: Added support for <code>profile_batch</code> argument</li>
+<li>
+<code><a href="../reference/layer_group_query_attention.html">layer_group_query_attention()</a></code>: Added <code>flash_attention</code> and <code>seed</code> arguments</li>
+<li>
+<code><a href="../reference/layer_multi_head_attention.html">layer_multi_head_attention()</a></code>: Added <code>flash_attention</code> argument</li>
+<li>
+<code><a href="../reference/metric_sparse_top_k_categorical_accuracy.html">metric_sparse_top_k_categorical_accuracy()</a></code>: Added <code>from_sorted_ids</code> argument</li>
+</ul></div>
+</div>
+<div class="section level4">
+<h4 id="performance-improvements-development-version">Performance improvements<a class="anchor" aria-label="anchor" href="#performance-improvements-development-version"></a></h4>
+<ul><li><p>Added native Flash Attention support for GPU (via cuDNN) and TPU (via Pallas kernel) in JAX backend</p></li>
+<li><p>Added opt-in native Flash Attention support for GPU in PyTorch backend</p></li>
+<li><p>Enabled additional kernel fusion via bias_add in TensorFlow backend</p></li>
+<li><p>Added support for Intel XPU devices in PyTorch backend</p></li>
+<li><p><code><a href="../reference/install_keras.html">install_keras()</a></code> changes: if a GPU is available, the default is now to install a CPU build of TensorFlow and a GPU build of JAX. To use a GPU in the current session, call <code>use_backend("jax")</code>.</p></li>
+</ul></div>
+</div>
+<div class="section level3">
 <h3 id="added-compatibility-with-keras-v360-user-facing-changes-development-version">Added compatibility with Keras v3.6.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v360-user-facing-changes-development-version"></a></h3>
 <div class="section level5">
 <h5 id="breaking-changes-development-version">Breaking changes:<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h5>
