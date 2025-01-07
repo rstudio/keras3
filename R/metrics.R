@@ -3792,8 +3792,6 @@ function (y_true, y_pred, axis = -1L, ...,
 #' @family metrics
 #' @export
 #' @tether keras.metrics.PearsonCorrelation
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/metrics/PearsonCorrelation>
 metric_pearson_correlation <-
 function (y_true, y_pred, axis = -1L, ..., name = "pearson_correlation",
     dtype = NULL)

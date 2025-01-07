@@ -761,8 +761,6 @@ function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
 #' @family initializers
 #' @family constant initializers
 #' @tether keras.initializers.STFT
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/STFT>
 initializer_stft <-
 function (side = "real", window = "hann", scaling = "density",
     periodic = FALSE)

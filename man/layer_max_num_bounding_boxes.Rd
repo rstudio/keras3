@@ -4,13 +4,7 @@
 \alias{layer_max_num_bounding_boxes}
 \title{Ensure the maximum number of bounding boxes.}
 \usage{
-layer_max_num_bounding_boxes(
-  object,
-  max_number,
-  fill_value = -1L,
-  ...,
-  padding_value = NULL
-)
+layer_max_num_bounding_boxes(object, max_number, fill_value = -1L, ...)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}

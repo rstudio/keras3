@@ -51,10 +51,6 @@ values <- initializer(shape = c(128, 1, 513))
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/STFT}
-}
-
 Other initializers: \cr
 \code{\link{initializer_constant}()} \cr
 \code{\link{initializer_glorot_normal}()} \cr

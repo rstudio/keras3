@@ -13,7 +13,7 @@
 #'   Turing machine.
 #' - Is capable of running on top of multiple back-ends including
 #'   [TensorFlow](https://github.com/tensorflow/tensorflow),
-#'   [Jax](https://github.com/google/jax),
+#'   [Jax](https://github.com/jax-ml/jax),
 #'   or [PyTorch](https://github.com/pytorch/pytorch).
 #'
 #' See the package website at <https://keras3.posit.co> for complete documentation.

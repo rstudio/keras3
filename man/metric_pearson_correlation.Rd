@@ -77,10 +77,6 @@ Usage with \code{compile()} API:
 }
 
 \seealso{
-\itemize{
-\item \url{https://www.tensorflow.org/api_docs/python/tf/keras/metrics/PearsonCorrelation}
-}
-
 Other regression metrics: \cr
 \code{\link{metric_concordance_correlation}()} \cr
 \code{\link{metric_cosine_similarity}()} \cr

@@ -22,7 +22,7 @@ building essentially any deep learning model, from a memory network to a neural
 Turing machine.
 \item Is capable of running on top of multiple back-ends including
 \href{https://github.com/tensorflow/tensorflow}{TensorFlow},
-\href{https://github.com/google/jax}{Jax},
+\href{https://github.com/jax-ml/jax}{Jax},
 or \href{https://github.com/pytorch/pytorch}{PyTorch}.
 }
 

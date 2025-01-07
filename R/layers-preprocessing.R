@@ -204,7 +204,7 @@ function (object, height, width, data_format = NULL, ...)
 #' @family layers
 #' @tether keras.layers.MaxNumBoundingBoxes
 layer_max_num_bounding_boxes <-
-function (object, max_number, fill_value = -1L, ..., padding_value = NULL)
+function (object, max_number, fill_value = -1L, ...)
 {
     args <- capture_args(list(fill_value = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
