@@ -47,7 +47,7 @@ resolve_rmd_tether <- function(url) {
   tutobook_to_rmd(path, outfile = FALSE)
 }
 
-# resolve_rmd_tether <- NULL
+resolve_rmd_tether <- NULL
 # resolve_roxy_tether <- NULL
 
 
@@ -130,12 +130,3 @@ view_vignette_adaptation_diff <- function(rmd_file) {
 }
 
 # view_vignette_adaptation_diff("vignettes-src/writing_a_training_loop_from_scratch.Rmd")
-
-add 7 new nn ops
-op_glu()
-op_hard_shrink()
-op_hard_tanh()
-op_soft_shrink()
-op_squareplus()
-op_tanh_shrink()
-op_celu()
