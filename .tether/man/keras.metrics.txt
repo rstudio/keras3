@@ -246,7 +246,8 @@ sparse_categorical_crossentropy(
 sparse_top_k_categorical_accuracy(
   y_true,
   y_pred,
-  k=5
+  k=5,
+  from_sorted_ids=False
 )
 SparseCategoricalAccuracy(name='sparse_categorical_accuracy', dtype=None)
 SparseCategoricalCrossentropy(
@@ -258,7 +259,8 @@ SparseCategoricalCrossentropy(
 SparseTopKCategoricalAccuracy(
   k=5,
   name='sparse_top_k_categorical_accuracy',
-  dtype=None
+  dtype=None,
+  from_sorted_ids=False
 )
 SpecificityAtSensitivity(
   sensitivity,
