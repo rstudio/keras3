@@ -436,3 +436,52 @@ keras$ops$saturate_cast(x, dtype)
 op_trunc <-
 function (x)
 keras$ops$trunc(x)
+
+
+#' Calculate the base-2 exponential of all elements in the input tensor.
+#'
+#' @returns
+#' Output tensor, element-wise base-2 exponential of `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.exp2
+op_exp2 <-
+function (x)
+keras$ops$exp2(x)
+
+
+#' Return the inner product of two tensors.
+#'
+#' @description
+#' Ordinary inner product of vectors for 1-D tensors
+#' (without complex conjugation), in higher dimensions
+#' a sum product over the last axes.
+#'
+#' Multidimensional arrays are treated as vectors by flattening
+#' all but their last axes. The resulting dot product is performed
+#' over their last axes.
+#'
+#' @returns
+#' Output tensor. The shape of the output is determined by
+#' broadcasting the shapes of `x1` and `x2` after removing
+#' their last axes.
+#'
+#' @param x1
+#' First input tensor.
+#'
+#' @param x2
+#' Second input tensor. The last dimension of `x1` and `x2`
+#' must match.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.inner
+op_inner <-
+function (x1, x2)
+keras$ops$inner(x1, x2)
