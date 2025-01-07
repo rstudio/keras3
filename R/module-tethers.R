@@ -227,6 +227,12 @@ NULL
 #' @noRd
 NULL
 
+#' @title keras.visualization
+#' @name keras.visualization
+#' @tether keras.visualization
+#' @noRd
+NULL
+
 
 #' @title keras
 #' @name keras

@@ -91,4 +91,5 @@ Variable(
   name=None
 )
 version()
+visualization: Module(keras.api.visualization)
 
