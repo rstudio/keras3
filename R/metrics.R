@@ -3644,6 +3644,89 @@ function (..., name = "root_mean_squared_error", dtype = NULL)
 }
 
 
+#' Calculates the Concordance Correlation Coefficient (CCC).
+#'
+#' @description
+#' Formula:
+#'
+#' ```r
+#' loss <- mean(
+#'   2 * (y_true - mean(y_true)) * (y_pred - mean(y_pred)) /
+#'     (var(y_true) + var(y_pred) + (mean(y_true) - mean(y_pred))^2)
+#' )
+#' ```
+#'
+#' CCC evaluates the agreement between true values (`y_true`) and predicted
+#' values (`y_pred`) by considering both precision and accuracy. The
+#' coefficient ranges from -1 to 1, where a value of 1 indicates perfect
+#' agreement.
+#'
+#' This metric is useful in regression tasks where it is important to assess
+#' how well the predictions match the true values, taking into account both
+#' their correlation and proximity to the 45-degree line of perfect
+#' concordance.
+#'
+#' # Examples
+#' ```{r}
+#' ccc <- metric_concordance_correlation(axis=-1)
+#' y_true <- rbind(c(0, 1, 0.5),
+#'                 c(1, 1, 0.2))
+#' y_pred <- rbind(c(0.1, 0.9, 0.5),
+#'                 c(1, 0.9, 0.2))
+#' ccc$update_state(y_true, y_pred)
+#' ccc$result()
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```r
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'mean_squared_error',
+#'   metrics = c(metric_concordance_correlation())
+#' )
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param axis
+#' (Optional) integer or tuple of integers of the axis/axes along
+#' which to compute the metric. Defaults to `-1`.
+#'
+#' @param y_true
+#' Tensor of true targets.
+#'
+#' @param y_pred
+#' Tensor of predicted targets.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @family regression metrics
+#' @family metrics
+#' @export
+#' @tether keras.metrics.ConcordanceCorrelation
+metric_concordance_correlation <-
+function (y_true, y_pred, axis = -1L, ...,
+          name = "concordance_correlation", dtype = NULL)
+{
+  args <- capture_args(list(
+    y_true = as_py_array,
+    y_pred = as_py_array,
+    axis = as_axis
+  ))
+  callable <- if (missing(y_true) && missing(y_pred))
+    keras$metrics$ConcordanceCorrelation
+  else
+    keras$metrics$concordance_correlation
+  do.call(callable, args)
+}
+
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export

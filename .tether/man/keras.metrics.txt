@@ -77,6 +77,16 @@ CategoricalCrossentropy(
   axis=-1
 )
 CategoricalHinge(name='categorical_hinge', dtype=None)
+concordance_correlation(
+  y_true,
+  y_pred,
+  axis=-1
+)
+ConcordanceCorrelation(
+  name='concordance_correlation',
+  dtype=None,
+  axis=-1
+)
 CosineSimilarity(
   name='cosine_similarity',
   dtype=None,
