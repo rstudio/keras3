@@ -716,6 +716,58 @@ function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
     do.call(keras$initializers$VarianceScaling, args)
 }
 
+#' Initializer of Conv kernels for Short-term Fourier Transformation (STFT).
+#'
+#' @description
+#' Since the formula involves complex numbers, this class compute either the
+#' real or the imaginary components of the final output.
+#'
+#' Additionally, this initializer supports windowing functions across the time
+#' dimension as commonly used in STFT. Windowing functions from the Python module
+#' `scipy.signal.windows` are supported, including the common `hann` and
+#' `hamming` windowing functions. This layer supports periodic windows and
+#' scaling-based normalization.
+#'
+#' This is primarily intended for use in the `STFTSpectrogram` layer.
+#'
+#' # Examples
+#' ```{r}
+#' # Standalone usage:
+#' initializer <- initializer_stft("real", "hann", "density", FALSE)
+#' values <- initializer(shape = c(128, 1, 513))
+#' ```
+#'
+#' @param side
+#' String, `"real"` or `"imag"` deciding if the kernel will compute
+#' the real side or the imaginary side of the output. Defaults to
+#' `"real"`.
+#'
+#' @param window
+#' String for the name of the windowing function in the
+#' `scipy.signal.windows` module, or array_like for the window values,
+#' or `NULL` for no windowing.
+#'
+#' @param scaling
+#' String, `"density"` or `"spectrum"` for scaling of the window
+#' for normalization, either L2 or L1 normalization.
+#' `NULL` for no scaling.
+#'
+#' @param periodic
+#' Boolean, if True, the window function will be treated as
+#' periodic. Defaults to `FALSE`.
+#'
+#' @export
+#' @tether keras.initializers.STFT
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/STFT>
+initializer_stft <-
+function (side = "real", window = "hann", scaling = "density",
+    periodic = FALSE)
+{
+    args <- capture_args(NULL)
+    do.call(keras$initializers$STFT, args)
+}
+
 
 
 #' @export
