@@ -43,8 +43,11 @@ Other backend: \cr
 \code{\link{config_set_image_data_format}()} \cr
 
 Other config: \cr
+\code{\link{config_disable_flash_attention}()} \cr
 \code{\link{config_disable_interactive_logging}()} \cr
 \code{\link{config_disable_traceback_filtering}()} \cr
+\code{\link{config_dtype_policy}()} \cr
+\code{\link{config_enable_flash_attention}()} \cr
 \code{\link{config_enable_interactive_logging}()} \cr
 \code{\link{config_enable_traceback_filtering}()} \cr
 \code{\link{config_enable_unsafe_deserialization}()} \cr
@@ -54,6 +57,7 @@ Other config: \cr
 \code{\link{config_is_interactive_logging_enabled}()} \cr
 \code{\link{config_is_traceback_filtering_enabled}()} \cr
 \code{\link{config_set_backend}()} \cr
+\code{\link{config_set_dtype_policy}()} \cr
 \code{\link{config_set_epsilon}()} \cr
 \code{\link{config_set_floatx}()} \cr
 \code{\link{config_set_image_data_format}()} \cr

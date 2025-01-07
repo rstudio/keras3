@@ -65,7 +65,7 @@ with the relevant config:
 deserialize_keras_object(config)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.optimizers.adam.Adam object>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <keras.src.optimizers.adam.Adam object at 0x0>
 
 }\if{html}{\out{</div>}}
 
@@ -138,7 +138,7 @@ str(full_config)
 deserialize_keras_object(full_config)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <<r-namespace:keras3>.ModifiedMeanSquaredError object>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <LossFunctionWrapper(<function mean_squared_error at 0x0>, kwargs=\{\})>
 ##  signature: (y_true, y_pred, sample_weight=None)
 
 }\if{html}{\out{</div>}}

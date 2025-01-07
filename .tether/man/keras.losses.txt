@@ -74,6 +74,23 @@ CategoricalHinge(
   name='categorical_hinge',
   dtype=None
 )
+circle(
+  y_true,
+  y_pred,
+  ref_labels=None,
+  ref_embeddings=None,
+  remove_diagonal=True,
+  gamma=80,
+  margin=0.4
+)
+Circle(
+  gamma=80.0,
+  margin=0.4,
+  remove_diagonal=True,
+  reduction='sum_over_batch_size',
+  name='circle',
+  dtype=None
+)
 cosine_similarity(
   y_true,
   y_pred,

@@ -5,7 +5,7 @@ keras.ops.argmin(
   keepdims=False
 )
 __doc__
-Returns the indices of the minium values along an axis.
+Returns the indices of the minimum values along an axis.
 
 Args:
     x: Input tensor.

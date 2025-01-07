@@ -8,4 +8,5 @@ Args:
     x2: Second input tensor.
 
 Returns:
-    Output tensor, element-wise comparsion of `x1` and `x2`.
+    Output tensor, element-wise comparison of `x1` and `x2`.
+

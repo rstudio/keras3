@@ -133,7 +133,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' attention scores. Defaults to `0.0`.
 #'
 #' @param seed
-#' An integer to use as random seed incase of `dropout`.
+#' An integer to use as random seed in case of `dropout`.
 #'
 #' @param score_mode
 #' Function to use to compute attention scores, one of
@@ -234,6 +234,13 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param use_bias
 #' Boolean, whether the dense layers use bias vectors/matrices.
 #'
+#' @param flash_attention
+#' If `NULL`, the layer attempts to use flash
+#' attention for faster and more memory-efficient attention
+#' computations when possible. This behavior can be configured using
+#' `config_enable_flash_attention()` or
+#' `config_disable_flash_attention()`.
+#'
 #' @param kernel_initializer
 #' Initializer for dense layer kernels.
 #'
@@ -255,6 +262,9 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param bias_constraint
 #' Constraint for dense layer kernels.
 #'
+#' @param seed
+#' Optional integer to seed the dropout layer.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -269,10 +279,10 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @tether keras.layers.GroupQueryAttention
 layer_group_query_attention <-
 function (object, head_dim, num_query_heads, num_key_value_heads,
-    dropout = 0, use_bias = TRUE, kernel_initializer = "glorot_uniform",
+    dropout = 0, use_bias = TRUE, flash_attention = NULL, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
-    ...)
+    seed = NULL, ...)
 {
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
@@ -378,6 +388,13 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' axes over which the attention is applied. `NULL` means
 #' attention over all axes, but batch, heads, and features.
 #'
+#' @param flash_attention
+#' If `NULL`, the layer attempts to use flash
+#' attention for faster and more memory-efficient attention
+#' computations when possible. This behavior can be configured using
+#' `config_enable_flash_attention()` or
+#' `config_disable_flash_attention()`.
+#'
 #' @param kernel_initializer
 #' Initializer for dense layer kernels.
 #'
@@ -418,7 +435,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @tether keras.layers.MultiHeadAttention
 layer_multi_head_attention <-
 function (inputs, num_heads, key_dim, value_dim = NULL, dropout = 0,
-    use_bias = TRUE, output_shape = NULL, attention_axes = NULL,
+    use_bias = TRUE, output_shape = NULL, attention_axes = NULL, flash_attention=NULL,
     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, seed = NULL, ...)

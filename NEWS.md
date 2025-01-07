@@ -1,5 +1,62 @@
 # keras3 (development version)
 
+## Added compatibility with Keras v3.7.0. User-facing changes:
+
+### New functions
+
+#### Activations
+- `activation_celu()` 
+- `activation_glu()`
+- `activation_hard_shrink()`
+- `activation_hard_tanh()`
+- `activation_log_sigmoid()`
+- `activation_soft_shrink()` 
+- `activation_squareplus()` 
+- `activation_tanh_shrink()`
+
+#### Configuration
+- `config_disable_flash_attention()`
+- `config_enable_flash_attention()`
+- `config_is_flash_attention_enabled()`
+
+#### Layers and Initializers
+- `initializer_stft()`
+- `layer_max_num_bounding_boxes()`
+- `layer_stft_spectrogram()`
+
+#### Losses and Metrics
+- `loss_circle()`
+- `metric_concordance_correlation()`
+- `metric_pearson_correlation()`
+
+#### Operations
+- `op_celu()`
+- `op_exp2()`
+- `op_glu()`
+- `op_hard_shrink()`
+- `op_hard_tanh()`
+- `op_ifft2()`
+- `op_inner()`
+- `op_soft_shrink()`
+- `op_squareplus()`
+- `op_tanh_shrink()`
+
+#### New arguments
+
+* `callback_backup_and_restore()`: Added `double_checkpoint` argument to save a fallback checkpoint
+* `callback_tensorboard()`: Added support for `profile_batch` argument
+* `layer_group_query_attention()`: Added `flash_attention` and `seed` arguments
+* `layer_multi_head_attention()`: Added `flash_attention` argument
+* `metric_sparse_top_k_categorical_accuracy()`: Added `from_sorted_ids` argument
+
+### Performance improvements
+
+* Added native Flash Attention support for GPU (via cuDNN) and TPU (via Pallas kernel) in JAX backend
+* Added opt-in native Flash Attention support for GPU in PyTorch backend
+* Enabled additional kernel fusion via bias_add in TensorFlow backend
+* Added support for Intel XPU devices in PyTorch backend
+
+
 - `install_keras()` changes: if a GPU is available, the default is now to 
   install a CPU build of TensorFlow and a GPU build of JAX. To use a GPU in the 
   current session, call `use_backend("jax")`.

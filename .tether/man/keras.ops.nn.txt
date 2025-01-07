@@ -25,6 +25,7 @@ categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+celu(x, alpha=1.0)
 conv(
   inputs,
   kernel,
@@ -73,13 +74,17 @@ dot_product_attention(
   bias=None,
   mask=None,
   scale=None,
-  is_causal=False
+  is_causal=False,
+  flash_attention=None
 )
 elu(x, alpha=1.0)
 gelu(x, approximate=True)
+glu(x, axis=-1)
+hard_shrink(x, threshold=0.5)
 hard_sigmoid(x)
 hard_silu(x)
 hard_swish(x)
+hard_tanh(x)
 leaky_relu(x, negative_slope=0.2)
 log_sigmoid(x)
 log_softmax(x, axis=-1)
@@ -136,6 +141,7 @@ separable_conv(
 )
 sigmoid(x)
 silu(x)
+soft_shrink(x, threshold=0.5)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)
@@ -145,5 +151,7 @@ sparse_categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+squareplus(x, b=4)
 swish(x)
+tanh_shrink(x)
 

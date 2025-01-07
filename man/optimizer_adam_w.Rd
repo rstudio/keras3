@@ -119,7 +119,7 @@ method to decay weights per the techniques discussed in the paper,
 
 According to
 \href{https://arxiv.org/abs/1412.6980}{Kingma et al., 2014},
-the underying Adam method is "\emph{computationally
+the underlying Adam method is "\emph{computationally
 efficient, has little memory requirement, invariant to diagonal rescaling of
 gradients, and is well suited for problems that are large in terms of
 data/parameters}".

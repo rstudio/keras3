@@ -128,13 +128,13 @@ r_to_py(keras$ops)$convert_to_numpy(x)
 #' ```
 #'
 #' @returns
-#' A tensor of the specified `dtype`.
+#' A backend tensor of the specified `dtype` and sparseness.
 #'
 #' @param x
-#' An array.
+#' An array (can be nested) or a backend tensor.
 #'
 #' @param dtype
-#' The target type.
+#' The target type. If `NULL`, the type of `x` is used.
 #'
 #' @param sparse
 #' Whether to keep sparse tensors. `FALSE` will cause sparse
@@ -899,6 +899,35 @@ function (x)
 keras$ops$fft2(x)
 
 
+#' Computes the 2D Inverse Fast Fourier Transform along the last two axes of
+#'
+#' @description
+#' input.
+#'
+#' # Examples
+#' ```{r}
+#' x <- list(op_array(rbind(c(1, 2), c(2, 1))),
+#'           op_array(rbind(c(0, 1), c(1, 0))))
+#' op_ifft2(x)
+#' ```
+#'
+#' @returns
+#' A tuple containing two tensors - the real and imaginary parts of the
+#' output.
+#'
+#' @param x
+#' Tuple of the real and imaginary parts of the input tensor. Both
+#' tensors in the tuple should be of floating type.
+#'
+#' @export
+#' @family math ops
+#' @family ops
+#' @tether keras.ops.ifft2
+op_ifft2 <-
+function (x)
+keras$ops$ifft2(tuple(x))
+
+
 #' Checks if the targets are in the top-k predictions.
 #'
 #' @description
@@ -1395,7 +1424,7 @@ function (condlist, choicelist, default = 0L)
 #' A tensor of shape `(..., M, M)` representing the coefficients matrix.
 #'
 #' @param b
-#' A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+#' A tensor of shape `(..., M)` or `(..., M, N)` representing the
 #' right-hand side or "dependent variable" matrix.
 #'
 #' @export
@@ -3663,7 +3692,7 @@ function(f, elems, reverse = FALSE, axis = 1L)
 #' is negative it counts from the last to the first axis.
 #'
 #' @param weights
-#' Tensor of wieghts associated with the values in `x`. Each
+#' Tensor of weights associated with the values in `x`. Each
 #' value in `x` contributes to the average according to its
 #' associated weight. The weights array can either be 1-D (in which
 #' case its length must be the size of a along the given axis) or of
@@ -6000,7 +6029,7 @@ keras$ops$nonzero(x)
 #' ```
 #'
 #' @returns
-#' Output tensor, element-wise comparsion of `x1` and `x2`.
+#' Output tensor, element-wise comparison of `x1` and `x2`.
 #'
 #' @param x1
 #' First input tensor.
@@ -6220,10 +6249,10 @@ function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 #' Compute the q-th quantile(s) of the data along the specified axis.
 #'
 #' @returns
-#' The quantile(s). If `q` is a single probability and `axis=NULL`, then
-#' the result is a scalar. If multiple probabilies levels are given, first
-#' axis of the result corresponds to the quantiles. The other axes are the
-#' axes that remain after the reduction of `x`.
+#' The quantile(s). If `q` is a single probability and `axis = NULL`, then
+#' the result is a scalar. If multiple probabilities levels are given,
+#' first axis of the result corresponds to the quantiles. The other axes
+#' are the axes that remain after the reduction of `x`.
 #'
 #' @param x
 #' Input tensor.

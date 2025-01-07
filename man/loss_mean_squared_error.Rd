@@ -21,8 +21,13 @@ loss_mean_squared_error(
 \item{...}{For forward/backward compatability.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
-this should be \code{"sum_over_batch_size"}.
-Supported options are \code{"sum"}, \code{"sum_over_batch_size"} or \code{NULL}.}
+this should be \code{"sum_over_batch_size"}. Supported options are
+\code{"sum"}, \code{"sum_over_batch_size"}, \code{"mean"},
+\code{"mean_with_sample_weight"} or \code{NULL}. \code{"sum"} sums the loss,
+\code{"sum_over_batch_size"} and \code{"mean"} sum the loss and divide by the
+sample size, and \code{"mean_with_sample_weight"} sums the loss and
+divides by the sum of the sample weights. \code{"none"} and \code{NULL}
+perform no aggregation. Defaults to \code{"sum_over_batch_size"}.}
 
 \item{name}{Optional name for the loss instance.}
 
@@ -60,6 +65,7 @@ Other losses: \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
+\code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr
 \code{\link{loss_ctc}()} \cr
 \code{\link{loss_dice}()} \cr

@@ -47,6 +47,7 @@ Other losses: \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
+\code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr
 \code{\link{loss_ctc}()} \cr
 \code{\link{loss_dice}()} \cr
@@ -90,6 +91,7 @@ Other metrics: \cr
 \code{\link{metric_categorical_crossentropy}()} \cr
 \code{\link{metric_categorical_focal_crossentropy}()} \cr
 \code{\link{metric_categorical_hinge}()} \cr
+\code{\link{metric_concordance_correlation}()} \cr
 \code{\link{metric_cosine_similarity}()} \cr
 \code{\link{metric_f1_score}()} \cr
 \code{\link{metric_false_negatives}()} \cr
@@ -109,6 +111,7 @@ Other metrics: \cr
 \code{\link{metric_mean_wrapper}()} \cr
 \code{\link{metric_one_hot_iou}()} \cr
 \code{\link{metric_one_hot_mean_iou}()} \cr
+\code{\link{metric_pearson_correlation}()} \cr
 \code{\link{metric_poisson}()} \cr
 \code{\link{metric_precision}()} \cr
 \code{\link{metric_precision_at_recall}()} \cr

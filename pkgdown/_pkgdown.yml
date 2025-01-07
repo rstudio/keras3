@@ -140,6 +140,8 @@ reference:
     - count_params
     - pop_layer
     - quantize_weights
+    - get_state_tree
+    - set_state_tree
 
   - subtitle: "Save and Load Models"
   - contents:
@@ -205,6 +207,7 @@ reference:
   - subtitle: "Preprocessing Layers"
   - contents:
     - has_concept("preprocessing layers")
+    - layer_pipeline
     - adapt
     # - has_concept("random preprocessing layers")
 

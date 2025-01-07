@@ -310,6 +310,7 @@ test_succeeds("layer_text_vectorization", {
     input_shape = c(1), dtype = tf$string)
 
   input_data = rbind("foo qux bar", "qux baz")
+  input_data = c("foo qux bar", "qux baz")
   preds <- model %>% predict(input_data)
 
   expect_equal(preds, rbind(c(2, 1, 4, 0),

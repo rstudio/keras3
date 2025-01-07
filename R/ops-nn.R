@@ -208,14 +208,246 @@ keras$ops$psnr(x1, x2, max_val)
 #' @param is_causal
 #' Whether to apply causal mask.
 #'
+#' @param flash_attention
+#' Whether to use flash attention. If `NULL`, it will
+#' attempt to use flash attention if the required conditions are met.
+#' Typically, the inputs must be in float16 and bfloat16 dtype and the
+#' input layout requirements may vary depending on the backend.
+#'
 #' @export
 #' @tether keras.ops.dot_product_attention
 #' @family nn ops
 #' @family ops
 op_dot_product_attention <-
 function (query, key, value, bias = NULL, mask = NULL, scale = NULL,
-          is_causal = FALSE)
+          is_causal = FALSE, flash_attention = NULL)
 {
   args <- capture_args()
   do.call(keras$ops$dot_product_attention, args)
 }
+
+
+
+
+
+#' Gated Linear Unit (GLU) activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `f(x) = a * sigmoid(b)`
+#' where `x` is split into `a` and `b` along the given axis.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1., 0., 1. , 1.))
+#' op_glu(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as half of the input.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' The axis along which to split the input tensor. Defaults to `-1`.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.glu
+op_glu <-
+function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$ops$glu, args)
+}
+
+
+#' Hard Shrink activation function.
+#'
+#' @description
+#' The Hard Shrink function is a thresholding operation defined as:
+#'
+#' `f(x) = x` if `|x| > threshold`,
+#' `f(x) = 0` otherwise.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-0.5, 0., 1.))
+#' op_hard_shrink(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' Threshold value. Defaults to 0.5.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.hard_shrink
+op_hard_shrink <-
+function (x, threshold = 0.5)
+keras$ops$hard_shrink(x, threshold)
+
+
+#' Applies the HardTanh function element-wise.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `f(x) = -1 for x < -1`, `f(x) = x for -1 <= x <= 1`, `f(x) = 1 for x > 1`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-2., -1., 0., 1., 2.))
+#' op_hard_tanh(x)
+#' ```
+#'
+#' @returns
+#' Output tensor of same shape as `x`
+#' where values are clamped between -1 and 1.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.hard_tanh
+op_hard_tanh <-
+function (x)
+keras$ops$hard_tanh(x)
+
+
+#' Soft Shrink activation function.
+#'
+#' @description
+#' It is defined as
+#'
+#' `f(x) = x - threshold` if `x > threshold`,
+#' `f(x) = x + threshold` if `x < -threshold`,
+#' `f(x) = 0` otherwise.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1, 0, 1))
+#' op_soft_shrink(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' Threshold value. Defaults to 0.5.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.soft_shrink
+op_soft_shrink <-
+function (x, threshold = 0.5)
+keras$ops$soft_shrink(x, threshold)
+
+
+#' Squareplus activation function.
+#'
+#' @description
+#' The Squareplus activation function is defined as:
+#'
+#' `f(x) = (x + sqrt(x^2 + b)) / 2`
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0))
+#' op_squareplus(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param b
+#' Smoothness parameter. Defaults to 4.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.squareplus
+op_squareplus <-
+function (x, b = 4L)
+{
+    args <- capture_args(NULL)
+    do.call(keras$ops$squareplus, args)
+}
+
+
+#' Applies the tanh shrink function element-wise.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `f(x) = x - tanh(x)`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1., 0., 1.))
+#' op_tanh_shrink(x)
+#' ```
+#'
+#' @returns
+#' Output tensor of the same shape as `x`, where each element is
+#' transformed according to the tanh shrink operation.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.tanh_shrink
+op_tanh_shrink <-
+function (x)
+keras$ops$tanh_shrink(x)
+
+
+#' Continuously-differentiable exponential linear unit.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `f(x) =  alpha * (exp(x / alpha) - 1) for x < 0`, `f(x) = x for x >= 0`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1., 0., 1.))
+#' op_celu(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param alpha
+#' The value for the CELU formulation. Defaults to `1.0`.
+#'
+#' @family nn ops
+#' @family ops
+#' @export
+#' @tether keras.ops.celu
+op_celu <-
+function (x, alpha = 1)
+keras$ops$celu(x, alpha)

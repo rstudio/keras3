@@ -90,9 +90,14 @@ test_succeeds <- function(desc, expr, required_version = NULL) {
     local_output_sink(nullfile())
   }
 
+
   rlang::eval_tidy(
-    rlang::expr(test_that({{desc}}, expect_no_error( {{expr}} ))),
-    env = parent.frame())
+    rlang::expr(test_that(!!desc, {
+      expect_no_error( {{expr}} )
+      expect_true(TRUE) # https://github.com/r-lib/testthat/issues/2037
+      } ))
+    # , # env = parent.frame()
+  )
 
 }
 

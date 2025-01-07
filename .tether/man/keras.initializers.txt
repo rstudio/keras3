@@ -44,6 +44,24 @@ RandomUniform(
   seed=None
 )
 serialize(initializer)
+stft(
+  side='real',
+  window='hann',
+  scaling='density',
+  periodic=False
+)
+STFT(
+  side='real',
+  window='hann',
+  scaling='density',
+  periodic=False
+)
+STFTInitializer(
+  side='real',
+  window='hann',
+  scaling='density',
+  periodic=False
+)
 truncated_normal(
   mean=0.0,
   stddev=0.05,

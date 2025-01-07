@@ -570,3 +570,202 @@ activation_hard_swish <-
     args <- capture_args(NULL)
     do.call(keras$activations$hard_swish, args)
   }, py_function_name = "hard_silu")
+
+
+#' Gated Linear Unit (GLU) activation function.
+#'
+#' @description
+#' The GLU activation function is defined as:
+#'
+#' `glu(x) = a * sigmoid(b)`,
+#'
+#' where `x` is split into two equal parts `a` and `b` along the given axis.
+#'
+#' # Reference
+#' - [Dauphin et al., 2017](https://arxiv.org/abs/1612.08083)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' The axis along which to split the input tensor. Defaults to `-1`.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.glu
+activation_glu <- function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$activations$glu, args)
+}
+
+#' Hard Shrink activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `hard_shrink(x) = x` if `|x| > threshold`,
+#' `hard_shrink(x) = 0` otherwise.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' Threshold value. Defaults to `0.5`.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.hard_shrink
+activation_hard_shrink <-
+function (x, threshold = 0.5)
+{
+  args <- capture_args(NULL)
+  do.call(keras$activations$hard_shrink, args)
+}
+
+
+#' Continuously Differentiable Exponential Linear Unit.
+#'
+#' @description
+#' The CeLU activation function is defined as:
+#'
+#' `celu(x) = alpha * (exp(x / alpha) - 1) for x < 0`,`celu(x) = x for x >= 0`.
+#'
+#' where `alpha` is a scaling parameter that controls the activation's shape.
+#'
+#' # Reference
+#' - [Barron, J. T., 2017](https://arxiv.org/abs/1704.07483)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param alpha
+#' The  value for the CeLU formulation. Defaults to `1.0`.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.celu
+activation_celu <-
+function (x, alpha = 1)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$celu, args)
+}
+
+#' HardTanh activation function.
+#'
+#' @description
+#' It is defined as:
+#' `hard_tanh(x) = -1 for x < -1`,
+#' `hard_tanh(x) = x for -1 <= x <= 1`,
+#' `hard_tanh(x) = 1 for x > 1`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.hard_tanh
+activation_hard_tanh <-
+function (x) {
+  args <- capture_args(NULL)
+  do.call(keras$activations$hard_tanh, args)
+}
+
+#' Logarithm of the sigmoid activation function.
+#'
+#' @description
+#' It is defined as `f(x) = log(1 / (1 + exp(-x)))`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.log_sigmoid
+activation_log_sigmoid <-
+function (x)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$log_sigmoid, args)
+}
+
+#' Soft Shrink activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `soft_shrink(x) = x - threshold` if `x > threshold`,
+#' `soft_shrink(x) = x + threshold` if `x < -threshold`,
+#' `soft_shrink(x) = 0` otherwise.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' Threshold value. Defaults to 0.5.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.soft_shrink
+activation_soft_shrink <-
+function (x, threshold = 0.5)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$soft_shrink, args)
+}
+
+#' Squareplus activation function.
+#'
+#' @description
+#' The Squareplus activation function is defined as:
+#'
+#' `f(x) = (x + sqrt(x^2 + b)) / 2`
+#'
+#' Where `b` is a smoothness parameter.
+#'
+#' # Reference
+#' - [Ramachandran et al., 2021](https://arxiv.org/abs/2112.11687)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param b
+#' Smoothness parameter. Defaults to 4.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.squareplus
+activation_squareplus <-
+function (x, b = 4L)
+{
+    args <- capture_args()
+    do.call(keras$activations$squareplus, args)
+}
+
+#' Tanh shrink activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `f(x) = x - tanh(x)`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.tanh_shrink
+activation_tanh_shrink <-
+function (x)
+{
+  keras$activations$tanh_shrink(x)
+}

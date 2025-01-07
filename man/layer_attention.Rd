@@ -27,7 +27,7 @@ of the concatenation of the \code{query} and \code{key} vectors.}
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 attention scores. Defaults to \code{0.0}.}
 
-\item{seed}{An integer to use as random seed incase of \code{dropout}.}
+\item{seed}{An integer to use as random seed in case of \code{dropout}.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -172,6 +172,7 @@ Other layers: \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr
 \code{\link{layer_masking}()} \cr
+\code{\link{layer_max_num_bounding_boxes}()} \cr
 \code{\link{layer_max_pooling_1d}()} \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
@@ -202,6 +203,7 @@ Other layers: \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr
 \code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_stft_spectrogram}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_subtract}()} \cr
 \code{\link{layer_text_vectorization}()} \cr

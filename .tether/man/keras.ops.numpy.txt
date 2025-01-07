@@ -131,6 +131,7 @@ einsum(subscripts, *operands)
 empty(shape, dtype=None)
 equal(x1, x2)
 exp(x)
+exp2(x)
 expand_dims(x, axis)
 expm1(x)
 eye(
@@ -163,6 +164,7 @@ histogram(
 hstack(xs)
 identity(n, dtype=None)
 imag(x)
+inner(x1, x2)
 isclose(
   x1,
   x2,

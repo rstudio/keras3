@@ -47,7 +47,7 @@ resolve_rmd_tether <- function(url) {
   tutobook_to_rmd(path, outfile = FALSE)
 }
 
-# resolve_rmd_tether <- NULL
+resolve_rmd_tether <- NULL
 # resolve_roxy_tether <- NULL
 
 
@@ -69,26 +69,48 @@ message("DONE!")
 if(FALSE) {
   # mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
 
-  mk_export("keras.Model.get_state_tree")$dump |> writeLines()
+  mk_export("keras.layers.MaxNumBoundingBoxes")$dump |> cat_cb()
+  mk_export("keras.layers.STFTSpectrogram")$dump |> cat_cb()
+  mk_export("keras.activations.glu")$dump |> cat_cb()
+  mk_export("keras.activations.hard_shrink")$dump |> cat_cb()
+  mk_export("keras.activations.celu")$dump |> cat_cb()
+  mk_export("keras.activations.hard_tanh")$dump |> cat_cb()
+  mk_export("keras.activations.log_sigmoid")$dump |> cat_cb()
+  mk_export("keras.activations.soft_shrink")$dump |> cat_cb()
+  mk_export("keras.activations.squareplus")$dump |> cat_cb()
+  mk_export("keras.activations.tanh_shrink")$dump |> cat_cb()
+  mk_export("keras.config.is_flash_attention_enabled")$dump |> cat_cb()
+  mk_export("keras.losses.circle")$dump |> cat_cb()
+  mk_export("keras.initializers.STFT")$dump |> cat_cb()
+  mk_export("keras.metrics.ConcordanceCorrelation")$dump |> cat_cb()
+  mk_export("keras.metrics.PearsonCorrelation")$dump |> cat_cb()
+
+
   mk_export("keras.Model.set_state_tree")$dump |> cat_cb()
   mk_export("keras.layers.Solarization")$dump |> cat_cb()
+  mk_export("keras.ops.ifft2")$dump |> cat_cb()
 
   catched <- character()
   catch <- function(...) catched <<- c(catched, "\n\n", ...)
-  mk_export("keras.ops.bitwise_and")$dump               |> catch()
-  mk_export("keras.ops.bitwise_invert")$dump            |> catch()
-  mk_export("keras.ops.bitwise_left_shift")$dump        |> catch()
-  mk_export("keras.ops.bitwise_not")$dump               |> catch()
-  mk_export("keras.ops.bitwise_or")$dump                |> catch()
-  mk_export("keras.ops.bitwise_right_shift")$dump       |> catch()
-  mk_export("keras.ops.bitwise_xor")$dump               |> catch()
-  mk_export("keras.ops.dot_product_attention")$dump     |> catch()
-  mk_export("keras.ops.histogram")$dump                 |> catch()
-  mk_export("keras.ops.left_shift")$dump                |> catch()
-  mk_export("keras.ops.right_shift")$dump               |> catch()
-  mk_export("keras.ops.logdet")$dump                    |> catch()
-  mk_export("keras.ops.saturate_cast")$dump             |> catch()
-  mk_export("keras.ops.trunc")$dump                     |> catch()
+  mk_export("keras.ops.exp2")$dump               |> catch()
+  mk_export("keras.ops.inner")$dump               |> catch()
+
+  # mk_export("keras.ops.glu")$dump               |> catch()
+  # mk_export("keras.ops.hard_shrink")$dump            |> catch()
+  # mk_export("keras.ops.hard_tanh")$dump        |> catch()
+  # mk_export("keras.ops.soft_shrink")$dump               |> catch()
+  # mk_export("keras.ops.squareplus")$dump                |> catch()
+  # mk_export("keras.ops.tanh_shrink")$dump       |> catch()
+  # mk_export("keras.ops.celu")$dump               |> catch()
+
+  #
+  # mk_export("keras.ops.dot_product_attention")$dump     |> catch()
+  # mk_export("keras.ops.histogram")$dump                 |> catch()
+  # mk_export("keras.ops.left_shift")$dump                |> catch()
+  # mk_export("keras.ops.right_shift")$dump               |> catch()
+  # mk_export("keras.ops.logdet")$dump                    |> catch()
+  # mk_export("keras.ops.saturate_cast")$dump             |> catch()
+  # mk_export("keras.ops.trunc")$dump                     |> catch()
 
 
   catched |>  str_flatten_and_compact_lines(roxygen = TRUE) |> cat_cb()

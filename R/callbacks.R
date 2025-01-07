@@ -82,6 +82,14 @@
 #' `save_freq` batches. Set `save_freq = FALSE` only if using
 #' preemption checkpointing (i.e. with `save_before_preemption = TRUE`).
 #'
+#' @param double_checkpoint
+#' Boolean. If enabled, `BackupAndRestore` callback
+#' will save 2 last training states (current and previous). After
+#' interruption if current state can't be loaded due to IO error
+#' (e.g. file corrupted) it will try to restore previous one. Such
+#' behaviour will consume twice more space on disk, but increase fault
+#' tolerance. Defaults to `FALSE`.
+#'
 #' @param delete_checkpoint
 #' Boolean. This `backup_and_restore`
 #' callback works by saving a checkpoint to back up the training state.
@@ -97,7 +105,7 @@
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/BackupAndRestore>
 #' @tether keras.callbacks.BackupAndRestore
 callback_backup_and_restore <-
-function (backup_dir, save_freq = "epoch", delete_checkpoint = TRUE)
+function (backup_dir, save_freq = "epoch", double_checkpoint = FALSE, delete_checkpoint = TRUE)
 {
     args <- capture_args(list(save_freq = as_integer))
     do.call(keras$callbacks$BackupAndRestore, args)
@@ -849,11 +857,10 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #' Batch-level summary writing is also available via `train_step`
 #' override. Please see
 #' [TensorBoard Scalars tutorial](
-#'     https://www.tensorflow.org/tensorboard/scalars_and_keras#batch-level_logging)  # noqa: E501
+#'     https://www.tensorflow.org/tensorboard/scalars_and_keras#batch-level_logging)
 #' for more details.
 #'
 #' @param profile_batch
-#' (Not supported at this time)
 #' Profile the batch(es) to sample compute characteristics.
 #' profile_batch must be a non-negative integer or a tuple of integers.
 #' A pair of positive integers signify a range of batches to profile.
@@ -861,7 +868,7 @@ function (root = "http://localhost:9000", path = "/publish/epoch/end/",
 #'
 #' @param embeddings_freq
 #' frequency (in epochs) at which embedding layers will be
-#' visualized. If set to 0, embeddings won't be visualized.
+#' visualized. If set to `0`, embeddings won't be visualized.
 #'
 #' @param embeddings_metadata
 #' Named list which maps embedding layer names to the

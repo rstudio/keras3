@@ -490,6 +490,26 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #'
 #' @description
 #'
+#' Computes how often integer targets are in the top `K` predictions.
+#'
+#' By default, the arguments expected by `update_state()` are:
+#' - `y_true`: a tensor of shape `(batch_size)` representing indices of true
+#'     categories.
+#' - `y_pred`: a tensor of shape `(batch_size, num_categories)` containing the
+#'     scores for each sample for all possible categories.
+#'
+#' With `from_sorted_ids=TRUE`, the arguments expected by `update_state` are:
+#' - `y_true`: a tensor of shape `(batch_size)` representing indices or IDs of
+#'     true categories.
+#' - `y_pred`: a tensor of shape `(batch_size, N)` containing the indices or
+#'     IDs of the top `N` categories sorted in order from highest score to
+#'     lowest score. `N` must be greater or equal to `k`.
+#'
+#' The `from_sorted_ids=TRUE` option can be more efficient when the set of
+#' categories is very large and the model has an optimized way to retrieve the
+#' top ones either without scoring or without maintaining the scores for all
+#' the possible categories.
+#'
 #' # Usage
 #' Standalone usage:
 #'
@@ -512,6 +532,13 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' m$result()
 #' ```
 #'
+#' ```{r}
+#' m <- metric_sparse_top_k_categorical_accuracy(k = 1, from_sorted_ids = TRUE)
+#' m$update_state(array(c(2, 1)), rbind(c(1, 0, 3),
+#'                                      c(1, 2, 3)))
+#' m$result()
+#' ```
+#'
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
@@ -529,6 +556,12 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #'
 #' @param dtype
 #' (Optional) data type of the metric result.
+#'
+#' @param from_sorted_ids
+#' (Optional) When `FALSE`, the default, the tensor passed
+#' in `y_pred` contains the unsorted scores of all possible categories.
+#' When `TRUE`, `y_pred` contains the indices or IDs for the top
+#' categories.
 #'
 #' @param y_true
 #' Tensor of true targets.
@@ -550,7 +583,7 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' @tether keras.metrics.SparseTopKCategoricalAccuracy
 metric_sparse_top_k_categorical_accuracy <-
 function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy",
-    dtype = NULL)
+    dtype = NULL, from_sorted_ids = FALSE)
 {
     args <- capture_args(list(k = as_integer,
                               y_true = as_py_array,
@@ -3611,6 +3644,169 @@ function (..., name = "root_mean_squared_error", dtype = NULL)
 }
 
 
+#' Calculates the Concordance Correlation Coefficient (CCC).
+#'
+#' @description
+#' Formula:
+#'
+#' ```r
+#' loss <- mean(
+#'   2 * (y_true - mean(y_true)) * (y_pred - mean(y_pred)) /
+#'     (var(y_true) + var(y_pred) + (mean(y_true) - mean(y_pred))^2)
+#' )
+#' ```
+#'
+#' CCC evaluates the agreement between true values (`y_true`) and predicted
+#' values (`y_pred`) by considering both precision and accuracy. The
+#' coefficient ranges from -1 to 1, where a value of 1 indicates perfect
+#' agreement.
+#'
+#' This metric is useful in regression tasks where it is important to assess
+#' how well the predictions match the true values, taking into account both
+#' their correlation and proximity to the 45-degree line of perfect
+#' concordance.
+#'
+#' # Examples
+#' ```{r}
+#' ccc <- metric_concordance_correlation(axis=-1)
+#' y_true <- rbind(c(0, 1, 0.5),
+#'                 c(1, 1, 0.2))
+#' y_pred <- rbind(c(0.1, 0.9, 0.5),
+#'                 c(1, 0.9, 0.2))
+#' ccc$update_state(y_true, y_pred)
+#' ccc$result()
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```r
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'mean_squared_error',
+#'   metrics = c(metric_concordance_correlation())
+#' )
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param axis
+#' (Optional) integer or tuple of integers of the axis/axes along
+#' which to compute the metric. Defaults to `-1`.
+#'
+#' @param y_true
+#' Tensor of true targets.
+#'
+#' @param y_pred
+#' Tensor of predicted targets.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @family regression metrics
+#' @family metrics
+#' @export
+#' @tether keras.metrics.ConcordanceCorrelation
+metric_concordance_correlation <-
+function (y_true, y_pred, axis = -1L, ...,
+          name = "concordance_correlation", dtype = NULL)
+{
+  args <- capture_args(list(
+    y_true = as_py_array,
+    y_pred = as_py_array,
+    axis = as_axis
+  ))
+  callable <- if (missing(y_true) && missing(y_pred))
+    keras$metrics$ConcordanceCorrelation
+  else
+    keras$metrics$concordance_correlation
+  do.call(callable, args)
+}
+
+#' Calculates the Pearson Correlation Coefficient (PCC).
+#'
+#' @description
+#' Formula:
+#'
+#' ```r
+#' loss = mean(l2norm(y_true - mean(y_true) * l2norm(y_pred - mean(y_pred)))
+#' ```
+#'
+#' PCC measures the linear relationship between the true values (`y_true`) and
+#' the predicted values (`y_pred`). The coefficient ranges from -1 to 1, where
+#' a value of 1 implies a perfect positive linear correlation, 0 indicates no
+#' linear correlation, and -1 indicates a perfect negative linear correlation.
+#'
+#' This metric is widely used in regression tasks where the strength of the
+#' linear relationship between predictions and true labels is an
+#' important evaluation criterion.
+#'
+#' # Examples
+#' ```{r}
+#' pcc <- metric_pearson_correlation(axis = -1)
+#' y_true <- rbind(c(0, 1, 0.5),
+#'                 c(1, 1, 0.2))
+#' y_pred <- rbind(c(0.1, 0.9, 0.5),
+#'                 c(1, 0.9, 0.2))
+#' pcc$update_state(y_true, y_pred)
+#' pcc$result()
+#' # equivalent operation using R's stats::cor()
+#' mean(sapply(1:nrow(y_true), function(i) {
+#'   cor(y_true[i, ], y_pred[i, ])
+#' }))
+#' ```
+#'
+#' Usage with `compile()` API:
+#'
+#' ```r
+#' model |> compile(
+#'   optimizer = 'sgd',
+#'   loss = 'mean_squared_error',
+#'   metrics = c(keras.metrics.PearsonCorrelation())
+#' )
+#' ```
+#'
+#' @param name
+#' (Optional) string name of the metric instance.
+#'
+#' @param dtype
+#' (Optional) data type of the metric result.
+#'
+#' @param axis
+#' (Optional) integer or tuple of integers of the axis/axes along
+#' which to compute the metric. Defaults to `-1`.
+#'
+#' @param y_true
+#' Tensor of true targets.
+#'
+#' @param y_pred
+#' Tensor of predicted targets.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @family regression metrics
+#' @family metrics
+#' @export
+#' @tether keras.metrics.PearsonCorrelation
+metric_pearson_correlation <-
+function (y_true, y_pred, axis = -1L, ..., name = "pearson_correlation",
+    dtype = NULL)
+{
+  args <- capture_args(list(
+    axis = as_axis,
+    y_true = as_py_array,
+    y_pred = as_py_array
+  ))
+  callable <- if (missing(y_true) && missing(y_pred))
+    keras$metrics$PearsonCorrelation
+  else
+    keras$metrics$pearson_correlation
+  do.call(callable, args)
+}
 
 #' @importFrom reticulate py_to_r_wrapper
 #' @export

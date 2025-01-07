@@ -20,6 +20,7 @@ audio_dataset_from_directory(
   follow_links=False,
   verbose=True
 )
+bounding_boxes: Module(keras.api.utils.bounding_boxes)
 clear_session(free_memory=True)
 Config(**kwargs)
 custom_object_scope(custom_objects)

@@ -61,10 +61,9 @@ class TensorBoard(keras.src.callbacks.callback.Callback)
  |          Batch-level summary writing is also available via `train_step`
  |          override. Please see
  |          [TensorBoard Scalars tutorial](
- |              https://www.tensorflow.org/tensorboard/scalars_and_keras#batch-level_logging)  # noqa: E501
+ |              https://www.tensorflow.org/tensorboard/scalars_and_keras#batch-level_logging)
  |          for more details.
- |      profile_batch: (Not supported at this time)
- |          Profile the batch(es) to sample compute characteristics.
+ |      profile_batch: Profile the batch(es) to sample compute characteristics.
  |          profile_batch must be a non-negative integer or a tuple of integers.
  |          A pair of positive integers signify a range of batches to profile.
  |          By default, profiling is disabled.
@@ -182,6 +181,27 @@ class TensorBoard(keras.src.callbacks.callback.Callback)
  |    logs=None
  |  )
  |      Runs metrics and histogram summaries at epoch end.
+ |
+ |  on_test_batch_begin(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      Called at the beginning of a batch in `evaluate` methods.
+ |
+ |      Also called at the beginning of a validation batch in the `fit`
+ |      methods, if validation data is provided.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Note that if the `steps_per_execution` argument to `compile` in
+ |      `Model` is set to `N`, this method will only be called every
+ |      `N` batches.
+ |
+ |      Args:
+ |          batch: Integer, index of batch within the current epoch.
+ |          logs: Dict. Currently no data is passed to this argument for this
+ |            method but that may change in the future.
  |
  |  on_test_begin(self, logs=None)
  |      Called at the beginning of evaluation or validation.

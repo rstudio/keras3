@@ -208,7 +208,7 @@ function (x, ord = NULL, axis = NULL, keepdims = FALSE)
 #' A tensor of shape `(..., M, M)` representing the coefficients matrix.
 #'
 #' @param b
-#' A tensor of shape `(..., M)` or `(..., M, N)` represeting the
+#' A tensor of shape `(..., M)` or `(..., M, N)` representing the
 #' right-hand side or "dependent variable" matrix.
 #'
 #' @param lower logical.

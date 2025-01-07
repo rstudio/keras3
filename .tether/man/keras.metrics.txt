@@ -77,6 +77,16 @@ CategoricalCrossentropy(
   axis=-1
 )
 CategoricalHinge(name='categorical_hinge', dtype=None)
+concordance_correlation(
+  y_true,
+  y_pred,
+  axis=-1
+)
+ConcordanceCorrelation(
+  name='concordance_correlation',
+  dtype=None,
+  axis=-1
+)
 CosineSimilarity(
   name='cosine_similarity',
   dtype=None,
@@ -170,6 +180,16 @@ OneHotMeanIoU(
   sparse_y_pred=False,
   axis=-1
 )
+pearson_correlation(
+  y_true,
+  y_pred,
+  axis=-1
+)
+PearsonCorrelation(
+  name='pearson_correlation',
+  dtype=None,
+  axis=-1
+)
 poisson(y_true, y_pred)
 Poisson(name='poisson', dtype=None)
 Precision(
@@ -226,7 +246,8 @@ sparse_categorical_crossentropy(
 sparse_top_k_categorical_accuracy(
   y_true,
   y_pred,
-  k=5
+  k=5,
+  from_sorted_ids=False
 )
 SparseCategoricalAccuracy(name='sparse_categorical_accuracy', dtype=None)
 SparseCategoricalCrossentropy(
@@ -238,7 +259,8 @@ SparseCategoricalCrossentropy(
 SparseTopKCategoricalAccuracy(
   k=5,
   name='sparse_top_k_categorical_accuracy',
-  dtype=None
+  dtype=None,
+  from_sorted_ids=False
 )
 SpecificityAtSensitivity(
   sensitivity,

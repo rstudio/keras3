@@ -73,6 +73,13 @@ class CenterCrop(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |      An object config is a Python dictionary (serializable)
  |      containing the information needed to re-instantiate it.
  |
+ |  get_random_transformation(
+ |    self,
+ |    data,
+ |    training=True,
+ |    seed=None
+ |  )
+ |
  |  transform_bounding_boxes(
  |    self,
  |    bounding_boxes,

@@ -37,13 +37,18 @@
 <url><loc>https://keras3.posit.co/dev/reference/Loss.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/Metric.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/Model.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_celu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_elu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_exponential.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_gelu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_glu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_hard_shrink.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_hard_sigmoid.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_hard_silu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_hard_tanh.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_leaky_relu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_linear.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_log_sigmoid.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_log_softmax.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_mish.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_relu.html</loc></url>
@@ -51,10 +56,13 @@
 <url><loc>https://keras3.posit.co/dev/reference/activation_selu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_sigmoid.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_silu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_soft_shrink.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_softmax.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_softplus.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_softsign.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_squareplus.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/activation_tanh.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/activation_tanh_shrink.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/active_property.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/adapt.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/application_convnext_base.html</loc></url>
@@ -115,15 +123,18 @@
 <url><loc>https://keras3.posit.co/dev/reference/clone_model.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/compile.keras.src.models.model.Model.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_backend.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/config_disable_flash_attention.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_disable_interactive_logging.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_disable_traceback_filtering.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_dtype_policy.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/config_enable_flash_attention.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_enable_interactive_logging.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_enable_traceback_filtering.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_enable_unsafe_deserialization.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_epsilon.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_floatx.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_image_data_format.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/config_is_flash_attention_enabled.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_is_interactive_logging_enabled.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_is_traceback_filtering_enabled.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/config_set_backend.html</loc></url>
@@ -156,6 +167,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/get_registered_name.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/get_registered_object.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/get_source_inputs.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/get_state_tree.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/get_weights.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/grapes-py_class-grapes.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/grapes-set-active-grapes.html</loc></url>
@@ -180,6 +192,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/initializer_orthogonal.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/initializer_random_normal.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/initializer_random_uniform.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/initializer_stft.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/initializer_truncated_normal.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/initializer_variance_scaling.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/initializer_zeros.html</loc></url>
@@ -200,6 +213,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/layer_additive_attention.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_alpha_dropout.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_attention.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/layer_auto_contrast.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_average.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_average_pooling_1d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_average_pooling_2d.html</loc></url>
@@ -253,6 +267,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/layer_layer_normalization.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_lstm.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_masking.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/layer_max_num_bounding_boxes.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_max_pooling_1d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_max_pooling_2d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_max_pooling_3d.html</loc></url>
@@ -263,6 +278,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/layer_multiply.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_normalization.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_permute.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/layer_pipeline.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_random_brightness.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_random_contrast.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_random_crop.html</loc></url>
@@ -278,10 +294,12 @@
 <url><loc>https://keras3.posit.co/dev/reference/layer_separable_conv_1d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_separable_conv_2d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_simple_rnn.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/layer_solarization.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_spatial_dropout_1d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_spatial_dropout_2d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_spatial_dropout_3d.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_spectral_normalization.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/layer_stft_spectrogram.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_string_lookup.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_subtract.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/layer_text_vectorization.html</loc></url>
@@ -308,6 +326,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/loss_categorical_crossentropy.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/loss_categorical_focal_crossentropy.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/loss_categorical_hinge.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/loss_circle.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/loss_cosine_similarity.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/loss_ctc.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/loss_dice.html</loc></url>
@@ -333,6 +352,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/metric_categorical_crossentropy.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_categorical_focal_crossentropy.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_categorical_hinge.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/metric_concordance_correlation.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_cosine_similarity.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_f1_score.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_false_negatives.html</loc></url>
@@ -353,6 +373,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/metric_mean_wrapper.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_one_hot_iou.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_one_hot_mean_iou.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/metric_pearson_correlation.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_poisson.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_precision.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/metric_precision_at_recall.html</loc></url>
@@ -402,10 +423,18 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_batch_normalization.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_binary_crossentropy.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_bincount.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_and.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_invert.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_left_shift.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_not.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_or.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_right_shift.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_bitwise_xor.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_broadcast_to.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_cast.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_categorical_crossentropy.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_ceil.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_celu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_cholesky.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_clip.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_concatenate.html</loc></url>
@@ -435,6 +464,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_divide.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_divide_no_nan.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_dot.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_dot_product_attention.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_dtype.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_eig.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_eigh.html</loc></url>
@@ -445,6 +475,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_erf.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_erfinv.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_exp.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_exp2.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_expand_dims.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_expm1.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_extract_sequences.html</loc></url>
@@ -459,12 +490,17 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_full_like.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_gelu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_get_item.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_glu.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_greater.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_greater_equal.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_hard_shrink.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_hard_sigmoid.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_hard_silu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_hard_tanh.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_histogram.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_hstack.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_identity.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_ifft2.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_imag.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_image_affine_transform.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_image_crop.html</loc></url>
@@ -476,6 +512,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_image_rgb_to_grayscale.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_image_rgb_to_hsv.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_in_top_k.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_inner.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_inv.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_irfft.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_is_tensor.html</loc></url>
@@ -485,6 +522,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_isnan.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_istft.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_leaky_relu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_left_shift.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_less.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_less_equal.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_linspace.html</loc></url>
@@ -495,6 +533,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_log_sigmoid.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_log_softmax.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_logaddexp.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_logdet.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_logical_and.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_logical_not.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_logical_or.html</loc></url>
@@ -543,9 +582,11 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_repeat.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_reshape.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_rfft.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_right_shift.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_roll.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_round.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_rsqrt.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_saturate_cast.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_scan.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_scatter.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_scatter_update.html</loc></url>
@@ -565,6 +606,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_slice.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_slice_update.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_slogdet.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_soft_shrink.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_softmax.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_softplus.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_softsign.html</loc></url>
@@ -575,6 +617,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_split.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_sqrt.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_square.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_squareplus.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_squeeze.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_stack.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_std.html</loc></url>
@@ -589,6 +632,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_take_along_axis.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_tan.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_tanh.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_tanh_shrink.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_tensordot.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_tile.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_top_k.html</loc></url>
@@ -597,6 +641,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_tri.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_tril.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_triu.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_trunc.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_unstack.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_var.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_vdot.html</loc></url>
@@ -656,6 +701,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/save_model_weights.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/serialize_keras_object.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/set_random_seed.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/set_state_tree.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/shape.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/split_dataset.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/summary.keras.src.models.model.Model.html</loc></url>

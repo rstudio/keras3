@@ -21,7 +21,7 @@ layer_jax_model_wrapper(
 list of arguments it takes and the outputs it returns.}
 
 \item{init_fn}{the function to call to initialize the model. See description
-above for the list of arguments it takes and the ouputs it returns.
+above for the list of arguments it takes and the outputs it returns.
 If \code{NULL}, then \code{params} and/or \code{state} must be provided.}
 
 \item{params}{A \code{PyTree} containing all the model trainable parameters. This
@@ -310,6 +310,7 @@ Other layers: \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr
 \code{\link{layer_masking}()} \cr
+\code{\link{layer_max_num_bounding_boxes}()} \cr
 \code{\link{layer_max_pooling_1d}()} \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
@@ -340,6 +341,7 @@ Other layers: \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr
 \code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_stft_spectrogram}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_subtract}()} \cr
 \code{\link{layer_text_vectorization}()} \cr

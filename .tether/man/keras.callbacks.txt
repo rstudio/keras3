@@ -1,6 +1,7 @@
 BackupAndRestore(
   backup_dir,
   save_freq='epoch',
+  double_checkpoint=False,
   delete_checkpoint=True
 )
 Callback()

@@ -639,6 +639,7 @@ GroupQueryAttention(
   num_key_value_heads,
   dropout=0.0,
   use_bias=True,
+  flash_attention=None,
   kernel_initializer='glorot_uniform',
   bias_initializer='zeros',
   kernel_regularizer=None,
@@ -646,6 +647,7 @@ GroupQueryAttention(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  seed=None,
   **kwargs
 )
 GRU(
@@ -840,6 +842,11 @@ LSTMCell(
 Masking(mask_value=0.0, **kwargs)
 maximum(inputs, **kwargs)
 Maximum(**kwargs)
+MaxNumBoundingBoxes(
+  max_number,
+  fill_value=-1,
+  **kwargs
+)
 MaxPool1D(
   pool_size=2,
   strides=None,
@@ -914,6 +921,7 @@ MultiHeadAttention(
   use_bias=True,
   output_shape=None,
   attention_axes=None,
+  flash_attention=None,
   kernel_initializer='glorot_uniform',
   bias_initializer='zeros',
   kernel_regularizer=None,
@@ -1195,6 +1203,19 @@ SpectralNormalization(
   **kwargs
 )
 StackedRNNCells(cells, **kwargs)
+STFTSpectrogram(
+  mode='log',
+  frame_length=256,
+  frame_step=None,
+  fft_length=None,
+  window='hann',
+  periodic=False,
+  scaling='density',
+  padding='valid',
+  expand_dims=False,
+  data_format=None,
+  **kwargs
+)
 StringLookup(
   max_tokens=None,
   num_oov_indices=1,

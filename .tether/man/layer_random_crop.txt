@@ -90,7 +90,7 @@ class RandomCrop(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |    training=True
  |  )
  |      bounding_boxes = {
- |          "boxes": (batch, num_boxes, 4),  # left-top-right-bottom
+ |          "boxes": (batch, num_boxes, 4),  # left-top-right-bottom (xyxy)
  |          "labels": (batch, num_boxes, num_classes),
  |      }
  |      or

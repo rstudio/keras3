@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   examples/vision/autoencoder: examples/vision/autoencoder.html
@@ -28,7 +28,7 @@ articles:
   understanding_masking_and_padding: understanding_masking_and_padding.html
   writing_a_custom_training_loop_in_tensorflow: writing_a_custom_training_loop_in_tensorflow.html
   writing_your_own_callbacks: writing_your_own_callbacks.html
-last_built: 2024-09-04T19:14Z
+last_built: 2025-01-07T16:09Z
 urls:
   reference: https://keras3.posit.co/reference
   article: https://keras3.posit.co/articles

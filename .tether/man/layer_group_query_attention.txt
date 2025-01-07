@@ -1,7 +1,7 @@
 Help on class GroupedQueryAttention in module keras.src.layers.attention.grouped_query_attention:
 
 class GroupedQueryAttention(keras.src.layers.layer.Layer)
- |  GroupedQueryAttention(head_dim, num_query_heads, num_key_value_heads, dropout=0.0, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, **kwargs)
+ |  GroupedQueryAttention(head_dim, num_query_heads, num_key_value_heads, dropout=0.0, use_bias=True, flash_attention=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, seed=None, **kwargs)
  |
  |  Grouped Query Attention layer.
  |
@@ -26,6 +26,11 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |      num_key_value_heads: Number of key and value attention heads.
  |      dropout: Dropout probability.
  |      use_bias: Boolean, whether the dense layers use bias vectors/matrices.
+ |      flash_attention: If `None`, the layer attempts to use flash
+ |          attention for faster and more memory-efficient attention
+ |          computations when possible. This behavior can be configured using
+ |          `keras.config.enable_flash_attention()` or
+ |          `keras.config.disable_flash_attention()`.
  |      kernel_initializer: Initializer for dense layer kernels.
  |      bias_initializer: Initializer for dense layer biases.
  |      kernel_regularizer: Regularizer for dense layer kernels.
@@ -33,6 +38,7 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |      activity_regularizer: Regularizer for dense layer activity.
  |      kernel_constraint: Constraint for dense layer kernels.
  |      bias_constraint: Constraint for dense layer kernels.
+ |      seed: Optional integer to seed the dropout layer.
  |
  |  Call arguments:
  |      query: Query tensor of shape `(batch_dim, target_seq_len, feature_dim)`,
@@ -89,6 +95,7 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |    num_key_value_heads,
  |    dropout=0.0,
  |    use_bias=True,
+ |    flash_attention=None,
  |    kernel_initializer='glorot_uniform',
  |    bias_initializer='zeros',
  |    kernel_regularizer=None,
@@ -96,6 +103,7 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |    activity_regularizer=None,
  |    kernel_constraint=None,
  |    bias_constraint=None,
+ |    seed=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

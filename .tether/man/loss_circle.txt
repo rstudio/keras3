@@ -1,0 +1,82 @@
+Help on class Circle in module keras.src.losses.losses:
+
+class Circle(LossFunctionWrapper)
+ |  Circle(gamma=80.0, margin=0.4, remove_diagonal=True, reduction='sum_over_batch_size', name='circle', dtype=None)
+ |
+ |  Computes Circle Loss between integer labels and L2-normalized embeddings.
+ |
+ |  This is a metric learning loss designed to minimize within-class distance
+ |  and maximize between-class distance in a flexible manner by dynamically
+ |  adjusting the penalty strength based on optimization status of each
+ |  similarity score.
+ |
+ |  To use Circle Loss effectively, the model should output embeddings without
+ |  an activation function (such as a `Dense` layer with `activation=None`)
+ |  followed by UnitNormalization layer to ensure unit-norm embeddings.
+ |
+ |  Args:
+ |      gamma: Scaling factor that determines the largest scale of each
+ |          similarity score. Defaults to `80`.
+ |      margin: The relaxation factor, below this distance, negatives are
+ |      up weighted and positives are down weighted. Similarly, above this
+ |      distance negatives are down weighted and positive are up weighted.
+ |          Defaults to `0.4`.
+ |      remove_diagonal: Boolean, whether to remove self-similarities from the
+ |          positive mask. Defaults to `True`.
+ |      reduction: Type of reduction to apply to the loss. In almost all cases
+ |          this should be `"sum_over_batch_size"`. Supported options are
+ |          `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+ |          `"mean_with_sample_weight"` or `None`. `"sum"` sums the loss,
+ |          `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+ |          sample size, and `"mean_with_sample_weight"` sums the loss and
+ |          divides by the sum of the sample weights. `"none"` and `None`
+ |          perform no aggregation. Defaults to `"sum_over_batch_size"`.
+ |      name: Optional name for the loss instance.
+ |      dtype: The dtype of the loss's computations. Defaults to `None`, which
+ |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
+ |          `"float32"` unless set to different value
+ |          (via `keras.backend.set_floatx()`). If a `keras.DTypePolicy` is
+ |          provided, then the `compute_dtype` will be utilized.
+ |
+ |  Examples:
+ |
+ |  Usage with the `compile()` API:
+ |
+ |  ```python
+ |  model = models.Sequential([
+ |      keras.layers.Input(shape=(224, 224, 3)),
+ |      keras.layers.Conv2D(16, (3, 3), activation='relu'),
+ |      keras.layers.Flatten(),
+ |      keras.layers.Dense(64, activation=None),  # No activation
+ |      keras.layers.UnitNormalization()  # L2 normalization
+ |  ])
+ |
+ |  model.compile(optimizer="adam", loss=keras.losses.Circle())
+ |  ```
+ |
+ |  Reference:
+ |  - [Yifan Sun et al., 2020](https://arxiv.org/abs/2002.10857)
+ |
+ |  Method resolution order:
+ |      Circle
+ |      LossFunctionWrapper
+ |      keras.src.losses.loss.Loss
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    gamma=80.0,
+ |    margin=0.4,
+ |    remove_diagonal=True,
+ |    reduction='sum_over_batch_size',
+ |    name='circle',
+ |    dtype=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |
+

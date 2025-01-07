@@ -1041,7 +1041,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 #' # Example
 #' ```{r}
 #' x <- random_uniform(c(4, 10, 10, 12))
-#' y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
+#' y <- x |> layer_depthwise_conv_2d(kernel_size = 3, activation = 'relu')
 #' shape(y)
 #' ```
 #'

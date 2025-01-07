@@ -1,6 +1,5 @@
 __signature__
-keras.config.dtype_policy
-()
+keras.config.dtype_policy()
 __doc__
 Returns the current default dtype policy object.
 

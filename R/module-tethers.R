@@ -221,6 +221,18 @@ NULL
 #' @noRd
 NULL
 
+#' @title keras.utils.bounding_boxes
+#' @name keras.utils.bounding_boxes
+#' @tether keras.utils.bounding_boxes
+#' @noRd
+NULL
+
+#' @title keras.visualization
+#' @name keras.visualization
+#' @tether keras.visualization
+#' @noRd
+NULL
+
 
 #' @title keras
 #' @name keras

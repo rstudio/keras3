@@ -1357,7 +1357,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' @description
 #'
 #' # Call Arguments
-#' - `inputs`: Input tensor.
+#' - `sequences`: A 3-D tensor with shape `(batch_size, timesteps, features)`.
 #' - `initial_state`: List of initial state tensors to be passed to the first
 #'     call of the cell.
 #' - `mask`: Binary tensor of shape `[batch_size, timesteps]`
@@ -1397,17 +1397,15 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' To enable statefulness:
 #'
-#' - Specify `stateful = TRUE` in the layer constructor.
+#' - Specify `stateful=TRUE` in the layer constructor.
 #' - Specify a fixed batch size for your model, by passing
-#'   - If sequential model:
-#'     `input_batch_shape = c(...)` to the `keras_model_sequential()` call.
-#'   - Else for functional model with 1 or more input layers:
-#'     `batch_shape = c(...)` to the `layer_input()` call(s).
-#'
-#'   This is the expected shape of your inputs
-#'   *including the batch size*.
-#'   It should be a list of integers, e.g. `c(32, 10, 100)`.
-#' - Specify `shuffle = FALSE` when calling `fit()`.
+#'   `batch_size=...` to the `layer_input()` layer(s) of your model.
+#'   Remember to also specify the same `batch_size=...` when
+#'   calling `fit()`, or otherwise use a generator-like
+#'   data source like
+#'   `tf.data.Dataset`.
+#' - Specify `shuffle=FALSE` when calling `fit()`, since your
+#'   batches are expected to be temporally ordered.
 #'
 #' To reset the states of your model, call [`reset_state()`] on either
 #' a specific layer, or on your entire model.
@@ -1415,7 +1413,8 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Note on specifying the initial state of RNNs:
 #'
 #' You can specify the initial state of RNN layers symbolically by
-#' calling them with the keyword argument `initial_state`. The value of
+#' passing a named argument `initial_state` to the layer or to `reset_state()`.
+#' The value of
 #' `initial_state` should be a tensor or list of tensors representing
 #' the initial state of the RNN layer.
 #'

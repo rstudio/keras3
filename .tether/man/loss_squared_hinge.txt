@@ -16,8 +16,13 @@ class SquaredHinge(LossFunctionWrapper)
  |
  |  Args:
  |      reduction: Type of reduction to apply to the loss. In almost all cases
- |          this should be `"sum_over_batch_size"`.
- |          Supported options are `"sum"`, `"sum_over_batch_size"` or `None`.
+ |          this should be `"sum_over_batch_size"`. Supported options are
+ |          `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+ |          `"mean_with_sample_weight"` or `None`. `"sum"` sums the loss,
+ |          `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+ |          sample size, and `"mean_with_sample_weight"` sums the loss and
+ |          divides by the sum of the sample weights. `"none"` and `None`
+ |          perform no aggregation. Defaults to `"sum_over_batch_size"`.
  |      name: Optional name for the loss instance.
  |      dtype: The dtype of the loss's computations. Defaults to `None`, which
  |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a

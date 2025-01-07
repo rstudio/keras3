@@ -1,0 +1,15 @@
+__signature__
+keras.activations.soft_shrink(x, threshold=0.5)
+__doc__
+Soft Shrink activation function.
+
+It is defined as:
+
+`soft_shrink(x) = x - threshold` if `x > threshold`,
+`soft_shrink(x) = x + threshold` if `x < -threshold`,
+`soft_shrink(x) = 0` otherwise.
+
+Args:
+    x: Input tensor.
+    threshold: Threshold value. Defaults to 0.5.
+

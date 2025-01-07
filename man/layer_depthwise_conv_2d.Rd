@@ -135,11 +135,11 @@ ValueError: when both \code{strides > 1} and \code{dilation_rate > 1}.
 
 \section{Example}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_uniform(c(4, 10, 10, 12))
-y <- x |> layer_depthwise_conv_2d(3, 3, activation = 'relu')
+y <- x |> layer_depthwise_conv_2d(kernel_size = 3, activation = 'relu')
 shape(y)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 3, 3, 12)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(4, 8, 8, 12)
 
 }\if{html}{\out{</div>}}
 }
@@ -225,6 +225,7 @@ Other layers: \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr
 \code{\link{layer_masking}()} \cr
+\code{\link{layer_max_num_bounding_boxes}()} \cr
 \code{\link{layer_max_pooling_1d}()} \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
@@ -255,6 +256,7 @@ Other layers: \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr
 \code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_stft_spectrogram}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_subtract}()} \cr
 \code{\link{layer_text_vectorization}()} \cr

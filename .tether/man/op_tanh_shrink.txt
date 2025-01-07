@@ -1,0 +1,23 @@
+__signature__
+keras.ops.tanh_shrink(x)
+__doc__
+Applies the tanh shrink function element-wise.
+
+It is defined as:
+
+`f(x) = x - tanh(x)`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output tensor of the same shape as `x`, where each element is
+    transformed according to the tanh shrink operation.
+
+Example:
+
+>>> x = np.array([ -1., 0., 1.])
+>>> x_tanh_shrink = keras.ops.tanh_shrink(x)
+>>> print(x_tanh_shrink)
+array([-0.23840584  0.  0.23840584], shape=(3,), dtype=float64)
+

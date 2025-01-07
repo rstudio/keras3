@@ -93,7 +93,7 @@ Base class for recurrent layers
 }
 \section{Call Arguments}{
 \itemize{
-\item \code{inputs}: Input tensor.
+\item \code{sequences}: A 3-D tensor with shape \verb{(batch_size, timesteps, features)}.
 \item \code{initial_state}: List of initial state tensors to be passed to the first
 call of the cell.
 \item \code{mask}: Binary tensor of shape \verb{[batch_size, timesteps]}
@@ -138,19 +138,15 @@ between samples in different successive batches.
 
 To enable statefulness:
 \itemize{
-\item Specify \code{stateful = TRUE} in the layer constructor.
+\item Specify \code{stateful=TRUE} in the layer constructor.
 \item Specify a fixed batch size for your model, by passing
-\itemize{
-\item If sequential model:
-\code{input_batch_shape = c(...)} to the \code{keras_model_sequential()} call.
-\item Else for functional model with 1 or more input layers:
-\code{batch_shape = c(...)} to the \code{layer_input()} call(s).
-}
-
-This is the expected shape of your inputs
-\emph{including the batch size}.
-It should be a list of integers, e.g. \code{c(32, 10, 100)}.
-\item Specify \code{shuffle = FALSE} when calling \code{fit()}.
+\code{batch_size=...} to the \code{layer_input()} layer(s) of your model.
+Remember to also specify the same \code{batch_size=...} when
+calling \code{fit()}, or otherwise use a generator-like
+data source like
+\code{tf.data.Dataset}.
+\item Specify \code{shuffle=FALSE} when calling \code{fit()}, since your
+batches are expected to be temporally ordered.
 }
 
 To reset the states of your model, call \code{\link[=reset_state]{reset_state()}} on either
@@ -159,7 +155,8 @@ a specific layer, or on your entire model.
 Note on specifying the initial state of RNNs:
 
 You can specify the initial state of RNN layers symbolically by
-calling them with the keyword argument \code{initial_state}. The value of
+passing a named argument \code{initial_state} to the layer or to \code{reset_state()}.
+The value of
 \code{initial_state} should be a tensor or list of tensors representing
 the initial state of the RNN layer.
 }
@@ -304,6 +301,7 @@ Other layers: \cr
 \code{\link{layer_layer_normalization}()} \cr
 \code{\link{layer_lstm}()} \cr
 \code{\link{layer_masking}()} \cr
+\code{\link{layer_max_num_bounding_boxes}()} \cr
 \code{\link{layer_max_pooling_1d}()} \cr
 \code{\link{layer_max_pooling_2d}()} \cr
 \code{\link{layer_max_pooling_3d}()} \cr
@@ -333,6 +331,7 @@ Other layers: \cr
 \code{\link{layer_spatial_dropout_2d}()} \cr
 \code{\link{layer_spatial_dropout_3d}()} \cr
 \code{\link{layer_spectral_normalization}()} \cr
+\code{\link{layer_stft_spectrogram}()} \cr
 \code{\link{layer_string_lookup}()} \cr
 \code{\link{layer_subtract}()} \cr
 \code{\link{layer_text_vectorization}()} \cr
