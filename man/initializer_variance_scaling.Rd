@@ -89,6 +89,7 @@ Other initializers: \cr
 \code{\link{initializer_orthogonal}()} \cr
 \code{\link{initializer_random_normal}()} \cr
 \code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_stft}()} \cr
 \code{\link{initializer_truncated_normal}()} \cr
 \code{\link{initializer_zeros}()} \cr
 }

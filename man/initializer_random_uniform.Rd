@@ -70,6 +70,7 @@ Other initializers: \cr
 \code{\link{initializer_ones}()} \cr
 \code{\link{initializer_orthogonal}()} \cr
 \code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_stft}()} \cr
 \code{\link{initializer_truncated_normal}()} \cr
 \code{\link{initializer_variance_scaling}()} \cr
 \code{\link{initializer_zeros}()} \cr

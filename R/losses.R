@@ -1925,7 +1925,6 @@ function (y_true, y_pred, ..., alpha = 0.5, beta = 0.5,
 #' @param ...
 #' For forward/backward compatability.
 #'
-#' @inheritParams loss_hinge
 #' @family losses
 #' @export
 #' @tether keras.losses.Circle

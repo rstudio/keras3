@@ -27,6 +27,10 @@ for normalization, either L2 or L1 normalization.
 \item{periodic}{Boolean, if True, the window function will be treated as
 periodic. Defaults to \code{FALSE}.}
 }
+\value{
+An \code{Initializer} instance that can be passed to layer or variable
+constructors, or called directly with a \code{shape} to return a Tensor.
+}
 \description{
 Since the formula involves complex numbers, this class compute either the
 real or the imaginary components of the final output.
@@ -50,4 +54,29 @@ values <- initializer(shape = c(128, 1, 513))
 \itemize{
 \item \url{https://www.tensorflow.org/api_docs/python/tf/keras/initializers/STFT}
 }
+
+Other initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_glorot_normal}()} \cr
+\code{\link{initializer_glorot_uniform}()} \cr
+\code{\link{initializer_he_normal}()} \cr
+\code{\link{initializer_he_uniform}()} \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_lecun_normal}()} \cr
+\code{\link{initializer_lecun_uniform}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_orthogonal}()} \cr
+\code{\link{initializer_random_normal}()} \cr
+\code{\link{initializer_random_uniform}()} \cr
+\code{\link{initializer_truncated_normal}()} \cr
+\code{\link{initializer_variance_scaling}()} \cr
+\code{\link{initializer_zeros}()} \cr
+
+Other constant initializers: \cr
+\code{\link{initializer_constant}()} \cr
+\code{\link{initializer_identity}()} \cr
+\code{\link{initializer_ones}()} \cr
+\code{\link{initializer_zeros}()} \cr
 }
+\concept{constant initializers}
+\concept{initializers}

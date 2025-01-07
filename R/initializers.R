@@ -757,6 +757,9 @@ function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
 #' periodic. Defaults to `FALSE`.
 #'
 #' @export
+#' @inherit initializer_constant return
+#' @family initializers
+#' @family constant initializers
 #' @tether keras.initializers.STFT
 #' @seealso
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/STFT>
