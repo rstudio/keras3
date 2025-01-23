@@ -824,3 +824,31 @@ function (x, axis = -1L)
     args <- capture_args(list(axis = as_axis))
     do.call(keras$activations$sparsemax, args)
 }
+
+#' Threshold activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `threshold(x) = x` if `x > threshold`,
+#' `threshold(x) = default_value` otherwise.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' The value that decides when to retain or replace x.
+#'
+#' @param default_value
+#' Value to assign when `x <= threshold`.
+#'
+#' @export
+#' @tether keras.activations.threshold
+#' @family activations
+#' @inherit activation_elu return
+activation_threshold <-
+function (x, threshold, default_value)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$threshold, args)
+}
