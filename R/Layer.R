@@ -235,7 +235,7 @@
 #'              autocast = TRUE,
 #'              regularizer = NULL,
 #'              constraint = NULL,
-#'              aggregation = 'mean',
+#'              aggregation = 'none',
 #'              name = NULL)
 #'   ```
 #'   Add a weight variable to the layer.
@@ -269,10 +269,11 @@
 #'       variable after any optimizer update,
 #'       or string name of a built-in constraint.
 #'       Defaults to `NULL`.
-#'   * `aggregation`: String, one of `'mean'`, `'sum'`,
-#'      `'only_first_replica'`. Annotates the variable with the type
-#'       of multi-replica aggregation to be used for this variable
-#'       when writing custom data parallel training loops.
+#'   * `aggregation`: Optional string, one of `NULL`, `"none"`, `"mean"`,
+#'      `"sum"` or `"only_first_replica"`. Annotates the variable with
+#'      the type of multi-replica aggregation to be used for this
+#'      variable when writing custom data parallel training loops.
+#'      Defaults to `"none"`.
 #'   * `name`: String name of the variable. Useful for debugging purposes.
 #'
 #'   Returns:
