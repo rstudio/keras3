@@ -1055,7 +1055,7 @@ function (x, fft_length = NULL)
 #'
 #' @param fft_length
 #' An integer representing the size of the FFT that produced
-#' `stft`.
+#' `stft`. Should be of type `int32`.
 #'
 #' @param length
 #' An integer representing the output is clipped to exactly length.
