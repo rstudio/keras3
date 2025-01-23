@@ -80,6 +80,19 @@ if(FALSE) {
   mk_export("keras.ops.sparsemax")$dump |> cat_cb()
   mk_export("keras.ops.threshold")$dump |> cat_cb()
 
+  mk_export("keras.ops.diagflat")$dump |> cat_cb()
+  mk_export("keras.ops.unravel_index")$dump |> cat_cb()
+
+  mk_export("keras.layers.Equalization")$dump |> cat_cb()
+  mk_export("keras.layers.MixUp")$dump |> cat_cb()
+
+  mk_export("keras.layers.RandAugment")$dump |> cat_cb()
+  mk_export("keras.layers.RandomColorDegeneration")$dump |> cat_cb()
+  mk_export("keras.layers.RandomColorJitter")$dump |> cat_cb()
+  mk_export("keras.layers.RandomGrayscale")$dump |> cat_cb()
+  mk_export("keras.layers.RandomHue")$dump |> cat_cb()
+  mk_export("keras.layers.RandomPosterization")$dump |> cat_cb()
+
 
 
   mk_export("keras.activations.glu")$dump |> cat_cb()

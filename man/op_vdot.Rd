@@ -69,6 +69,7 @@ Other numpy ops: \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
 \code{\link{op_diag}()} \cr
+\code{\link{op_diagflat}()} \cr
 \code{\link{op_diagonal}()} \cr
 \code{\link{op_diff}()} \cr
 \code{\link{op_digitize}()} \cr
@@ -242,6 +243,7 @@ Other ops: \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
+\code{\link{op_diagflat}()} \cr
 \code{\link{op_diagonal}()} \cr
 \code{\link{op_diff}()} \cr
 \code{\link{op_digitize}()} \cr
@@ -429,6 +431,7 @@ Other ops: \cr
 \code{\link{op_tril}()} \cr
 \code{\link{op_triu}()} \cr
 \code{\link{op_trunc}()} \cr
+\code{\link{op_unravel_index}()} \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vectorize}()} \cr
