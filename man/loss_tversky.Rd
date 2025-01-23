@@ -12,6 +12,7 @@ loss_tversky(
   beta = 0.5,
   reduction = "sum_over_batch_size",
   name = "tversky",
+  axis = NULL,
   dtype = NULL
 )
 }
@@ -38,6 +39,8 @@ divides by the sum of the sample weights. \code{"none"} and \code{NULL}
 perform no aggregation. Defaults to \code{"sum_over_batch_size"}.}
 
 \item{name}{Optional name for the loss instance. (string)}
+
+\item{axis}{Axis (1-based)}
 
 \item{dtype}{The dtype of the loss's computations. Defaults to \code{NULL}, which
 means using \code{config_floatx()}. \code{config_floatx()} is a

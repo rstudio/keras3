@@ -23,7 +23,7 @@ tensors in the list should be of floating type.}
 \item{sequence_stride}{An integer representing the sequence hop size.}
 
 \item{fft_length}{An integer representing the size of the FFT that produced
-\code{stft}.}
+\code{stft}. Should be of type \code{int32}.}
 
 \item{length}{An integer representing the output is clipped to exactly length.
 If not specified, no padding or clipping take place. Defaults to

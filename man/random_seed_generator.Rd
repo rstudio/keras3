@@ -2,7 +2,7 @@
 % Please edit documentation in R/random.R
 \name{random_seed_generator}
 \alias{random_seed_generator}
-\title{Generates variable seeds upon each call to a RNG-using function.}
+\title{Generates variable seeds upon each call to a function generating random numbers.}
 \usage{
 random_seed_generator(seed = NULL, name = NULL, ...)
 }
@@ -18,12 +18,23 @@ A \code{SeedGenerator} instance, which can be passed as the \verb{seed = }
 argument to other random tensor generators.
 }
 \description{
-In Keras, all RNG-using methods (such as \code{random_normal()})
-are stateless, meaning that if you pass an integer seed to them
-(such as \code{seed = 42}), they will return the same values at each call.
-In order to get different values at each call, you must use a
-\code{SeedGenerator} instead as the seed argument. The \code{SeedGenerator}
-object is stateful.
+In Keras, all random number generators (such as
+\code{\link[=random_normal]{random_normal()}}) are stateless, meaning that if you pass an
+integer seed to them (such as \code{seed=42}), they will return the same
+values for repeated calls. To get different values for each
+call, a \code{SeedGenerator} providing the state of the random generator
+has to be used.
+
+Note that all the random number generators have a default seed of \code{NULL},
+which implies that an internal global \code{SeedGenerator} is used.
+If you need to decouple the RNG from the global state you can provide
+a local \code{StateGenerator} with either a deterministic or random initial
+state.
+
+Remark concerning the JAX backen: Note that the use of a local
+\code{StateGenerator} as seed argument is required for JIT compilation of
+RNG with the JAX backend, because the use of global state is not
+supported.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{seed_gen <- random_seed_generator(seed = 42)
