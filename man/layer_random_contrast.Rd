@@ -4,7 +4,13 @@
 \alias{layer_random_contrast}
 \title{A preprocessing layer which randomly adjusts contrast during training.}
 \usage{
-layer_random_contrast(object, factor, seed = NULL, ...)
+layer_random_contrast(
+  object,
+  factor,
+  value_range = c(0L, 255L),
+  seed = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
@@ -16,6 +22,11 @@ The contrast factor will be randomly picked between
 \verb{[1.0 - lower, 1.0 + upper]}. For any pixel x in the channel,
 the output will be \code{(x - mean) * factor + mean}
 where \code{mean} is the mean value of the channel.}
+
+\item{value_range}{the range of values the incoming images will have.
+Represented as a two-number tuple written \code{tuple(low, high)}. This is
+typically either \verb{[0, 1]} or \verb{[0, 255]} depending on how your
+preprocessing pipeline is set up.}
 
 \item{seed}{Integer. Used to create a random seed.}
 

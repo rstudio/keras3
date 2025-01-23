@@ -1346,12 +1346,12 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' while a negative value means clock-wise.
 #' When represented as a single
 #' float, this value is used for both the upper and lower bound.
-#' For instance, `factor=(-0.2, 0.3)`
+#' For instance, `factor=c(-0.2, 0.3)`
 #' results in an output rotation by a random
-#' amount in the range `[-20% * 2pi, 30% * 2pi]`.
+#' amount in the range `[-20% * 360, 30% * 360]`.
 #' `factor=0.2` results in an
 #' output rotating by a random amount
-#' in the range `[-20% * 2pi, 20% * 2pi]`.
+#' in the range `[-20% * 360, 20% * 360]`.
 #'
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled

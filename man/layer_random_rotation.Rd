@@ -25,12 +25,12 @@ counter clock-wise,
 while a negative value means clock-wise.
 When represented as a single
 float, this value is used for both the upper and lower bound.
-For instance, \verb{factor=(-0.2, 0.3)}
+For instance, \code{factor=c(-0.2, 0.3)}
 results in an output rotation by a random
-amount in the range \verb{[-20\% * 2pi, 30\% * 2pi]}.
+amount in the range \verb{[-20\% * 360, 30\% * 360]}.
 \code{factor=0.2} results in an
 output rotating by a random amount
-in the range \verb{[-20\% * 2pi, 20\% * 2pi]}.}
+in the range \verb{[-20\% * 360, 20\% * 360]}.}
 
 \item{fill_mode}{Points outside the boundaries of the input are filled
 according to the given mode
