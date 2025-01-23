@@ -271,7 +271,7 @@ as_integer_array <- function(x) {
 }
 
 as_integer_tuple <- function(x, force_tuple = FALSE) {
-  if (is.null(x))
+  if (is.null(x) || is_py_object(x))
     x
   else if (is.list(x) || force_tuple)
     tuple(as.list(as.integer(x)))
