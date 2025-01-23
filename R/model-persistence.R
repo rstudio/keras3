@@ -310,7 +310,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 }
 
 
-#' Create a TF SavedModel artifact for inference (e.g. via TF-Serving).
+#' Export the model as an artifact for inference.
 #'
 #' @description
 #' (e.g. via TF-Serving).
@@ -326,6 +326,9 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' The original code of the model (including any custom layers you may
 #' have used) is *no longer* necessary to reload the artifact -- it is
 #' entirely standalone.
+#'
+#' **Note:** This feature is currently supported only with TensorFlow, JAX
+#' and Torch backends.
 #'
 #' # Examples
 #' ```r
@@ -343,14 +346,49 @@ load_model_config <- function(filepath, custom_objects = NULL)
 # If you would like to customize your serving endpoints, you can
 # use the lower-level `import("keras").export.ExportArchive` class. The
 # `export()` method relies on `ExportArchive` internally.
+#
+#' Here's how to export an ONNX for inference.
+#'
+#' ```r
+#' # Export the model as a ONNX artifact
+#' model |> export_savedmodel("path/to/location", format = "onnx")
+#'
+#' # Load the artifact in a different process/environment
+#' onnxruntime <- reticulate::import("onnxruntime")
+#' ort_session <- onnxruntime$InferenceSession("path/to/location")
+#' input_data <- list(....)
+#' names(input_data) <- sapply(ort_session$get_inputs(), `[[`, "name")
+#' predictions <- ort_session$run(NULL, input_data)
+#' ```
+#'
 #'
 #' @param export_dir_base
 #' string, file path where to save
 #' the artifact.
 #'
-#' @param ... For forward/backward compatability.
+#' @param ... Additional keyword arguments:
+#' - Specific to the JAX backend and `format="tf_saved_model"`:
+#'   - `is_static`: Optional `bool`. Indicates whether `fn` is
+#'     static. Set to `FALSE` if `fn` involves state updates
+#'     (e.g., RNG seeds and counters).
+#'   - `jax2tf_kwargs`: Optional `dict`. Arguments for
+#'     `jax2tf.convert`. See the documentation for
+#'     [`jax2tf.convert`](
+#'       https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md).
+#'     If `native_serialization` and `polymorphic_shapes` are
+#'     not provided, they will be automatically computed.
 #'
 #' @param object A keras model.
+#'
+#' @param format string. The export format. Supported values:
+#' `"tf_saved_model"` and `"onnx"`.  Defaults to
+#' `"tf_saved_model"`.
+#'
+#' @param input_signature Optional. Specifies the shape and dtype of the
+#' model inputs. Can be a structure of `keras.InputSpec`,
+#' `tf.TensorSpec`, `backend.KerasTensor`, or backend tensor. If
+#' not provided, it will be automatically computed. Defaults to
+#' `NULL`.
 #'
 #' @param verbose
 #' whether to print all the variables of the exported model.
@@ -365,7 +403,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
 export_savedmodel.keras.src.models.model.Model <-
-function(object, export_dir_base, ..., verbose = TRUE) {
+function(object, export_dir_base, ..., format = 'tf_saved_model', verbose = TRUE, input_signature = NULL) {
   args <- capture_args(ignore = c("object", "export_dir_base"))
   # export_dir_base is called 'filename' in method. Pass it as a positional arg
   args <- c(list(export_dir_base), args)
