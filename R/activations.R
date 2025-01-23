@@ -769,3 +769,86 @@ function (x)
 {
   keras$activations$tanh_shrink(x)
 }
+
+
+#' SparsePlus activation function.
+#'
+#' @description
+#' SparsePlus is defined as:
+#'
+#' `sparse_plus(x) = 0` for `x <= -1`.
+#' `sparse_plus(x) = (1/4) * (x + 1)^2` for `-1 < x < 1`.
+#' `sparse_plus(x) = x` for `x >= 1`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.activations.sparse_plus
+#' @family activations
+#' @inherit activation_elu return
+activation_sparse_plus <-
+function (x)
+{
+    keras$activations$sparse_plus(x)
+}
+
+#' Sparsemax activation function.
+#'
+#' @description
+#' For each batch `i`, and class `j`,
+#' sparsemax activation function is defined as:
+#'
+#' `sparsemax(x)[i, j] = max(x[i, j] - (x[i, :]), 0).`
+#'
+#' # Reference
+#' - [Martins et.al., 2016](https://arxiv.org/abs/1602.02068)
+#'
+#' @returns
+#' A tensor, output of sparsemax transformation. Has the same type and
+#' shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' `int`, axis along which the sparsemax operation is applied. (1-based)
+#'
+#' @export
+#' @tether keras.activations.sparsemax
+#' @family activations
+#' @inherit activation_elu return
+activation_sparsemax <-
+function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$activations$sparsemax, args)
+}
+
+#' Threshold activation function.
+#'
+#' @description
+#' It is defined as:
+#'
+#' `threshold(x) = x` if `x > threshold`,
+#' `threshold(x) = default_value` otherwise.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' The value that decides when to retain or replace x.
+#'
+#' @param default_value
+#' Value to assign when `x <= threshold`.
+#'
+#' @export
+#' @tether keras.activations.threshold
+#' @family activations
+#' @inherit activation_elu return
+activation_threshold <-
+function (x, threshold, default_value)
+{
+    args <- capture_args(NULL)
+    do.call(keras$activations$threshold, args)
+}

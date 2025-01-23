@@ -202,6 +202,7 @@ depthwise_conv(
 )
 det(x)
 diag(x, k=0)
+diagflat(x, k=0)
 diagonal(
   x,
   offset=0,
@@ -587,6 +588,8 @@ sparse_categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+sparse_plus(x)
+sparsemax(x, axis=-1)
 split(
   x,
   indices_or_sections,
@@ -651,6 +654,11 @@ tensordot(
   x2,
   axes=2
 )
+threshold(
+  x,
+  threshold,
+  default_value
+)
 tile(x, repeats)
 top_k(
   x,
@@ -674,6 +682,7 @@ tril(x, k=0)
 triu(x, k=0)
 true_divide(x1, x2)
 trunc(x)
+unravel_index(indices, shape)
 unstack(
   x,
   num=None,

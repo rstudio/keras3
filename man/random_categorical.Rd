@@ -17,14 +17,20 @@ tensor's shape.}
 
 \item{dtype}{Optional dtype of the output tensor.}
 
-\item{seed}{An R integer or instance of
+\item{seed}{Optional R integer or instance of
 \code{\link[=random_seed_generator]{random_seed_generator()}}.
-Used to make the behavior of the initializer
-deterministic. Note that an initializer seeded with an integer
-or \code{NULL} (unseeded) will produce the same random values
-across multiple calls. To get different random values
-across multiple calls, use as seed an instance
-of \code{\link[=random_seed_generator]{random_seed_generator()}}.}
+By default, the \code{seed} argument is \code{NULL}, and an internal global
+\code{\link[=random_seed_generator]{random_seed_generator()}} is used. The \code{seed} argument can be
+used to ensure deterministic (repeatable) random number generation.
+Note that passing an integer as the \code{seed} value will produce the
+same random values for each call. To generate different random
+values for repeated calls, an instance of
+\code{\link[=random_seed_generator]{random_seed_generator()}} must be provided as the \code{seed} value.
+
+Remark concerning the JAX backend: When tracing functions with the
+JAX backend the global \code{\link[=random_seed_generator]{random_seed_generator()}} is not
+supported. Therefore, during tracing the default value \code{seed=NULL}
+will produce an error, and a \code{seed} argument must be provided.}
 }
 \value{
 A 2-D tensor with (batch_size, num_samples).

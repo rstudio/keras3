@@ -93,13 +93,13 @@ If \code{TRUE}, process the input sequence backwards and return the
 reversed sequence.}
 
 \item{stateful}{Boolean (default: \code{FALSE}). If \code{TRUE}, the last state
-for each sample at index i in a batch will be used as initial
-state for the sample of index i in the following batch.}
+for each sample at index i in a batch will be used as the
+initial state for the sample of index i in the following batch.}
 
 \item{unroll}{Boolean (default: \code{FALSE}).
 If \code{TRUE}, the network will be unrolled,
 else a symbolic loop will be used.
-Unrolling can speed-up a RNN,
+Unrolling can speed-up an RNN,
 although it tends to be more memory-intensive.
 Unrolling is only suitable for short sequences.}
 
@@ -216,6 +216,7 @@ Other layers: \cr
 \code{\link{layer_dropout}()} \cr
 \code{\link{layer_einsum_dense}()} \cr
 \code{\link{layer_embedding}()} \cr
+\code{\link{layer_equalization}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
 \code{\link{layer_flax_module_wrapper}()} \cr
@@ -246,15 +247,25 @@ Other layers: \cr
 \code{\link{layer_maximum}()} \cr
 \code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_minimum}()} \cr
+\code{\link{layer_mix_up}()} \cr
 \code{\link{layer_multi_head_attention}()} \cr
 \code{\link{layer_multiply}()} \cr
 \code{\link{layer_normalization}()} \cr
 \code{\link{layer_permute}()} \cr
+\code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_color_degeneration}()} \cr
+\code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_grayscale}()} \cr
+\code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_saturation}()} \cr
+\code{\link{layer_random_sharpness}()} \cr
+\code{\link{layer_random_shear}()} \cr
 \code{\link{layer_random_translation}()} \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_repeat_vector}()} \cr

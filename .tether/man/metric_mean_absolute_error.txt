@@ -21,6 +21,7 @@ class MeanAbsoluteError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
  |  >>> m.result()
  |  0.25
+ |
  |  >>> m.reset_state()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
  |  ...                sample_weight=[1, 0])

@@ -542,6 +542,12 @@ Embedding(
   lora_rank=None,
   **kwargs
 )
+Equalization(
+  value_range=(0, 255),
+  bins=256,
+  data_format=None,
+  **kwargs
+)
 Flatten(data_format=None, **kwargs)
 FlaxLayer(
   module,
@@ -913,6 +919,12 @@ MelSpectrogram(
 )
 minimum(inputs, **kwargs)
 Minimum(**kwargs)
+MixUp(
+  alpha=0.2,
+  data_format=None,
+  seed=None,
+  **kwargs
+)
 MultiHeadAttention(
   num_heads,
   key_dim,
@@ -950,14 +962,41 @@ PReLU(
   shared_axes=None,
   **kwargs
 )
+RandAugment(
+  value_range=(0, 255),
+  num_ops=2,
+  factor=0.5,
+  interpolation='bilinear',
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 RandomBrightness(
   factor,
   value_range=(0, 255),
   seed=None,
   **kwargs
 )
+RandomColorDegeneration(
+  factor,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
+  **kwargs
+)
+RandomColorJitter(
+  value_range=(0, 255),
+  brightness_factor=None,
+  contrast_factor=None,
+  saturation_factor=None,
+  hue_factor=None,
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 RandomContrast(
   factor,
+  value_range=(0, 255),
   seed=None,
   **kwargs
 )
@@ -975,6 +1014,26 @@ RandomFlip(
   data_format=None,
   **kwargs
 )
+RandomGrayscale(
+  factor=0.5,
+  data_format=None,
+  seed=None,
+  **kwargs
+)
+RandomHue(
+  factor,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
+  **kwargs
+)
+RandomPosterization(
+  factor,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
+  **kwargs
+)
 RandomRotation(
   factor,
   fill_mode='reflect',
@@ -982,6 +1041,30 @@ RandomRotation(
   seed=None,
   fill_value=0.0,
   data_format=None,
+  **kwargs
+)
+RandomSaturation(
+  factor,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
+  **kwargs
+)
+RandomSharpness(
+  factor,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
+  **kwargs
+)
+RandomShear(
+  x_factor=0.0,
+  y_factor=0.0,
+  interpolation='bilinear',
+  fill_mode='reflect',
+  fill_value=0.0,
+  data_format=None,
+  seed=None,
   **kwargs
 )
 RandomTranslation(

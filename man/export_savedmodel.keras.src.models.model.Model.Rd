@@ -2,9 +2,16 @@
 % Please edit documentation in R/model-persistence.R
 \name{export_savedmodel.keras.src.models.model.Model}
 \alias{export_savedmodel.keras.src.models.model.Model}
-\title{Create a TF SavedModel artifact for inference (e.g. via TF-Serving).}
+\title{Export the model as an artifact for inference.}
 \usage{
-\method{export_savedmodel}{keras.src.models.model.Model}(object, export_dir_base, ..., verbose = TRUE)
+\method{export_savedmodel}{keras.src.models.model.Model}(
+  object,
+  export_dir_base,
+  ...,
+  format = "tf_saved_model",
+  verbose = TRUE,
+  input_signature = NULL
+)
 }
 \arguments{
 \item{object}{A keras model.}
@@ -12,9 +19,32 @@
 \item{export_dir_base}{string, file path where to save
 the artifact.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{Additional keyword arguments:
+\itemize{
+\item Specific to the JAX backend and \code{format="tf_saved_model"}:
+\itemize{
+\item \code{is_static}: Optional \code{bool}. Indicates whether \code{fn} is
+static. Set to \code{FALSE} if \code{fn} involves state updates
+(e.g., RNG seeds and counters).
+\item \code{jax2tf_kwargs}: Optional \code{dict}. Arguments for
+\code{jax2tf.convert}. See the documentation for
+\href{https://github.com/jax-ml/jax/blob/main/jax/experimental/jax2tf/README.md}{\code{jax2tf.convert}}.
+If \code{native_serialization} and \code{polymorphic_shapes} are
+not provided, they will be automatically computed.
+}
+}}
+
+\item{format}{string. The export format. Supported values:
+\code{"tf_saved_model"} and \code{"onnx"}.  Defaults to
+\code{"tf_saved_model"}.}
 
 \item{verbose}{whether to print all the variables of the exported model.}
+
+\item{input_signature}{Optional. Specifies the shape and dtype of the
+model inputs. Can be a structure of \code{keras.InputSpec},
+\code{tf.TensorSpec}, \code{backend.KerasTensor}, or backend tensor. If
+not provided, it will be automatically computed. Defaults to
+\code{NULL}.}
 }
 \value{
 This is called primarily for the side effect of exporting \code{object}.
@@ -35,6 +65,9 @@ under the name \code{serve()} (see example below).
 The original code of the model (including any custom layers you may
 have used) is \emph{no longer} necessary to reload the artifact -- it is
 entirely standalone.
+
+\strong{Note:} This feature is currently supported only with TensorFlow, JAX
+and Torch backends.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Create the artifact
@@ -46,6 +79,19 @@ reloaded_artifact <- tf$saved_model$load("path/to/location")
 predictions <- reloaded_artifact$serve(input_data)
 
 # see tfdeploy::serve_savedmodel() for serving a model over a local web api.
+}\if{html}{\out{</div>}}
+
+Here's how to export an ONNX for inference.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Export the model as a ONNX artifact
+model |> export_savedmodel("path/to/location", format = "onnx")
+
+# Load the artifact in a different process/environment
+onnxruntime <- reticulate::import("onnxruntime")
+ort_session <- onnxruntime$InferenceSession("path/to/location")
+input_data <- list(....)
+names(input_data) <- sapply(ort_session$get_inputs(), `[[`, "name")
+predictions <- ort_session$run(NULL, input_data)
 }\if{html}{\out{</div>}}
 }
 

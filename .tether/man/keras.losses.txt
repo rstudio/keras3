@@ -210,13 +210,15 @@ tversky(
   y_true,
   y_pred,
   alpha=0.5,
-  beta=0.5
+  beta=0.5,
+  axis=None
 )
 Tversky(
   alpha=0.5,
   beta=0.5,
   reduction='sum_over_batch_size',
   name='tversky',
+  axis=None,
   dtype=None
 )
 

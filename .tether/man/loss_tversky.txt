@@ -1,7 +1,7 @@
 Help on class Tversky in module keras.src.losses.losses:
 
 class Tversky(LossFunctionWrapper)
- |  Tversky(alpha=0.5, beta=0.5, reduction='sum_over_batch_size', name='tversky', dtype=None)
+ |  Tversky(alpha=0.5, beta=0.5, reduction='sum_over_batch_size', name='tversky', axis=None, dtype=None)
  |
  |  Computes the Tversky loss value between `y_true` and `y_pred`.
  |
@@ -53,6 +53,7 @@ class Tversky(LossFunctionWrapper)
  |    beta=0.5,
  |    reduction='sum_over_batch_size',
  |    name='tversky',
+ |    axis=None,
  |    dtype=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

@@ -451,3 +451,131 @@ keras$ops$tanh_shrink(x)
 op_celu <-
 function (x, alpha = 1)
 keras$ops$celu(x, alpha)
+
+#' SparsePlus activation function.
+#'
+#' @description
+#' It is defined as
+#'
+#' `f(x) = 0` for `x <= -1`.
+#' `f(x) = (1/4) * (x + 1)^2` for `-1 < x < 1`.
+#' `f(x) = x` for `x >= 1`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0))
+#' op_sparse_plus(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.ops.sparse_plus
+#' @family nn ops
+#' @family ops
+op_sparse_plus <-
+function (x)
+keras$ops$sparse_plus(x)
+
+#' Sparsemax activation function.
+#'
+#' @description
+#' For each batch `i`, and class `j`,
+#' sparsemax activation function is defined as:
+#'
+#' `sparsemax(x)[i, j] = max(x[i, j] - (x[i, :]), 0).`
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1., 0., 1.))
+#' op_sparsemax(x)
+#' ```
+#'
+#' @returns
+#' A tensor, output of sparsemax transformation. Has the same type and
+#' shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' `int`, axis along which the sparsemax operation is applied.
+#'
+#' @export
+#' @tether keras.ops.sparsemax
+#' @family nn ops
+#' @family ops
+op_sparsemax <-
+function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$ops$sparsemax, args)
+}
+
+#' Threshold activation function.
+#'
+#' @description
+#' The function thresholds the input `x` as follows:
+#' `f(x) = x` if `x > threshold`,
+#' `f(x) = default_value` otherwise.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0, 2.0))
+#' op_threshold(x, 1, 0)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' The value that decides when to retain or replace x.
+#'
+#' @param default_value
+#' Value to assign when `x <= threshold`.
+#'
+#' @export
+#' @tether keras.ops.threshold
+#' @family nn ops
+#' @family ops
+op_threshold <-
+function (x, threshold, default_value)
+keras$ops$threshold(x, threshold, default_value)
+
+#' Convert flat indices to coordinate arrays in a given array shape.
+#'
+#' @description
+#'
+#' # Examples
+#' ```{r}
+#' indices <- c(1, 5)
+#' shape <- array(c(3, 3))
+#' op_unravel_index(indices, shape)
+#' ```
+#'
+#' @returns
+#' Tuple of arrays for each dimension with unraveled indices.
+#'
+#' @param indices
+#' An integer or array of integers representing flat indices.
+#'
+#' @param shape
+#' The shape of the array to unravel into.
+#'
+#' @export
+#' @tether keras.ops.unravel_index
+#' @family nn ops
+#' @family ops
+op_unravel_index <-
+function (indices, shape)
+{
+    args <- capture_args(list(indices = as_index, shape = normalize_shape))
+    do.call(keras$ops$unravel_index, args)
+}

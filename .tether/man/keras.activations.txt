@@ -30,8 +30,15 @@ soft_shrink(x, threshold=0.5)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)
+sparse_plus(x)
+sparsemax(x, axis=-1)
 squareplus(x, b=4)
 swish(x)
 tanh(x)
 tanh_shrink(x)
+threshold(
+  x,
+  threshold,
+  default_value
+)
 

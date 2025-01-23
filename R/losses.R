@@ -1821,6 +1821,8 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' (via `config_set_floatx()`). If a `keras$DTypePolicy` is
 #' provided, then the `compute_dtype` will be utilized.
 #'
+#' @param axis Axis (1-based)
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -1830,9 +1832,10 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @tether keras.losses.Tversky
 loss_tversky <-
 function (y_true, y_pred, ..., alpha = 0.5, beta = 0.5,
-     reduction = "sum_over_batch_size", name = "tversky", dtype = NULL)
+     reduction = "sum_over_batch_size", name = "tversky", axis = NULL, dtype = NULL)
 {
-    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array))
+    args <- capture_args(list(y_true = as_py_array, y_pred = as_py_array,
+                              axis = as_axis))
     callable <- if (missing(y_true) && missing(y_pred))
       keras$losses$Tversky else keras$losses$tversky
     do.call(callable, args)

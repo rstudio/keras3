@@ -1145,6 +1145,12 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' the output will be `(x - mean) * factor + mean`
 #' where `mean` is the mean value of the channel.
 #'
+#' @param value_range
+#' The range of values the incoming images will have.
+#' Represented as a two-number tuple written `tuple(low, high)`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
 #' @param seed
 #' Integer. Used to create a random seed.
 #'
@@ -1164,12 +1170,19 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomContrast>
 #' @tether keras.layers.RandomContrast
 layer_random_contrast <-
-function (object, factor, seed = NULL, ...)
+function (object, factor, value_range = c(0L, 255L), seed = NULL, ...)
 {
-    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
-    create_layer(keras$layers$RandomContrast, object, args)
+  args <- capture_args(
+    list(
+      seed = as_integer,
+      input_shape = normalize_shape,
+      batch_size = as_integer,
+      batch_input_shape = normalize_shape,
+      value_range = as_tuple
+    ),
+    ignore = "object"
+  )
+  create_layer(keras$layers$RandomContrast, object, args)
 }
 
 
@@ -1334,12 +1347,12 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' while a negative value means clock-wise.
 #' When represented as a single
 #' float, this value is used for both the upper and lower bound.
-#' For instance, `factor=(-0.2, 0.3)`
+#' For instance, `factor=c(-0.2, 0.3)`
 #' results in an output rotation by a random
-#' amount in the range `[-20% * 2pi, 30% * 2pi]`.
+#' amount in the range `[-20% * 360, 30% * 360]`.
 #' `factor=0.2` results in an
 #' output rotating by a random amount
-#' in the range `[-20% * 2pi, 20% * 2pi]`.
+#' in the range `[-20% * 360, 20% * 360]`.
 #'
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
@@ -1899,6 +1912,674 @@ function (object, addition_factor = 0, threshold_factor = 0,
 }
 
 
+#' Preprocessing layer for histogram equalization on image channels.
+#'
+#' @description
+#' Histogram equalization is a technique to adjust image intensities to
+#' enhance contrast by effectively spreading out the most frequent
+#' intensity values. This layer applies equalization on a channel-wise
+#' basis, which can improve the visibility of details in images.
+#'
+#' This layer works with both grayscale and color images, performing
+#' equalization independently on each color channel. At inference time,
+#' the equalization is consistently applied.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' (independently of which backend you're using).
+#'
+#' ## Input Shape
+#' 3D (unbatched) or 4D (batched) tensor with shape:
+#' `(..., height, width, channels)`, in `"channels_last"` format,
+#' or `(..., channels, height, width)`, in `"channels_first"` format.
+#'
+#' ## Output Shape
+#' 3D (unbatched) or 4D (batched) tensor with shape:
+#' `(..., target_height, target_width, channels)`,
+#' or `(..., channels, target_height, target_width)`,
+#' in `"channels_first"` format.
+#'
+#' # Examples
+#' ```r
+#' # Create an equalization layer for standard 8-bit images
+#' equalizer <- layer_equalization()
+#'
+#' # An image with uneven intensity distribution
+#' image <- np_array(...) # your input image
+#'
+#' # Apply histogram equalization
+#' equalized_image <- equalizer(image)
+#'
+#' # For images with custom value range
+#' custom_equalizer <- layer_equalization(
+#'     value_range=c(0.0, 1.0),  # for normalized images
+#'     bins=128  # fewer bins for more subtle equalization
+#' )
+#' custom_equalized <- custom_equalizer(normalized_image)
+#' ```
+#'
+#' @param value_range
+#' Optional list/tuple of 2 floats specifying the lower
+#' and upper limits of the input data values. Defaults to `[0, 255]`.
+#' If the input image has been scaled, use the appropriate range
+#' (e.g., `[0.0, 1.0]`). The equalization will be scaled to this
+#' range, and output values will be clipped accordingly.
+#'
+#' @param bins
+#' Integer specifying the number of histogram bins to use for
+#' equalization. Defaults to 256, which is suitable for 8-bit images.
+#' Larger values can provide more granular intensity redistribution.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_random_grayscale
+#'
+#' @export
+#' @tether keras.layers.Equalization
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_equalization <-
+function (object, value_range = list(0L, 255L), bins = 256L,
+    data_format = NULL, ...)
+{
+    args <- capture_args(list(bins = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$Equalization, object, args)
+}
+
+#' MixUp implements the MixUp data augmentation technique.
+#'
+#' @description
+#'
+#' # References
+#' - [MixUp paper](https://arxiv.org/abs/1710.09412).
+#' - [MixUp for Object Detection paper](https://arxiv.org/pdf/1902.04103).
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' c(images, labels) %<-% list(images[1:8,,,], labels[1:8,])
+#' labels <- labels |> op_one_hot(10) |> op_cast("float32")
+#' mix_up <- layer_mix_up(alpha=0.2)
+#' output <- mix_up(list(images = images, labels = labels))
+#' ```
+#'
+#' @param alpha
+#' Float between 0 and 1. Controls the blending strength.
+#' Smaller values mean less mixing, while larger values allow
+#' for more  blending between images. Defaults to 0.2,
+#' recommended for ImageNet1k classification.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_random_grayscale
+#' @export
+#' @tether keras.layers.MixUp
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_mix_up <-
+function (object, alpha = 0.2, data_format = NULL, seed = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$MixUp, object, args)
+}
+
+
+#' RandAugment performs the Rand Augment operation on input images.
+#'
+#' @description
+#' This layer can be thought of as an all-in-one image augmentation layer. The
+#' policy implemented by this layer has been benchmarked extensively and is
+#' effective on a wide variety of datasets.
+#'
+#' # References
+#' - [RandAugment](https://arxiv.org/abs/1909.13719)
+#'
+#' @param value_range
+#' The range of values the input image can take.
+#' Default is `(0, 255)`. Typically, this would be `(0, 1)`
+#' for normalized images or `(0, 255)` for raw images.
+#'
+#' @param num_ops
+#' The number of augmentation operations to apply sequentially
+#' to each image. Default is 2.
+#'
+#' @param factor
+#' The strength of the augmentation as a normalized value
+#' between 0 and 1. Default is 0.5.
+#'
+#' @param interpolation
+#' The interpolation method to use for resizing operations.
+#' Options include `nearest`, `bilinear`. Default is `bilinear`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_random_grayscale
+#' @export
+#' @tether keras.layers.RandAugment
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_rand_augment <-
+function (object, value_range = list(0L, 255L), num_ops = 2L,
+    factor = 0.5, interpolation = "bilinear", seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(num_ops = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$RandAugment, object, args)
+}
+
+
+#' Randomly performs the color degeneration operation on given images.
+#'
+#' @description
+#' The sharpness operation first converts an image to gray scale, then back to
+#' color. It then takes a weighted average between original image and the
+#' degenerated image. This makes colors appear more dull.
+#'
+#' @param factor
+#' A tuple of two floats or a single float.
+#' `factor` controls the extent to which the
+#' image sharpness is impacted. `factor=0.0` makes this layer perform a
+#' no-op operation, while a value of 1.0 uses the degenerated result
+#' entirely. Values between 0 and 1 result in linear interpolation
+#' between the original image and the sharpened image.
+#' Values should be between `0.0` and `1.0`. If a tuple is used, a
+#' `factor` is sampled between the two values for every image
+#' augmented. If a single float is used, a value between `0.0` and the
+#' passed float is sampled. In order to ensure the value is always the
+#' same, please pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' The range of values the input image can take.
+#' Default is `(0, 255)`. Typically, this would be `(0, 1)`
+#' for normalized images or `(0, 255)` for raw images.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_random_grayscale
+#' @export
+#' @tether keras.layers.RandomColorDegeneration
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_color_degeneration <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomColorDegeneration, object,
+        args)
+}
+
+#' Randomly apply brightness, contrast, saturation
+#'
+#' @description
+#' and hue image processing operation sequentially and randomly on the
+#' input.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two number tuple written `[low, high].`
+#' This is typically either `[0, 1]` or `[0, 255]` depending
+#' on how your preprocessing pipeline is set up.
+#'
+#' @param brightness_factor
+#' Float or a list/tuple of 2 floats between -1.0
+#' and 1.0. The factor is used to determine the lower bound and
+#' upper bound of the brightness adjustment. A float value will
+#' be chosen randomly between the limits. When -1.0 is chosen,
+#' the output image will be black, and when 1.0 is chosen, the
+#' image will be fully white. When only one float is provided,
+#' eg, 0.2, then -0.2 will be used for lower bound and 0.2 will
+#' be used for upper bound.
+#'
+#' @param contrast_factor
+#' a positive float represented as fraction of value,
+#' or a tuple of size 2 representing lower and upper bound. When
+#' represented as a single float, lower = upper. The contrast
+#' factor will be randomly picked between `[1.0 - lower, 1.0 +
+#' upper]`. For any pixel x in the channel, the output will be
+#' `(x - mean) * factor + mean` where `mean` is the mean value
+#' of the channel.
+#'
+#' @param saturation_factor
+#' A tuple of two floats or a single float. `factor`
+#' controls the extent to which the image saturation is impacted.
+#' `factor=0.5` makes this layer perform a no-op operation.
+#' `factor=0.0` makes the image fully grayscale. `factor=1.0`
+#' makes the image fully saturated. Values should be between
+#' `0.0` and `1.0`. If a tuple is used, a `factor` is sampled
+#' between the two values for every image augmented. If a single
+#' float is used, a value between `0.0` and the passed float is
+#' sampled. To ensure the value is always the same, pass a tuple
+#' with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param hue_factor
+#' A single float or a tuple of two floats. `factor`
+#' controls the extent to which the image hue is impacted.
+#' `factor=0.0` makes this layer perform a no-op operation,
+#' while a value of `1.0` performs the most aggressive contrast
+#' adjustment available. If a tuple is used, a `factor` is
+#' sampled between the two values for every image augmented.
+#' If a single float is used, a value between `0.0` and the
+#' passed float is sampled. In order to ensure the value is
+#' always the same, please pass a tuple with two identical
+#' floats: `(0.5, 0.5)`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_random_grayscale
+#' @export
+#' @tether keras.layers.RandomColorJitter
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_color_jitter <-
+function (object, value_range = list(0L, 255L), brightness_factor = NULL,
+    contrast_factor = NULL, saturation_factor = NULL, hue_factor = NULL,
+    seed = NULL, data_format = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomColorJitter, object, args)
+}
+
+
+#' Preprocessing layer for random conversion of RGB images to grayscale.
+#'
+#' @description
+#' This layer randomly converts input images to grayscale with a specified
+#' factor. When applied, it maintains the original number of channels
+#' but sets all channels to the same grayscale value. This can be useful
+#' for data augmentation and training models to be robust to color
+#' variations.
+#'
+#' The conversion preserves the perceived luminance of the original color
+#' image using standard RGB to grayscale conversion coefficients. Images
+#' that are not selected for conversion remain unchanged.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' (independently of which backend you're using).
+#'
+#' # Input Shape
+#' 3D (unbatched) or 4D (batched) tensor with shape:
+#' `(..., height, width, channels)`, in `"channels_last"` format,
+#' or `(..., channels, height, width)`, in `"channels_first"` format.
+#'
+#' # Output Shape
+#' Same as input shape. The output maintains the same number of channels
+#' as the input, even for grayscale-converted images where all channels
+#' will have the same value.
+#'
+#' @param factor
+#' Float between 0 and 1, specifying the factor of
+#' converting each image to grayscale. Defaults to 0.5. A value of
+#' 1.0 means all images will be converted, while 0.0 means no images
+#' will be converted.
+#'
+#' @param data_format
+#' String, one of `"channels_last"` (default) or
+#' `"channels_first"`. The ordering of the dimensions in the inputs.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)` while `"channels_first"`
+#' corresponds to inputs with shape
+#' `(batch, channels, height, width)`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param seed
+#' Initial seed for the random number generator
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomGrayscale
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_grayscale <-
+function (object, factor = 0.5, data_format = NULL, seed = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomGrayscale, object, args)
+}
+
+#' Randomly adjusts the hue on given images.
+#'
+#' @description
+#' This layer will randomly increase/reduce the hue for the input RGB
+#' images.
+#'
+#' The image hue is adjusted by converting the image(s) to HSV and rotating the
+#' hue channel (H) by delta. The image is then converted back to RGB.
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' random_hue <- layer_random_hue(factor=0.5, value_range=c(0, 1))
+#' images <- op_cast(images[1:8,,,], "float32")
+#' augmented_images_batch = random_hue(images)
+#' ```
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the extent to which the
+#' image hue is impacted. `factor=0.0` makes this layer perform a
+#' no-op operation, while a value of `1.0` performs the most aggressive
+#' contrast adjustment available. If a tuple is used, a `factor` is
+#' sampled between the two values for every image augmented. If a
+#' single float is used, a value between `0.0` and the passed float is
+#' sampled. In order to ensure the value is always the same, please
+#' pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inheritParams layer_random_grayscale
+#' @tether keras.layers.RandomHue
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_hue <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomHue, object, args)
+}
+
+#' Reduces the number of bits for each color channel.
+#'
+#' @description
+#'
+#' # References
+#' - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
+#' - [RandAugment: Practical automated data augmentation with a reduced search space](https://arxiv.org/abs/1909.13719)
+#'
+#' @param value_range
+#' a tuple or a list of two elements. The first value
+#' represents the lower bound for values in passed images, the second
+#' represents the upper bound. Images passed to the layer should have
+#' values within `value_range`. Defaults to `(0, 255)`.
+#'
+#' @param factor
+#' integer, the number of bits to keep for each channel. Must be a
+#' value between 1-8.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param seed
+#' Initial seed for the random number generator
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inheritParams layer_random_grayscale
+#' @tether keras.layers.RandomPosterization
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_posterization <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(factor = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$RandomPosterization, object, args)
+}
+
+#' Randomly adjusts the saturation on given images.
+#'
+#' @description
+#' This layer will randomly increase/reduce the saturation for the input RGB
+#' images.
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' images <- images[1:8, , , ] |> op_cast("float32")
+#' random_saturation <- layer_random_saturation(factor = 0.2)
+#' augmented_images <- random_saturation(images)
+#' ```
+#'
+#' @param factor
+#' A tuple of two floats or a single float.
+#' `factor` controls the extent to which the image saturation
+#' is impacted. `factor=0.5` makes this layer perform a no-op
+#' operation. `factor=0.0` makes the image fully grayscale.
+#' `factor=1.0` makes the image fully saturated. Values should
+#' be between `0.0` and `1.0`. If a tuple is used, a `factor`
+#' is sampled between the two values for every image augmented.
+#' If a single float is used, a value between `0.0` and the passed
+#' float is sampled. To ensure the value is always the same,
+#' pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inheritParams layer_random_grayscale
+#' @tether keras.layers.RandomSaturation
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_saturation <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomSaturation, object, args)
+}
+
+#' Randomly performs the sharpness operation on given images.
+#'
+#' @description
+#' The sharpness operation first performs a blur, then blends between the
+#' original image and the processed image. This operation adjusts the clarity
+#' of the edges in an image, ranging from blurred to enhanced sharpness.
+#'
+#' @param factor
+#' A tuple of two floats or a single float.
+#' `factor` controls the extent to which the image sharpness
+#' is impacted. `factor=0.0` results in a fully blurred image,
+#' `factor=0.5` applies no operation (preserving the original image),
+#' and `factor=1.0` enhances the sharpness beyond the original. Values
+#' should be between `0.0` and `1.0`. If a tuple is used, a `factor`
+#' is sampled between the two values for every image augmented.
+#' If a single float is used, a value between `0.0` and the passed
+#' float is sampled. To ensure the value is always the same,
+#' pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inheritParams layer_random_grayscale
+#' @tether keras.layers.RandomSharpness
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_sharpness <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomSharpness, object, args)
+}
+
+#' A preprocessing layer that randomly applies shear transformations
+#'
+#' @description
+#' images.
+#'
+#' This layer shears the input images along the x-axis and/or y-axis by a
+#' randomly selected factor within the specified range. The shear
+#' transformation is applied to each image independently in a batch. Empty
+#' regions created during the transformation are filled according to the
+#' `fill_mode` and `fill_value` parameters.
+#'
+#' @param x_factor
+#' A tuple of two floats. For each augmented image, a value
+#' is sampled from the provided range. If a float is passed, the
+#' range is interpreted as `(0, x_factor)`. Values represent a
+#' percentage of the image to shear over. For example, 0.3 shears
+#' pixels up to 30% of the way across the image. All provided values
+#' should be positive.
+#'
+#' @param y_factor
+#' A tuple of two floats. For each augmented image, a value
+#' is sampled from the provided range. If a float is passed, the
+#' range is interpreted as `(0, y_factor)`. Values represent a
+#' percentage of the image to shear over. For example, 0.3 shears
+#' pixels up to 30% of the way across the image. All provided values
+#' should be positive.
+#'
+#' @param interpolation
+#' Interpolation mode. Supported values: `"nearest"`,
+#' `"bilinear"`.
+#'
+#' @param fill_mode
+#' Points outside the boundaries of the input are filled
+#' according to the given mode. Available methods are `"constant"`,
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' - `"reflect"`: `(d c b a | a b c d | d c b a)`
+#'     The input is extended by reflecting about the edge of the
+#'     last pixel.
+#' - `"constant"`: `(k k k k | a b c d | k k k k)`
+#'     The input is extended by filling all values beyond the edge
+#'     with the same constant value `k` specified by `fill_value`.
+#' - `"wrap"`: `(a b c d | a b c d | a b c d)`
+#'     The input is extended by wrapping around to the opposite edge.
+#' - `"nearest"`: `(a a a a | a b c d | d d d d)`
+#'     The input is extended by the nearest pixel.
+#' Note that when using torch backend, `"reflect"` is redirected to
+#' `"mirror"` `(c d c b | a b c d | c b a b)` because torch does
+#' not support `"reflect"`.
+#' Note that torch backend does not support `"wrap"`.
+#'
+#' @param fill_value
+#' A float representing the value to be filled outside the
+#' boundaries when `fill_mode="constant"`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @inheritParams layer_random_grayscale
+#' @tether keras.layers.RandomShear
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_shear <-
+function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
+    fill_mode = "reflect", fill_value = 0, data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomShear, object, args)
+}
 
 #' Applies a series of layers to an input.
 #'

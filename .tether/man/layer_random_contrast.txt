@@ -1,7 +1,7 @@
 Help on class RandomContrast in module keras.src.layers.preprocessing.image_preprocessing.random_contrast:
 
 class RandomContrast(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
- |  RandomContrast(factor, seed=None, **kwargs)
+ |  RandomContrast(factor, value_range=(0, 255), seed=None, **kwargs)
  |
  |  A preprocessing layer which randomly adjusts contrast during training.
  |
@@ -36,6 +36,10 @@ class RandomContrast(keras.src.layers.preprocessing.image_preprocessing.base_ima
  |          `[1.0 - lower, 1.0 + upper]`. For any pixel x in the channel,
  |          the output will be `(x - mean) * factor + mean`
  |          where `mean` is the mean value of the channel.
+ |      value_range: the range of values the incoming images will have.
+ |          Represented as a two-number tuple written `[low, high]`. This is
+ |          typically either `[0, 1]` or `[0, 255]` depending on how your
+ |          preprocessing pipeline is set up.
  |      seed: Integer. Used to create a random seed.
  |
  |  Method resolution order:
@@ -56,6 +60,7 @@ class RandomContrast(keras.src.layers.preprocessing.image_preprocessing.base_ima
  |  __init__(
  |    self,
  |    factor,
+ |    value_range=(0, 255),
  |    seed=None,
  |    **kwargs
  |  )

@@ -10,13 +10,27 @@ affine_transform(
   width,
   center_x=None,
   center_y=None,
-  format='xyxy'
+  bounding_box_format='xyxy'
 )
 clip_to_image_size(
   bounding_boxes,
   height=None,
   width=None,
-  format='xyxy'
+  bounding_box_format='xyxy'
+)
+compute_ciou(
+  boxes1,
+  boxes2,
+  bounding_box_format,
+  image_shape=None
+)
+compute_iou(
+  boxes1,
+  boxes2,
+  bounding_box_format,
+  use_masking=False,
+  mask_val=-1,
+  image_shape=None
 )
 convert_format(
   boxes,
@@ -32,12 +46,32 @@ crop(
   left,
   height,
   width,
-  format='xyxy'
+  bounding_box_format='xyxy'
+)
+decode_deltas_to_boxes(
+  anchors,
+  boxes_delta,
+  anchor_format,
+  box_format,
+  encoded_format='center_yxhw',
+  variance=None,
+  image_shape=None
+)
+encode_box_to_deltas(
+  anchors,
+  boxes,
+  anchor_format,
+  box_format,
+  encoding_format='center_yxhw',
+  variance=None,
+  image_shape=None
 )
 pad(
   boxes,
   top,
   left,
-  format='xyxy'
+  height=None,
+  width=None,
+  bounding_box_format='xyxy'
 )
 

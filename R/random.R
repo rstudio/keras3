@@ -31,14 +31,20 @@
 #' Optional dtype of the output tensor.
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @export
 #' @family random
@@ -99,14 +105,20 @@ function (inputs, rate, noise_shape = NULL, seed = NULL)
 #' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @returns A tensor of random values.
 #' @export
@@ -147,14 +159,20 @@ function (shape, alpha, dtype = NULL, seed = NULL)
 #' supported. If not specified, `"int32"` is used.
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @returns A tensor of random values.
 #' @export
@@ -191,14 +209,20 @@ function (shape, minval, maxval, dtype = "int32", seed = NULL)
 #' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @returns A tensor of random values.
 #' @export
@@ -224,14 +248,20 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' `0`.
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @returns A tensor, a copy of `x` with the `axis` axis shuffled.
 #' @export
@@ -271,14 +301,20 @@ function (x, axis = 1L, seed = NULL)
 #' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @returns A tensor of random values.
 #' @export
@@ -321,14 +357,20 @@ function (shape, mean = 0, stddev = 1, dtype = NULL, seed = NULL)
 #' `config_set_floatx(float_dtype)`)
 #'
 #' @param seed
-#' An R integer or instance of
+#' Optional R integer or instance of
 #' [`random_seed_generator()`].
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or `NULL` (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @returns A tensor of random values.
 #' @export
@@ -344,15 +386,27 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 }
 
 
-#' Generates variable seeds upon each call to a RNG-using function.
+#' Generates variable seeds upon each call to a function generating random numbers.
 #'
 #' @description
-#' In Keras, all RNG-using methods (such as `random_normal()`)
-#' are stateless, meaning that if you pass an integer seed to them
-#' (such as `seed = 42`), they will return the same values at each call.
-#' In order to get different values at each call, you must use a
-#' `SeedGenerator` instead as the seed argument. The `SeedGenerator`
-#' object is stateful.
+#'
+#' In Keras, all random number generators (such as
+#' [`random_normal()`]) are stateless, meaning that if you pass an
+#' integer seed to them (such as `seed=42`), they will return the same
+#' values for repeated calls. To get different values for each
+#' call, a `SeedGenerator` providing the state of the random generator
+#' has to be used.
+#'
+#' Note that all the random number generators have a default seed of `NULL`,
+#' which implies that an internal global `SeedGenerator` is used.
+#' If you need to decouple the RNG from the global state you can provide
+#' a local `StateGenerator` with either a deterministic or random initial
+#' state.
+#'
+#' Remark concerning the JAX backen: Note that the use of a local
+#' `StateGenerator` as seed argument is required for JIT compilation of
+#' RNG with the JAX backend, because the use of global state is not
+#' supported.
 #'
 #' # Examples
 #' ```{r}
@@ -429,14 +483,20 @@ function (seed = NULL, name = NULL, ...)
 #' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
-#' An integer or instance of
-#' `random_seed_generator()`.
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or NULL (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of `random_seed_generator()`.
+#' Optional R integer or instance of
+#' [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @export
 #' @returns A tensor of random values.
@@ -475,14 +535,20 @@ function (shape, alpha, beta, dtype = NULL, seed = NULL)
 #' `config_set_floatx(float_dtype)`).
 #'
 #' @param seed
-#' A Python integer or instance of
-#' `random_seed_generator()`.
-#' Used to make the behavior of the initializer
-#' deterministic. Note that an initializer seeded with an integer
-#' or None (unseeded) will produce the same random values
-#' across multiple calls. To get different random values
-#' across multiple calls, use as seed an instance
-#' of `random_seed_generator()`.
+#' Optional R integer or instance of
+#' [`random_seed_generator()`].
+#'  By default, the `seed` argument is `NULL`, and an internal global
+#' [`random_seed_generator()`] is used. The `seed` argument can be
+#' used to ensure deterministic (repeatable) random number generation.
+#' Note that passing an integer as the `seed` value will produce the
+#' same random values for each call. To generate different random
+#' values for repeated calls, an instance of
+#' [`random_seed_generator()`] must be provided as the `seed` value.
+#'
+#' Remark concerning the JAX backend: When tracing functions with the
+#' JAX backend the global [`random_seed_generator()`] is not
+#' supported. Therefore, during tracing the default value `seed=NULL`
+#' will produce an error, and a `seed` argument must be provided.
 #'
 #' @export
 #' @returns A tensor of random values.

@@ -2,7 +2,7 @@ assert_same_paths(a, b)
 assert_same_structure(
   a,
   b,
-  check_types=True
+  check_types=None
 )
 flatten(structure)
 flatten_with_path(structure)
@@ -15,11 +15,8 @@ map_structure_up_to(
   func,
   *structures
 )
-pack_sequence_as(
-  structure,
-  flat_sequence,
-  sequence_fn=None
-)
+MAP_TO_NONE()
+pack_sequence_as(structure, flat_sequence)
 traverse(
   func,
   structure,

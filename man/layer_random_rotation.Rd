@@ -25,12 +25,12 @@ counter clock-wise,
 while a negative value means clock-wise.
 When represented as a single
 float, this value is used for both the upper and lower bound.
-For instance, \verb{factor=(-0.2, 0.3)}
+For instance, \code{factor=c(-0.2, 0.3)}
 results in an output rotation by a random
-amount in the range \verb{[-20\% * 2pi, 30\% * 2pi]}.
+amount in the range \verb{[-20\% * 360, 30\% * 360]}.
 \code{factor=0.2} results in an
 output rotating by a random amount
-in the range \verb{[-20\% * 2pi, 20\% * 2pi]}.}
+in the range \verb{[-20\% * 360, 20\% * 360]}.}
 
 \item{fill_mode}{Points outside the boundaries of the input are filled
 according to the given mode
@@ -122,17 +122,28 @@ Other preprocessing layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_discretization}()} \cr
+\code{\link{layer_equalization}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_hashed_crossing}()} \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
 \code{\link{layer_max_num_bounding_boxes}()} \cr
 \code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_mix_up}()} \cr
 \code{\link{layer_normalization}()} \cr
+\code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_color_degeneration}()} \cr
+\code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_grayscale}()} \cr
+\code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_posterization}()} \cr
+\code{\link{layer_random_saturation}()} \cr
+\code{\link{layer_random_sharpness}()} \cr
+\code{\link{layer_random_shear}()} \cr
 \code{\link{layer_random_translation}()} \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_rescaling}()} \cr
@@ -185,6 +196,7 @@ Other layers: \cr
 \code{\link{layer_dropout}()} \cr
 \code{\link{layer_einsum_dense}()} \cr
 \code{\link{layer_embedding}()} \cr
+\code{\link{layer_equalization}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
 \code{\link{layer_flax_module_wrapper}()} \cr
@@ -215,14 +227,24 @@ Other layers: \cr
 \code{\link{layer_maximum}()} \cr
 \code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_minimum}()} \cr
+\code{\link{layer_mix_up}()} \cr
 \code{\link{layer_multi_head_attention}()} \cr
 \code{\link{layer_multiply}()} \cr
 \code{\link{layer_normalization}()} \cr
 \code{\link{layer_permute}()} \cr
+\code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_color_degeneration}()} \cr
+\code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_grayscale}()} \cr
+\code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_posterization}()} \cr
+\code{\link{layer_random_saturation}()} \cr
+\code{\link{layer_random_sharpness}()} \cr
+\code{\link{layer_random_shear}()} \cr
 \code{\link{layer_random_translation}()} \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_repeat_vector}()} \cr

@@ -1669,14 +1669,14 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 #'
 #' @param stateful
 #' Boolean (default: `FALSE`). If `TRUE`, the last state
-#' for each sample at index i in a batch will be used as initial
-#' state for the sample of index i in the following batch.
+#' for each sample at index i in a batch will be used as the
+#' initial state for the sample of index i in the following batch.
 #'
 #' @param unroll
 #' Boolean (default: `FALSE`).
 #' If `TRUE`, the network will be unrolled,
 #' else a symbolic loop will be used.
-#' Unrolling can speed-up a RNN,
+#' Unrolling can speed-up an RNN,
 #' although it tends to be more memory-intensive.
 #' Unrolling is only suitable for short sequences.
 #'

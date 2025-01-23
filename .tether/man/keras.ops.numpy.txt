@@ -112,6 +112,7 @@ cumsum(
   dtype=None
 )
 diag(x, k=0)
+diagflat(x, k=0)
 diagonal(
   x,
   offset=0,
@@ -358,6 +359,7 @@ tril(x, k=0)
 triu(x, k=0)
 true_divide(x1, x2)
 trunc(x)
+unravel_index(indices, shape)
 var(
   x,
   axis=None,

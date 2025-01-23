@@ -21,12 +21,13 @@ callback_model_checkpoint(
 which will be filled the value of \code{epoch} and keys in \code{logs}
 (passed in \code{on_epoch_end}).
 The \code{filepath} name needs to end with \code{".weights.h5"} when
-\code{save_weights_only = TRUE} or should end with \code{".keras"} when
-checkpoint saving the whole model (default).
+\code{save_weights_only = TRUE} or should end with \code{".keras"} or \code{".h5"}
+when checkpoint saving the whole model (default).
 For example:
-if \code{filepath} is \code{"{epoch:02d}-{val_loss:.2f}.keras"}, then the
-model checkpoints will be saved with the epoch number and the
-validation loss in the filename. The directory of the filepath
+if \code{filepath} is \code{"{epoch:02d}-{val_loss:.2f}.keras"} or
+\code{"{epoch:02d}-{val_loss:.2f}.weights.h5"}, then the model
+checkpoints will be saved with the epoch number and the validation
+loss in the filename. The directory of the filepath
 should not be reused by any other callbacks to avoid conflicts.}
 
 \item{monitor}{The metric name to monitor. Typically the metrics are set by

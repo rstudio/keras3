@@ -87,9 +87,10 @@ Variable(
   dtype=None,
   trainable=True,
   autocast=True,
-  aggregation='mean',
+  aggregation='none',
   name=None
 )
 version()
 visualization: Module(keras.api.visualization)
+wrappers: Module(keras.api.wrappers)
 

@@ -137,6 +137,7 @@ Other numpy ops: \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
 \code{\link{op_diag}()} \cr
+\code{\link{op_diagflat}()} \cr
 \code{\link{op_diagonal}()} \cr
 \code{\link{op_diff}()} \cr
 \code{\link{op_digitize}()} \cr
@@ -310,6 +311,7 @@ Other ops: \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
+\code{\link{op_diagflat}()} \cr
 \code{\link{op_diagonal}()} \cr
 \code{\link{op_diff}()} \cr
 \code{\link{op_digitize}()} \cr
@@ -466,6 +468,8 @@ Other ops: \cr
 \code{\link{op_solve_triangular}()} \cr
 \code{\link{op_sort}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
+\code{\link{op_sparse_plus}()} \cr
+\code{\link{op_sparsemax}()} \cr
 \code{\link{op_split}()} \cr
 \code{\link{op_sqrt}()} \cr
 \code{\link{op_square}()} \cr
@@ -486,6 +490,7 @@ Other ops: \cr
 \code{\link{op_tanh}()} \cr
 \code{\link{op_tanh_shrink}()} \cr
 \code{\link{op_tensordot}()} \cr
+\code{\link{op_threshold}()} \cr
 \code{\link{op_tile}()} \cr
 \code{\link{op_top_k}()} \cr
 \code{\link{op_trace}()} \cr
@@ -494,6 +499,7 @@ Other ops: \cr
 \code{\link{op_tril}()} \cr
 \code{\link{op_triu}()} \cr
 \code{\link{op_trunc}()} \cr
+\code{\link{op_unravel_index}()} \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vdot}()} \cr

@@ -1,0 +1,88 @@
+Help on class RandomPosterization in module keras.src.layers.preprocessing.image_preprocessing.random_posterization:
+
+class RandomPosterization(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
+ |  RandomPosterization(factor, value_range=(0, 255), data_format=None, seed=None, **kwargs)
+ |
+ |  Reduces the number of bits for each color channel.
+ |
+ |  References:
+ |  - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
+ |  - [RandAugment: Practical automated data augmentation with a reduced search space](https://arxiv.org/abs/1909.13719)
+ |
+ |  Args:
+ |      value_range: a tuple or a list of two elements. The first value
+ |          represents the lower bound for values in passed images, the second
+ |          represents the upper bound. Images passed to the layer should have
+ |          values within `value_range`. Defaults to `(0, 255)`.
+ |      factor: integer, the number of bits to keep for each channel. Must be a
+ |          value between 1-8.
+ |
+ |  Method resolution order:
+ |      RandomPosterization
+ |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
+ |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    factor,
+ |    value_range=(0, 255),
+ |    data_format=None,
+ |    seed=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  get_random_transformation(
+ |    self,
+ |    data,
+ |    training=True,
+ |    seed=None
+ |  )
+ |
+ |  transform_bounding_boxes(
+ |    self,
+ |    bounding_boxes,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_images(
+ |    self,
+ |    images,
+ |    transformation=None,
+ |    training=True
+ |  )
+ |
+ |  transform_labels(
+ |    self,
+ |    labels,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_segmentation_masks(
+ |    self,
+ |    segmentation_masks,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+

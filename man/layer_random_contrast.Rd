@@ -4,7 +4,13 @@
 \alias{layer_random_contrast}
 \title{A preprocessing layer which randomly adjusts contrast during training.}
 \usage{
-layer_random_contrast(object, factor, seed = NULL, ...)
+layer_random_contrast(
+  object,
+  factor,
+  value_range = c(0L, 255L),
+  seed = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
@@ -16,6 +22,11 @@ The contrast factor will be randomly picked between
 \verb{[1.0 - lower, 1.0 + upper]}. For any pixel x in the channel,
 the output will be \code{(x - mean) * factor + mean}
 where \code{mean} is the mean value of the channel.}
+
+\item{value_range}{The range of values the incoming images will have.
+Represented as a two-number tuple written \code{tuple(low, high)}. This is
+typically either \verb{[0, 1]} or \verb{[0, 255]} depending on how your
+preprocessing pipeline is set up.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
@@ -76,17 +87,28 @@ Other preprocessing layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_discretization}()} \cr
+\code{\link{layer_equalization}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_hashed_crossing}()} \cr
 \code{\link{layer_hashing}()} \cr
 \code{\link{layer_integer_lookup}()} \cr
 \code{\link{layer_max_num_bounding_boxes}()} \cr
 \code{\link{layer_mel_spectrogram}()} \cr
+\code{\link{layer_mix_up}()} \cr
 \code{\link{layer_normalization}()} \cr
+\code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_color_degeneration}()} \cr
+\code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_crop}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_grayscale}()} \cr
+\code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_saturation}()} \cr
+\code{\link{layer_random_sharpness}()} \cr
+\code{\link{layer_random_shear}()} \cr
 \code{\link{layer_random_translation}()} \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_rescaling}()} \cr
@@ -139,6 +161,7 @@ Other layers: \cr
 \code{\link{layer_dropout}()} \cr
 \code{\link{layer_einsum_dense}()} \cr
 \code{\link{layer_embedding}()} \cr
+\code{\link{layer_equalization}()} \cr
 \code{\link{layer_feature_space}()} \cr
 \code{\link{layer_flatten}()} \cr
 \code{\link{layer_flax_module_wrapper}()} \cr
@@ -169,14 +192,24 @@ Other layers: \cr
 \code{\link{layer_maximum}()} \cr
 \code{\link{layer_mel_spectrogram}()} \cr
 \code{\link{layer_minimum}()} \cr
+\code{\link{layer_mix_up}()} \cr
 \code{\link{layer_multi_head_attention}()} \cr
 \code{\link{layer_multiply}()} \cr
 \code{\link{layer_normalization}()} \cr
 \code{\link{layer_permute}()} \cr
+\code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_brightness}()} \cr
+\code{\link{layer_random_color_degeneration}()} \cr
+\code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_crop}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_grayscale}()} \cr
+\code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_saturation}()} \cr
+\code{\link{layer_random_sharpness}()} \cr
+\code{\link{layer_random_shear}()} \cr
 \code{\link{layer_random_translation}()} \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_repeat_vector}()} \cr

@@ -495,12 +495,13 @@ function (schedule, verbose = 0L)
 #' which will be filled the value of `epoch` and keys in `logs`
 #' (passed in `on_epoch_end`).
 #' The `filepath` name needs to end with `".weights.h5"` when
-#' `save_weights_only = TRUE` or should end with `".keras"` when
-#' checkpoint saving the whole model (default).
+#' `save_weights_only = TRUE` or should end with `".keras"` or `".h5"`
+#' when checkpoint saving the whole model (default).
 #' For example:
-#' if `filepath` is `"{epoch:02d}-{val_loss:.2f}.keras"`, then the
-#' model checkpoints will be saved with the epoch number and the
-#' validation loss in the filename. The directory of the filepath
+#' if `filepath` is `"{epoch:02d}-{val_loss:.2f}.keras"` or
+#' `"{epoch:02d}-{val_loss:.2f}.weights.h5"`, then the model
+#' checkpoints will be saved with the epoch number and the validation
+#' loss in the filename. The directory of the filepath
 #' should not be reused by any other callbacks to avoid conflicts.
 #'
 #' @param monitor
