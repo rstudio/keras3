@@ -515,3 +515,36 @@ function (x, axis = -1L)
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$sparsemax, args)
 }
+
+#' Threshold activation function.
+#'
+#' @description
+#' The function thresholds the input `x` as follows:
+#' `f(x) = x` if `x > threshold`,
+#' `f(x) = default_value` otherwise.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0, 2.0))
+#' op_threshold(x, 1, 0)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param threshold
+#' The value that decides when to retain or replace x.
+#'
+#' @param default_value
+#' Value to assign when `x <= threshold`.
+#'
+#' @export
+#' @tether keras.ops.threshold
+#' @family nn ops
+#' @family ops
+op_threshold <-
+function (x, threshold, default_value)
+keras$ops$threshold(x, threshold, default_value)
