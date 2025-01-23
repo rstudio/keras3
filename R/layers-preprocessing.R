@@ -2215,6 +2215,72 @@ function (object, value_range = list(0L, 255L), brightness_factor = NULL,
     create_layer(keras$layers$RandomColorJitter, object, args)
 }
 
+
+#' Preprocessing layer for random conversion of RGB images to grayscale.
+#'
+#' @description
+#' This layer randomly converts input images to grayscale with a specified
+#' factor. When applied, it maintains the original number of channels
+#' but sets all channels to the same grayscale value. This can be useful
+#' for data augmentation and training models to be robust to color
+#' variations.
+#'
+#' The conversion preserves the perceived luminance of the original color
+#' image using standard RGB to grayscale conversion coefficients. Images
+#' that are not selected for conversion remain unchanged.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' (independently of which backend you're using).
+#'
+#' # Input Shape
+#' 3D (unbatched) or 4D (batched) tensor with shape:
+#' `(..., height, width, channels)`, in `"channels_last"` format,
+#' or `(..., channels, height, width)`, in `"channels_first"` format.
+#'
+#' # Output Shape
+#' Same as input shape. The output maintains the same number of channels
+#' as the input, even for grayscale-converted images where all channels
+#' will have the same value.
+#'
+#' @param factor
+#' Float between 0 and 1, specifying the factor of
+#' converting each image to grayscale. Defaults to 0.5. A value of
+#' 1.0 means all images will be converted, while 0.0 means no images
+#' will be converted.
+#'
+#' @param data_format
+#' String, one of `"channels_last"` (default) or
+#' `"channels_first"`. The ordering of the dimensions in the inputs.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)` while `"channels_first"`
+#' corresponds to inputs with shape
+#' `(batch, channels, height, width)`.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param seed
+#' Initial seed for the random number generator
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomGrayscale
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_grayscale <-
+function (object, factor = 0.5, data_format = NULL, seed = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomGrayscale, object, args)
+}
+
+
 #' Applies a series of layers to an input.
 #'
 #' @description
