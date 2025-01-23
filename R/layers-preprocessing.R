@@ -1145,6 +1145,11 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' the output will be `(x - mean) * factor + mean`
 #' where `mean` is the mean value of the channel.
 #'
+#' @param value_range the range of values the incoming images will have.
+#' Represented as a two-number tuple written `tuple(low, high)`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
 #' @param seed
 #' Integer. Used to create a random seed.
 #'
@@ -1164,12 +1169,19 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/RandomContrast>
 #' @tether keras.layers.RandomContrast
 layer_random_contrast <-
-function (object, factor, seed = NULL, ...)
+function (object, factor, value_range = c(0L, 255L), seed = NULL, ...)
 {
-    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
-    create_layer(keras$layers$RandomContrast, object, args)
+  args <- capture_args(
+    list(
+      seed = as_integer,
+      input_shape = normalize_shape,
+      batch_size = as_integer,
+      batch_input_shape = normalize_shape,
+      value_range = as_tuple
+    ),
+    ignore = "object"
+  )
+  create_layer(keras$layers$RandomContrast, object, args)
 }
 
 
