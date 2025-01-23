@@ -1,17 +1,47 @@
 # keras3 (development version)
 
+## Added compatibility with Keras v3.8.0. User-facing changes:
+
+- New symbols:
+  - `activation_sparse_plus()`
+  - `activation_sparsemax()`
+  - `activation_threshold()`
+  - `layer_equalization()`
+  - `layer_mix_up()`
+  - `layer_rand_augment()`
+  - `layer_random_color_degeneration()`
+  - `layer_random_color_jitter()`
+  - `layer_random_grayscale()`
+  - `layer_random_hue()`
+  - `layer_random_posterization()`
+  - `layer_random_saturation()`
+  - `layer_random_sharpness()`
+  - `layer_random_shear()`
+  - `op_diagflat()`
+  - `op_sparse_plus()`
+  - `op_sparsemax()`
+  - `op_threshold()`
+  - `op_unravel_index()`
+
+- Add argument axis to tversky loss
+- New: ONNX model export with `export_savedmodel()`
+- Doc improvements and bug fixes.
+- JAX specific changes: Add support for JAX named scope
+- TensorFlow specific changes: Make `random_shuffle()` XLA compilable
+
+
 ## Added compatibility with Keras v3.7.0. User-facing changes:
 
 ### New functions
 
 #### Activations
-- `activation_celu()` 
+- `activation_celu()`
 - `activation_glu()`
 - `activation_hard_shrink()`
 - `activation_hard_tanh()`
 - `activation_log_sigmoid()`
-- `activation_soft_shrink()` 
-- `activation_squareplus()` 
+- `activation_soft_shrink()`
+- `activation_squareplus()`
 - `activation_tanh_shrink()`
 
 #### Configuration
@@ -57,26 +87,26 @@
 * Added support for Intel XPU devices in PyTorch backend
 
 
-- `install_keras()` changes: if a GPU is available, the default is now to 
-  install a CPU build of TensorFlow and a GPU build of JAX. To use a GPU in the 
+- `install_keras()` changes: if a GPU is available, the default is now to
+  install a CPU build of TensorFlow and a GPU build of JAX. To use a GPU in the
   current session, call `use_backend("jax")`.
 
 ## Added compatibility with Keras v3.6.0. User-facing changes:
 
 #### Breaking changes:
 
-- When using `get_file()` with `extract = TRUE` or `untar = TRUE`, the return value 
+- When using `get_file()` with `extract = TRUE` or `untar = TRUE`, the return value
   is now the path of the extracted directory, rather than the path of the archive.
 
 #### Other changes and additions:
 
-- Logging is now asynchronous in `fit()`, `evaluate()`, and `predict()`. This 
-  enables 100% compact stacking of `train_step` calls on accelerators (e.g. when 
+- Logging is now asynchronous in `fit()`, `evaluate()`, and `predict()`. This
+  enables 100% compact stacking of `train_step` calls on accelerators (e.g. when
   running small models on TPU).
-  - If you are using custom callbacks that rely on `on_batch_end`, this will 
-    disable async logging. You can re-enable it by adding 
-    `self$async_safe <- TRUE` to your callbacks. Note that the TensorBoard 
-    callback is not considered async-safe by default. Default callbacks like the 
+  - If you are using custom callbacks that rely on `on_batch_end`, this will
+    disable async logging. You can re-enable it by adding
+    `self$async_safe <- TRUE` to your callbacks. Note that the TensorBoard
+    callback is not considered async-safe by default. Default callbacks like the
     progress bar are async-safe.
 
 - New bitwise operations:
@@ -99,15 +129,15 @@
   - `layer_auto_contrast()`
   - `layer_solarization()`
 
-- New Model functions `get_state_tree()` and `set_state_tree()`, for retrieving 
-  all model variables, including trainable, non-trainable, optimizer variables, 
+- New Model functions `get_state_tree()` and `set_state_tree()`, for retrieving
+  all model variables, including trainable, non-trainable, optimizer variables,
   and metric variables.
 
-- New `layer_pipeline()` for composing a sequence of layers. This class is useful 
-  for building a preprocessing pipeline. Compared to a `keras_model_sequential()`, 
+- New `layer_pipeline()` for composing a sequence of layers. This class is useful
+  for building a preprocessing pipeline. Compared to a `keras_model_sequential()`,
   `layer_pipeline()` has a few key differences:
   - It's not a Model, just a plain layer.
-  - When the layers in the pipeline are compatible with `tf.data`, the pipeline 
+  - When the layers in the pipeline are compatible with `tf.data`, the pipeline
     will also remain `tf.data` compatible, regardless of the backend you use.
 
 - New argument: `export_savedmodel(verbose = )`
