@@ -2338,6 +2338,48 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
     create_layer(keras$layers$RandomHue, object, args)
 }
 
+#' Reduces the number of bits for each color channel.
+#'
+#' @description
+#'
+#' # References
+#' - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
+#' - [RandAugment: Practical automated data augmentation with a reduced search space](https://arxiv.org/abs/1909.13719)
+#'
+#' @param value_range
+#' a tuple or a list of two elements. The first value
+#' represents the lower bound for values in passed images, the second
+#' represents the upper bound. Images passed to the layer should have
+#' values within `value_range`. Defaults to `(0, 255)`.
+#'
+#' @param factor
+#' integer, the number of bits to keep for each channel. Must be a
+#' value between 1-8.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param seed
+#' Initial seed for the random number generator
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomPosterization
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_posterization <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(factor = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$RandomPosterization, object, args)
+}
+
 #' Applies a series of layers to an input.
 #'
 #' @description
