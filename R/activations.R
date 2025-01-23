@@ -793,3 +793,34 @@ function (x)
     keras$activations$sparse_plus(x)
 }
 
+#' Sparsemax activation function.
+#'
+#' @description
+#' For each batch `i`, and class `j`,
+#' sparsemax activation function is defined as:
+#'
+#' `sparsemax(x)[i, j] = max(x[i, j] - (x[i, :]), 0).`
+#'
+#' # Reference
+#' - [Martins et.al., 2016](https://arxiv.org/abs/1602.02068)
+#'
+#' @returns
+#' A tensor, output of sparsemax transformation. Has the same type and
+#' shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' `int`, axis along which the sparsemax operation is applied. (1-based)
+#'
+#' @export
+#' @tether keras.activations.sparsemax
+#' @family activations
+#' @inherit activation_elu return
+activation_sparsemax <-
+function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$activations$sparsemax, args)
+}
