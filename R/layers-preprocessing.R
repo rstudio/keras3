@@ -2280,6 +2280,63 @@ function (object, factor = 0.5, data_format = NULL, seed = NULL,
     create_layer(keras$layers$RandomGrayscale, object, args)
 }
 
+#' Randomly adjusts the hue on given images.
+#'
+#' @description
+#' This layer will randomly increase/reduce the hue for the input RGB
+#' images.
+#'
+#' The image hue is adjusted by converting the image(s) to HSV and rotating the
+#' hue channel (H) by delta. The image is then converted back to RGB.
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' random_hue <- layer_random_hue(factor=0.5, value_range=c(0, 1))
+#' images <- op_cast(images[1:8,,,], "float32")
+#' augmented_images_batch = random_hue(images)
+#' ```
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the extent to which the
+#' image hue is impacted. `factor=0.0` makes this layer perform a
+#' no-op operation, while a value of `1.0` performs the most aggressive
+#' contrast adjustment available. If a tuple is used, a `factor` is
+#' sampled between the two values for every image augmented. If a
+#' single float is used, a value between `0.0` and the passed float is
+#' sampled. In order to ensure the value is always the same, please
+#' pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomHue
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_hue <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomHue, object, args)
+}
 
 #' Applies a series of layers to an input.
 #'
