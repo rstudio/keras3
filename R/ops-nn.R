@@ -480,3 +480,38 @@ keras$ops$celu(x, alpha)
 op_sparse_plus <-
 function (x)
 keras$ops$sparse_plus(x)
+
+#' Sparsemax activation function.
+#'
+#' @description
+#' For each batch `i`, and class `j`,
+#' sparsemax activation function is defined as:
+#'
+#' `sparsemax(x)[i, j] = max(x[i, j] - (x[i, :]), 0).`
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1., 0., 1.))
+#' op_sparsemax(x)
+#' ```
+#'
+#' @returns
+#' A tensor, output of sparsemax transformation. Has the same type and
+#' shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' `int`, axis along which the sparsemax operation is applied.
+#'
+#' @export
+#' @tether keras.ops.sparsemax
+#' @family nn ops
+#' @family ops
+op_sparsemax <-
+function (x, axis = -1L)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$ops$sparsemax, args)
+}
