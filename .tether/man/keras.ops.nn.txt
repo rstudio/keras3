@@ -151,7 +151,14 @@ sparse_categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+sparse_plus(x)
+sparsemax(x, axis=-1)
 squareplus(x, b=4)
 swish(x)
 tanh_shrink(x)
+threshold(
+  x,
+  threshold,
+  default_value
+)
 
