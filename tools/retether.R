@@ -71,6 +71,17 @@ if(FALSE) {
 
   mk_export("keras.layers.MaxNumBoundingBoxes")$dump |> cat_cb()
   mk_export("keras.layers.STFTSpectrogram")$dump |> cat_cb()
+
+  mk_export("keras.activations.sparse_plus")$dump |> cat_cb()
+  mk_export("keras.activations.sparsemax")$dump |> cat_cb()
+  mk_export("keras.activations.threshold")$dump |> cat_cb()
+
+  mk_export("keras.ops.sparse_plus")$dump |> cat_cb()
+  mk_export("keras.ops.sparsemax")$dump |> cat_cb()
+  mk_export("keras.ops.threshold")$dump |> cat_cb()
+
+
+
   mk_export("keras.activations.glu")$dump |> cat_cb()
   mk_export("keras.activations.hard_shrink")$dump |> cat_cb()
   mk_export("keras.activations.celu")$dump |> cat_cb()

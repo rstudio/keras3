@@ -451,3 +451,32 @@ keras$ops$tanh_shrink(x)
 op_celu <-
 function (x, alpha = 1)
 keras$ops$celu(x, alpha)
+
+#' SparsePlus activation function.
+#'
+#' @description
+#' It is defined as
+#'
+#' `f(x) = 0` for `x <= -1`.
+#' `f(x) = (1/4) * (x + 1)^2` for `-1 < x < 1`.
+#' `f(x) = x` for `x >= 1`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0))
+#' op_sparse_plus(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.ops.sparse_plus
+#' @family nn ops
+#' @family ops
+op_sparse_plus <-
+function (x)
+keras$ops$sparse_plus(x)
