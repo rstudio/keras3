@@ -2380,6 +2380,63 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
     create_layer(keras$layers$RandomPosterization, object, args)
 }
 
+#' Randomly adjusts the saturation on given images.
+#'
+#' @description
+#' This layer will randomly increase/reduce the saturation for the input RGB
+#' images.
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' images <- images[1:8, , , ] |> op_cast("float32")
+#' random_saturation <- layer_random_saturation(factor = 0.2)
+#' augmented_images <- random_saturation(images)
+#' ```
+#'
+#' @param factor
+#' A tuple of two floats or a single float.
+#' `factor` controls the extent to which the image saturation
+#' is impacted. `factor=0.5` makes this layer perform a no-op
+#' operation. `factor=0.0` makes the image fully grayscale.
+#' `factor=1.0` makes the image fully saturated. Values should
+#' be between `0.0` and `1.0`. If a tuple is used, a `factor`
+#' is sampled between the two values for every image augmented.
+#' If a single float is used, a value between `0.0` and the passed
+#' float is sampled. To ensure the value is always the same,
+#' pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomSaturation
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_saturation <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomSaturation, object, args)
+}
+
+
 #' Applies a series of layers to an input.
 #'
 #' @description
