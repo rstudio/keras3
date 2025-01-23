@@ -485,3 +485,31 @@ keras$ops$exp2(x)
 op_inner <-
 function (x1, x2)
 keras$ops$inner(x1, x2)
+
+
+#' Create a two-dimensional array with the flattened input diagonal.
+#'
+#' @description
+#' the k-th diagonal.
+#'
+#' @returns
+#' A 2-D tensor with the flattened input on the specified diagonal.
+#'
+#' @param x
+#' Input tensor to be flattened and placed on the diagonal.
+#'
+#' @param k
+#' The diagonal to place the flattened input. Defaults to `0`.
+#' Use `k > 0` for diagonals above the main diagonal,
+#' and `k < 0` for diagonals below the main diagonal.
+#'
+#' @export
+#' @tether keras.ops.diagflat
+#' @family numpy ops
+#' @family ops
+op_diagflat <-
+function (x, k = 0L)
+{
+    args <- capture_args(list(k = as_integer))
+    do.call(keras$ops$diagflat, args)
+}
