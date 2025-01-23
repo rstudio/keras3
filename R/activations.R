@@ -769,3 +769,27 @@ function (x)
 {
   keras$activations$tanh_shrink(x)
 }
+
+
+#' SparsePlus activation function.
+#'
+#' @description
+#' SparsePlus is defined as:
+#'
+#' `sparse_plus(x) = 0` for `x <= -1`.
+#' `sparse_plus(x) = (1/4) * (x + 1)^2` for `-1 < x < 1`.
+#' `sparse_plus(x) = x` for `x >= 1`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.activations.sparse_plus
+#' @family activations
+#' @inherit activation_elu return
+activation_sparse_plus <-
+function (x)
+{
+    keras$activations$sparse_plus(x)
+}
+
