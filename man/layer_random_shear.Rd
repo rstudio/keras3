@@ -59,6 +59,13 @@ Note that torch backend does not support \code{"wrap"}.
 \item{fill_value}{A float representing the value to be filled outside the
 boundaries when \code{fill_mode="constant"}.}
 
+\item{data_format}{String, one of \code{"channels_last"} (default) or
+\code{"channels_first"}. The ordering of the dimensions in the inputs.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch, height, width, channels)} while \code{"channels_first"}
+corresponds to inputs with shape
+\verb{(batch, channels, height, width)}.}
+
 \item{seed}{Integer. Used to create a random seed.}
 
 \item{...}{For forward/backward compatability.}

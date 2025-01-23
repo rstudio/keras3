@@ -24,6 +24,13 @@ represents the lower bound for values in passed images, the second
 represents the upper bound. Images passed to the layer should have
 values within \code{value_range}. Defaults to \verb{(0, 255)}.}
 
+\item{data_format}{String, one of \code{"channels_last"} (default) or
+\code{"channels_first"}. The ordering of the dimensions in the inputs.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch, height, width, channels)} while \code{"channels_first"}
+corresponds to inputs with shape
+\verb{(batch, channels, height, width)}.}
+
 \item{seed}{Initial seed for the random number generator}
 
 \item{...}{For forward/backward compatability.}

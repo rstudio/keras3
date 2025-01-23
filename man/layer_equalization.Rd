@@ -25,6 +25,13 @@ range, and output values will be clipped accordingly.}
 equalization. Defaults to 256, which is suitable for 8-bit images.
 Larger values can provide more granular intensity redistribution.}
 
+\item{data_format}{String, one of \code{"channels_last"} (default) or
+\code{"channels_first"}. The ordering of the dimensions in the inputs.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch, height, width, channels)} while \code{"channels_first"}
+corresponds to inputs with shape
+\verb{(batch, channels, height, width)}.}
+
 \item{...}{For forward/backward compatability.}
 }
 \description{
@@ -65,11 +72,11 @@ image <- np_array(...) # your input image
 equalized_image <- equalizer(image)
 
 # For images with custom value range
-custom_equalizer = layer_equalization(
+custom_equalizer <- layer_equalization(
     value_range=c(0.0, 1.0),  # for normalized images
     bins=128  # fewer bins for more subtle equalization
 )
-custom_equalized = custom_equalizer(normalized_image)
+custom_equalized <- custom_equalizer(normalized_image)
 }\if{html}{\out{</div>}}
 }
 

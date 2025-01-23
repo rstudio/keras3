@@ -1949,11 +1949,11 @@ function (object, addition_factor = 0, threshold_factor = 0,
 #' equalized_image <- equalizer(image)
 #'
 #' # For images with custom value range
-#' custom_equalizer = layer_equalization(
+#' custom_equalizer <- layer_equalization(
 #'     value_range=c(0.0, 1.0),  # for normalized images
 #'     bins=128  # fewer bins for more subtle equalization
 #' )
-#' custom_equalized = custom_equalizer(normalized_image)
+#' custom_equalized <- custom_equalizer(normalized_image)
 #' ```
 #'
 #' @param value_range
@@ -1973,6 +1973,8 @@ function (object, addition_factor = 0, threshold_factor = 0,
 #'
 #' @param ...
 #' For forward/backward compatability.
+#'
+#' @inheritParams layer_random_grayscale
 #'
 #' @export
 #' @tether keras.layers.Equalization
@@ -2021,6 +2023,7 @@ function (object, value_range = list(0L, 255L), bins = 256L,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inheritParams layer_random_grayscale
 #' @export
 #' @tether keras.layers.MixUp
 #' @family image preprocessing layers
@@ -2073,6 +2076,7 @@ function (object, alpha = 0.2, data_format = NULL, seed = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inheritParams layer_random_grayscale
 #' @export
 #' @tether keras.layers.RandAugment
 #' @family image preprocessing layers
@@ -2119,6 +2123,7 @@ function (object, value_range = list(0L, 255L), num_ops = 2L,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inheritParams layer_random_grayscale
 #' @export
 #' @tether keras.layers.RandomColorDegeneration
 #' @family image preprocessing layers
@@ -2199,6 +2204,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inheritParams layer_random_grayscale
 #' @export
 #' @tether keras.layers.RandomColorJitter
 #' @family image preprocessing layers
@@ -2324,6 +2330,7 @@ function (object, factor = 0.5, data_format = NULL, seed = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inheritParams layer_random_grayscale
 #' @tether keras.layers.RandomHue
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -2366,6 +2373,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inheritParams layer_random_grayscale
 #' @tether keras.layers.RandomPosterization
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -2422,6 +2430,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inheritParams layer_random_grayscale
 #' @tether keras.layers.RandomSaturation
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -2471,6 +2480,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inheritParams layer_random_grayscale
 #' @tether keras.layers.RandomSharpness
 #' @family image preprocessing layers
 #' @family preprocessing layers
@@ -2549,6 +2559,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' For forward/backward compatability.
 #'
 #' @export
+#' @inheritParams layer_random_grayscale
 #' @tether keras.layers.RandomShear
 #' @family image preprocessing layers
 #' @family preprocessing layers

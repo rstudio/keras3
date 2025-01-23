@@ -64,6 +64,13 @@ floats: \verb{(0.5, 0.5)}.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
+\item{data_format}{String, one of \code{"channels_last"} (default) or
+\code{"channels_first"}. The ordering of the dimensions in the inputs.
+\code{"channels_last"} corresponds to inputs with shape
+\verb{(batch, height, width, channels)} while \code{"channels_first"}
+corresponds to inputs with shape
+\verb{(batch, channels, height, width)}.}
+
 \item{...}{For forward/backward compatability.}
 }
 \description{
