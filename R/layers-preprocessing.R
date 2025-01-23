@@ -2090,6 +2090,52 @@ function (object, value_range = list(0L, 255L), num_ops = 2L,
 }
 
 
+#' Randomly performs the color degeneration operation on given images.
+#'
+#' @description
+#' The sharpness operation first converts an image to gray scale, then back to
+#' color. It then takes a weighted average between original image and the
+#' degenerated image. This makes colors appear more dull.
+#'
+#' @param factor
+#' A tuple of two floats or a single float.
+#' `factor` controls the extent to which the
+#' image sharpness is impacted. `factor=0.0` makes this layer perform a
+#' no-op operation, while a value of 1.0 uses the degenerated result
+#' entirely. Values between 0 and 1 result in linear interpolation
+#' between the original image and the sharpened image.
+#' Values should be between `0.0` and `1.0`. If a tuple is used, a
+#' `factor` is sampled between the two values for every image
+#' augmented. If a single float is used, a value between `0.0` and the
+#' passed float is sampled. In order to ensure the value is always the
+#' same, please pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomColorDegeneration
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_color_degeneration <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomColorDegeneration, object,
+        args)
+}
+
+
 #' Applies a series of layers to an input.
 #'
 #' @description
