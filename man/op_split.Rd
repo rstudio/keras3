@@ -404,6 +404,8 @@ Other ops: \cr
 \code{\link{op_solve_triangular}()} \cr
 \code{\link{op_sort}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
+\code{\link{op_sparse_plus}()} \cr
+\code{\link{op_sparsemax}()} \cr
 \code{\link{op_sqrt}()} \cr
 \code{\link{op_square}()} \cr
 \code{\link{op_squareplus}()} \cr
@@ -423,6 +425,7 @@ Other ops: \cr
 \code{\link{op_tanh}()} \cr
 \code{\link{op_tanh_shrink}()} \cr
 \code{\link{op_tensordot}()} \cr
+\code{\link{op_threshold}()} \cr
 \code{\link{op_tile}()} \cr
 \code{\link{op_top_k}()} \cr
 \code{\link{op_trace}()} \cr
