@@ -2135,6 +2135,85 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
         args)
 }
 
+#' Randomly apply brightness, contrast, saturation
+#'
+#' @description
+#' and hue image processing operation sequentially and randomly on the
+#' input.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two number tuple written `[low, high].`
+#' This is typically either `[0, 1]` or `[0, 255]` depending
+#' on how your preprocessing pipeline is set up.
+#'
+#' @param brightness_factor
+#' Float or a list/tuple of 2 floats between -1.0
+#' and 1.0. The factor is used to determine the lower bound and
+#' upper bound of the brightness adjustment. A float value will
+#' be chosen randomly between the limits. When -1.0 is chosen,
+#' the output image will be black, and when 1.0 is chosen, the
+#' image will be fully white. When only one float is provided,
+#' eg, 0.2, then -0.2 will be used for lower bound and 0.2 will
+#' be used for upper bound.
+#'
+#' @param contrast_factor
+#' a positive float represented as fraction of value,
+#' or a tuple of size 2 representing lower and upper bound. When
+#' represented as a single float, lower = upper. The contrast
+#' factor will be randomly picked between `[1.0 - lower, 1.0 +
+#' upper]`. For any pixel x in the channel, the output will be
+#' `(x - mean) * factor + mean` where `mean` is the mean value
+#' of the channel.
+#'
+#' @param saturation_factor
+#' A tuple of two floats or a single float. `factor`
+#' controls the extent to which the image saturation is impacted.
+#' `factor=0.5` makes this layer perform a no-op operation.
+#' `factor=0.0` makes the image fully grayscale. `factor=1.0`
+#' makes the image fully saturated. Values should be between
+#' `0.0` and `1.0`. If a tuple is used, a `factor` is sampled
+#' between the two values for every image augmented. If a single
+#' float is used, a value between `0.0` and the passed float is
+#' sampled. To ensure the value is always the same, pass a tuple
+#' with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param hue_factor
+#' A single float or a tuple of two floats. `factor`
+#' controls the extent to which the image hue is impacted.
+#' `factor=0.0` makes this layer perform a no-op operation,
+#' while a value of `1.0` performs the most aggressive contrast
+#' adjustment available. If a tuple is used, a `factor` is
+#' sampled between the two values for every image augmented.
+#' If a single float is used, a value between `0.0` and the
+#' passed float is sampled. In order to ensure the value is
+#' always the same, please pass a tuple with two identical
+#' floats: `(0.5, 0.5)`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomColorJitter
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_color_jitter <-
+function (object, value_range = list(0L, 255L), brightness_factor = NULL,
+    contrast_factor = NULL, saturation_factor = NULL, hue_factor = NULL,
+    seed = NULL, data_format = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomColorJitter, object, args)
+}
 
 #' Applies a series of layers to an input.
 #'
