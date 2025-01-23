@@ -542,6 +542,12 @@ Embedding(
   lora_rank=None,
   **kwargs
 )
+Equalization(
+  value_range=(0, 255),
+  bins=256,
+  data_format=None,
+  **kwargs
+)
 Flatten(data_format=None, **kwargs)
 FlaxLayer(
   module,
@@ -913,6 +919,12 @@ MelSpectrogram(
 )
 minimum(inputs, **kwargs)
 Minimum(**kwargs)
+MixUp(
+  alpha=0.2,
+  data_format=None,
+  seed=None,
+  **kwargs
+)
 MultiHeadAttention(
   num_heads,
   key_dim,

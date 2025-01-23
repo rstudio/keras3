@@ -1989,7 +1989,51 @@ function (object, value_range = list(0L, 255L), bins = 256L,
     create_layer(keras$layers$Equalization, object, args)
 }
 
-
+#' MixUp implements the MixUp data augmentation technique.
+#'
+#' @description
+#'
+#' # References
+#' - [MixUp paper](https://arxiv.org/abs/1710.09412).
+#' - [MixUp for Object Detection paper](https://arxiv.org/pdf/1902.04103).
+#'
+#' # Examples
+#' ```{r}
+#' c(c(images, labels), .) %<-% dataset_cifar10()
+#' c(images, labels) %<-% list(images[1:8,,,], labels[1:8,])
+#' labels <- labels |> op_one_hot(10) |> op_cast("float32")
+#' mix_up <- layer_mix_up(alpha=0.2)
+#' output <- mix_up(list(images = images, labels = labels))
+#' ```
+#'
+#' @param alpha
+#' Float between 0 and 1. Controls the blending strength.
+#' Smaller values mean less mixing, while larger values allow
+#' for more  blending between images. Defaults to 0.2,
+#' recommended for ImageNet1k classification.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.MixUp
+#' @seealso
+#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MixUp>
+layer_mix_up <-
+function (object, alpha = 0.2, data_format = NULL, seed = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$MixUp, object, args)
+}
 
 
 
