@@ -2023,8 +2023,9 @@ function (object, value_range = list(0L, 255L), bins = 256L,
 #'
 #' @export
 #' @tether keras.layers.MixUp
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/layers/MixUp>
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
 layer_mix_up <-
 function (object, alpha = 0.2, data_format = NULL, seed = NULL,
     ...)
@@ -2036,7 +2037,57 @@ function (object, alpha = 0.2, data_format = NULL, seed = NULL,
 }
 
 
-
+#' RandAugment performs the Rand Augment operation on input images.
+#'
+#' @description
+#' This layer can be thought of as an all-in-one image augmentation layer. The
+#' policy implemented by this layer has been benchmarked extensively and is
+#' effective on a wide variety of datasets.
+#'
+#' # References
+#' - [RandAugment](https://arxiv.org/abs/1909.13719)
+#'
+#' @param value_range
+#' The range of values the input image can take.
+#' Default is `(0, 255)`. Typically, this would be `(0, 1)`
+#' for normalized images or `(0, 255)` for raw images.
+#'
+#' @param num_ops
+#' The number of augmentation operations to apply sequentially
+#' to each image. Default is 2.
+#'
+#' @param factor
+#' The strength of the augmentation as a normalized value
+#' between 0 and 1. Default is 0.5.
+#'
+#' @param interpolation
+#' The interpolation method to use for resizing operations.
+#' Options include `nearest`, `bilinear`. Default is `bilinear`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandAugment
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_rand_augment <-
+function (object, value_range = list(0L, 255L), num_ops = 2L,
+    factor = 0.5, interpolation = "bilinear", seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(num_ops = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$RandAugment, object, args)
+}
 
 
 #' Applies a series of layers to an input.
