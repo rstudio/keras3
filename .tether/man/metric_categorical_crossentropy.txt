@@ -24,9 +24,7 @@ class CategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetricWrap
  |      axis: (Optional) Defaults to `-1`.
  |          The dimension along which entropy is computed.
  |
- |  Example:
- |
- |  Example:
+ |  Examples:
  |
  |  >>> # EPSILON = 1e-7, y = y_true, y` = y_pred
  |  >>> # y` = clip_ops.clip_by_value(output, EPSILON, 1. - EPSILON)

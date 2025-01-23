@@ -15,9 +15,7 @@ class RootMeanSquaredError(keras.src.metrics.reduction_metrics.Mean)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Example:
- |
- |  Example:
+ |  Examples:
  |
  |  >>> m = keras.metrics.RootMeanSquaredError()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])

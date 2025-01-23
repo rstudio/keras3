@@ -16,7 +16,6 @@ class MeanSquaredError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      dtype: (Optional) data type of the metric result.
  |
  |  Example:
- |
  |  >>> m = keras.metrics.MeanSquaredError()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
  |  >>> m.result()

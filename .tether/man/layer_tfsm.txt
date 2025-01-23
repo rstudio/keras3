@@ -1,4 +1,4 @@
-Help on class TFSMLayer in module keras.src.export.export_lib:
+Help on class TFSMLayer in module keras.src.export.tfsm_layer:
 
 class TFSMLayer(keras.src.layers.layer.Layer)
  |  TFSMLayer(filepath, call_endpoint='serve', call_training_endpoint=None, trainable=True, name=None, dtype=None)

@@ -16,14 +16,13 @@ class LogCoshError(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
  |      name: (Optional) string name of the metric instance.
  |      dtype: (Optional) data type of the metric result.
  |
- |  Example:
- |
- |  Example:
+ |  Examples:
  |
  |  >>> m = keras.metrics.LogCoshError()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]])
  |  >>> m.result()
  |  0.10844523
+ |
  |  >>> m.reset_state()
  |  >>> m.update_state([[0, 1], [0, 0]], [[1, 1], [0, 0]],
  |  ...                sample_weight=[1, 0])
