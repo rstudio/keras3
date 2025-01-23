@@ -28,7 +28,7 @@ static. Set to \code{FALSE} if \code{fn} involves state updates
 (e.g., RNG seeds and counters).
 \item \code{jax2tf_kwargs}: Optional \code{dict}. Arguments for
 \code{jax2tf.convert}. See the documentation for
-\href{https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md}{\code{jax2tf.convert}}.
+\href{https://github.com/jax-ml/jax/blob/main/jax/experimental/jax2tf/README.md}{\code{jax2tf.convert}}.
 If \code{native_serialization} and \code{polymorphic_shapes} are
 not provided, they will be automatically computed.
 }

@@ -28,6 +28,10 @@ augmented. If a single float is used, a value between \code{0.0} and the
 passed float is sampled. In order to ensure the value is always the
 same, please pass a tuple with two identical floats: \verb{(0.5, 0.5)}.}
 
+\item{value_range}{The range of values the input image can take.
+Default is \verb{(0, 255)}. Typically, this would be \verb{(0, 1)}
+for normalized images or \verb{(0, 255)} for raw images.}
+
 \item{data_format}{String, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.
 \code{"channels_last"} corresponds to inputs with shape

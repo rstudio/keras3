@@ -23,7 +23,7 @@ The contrast factor will be randomly picked between
 the output will be \code{(x - mean) * factor + mean}
 where \code{mean} is the mean value of the channel.}
 
-\item{value_range}{the range of values the incoming images will have.
+\item{value_range}{The range of values the incoming images will have.
 Represented as a two-number tuple written \code{tuple(low, high)}. This is
 typically either \verb{[0, 1]} or \verb{[0, 255]} depending on how your
 preprocessing pipeline is set up.}

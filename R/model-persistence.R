@@ -374,7 +374,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #'   - `jax2tf_kwargs`: Optional `dict`. Arguments for
 #'     `jax2tf.convert`. See the documentation for
 #'     [`jax2tf.convert`](
-#'       https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md).
+#'       https://github.com/jax-ml/jax/blob/main/jax/experimental/jax2tf/README.md).
 #'     If `native_serialization` and `polymorphic_shapes` are
 #'     not provided, they will be automatically computed.
 #'

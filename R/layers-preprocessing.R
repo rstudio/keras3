@@ -1145,7 +1145,8 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' the output will be `(x - mean) * factor + mean`
 #' where `mean` is the mean value of the channel.
 #'
-#' @param value_range the range of values the incoming images will have.
+#' @param value_range
+#' The range of values the incoming images will have.
 #' Represented as a two-number tuple written `tuple(low, high)`. This is
 #' typically either `[0, 1]` or `[0, 255]` depending on how your
 #' preprocessing pipeline is set up.
@@ -2113,6 +2114,11 @@ function (object, value_range = list(0L, 255L), num_ops = 2L,
 #' augmented. If a single float is used, a value between `0.0` and the
 #' passed float is sampled. In order to ensure the value is always the
 #' same, please pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' The range of values the input image can take.
+#' Default is `(0, 255)`. Typically, this would be `(0, 1)`
+#' for normalized images or `(0, 255)` for raw images.
 #'
 #' @param seed
 #' Integer. Used to create a random seed.
