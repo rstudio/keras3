@@ -2485,6 +2485,85 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
     create_layer(keras$layers$RandomSharpness, object, args)
 }
 
+#' A preprocessing layer that randomly applies shear transformations
+#'
+#' @description
+#' images.
+#'
+#' This layer shears the input images along the x-axis and/or y-axis by a
+#' randomly selected factor within the specified range. The shear
+#' transformation is applied to each image independently in a batch. Empty
+#' regions created during the transformation are filled according to the
+#' `fill_mode` and `fill_value` parameters.
+#'
+#' @param x_factor
+#' A tuple of two floats. For each augmented image, a value
+#' is sampled from the provided range. If a float is passed, the
+#' range is interpreted as `(0, x_factor)`. Values represent a
+#' percentage of the image to shear over. For example, 0.3 shears
+#' pixels up to 30% of the way across the image. All provided values
+#' should be positive.
+#'
+#' @param y_factor
+#' A tuple of two floats. For each augmented image, a value
+#' is sampled from the provided range. If a float is passed, the
+#' range is interpreted as `(0, y_factor)`. Values represent a
+#' percentage of the image to shear over. For example, 0.3 shears
+#' pixels up to 30% of the way across the image. All provided values
+#' should be positive.
+#'
+#' @param interpolation
+#' Interpolation mode. Supported values: `"nearest"`,
+#' `"bilinear"`.
+#'
+#' @param fill_mode
+#' Points outside the boundaries of the input are filled
+#' according to the given mode. Available methods are `"constant"`,
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' - `"reflect"`: `(d c b a | a b c d | d c b a)`
+#'     The input is extended by reflecting about the edge of the
+#'     last pixel.
+#' - `"constant"`: `(k k k k | a b c d | k k k k)`
+#'     The input is extended by filling all values beyond the edge
+#'     with the same constant value `k` specified by `fill_value`.
+#' - `"wrap"`: `(a b c d | a b c d | a b c d)`
+#'     The input is extended by wrapping around to the opposite edge.
+#' - `"nearest"`: `(a a a a | a b c d | d d d d)`
+#'     The input is extended by the nearest pixel.
+#' Note that when using torch backend, `"reflect"` is redirected to
+#' `"mirror"` `(c d c b | a b c d | c b a b)` because torch does
+#' not support `"reflect"`.
+#' Note that torch backend does not support `"wrap"`.
+#'
+#' @param fill_value
+#' A float representing the value to be filled outside the
+#' boundaries when `fill_mode="constant"`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomShear
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_shear <-
+function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
+    fill_mode = "reflect", fill_value = 0, data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomShear, object, args)
+}
+
 #' Applies a series of layers to an input.
 #'
 #' @description
