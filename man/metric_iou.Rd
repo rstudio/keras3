@@ -79,8 +79,8 @@ m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[1. 1.]
-##  [1. 1.]], shape=(2, 2), dtype=float32)
+## [[1 1]
+##  [1 1]], shape=(2, 2), dtype=int64)
 
 }\if{html}{\out{</div>}}
 
@@ -93,19 +93,19 @@ m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
-               sample_weight = c(0.3, 0.3, 0.3, 0.1))
+               sample_weight = 10 * c(0.3, 0.3, 0.3, 0.1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0.3 0.3]
-##  [0.3 0.1]], shape=(2, 2), dtype=float32)
+## [[3 3]
+##  [3 1]], shape=(2, 2), dtype=int64)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.33333325, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3333333, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

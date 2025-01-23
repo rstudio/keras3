@@ -77,23 +77,23 @@ Standalone usage:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
 y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
                 c(0.1, 0.4, 0.5))
-sample_weight <- c(0.1, 0.2, 0.3, 0.4)
+sample_weight <- 10 * c(0.1, 0.2, 0.3, 0.4)
 m <- metric_one_hot_mean_iou(num_classes = 3L)
 m$update_state(
     y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0.  0.  0.6]
-##  [0.3 0.  0. ]
-##  [0.  0.  0.1]], shape=(3, 3), dtype=float32)
+## [[0 0 6]
+##  [3 0 0]
+##  [0 0 1]], shape=(3, 3), dtype=int64)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.047619034, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.04761905, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

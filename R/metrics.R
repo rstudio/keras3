@@ -2056,7 +2056,7 @@ function (y_true, y_pred, ..., name = "squared_hinge",
 #' ```{r}
 #' m$reset_state()
 #' m$update_state(c(0, 1, 0, 1), c(0.1, 0.2, 0.4, 0.7),
-#'                sample_weight = c(0.2, 0.3, 0.4, 0.1))
+#'                sample_weight = 10 * c(0.2, 0.3, 0.4, 0.1))
 #' m$result()
 #' ```
 #'
@@ -2145,7 +2145,7 @@ function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
 #' ```{r}
 #' m$reset_state()
 #' m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
-#'                sample_weight = c(0.3, 0.3, 0.3, 0.1))
+#'                sample_weight = 10 * c(0.3, 0.3, 0.3, 0.1))
 #' m$result()
 #' ```
 #'
@@ -2239,7 +2239,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #'
 #' ```{r}
 #' # cm = [[1, 1],
-#' #        [1, 1]]
+#' #       [1, 1]]
 #' # sum_row = [2, 2], sum_col = [2, 2], true_positives = [1, 1]
 #' # iou = true_positives / (sum_row + sum_col - true_positives))
 #' # result = (1 / (2 + 2 - 1) + 1 / (2 + 2 - 1)) / 2 = 0.33
@@ -2251,7 +2251,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' ```{r}
 #' m$reset_state()
 #' m$update_state(c(0, 0, 1, 1), c(0, 1, 0, 1),
-#'                sample_weight=c(0.3, 0.3, 0.3, 0.1))
+#'                sample_weight= 10 * c(0.3, 0.3, 0.3, 0.1))
 #' m$result()
 #' ```
 #'
@@ -2365,7 +2365,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' m <- metric_one_hot_iou(num_classes = 3, target_class_ids = c(0, 2))
 #' m$update_state(y_true = y_true,
 #'                y_pred = y_pred,
-#'                sample_weight = sample_weight)
+#'                sample_weight = 10*sample_weight)
 #' m$result()
 #' ```
 #'
@@ -2473,7 +2473,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' y_true <- rbind(c(0, 0, 1), c(1, 0, 0), c(0, 1, 0), c(1, 0, 0))
 #' y_pred <- rbind(c(0.2, 0.3, 0.5), c(0.1, 0.2, 0.7), c(0.5, 0.3, 0.1),
 #'                 c(0.1, 0.4, 0.5))
-#' sample_weight <- c(0.1, 0.2, 0.3, 0.4)
+#' sample_weight <- 10 * c(0.1, 0.2, 0.3, 0.4)
 #' m <- metric_one_hot_mean_iou(num_classes = 3L)
 #' m$update_state(
 #'     y_true = y_true, y_pred = y_pred, sample_weight = sample_weight)
