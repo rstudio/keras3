@@ -1911,6 +1911,89 @@ function (object, addition_factor = 0, threshold_factor = 0,
 }
 
 
+#' Preprocessing layer for histogram equalization on image channels.
+#'
+#' @description
+#' Histogram equalization is a technique to adjust image intensities to
+#' enhance contrast by effectively spreading out the most frequent
+#' intensity values. This layer applies equalization on a channel-wise
+#' basis, which can improve the visibility of details in images.
+#'
+#' This layer works with both grayscale and color images, performing
+#' equalization independently on each color channel. At inference time,
+#' the equalization is consistently applied.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' (independently of which backend you're using).
+#'
+#' ## Input Shape
+#' 3D (unbatched) or 4D (batched) tensor with shape:
+#' `(..., height, width, channels)`, in `"channels_last"` format,
+#' or `(..., channels, height, width)`, in `"channels_first"` format.
+#'
+#' ## Output Shape
+#' 3D (unbatched) or 4D (batched) tensor with shape:
+#' `(..., target_height, target_width, channels)`,
+#' or `(..., channels, target_height, target_width)`,
+#' in `"channels_first"` format.
+#'
+#' # Examples
+#' ```r
+#' # Create an equalization layer for standard 8-bit images
+#' equalizer <- layer_equalization()
+#'
+#' # An image with uneven intensity distribution
+#' image <- np_array(...) # your input image
+#'
+#' # Apply histogram equalization
+#' equalized_image <- equalizer(image)
+#'
+#' # For images with custom value range
+#' custom_equalizer = layer_equalization(
+#'     value_range=c(0.0, 1.0),  # for normalized images
+#'     bins=128  # fewer bins for more subtle equalization
+#' )
+#' custom_equalized = custom_equalizer(normalized_image)
+#' ```
+#'
+#' @param value_range
+#' Optional list/tuple of 2 floats specifying the lower
+#' and upper limits of the input data values. Defaults to `[0, 255]`.
+#' If the input image has been scaled, use the appropriate range
+#' (e.g., `[0.0, 1.0]`). The equalization will be scaled to this
+#' range, and output values will be clipped accordingly.
+#'
+#' @param bins
+#' Integer specifying the number of histogram bins to use for
+#' equalization. Defaults to 256, which is suitable for 8-bit images.
+#' Larger values can provide more granular intensity redistribution.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.Equalization
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_equalization <-
+function (object, value_range = list(0L, 255L), bins = 256L,
+    data_format = NULL, ...)
+{
+    args <- capture_args(list(bins = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$Equalization, object, args)
+}
+
+
+
+
+
+
 
 #' Applies a series of layers to an input.
 #'
