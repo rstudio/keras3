@@ -2436,6 +2436,54 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
     create_layer(keras$layers$RandomSaturation, object, args)
 }
 
+#' Randomly performs the sharpness operation on given images.
+#'
+#' @description
+#' The sharpness operation first performs a blur, then blends between the
+#' original image and the processed image. This operation adjusts the clarity
+#' of the edges in an image, ranging from blurred to enhanced sharpness.
+#'
+#' @param factor
+#' A tuple of two floats or a single float.
+#' `factor` controls the extent to which the image sharpness
+#' is impacted. `factor=0.0` results in a fully blurred image,
+#' `factor=0.5` applies no operation (preserving the original image),
+#' and `factor=1.0` enhances the sharpness beyond the original. Values
+#' should be between `0.0` and `1.0`. If a tuple is used, a `factor`
+#' is sampled between the two values for every image augmented.
+#' If a single float is used, a value between `0.0` and the passed
+#' float is sampled. To ensure the value is always the same,
+#' pass a tuple with two identical floats: `(0.5, 0.5)`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomSharpness
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_sharpness <-
+function (object, factor, value_range = list(0L, 255L), data_format = NULL,
+    seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomSharpness, object, args)
+}
 
 #' Applies a series of layers to an input.
 #'
