@@ -1,0 +1,28 @@
+__signature__
+keras.ops.threshold(
+  x,
+  threshold,
+  default_value
+)
+__doc__
+Threshold activation function.
+
+The function thresholds the input `x` as follows:
+`f(x) = x` if `x > threshold`,
+`f(x) = default_value` otherwise.
+
+Args:
+    x: Input tensor.
+    threshold: The value that decides when to retain or replace x.
+    default_value: Value to assign when `x <= threshold`.
+
+Returns:
+    A tensor with the same shape as `x`.
+
+Example:
+
+>>> x = np.array([-1.0, 0.0, 1.0, 2.0])
+>>> x_threshold = keras.ops.threshold(x, 1, 0)
+>>> print(x_threshold)
+array([0., 0., 0., 2.], shape=(4,), dtype=float64)
+

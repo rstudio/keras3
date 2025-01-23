@@ -92,6 +92,9 @@ if(FALSE) {
   mk_export("keras.layers.RandomGrayscale")$dump |> cat_cb()
   mk_export("keras.layers.RandomHue")$dump |> cat_cb()
   mk_export("keras.layers.RandomPosterization")$dump |> cat_cb()
+  mk_export("keras.layers.RandomSaturation")$dump |> cat_cb()
+  mk_export("keras.layers.RandomSharpness")$dump |> cat_cb()
+  mk_export("keras.layers.RandomShear")$dump |> cat_cb()
 
 
 

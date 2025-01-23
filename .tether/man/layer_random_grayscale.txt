@@ -1,0 +1,115 @@
+Help on class RandomGrayscale in module keras.src.layers.preprocessing.image_preprocessing.random_grayscale:
+
+class RandomGrayscale(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
+ |  RandomGrayscale(factor=0.5, data_format=None, seed=None, **kwargs)
+ |
+ |  Preprocessing layer for random conversion of RGB images to grayscale.
+ |
+ |  This layer randomly converts input images to grayscale with a specified
+ |  factor. When applied, it maintains the original number of channels
+ |  but sets all channels to the same grayscale value. This can be useful
+ |  for data augmentation and training models to be robust to color
+ |  variations.
+ |
+ |  The conversion preserves the perceived luminance of the original color
+ |  image using standard RGB to grayscale conversion coefficients. Images
+ |  that are not selected for conversion remain unchanged.
+ |
+ |  **Note:** This layer is safe to use inside a `tf.data` pipeline
+ |  (independently of which backend you're using).
+ |
+ |  Args:
+ |      factor: Float between 0 and 1, specifying the factor of
+ |          converting each image to grayscale. Defaults to 0.5. A value of
+ |          1.0 means all images will be converted, while 0.0 means no images
+ |          will be converted.
+ |      data_format: String, one of `"channels_last"` (default) or
+ |          `"channels_first"`. The ordering of the dimensions in the inputs.
+ |          `"channels_last"` corresponds to inputs with shape
+ |          `(batch, height, width, channels)` while `"channels_first"`
+ |          corresponds to inputs with shape
+ |          `(batch, channels, height, width)`.
+ |
+ |  Input shape:
+ |      3D (unbatched) or 4D (batched) tensor with shape:
+ |      `(..., height, width, channels)`, in `"channels_last"` format,
+ |      or `(..., channels, height, width)`, in `"channels_first"` format.
+ |
+ |  Output shape:
+ |      Same as input shape. The output maintains the same number of channels
+ |      as the input, even for grayscale-converted images where all channels
+ |      will have the same value.
+ |
+ |  Method resolution order:
+ |      RandomGrayscale
+ |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
+ |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    factor=0.5,
+ |    data_format=None,
+ |    seed=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  compute_output_spec(
+ |    self,
+ |    inputs,
+ |    **kwargs
+ |  )
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  get_random_transformation(
+ |    self,
+ |    images,
+ |    training=True,
+ |    seed=None
+ |  )
+ |
+ |  transform_bounding_boxes(
+ |    self,
+ |    bounding_boxes,
+ |    **kwargs
+ |  )
+ |
+ |  transform_images(
+ |    self,
+ |    images,
+ |    transformation,
+ |    training=True
+ |  )
+ |
+ |  transform_labels(
+ |    self,
+ |    labels,
+ |    transformations=None,
+ |    **kwargs
+ |  )
+ |
+ |  transform_segmentation_masks(
+ |    self,
+ |    segmentation_masks,
+ |    transformations=None,
+ |    **kwargs
+ |  )
+ |
+
