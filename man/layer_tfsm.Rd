@@ -59,8 +59,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   135801366603984: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   135801367082768: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   137607799269008: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   137607799271504: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 
@@ -174,10 +174,17 @@ Other layers: \cr
 \code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_brightness}()} \cr
 \code{\link{layer_random_color_degeneration}()} \cr
+\code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_grayscale}()} \cr
+\code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
+\code{\link{layer_random_saturation}()} \cr
+\code{\link{layer_random_sharpness}()} \cr
+\code{\link{layer_random_shear}()} \cr
 \code{\link{layer_random_translation}()} \cr
 \code{\link{layer_random_zoom}()} \cr
 \code{\link{layer_repeat_vector}()} \cr
