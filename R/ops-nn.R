@@ -548,3 +548,34 @@ function (x, axis = -1L)
 op_threshold <-
 function (x, threshold, default_value)
 keras$ops$threshold(x, threshold, default_value)
+
+#' Convert flat indices to coordinate arrays in a given array shape.
+#'
+#' @description
+#'
+#' # Examples
+#' ```{r}
+#' indices <- c(1, 5)
+#' shape <- array(c(3, 3))
+#' op_unravel_index(indices, shape)
+#' ```
+#'
+#' @returns
+#' Tuple of arrays for each dimension with unraveled indices.
+#'
+#' @param indices
+#' An integer or array of integers representing flat indices.
+#'
+#' @param shape
+#' The shape of the array to unravel into.
+#'
+#' @export
+#' @tether keras.ops.unravel_index
+#' @family nn ops
+#' @family ops
+op_unravel_index <-
+function (indices, shape)
+{
+    args <- capture_args(list(indices = as_index, shape = normalize_shape))
+    do.call(keras$ops$unravel_index, args)
+}
