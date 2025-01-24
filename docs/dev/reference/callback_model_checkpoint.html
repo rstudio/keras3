@@ -120,12 +120,13 @@ at the end of every epoch, or after a fixed number of training batches.</p></li>
 which will be filled the value of <code>epoch</code> and keys in <code>logs</code>
 (passed in <code>on_epoch_end</code>).
 The <code>filepath</code> name needs to end with <code>".weights.h5"</code> when
-<code>save_weights_only = TRUE</code> or should end with <code>".keras"</code> when
-checkpoint saving the whole model (default).
+<code>save_weights_only = TRUE</code> or should end with <code>".keras"</code> or <code>".h5"</code>
+when checkpoint saving the whole model (default).
 For example:
-if <code>filepath</code> is <code>"{epoch:02d}-{val_loss:.2f}.keras"</code>, then the
-model checkpoints will be saved with the epoch number and the
-validation loss in the filename. The directory of the filepath
+if <code>filepath</code> is <code>"{epoch:02d}-{val_loss:.2f}.keras"</code> or
+<code>"{epoch:02d}-{val_loss:.2f}.weights.h5"</code>, then the model
+checkpoints will be saved with the epoch number and the validation
+loss in the filename. The directory of the filepath
 should not be reused by any other callbacks to avoid conflicts.</p></dd>
 
 

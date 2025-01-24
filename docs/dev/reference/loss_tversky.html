@@ -88,6 +88,7 @@ Dice Loss.</p>
 <span>  beta <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  reduction <span class="op">=</span> <span class="st">"sum_over_batch_size"</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"tversky"</span>,</span>
+<span>  axis <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dtype <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -131,6 +132,10 @@ perform no aggregation. Defaults to <code>"sum_over_batch_size"</code>.</p></dd>
 
 <dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
 <dd><p>Optional name for the loss instance. (string)</p></dd>
+
+
+<dt id="arg-axis">axis<a class="anchor" aria-label="anchor" href="#arg-axis"></a></dt>
+<dd><p>Axis (1-based)</p></dd>
 
 
 <dt id="arg-dtype">dtype<a class="anchor" aria-label="anchor" href="#arg-dtype"></a></dt>

@@ -227,10 +227,10 @@ then evaluate the model on the test data:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 784us/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 2ms/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9595 - loss: 0.1328</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step - accuracy: 0.9595 - loss: 0.1328</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -593,9 +593,9 @@ targets:</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 66ms/step - department_loss: 381.0319 - loss: 498.7886 - priority_loss: 117.7568</span></span>
+<span><span class="co">## 40/40 - 3s - 74ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 0s - 10ms/step - department_loss: 358.5705 - loss: 438.4252 - priority_loss: 79.8546</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -708,7 +708,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 375ms/step - acc: 0.1250 - loss: 2.3001 - val_acc: 0.1400 - val_loss: 2.2938</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 6s - 453ms/step - acc: 0.1250 - loss: 2.3006 - val_acc: 0.1300 - val_loss: 2.2969</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

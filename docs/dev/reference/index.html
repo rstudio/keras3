@@ -280,7 +280,7 @@
           <code><a href="export_savedmodel.keras.src.models.model.Model.html">export_savedmodel(<i>&lt;keras.src.models.model.Model&gt;</i>)</a></code>
 
         </dt>
-        <dd>Create a TF SavedModel artifact for inference (e.g. via TF-Serving).</dd>
+        <dd>Export the model as an artifact for inference.</dd>
       </dl><dl><dt>
 
           <code><a href="layer_tfsm.html">layer_tfsm()</a></code>
@@ -962,6 +962,12 @@
         <dd>A preprocessing layer which buckets continuous features by ranges.</dd>
       </dl><dl><dt>
 
+          <code><a href="layer_equalization.html">layer_equalization()</a></code>
+
+        </dt>
+        <dd>Preprocessing layer for histogram equalization on image channels.</dd>
+      </dl><dl><dt>
+
           <code><a href="layer_feature_space.html">layer_feature_space()</a></code> <code><a href="layer_feature_space.html">feature_cross()</a></code> <code><a href="layer_feature_space.html">feature_custom()</a></code> <code><a href="layer_feature_space.html">feature_float()</a></code> <code><a href="layer_feature_space.html">feature_float_rescaled()</a></code> <code><a href="layer_feature_space.html">feature_float_normalized()</a></code> <code><a href="layer_feature_space.html">feature_float_discretized()</a></code> <code><a href="layer_feature_space.html">feature_integer_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_categorical()</a></code> <code><a href="layer_feature_space.html">feature_string_hashed()</a></code> <code><a href="layer_feature_space.html">feature_integer_hashed()</a></code>
 
         </dt>
@@ -998,16 +1004,40 @@
         <dd>A preprocessing layer to convert raw audio signals to Mel spectrograms.</dd>
       </dl><dl><dt>
 
+          <code><a href="layer_mix_up.html">layer_mix_up()</a></code>
+
+        </dt>
+        <dd>MixUp implements the MixUp data augmentation technique.</dd>
+      </dl><dl><dt>
+
           <code><a href="layer_normalization.html">layer_normalization()</a></code>
 
         </dt>
         <dd>A preprocessing layer that normalizes continuous features.</dd>
       </dl><dl><dt>
 
+          <code><a href="layer_rand_augment.html">layer_rand_augment()</a></code>
+
+        </dt>
+        <dd>RandAugment performs the Rand Augment operation on input images.</dd>
+      </dl><dl><dt>
+
           <code><a href="layer_random_brightness.html">layer_random_brightness()</a></code>
 
         </dt>
         <dd>A preprocessing layer which randomly adjusts brightness during training.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_color_degeneration.html">layer_random_color_degeneration()</a></code>
+
+        </dt>
+        <dd>Randomly performs the color degeneration operation on given images.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_color_jitter.html">layer_random_color_jitter()</a></code>
+
+        </dt>
+        <dd>Randomly apply brightness, contrast, saturation</dd>
       </dl><dl><dt>
 
           <code><a href="layer_random_contrast.html">layer_random_contrast()</a></code>
@@ -1028,10 +1058,46 @@
         <dd>A preprocessing layer which randomly flips images during training.</dd>
       </dl><dl><dt>
 
+          <code><a href="layer_random_grayscale.html">layer_random_grayscale()</a></code>
+
+        </dt>
+        <dd>Preprocessing layer for random conversion of RGB images to grayscale.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_hue.html">layer_random_hue()</a></code>
+
+        </dt>
+        <dd>Randomly adjusts the hue on given images.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_posterization.html">layer_random_posterization()</a></code>
+
+        </dt>
+        <dd>Reduces the number of bits for each color channel.</dd>
+      </dl><dl><dt>
+
           <code><a href="layer_random_rotation.html">layer_random_rotation()</a></code>
 
         </dt>
         <dd>A preprocessing layer which randomly rotates images during training.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_saturation.html">layer_random_saturation()</a></code>
+
+        </dt>
+        <dd>Randomly adjusts the saturation on given images.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_sharpness.html">layer_random_sharpness()</a></code>
+
+        </dt>
+        <dd>Randomly performs the sharpness operation on given images.</dd>
+      </dl><dl><dt>
+
+          <code><a href="layer_random_shear.html">layer_random_shear()</a></code>
+
+        </dt>
+        <dd>A preprocessing layer that randomly applies shear transformations</dd>
       </dl><dl><dt>
 
           <code><a href="layer_random_translation.html">layer_random_translation()</a></code>
@@ -1799,6 +1865,12 @@
 
         </dt>
         <dd>Extract a diagonal or construct a diagonal array.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_diagflat.html">op_diagflat()</a></code>
+
+        </dt>
+        <dd>Create a two-dimensional array with the flattened input diagonal.</dd>
       </dl><dl><dt>
 
           <code><a href="op_diagonal.html">op_diagonal()</a></code>
@@ -2712,6 +2784,18 @@
         <dd>Computes sparse categorical cross-entropy loss.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_sparse_plus.html">op_sparse_plus()</a></code>
+
+        </dt>
+        <dd>SparsePlus activation function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_sparsemax.html">op_sparsemax()</a></code>
+
+        </dt>
+        <dd>Sparsemax activation function.</dd>
+      </dl><dl><dt>
+
           <code><a href="op_squareplus.html">op_squareplus()</a></code>
 
         </dt>
@@ -2722,6 +2806,18 @@
 
         </dt>
         <dd>Applies the tanh shrink function element-wise.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_threshold.html">op_threshold()</a></code>
+
+        </dt>
+        <dd>Threshold activation function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_unravel_index.html">op_unravel_index()</a></code>
+
+        </dt>
+        <dd>Convert flat indices to coordinate arrays in a given array shape.</dd>
       </dl></div><div class="section level2">
 
       <h3 id="linear-algebra-operations">Linear Algebra Operations<a class="anchor" aria-label="anchor" href="#linear-algebra-operations"></a></h3>
@@ -4162,6 +4258,18 @@
         <dd>Softsign activation function.</dd>
       </dl><dl><dt>
 
+          <code><a href="activation_sparse_plus.html">activation_sparse_plus()</a></code>
+
+        </dt>
+        <dd>SparsePlus activation function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="activation_sparsemax.html">activation_sparsemax()</a></code>
+
+        </dt>
+        <dd>Sparsemax activation function.</dd>
+      </dl><dl><dt>
+
           <code><a href="activation_squareplus.html">activation_squareplus()</a></code>
 
         </dt>
@@ -4178,6 +4286,12 @@
 
         </dt>
         <dd>Tanh shrink activation function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="activation_threshold.html">activation_threshold()</a></code>
+
+        </dt>
+        <dd>Threshold activation function.</dd>
       </dl></div><div class="section level2">
       <h2 id="random-tensor-generators">Random Tensor Generators<a class="anchor" aria-label="anchor" href="#random-tensor-generators"></a></h2>
 
@@ -4254,7 +4368,7 @@
           <code><a href="random_seed_generator.html">random_seed_generator()</a></code>
 
         </dt>
-        <dd>Generates variable seeds upon each call to a RNG-using function.</dd>
+        <dd>Generates variable seeds upon each call to a function generating random numbers.</dd>
       </dl></div><div class="section level2">
       <h2 id="builtin-small-datasets">Builtin small datasets<a class="anchor" aria-label="anchor" href="#builtin-small-datasets"></a></h2>
 

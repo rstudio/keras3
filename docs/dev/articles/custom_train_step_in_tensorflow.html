@@ -205,11 +205,11 @@ value.</p>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 23ms/step - loss: 3.2271 - mae: 1.4339</span></span>
+<span><span class="co">## 32/32 - 1s - 29ms/step - mae: 1.4339 - loss: 3.2271</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.9034 - mae: 1.3605</span></span>
+<span><span class="co">## 32/32 - 0s - 2ms/step - mae: 1.3605 - loss: 2.9034</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.6272 - mae: 1.2960</span></span></code></pre>
+<span><span class="co">## 32/32 - 0s - 2ms/step - mae: 1.2960 - loss: 2.6272</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="going-lower-level">Going lower-level<a class="anchor" aria-label="anchor" href="#going-lower-level"></a>
@@ -292,11 +292,11 @@ epoch or at the beginning of a call to <code><a href="https://rdrr.io/pkg/tensor
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, epochs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 22ms/step - loss: 2.5170 - mae: 1.2923</span></span>
+<span><span class="co">## 32/32 - 1s - 20ms/step - loss: 2.5170 - mae: 1.2923</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.2689 - mae: 1.2241</span></span>
+<span><span class="co">## 32/32 - 0s - 2ms/step - loss: 2.2689 - mae: 1.2241</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 32/32 - 0s - 1ms/step - loss: 2.0578 - mae: 1.1633</span></span></code></pre>
+<span><span class="co">## 32/32 - 0s - 2ms/step - loss: 2.0578 - mae: 1.1633</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="supporting-sample_weight-class_weight">Supporting <code>sample_weight</code> &amp;
@@ -362,11 +362,11 @@ argument</li>
 <span><span class="va">sw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, sample_weight <span class="op">=</span> <span class="va">sw</span>, epochs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 32/32 - 1s - 26ms/step - loss: 0.1681 - mae: 1.3434</span></span>
+<span><span class="co">## 32/32 - 1s - 28ms/step - mae: 1.3434 - loss: 0.1681</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 32/32 - 0s - 9ms/step - loss: 0.1394 - mae: 1.3364</span></span>
+<span><span class="co">## 32/32 - 0s - 3ms/step - mae: 1.3364 - loss: 0.1394</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 32/32 - 0s - 1ms/step - loss: 0.1148 - mae: 1.3286</span></span></code></pre>
+<span><span class="co">## 32/32 - 0s - 3ms/step - mae: 1.3286 - loss: 0.1148</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="providing-your-own-evaluation-step">Providing your own evaluation step<a class="anchor" aria-label="anchor" href="#providing-your-own-evaluation-step"></a>
@@ -409,12 +409,13 @@ like:</p>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">32</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 32/32 - 0s - 10ms/step - loss: 0.0000e+00 - mae: 1.3871</span></span></code></pre>
+<pre><code><span><span class="co">## 32/32 - 0s - 9ms/step - mae: 1.3871 - loss: 0.0000e+00</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0</span></span>
+<span><span class="co">## tf.Tensor(0.0, shape=(), dtype=float32)</span></span>
 <span><span class="co">##</span></span>
-<span><span class="co">## $mae</span></span>
-<span><span class="co">## [1] 1.387149</span></span></code></pre>
+<span><span class="co">## $compile_metrics</span></span>
+<span><span class="co">## $compile_metrics$mae</span></span>
+<span><span class="co">## tf.Tensor(1.3871489, shape=(), dtype=float32)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="wrapping-up-an-end-to-end-gan-example">Wrapping up: an end-to-end GAN example<a class="anchor" aria-label="anchor" href="#wrapping-up-an-end-to-end-gan-example"></a>
@@ -570,7 +571,7 @@ entire GAN algorithm in 17 lines in <code>train_step</code>:</p>
 <span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_take.html" class="external-link">dataset_take</a></span><span class="op">(</span><span class="va">dataset</span>, <span class="fl">100</span><span class="op">)</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 100/100 - 5s - 54ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00</span></span></code></pre>
+<pre><code><span><span class="co">## 100/100 - 6s - 57ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00</span></span></code></pre>
 <p>The ideas behind deep learning are simple, so why should their
 implementation be painful?</p>
 </div>
