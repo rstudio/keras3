@@ -25,7 +25,6 @@ word splitting & indexing.
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(tfdatasets, exclude = "shape")
 library(keras3)
-use_virtualenv("r-keras")
 ```
 
 ## Load the data: IMDB movie review sentiment classification

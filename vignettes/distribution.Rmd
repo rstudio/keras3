@@ -184,11 +184,11 @@ model |> fit(dataset, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 8/8 - 0s - 38ms/step - loss: 1.0768
+## 8/8 - 0s - 40ms/step - loss: 1.1398
 ## Epoch 2/3
-## 8/8 - 0s - 6ms/step - loss: 0.9754
+## 8/8 - 0s - 7ms/step - loss: 1.0593
 ## Epoch 3/3
-## 8/8 - 0s - 5ms/step - loss: 0.9347
+## 8/8 - 0s - 5ms/step - loss: 1.0071
 ```
 
 ``` r
@@ -196,12 +196,12 @@ model |> evaluate(dataset)
 ```
 
 ```
-## 8/8 - 0s - 7ms/step - loss: 0.8936
+## 8/8 - 0s - 6ms/step - loss: 0.9609
 ```
 
 ```
 ## $loss
-## [1] 0.8935966
+## [1] 0.9609067
 ```
 
 
@@ -278,11 +278,11 @@ model |> fit(dataset, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 8/8 - 0s - 29ms/step - loss: 1.0836
+## 8/8 - 0s - 25ms/step - loss: 1.1612
 ## Epoch 2/3
-## 8/8 - 0s - 4ms/step - loss: 1.0192
+## 8/8 - 0s - 4ms/step - loss: 1.0702
 ## Epoch 3/3
-## 8/8 - 0s - 4ms/step - loss: 0.9821
+## 8/8 - 0s - 5ms/step - loss: 1.0184
 ```
 
 ``` r
@@ -290,12 +290,12 @@ model |> evaluate(dataset)
 ```
 
 ```
-## 8/8 - 0s - 8ms/step - loss: 0.9576
+## 8/8 - 0s - 7ms/step - loss: 0.9844
 ```
 
 ```
 ## $loss
-## [1] 0.9576273
+## [1] 0.9844129
 ```
 
 

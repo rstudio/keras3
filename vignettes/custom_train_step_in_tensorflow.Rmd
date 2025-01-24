@@ -127,11 +127,11 @@ model |> fit(x, y, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 23ms/step - loss: 3.2271 - mae: 1.4339
+## 32/32 - 1s - 24ms/step - mae: 1.4339 - loss: 3.2271
 ## Epoch 2/3
-## 32/32 - 0s - 1ms/step - loss: 2.9034 - mae: 1.3605
+## 32/32 - 0s - 2ms/step - mae: 1.3605 - loss: 2.9034
 ## Epoch 3/3
-## 32/32 - 0s - 1ms/step - loss: 2.6272 - mae: 1.2960
+## 32/32 - 0s - 2ms/step - mae: 1.2960 - loss: 2.6272
 ```
 
 ## Going lower-level
@@ -212,11 +212,11 @@ model |> fit(x, y, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 22ms/step - loss: 2.5170 - mae: 1.2923
+## 32/32 - 1s - 23ms/step - loss: 2.5170 - mae: 1.2923
 ## Epoch 2/3
-## 32/32 - 0s - 1ms/step - loss: 2.2689 - mae: 1.2241
+## 32/32 - 0s - 2ms/step - loss: 2.2689 - mae: 1.2241
 ## Epoch 3/3
-## 32/32 - 0s - 1ms/step - loss: 2.0578 - mae: 1.1633
+## 32/32 - 0s - 3ms/step - loss: 2.0578 - mae: 1.1633
 ```
 
 ## Supporting `sample_weight` & `class_weight`
@@ -282,11 +282,11 @@ model |> fit(x, y, sample_weight = sw, epochs = 3)
 
 ```
 ## Epoch 1/3
-## 32/32 - 1s - 26ms/step - loss: 0.1681 - mae: 1.3434
+## 32/32 - 1s - 26ms/step - mae: 1.3434 - loss: 0.1681
 ## Epoch 2/3
-## 32/32 - 0s - 9ms/step - loss: 0.1394 - mae: 1.3364
+## 32/32 - 0s - 2ms/step - mae: 1.3364 - loss: 0.1394
 ## Epoch 3/3
-## 32/32 - 0s - 1ms/step - loss: 0.1148 - mae: 1.3286
+## 32/32 - 0s - 2ms/step - mae: 1.3286 - loss: 0.1148
 ```
 
 ## Providing your own evaluation step
@@ -332,15 +332,16 @@ model |> evaluate(x, y)
 ```
 
 ```
-## 32/32 - 0s - 10ms/step - loss: 0.0000e+00 - mae: 1.3871
+## 32/32 - 0s - 10ms/step - mae: 1.3871 - loss: 0.0000e+00
 ```
 
 ```
 ## $loss
-## [1] 0
+## tf.Tensor(0.0, shape=(), dtype=float32)
 ##
-## $mae
-## [1] 1.387149
+## $compile_metrics
+## $compile_metrics$mae
+## tf.Tensor(1.3871489, shape=(), dtype=float32)
 ```
 
 ## Wrapping up: an end-to-end GAN example
@@ -507,7 +508,7 @@ gan |> fit(
 ```
 
 ```
-## 100/100 - 5s - 54ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+## 100/100 - 5s - 55ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 ```
 
 The ideas behind deep learning are simple, so why should their implementation be painful?

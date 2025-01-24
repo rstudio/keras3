@@ -44,7 +44,7 @@ install.packages("keras3")
 or install the development version with:
 
 ```{r, eval=FALSE}
-remotes::install_github("rstudio/keras")
+remotes::install_github("rstudio/keras3")
 ```
 
 The Keras R interface requires that a backend engine be installed. This is [TensorFlow](https://www.tensorflow.org/) by default.
