@@ -210,7 +210,7 @@ history <- model |> fit(
 ## Epoch 1/2
 ## 750/750 - 2s - 3ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
 ## Epoch 2/2
-## 750/750 - 1s - 784us/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397
+## 750/750 - 1s - 2ms/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397
 ```
 
 ``` r
@@ -218,7 +218,7 @@ test_scores <- model |> evaluate(x_test, y_test, verbose=2)
 ```
 
 ```
-## 313/313 - 0s - 1ms/step - accuracy: 0.9595 - loss: 0.1328
+## 313/313 - 1s - 2ms/step - accuracy: 0.9595 - loss: 0.1328
 ```
 
 
@@ -643,9 +643,9 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 66ms/step - department_loss: 381.0319 - loss: 498.7886 - priority_loss: 117.7568
+## 40/40 - 3s - 74ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
 ## Epoch 2/2
-## 40/40 - 0s - 10ms/step - department_loss: 358.5705 - loss: 438.4252 - priority_loss: 79.8546
+## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828
 ```
 
 When calling fit with a `Dataset` object, it should yield either a
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 5s - 375ms/step - acc: 0.1250 - loss: 2.3001 - val_acc: 0.1400 - val_loss: 2.2938
+## 13/13 - 6s - 453ms/step - acc: 0.1250 - loss: 2.3006 - val_acc: 0.1300 - val_loss: 2.2969
 ```
 
 ## Shared layers

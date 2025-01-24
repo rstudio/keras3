@@ -92,14 +92,19 @@ which defaults to <code>"float32"</code> unless you configured it otherwise (via
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>
-<dd><p>A Python integer or instance of
+<dd><p>Optional R integer or instance of
 <code><a href="random_seed_generator.html">random_seed_generator()</a></code>.
-Used to make the behavior of the initializer
-deterministic. Note that an initializer seeded with an integer
-or None (unseeded) will produce the same random values
-across multiple calls. To get different random values
-across multiple calls, use as seed an instance
-of <code><a href="random_seed_generator.html">random_seed_generator()</a></code>.</p></dd>
+By default, the <code>seed</code> argument is <code>NULL</code>, and an internal global
+<code><a href="random_seed_generator.html">random_seed_generator()</a></code> is used. The <code>seed</code> argument can be
+used to ensure deterministic (repeatable) random number generation.
+Note that passing an integer as the <code>seed</code> value will produce the
+same random values for each call. To generate different random
+values for repeated calls, an instance of
+<code><a href="random_seed_generator.html">random_seed_generator()</a></code> must be provided as the <code>seed</code> value.</p>
+<p>Remark concerning the JAX backend: When tracing functions with the
+JAX backend the global <code><a href="random_seed_generator.html">random_seed_generator()</a></code> is not
+supported. Therefore, during tracing the default value <code>seed=NULL</code>
+will produce an error, and a <code>seed</code> argument must be provided.</p></dd>
 
 </dl></div>
     <div class="section level2">

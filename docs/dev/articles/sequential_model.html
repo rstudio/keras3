@@ -205,10 +205,13 @@ the shape of the weights depends on the shape of the inputs:</p>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">layer</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="va">layer</span><span class="op">$</span><span class="va">weights</span>  <span class="co"># Now it has weights, of shape (4, 3) and (3,)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
-<span><span class="co">## &lt;KerasVariable shape=(4, 3), dtype=float32, path=dense_9/kernel&gt;</span></span>
+<span><span class="co">## &lt;Variable path=dense_9/kernel, shape=(4, 3), dtype=float32, value=[[ 0.48581433  0.78749573  0.61015   ]</span></span>
+<span><span class="co">##  [ 0.7962619   0.7261175  -0.8046875 ]</span></span>
+<span><span class="co">##  [-0.6189915   0.37973273  0.50559556]</span></span>
+<span><span class="co">##  [-0.5455791  -0.60714126  0.19791973]]&gt;</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## [[2]]</span></span>
-<span><span class="co">## &lt;KerasVariable shape=(3), dtype=float32, path=dense_9/bias&gt;</span></span></code></pre>
+<span><span class="co">## &lt;Variable path=dense_9/bias, shape=(3), dtype=float32, value=[0. 0. 0.]&gt;</span></span></code></pre>
 <p>Naturally, this also applies to Sequential models. When you
 instantiate a Sequential model without an input shape, it isn’t “built”:
 it has no weights (and calling <code>model$weights</code> results in an
