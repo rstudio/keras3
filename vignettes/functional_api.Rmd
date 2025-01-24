@@ -208,9 +208,9 @@ history <- model |> fit(
 
 ```
 ## Epoch 1/2
-## 750/750 - 2s - 3ms/step - accuracy: 0.8980 - loss: 0.3540 - val_accuracy: 0.9444 - val_loss: 0.1898
+## 750/750 - 2s - 3ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
 ## Epoch 2/2
-## 750/750 - 1s - 1ms/step - accuracy: 0.9512 - loss: 0.1633 - val_accuracy: 0.9605 - val_loss: 0.1387
+## 750/750 - 1s - 2ms/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397
 ```
 
 ``` r
@@ -218,7 +218,7 @@ test_scores <- model |> evaluate(x_test, y_test, verbose=2)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9598 - loss: 0.1322
+## 313/313 - 1s - 2ms/step - accuracy: 0.9595 - loss: 0.1328
 ```
 
 
@@ -229,8 +229,8 @@ cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
 ```
-## Test loss: 0.1321879
-## Test accuracy: 0.9598
+## Test loss: 0.132778
+## Test accuracy: 0.9595
 ```
 
 For further reading, see the [training and evaluation](training_with_built_in_methods.html) guide.
@@ -643,7 +643,7 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 65ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
+## 40/40 - 3s - 74ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
 ## Epoch 2/2
 ## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828
 ```
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 5s - 367ms/step - acc: 0.1250 - loss: 2.3003 - val_acc: 0.1250 - val_loss: 2.2946
+## 13/13 - 6s - 453ms/step - acc: 0.1250 - loss: 2.3006 - val_acc: 0.1300 - val_loss: 2.2969
 ```
 
 ## Shared layers

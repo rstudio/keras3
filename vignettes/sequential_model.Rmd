@@ -167,10 +167,13 @@ layer$weights  # Now it has weights, of shape (4, 3) and (3,)
 
 ```
 ## [[1]]
-## <KerasVariable shape=(4, 3), dtype=float32, path=dense_9/kernel>
+## <Variable path=dense_9/kernel, shape=(4, 3), dtype=float32, value=[[ 0.48581433  0.78749573  0.61015   ]
+##  [ 0.7962619   0.7261175  -0.8046875 ]
+##  [-0.6189915   0.37973273  0.50559556]
+##  [-0.5455791  -0.60714126  0.19791973]]>
 ##
 ## [[2]]
-## <KerasVariable shape=(3), dtype=float32, path=dense_9/bias>
+## <Variable path=dense_9/bias, shape=(3), dtype=float32, value=[0. 0. 0.]>
 ```
 
 Naturally, this also applies to Sequential models. When you instantiate a

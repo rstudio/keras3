@@ -96,10 +96,11 @@ linear_layer$weights
 
 ```
 ## [[1]]
-## <KerasVariable shape=(2, 4), dtype=float32, path=linear/variable>
+## <Variable path=linear/variable, shape=(2, 4), dtype=float32, value=[[-0.06251299  0.05335509  0.01485647 -0.00985784]
+##  [ 0.08404355  0.10115016  0.00569303  0.05479009]]>
 ##
 ## [[2]]
-## <KerasVariable shape=(4), dtype=float32, path=linear/variable_1>
+## <Variable path=linear/variable_1, shape=(4), dtype=float32, value=[0. 0. 0. 0.]>
 ```
 
 ## Layers can have non-trainable weights
@@ -480,7 +481,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 144ms/step - loss: 1.9081
+## 1/1 - 0s - 142ms/step - loss: 1.9081
 ```
 
 ``` r
@@ -492,7 +493,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 78ms/step - loss: -2.2532e-03
+## 1/1 - 0s - 115ms/step - loss: 1.6613
 ```
 
 ## You can optionally enable serialization on your layers
@@ -841,7 +842,7 @@ vae |> fit(x_train, x_train, epochs = 2, batch_size = 64)
 
 ```
 ## Epoch 1/2
-## 938/938 - 4s - 4ms/step - loss: 0.0748
+## 938/938 - 5s - 5ms/step - loss: 0.0748
 ## Epoch 2/2
-## 938/938 - 1s - 810us/step - loss: 0.0676
+## 938/938 - 1s - 2ms/step - loss: 0.0676
 ```
