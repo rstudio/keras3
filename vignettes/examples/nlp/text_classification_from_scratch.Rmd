@@ -27,7 +27,6 @@ word splitting & indexing.
 library(tensorflow, exclude = c("shape", "set_random_seed"))
 library(tfdatasets, exclude = "shape")
 library(keras3)
-use_virtualenv("r-keras")
 ```
 
 ## Load the data: IMDB movie review sentiment classification
@@ -402,11 +401,11 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 6s - 10ms/step - accuracy: 0.6953 - loss: 0.5231 - val_accuracy: 0.8618 - val_loss: 0.3205
+## 625/625 - 5s - 8ms/step - accuracy: 0.6873 - loss: 0.5318 - val_accuracy: 0.8640 - val_loss: 0.3301
 ## Epoch 2/3
-## 625/625 - 1s - 2ms/step - accuracy: 0.9032 - loss: 0.2390 - val_accuracy: 0.8742 - val_loss: 0.3113
+## 625/625 - 2s - 3ms/step - accuracy: 0.9047 - loss: 0.2398 - val_accuracy: 0.8716 - val_loss: 0.3212
 ## Epoch 3/3
-## 625/625 - 2s - 2ms/step - accuracy: 0.9553 - loss: 0.1211 - val_accuracy: 0.8666 - val_loss: 0.3531
+## 625/625 - 2s - 3ms/step - accuracy: 0.9568 - loss: 0.1230 - val_accuracy: 0.8730 - val_loss: 0.3835
 ```
 
 ## Evaluate the model on the test set
@@ -417,15 +416,15 @@ model |> evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8520 - loss: 0.3960
+## 782/782 - 1s - 2ms/step - accuracy: 0.8655 - loss: 0.3982
 ```
 
 ```
 ## $accuracy
-## [1] 0.85204
+## [1] 0.86552
 ##
 ## $loss
-## [1] 0.3959631
+## [1] 0.3982031
 ```
 
 ## Make an end-to-end model
@@ -455,13 +454,13 @@ end_to_end_model |> evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 3s - 4ms/step - accuracy: 0.8520 - loss: 0.0000e+00
+## 782/782 - 3s - 4ms/step - accuracy: 0.8655 - loss: 0.3982
 ```
 
 ```
 ## $accuracy
-## [1] 0.85204
+## [1] 0.86552
 ##
 ## $loss
-## [1] 0
+## [1] 0.398203
 ```
