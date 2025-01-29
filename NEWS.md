@@ -1,5 +1,8 @@
 # keras3 (development version)
 
+- The progress bar in `fit()`, `evaluate()` and `predict()` now 
+  defaults to not presenting during testthat tests.
+
 ## Added compatibility with Keras v3.8.0. User-facing changes:
 
 - New symbols:
