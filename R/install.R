@@ -288,7 +288,7 @@ use_backend <- function(backend, gpu = NA) {
 
 
 get_os <- function() {
-  if(is_windows()) "Windows" else if (is_mac_arm64()) "macOS" else "Linux"
+  if (is_windows()) "Windows" else if (is_mac_arm64()) "macOS" else "Linux"
 }
 
 is_keras_loaded <- function() {

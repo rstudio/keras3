@@ -1,5 +1,11 @@
 # keras3 (development version)
 
+- Keras now uses `reticulate::py_require()` to resolve Python dependencies.
+  Calling `install_keras()` is no longer required (but is still supported).
+  
+- `use_backend()` gains a `gpu` argument, to specify if a GPU-capable set of 
+  dependencies should be resolved by `py_require()`. 
+
 ## Added compatibility with Keras v3.8.0. User-facing changes:
 
 - New symbols:
