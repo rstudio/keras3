@@ -1054,6 +1054,8 @@ as_model_verbose_arg <- function(x) {
   # x == auto
   if(isTRUE(getOption('knitr.in.progress')))
     return(2L)
+  if(identical(Sys.getenv("TESTTHAT"), "true"))
+    return(0L) # don't draw progress in tests
   x # "auto"
 }
 
