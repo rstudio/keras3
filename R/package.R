@@ -61,6 +61,13 @@ keras <- NULL
   if (!is.null(keras_python))
     Sys.setenv(RETICULATE_PYTHON = keras_python)
 
+  # default backend is tensorflow for now
+  # the tensorflow R package calls `py_require()` to ensure GPU is usable on Linux
+  py_require(c(
+    "keras", "pydot", "scipy", "pandas", "Pillow",
+    "ipython", "tensorflow_datasets"
+  ))
+
   # delay load keras
   try(keras <<- import("keras", delay_load = list(
 

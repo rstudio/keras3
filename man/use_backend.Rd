@@ -4,10 +4,12 @@
 \alias{use_backend}
 \title{Configure a Keras backend}
 \usage{
-use_backend(backend)
+use_backend(backend, gpu = NA)
 }
 \arguments{
 \item{backend}{string, can be \code{"tensorflow"}, \code{"jax"}, \code{"numpy"}, or \code{"torch"}.}
+
+\item{gpu}{bool, whether to use the GPU.}
 }
 \value{
 Called primarily for side effects. Returns the provided \code{backend}, invisibly.
