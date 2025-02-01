@@ -37,7 +37,8 @@ Imports:
     fastmap,
     glue,
     cli,
-    rlang
+    rlang,
+    dotty
 Suggests:
     ggplot2,
     testthat (>= 2.1.0),
@@ -54,5 +55,5 @@ Suggests:
     jpeg
 RoxygenNote: 7.3.2
 VignetteBuilder: knitr
-Remotes:  
+Remotes:
     rstudio/reticulate
