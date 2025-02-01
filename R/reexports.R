@@ -122,3 +122,8 @@ generics::compile
 #' @importFrom tensorflow evaluate
 #' @export
 tensorflow::evaluate
+
+
+#' @importFrom dotty .
+#' @export
+dotty::.
