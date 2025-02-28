@@ -256,7 +256,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Windows_tensorflow = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
-      py_require("tensorflow")
+      py_require(c("tensorflow", "numpy<2"))
     },
 
     Windows_jax = {
