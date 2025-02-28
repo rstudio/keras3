@@ -164,11 +164,11 @@ use_backend <- function(backend, gpu = NA) {
     macOS_tensorflow = {
 
       if (is.na(gpu))
-        gpu <- TRUE
+        gpu <- FALSE
 
       if (gpu) {
-        py_require("tensorflow", action = "remove")
-        py_require(c("tensorflow-macos", "tensorflow-metal"), python_version = "<3.12")
+        # py_require("tensorflow", action = "remove")
+        py_require(c("tensorflow", "tensorflow-metal"))
       } else {
         py_require(action = "remove", c("tensorflow-macos", "tensorflow-metal"))
         py_require("tensorflow")
