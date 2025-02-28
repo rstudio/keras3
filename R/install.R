@@ -37,7 +37,7 @@ install_keras <- function(
 
       # lspci doens't list GPUs on WSL Linux, but nvidia-smi does.
       nvidia_smi_listed <- tryCatch(
-        system("nvidia-smi -L", intern = TRUE),
+        system("nvidia-smi -L", intern = TRUE, ignore.stderr = TRUE),
         warning = function(w) character(),
         error = function(e) character()
       )
@@ -322,7 +322,7 @@ has_gpu <- function() {
 
     # lspci doens't list GPUs on WSL Linux, but nvidia-smi does.
     nvidia_smi_listed <- tryCatch(
-      system("nvidia-smi -L", intern = TRUE),
+      system("nvidia-smi -L", intern = TRUE, ignore.stderr = TRUE),
       warning = function(w) character(),
       error = function(e) character()
     )
