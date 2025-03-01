@@ -75,7 +75,12 @@ jobs:
           upgrade: 'TRUE'
 
       - name: Install Keras
-        run: keras3::install_keras(python_version = '${{ matrix.python }}')
+        run: |
+          options(echo = TRUE)
+          print(sessionInfo())
+          # print(Sys.info())
+          print(keras3::op_convert_to_tensor("Hello World!"))
+          print(reticulate::py_config())
 
       - uses: r-lib/actions/check-r-package@v2
         with:

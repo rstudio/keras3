@@ -11,6 +11,9 @@
 
 - `dotty::.` is now reexported.
 
+- `%*%` now dispatches to `op_matmul()` for tensorflow tensors, which
+  has relaxed shape constraints compared to `tf$matmul()`.
+
 ## Added compatibility with Keras v3.8.0. User-facing changes:
 
 - New symbols:

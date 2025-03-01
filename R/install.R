@@ -37,7 +37,7 @@ install_keras <- function(
 
       # lspci doens't list GPUs on WSL Linux, but nvidia-smi does.
       nvidia_smi_listed <- tryCatch(
-        system("nvidia-smi -L", intern = TRUE),
+        system("nvidia-smi -L", intern = TRUE, ignore.stderr = TRUE),
         warning = function(w) character(),
         error = function(e) character()
       )
@@ -164,11 +164,11 @@ use_backend <- function(backend, gpu = NA) {
     macOS_tensorflow = {
 
       if (is.na(gpu))
-        gpu <- TRUE
+        gpu <- FALSE
 
       if (gpu) {
-        py_require("tensorflow", action = "remove")
-        py_require(c("tensorflow-macos", "tensorflow-metal"), python_version = "<3.12")
+        # py_require("tensorflow", action = "remove")
+        py_require(c("tensorflow", "tensorflow-metal"))
       } else {
         py_require(action = "remove", c("tensorflow-macos", "tensorflow-metal"))
         py_require("tensorflow")
@@ -256,7 +256,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Windows_tensorflow = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
-      py_require("tensorflow")
+      py_require(c("tensorflow", "numpy<2"))
     },
 
     Windows_jax = {
@@ -322,7 +322,7 @@ has_gpu <- function() {
 
     # lspci doens't list GPUs on WSL Linux, but nvidia-smi does.
     nvidia_smi_listed <- tryCatch(
-      system("nvidia-smi -L", intern = TRUE),
+      system("nvidia-smi -L", intern = TRUE, ignore.stderr = TRUE),
       warning = function(w) character(),
       error = function(e) character()
     )

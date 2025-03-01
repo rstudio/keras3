@@ -25,6 +25,7 @@
 \alias{fit}
 \alias{compile}
 \alias{evaluate}
+\alias{.}
 \title{Objects exported from other packages}
 \keyword{internal}
 \description{
@@ -32,6 +33,8 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
+  \item{dotty}{\code{\link[dotty:dotty]{.}}}
+
   \item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}}
 
   \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}

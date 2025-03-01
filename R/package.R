@@ -52,21 +52,38 @@ keras <- NULL
 .onLoad <- function(libname, pkgname) {
 
   # tensorflow:::.onLoad() registers some reticulate class filter hooks
-  # we need to identify tensors reliably.
+  # we need to identify tensorflow tensors reliably.
   requireNamespace("tensorflow", quietly = TRUE)
   maybe_register_S3_methods()
+
+  registerS3method("%*%", "tensorflow.tensor", op_matmul, baseenv())
 
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
     Sys.setenv(RETICULATE_PYTHON = keras_python)
 
-  # default backend is tensorflow for now
-  # the tensorflow R package calls `py_require()` to ensure GPU is usable on Linux
   py_require(c(
     "keras", "pydot", "scipy", "pandas", "Pillow",
-    "ipython", "tensorflow_datasets"
+    "ipython" #, "tensorflow_datasets"
   ))
+
+  # default backend is tensorflow for now
+  # the tensorflow R package calls `py_require()` to ensure GPU is usable on Linux
+  # use_backend() includes py_require(action = "remove") calls to undo
+  # what tensorflow:::.onLoad() did. Keep them in sync!
+  backend <- Sys.getenv("KERAS_BACKEND", "tensorflow")
+  gpu <- NA
+  if (endsWith(backend, "-cpu")) {
+    gpu <- FALSE
+    backend <- sub("-cpu$", "", backend)
+    Sys.setenv("KERAS_BACKEND" = backend)
+  } else if (endsWith(backend, "-gpu")) {
+    gpu <- TRUE
+    backend <- sub("-gpu$", "", backend)
+    Sys.setenv("KERAS_BACKEND" = backend)
+  }
+  use_backend(backend, gpu)
 
   # delay load keras
   try(keras <<- import("keras", delay_load = list(
