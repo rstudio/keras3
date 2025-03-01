@@ -72,7 +72,18 @@ keras <- NULL
   # the tensorflow R package calls `py_require()` to ensure GPU is usable on Linux
   # use_backend() includes py_require(action = "remove") calls to undo
   # what tensorflow:::.onLoad() did. Keep them in sync!
-  use_backend(Sys.getenv("KERAS_BACKEND", "tensorflow"))
+  backend <- Sys.getenv("KERAS_BACKEND", "tensorflow")
+  gpu <- NA
+  if (endsWith(backend, "-cpu")) {
+    gpu <- FALSE
+    backend <- sub("-cpu$", "", backend)
+    Sys.setenv("KERAS_BACKEND" = backend)
+  } else if (endsWith(backend, "-gpu")) {
+    gpu <- TRUE
+    backend <- sub("-gpu$", "", backend)
+    Sys.setenv("KERAS_BACKEND" = backend)
+  }
+  use_backend(backend, gpu)
 
   # delay load keras
   try(keras <<- import("keras", delay_load = list(
