@@ -1962,7 +1962,8 @@ py_to_r_wrapper.keras.src.losses.loss.Loss <- function(x) {
   as.function.default(c(formals(x), quote({
     args <- capture_args(list(y_true = as_py_array,
                               y_pred = as_py_array,
-                              sample_weight = as_py_array))
+                              sample_weight = as_py_array),
+                         enforce_all_dots_named = FALSE)
     do.call(x, args)
   })))
 }

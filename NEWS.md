@@ -13,6 +13,9 @@
 
 - `%*%` now dispatches to `op_matmul()` for tensorflow tensors, which
   has relaxed shape constraints compared to `tf$matmul()`.
+  
+- Fixed an issue where calling a `Metric` and `Loss` object 
+  with unnamed arguments would error.
 
 ## Added compatibility with Keras v3.8.0. User-facing changes:
 
