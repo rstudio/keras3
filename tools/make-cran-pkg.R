@@ -2,6 +2,9 @@
 
 devtools::build(manual = TRUE)
 
+if(length(Sys.glob("../keras3_*.tar.gz")) > 1)
+  stop("too many tarballs")
+
 withr::with_dir("..", {
   system("R CMD check --as-cran keras3_*.tar.gz")
 })
