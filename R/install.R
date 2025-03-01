@@ -27,11 +27,13 @@ install_keras <- function(
   if (is.na(gpu)) {
 
     has_nvidia_gpu <- function() {
-      lspci_listed <- tryCatch(
-        as.logical(length(system("lspci | grep -i nvidia", intern = TRUE))),
-        warning = function(w) FALSE, # warning emitted by system for non-0 exit status
-        error = function(e) FALSE
-      )
+      lspci_listed <- tryCatch({
+        lspci <- system("lspci", intern = TRUE, ignore.stderr = TRUE)
+        any(grepl("nvidia", lspci, ignore.case = TRUE))
+      },
+      warning = function(w) FALSE,
+      error = function(e) FALSE)
+
       if (lspci_listed)
         return(TRUE)
 
@@ -308,14 +310,12 @@ is_keras_loaded <- function() {
 has_gpu <- function() {
 
   has_nvidia_gpu <- function() {
-    lspci_listed <- tryCatch(
-      as.logical(length(
-        system("lspci | grep -i nvidia", intern = TRUE)
-      )),
-      # warning emitted by system for non-0 exit status
-      warning = function(w) FALSE,
-      error = function(e) FALSE
-    )
+    lspci_listed <- tryCatch({
+      lspci <- system("lspci", intern = TRUE, ignore.stderr = TRUE)
+      any(grepl("nvidia", lspci, ignore.case = TRUE))
+    },
+    warning = function(w) FALSE,
+    error = function(e) FALSE)
 
     if (lspci_listed)
       return(TRUE)
