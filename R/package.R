@@ -56,6 +56,8 @@ keras <- NULL
   requireNamespace("tensorflow", quietly = TRUE)
   maybe_register_S3_methods()
 
+  registerS3method("%*%", "tensorflow.tensor", op_matmul, baseenv())
+
   # if KERAS_PYTHON is defined then forward it to RETICULATE_PYTHON
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
