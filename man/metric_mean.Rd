@@ -35,6 +35,16 @@ m$result()
 
 }\if{html}{\out{</div>}}
 
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# calling a metric directly is equivalent to calling
+# m$update_state(); m$result()
+m <- metric_mean()
+m(c(1, 3, 5, 7))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(4.0, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(c(1, 3, 5, 7), sample_weight = c(1, 1, 0, 0))
 m$result()

@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Introduction to Keras for Researchers">
 <meta name="description" content="Everything you need to know to use Keras &amp; TensorFlow for deep learning research.">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -393,7 +393,7 @@ before using them, if you need to.</p>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Iterate over the batches of the dataset.</span></span>
-<span><span class="fu">coro</span><span class="fu">::</span><span class="fu">loop</span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Open a GradientTape.</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
 <span>    <span class="co"># Forward pass.</span></span>
@@ -616,7 +616,7 @@ gradients when writing a training loop.</p>
 <span><span class="va">loss_fn</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>from_logits<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_sgd.html">optimizer_sgd</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-3</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">coro</span><span class="fu">::</span><span class="fu">loop</span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
@@ -670,7 +670,7 @@ an evaluation via <code>metric$reset_state()</code>
 <span><span class="va">optimizer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">1e-3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">epoch</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu">coro</span><span class="fu">::</span><span class="fu">loop</span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>    <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
@@ -807,7 +807,7 @@ wrapping it in a <code>tf.function</code> decorator.</p>
 <span>  <span class="fu">tfdatasets</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">i</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
-<span><span class="fu">coro</span><span class="fu">::</span><span class="fu">loop</span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">i</span> <span class="op">+</span> <span class="fl">1</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
@@ -1178,7 +1178,7 @@ function.</p>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">losses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Keep track of the losses over time.</span></span>
-<span><span class="fu">coro</span><span class="fu">::</span><span class="fu">loop</span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span><span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu">training_step</span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="co"># Logging.</span></span>
@@ -1312,7 +1312,7 @@ to minimize the final classification loss</li>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">losses</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>  <span class="co"># Keep track of the losses over time.</span></span>
-<span><span class="fu">coro</span><span class="fu">::</span><span class="fu">loop</span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="fu">coro</span><span class="fu">::</span><span class="fu"><a href="https://coro.r-lib.org/reference/collect.html" class="external-link">loop</a></span><span class="op">(</span><span class="kw">for</span> <span class="op">(</span><span class="va">data</span> <span class="kw">in</span> <span class="va">dataset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">loss</span> <span class="op">&lt;-</span> <span class="fu">train_step</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
@@ -1359,7 +1359,7 @@ build with Keras!</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
