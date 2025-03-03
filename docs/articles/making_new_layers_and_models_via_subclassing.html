@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Making new layers and models via subclassing">
 <meta name="description" content="Complete guide to writing `Layer` and `Model` objects from scratch.">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -167,10 +167,11 @@ attributes:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">linear_layer</span><span class="op">$</span><span class="va">weights</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
-<span><span class="co">## &lt;KerasVariable shape=(2, 4), dtype=float32, path=linear/variable&gt;</span></span>
+<span><span class="co">## &lt;Variable path=linear/variable, shape=(2, 4), dtype=float32, value=[[-0.06251299  0.05335509  0.01485647 -0.00985784]</span></span>
+<span><span class="co">##  [ 0.08404355  0.10115016  0.00569303  0.05479009]]&gt;</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## [[2]]</span></span>
-<span><span class="co">## &lt;KerasVariable shape=(4), dtype=float32, path=linear/variable_1&gt;</span></span></code></pre>
+<span><span class="co">## &lt;Variable path=linear/variable_1, shape=(4), dtype=float32, value=[0. 0. 0. 0.]&gt;</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="layers-can-have-non-trainable-weights">Layers can have non-trainable weights<a class="anchor" aria-label="anchor" href="#layers-can-have-non-trainable-weights"></a>
@@ -468,14 +469,14 @@ automatically summed and added to the main loss, if any):</p>
 <span><span class="co"># losses get added to it</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span>, loss <span class="op">=</span> <span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 144ms/step - loss: 1.9081</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 142ms/step - loss: 1.9081</span></span></code></pre>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># It's also possible not to pass any loss in `compile`,</span></span>
 <span><span class="co"># since the model already has a loss to minimize, via the `add_loss`</span></span>
 <span><span class="co"># call during the forward pass!</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer <span class="op">=</span> <span class="st">"adam"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 78ms/step - loss: -2.2532e-03</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 115ms/step - loss: 1.6613</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="you-can-optionally-enable-serialization-on-your-layers">You can optionally enable serialization on your layers<a class="anchor" aria-label="anchor" href="#you-can-optionally-enable-serialization-on-your-layers"></a>
@@ -801,9 +802,9 @@ a regularization loss (KL divergence).</p>
 <span></span>
 <span><span class="va">vae</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">x_train</span>, epochs <span class="op">=</span> <span class="fl">2</span>, batch_size <span class="op">=</span> <span class="fl">64</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 938/938 - 4s - 4ms/step - loss: 0.0748</span></span>
+<span><span class="co">## 938/938 - 5s - 5ms/step - loss: 0.0748</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 938/938 - 1s - 810us/step - loss: 0.0676</span></span></code></pre>
+<span><span class="co">## 938/938 - 1s - 2ms/step - loss: 0.0676</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -816,7 +817,7 @@ a regularization loss (KL divergence).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

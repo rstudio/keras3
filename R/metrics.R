@@ -2978,6 +2978,13 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' ```
 #'
 #' ```{r}
+#' # calling a metric directly is equivalent to calling
+#' # m$update_state(); m$result()
+#' m <- metric_mean()
+#' m(c(1, 3, 5, 7))
+#' ```
+#'
+#' ```{r}
 #' m$reset_state()
 #' m$update_state(c(1, 3, 5, 7), sample_weight = c(1, 1, 0, 0))
 #' m$result()

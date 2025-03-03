@@ -128,23 +128,29 @@ is_linux <- function() {
 
 #' Configure a Keras backend
 #'
-#' @param backend string, can be `"tensorflow"`, `"jax"`, `"numpy"`, or `"torch"`.
-#' @param gpu bool, whether to use the GPU.
+#' @param backend string, can be `"tensorflow"`, `"jax"`, `"numpy"`, or
+#'   `"torch"`.
+#' @param gpu bool, whether to use the GPU. If `NA` (default), it will attempt
+#'   to detect GPU availability on Linux. On M-series Macs, it defaults to
+#'   `FALSE` for TensorFlow and `TRUE` for JAX. On Windows, it defaults to
+#'   `FALSE`.
 #'
 #' @details
-#' These functions allow configuring which backend keras will use.
-#' Note that only one backend can be configured at a time.
+#'
+#' These functions allow configuring which backend keras will use. Note that
+#' only one backend can be configured at a time.
 #'
 #' The function should be called after `library(keras3)` and before calling
 #' other functions within the package (see below for an example).
 #'
-#' There is experimental support for changing the backend after keras has initialized.
-#' using `config_set_backend()`.
+#' There is experimental support for changing the backend after keras has
+#' initialized. using `config_set_backend()`.
 #' ```r
 #' library(keras3)
 #' use_backend("tensorflow")
 #' ```
-#' @returns Called primarily for side effects. Returns the provided `backend`, invisibly.
+#' @returns Called primarily for side effects. Returns the provided `backend`,
+#'   invisibly.
 #' @export
 use_backend <- function(backend, gpu = NA) {
 
@@ -245,9 +251,11 @@ use_backend <- function(backend, gpu = NA) {
       if (gpu) {
         py_require(c("tensorflow-cpu", "torch", "torchvision", "torchaudio"))
       } else {
-        Sys.setenv("UV_INDEX" = "https://download.pytorch.org/whl/cpu")
+        Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
+          "https://download.pytorch.org/whl/cpu",
+          Sys.getenv("UV_INDEX")
+        )))
         py_require(c("tensorflow-cpu", "torch", "torchvision", "torchaudio"))
-                   # additional_args = c("--index", "https://download.pytorch.org/whl/cpu"))
       }
     },
 
@@ -268,12 +276,14 @@ use_backend <- function(backend, gpu = NA) {
 
     Windows_torch = {
       if (is.na(gpu))
-        gpu <- has_gpu()
+        gpu <- FALSE
 
       if (gpu) {
-        Sys.setenv("UV_INDEX" = "https://download.pytorch.org/whl/cu126")
+        Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
+            "https://download.pytorch.org/whl/cu126",
+            Sys.getenv("UV_INDEX")
+        )))
         py_require(c("torch", "torchvision", "torchaudio"))
-                   # additional_args = c("--index", "https://download.pytorch.org/whl/cu126"))
       } else {
         py_require(c("torch", "torchvision", "torchaudio"))
       }
@@ -286,6 +296,7 @@ use_backend <- function(backend, gpu = NA) {
 
   invisible(backend)
 }
+
 
 
 

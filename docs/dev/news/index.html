@@ -54,7 +54,12 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
-<div class="section level3">
+<ul><li><p>Keras now uses <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">reticulate::py_require()</a></code> to resolve Python dependencies. Calling <code><a href="../reference/install_keras.html">install_keras()</a></code> is no longer required (but is still supported).</p></li>
+<li><p><code><a href="../reference/use_backend.html">use_backend()</a></code> gains a <code>gpu</code> argument, to specify if a GPU-capable set of dependencies should be resolved by <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">py_require()</a></code>.</p></li>
+<li><p>The progress bar in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> now defaults to not presenting during testthat tests.</p></li>
+<li><p><code><a href="https://kevinushey.github.io/dotty/reference/dotty.html" class="external-link">dotty::.</a></code> is now reexported.</p></li>
+<li><p><code>%*%</code> now dispatches to <code><a href="../reference/op_matmul.html">op_matmul()</a></code> for tensorflow tensors, which has relaxed shape constraints compared to <code>tf$matmul()</code>.</p></li>
+</ul><div class="section level3">
 <h3 id="added-compatibility-with-keras-v380-user-facing-changes-development-version">Added compatibility with Keras v3.8.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v380-user-facing-changes-development-version"></a></h3>
 <ul><li>New symbols:
 <ul><li><code><a href="../reference/activation_sparse_plus.html">activation_sparse_plus()</a></code></li>

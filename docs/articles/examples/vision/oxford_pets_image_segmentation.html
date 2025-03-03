@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../../../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../../../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../../deps/search-1.0.0/fuse.min.js"></script><script src="../../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Image segmentation with a U-Net-like architecture">
 <meta name="description" content="Image segmentation model trained from scratch on the Oxford Pets dataset.">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -150,7 +150,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="oxford_pets_image_segmentation/unnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
+<img src="oxford_pets_image_segmentation%2Funnamed-chunk-4-1.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
 </div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">target_img_paths</span><span class="op">[</span><span class="fl">10</span><span class="op">]</span> <span class="op">|&gt;</span></span>
@@ -159,7 +159,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>  <span class="fu"><a href="https://rdrr.io/r/grDevices/as.raster.html" class="external-link">as.raster</a></span><span class="op">(</span>max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
-<img src="oxford_pets_image_segmentation/unnamed-chunk-4-2.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
+<img src="oxford_pets_image_segmentation%2Funnamed-chunk-4-2.png" alt="plot of chunk unnamed-chunk-4"><div class="figcaption">plot of chunk unnamed-chunk-4</div>
 </div>
 </div>
 <div class="section level2">
@@ -557,105 +557,105 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>    verbose<span class="op">=</span><span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/50</span></span>
-<span><span class="co">## 32/32 - 35s - 1s/step - loss: 1.4284 - val_loss: 1.5501</span></span>
+<span><span class="co">## 32/32 - 42s - 1s/step - loss: 1.4283 - val_loss: 1.5509</span></span>
 <span><span class="co">## Epoch 2/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.9222 - val_loss: 1.9888</span></span>
+<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.9222 - val_loss: 1.9889</span></span>
 <span><span class="co">## Epoch 3/50</span></span>
-<span><span class="co">## 32/32 - 2s - 69ms/step - loss: 0.7765 - val_loss: 2.5120</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.7764 - val_loss: 2.5126</span></span>
 <span><span class="co">## Epoch 4/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.7201 - val_loss: 3.0113</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.7201 - val_loss: 3.0138</span></span>
 <span><span class="co">## Epoch 5/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.6848 - val_loss: 3.2869</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.6848 - val_loss: 3.2920</span></span>
 <span><span class="co">## Epoch 6/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.6557 - val_loss: 3.4469</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.6557 - val_loss: 3.4508</span></span>
 <span><span class="co">## Epoch 7/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.6304 - val_loss: 3.5521</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.6302 - val_loss: 3.5582</span></span>
 <span><span class="co">## Epoch 8/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.6084 - val_loss: 3.6420</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.6082 - val_loss: 3.6514</span></span>
 <span><span class="co">## Epoch 9/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.5895 - val_loss: 3.7225</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.5894 - val_loss: 3.7314</span></span>
 <span><span class="co">## Epoch 10/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.5727 - val_loss: 3.7848</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.5726 - val_loss: 3.7943</span></span>
 <span><span class="co">## Epoch 11/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.5568 - val_loss: 3.8129</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.5566 - val_loss: 3.8239</span></span>
 <span><span class="co">## Epoch 12/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.5409 - val_loss: 3.7908</span></span>
+<span><span class="co">## 32/32 - 2s - 72ms/step - loss: 0.5407 - val_loss: 3.8035</span></span>
 <span><span class="co">## Epoch 13/50</span></span>
-<span><span class="co">## 32/32 - 2s - 68ms/step - loss: 0.5243 - val_loss: 3.7079</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.5242 - val_loss: 3.7181</span></span>
 <span><span class="co">## Epoch 14/50</span></span>
-<span><span class="co">## 32/32 - 2s - 70ms/step - loss: 0.5063 - val_loss: 3.5739</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.5062 - val_loss: 3.5823</span></span>
 <span><span class="co">## Epoch 15/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.4861 - val_loss: 3.4241</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.4860 - val_loss: 3.4245</span></span>
 <span><span class="co">## Epoch 16/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.4638 - val_loss: 3.2322</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.4638 - val_loss: 3.2306</span></span>
 <span><span class="co">## Epoch 17/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.4396 - val_loss: 2.9929</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.4396 - val_loss: 2.9870</span></span>
 <span><span class="co">## Epoch 18/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.4140 - val_loss: 2.6925</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.4140 - val_loss: 2.6840</span></span>
 <span><span class="co">## Epoch 19/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.3875 - val_loss: 2.3410</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.3877 - val_loss: 2.3417</span></span>
 <span><span class="co">## Epoch 20/50</span></span>
-<span><span class="co">## 32/32 - 2s - 72ms/step - loss: 0.3619 - val_loss: 1.9768</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.3622 - val_loss: 1.9394</span></span>
 <span><span class="co">## Epoch 21/50</span></span>
-<span><span class="co">## 32/32 - 2s - 68ms/step - loss: 0.3389 - val_loss: 1.6291</span></span>
+<span><span class="co">## 32/32 - 2s - 72ms/step - loss: 0.3391 - val_loss: 1.6132</span></span>
 <span><span class="co">## Epoch 22/50</span></span>
-<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.3201 - val_loss: 1.3334</span></span>
+<span><span class="co">## 32/32 - 3s - 82ms/step - loss: 0.3200 - val_loss: 1.3344</span></span>
 <span><span class="co">## Epoch 23/50</span></span>
-<span><span class="co">## 32/32 - 2s - 70ms/step - loss: 0.3078 - val_loss: 1.0987</span></span>
+<span><span class="co">## 32/32 - 3s - 81ms/step - loss: 0.3079 - val_loss: 1.0803</span></span>
 <span><span class="co">## Epoch 24/50</span></span>
-<span><span class="co">## 32/32 - 2s - 70ms/step - loss: 0.3073 - val_loss: 1.0320</span></span>
+<span><span class="co">## 32/32 - 3s - 81ms/step - loss: 0.3086 - val_loss: 1.0174</span></span>
 <span><span class="co">## Epoch 25/50</span></span>
-<span><span class="co">## 32/32 - 2s - 68ms/step - loss: 0.3392 - val_loss: 0.9181</span></span>
+<span><span class="co">## 32/32 - 3s - 82ms/step - loss: 0.3432 - val_loss: 0.9039</span></span>
 <span><span class="co">## Epoch 26/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3674 - val_loss: 0.9856</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.3627 - val_loss: 1.0184</span></span>
 <span><span class="co">## Epoch 27/50</span></span>
-<span><span class="co">## 32/32 - 2s - 72ms/step - loss: 0.3336 - val_loss: 0.8418</span></span>
+<span><span class="co">## 32/32 - 3s - 81ms/step - loss: 0.3278 - val_loss: 0.8675</span></span>
 <span><span class="co">## Epoch 28/50</span></span>
-<span><span class="co">## 32/32 - 2s - 63ms/step - loss: 0.2901 - val_loss: 0.9893</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.2893 - val_loss: 1.0121</span></span>
 <span><span class="co">## Epoch 29/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2737 - val_loss: 1.1443</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2742 - val_loss: 1.1642</span></span>
 <span><span class="co">## Epoch 30/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2681 - val_loss: 1.1886</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2701 - val_loss: 1.1681</span></span>
 <span><span class="co">## Epoch 31/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.2707 - val_loss: 1.1304</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2739 - val_loss: 1.1215</span></span>
 <span><span class="co">## Epoch 32/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2860 - val_loss: 1.0745</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2879 - val_loss: 1.0958</span></span>
 <span><span class="co">## Epoch 33/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.3135 - val_loss: 1.2410</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.3117 - val_loss: 1.2471</span></span>
 <span><span class="co">## Epoch 34/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.3016 - val_loss: 1.2617</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2985 - val_loss: 1.2361</span></span>
 <span><span class="co">## Epoch 35/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2858 - val_loss: 1.0743</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2874 - val_loss: 1.0723</span></span>
 <span><span class="co">## Epoch 36/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2803 - val_loss: 1.0980</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2788 - val_loss: 0.9677</span></span>
 <span><span class="co">## Epoch 37/50</span></span>
-<span><span class="co">## 32/32 - 2s - 69ms/step - loss: 0.2762 - val_loss: 1.4966</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2720 - val_loss: 1.3955</span></span>
 <span><span class="co">## Epoch 38/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2625 - val_loss: 1.0397</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2602 - val_loss: 1.0395</span></span>
 <span><span class="co">## Epoch 39/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2475 - val_loss: 1.1995</span></span>
+<span><span class="co">## 32/32 - 2s - 76ms/step - loss: 0.2420 - val_loss: 1.2572</span></span>
 <span><span class="co">## Epoch 40/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.2468 - val_loss: 1.1267</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2412 - val_loss: 1.2269</span></span>
 <span><span class="co">## Epoch 41/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2416 - val_loss: 1.3864</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.2438 - val_loss: 1.2962</span></span>
 <span><span class="co">## Epoch 42/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.2304 - val_loss: 1.4553</span></span>
+<span><span class="co">## 32/32 - 2s - 71ms/step - loss: 0.2346 - val_loss: 1.5495</span></span>
 <span><span class="co">## Epoch 43/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2287 - val_loss: 1.2477</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2338 - val_loss: 1.2897</span></span>
 <span><span class="co">## Epoch 44/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2223 - val_loss: 1.1645</span></span>
+<span><span class="co">## 32/32 - 2s - 76ms/step - loss: 0.2217 - val_loss: 1.1796</span></span>
 <span><span class="co">## Epoch 45/50</span></span>
-<span><span class="co">## 32/32 - 2s - 67ms/step - loss: 0.2176 - val_loss: 1.0877</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2162 - val_loss: 1.0664</span></span>
 <span><span class="co">## Epoch 46/50</span></span>
-<span><span class="co">## 32/32 - 2s - 65ms/step - loss: 0.2109 - val_loss: 1.0843</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2107 - val_loss: 1.1255</span></span>
 <span><span class="co">## Epoch 47/50</span></span>
-<span><span class="co">## 32/32 - 2s - 70ms/step - loss: 0.2064 - val_loss: 1.0662</span></span>
+<span><span class="co">## 32/32 - 2s - 75ms/step - loss: 0.2052 - val_loss: 1.0769</span></span>
 <span><span class="co">## Epoch 48/50</span></span>
-<span><span class="co">## 32/32 - 2s - 66ms/step - loss: 0.2004 - val_loss: 1.0927</span></span>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.2006 - val_loss: 1.1074</span></span>
 <span><span class="co">## Epoch 49/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.1934 - val_loss: 1.0553</span></span>
+<span><span class="co">## 32/32 - 2s - 73ms/step - loss: 0.1929 - val_loss: 1.0538</span></span>
 <span><span class="co">## Epoch 50/50</span></span>
-<span><span class="co">## 32/32 - 2s - 64ms/step - loss: 0.1839 - val_loss: 1.1265</span></span></code></pre>
+<span><span class="co">## 32/32 - 2s - 74ms/step - loss: 0.1841 - val_loss: 1.0820</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-predictions">Visualize predictions<a class="anchor" aria-label="anchor" href="#visualize-predictions"></a>
@@ -667,7 +667,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span>  <span class="va">batch_size</span>, <span class="va">img_size</span>, <span class="va">val_input_img_paths</span>, <span class="va">val_target_img_paths</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">val_preds</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="va">val_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 32/32 - 3s - 94ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 32/32 - 3s - 107ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">display_mask</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Quick utility to display a model's prediction.</span></span>
@@ -698,7 +698,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 <span><span class="co"># Display mask predicted by our model</span></span>
 <span><span class="fu">display_mask</span><span class="op">(</span><span class="va">i</span><span class="op">)</span>  <span class="co"># Note that the model only sees inputs at 150x150.</span></span></code></pre></div>
 <div class="float">
-<img src="oxford_pets_image_segmentation/unnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9"><div class="figcaption">plot of chunk unnamed-chunk-9</div>
+<img src="oxford_pets_image_segmentation%2Funnamed-chunk-9-1.png" alt="plot of chunk unnamed-chunk-9"><div class="figcaption">plot of chunk unnamed-chunk-9</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -712,7 +712,7 @@ like?<a class="anchor" aria-label="anchor" href="#what-does-one-input-image-and-
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

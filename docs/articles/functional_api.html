@@ -14,8 +14,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="The Functional API">
 <meta name="description" content="Complete guide to the functional API.">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -179,12 +179,12 @@ inputs and outputs in the graph of layers:</p>
 <p>You can also plot the model as a graph:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-10-1.png" width="176"></p>
+<p><img src="functional_api%2Funnamed-chunk-10-1.png" width="176"></p>
 <p>And, optionally, display the input and output shapes of each layer in
 the plotted graph:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-11-1.png" width="580"></p>
+<p><img src="functional_api%2Funnamed-chunk-11-1.png" width="580"></p>
 <p>This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.</p>
 <p>A “graph of layers” is an intuitive mental image for a deep learning
@@ -226,10 +226,10 @@ then evaluate the model on the test data:</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 750/750 - 1s - 784us/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397</span></span></code></pre>
+<span><span class="co">## 750/750 - 1s - 2ms/step - accuracy: 0.9509 - loss: 0.1635 - val_accuracy: 0.9597 - val_loss: 0.1397</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step - accuracy: 0.9595 - loss: 0.1328</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step - accuracy: 0.9595 - loss: 0.1328</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -549,7 +549,7 @@ the set of departments).</li>
 <p>Now plot the model:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-20-1.png" width="1637"></p>
+<p><img src="functional_api%2Funnamed-chunk-20-1.png" width="1637"></p>
 <p>When compiling this model, you can assign different losses to each
 output. You can even assign different weights to each loss – to modulate
 their contribution to the total training loss.</p>
@@ -592,9 +592,9 @@ targets:</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 66ms/step - department_loss: 381.0319 - loss: 498.7886 - priority_loss: 117.7568</span></span>
+<span><span class="co">## 40/40 - 3s - 74ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 0s - 10ms/step - department_loss: 358.5705 - loss: 438.4252 - priority_loss: 79.8546</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -684,7 +684,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <p>Plot the model:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-25-1.png" width="953"></p>
+<p><img src="functional_api%2Funnamed-chunk-25-1.png" width="953"></p>
 <p>Now train the model:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_cifar10.html">dataset_cifar10</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -707,7 +707,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 375ms/step - acc: 0.1250 - loss: 2.3001 - val_acc: 0.1400 - val_loss: 2.2938</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 6s - 453ms/step - acc: 0.1250 - loss: 2.3006 - val_acc: 0.1300 - val_loss: 2.2969</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -1114,7 +1114,7 @@ used in a functional model:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

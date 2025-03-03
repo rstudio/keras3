@@ -7,25 +7,30 @@
 use_backend(backend, gpu = NA)
 }
 \arguments{
-\item{backend}{string, can be \code{"tensorflow"}, \code{"jax"}, \code{"numpy"}, or \code{"torch"}.}
+\item{backend}{string, can be \code{"tensorflow"}, \code{"jax"}, \code{"numpy"}, or
+\code{"torch"}.}
 
-\item{gpu}{bool, whether to use the GPU.}
+\item{gpu}{bool, whether to use the GPU. If \code{NA} (default), it will attempt
+to detect GPU availability on Linux. On M-series Macs, it defaults to
+\code{FALSE} for TensorFlow and \code{TRUE} for JAX. On Windows, it defaults to
+\code{FALSE}.}
 }
 \value{
-Called primarily for side effects. Returns the provided \code{backend}, invisibly.
+Called primarily for side effects. Returns the provided \code{backend},
+invisibly.
 }
 \description{
 Configure a Keras backend
 }
 \details{
-These functions allow configuring which backend keras will use.
-Note that only one backend can be configured at a time.
+These functions allow configuring which backend keras will use. Note that
+only one backend can be configured at a time.
 
 The function should be called after \code{library(keras3)} and before calling
 other functions within the package (see below for an example).
 
-There is experimental support for changing the backend after keras has initialized.
-using \code{config_set_backend()}.
+There is experimental support for changing the backend after keras has
+initialized. using \code{config_set_backend()}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(keras3)
 use_backend("tensorflow")
