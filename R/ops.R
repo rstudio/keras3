@@ -4753,7 +4753,7 @@ keras$ops$expm1(x)
 op_eye <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
-    args <- capture_args(list(k = as_integer))
+    args <- capture_args(list(N = as_integer, M = as_integer, k = as_integer))
     do.call(keras$ops$eye, args)
 }
 
