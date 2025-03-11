@@ -45,7 +45,7 @@ create_layer <- function(LayerClass, object, args = list()) {
   if (is.null(object))
     layer
   else
-    invisible(compose_layer(object, layer))
+    compose_layer(object, layer)
 }
 
 
@@ -60,7 +60,7 @@ compose_layer <- function(object, layer, ...) {
     if(length(list(...)) > 0) warning("arguments passed via ellipsis will be ignored")
 
     object$add(layer)
-    return(object)
+    return(invisible(object))
   }
 
   # otherwise, invoke `layer$__call__()`
