@@ -2209,7 +2209,12 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
     ignore_class = NULL, sparse_y_true = TRUE, sparse_y_pred = TRUE,
     axis = -1L)
 {
-    args <- capture_args(list(ignore_class = as_integer, axis = as_axis))
+    args <- capture_args(list(num_classes = as_integer,
+                              target_class_ids = function(x) {
+                                as.list(as_integer(x))
+                              },
+                              ignore_class = as_integer,
+                              axis = as_axis))
     do.call(keras$metrics$IoU, args)
 }
 
