@@ -1549,7 +1549,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 op_top_k <-
 function (x, k, sorted = TRUE)
 {
-    args <- capture_args(list(k = as_integer))
+    args <- capture_args(list(x = as_array, k = as_integer))
     do.call(keras$ops$top_k, args)
 }
 
