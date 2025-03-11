@@ -95,10 +95,10 @@ function (pred, true_fn, false_fn)
 keras$ops$cond(pred, true_fn, false_fn)
 
 
-#' Convert a tensor to a NumPy array.
+#' Convert a tensor to an R or NumPy array.
 #'
 #' @returns
-#' A NumPy array.
+#' A NumPy array or R array.
 #'
 #' @param x
 #' A tensor.
@@ -113,6 +113,13 @@ keras$ops$cond(pred, true_fn, false_fn)
 op_convert_to_numpy <-
 function (x)
 r_to_py(keras$ops)$convert_to_numpy(x)
+
+#' @rdname op_convert_to_numpy
+#' @export
+op_convert_to_array <-
+function(x)
+keras$ops$convert_to_numpy(x)
+
 
 
 #' Convert an array to a tensor.
