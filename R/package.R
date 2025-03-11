@@ -101,11 +101,12 @@ keras <- NULL
       # check version
       # check_implementation_version()
 
-      tryCatch(
-        import("tensorflow")$experimental$numpy$experimental_enable_numpy_behavior(),
-        error = function(e) {
-          warning("failed setting experimental_enable_numpy_behavior")
-        })
+      # disabled because of errors with keras-hub
+      # tryCatch(
+      #   import("tensorflow")$experimental$numpy$experimental_enable_numpy_behavior(),
+      #   error = function(e) {
+      #     warning("failed setting experimental_enable_numpy_behavior")
+      #   })
 
     },
 
