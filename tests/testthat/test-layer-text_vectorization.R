@@ -13,7 +13,7 @@ test_call_succeeds("layer_text_vectorization", {
   layer %>% adapt(input)
   output <- layer(input)
 
-  expect_s3_class(output, "tensorflow.tensor")
+  expect_tensor(output)
 })
 
 test_call_succeeds("layer_text_vectorization", {
@@ -29,7 +29,7 @@ test_call_succeeds("layer_text_vectorization", {
 
   output <- layer(x)
 
-  expect_s3_class(output, "tensorflow.tensor")
+  expect_tensor(output)
 })
 
 test_call_succeeds("can use layer_text_vectorization in a functional model", {
@@ -48,6 +48,7 @@ test_call_succeeds("can use layer_text_vectorization in a functional model", {
   model <- keras_model(input, output)
 
   pred <- predict(model, x)
+  pred <- predict(model, tf$convert_to_tensor(x))
 
 })
 
