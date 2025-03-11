@@ -74,10 +74,10 @@ keras$ops$cast(x, dtype)
 #'               \() {NULL})
 #'       state
 #'     },
-#'     init_val = tensorflow::as_tensor(0))
+#'     init_val = tensorflow::as_tensor(0, "float32"))
 #' })
 #'
-#' fn(tensorflow::as_tensor(100))
+#' fn(tensorflow::as_tensor(100, "float32"))
 #'
 #' readLines(file)
 #'
