@@ -78,6 +78,7 @@ keras <- NULL
   # use_backend() includes py_require(action = "remove") calls to undo
   # what tensorflow:::.onLoad() did. Keep them in sync!
   # backend <- Sys.getenv("KERAS_BACKEND", "jax")
+  # ~/.keras.keras.json also has an (undocumented) 'backend' field
   backend <- Sys.getenv("KERAS_BACKEND", "tensorflow")
   gpu <- NA
   if (endsWith(backend, "-cpu")) {
