@@ -408,6 +408,8 @@ op_shape <-
 function (x)
 {
     out <- keras$ops$shape(x)
+    if (any(grepl("tensorflow\\..*\\.TensorShape", class(out))))
+      out <- out$as_list()
     class(out) <- "keras_shape"
     out
 }
