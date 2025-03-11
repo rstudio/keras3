@@ -68,6 +68,11 @@ keras <- NULL
     "ipython" #, "tensorflow_datasets"
   ))
 
+  if (is.na(Sys.getenv("KERAS_HOME", NA))) {
+    if (!dir.exists("~/.keras/"))
+      Sys.setenv("KERAS_HOME" = tools::R_user_dir("keras3", "cache"))
+  }
+
   # default backend is tensorflow for now
   # the tensorflow R package calls `py_require()` to ensure GPU is usable on Linux
   # use_backend() includes py_require(action = "remove") calls to undo
