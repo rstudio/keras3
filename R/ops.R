@@ -3121,13 +3121,12 @@ function (x1, x2, axis = NULL)
 #'
 #' @description
 #' `arange` can be called with a varying number of positional arguments:
-#' * `arange(stop)`: Values are generated within the half-open interval
-#'     `[0, stop)` (in other words, the interval including `start` but excluding
-#'     `stop`).
-#' * `arange(start, stop)`: Values are generated within the half-open interval
-#'     `[start, stop)`.
-#' * `arange(start, stop, step)`: Values are generated within the half-open
-#'     interval `[start, stop)`, with spacing between values given by step.
+#' * `arange(end)`: Values are generated within the half-open interval
+#'     `[1, end]` (in other words, the interval including `start` and `end`).
+#' * `arange(start, end)`: Values are generated within the interval
+#'     `[start, end]`.
+#' * `arange(start, end, step)`: Values are generated within the
+#'     interval `[start, end]`, with spacing between values given by `step`.
 #'
 #' # Examples
 #' ```{r}
@@ -3141,14 +3140,14 @@ function (x1, x2, axis = NULL)
 #' @returns
 #' Tensor of evenly spaced values.
 #' For floating point arguments, the length of the result is
-#' `ceiling((stop - start)/step)`. Because of floating point overflow, this
-#' rule may result in the last element of out being greater than stop.
+#' `ceiling((end - start)/step)`. Because of floating point overflow, this
+#' rule may result in the last element of out being greater than `end`.
 #'
 #' @param start
 #' Integer or real, representing the start of the interval. The
 #' interval includes this value.
 #'
-#' @param stop
+#' @param end
 #' Integer or real, representing the end of the interval. The
 #' interval does not include this value, except in some cases where
 #' `step` is not an integer and floating point round-off affects the
@@ -3172,18 +3171,25 @@ function (x1, x2, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 #' @tether keras.ops.arange
 op_arange <-
-function (start, stop = NULL, step = 1L, dtype = NULL)
+function (start, end, step = 1L, dtype = NULL)
 {
-  transformers <- list()
-  if (!is.null(dtype) && keras$backend$is_int_dtype(dtype))
-    transformers[c("start", "stop", "step")] <- list(function(x) {
-      if (is.double(x))
-        storage.mode(x) <- "integer"
-      x
-    })
 
-  args <- capture_args(transformers)
-  do.call(keras$ops$arange, args)
+  if(missing(end)) {
+    start <- 1L
+    end <- start
+  }
+
+  if (!is.null(dtype) && keras$backend$is_int_dtype(dtype)) {
+    if (is.double(start))
+      storage.mode(start) <- "integer"
+    if (is.double(end))
+      storage.mode(end) <- "integer"
+  }
+
+  abs_step <- op_abs(step)
+  step <- op_where(start > end, -abs_step, abs_step)
+
+  keras$ops$arange(start, end+step, step, dtype = dtype)
 }
 
 
