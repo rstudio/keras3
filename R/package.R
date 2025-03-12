@@ -69,8 +69,12 @@ keras <- NULL
   ))
 
   if (is.na(Sys.getenv("KERAS_HOME", NA))) {
-    if (!dir.exists("~/.keras/"))
-      Sys.setenv("KERAS_HOME" = tools::R_user_dir("keras3", "cache"))
+    if (!dir.exists("~/.keras/")) {
+      Sys.setenv("KERAS_HOME" = normalizePath(
+        tools::R_user_dir("keras3", "cache"),
+        mustWork = FALSE
+        ))
+    }
   }
 
   # default backend is tensorflow for now
