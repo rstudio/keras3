@@ -57,13 +57,13 @@ fn <- tensorflow::tf_function(function(epochs) \{
               \\() \{NULL\})
       state
     \},
-    init_val = tensorflow::as_tensor(0))
+    init_val = tensorflow::as_tensor(0, "float32"))
 \})
 
-fn(tensorflow::as_tensor(100))
+fn(tensorflow::as_tensor(100, "float32"))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.0, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

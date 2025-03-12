@@ -222,13 +222,13 @@ preprocessed_ds <- labeled_dataset |>
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## $float_values
-## <KerasTensor shape=(None, 1), dtype=float32, sparse=False, name=float_values>
+## <KerasTensor shape=(None, 1), dtype=float32, sparse=False, ragged=False, name=float_values>
 ##
 ## $string_values
-## <KerasTensor shape=(None, 1), dtype=string, sparse=False, name=string_values>
+## <KerasTensor shape=(None, 1), dtype=string, sparse=False, ragged=False, name=string_values>
 ##
 ## $int_values
-## <KerasTensor shape=(None, 1), dtype=int32, sparse=False, name=int_values>
+## <KerasTensor shape=(None, 1), dtype=int32, sparse=False, ragged=False, name=int_values>
 
 }\if{html}{\out{</div>}}
 
@@ -236,7 +236,7 @@ preprocessed_ds <- labeled_dataset |>
 (encoded_features <- feature_space$get_encoded_features())
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 43), dtype=float32, sparse=False, name=keras_tensor_7>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 43), dtype=float32, sparse=False, ragged=False, name=keras_tensor_7>
 
 }\if{html}{\out{</div>}}
 

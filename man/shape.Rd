@@ -75,8 +75,8 @@ Most functions that take a 'shape' argument also coerce with \code{shape()}
 layer_input(shape(1, 2, 3))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, name=keras_tensor>
-## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, name=keras_tensor_1>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, ragged=False, name=keras_tensor>
+## <KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, ragged=False, name=keras_tensor_1>
 
 }\if{html}{\out{</div>}}
 

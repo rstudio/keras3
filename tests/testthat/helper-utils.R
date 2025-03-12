@@ -153,7 +153,9 @@ define_and_compile_model <- function() {
 expect_tensor <- function(x, shape=NULL, shaped_as=NULL) {
   x_lbl <- quasi_label(rlang::enquo(x), arg = 'x')$lab
 
-  expect(keras$backend$is_keras_tensor(x) || inherits(x, "tensorflow.tensor"),
+  expect(op_is_tensor(x) ||
+           keras$backend$is_keras_tensor(x) ||
+           inherits(x, "tensorflow.tensor"),
          paste(x_lbl, "was wrong S3 class, expected a tensor, actual", class(x)))
 
   x_shape <- x$shape

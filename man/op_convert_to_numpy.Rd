@@ -2,18 +2,21 @@
 % Please edit documentation in R/ops.R
 \name{op_convert_to_numpy}
 \alias{op_convert_to_numpy}
-\title{Convert a tensor to a NumPy array.}
+\alias{op_convert_to_array}
+\title{Convert a tensor to an R or NumPy array.}
 \usage{
 op_convert_to_numpy(x)
+
+op_convert_to_array(x)
 }
 \arguments{
 \item{x}{A tensor.}
 }
 \value{
-A NumPy array.
+A NumPy array or R array.
 }
 \description{
-Convert a tensor to a NumPy array.
+Convert a tensor to an R or NumPy array.
 }
 \seealso{
 \itemize{

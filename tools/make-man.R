@@ -1,7 +1,11 @@
 #!/usr/bin/env Rscript
-
+Sys.setenv("KERAS_BACKEND" = "tensorflow-cpu")
 devtools::document()
 
+# reticulate::py_require(c(
+#   "keras",
+#   if (Sys.info()[["sysname"]] == "Linux") "tensorflow-cpu" else "tensorflow"
+# ))
 if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
 
 # rd_file <- "man/activation_elu.Rd"

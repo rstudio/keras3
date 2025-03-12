@@ -1,3 +1,27 @@
+# keras3 (development version)
+
+- `KERAS_HOME` is now set to `tools::R_user_dir("keras3", "cache")` if
+  `~/.keras` does not exist and `KERAS_HOME` is unset.
+
+- `tf.experimental_enable_numpy_behavior()` is no longer automatically called,
+  due to errors with `keras-hub`.
+  This change makes dtype promotion behavior more strict.
+  To reenable, it's recommended to use "safe" mode:
+  ```r
+  reticulate::import("tensorflow")$experimental$numpy$
+    experimental_enable_numpy_behavior(
+      prefer_float32 = TRUE,
+      dtype_conversion_mode = "safe"
+    )
+  ```
+
+  - new `op_convert_to_array()` to convert a tensor to an R array.
+
+  - Fixed an issue where `op_shape()` would sometimes return a TensorFlow `TensorShape`
+
+  - Fixes for `metric_iou()`, `op_top_k()`, and `op_eye()` being called with R atomic doubles
+
+
 # keras3 1.3.0
 
 - Keras now uses `reticulate::py_require()` to resolve Python dependencies.
@@ -13,8 +37,8 @@
 
 - `%*%` now dispatches to `op_matmul()` for tensorflow tensors, which
   has relaxed shape constraints compared to `tf$matmul()`.
-  
-- Fixed an issue where calling a `Metric` and `Loss` object 
+
+- Fixed an issue where calling a `Metric` and `Loss` object
   with unnamed arguments would error.
 
 ## Added compatibility with Keras v3.8.0. User-facing changes:

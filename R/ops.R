@@ -74,10 +74,10 @@ keras$ops$cast(x, dtype)
 #'               \() {NULL})
 #'       state
 #'     },
-#'     init_val = tensorflow::as_tensor(0))
+#'     init_val = tensorflow::as_tensor(0, "float32"))
 #' })
 #'
-#' fn(tensorflow::as_tensor(100))
+#' fn(tensorflow::as_tensor(100, "float32"))
 #'
 #' readLines(file)
 #'
@@ -95,10 +95,10 @@ function (pred, true_fn, false_fn)
 keras$ops$cond(pred, true_fn, false_fn)
 
 
-#' Convert a tensor to a NumPy array.
+#' Convert a tensor to an R or NumPy array.
 #'
 #' @returns
-#' A NumPy array.
+#' A NumPy array or R array.
 #'
 #' @param x
 #' A tensor.
@@ -113,6 +113,13 @@ keras$ops$cond(pred, true_fn, false_fn)
 op_convert_to_numpy <-
 function (x)
 r_to_py(keras$ops)$convert_to_numpy(x)
+
+#' @rdname op_convert_to_numpy
+#' @export
+op_convert_to_array <-
+function(x)
+keras$ops$convert_to_numpy(x)
+
 
 
 #' Convert an array to a tensor.
@@ -401,6 +408,8 @@ op_shape <-
 function (x)
 {
     out <- keras$ops$shape(x)
+    if (any(grepl("tensorflow\\..*\\.TensorShape", class(out))))
+      out <- out$as_list()
     class(out) <- "keras_shape"
     out
 }
@@ -1540,7 +1549,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 op_top_k <-
 function (x, k, sorted = TRUE)
 {
-    args <- capture_args(list(k = as_integer))
+    args <- capture_args(list(x = as_array, k = as_integer))
     do.call(keras$ops$top_k, args)
 }
 
@@ -4744,7 +4753,7 @@ keras$ops$expm1(x)
 op_eye <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
-    args <- capture_args(list(k = as_integer))
+    args <- capture_args(list(N = as_integer, M = as_integer, k = as_integer))
     do.call(keras$ops$eye, args)
 }
 
