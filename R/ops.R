@@ -3417,13 +3417,13 @@ keras$ops$arctanh(x)
 #' ```
 #'
 #' @note
-#' This is similar to R `max.col(x) - 1` for the case of a 2-d array (a matrix),
-#' or for an nd-array, `apply(x, axis, which.max) - 1`
+#' This is similar to R `max.col(x)` for the case of a 2-d array (a matrix),
+#' or for an nd-array, `apply(x, axis, which.max)`
 #'
 #' @returns
 #' Tensor of indices. It has the same shape as `x`, with the dimension
-#' along `axis` removed. Note that the returned integer is 0-based (i.e., if the
-#' argmax is in the first index position, the returned value will be `0`)
+#' along `axis` removed. Note that the returned integer is 1-based (i.e., if the
+#' argmax is in the first index position, the returned value will be `1`)
 #'
 #' @param x
 #' Input tensor.
@@ -3446,8 +3446,8 @@ keras$ops$arctanh(x)
 op_argmax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argmax, args)
+    args <- capture_args(list(x = as_array, axis = as_axis))
+    do.call(keras$ops$argmax, args) + 1L
 }
 
 

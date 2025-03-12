@@ -73,7 +73,7 @@ keras <- NULL
       Sys.setenv("KERAS_HOME" = normalizePath(
         tools::R_user_dir("keras3", "cache"),
         mustWork = FALSE
-        ))
+      ))
     }
   }
 
