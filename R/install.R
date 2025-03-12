@@ -195,7 +195,7 @@ use_backend <- function(backend, gpu = NA) {
       if (gpu) {
         py_require(c("tensorflow", "jax", "jax-metal"))
       } else {
-        py_require("tensorflow", "jax[cpu]")
+        py_require(c("tensorflow", "jax[cpu]"))
       }
     },
 
