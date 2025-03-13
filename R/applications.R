@@ -4119,7 +4119,22 @@ set_preprocessing_attributes <- function(object, module) {
       do.call(.(.preprocess_input), args)
     })), envir = parent.env(environment()))
 
-  attr(object, "decode_predictions") <- module$decode_predictions
+  .decode_predictions <- module$decode_predictions
+
+  attr(object, "decode_predictions") <-
+    as.function.default(c(formals(.decode_predictions), bquote({
+      args <- capture_args()
+      decoded <- do.call(.(.decode_predictions), args)
+
+      # convert to a list of data frames
+      lapply(decoded, function(x) {
+        m <- t(sapply(1:length(x), function(n) x[[n]]))
+        data.frame(class_name = as.character(m[,1]),
+                   class_description = as.character(m[,2]),
+                   score = as.numeric(m[,3]),
+                   stringsAsFactors = FALSE)
+      })
+    })), envir = parent.env(environment()))
   object
 }
 
