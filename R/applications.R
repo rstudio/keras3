@@ -4053,7 +4053,29 @@ NULL
 application_preprocess_inputs <- function(model, x, ..., data_format = NULL) {
   preprocess_input <- attr(model, "preprocess_input")
   if (is.null(preprocess_input)) not_found_errors()
+  if (missing(x)) {
+    if (!is.null(data_format) || length(list(...))) {
+      .preprocess_input <- preprocess_input
+      preprocess_input <- as.function.default(c(
+        alist(x = , ... =), list(data_format = data_format),
+        bquote(
+          .preprocess_input(x, data_format = data_format, ..., ..(list(...))),
+          splice = TRUE
+        )
+      ))
+      environment(preprocess_input) <- rlang::env(
+        asNamespace("keras3"),
+        .preprocess_input = .preprocess_input
+      )
+    }
+    return(preprocess_input)
+  }
   preprocess_input(x, data_format = data_format, ...)
+}
+
+partial <- function(.fn, .sig, ...) {
+  body <- as.call(c(.fn, lapply(names(.sig), as.symbol),  ...))
+  as.function.default(c(.sig, body), envir = baseenv())
 }
 
 #' @describeIn process_utils Decode predictions from the model
