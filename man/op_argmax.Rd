@@ -17,15 +17,15 @@ in the result as dimensions with size one. Defaults to \code{FALSE}.}
 }
 \value{
 Tensor of indices. It has the same shape as \code{x}, with the dimension
-along \code{axis} removed. Note that the returned integer is 0-based (i.e., if the
-argmax is in the first index position, the returned value will be \code{0})
+along \code{axis} removed. Note that the returned integer is 1-based (i.e., if the
+argmax is in the first index position, the returned value will be \code{1})
 }
 \description{
 Returns the indices of the maximum values along an axis.
 }
 \note{
-This is similar to R \code{max.col(x) - 1} for the case of a 2-d array (a matrix),
-or for an nd-array, \code{apply(x, axis, which.max) - 1}
+This is similar to R \code{max.col(x)} for the case of a 2-d array (a matrix),
+or for an nd-array, \code{apply(x, axis, which.max)}
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
@@ -33,29 +33,47 @@ x
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[10. 11. 12.]
-##  [13. 14. 15.]], shape=(2, 3), dtype=float32)
+## [[11. 12. 13.]
+##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmax(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(5, shape=(), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[11. 12. 13.]
+##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(6, shape=(), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmax(x, axis = 1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 1], shape=(3), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[11. 12. 13.]
+##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 2 2], shape=(3), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmax(x, axis = 2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 2], shape=(2), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[11. 12. 13.]
+##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3 3], shape=(2), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }

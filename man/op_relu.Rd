@@ -20,7 +20,7 @@ It is defined as \code{f(x) = max(0, x)}.
 op_relu(x1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.  1.  0.2], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.  0.  1.  0.2], shape=(4), dtype=float64)
 
 }\if{html}{\out{</div>}}
 

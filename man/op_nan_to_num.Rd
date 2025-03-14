@@ -25,21 +25,21 @@ Replace NaN with zero and infinity with large finite numbers.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_convert_to_tensor(c(1, NaN, -Inf, Inf)))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  1.  nan -inf  inf], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  1.  nan -inf  inf], shape=(4), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_nan_to_num(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.0000000e+00  0.0000000e+00 -3.4028235e+38  3.4028235e+38], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.00000000e+000  0.00000000e+000 -1.79769313e+308  1.79769313e+308], shape=(4), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_nan_to_num(x, nan = -1, posinf = 2, neginf = -2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1. -1. -2.  2.], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1. -1. -2.  2.], shape=(4), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }

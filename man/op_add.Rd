@@ -23,7 +23,7 @@ x2 <- op_convert_to_tensor(c(5, 6))
 op_add(x1, x2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
@@ -31,7 +31,7 @@ op_add(x1, x2)
 x1 + x2
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 6. 10.], shape=(2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 

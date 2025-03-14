@@ -20,21 +20,21 @@ Note that this function is automatically called when using the R operator \code{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_less_equal(x, 2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True  True  True False], shape=(4), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True  True False False], shape=(4), dtype=bool)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <= 2
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True  True  True False], shape=(4), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True  True False False], shape=(4), dtype=bool)
 
 }\if{html}{\out{</div>}}
 }

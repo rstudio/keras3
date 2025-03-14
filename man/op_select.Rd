@@ -36,7 +36,7 @@ choicelist <- list(x, x^2)
 op_select(condlist, choicelist, 42)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0  1  2 42 16 25], shape=(6), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1  2 42 16 25 36], shape=(6), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }

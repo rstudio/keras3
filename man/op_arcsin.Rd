@@ -21,7 +21,7 @@ Inverse sine, element-wise.
 op_arcsin(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.5707964 -1.5707964  0.       ], shape=(3), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.57079633 -1.57079633  0.        ], shape=(3), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }

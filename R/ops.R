@@ -3177,8 +3177,8 @@ function (start, end, step = 1L, dtype = NULL)
 {
 
   if(missing(end)) {
-    start <- 1L
     end <- start
+    start <- if (is.double(end)) 1 else 1L
   }
 
   if (!is.null(dtype) && keras$backend$is_int_dtype(dtype)) {

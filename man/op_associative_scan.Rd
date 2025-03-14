@@ -51,7 +51,7 @@ xs <- op_arange(5L)
 op_associative_scan(sum_fn, xs)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0  1  3  6 10], shape=(5), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1  3  6 10 15], shape=(5), dtype=int32)
 
 }\if{html}{\out{</div>}}
 

@@ -20,7 +20,7 @@ Computes reciprocal of square root of x element-wise.
 op_rsqrt(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.         0.31622776 0.1       ], shape=(3), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.         0.31622777 0.1       ], shape=(3), dtype=float64)
 
 }\if{html}{\out{</div>}}
 

@@ -89,6 +89,13 @@ labels <- random_uniform(c(1000, 10))
 model |> fit(data, labels, verbose = 0)
 }\if{html}{\out{</div>}}
 
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## Tensor("data_1:0", shape=(None, 10), dtype=float32)
+## Tensor("sequential_1/dense_2_1/Softmax:0", shape=(None, 10), dtype=float32)
+## Tensor("data_1:0", shape=(None, 10), dtype=float32)
+## Tensor("sequential_1/dense_2_1/Softmax:0", shape=(None, 10), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
 To be implemented by subclasses (custom metrics):
 \itemize{
 \item \code{initialize()}: All state variables should be created in this method by

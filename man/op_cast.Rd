@@ -21,14 +21,14 @@ Cast a tensor to the desired dtype.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_cast(x, dtype = "float16")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float16)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float16)
 
 }\if{html}{\out{</div>}}
 }

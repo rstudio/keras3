@@ -34,14 +34,14 @@ Compute the weighted average along the specified axis.
 data
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 3 4], shape=(4), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 3 4 5], shape=(5), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_average(data)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.5, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(3.0, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -60,9 +60,9 @@ data
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 1.]
-##  [2. 3.]
-##  [4. 5.]], shape=(3, 2), dtype=float32)
+## [[1. 2.]
+##  [3. 4.]
+##  [5. 6.]], shape=(3, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -73,7 +73,7 @@ data
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.75 2.75 4.75], shape=(3), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.75 3.75 5.75], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

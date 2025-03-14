@@ -68,7 +68,7 @@ purposes. The following norms can be calculated:
 op_norm(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(7.745967, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(8.306623, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

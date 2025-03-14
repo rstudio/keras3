@@ -84,6 +84,19 @@ m$update_state(
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 1.]
+##  [1. 0. 0.]
+##  [0. 1. 0.]
+##  [1. 0. 0.]], shape=(4, 3), dtype=float32)
+## tf.Tensor(
+## [[0.2 0.3 0.5]
+##  [0.1 0.2 0.7]
+##  [0.5 0.3 0.1]
+##  [0.1 0.4 0.5]], shape=(4, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
 ## [[0 0 6]
 ##  [3 0 0]
 ##  [0 0 1]], shape=(3, 3), dtype=int64)

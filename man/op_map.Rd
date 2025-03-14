@@ -39,7 +39,7 @@ ys <- op_map(xs, f)
 ys
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.  1.  4.  9. 16. 25. 36. 49. 64. 81.], shape=(10), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  1.   4.   9.  16.  25.  36.  49.  64.  81. 100.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -48,14 +48,14 @@ ys <- op_map(xs, f)
 ys$y1
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.  1.  4.  9. 16. 25. 36. 49. 64. 81.], shape=(10), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  1.   4.   9.  16.  25.  36.  49.  64.  81. 100.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{ys$y2
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0. 10. 20. 30. 40. 50. 60. 70. 80. 90.], shape=(10), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 10.  20.  30.  40.  50.  60.  70.  80.  90. 100.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

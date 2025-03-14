@@ -20,21 +20,21 @@ Note that this function is automatically called when using the R operator \code{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(10))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3. 4. 5. 6. 7. 8. 9.], shape=(10), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.  2.  3.  4.  5.  6.  7.  8.  9. 10.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_mod(x, 3)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 0. 1. 2. 0. 1. 2. 0.], shape=(10), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 0. 1. 2. 0. 1. 2. 0. 1.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x \%\% 3
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 0. 1. 2. 0. 1. 2. 0.], shape=(10), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 0. 1. 2. 0. 1. 2. 0. 1.], shape=(10), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

@@ -36,10 +36,10 @@ op_rfft(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
-## tf.Tensor([10.  -2.5 -2.5], shape=(3), dtype=float32)
+## tf.Tensor([10.  -2.5 -2.5], shape=(3), dtype=float64)
 ##
 ## [[2]]
-## tf.Tensor([0.        3.440955  0.8122992], shape=(3), dtype=float32)
+## tf.Tensor([0.         3.4409548  0.81229924], shape=(3), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
@@ -47,10 +47,10 @@ op_rfft(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
-## tf.Tensor([ 3.  -1.5], shape=(2), dtype=float32)
+## tf.Tensor([ 3.  -1.5], shape=(2), dtype=float64)
 ##
 ## [[2]]
-## tf.Tensor([0.        0.8660254], shape=(2), dtype=float32)
+## tf.Tensor([0.        0.8660254], shape=(2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }

@@ -33,8 +33,8 @@ Trace of a matrix:
 op_trace(a)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(60.0, shape=(), dtype=float32)
-## tf.Tensor(60.0, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(65.0, shape=(), dtype=float32)
+## tf.Tensor(65.0, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -44,8 +44,8 @@ Extract the diagonal:
 op_diag(a)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.  6. 12. 18. 24.], shape=(5), dtype=float32)
-## tf.Tensor([ 0.  6. 12. 18. 24.], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.  7. 13. 19. 25.], shape=(5), dtype=float32)
+## tf.Tensor([ 1.  7. 13. 19. 25.], shape=(5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -55,8 +55,8 @@ Sum over an axis:
 op_sum(a, axis = 2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float32)
-## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 15.  40.  65.  90. 115.], shape=(5), dtype=float32)
+## tf.Tensor([ 15.  40.  65.  90. 115.], shape=(5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -67,8 +67,8 @@ with ellipsis:
 op_sum(a, axis = -1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float32)
-## tf.Tensor([ 10.  35.  60.  85. 110.], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 15.  40.  65.  90. 115.], shape=(5), dtype=float32)
+## tf.Tensor([ 15.  40.  65.  90. 115.], shape=(5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -78,8 +78,8 @@ Compute a matrix transpose or reorder any number of axes:
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 1. 2.]
-##  [3. 4. 5.]], shape=(2, 3), dtype=float32)
+## [[1. 2. 3.]
+##  [4. 5. 6.]], shape=(2, 3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -88,13 +88,13 @@ op_transpose(c)          # same as above
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 3.]
-##  [1. 4.]
-##  [2. 5.]], shape=(3, 2), dtype=float32)
+## [[1. 4.]
+##  [2. 5.]
+##  [3. 6.]], shape=(3, 2), dtype=float32)
 ## tf.Tensor(
-## [[0. 3.]
-##  [1. 4.]
-##  [2. 5.]], shape=(3, 2), dtype=float32)
+## [[1. 4.]
+##  [2. 5.]
+##  [3. 6.]], shape=(3, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -106,10 +106,10 @@ a \%*\% b
 op_matmul(a, b)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float32)
-## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float32)
-## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float32)
-## tf.Tensor([ 30.  80. 130. 180. 230.], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 55. 130. 205. 280. 355.], shape=(5), dtype=float32)
+## tf.Tensor([ 55. 130. 205. 280. 355.], shape=(5), dtype=float32)
+## tf.Tensor([ 55. 130. 205. 280. 355.], shape=(5), dtype=float32)
+## tf.Tensor([ 55. 130. 205. 280. 355.], shape=(5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }
