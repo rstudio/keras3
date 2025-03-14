@@ -172,6 +172,44 @@ keras <- NULL
   # on_load_make_as_activation()
 
 
+  reticulate::py_register_load_hook("keras", function() {
+
+    device <-  import("keras")$device
+    convert_to_tensor <- import("keras.ops")$convert_to_tensor
+    with(device("cpu:0"), {
+      backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
+    })
+
+    registerS3method("@", backend_tensor_class, `@.keras_backend_tensor`, baseenv())
+
+    py_subset <- getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
+    registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
+    registerS3method("[", "keras_py_backend_tensor", py_subset, baseenv())
+
+  })
+
+
+  reticulate::py_register_load_hook("tensorflow", function() {
+
+    # we still need to register tensorflow methods even if backend is not
+    # tensorflow, since tf.data is used with other backends
+    registerS3method("@", "tensorflow.tensor", `@.keras_backend_tensor`, baseenv())
+  })
+
+}
+
+`@.keras_backend_tensor` <-  function(x, name) {
+  out <- rlang::env_clone(x)
+  attrs <- attributes(x)
+  cls <- switch(
+    name,
+    "r" = "keras_r_backend_tensor" ,
+    "py" = "keras_py_backend_tensor",
+    stop("<subset-style> must be 'r' or 'py' in expression <tensor>@<subset-style>")
+  )
+  attrs$class <- c(cls, attrs$class)
+  attributes(out) <- attrs
+  out
 }
 
 keras_not_found_message <- function(error_message) {
