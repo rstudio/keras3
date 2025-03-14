@@ -185,7 +185,7 @@ keras <- NULL
     registerS3method("@", symbolic_tensor_class, `@.keras_backend_tensor`, baseenv())
     registerS3method("@", backend_tensor_class, `@.keras_backend_tensor`, baseenv())
 
-    py_subset <- getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
+    py_subset <- utils::getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
     registerS3method("[", "keras_py_backend_tensor", py_subset, baseenv())
 
@@ -200,7 +200,10 @@ keras <- NULL
     py_capture_output({
       tf$experimental$numpy$experimental_enable_numpy_behavior(
         prefer_float32 = TRUE,
-        dtype_conversion_mode = "safe"
+        dtype_conversion_mode = "legacy"
+        # "all" or "safe" leads to error in keras
+        # can optionally also do "off", but that's even more strict
+        # dtype_conversion_mode = "off"
       )
     }, "stderr")
 

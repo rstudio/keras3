@@ -871,7 +871,7 @@ relative_to <- function(dir, file) {
 if (FALSE) {
   # roxygen2 now wants this exported.
   `[.tensorflow.tensor` <-
-    getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
+    utils::getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
   formals(`[.tensorflow.tensor`)$style <- "R"
   formals(`[.tensorflow.tensor`)$options <-
     tensorflow::tf_extract_opts(
