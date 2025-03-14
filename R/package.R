@@ -94,7 +94,16 @@ keras <- NULL
     backend <- sub("-gpu$", "", backend)
     Sys.setenv("KERAS_BACKEND" = backend)
   }
-  use_backend(backend, gpu)
+
+  if(Sys.getenv("DEVTOOLS_LOAD") == "keras3") {
+    if (Sys.getenv("KERAS_BACKEND_CONFIGURED") != "yes") {
+      use_backend(backend, gpu)
+      Sys.setenv("KERAS_BACKEND_CONFIGURED" = "yes")
+    }
+  } else {
+    use_backend(backend, gpu)
+  }
+
 
   # delay load keras
   try(keras <<- import("keras", delay_load = list(
