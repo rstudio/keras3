@@ -174,12 +174,15 @@ keras <- NULL
 
   reticulate::py_register_load_hook("keras", function() {
 
-    device <-  import("keras")$device
-    convert_to_tensor <- import("keras.ops")$convert_to_tensor
+    keras <- import("keras")
+    device <- keras$device
+    convert_to_tensor <- import("keras.ops", convert = FALSE)$convert_to_tensor
     with(device("cpu:0"), {
       backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
     })
+    symbolic_tensor_class <- nameOfClass(keras$KerasTensor)
 
+    registerS3method("@", symbolic_tensor_class, `@.keras_backend_tensor`, baseenv())
     registerS3method("@", backend_tensor_class, `@.keras_backend_tensor`, baseenv())
 
     py_subset <- getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
