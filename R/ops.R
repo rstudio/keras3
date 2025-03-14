@@ -162,6 +162,8 @@ function (x, dtype = NULL, sparse = NULL) {
       typeof(x) == "double" &&
       grepl("int", dtype, fixed = TRUE))
     storage.mode(x) <- "integer"
+  if (is.atomic(x) && length(x) > 1L)
+    x <- as_array(x)
   keras$ops$convert_to_tensor(x, dtype, sparse)
 }
 
