@@ -151,10 +151,14 @@ op_subset <- function(x, ...) {
       end <- py_to_r(arg$stop)
       if (!is.null(end)) {
         if (is.numeric(end)) {
-          end <- if (identical(end, -1L) || identical(end, x_shape[[axis]]))
+          end <- if (identical(end, -1L) ||
+                     identical(end, x_shape[[axis]])) {
             NULL
-          else
+          } else if (end < 0L) {
             as.integer(end) + 1L
+          } else {
+            as.integer(end)
+          }
         } else if (op_is_tensor(end)) {
           end <- op_where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
         }

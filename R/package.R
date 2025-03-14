@@ -196,6 +196,14 @@ keras <- NULL
 
   reticulate::py_register_load_hook("tensorflow", function() {
 
+    tf <- import("tensorflow")
+    py_capture_output({
+      tf$experimental$numpy$experimental_enable_numpy_behavior(
+        prefer_float32 = TRUE,
+        dtype_conversion_mode = "safe"
+      )
+    }, "stderr")
+
     # we still need to register tensorflow methods even if backend is not
     # tensorflow, since tf.data is used with other backends
     registerS3method("@", "tensorflow.tensor", `@.keras_backend_tensor`, baseenv())

@@ -117,11 +117,10 @@ test_that("op_subset() works", {
   expect_equal_array(r0, r3)
 
   expect_equal_array(xt>10, xr>10)
-  expect_equal_array(sort(xr[xr>10]), op_sort(xt[xt>10]))
   expect_equal_array(sort(xr[xr>10]), op_sort(xt@r[xt>10]))
   expect_equal_array(sort(xr[xr>10]), op_sort(xt@py[xt>10]))
   # search order is different
-  expect_equal_array(t(xr)[t(xr)>10], xt[xt>10])
+  expect_equal_array(t(xr)[t(xr)>10], xt@r[xt>10])
 
 })
 
@@ -134,9 +133,9 @@ test_that("op_subset() works", {
   xt <- op_convert_to_tensor(xr)
 
   # .. and newaxis
-  expect_equal(op_shape(xt[newaxis]), shape(1, 4, 5))
-  expect_equal(op_shape(xt[newaxis, ..]), shape(1, 4, 5))
-  expect_equal(op_shape(xt[newaxis, .., newaxis]), shape(1, 4, 5, 1))
+  expect_equal(op_shape(xt@py[newaxis]), shape(1, 4, 5))
+  expect_equal(op_shape(xt@py[newaxis, ..]), shape(1, 4, 5))
+  expect_equal(op_shape(xt@py[newaxis, .., newaxis]), shape(1, 4, 5, 1))
 
   # negative numbers
   expect_equal_array(xt@r[-1], xr[4,])
