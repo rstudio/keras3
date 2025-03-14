@@ -182,8 +182,8 @@ keras <- NULL
     })
     symbolic_tensor_class <- nameOfClass(keras$KerasTensor)
 
-    registerS3method("@", symbolic_tensor_class, `@.keras_backend_tensor`, baseenv())
-    registerS3method("@", backend_tensor_class, `@.keras_backend_tensor`, baseenv())
+    registerS3method("@", symbolic_tensor_class, at.keras_backend_tensor, baseenv())
+    registerS3method("@", backend_tensor_class, at.keras_backend_tensor, baseenv())
 
     py_subset <- utils::getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
@@ -209,12 +209,12 @@ keras <- NULL
 
     # we still need to register tensorflow methods even if backend is not
     # tensorflow, since tf.data is used with other backends
-    registerS3method("@", "tensorflow.tensor", `@.keras_backend_tensor`, baseenv())
+    registerS3method("@", "tensorflow.tensor", `at.keras_backend_tensor`, baseenv())
   })
 
 }
 
-`@.keras_backend_tensor` <-  function(x, name) {
+at.keras_backend_tensor <-  function(x, name) {
   out <- rlang::env_clone(x)
   attrs <- attributes(x)
   cls <- switch(
