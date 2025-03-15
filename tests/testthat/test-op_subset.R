@@ -156,3 +156,20 @@ test_that("op_subset() works", {
 
 })
 
+
+
+test_that("op_subset<-() works", {
+  if (getRversion() < "4.2")
+    skip("R version does not support @ methods")
+
+  xr <- array(1:20, c(4, 5))
+  xt <- keras$Variable(xr)
+
+  xt@r[2,] <- 99L
+  xr[2,] <- 99L
+  expect_equal_array(xr, xt)
+
+  xt@r[1,] <- xr[1,] <- 11:15
+  expect_equal_array(xr, xt)
+})
+
