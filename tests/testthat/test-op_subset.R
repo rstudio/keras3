@@ -35,7 +35,7 @@ test_that("op_subset() works", {
     expr <- substitute(expr)
     array_result <- as.array(eval(expr, env(parent.frame(), x = xr)))
     tensor_result <- eval(expr, env(parent.frame(), `[` = op_subset, x = xt))
-    expect_identical(array_result, op_convert_to_array(tensor_result))
+    expect_equal_array(array_result, tensor_result)
 
     vars <- setdiff(all.vars(expr), "x")
     if(length(vars)) {
@@ -49,7 +49,7 @@ test_that("op_subset() works", {
         op_convert_to_tensor(x)
       })
       tensor_result2 <- eval(expr, env(parent.frame(), `[` = op_subset, x = xt, !!!vars))
-      expect_identical(array_result, op_convert_to_array(tensor_result2))
+      expect_equal_array(array_result, tensor_result2)
     }
   }
 
