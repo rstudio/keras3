@@ -3,6 +3,9 @@
 
 test_that("op_subset() works", {
 
+  if (getRversion() < "4.2")
+    skip("R version does not support @ methods")
+
   xr <- array(1:20, c(4, 5))
   xt <- op_convert_to_tensor(xr)
 
@@ -27,6 +30,8 @@ test_that("op_subset() works", {
 
 
 test_that("op_subset() works", {
+  if (getRversion() < "4.2")
+    skip("R version does not support @ methods")
 
   xr <- array(1:20, c(4, 5))
   xt <- op_convert_to_tensor(xr)
@@ -128,6 +133,9 @@ test_that("op_subset() works", {
 
 test_that("op_subset() works", {
   # test pythonic features
+
+  if (getRversion() < "4.2")
+    skip("R version does not support @ methods")
 
   xr <- array(1:20, c(4, 5))
   xt <- op_convert_to_tensor(xr)
