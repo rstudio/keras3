@@ -189,6 +189,14 @@ keras <- NULL
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
     registerS3method("[", "keras_py_backend_tensor", py_subset, baseenv())
 
+
+    registerS3method("@<-", symbolic_tensor_class, at_set.keras_backend_tensor, baseenv())
+    registerS3method("@<-", backend_tensor_class, at_set.keras_backend_tensor, baseenv())
+
+    `py_subset<-` <- utils::getS3method("[<-", "python.builtin.object", envir = asNamespace("reticulate"))
+    registerS3method("[<-", "keras_r_backend_tensor", `op_subset<-`, baseenv())
+    registerS3method("[<-", "keras_py_backend_tensor", `py_subset<-`, baseenv())
+
     registerS3method("as.array", backend_tensor_class, op_convert_to_array, baseenv())
 
   })
@@ -207,26 +215,35 @@ keras <- NULL
       )
     }, "stderr")
 
-    # we still need to register tensorflow methods even if backend is not
-    # tensorflow, since tf.data is used with other backends
-    registerS3method("@", "tensorflow.tensor", `at.keras_backend_tensor`, baseenv())
+    # we still need to register tensorflow `@` and `@<-` methods even if the
+    # backend is not tensorflow, because tf.data can be used with other backends
+    # and tensorflow.tensor might still be encountered.
+    registerS3method("@", "tensorflow.tensor", at.keras_backend_tensor, baseenv())
+    registerS3method("@<-", "tensorflow.tensor", at_set.keras_backend_tensor, baseenv())
   })
 
 }
 
-at.keras_backend_tensor <-  function(x, name) {
-  out <- rlang::env_clone(x)
-  attrs <- attributes(x)
+
+at.keras_backend_tensor <-  function(object, name) {
+  out <- rlang::env_clone(object)
+  attrs <- attributes(object)
   cls <- switch(
     name,
-    "r" = "keras_r_backend_tensor" ,
-    "py" = "keras_py_backend_tensor",
+    r = "keras_r_backend_tensor" ,
+    py = "keras_py_backend_tensor",
     stop("<subset-style> must be 'r' or 'py' in expression <tensor>@<subset-style>")
   )
-  attrs$class <- c(cls, attrs$class)
+  attrs$class <- unique(c(cls, attrs$class))
   attributes(out) <- attrs
   out
 }
+
+
+at_set.keras_backend_tensor <- function(object, name, value) {
+  value
+}
+
 
 keras_not_found_message <- function(error_message) {
   message(error_message)

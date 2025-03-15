@@ -32,8 +32,8 @@ broadcast_to_rank <- function(x, axis, rank) {
 }
 
 
-op_subset <- function(x, ...) {
-  key <- asNamespace("reticulate")$dots_to__getitem__key(..., .envir = parent.frame())
+r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
+  key <- asNamespace("reticulate")$dots_to__getitem__key(..., .envir = .envir)
   key <- if (inherits(key, "python.builtin.tuple"))
     py_to_r(key)
   else
@@ -215,7 +215,50 @@ op_subset <- function(x, ...) {
   }
 
   key <- tuple(key)
+  key
+}
+
+op_subset <- function(x, ...) {
+
+  key <- r_extract_to_py_get_item_key(x, ..., .envir = parent.frame())
   # print(key)
   py_get_item(x, key)
 }
 
+
+`op_subset<-` <- function(x, ..., value) {
+  # browser()
+  key <- r_extract_to_py_get_item_key(x, ..., .envir = parent.frame())
+  if (is.atomic(value)) {
+    if (is.double(x) && grepl("int", op_dtype(x)))
+      storage.mode(value) <- "integer"
+    if (length(value) > 1L)
+      value <- as.array(value)
+  }
+  switch(
+
+    config_backend(),
+
+    tensorflow = {
+      # v[0, 0].assign(3.)
+      x <- py_get_item(x, key)
+      assign <- py_get_attr(x, "assign", silent = TRUE)
+      if (is.null(assign))
+        stop("[<- only supported on tensorflow.Variable, not a constant Tensor")
+      # assign() returns a ref to the same variable, post assign op, which is needed
+      # to ensure op order in graph mode. Return the new ref.
+      assign(value)
+    },
+
+    jax = {
+      # new_x = x.at[0].set(10)
+      x <- py_get_attr(x, "at")
+      x <- py_get_item(x, key)
+      py_get_attr(x, "set")(value)
+    },
+
+    {
+      # default method; torch, numpy, ...
+      py_set_item(x, key, value)
+    })
+}
