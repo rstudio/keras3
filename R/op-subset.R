@@ -42,7 +42,6 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
   delayedAssign("x_shape", op_shape(x))
   delayedAssign("x_rank", op_ndim(x))
 
-
   # there are these possible values
   # only 1 arg in ..., it is a logical array of shape x
   # - pass it through
@@ -60,7 +59,7 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
     if(inherits(arg, "numpy.ndarray"))
       arg <- py_to_r(arg)
     if(is.logical(arg)) {
-      return(py_get_item(x, as.array(arg)))
+      return(as.array(arg))
     }
 
     if(is.matrix(arg) && ncol(arg) == x_rank) {
@@ -68,18 +67,18 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
       pos <- arg > 0L
       arg[pos] <- arg[pos] - 1L
       key <- tuple(asplit(arg, 2))
-      return(py_get_item(x, key))
+      return(key)
     }
 
     if (op_is_tensor(arg)) {
       if (op_dtype(arg) == "bool") {
-        return(py_get_item(x, arg))
+        return(arg)
       }
 
       if (op_ndim(arg) == 2L && op_shape(arg)[[2]] == x_rank) {
         arg <- op_where(arg > 0, arg - 1L, arg)
         key <- tuple(op_unstack(arg, axis = 2))
-        return(py_get_item(x, key))
+        return(key)
       }
     }
   }
