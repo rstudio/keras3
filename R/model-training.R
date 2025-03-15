@@ -563,7 +563,7 @@ function(object,
       args$callbacks
     )
 
-    # nameOfClass(tensorflow::tf$data$Dataset)
+    # nameOfClass.python.builtin.type(tensorflow::tf$data$Dataset)
     if(inherits(args$x, "tensorflow.python.data.ops.dataset_ops.DatasetV2") &&
        !is.null(args$batch_size))
       stop("batch_size can not be specified with a TF Dataset")

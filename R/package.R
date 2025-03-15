@@ -180,7 +180,7 @@ keras <- NULL
     with(device("cpu:0"), {
       backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
     })
-    symbolic_tensor_class <- nameOfClass(keras$KerasTensor)
+    symbolic_tensor_class <- nameOfClass.python.builtin.type(keras$KerasTensor)
 
     registerS3method("@", symbolic_tensor_class, at.keras_backend_tensor, baseenv())
     registerS3method("@", backend_tensor_class, at.keras_backend_tensor, baseenv())
@@ -252,6 +252,14 @@ maybe_register_S3_methods <- function() {
   .register_no_overwrite("keras.src.utils.tracking.TrackedDict")
   .register_no_overwrite("keras.src.utils.tracking.TrackedList")
   .register_no_overwrite("keras.src.utils.tracking.TrackedSet")
+}
+
+nameOfClass.python.builtin.type <- function(x) {
+  paste(
+    as_r_value(py_get_attr(x, "__module__")),
+    as_r_value(py_get_attr(x, "__name__")),
+    sep = "."
+  )
 }
 
 resolve_implementation_module <- function() {
