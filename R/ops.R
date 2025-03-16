@@ -7862,13 +7862,15 @@ function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
 #'
 #' # Examples
 #' ```{r}
-#' add_fn <- function(x, y) x + y
-#' subtract_fn <- function(x, y) x - y
-#' x <- op_array(2.0)
+#' add_fn <- function(x, y) x + y + 100
+#' subtract_fn <- function(x, y) x - y - 100
+#' x <- op_array(2)
 #' y <- op_array(0.5)
 #' branches <- list(add_fn, subtract_fn)
-#' op_switch(1, branches, x, y)
-#' op_switch(2, branches, x, y)
+#' op_switch(0, branches, x, y) # +
+#' op_switch(1, branches, x, y) # +
+#' op_switch(2, branches, x, y) # -
+#' op_switch(3, branches, x, y) # -
 #' ```
 #'
 #' @returns
