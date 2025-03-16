@@ -271,7 +271,9 @@ maybe_register_S3_methods <- function() {
   .register_no_overwrite("keras.src.utils.tracking.TrackedSet")
 }
 
-nameOfClass.python.builtin.type <- function(x) {
+# not exported regular function since nameOfClass() requires R>4.3
+# __ instead of . to avoid roxygen warning
+nameOfClass__python.builtin.type <- function(x) {
   paste(
     as_r_value(py_get_attr(x, "__module__")),
     as_r_value(py_get_attr(x, "__name__")),
