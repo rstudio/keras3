@@ -405,7 +405,7 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 #' # Image: 4x4 pixels, 3 colors (RGB)
 #' # Tensor shape: (img_height, img_width, img_color_channels)
 #' shp <- shape(4, 4, 3)
-#' x <- op_arange(prod(unlist(shp))) |> op_reshape(shp)
+#' x <- op_arange(prod(shp)) |> op_reshape(shp)
 #'
 #' # Convert to a batch of images by inserting a new axis
 #' # New shape: (batch_size, img_height, img_width, img_color_channels)

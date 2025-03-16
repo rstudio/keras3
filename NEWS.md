@@ -32,6 +32,8 @@
 
 - New `x@py[...]` accessor introduced for Python-style 0-based indexing of tensors.
 
+- New `Summary` group generic method for `keras_shape`, enabling usage like
+  `prod(shape(3, 4))`
 
 - `KERAS_HOME` is now set to `tools::R_user_dir("keras3", "cache")` if
  `~/.keras` does not exist and `KERAS_HOME` is unset.
