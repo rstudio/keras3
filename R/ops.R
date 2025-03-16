@@ -3775,7 +3775,7 @@ function (x, axis = NULL, weights = NULL)
 #' @returns
 #' 1D tensor where each element gives the number of occurrence(s) of its
 #' index value in x. Its length is the maximum between `max(x) + 1` and
-#' minlength.
+#' `minlength`.
 #'
 #' @param x
 #' Input tensor.
@@ -4199,8 +4199,8 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' labels in the output. Defaults to `TRUE`.
 #'
 #' @param mask_index
-#' An integer scalar, the (0-based) index of the mask character in
-#' the vocabulary. Defaults to `0`.
+#' An integer scalar, the (1-based) index of the mask character in
+#' the vocabulary. Defaults to `1`.
 #'
 #' @export
 #' @family numpy ops
@@ -4208,13 +4208,13 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @tether keras.ops.ctc_decode
 op_ctc_decode <-
 function (inputs, sequence_lengths, strategy = "greedy", beam_width = 100L,
-    top_paths = 1L, merge_repeated = TRUE, mask_index = 0L)
+    top_paths = 1L, merge_repeated = TRUE, mask_index = 1L)
 {
     args <- capture_args(list(
       sequence_lengths = as_integer_array,
       beam_width = as_integer,
       top_paths = as_integer,
-      mask_index = as_integer))
+      mask_index = as_py_index))
     do.call(keras$ops$ctc_decode, args)
 }
 
