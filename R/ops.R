@@ -6963,7 +6963,7 @@ keras$ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 op_take <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args(list(indices = as_index, axis = as_axis))
+    args <- capture_args(list(indices = as_py_index, axis = as_axis))
     do.call(keras$ops$take, args)
 }
 
@@ -6993,7 +6993,7 @@ function (x, indices, axis = NULL)
 op_take_along_axis <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args(list(indices = as_index, axis = as_axis))
+    args <- capture_args(list(indices = as_py_index, axis = as_axis))
     do.call(keras$ops$take_along_axis, args)
 }
 
@@ -7213,7 +7213,7 @@ function (x, axes = NULL)
 op_tri <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
-    args <- capture_args(list(k = as_integer))
+    args <- capture_args(list(N = as_integer, M = as_integer, k = as_integer))
     do.call(keras$ops$tri, args)
 }
 
@@ -7895,6 +7895,6 @@ function (index, branches, ...)
 {
   if (!is.null(names(list(...))))
     stop("Arguments supplied to ... must be unnamed")
-  index <- op_convert_to_tensor(index, "int32") - 1L
+  index <- as_py_index(index)
   keras$ops$switch(index, branches, ...)
 }
