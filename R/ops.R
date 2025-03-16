@@ -5009,8 +5009,8 @@ keras$ops$greater_equal(x1, x2)
 #' @returns
 #' The tensor formed by stacking the given tensors.
 #'
-#' @param xs
-#' Sequence of tensors.
+#' @param xs,...
+#' list of tensors.
 #'
 #' @export
 #' @family numpy ops
@@ -5020,8 +5020,14 @@ keras$ops$greater_equal(x1, x2)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hstack>
 #' @tether keras.ops.hstack
 op_hstack <-
-function (xs)
-keras$ops$hstack(xs)
+function (xs, ...) {
+  if (!is.list(xs))
+    xs <- list(xs)
+  xs <- c(xs, list2(...))
+  names(xs) <- NULL
+  xs <- lapply(xs, atomic_to_array)
+  ops$hstack(xs)
+}
 
 
 #' Return the identity tensor.
@@ -7299,7 +7305,7 @@ keras$ops$vdot(x1, x2)
 #' @returns
 #' Tensor formed by stacking the given tensors.
 #'
-#' @param xs
+#' @param xs,...
 #' Sequence of tensors.
 #'
 #' @export
@@ -7310,8 +7316,14 @@ keras$ops$vdot(x1, x2)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack>
 #' @tether keras.ops.vstack
 op_vstack <-
-function (xs)
-keras$ops$vstack(xs)
+function (xs, ...) {
+  if (!is.list(xs))
+    xs <- list(xs)
+  xs <- c(xs, list2(...))
+  names(xs) <- NULL
+  xs <- lapply(xs, atomic_to_array)
+  ops$vstack(xs)
+}
 
 #' Turn a function into a vectorized function.
 #'

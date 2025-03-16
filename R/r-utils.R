@@ -183,6 +183,8 @@ check_bool <- function(x) {
 
 # ---- arg transformers ----
 
+atomic_to_array <- function(x) if(is.atomic(x)) as.array(x) else x
+
 as_array <- function(x)
   if(is.null(x) || is_py_object(x) || is.array(x))
     x else as.array(x)
