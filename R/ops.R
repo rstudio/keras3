@@ -4394,7 +4394,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 #' op_diff(x)
 #' op_diff(x, n = 2)
 #' x <- op_array(rbind(c(1, 3, 6, 10),
-#'                   c(0, 5, 6, 8)))
+#'                     c(0, 5, 6, 8)))
 #' op_diff(x)
 #' op_diff(x, axis = 1)
 #' ```
@@ -4432,10 +4432,9 @@ function (a, n = 1L, axis = -1L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- op_array(c(0.0, 1.0, 3.0, 1.6))
-#' bins <- array(c(0.0, 3.0, 4.5, 7.0))
+#' x <- op_array(c(-1,    0, 1,    3, 3.5,      4.5,  1.6,    8))
+#' bins <- array(c(    0,       3,         4.5,            7))
 #' op_digitize(x, bins)
-#' # array([1, 1, 2, 1])
 #' ```
 #'
 #' @returns
@@ -4459,7 +4458,7 @@ op_digitize <-
 function (x, bins)
 {
     args <- capture_args(list(bins = as.array))
-    do.call(keras$ops$digitize, args)
+    do.call(keras$ops$digitize, args) + 1L
 }
 
 
