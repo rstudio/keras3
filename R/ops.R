@@ -6935,7 +6935,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @tether keras.ops.swapaxes
 op_swapaxes <-
 function (x, axis1, axis2)
-keras$ops$swapaxes(x, axis1, axis2)
+keras$ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 
 
 #' Take elements from a tensor along an axis.
