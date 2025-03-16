@@ -19,14 +19,21 @@ try_into_slice <- function(x) {
   NULL
 }
 
+seq_len0 <- function(x) seq.int(from = 0L, length.out = x)
+
 broadcast_to_rank <- function(x, axis, rank) {
   if (is.atomic(x)) {
     shp <- rep_len(1L, rank)
     shp[axis] <- length(x)
     dim(x) <- shp
-  } else {
+  } else if (inherits(x, "tensorflow.tensor")) {
     if (rank > 1L)
-      x <- op_expand_dims(x, seq_len(rank)[-axis])
+      x <- tf$expand_dims(x, seq_len0(rank)[-axis])
+  } else if (op_is_tensor(x)) {
+    if (rank > 1L)
+      x <- keras$ops$expand_dims(x, seq_len0(rank)[-axis])
+  } else {
+    # stop()?
   }
   x
 }
@@ -39,8 +46,13 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
   else
     list(key)
 
-  delayedAssign("x_shape", op_shape(x))
-  delayedAssign("x_rank", op_ndim(x))
+  if(inherits(x, "tensorflow.tensor")) {
+    delayedAssign("x_shape", as_r_value(x$shape$as_list()))
+    delayedAssign("x_rank", as_r_value(x$ndim))
+  } else {
+    delayedAssign("x_shape", op_shape(x))
+    delayedAssign("x_rank", op_ndim(x))
+  }
 
   # there are these possible values
   # only 1 arg in ..., it is a logical array of shape x
@@ -70,14 +82,29 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
       return(key)
     }
 
+    # need a separate check for tensorflow tensors, since op_is_tensor()
+    # only detects the configured backend, but we might still get a tf.tensor
+    if(inherits(arg, "tensorflow.tensor")) {
+      if (as_r_value(arg$dtype$is_bool)) {
+        return(arg)
+      }
+      if (as_r_value(arg$ndim) == 2L &&
+          as_r_value(arg$shape$as_list())[[2L]] == x_rank) {
+
+        arg <- tf$where(arg > 0L, arg - 1L, arg)
+        key <- tuple(tf$unstack(arg, axis = 1L))
+        return(key)
+      }
+    }
+
     if (op_is_tensor(arg)) {
       if (op_dtype(arg) == "bool") {
         return(arg)
       }
 
       if (op_ndim(arg) == 2L && op_shape(arg)[[2]] == x_rank) {
-        arg <- op_where(arg > 0, arg - 1L, arg)
-        key <- tuple(op_unstack(arg, axis = 2))
+        arg <- ops$where(arg > 0L, arg - 1L, arg)
+        key <- tuple(op_unstack(arg, axis = 2L))
         return(key)
       }
     }
@@ -158,8 +185,10 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
           } else {
             as.integer(end)
           }
+        } else if(inherits(end, "tensorflow.tensor")) {
+          end <- tf$where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
         } else if (op_is_tensor(end)) {
-          end <- op_where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
+          end <- ops$where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
         }
       }
       slice2 <- asNamespace("reticulate")$py_slice(start, end, arg$step)
@@ -168,6 +197,30 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
     }
 
     if (inherits(arg, "python.builtin.ellipsis")) {
+      return(arg)
+    }
+
+    if (inherits(arg, "tensorflow.tensor")) {
+      arg_rank <- as_r_value(arg$ndim)
+      if (arg_rank == 0L) {
+        # scalar
+        arg <- tf$where(arg > 0L, arg - 1L, arg)
+        return(arg)
+      }
+
+      if (arg_rank != 1L) {
+        stop("subsetting tensor must be 1d")
+      }
+
+      if (as_r_value(arg$dtype$is_bool)) {
+        # TODO: should op_nonzero cbind the results?
+        # browser()
+        arg <- tf$squeeze(tf$where(arg), 1L)
+      } else {
+        arg <- tf$where(arg > 0L, arg - 1L, arg)
+      }
+
+      advanced_idx[axis] <<- TRUE
       return(arg)
     }
 
@@ -186,9 +239,9 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
 
       if (op_dtype(arg) == "bool") {
         # TODO: should op_nonzero cbind the results?
-        arg <- op_nonzero(arg)[[1L]]
+        arg <- keras$ops$nonzero(arg)[[1L]]
       } else {
-        arg <- op_where(arg > 0L, arg - 1L, arg)
+        arg <- ops$where(arg > 0L, arg - 1L, arg)
       }
 
       advanced_idx[axis] <<- TRUE
