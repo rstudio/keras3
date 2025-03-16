@@ -6650,6 +6650,19 @@ function (x, axis = -1L)
 #' A split does not have to result in equal division when using
 #' Torch backend.
 #'
+#' # Example
+#' ```{r}
+#' x <- op_arange(12)
+#'
+#' # pass a scalar integer for n sections
+#' op_split(x, 2)
+#' op_split(x, 3)
+#'
+#' # 1-d array/tensor for indices
+#' op_split(x, array(c(3, 8)))
+#' op_split(x, array(c(3)))
+#' ```
+#'
 #' @returns
 #' A list of tensors.
 #'
@@ -6675,8 +6688,36 @@ function (x, axis = -1L)
 op_split <-
 function (x, indices_or_sections, axis = 1L)
 {
-    args <- capture_args(list(indices_or_sections = as_integer,
-        axis = as_axis))
+    args <- capture_args(list(
+      indices_or_sections = function(n) {
+        if (is.atomic(n)) {
+          if (length(n) > 1L ||
+              is.array(n)) {
+            return(as_py_index(n))
+          } else {
+            return(as.integer(n))
+          }
+        }
+
+        if (inherits(n, "numpy.ndarray")) {
+          if (as_r_value(n$ndim) > 0L) {
+            return(as_py_index(n))
+          } else {
+            return(as.integer(n))
+          }
+        }
+
+        if (op_is_tensor(n)) {
+          if (op_ndim(n) > 0L) {
+            return(as_py_index(n))
+          } else {
+            return(n)
+          }
+        }
+
+        stop("indices_or_sections must be a scalar or 1-d tensor or array")
+      },
+      axis = as_axis))
     do.call(keras$ops$split, args)
 }
 
