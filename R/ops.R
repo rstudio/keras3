@@ -7536,7 +7536,7 @@ keras$ops$zeros_like(x, dtype)
 #'
 #' @param mask_index
 #' The index of the mask character in the vocabulary.
-#' Defaults to `0`.
+#' Defaults to `1` (the first element in vocabulary).
 #'
 #' @returns A tensor, shape `(batch_size)`, of loss values.
 #' @export
@@ -7546,9 +7546,9 @@ keras$ops$zeros_like(x, dtype)
 # @seealso
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss>
 op_ctc_loss <-
-function (target, output, target_length, output_length, mask_index = 0L)
+function (target, output, target_length, output_length, mask_index = 1L)
 {
-    args <- capture_args(list(target = as_integer_array, mask_index = as_integer))
+    args <- capture_args(list(target = as_integer_array, mask_index = as_py_index))
     do.call(keras$ops$ctc_loss, args)
 }
 
