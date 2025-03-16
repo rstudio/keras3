@@ -2338,11 +2338,11 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #' @param x
 #' Integer tensor to be encoded. The shape can be
 #' arbitrary, but the dtype should be integer.
-#' R factors are coerced to integer and offset to be 0-based, i.e.,
-#' `as.integer(x) - 1L`.
+#' R factors are coerced to integer.
 #'
 #' @param num_classes
-#' Number of classes for the one-hot encoding.
+#' Number of classes for the one-hot encoding. If `x` is a factor and
+#' `num_classes` is `NULL` or missing, then `levels(x)` is used.
 #'
 #' @param axis
 #' Axis along which the encoding is performed.
@@ -2366,16 +2366,15 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 op_one_hot <-
 function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 {
-    args <- capture_args(list(
-      x = function(x) {
-        if (inherits(x, "factor"))
-          array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
-        else
-          as_integer_array(x)
-      },
-      axis = as_axis,
-      num_classes = as_integer))
-    do.call(keras$ops$one_hot, args)
+
+  args <- capture_args(list(axis = as_axis, num_classes = as_integer))
+  if (inherits(x, "factor")) {
+    if (is.null(args$num_classes))
+      args$num_classes <- length(levels(x))
+    x <- unclass(x)
+  }
+  args$x <- as_py_index(x)
+  do.call(keras$ops$one_hot, args)
 }
 
 
