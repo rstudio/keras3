@@ -36,6 +36,8 @@
 # package level global state
 .globals <- new.env(parent = emptyenv())
 
+tf <- NULL
+ops <- NULL
 
 
 #' Main Keras module
@@ -169,9 +171,6 @@ keras <- NULL
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
 
-  # on_load_make_as_activation()
-
-
   reticulate::py_register_load_hook("keras", function() {
 
     keras <- import("keras")
@@ -180,7 +179,7 @@ keras <- NULL
     with(device("cpu:0"), {
       backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
     })
-    symbolic_tensor_class <- nameOfClass.python.builtin.type(keras$KerasTensor)
+    symbolic_tensor_class <- nameOfClass__python.builtin.type(keras$KerasTensor)
 
     registerS3method("@", symbolic_tensor_class, at.keras_backend_tensor, baseenv())
     registerS3method("@", backend_tensor_class, at.keras_backend_tensor, baseenv())
@@ -221,6 +220,15 @@ keras <- NULL
     registerS3method("@", "tensorflow.tensor", at.keras_backend_tensor, baseenv())
     registerS3method("@<-", "tensorflow.tensor", at_set.keras_backend_tensor, baseenv())
   })
+
+  # on_load_make_as_activation()
+  tf <<- try(import("tensorflow", delay_load = TRUE))
+  ops <<- try(import("keras.ops", delay_load = list(
+    before_load = function() {
+      # force the load hooks on 'keras' to run
+      keras$ops
+    }
+  )))
 
 }
 
