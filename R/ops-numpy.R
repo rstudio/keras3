@@ -27,6 +27,13 @@ keras$ops$divide_no_nan(x1, x2)
 #' of indices of the same shape as `x` that index data along the given axis
 #' in partitioned order.
 #'
+#' ```{r}
+#' x <- op_convert_to_tensor(c(9, 3, 6, 2, 8, 5, 7, 1, 10, 4))
+#' x@r[op_argpartition(x, 3)]
+#' x@r[op_argpartition(x, 5)]
+#' x@r[op_argpartition(x, 7)]
+#' ```
+#'
 #' @returns
 #' Array of indices that partition `x` along the specified `axis`.
 #'
@@ -52,8 +59,8 @@ keras$ops$divide_no_nan(x1, x2)
 op_argpartition <-
 function (x, kth, axis = -1L)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argpartition, args)
+    args <- capture_args(list(x = as_array, axis = as_axis, kth = as_py_index))
+    do.call(keras$ops$argpartition, args) + 1L
 }
 
 
