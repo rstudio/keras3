@@ -163,7 +163,7 @@ function (x, dtype = NULL, sparse = NULL) {
       grepl("int", dtype, fixed = TRUE))
     storage.mode(x) <- "integer"
   if (is.atomic(x) && length(x) > 1L)
-    x <- as_array(x)
+    x <- as.array(x)
   keras$ops$convert_to_tensor(x, dtype, sparse)
 }
 
@@ -349,7 +349,7 @@ function (indices, values, shape)
 op_scatter_update <-
 function (inputs, indices, updates)
 {
-    args <- capture_args(list(indices = as_index))
+    args <- capture_args(list(indices = as_index, updates = as_array))
     do.call(keras$ops$scatter_update, args)
 }
 
@@ -463,7 +463,7 @@ function (x)
 op_slice <-
 function (inputs, start_indices, shape)
 {
-    args <- capture_args(list(shape = normalize_shape, start_indices = as_index))
+    args <- capture_args(list(inputs = as_array, shape = normalize_shape, start_indices = as_index))
     do.call(keras$ops$slice, args)
 }
 
@@ -512,7 +512,7 @@ function (inputs, start_indices, shape)
 op_slice_update <-
 function (inputs, start_indices, updates)
 {
-    args <- capture_args(list(start_indices = as_index))
+    args <- capture_args(list(inputs = as_array, start_indices = as_index, updates = as_array))
     do.call(keras$ops$slice_update, args)
 }
 
@@ -591,7 +591,7 @@ keras$ops$stop_gradient(variable)
 op_unstack <-
 function (x, num = NULL, axis = 1L)
 {
-    args <- capture_args(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis, num = as_integer))
     do.call(keras$ops$unstack, args)
 }
 
@@ -1188,7 +1188,7 @@ keras$ops$qr(x, mode)
 
 #' @export
 py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
-  x <- py_eval("tuple")(x)
+  x <- py_get_attr(import("builtins"), "tuple")(x)
   names(x) <- c("q", "r")
   x
 }
