@@ -6,6 +6,7 @@
 \alias{print.keras_shape}
 \alias{[.keras_shape}
 \alias{as.integer.keras_shape}
+\alias{Summary.keras_shape}
 \alias{as.list.keras_shape}
 \alias{==.keras_shape}
 \alias{!=.keras_shape}
@@ -20,6 +21,8 @@ shape(...)
 \method{[}{keras_shape}(x, ...)
 
 \method{as.integer}{keras_shape}(x, ...)
+
+\method{Summary}{keras_shape}(..., na.rm = FALSE)
 
 \method{as.list}{keras_shape}(x, ...)
 
