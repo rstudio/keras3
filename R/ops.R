@@ -7147,9 +7147,12 @@ keras$ops$tile(x, repeats)
 op_trace <-
 function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
-    args <- capture_args(list(offset = as_integer, axis1 = as_integer,
-        axis2 = as_integer))
-    do.call(keras$ops$trace, args)
+  args <- capture_args(list(
+    offset = as_integer,
+    axis1 = as_axis,
+    axis2 = as_axis
+  ))
+  do.call(keras$ops$trace, args)
 }
 
 
