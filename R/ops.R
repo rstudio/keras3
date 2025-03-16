@@ -379,7 +379,7 @@ function (inputs, indices, updates)
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left")
-keras$ops$searchsorted(sorted_sequence, values, side)
+keras$ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
 
 
 #' Gets the shape of the tensor input.
