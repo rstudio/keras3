@@ -609,6 +609,12 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' **Note:** This layer is safe to use inside a `tf.data` pipeline
 #' (independently of which backend you're using).
 #'
+#' **Note:** If working with layer outputs directly (e.g., not passing outputs
+#' to another layer, but using them in lower-level operations like `[` and
+#' `op_*`): the returned indices are 0-based. However, with default settings,
+#' the first (`0`) index is the OOV token, so the returned indices are offset by
+#' `1` and may appear to be 1-based.
+#'
 #' # Examples
 #' **Creating a lookup layer with a known vocabulary**
 #'
@@ -617,7 +623,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
 #' data <- op_array(rbind(c(12, 1138, 42),
-#'                       c(42, 1000, 36)))  # Note OOV tokens
+#'                        c(42, 1000, 36)))  # Note OOV tokens
 #' out <- data |> layer_integer_lookup(vocabulary = vocab)
 #' out
 #' ```
@@ -629,7 +635,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #'
 #' ```{r}
 #' data <- op_array(rbind(c(12, 1138, 42),
-#'                       c(42, 1000, 36)))  # Note OOV tokens
+#'                        c(42, 1000, 36)))  # Note OOV tokens
 #' layer <- layer_integer_lookup()
 #' layer |> adapt(data)
 #' layer |> get_vocabulary() |> str()
@@ -653,7 +659,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
 #' data <- op_array(rbind(c(12, 1138, 42),
-#'                       c(37, 1000, 36)))  # Note OOV tokens
+#'                        c(37, 1000, 36)))  # Note OOV tokens
 #' out <- data |>
 #'   layer_integer_lookup(vocabulary = vocab,
 #'                        num_oov_indices = 2)
@@ -755,7 +761,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' ```{r}
 #' vocab <- c(12, 36, 1138, 42) |> as.integer()
 #' data <- op_array(c(1, 3, 4,
-#'                   4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
+#'                    4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
 #' layer <- layer_integer_lookup(vocabulary = vocab, invert = TRUE)
 #' layer(data)
 #' ```
@@ -908,6 +914,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
         ignore = "object")
     create_layer(keras$layers$IntegerLookup, object, args)
 }
+# TODO: 1 based?
 
 
 #' A preprocessing layer that normalizes continuous features.
@@ -2652,7 +2659,7 @@ function (layers, name = NULL)
 #'
 #' There are two possible output modes for the layer.
 #' When `output_mode` is `"int"`,
-#' input strings are converted to their index in the vocabulary (an integer).
+#' input strings are converted to their (0-based) index in the vocabulary (an integer).
 #' When `output_mode` is `"multi_hot"`, `"count"`, or `"tf_idf"`, input strings
 #' are encoded into an array where each dimension corresponds to an element in
 #' the vocabulary.
@@ -2676,6 +2683,12 @@ function (layers, name = NULL)
 #'
 #' **Note:** This layer is safe to use inside a `tf.data` pipeline
 #' (independently of which backend you're using).
+#'
+#' **Note:** If working with layer outputs directly (e.g., not passing outputs
+#' to another layer, but using them in lower-level operations like `[` and
+#' `op_*`): the returned indices are 0-based. However, with default settings,
+#' the first (`0`) index is the OOV token, so the returned indices are offset by
+#' `1` and may appear to be 1-based.
 #'
 #' # Examples
 #' **Creating a lookup layer with a known vocabulary**
@@ -2967,6 +2980,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
         ignore = "object")
     create_layer(keras$layers$StringLookup, object, args)
 }
+# TODO: 1 based?
 
 
 #' A preprocessing layer which maps text features to integer sequences.

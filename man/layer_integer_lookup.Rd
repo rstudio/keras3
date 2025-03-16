@@ -163,6 +163,12 @@ to use this layer.
 
 \strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
 (independently of which backend you're using).
+
+\strong{Note:} If working with layer outputs directly (e.g., not passing outputs
+to another layer, but using them in lower-level operations like \code{[} and
+\verb{op_*}): the returned indices are 0-based. However, with default settings,
+the first (\code{0}) index is the OOV token, so the returned indices are offset by
+\code{1} and may appear to be 1-based.
 }
 \section{Examples}{
 \strong{Creating a lookup layer with a known vocabulary}
@@ -171,7 +177,7 @@ This example creates a lookup layer with a pre-existing vocabulary.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(rbind(c(12, 1138, 42),
-                      c(42, 1000, 36)))  # Note OOV tokens
+                       c(42, 1000, 36)))  # Note OOV tokens
 out <- data |> layer_integer_lookup(vocabulary = vocab)
 out
 }\if{html}{\out{</div>}}
@@ -188,7 +194,7 @@ This example creates a lookup layer and generates the vocabulary by
 analyzing the dataset.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{data <- op_array(rbind(c(12, 1138, 42),
-                      c(42, 1000, 36)))  # Note OOV tokens
+                       c(42, 1000, 36)))  # Note OOV tokens
 layer <- layer_integer_lookup()
 layer |> adapt(data)
 layer |> get_vocabulary() |> str()
@@ -226,7 +232,7 @@ a deterministic fashion across the set.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(rbind(c(12, 1138, 42),
-                      c(37, 1000, 36)))  # Note OOV tokens
+                       c(37, 1000, 36)))  # Note OOV tokens
 out <- data |>
   layer_integer_lookup(vocabulary = vocab,
                        num_oov_indices = 2)
@@ -361,7 +367,7 @@ pass the vocab in this example.)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{vocab <- c(12, 36, 1138, 42) |> as.integer()
 data <- op_array(c(1, 3, 4,
-                  4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
+                   4, 0, 2)) |> op_reshape(c(2,-1)) |> op_cast("int32")
 layer <- layer_integer_lookup(vocabulary = vocab, invert = TRUE)
 layer(data)
 }\if{html}{\out{</div>}}
