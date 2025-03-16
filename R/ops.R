@@ -6038,13 +6038,22 @@ keras$ops$negative(x)
 
 #' Return the indices of the elements that are non-zero.
 #'
+#' @details
+#'
 #' ## Example
+#'
+#' `op_nonzero()` indices can be used with `<tensor>@r[`
 #'
 #' ```{r}
 #' (x <- op_scatter(indices = rbind(1, 5, 10), values = c(1, 2, 3), shape = c(10)))
 #' (nz <- op_nonzero(x))
 #' x@r[nz]
 #'
+#' # same as `x@r[nz]`
+#' x@r[x != 0]
+#' x@r[op_cast(x, "bool")]
+#'
+#' # 2d example
 #' (x2 <- op_stack(c(x, op_roll(x, 1), op_roll(x, 2))))
 #' x2@r[op_nonzero(x2)]
 #'

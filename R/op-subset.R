@@ -2,7 +2,6 @@
 
 try_into_slice <- function(x) {
   if (is.numeric(x) && length(x) >= 2L) {
-    # rng <- range(x)
     x <- as.integer(x)
     start <- x[1L]
     end <- x[length(x)]
@@ -176,7 +175,6 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 
 
     if (inherits(arg, "python.builtin.slice")) {
-      # browser()
       start <- sys.function()(py_to_r(arg$start), axis)
       if(identical(start, 0L))
         start <- NULL
@@ -193,15 +191,6 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
             else
               end <- end2
           }
-          # end <-
-          #   if (identical(end, -1L) ||
-          #       identical(end, x_shape[[axis]])) {
-          #   NULL
-          # } else
-          # else {
-            # end
-          # }
-          # if (identical(end, 0L) ||
         } else if(inherits(end, "tensorflow.tensor")) {
           end <- tf$where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
         } else if (op_is_tensor(end)) {
@@ -232,8 +221,6 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
       }
 
       if (as_r_value(arg$dtype$is_bool)) {
-        # TODO: should op_nonzero cbind the results?
-        # browser()
         arg <- tf$squeeze(tf$where(arg), 1L)
       } else {
         arg <- tf$where(arg > 0L, arg - 1L, arg)
@@ -257,8 +244,7 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
       }
 
       if (op_dtype(arg) == "bool") {
-        # TODO: should op_nonzero cbind the results?
-        arg <- keras$ops$nonzero(arg)[[1L]]
+        arg <- ops$nonzero(arg)[[1L]]
       } else {
         arg <- ops$where(arg > 0L, arg - 1L, arg)
       }
@@ -455,8 +441,8 @@ op_subset <- function(x, ...) {
 
 #' @export
 #' @rdname op_subset
-#' @family core ops
-#' @family ops
+# ' @family core ops
+# ' @family ops
 `op_subset<-` <- function(x, ..., value) {
   # browser()
   key <- r_extract_args_into_py_get_item_key(x, ..., .envir = parent.frame())
@@ -497,6 +483,6 @@ op_subset <- function(x, ...) {
 
 #' @export
 #' @rdname op_subset
-#' @family core ops
-#' @family ops
+# ' @family core ops
+# ' @family ops
 op_subset_set <- `op_subset<-`
