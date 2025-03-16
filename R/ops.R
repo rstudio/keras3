@@ -247,9 +247,11 @@ keras$ops$is_tensor(x)
 #'
 #' # Examples
 #' ```{r}
+#' op_scatter(indices = rbind(1), values = 1, shape = c(5))
+#' op_scatter(indices = rbind(1, 3), values = 1:2, shape = c(5))
 #' indices <- rbind(c(1, 2), c(2, 2))
 #' values <- op_array(c(1, 1))
-#' op_scatter(indices, values, shape= c(2, 2))
+#' op_scatter(indices, values, shape = c(2, 2))
 #' ```
 #'
 #' @param indices
@@ -274,8 +276,12 @@ keras$ops$is_tensor(x)
 op_scatter <-
 function (indices, values, shape)
 {
-    args <- capture_args(list(indices = as_index, shape = normalize_shape))
-    do.call(keras$ops$scatter, args)
+  args <- capture_args(list(
+    indices = as_py_index,
+    values = as_array,
+    shape = normalize_shape
+  ))
+  do.call(keras$ops$scatter, args)
 }
 
 
