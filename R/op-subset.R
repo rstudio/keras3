@@ -1,18 +1,23 @@
 
 
 try_into_slice <- function(x) {
-  if(is.integer(x) && length(x) >= 2L) {
-    rng <- range(x)
-    start <- rng[1L]
-    end <- rng[2L]
+  if (is.numeric(x) && length(x) >= 2L) {
+    # rng <- range(x)
+    x <- as.integer(x)
+    start <- x[1L]
+    end <- x[length(x)]
     step <-  x[2L] - x[1L]
+    if (sign(start) != sign(end))
+      return()
+    x2 <- seq.int(start, end, step)
 
-    x2 <- do.call(seq.int, as.list(c(start, end, by = step)))
-    if (identical(x, x2)) {
+    if (identical(as.integer(x), x2)) {
       if (identical(step, 1L))
         step <- NULL
       if (identical(start, 1L))
         start <- NULL
+      if(identical(end, -1L))
+        end <- NULL
       return(asNamespace("reticulate")$py_slice(start, end, step))
     }
   }
@@ -39,7 +44,7 @@ broadcast_to_rank <- function(x, axis, rank) {
 }
 
 
-r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
+r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
   key <- asNamespace("reticulate")$dots_to__getitem__key(..., .envir = .envir)
   key <- if (inherits(key, "python.builtin.tuple"))
     py_to_r(key)
@@ -113,7 +118,7 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
 
   advanced_idx <- logical(...length())
 
-  translate_one_based_to_zero_based <- function(arg, axis) {
+  into_py_index <- function(arg, axis) {
 
     if (is.null(arg)) {
       return() # newaxis
@@ -171,27 +176,41 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
 
 
     if (inherits(arg, "python.builtin.slice")) {
+      # browser()
       start <- sys.function()(py_to_r(arg$start), axis)
       if(identical(start, 0L))
         start <- NULL
       end <- py_to_r(arg$stop)
+      step <- py_to_r(arg$step) %||% 1L
       if (!is.null(end)) {
-        if (is.numeric(end)) {
-          end <- if (identical(end, -1L) ||
-                     identical(end, x_shape[[axis]])) {
-            NULL
+        if (is.integer(end)) {
+          if (identical(end, x_shape[[axis]])) {
+            end <- NULL
           } else if (end < 0L) {
-            as.integer(end) + 1L
-          } else {
-            as.integer(end)
+            end2 <- end + step # TODO: handle case where step is a tensor
+            if (sign(end2) != sign(end))
+              end <- NULL
+            else
+              end <- end2
           }
+          # end <-
+          #   if (identical(end, -1L) ||
+          #       identical(end, x_shape[[axis]])) {
+          #   NULL
+          # } else
+          # else {
+            # end
+          # }
+          # if (identical(end, 0L) ||
         } else if(inherits(end, "tensorflow.tensor")) {
           end <- tf$where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
         } else if (op_is_tensor(end)) {
           end <- ops$where(end > 0L, end, (x_shape[[axis]] + 1L) - end)
         }
       }
-      slice2 <- asNamespace("reticulate")$py_slice(start, end, arg$step)
+      if (identical(step, 1L))
+        step <- NULL
+      slice2 <- asNamespace("reticulate")$py_slice(start, end, step)
       return(slice2)
 
     }
@@ -258,7 +277,7 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
   }
 
 
-  key <- imap(key, translate_one_based_to_zero_based)
+  key <- imap(key, into_py_index)
   if (any(advanced_idx)) {
     advanced_subspace_rank <- sum(advanced_idx)
     key[advanced_idx] <- imap(key[advanced_idx], function(arg, subspace_axis) {
@@ -270,17 +289,177 @@ r_extract_to_py_get_item_key <- function(x, ..., .envir = parent.frame(2L)) {
   key
 }
 
-op_subset <- function(x, ...) {
 
-  key <- r_extract_to_py_get_item_key(x, ..., .envir = parent.frame())
+#' Subset elements from a tensor
+#'
+#' Extract elements from a tensor using common R-style `[` indexing idioms. This
+#' function can also be conveniently accessed via the syntax `tensor@r[...]`.
+#'
+#' @param x Input tensor.
+#'
+#' @param ... Indices specifying elements to extract. Each argument in `...` can
+#'   be:
+#'
+#' - An integer scalar
+#' - A 1-d integer or logical vector
+#' - `NULL` or `newaxis`
+#' - The `..` symbol
+#' - A slice expression using `:`
+#'
+#'   If only a single argument is supplied to `...`, then `..1` can also be:
+#'
+#' - A logical array matching the shape of `x`
+#' - An integer matrix with `ncol(..1) == op_rank(x)`
+#'
+#' @details
+#'
+#' While the semantics are similar to R's `[`, there are some differences:
+#'
+#' # Differences from R's `[`:
+#'
+#' - Negative indices follow Python-style indexing, counting from the end of the array.
+#' - `NULL` or `newaxis` adds a new dimension (equivalent to `op_expand_dims()`).
+#' - If fewer indices than dimensions (`op_rank(x)`) are provided, missing dimensions
+#'   are implicitly filled. For example, if `x` is a matrix, `x[1]` returns the first row.
+#' - `..` or `all_dims()` expands to include all unspecified dimensions (see examples).
+#' - Extended slicing syntax (`:`) is supported, including:
+#'   - Strided steps: `x@r[start:end:step]`
+#'   - `NA` values for `start` and `end`. `NA` for `start` defaults to `1`, and
+#'     `NA` for `end` defaults to the axis size.
+#' - A logical array matching the shape of `x` selects elements in row-wise order.
+#'
+#' # Similarities with R's `[`:
+#'
+#' Similarities to R's `[` (differences from Python's `[`):
+#'
+#' - Positive indices are 1-based.
+#' - Slices (`x[start:end]`) are inclusive of `end`.
+#' - 1-d logical/integer arrays subset along their respective axis.
+#'   Multiple vectors provided for different axes return intersected subsets.
+#' - A single integer matrix with `ncol(i) == op_rank(x)` selects elements by
+#'   coordinates. Each row in the matrix specifies the location of one value, where each column
+#'   corresponds to an axis in the tensor being subsetted.  This means you use a
+#'   2-column matrix to subset a matrix, a 3-column matrix to subset a 3d array,
+#'   and so on.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_arange(5L) + 10L
+#'
+#' # Basic example, get first element
+#' op_subset(x, 1)
+#'
+#' # Use `@r[` syntax
+#' x@r[1]           # same as `op_subset(x, 1)`
+#' x@r[1:2]         # get the first 2 elements
+#' x@r[c(1, 3)]     # first and third element
+#'
+#' # Negative indices
+#' x@r[-1]          # last element
+#' x@r[-2]          # second to last element
+#' x@r[c(-1, -2)]   # last and second to last elements
+#' x@r[c(-2, -1)]   # second to last and last elements
+#' x@r[c(1, -1)]    # first and last elements
+#'
+#' # Slices
+#' x@r[1:3]          # first 3 elements
+#' x@r[NA:3]         # first 3 elements
+#' x@r[1:5]          # all elements
+#' x@r[1:-1]         # all elements
+#' x@r[NA:NA]        # all elements
+#' x@r[]             # all elements
+#'
+#' x@r[1:-2]         # drop last element
+#' x@r[NA:-2]        # drop last element
+#' x@r[2:NA]         # drop first element
+#'
+#' # 2D array examples
+#' xr <- array(1:12, c(3, 4))
+#' x <- op_convert_to_tensor(xr)
+#'
+#' # Basic subsetting
+#' x@r[1, ]      # first row
+#' x@r[1]        # also first row! Missing axes are implicitly inserted
+#' x@r[-1]       # last row
+#' x@r[, 2]      # second column
+#' x@r[, 2:2]    # second column, but shape preserved (like [, drop=FALSE])
+#'
+#' # Subsetting with a boolean array
+#' # Note: extracted elements are selected row-wise, not column-wise
+#' mask <- x >= 6
+#' x@r[mask]             # returns a 1D tensor
+#'
+#' x.r <- as.array(x)
+#' mask.r <- as.array(mask)
+#' # as.array(x)[mask] selects column-wise. Use `aperm()` to reverse search order.
+#' all(aperm(x.r)[aperm(mask.r)] == as.array(x@r[mask]))
+#'
+#' # Subsetting with a matrix of index positions
+#' indices <- rbind(c(1, 1), c(2, 2), c(3, 3))
+#' x@r[indices] # get diagonal elements
+#' x.r[indices] # same as subsetting an R array
+#'
+#'
+#' # 3D array examples
+#' # Image: 4x4 pixels, 3 colors (RGB)
+#' # Tensor shape: (img_height, img_width, img_color_channels)
+#' shp <- shape(4, 4, 3)
+#' x <- op_arange(prod(unlist(shp))) |> op_reshape(shp)
+#'
+#' # Convert to a batch of images by inserting a new axis
+#' # New shape: (batch_size, img_height, img_width, img_color_channels)
+#' x@r[newaxis, , , ] |> op_shape()
+#' x@r[newaxis] |> op_shape()  # same as above
+#' x@r[NULL] |> op_shape()     # same as above
+#'
+#' x <- x@r[newaxis]
+#' # Extract color channels
+#' x@r[, , , 1]          # red channel
+#' x@r[.., 1]            # red channel, same as above using .. shorthand
+#' x@r[.., 2]            # green channel
+#' x@r[.., 3]            # blue channel
+#'
+#' # .. expands to all unspecified axes.
+#' op_shape(x@r[])
+#' op_shape(x@r[..])
+#' op_shape(x@r[1, ..])
+#' op_shape(x@r[1, .., 1, 1])
+#' op_shape(x@r[1, 1, 1, .., 1])
+#'
+#'
+#' # op_subset<- uses the same semantics, but note that not all tensors
+#' # support modification. E.g., TensorFlow constant tensors cannot be modified,
+#' # while TensorFlow Variables can be.
+#'
+#' x <- tensorflow::tf$Variable(matrix(1, 2, 3))
+#' op_subset(x, 1) <- 9
+#' x
+#'
+#' x@r[1,1] <- 33
+#' x
+#' ```
+#'
+#' @returns
+#' A tensor containing the subset of elements.
+#'
+#' @export
+# ' @family core ops
+# ' @family ops
+op_subset <- function(x, ...) {
+  key <- r_extract_args_into_py_get_item_key(x, ..., .envir = parent.frame())
   # print(key)
   py_get_item(x, key)
 }
 
 
+#' @export
+#' @rdname op_subset
+#' @family core ops
+#' @family ops
 `op_subset<-` <- function(x, ..., value) {
   # browser()
-  key <- r_extract_to_py_get_item_key(x, ..., .envir = parent.frame())
+  key <- r_extract_args_into_py_get_item_key(x, ..., .envir = parent.frame())
   if (is.atomic(value)) {
     if (is.double(x) && grepl("int", op_dtype(x)))
       storage.mode(value) <- "integer"
@@ -314,3 +493,10 @@ op_subset <- function(x, ...) {
       py_set_item(x, key, value)
     })
 }
+
+
+#' @export
+#' @rdname op_subset
+#' @family core ops
+#' @family ops
+op_subset_set <- `op_subset<-`
