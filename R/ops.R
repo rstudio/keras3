@@ -3520,17 +3520,25 @@ function (x, axis = NULL, keepdims = FALSE)
 #' # Examples
 #' One dimensional array:
 #' ```{r}
-#' x <- op_array(c(3, 1, 2))
+#' x <- op_array(c(3, 1, 2)) + .1
 #' op_argsort(x)
+#' x@r[op_argsort(x)] == op_sort(x)
 #' ```
 #'
 #' Two-dimensional array:
 #' ```{r}
 #' x <- op_array(rbind(c(0, 3),
-#'                    c(3, 2),
-#'                    c(4, 5)), dtype = "int32")
-#' op_argsort(x, axis = 1)
-#' op_argsort(x, axis = 2)
+#'                     c(3, 2),
+#'                     c(4, 5))) + .1
+#' # op_argsort(x, axis = 1)
+#'
+#' (i <- op_argsort(x, axis = 1))
+#' x@r[i@r[, 1], ] # sort x-rows using first col of x
+#' x@r[i@r[, 2], ] # sort x-rows using second col of x
+#'
+#'
+#' (i <- op_argsort(x, axis = 2))
+#' x@r[, i@r[2,]] # sort x-cols using second row of x
 #' ```
 #'
 #' @returns
@@ -3554,7 +3562,7 @@ op_argsort <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argsort, args)
+    do.call(keras$ops$argsort, args) + 1L
 }
 
 
