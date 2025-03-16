@@ -6038,6 +6038,21 @@ keras$ops$negative(x)
 
 #' Return the indices of the elements that are non-zero.
 #'
+#' ## Example
+#'
+#' ```{r}
+#' (x <- op_scatter(indices = rbind(1, 5, 10), values = c(1, 2, 3), shape = c(10)))
+#' (nz <- op_nonzero(x))
+#' x@r[nz]
+#'
+#' (x2 <- op_stack(c(x, op_roll(x, 1), op_roll(x, 2))))
+#' x2@r[op_nonzero(x2)]
+#'
+#' x3 <- op_stack(c(x2, x2*1.1))
+#' x3@r[op_nonzero(x3)]
+#' x3@py[keras$ops$nonzero(x3)]
+#' ```
+#'
 #' @returns
 #' Indices of elements that are non-zero.
 #'
@@ -6052,8 +6067,10 @@ keras$ops$negative(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nonzero>
 #' @tether keras.ops.nonzero
 op_nonzero <-
-function (x)
-keras$ops$nonzero(x)
+function (x) {
+  ops$stack(lapply(ops$nonzero(x), `+`, 1L),
+            axis = -1L)
+}
 
 
 #' Return `(x1 != x2)` element-wise.
