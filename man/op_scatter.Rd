@@ -25,9 +25,23 @@ returns the output. It is equivalent to:
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_scatter(indices = rbind(1), values = 1, shape = c(5))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 0. 0. 0. 0.], shape=(5), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_scatter(indices = rbind(1, 3), values = 1:2, shape = c(5))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 0 2 0 0], shape=(5), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{indices <- rbind(c(1, 2), c(2, 2))
 values <- op_array(c(1, 1))
-op_scatter(indices, values, shape= c(2, 2))
+op_scatter(indices, values, shape = c(2, 2))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(

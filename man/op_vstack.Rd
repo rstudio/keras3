@@ -4,10 +4,10 @@
 \alias{op_vstack}
 \title{Stack tensors in sequence vertically (row wise).}
 \usage{
-op_vstack(xs)
+op_vstack(xs, ...)
 }
 \arguments{
-\item{xs}{Sequence of tensors.}
+\item{xs, ...}{Sequence of tensors.}
 }
 \value{
 Tensor formed by stacking the given tensors.

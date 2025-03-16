@@ -27,6 +27,62 @@ A split does not have to result in equal division when using
 Torch backend.
 }
 
+\section{Example}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_arange(12)
+
+# pass a scalar integer for n sections
+op_split(x, 2)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([1. 2. 3. 4. 5. 6.], shape=(6), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([ 7.  8.  9. 10. 11. 12.], shape=(6), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_split(x, 3)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([5. 6. 7. 8.], shape=(4), dtype=float32)
+##
+## [[3]]
+## tf.Tensor([ 9. 10. 11. 12.], shape=(4), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1-d array/tensor for indices
+op_split(x, array(c(3, 8)))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([1. 2.], shape=(2), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([3. 4. 5. 6. 7.], shape=(5), dtype=float32)
+##
+## [[3]]
+## tf.Tensor([ 8.  9. 10. 11. 12.], shape=(5), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_split(x, array(c(3)))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
+## tf.Tensor([1. 2.], shape=(2), dtype=float32)
+##
+## [[2]]
+## tf.Tensor([ 3.  4.  5.  6.  7.  8.  9. 10. 11. 12.], shape=(10), dtype=float32)
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#split-function}

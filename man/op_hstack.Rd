@@ -4,10 +4,10 @@
 \alias{op_hstack}
 \title{Stack tensors in sequence horizontally (column wise).}
 \usage{
-op_hstack(xs)
+op_hstack(xs, ...)
 }
 \arguments{
-\item{xs}{Sequence of tensors.}
+\item{xs, ...}{list of tensors.}
 }
 \value{
 The tensor formed by stacking the given tensors.

@@ -23,7 +23,7 @@ along \code{axis} removed.
 Returns the indices of the minimum values along an axis.
 }
 \note{
-This is similar to an R expression \code{apply(x, axis, which.min) - 1}, where \code{x}
+This is similar to an R expression \code{apply(x, axis, which.min)}, where \code{x}
 is a R array.
 }
 \section{Examples}{
@@ -46,7 +46,7 @@ x
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0, shape=(), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1, shape=(), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -59,7 +59,7 @@ x
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 0 0], shape=(3), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 1], shape=(3), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -72,7 +72,7 @@ x
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 0], shape=(2), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1], shape=(2), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }

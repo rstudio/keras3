@@ -3530,14 +3530,14 @@ function (x, axis = NULL, keepdims = FALSE)
 #' x <- op_array(rbind(c(0, 3),
 #'                     c(3, 2),
 #'                     c(4, 5))) + .1
-#' # op_argsort(x, axis = 1)
-#'
 #' (i <- op_argsort(x, axis = 1))
+#'
 #' x@r[i@r[, 1], ] # sort x-rows using first col of x
 #' x@r[i@r[, 2], ] # sort x-rows using second col of x
 #'
 #'
 #' (i <- op_argsort(x, axis = 2))
+#'
 #' x@r[, i@r[2,]] # sort x-cols using second row of x
 #' ```
 #'
