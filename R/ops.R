@@ -3474,7 +3474,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' ```
 #'
 #' @note
-#' This is similar to an R expression `apply(x, axis, which.min) - 1`, where `x`
+#' This is similar to an R expression `apply(x, axis, which.min)`, where `x`
 #' is a R array.
 #'
 #' @returns
@@ -3503,7 +3503,7 @@ op_argmin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argmin, args)
+    do.call(keras$ops$argmin, args) + 1L
 }
 
 
