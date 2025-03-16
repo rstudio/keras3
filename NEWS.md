@@ -1,25 +1,46 @@
 # keras3 (development version)
 
+- New `op_subset()` and `x@r[...]` methods enable tensor subsetting
+  using R's `[` semantics and idioms.
+
+- New subset assignment methods implemented for tensors:
+    `op_subset(x, ...) <- value` and `x@r[...] <- value`
+
+- Breaking changes: All operations prefixed with `op_` now return 1-based
+  indices by default. The following functions that return or consume indices have
+  changed:
+    `op_argmax()`, `op_argmin()`, `op_top_k()`, `op_argpartition()`,
+    `op_searchsorted()`, `op_argsort()`, `op_digitize()`, `op_nonzero()`,
+    `op_split()`, `op_trace()`, `op_swapaxes()`, `op_ctc_decode()`,
+    `op_ctc_loss()`, `op_one_hot()`, `op_arange()`
+
+- `op_arange()` now matches the semantics of `base::seq()`. By default
+  it starts, includes the end value, and automatically infers step direction.
+
+- `op_one_hot()` now infers `num_classes` if supplied a factor.
+
+- `op_hstack()` and `op_vstack()` now accept arguments passed via `...`.
+
+- `application_decode_predictions()` now returns a processed data frame by
+  default or a decoder function if predictions are missing.
+
+- `application_preprocess_inputs()` returns a preprocessor function if
+  inputs are missing.
+
+- Various new examples added to documentation,
+  including `op_scatter()`, `op_switch()`, and `op_nonzero()`.
+
+- New `x@py[...]` accessor introduced for Python-style 0-based indexing of tensors.
+
+
 - `KERAS_HOME` is now set to `tools::R_user_dir("keras3", "cache")` if
-  `~/.keras` does not exist and `KERAS_HOME` is unset.
+ `~/.keras` does not exist and `KERAS_HOME` is unset.
 
-- `tf.experimental_enable_numpy_behavior()` is no longer automatically called,
-  due to errors with `keras-hub`.
-  This change makes dtype promotion behavior more strict.
-  To reenable, it's recommended to use "safe" mode:
-  ```r
-  reticulate::import("tensorflow")$experimental$numpy$
-    experimental_enable_numpy_behavior(
-      prefer_float32 = TRUE,
-      dtype_conversion_mode = "safe"
-    )
-  ```
+- new `op_convert_to_array()` to convert a tensor to an R array.
 
-  - new `op_convert_to_array()` to convert a tensor to an R array.
+- Fixed an issue where `op_shape()` would sometimes return a TensorFlow `TensorShape`
 
-  - Fixed an issue where `op_shape()` would sometimes return a TensorFlow `TensorShape`
-
-  - Fixes for `metric_iou()`, `op_top_k()`, and `op_eye()` being called with R atomic doubles
+- Fixes for `metric_iou()`, `op_top_k()`, and `op_eye()` being called with R atomic doubles
 
 
 # keras3 1.3.0
