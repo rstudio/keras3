@@ -355,7 +355,7 @@ as_py_index <- function(x) {
   }
 
   # else is tensor
-  keras$ops$where(x > 0L, x - 1L, x)
+  ops$where(x > 0L, x - 1L, x)
 }
 
 as_index <- as_py_index
@@ -429,7 +429,7 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
     return(last_cl2[[c(3L, 2L)]])
 
   # bare builtin op_wrapper, like
-  # op_add <- function(x1, x2) keras$ops$add(x1, x2)
+  # op_add <- function(x1, x2) ops$add(x1, x2)
   if (is.call(cl <- body(x)) &&
       (is.call(cl0 <- cl1 <- cl[[1L]]) ||
        (

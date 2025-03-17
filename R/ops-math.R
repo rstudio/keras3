@@ -22,4 +22,4 @@
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/erfinv>
 op_erfinv <-
 function (x)
-keras$ops$erfinv(x)
+ops$erfinv(x)

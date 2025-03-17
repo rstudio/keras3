@@ -35,7 +35,7 @@ broadcast_to_rank <- function(x, axis, rank) {
       x <- tf$expand_dims(x, seq_len0(rank)[-axis])
   } else if (op_is_tensor(x)) {
     if (rank > 1L)
-      x <- keras$ops$expand_dims(x, seq_len0(rank)[-axis])
+      x <- ops$expand_dims(x, seq_len0(rank)[-axis])
   } else {
     # stop()?
   }

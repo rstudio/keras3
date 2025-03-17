@@ -28,7 +28,7 @@
 #' @tether keras.ops.cast
 op_cast <-
 function (x, dtype)
-keras$ops$cast(x, dtype)
+ops$cast(x, dtype)
 
 
 #' Conditionally applies `true_fn` or `false_fn`.
@@ -92,7 +92,7 @@ keras$ops$cast(x, dtype)
 #' @tether keras.ops.cond
 op_cond <-
 function (pred, true_fn, false_fn)
-keras$ops$cond(pred, true_fn, false_fn)
+ops$cond(pred, true_fn, false_fn)
 
 
 #' Convert a tensor to an R or NumPy array.
@@ -118,7 +118,7 @@ r_to_py(keras$ops)$convert_to_numpy(x)
 #' @export
 op_convert_to_array <-
 function(x)
-keras$ops$convert_to_numpy(x)
+ops$convert_to_numpy(x)
 
 
 
@@ -164,7 +164,7 @@ function (x, dtype = NULL, sparse = NULL) {
     storage.mode(x) <- "integer"
   if (is.atomic(x) && length(x) > 1L)
     x <- as.array(x)
-  keras$ops$convert_to_tensor(x, dtype, sparse)
+  ops$convert_to_tensor(x, dtype, sparse)
 }
 
 
@@ -207,7 +207,7 @@ function (x, dtype = NULL, sparse = NULL) {
 #' @tether keras.ops.fori_loop
 op_fori_loop <-
 function (lower, upper, body_fun, init_val)
-keras$ops$fori_loop(lower, upper, body_fun, init_val)
+ops$fori_loop(lower, upper, body_fun, init_val)
 
 
 #' Check whether the given object is a tensor.
@@ -232,7 +232,7 @@ keras$ops$fori_loop(lower, upper, body_fun, init_val)
 #' @tether keras.ops.is_tensor
 op_is_tensor <-
 function (x)
-keras$ops$is_tensor(x)
+ops$is_tensor(x)
 
 
 #' Returns a tensor of shape `shape` where `indices` are set to `values`.
@@ -281,7 +281,7 @@ function (indices, values, shape)
     values = as_array,
     shape = normalize_shape
   ))
-  do.call(keras$ops$scatter, args)
+  do.call(ops$scatter, args)
 }
 
 
@@ -350,7 +350,7 @@ op_scatter_update <-
 function (inputs, indices, updates)
 {
     args <- capture_args(list(indices = as_index, updates = as_array))
-    do.call(keras$ops$scatter_update, args)
+    do.call(ops$scatter_update, args)
 }
 
 #' Perform a binary search
@@ -379,7 +379,7 @@ function (inputs, indices, updates)
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left")
-keras$ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
+ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
 
 
 #' Gets the shape of the tensor input.
@@ -415,7 +415,7 @@ keras$ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
 op_shape <-
 function (x)
 {
-    out <- keras$ops$shape(x)
+    out <- ops$shape(x)
     if (any(grepl("tensorflow\\..*\\.TensorShape", class(out))))
       out <- out$as_list()
     class(out) <- "keras_shape"
@@ -464,7 +464,7 @@ op_slice <-
 function (inputs, start_indices, shape)
 {
     args <- capture_args(list(inputs = as_array, shape = normalize_shape, start_indices = as_index))
-    do.call(keras$ops$slice, args)
+    do.call(ops$slice, args)
 }
 
 
@@ -513,7 +513,7 @@ op_slice_update <-
 function (inputs, start_indices, updates)
 {
     args <- capture_args(list(inputs = as_array, start_indices = as_index, updates = as_array))
-    do.call(keras$ops$slice_update, args)
+    do.call(ops$slice_update, args)
 }
 
 
@@ -544,7 +544,7 @@ function (inputs, start_indices, updates)
 #' @tether keras.ops.stop_gradient
 op_stop_gradient <-
 function (variable)
-keras$ops$stop_gradient(variable)
+ops$stop_gradient(variable)
 
 
 #' Unpacks the given dimension of a rank-R tensor into rank-(R-1) tensors.
@@ -592,7 +592,7 @@ op_unstack <-
 function (x, num = NULL, axis = 1L)
 {
     args <- capture_args(list(axis = as_axis, num = as_integer))
-    do.call(keras$ops$unstack, args)
+    do.call(ops$unstack, args)
 }
 
 
@@ -711,7 +711,7 @@ function (x, num = NULL, axis = 1L)
 #' @tether keras.ops.vectorized_map
 op_vectorized_map <-
 function (elements, f)
-keras$ops$vectorized_map(f, elements)
+ops$vectorized_map(f, elements)
 
 
 #' While loop implementation.
@@ -775,7 +775,7 @@ keras$ops$vectorized_map(f, elements)
 #' @tether keras.ops.while_loop
 op_while_loop <-
 function (cond, body, loop_vars, maximum_iterations = NULL)
-keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
+ops$while_loop(cond, body, loop_vars, maximum_iterations)
 
 
 #' Computes the error function of `x`, element-wise.
@@ -803,7 +803,7 @@ keras$ops$while_loop(cond, body, loop_vars, maximum_iterations)
 #' @tether keras.ops.erf
 op_erf <-
 function (x)
-keras$ops$erf(x)
+ops$erf(x)
 
 
 #' Expands the dimension of last axis into sequences of `sequence_length`.
@@ -848,7 +848,7 @@ function (x, sequence_length, sequence_stride)
 {
     args <- capture_args(list(sequence_length = as_integer,
         sequence_stride = as_integer))
-    do.call(keras$ops$extract_sequences, args)
+    do.call(ops$extract_sequences, args)
 }
 
 
@@ -880,7 +880,7 @@ function (x, sequence_length, sequence_stride)
 #' @tether keras.ops.fft
 op_fft <-
 function (x)
-keras$ops$fft(x)
+ops$fft(x)
 
 
 #' Computes the 2D Fast Fourier Transform along the last two axes of input.
@@ -913,7 +913,7 @@ keras$ops$fft(x)
 #' @tether keras.ops.fft2
 op_fft2 <-
 function (x)
-keras$ops$fft2(x)
+ops$fft2(x)
 
 
 #' Computes the 2D Inverse Fast Fourier Transform along the last two axes of
@@ -942,7 +942,7 @@ keras$ops$fft2(x)
 #' @tether keras.ops.ifft2
 op_ifft2 <-
 function (x)
-keras$ops$ifft2(tuple(x))
+ops$ifft2(tuple(x))
 
 
 #' Checks if the targets are in the top-k predictions.
@@ -984,7 +984,7 @@ op_in_top_k <-
 function (targets, predictions, k)
 {
     args <- capture_args(list(k = as_integer))
-    do.call(keras$ops$in_top_k, args)
+    do.call(ops$in_top_k, args)
 }
 
 
@@ -1039,7 +1039,7 @@ op_irfft <-
 function (x, fft_length = NULL)
 {
     args <- capture_args(list(fft_length = as_integer))
-    do.call(keras$ops$irfft, args)
+    do.call(ops$irfft, args)
 }
 
 
@@ -1104,7 +1104,7 @@ function (x, sequence_length, sequence_stride, fft_length, length = NULL,
     args <- capture_args(list(sequence_length = as_integer,
         sequence_stride = as_integer, fft_length = as_integer,
         length = as_integer, x = tuple))
-    do.call(keras$ops$istft, args)
+    do.call(ops$istft, args)
 }
 
 
@@ -1146,7 +1146,7 @@ op_logsumexp <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$logsumexp, args)
+    do.call(ops$logsumexp, args)
 }
 
 
@@ -1183,7 +1183,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @tether keras.ops.qr
 op_qr <-
 function (x, mode = "reduced")
-keras$ops$qr(x, mode)
+ops$qr(x, mode)
 
 
 #' @export
@@ -1243,7 +1243,7 @@ op_rfft <-
 function (x, fft_length = NULL)
 {
     args <- capture_args(list(fft_length = as_integer))
-    do.call(keras$ops$rfft, args)
+    do.call(ops$rfft, args)
 }
 
 
@@ -1274,7 +1274,7 @@ function (x, fft_length = NULL)
 #' @tether keras.ops.rsqrt
 op_rsqrt <-
 function (x)
-keras$ops$rsqrt(x)
+ops$rsqrt(x)
 
 
 #' Computes the max of segments in a tensor.
@@ -1323,7 +1323,7 @@ op_segment_max <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
     args <- capture_args(list(segment_ids = as_index, num_segments = as_integer))
-    do.call(keras$ops$segment_max, args)
+    do.call(ops$segment_max, args)
 }
 
 
@@ -1371,7 +1371,7 @@ op_segment_sum <-
 function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 {
     args <- capture_args(list(segment_ids = as_index, num_segments = as_integer))
-    do.call(keras$ops$segment_sum, args)
+    do.call(ops$segment_sum, args)
 }
 
 #' Return elements from `choicelist`, based on conditions in `condlist`.
@@ -1417,7 +1417,7 @@ op_select <-
 function (condlist, choicelist, default = 0L)
 {
     args <- capture_args(list(default = as_integer))
-    do.call(keras$ops$select, args)
+    do.call(ops$select, args)
 }
 
 
@@ -1453,7 +1453,7 @@ function (condlist, choicelist, default = 0L)
 #' @tether keras.ops.solve
 op_solve <-
 function (a, b)
-keras$ops$solve(a, b)
+ops$solve(a, b)
 
 
 #' Short-Time Fourier Transform along the last axis of the input.
@@ -1512,7 +1512,7 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 {
     args <- capture_args(list(sequence_length = as_integer,
         sequence_stride = as_integer, fft_length = as_integer))
-    do.call(keras$ops$stft, args)
+    do.call(ops$stft, args)
 }
 
 
@@ -1558,7 +1558,7 @@ op_top_k <-
 function (x, k, sorted = TRUE)
 {
     args <- capture_args(list(x = as_array, k = as_integer))
-    res <- do.call(keras$ops$top_k, args)
+    res <- do.call(ops$top_k, args)
     res[[2L]] <- res[[2L]] + 1L
     res
 }
@@ -1624,7 +1624,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
     data_format = NULL)
 {
     args <- capture_args(list(pool_size = as_integer, strides = as_integer))
-    do.call(keras$ops$average_pool, args)
+    do.call(ops$average_pool, args)
 }
 
 
@@ -1672,7 +1672,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 #' @tether keras.ops.binary_crossentropy
 op_binary_crossentropy <-
 function (target, output, from_logits = FALSE)
-keras$ops$binary_crossentropy(target, output, from_logits)
+ops$binary_crossentropy(target, output, from_logits)
 
 
 #' Computes categorical cross-entropy loss between target and output tensor.
@@ -1732,7 +1732,7 @@ op_categorical_crossentropy <-
 function (target, output, from_logits = FALSE, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$categorical_crossentropy, args)
+    do.call(ops$categorical_crossentropy, args)
 }
 
 
@@ -1795,7 +1795,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
     dilation_rate = 1L)
 {
     args <- capture_args(list(strides = as_integer, dilation_rate = as_integer))
-    do.call(keras$ops$conv, args)
+    do.call(ops$conv, args)
 }
 
 
@@ -1868,7 +1868,7 @@ function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
 {
     args <- capture_args(list(strides = as_integer, output_padding = as_integer,
         dilation_rate = as_integer))
-    do.call(keras$ops$conv_transpose, args)
+    do.call(ops$conv_transpose, args)
 }
 
 
@@ -1931,7 +1931,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
     dilation_rate = 1L)
 {
     args <- capture_args(list(strides = as_integer, dilation_rate = as_integer))
-    do.call(keras$ops$depthwise_conv, args)
+    do.call(ops$depthwise_conv, args)
 }
 
 
@@ -1966,7 +1966,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #' @tether keras.ops.elu
 op_elu <-
 function (x, alpha = 1)
-keras$ops$elu(x, alpha)
+ops$elu(x, alpha)
 
 
 #' Gaussian Error Linear Unit (GELU) activation function.
@@ -2012,7 +2012,7 @@ keras$ops$elu(x, alpha)
 #' @tether keras.ops.gelu
 op_gelu <-
 function (x, approximate = TRUE)
-keras$ops$gelu(x, approximate)
+ops$gelu(x, approximate)
 
 
 #'
@@ -2050,7 +2050,7 @@ keras$ops$gelu(x, approximate)
 #' @tether keras.ops.hard_sigmoid
 op_hard_sigmoid <-
 function (x)
-keras$ops$hard_sigmoid(x)
+ops$hard_sigmoid(x)
 
 
 #' Leaky version of a Rectified Linear Unit activation function.
@@ -2091,7 +2091,7 @@ keras$ops$hard_sigmoid(x)
 #' @tether keras.ops.leaky_relu
 op_leaky_relu <-
 function (x, negative_slope = 0.2)
-keras$ops$leaky_relu(x, negative_slope)
+ops$leaky_relu(x, negative_slope)
 
 
 #' Logarithm of the sigmoid activation function.
@@ -2121,7 +2121,7 @@ keras$ops$leaky_relu(x, negative_slope)
 #' @tether keras.ops.log_sigmoid
 op_log_sigmoid <-
 function (x)
-keras$ops$log_sigmoid(x)
+ops$log_sigmoid(x)
 
 
 #' Log-softmax activation function.
@@ -2158,7 +2158,7 @@ op_log_softmax <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$log_softmax, args)
+    do.call(ops$log_softmax, args)
 }
 
 
@@ -2214,7 +2214,7 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
     data_format = NULL)
 {
     args <- capture_args(list(pool_size = as_integer, strides = as_integer))
-    do.call(keras$ops$max_pool, args)
+    do.call(ops$max_pool, args)
 }
 
 
@@ -2262,7 +2262,7 @@ op_moments <-
 function (x, axes, keepdims = FALSE, synchronized = FALSE)
 {
     args <- capture_args(list(axes = as_axis))
-    do.call(keras$ops$moments, args)
+    do.call(ops$moments, args)
 }
 
 
@@ -2313,7 +2313,7 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 {
     args <- capture_args(list(inputs = as_integer, num_classes = as_integer,
         axis = as_axis))
-    do.call(keras$ops$multi_hot, args)
+    do.call(ops$multi_hot, args)
 }
 
 
@@ -2415,7 +2415,7 @@ function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 #' @tether keras.ops.relu
 op_relu <-
 function (x)
-keras$ops$relu(x)
+ops$relu(x)
 
 
 #' Rectified linear unit activation function with upper bound of 6.
@@ -2450,7 +2450,7 @@ keras$ops$relu(x)
 #' @tether keras.ops.relu6
 op_relu6 <-
 function (x)
-keras$ops$relu6(x)
+ops$relu6(x)
 
 
 #' Scaled Exponential Linear Unit (SELU) activation function.
@@ -2482,7 +2482,7 @@ keras$ops$relu6(x)
 #' @tether keras.ops.selu
 op_selu <-
 function (x)
-keras$ops$selu(x)
+ops$selu(x)
 
 
 #' General N-D separable convolution.
@@ -2550,7 +2550,7 @@ function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
     padding = "valid", data_format = NULL, dilation_rate = 1L)
 {
     args <- capture_args(list(strides = as_integer, dilation_rate = as_integer))
-    do.call(keras$ops$separable_conv, args)
+    do.call(ops$separable_conv, args)
 }
 
 
@@ -2580,7 +2580,7 @@ function (inputs, depthwise_kernel, pointwise_kernel, strides = 1L,
 #' @tether keras.ops.sigmoid
 op_sigmoid <-
 function (x)
-keras$ops$sigmoid(x)
+ops$sigmoid(x)
 
 
 #' Sigmoid Linear Unit (SiLU) activation function, also known as Swish.
@@ -2611,7 +2611,7 @@ keras$ops$sigmoid(x)
 #' @tether keras.ops.silu
 op_silu <-
 function (x)
-keras$ops$silu(x)
+ops$silu(x)
 
 
 #' Softmax activation function.
@@ -2653,7 +2653,7 @@ op_softmax <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$softmax, args)
+    do.call(ops$softmax, args)
 }
 
 
@@ -2688,7 +2688,7 @@ function (x, axis = -1L)
 #' @tether keras.ops.softplus
 op_softplus <-
 function (x)
-keras$ops$softplus(x)
+ops$softplus(x)
 
 
 #' Softsign activation function.
@@ -2722,7 +2722,7 @@ keras$ops$softplus(x)
 #' @tether keras.ops.softsign
 op_softsign <-
 function (x)
-keras$ops$softsign(x)
+ops$softsign(x)
 
 
 #' Computes sparse categorical cross-entropy loss.
@@ -2782,7 +2782,7 @@ op_sparse_categorical_crossentropy <-
 function (target, output, from_logits = FALSE, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$sparse_categorical_crossentropy, args)
+    do.call(ops$sparse_categorical_crossentropy, args)
 }
 
 
@@ -2810,7 +2810,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' @tether keras.ops.absolute
 op_abs <-
 function (x)
-keras$ops$absolute(x)
+ops$absolute(x)
 
 
 #' Add arguments element-wise.
@@ -2858,7 +2858,7 @@ keras$ops$absolute(x)
 #' @tether keras.ops.add
 op_add <-
 function (x1, x2)
-keras$ops$add(x1, x2)
+ops$add(x1, x2)
 
 
 #' Test whether all array elements along a given axis evaluate to `TRUE`.
@@ -2910,7 +2910,7 @@ op_all <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$all, args)
+    do.call(ops$all, args)
 }
 
 
@@ -2963,7 +2963,7 @@ function (x, axis = NULL, keepdims = FALSE)
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$amax, args)
+    do.call(ops$amax, args)
 }
 
 
@@ -3016,7 +3016,7 @@ function (x, axis = NULL, keepdims = FALSE)
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$amin, args)
+    do.call(ops$amin, args)
 }
 
 
@@ -3074,7 +3074,7 @@ op_any <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$any, args)
+    do.call(ops$any, args)
 }
 
 
@@ -3122,7 +3122,7 @@ op_append <-
 function (x1, x2, axis = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$append, args)
+    do.call(ops$append, args)
 }
 
 
@@ -3198,7 +3198,7 @@ function (start, end, step = 1L, dtype = NULL)
   abs_step <- op_abs(step)
   step <- op_where(start > end, -abs_step, abs_step)
 
-  keras$ops$arange(start, end+step, step, dtype = dtype)
+  ops$arange(start, end+step, step, dtype = dtype)
 }
 
 
@@ -3229,7 +3229,7 @@ function (start, end, step = 1L, dtype = NULL)
 #' @tether keras.ops.arccos
 op_arccos <-
 function (x)
-keras$ops$arccos(x)
+ops$arccos(x)
 
 
 #' Inverse hyperbolic cosine, element-wise.
@@ -3256,7 +3256,7 @@ keras$ops$arccos(x)
 #' @tether keras.ops.arccosh
 op_arccosh <-
 function (x)
-keras$ops$arccosh(x)
+ops$arccosh(x)
 
 
 #' Inverse sine, element-wise.
@@ -3285,7 +3285,7 @@ keras$ops$arccosh(x)
 #' @tether keras.ops.arcsin
 op_arcsin <-
 function (x)
-keras$ops$arcsin(x)
+ops$arcsin(x)
 
 
 #' Inverse hyperbolic sine, element-wise.
@@ -3313,7 +3313,7 @@ keras$ops$arcsin(x)
 #' @tether keras.ops.arcsinh
 op_arcsinh <-
 function (x)
-keras$ops$arcsinh(x)
+ops$arcsinh(x)
 
 
 #' Trigonometric inverse tangent, element-wise.
@@ -3342,7 +3342,7 @@ keras$ops$arcsinh(x)
 #' @tether keras.ops.arctan
 op_arctan <-
 function (x)
-keras$ops$arctan(x)
+ops$arctan(x)
 
 
 #' Element-wise arc tangent of `x1/x2` choosing the quadrant correctly.
@@ -3395,7 +3395,7 @@ keras$ops$arctan(x)
 #' @tether keras.ops.arctan2
 op_arctan2 <-
 function (x1, x2)
-keras$ops$arctan2(x1, x2)
+ops$arctan2(x1, x2)
 
 
 #' Inverse hyperbolic tangent, element-wise.
@@ -3415,7 +3415,7 @@ keras$ops$arctan2(x1, x2)
 #' @tether keras.ops.arctanh
 op_arctanh <-
 function (x)
-keras$ops$arctanh(x)
+ops$arctanh(x)
 
 
 #' Returns the indices of the maximum values along an axis.
@@ -3462,7 +3462,7 @@ op_argmax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(x = as_array, axis = as_axis))
-    do.call(keras$ops$argmax, args) + 1L
+    do.call(ops$argmax, args) + 1L
 }
 
 
@@ -3509,7 +3509,7 @@ op_argmin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argmin, args) + 1L
+    do.call(ops$argmin, args) + 1L
 }
 
 
@@ -3562,7 +3562,7 @@ op_argsort <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argsort, args) + 1L
+    do.call(ops$argsort, args) + 1L
 }
 
 
@@ -3602,7 +3602,7 @@ function (x, dtype = NULL)
       typeof(x) == "double" &&
       grepl("int", dtype, fixed = TRUE))
     storage.mode(x) <- "integer"
-  keras$ops$array(x, dtype)
+  ops$array(x, dtype)
 }
 
 #' Performs a scan with an associative binary operation, in parallel.
@@ -3678,7 +3678,7 @@ op_associative_scan <-
 function(f, elems, reverse = FALSE, axis = 1L)
 {
   args <- capture_args(list(axis = as_axis))
-  do.call(keras$ops$associative_scan, args)
+  do.call(ops$associative_scan, args)
 }
 
 #' Compute the weighted average along the specified axis.
@@ -3752,7 +3752,7 @@ function (x, axis = NULL, weights = NULL)
     if(!is.null(weights) && is.null(axis) &&
        !identical(op_shape(weights), op_shape(x)))
       stop("Axis must be specified when shapes of x and weights differ.")
-    do.call(keras$ops$average, args)
+    do.call(ops$average, args)
 }
 
 
@@ -3810,7 +3810,7 @@ op_bincount <-
 function (x, weights = NULL, minlength = 0L, sparse = FALSE)
 {
     args <- capture_args(list(x = as_integer, minlength = as_integer))
-    do.call(keras$ops$bincount, args)
+    do.call(ops$bincount, args)
 }
 
 
@@ -3844,7 +3844,7 @@ op_broadcast_to <-
 function (x, shape)
 {
     args <- capture_args(list(shape = normalize_shape))
-    do.call(keras$ops$broadcast_to, args)
+    do.call(ops$broadcast_to, args)
 }
 
 
@@ -3869,7 +3869,7 @@ function (x, shape)
 #' @tether keras.ops.ceil
 op_ceil <-
 function (x)
-keras$ops$ceil(x)
+ops$ceil(x)
 
 
 #' Clip (limit) the values in a tensor.
@@ -3900,7 +3900,7 @@ keras$ops$ceil(x)
 #' @tether keras.ops.clip
 op_clip <-
 function (x, x_min, x_max)
-keras$ops$clip(x, x_min, x_max)
+ops$clip(x, x_min, x_max)
 
 
 #' Join a sequence of tensors along an existing axis.
@@ -3925,7 +3925,7 @@ op_concatenate <-
 function (xs, axis = 1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$concatenate, args)
+    do.call(ops$concatenate, args)
 }
 
 
@@ -3943,7 +3943,7 @@ function (xs, axis = 1L)
 # ' @tether keras.ops.conj
 # op_conj <-
 # function (x)
-# keras$ops$conj(x)
+# ops$conj(x)
 
 
 #' Returns the complex conjugate, element-wise.
@@ -3967,7 +3967,7 @@ function (xs, axis = 1L)
 #' @tether keras.ops.conjugate
 op_conj <-
 function (x)
-keras$ops$conjugate(x)
+ops$conjugate(x)
 
 
 #' Returns a copy of `x`.
@@ -3987,7 +3987,7 @@ keras$ops$conjugate(x)
 #' @tether keras.ops.copy
 op_copy <-
 function (x)
-keras$ops$copy(x)
+ops$copy(x)
 
 
 #' Compute the cross-correlation of two 1-dimensional tensors.
@@ -4015,7 +4015,7 @@ keras$ops$copy(x)
 #' @tether keras.ops.correlate
 op_correlate <-
 function (x1, x2, mode = "valid")
-keras$ops$correlate(as_array(x1), as_array(x2), mode)
+ops$correlate(as_array(x1), as_array(x2), mode)
 
 #' Cosine, element-wise.
 #'
@@ -4034,7 +4034,7 @@ keras$ops$correlate(as_array(x1), as_array(x2), mode)
 #' @tether keras.ops.cos
 op_cos <-
 function (x)
-keras$ops$cos(x)
+ops$cos(x)
 
 
 #' Hyperbolic cosine, element-wise.
@@ -4054,7 +4054,7 @@ keras$ops$cos(x)
 #' @tether keras.ops.cosh
 op_cosh <-
 function (x)
-keras$ops$cosh(x)
+ops$cosh(x)
 
 
 #' Counts the number of non-zero values in `x` along the given `axis`.
@@ -4093,7 +4093,7 @@ op_count_nonzero <-
 function (x, axis = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$count_nonzero, args)
+    do.call(ops$count_nonzero, args)
 }
 
 
@@ -4153,7 +4153,7 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 {
     args <- capture_args(list(axisa = as_integer, axisb = as_integer,
         axisc = as_integer, axis = as_axis))
-    do.call(keras$ops$cross, args)
+    do.call(ops$cross, args)
 }
 
 #' Decodes the output of a CTC model.
@@ -4215,7 +4215,7 @@ function (inputs, sequence_lengths, strategy = "greedy", beam_width = 100L,
       beam_width = as_integer,
       top_paths = as_integer,
       mask_index = as_py_index))
-    do.call(keras$ops$ctc_decode, args)
+    do.call(ops$ctc_decode, args)
 }
 
 #' Return the cumulative product of elements along a given axis.
@@ -4244,7 +4244,7 @@ op_cumprod <-
 function (x, axis = NULL, dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$cumprod, args)
+    do.call(ops$cumprod, args)
 }
 
 
@@ -4274,7 +4274,7 @@ op_cumsum <-
 function (x, axis = NULL, dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$cumsum, args)
+    do.call(ops$cumsum, args)
 }
 
 
@@ -4315,7 +4315,7 @@ op_diag <-
 function (x, k = 0L)
 {
     args <- capture_args(list(k = as_integer))
-    do.call(keras$ops$diag, args)
+    do.call(ops$diag, args)
 }
 
 
@@ -4377,7 +4377,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
     args <- capture_args(list(offset = as_integer, axis1 = as_axis,
         axis2 = as_axis))
-    do.call(keras$ops$diagonal, args)
+    do.call(ops$diagonal, args)
 }
 
 
@@ -4422,7 +4422,7 @@ op_diff <-
 function (a, n = 1L, axis = -1L)
 {
     args <- capture_args(list(n = as_integer, axis = as_axis))
-    do.call(keras$ops$diff, args)
+    do.call(ops$diff, args)
 }
 
 
@@ -4458,7 +4458,7 @@ op_digitize <-
 function (x, bins)
 {
     args <- capture_args(list(bins = as.array))
-    do.call(keras$ops$digitize, args) + 1L
+    do.call(ops$digitize, args) + 1L
 }
 
 
@@ -4496,7 +4496,7 @@ function (x, bins)
 #' @tether keras.ops.divide
 op_divide <-
 function (x1, x2)
-keras$ops$divide(x1, x2)
+ops$divide(x1, x2)
 
 
 #' Dot product of two tensors.
@@ -4533,7 +4533,7 @@ keras$ops$divide(x1, x2)
 #' @tether keras.ops.dot
 op_dot <-
 function (x1, x2)
-keras$ops$dot(x1, x2)
+ops$dot(x1, x2)
 
 
 #' Evaluates the Einstein summation convention on the operands.
@@ -4617,7 +4617,7 @@ keras$ops$dot(x1, x2)
 #' @tether keras.ops.einsum
 op_einsum <-
 function (subscripts, ...)
-keras$ops$einsum(subscripts, ...)
+ops$einsum(subscripts, ...)
 
 
 #' Return a tensor of given shape and type filled with uninitialized data.
@@ -4642,7 +4642,7 @@ op_empty <-
 function (shape, dtype = NULL)
 {
     args <- capture_args(list(shape = normalize_shape))
-    do.call(keras$ops$empty, args)
+    do.call(ops$empty, args)
 }
 
 
@@ -4673,7 +4673,7 @@ function (shape, dtype = NULL)
 #' @tether keras.ops.equal
 op_equal <-
 function (x1, x2)
-keras$ops$equal(x1, x2)
+ops$equal(x1, x2)
 
 
 #' Calculate the exponential of all elements in the input tensor.
@@ -4693,7 +4693,7 @@ keras$ops$equal(x1, x2)
 #' @tether keras.ops.exp
 op_exp <-
 function (x)
-keras$ops$exp(x)
+ops$exp(x)
 
 
 #' Expand the shape of a tensor.
@@ -4722,7 +4722,7 @@ op_expand_dims <-
 function (x, axis)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$expand_dims, args)
+    do.call(ops$expand_dims, args)
 }
 
 
@@ -4743,7 +4743,7 @@ function (x, axis)
 #' @tether keras.ops.expm1
 op_expm1 <-
 function (x)
-keras$ops$expm1(x)
+ops$expm1(x)
 
 
 #' Return a 2-D tensor with ones on the diagonal and zeros elsewhere.
@@ -4776,7 +4776,7 @@ op_eye <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
     args <- capture_args(list(N = as_integer, M = as_integer, k = as_integer))
-    do.call(keras$ops$eye, args)
+    do.call(ops$eye, args)
 }
 
 
@@ -4806,7 +4806,7 @@ op_flip <-
 function (x, axis = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$flip, args)
+    do.call(ops$flip, args)
 }
 
 
@@ -4830,7 +4830,7 @@ function (x, axis = NULL)
 #' @tether keras.ops.floor
 op_floor <-
 function (x)
-keras$ops$floor(x)
+ops$floor(x)
 
 
 #' Returns the largest integer smaller or equal to the division of inputs.
@@ -4859,7 +4859,7 @@ keras$ops$floor(x)
 #' @tether keras.ops.floor_divide
 op_floor_divide <-
 function (x1, x2)
-keras$ops$floor_divide(x1, x2)
+ops$floor_divide(x1, x2)
 
 
 #' Return a new tensor of given shape and type, filled with `fill_value`.
@@ -4887,7 +4887,7 @@ op_full <-
 function (shape, fill_value, dtype = NULL)
 {
     args <- capture_args(list(shape = normalize_shape))
-    do.call(keras$ops$full, args)
+    do.call(ops$full, args)
 }
 
 
@@ -4914,7 +4914,7 @@ function (shape, fill_value, dtype = NULL)
 #' @tether keras.ops.full_like
 op_full_like <-
 function (x, fill_value, dtype = NULL)
-keras$ops$full_like(x, fill_value, dtype)
+ops$full_like(x, fill_value, dtype)
 
 
 #' Return `x[key]`.
@@ -4938,7 +4938,7 @@ keras$ops$full_like(x, fill_value, dtype)
 #' @tether keras.ops.get_item
 op_get_item <-
 function (x, key)
-keras$ops$get_item(x, key)
+ops$get_item(x, key)
 
 
 #' Return the truth value of `x1 > x2` element-wise.
@@ -4968,7 +4968,7 @@ keras$ops$get_item(x, key)
 #' @tether keras.ops.greater
 op_greater <-
 function (x1, x2)
-keras$ops$greater(x1, x2)
+ops$greater(x1, x2)
 
 
 #' Return the truth value of `x1 >= x2` element-wise.
@@ -4997,7 +4997,7 @@ keras$ops$greater(x1, x2)
 #' @tether keras.ops.greater_equal
 op_greater_equal <-
 function (x1, x2)
-keras$ops$greater_equal(x1, x2)
+ops$greater_equal(x1, x2)
 
 
 #' Stack tensors in sequence horizontally (column wise).
@@ -5054,7 +5054,7 @@ function (xs, ...) {
 #' @tether keras.ops.identity
 op_identity <-
 function (n, dtype = NULL)
-keras$ops$identity(n, dtype)
+ops$identity(n, dtype)
 
 
 #' Return the imaginary part of the complex argument.
@@ -5074,7 +5074,7 @@ keras$ops$identity(n, dtype)
 #' @tether keras.ops.imag
 op_imag <-
 function (x)
-keras$ops$imag(x)
+ops$imag(x)
 
 
 #' Return whether two tensors are element-wise almost equal.
@@ -5110,7 +5110,7 @@ function (x1, x2,
           atol = 1e-08,
           equal_nan = FALSE) {
   args <- capture_args()
-  do.call(keras$ops$isclose, args)
+  do.call(ops$isclose, args)
 }
 
 
@@ -5136,7 +5136,7 @@ function (x1, x2,
 #' @tether keras.ops.isfinite
 op_isfinite <-
 function (x)
-keras$ops$isfinite(x)
+ops$isfinite(x)
 
 
 #' Test element-wise for positive or negative infinity.
@@ -5156,7 +5156,7 @@ keras$ops$isfinite(x)
 #' @tether keras.ops.isinf
 op_isinf <-
 function (x)
-keras$ops$isinf(x)
+ops$isinf(x)
 
 
 #' Test element-wise for NaN and return result as a boolean tensor.
@@ -5176,7 +5176,7 @@ keras$ops$isinf(x)
 #' @tether keras.ops.isnan
 op_isnan <-
 function (x)
-keras$ops$isnan(x)
+ops$isnan(x)
 
 
 #' Return the truth value of `x1 < x2` element-wise.
@@ -5206,7 +5206,7 @@ keras$ops$isnan(x)
 #' @tether keras.ops.less
 op_less <-
 function (x1, x2)
-keras$ops$less(x1, x2)
+ops$less(x1, x2)
 
 
 #' Return the truth value of `x1 <= x2` element-wise.
@@ -5236,7 +5236,7 @@ keras$ops$less(x1, x2)
 #' @tether keras.ops.less_equal
 op_less_equal <-
 function (x1, x2)
-keras$ops$less_equal(x1, x2)
+ops$less_equal(x1, x2)
 
 
 #' Return evenly spaced numbers over a specified interval.
@@ -5294,7 +5294,7 @@ function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
     dtype = NULL, axis = 1L)
 {
     args <- capture_args(list(num = as_integer, axis = as_axis))
-    do.call(keras$ops$linspace, args)
+    do.call(ops$linspace, args)
 }
 
 
@@ -5315,7 +5315,7 @@ function (start, stop, num = 50L, endpoint = TRUE, retstep = FALSE,
 #' @tether keras.ops.log
 op_log <-
 function (x)
-keras$ops$log(x)
+ops$log(x)
 
 
 #' Return the base 10 logarithm of the input tensor, element-wise.
@@ -5335,7 +5335,7 @@ keras$ops$log(x)
 #' @tether keras.ops.log10
 op_log10 <-
 function (x)
-keras$ops$log10(x)
+ops$log10(x)
 
 
 #' Returns the natural logarithm of one plus the `x`, element-wise.
@@ -5358,7 +5358,7 @@ keras$ops$log10(x)
 #' @tether keras.ops.log1p
 op_log1p <-
 function (x)
-keras$ops$log1p(x)
+ops$log1p(x)
 
 
 #' Base-2 logarithm of `x`, element-wise.
@@ -5378,7 +5378,7 @@ keras$ops$log1p(x)
 #' @tether keras.ops.log2
 op_log2 <-
 function (x)
-keras$ops$log2(x)
+ops$log2(x)
 
 
 #' Logarithm of the sum of exponentiations of the inputs.
@@ -5405,7 +5405,7 @@ keras$ops$log2(x)
 #' @tether keras.ops.logaddexp
 op_logaddexp <-
 function (x1, x2)
-keras$ops$logaddexp(x1, x2)
+ops$logaddexp(x1, x2)
 
 
 #' Computes the element-wise logical AND of the given input tensors.
@@ -5433,7 +5433,7 @@ keras$ops$logaddexp(x1, x2)
 #' @tether keras.ops.logical_and
 op_logical_and <-
 function (x1, x2)
-keras$ops$logical_and(x1, x2)
+ops$logical_and(x1, x2)
 
 
 #' Computes the element-wise NOT of the given input tensor.
@@ -5458,7 +5458,7 @@ keras$ops$logical_and(x1, x2)
 #' @tether keras.ops.logical_not
 op_logical_not <-
 function (x)
-keras$ops$logical_not(x)
+ops$logical_not(x)
 
 
 #' Computes the element-wise logical OR of the given input tensors.
@@ -5486,7 +5486,7 @@ keras$ops$logical_not(x)
 #' @tether keras.ops.logical_or
 op_logical_or <-
 function (x1, x2)
-keras$ops$logical_or(x1, x2)
+ops$logical_or(x1, x2)
 
 
 #' Compute the truth value of `x1 XOR x2`, element-wise.
@@ -5508,7 +5508,7 @@ keras$ops$logical_or(x1, x2)
 #' @tether keras.ops.logical_xor
 op_logical_xor <-
 function (x1, x2)
-keras$ops$logical_xor(x1, x2)
+ops$logical_xor(x1, x2)
 
 
 #' Returns numbers spaced evenly on a log scale.
@@ -5562,7 +5562,7 @@ function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
 {
     args <- capture_args(list(num = as_integer, base = as_integer,
         axis = as_axis))
-    do.call(keras$ops$logspace, args)
+    do.call(ops$logspace, args)
 }
 
 
@@ -5640,7 +5640,7 @@ op_max <-
 function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$max, args)
+    do.call(ops$max, args)
 }
 
 
@@ -5664,7 +5664,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' @tether keras.ops.maximum
 op_maximum <-
 function (x1, x2)
-keras$ops$maximum(x1, x2)
+ops$maximum(x1, x2)
 
 #' @export
 #' @rdname op_maximum
@@ -5698,7 +5698,7 @@ op_mean <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$mean, args)
+    do.call(ops$mean, args)
 }
 
 
@@ -5729,7 +5729,7 @@ op_median <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$median, args)
+    do.call(ops$median, args)
 }
 
 
@@ -5785,7 +5785,7 @@ function (..., indexing = "xy")
             np_array(x, "int64")
         else x
     })
-    keras$ops$meshgrid(!!!args, indexing = indexing)
+    ops$meshgrid(!!!args, indexing = indexing)
 }
 
 
@@ -5829,7 +5829,7 @@ op_min <-
 function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$min, args)
+    do.call(ops$min, args)
 }
 
 
@@ -5853,7 +5853,7 @@ function (x, axis = NULL, keepdims = FALSE, initial = NULL)
 #' @tether keras.ops.minimum
 op_minimum <-
 function (x1, x2)
-keras$ops$minimum(x1, x2)
+ops$minimum(x1, x2)
 
 #' @rdname op_minimum
 #' @export
@@ -5887,7 +5887,7 @@ op_pmin <- op_minimum
 #' @tether keras.ops.mod
 op_mod <-
 function (x1, x2)
-keras$ops$mod(x1, x2)
+ops$mod(x1, x2)
 
 
 #' Move axes of a tensor to new positions.
@@ -5917,7 +5917,7 @@ keras$ops$mod(x1, x2)
 #' @tether keras.ops.moveaxis
 op_moveaxis <-
 function (x, source, destination)
-keras$ops$moveaxis(x, as_axis(source), as_axis(destination))
+ops$moveaxis(x, as_axis(source), as_axis(destination))
 
 
 #' Multiply arguments element-wise.
@@ -5946,7 +5946,7 @@ keras$ops$moveaxis(x, as_axis(source), as_axis(destination))
 #' @tether keras.ops.multiply
 op_multiply <-
 function (x1, x2)
-keras$ops$multiply(x1, x2)
+ops$multiply(x1, x2)
 
 
 #' Replace NaN with zero and infinity with large finite numbers.
@@ -5985,7 +5985,7 @@ keras$ops$multiply(x1, x2)
 op_nan_to_num <-
 function (x, nan = 0, posinf = NULL, neginf = NULL) {
   args <- capture_args()
-  do.call(keras$ops$nan_to_num, args)
+  do.call(ops$nan_to_num, args)
 }
 
 
@@ -6006,7 +6006,7 @@ function (x, nan = 0, posinf = NULL, neginf = NULL) {
 #' @tether keras.ops.ndim
 op_ndim <-
 function (x)
-keras$ops$ndim(x)
+ops$ndim(x)
 
 
 #' Numerical negative, element-wise.
@@ -6033,7 +6033,7 @@ keras$ops$ndim(x)
 #' @tether keras.ops.negative
 op_negative <-
 function (x)
-keras$ops$negative(x)
+ops$negative(x)
 
 
 #' Return the indices of the elements that are non-zero.
@@ -6059,7 +6059,7 @@ keras$ops$negative(x)
 #'
 #' x3 <- op_stack(c(x2, x2*1.1))
 #' x3@r[op_nonzero(x3)]
-#' x3@py[keras$ops$nonzero(x3)]
+#' x3@py[ops$nonzero(x3)]
 #' ```
 #'
 #' @returns
@@ -6109,7 +6109,7 @@ function (x) {
 #' @tether keras.ops.not_equal
 op_not_equal <-
 function (x1, x2)
-keras$ops$not_equal(x1, x2)
+ops$not_equal(x1, x2)
 
 
 #' Return a new tensor of given shape and type, filled with ones.
@@ -6134,7 +6134,7 @@ op_ones <-
 function (shape, dtype = NULL)
 {
     args <- capture_args(list(shape = normalize_shape))
-    do.call(keras$ops$ones, args)
+    do.call(ops$ones, args)
 }
 
 
@@ -6158,7 +6158,7 @@ function (shape, dtype = NULL)
 #' @tether keras.ops.ones_like
 op_ones_like <-
 function (x, dtype = NULL)
-keras$ops$ones_like(x, dtype)
+ops$ones_like(x, dtype)
 
 
 #' Compute the outer product of two vectors.
@@ -6188,7 +6188,7 @@ keras$ops$ones_like(x, dtype)
 #' @tether keras.ops.outer
 op_outer <-
 function (x1, x2)
-keras$ops$outer(x1, x2)
+ops$outer(x1, x2)
 
 
 #' Pad a tensor.
@@ -6241,7 +6241,7 @@ op_pad <-
 function (x, pad_width, mode = "constant", constant_values = NULL)
 {
     args <- capture_args(list(pad_width = as_integer))
-    do.call(keras$ops$pad, args)
+    do.call(ops$pad, args)
 }
 
 
@@ -6271,7 +6271,7 @@ function (x, pad_width, mode = "constant", constant_values = NULL)
 #' @tether keras.ops.power
 op_power <-
 function (x1, x2)
-keras$ops$power(x1, x2)
+ops$power(x1, x2)
 
 
 #' Return the product of tensor elements over a given axis.
@@ -6305,7 +6305,7 @@ op_prod <-
 function (x, axis = NULL, keepdims = FALSE, dtype = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$prod, args)
+    do.call(ops$prod, args)
 }
 
 
@@ -6355,7 +6355,7 @@ op_quantile <-
 function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$quantile, args)
+    do.call(ops$quantile, args)
 }
 
 
@@ -6379,7 +6379,7 @@ function (x, q, axis = NULL, method = "linear", keepdims = FALSE)
 #' @tether keras.ops.ravel
 op_ravel <-
 function (x)
-keras$ops$ravel(x)
+ops$ravel(x)
 
 
 #' Return the real part of the complex argument.
@@ -6399,7 +6399,7 @@ keras$ops$ravel(x)
 #' @tether keras.ops.real
 op_real <-
 function (x)
-keras$ops$real(x)
+ops$real(x)
 
 
 #' Return the reciprocal of the argument, element-wise.
@@ -6422,7 +6422,7 @@ keras$ops$real(x)
 #' @tether keras.ops.reciprocal
 op_reciprocal <-
 function (x)
-keras$ops$reciprocal(x)
+ops$reciprocal(x)
 
 
 #' Repeat each element of a tensor after themselves.
@@ -6451,7 +6451,7 @@ op_repeat <-
 function (x, repeats, axis = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$`repeat`, args)
+    do.call(ops$`repeat`, args)
 }
 
 
@@ -6479,7 +6479,7 @@ function (x, repeats, axis = NULL)
 op_reshape <-
 function (x, newshape)
 {
-    keras$ops$reshape(x, tuple(lapply(shape(newshape),
+    ops$reshape(x, tuple(lapply(shape(newshape),
                                       function(d) d %||% -1L)))
 }
 
@@ -6514,7 +6514,7 @@ op_roll <-
 function (x, shift, axis = NULL)
 {
     args <- capture_args(list(shift = as_integer, axis = as_axis))
-    do.call(keras$ops$roll, args)
+    do.call(ops$roll, args)
 }
 
 
@@ -6540,7 +6540,7 @@ op_round <-
 function (x, decimals = 0L)
 {
     args <- capture_args(list(decimals = as_integer))
-    do.call(keras$ops$round, args)
+    do.call(ops$round, args)
 }
 
 
@@ -6561,7 +6561,7 @@ function (x, decimals = 0L)
 #' @tether keras.ops.sign
 op_sign <-
 function (x)
-keras$ops$sign(x)
+ops$sign(x)
 
 
 #' Trigonometric sine, element-wise.
@@ -6581,7 +6581,7 @@ keras$ops$sign(x)
 #' @tether keras.ops.sin
 op_sin <-
 function (x)
-keras$ops$sin(x)
+ops$sin(x)
 
 
 #' Hyperbolic sine, element-wise.
@@ -6601,7 +6601,7 @@ keras$ops$sin(x)
 #' @tether keras.ops.sinh
 op_sinh <-
 function (x)
-keras$ops$sinh(x)
+ops$sinh(x)
 
 
 #' Return the number of elements in a tensor.
@@ -6621,7 +6621,7 @@ keras$ops$sinh(x)
 #' @tether keras.ops.size
 op_size <-
 function (x)
-keras$ops$size(x)
+ops$size(x)
 
 
 #' Sorts the elements of `x` along a given axis in ascending order.
@@ -6647,7 +6647,7 @@ op_sort <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$sort, args)
+    do.call(ops$sort, args)
 }
 
 
@@ -6727,7 +6727,7 @@ function (x, indices_or_sections, axis = 1L)
         stop("indices_or_sections must be a scalar or 1-d tensor or array")
       },
       axis = as_axis))
-    do.call(keras$ops$split, args)
+    do.call(ops$split, args)
 }
 
 
@@ -6748,7 +6748,7 @@ function (x, indices_or_sections, axis = 1L)
 #' @tether keras.ops.sqrt
 op_sqrt <-
 function (x)
-keras$ops$sqrt(x)
+ops$sqrt(x)
 
 
 #' Return the element-wise square of the input.
@@ -6768,7 +6768,7 @@ keras$ops$sqrt(x)
 #' @tether keras.ops.square
 op_square <-
 function (x)
-keras$ops$square(x)
+ops$square(x)
 
 
 #' Remove axes of length one from `x`.
@@ -6794,7 +6794,7 @@ op_squeeze <-
 function (x, axis = NULL)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$squeeze, args)
+    do.call(ops$squeeze, args)
 }
 
 
@@ -6824,7 +6824,7 @@ op_stack <-
 function (x, axis = 1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$stack, args)
+    do.call(ops$stack, args)
 }
 
 
@@ -6856,7 +6856,7 @@ op_std <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$std, args)
+    do.call(ops$std, args)
 }
 
 
@@ -6887,7 +6887,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @tether keras.ops.subtract
 op_subtract <-
 function (x1, x2)
-keras$ops$subtract(x1, x2)
+ops$subtract(x1, x2)
 
 
 #' Sum of a tensor over the given axes.
@@ -6917,7 +6917,7 @@ op_sum <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$sum, args)
+    do.call(ops$sum, args)
 }
 
 
@@ -6944,7 +6944,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @tether keras.ops.swapaxes
 op_swapaxes <-
 function (x, axis1, axis2)
-keras$ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
+ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 
 
 #' Take elements from a tensor along an axis.
@@ -6973,7 +6973,7 @@ op_take <-
 function (x, indices, axis = NULL)
 {
     args <- capture_args(list(indices = as_py_index, axis = as_axis))
-    do.call(keras$ops$take, args)
+    do.call(ops$take, args)
 }
 
 
@@ -7003,7 +7003,7 @@ op_take_along_axis <-
 function (x, indices, axis = NULL)
 {
     args <- capture_args(list(indices = as_py_index, axis = as_axis))
-    do.call(keras$ops$take_along_axis, args)
+    do.call(ops$take_along_axis, args)
 }
 
 
@@ -7024,7 +7024,7 @@ function (x, indices, axis = NULL)
 #' @tether keras.ops.tan
 op_tan <-
 function (x)
-keras$ops$tan(x)
+ops$tan(x)
 
 
 #' Hyperbolic tangent, element-wise.
@@ -7044,7 +7044,7 @@ keras$ops$tan(x)
 #' @tether keras.ops.tanh
 op_tanh <-
 function (x)
-keras$ops$tanh(x)
+ops$tanh(x)
 
 
 #' Compute the tensor dot product along specified axes.
@@ -7077,7 +7077,7 @@ op_tensordot <-
 function (x1, x2, axes = 3L)
 {
     args <- capture_args(list(axes = as_axis))
-    do.call(keras$ops$tensordot, args)
+    do.call(ops$tensordot, args)
 }
 
 
@@ -7110,7 +7110,7 @@ function (x1, x2, axes = 3L)
 #' @tether keras.ops.tile
 op_tile <-
 function (x, repeats)
-keras$ops$tile(x, repeats)
+ops$tile(x, repeats)
 
 
 #' Return the sum along diagonals of the tensor.
@@ -7161,7 +7161,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
     axis1 = as_axis,
     axis2 = as_axis
   ))
-  do.call(keras$ops$trace, args)
+  do.call(ops$trace, args)
 }
 
 
@@ -7188,7 +7188,7 @@ op_transpose <-
 function (x, axes = NULL)
 {
     args <- capture_args(list(axes = as_axis))
-    do.call(keras$ops$transpose, args)
+    do.call(ops$transpose, args)
 }
 
 
@@ -7223,7 +7223,7 @@ op_tri <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
     args <- capture_args(list(N = as_integer, M = as_integer, k = as_integer))
-    do.call(keras$ops$tri, args)
+    do.call(ops$tri, args)
 }
 
 
@@ -7254,7 +7254,7 @@ op_tril <-
 function (x, k = 0L)
 {
     args <- capture_args(list(k = as_integer))
-    do.call(keras$ops$tril, args)
+    do.call(ops$tril, args)
 }
 
 
@@ -7285,7 +7285,7 @@ op_triu <-
 function (x, k = 0L)
 {
     args <- capture_args(list(k = as_integer))
-    do.call(keras$ops$triu, args)
+    do.call(ops$triu, args)
 }
 
 
@@ -7306,7 +7306,7 @@ function (x, k = 0L)
 # ' @tether keras.ops.true_divide
 # op_true_divide <-
 # function (x1, x2)
-# keras$ops$true_divide(x1, x2)
+# ops$true_divide(x1, x2)
 
 
 #' Compute the variance along the specified axes.
@@ -7336,7 +7336,7 @@ op_var <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$var, args)
+    do.call(ops$var, args)
 }
 
 
@@ -7367,7 +7367,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @tether keras.ops.vdot
 op_vdot <-
 function (x1, x2)
-keras$ops$vdot(x1, x2)
+ops$vdot(x1, x2)
 
 
 #' Stack tensors in sequence vertically (row wise).
@@ -7446,7 +7446,7 @@ function (xs, ...) {
 #' @tether keras.ops.vectorize
 op_vectorize <-
 function (func, ..., excluded = NULL, signature = NULL)
-keras$ops$vectorize(func, ..., excluded = excluded, signature = signature)
+ops$vectorize(func, ..., excluded = excluded, signature = signature)
 
 
 #' Return elements chosen from `x1` or `x2` depending on `condition`.
@@ -7473,7 +7473,7 @@ keras$ops$vectorize(func, ..., excluded = excluded, signature = signature)
 #' @tether keras.ops.where
 op_where <-
 function (condition, x1 = NULL, x2 = NULL)
-keras$ops$where(condition, x1, x2)
+ops$where(condition, x1, x2)
 
 
 #' Return a new tensor of given shape and type, filled with zeros.
@@ -7498,7 +7498,7 @@ op_zeros <-
 function (shape, dtype = NULL)
 {
     args <- capture_args(list(shape = normalize_shape))
-    do.call(keras$ops$zeros, args)
+    do.call(ops$zeros, args)
 }
 
 
@@ -7522,7 +7522,7 @@ function (shape, dtype = NULL)
 #' @tether keras.ops.zeros_like
 op_zeros_like <-
 function (x, dtype = NULL)
-keras$ops$zeros_like(x, dtype)
+ops$zeros_like(x, dtype)
 
 
 #' CTC (Connectionist Temporal Classification) loss.
@@ -7558,7 +7558,7 @@ op_ctc_loss <-
 function (target, output, target_length, output_length, mask_index = 1L)
 {
     args <- capture_args(list(target = as_integer_array, mask_index = as_py_index))
-    do.call(keras$ops$ctc_loss, args)
+    do.call(ops$ctc_loss, args)
 }
 
 
@@ -7593,13 +7593,13 @@ function (target, output, target_length, output_length, mask_index = 1L)
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hard_silu>
 op_hard_silu <-
 function (x)
-keras$ops$hard_silu(x)
+ops$hard_silu(x)
 
 #' @rdname op_hard_silu
 #' @export
 op_hard_swish <-
 function (x)
-keras$ops$hard_swish(x)
+ops$hard_swish(x)
 
 
 #' Decorator to define a function with a custom gradient.
@@ -7679,7 +7679,7 @@ keras$ops$hard_swish(x)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/custom_gradient>
 op_custom_gradient <-
 function (f)
-keras$ops$custom_gradient(f)
+ops$custom_gradient(f)
 
 
 #' Return the dtype of the tensor input as a standardized string.
@@ -7705,7 +7705,7 @@ keras$ops$custom_gradient(f)
 #' @family ops
 #' @export
 #' @tether keras.ops.dtype
-op_dtype <- function(x) keras$ops$dtype(x)
+op_dtype <- function(x) ops$dtype(x)
 
 
 #' Map a function over leading array axes.
@@ -7759,7 +7759,7 @@ op_dtype <- function(x) keras$ops$dtype(x)
 #' @tether keras.ops.map
 op_map <-
 function (xs, f)
-keras$ops$map(f, xs)
+ops$map(f, xs)
 
 
 #' Scan a function over leading array axes while carrying along state.
@@ -7851,7 +7851,7 @@ op_scan <-
 function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
 {
     args <- capture_args(list(length = as_integer, unroll = as_integer))
-    do.call(keras$ops$scan, args)
+    do.call(ops$scan, args)
 }
 
 
@@ -7905,5 +7905,5 @@ function (index, branches, ...)
   if (!is.null(names(list(...))))
     stop("Arguments supplied to ... must be unnamed")
   index <- as_py_index(index)
-  keras$ops$switch(index, branches, ...)
+  ops$switch(index, branches, ...)
 }
