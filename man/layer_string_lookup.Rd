@@ -142,7 +142,7 @@ as out-of-vocabulary (OOV).
 
 There are two possible output modes for the layer.
 When \code{output_mode} is \code{"int"},
-input strings are converted to their index in the vocabulary (an integer).
+input strings are converted to their (0-based) index in the vocabulary (an integer).
 When \code{output_mode} is \code{"multi_hot"}, \code{"count"}, or \code{"tf_idf"}, input strings
 are encoded into an array where each dimension corresponds to an element in
 the vocabulary.
@@ -166,6 +166,12 @@ to use this layer.
 
 \strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
 (independently of which backend you're using).
+
+\strong{Note:} If working with layer outputs directly (e.g., not passing outputs
+to another layer, but using them in lower-level operations like \code{[} and
+\verb{op_*}): the returned indices are 0-based. However, with default settings,
+the first (\code{0}) index is the OOV token, so the returned indices are offset by
+\code{1} and may appear to be 1-based.
 }
 \section{Examples}{
 \strong{Creating a lookup layer with a known vocabulary}

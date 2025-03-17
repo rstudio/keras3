@@ -19,16 +19,13 @@ Output array of indices, of same shape as \code{x}.
 Returns the indices of the bins to which each value in \code{x} belongs.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(0.0, 1.0, 3.0, 1.6))
-bins <- array(c(0.0, 3.0, 4.5, 7.0))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(-1,    0, 1,    3, 3.5,      4.5,  1.6,    8))
+bins <- array(c(    0,       3,         4.5,            7))
 op_digitize(x, bins)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 2 1], shape=(4), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 2 3 3 4 2 5], shape=(8), dtype=int32)
 
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([1, 1, 2, 1])
 }\if{html}{\out{</div>}}
 }
 
@@ -421,6 +418,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

@@ -31,7 +31,7 @@ op_top_k(x, k = 3)
 ## tf.Tensor([9 7 5], shape=(3), dtype=int32)
 ##
 ## $indices
-## tf.Tensor([4 2 0], shape=(3), dtype=int32)
+## tf.Tensor([5 3 1], shape=(3), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -46,7 +46,7 @@ values
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{indices
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([4 2 0], shape=(3), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([5 3 1], shape=(3), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }
@@ -303,6 +303,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

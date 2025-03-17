@@ -4020,7 +4020,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' inputs and outputs of Keras applications.
 #'
 #' @param model A Keras model initialized using any `application_` function.
-#' @param x A batch of inputs to the model.
+#' @param x A batch of inputs to the model. If `x` is missing, then the `preprocess_input` function appropriate for `model` is returned.
 #' @param preds A batch of outputs from the model.
 #' @param ... Additional arguments passed to the preprocessing or decoding function.
 #' @param top The number of top predictions to return.
@@ -4053,7 +4053,29 @@ NULL
 application_preprocess_inputs <- function(model, x, ..., data_format = NULL) {
   preprocess_input <- attr(model, "preprocess_input")
   if (is.null(preprocess_input)) not_found_errors()
+  if (missing(x)) {
+    if (!is.null(data_format) || length(list(...))) {
+      .preprocess_input <- preprocess_input
+      preprocess_input <- as.function.default(c(
+        alist(x = , ... =), list(data_format = data_format),
+        bquote(
+          .preprocess_input(x, data_format = data_format, ..., ..(list(...))),
+          splice = TRUE
+        )
+      ))
+      environment(preprocess_input) <- rlang::env(
+        asNamespace("keras3"),
+        .preprocess_input = .preprocess_input
+      )
+    }
+    return(preprocess_input)
+  }
   preprocess_input(x, data_format = data_format, ...)
+}
+
+partial <- function(.fn, .sig, ...) {
+  body <- as.call(c(.fn, lapply(names(.sig), as.symbol),  ...))
+  as.function.default(c(.sig, body), envir = baseenv())
 }
 
 #' @describeIn process_utils Decode predictions from the model
@@ -4061,6 +4083,25 @@ application_preprocess_inputs <- function(model, x, ..., data_format = NULL) {
 application_decode_predictions <- function(model, preds, top = 5L, ...) {
   decode_predictions <- attr(model, "decode_predictions")
   if (is.null(decode_predictions)) not_found_errors()
+
+  if (missing(preds)) {
+    if (!identical(top, 5L) || length(list(...))) {
+      .decode_predictions <- decode_predictions
+      decode_predictions <- as.function.default(c(
+        alist(preds =), list(top = top), alist(... =),
+        bquote(
+          .decode_predictions(preds, top = .(top), ..(list(...))),
+          splice = TRUE
+        )
+      ))
+      environment(decode_predictions) <- rlang::env(
+        asNamespace("keras3"),
+        .decode_predictions = .decode_predictions
+      )
+    }
+    return(decode_predictions)
+  }
+
   decode_predictions(preds, top = as_integer(top), ...)
 }
 
@@ -4119,7 +4160,22 @@ set_preprocessing_attributes <- function(object, module) {
       do.call(.(.preprocess_input), args)
     })), envir = parent.env(environment()))
 
-  attr(object, "decode_predictions") <- module$decode_predictions
+  .decode_predictions <- module$decode_predictions
+
+  attr(object, "decode_predictions") <-
+    as.function.default(c(formals(.decode_predictions), bquote({
+      args <- capture_args()
+      decoded <- do.call(.(.decode_predictions), args)
+
+      # convert to a list of data frames
+      lapply(decoded, function(x) {
+        m <- t(sapply(1:length(x), function(n) x[[n]]))
+        data.frame(class_name = as.character(m[,1]),
+                   class_description = as.character(m[,2]),
+                   score = as.numeric(m[,3]),
+                   stringsAsFactors = FALSE)
+      })
+    })), envir = parent.env(environment()))
   object
 }
 

@@ -24,9 +24,9 @@ have the same size first dimension, and they are iterated over together.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ 0  1  2  3]
-##  [ 4  5  6  7]
-##  [ 8  9 10 11]], shape=(3, 4), dtype=int32)
+## [[ 1  2  3  4]
+##  [ 5  6  7  8]
+##  [ 9 10 11 12]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -34,9 +34,9 @@ have the same size first dimension, and they are iterated over together.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[10 11 12 13]
-##  [14 15 16 17]
-##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+## [[11 12 13 14]
+##  [15 16 17 18]
+##  [19 20 21 22]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -44,9 +44,9 @@ have the same size first dimension, and they are iterated over together.
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ 0  3  6  9]
-##  [12 15 18 21]
-##  [24 27 30 33]], shape=(3, 4), dtype=int32)
+## [[ 3  6  9 12]
+##  [15 18 21 24]
+##  [27 30 33 36]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -71,9 +71,9 @@ output <- op_vectorized_map(input, function(.x) \{
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[10 11 12 13]
-##  [14 15 16 17]
-##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+## [[11 12 13 14]
+##  [15 16 17 18]
+##  [19 20 21 22]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -97,9 +97,9 @@ output <- op_vectorized_map(input, function(.x) \{
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[10 11 12 13]
-##  [14 15 16 17]
-##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+## [[11 12 13 14]
+##  [15 16 17 18]
+##  [19 20 21 22]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -122,15 +122,15 @@ output <- op_vectorized_map(input, function(.x) \{
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
 ## tf.Tensor(
-## [[10 11 12 13]
-##  [14 15 16 17]
-##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+## [[11 12 13 14]
+##  [15 16 17 18]
+##  [19 20 21 22]], shape=(3, 4), dtype=int32)
 ##
 ## [[2]]
 ## tf.Tensor(
-## [[20 21 22 23]
-##  [24 25 26 27]
-##  [28 29 30 31]], shape=(3, 4), dtype=int32)
+## [[21 22 23 24]
+##  [25 26 27 28]
+##  [29 30 31 32]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -156,15 +156,15 @@ output <- op_vectorized_map(input, function(.x) \{
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## $outname1
 ## tf.Tensor(
-## [[10 11 12 13]
-##  [14 15 16 17]
-##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+## [[11 12 13 14]
+##  [15 16 17 18]
+##  [19 20 21 22]], shape=(3, 4), dtype=int32)
 ##
 ## $outname2
 ## tf.Tensor(
-## [[20 21 22 23]
-##  [24 25 26 27]
-##  [28 29 30 31]], shape=(3, 4), dtype=int32)
+## [[21 22 23 24]
+##  [25 26 27 28]
+##  [29 30 31 32]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -187,9 +187,9 @@ output <- op_vectorized_map(input, function(.x) \{
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## [[1]]
 ## tf.Tensor(
-## [[10 11 12 13]
-##  [14 15 16 17]
-##  [18 19 20 21]], shape=(3, 4), dtype=int32)
+## [[11 12 13 14]
+##  [15 16 17 18]
+##  [19 20 21 22]], shape=(3, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }
@@ -246,6 +246,7 @@ Other core ops: \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_switch}()} \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_while_loop}()} \cr
@@ -478,6 +479,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

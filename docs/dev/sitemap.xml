@@ -412,6 +412,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/new_loss_class.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/new_metric_class.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/new_model_class.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/newaxis.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/normalize.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_abs.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_add.html</loc></url>
@@ -640,6 +641,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/op_std.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_stft.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_stop_gradient.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/op_subset.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_subtract.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_sum.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/op_svd.html</loc></url>

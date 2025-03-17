@@ -20,7 +20,7 @@ It is defined as \code{f(x) = log(1 / (1 + exp(-x)))}.
 op_log_sigmoid(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.0000418  -0.6931472  -0.474077   -0.00671535], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-1.00004181 -0.69314718 -0.47407698 -0.00671535], shape=(4), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }
@@ -301,6 +301,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

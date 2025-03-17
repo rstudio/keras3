@@ -298,14 +298,14 @@ test_succeeds("timeseries_dataset_from_array", {
     stopifnot(exprs = {
       # First sequence: steps [1-10]
       # Corresponding target: step 11
-      all.equal(as.array(input[1, ]), data[1:10])
-      all.equal(as.array(target[1]), data[11])
+      all.equal(as.array(input[1, ]), as.array(data[1:10]))
+      all.equal(as.array(target[1]), as.array(data[11]))
 
-      all.equal(as.array(input[2, ]), data[2:11])
-      all.equal(as.array(target[2]), data[12])
+      all.equal(as.array(input[2, ]), as.array(data[2:11]))
+      all.equal(as.array(target[2]), as.array(data[12]))
 
-      all.equal(as.array(input[3, ]), data[3:12])
-      all.equal(as.array(target[3]), data[13])
+      all.equal(as.array(input[3, ]), as.array(data[3:12]))
+      all.equal(as.array(target[3]), as.array(data[13]))
     })
   }
 

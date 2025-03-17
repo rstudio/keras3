@@ -11,7 +11,7 @@ op_ctc_decode(
   beam_width = 100L,
   top_paths = 1L,
   merge_repeated = TRUE,
-  mask_index = 0L
+  mask_index = 1L
 )
 }
 \arguments{
@@ -34,8 +34,8 @@ Defaults to \code{1}.}
 \item{merge_repeated}{A boolean scalar, whether to merge repeated
 labels in the output. Defaults to \code{TRUE}.}
 
-\item{mask_index}{An integer scalar, the (0-based) index of the mask character in
-the vocabulary. Defaults to \code{0}.}
+\item{mask_index}{An integer scalar, the (1-based) index of the mask character in
+the vocabulary. Defaults to \code{1}.}
 }
 \value{
 A list containing:
@@ -440,6 +440,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

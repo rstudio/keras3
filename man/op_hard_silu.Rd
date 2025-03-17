@@ -30,7 +30,7 @@ It's a faster, piecewise linear approximation of the silu activation.
 op_hard_silu(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.         -0.33333334  0.          0.6666667   3.        ], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.         -0.33333333  0.          0.66666667  3.        ], shape=(5), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }
@@ -307,6 +307,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

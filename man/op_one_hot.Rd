@@ -9,10 +9,10 @@ op_one_hot(x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 \arguments{
 \item{x}{Integer tensor to be encoded. The shape can be
 arbitrary, but the dtype should be integer.
-R factors are coerced to integer and offset to be 0-based, i.e.,
-\code{as.integer(x) - 1L}.}
+R factors are coerced to integer.}
 
-\item{num_classes}{Number of classes for the one-hot encoding.}
+\item{num_classes}{Number of classes for the one-hot encoding. If \code{x} is a factor and
+\code{num_classes} is \code{NULL} or missing, then \code{levels(x)} is used.}
 
 \item{axis}{Axis along which the encoding is performed.
 \code{-1} represents the last axis. Defaults to \code{-1}.}
@@ -41,9 +41,9 @@ op_one_hot(x, num_classes = 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 1. 0. 0.]
-##  [0. 0. 0. 1.]
+## [[1. 0. 0. 0.]
 ##  [0. 0. 1. 0.]
+##  [0. 1. 0. 0.]
 ##  [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
 
 }\if{html}{\out{</div>}}
@@ -331,6 +331,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

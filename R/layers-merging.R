@@ -140,14 +140,14 @@ function (inputs, ...)
 #' # Examples
 #' ```{r}
 #' x <- op_arange(20) |> op_reshape(c(2, 2, 5))
-#' y <- op_arange(20, 40) |> op_reshape(c(2, 2, 5))
+#' y <- op_arange(21, 40) |> op_reshape(c(2, 2, 5))
 #' layer_concatenate(x, y, axis = 2)
 #' ```
 #' Usage in a Keras model:
 #'
 #' ```{r}
 #' x1 <- op_arange(10)     |> op_reshape(c(5, 2)) |> layer_dense(8)
-#' x2 <- op_arange(10, 20) |> op_reshape(c(5, 2)) |> layer_dense(8)
+#' x2 <- op_arange(11, 20) |> op_reshape(c(5, 2)) |> layer_dense(8)
 #' y <- layer_concatenate(x1, x2)
 #' ```
 #'

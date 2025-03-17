@@ -51,7 +51,7 @@ To reconstruct an original waveform, the parameters should be the same in
 op_istft(op_stft(x, 1, 1, 1), 1, 1, 1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([], shape=(0), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([], shape=(0), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
@@ -310,6 +310,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

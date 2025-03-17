@@ -41,13 +41,13 @@ x
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[[ 0.  1.]
-##   [ 2.  3.]
-##   [ 4.  5.]]
+## [[[ 1.  2.]
+##   [ 3.  4.]
+##   [ 5.  6.]]
 ##
-##  [[ 6.  7.]
-##   [ 8.  9.]
-##   [10. 11.]]], shape=(2, 3, 2), dtype=float32)
+##  [[ 7.  8.]
+##   [ 9. 10.]
+##   [11. 12.]]], shape=(2, 3, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -56,9 +56,9 @@ y
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[[2. 3.]]
+## [[[ 3.  4.]]
 ##
-##  [[8. 9.]]], shape=(2, 1, 2), dtype=float32)
+##  [[ 9. 10.]]], shape=(2, 1, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

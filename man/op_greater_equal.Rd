@@ -20,21 +20,21 @@ Note that this function is automatically called when using the R operator \code{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_greater_equal(x, 2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False False  True  True], shape=(4), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False  True  True  True], shape=(4), dtype=bool)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x >= 2
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False False  True  True], shape=(4), dtype=bool)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([False  True  True  True], shape=(4), dtype=bool)
 
 }\if{html}{\out{</div>}}
 }
@@ -427,6 +427,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

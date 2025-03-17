@@ -427,6 +427,7 @@ reference:
     - zip_lists
     - get_file
     - split_dataset
+    - newaxis
     # - pack_x_y_sample_weight
     # - unpack_x_y_sample_weight
 

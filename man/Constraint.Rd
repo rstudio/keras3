@@ -82,7 +82,7 @@ weight <- op_convert_to_tensor(c(-1, 1))
 constraint_nonnegative()(weight)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.  1.], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.  1.], shape=(2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 

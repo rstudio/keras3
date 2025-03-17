@@ -157,6 +157,7 @@ use_backend <- function(backend, gpu = NA) {
   if (is_keras_loaded()) {
     if (config_backend() != backend)
       stop("The keras backend must be set before keras has inititialized. Please restart the R session.")
+    return()
   }
 
   Sys.setenv(KERAS_BACKEND = backend)
@@ -175,7 +176,6 @@ use_backend <- function(backend, gpu = NA) {
         gpu <- FALSE
 
       if (gpu) {
-        # py_require("tensorflow", action = "remove")
         py_require(c("tensorflow", "tensorflow-metal"))
       } else {
         py_require(action = "remove", c("tensorflow-macos", "tensorflow-metal"))
@@ -185,9 +185,7 @@ use_backend <- function(backend, gpu = NA) {
     },
 
     macOS_jax = {
-
-      py_require(c("tensorflow-metal", "tensorflow-macos"),
-                 action = "remove")
+      py_require(c("tensorflow-metal", "tensorflow-macos"), action = "remove")
 
       if (is.na(gpu))
         gpu <- TRUE
@@ -203,15 +201,14 @@ use_backend <- function(backend, gpu = NA) {
       if(isTRUE(gpu))
         warning("GPU usage not supported on macOS. Please use a different backend to use the GPU (jax)")
 
-      py_require(c("tensorflow-metal", "tensorflow-macos"),
-                 action = "remove")
+      py_require(c("tensorflow-metal", "tensorflow-macos"), action = "remove")
 
       py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
     },
 
     macOS_numpy = {
       py_require(c("tensorflow-metal", "tensorflow-macos"), action = "remove")
-      py_require(c("tensorflow", "numpy"))
+      py_require(c("tensorflow", "numpy", "jax[cpu]")) # numpy backend requires jax for some image ops
     },
 
     Linux_tensorflow = {
@@ -229,8 +226,7 @@ use_backend <- function(backend, gpu = NA) {
     },
 
     Linux_jax = {
-      py_require(c("tensorflow", "tensorflow[and-cuda]"),
-                 action = "remove")
+      py_require(c("tensorflow", "tensorflow[and-cuda]"), action = "remove")
 
       if (is.na(gpu))
         gpu <- has_gpu()
@@ -261,7 +257,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Linux_numpy = {
       py_require(c("tensorflow", "tensorflow[and-cuda]"), action = "remove")
-      py_require(c("tensorflow-cpu", "numpy"))
+      py_require(c("tensorflow-cpu", "numpy", "jax[cpu]"))
     },
 
     Windows_tensorflow = {
@@ -271,7 +267,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Windows_jax = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
-      py_require("jax")
+      py_require(c("tensorflow", "jax"))
     },
 
     Windows_torch = {
@@ -280,17 +276,17 @@ use_backend <- function(backend, gpu = NA) {
 
       if (gpu) {
         Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
-            "https://download.pytorch.org/whl/cu126",
-            Sys.getenv("UV_INDEX")
+          "https://download.pytorch.org/whl/cu126",
+          Sys.getenv("UV_INDEX")
         )))
-        py_require(c("torch", "torchvision", "torchaudio"))
+        py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
       } else {
-        py_require(c("torch", "torchvision", "torchaudio"))
+        py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
       }
     },
 
     Windows_numpy = {
-      py_require("numpy")
+      py_require(c("tensorflow", "numpy", "jax[cpu]"))
     }
   )
 

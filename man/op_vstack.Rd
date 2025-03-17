@@ -4,10 +4,10 @@
 \alias{op_vstack}
 \title{Stack tensors in sequence vertically (row wise).}
 \usage{
-op_vstack(xs)
+op_vstack(xs, ...)
 }
 \arguments{
-\item{xs}{Sequence of tensors.}
+\item{xs, ...}{Sequence of tensors.}
 }
 \value{
 Tensor formed by stacking the given tensors.
@@ -405,6 +405,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

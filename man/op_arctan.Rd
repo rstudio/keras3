@@ -21,7 +21,7 @@ Trigonometric inverse tangent, element-wise.
 op_arctan(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.        0.7853982], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.         0.78539816], shape=(2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }
@@ -415,6 +415,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

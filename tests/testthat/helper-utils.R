@@ -218,3 +218,20 @@ k_constant <- function(value, dtype = NULL, shape = NULL, name = NULL) {
   x
   keras$ops$convert_to_tensor(x)
 }
+
+
+ct <- function(...) {
+  x <- if(...length() == 1L) ..1 else c(...)
+  if (is.double(x))
+    storage.mode(x) <- "integer"
+  op_convert_to_tensor(as.array(x))
+}
+
+as.tensor <- function(x) op_convert_to_tensor(x)
+
+env <- rlang::env
+
+
+expect_equal_array <- function(x, y) {
+  expect_equal(as.array(x), as.array(y))
+}

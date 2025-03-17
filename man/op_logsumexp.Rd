@@ -28,7 +28,7 @@ Computes the logarithm of sum of exponentials of elements in a tensor.
 op_logsumexp(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(3.407606, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(3.4076059644443806, shape=(), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }
@@ -284,6 +284,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

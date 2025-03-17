@@ -15,6 +15,84 @@ Indices of elements that are non-zero.
 \description{
 Return the indices of the elements that are non-zero.
 }
+\details{
+\subsection{Example}{
+
+\code{op_nonzero()} indices can be used with \verb{<tensor>@r[}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_scatter(indices = rbind(1, 5, 10), values = c(1, 2, 3), shape = c(10)))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 0. 0. 0. 2. 0. 0. 0. 0. 3.], shape=(10), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(nz <- op_nonzero(x))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[ 1]
+##  [ 5]
+##  [10]], shape=(3, 1), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[nz]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# same as `x@r[nz]`
+x@r[x != 0]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[op_cast(x, "bool")]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3.], shape=(3), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2d example
+(x2 <- op_stack(c(x, op_roll(x, 1), op_roll(x, 2))))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1. 0. 0. 0. 2. 0. 0. 0. 0. 3.]
+##  [3. 1. 0. 0. 0. 2. 0. 0. 0. 0.]
+##  [0. 3. 1. 0. 0. 0. 2. 0. 0. 0.]], shape=(3, 10), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x2@r[op_nonzero(x2)]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 3. 1. 2. 3. 1. 2.], shape=(9), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x3 <- op_stack(c(x2, x2*1.1))
+x3@r[op_nonzero(x3)]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.  2.  3.  3.  1.  2.  3.  1.  2.  1.1 2.2 3.3 3.3 1.1 2.2 3.3 1.1 2.2], shape=(18), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x3@py[keras$ops$nonzero(x3)]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.  2.  3.  3.  1.  2.  3.  1.  2.  1.1 2.2 3.3 3.3 1.1 2.2 3.3 1.1 2.2], shape=(18), dtype=float64)
+
+}\if{html}{\out{</div>}}
+}
+}
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/ops/numpy#nonzero-function}
@@ -404,6 +482,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

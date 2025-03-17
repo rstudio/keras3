@@ -26,6 +26,28 @@ Array of indices that partition \code{x} along the specified \code{axis}.
 It returns an array
 of indices of the same shape as \code{x} that index data along the given axis
 in partitioned order.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_convert_to_tensor(c(9, 3, 6, 2, 8, 5, 7, 1, 10, 4))
+x@r[op_argpartition(x, 3)]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.  2.  3. 10.  9.  8.  7.  6.  5.  4.], shape=(10), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[op_argpartition(x, 5)]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.  2.  3.  4.  5. 10.  9.  8.  7.  6.], shape=(10), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[op_argpartition(x, 7)]
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 1.  2.  3.  4.  5.  6.  7. 10.  9.  8.], shape=(10), dtype=float64)
+
+}\if{html}{\out{</div>}}
 }
 \seealso{
 Other numpy ops: \cr
@@ -412,6 +434,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

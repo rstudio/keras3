@@ -28,7 +28,7 @@ sparse tensors.}
 \value{
 1D tensor where each element gives the number of occurrence(s) of its
 index value in x. Its length is the maximum between \code{max(x) + 1} and
-minlength.
+\code{minlength}.
 }
 \description{
 Count the number of occurrences of each value in a tensor of integers.
@@ -460,6 +460,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

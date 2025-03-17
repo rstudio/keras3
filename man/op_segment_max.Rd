@@ -35,7 +35,7 @@ num_segments <- 3
 op_segment_max(data, segment_ids, num_segments)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  2.  20. 200.], shape=(3), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([  2.  20. 200.], shape=(3), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
@@ -294,6 +294,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

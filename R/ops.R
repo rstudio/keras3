@@ -162,6 +162,8 @@ function (x, dtype = NULL, sparse = NULL) {
       typeof(x) == "double" &&
       grepl("int", dtype, fixed = TRUE))
     storage.mode(x) <- "integer"
+  if (is.atomic(x) && length(x) > 1L)
+    x <- as.array(x)
   keras$ops$convert_to_tensor(x, dtype, sparse)
 }
 
@@ -245,9 +247,11 @@ keras$ops$is_tensor(x)
 #'
 #' # Examples
 #' ```{r}
+#' op_scatter(indices = rbind(1), values = 1, shape = c(5))
+#' op_scatter(indices = rbind(1, 3), values = 1:2, shape = c(5))
 #' indices <- rbind(c(1, 2), c(2, 2))
 #' values <- op_array(c(1, 1))
-#' op_scatter(indices, values, shape= c(2, 2))
+#' op_scatter(indices, values, shape = c(2, 2))
 #' ```
 #'
 #' @param indices
@@ -272,8 +276,12 @@ keras$ops$is_tensor(x)
 op_scatter <-
 function (indices, values, shape)
 {
-    args <- capture_args(list(indices = as_index, shape = normalize_shape))
-    do.call(keras$ops$scatter, args)
+  args <- capture_args(list(
+    indices = as_py_index,
+    values = as_array,
+    shape = normalize_shape
+  ))
+  do.call(keras$ops$scatter, args)
 }
 
 
@@ -341,7 +349,7 @@ function (indices, values, shape)
 op_scatter_update <-
 function (inputs, indices, updates)
 {
-    args <- capture_args(list(indices = as_index))
+    args <- capture_args(list(indices = as_index, updates = as_array))
     do.call(keras$ops$scatter_update, args)
 }
 
@@ -371,7 +379,7 @@ function (inputs, indices, updates)
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left")
-keras$ops$searchsorted(sorted_sequence, values, side)
+keras$ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
 
 
 #' Gets the shape of the tensor input.
@@ -455,7 +463,7 @@ function (x)
 op_slice <-
 function (inputs, start_indices, shape)
 {
-    args <- capture_args(list(shape = normalize_shape, start_indices = as_index))
+    args <- capture_args(list(inputs = as_array, shape = normalize_shape, start_indices = as_index))
     do.call(keras$ops$slice, args)
 }
 
@@ -504,7 +512,7 @@ function (inputs, start_indices, shape)
 op_slice_update <-
 function (inputs, start_indices, updates)
 {
-    args <- capture_args(list(start_indices = as_index))
+    args <- capture_args(list(inputs = as_array, start_indices = as_index, updates = as_array))
     do.call(keras$ops$slice_update, args)
 }
 
@@ -583,7 +591,7 @@ keras$ops$stop_gradient(variable)
 op_unstack <-
 function (x, num = NULL, axis = 1L)
 {
-    args <- capture_args(list(axis = as_axis))
+    args <- capture_args(list(axis = as_axis, num = as_integer))
     do.call(keras$ops$unstack, args)
 }
 
@@ -1180,7 +1188,7 @@ keras$ops$qr(x, mode)
 
 #' @export
 py_to_r.tensorflow.python.ops.gen_linalg_ops.Qr <- function(x) {
-  x <- py_eval("tuple")(x)
+  x <- py_get_attr(import("builtins"), "tuple")(x)
   names(x) <- c("q", "r")
   x
 }
@@ -1550,7 +1558,9 @@ op_top_k <-
 function (x, k, sorted = TRUE)
 {
     args <- capture_args(list(x = as_array, k = as_integer))
-    do.call(keras$ops$top_k, args)
+    res <- do.call(keras$ops$top_k, args)
+    res[[2L]] <- res[[2L]] + 1L
+    res
 }
 
 
@@ -2334,11 +2344,11 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #' @param x
 #' Integer tensor to be encoded. The shape can be
 #' arbitrary, but the dtype should be integer.
-#' R factors are coerced to integer and offset to be 0-based, i.e.,
-#' `as.integer(x) - 1L`.
+#' R factors are coerced to integer.
 #'
 #' @param num_classes
-#' Number of classes for the one-hot encoding.
+#' Number of classes for the one-hot encoding. If `x` is a factor and
+#' `num_classes` is `NULL` or missing, then `levels(x)` is used.
 #'
 #' @param axis
 #' Axis along which the encoding is performed.
@@ -2362,16 +2372,15 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 op_one_hot <-
 function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
 {
-    args <- capture_args(list(
-      x = function(x) {
-        if (inherits(x, "factor"))
-          array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
-        else
-          as_integer_array(x)
-      },
-      axis = as_axis,
-      num_classes = as_integer))
-    do.call(keras$ops$one_hot, args)
+
+  args <- capture_args(list(axis = as_axis, num_classes = as_integer))
+  if (inherits(x, "factor")) {
+    if (is.null(args$num_classes))
+      args$num_classes <- length(levels(x))
+    x <- unclass(x)
+  }
+  args$x <- as_py_index(x)
+  do.call(keras$ops$one_hot, args)
 }
 
 
@@ -3121,13 +3130,12 @@ function (x1, x2, axis = NULL)
 #'
 #' @description
 #' `arange` can be called with a varying number of positional arguments:
-#' * `arange(stop)`: Values are generated within the half-open interval
-#'     `[0, stop)` (in other words, the interval including `start` but excluding
-#'     `stop`).
-#' * `arange(start, stop)`: Values are generated within the half-open interval
-#'     `[start, stop)`.
-#' * `arange(start, stop, step)`: Values are generated within the half-open
-#'     interval `[start, stop)`, with spacing between values given by step.
+#' * `arange(end)`: Values are generated within the half-open interval
+#'     `[1, end]` (in other words, the interval including `start` and `end`).
+#' * `arange(start, end)`: Values are generated within the interval
+#'     `[start, end]`.
+#' * `arange(start, end, step)`: Values are generated within the
+#'     interval `[start, end]`, with spacing between values given by `step`.
 #'
 #' # Examples
 #' ```{r}
@@ -3141,14 +3149,14 @@ function (x1, x2, axis = NULL)
 #' @returns
 #' Tensor of evenly spaced values.
 #' For floating point arguments, the length of the result is
-#' `ceiling((stop - start)/step)`. Because of floating point overflow, this
-#' rule may result in the last element of out being greater than stop.
+#' `ceiling((end - start)/step)`. Because of floating point overflow, this
+#' rule may result in the last element of out being greater than `end`.
 #'
 #' @param start
 #' Integer or real, representing the start of the interval. The
 #' interval includes this value.
 #'
-#' @param stop
+#' @param end
 #' Integer or real, representing the end of the interval. The
 #' interval does not include this value, except in some cases where
 #' `step` is not an integer and floating point round-off affects the
@@ -3172,18 +3180,25 @@ function (x1, x2, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 #' @tether keras.ops.arange
 op_arange <-
-function (start, stop = NULL, step = 1L, dtype = NULL)
+function (start, end, step = 1L, dtype = NULL)
 {
-  transformers <- list()
-  if (!is.null(dtype) && keras$backend$is_int_dtype(dtype))
-    transformers[c("start", "stop", "step")] <- list(function(x) {
-      if (is.double(x))
-        storage.mode(x) <- "integer"
-      x
-    })
 
-  args <- capture_args(transformers)
-  do.call(keras$ops$arange, args)
+  if(missing(end)) {
+    end <- start
+    start <- if (is.double(end)) 1 else 1L
+  }
+
+  if (!is.null(dtype) && keras$backend$is_int_dtype(dtype)) {
+    if (is.double(start))
+      storage.mode(start) <- "integer"
+    if (is.double(end))
+      storage.mode(end) <- "integer"
+  }
+
+  abs_step <- op_abs(step)
+  step <- op_where(start > end, -abs_step, abs_step)
+
+  keras$ops$arange(start, end+step, step, dtype = dtype)
 }
 
 
@@ -3417,13 +3432,13 @@ keras$ops$arctanh(x)
 #' ```
 #'
 #' @note
-#' This is similar to R `max.col(x) - 1` for the case of a 2-d array (a matrix),
-#' or for an nd-array, `apply(x, axis, which.max) - 1`
+#' This is similar to R `max.col(x)` for the case of a 2-d array (a matrix),
+#' or for an nd-array, `apply(x, axis, which.max)`
 #'
 #' @returns
 #' Tensor of indices. It has the same shape as `x`, with the dimension
-#' along `axis` removed. Note that the returned integer is 0-based (i.e., if the
-#' argmax is in the first index position, the returned value will be `0`)
+#' along `axis` removed. Note that the returned integer is 1-based (i.e., if the
+#' argmax is in the first index position, the returned value will be `1`)
 #'
 #' @param x
 #' Input tensor.
@@ -3446,8 +3461,8 @@ keras$ops$arctanh(x)
 op_argmax <-
 function (x, axis = NULL, keepdims = FALSE)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argmax, args)
+    args <- capture_args(list(x = as_array, axis = as_axis))
+    do.call(keras$ops$argmax, args) + 1L
 }
 
 
@@ -3465,7 +3480,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' ```
 #'
 #' @note
-#' This is similar to an R expression `apply(x, axis, which.min) - 1`, where `x`
+#' This is similar to an R expression `apply(x, axis, which.min)`, where `x`
 #' is a R array.
 #'
 #' @returns
@@ -3494,7 +3509,7 @@ op_argmin <-
 function (x, axis = NULL, keepdims = FALSE)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argmin, args)
+    do.call(keras$ops$argmin, args) + 1L
 }
 
 
@@ -3505,17 +3520,25 @@ function (x, axis = NULL, keepdims = FALSE)
 #' # Examples
 #' One dimensional array:
 #' ```{r}
-#' x <- op_array(c(3, 1, 2))
+#' x <- op_array(c(3, 1, 2)) + .1
 #' op_argsort(x)
+#' x@r[op_argsort(x)] == op_sort(x)
 #' ```
 #'
 #' Two-dimensional array:
 #' ```{r}
 #' x <- op_array(rbind(c(0, 3),
-#'                    c(3, 2),
-#'                    c(4, 5)), dtype = "int32")
-#' op_argsort(x, axis = 1)
-#' op_argsort(x, axis = 2)
+#'                     c(3, 2),
+#'                     c(4, 5))) + .1
+#' (i <- op_argsort(x, axis = 1))
+#'
+#' x@r[i@r[, 1], ] # sort x-rows using first col of x
+#' x@r[i@r[, 2], ] # sort x-rows using second col of x
+#'
+#'
+#' (i <- op_argsort(x, axis = 2))
+#'
+#' x@r[, i@r[2,]] # sort x-cols using second row of x
 #' ```
 #'
 #' @returns
@@ -3539,7 +3562,7 @@ op_argsort <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$argsort, args)
+    do.call(keras$ops$argsort, args) + 1L
 }
 
 
@@ -3752,7 +3775,7 @@ function (x, axis = NULL, weights = NULL)
 #' @returns
 #' 1D tensor where each element gives the number of occurrence(s) of its
 #' index value in x. Its length is the maximum between `max(x) + 1` and
-#' minlength.
+#' `minlength`.
 #'
 #' @param x
 #' Input tensor.
@@ -4176,8 +4199,8 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' labels in the output. Defaults to `TRUE`.
 #'
 #' @param mask_index
-#' An integer scalar, the (0-based) index of the mask character in
-#' the vocabulary. Defaults to `0`.
+#' An integer scalar, the (1-based) index of the mask character in
+#' the vocabulary. Defaults to `1`.
 #'
 #' @export
 #' @family numpy ops
@@ -4185,13 +4208,13 @@ function (x1, x2, axisa = -1L, axisb = -1L, axisc = -1L, axis = NULL)
 #' @tether keras.ops.ctc_decode
 op_ctc_decode <-
 function (inputs, sequence_lengths, strategy = "greedy", beam_width = 100L,
-    top_paths = 1L, merge_repeated = TRUE, mask_index = 0L)
+    top_paths = 1L, merge_repeated = TRUE, mask_index = 1L)
 {
     args <- capture_args(list(
       sequence_lengths = as_integer_array,
       beam_width = as_integer,
       top_paths = as_integer,
-      mask_index = as_integer))
+      mask_index = as_py_index))
     do.call(keras$ops$ctc_decode, args)
 }
 
@@ -4371,7 +4394,7 @@ function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 #' op_diff(x)
 #' op_diff(x, n = 2)
 #' x <- op_array(rbind(c(1, 3, 6, 10),
-#'                   c(0, 5, 6, 8)))
+#'                     c(0, 5, 6, 8)))
 #' op_diff(x)
 #' op_diff(x, axis = 1)
 #' ```
@@ -4409,10 +4432,9 @@ function (a, n = 1L, axis = -1L)
 #'
 #' # Examples
 #' ```{r}
-#' x <- op_array(c(0.0, 1.0, 3.0, 1.6))
-#' bins <- array(c(0.0, 3.0, 4.5, 7.0))
+#' x <- op_array(c(-1,    0, 1,    3, 3.5,      4.5,  1.6,    8))
+#' bins <- array(c(    0,       3,         4.5,            7))
 #' op_digitize(x, bins)
-#' # array([1, 1, 2, 1])
 #' ```
 #'
 #' @returns
@@ -4436,7 +4458,7 @@ op_digitize <-
 function (x, bins)
 {
     args <- capture_args(list(bins = as.array))
-    do.call(keras$ops$digitize, args)
+    do.call(keras$ops$digitize, args) + 1L
 }
 
 
@@ -4987,8 +5009,8 @@ keras$ops$greater_equal(x1, x2)
 #' @returns
 #' The tensor formed by stacking the given tensors.
 #'
-#' @param xs
-#' Sequence of tensors.
+#' @param xs,...
+#' list of tensors.
 #'
 #' @export
 #' @family numpy ops
@@ -4998,8 +5020,14 @@ keras$ops$greater_equal(x1, x2)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/hstack>
 #' @tether keras.ops.hstack
 op_hstack <-
-function (xs)
-keras$ops$hstack(xs)
+function (xs, ...) {
+  if (!is.list(xs))
+    xs <- list(xs)
+  xs <- c(xs, list2(...))
+  names(xs) <- NULL
+  xs <- lapply(xs, atomic_to_array)
+  ops$hstack(xs)
+}
 
 
 #' Return the identity tensor.
@@ -6010,6 +6038,30 @@ keras$ops$negative(x)
 
 #' Return the indices of the elements that are non-zero.
 #'
+#' @details
+#'
+#' ## Example
+#'
+#' `op_nonzero()` indices can be used with `<tensor>@r[`
+#'
+#' ```{r}
+#' (x <- op_scatter(indices = rbind(1, 5, 10), values = c(1, 2, 3), shape = c(10)))
+#' (nz <- op_nonzero(x))
+#' x@r[nz]
+#'
+#' # same as `x@r[nz]`
+#' x@r[x != 0]
+#' x@r[op_cast(x, "bool")]
+#'
+#' # 2d example
+#' (x2 <- op_stack(c(x, op_roll(x, 1), op_roll(x, 2))))
+#' x2@r[op_nonzero(x2)]
+#'
+#' x3 <- op_stack(c(x2, x2*1.1))
+#' x3@r[op_nonzero(x3)]
+#' x3@py[keras$ops$nonzero(x3)]
+#' ```
+#'
 #' @returns
 #' Indices of elements that are non-zero.
 #'
@@ -6024,8 +6076,10 @@ keras$ops$negative(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/nonzero>
 #' @tether keras.ops.nonzero
 op_nonzero <-
-function (x)
-keras$ops$nonzero(x)
+function (x) {
+  ops$stack(lapply(ops$nonzero(x), `+`, 1L),
+            axis = -1L)
+}
 
 
 #' Return `(x1 != x2)` element-wise.
@@ -6605,6 +6659,19 @@ function (x, axis = -1L)
 #' A split does not have to result in equal division when using
 #' Torch backend.
 #'
+#' # Example
+#' ```{r}
+#' x <- op_arange(12)
+#'
+#' # pass a scalar integer for n sections
+#' op_split(x, 2)
+#' op_split(x, 3)
+#'
+#' # 1-d array/tensor for indices
+#' op_split(x, array(c(3, 8)))
+#' op_split(x, array(c(3)))
+#' ```
+#'
 #' @returns
 #' A list of tensors.
 #'
@@ -6630,8 +6697,36 @@ function (x, axis = -1L)
 op_split <-
 function (x, indices_or_sections, axis = 1L)
 {
-    args <- capture_args(list(indices_or_sections = as_integer,
-        axis = as_axis))
+    args <- capture_args(list(
+      indices_or_sections = function(n) {
+        if (is.atomic(n)) {
+          if (length(n) > 1L ||
+              is.array(n)) {
+            return(as_py_index(n))
+          } else {
+            return(as.integer(n))
+          }
+        }
+
+        if (inherits(n, "numpy.ndarray")) {
+          if (as_r_value(n$ndim) > 0L) {
+            return(as_py_index(n))
+          } else {
+            return(as.integer(n))
+          }
+        }
+
+        if (op_is_tensor(n)) {
+          if (op_ndim(n) > 0L) {
+            return(as_py_index(n))
+          } else {
+            return(n)
+          }
+        }
+
+        stop("indices_or_sections must be a scalar or 1-d tensor or array")
+      },
+      axis = as_axis))
     do.call(keras$ops$split, args)
 }
 
@@ -6849,7 +6944,7 @@ function (x, axis = NULL, keepdims = FALSE)
 #' @tether keras.ops.swapaxes
 op_swapaxes <-
 function (x, axis1, axis2)
-keras$ops$swapaxes(x, axis1, axis2)
+keras$ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 
 
 #' Take elements from a tensor along an axis.
@@ -6877,7 +6972,7 @@ keras$ops$swapaxes(x, axis1, axis2)
 op_take <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args(list(indices = as_index, axis = as_axis))
+    args <- capture_args(list(indices = as_py_index, axis = as_axis))
     do.call(keras$ops$take, args)
 }
 
@@ -6907,7 +7002,7 @@ function (x, indices, axis = NULL)
 op_take_along_axis <-
 function (x, indices, axis = NULL)
 {
-    args <- capture_args(list(indices = as_index, axis = as_axis))
+    args <- capture_args(list(indices = as_py_index, axis = as_axis))
     do.call(keras$ops$take_along_axis, args)
 }
 
@@ -7061,9 +7156,12 @@ keras$ops$tile(x, repeats)
 op_trace <-
 function (x, offset = 0L, axis1 = 1L, axis2 = 2L)
 {
-    args <- capture_args(list(offset = as_integer, axis1 = as_integer,
-        axis2 = as_integer))
-    do.call(keras$ops$trace, args)
+  args <- capture_args(list(
+    offset = as_integer,
+    axis1 = as_axis,
+    axis2 = as_axis
+  ))
+  do.call(keras$ops$trace, args)
 }
 
 
@@ -7124,7 +7222,7 @@ function (x, axes = NULL)
 op_tri <-
 function (N, M = NULL, k = 0L, dtype = NULL)
 {
-    args <- capture_args(list(k = as_integer))
+    args <- capture_args(list(N = as_integer, M = as_integer, k = as_integer))
     do.call(keras$ops$tri, args)
 }
 
@@ -7277,7 +7375,7 @@ keras$ops$vdot(x1, x2)
 #' @returns
 #' Tensor formed by stacking the given tensors.
 #'
-#' @param xs
+#' @param xs,...
 #' Sequence of tensors.
 #'
 #' @export
@@ -7288,8 +7386,14 @@ keras$ops$vdot(x1, x2)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/vstack>
 #' @tether keras.ops.vstack
 op_vstack <-
-function (xs)
-keras$ops$vstack(xs)
+function (xs, ...) {
+  if (!is.list(xs))
+    xs <- list(xs)
+  xs <- c(xs, list2(...))
+  names(xs) <- NULL
+  xs <- lapply(xs, atomic_to_array)
+  ops$vstack(xs)
+}
 
 #' Turn a function into a vectorized function.
 #'
@@ -7441,7 +7545,7 @@ keras$ops$zeros_like(x, dtype)
 #'
 #' @param mask_index
 #' The index of the mask character in the vocabulary.
-#' Defaults to `0`.
+#' Defaults to `1` (the first element in vocabulary).
 #'
 #' @returns A tensor, shape `(batch_size)`, of loss values.
 #' @export
@@ -7451,9 +7555,9 @@ keras$ops$zeros_like(x, dtype)
 # @seealso
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/ctc_loss>
 op_ctc_loss <-
-function (target, output, target_length, output_length, mask_index = 0L)
+function (target, output, target_length, output_length, mask_index = 1L)
 {
-    args <- capture_args(list(target = as_integer_array, mask_index = as_integer))
+    args <- capture_args(list(target = as_integer_array, mask_index = as_py_index))
     do.call(keras$ops$ctc_loss, args)
 }
 
@@ -7767,13 +7871,15 @@ function (f, init, xs = NULL, length = NULL, reverse = FALSE, unroll = 1L)
 #'
 #' # Examples
 #' ```{r}
-#' add_fn <- function(x, y) x + y
-#' subtract_fn <- function(x, y) x - y
-#' x <- op_array(2.0)
+#' add_fn <- function(x, y) x + y + 100
+#' subtract_fn <- function(x, y) x - y - 100
+#' x <- op_array(2)
 #' y <- op_array(0.5)
 #' branches <- list(add_fn, subtract_fn)
-#' op_switch(1, branches, x, y)
-#' op_switch(2, branches, x, y)
+#' op_switch(0, branches, x, y) # +
+#' op_switch(1, branches, x, y) # +
+#' op_switch(2, branches, x, y) # -
+#' op_switch(3, branches, x, y) # -
 #' ```
 #'
 #' @returns
@@ -7798,6 +7904,6 @@ function (index, branches, ...)
 {
   if (!is.null(names(list(...))))
     stop("Arguments supplied to ... must be unnamed")
-  index <- op_convert_to_tensor(index, "int32") - 1L
+  index <- as_py_index(index)
   keras$ops$switch(index, branches, ...)
 }

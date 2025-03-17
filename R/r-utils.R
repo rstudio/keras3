@@ -183,6 +183,8 @@ check_bool <- function(x) {
 
 # ---- arg transformers ----
 
+atomic_to_array <- function(x) if(is.atomic(x)) as.array(x) else x
+
 as_array <- function(x)
   if(is.null(x) || is_py_object(x) || is.array(x))
     x else as.array(x)
@@ -263,10 +265,11 @@ as_integer <- function(x) {
 }
 
 as_integer_array <- function(x) {
-  if(is.atomic(x))
+  if (is.atomic(x)) {
+    if (is.double(x))
+      storage.mode(x) <- "integer"
     x <- as.array(x)
-  if(is.array(x) && storage.mode(x) != "integer")
-    storage.mode(x) <- "integer"
+  }
   x
 }
 
@@ -332,13 +335,30 @@ normalize_path <- function(path) {
 
 
 # unused
-as_index <- function(x) {
-  if(storage.mode(x) == "double")
-    storage.mode(x) <- "integer"
-  # k_array() pass through here...
-  # TODO: implement an efficient way to check for negative slices
-  x - 1L
+as_py_index <- function(x) {
+  if (is.list(x))
+    return(lapply(x, as_py_index))
+
+  if (is.atomic(x)) {
+    if (is.double(x))
+      storage.mode(x) <- "integer"
+    if (length(x) > 1L)
+      x <- as.array(x)
+    pos <- x > 0L
+    x[pos] <- x[pos] - 1L
+    return(x)
+  }
+
+  if (inherits(x, "numpy.ndarray")) {
+    np <- import("numpy", convert = FALSE)
+    return(np$where(x > 0L, x - 1L, x))
+  }
+
+  # else is tensor
+  keras$ops$where(x > 0L, x - 1L, x)
 }
+
+as_index <- as_py_index
 
 
 # Sketch for an alternative approach to offsetting indexes,
@@ -871,7 +891,7 @@ relative_to <- function(dir, file) {
 if (FALSE) {
   # roxygen2 now wants this exported.
   `[.tensorflow.tensor` <-
-    getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
+    utils::getS3method("[", "tensorflow.tensor", envir = asNamespace("tensorflow"))
   formals(`[.tensorflow.tensor`)$style <- "R"
   formals(`[.tensorflow.tensor`)$options <-
     tensorflow::tf_extract_opts(

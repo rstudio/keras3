@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,6 +74,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'keras_shape'</span></span>
+<span><span class="fu">Summary</span><span class="op">(</span><span class="va">...</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'keras_shape'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'keras_shape'</span></span>
@@ -103,6 +106,11 @@ via <code><a href="https://rdrr.io/r/base/integer.html" class="external-link">as
 <dd><p>Whether to format the shape object with a prefix. Defaults to
 <code>"shape"</code>.</p></dd>
 
+
+<dt id="arg-na-rm">na.rm<a class="anchor" aria-label="anchor" href="#arg-na-rm"></a></dt>
+<dd><p>passed on to Summary group generics like <code><a href="https://rdrr.io/r/base/prod.html" class="external-link">prod()</a></code>. Unknown axes
+are treated as <code>NA</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -127,8 +135,8 @@ being traced).</p>
 <p>Most functions that take a 'shape' argument also coerce with <code>shape()</code></p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/layer_input.html">layer_input</a></span><span class="op">(</span><span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, name=keras_tensor&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, name=keras_tensor_1&gt;</span></span>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, ragged=False, name=keras_tensor&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## &lt;KerasTensor shape=(None, 1, 2, 3), dtype=float32, sparse=False, ragged=False, name=keras_tensor_1&gt;</span></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>You can also use <code>shape()</code> to get the shape of a tensor
 (excepting scalar integer tensors).</p>

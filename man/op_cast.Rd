@@ -21,14 +21,14 @@ Cast a tensor to the desired dtype.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{(x <- op_arange(4))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_cast(x, dtype = "float16")
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0. 1. 2. 3.], shape=(4), dtype=float16)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1. 2. 3. 4.], shape=(4), dtype=float16)
 
 }\if{html}{\out{</div>}}
 }
@@ -56,6 +56,7 @@ Other core ops: \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_switch}()} \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_vectorized_map}()} \cr
@@ -288,6 +289,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

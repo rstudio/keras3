@@ -45,7 +45,15 @@ m$update_state(
   rbind(c(0, 0, 1), c(0, 1, 0)),
   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32")
 )
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 1.]
+##  [0. 1. 0.]], shape=(2, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
@@ -57,7 +65,15 @@ m$update_state(
   rbind(c(0, 0, 1), c(0, 1, 0)),
   op_array(rbind(c(0.1, 0.9, 0.8), c(0.05, 0.95, 0)), dtype = "float32"),
   sample_weight = c(0.7, 0.3))
-m$result()
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 1.]
+##  [0. 1. 0.]], shape=(2, 3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)

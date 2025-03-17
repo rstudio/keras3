@@ -21,36 +21,73 @@ Returns the indices that would sort a tensor.
 \section{Examples}{
 One dimensional array:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(3, 1, 2))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(3, 1, 2)) + .1
 op_argsort(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 0], shape=(3), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 3 1], shape=(3), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[op_argsort(x)] == op_sort(x)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ True  True  True], shape=(3), dtype=bool)
 
 }\if{html}{\out{</div>}}
 
 Two-dimensional array:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(0, 3),
-                   c(3, 2),
-                   c(4, 5)), dtype = "int32")
-op_argsort(x, axis = 1)
+                    c(3, 2),
+                    c(4, 5))) + .1
+(i <- op_argsort(x, axis = 1))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0 1]
-##  [1 0]
-##  [2 2]], shape=(3, 2), dtype=int32)
+## [[1 2]
+##  [2 1]
+##  [3 3]], shape=(3, 2), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argsort(x, axis = 2)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[i@r[, 1], ] # sort x-rows using first col of x
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0 1]
-##  [1 0]
-##  [0 1]], shape=(3, 2), dtype=int32)
+## [[0.1 3.1]
+##  [3.1 2.1]
+##  [4.1 5.1]], shape=(3, 2), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[i@r[, 2], ] # sort x-rows using second col of x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[3.1 2.1]
+##  [0.1 3.1]
+##  [4.1 5.1]], shape=(3, 2), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{(i <- op_argsort(x, axis = 2))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[1 2]
+##  [2 1]
+##  [1 2]], shape=(3, 2), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x@r[, i@r[2,]] # sort x-cols using second row of x
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[3.1 0.1]
+##  [2.1 3.1]
+##  [5.1 4.1]], shape=(3, 2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 }
@@ -444,6 +481,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

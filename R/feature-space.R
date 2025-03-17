@@ -324,6 +324,7 @@ function(max_tokens = NULL,
   args <- capture_args(list(max_tokens = as_integer, num_oov_indices = as_integer))
   keras$utils$FeatureSpace$integer_categorical(!!!args)
 }
+# TODO: 1-based?
 
 #' @export
 #' @rdname layer_feature_space
@@ -336,6 +337,7 @@ function(max_tokens = NULL,
   args <- capture_args(list(max_tokens = as_integer, num_oov_indices = as_integer))
   keras$utils$FeatureSpace$string_categorical(!!!args)
 }
+# TODO: handle 'factor' inputs in adapt() with a dataframe?
 
 #' @export
 #' @rdname layer_feature_space

@@ -13,7 +13,7 @@ application_decode_predictions(model, preds, top = 5L, ...)
 \arguments{
 \item{model}{A Keras model initialized using any \code{application_} function.}
 
-\item{x}{A batch of inputs to the model.}
+\item{x}{A batch of inputs to the model. If \code{x} is missing, then the \code{preprocess_input} function appropriate for \code{model} is returned.}
 
 \item{...}{Additional arguments passed to the preprocessing or decoding function.}
 

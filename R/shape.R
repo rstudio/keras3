@@ -202,6 +202,16 @@ as.integer.keras_shape <- function(x, ...) {
   vapply(x, function(el) el %||% NA_integer_, 1L)
 }
 
+#' @rdname shape
+#' @export
+#' @param na.rm passed on to Summary group generics like `prod()`. Unknown axes
+#'   are treated as `NA`.
+Summary.keras_shape <- function(..., na.rm = FALSE) {
+  x <- shape(...)
+  x <- as.integer.keras_shape(x)
+  do.call(.Generic, list(x, na.rm = na.rm))
+}
+
 #' @importFrom zeallot destructure
 #' @export
 destructure.keras_shape <- function(x) unclass(x)
@@ -229,4 +239,5 @@ as.list.keras_shape <- function(x, ...) unclass(x)
 
 # ' @rdname shape
 # ' @export
+# ## just use shape(shp1, shp2, ...)
 # c.keras_shape <- function(...) shape(...)

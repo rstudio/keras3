@@ -39,7 +39,7 @@ op_diff(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(1, 3, 6, 10),
-                  c(0, 5, 6, 8)))
+                    c(0, 5, 6, 8)))
 op_diff(x)
 }\if{html}{\out{</div>}}
 
@@ -442,6 +442,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

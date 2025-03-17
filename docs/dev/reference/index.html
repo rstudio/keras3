@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1371,10 +1371,10 @@
         <dd>Conditionally applies <code>true_fn</code> or <code>false_fn</code>.</dd>
       </dl><dl><dt>
 
-          <code><a href="op_convert_to_numpy.html">op_convert_to_numpy()</a></code>
+          <code><a href="op_convert_to_numpy.html">op_convert_to_numpy()</a></code> <code><a href="op_convert_to_numpy.html">op_convert_to_array()</a></code>
 
         </dt>
-        <dd>Convert a tensor to a NumPy array.</dd>
+        <dd>Convert a tensor to an R or NumPy array.</dd>
       </dl><dl><dt>
 
           <code><a href="op_convert_to_tensor.html">op_convert_to_tensor()</a></code>
@@ -1459,6 +1459,12 @@
 
         </dt>
         <dd>Stops gradient computation.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_subset.html">op_subset()</a></code> <code><a href="op_subset.html">`op_subset&lt;-`()</a></code> <code><a href="op_subset.html">op_subset_set()</a></code>
+
+        </dt>
+        <dd>Subset elements from a tensor</dd>
       </dl><dl><dt>
 
           <code><a href="op_switch.html">op_switch()</a></code>
@@ -4578,7 +4584,7 @@
         <dd>Configure a Keras backend</dd>
       </dl><dl><dt>
 
-          <code><a href="shape.html">shape()</a></code> <code><a href="shape.html">format(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">print(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`[`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.integer(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.list(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`==`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`!=`(<i>&lt;keras_shape&gt;</i>)</a></code>
+          <code><a href="shape.html">shape()</a></code> <code><a href="shape.html">format(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">print(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`[`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.integer(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">Summary(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">as.list(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`==`(<i>&lt;keras_shape&gt;</i>)</a></code> <code><a href="shape.html">`!=`(<i>&lt;keras_shape&gt;</i>)</a></code>
 
         </dt>
         <dd>Tensor shape utility</dd>
@@ -4658,6 +4664,12 @@
 
         </dt>
         <dd>Splits a dataset into a left half and a right half (e.g. train / test).</dd>
+      </dl><dl><dt>
+
+          <code><a href="newaxis.html">newaxis</a></code>
+
+        </dt>
+        <dd>New axis</dd>
       </dl></div><div class="section level2">
 
       <h3 id="serialization-utils">Serialization Utils<a class="anchor" aria-label="anchor" href="#serialization-utils"></a></h3>

@@ -37,6 +37,10 @@
 #' @family model creation
 #' @tether keras.Model
 keras_model <- function(inputs = NULL, outputs = NULL, ...) {
+  if (is.list(inputs) && is.null(names(inputs)) && length(inputs) == 1L)
+    inputs <- inputs[[1L]]
+  if (is.list(outputs) && is.null(names(outputs)) && length(outputs) == 1L)
+    outputs <- outputs[[1L]]
   keras$models$Model(inputs = inputs, outputs = outputs, ...)
 }
 

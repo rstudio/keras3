@@ -29,22 +29,36 @@ The semantics of \code{switch} are given roughly by this implementation:
 }\if{html}{\out{</div>}}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_fn <- function(x, y) x + y
-subtract_fn <- function(x, y) x - y
-x <- op_array(2.0)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{add_fn <- function(x, y) x + y + 100
+subtract_fn <- function(x, y) x - y - 100
+x <- op_array(2)
 y <- op_array(0.5)
 branches <- list(add_fn, subtract_fn)
-op_switch(1, branches, x, y)
+op_switch(0, branches, x, y) # +
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.5, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(102.5, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_switch(2, branches, x, y)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_switch(1, branches, x, y) # +
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.5, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(102.5, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_switch(2, branches, x, y) # -
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(-98.5, shape=(), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_switch(3, branches, x, y) # -
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(-98.5, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }
@@ -69,6 +83,7 @@ Other core ops: \cr
 \code{\link{op_slice}()} \cr
 \code{\link{op_slice_update}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_unstack}()} \cr
 \code{\link{op_vectorized_map}()} \cr
 \code{\link{op_while_loop}()} \cr
@@ -301,6 +316,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

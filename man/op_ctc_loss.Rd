@@ -4,7 +4,7 @@
 \alias{op_ctc_loss}
 \title{CTC (Connectionist Temporal Classification) loss.}
 \usage{
-op_ctc_loss(target, output, target_length, output_length, mask_index = 0L)
+op_ctc_loss(target, output, target_length, output_length, mask_index = 1L)
 }
 \arguments{
 \item{target}{A tensor of shape \verb{(batch_size, max_length)} containing
@@ -20,7 +20,7 @@ true label lengths.}
 output lengths.}
 
 \item{mask_index}{The index of the mask character in the vocabulary.
-Defaults to \code{0}.}
+Defaults to \code{1} (the first element in vocabulary).}
 }
 \value{
 A tensor, shape \code{(batch_size)}, of loss values.
@@ -300,6 +300,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr

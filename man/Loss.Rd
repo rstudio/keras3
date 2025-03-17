@@ -69,7 +69,7 @@ y_pred <- op_arange(20) |> op_reshape(c(4, 5)) * 2
 (loss <- mse(y_true, y_pred))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(123.5, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(143.5, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -83,7 +83,7 @@ sample_weight <-array(c(.25, .25, 1, 1))
 (weighted_loss <- mse(y_true, y_pred, sample_weight = sample_weight))
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(112.8125, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(129.0625, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

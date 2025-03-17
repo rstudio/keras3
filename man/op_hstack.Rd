@@ -4,10 +4,10 @@
 \alias{op_hstack}
 \title{Stack tensors in sequence horizontally (column wise).}
 \usage{
-op_hstack(xs)
+op_hstack(xs, ...)
 }
 \arguments{
-\item{xs}{Sequence of tensors.}
+\item{xs, ...}{list of tensors.}
 }
 \value{
 The tensor formed by stacking the given tensors.
@@ -405,6 +405,7 @@ Other ops: \cr
 \code{\link{op_std}()} \cr
 \code{\link{op_stft}()} \cr
 \code{\link{op_stop_gradient}()} \cr
+\code{\link{op_subset}()} \cr
 \code{\link{op_subtract}()} \cr
 \code{\link{op_sum}()} \cr
 \code{\link{op_svd}()} \cr
