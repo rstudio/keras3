@@ -2327,13 +2327,10 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #'
 #' # Examples
 #' ```{r}
-#' x <- op_array(c(1, 3, 2, 0), "int32")
+#' x <- op_array(c(2, 4, 3, 1), "int32")
 #' op_one_hot(x, num_classes = 4)
-#' # array([[0. 1. 0. 0.]
-#' #        [0. 0. 0. 1.]
-#' #        [0. 0. 1. 0.]
-#' #        [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
-#' ```
+#' op_one_hot(x - 1, num_classes = 4, zero_indexed = TRUE)
+# ```
 #'
 #' @returns
 #' Integer tensor: One-hot encoded tensor with the same shape as `x`
@@ -2362,6 +2359,11 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #' Whether to return a sparse tensor; for backends that support
 #' sparse tensors.
 #'
+#' @param zero_indexed
+#' If `TRUE`, treats indices as zero-based (`0` encodes to first position); if
+#' `FALSE` (default), treats indices as one-based (`1` encodes to first
+#' position).
+#'
 #' @export
 #' @family nn ops
 #' @family ops
@@ -2370,17 +2372,20 @@ function (inputs, num_classes, axis = -1L, dtype = NULL, sparse = FALSE, ...)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/one_hot>
 #' @tether keras.ops.one_hot
 op_one_hot <-
-function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
+function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE,
+          zero_indexed = FALSE)
 {
 
-  args <- capture_args(list(axis = as_axis, num_classes = as_integer))
+  args <- capture_args(list(axis = as_axis, num_classes = as_integer),
+                       ignore = "zero_indexed")
   if (inherits(x, "factor")) {
     if (is.null(args$num_classes))
       args$num_classes <- length(levels(x))
     x <- unclass(x)
   }
-  args$x <- as_py_index(x)
-  do.call(keras$ops$one_hot, args)
+  if (!zero_indexed)
+    args$x <- as_py_index(x)
+  do.call(ops$one_hot, args)
 }
 
 
