@@ -5595,8 +5595,18 @@ function (start, stop, num = 50L, endpoint = TRUE, base = 10L,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/matmul>
 #' @tether keras.ops.matmul
 op_matmul <-
-function (x1, x2)
-keras$ops$matmul(x1, x2)
+function (x1, x2) {
+  if (is.atomic(x1) && op_is_tensor(x2)) {
+    if (length(x1) > 1)
+      x1 <- as.array(x1)
+    x1 <- ops$convert_to_tensor(x1, dtype = ops$dtype(x2))
+  } else if (op_is_tensor(x1) && is.atomic(x2)) {
+    if (length(x2) > 1)
+      x2 <- as.array(x2)
+    x2 <- ops$convert_to_tensor(x2, dtype = ops$dtype(x1))
+  }
+  ops$matmul(x1, x2)
+}
 
 
 #' Return the maximum of a tensor or maximum along an axis.
