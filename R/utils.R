@@ -537,7 +537,7 @@ keras_array <- function(x, dtype = NULL) {
     return(x)
 
   # reflect tensors
-  if (keras$ops$is_tensor(x))
+  if (ops$is_tensor(x))
     return(x)
 
   # allow passing things like pandas.Series(), for workarounds like

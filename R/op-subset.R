@@ -86,6 +86,20 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
       return(key)
     }
 
+    if (inherits(arg, "numpy.ndarray")) {
+      if (as_r_value(x$dtype$name) == "bool") {
+        return(arg)
+      }
+      if (as_r_value(arg$ndim) == 2L &&
+          as_r_value(arg$shape)[[2L]] == x_rank) {
+
+        arg <- as_py_index(arg)
+        # arg <- np$where(arg > 0L, arg - 1L, arg)
+        key <- np$unstack(arg, axis = 1L)
+        return(key)
+      }
+    }
+
     # need a separate check for tensorflow tensors, since op_is_tensor()
     # only detects the configured backend, but we might still get a tf.tensor
     if(inherits(arg, "tensorflow.tensor")) {

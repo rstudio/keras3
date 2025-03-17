@@ -334,6 +334,7 @@ normalize_path <- function(path) {
 }
 
 
+
 # unused
 as_py_index <- function(x) {
   if (is.list(x))
@@ -350,8 +351,18 @@ as_py_index <- function(x) {
   }
 
   if (inherits(x, "numpy.ndarray")) {
-    np <- import("numpy", convert = FALSE)
-    return(np$where(x > 0L, x - 1L, x))
+    offset <- .globals$as_py_index.numpy.ndarray
+    if (is.null(offset)) {
+      .globals$as_py_index.numpy.ndarray <- offset <-
+         py_run_string("
+from numpy import where
+
+def r_index_to_py_index(x):
+  return where(x > 0, x - 1, x)
+
+", local = TRUE, convert = FALSE)$r_index_to_py_index
+    }
+    return(offset(x))
   }
 
   # else is tensor

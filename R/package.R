@@ -38,6 +38,7 @@
 
 tf <- NULL
 ops <- NULL
+np <- NULL
 
 
 #' Main Keras module
@@ -222,6 +223,7 @@ keras <- NULL
   })
 
   # on_load_make_as_activation()
+  np <<- try(import("numpy", convert = FALSE, delay_load = TRUE))
   tf <<- try(import("tensorflow", delay_load = TRUE))
   ops <<- try(import("keras.ops", delay_load = list(
     before_load = function() {
