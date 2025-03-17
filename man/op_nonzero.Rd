@@ -85,7 +85,7 @@ x3@r[op_nonzero(x3)]
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x3@py[keras$ops$nonzero(x3)]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x3@py[ops$nonzero(x3)]
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1.  2.  3.  3.  1.  2.  3.  1.  2.  1.1 2.2 3.3 3.3 1.1 2.2 3.3 1.1 2.2], shape=(18), dtype=float64)

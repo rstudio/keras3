@@ -4,7 +4,14 @@
 \alias{op_one_hot}
 \title{Converts integer tensor \code{x} into a one-hot tensor.}
 \usage{
-op_one_hot(x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE)
+op_one_hot(
+  x,
+  num_classes,
+  axis = -1L,
+  dtype = NULL,
+  sparse = FALSE,
+  zero_indexed = FALSE
+)
 }
 \arguments{
 \item{x}{Integer tensor to be encoded. The shape can be
@@ -22,6 +29,10 @@ provided, it defaults to the default data type of the backend.}
 
 \item{sparse}{Whether to return a sparse tensor; for backends that support
 sparse tensors.}
+
+\item{zero_indexed}{If \code{TRUE}, treats indices as zero-based (\code{0} encodes to first position); if
+\code{FALSE} (default), treats indices as one-based (\code{1} encodes to first
+position).}
 }
 \value{
 Integer tensor: One-hot encoded tensor with the same shape as \code{x}
@@ -36,22 +47,27 @@ and the index corresponding to the integer value is marked as 1, while
 all other indices are marked as 0.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(1, 3, 2, 0), "int32")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(c(2, 4, 3, 1), "int32")
 op_one_hot(x, num_classes = 4)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[1. 0. 0. 0.]
+## [[0. 1. 0. 0.]
+##  [0. 0. 0. 1.]
 ##  [0. 0. 1. 0.]
-##  [0. 1. 0. 0.]
 ##  [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([[0. 1. 0. 0.]
-#        [0. 0. 0. 1.]
-#        [0. 0. 1. 0.]
-#        [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_one_hot(x - 1, num_classes = 4, zero_indexed = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 1. 0. 0.]
+##  [0. 0. 0. 1.]
+##  [0. 0. 1. 0.]
+##  [1. 0. 0. 0.]], shape=(4, 4), dtype=float32)
+
 }\if{html}{\out{</div>}}
 }
 
