@@ -271,6 +271,12 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
     })
   }
 
+  # TODO: add support for drop
+  # e.g., if(drop) {key <- lapply(key, function(x) {
+  #   if(is_scalar(x)) py_slice(x, x) else x
+  #   # also, check if 'drop' needed for indices
+  # })
+
   key <- tuple(key)
   key
 }
@@ -292,10 +298,12 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 #' - The `..` symbol
 #' - A slice expression using `:`
 #'
-#'   If only a single argument is supplied to `...`, then `..1` can also be:
+#' If only a single argument is supplied to `...`, then `..1` can also be:
 #'
-#' - A logical array matching the shape of `x`
-#' - An integer matrix with `ncol(..1) == op_rank(x)`
+#' - A logical array with the same shape as `x`
+#' - An integer matrix where `ncol(..1) == op_rank(x)`
+#'
+#' @param value new value to replace the selected subset with.
 #'
 #' @details
 #'
@@ -331,7 +339,7 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 #' # Examples
 #'
 #' ```{r}
-#' x <- op_arange(5L) + 10L
+#' (x <- op_arange(5L) + 10L)
 #'
 #' # Basic example, get first element
 #' op_subset(x, 1)
@@ -418,7 +426,7 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 #' # support modification. E.g., TensorFlow constant tensors cannot be modified,
 #' # while TensorFlow Variables can be.
 #'
-#' x <- tensorflow::tf$Variable(matrix(1, 2, 3))
+#' (x <- tensorflow::tf$Variable(matrix(1, nrow = 2, ncol = 3)))
 #' op_subset(x, 1) <- 9
 #' x
 #'
@@ -430,8 +438,8 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 #' A tensor containing the subset of elements.
 #'
 #' @export
-# ' @family core ops
-# ' @family ops
+#' @family core ops
+#' @family ops
 op_subset <- function(x, ...) {
   key <- r_extract_args_into_py_get_item_key(x, ..., .envir = parent.frame())
   # print(key)
@@ -441,8 +449,8 @@ op_subset <- function(x, ...) {
 
 #' @export
 #' @rdname op_subset
-# ' @family core ops
-# ' @family ops
+#' @family core ops
+#' @family ops
 `op_subset<-` <- function(x, ..., value) {
   # browser()
   key <- r_extract_args_into_py_get_item_key(x, ..., .envir = parent.frame())
@@ -483,6 +491,6 @@ op_subset <- function(x, ...) {
 
 #' @export
 #' @rdname op_subset
-# ' @family core ops
-# ' @family ops
+#' @family core ops
+#' @family ops
 op_subset_set <- `op_subset<-`

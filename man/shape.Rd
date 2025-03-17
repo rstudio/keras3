@@ -41,6 +41,9 @@ via \code{as.integer()}.}
 
 \item{prefix}{Whether to format the shape object with a prefix. Defaults to
 \code{"shape"}.}
+
+\item{na.rm}{passed on to Summary group generics like \code{prod()}. Unknown axes
+are treated as \code{NA}.}
 }
 \value{
 A list with a \code{"keras_shape"} class attribute. Each element of the

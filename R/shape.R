@@ -204,6 +204,8 @@ as.integer.keras_shape <- function(x, ...) {
 
 #' @rdname shape
 #' @export
+#' @param na.rm passed on to Summary group generics like `prod()`. Unknown axes
+#'   are treated as `NA`.
 Summary.keras_shape <- function(..., na.rm = FALSE) {
   x <- shape(...)
   x <- as.integer.keras_shape(x)

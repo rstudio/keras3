@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,13 +54,32 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
+<ul><li><p>New <code><a href="../reference/op_subset.html">op_subset()</a></code> and <code>x@r[...]</code> methods enable tensor subsetting using R’s <code>[</code> semantics and idioms.</p></li>
+<li><p>New subset assignment methods implemented for tensors: <code>op_subset(x, ...) &lt;- value</code> and <code>x@r[...] &lt;- value</code></p></li>
+<li><p>Breaking changes: All operations prefixed with <code>op_</code> now return 1-based indices by default. The following functions that return or consume indices have changed: <code><a href="../reference/op_argmax.html">op_argmax()</a></code>, <code><a href="../reference/op_argmin.html">op_argmin()</a></code>, <code><a href="../reference/op_top_k.html">op_top_k()</a></code>, <code><a href="../reference/op_argpartition.html">op_argpartition()</a></code>, <code><a href="../reference/op_searchsorted.html">op_searchsorted()</a></code>, <code><a href="../reference/op_argsort.html">op_argsort()</a></code>, <code><a href="../reference/op_digitize.html">op_digitize()</a></code>, <code><a href="../reference/op_nonzero.html">op_nonzero()</a></code>, <code><a href="../reference/op_split.html">op_split()</a></code>, <code><a href="../reference/op_trace.html">op_trace()</a></code>, <code><a href="../reference/op_swapaxes.html">op_swapaxes()</a></code>, <code><a href="../reference/op_ctc_decode.html">op_ctc_decode()</a></code>, <code><a href="../reference/op_ctc_loss.html">op_ctc_loss()</a></code>, <code><a href="../reference/op_one_hot.html">op_one_hot()</a></code>, <code><a href="../reference/op_arange.html">op_arange()</a></code></p></li>
+<li><p><code><a href="../reference/op_arange.html">op_arange()</a></code> now matches the semantics of <code><a href="https://rdrr.io/r/base/seq.html" class="external-link">base::seq()</a></code>. By default it starts, includes the end value, and automatically infers step direction.</p></li>
+<li><p><code><a href="../reference/op_one_hot.html">op_one_hot()</a></code> now infers <code>num_classes</code> if supplied a factor.</p></li>
+<li><p><code><a href="../reference/op_hstack.html">op_hstack()</a></code> and <code><a href="../reference/op_vstack.html">op_vstack()</a></code> now accept arguments passed via <code>...</code>.</p></li>
+<li><p><code><a href="../reference/process_utils.html">application_decode_predictions()</a></code> now returns a processed data frame by default or a decoder function if predictions are missing.</p></li>
+<li><p><code><a href="../reference/process_utils.html">application_preprocess_inputs()</a></code> returns a preprocessor function if inputs are missing.</p></li>
+<li><p>Various new examples added to documentation, including <code><a href="../reference/op_scatter.html">op_scatter()</a></code>, <code><a href="../reference/op_switch.html">op_switch()</a></code>, and <code><a href="../reference/op_nonzero.html">op_nonzero()</a></code>.</p></li>
+<li><p>New <code>x@py[...]</code> accessor introduced for Python-style 0-based indexing of tensors.</p></li>
+<li><p>New <code>Summary</code> group generic method for <code>keras_shape</code>, enabling usage like <code>prod(shape(3, 4))</code></p></li>
+<li><p><code>KERAS_HOME</code> is now set to <code>tools::R_user_dir("keras3", "cache")</code> if <code>~/.keras</code> does not exist and <code>KERAS_HOME</code> is unset.</p></li>
+<li><p>new <code><a href="../reference/op_convert_to_numpy.html">op_convert_to_array()</a></code> to convert a tensor to an R array.</p></li>
+<li><p>Fixed an issue where <code><a href="../reference/op_shape.html">op_shape()</a></code> would sometimes return a TensorFlow <code>TensorShape</code></p></li>
+<li><p>Fixes for <code><a href="../reference/metric_iou.html">metric_iou()</a></code>, <code><a href="../reference/op_top_k.html">op_top_k()</a></code>, and <code><a href="../reference/op_eye.html">op_eye()</a></code> being called with R atomic doubles</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.0" id="keras3-130">keras3 1.3.0<a class="anchor" aria-label="anchor" href="#keras3-130"></a></h2><p class="text-muted">CRAN release: 2025-03-03</p>
 <ul><li><p>Keras now uses <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">reticulate::py_require()</a></code> to resolve Python dependencies. Calling <code><a href="../reference/install_keras.html">install_keras()</a></code> is no longer required (but is still supported).</p></li>
 <li><p><code><a href="../reference/use_backend.html">use_backend()</a></code> gains a <code>gpu</code> argument, to specify if a GPU-capable set of dependencies should be resolved by <code><a href="https://rstudio.github.io/reticulate/reference/py_require.html" class="external-link">py_require()</a></code>.</p></li>
 <li><p>The progress bar in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code> and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code> now defaults to not presenting during testthat tests.</p></li>
 <li><p><code><a href="https://kevinushey.github.io/dotty/reference/dotty.html" class="external-link">dotty::.</a></code> is now reexported.</p></li>
 <li><p><code>%*%</code> now dispatches to <code><a href="../reference/op_matmul.html">op_matmul()</a></code> for tensorflow tensors, which has relaxed shape constraints compared to <code>tf$matmul()</code>.</p></li>
+<li><p>Fixed an issue where calling a <code>Metric</code> and <code>Loss</code> object with unnamed arguments would error.</p></li>
 </ul><div class="section level3">
-<h3 id="added-compatibility-with-keras-v380-user-facing-changes-development-version">Added compatibility with Keras v3.8.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v380-user-facing-changes-development-version"></a></h3>
+<h3 id="added-compatibility-with-keras-v380-user-facing-changes-1-3-0">Added compatibility with Keras v3.8.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v380-user-facing-changes-1-3-0"></a></h3>
 <ul><li>New symbols:
 <ul><li><code><a href="../reference/activation_sparse_plus.html">activation_sparse_plus()</a></code></li>
 <li><code><a href="../reference/activation_sparsemax.html">activation_sparsemax()</a></code></li>
@@ -90,11 +109,11 @@
 <li>TensorFlow specific changes: Make <code><a href="../reference/random_shuffle.html">random_shuffle()</a></code> XLA compilable</li>
 </ul></div>
 <div class="section level3">
-<h3 id="added-compatibility-with-keras-v370-user-facing-changes-development-version">Added compatibility with Keras v3.7.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v370-user-facing-changes-development-version"></a></h3>
+<h3 id="added-compatibility-with-keras-v370-user-facing-changes-1-3-0">Added compatibility with Keras v3.7.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v370-user-facing-changes-1-3-0"></a></h3>
 <div class="section level4">
-<h4 id="new-functions-development-version">New functions<a class="anchor" aria-label="anchor" href="#new-functions-development-version"></a></h4>
+<h4 id="new-functions-1-3-0">New functions<a class="anchor" aria-label="anchor" href="#new-functions-1-3-0"></a></h4>
 <div class="section level5">
-<h5 id="activations-development-version">Activations<a class="anchor" aria-label="anchor" href="#activations-development-version"></a></h5>
+<h5 id="activations-1-3-0">Activations<a class="anchor" aria-label="anchor" href="#activations-1-3-0"></a></h5>
 <ul><li><code><a href="../reference/activation_celu.html">activation_celu()</a></code></li>
 <li><code><a href="../reference/activation_glu.html">activation_glu()</a></code></li>
 <li><code><a href="../reference/activation_hard_shrink.html">activation_hard_shrink()</a></code></li>
@@ -105,25 +124,25 @@
 <li><code><a href="../reference/activation_tanh_shrink.html">activation_tanh_shrink()</a></code></li>
 </ul></div>
 <div class="section level5">
-<h5 id="configuration-development-version">Configuration<a class="anchor" aria-label="anchor" href="#configuration-development-version"></a></h5>
+<h5 id="configuration-1-3-0">Configuration<a class="anchor" aria-label="anchor" href="#configuration-1-3-0"></a></h5>
 <ul><li><code><a href="../reference/config_disable_flash_attention.html">config_disable_flash_attention()</a></code></li>
 <li><code><a href="../reference/config_enable_flash_attention.html">config_enable_flash_attention()</a></code></li>
 <li><code><a href="../reference/config_is_flash_attention_enabled.html">config_is_flash_attention_enabled()</a></code></li>
 </ul></div>
 <div class="section level5">
-<h5 id="layers-and-initializers-development-version">Layers and Initializers<a class="anchor" aria-label="anchor" href="#layers-and-initializers-development-version"></a></h5>
+<h5 id="layers-and-initializers-1-3-0">Layers and Initializers<a class="anchor" aria-label="anchor" href="#layers-and-initializers-1-3-0"></a></h5>
 <ul><li><code><a href="../reference/initializer_stft.html">initializer_stft()</a></code></li>
 <li><code><a href="../reference/layer_max_num_bounding_boxes.html">layer_max_num_bounding_boxes()</a></code></li>
 <li><code><a href="../reference/layer_stft_spectrogram.html">layer_stft_spectrogram()</a></code></li>
 </ul></div>
 <div class="section level5">
-<h5 id="losses-and-metrics-development-version">Losses and Metrics<a class="anchor" aria-label="anchor" href="#losses-and-metrics-development-version"></a></h5>
+<h5 id="losses-and-metrics-1-3-0">Losses and Metrics<a class="anchor" aria-label="anchor" href="#losses-and-metrics-1-3-0"></a></h5>
 <ul><li><code><a href="../reference/loss_circle.html">loss_circle()</a></code></li>
 <li><code><a href="../reference/metric_concordance_correlation.html">metric_concordance_correlation()</a></code></li>
 <li><code><a href="../reference/metric_pearson_correlation.html">metric_pearson_correlation()</a></code></li>
 </ul></div>
 <div class="section level5">
-<h5 id="operations-development-version">Operations<a class="anchor" aria-label="anchor" href="#operations-development-version"></a></h5>
+<h5 id="operations-1-3-0">Operations<a class="anchor" aria-label="anchor" href="#operations-1-3-0"></a></h5>
 <ul><li><code><a href="../reference/op_celu.html">op_celu()</a></code></li>
 <li><code><a href="../reference/op_exp2.html">op_exp2()</a></code></li>
 <li><code><a href="../reference/op_glu.html">op_glu()</a></code></li>
@@ -136,7 +155,7 @@
 <li><code><a href="../reference/op_tanh_shrink.html">op_tanh_shrink()</a></code></li>
 </ul></div>
 <div class="section level5">
-<h5 id="new-arguments-development-version">New arguments<a class="anchor" aria-label="anchor" href="#new-arguments-development-version"></a></h5>
+<h5 id="new-arguments-1-3-0">New arguments<a class="anchor" aria-label="anchor" href="#new-arguments-1-3-0"></a></h5>
 <ul><li>
 <code><a href="../reference/callback_backup_and_restore.html">callback_backup_and_restore()</a></code>: Added <code>double_checkpoint</code> argument to save a fallback checkpoint</li>
 <li>
@@ -150,7 +169,7 @@
 </ul></div>
 </div>
 <div class="section level4">
-<h4 id="performance-improvements-development-version">Performance improvements<a class="anchor" aria-label="anchor" href="#performance-improvements-development-version"></a></h4>
+<h4 id="performance-improvements-1-3-0">Performance improvements<a class="anchor" aria-label="anchor" href="#performance-improvements-1-3-0"></a></h4>
 <ul><li><p>Added native Flash Attention support for GPU (via cuDNN) and TPU (via Pallas kernel) in JAX backend</p></li>
 <li><p>Added opt-in native Flash Attention support for GPU in PyTorch backend</p></li>
 <li><p>Enabled additional kernel fusion via bias_add in TensorFlow backend</p></li>
@@ -159,13 +178,13 @@
 </ul></div>
 </div>
 <div class="section level3">
-<h3 id="added-compatibility-with-keras-v360-user-facing-changes-development-version">Added compatibility with Keras v3.6.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v360-user-facing-changes-development-version"></a></h3>
+<h3 id="added-compatibility-with-keras-v360-user-facing-changes-1-3-0">Added compatibility with Keras v3.6.0. User-facing changes:<a class="anchor" aria-label="anchor" href="#added-compatibility-with-keras-v360-user-facing-changes-1-3-0"></a></h3>
 <div class="section level5">
-<h5 id="breaking-changes-development-version">Breaking changes:<a class="anchor" aria-label="anchor" href="#breaking-changes-development-version"></a></h5>
+<h5 id="breaking-changes-1-3-0">Breaking changes:<a class="anchor" aria-label="anchor" href="#breaking-changes-1-3-0"></a></h5>
 <ul><li>When using <code><a href="../reference/get_file.html">get_file()</a></code> with <code>extract = TRUE</code> or <code>untar = TRUE</code>, the return value is now the path of the extracted directory, rather than the path of the archive.</li>
 </ul></div>
 <div class="section level5">
-<h5 id="other-changes-and-additions-development-version">Other changes and additions:<a class="anchor" aria-label="anchor" href="#other-changes-and-additions-development-version"></a></h5>
+<h5 id="other-changes-and-additions-1-3-0">Other changes and additions:<a class="anchor" aria-label="anchor" href="#other-changes-and-additions-1-3-0"></a></h5>
 <ul><li>
 <p>Logging is now asynchronous in <code><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit()</a></code>, <code><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate()</a></code>, and <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>. This enables 100% compact stacking of <code>train_step</code> calls on accelerators (e.g. when running small models on TPU).</p>
 <ul><li>If you are using custom callbacks that rely on <code>on_batch_end</code>, this will disable async logging. You can re-enable it by adding <code>self$async_safe &lt;- TRUE</code> to your callbacks. Note that the TensorBoard callback is not considered async-safe by default. Default callbacks like the progress bar are async-safe.</li>

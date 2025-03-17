@@ -15,7 +15,7 @@ constraint_nonnegative &amp;lt;- Constraint(&quot;NonNegative&quot;,
 weight &amp;lt;- op_convert_to_tensor(c(-1, 1))
 constraint_nonnegative()(weight)
 
-## tf.Tensor([-0.  1.], shape=(2), dtype=float32)
+## tf.Tensor([-0.  1.], shape=(2), dtype=float64)
 
 
 Usage in a layer:
@@ -40,7 +40,7 @@ constraint_nonnegative &amp;lt;- Constraint(&quot;NonNegative&quot;,
 weight &amp;lt;- op_convert_to_tensor(c(-1, 1))
 constraint_nonnegative()(weight)
 
-## tf.Tensor([-0.  1.], shape=(2), dtype=float32)
+## tf.Tensor([-0.  1.], shape=(2), dtype=float64)
 
 
 Usage in a layer:
@@ -58,7 +58,7 @@ layer_dense(units = 4, kernel_constraint = constraint_nonnegative())
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.2.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,7 @@ layers via the <code>kernel_constraint</code> or <code>bias_constraint</code> ar
 <span><span class="op">)</span></span>
 <span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">constraint_nonnegative</span><span class="op">(</span><span class="op">)</span><span class="op">(</span><span class="va">weight</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([-0.  1.], shape=(2), dtype=float32)</span></span>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor([-0.  1.], shape=(2), dtype=float64)</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>Usage in a layer:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">4</span>, kernel_constraint <span class="op">=</span> <span class="fu">constraint_nonnegative</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
