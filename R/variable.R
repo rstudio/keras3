@@ -45,7 +45,7 @@
 #' # To modify a subset of values
 #' value <- variable_from_array$value
 #' value@r[1,] <- 99
-#' variable_from_array$assign(value)
+#' invisible(variable_from_array$assign(value))
 #' variable_from_array
 #' ```
 #'

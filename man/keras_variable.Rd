@@ -77,37 +77,27 @@ variable_from_array <- keras_variable(initializer = initial_array)
 )
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{variable_from_array@r[1,] <- 99
-variable_from_array
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Variable 'UnreadVariable' shape=(3, 3) dtype=float64, numpy=
-## array([[99., 99., 99.],
-##        [ 1.,  1.,  1.],
-##        [ 1.,  1.,  1.]])>
-
-}\if{html}{\out{</div>}}
-
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{new_value <- array(0, c(3, 3))
-variable_from_array@r[] <- new_value
-variable_from_array
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Variable 'UnreadVariable' shape=(3, 3) dtype=float64, numpy=
-## array([[0., 0., 0.],
-##        [0., 0., 0.],
-##        [0., 0., 0.]])>
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# `@r[]<-` same as:
 variable_from_array$assign(new_value)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <tf.Variable 'UnreadVariable' shape=(3, 3) dtype=float64, numpy=
-## array([[0., 0., 0.],
-##        [0., 0., 0.],
-##        [0., 0., 0.]])>
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[0. 0. 0.]
+##  [0. 0. 0.]
+##  [0. 0. 0.]], shape=(3, 3), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# To modify a subset of values
+value <- variable_from_array$value
+value@r[1,] <- 99
+invisible(variable_from_array$assign(value))
+variable_from_array
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <Variable path=variable, shape=(3, 3), dtype=float64, value=[[99. 99. 99.]
+##  [ 0.  0.  0.]
+##  [ 0.  0.  0.]]>
 
 }\if{html}{\out{</div>}}
 
