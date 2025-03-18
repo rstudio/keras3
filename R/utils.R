@@ -521,9 +521,9 @@ function (sequences, maxlen = NULL, dtype = "int32", padding = "pre",
 #' order then it is returned unmodified (no additional copies are made).
 #'
 #' @param x Object or list of objects to convert
-#' @param dtype NumPy data type (e.g. float32, float64). If this is unspecified
-#'   then R doubles will be converted to the default floating point type for the
-#'   current Keras backend.
+#' @param dtype NumPy data type (e.g. `"float32"`, `"float64"`). If this is
+#'   unspecified then R doubles will be converted to the default floating point
+#'   type for the current Keras backend.
 #'
 #' @returns NumPy array with the specified `dtype` (or list of NumPy arrays if a
 #'   list was passed for `x`).
@@ -537,47 +537,21 @@ keras_array <- function(x, dtype = NULL) {
     return(x)
 
   # reflect tensors
-  if (ops$is_tensor(x))
-    return(x)
-
   # allow passing things like pandas.Series(), for workarounds like
   # https://github.com/rstudio/keras/issues/1341
-  if(is_py_object(x))
+  if (is_py_object(x))
     return(x)
 
-  if (is.data.frame(x))
-    x <- as.list(x)
-
-  # recurse for lists
+  # recurse for lists/data.frames
   if (is.list(x))
     return(lapply(x, keras_array))
 
-  # convert to numpy
-  if (!inherits(x, "numpy.ndarray")) {
+  # establish the target datatype - if we are converting a double from R
+  # into numpy then use the default floatx for the current backend
+  if (is.null(dtype) && is.double(x))
+    dtype <- config_floatx()
 
-    # establish the target datatype - if we are converting a double from R
-    # into numpy then use the default floatx for the current backend
-    if (is.null(dtype) && is.double(x))
-      dtype <- config_floatx()
-
-    # convert non-array to array
-    if (!is.array(x))
-      x <- as.array(x)
-
-    # do the conversion (will result in Fortran column ordering)
-    x <- r_to_py(x)
-  }
-
-  if(!inherits(x, "numpy.ndarray"))
-    stop("Could not convert object to keras array.")
-
-  # if we don't yet have a dtype then use the converted type
-  if (is.null(dtype))
-    dtype <- x$dtype
-
-  # ensure we use C column ordering (won't create a new array if the array
-  # is already using C ordering)
-  x$astype(dtype = dtype, order = "C", copy = FALSE)
+  np_array(x, dtype)
 }
 
 
