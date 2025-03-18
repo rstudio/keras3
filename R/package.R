@@ -54,6 +54,9 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
+  if (is.na(Sys.getenv("TF_CPP_MIN_LOG_LEVEL", NA)))
+    Sys.setenv("TF_CPP_MIN_LOG_LEVEL" = "2")
+
   # tensorflow:::.onLoad() registers some reticulate class filter hooks
   # we need to identify tensorflow tensors reliably.
   requireNamespace("tensorflow", quietly = TRUE)
