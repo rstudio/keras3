@@ -474,32 +474,34 @@ op_subset <- function(x, ...) {
     if (length(value) > 1L)
       value <- as.array(value)
   }
-  switch(
 
-    config_backend(),
+  repeat { # paired with `break` for a simulacrum of a goto
 
-    tensorflow = {
-      # v[0, 0].assign(3.)
-      x <- py_get_item(x, key)
-      assign <- py_get_attr(x, "assign", silent = TRUE)
-      if (is.null(assign))
-        stop("[<- only supported on tensorflow.Variable, not a constant Tensor")
-      # assign() returns a ref to the same variable, post assign op, which is needed
-      # to ensure op order in graph mode. Return the new ref.
-      assign(value)
-    },
+    # handle jax and tensorflow, regardless of backend
+    if (inherits(x, "tensorflow.tensor")) {
+      # x[0, 0].assign(3.)
+      x_subset <- py_get_item(x, key, TRUE) %||% break
+      assign <- py_get_attr(x_subset, "assign", TRUE) %||% break
+      # assign returns a new ref to the same variable, with
+      # the assignment op as a parent op in graph mode.
+      return(assign(value))
+    }
 
-    jax = {
+    if (any(startsWith(class(x), "jax"))) {
+      # "jaxlib.xla_extension.ArrayImpl", other S3 classes?
       # new_x = x.at[0].set(10)
-      x <- py_get_attr(x, "at")
-      x <- py_get_item(x, key)
-      py_get_attr(x, "set")(value)
-    },
+      x_at <- py_get_attr(x, "at", TRUE) %||% break
+      x_subset <- py_get_item(x_at, key, TRUE) %||% break
+      set <- py_get_attr(x, "set") %||% break
+      return(set(value))
+    }
+    break
+  }
 
-    {
-      # default method; torch, numpy, ...
-      py_set_item(x, key, value)
-    })
+  # default method; torch, numpy, ...
+  # will throw error if object does not support in-place modification
+  py_set_item(x, key, value)
+
 }
 
 
