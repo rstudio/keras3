@@ -199,6 +199,7 @@ keras <- NULL
 
     registerS3method("as.array", backend_tensor_class, op_convert_to_array, baseenv())
     registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
+    registerS3method("%*%", backend_tensor_class, op_matmul, baseenv())
   })
 
 
