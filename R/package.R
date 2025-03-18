@@ -198,7 +198,7 @@ keras <- NULL
     registerS3method("[<-", "keras_py_backend_tensor", `py_subset<-`, baseenv())
 
     registerS3method("as.array", backend_tensor_class, op_convert_to_array, baseenv())
-
+    registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
   })
 
 

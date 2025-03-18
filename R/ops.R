@@ -6289,6 +6289,17 @@ function (x1, x2)
 ops$power(x1, x2)
 
 
+`^__keras.backend.tensor` <- function(e1, e2) {
+  if (is.numeric(e2) && length(e2) == 1L) {
+    if (e2 == 2L)
+      return(ops$square(e1))
+    if (e2 == 0.5)
+      return(ops$sqrt(e1))
+  }
+  ops$power(e1, e2)
+}
+
+
 #' Return the product of tensor elements over a given axis.
 #'
 #' @returns
