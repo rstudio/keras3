@@ -175,9 +175,8 @@ keras <- NULL
   reticulate::py_register_load_hook("keras", function() {
 
     keras <- import("keras")
-    device <- keras$device
     convert_to_tensor <- import("keras.ops", convert = FALSE)$convert_to_tensor
-    with(device("cpu:0"), {
+    with(keras$device("cpu:0"), {
       backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
     })
     symbolic_tensor_class <- nameOfClass__python.builtin.type(keras$KerasTensor)
@@ -189,7 +188,6 @@ keras <- NULL
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
     registerS3method("[", "keras_py_backend_tensor", py_subset, baseenv())
 
-
     registerS3method("@<-", symbolic_tensor_class, at_set.keras_backend_tensor, baseenv())
     registerS3method("@<-", backend_tensor_class, at_set.keras_backend_tensor, baseenv())
 
@@ -200,6 +198,19 @@ keras <- NULL
     registerS3method("as.array", backend_tensor_class, op_convert_to_array, baseenv())
     registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
     registerS3method("%*%", backend_tensor_class, op_matmul, baseenv())
+
+  })
+
+
+
+  reticulate::py_register_load_hook("torch", function() {
+    # force keras load hooks to run
+    keras$ops
+  })
+
+  reticulate::py_register_load_hook("jax", function() {
+    # force keras load hooks to run
+    keras$ops
   })
 
 
