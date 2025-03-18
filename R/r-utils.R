@@ -453,7 +453,7 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
     while (is.call(cl0) && identical(cl0[[1L]], quote(`$`)))
       cl0 <- cl0[[2L]]
 
-    if (identical(cl0, quote(keras)))
+    if (identical(cl0, quote(keras)) || identical(cl0, quote(ops)))
       return(cl1)
   }
 
