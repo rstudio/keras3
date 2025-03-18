@@ -28,52 +28,35 @@ This is similar to R \code{max.col(x)} for the case of a 2-d array (a matrix),
 or for an nd-array, \code{apply(x, axis, which.max)}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(11, 12, 10),
+                    c(12, 11, 10)))
 x
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
+## [[11. 12. 10.]
+##  [12. 11. 10.]], shape=(2, 3), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmax(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(6, shape=(), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2, shape=(), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmax(x, axis = 1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 2 2], shape=(3), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 1 1], shape=(3), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmax(x, axis = 2)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3 3], shape=(2), dtype=int32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2 1], shape=(2), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }

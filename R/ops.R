@@ -3429,7 +3429,8 @@ ops$arctanh(x)
 #'
 #' # Examples
 #' ```{r}
-#' x <- op_arange(6L) |> op_reshape(c(2, 3)) |> op_add(10)
+#' x <- op_array(rbind(c(11, 12, 10),
+#'                     c(12, 11, 10)))
 #' x
 #' op_argmax(x)
 #' op_argmax(x, axis = 1)

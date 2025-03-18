@@ -444,9 +444,9 @@ function (y_true, y_pred, ..., name = "categorical_accuracy",
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model %>% compile(optimizer = 'sgd',
-#'                   loss = 'sparse_categorical_crossentropy',
-#'                   metrics = list(metric_sparse_categorical_accuracy()))
+#' model |> compile(optimizer = 'sgd',
+#'                  loss = 'sparse_categorical_crossentropy',
+#'                  metrics = list(metric_sparse_categorical_accuracy()))
 #' ```
 #'
 #' @param name
@@ -623,9 +623,9 @@ function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy
 #' Usage with `compile()` API:
 #'
 #' ```{r, eval = FALSE}
-#' model.compile(optimizer = 'sgd',
-#'               loss = 'categorical_crossentropy',
-#'               metrics = list(metric_top_k_categorical_accuracy()))
+#' model |> compile(optimizer = 'sgd',
+#'                  loss = 'categorical_crossentropy',
+#'                  metrics = list(metric_top_k_categorical_accuracy()))
 #' ```
 #'
 #' @param k

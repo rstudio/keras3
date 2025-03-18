@@ -52,18 +52,7 @@ Standalone usage:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_categorical_accuracy()
 m$update_state(rbind(c(0, 0, 1), c(0, 1, 0)), rbind(c(0.1, 0.9, 0.8),
                 c(0.05, 0.95, 0)))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 0. 1.]
-##  [0. 1. 0.]], shape=(2, 3), dtype=float32)
-## tf.Tensor(
-## [[0.1  0.9  0.8 ]
-##  [0.05 0.95 0.  ]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
+m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
@@ -74,18 +63,7 @@ m$update_state(rbind(c(0, 0, 1), c(0, 1, 0)), rbind(c(0.1, 0.9, 0.8),
 m$update_state(rbind(c(0, 0, 1), c(0, 1, 0)), rbind(c(0.1, 0.9, 0.8),
                c(0.05, 0.95, 0)),
                sample_weight = c(0.7, 0.3))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0. 0. 1.]
-##  [0. 1. 0.]], shape=(2, 3), dtype=float32)
-## tf.Tensor(
-## [[0.1  0.9  0.8 ]
-##  [0.05 0.95 0.  ]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
+m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
