@@ -7,6 +7,7 @@
 \alias{use_python}
 \alias{use_virtualenv}
 \alias{array_reshape}
+\alias{\%as\%}
 \alias{np_array}
 \alias{tuple}
 \alias{iter_next}
@@ -39,7 +40,7 @@ below to see their documentation.
 
   \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
 
-  \item{reticulate}{\code{\link[reticulate]{array_reshape}}, \code{\link[reticulate:iterate]{as_iterator}}, \code{\link[reticulate:iterate]{iter_next}}, \code{\link[reticulate]{iterate}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
+  \item{reticulate}{\code{\link[reticulate:with-as-operator]{\%as\%}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate:iterate]{as_iterator}}, \code{\link[reticulate:iterate]{iter_next}}, \code{\link[reticulate]{iterate}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
 
   \item{tensorflow}{\code{\link[tensorflow]{all_dims}}, \code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{tensorboard}}}
 
