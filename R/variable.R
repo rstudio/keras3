@@ -39,14 +39,14 @@
 # **Updating the value of a `Variable`:**
 #'
 #' ```{r}
-#' variable_from_array@r[1,] <- 99
-#' variable_from_array
-#'
 #' new_value <- array(0, c(3, 3))
-#' variable_from_array@r[] <- new_value
-#' variable_from_array
-#' # `@r[]<-` same as:
 #' variable_from_array$assign(new_value)
+#'
+#' # To modify a subset of values
+#' value <- variable_from_array$value
+#' value@r[1,] <- 99
+#' variable_from_array$assign(value)
+#' variable_from_array
 #' ```
 #'
 #' **Marking a `Variable` as non-trainable:**
