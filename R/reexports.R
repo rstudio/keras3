@@ -44,6 +44,10 @@ reticulate::use_virtualenv
 #' @export
 reticulate::array_reshape
 
+#' @importFrom reticulate array_reshape
+#' @export
+reticulate::`%as%`
+
 #' @importFrom reticulate np_array
 #' @export
 reticulate::np_array
