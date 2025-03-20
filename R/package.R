@@ -220,6 +220,7 @@ keras <- NULL
   reticulate::py_register_load_hook("tensorflow", function() {
 
     tf <- import("tensorflow")
+    if(Sys.getenv("TENSORFLOW_ENABLE_NUMPY_BEHAVIOR") != "false")
     py_capture_output({
       tf$experimental$numpy$experimental_enable_numpy_behavior(
         prefer_float32 = TRUE,
