@@ -64,7 +64,7 @@ function (x, mean, variance, axis, offset = NULL, scale = NULL,
       variance = as_array,
       offset = as_array
     ))
-    do.call(keras$ops$batch_normalization, args)
+    do.call(ops$batch_normalization, args)
 }
 
 #' Normalizes `x` over the specified axis.
@@ -107,7 +107,7 @@ op_normalize <-
 function (x, axis = -1L, order = 2L, epsilon = NULL)
 {
     args <- capture_args(list(axis = as_axis, order = as_integer))
-    do.call(keras$ops$normalize, args)
+    do.call(ops$normalize, args)
 }
 
 
@@ -146,7 +146,7 @@ function (x, axis = -1L, order = 2L, epsilon = NULL)
 #' @tether keras.ops.psnr
 op_psnr <-
 function (x1, x2, max_val)
-keras$ops$psnr(x1, x2, max_val)
+ops$psnr(x1, x2, max_val)
 
 
 
@@ -223,7 +223,7 @@ function (query, key, value, bias = NULL, mask = NULL, scale = NULL,
           is_causal = FALSE, flash_attention = NULL)
 {
   args <- capture_args()
-  do.call(keras$ops$dot_product_attention, args)
+  do.call(ops$dot_product_attention, args)
 }
 
 
@@ -261,7 +261,7 @@ op_glu <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$glu, args)
+    do.call(ops$glu, args)
 }
 
 
@@ -294,7 +294,7 @@ function (x, axis = -1L)
 #' @tether keras.ops.hard_shrink
 op_hard_shrink <-
 function (x, threshold = 0.5)
-keras$ops$hard_shrink(x, threshold)
+ops$hard_shrink(x, threshold)
 
 
 #' Applies the HardTanh function element-wise.
@@ -323,7 +323,7 @@ keras$ops$hard_shrink(x, threshold)
 #' @tether keras.ops.hard_tanh
 op_hard_tanh <-
 function (x)
-keras$ops$hard_tanh(x)
+ops$hard_tanh(x)
 
 
 #' Soft Shrink activation function.
@@ -356,7 +356,7 @@ keras$ops$hard_tanh(x)
 #' @tether keras.ops.soft_shrink
 op_soft_shrink <-
 function (x, threshold = 0.5)
-keras$ops$soft_shrink(x, threshold)
+ops$soft_shrink(x, threshold)
 
 
 #' Squareplus activation function.
@@ -389,7 +389,7 @@ op_squareplus <-
 function (x, b = 4L)
 {
     args <- capture_args(NULL)
-    do.call(keras$ops$squareplus, args)
+    do.call(ops$squareplus, args)
 }
 
 
@@ -419,7 +419,7 @@ function (x, b = 4L)
 #' @tether keras.ops.tanh_shrink
 op_tanh_shrink <-
 function (x)
-keras$ops$tanh_shrink(x)
+ops$tanh_shrink(x)
 
 
 #' Continuously-differentiable exponential linear unit.
@@ -450,7 +450,7 @@ keras$ops$tanh_shrink(x)
 #' @tether keras.ops.celu
 op_celu <-
 function (x, alpha = 1)
-keras$ops$celu(x, alpha)
+ops$celu(x, alpha)
 
 #' SparsePlus activation function.
 #'
@@ -479,7 +479,7 @@ keras$ops$celu(x, alpha)
 #' @family ops
 op_sparse_plus <-
 function (x)
-keras$ops$sparse_plus(x)
+ops$sparse_plus(x)
 
 #' Sparsemax activation function.
 #'
@@ -513,7 +513,7 @@ op_sparsemax <-
 function (x, axis = -1L)
 {
     args <- capture_args(list(axis = as_axis))
-    do.call(keras$ops$sparsemax, args)
+    do.call(ops$sparsemax, args)
 }
 
 #' Threshold activation function.
@@ -547,7 +547,7 @@ function (x, axis = -1L)
 #' @family ops
 op_threshold <-
 function (x, threshold, default_value)
-keras$ops$threshold(x, threshold, default_value)
+ops$threshold(x, threshold, default_value)
 
 #' Convert flat indices to coordinate arrays in a given array shape.
 #'
@@ -577,5 +577,5 @@ op_unravel_index <-
 function (indices, shape)
 {
     args <- capture_args(list(indices = as_index, shape = normalize_shape))
-    do.call(keras$ops$unravel_index, args)
+    do.call(ops$unravel_index, args)
 }

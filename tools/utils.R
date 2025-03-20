@@ -42,6 +42,12 @@ library(envir)
 library(commafree)
 library(magrittr, include.only = c("%>%", "%<>%"))
 library(reticulate)
+py_require(c(
+  "keras", "pydot", "scipy", "pandas", "Pillow", "ipython"
+))
+# py_require("tensorflow-cpu")
+py_require("tensorflow")
+
 library(assertthat, include.only = c("assert_that"))
 
 import_from(roxygen2, block_has_tags)

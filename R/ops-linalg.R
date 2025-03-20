@@ -16,7 +16,7 @@
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cholesky>
 op_cholesky <-
 function (x)
-keras$ops$cholesky(x)
+ops$cholesky(x)
 
 
 #' Computes the determinant of a square tensor.
@@ -35,7 +35,7 @@ keras$ops$cholesky(x)
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/det>
 op_det <-
 function (x)
-keras$ops$det(x)
+ops$det(x)
 
 
 #' Computes the eigenvalues and eigenvectors of a square matrix.
@@ -55,7 +55,7 @@ keras$ops$det(x)
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/eig>
 op_eig <-
 function (x)
-keras$ops$eig(x)
+ops$eig(x)
 
 #' Computes the eigenvalues and eigenvectors of a complex Hermitian.
 #'
@@ -72,7 +72,7 @@ keras$ops$eig(x)
 #' @tether keras.ops.eigh
 op_eigh <-
 function (x)
-keras$ops$eigh(x)
+ops$eigh(x)
 
 #' Computes the inverse of a square tensor.
 #'
@@ -90,7 +90,7 @@ keras$ops$eigh(x)
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/inv>
 op_inv <-
 function (x)
-keras$ops$inv(x)
+ops$inv(x)
 
 
 #' Computes the lower-upper decomposition of a square matrix.
@@ -111,7 +111,7 @@ keras$ops$inv(x)
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/lu_factor>
 op_lu_factor <-
 function (x)
-keras$ops$lu_factor(x)
+ops$lu_factor(x)
 
 
 #' Matrix or vector norm.
@@ -194,7 +194,7 @@ function (x, ord = NULL, axis = NULL, keepdims = FALSE)
           x
       }
     ))
-    do.call(keras$ops$norm, args)
+    do.call(ops$norm, args)
 }
 
 
@@ -222,7 +222,7 @@ function (x, ord = NULL, axis = NULL, keepdims = FALSE)
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/solve_triangular>
 op_solve_triangular <-
 function (a, b, lower = FALSE)
-keras$ops$solve_triangular(a, b, lower)
+ops$solve_triangular(a, b, lower)
 
 
 #' Computes the singular value decomposition of a matrix.
@@ -250,7 +250,7 @@ keras$ops$solve_triangular(a, b, lower)
 #' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/svd>
 op_svd <-
 function (x, full_matrices = TRUE, compute_uv = TRUE)
-keras$ops$svd(x, full_matrices, compute_uv)
+ops$svd(x, full_matrices, compute_uv)
 
 
 
@@ -272,7 +272,7 @@ keras$ops$svd(x, full_matrices, compute_uv)
 #' @tether keras.ops.slogdet
 op_slogdet <-
 function (x)
-keras$ops$slogdet(x)
+ops$slogdet(x)
 
 
 #' Return the least-squares solution to a linear matrix equation.
@@ -325,4 +325,4 @@ keras$ops$slogdet(x)
 #' @tether keras.ops.lstsq
 op_lstsq <-
 function (a, b, rcond = NULL)
-keras$ops$lstsq(a, b, rcond)
+ops$lstsq(a, b, rcond)

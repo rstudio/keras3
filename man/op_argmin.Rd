@@ -40,12 +40,6 @@ x
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmin(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1, shape=(), dtype=int32)
 
 }\if{html}{\out{</div>}}
@@ -53,23 +47,11 @@ x
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmin(x, axis = 1)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1 1], shape=(3), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_argmin(x, axis = 2)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[11. 12. 13.]
-##  [14. 15. 16.]], shape=(2, 3), dtype=float32)
-
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 1], shape=(2), dtype=int32)

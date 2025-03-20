@@ -122,7 +122,7 @@ shape <- function(...) {
         return(map_int(as.list(as_r_value(x$as_list())),
                        function(e) e %||% NA_integer_))
 
-      shp <- keras$ops$shape(x)
+      shp <- ops$shape(x)
 
       # convert subclassed tuples, as encountered in Torch
       # class(shp): torch.Size, python.builtin.tuple, python.builtin.object

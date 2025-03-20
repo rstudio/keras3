@@ -334,6 +334,7 @@ normalize_path <- function(path) {
 }
 
 
+
 # unused
 as_py_index <- function(x) {
   if (is.list(x))
@@ -350,12 +351,22 @@ as_py_index <- function(x) {
   }
 
   if (inherits(x, "numpy.ndarray")) {
-    np <- import("numpy", convert = FALSE)
-    return(np$where(x > 0L, x - 1L, x))
+    offset <- .globals$as_py_index.numpy.ndarray
+    if (is.null(offset)) {
+      .globals$as_py_index.numpy.ndarray <- offset <-
+         py_run_string("
+from numpy import where
+
+def r_index_to_py_index(x):
+  return where(x > 0, x - 1, x)
+
+", local = TRUE, convert = FALSE)$r_index_to_py_index
+    }
+    return(offset(x))
   }
 
   # else is tensor
-  keras$ops$where(x > 0L, x - 1L, x)
+  ops$where(x > 0L, x - 1L, x)
 }
 
 as_index <- as_py_index
@@ -429,7 +440,7 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
     return(last_cl2[[c(3L, 2L)]])
 
   # bare builtin op_wrapper, like
-  # op_add <- function(x1, x2) keras$ops$add(x1, x2)
+  # op_add <- function(x1, x2) ops$add(x1, x2)
   if (is.call(cl <- body(x)) &&
       (is.call(cl0 <- cl1 <- cl[[1L]]) ||
        (
@@ -442,7 +453,7 @@ resolve_wrapper_py_obj_expr <- function(x, prefer_class = TRUE) {
     while (is.call(cl0) && identical(cl0[[1L]], quote(`$`)))
       cl0 <- cl0[[2L]]
 
-    if (identical(cl0, quote(keras)))
+    if (identical(cl0, quote(keras)) || identical(cl0, quote(ops)))
       return(cl1)
   }
 

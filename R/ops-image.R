@@ -103,7 +103,7 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
     # pass 'images' as unnamed positional arg (was renamed from 'image' in Keras 3.4.0)
     args <- args_to_positional(args, "images")
 
-    do.call(keras$ops$image$affine_transform, args)
+    do.call(ops$image$affine_transform, args)
 }
 
 
@@ -171,7 +171,7 @@ function (images, size, strides = NULL, dilation_rate = 1L, padding = "valid",
     # pass 'images' as unnamed positional arg (was renamed from 'image' in Keras 3.4.0)
     args <- args_to_positional(args, "images")
 
-    do.call(keras$ops$image$extract_patches, args)
+    do.call(ops$image$extract_patches, args)
 }
 
 
@@ -233,7 +233,7 @@ function (inputs, coordinates, order, fill_mode = "constant",
     args <- capture_args(list(fill_value = as_integer))
     # "inputs" renamed from "input" in Keras 3.4.0
     args <- args_to_positional(args, "inputs")
-    do.call(keras$ops$image$map_coordinates, args)
+    do.call(ops$image$map_coordinates, args)
 }
 
 
@@ -308,7 +308,7 @@ function (images, top_padding = NULL, left_padding = NULL,
         bottom_padding = as_integer, left_padding = as_integer,
         right_padding = as_integer, target_height = as_integer,
         target_width = as_integer))
-    do.call(keras$ops$image$pad_images, args)
+    do.call(ops$image$pad_images, args)
 }
 
 
@@ -402,7 +402,7 @@ function (images, size, interpolation = "bilinear", antialias = FALSE,
 {
     args <- capture_args(list(size = as_integer))
     args <- args_to_positional(args, "images")
-    do.call(keras$ops$image$resize, args)
+    do.call(ops$image$resize, args)
 }
 
 
@@ -472,7 +472,7 @@ function (images, top_cropping = NULL, left_cropping = NULL,
       target_height = as_integer,
       target_width = as_integer
   ))
-  do.call(keras$ops$image$crop_images, args)
+  do.call(ops$image$crop_images, args)
 }
 
 #' Convert RGB images to grayscale.
@@ -522,7 +522,7 @@ function (images, top_cropping = NULL, left_cropping = NULL,
 #' @tether keras.ops.image.rgb_to_grayscale
 op_image_rgb_to_grayscale <-
 function (images, data_format = NULL) {
-  keras$ops$image$rgb_to_grayscale(images, data_format)
+  ops$image$rgb_to_grayscale(images, data_format)
 }
 
 
@@ -574,7 +574,7 @@ function (images, data_format = NULL) {
 #' @tether keras.ops.image.hsv_to_rgb
 op_image_hsv_to_rgb <-
 function (images, data_format = NULL) {
-  keras$ops$image$hsv_to_rgb(images, data_format)
+  ops$image$hsv_to_rgb(images, data_format)
 }
 
 #' Convert RGB images to HSV.
@@ -627,5 +627,5 @@ function (images, data_format = NULL) {
 #' @tether keras.ops.image.rgb_to_hsv
 op_image_rgb_to_hsv <-
 function (images, data_format = NULL) {
-  keras$ops$image$rgb_to_hsv(images, data_format)
+  ops$image$rgb_to_hsv(images, data_format)
 }

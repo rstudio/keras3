@@ -38,6 +38,7 @@
 
 tf <- NULL
 ops <- NULL
+np <- NULL
 
 
 #' Main Keras module
@@ -52,6 +53,9 @@ ops <- NULL
 keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
+
+  if (is.na(Sys.getenv("TF_CPP_MIN_LOG_LEVEL", NA)))
+    Sys.setenv("TF_CPP_MIN_LOG_LEVEL" = "2")
 
   # tensorflow:::.onLoad() registers some reticulate class filter hooks
   # we need to identify tensorflow tensors reliably.
@@ -174,9 +178,8 @@ keras <- NULL
   reticulate::py_register_load_hook("keras", function() {
 
     keras <- import("keras")
-    device <- keras$device
     convert_to_tensor <- import("keras.ops", convert = FALSE)$convert_to_tensor
-    with(device("cpu:0"), {
+    with(keras$device("cpu:0"), {
       backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
     })
     symbolic_tensor_class <- nameOfClass__python.builtin.type(keras$KerasTensor)
@@ -188,7 +191,6 @@ keras <- NULL
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
     registerS3method("[", "keras_py_backend_tensor", py_subset, baseenv())
 
-
     registerS3method("@<-", symbolic_tensor_class, at_set.keras_backend_tensor, baseenv())
     registerS3method("@<-", backend_tensor_class, at_set.keras_backend_tensor, baseenv())
 
@@ -197,13 +199,28 @@ keras <- NULL
     registerS3method("[<-", "keras_py_backend_tensor", `py_subset<-`, baseenv())
 
     registerS3method("as.array", backend_tensor_class, op_convert_to_array, baseenv())
+    registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
+    registerS3method("%*%", backend_tensor_class, op_matmul, baseenv())
 
+  })
+
+
+
+  reticulate::py_register_load_hook("torch", function() {
+    # force keras load hooks to run
+    keras$ops
+  })
+
+  reticulate::py_register_load_hook("jax", function() {
+    # force keras load hooks to run
+    keras$ops
   })
 
 
   reticulate::py_register_load_hook("tensorflow", function() {
 
     tf <- import("tensorflow")
+    if(Sys.getenv("TENSORFLOW_ENABLE_NUMPY_BEHAVIOR") != "false")
     py_capture_output({
       tf$experimental$numpy$experimental_enable_numpy_behavior(
         prefer_float32 = TRUE,
@@ -222,6 +239,7 @@ keras <- NULL
   })
 
   # on_load_make_as_activation()
+  np <<- try(import("numpy", convert = FALSE, delay_load = TRUE))
   tf <<- try(import("tensorflow", delay_load = TRUE))
   ops <<- try(import("keras.ops", delay_load = list(
     before_load = function() {

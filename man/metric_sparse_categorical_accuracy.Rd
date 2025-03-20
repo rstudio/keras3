@@ -50,15 +50,7 @@ Standalone usage:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m <- metric_sparse_categorical_accuracy()
 m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0.1  0.6  0.3 ]
-##  [0.05 0.95 0.  ]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
+m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.5, shape=(), dtype=float32)
@@ -68,15 +60,7 @@ m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)))
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{m$reset_state()
 m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)),
                sample_weight = c(0.7, 0.3))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[0.1  0.6  0.3 ]
-##  [0.05 0.95 0.  ]], shape=(2, 3), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{m$result()
+m$result()
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.3, shape=(), dtype=float32)
@@ -85,9 +69,9 @@ m$update_state(rbind(2L, 1L), rbind(c(0.1, 0.6, 0.3), c(0.05, 0.95, 0)),
 
 Usage with \code{compile()} API:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model \%>\% compile(optimizer = 'sgd',
-                  loss = 'sparse_categorical_crossentropy',
-                  metrics = list(metric_sparse_categorical_accuracy()))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(optimizer = 'sgd',
+                 loss = 'sparse_categorical_crossentropy',
+                 metrics = list(metric_sparse_categorical_accuracy()))
 }\if{html}{\out{</div>}}
 }
 
