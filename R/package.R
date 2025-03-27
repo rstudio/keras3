@@ -186,6 +186,7 @@ keras <- NULL
 
     registerS3method("@", symbolic_tensor_class, at.keras_backend_tensor, baseenv())
     registerS3method("@", backend_tensor_class, at.keras_backend_tensor, baseenv())
+    registerS3method("@", "numpy.ndarray", at.keras_backend_tensor, baseenv())
 
     py_subset <- utils::getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
@@ -193,6 +194,7 @@ keras <- NULL
 
     registerS3method("@<-", symbolic_tensor_class, at_set.keras_backend_tensor, baseenv())
     registerS3method("@<-", backend_tensor_class, at_set.keras_backend_tensor, baseenv())
+    registerS3method("@<-", "numpy.ndarray", at_set.keras_backend_tensor, baseenv())
 
     `py_subset<-` <- utils::getS3method("[<-", "python.builtin.object", envir = asNamespace("reticulate"))
     registerS3method("[<-", "keras_r_backend_tensor", `op_subset<-`, baseenv())
