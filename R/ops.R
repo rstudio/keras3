@@ -6114,7 +6114,6 @@ ops$negative(x)
 #'
 #' x3 <- op_stack(c(x2, x2*1.1))
 #' x3@r[op_nonzero(x3)]
-#' x3@py[ops$nonzero(x3)]
 #' ```
 #'
 #' @returns

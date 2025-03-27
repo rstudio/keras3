@@ -4,13 +4,17 @@
 \alias{op_digitize}
 \title{Returns the indices of the bins to which each value in \code{x} belongs.}
 \usage{
-op_digitize(x, bins)
+op_digitize(x, bins, zero_indexed = FALSE)
 }
 \arguments{
 \item{x}{Input array to be binned.}
 
 \item{bins}{Array of bins. It has to be one-dimensional and monotonically
 increasing.}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+bin); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes the first bin).}
 }
 \value{
 Output array of indices, of same shape as \code{x}.
