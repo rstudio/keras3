@@ -219,17 +219,22 @@ keras <- NULL
 
   reticulate::py_register_load_hook("tensorflow", function() {
 
-    tf <- import("tensorflow")
-    if(Sys.getenv("TENSORFLOW_ENABLE_NUMPY_BEHAVIOR") != "false")
-    py_capture_output({
-      tf$experimental$numpy$experimental_enable_numpy_behavior(
-        prefer_float32 = TRUE,
-        dtype_conversion_mode = "legacy"
-        # "all" or "safe" leads to error in keras
-        # can optionally also do "off", but that's even more strict
-        # dtype_conversion_mode = "off"
-      )
-    }, "stderr")
+    # Globally enabling this is too disruptive - causes
+    # errors in tf internal calls like `tf.strings.split("foo\nbar", "\n")`
+    # also, internal keras calls in `fit()` that check for overflow.
+    # we only use numpy style slicing via an internal method in op_subset()
+
+    # tf <- import("tensorflow")
+    # if(Sys.getenv("TENSORFLOW_ENABLE_NUMPY_BEHAVIOR") != "false")
+    # py_capture_output({
+    #   tf$experimental$numpy$experimental_enable_numpy_behavior(
+    #     prefer_float32 = TRUE,
+    #     dtype_conversion_mode = "legacy"
+    #     # "all" or "safe" leads to error in keras
+    #     # can optionally also do "off", but that's even more strict
+    #     # dtype_conversion_mode = "off"
+    #   )
+    # }, "stderr")
 
     # we still need to register tensorflow `@` and `@<-` methods even if the
     # backend is not tensorflow, because tf.data can be used with other backends
