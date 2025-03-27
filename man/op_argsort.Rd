@@ -4,13 +4,17 @@
 \alias{op_argsort}
 \title{Returns the indices that would sort a tensor.}
 \usage{
-op_argsort(x, axis = -1L)
+op_argsort(x, axis = -1L, zero_indexed = FALSE)
 }
 \arguments{
 \item{x}{Input tensor.}
 
 \item{axis}{Axis along which to sort. Defaults to \code{-1} (the last axis). If
 \code{NULL}, the flattened tensor is used.}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes to first position).}
 }
 \value{
 Tensor of indices that sort \code{x} along the specified \code{axis}.

@@ -4,7 +4,7 @@
 \alias{op_argmin}
 \title{Returns the indices of the minimum values along an axis.}
 \usage{
-op_argmin(x, axis = NULL, keepdims = FALSE)
+op_argmin(x, axis = NULL, keepdims = FALSE, zero_indexed = FALSE)
 }
 \arguments{
 \item{x}{Input tensor.}
@@ -14,6 +14,10 @@ along the specified axis.}
 
 \item{keepdims}{If this is set to \code{TRUE}, the axes which are reduced are left
 in the result as dimensions with size one. Defaults to \code{FALSE}.}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes to first position).}
 }
 \value{
 Tensor of indices. It has the same shape as \code{x}, with the dimension

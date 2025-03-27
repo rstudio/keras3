@@ -4,7 +4,7 @@
 \alias{op_searchsorted}
 \title{Perform a binary search}
 \usage{
-op_searchsorted(sorted_sequence, values, side = "left")
+op_searchsorted(sorted_sequence, values, side = "left", zero_indexed = FALSE)
 }
 \arguments{
 \item{sorted_sequence}{1-D input tensor, sorted along the innermost
@@ -14,6 +14,10 @@ dimension.}
 
 \item{side}{\code{'left'} or \code{'right'}, specifying the direction in which to insert
 for the equality case (tie-breaker).}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes to first position).}
 }
 \value{
 Tensor of insertion indices of same shape as \code{values}.

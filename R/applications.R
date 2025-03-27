@@ -4151,7 +4151,7 @@ set_preprocessing_attributes <- function(object, module) {
       args <- capture_args(list(
         x = function(x) {
           if (!is_py_object(x))
-            x <- np_array(x)
+            x <- np_array(x, dtype = if(is.double(x)) config_floatx())
           if (inherits(x, "numpy.ndarray") && !py_bool(x$flags$writeable))
             x <- x$copy()
           x

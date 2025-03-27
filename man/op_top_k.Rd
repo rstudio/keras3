@@ -4,7 +4,7 @@
 \alias{op_top_k}
 \title{Finds the top-k values and their indices in a tensor.}
 \usage{
-op_top_k(x, k, sorted = TRUE)
+op_top_k(x, k, sorted = TRUE, zero_indexed = FALSE)
 }
 \arguments{
 \item{x}{Input tensor.}
@@ -13,6 +13,10 @@ op_top_k(x, k, sorted = TRUE)
 
 \item{sorted}{A boolean indicating whether to sort the output in
 descending order. Defaults to \code{TRUE}.}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes to first position).}
 }
 \value{
 A list containing two tensors. The first tensor contains the
