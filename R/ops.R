@@ -373,13 +373,21 @@ function (inputs, indices, updates)
 #' `'left'` or `'right'`, specifying the direction in which to insert
 #' for the equality case (tie-breaker).
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family core ops
 #' @family ops
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
-function (sorted_sequence, values, side = "left")
-ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
+function (sorted_sequence, values, side = "left", zero_indexed = FALSE) {
+
+  result <- ops$searchsorted(as_array(sorted_sequence), as_array(values), side)
+  if (zero_indexed) result else result + 1L
+}
 
 
 #' Gets the shape of the tensor input.
@@ -1547,6 +1555,11 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #' A boolean indicating whether to sort the output in
 #' descending order. Defaults to `TRUE`.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family math ops
 #' @family ops
@@ -1555,12 +1568,14 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k>
 #' @tether keras.ops.top_k
 op_top_k <-
-function (x, k, sorted = TRUE)
+function (x, k, sorted = TRUE, zero_indexed = FALSE)
 {
-    args <- capture_args(list(x = as_array, k = as_integer))
-    res <- do.call(ops$top_k, args)
-    res[[2L]] <- res[[2L]] + 1L
-    res
+    args <- capture_args(list(x = as_array, k = as_integer),
+                         ignore = "zero_indexed")
+    result <- do.call(ops$top_k, args)
+    if (!zero_indexed)
+      result[[2L]] <- result[[2L]] + 1L
+    result
 }
 
 
@@ -3457,6 +3472,11 @@ ops$arctanh(x)
 #' If this is set to `TRUE`, the axes which are reduced are left
 #' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3465,10 +3485,11 @@ ops$arctanh(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 #' @tether keras.ops.argmax
 op_argmax <-
-function (x, axis = NULL, keepdims = FALSE)
+function (x, axis = NULL, keepdims = FALSE, zero_indexed = FALSE)
 {
-    args <- capture_args(list(x = as_array, axis = as_axis))
-    do.call(ops$argmax, args) + 1L
+    args <- capture_args(list(x = as_array, axis = as_axis), ignore = "zero_indexed")
+    result <- do.call(ops$argmax, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -3504,6 +3525,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #' If this is set to `TRUE`, the axes which are reduced are left
 #' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3512,10 +3538,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 #' @tether keras.ops.argmin
 op_argmin <-
-function (x, axis = NULL, keepdims = FALSE)
+function (x, axis = NULL, keepdims = FALSE, zero_indexed = FALSE)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(ops$argmin, args) + 1L
+    args <- capture_args(list(axis = as_axis), ignore = "zero_indexed")
+    result <- do.call(ops$argmin, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -3557,6 +3584,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #' Axis along which to sort. Defaults to `-1` (the last axis). If
 #' `NULL`, the flattened tensor is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3565,10 +3597,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argsort>
 #' @tether keras.ops.argsort
 op_argsort <-
-function (x, axis = -1L)
+function (x, axis = -1L, zero_indexed = FALSE)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(ops$argsort, args) + 1L
+    args <- capture_args(list(axis = as_axis), ignore = "zero_indexed")
+    result <- do.call(ops$argsort, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -4453,6 +4486,11 @@ function (a, n = 1L, axis = -1L)
 #' Array of bins. It has to be one-dimensional and monotonically
 #' increasing.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' bin); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes the first bin).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -4461,10 +4499,11 @@ function (a, n = 1L, axis = -1L)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/digitize>
 #' @tether keras.ops.digitize
 op_digitize <-
-function (x, bins)
+function (x, bins, zero_indexed = FALSE)
 {
-    args <- capture_args(list(bins = as.array))
-    do.call(ops$digitize, args) + 1L
+    args <- capture_args(list(bins = as.array), ignore = "zero_indexed")
+    result <- do.call(ops$digitize, args)
+    if (zero_indexed) result else result + 1L
 }
 
 

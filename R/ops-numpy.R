@@ -52,15 +52,22 @@ ops$divide_no_nan(x1, x2)
 #' Axis along which to sort. The default is `-1` (the last axis).
 #' If `NULL`, the flattened array is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
 #' @tether keras.ops.argpartition
 op_argpartition <-
-function (x, kth, axis = -1L)
+function (x, kth, axis = -1L, zero_indexed = FALSE)
 {
-    args <- capture_args(list(x = as_array, axis = as_axis, kth = as_py_index))
-    do.call(ops$argpartition, args) + 1L
+    args <- capture_args(list(x = as_array, axis = as_axis, kth = as_py_index),
+                         ignore = "zero_indexed")
+    result <- do.call(ops$argpartition, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
