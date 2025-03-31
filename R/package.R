@@ -204,6 +204,16 @@ keras <- NULL
     registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
     registerS3method("%*%", backend_tensor_class, op_matmul, baseenv())
 
+    if(keras$config$backend() == "jax") {
+      for(py_type in import("jax")$Array$`__subclasses__`()) {
+        s3_classname <- nameOfClass__python.builtin.type(py_type)
+        registerS3method("@"       , s3_classname, at.keras_backend_tensor, baseenv())
+        registerS3method("@<-"     , s3_classname, at_set.keras_backend_tensor, baseenv())
+        registerS3method("as.array", s3_classname, op_convert_to_array, baseenv())
+        registerS3method("^"       , s3_classname, `^__keras.backend.tensor`, baseenv())
+        registerS3method("%*%"     , s3_classname, op_matmul, baseenv())
+      }
+    }
   })
 
 
