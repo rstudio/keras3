@@ -3187,6 +3187,9 @@ function (x1, x2, axis = NULL)
 #' `out[i+1] - out[i]`. The default step size is 1. If `step` is
 #' specified as a position argument, `start` must also be given.
 #'
+#' @param include_end `TRUE` or `FALSE`. If `FALSE`, then `end` is not included
+#' in the output sequence.
+#'
 #' @param dtype
 #' The type of the output array. If `dtype` is not given, infer the
 #' data type from the other input arguments.
@@ -3199,7 +3202,8 @@ function (x1, x2, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 #' @tether keras.ops.arange
 op_arange <-
-function (start, end, step = 1L, dtype = NULL)
+function (start, end, step = 1L, dtype = NULL,
+          include_end = TRUE)
 {
 
   if(missing(end)) {
@@ -3214,10 +3218,14 @@ function (start, end, step = 1L, dtype = NULL)
       storage.mode(end) <- "integer"
   }
 
-  abs_step <- op_abs(step)
-  step <- op_where(start > end, -abs_step, abs_step)
+  ## This breaks a op_arange() call in a jax tracing context
+  # abs_step <- op_abs(step)
+  # step <- op_where(start > end, -abs_step, abs_step)
 
-  ops$arange(start, end+step, step, dtype = dtype)
+  if (include_end)
+    end <- end+step
+
+  ops$arange(start, end, step, dtype = dtype)
 }
 
 
