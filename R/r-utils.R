@@ -189,9 +189,10 @@ as_array <- function(x)
   if(is.null(x) || is_py_object(x) || is.array(x))
     x else as.array(x)
 
-as_py_array <- function(x)
+as_py_array <- function(x) {
   if(is.null(x) || is_py_object(x))
-    x else np_array(x)
+    x else np_array(x, dtype = if(is.double(x)) config_floatx())
+}
 
 as_r_value <- function (x)
   if (is_py_object(x))
