@@ -745,6 +745,7 @@ function (data, targets, sequence_length, sequence_stride = 1L,
 {
     args <- capture_args(list(sequence_stride = as_integer,
         sampling_rate = as_integer, batch_size = as_integer,
-        seed = as_integer, start_index = as_integer, end_index = as_integer))
+        seed = as_integer, start_index = as_integer, end_index = as_integer,
+        data = keras_array, targets = keras_array))
     do.call(keras$utils$timeseries_dataset_from_array, args)
 }
