@@ -7034,6 +7034,11 @@ ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 #' The axis over which to select values. By default, the
 #' flattened input tensor is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, treats indices as zero-based (`0` encodes to first position); if
+#' `FALSE` (default), treats indices as one-based (`1` encodes to first
+#' position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -7042,9 +7047,13 @@ ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>
 #' @tether keras.ops.take
 op_take <-
-function (x, indices, axis = NULL)
+function (x, indices, axis = NULL, zero_indexed = FALSE)
 {
-    args <- capture_args(list(indices = as_py_index, axis = as_axis))
+    args <- capture_args(
+      list(indices = if (zero_indexed) as_integer_array else as_py_index,
+           axis = as_axis),
+      ignore = "zero_indexed"
+    )
     do.call(ops$take, args)
 }
 
@@ -7064,6 +7073,11 @@ function (x, indices, axis = NULL)
 #' The axis over which to select values. By default, the flattened
 #' input tensor is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, treats indices as zero-based (`0` encodes to first position); if
+#' `FALSE` (default), treats indices as one-based (`1` encodes to first
+#' position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -7072,9 +7086,13 @@ function (x, indices, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis>
 #' @tether keras.ops.take_along_axis
 op_take_along_axis <-
-function (x, indices, axis = NULL)
+function (x, indices, axis = NULL, zero_indexed = FALSE)
 {
-    args <- capture_args(list(indices = as_py_index, axis = as_axis))
+    args <- capture_args(
+      list(indices = if (zero_indexed) as_integer_array else as_py_index,
+           axis = as_axis),
+      ignore = "zero_indexed"
+    )
     do.call(ops$take_along_axis, args)
 }
 
