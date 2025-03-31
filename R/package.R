@@ -273,8 +273,8 @@ at.keras_backend_tensor <-  function(object, name) {
   attrs <- attributes(object)
   cls <- switch(
     name,
-    r = "keras_r_backend_tensor" ,
-    py = "keras_py_backend_tensor",
+    "1" = , one = , R = , r = "keras_r_backend_tensor",
+    "0" = , zero =, Py =, py = "keras_py_backend_tensor",
     stop("<subset-style> must be 'r' or 'py' in expression <tensor>@<subset-style>")
   )
   attrs$class <- unique(c(cls, attrs$class))
