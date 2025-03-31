@@ -2391,15 +2391,14 @@ function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE,
           zero_indexed = FALSE)
 {
 
-  args <- capture_args(list(axis = as_axis, num_classes = as_integer),
+  args <- capture_args(list(x = if (zero_indexed) identity else as_py_index,
+                            axis = as_axis, num_classes = as_integer),
                        ignore = "zero_indexed")
   if (inherits(x, "factor")) {
     if (is.null(args$num_classes))
       args$num_classes <- length(levels(x))
     x <- unclass(x)
   }
-  if (!zero_indexed)
-    args$x <- as_py_index(x)
   do.call(ops$one_hot, args)
 }
 
