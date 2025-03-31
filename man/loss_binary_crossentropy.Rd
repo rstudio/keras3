@@ -75,7 +75,7 @@ loss <- loss_binary_crossentropy(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.91629073 0.71355818], shape=(2), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.91629076 0.7135582 ], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

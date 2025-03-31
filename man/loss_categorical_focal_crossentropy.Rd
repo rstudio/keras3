@@ -115,7 +115,7 @@ loss <- loss_categorical_focal_crossentropy(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.20583090e-05 4.66273481e-01], shape=(2), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([3.2058331e-05 4.6627346e-01], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

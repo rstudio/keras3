@@ -4,13 +4,13 @@
 \alias{op_arange}
 \title{Return evenly spaced values within a given interval.}
 \usage{
-op_arange(start, end, step = 1L, dtype = NULL)
+op_arange(start, end, step = 1L, dtype = NULL, include_end = TRUE)
 }
 \arguments{
 \item{start}{Integer or real, representing the start of the interval. The
 interval includes this value.}
 
-\item{end}{Integer or real, representing the end of the interval. The
+\item{end}{Integer or real, representing the end of the interval. If \code{include_end} is \code{FALSE}, the
 interval does not include this value, except in some cases where
 \code{step} is not an integer and floating point round-off affects the
 length of \code{out}. Defaults to \code{NULL}.}
@@ -22,6 +22,9 @@ specified as a position argument, \code{start} must also be given.}
 
 \item{dtype}{The type of the output array. If \code{dtype} is not given, infer the
 data type from the other input arguments.}
+
+\item{include_end}{\code{TRUE} or \code{FALSE}. If \code{FALSE}, then \code{end} is not included
+in the output sequence.}
 }
 \value{
 Tensor of evenly spaced values.

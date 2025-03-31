@@ -3176,7 +3176,7 @@ function (x1, x2, axis = NULL)
 #' interval includes this value.
 #'
 #' @param end
-#' Integer or real, representing the end of the interval. The
+#' Integer or real, representing the end of the interval. If `include_end` is `FALSE`, the
 #' interval does not include this value, except in some cases where
 #' `step` is not an integer and floating point round-off affects the
 #' length of `out`. Defaults to `NULL`.
