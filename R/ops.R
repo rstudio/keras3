@@ -6551,8 +6551,7 @@ function (x, repeats, axis = NULL)
 op_reshape <-
 function (x, newshape)
 {
-    ops$reshape(x, tuple(lapply(shape(newshape),
-                                      function(d) d %||% -1L)))
+    ops$reshape(as_py_array(x), tuple(lapply(shape(newshape), function(d) d %||% -1L)))
 }
 
 
