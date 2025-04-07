@@ -14,9 +14,9 @@ image_to_array(img, data_format = NULL, dtype = NULL)
 setting \code{config_image_data_format()} is used (unless you
 changed it, it defaults to \code{"channels_last"}).}
 
-\item{dtype}{Dtype to use. \code{NULL} means the global setting
-\code{config_floatx()} is used (unless you changed it, it
-defaults to \code{"float32"}).}
+\item{dtype}{Dtype to use. \code{NULL} and \code{"double"} return an R double array.
+\code{"integer"} returns an R integer array.
+All other values (e.g., \code{"float32"}) return a NumPy array.}
 }
 \value{
 A 3D array.
