@@ -505,7 +505,7 @@ tf_numpy_style_get_item <- function(x, key, silent = FALSE) {
       # new_x = x.at[0].set(10)
       x_at <- py_get_attr(x, "at", TRUE) %||% break
       x_subset <- py_get_item(x_at, key, TRUE) %||% break
-      set <- py_get_attr(x, "set") %||% break
+      set <- py_get_attr(x_subset, "set") %||% break
       return(set(value))
     }
     break
