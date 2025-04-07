@@ -266,9 +266,8 @@ as_integer <- function(x) {
 }
 
 as_integer_array <- function(x) {
-  if (is.atomic(x)) {
-    if (is.double(x))
-      storage.mode(x) <- "integer"
+  if (is.double(x)) {
+    storage.mode(x) <- "integer"
     x <- as.array(x)
   }
   x
