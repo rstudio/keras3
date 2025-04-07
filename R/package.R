@@ -110,7 +110,6 @@ keras <- NULL
     use_backend(backend, gpu)
   }
 
-
   # delay load keras
   try(keras <<- import("keras", delay_load = list(
 
@@ -175,6 +174,13 @@ keras <- NULL
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
 
+  ## numpy is loaded in a non-standard code path by reticulate
+  ## (it's loaded early in c++ and bypasses the importer that calls hooks)
+  ## So we indiscriminately register the s3 methods for numpy arrays
+  ## instead of using py_register_load_hook("numpy")
+  registerS3method("@", "numpy.ndarray", at.keras_backend_tensor, baseenv())
+  registerS3method("@<-", "numpy.ndarray", at_set.keras_backend_tensor, baseenv())
+
   reticulate::py_register_load_hook("keras", function() {
 
     keras <- import("keras")
@@ -186,7 +192,6 @@ keras <- NULL
 
     registerS3method("@", symbolic_tensor_class, at.keras_backend_tensor, baseenv())
     registerS3method("@", backend_tensor_class, at.keras_backend_tensor, baseenv())
-    registerS3method("@", "numpy.ndarray", at.keras_backend_tensor, baseenv())
 
     py_subset <- utils::getS3method("[", "python.builtin.object", envir = asNamespace("reticulate"))
     registerS3method("[", "keras_r_backend_tensor", op_subset, baseenv())
@@ -194,7 +199,6 @@ keras <- NULL
 
     registerS3method("@<-", symbolic_tensor_class, at_set.keras_backend_tensor, baseenv())
     registerS3method("@<-", backend_tensor_class, at_set.keras_backend_tensor, baseenv())
-    registerS3method("@<-", "numpy.ndarray", at_set.keras_backend_tensor, baseenv())
 
     `py_subset<-` <- utils::getS3method("[<-", "python.builtin.object", envir = asNamespace("reticulate"))
     registerS3method("[<-", "keras_r_backend_tensor", `op_subset<-`, baseenv())
