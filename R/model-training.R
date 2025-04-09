@@ -930,7 +930,7 @@ summary.keras.src.models.model.Model <- function(object, ...) {
 #' @export
 format.keras.src.models.model.Model <-
 function(x,
-         line_length = getOption("width"), # width - (12L * show_trainable),
+         line_length = min(getOption("width"), 180), # width - (12L * show_trainable),
          positions = NULL,
          expand_nested = FALSE,
          show_trainable = NA,
