@@ -10,7 +10,7 @@
 
 \method{format}{keras.src.models.model.Model}(
   x,
-  line_length = getOption("width"),
+  line_length = min(getOption("width"), 180),
   positions = NULL,
   expand_nested = FALSE,
   show_trainable = NA,
