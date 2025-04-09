@@ -4,7 +4,13 @@
 \alias{random_categorical}
 \title{Draws samples from a categorical distribution.}
 \usage{
-random_categorical(logits, num_samples, dtype = "int32", seed = NULL)
+random_categorical(
+  logits,
+  num_samples,
+  dtype = "int32",
+  seed = NULL,
+  zero_indexed = FALSE
+)
 }
 \arguments{
 \item{logits}{2-D Tensor with shape (batch_size, num_classes). Each row
@@ -31,6 +37,10 @@ Remark concerning the JAX backend: When tracing functions with the
 JAX backend the global \code{\link[=random_seed_generator]{random_seed_generator()}} is not
 supported. Therefore, during tracing the default value \code{seed=NULL}
 will produce an error, and a \code{seed} argument must be provided.}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes to first position).}
 }
 \value{
 A 2-D tensor with (batch_size, num_samples).
@@ -45,6 +55,38 @@ The function will output a 2-D tensor with shape (batch_size, num_samples),
 where each row contains samples from the corresponding row in \code{logits}.
 Each column index contains an independent samples drawn from the input
 distribution.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- matrix(c(100, .1, 99), nrow = 1)
+random_categorical(x, num_samples = 5, seed = 1234)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[3 1 1 3 3]], shape=(1, 5), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{random_categorical(x, num_samples = 5, seed = 1234,
+                   zero_indexed = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[2 0 0 2 2]], shape=(1, 5), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_take(x, random_categorical(x, num_samples = 5, seed = 1234))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ 99. 100. 100.  99.  99.]], shape=(1, 5), dtype=float64)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_take(x, random_categorical(x, num_samples = 5, seed = 1234,
+                              zero_indexed = TRUE),
+        zero_indexed = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([[ 99. 100. 100.  99.  99.]], shape=(1, 5), dtype=float64)
+
+}\if{html}{\out{</div>}}
 }
 \seealso{
 Other random: \cr

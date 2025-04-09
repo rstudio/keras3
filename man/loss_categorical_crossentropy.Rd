@@ -69,7 +69,7 @@ loss <- loss_categorical_crossentropy(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129329 2.30258509], shape=(2), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129331 2.3025851 ], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 

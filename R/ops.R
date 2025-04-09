@@ -373,13 +373,21 @@ function (inputs, indices, updates)
 #' `'left'` or `'right'`, specifying the direction in which to insert
 #' for the equality case (tie-breaker).
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family core ops
 #' @family ops
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
-function (sorted_sequence, values, side = "left")
-ops$searchsorted(as_array(sorted_sequence), as_array(values), side) + 1L
+function (sorted_sequence, values, side = "left", zero_indexed = FALSE) {
+
+  result <- ops$searchsorted(as_array(sorted_sequence), as_array(values), side)
+  if (zero_indexed) result else result + 1L
+}
 
 
 #' Gets the shape of the tensor input.
@@ -1547,6 +1555,11 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #' A boolean indicating whether to sort the output in
 #' descending order. Defaults to `TRUE`.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family math ops
 #' @family ops
@@ -1555,12 +1568,14 @@ function (x, sequence_length, sequence_stride, fft_length, window = "hann",
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/top_k>
 #' @tether keras.ops.top_k
 op_top_k <-
-function (x, k, sorted = TRUE)
+function (x, k, sorted = TRUE, zero_indexed = FALSE)
 {
-    args <- capture_args(list(x = as_array, k = as_integer))
-    res <- do.call(ops$top_k, args)
-    res[[2L]] <- res[[2L]] + 1L
-    res
+    args <- capture_args(list(x = as_array, k = as_integer),
+                         ignore = "zero_indexed")
+    result <- do.call(ops$top_k, args)
+    if (!zero_indexed)
+      result[[2L]] <- result[[2L]] + 1L
+    result
 }
 
 
@@ -2376,15 +2391,16 @@ function (x, num_classes, axis = -1L, dtype = NULL, sparse = FALSE,
           zero_indexed = FALSE)
 {
 
-  args <- capture_args(list(axis = as_axis, num_classes = as_integer),
+  args <- capture_args(list(x = if (zero_indexed) identity else as_py_index,
+                            axis = as_axis, num_classes = as_integer),
                        ignore = "zero_indexed")
   if (inherits(x, "factor")) {
+    if(!zero_indexed)
+      stop("zero_indexed=TRUE is incompatible with `x` being a factor.")
     if (is.null(args$num_classes))
       args$num_classes <- length(levels(x))
     x <- unclass(x)
   }
-  if (!zero_indexed)
-    args$x <- as_py_index(x)
   do.call(ops$one_hot, args)
 }
 
@@ -3162,7 +3178,7 @@ function (x1, x2, axis = NULL)
 #' interval includes this value.
 #'
 #' @param end
-#' Integer or real, representing the end of the interval. The
+#' Integer or real, representing the end of the interval. If `include_end` is `FALSE`, the
 #' interval does not include this value, except in some cases where
 #' `step` is not an integer and floating point round-off affects the
 #' length of `out`. Defaults to `NULL`.
@@ -3172,6 +3188,9 @@ function (x1, x2, axis = NULL)
 #' output `out`, this is the distance between two adjacent values,
 #' `out[i+1] - out[i]`. The default step size is 1. If `step` is
 #' specified as a position argument, `start` must also be given.
+#'
+#' @param include_end `TRUE` or `FALSE`. If `FALSE`, then `end` is not included
+#' in the output sequence.
 #'
 #' @param dtype
 #' The type of the output array. If `dtype` is not given, infer the
@@ -3185,7 +3204,8 @@ function (x1, x2, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/arange>
 #' @tether keras.ops.arange
 op_arange <-
-function (start, end, step = 1L, dtype = NULL)
+function (start, end, step = 1L, dtype = NULL,
+          include_end = TRUE)
 {
 
   if(missing(end)) {
@@ -3200,10 +3220,14 @@ function (start, end, step = 1L, dtype = NULL)
       storage.mode(end) <- "integer"
   }
 
-  abs_step <- op_abs(step)
-  step <- op_where(start > end, -abs_step, abs_step)
+  ## This breaks a op_arange() call in a jax tracing context
+  # abs_step <- op_abs(step)
+  # step <- op_where(start > end, -abs_step, abs_step)
 
-  ops$arange(start, end+step, step, dtype = dtype)
+  if (include_end)
+    end <- end+step
+
+  ops$arange(start, end, step, dtype = dtype)
 }
 
 
@@ -3457,6 +3481,11 @@ ops$arctanh(x)
 #' If this is set to `TRUE`, the axes which are reduced are left
 #' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3465,10 +3494,11 @@ ops$arctanh(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmax>
 #' @tether keras.ops.argmax
 op_argmax <-
-function (x, axis = NULL, keepdims = FALSE)
+function (x, axis = NULL, keepdims = FALSE, zero_indexed = FALSE)
 {
-    args <- capture_args(list(x = as_array, axis = as_axis))
-    do.call(ops$argmax, args) + 1L
+    args <- capture_args(list(x = as_array, axis = as_axis), ignore = "zero_indexed")
+    result <- do.call(ops$argmax, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -3504,6 +3534,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #' If this is set to `TRUE`, the axes which are reduced are left
 #' in the result as dimensions with size one. Defaults to `FALSE`.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3512,10 +3547,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argmin>
 #' @tether keras.ops.argmin
 op_argmin <-
-function (x, axis = NULL, keepdims = FALSE)
+function (x, axis = NULL, keepdims = FALSE, zero_indexed = FALSE)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(ops$argmin, args) + 1L
+    args <- capture_args(list(axis = as_axis), ignore = "zero_indexed")
+    result <- do.call(ops$argmin, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -3557,6 +3593,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #' Axis along which to sort. Defaults to `-1` (the last axis). If
 #' `NULL`, the flattened tensor is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -3565,10 +3606,11 @@ function (x, axis = NULL, keepdims = FALSE)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/argsort>
 #' @tether keras.ops.argsort
 op_argsort <-
-function (x, axis = -1L)
+function (x, axis = -1L, zero_indexed = FALSE)
 {
-    args <- capture_args(list(axis = as_axis))
-    do.call(ops$argsort, args) + 1L
+    args <- capture_args(list(axis = as_axis), ignore = "zero_indexed")
+    result <- do.call(ops$argsort, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -4453,6 +4495,11 @@ function (a, n = 1L, axis = -1L)
 #' Array of bins. It has to be one-dimensional and monotonically
 #' increasing.
 #'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' bin); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes the first bin).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -4461,10 +4508,11 @@ function (a, n = 1L, axis = -1L)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/digitize>
 #' @tether keras.ops.digitize
 op_digitize <-
-function (x, bins)
+function (x, bins, zero_indexed = FALSE)
 {
-    args <- capture_args(list(bins = as.array))
-    do.call(ops$digitize, args) + 1L
+    args <- capture_args(list(bins = as.array), ignore = "zero_indexed")
+    result <- do.call(ops$digitize, args)
+    if (zero_indexed) result else result + 1L
 }
 
 
@@ -6075,7 +6123,6 @@ ops$negative(x)
 #'
 #' x3 <- op_stack(c(x2, x2*1.1))
 #' x3@r[op_nonzero(x3)]
-#' x3@py[ops$nonzero(x3)]
 #' ```
 #'
 #' @returns
@@ -6506,8 +6553,7 @@ function (x, repeats, axis = NULL)
 op_reshape <-
 function (x, newshape)
 {
-    ops$reshape(x, tuple(lapply(shape(newshape),
-                                      function(d) d %||% -1L)))
+    ops$reshape(as_py_array(x), tuple(lapply(shape(newshape), function(d) d %||% -1L)))
 }
 
 
@@ -6989,6 +7035,11 @@ ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 #' The axis over which to select values. By default, the
 #' flattened input tensor is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, treats indices as zero-based (`0` encodes to first position); if
+#' `FALSE` (default), treats indices as one-based (`1` encodes to first
+#' position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -6997,9 +7048,13 @@ ops$swapaxes(x, as_axis(axis1), as_axis(axis2))
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take>
 #' @tether keras.ops.take
 op_take <-
-function (x, indices, axis = NULL)
+function (x, indices, axis = NULL, zero_indexed = FALSE)
 {
-    args <- capture_args(list(indices = as_py_index, axis = as_axis))
+    args <- capture_args(
+      list(indices = if (zero_indexed) as_integer_array else as_py_index,
+           axis = as_axis),
+      ignore = "zero_indexed"
+    )
     do.call(ops$take, args)
 }
 
@@ -7019,6 +7074,11 @@ function (x, indices, axis = NULL)
 #' The axis over which to select values. By default, the flattened
 #' input tensor is used.
 #'
+#' @param zero_indexed
+#' If `TRUE`, treats indices as zero-based (`0` encodes to first position); if
+#' `FALSE` (default), treats indices as one-based (`1` encodes to first
+#' position).
+#'
 #' @export
 #' @family numpy ops
 #' @family ops
@@ -7027,9 +7087,13 @@ function (x, indices, axis = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/take_along_axis>
 #' @tether keras.ops.take_along_axis
 op_take_along_axis <-
-function (x, indices, axis = NULL)
+function (x, indices, axis = NULL, zero_indexed = FALSE)
 {
-    args <- capture_args(list(indices = as_py_index, axis = as_axis))
+    args <- capture_args(
+      list(indices = if (zero_indexed) as_integer_array else as_py_index,
+           axis = as_axis),
+      ignore = "zero_indexed"
+    )
     do.call(ops$take_along_axis, args)
 }
 

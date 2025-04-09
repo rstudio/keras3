@@ -22,6 +22,7 @@ and 10,000 test images.
 \seealso{
 Other datasets: \cr
 \code{\link{dataset_boston_housing}()} \cr
+\code{\link{dataset_california_housing}()} \cr
 \code{\link{dataset_cifar100}()} \cr
 \code{\link{dataset_fashion_mnist}()} \cr
 \code{\link{dataset_imdb}()} \cr

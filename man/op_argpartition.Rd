@@ -4,7 +4,7 @@
 \alias{op_argpartition}
 \title{Performs an indirect partition along the given axis.}
 \usage{
-op_argpartition(x, kth, axis = -1L)
+op_argpartition(x, kth, axis = -1L, zero_indexed = FALSE)
 }
 \arguments{
 \item{x}{Array to sort.}
@@ -18,6 +18,10 @@ into their sorted position at once.}
 
 \item{axis}{Axis along which to sort. The default is \code{-1} (the last axis).
 If \code{NULL}, the flattened array is used.}
+
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
+encodes to first position).}
 }
 \value{
 Array of indices that partition \code{x} along the specified \code{axis}.

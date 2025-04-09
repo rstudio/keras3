@@ -368,14 +368,17 @@ function (x, axis = -1L, order = 2L)
 to_categorical <-
 function (x, num_classes = NULL)
 {
-    args <- capture_args(list(x = function(x) {
-      if (inherits(x, "factor"))
-        array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
-      else
-        as_integer_array(x)
-    }, num_classes = as_integer))
-    do.call(keras$utils$to_categorical, args)
+  if (inherits(x, "factor")) {
+    x <- array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
+    if (is.null(num_classes))
+      num_classes <- length(levels(x))
+  }
+
+  x <- as_integer_array(x)
+  num_classes <- as_integer(num_classes)
+  keras$utils$to_categorical(x, num_classes)
 }
+
 
 
 #' Sets all random seeds (Python, NumPy, and backend framework, e.g. TF).

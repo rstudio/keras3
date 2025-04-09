@@ -54,7 +54,7 @@ Sys.setenv("XLA_FLAGS" = "--xla_force_host_platform_device_count=8")
 library(keras3)
 
 # The distribution API is only implemented for the JAX backend for now.
-use_backend("jax")
+use_backend("jax", FALSE)
 jax <- reticulate::import("jax")
 
 library(tfdatasets, exclude = "shape") # For dataset input.
@@ -229,7 +229,28 @@ outputs <- inputs |>
               name = "d2")
 
 model <- keras_model(inputs = inputs, outputs = outputs)
+```
 
+We can visualize how individual weights will be sharded
+```{r}
+d1 <- get_layer(model, "d1")
+d1$kernel$value |> jax$debug$visualize_array_sharding()
+
+d2 <- get_layer(model, "d2")
+d2$kernel$value |> jax$debug$visualize_array_sharding()
+d2$bias$value |> jax$debug$visualize_array_sharding()
+
+x_batch <- dataset |>  
+  as_iterator() |> iter_next() |> 
+  _[[1]] |> op_convert_to_tensor()
+
+output_array <- model(x_batch)
+output_array |> jax$debug$visualize_array_sharding()
+```
+
+
+
+```{r}
 # The data will be sharded across the "data" dimension of the method, which
 # has 2 devices.
 model |> compile(loss = "mse")
@@ -273,3 +294,8 @@ full_model_parallel_mesh <- keras$distribution$DeviceMesh(
 3. [TensorFlow Distributed training with DTensors](https://www.tensorflow.org/tutorials/distribute/dtensor_ml_tutorial)
 4. [TensorFlow DTensor concepts](https://www.tensorflow.org/guide/dtensor_overview)
 5. [Using DTensors with tf.keras](https://www.tensorflow.org/tutorials/distribute/dtensor_keras_tutorial)
+
+```{r}
+
+```
+

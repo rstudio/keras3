@@ -110,7 +110,6 @@ keras <- NULL
     use_backend(backend, gpu)
   }
 
-
   # delay load keras
   try(keras <<- import("keras", delay_load = list(
 
@@ -175,6 +174,13 @@ keras <- NULL
   setHook("tensorflow.on_before_use_session", tensorflow_on_before_use_session)
   setHook("tensorflow.on_use_session", tensorflow_on_use_session)
 
+  ## numpy is loaded in a non-standard code path by reticulate
+  ## (it's loaded early in c++ and bypasses the importer that calls hooks)
+  ## So we indiscriminately register the s3 methods for numpy arrays
+  ## instead of using py_register_load_hook("numpy")
+  registerS3method("@", "numpy.ndarray", at.keras_backend_tensor, baseenv())
+  registerS3method("@<-", "numpy.ndarray", at_set.keras_backend_tensor, baseenv())
+
   reticulate::py_register_load_hook("keras", function() {
 
     keras <- import("keras")
@@ -202,6 +208,16 @@ keras <- NULL
     registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
     registerS3method("%*%", backend_tensor_class, op_matmul, baseenv())
 
+    if(keras$config$backend() == "jax") {
+      for(py_type in import("jax")$Array$`__subclasses__`()) {
+        s3_classname <- nameOfClass__python.builtin.type(py_type)
+        registerS3method("@"       , s3_classname, at.keras_backend_tensor, baseenv())
+        registerS3method("@<-"     , s3_classname, at_set.keras_backend_tensor, baseenv())
+        registerS3method("as.array", s3_classname, op_convert_to_array, baseenv())
+        registerS3method("^"       , s3_classname, `^__keras.backend.tensor`, baseenv())
+        registerS3method("%*%"     , s3_classname, op_matmul, baseenv())
+      }
+    }
   })
 
 
@@ -219,17 +235,22 @@ keras <- NULL
 
   reticulate::py_register_load_hook("tensorflow", function() {
 
-    tf <- import("tensorflow")
-    if(Sys.getenv("TENSORFLOW_ENABLE_NUMPY_BEHAVIOR") != "false")
-    py_capture_output({
-      tf$experimental$numpy$experimental_enable_numpy_behavior(
-        prefer_float32 = TRUE,
-        dtype_conversion_mode = "legacy"
-        # "all" or "safe" leads to error in keras
-        # can optionally also do "off", but that's even more strict
-        # dtype_conversion_mode = "off"
-      )
-    }, "stderr")
+    # Globally enabling this is too disruptive - causes
+    # errors in tf internal calls like `tf.strings.split("foo\nbar", "\n")`
+    # also, internal keras calls in `fit()` that check for overflow.
+    # we only use numpy style slicing via an internal method in op_subset()
+
+    # tf <- import("tensorflow")
+    # if(Sys.getenv("TENSORFLOW_ENABLE_NUMPY_BEHAVIOR") != "false")
+    # py_capture_output({
+    #   tf$experimental$numpy$experimental_enable_numpy_behavior(
+    #     prefer_float32 = TRUE,
+    #     dtype_conversion_mode = "legacy"
+    #     # "all" or "safe" leads to error in keras
+    #     # can optionally also do "off", but that's even more strict
+    #     # dtype_conversion_mode = "off"
+    #   )
+    # }, "stderr")
 
     # we still need to register tensorflow `@` and `@<-` methods even if the
     # backend is not tensorflow, because tf.data can be used with other backends
@@ -256,8 +277,8 @@ at.keras_backend_tensor <-  function(object, name) {
   attrs <- attributes(object)
   cls <- switch(
     name,
-    r = "keras_r_backend_tensor" ,
-    py = "keras_py_backend_tensor",
+    "1" = , one = , R = , r = "keras_r_backend_tensor",
+    "0" = , zero =, Py =, py = "keras_py_backend_tensor",
     stop("<subset-style> must be 'r' or 'py' in expression <tensor>@<subset-style>")
   )
   attrs$class <- unique(c(cls, attrs$class))

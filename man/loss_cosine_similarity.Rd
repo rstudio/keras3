@@ -65,7 +65,7 @@ loss <- loss_cosine_similarity(y_true, y_pred, axis=-1)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0. -1.  1.], shape=(3), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.         -0.99999994  0.99999994], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

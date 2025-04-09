@@ -179,9 +179,9 @@ function (path, color_mode = "rgb", target_size = NULL, interpolation = "nearest
 #' changed it, it defaults to `"channels_last"`).
 #'
 #' @param dtype
-#' Dtype to use. `NULL` means the global setting
-#' `config_floatx()` is used (unless you changed it, it
-#' defaults to `"float32"`).
+#' Dtype to use. `NULL` and `"double"` return an R double array.
+#' `"integer"` returns an R integer array.
+#' All other values (e.g., `"float32"`) return a NumPy array.
 #'
 #' @export
 #' @family image utils
@@ -194,5 +194,13 @@ image_to_array <-
 function (img, data_format = NULL, dtype = NULL)
 {
   args <- capture_args()
-  do.call(keras$utils$img_to_array, args)
+  callable <- keras$utils$img_to_array
+  if (is.null(dtype) || identical(dtype, "double")) {
+    args$dtype <- "float64"
+  } else if (identical(dtype, "integer")) {
+    args$dtype <- "int32"
+  } else {
+    assign("convert", FALSE, as.environment(callable))
+  }
+  do.call(callable, args)
 }

@@ -4,7 +4,7 @@
 \alias{op_take}
 \title{Take elements from a tensor along an axis.}
 \usage{
-op_take(x, indices, axis = NULL)
+op_take(x, indices, axis = NULL, zero_indexed = FALSE)
 }
 \arguments{
 \item{x}{Source tensor.}
@@ -13,6 +13,10 @@ op_take(x, indices, axis = NULL)
 
 \item{axis}{The axis over which to select values. By default, the
 flattened input tensor is used.}
+
+\item{zero_indexed}{If \code{TRUE}, treats indices as zero-based (\code{0} encodes to first position); if
+\code{FALSE} (default), treats indices as one-based (\code{1} encodes to first
+position).}
 }
 \value{
 The corresponding tensor of values.

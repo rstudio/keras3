@@ -68,7 +68,7 @@ stopifnot(shape(loss) == shape(2))
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.50000001 0.75757576], shape=(2), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.5        0.75757575], shape=(2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -77,7 +77,7 @@ stopifnot(shape(loss) == shape())
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6164383614186526, shape=(), dtype=float64)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.6164384, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

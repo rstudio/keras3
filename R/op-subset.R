@@ -457,7 +457,20 @@ r_extract_args_into_py_get_item_key <- function(x, ..., .envir = parent.frame(2L
 op_subset <- function(x, ...) {
   key <- r_extract_args_into_py_get_item_key(x, ..., .envir = parent.frame())
   # print(key)
+  if (inherits(x, "tensorflow.tensor")) {
+    return(tf_numpy_style_get_item(x, key))
+  }
   py_get_item(x, key)
+}
+
+tf_numpy_style_get_item <- function(x, key, silent = FALSE) {
+  if (inherits(x, "tensorflow.tensor")) {
+    numpy_style_getitem <- py_get_attr(x, "_numpy_style_getitem", TRUE)
+    if (!is.null(numpy_style_getitem)) {
+      return(numpy_style_getitem(key))
+    }
+  }
+  py_get_item(x, key, silent = silent)
 }
 
 
@@ -480,7 +493,7 @@ op_subset <- function(x, ...) {
     # handle jax and tensorflow, regardless of backend
     if (inherits(x, "tensorflow.tensor")) {
       # x[0, 0].assign(3.)
-      x_subset <- py_get_item(x, key, TRUE) %||% break
+      x_subset <- tf_numpy_style_get_item(x, key, TRUE) %||% break
       assign <- py_get_attr(x_subset, "assign", TRUE) %||% break
       # assign returns a new ref to the same variable, with
       # the assignment op as a parent op in graph mode.
@@ -492,7 +505,7 @@ op_subset <- function(x, ...) {
       # new_x = x.at[0].set(10)
       x_at <- py_get_attr(x, "at", TRUE) %||% break
       x_subset <- py_get_item(x_at, key, TRUE) %||% break
-      set <- py_get_attr(x, "set") %||% break
+      set <- py_get_attr(x_subset, "set") %||% break
       return(set(value))
     }
     break

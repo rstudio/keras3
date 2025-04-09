@@ -69,6 +69,7 @@ to encode any unknown word.
 \seealso{
 Other datasets: \cr
 \code{\link{dataset_boston_housing}()} \cr
+\code{\link{dataset_california_housing}()} \cr
 \code{\link{dataset_cifar10}()} \cr
 \code{\link{dataset_cifar100}()} \cr
 \code{\link{dataset_fashion_mnist}()} \cr

@@ -14,6 +14,17 @@
 #' Each column index contains an independent samples drawn from the input
 #' distribution.
 #'
+#' ```{r}
+#' x <- matrix(c(100, .1, 99), nrow = 1)
+#' random_categorical(x, num_samples = 5, seed = 1234)
+#' random_categorical(x, num_samples = 5, seed = 1234,
+#'                    zero_indexed = TRUE)
+#' op_take(x, random_categorical(x, num_samples = 5, seed = 1234))
+#' op_take(x, random_categorical(x, num_samples = 5, seed = 1234,
+#'                               zero_indexed = TRUE),
+#'         zero_indexed = TRUE)
+#' ````
+#'
 #' @returns
 #' A 2-D tensor with (batch_size, num_samples).
 #'
@@ -29,6 +40,11 @@
 #'
 #' @param dtype
 #' Optional dtype of the output tensor.
+#'
+#' @param zero_indexed
+#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' position); if `FALSE` (default), the returned indices are one-based (`1`
+#' encodes to first position).
 #'
 #' @param seed
 #' Optional R integer or instance of
@@ -46,16 +62,19 @@
 #' supported. Therefore, during tracing the default value `seed=NULL`
 #' will produce an error, and a `seed` argument must be provided.
 #'
+
 #' @export
 #' @family random
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/random/categorical>
 #' @tether keras.random.categorical
 random_categorical <-
-function (logits, num_samples, dtype = "int32", seed = NULL)
+function (logits, num_samples, dtype = "int32", seed = NULL, zero_indexed = FALSE)
 {
-    args <- capture_args(list(num_samples = as_integer, seed = as_integer))
-    do.call(keras$random$categorical, args)
+    args <- capture_args(list(num_samples = as_integer, seed = as_integer),
+                         ignore = "zero_indexed")
+    result <- do.call(keras$random$categorical, args)
+    if (zero_indexed) result else result + 1L
 }
 
 

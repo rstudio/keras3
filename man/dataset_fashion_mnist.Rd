@@ -2,7 +2,15 @@
 % Please edit documentation in R/datasets.R
 \name{dataset_fashion_mnist}
 \alias{dataset_fashion_mnist}
-\title{Fashion-MNIST database of fashion articles}
+\title{dataset_california_housing <- function(version = 'large',
+path = 'california_housing.npz',
+test_split = 0.2,
+seed = 113) {
+args <- capture_args()
+dataset <- do.call(keras$datasets$california_housing$load_data, args)
+as_dataset_list(dataset)
+}
+Fashion-MNIST database of fashion articles}
 \usage{
 dataset_fashion_mnist()
 }
@@ -37,6 +45,7 @@ replacement for MNIST. The class labels are:
 \seealso{
 Other datasets: \cr
 \code{\link{dataset_boston_housing}()} \cr
+\code{\link{dataset_california_housing}()} \cr
 \code{\link{dataset_cifar10}()} \cr
 \code{\link{dataset_cifar100}()} \cr
 \code{\link{dataset_imdb}()} \cr
