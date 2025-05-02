@@ -193,6 +193,8 @@ class JaxLayer(keras.src.layers.layer.Layer)
  |          argument, then `init_fn` is called at build time to initialize the
  |          non-trainable state of the model.
  |    seed: Seed for random number generator. Optional.
+ |    dtype: The dtype of the layer's computations and weights. Can also be a
+ |          `keras.DTypePolicy`. Optional. Defaults to the default policy.
  |
  |  Method resolution order:
  |      JaxLayer

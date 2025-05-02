@@ -23,6 +23,7 @@ Input(
   batch_size=None,
   dtype=None,
   sparse=None,
+  ragged=None,
   batch_shape=None,
   name=None,
   tensor=None,

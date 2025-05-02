@@ -724,7 +724,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #'
 #' 1. `activation` == `tanh`
 #' 2. `recurrent_activation` == `sigmoid`
-#' 3. `dropout` == 0 and `recurrent_dropout` == 0
+#' 3. `recurrent_dropout` == 0
 #' 4. `unroll` is `FALSE`
 #' 5. `use_bias` is `TRUE`
 #' 6. `reset_after` is `TRUE`
@@ -1047,7 +1047,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'
 #' 1. `activation` == `tanh`
 #' 2. `recurrent_activation` == `sigmoid`
-#' 3. `dropout` == 0 and `recurrent_dropout` == 0
+#' 3. `recurrent_dropout` == 0
 #' 4. `unroll` is `FALSE`
 #' 5. `use_bias` is `TRUE`
 #' 6. Inputs, if use masking, are strictly right-padded.
