@@ -2653,6 +2653,62 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
     create_layer(keras$layers$RandomErasing, object, args)
 }
 
+#' Applies random Gaussian blur to images for data augmentation.
+#'
+#' @description
+#' This layer performs a Gaussian blur operation on input images with a
+#' randomly selected degree of blurring, controlled by the `factor` and
+#' `sigma` arguments.
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the extent to which the image hue is impacted.
+#' `factor=0.0` makes this layer perform a no-op operation,
+#' while a value of `1.0` performs the most aggressive
+#' blurring available. If a tuple is used, a `factor` is
+#' sampled between the two values for every image augmented. If a
+#' single float is used, a value between `0.0` and the passed float is
+#' sampled. Default is 1.0.
+#'
+#' @param kernel_size
+#' Integer. Size of the Gaussian kernel used for blurring.
+#' Must be an odd integer. Default is 3.
+#'
+#' @param sigma
+#' Float or tuple of two floats. Standard deviation of the Gaussian
+#' kernel. Controls the intensity of the blur. If a tuple is provided,
+#' a value is sampled between the two for each image. Default is 1.0.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomGaussianBlur
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_gaussian_blur <-
+function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
+    0L, 255L), data_format = NULL, seed = NULL, ...)
+{
+    args <- capture_args(list(kernel_size = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$RandomGaussianBlur, object, args)
+}
+
 
 #' Performs the AugMix data augmentation technique.
 #'

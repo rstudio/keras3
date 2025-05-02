@@ -1043,6 +1043,15 @@ RandomFlip(
   data_format=None,
   **kwargs
 )
+RandomGaussianBlur(
+  factor=1.0,
+  kernel_size=3,
+  sigma=1.0,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
+  **kwargs
+)
 RandomGrayscale(
   factor=0.5,
   data_format=None,
