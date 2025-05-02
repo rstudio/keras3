@@ -405,6 +405,60 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
     create_layer(keras$layers$LayerNormalization, object, args)
 }
 
+#' Root Mean Square (RMS) Normalization layer.
+#'
+#' @description
+#' This layer normalizes the input tensor based on its RMS value.
+#'
+#' The Keras layer performs the operation as described in
+#' [Root Mean Square Layer Normalization](https://arxiv.org/pdf/1910.07467)
+#' by Biao Zhang et al.
+#'
+#' If `scale` is enabled, the layer will scale the normalized outputs via
+#' a learnable scaling factor.
+#'
+#' So, with scaling enabled, the normalization equations
+#' are as follows:
+#'
+#' Let the intermediate activations for a mini-batch to be the `inputs`.
+#'
+#' ```r
+#' rms_normalization(x) = x * rsqrt(mean(square(x))) * scale
+#' ```
+#'
+#' For example:
+#'
+#' ```{r}
+#' layer <- layer_rms_normalization()
+#' layer$build(shape(5, 20, 30, 10))
+#' op_shape(layer$scale$shape)
+#' layer(op_array(runif(10)))
+#' ```
+#'
+#' @param axis
+#' int. The axis on which to perform the normalization.
+#'
+#' @param epsilon
+#' float. A small number to add to avoid division by zero.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RMSNormalization
+#' @family normalization layers
+#' @family layers
+layer_rms_normalization <-
+function (object, axis = -1L, epsilon = 1e-06, ...)
+{
+    args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RMSNormalization, object, args)
+}
 
 #' Performs spectral normalization on the weights of a target layer.
 #'

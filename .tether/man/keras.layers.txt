@@ -1166,6 +1166,11 @@ Resizing(
   data_format=None,
   **kwargs
 )
+RMSNormalization(
+  axis=-1,
+  epsilon=1e-06,
+  **kwargs
+)
 RNN(
   cell,
   return_sequences=False,
