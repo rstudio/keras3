@@ -527,3 +527,49 @@ function (x, k = 0L)
     args <- capture_args(list(k = as_integer))
     do.call(ops$diagflat, args)
 }
+
+
+#' Rotate an array by 90 degrees in the plane specified by axes.
+#'
+#' @description
+#' This function rotates an array counterclockwise
+#' by 90 degrees `k` times in the plane specified by `axes`.
+#' Supports arrays of two or more dimensions.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' m <- 1:4 |> op_reshape(c(2, 2))
+#' m
+#' op_rot90(m)
+#' ```
+#'
+#' ```{r}
+#' m <- 1:8 |> op_reshape(c(2, 2, 2))
+#' m
+#' op_rot90(m, k = 1, axes = c(2, 3))
+#' ```
+#'
+#' @returns
+#' Rotated array.
+#'
+#' @param array
+#' Input array to rotate.
+#'
+#' @param k
+#' Number of times the array is rotated by 90 degrees.
+#'
+#' @param axes
+#' A tuple of two integers specifying the
+#' plane of rotation (defaults to `(1, 2)`).
+#'
+#' @export
+#' @tether keras.ops.rot90
+#' @family numpy ops
+#' @family ops
+op_rot90 <-
+function (array, k = 1L, axes = list(1L, 2L))
+{
+    args <- capture_args(list(k = as_integer, axes = as_axis))
+    do.call(keras$ops$rot90, args)
+}

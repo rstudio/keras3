@@ -773,8 +773,9 @@ function (images, kernel_size = list(3L, 3L), sigma = list(1,
 #'
 #' @export
 #' @tether keras.ops.image.perspective_transform
-#' @seealso
-#' + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/image/perspective_transform>
+#' @family image ops
+#' @family image utils
+#' @family ops
 op_image_perspective_transform <-
 function (images, start_points, end_points, interpolation = "bilinear",
     fill_value = 0L, data_format = NULL)

@@ -287,6 +287,11 @@ roll(
   shift,
   axis=None
 )
+rot90(
+  array,
+  k=1,
+  axes=(0, 1)
+)
 round(x, decimals=0)
 select(
   condlist,
