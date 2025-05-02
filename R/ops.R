@@ -148,6 +148,9 @@ ops$convert_to_numpy(x)
 #' tensors to be densified. The default value of `NULL` means that
 #' sparse tensors are kept only if the backend supports them.
 #'
+#' @param ragged
+#' Bool.
+#'
 #' @export
 #' @family core ops
 #' @family ops
@@ -157,7 +160,7 @@ ops$convert_to_numpy(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
 #' @tether keras.ops.convert_to_tensor
 op_convert_to_tensor <-
-function (x, dtype = NULL, sparse = NULL) {
+function (x, dtype = NULL, sparse = NULL, ragged = NULL) {
   if (!is.null(dtype) && is_string(dtype) &&
       typeof(x) == "double" &&
       grepl("int", dtype, fixed = TRUE))
