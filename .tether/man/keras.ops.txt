@@ -146,7 +146,8 @@ convert_to_numpy(x)
 convert_to_tensor(
   x,
   dtype=None,
-  sparse=None
+  sparse=None,
+  ragged=None
 )
 copy(x)
 correlate(
