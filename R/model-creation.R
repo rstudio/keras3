@@ -480,14 +480,14 @@ get_layer <- function(object, name = NULL, index = NULL) {
 #' Remove the last layer in a Sequential model
 #'
 #' @param object Sequential keras model object
-#' @returns The input `object`, invisibly.
+#' @returns The removed layer.
 #'
 #' @family model functions
 #'
 #' @export
-pop_layer <- function(object) {
-  object$pop()
-  invisible(object)
+pop_layer <- function(object, rebuild = TRUE) {
+  args <- capture_args(ignore = "object")
+  do.call(object$pop, args)
 }
 
 
