@@ -480,6 +480,10 @@ get_layer <- function(object, name = NULL, index = NULL) {
 #' Remove the last layer in a Sequential model
 #'
 #' @param object Sequential keras model object
+#' @param rebuild
+#' `bool`. Whether to rebuild the model after removing
+#' the layer. Defaults to `TRUE`.
+#'
 #' @returns The removed layer.
 #'
 #' @family model functions

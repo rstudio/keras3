@@ -31,6 +31,15 @@ values within \code{value_range}. Defaults to \verb{(0, 255)}.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
+\item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
+The ordering of the dimensions in the inputs. \code{"channels_last"}
+corresponds to inputs with shape \verb{(batch, height, width, channels)}
+while \code{"channels_first"} corresponds to inputs with shape
+\verb{(batch, channels, height, width)}. It defaults to the
+\code{image_data_format} value found in your Keras config file at
+\verb{~/.keras/keras.json}. If you never set it, then it will be
+\code{"channels_last"}.}
+
 \item{...}{For forward/backward compatability.}
 }
 \description{

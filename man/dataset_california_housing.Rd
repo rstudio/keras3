@@ -33,7 +33,7 @@ Nested list of arrays: \verb{(x_train, y_train), (x_test, y_test)}.
 containing either the training samples (for \code{x_train}),
 or test samples (for \code{y_train}).
 
-\strong{\code{y_train}, \code{y_test}}: arrays of shape \verb{(num_samples,)}
+\strong{\code{y_train}, \code{y_test}}: arrays of shape \code{(num_samples)}
 containing the target scalars. The targets are float scalars
 typically between 25,000 and 500,000 that represent
 the home prices in dollars.

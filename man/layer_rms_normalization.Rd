@@ -38,24 +38,12 @@ For example:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{layer <- layer_rms_normalization()
 layer$build(shape(5, 20, 30, 10))
 op_shape(layer$scale$shape)
-}\if{html}{\out{</div>}}
+## shape(1)
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(1)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{layer(op_array(runif(10)))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [0.42307475 0.59296083 0.9128132  1.4471836  0.32137007 1.431539
-##  1.5052928  1.0529482  1.0024617  0.09845333], shape=(10), dtype=float32)
+op_shape(layer(op_array(runif(10))))
+## shape(10)
 
 }\if{html}{\out{</div>}}
-
-[0.42307475 0.59296083 0.9128132  1.4471836  0.32137007 1.431539
-\subsection{1.5052928  1.0529482  1.0024617  0.09845333]: R:0.42307475\%200.59296083\%200.9128132\%20\%201.4471836\%20\%200.32137007\%201.431539\%0A##\%20\%201.5052928\%20\%201.0529482\%20\%201.0024617\%20\%200.09845333}{
-}
 }
 \seealso{
 Other normalization layers: \cr

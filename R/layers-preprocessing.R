@@ -2637,6 +2637,8 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inheritParams layer_center_crop
+#'
 #' @export
 #' @tether keras.layers.RandomErasing
 #' @family image preprocessing layers
@@ -2694,6 +2696,8 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
 #' @param ...
 #' For forward/backward compatability.
 #'
+#' @inheritParams layer_center_crop
+#'
 #' @export
 #' @tether keras.layers.RandomGaussianBlur
 #' @family image preprocessing layers
@@ -2738,6 +2742,8 @@ function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @inheritParams layer_center_crop
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -2794,6 +2800,8 @@ function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @inheritParams layer_center_crop
 #'
 #' @param ...
 #' For forward/backward compatability.
@@ -2865,6 +2873,8 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
+#' @inheritParams layer_center_crop
+#'
 #' @param ...
 #' For forward/backward compatability.
 #'
@@ -2913,6 +2923,8 @@ function (object, value_range = c(0L, 255L), num_chains = 3L,
 #'
 #' @param ...
 #' For forward/backward compatability.
+#'
+#' @inheritParams layer_center_crop
 #'
 #' @export
 #' @tether keras.layers.CutMix

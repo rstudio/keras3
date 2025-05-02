@@ -8,6 +8,9 @@ pop_layer(object, rebuild = TRUE)
 }
 \arguments{
 \item{object}{Sequential keras model object}
+
+\item{rebuild}{\code{bool}. Whether to rebuild the model after removing
+the layer. Defaults to \code{TRUE}.}
 }
 \value{
 The removed layer.

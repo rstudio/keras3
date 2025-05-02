@@ -231,7 +231,7 @@ dataset_mnist <- function(path = "mnist.npz") {
 #'   containing either the training samples (for `x_train`),
 #'   or test samples (for `y_train`).
 #'
-#' **`y_train`, `y_test`**: arrays of shape `(num_samples,)`
+#' **`y_train`, `y_test`**: arrays of shape `(num_samples)`
 #'     containing the target scalars. The targets are float scalars
 #'     typically between 25,000 and 500,000 that represent
 #'     the home prices in dollars.
@@ -266,15 +266,6 @@ function (version = "large", path = "california_housing.npz",
     as_dataset_list(dataset)
 }
 
-# ' # ' @export
-#' dataset_california_housing <- function(version = 'large',
-#'                                        path = 'california_housing.npz',
-#'                                        test_split = 0.2,
-#'                                        seed = 113) {
-#'   args <- capture_args()
-#'   dataset <- do.call(keras$datasets$california_housing$load_data, args)
-#'   as_dataset_list(dataset)
-#' }
 
 
 #' Fashion-MNIST database of fashion articles

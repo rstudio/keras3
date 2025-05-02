@@ -428,11 +428,11 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #'
 #' For example:
 #'
-#' ```{r}
+#' ```{r, collapse=TRUE}
 #' layer <- layer_rms_normalization()
 #' layer$build(shape(5, 20, 30, 10))
 #' op_shape(layer$scale$shape)
-#' layer(op_array(runif(10)))
+#' op_shape(layer(op_array(runif(10))))
 #' ```
 #'
 #' @param axis
