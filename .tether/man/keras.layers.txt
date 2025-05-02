@@ -1072,6 +1072,15 @@ RandomInvert(
   data_format=None,
   **kwargs
 )
+RandomPerspective(
+  factor=1.0,
+  scale=1.0,
+  interpolation='bilinear',
+  fill_value=0.0,
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 RandomPosterization(
   factor,
   value_range=(0, 255),

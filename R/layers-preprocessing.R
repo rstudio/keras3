@@ -2757,6 +2757,61 @@ function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
     create_layer(keras$layers$RandomInvert, object, args)
 }
 
+#' A preprocessing layer that applies random perspective transformations.
+#'
+#' @description
+#' This layer distorts the perspective of input images by shifting their
+#' corner points, simulating a 3D-like transformation. The amount of distortion
+#' is controlled by the `factor` and `scale` parameters.
+#'
+#' @param factor
+#' A float or a tuple of two floats.
+#' Represents the probability of applying the perspective
+#' transformation to each image in the batch.
+#' - `factor=0.0` ensures no transformation is applied.
+#' - `factor=1.0` means the transformation is always applied.
+#' - If a tuple `(min, max)` is provided, a probability is randomly
+#'   sampled between `min` and `max` for each image.
+#' - If a single float is given, the probability is sampled between
+#'   `0.0` and the provided float.
+#' Default is 1.0.
+#'
+#' @param scale
+#' A float defining the relative amount of perspective shift.
+#' Determines how much the image corners are displaced, affecting
+#' the intensity of the perspective effect.
+#'
+#' @param interpolation
+#' Interpolation mode. Supported values: `"nearest"`,
+#' `"bilinear"`.
+#'
+#' @param fill_value
+#' a float represents the value to be filled outside the
+#' boundaries when `fill_mode="constant"`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomPerspective
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_perspective <-
+function (object, factor = 1, scale = 1, interpolation = "bilinear",
+    fill_value = 0, seed = NULL, data_format = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomPerspective, object, args)
+}
 
 #' Performs the AugMix data augmentation technique.
 #'
