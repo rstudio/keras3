@@ -48,6 +48,14 @@ pad_images(
   target_width=None,
   data_format=None
 )
+perspective_transform(
+  images,
+  start_points,
+  end_points,
+  interpolation='bilinear',
+  fill_value=0,
+  data_format=None
+)
 resize(
   images,
   size,
