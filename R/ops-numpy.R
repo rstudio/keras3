@@ -573,3 +573,23 @@ function (array, k = 1L, axes = list(1L, 2L))
     args <- capture_args(list(k = as_integer, axes = as_axis))
     do.call(keras$ops$rot90, args)
 }
+
+#' Return the sign bit of the elements of `x`.
+#'
+#' @description
+#' The output boolean tensor contains `TRUE` where the sign of `x` is negative,
+#' and `FALSE` otherwise.
+#'
+#' @returns
+#' Output boolean tensor of same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.ops.signbit
+#' @family numpy ops
+#' @family ops
+op_signbit <-
+function (x)
+keras$ops$signbit(x)

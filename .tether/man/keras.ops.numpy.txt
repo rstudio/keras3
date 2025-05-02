@@ -299,6 +299,7 @@ select(
   default=0
 )
 sign(x)
+signbit(x)
 sin(x)
 sinh(x)
 size(x)
