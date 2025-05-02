@@ -18,5 +18,6 @@ tools/make-website.R
 
 
 tools/make-man.R && tools/make-website.R
+tools/make-man.R && tools/make-cran-pkg.R && tools/make-website.R
 
 )")
