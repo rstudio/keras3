@@ -1,0 +1,83 @@
+Help on class RMSNormalization in module keras.src.layers.normalization.rms_normalization:
+
+class RMSNormalization(keras.src.layers.layer.Layer)
+ |  RMSNormalization(axis=-1, epsilon=1e-06, **kwargs)
+ |
+ |  Root Mean Square (RMS) Normalization layer.
+ |
+ |  This layer normalizes the input tensor based on its RMS value.
+ |
+ |  The Keras layer performs the operation as described in
+ |  [Root Mean Square Layer Normalization](https://arxiv.org/pdf/1910.07467)
+ |  by Biao Zhang et al.
+ |
+ |
+ |  If `scale` is enabled, the layer will scale the normalized outputs via
+ |  a learnable scaling factor.
+ |
+ |  So, with scaling enabled, the normalization equations
+ |  are as follows:
+ |
+ |  Let the intermediate activations for a mini-batch to be the `inputs`.
+ |
+ |  ```python
+ |  rms_normalization(x) = x * rsqrt(mean(square(x))) * scale
+ |  ```
+ |
+ |  For example:
+ |
+ |  >>> layer = keras.layers.RMSNormalization()
+ |  >>> layer.build([5, 20, 30, 10])
+ |  >>> print(layer.scale.shape)
+ |  (10,)
+ |  >>> layer(np.random.rand(1, 10)).numpy()
+ |  array([[0.35098287, 1.0495652 , 1.4645109 , 1.2944688 , 0.31124955,
+ |          1.2768592 , 1.184331  , 0.17474432, 0.49955517, 1.2428929 ]],
+ |      dtype=float32)
+ |
+ |  Args:
+ |      axis: int. The axis on which to perform the normalization.
+ |      epsilon: float. A small number to add to avoid division by zero.
+ |
+ |  Method resolution order:
+ |      RMSNormalization
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    axis=-1,
+ |    epsilon=1e-06,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, input_shape)
+ |
+ |  call(self, x)
+ |      Applies RMS normalization to the input tensor.
+ |
+ |      Args:
+ |          x: Input tensor of shape (batch_size, input_dim).
+ |
+ |      Returns:
+ |          The RMS-normalized tensor of the same shape (batch_size, input_dim),
+ |          scaled by the learned `scale` parameter.
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+

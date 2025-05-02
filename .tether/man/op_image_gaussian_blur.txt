@@ -1,0 +1,45 @@
+__signature__
+keras.ops.image.gaussian_blur(
+  images,
+  kernel_size=(3, 3),
+  sigma=(1.0, 1.0),
+  data_format=None
+)
+__doc__
+Applies a Gaussian blur to the image(s).
+
+Args:
+    images: Input image or batch of images. Must be 3D or 4D.
+    kernel_size: A tuple of two integers, specifying the height and width
+        of the Gaussian kernel.
+    sigma: A tuple of two floats, specifying the standard deviation of
+        the Gaussian kernel along height and width.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
+
+Returns:
+    Blurred image or batch of images.
+
+Examples:
+
+>>> x = np.random.random((2, 64, 80, 3))  # batch of 2 RGB images
+>>> y = keras.ops.image.gaussian_blur(x)
+>>> y.shape
+(2, 64, 80, 3)
+
+>>> x = np.random.random((64, 80, 3))  # single RGB image
+>>> y = keras.ops.image.gaussian_blur(x)
+>>> y.shape
+(64, 80, 3)
+
+>>> x = np.random.random((2, 3, 64, 80))  # batch of 2 RGB images
+>>> y = keras.ops.image.gaussian_blur(
+...     x, data_format="channels_first")
+>>> y.shape
+(2, 3, 64, 80)
+

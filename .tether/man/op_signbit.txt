@@ -1,0 +1,14 @@
+__signature__
+keras.ops.signbit(x)
+__doc__
+Return the sign bit of the elements of `x`.
+
+The output boolean tensor contains `True` where the sign of `x` is negative,
+and `False` otherwise.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output boolean tensor of same shape as `x`.
+

@@ -1,0 +1,33 @@
+__signature__
+keras.ops.polar(abs_, angle)
+__doc__
+Constructs a complex tensor whose elements are Cartesian
+coordinates corresponding to the polar coordinates
+with absolute value `abs` and angle `angle`.
+
+The operation is numerically equivalent to `torch.polar()`.
+It is not equivalent to `scipy.lingalg.polar()` which performs
+Singular Value Decomposition.
+
+Given the magnitude (`abs_`) and angle (`angle`), this function computes the
+corresponding complex number in the form of `real + imaginary * 1j`, where:
+- `real = abs_ * cos(angle)`
+- `imaginary = abs_ * sin(angle)`
+
+Args:
+    abs_: The magnitude (absolute value) of the complex number.
+    angle: The angle (in radians) of the complex number.
+
+Returns:
+    A complex number (or array of complex numbers) with the same shape as
+    `abs_` and `angle`.
+
+Example:
+
+>>> abs_ = keras.random.normal((1, 2))
+>>> angle = keras.random.normal((1, 2))
+>>> keras.ops.nn.polar(abs_, angle).shape
+(1, 2)
+>>> keras.ops.nn.polar(abs_, angle)
+Array([[0.63185346-0.59370506j, 0.48960376-0.31677645j]], dtype=complex64)
+
