@@ -629,3 +629,64 @@ op_image_rgb_to_hsv <-
 function (images, data_format = NULL) {
   ops$image$rgb_to_hsv(images, data_format)
 }
+
+
+#' Applies a Gaussian blur to the image(s).
+#'
+#' @description
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_ones(c(2, 64, 80, 3))  # batch of 2 RGB images
+#' y <- op_image_gaussian_blur(x)
+#' op_shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- op_ones(c(64, 80, 3))  # single RGB image
+#' y <- op_image_gaussian_blur(x)
+#' op_shape(y)
+#' ```
+#'
+#' ```{r}
+#' x <- op_ones(c(2, 3, 64, 80))  # batch of 2 RGB images, channels_first
+#' y <- op_image_gaussian_blur(x, data_format = "channels_first")
+#' op_shape(y)
+#' ```
+#'
+#' @returns
+#' Blurred image or batch of images.
+#'
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
+#'
+#' @param kernel_size
+#' A tuple of two integers, specifying the height and width
+#' of the Gaussian kernel.
+#'
+#' @param sigma
+#' A tuple of two floats, specifying the standard deviation of
+#' the Gaussian kernel along height and width.
+#'
+#' @param data_format
+#' A string specifying the data format of the input tensor.
+#' It can be either `"channels_last"` or `"channels_first"`.
+#' `"channels_last"` corresponds to inputs with shape
+#' `(batch, height, width, channels)`, while `"channels_first"`
+#' corresponds to inputs with shape `(batch, channels, height, width)`.
+#' If not specified, the value will default to
+#' `keras.config.image_data_format`.
+#'
+#' @export
+#' @tether keras.ops.image.gaussian_blur
+#' @family image ops
+#' @family image utils
+#' @family ops
+op_image_gaussian_blur <-
+function (images, kernel_size = list(3L, 3L), sigma = list(1,
+    1), data_format = NULL) {
+  args <- capture_args(list(kernel_size = as_integer_tuple, sigma = as_tuple))
+  do.call(keras$ops$image$gaussian_blur, args)
+}
+

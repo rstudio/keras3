@@ -24,6 +24,12 @@ extract_patches(
   padding='valid',
   data_format=None
 )
+gaussian_blur(
+  images,
+  kernel_size=(3, 3),
+  sigma=(1.0, 1.0),
+  data_format=None
+)
 hsv_to_rgb(images, data_format=None)
 map_coordinates(
   inputs,
