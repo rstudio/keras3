@@ -50,13 +50,11 @@ We'll be working with an English-to-Spanish translation dataset
 provided by [Anki](https://www.manythings.org/anki/). Let's download it:
 
 ```{r}
-zipfile <- get_file("spa-eng.zip", origin =
-  "http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip")
+zip_path <-
+  "http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip" |>
+  get_file(origin = _, extract = TRUE)
 
-zip::zip_list(zipfile) # See what's in the zipfile
-zip::unzip(zipfile, exdir = ".") # unzip into the current directory
-
-text_file <- fs::path("./spa-eng/spa.txt")
+text_path <- fs::path(zip_path, "spa-eng/spa.txt")
 ```
 
 ## Parsing the data
@@ -209,36 +207,31 @@ it provides the next words in the target sentence -- what the model will try to 
 
 ```{r}
 format_pair <- function(pair) {
-  # the vectorization layers requrie batched inputs,
-  # reshape scalar string tensor to add a batch dim
-  pair %<>% lapply(op_expand_dims, 1)
+  eng <- pair$english |> eng_vectorization()
+  spa <- pair$spanish |> spa_vectorization()
 
-  # vectorize
-  eng <- eng_vectorization(pair$english)
-  spa <- spa_vectorization(pair$spanish)
+  spa_feature <- spa@r[NA:-2]                                                   # <1>
+  spa_target <- spa@r[2:NA]                                                     # <2>
 
-  # drop the batch dim
-  eng %<>% tf$ensure_shape(shape(1, sequence_length)) %>% op_squeeze(1)
-  spa %<>% tf$ensure_shape(shape(1, sequence_length+1)) %>% op_squeeze(1)
+  features <- list(encoder_inputs = eng, decoder_inputs = spa_feature)
+  labels <- spa_target
+  sample_weight <- labels != 0
 
-  inputs <- list(encoder_inputs = eng,
-                 decoder_inputs = spa[NA:-2])
-  targets <- spa[2:NA]
-  list(inputs, targets)
+  tuple(features, labels, sample_weight)
 }
-
 
 batch_size <- 64
 
 library(tfdatasets, exclude = "shape")
 make_dataset <- function(pairs) {
-  tensor_slices_dataset(pairs) %>%
-    dataset_map(format_pair, num_parallel_calls = 4) %>%
-    dataset_cache() %>%
-    dataset_shuffle(2048) %>%
-    dataset_batch(batch_size) %>%
-    dataset_prefetch(2)
+  tensor_slices_dataset(pairs) |>
+    dataset_map(format_pair, num_parallel_calls = 4) |>
+    dataset_cache() |>
+    dataset_shuffle(2048) |>
+    dataset_batch(batch_size) |>
+    dataset_prefetch(16)
 }
+
 train_ds <- make_dataset(train_pairs)
 val_ds <- make_dataset(val_pairs)
 ```
@@ -248,7 +241,7 @@ Let's take a quick look at the sequence shapes
 (we have batches of 64 pairs, and all sequences are 20 steps long):
 
 ```{r}
-c(inputs, targets) %<-% iter_next(as_iterator(train_ds))
+c(inputs, targets, weights) %<-% iter_next(as_iterator(train_ds))
 str(inputs)
 str(targets)
 ```
@@ -346,7 +339,7 @@ layer_transformer_decoder <- Layer(
   get_causal_attention_mask = function(inputs) {
     c(batch_size, sequence_length, encoding_length) %<-% op_shape(inputs)
 
-    x <- op_arange(sequence_length)
+    x <- op_arange(0L, sequence_length, include_end = FALSE)
     i <- x[, NULL]
     j <- x[NULL, ]
     mask <- op_cast(i >= j, "int32")
@@ -398,7 +391,7 @@ layer_positional_embedding <- Layer(
 
   call = function(inputs) {
     c(., len) %<-% op_shape(inputs) # (batch_size, seq_len)
-    positions <- op_arange(0, len, dtype = "int32")
+    positions <- op_arange(0, len, dtype = "int32", include_end = FALSE)
     embedded_tokens <- self$token_embeddings(inputs)
     embedded_positions <- self$position_embeddings(positions)
     embedded_tokens + embedded_positions
@@ -476,6 +469,7 @@ transformer |> compile(
   loss = "sparse_categorical_crossentropy",
   metrics = "accuracy"
 )
+
 transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
 ```
@@ -544,3 +538,7 @@ English: I'm sure everything will be fine.
 Correct Translation: [start] estoy segura de que todo irá bien. [end]
   Model Translation: [start] estoy seguro de que todo va bien [end]
 ```
+```{r}
+
+```
+

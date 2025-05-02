@@ -331,7 +331,7 @@ dataset small, we will use 40% of the original training data (25,000 images) for
  training, 10% for validation, and 10% for testing.
 
 ```{r}
-# reticulate::py_install("tensorflow-datasets")
+reticulate::py_require("tensorflow-datasets")
 tfds <- reticulate::import("tensorflow_datasets")
 
 c(train_ds, validation_ds, test_ds) %<-% tfds$load(
