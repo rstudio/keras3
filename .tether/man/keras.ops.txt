@@ -485,6 +485,11 @@ quantile(
 )
 ravel(x)
 real(x)
+rearrange(
+  tensor,
+  pattern,
+  **axes_lengths
+)
 reciprocal(x)
 relu(x)
 relu6(x)

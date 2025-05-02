@@ -7998,3 +7998,61 @@ function (index, branches, ...)
   index <- as_py_index(index)
   ops$switch(index, branches, ...)
 }
+
+
+#' Rearranges the axes of a Keras tensor according to a specified pattern,
+#'
+#' @description
+#' einops-style.
+#'
+#' @returns
+#' Tensor: A Keras tensor with rearranged axes.
+#'
+#' Follows the logic of:
+#'
+#' 1. If decomposition is needed, reshape to match decomposed dimensions.
+#' 2. Permute known and inferred axes to match the form of the output.
+#' 3. Reshape to match the desired output shape.
+#'
+#' Example Usage:
+#'
+#' ```{r}
+#' images <- op_ones(c(32, 30, 40, 3)) # BHWC format
+#'
+#' # Reordering to BCHW
+#' op_rearrange(images, 'b h w c -> b c h w') |> op_shape()
+#'
+#' # "Merge" along first axis - concat images from a batch
+#' op_rearrange(images, 'b h w c -> (b h) w c') |> op_shape()
+#'
+#' # "Merge" along second axis - concat images horizontally
+#' op_rearrange(images, 'b h w c -> h (b w) c') |> op_shape()
+#'
+#' # Flatten images into a CHW vector
+#' op_rearrange(images, 'b h w c -> b (c h w)') |> op_shape()
+#'
+#' # Decompose H and W axes into 4 smaller patches
+#' op_rearrange(images, 'b (h1 h) (w1 w) c -> (b h1 w1) h w c', h1 = 2, w1 = 2) |> op_shape()
+#'
+#' # Space-to-depth decomposition of input axes
+#' op_rearrange(images, 'b (h h1) (w w1) c -> b h w (c h1 w1)', h1 = 2, w1 = 2) |> op_shape()
+#' ```
+#'
+#' @param tensor
+#' Input Keras tensor.
+#'
+#' @param pattern
+#' String describing the rearrangement in einops notation.
+#'
+#' @param ...
+#' `axes_lengths`, named arguments specifying lengths of axes
+#' when axes decomposition is used.
+#'
+#' @export
+#' @tether keras.ops.rearrange
+#' @family core ops
+#' @family ops
+op_rearrange <- function (tensor, pattern, ...) {
+  args <- c(list(tensor, pattern), lapply(list(...), as_integer))
+  do.call(keras$ops$rearrange, args)
+}
