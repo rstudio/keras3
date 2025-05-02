@@ -68,6 +68,25 @@ message("DONE!")
 
 if(FALSE) {
   # mk_export("keras.optimizers.Lamb")$dump |> cat_cb()
+  mk_export(paste0("keras.ops.", "rearrange"))$dump |> cat_cb()
+
+  mk_export(paste0("keras.ops.", "rot90"))$dump |> cat_cb()
+  mk_export(paste0("keras.ops.", "signbit"))$dump |> cat_cb()
+
+  mk_export(paste0("keras.ops.", "polar"))$dump |> cat_cb()
+  mk_export(paste0("keras.ops.", "rms_normalization"))$dump |> cat_cb()
+
+
+  mk_export(paste0("keras.ops.image.", "gaussian_blur"))$dump |> cat_cb()
+  mk_export(paste0("keras.ops.image.", "perspective_transform"))$dump |> cat_cb()
+
+  mk_export("keras.layers.AugMix")$dump |> cat_cb()
+  mk_export("keras.layers.CutMix")$dump |> cat_cb()
+  mk_export("keras.layers.RandomErasing")$dump |> cat_cb()
+  mk_export("keras.layers.RandomGaussianBlur")$dump |> cat_cb()
+  mk_export("keras.layers.RandomInvert")$dump |> cat_cb()
+  mk_export("keras.layers.RandomPerspective")$dump |> cat_cb()
+  mk_export("keras.layers.RMSNormalization")$dump |> cat_cb()
 
   mk_export("keras.layers.MaxNumBoundingBoxes")$dump |> cat_cb()
   mk_export("keras.layers.STFTSpectrogram")$dump |> cat_cb()

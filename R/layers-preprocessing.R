@@ -1473,7 +1473,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
 #' according to the given mode. Available methods are `"constant"`,
-#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"reflect"`.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
 #'     The input is extended by reflecting about the edge of the last
 #'     pixel.
@@ -1593,7 +1593,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
 #' according to the given mode. Available methods are `"constant"`,
-#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"reflect"`.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
 #'     The input is extended by reflecting about the edge of the last
 #'     pixel.
@@ -2544,7 +2544,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
 #' according to the given mode. Available methods are `"constant"`,
-#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"reflect"`.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
 #'     The input is extended by reflecting about the edge of the
 #'     last pixel.
