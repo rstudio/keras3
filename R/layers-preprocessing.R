@@ -2662,6 +2662,49 @@ function (object, value_range = c(0L, 255L), num_chains = 3L,
     create_layer(keras$layers$AugMix, object, args)
 }
 
+#' CutMix data augmentation technique.
+#'
+#' @description
+#' CutMix is a data augmentation method where patches are cut and pasted
+#' between two images in the dataset, while the labels are also mixed
+#' proportionally to the area of the patches.
+#'
+#' # References
+#'    - [CutMix paper]( https://arxiv.org/abs/1905.04899).
+#'
+#' @param factor
+#' A single float or a tuple of two floats between 0 and 1.
+#' If a tuple of numbers is passed, a `factor` is sampled
+#' between the two values.
+#' If a single float is passed, a value between 0 and the passed
+#' float is sampled. These values define the range from which the
+#' mixing weight is sampled. A higher factor increases the variability
+#' in patch sizes, leading to more diverse and larger mixed patches.
+#' Defaults to 1.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.CutMix
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_cut_mix <-
+function (object, factor = 1, seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$CutMix, object, args)
+}
 
 #' Applies a series of layers to an input.
 #'

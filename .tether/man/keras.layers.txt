@@ -452,6 +452,12 @@ Cropping3D(
   data_format=None,
   **kwargs
 )
+CutMix(
+  factor=1.0,
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 Dense(
   units,
   activation=None,
