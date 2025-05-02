@@ -222,6 +222,7 @@ reference:
   - contents:
     - layer_lambda
     - Layer
+    - keras_variable
     # - create_layer_wrapper
     # - create_layer
 

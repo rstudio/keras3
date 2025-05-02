@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>English-to-Spanish translation with a sequence-to-sequence Transformer • keras3</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../../../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../../../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../../../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../../../favicon.ico">
+<link rel="manifest" href="../../../site.webmanifest">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -32,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,22 +129,11 @@ behind Transformers, I recommend reading the book.</p>
 provided by <a href="https://www.manythings.org/anki/" class="external-link">Anki</a>. Let’s
 download it:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">zipfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/get_file.html">get_file</a></span><span class="op">(</span><span class="st">"spa-eng.zip"</span>, origin <span class="op">=</span></span>
-<span>  <span class="st">"http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">zip_path</span> <span class="op">&lt;-</span></span>
+<span>  <span class="st">"http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip"</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../../../reference/get_file.html">get_file</a></span><span class="op">(</span>origin <span class="op">=</span> <span class="va">_</span>, extract <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/zip/reference/zip_list.html" class="external-link">zip_list</a></span><span class="op">(</span><span class="va">zipfile</span><span class="op">)</span> <span class="co"># See what's in the zipfile</span></span></code></pre></div>
-<pre><code><span><span class="co">##             filename compressed_size uncompressed_size           timestamp</span></span>
-<span><span class="co">## 1           spa-eng/               0                 0 2018-06-13 12:21:20</span></span>
-<span><span class="co">## 2 spa-eng/_about.txt             685              1441 2018-05-13 19:50:34</span></span>
-<span><span class="co">## 3    spa-eng/spa.txt         2637619           8042772 2018-05-13 19:50:34</span></span>
-<span><span class="co">##   permissions    crc32 offset</span></span>
-<span><span class="co">## 1         755 00000000      0</span></span>
-<span><span class="co">## 2         644 4b18349d     38</span></span>
-<span><span class="co">## 3         644 63c5c4a2    771</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">zip</span><span class="fu">::</span><span class="fu"><a href="https://r-lib.github.io/zip/reference/unzip.html" class="external-link">unzip</a></span><span class="op">(</span><span class="va">zipfile</span>, exdir <span class="op">=</span> <span class="st">"."</span><span class="op">)</span> <span class="co"># unzip into the current directory</span></span>
-<span></span>
-<span><span class="va">text_file</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="st">"./spa-eng/spa.txt"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">text_path</span> <span class="op">&lt;-</span> <span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/path.html" class="external-link">path</a></span><span class="op">(</span><span class="va">zip_path</span>, <span class="st">"spa-eng/spa.txt"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="parsing-the-data">Parsing the data<a class="anchor" aria-label="anchor" href="#parsing-the-data"></a>
@@ -155,14 +143,14 @@ sentence. The English sentence is the <em>source sequence</em> and
 Spanish one is the <em>target sequence</em>. We prepend the token
 <code>"[start]"</code> and we append the token <code>"[end]"</code> to
 the Spanish sentence.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">text_file</span> <span class="op">&lt;-</span> <span class="st">"spa-eng/spa.txt"</span></span>
 <span><span class="va">text_pairs</span> <span class="op">&lt;-</span> <span class="va">text_file</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_tsv</a></span><span class="op">(</span>col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"english"</span>, <span class="st">"spanish"</span><span class="op">)</span>,</span>
 <span>                  col_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cc"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">within</a></span><span class="op">(</span><span class="va">spanish</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"[start]"</span>, <span class="va">.</span>, <span class="st">"[end]"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what our sentence pairs look like:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">text_pairs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">text_pairs</span><span class="op">)</span>, <span class="fl">5</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue_data</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">r"(</span></span>
 <span><span class="st">  english: {english}</span></span>
@@ -184,18 +172,18 @@ the Spanish sentence.</p>
 <span><span class="co">## spanish: [start] Ten cuidado. [end]</span></span></code></pre>
 <p>Now, let’s split the sentence pairs into a training set, a validation
 set, and a test set.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>random.shuffle(text_pairs)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>num_val_samples <span class="op">=</span> <span class="bu">int</span>(<span class="fl">0.15</span> <span class="op">*</span> <span class="bu">len</span>(text_pairs))</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>num_train_samples <span class="op">=</span> <span class="bu">len</span>(text_pairs) <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> num_val_samples</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>train_pairs <span class="op">=</span> text_pairs[:num_train_samples]</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>val_pairs <span class="op">=</span> text_pairs[num_train_samples : num_train_samples <span class="op">+</span> num_val_samples]</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>test_pairs <span class="op">=</span> text_pairs[num_train_samples <span class="op">+</span> num_val_samples :]</span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(text_pairs)<span class="sc">}</span><span class="ss"> total pairs"</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(train_pairs)<span class="sc">}</span><span class="ss"> training pairs"</span>)</span>
-<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(val_pairs)<span class="sc">}</span><span class="ss"> validation pairs"</span>)</span>
-<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(test_pairs)<span class="sc">}</span><span class="ss"> test pairs"</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>random.shuffle(text_pairs)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>num_val_samples <span class="op">=</span> <span class="bu">int</span>(<span class="fl">0.15</span> <span class="op">*</span> <span class="bu">len</span>(text_pairs))</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>num_train_samples <span class="op">=</span> <span class="bu">len</span>(text_pairs) <span class="op">-</span> <span class="dv">2</span> <span class="op">*</span> num_val_samples</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>train_pairs <span class="op">=</span> text_pairs[:num_train_samples]</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>val_pairs <span class="op">=</span> text_pairs[num_train_samples : num_train_samples <span class="op">+</span> num_val_samples]</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>test_pairs <span class="op">=</span> text_pairs[num_train_samples <span class="op">+</span> num_val_samples :]</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(text_pairs)<span class="sc">}</span><span class="ss"> total pairs"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(train_pairs)<span class="sc">}</span><span class="ss"> training pairs"</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(val_pairs)<span class="sc">}</span><span class="ss"> validation pairs"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(test_pairs)<span class="sc">}</span><span class="ss"> test pairs"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">num_test_samples</span> <span class="op">&lt;-</span> <span class="va">num_val_samples</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">0.15</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">text_pairs</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">num_train_samples</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">text_pairs</span><span class="op">)</span> <span class="op">-</span> <span class="va">num_val_samples</span> <span class="op">-</span> <span class="va">num_test_samples</span></span>
@@ -241,7 +229,7 @@ Instead, I would recommend turning each punctuation character into its
 own token, which you could achieve by providing a custom
 <code>split</code> function to
 <code><a href="../../../reference/layer_text_vectorization.html">layer_text_vectorization()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">punctuation_regex</span> <span class="op">&lt;-</span> <span class="st">"[¡¿]|[^[:^punct:][\\]]"</span></span>
 <span><span class="co"># the regex explained: Match ¡, or ¿, or any punctuation character except ]</span></span>
 <span><span class="co">#</span></span>
@@ -262,7 +250,7 @@ own token, which you could achieve by providing a custom
 <span><span class="va">input_string</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/as_tensor.html" class="external-link">as_tensor</a></span><span class="op">(</span><span class="st">"[start] ¡corre! [end]"</span><span class="op">)</span></span>
 <span><span class="fu">custom_standardization</span><span class="op">(</span><span class="va">input_string</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## tf.Tensor(b'[start] corre [end]', shape=(), dtype=string)</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vocab_size</span> <span class="op">&lt;-</span> <span class="fl">15000</span></span>
 <span><span class="va">sequence_length</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
 <span></span>
@@ -293,7 +281,7 @@ to N.</p>
 <code>inputs</code> is a dictionary (named list) with the keys
 (names) <code>encoder_inputs</code> and <code>decoder_inputs</code>.
 <code>encoder_inputs</code> is the vectorized source sentence and
-<code>encoder_inputs</code> is the target sentence “so far”, that is to
+<code>decoder_inputs</code> is the target sentence “so far”, that is to
 say, the words 0 to N used to predict word N+1 (and beyond) in the
 target sentence.</li>
 <li>
@@ -301,53 +289,44 @@ target sentence.</li>
 provides the next words in the target sentence – what the model will try
 to predict.</li>
 </ul>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">format_pair</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pair</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="co"># the vectorization layers requrie batched inputs,</span></span>
-<span>  <span class="co"># reshape scalar string tensor to add a batch dim</span></span>
-<span>  <span class="va">pair</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">op_expand_dims</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">eng</span> <span class="op">&lt;-</span> <span class="va">pair</span><span class="op">$</span><span class="va">english</span> <span class="op">|&gt;</span> <span class="fu">eng_vectorization</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">spa</span> <span class="op">&lt;-</span> <span class="va">pair</span><span class="op">$</span><span class="va">spanish</span> <span class="op">|&gt;</span> <span class="fu">spa_vectorization</span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="co"># vectorize</span></span>
-<span>  <span class="va">eng</span> <span class="op">&lt;-</span> <span class="fu">eng_vectorization</span><span class="op">(</span><span class="va">pair</span><span class="op">$</span><span class="va">english</span><span class="op">)</span></span>
-<span>  <span class="va">spa</span> <span class="op">&lt;-</span> <span class="fu">spa_vectorization</span><span class="op">(</span><span class="va">pair</span><span class="op">$</span><span class="va">spanish</span><span class="op">)</span></span>
+<span>  <span class="va">spa_feature</span> <span class="op">&lt;-</span> <span class="va">spa</span><span class="op">@</span><span class="va">r</span><span class="op">[</span><span class="cn">NA</span><span class="op">:</span><span class="op">-</span><span class="fl">2</span><span class="op">]</span>                                                   <span class="co"># &lt;1&gt;</span></span>
+<span>  <span class="va">spa_target</span> <span class="op">&lt;-</span> <span class="va">spa</span><span class="op">@</span><span class="va">r</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="cn">NA</span><span class="op">]</span>                                                     <span class="co"># &lt;2&gt;</span></span>
 <span></span>
-<span>  <span class="co"># drop the batch dim</span></span>
-<span>  <span class="va">eng</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="va">tf</span><span class="op">$</span><span class="fu">ensure_shape</span><span class="op">(</span><span class="fu"><a href="../../../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">sequence_length</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../../reference/op_squeeze.html">op_squeeze</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="va">spa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="va">tf</span><span class="op">$</span><span class="fu">ensure_shape</span><span class="op">(</span><span class="fu"><a href="../../../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">sequence_length</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../../../reference/op_squeeze.html">op_squeeze</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="va">features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoder_inputs <span class="op">=</span> <span class="va">eng</span>, decoder_inputs <span class="op">=</span> <span class="va">spa_feature</span><span class="op">)</span></span>
+<span>  <span class="va">labels</span> <span class="op">&lt;-</span> <span class="va">spa_target</span></span>
+<span>  <span class="va">sample_weight</span> <span class="op">&lt;-</span> <span class="va">labels</span> <span class="op">!=</span> <span class="fl">0</span></span>
 <span></span>
-<span>  <span class="va">inputs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoder_inputs <span class="op">=</span> <span class="va">eng</span>,</span>
-<span>                 decoder_inputs <span class="op">=</span> <span class="va">spa</span><span class="op">[</span><span class="cn">NA</span><span class="op">:</span><span class="op">-</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span>  <span class="va">targets</span> <span class="op">&lt;-</span> <span class="va">spa</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="cn">NA</span><span class="op">]</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">targets</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/tuple.html" class="external-link">tuple</a></span><span class="op">(</span><span class="va">features</span>, <span class="va">labels</span>, <span class="va">sample_weight</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span></span>
 <span></span>
 <span><span class="va">batch_size</span> <span class="op">&lt;-</span> <span class="fl">64</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span></span>
 <span><span class="va">make_dataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">pairs</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="va">pairs</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">format_pair</span>, num_parallel_calls <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html" class="external-link">dataset_shuffle</a></span><span class="op">(</span><span class="fl">2048</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_prefetch.html" class="external-link">dataset_prefetch</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/tensor_slices_dataset.html" class="external-link">tensor_slices_dataset</a></span><span class="op">(</span><span class="va">pairs</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_map.html" class="external-link">dataset_map</a></span><span class="op">(</span><span class="va">format_pair</span>, num_parallel_calls <span class="op">=</span> <span class="fl">4</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_cache.html" class="external-link">dataset_cache</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_shuffle.html" class="external-link">dataset_shuffle</a></span><span class="op">(</span><span class="fl">2048</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="va">batch_size</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_prefetch.html" class="external-link">dataset_prefetch</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="va">train_ds</span> <span class="op">&lt;-</span> <span class="fu">make_dataset</span><span class="op">(</span><span class="va">train_pairs</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Negative numbers are interpreted python-style when subsetting tensorflow tensors.</span></span>
-<span><span class="co">## See: ?`[.tensorflow.tensor` for details.</span></span>
-<span><span class="co">## To turn off this warning, set `options(tensorflow.extract.warn_negatives_pythonic = FALSE)`</span></span></code></pre>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">val_ds</span> <span class="op">&lt;-</span> <span class="fu">make_dataset</span><span class="op">(</span><span class="va">val_pairs</span><span class="op">)</span></span></code></pre></div>
+<span></span>
+<span><span class="va">train_ds</span> <span class="op">&lt;-</span> <span class="fu">make_dataset</span><span class="op">(</span><span class="va">train_pairs</span><span class="op">)</span></span>
+<span><span class="va">val_ds</span> <span class="op">&lt;-</span> <span class="fu">make_dataset</span><span class="op">(</span><span class="va">val_pairs</span><span class="op">)</span></span></code></pre></div>
 <p>Let’s take a quick look at the sequence shapes (we have batches of 64
 pairs, and all sequences are 20 steps long):</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">targets</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iter_next</a></span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">as_iterator</a></span><span class="op">(</span><span class="va">train_ds</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">targets</span>, <span class="va">weights</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iter_next</a></span><span class="op">(</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">as_iterator</a></span><span class="op">(</span><span class="va">train_ds</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## List of 2</span></span>
 <span><span class="co">##  $ encoder_inputs:&lt;tf.Tensor: shape=(64, 20), dtype=int64, numpy=…&gt;</span></span>
 <span><span class="co">##  $ decoder_inputs:&lt;tf.Tensor: shape=(64, 20), dtype=int64, numpy=…&gt;</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">targets</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt;tf.Tensor: shape=(64, 20), dtype=int64, numpy=…&gt;</span></span></code></pre>
 </div>
@@ -372,7 +351,7 @@ sees the entire sequences at once, and thus we must make sure that it
 only uses information from target tokens 0 to N when predicting token
 N+1 (otherwise, it could use information from the future, which would
 result in a model that cannot be used at inference time).</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">layer_transformer_encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>  classname <span class="op">=</span> <span class="st">"TransformerEncoder"</span>,</span>
 <span>  initialize <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">embed_dim</span>, <span class="va">dense_dim</span>, <span class="va">num_heads</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
@@ -445,7 +424,7 @@ result in a model that cannot be used at inference time).</p>
 <span>  get_causal_attention_mask <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">sequence_length</span>, <span class="va">encoding_length</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../../../reference/op_shape.html">op_shape</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="va">sequence_length</span><span class="op">)</span></span>
+<span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">0L</span>, <span class="va">sequence_length</span>, include_end <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>    <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span>, <span class="cn">NULL</span><span class="op">]</span></span>
 <span>    <span class="va">j</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="cn">NULL</span>, <span class="op">]</span></span>
 <span>    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_cast.html">op_cast</a></span><span class="op">(</span><span class="va">i</span> <span class="op">&gt;=</span> <span class="va">j</span>, <span class="st">"int32"</span><span class="op">)</span></span>
@@ -453,29 +432,37 @@ result in a model that cannot be used at inference time).</p>
 <span>    <span class="va">repeats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_stack.html">op_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span></span>
 <span>    <span class="fu"><a href="../../../reference/op_tile.html">op_tile</a></span><span class="op">(</span><span class="va">mask</span><span class="op">[</span><span class="cn">NULL</span>, , <span class="op">]</span>, <span class="va">repeats</span><span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
-<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">encoder_outputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">causal_mask</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">get_causal_attention_mask</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">mask</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="va">mask</span> <span class="op">&lt;-</span> <span class="va">causal_mask</span></span>
-<span>    <span class="kw">else</span></span>
-<span>      <span class="va">mask</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="op">{</span> <span class="fu"><a href="../../../reference/op_minimum.html">op_minimum</a></span><span class="op">(</span><span class="fu"><a href="../../../reference/op_cast.html">op_cast</a></span><span class="op">(</span><span class="va">.</span><span class="op">[</span>, <span class="cn">NULL</span>, <span class="op">]</span>, <span class="st">"int32"</span><span class="op">)</span>,</span>
-<span>                             <span class="va">causal_mask</span><span class="op">)</span> <span class="op">}</span></span>
+<span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">inputs_seq</span>, <span class="va">encoder_outputs</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">inputs</span></span>
+<span>    <span class="va">causal_mask</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">get_causal_attention_mask</span><span class="op">(</span><span class="va">inputs_seq</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">inputs</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="op">{</span> <span class="va">self</span><span class="op">$</span><span class="fu">attention_1</span><span class="op">(</span>query <span class="op">=</span> <span class="va">.</span>, value <span class="op">=</span> <span class="va">.</span>, key <span class="op">=</span> <span class="va">.</span>,</span>
-<span>                         attention_mask <span class="op">=</span> <span class="va">causal_mask</span><span class="op">)</span> <span class="op">+</span> <span class="va">.</span> <span class="op">}</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">self</span><span class="op">$</span><span class="fu">layernorm_1</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">mask</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">inputs_padding_mask</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span>      <span class="va">encoder_outputs_padding_mask</span> <span class="op">&lt;-</span> <span class="cn">NULL</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">inputs_padding_mask</span>, <span class="va">encoder_outputs_padding_mask</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="va">mask</span></span>
+<span>    <span class="op">}</span></span>
 <span></span>
-<span>      <span class="op">{</span> <span class="va">self</span><span class="op">$</span><span class="fu">attention_2</span><span class="op">(</span>query <span class="op">=</span> <span class="va">.</span>,</span>
-<span>                         value <span class="op">=</span> <span class="va">encoder_outputs</span>,</span>
-<span>                         key <span class="op">=</span> <span class="va">encoder_outputs</span>,</span>
-<span>                         attention_mask <span class="op">=</span> <span class="va">mask</span><span class="op">)</span> <span class="op">+</span> <span class="va">.</span> <span class="op">}</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">self</span><span class="op">$</span><span class="fu">layernorm_2</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="va">attention_output_1</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">attention_1</span><span class="op">(</span></span>
+<span>      query <span class="op">=</span> <span class="va">inputs_seq</span>,</span>
+<span>      value <span class="op">=</span> <span class="va">inputs_seq</span>,</span>
+<span>      key <span class="op">=</span> <span class="va">inputs_seq</span>,</span>
+<span>      attention_mask <span class="op">=</span> <span class="va">causal_mask</span>,</span>
+<span>      query_mask <span class="op">=</span> <span class="va">inputs_padding_mask</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">out_1</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">layernorm_1</span><span class="op">(</span><span class="va">inputs_seq</span> <span class="op">+</span> <span class="va">attention_output_1</span><span class="op">)</span></span>
 <span></span>
-<span>      <span class="op">{</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_proj</span><span class="op">(</span><span class="va">.</span><span class="op">)</span> <span class="op">+</span> <span class="va">.</span> <span class="op">}</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>      <span class="va">self</span><span class="op">$</span><span class="fu">layernorm_3</span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="va">attention_output_2</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">attention_2</span><span class="op">(</span></span>
+<span>      query <span class="op">=</span> <span class="va">out_1</span>,</span>
+<span>      value <span class="op">=</span> <span class="va">encoder_outputs</span>,</span>
+<span>      key <span class="op">=</span> <span class="va">encoder_outputs</span>,</span>
+<span>      query_mask <span class="op">=</span> <span class="va">inputs_padding_mask</span>,</span>
+<span>      key_mask <span class="op">=</span> <span class="va">encoder_outputs_padding_mask</span></span>
+<span>    <span class="op">)</span></span>
+<span>    <span class="va">out_2</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">layernorm_2</span><span class="op">(</span><span class="va">out_1</span> <span class="op">+</span> <span class="va">attention_output_2</span><span class="op">)</span></span>
 <span></span>
+<span>    <span class="va">self</span><span class="op">$</span><span class="fu">layernorm_3</span><span class="op">(</span><span class="va">out_2</span> <span class="op">+</span> <span class="va">self</span><span class="op">$</span><span class="fu">dense_proj</span><span class="op">(</span><span class="va">out_2</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -497,14 +484,13 @@ result in a model that cannot be used at inference time).</p>
 <span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">len</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../../../reference/op_shape.html">op_shape</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="co"># (batch_size, seq_len)</span></span>
-<span>    <span class="va">positions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">len</span>, dtype <span class="op">=</span> <span class="st">"int32"</span><span class="op">)</span></span>
+<span>    <span class="va">positions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">len</span>, dtype <span class="op">=</span> <span class="st">"int32"</span>, include_end <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>    <span class="va">embedded_tokens</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">token_embeddings</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span>    <span class="va">embedded_positions</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">position_embeddings</span><span class="op">(</span><span class="va">positions</span><span class="op">)</span></span>
 <span>    <span class="va">embedded_tokens</span> <span class="op">+</span> <span class="va">embedded_positions</span></span>
 <span>  <span class="op">}</span>,</span>
 <span></span>
 <span>  compute_mask <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">mask</span><span class="op">)</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span> <span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
 <span>    <span class="va">inputs</span> <span class="op">!=</span> <span class="fl">0L</span></span>
 <span>  <span class="op">}</span>,</span>
 <span></span>
@@ -516,7 +502,7 @@ result in a model that cannot be used at inference time).</p>
 <span>  <span class="op">}</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, we assemble the end-to-end model.</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">embed_dim</span> <span class="op">&lt;-</span> <span class="fl">256</span></span>
 <span><span class="va">latent_dim</span> <span class="op">&lt;-</span> <span class="fl">2048</span></span>
 <span><span class="va">num_heads</span> <span class="op">&lt;-</span> <span class="fl">8</span></span>
@@ -539,18 +525,20 @@ result in a model that cannot be used at inference time).</p>
 <span></span>
 <span><span class="va">decoder_outputs</span> <span class="op">&lt;-</span> <span class="va">decoder_inputs</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">layer_positional_embedding</span><span class="op">(</span><span class="va">sequence_length</span>, <span class="va">vocab_size</span>, <span class="va">embed_dim</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
-<span>  <span class="fu">transformer_decoder</span><span class="op">(</span><span class="va">.</span>, <span class="va">encoded_seq_inputs</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="op">{</span> <span class="fu">transformer_decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">encoded_seq_inputs</span><span class="op">)</span><span class="op">)</span> <span class="op">}</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../../../reference/layer_dropout.html">layer_dropout</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span><span class="va">vocab_size</span>, activation<span class="op">=</span><span class="st">"softmax"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">decoder_inputs</span>, <span class="va">encoded_seq_inputs</span><span class="op">)</span>,</span>
 <span>                       outputs <span class="op">=</span> <span class="va">decoder_outputs</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">decoder_outputs</span> <span class="op">=</span> <span class="fu">decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">decoder_inputs</span>, <span class="va">encoder_outputs</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">decoder_outputs</span> <span class="op">&lt;-</span> <span class="fu">decoder</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">decoder_inputs</span>, <span class="va">encoder_outputs</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">transformer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">encoder_inputs</span>, <span class="va">decoder_inputs</span><span class="op">)</span>,</span>
-<span>                           <span class="va">decoder_outputs</span>,</span>
-<span>                           name <span class="op">=</span> <span class="st">"transformer"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">transformer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/keras_model.html">keras_model</a></span><span class="op">(</span></span>
+<span>  inputs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>encoder_inputs <span class="op">=</span> <span class="va">encoder_inputs</span>, decoder_inputs <span class="op">=</span> <span class="va">decoder_inputs</span><span class="op">)</span>,</span>
+<span>  outputs <span class="op">=</span> <span class="va">decoder_outputs</span>,</span>
+<span>  name <span class="op">=</span> <span class="st">"transformer"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="training-our-model">Training our model<a class="anchor" aria-label="anchor" href="#training-our-model"></a>
@@ -560,7 +548,7 @@ validation data. Note that machine translation typically uses BLEU
 scores as well as other metrics, rather than accuracy.</p>
 <p>Here we only train for 1 epoch, but to get the model to actually
 converge you should train for at least 30 epochs.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span>  <span class="co"># This should be at least 30 for convergence</span></span>
 <span></span>
 <span><span class="va">transformer</span></span></code></pre></div>
@@ -574,27 +562,32 @@ converge you should train for at least 30 epochs.</p>
 <span><span class="co">## │ positional_embeddi… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>) │  <span style="color: #00AF00;">3,845,120</span> │ encoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
 <span><span class="co">## │ (<span style="color: #0087FF;">PositionalEmbeddi…</span> │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
+<span><span class="co">## │ not_equal           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)      │          <span style="color: #00AF00;">0</span> │ encoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">NotEqual</span>)          │                   │            │                   │</span></span>
+<span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
 <span><span class="co">## │ decoder_inputs      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)      │          <span style="color: #00AF00;">0</span> │ -                 │</span></span>
 <span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)        │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
 <span><span class="co">## │ transformer_encoder │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>) │  <span style="color: #00AF00;">3,155,456</span> │ positional_embed… │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">TransformerEncode…</span> │                   │            │                   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">TransformerEncode…</span> │                   │            │ not_equal[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
 <span><span class="co">## │ functional_3        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>,      │ <span style="color: #00AF00;">12,959,640</span> │ decoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
 <span><span class="co">## │ (<span style="color: #0087FF;">Functional</span>)        │ <span style="color: #00AF00;">15000</span>)            │            │ transformer_enco… │</span></span>
+<span><span class="co">## │                     │                   │            │ not_equal[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
 <span><span class="co">## └─────────────────────┴───────────────────┴────────────┴───────────────────┘</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">19,960,216</span> (76.14 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">19,960,216</span> (76.14 MB)</span></span>
 <span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  <span class="st">"rmsprop"</span>,</span>
-<span>  loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,</span>
+<span>  loss <span class="op">=</span> <span class="fu"><a href="../../../reference/loss_sparse_categorical_crossentropy.html">loss_sparse_categorical_crossentropy</a></span><span class="op">(</span>ignore_class <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="st">"accuracy"</span></span>
 <span><span class="op">)</span></span>
+<span></span>
 <span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>,</span>
 <span>                   validation_data <span class="op">=</span> <span class="va">val_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1297/1297 - 64s - 50ms/step - accuracy: 0.7709 - loss: 1.5752 - val_accuracy: 0.7788 - val_loss: 1.3699</span></span></code></pre>
+<pre><code><span><span class="co">## 1297/1297 - 61s - 47ms/step - accuracy: 0.1590 - loss: 3.8930 - val_accuracy: 0.1533 - val_loss: 3.6121</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="decoding-test-sentences">Decoding test sentences<a class="anchor" aria-label="anchor" href="#decoding-test-sentences"></a>
@@ -604,7 +597,7 @@ sentences. We simply feed into the model the vectorized English sentence
 as well as the target token <code>"[start]"</code>, then we repeatedly
 generated the next token, until we hit the token
 <code>"[end]"</code>.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spa_vocab</span> <span class="op">&lt;-</span> <span class="va">spa_vectorization</span> <span class="op">|&gt;</span> <span class="fu"><a href="../../../reference/layer_text_vectorization.html">get_vocabulary</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">max_decoded_sentence_length</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
 <span><span class="va">tf_decode_sequence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/tf_function.html" class="external-link">tf_function</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">input_sentence</span><span class="op">)</span> <span class="op">{</span></span>
@@ -622,8 +615,10 @@ generated the next token, until we hit the token
 <span>      <span class="fu">spa_vectorization</span><span class="op">(</span><span class="va">decoded_sentence</span><span class="op">)</span><span class="op">[</span>,<span class="cn">NA</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
 <span>    <span class="va">next_token_predictions</span> <span class="op">&lt;-</span></span>
-<span>      <span class="fu">transformer</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tokenized_input_sentence</span>,</span>
-<span>                       <span class="va">tokenized_target_sentence</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="fu">transformer</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>        encoder_inputs <span class="op">=</span> <span class="va">tokenized_input_sentence</span>,</span>
+<span>        decoder_inputs <span class="op">=</span> <span class="va">tokenized_target_sentence</span></span>
+<span>      <span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="va">sampled_token_index</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="fu">argmax</span><span class="op">(</span><span class="va">next_token_predictions</span><span class="op">[</span><span class="fl">0</span>, <span class="va">i</span>, <span class="op">]</span><span class="op">)</span></span>
 <span>    <span class="va">sampled_token</span> <span class="op">&lt;-</span> <span class="va">spa_vocab</span><span class="op">[</span><span class="va">sampled_token_index</span><span class="op">]</span></span>
@@ -665,7 +660,7 @@ Correct Translation: [start] estoy segura de que todo irá bien. [end]
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>
