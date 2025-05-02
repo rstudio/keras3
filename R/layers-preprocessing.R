@@ -2590,6 +2590,79 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
     create_layer(keras$layers$RandomShear, object, args)
 }
 
+#' Performs the AugMix data augmentation technique.
+#'
+#' @description
+#' AugMix aims to produce images with variety while preserving the image
+#' semantics and local statistics. During the augmentation process,
+#' the same augmentation is applied across all images in the batch
+#' in num_chains different ways, with each chain consisting of
+#' chain_depth augmentations.
+#'
+#' # References
+#' - [AugMix paper](https://arxiv.org/pdf/1912.02781)
+#' - [Official Code](https://github.com/google-research/augmix)
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two number tuple written (low, high).
+#' This is typically either `(0, 1)` or `(0, 255)` depending
+#' on how your preprocessing pipeline is set up.
+#'
+#' @param num_chains
+#' an integer representing the number of different chains to
+#' be mixed, defaults to 3.
+#'
+#' @param chain_depth
+#' an integer representing the maximum number of
+#' transformations to be applied in each chain. The actual number
+#' of transformations in each chain will be sampled randomly
+#' from the range `[0, `chain_depth`]`. Defaults to 3.
+#'
+#' @param factor
+#' The strength of the augmentation as a normalized value
+#' between 0 and 1. Default is 0.3.
+#'
+#' @param alpha
+#' a float value used as the probability coefficients for the
+#' Beta and Dirichlet distributions, defaults to 1.0.
+#'
+#' @param all_ops
+#' Use all operations (including random_brightness,
+#' random_color_degeneration, random_contrast and random_sharpness).
+#' Default is True.
+#'
+#' @param interpolation
+#' The interpolation method to use for resizing operations.
+#' Options include `"nearest"`, `"bilinear"`. Default is `"bilinear"`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.AugMix
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_aug_mix <-
+function (object, value_range = c(0L, 255L), num_chains = 3L,
+    chain_depth = 3L, factor = 0.3, alpha = 1, all_ops = TRUE,
+    interpolation = "bilinear", seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(num_chains = as_integer, chain_depth = as_integer,
+        seed = as_integer, input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$AugMix, object, args)
+}
+
+
 #' Applies a series of layers to an input.
 #'
 #' @description

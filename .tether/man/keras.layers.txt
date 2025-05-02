@@ -24,6 +24,18 @@ Attention(
   seed=None,
   **kwargs
 )
+AugMix(
+  value_range=(0, 255),
+  num_chains=3,
+  chain_depth=3,
+  factor=0.3,
+  alpha=1.0,
+  all_ops=True,
+  interpolation='bilinear',
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 AutoContrast(value_range=(0, 255), **kwargs)
 average(inputs, **kwargs)
 Average(**kwargs)
