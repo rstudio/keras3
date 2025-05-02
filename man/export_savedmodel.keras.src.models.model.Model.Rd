@@ -9,7 +9,7 @@
   export_dir_base,
   ...,
   format = "tf_saved_model",
-  verbose = TRUE,
+  verbose = NULL,
   input_signature = NULL
 )
 }
@@ -38,7 +38,9 @@ not provided, they will be automatically computed.
 \code{"tf_saved_model"} and \code{"onnx"}.  Defaults to
 \code{"tf_saved_model"}.}
 
-\item{verbose}{whether to print all the variables of the exported model.}
+\item{verbose}{Bool. Whether to print all the variables of the exported model. Defaults
+to \code{NULL}, which uses the default value set by different
+backends and formats.}
 
 \item{input_signature}{Optional. Specifies the shape and dtype of the
 model inputs. Can be a structure of \code{keras.InputSpec},
@@ -68,6 +70,10 @@ entirely standalone.
 
 \strong{Note:} This feature is currently supported only with TensorFlow, JAX
 and Torch backends.
+
+\strong{Note:} Be aware that the exported artifact may contain information
+from the local file system when using \code{format="onnx"}, \code{verbose=TRUE}
+and Torch backend.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Create the artifact

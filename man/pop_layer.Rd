@@ -4,13 +4,13 @@
 \alias{pop_layer}
 \title{Remove the last layer in a Sequential model}
 \usage{
-pop_layer(object)
+pop_layer(object, rebuild = TRUE)
 }
 \arguments{
 \item{object}{Sequential keras model object}
 }
 \value{
-The input \code{object}, invisibly.
+The removed layer.
 }
 \description{
 Remove the last layer in a Sequential model

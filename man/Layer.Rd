@@ -257,12 +257,10 @@ Args:
 \item trainable: Boolean, whether the layer's variables should be trainable.
 \item name: String name of the layer.
 \item dtype: The dtype of the layer's computations and weights. Can also be a
-\code{keras$DTypePolicy},
-which allows the computation and
-weight dtype to differ. Defaults to \code{NULL}. \code{NULL} means to use
-\code{config_dtype_policy()},
-which is a \code{"float32"} policy unless set to different value
-(via \code{config_set_dtype_policy()}).
+\code{keras$DTypePolicy}, which allows the computation and weight dtype
+to differ. Defaults to \code{NULL}. \code{NULL} means to use
+\code{config_dtype_policy()}, which is a \code{"float32"} policy unless
+set to different value (via \code{config_set_dtype_policy()}).
 }
 \item
 
@@ -471,6 +469,21 @@ model |> predict(data) # faster inference
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{quantized_call(...)
 }\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rematerialized_call(layer_call, ...)
+}\if{html}{\out{</div>}}
+
+Enable rematerialization dynamically for a layer's \code{call} method.
+
+Args:
+\itemize{
+\item \code{layer_call}: The original \code{call} method of a layer.
+\item \code{...}: additional args
+}
+
+Returns:
+A rematerialized version of the layer's \code{call} method.
 \item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{load_own_variables(store)
@@ -689,6 +702,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_aug_mix}()} \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
@@ -711,6 +725,7 @@ Other layers: \cr
 \code{\link{layer_cropping_1d}()} \cr
 \code{\link{layer_cropping_2d}()} \cr
 \code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_dense}()} \cr
 \code{\link{layer_depthwise_conv_1d}()} \cr
 \code{\link{layer_depthwise_conv_2d}()} \cr
@@ -761,9 +776,13 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_gaussian_blur}()} \cr
 \code{\link{layer_random_grayscale}()} \cr
 \code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_invert}()} \cr
+\code{\link{layer_random_perspective}()} \cr
 \code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
 \code{\link{layer_random_saturation}()} \cr
@@ -775,6 +794,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr

@@ -175,9 +175,11 @@ Other ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
 \code{\link{op_image_pad}()} \cr
+\code{\link{op_image_perspective_transform}()} \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
@@ -239,6 +241,7 @@ Other ops: \cr
 \code{\link{op_ones_like}()} \cr
 \code{\link{op_outer}()} \cr
 \code{\link{op_pad}()} \cr
+\code{\link{op_polar}()} \cr
 \code{\link{op_power}()} \cr
 \code{\link{op_prod}()} \cr
 \code{\link{op_psnr}()} \cr
@@ -246,6 +249,7 @@ Other ops: \cr
 \code{\link{op_quantile}()} \cr
 \code{\link{op_ravel}()} \cr
 \code{\link{op_real}()} \cr
+\code{\link{op_rearrange}()} \cr
 \code{\link{op_reciprocal}()} \cr
 \code{\link{op_relu}()} \cr
 \code{\link{op_relu6}()} \cr
@@ -253,7 +257,9 @@ Other ops: \cr
 \code{\link{op_reshape}()} \cr
 \code{\link{op_rfft}()} \cr
 \code{\link{op_right_shift}()} \cr
+\code{\link{op_rms_normalization}()} \cr
 \code{\link{op_roll}()} \cr
+\code{\link{op_rot90}()} \cr
 \code{\link{op_round}()} \cr
 \code{\link{op_rsqrt}()} \cr
 \code{\link{op_saturate_cast}()} \cr
@@ -268,6 +274,7 @@ Other ops: \cr
 \code{\link{op_shape}()} \cr
 \code{\link{op_sigmoid}()} \cr
 \code{\link{op_sign}()} \cr
+\code{\link{op_signbit}()} \cr
 \code{\link{op_silu}()} \cr
 \code{\link{op_sin}()} \cr
 \code{\link{op_sinh}()} \cr

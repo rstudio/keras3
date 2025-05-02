@@ -42,7 +42,9 @@ Defaults to \code{TRUE}.}
 \item{rms_scaling}{If \code{TRUE}, \code{center} and \code{scale} are ignored, and the
 inputs are scaled by \code{gamma} and the inverse square root
 of the square of all inputs. This is an approximate and faster
-approach that avoids ever computing the mean of the input.}
+approach that avoids ever computing the mean of the input. Note that
+this \emph{isn't} equivalent to the computation that the
+\code{layer_rms_normalization} layer performs.}
 
 \item{beta_initializer}{Initializer for the beta weight. Defaults to zeros.}
 
@@ -149,6 +151,7 @@ So, this \code{layer_layer_normalization()} implementation will not match a
 Other normalization layers: \cr
 \code{\link{layer_batch_normalization}()} \cr
 \code{\link{layer_group_normalization}()} \cr
+\code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_spectral_normalization}()} \cr
 \code{\link{layer_unit_normalization}()} \cr
 
@@ -165,6 +168,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_aug_mix}()} \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
@@ -187,6 +191,7 @@ Other layers: \cr
 \code{\link{layer_cropping_1d}()} \cr
 \code{\link{layer_cropping_2d}()} \cr
 \code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_dense}()} \cr
 \code{\link{layer_depthwise_conv_1d}()} \cr
 \code{\link{layer_depthwise_conv_2d}()} \cr
@@ -236,9 +241,13 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_gaussian_blur}()} \cr
 \code{\link{layer_random_grayscale}()} \cr
 \code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_invert}()} \cr
+\code{\link{layer_random_perspective}()} \cr
 \code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
 \code{\link{layer_random_saturation}()} \cr
@@ -250,6 +259,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr

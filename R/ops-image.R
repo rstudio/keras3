@@ -712,7 +712,7 @@ function (images, kernel_size = list(3L, 3L), sigma = list(1,
 #' ```
 #'
 #' ```{r}
-#' Single RGB image (channels_last)
+#' # Single RGB image (channels_last)
 #' x <- op_ones(c(64, 80, 3))
 #' start_points <- rbind(c(0, 0), c(0, 64), c(80, 0), c(80, 64))
 #' end_points <- rbind(c(3, 5), c(7, 64), c(76, -10), c(84, 61))

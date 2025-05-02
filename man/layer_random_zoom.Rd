@@ -40,7 +40,7 @@ directions by preserving the aspect ratio. Defaults to \code{NULL}.}
 
 \item{fill_mode}{Points outside the boundaries of the input are filled
 according to the given mode. Available methods are \code{"constant"},
-\code{"nearest"}, \code{"wrap"} and \code{"reflect"}. Defaults to \code{"constant"}.
+\code{"nearest"}, \code{"wrap"} and \code{"reflect"}. Defaults to \code{"reflect"}.
 \itemize{
 \item \code{"reflect"}: \verb{(d c b a | a b c d | d c b a)}
 The input is extended by reflecting about the edge of the last
@@ -134,9 +134,11 @@ Other image augmentation layers: \cr
 \code{\link{layer_random_translation}()} \cr
 
 Other preprocessing layers: \cr
+\code{\link{layer_aug_mix}()} \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
+\code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_discretization}()} \cr
 \code{\link{layer_equalization}()} \cr
 \code{\link{layer_feature_space}()} \cr
@@ -153,9 +155,13 @@ Other preprocessing layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_gaussian_blur}()} \cr
 \code{\link{layer_random_grayscale}()} \cr
 \code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_invert}()} \cr
+\code{\link{layer_random_perspective}()} \cr
 \code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
 \code{\link{layer_random_saturation}()} \cr
@@ -182,6 +188,7 @@ Other layers: \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
 \code{\link{layer_attention}()} \cr
+\code{\link{layer_aug_mix}()} \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_average}()} \cr
 \code{\link{layer_average_pooling_1d}()} \cr
@@ -204,6 +211,7 @@ Other layers: \cr
 \code{\link{layer_cropping_1d}()} \cr
 \code{\link{layer_cropping_2d}()} \cr
 \code{\link{layer_cropping_3d}()} \cr
+\code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_dense}()} \cr
 \code{\link{layer_depthwise_conv_1d}()} \cr
 \code{\link{layer_depthwise_conv_2d}()} \cr
@@ -254,9 +262,13 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
+\code{\link{layer_random_gaussian_blur}()} \cr
 \code{\link{layer_random_grayscale}()} \cr
 \code{\link{layer_random_hue}()} \cr
+\code{\link{layer_random_invert}()} \cr
+\code{\link{layer_random_perspective}()} \cr
 \code{\link{layer_random_posterization}()} \cr
 \code{\link{layer_random_rotation}()} \cr
 \code{\link{layer_random_saturation}()} \cr
@@ -267,6 +279,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr
 \code{\link{layer_separable_conv_2d}()} \cr
