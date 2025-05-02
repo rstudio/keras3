@@ -122,6 +122,7 @@ one_hot(
   dtype=None,
   sparse=False
 )
+polar(abs_, angle)
 psnr(
   x1,
   x2,
