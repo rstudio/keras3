@@ -1,7 +1,7 @@
 Help on class InputLayer in module keras.src.layers.core.input_layer:
 
 class InputLayer(keras.src.layers.layer.Layer)
- |  InputLayer(shape=None, batch_size=None, dtype=None, sparse=None, batch_shape=None, input_tensor=None, optional=False, name=None, **kwargs)
+ |  InputLayer(shape=None, batch_size=None, dtype=None, sparse=None, ragged=None, batch_shape=None, input_tensor=None, optional=False, name=None, **kwargs)
  |
  |  Method resolution order:
  |      InputLayer
@@ -22,6 +22,7 @@ class InputLayer(keras.src.layers.layer.Layer)
  |    batch_size=None,
  |    dtype=None,
  |    sparse=None,
+ |    ragged=None,
  |    batch_shape=None,
  |    input_tensor=None,
  |    optional=False,

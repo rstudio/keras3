@@ -169,6 +169,8 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' Boolean, whether the input is optional or not.
 #' An optional input can accept `NULL` values.
 #'
+#' @param input_ragged bool.
+#'
 #' @param ... additional arguments passed on to `keras.layers.InputLayer`.
 #'
 #' @param layers List of layers to add to the model.
@@ -217,6 +219,7 @@ function(input_shape = NULL, name = NULL,
          input_dtype = NULL,
          input_batch_size = NULL,
          input_sparse = NULL,
+         input_ragged = NULL,
          input_batch_shape = NULL,
          input_name = NULL,
          input_tensor = NULL,
@@ -253,6 +256,7 @@ function(input_shape = NULL,
          input_batch_size = NULL,
          input_dtype = NULL,
          input_sparse = NULL,
+         input_ragged = NULL,
          input_batch_shape = NULL,
          input_name = NULL,
          input_tensor = NULL,
@@ -284,6 +288,7 @@ function(input_shape = NULL,
                  dtype = "input_dtype",
 
                  sparse = "input_sparse",
+                 ragged = "input_ragged",
 
                  optional = "input_optional",
 
