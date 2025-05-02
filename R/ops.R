@@ -126,6 +126,9 @@ ops$convert_to_numpy(x)
 #'
 #' @description
 #'
+#' Native tensors for the current backend or left unchanged unless the `dtype`,
+#' `sparse` or `ragged` arguments are set.
+#'
 #' # Examples
 #' ```{r}
 #' x <- array(c(1, 2, 3))
@@ -138,7 +141,7 @@ ops$convert_to_numpy(x)
 #' A backend tensor of the specified `dtype` and sparseness.
 #'
 #' @param x
-#' An array (can be nested) or a backend tensor.
+#' An R or NumPy array (can be nested) or a backend tensor.
 #'
 #' @param dtype
 #' The target type. If `NULL`, the type of `x` is used.
@@ -149,7 +152,9 @@ ops$convert_to_numpy(x)
 #' sparse tensors are kept only if the backend supports them.
 #'
 #' @param ragged
-#' Bool.
+#' Whether to keep ragged tensors. `FALSE` will cause ragged
+#' tensors to be densified. The default value of `NULL` means that
+#' ragged tensors are kept only if the backend supports them.
 #'
 #' @export
 #' @family core ops

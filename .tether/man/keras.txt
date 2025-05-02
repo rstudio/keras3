@@ -44,6 +44,7 @@ KerasTensor(
   shape,
   dtype='float32',
   sparse=False,
+  ragged=False,
   record_history=True,
   name=None
 )
@@ -63,7 +64,7 @@ Model(*args, **kwargs)
 models: Module(keras.api.models)
 name_scope(name, **kwargs)
 Operation(*args, **kwargs)
-ops: Module(keras.api.ops)
+ops: Module(keras.ops)
 Optimizer(*args, **kwargs)
 optimizers: Module(keras.api.optimizers)
 preprocessing: Module(keras.api.preprocessing)
@@ -72,6 +73,12 @@ quantizers: Module(keras.api.quantizers)
 random: Module(keras.api.random)
 Regularizer()
 regularizers: Module(keras.api.regularizers)
+remat(f)
+RematScope(
+  mode='full',
+  output_size_threshold=1024,
+  layer_names=None
+)
 saving: Module(keras.api.saving)
 Sequential(*args, **kwargs)
 StatelessScope(

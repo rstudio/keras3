@@ -1,7 +1,7 @@
 Help on class Resizing in module keras.src.layers.preprocessing.image_preprocessing.resizing:
 
 class Resizing(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
- |  Resizing(height, width, interpolation='bilinear', crop_to_aspect_ratio=False, pad_to_aspect_ratio=False, fill_mode='constant', fill_value=0.0, data_format=None, **kwargs)
+ |  Resizing(height, width, interpolation='bilinear', crop_to_aspect_ratio=False, pad_to_aspect_ratio=False, fill_mode='constant', fill_value=0.0, antialias=False, data_format=None, **kwargs)
  |
  |  A preprocessing layer which resizes images.
  |
@@ -80,6 +80,7 @@ class Resizing(keras.src.layers.preprocessing.image_preprocessing.base_image_pre
  |    pad_to_aspect_ratio=False,
  |    fill_mode='constant',
  |    fill_value=0.0,
+ |    antialias=False,
  |    data_format=None,
  |    **kwargs
  |  )

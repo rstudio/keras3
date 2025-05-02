@@ -463,6 +463,7 @@ pad(
   mode='constant',
   constant_values=None
 )
+polar(abs_, angle)
 power(x1, x2)
 prod(
   x,
@@ -501,10 +502,21 @@ repeat(
 reshape(x, newshape)
 rfft(x, fft_length=None)
 right_shift(x, y)
+rms_normalization(
+  x,
+  scale=1,
+  axis=-1,
+  epsilon=None
+)
 roll(
   x,
   shift,
   axis=None
+)
+rot90(
+  array,
+  k=1,
+  axes=(0, 1)
 )
 round(x, decimals=0)
 rsqrt(x)
@@ -562,6 +574,7 @@ separable_conv(
 shape(x)
 sigmoid(x)
 sign(x)
+signbit(x)
 silu(x)
 sin(x)
 sinh(x)

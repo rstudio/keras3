@@ -42,6 +42,9 @@ plot_bounding_box_gallery(
 )
 plot_image_gallery(
   images,
+  y_true=None,
+  y_pred=None,
+  label_map=None,
   rows=None,
   cols=None,
   value_range=(0, 255),
