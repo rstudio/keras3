@@ -2,7 +2,7 @@
 title: English-to-Spanish translation with a sequence-to-sequence Transformer
 author: '[fchollet](https://twitter.com/fchollet), t-kalinowski'
 date-created: 2021/05/26
-last-modified: 2023/02/25
+last-modified: 2024/11/18
 description: Implementing a sequence-to-sequence Transformer and training it on a
   machine translation task.
 accelerator: GPU
@@ -199,11 +199,11 @@ using the source sentence and the target words from 1 to N.
 
 As such, the training dataset will yield a tuple `(inputs, targets)`, where:
 
-- `inputs` is a dictionary (named list) with the keys (names) `encoder_inputs` and `decoder_inputs`.
-`encoder_inputs` is the vectorized source sentence and `encoder_inputs` is the target sentence "so far",
-that is to say, the words 0 to N used to predict word N+1 (and beyond) in the target sentence.
-- `target` is the target sentence offset by one step:
-it provides the next words in the target sentence -- what the model will try to predict.
+* `inputs` is a dictionary (named list) with the keys (names) `encoder_inputs` and `decoder_inputs`.
+  `encoder_inputs` is the vectorized source sentence and `decoder_inputs` is the target sentence "so far",
+  that is to say, the words 0 to N used to predict word N+1 (and beyond) in the target sentence.
+* `target` is the target sentence offset by one step:
+  it provides the next words in the target sentence -- what the model will try to predict.
 
 ```{r}
 format_pair <- function(pair) {
@@ -347,29 +347,37 @@ layer_transformer_decoder <- Layer(
     repeats <- op_stack(c(batch_size, 1L, 1L))
     op_tile(mask[NULL, , ], repeats)
   },
-  call = function(inputs, encoder_outputs, mask = NULL) {
-    causal_mask <- self$get_causal_attention_mask(inputs)
 
-    if (is.null(mask))
-      mask <- causal_mask
-    else
-      mask %<>% { op_minimum(op_cast(.[, NULL, ], "int32"),
-                             causal_mask) }
+  call = function(inputs, mask = NULL) {
+    c(inputs_seq, encoder_outputs) %<-% inputs
+    causal_mask <- self$get_causal_attention_mask(inputs_seq)
 
-    inputs %>%
-      { self$attention_1(query = ., value = ., key = .,
-                         attention_mask = causal_mask) + . } %>%
-      self$layernorm_1() %>%
+    if (is.null(mask)) {
+      inputs_padding_mask <- NULL
+      encoder_outputs_padding_mask <- NULL
+    } else {
+      c(inputs_padding_mask, encoder_outputs_padding_mask) %<-% mask
+    }
 
-      { self$attention_2(query = .,
-                         value = encoder_outputs,
-                         key = encoder_outputs,
-                         attention_mask = mask) + . } %>%
-      self$layernorm_2() %>%
+    attention_output_1 <- self$attention_1(
+      query = inputs_seq,
+      value = inputs_seq,
+      key = inputs_seq,
+      attention_mask = causal_mask,
+      query_mask = inputs_padding_mask
+    )
+    out_1 <- self$layernorm_1(inputs_seq + attention_output_1)
 
-      { self$dense_proj(.) + . } %>%
-      self$layernorm_3()
+    attention_output_2 <- self$attention_2(
+      query = out_1,
+      value = encoder_outputs,
+      key = encoder_outputs,
+      query_mask = inputs_padding_mask,
+      key_mask = encoder_outputs_padding_mask
+    )
+    out_2 <- self$layernorm_2(out_1 + attention_output_2)
 
+    self$layernorm_3(out_2 + self$dense_proj(out_2))
   }
 )
 
@@ -398,7 +406,6 @@ layer_positional_embedding <- Layer(
   },
 
   compute_mask = function(inputs, mask = NULL) {
-    if (is.null(mask)) return (NULL)
     inputs != 0L
   },
 
@@ -437,20 +444,21 @@ transformer_decoder <- layer_transformer_decoder(NULL,
 
 decoder_outputs <- decoder_inputs %>%
   layer_positional_embedding(sequence_length, vocab_size, embed_dim) %>%
-  transformer_decoder(., encoded_seq_inputs) %>%
+  { transformer_decoder(list(., encoded_seq_inputs)) } %>%
   layer_dropout(0.5) %>%
   layer_dense(vocab_size, activation="softmax")
 
 decoder <- keras_model(inputs = list(decoder_inputs, encoded_seq_inputs),
                        outputs = decoder_outputs)
 
-decoder_outputs = decoder(list(decoder_inputs, encoder_outputs))
+decoder_outputs <- decoder(list(decoder_inputs, encoder_outputs))
 
-transformer <- keras_model(list(encoder_inputs, decoder_inputs),
-                           decoder_outputs,
-                           name = "transformer")
+transformer <- keras_model(
+  inputs = list(encoder_inputs = encoder_inputs, decoder_inputs = decoder_inputs),
+  outputs = decoder_outputs,
+  name = "transformer"
+)
 ```
-
 
 ## Training our model
 
@@ -466,14 +474,13 @@ epochs <- 1  # This should be at least 30 for convergence
 transformer
 transformer |> compile(
   "rmsprop",
-  loss = "sparse_categorical_crossentropy",
+  loss = loss_sparse_categorical_crossentropy(ignore_class = 0),
   metrics = "accuracy"
 )
 
 transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
 ```
-
 
 ## Decoding test sentences
 
@@ -500,8 +507,10 @@ tf_decode_sequence <- tf_function(function(input_sentence) {
       spa_vectorization(decoded_sentence)[,NA:-1]
 
     next_token_predictions <-
-      transformer(list(tokenized_input_sentence,
-                       tokenized_target_sentence))
+      transformer(list(
+        encoder_inputs = tokenized_input_sentence,
+        decoder_inputs = tokenized_target_sentence
+      ))
 
     sampled_token_index <- tf$argmax(next_token_predictions[0, i, ])
     sampled_token <- spa_vocab[sampled_token_index]
@@ -527,9 +536,7 @@ for (i in seq(20)) {
     cat("  Model Translation:", input_sentence %>% as_tensor() %>%
           tf_decode_sequence() %>% as.character(), "\n")
 }
-
 ```
-
 
 After 30 epochs, we get results such as:
 
