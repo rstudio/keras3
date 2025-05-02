@@ -1768,6 +1768,8 @@ function (object, scale, offset = 0, ...)
 #' @param fill_value
 #' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
 #'
+#' @param antialias bool
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -1797,7 +1799,7 @@ layer_resizing <-
 function (object, height, width, interpolation = "bilinear",
     crop_to_aspect_ratio = FALSE,
     pad_to_aspect_ratio = FALSE, fill_mode = "constant", fill_value = 0,
-    data_format = NULL, ...)
+    data_format = NULL, ..., antialias = FALSE)
 {
     args <- capture_args(list(height = as_integer, width = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
