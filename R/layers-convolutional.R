@@ -289,6 +289,15 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' and added to the outputs. Finally, if `activation` is not `NULL`, it is
 #' applied to the outputs as well.
 #'
+#' Note on numerical precision: While in general Keras operation execution
+#' results are identical across backends up to 1e-7 precision in float32,
+#' `Conv2D` operations may show larger variations. Due to the large
+#' number of element-wise multiplications and additions in convolution
+#' operations, especially with large inputs or kernel sizes, accumulated
+#' floating-point differences can exceed this 1e-7 threshold. These variations
+#' are particularly noticeable when using different backends (e.g., TensorFlow
+#' vs JAX) or different hardware.
+#'
 #' # Input Shape
 #' - If `data_format="channels_last"`:
 #'     A 4D tensor with shape: `(batch_size, height, width, channels)`

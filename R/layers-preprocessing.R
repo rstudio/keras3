@@ -258,7 +258,7 @@ function (object, max_number, fill_value = -1L, ...)
 #'
 #' @param num_bins
 #' The integer number of bins to compute.
-#' If this option is set,
+#' If this option is set, `bin_boundaries` should not be set and
 #' `adapt()` should be called to learn the bin boundaries.
 #'
 #' @param epsilon
