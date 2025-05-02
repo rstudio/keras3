@@ -9,6 +9,7 @@ keras_input(
   batch_size = NULL,
   dtype = NULL,
   sparse = NULL,
+  ragged = NULL,
   batch_shape = NULL,
   name = NULL,
   tensor = NULL,
@@ -30,6 +31,12 @@ is not known and may vary (e.g. sequence length).}
 
 \item{sparse}{A boolean specifying whether the expected input will be sparse
 tensors. Note that, if \code{sparse} is \code{FALSE}, sparse tensors can still
+be passed into the input - they will be densified with a default
+value of 0. This feature is only supported with the TensorFlow
+backend. Defaults to \code{FALSE}.}
+
+\item{ragged}{A boolean specifying whether the expected input will be ragged
+tensors. Note that, if \code{ragged} is \code{FALSE}, ragged tensors can still
 be passed into the input - they will be densified with a default
 value of 0. This feature is only supported with the TensorFlow
 backend. Defaults to \code{FALSE}.}

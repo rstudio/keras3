@@ -460,6 +460,9 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' @param seed
 #' Seed for random number generator. Optional.
 #'
+#' @param dtype The dtype of the layer's computations and weights. Can also be a
+#' `keras.DTypePolicy`. Optional. Defaults to the default policy.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -473,7 +476,7 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' @tether keras.layers.JaxLayer
 layer_jax_model_wrapper <-
 function (object, call_fn, init_fn = NULL, params = NULL, state = NULL,
-    seed = NULL, ...)
+    seed = NULL, ..., dtype = NULL)
 {
     args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),

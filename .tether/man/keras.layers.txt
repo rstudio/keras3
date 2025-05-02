@@ -24,6 +24,18 @@ Attention(
   seed=None,
   **kwargs
 )
+AugMix(
+  value_range=(0, 255),
+  num_chains=3,
+  chain_depth=3,
+  factor=0.3,
+  alpha=1.0,
+  all_ops=True,
+  interpolation='bilinear',
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 AutoContrast(value_range=(0, 255), **kwargs)
 average(inputs, **kwargs)
 Average(**kwargs)
@@ -440,6 +452,12 @@ Cropping3D(
   data_format=None,
   **kwargs
 )
+CutMix(
+  factor=1.0,
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 Dense(
   units,
   activation=None,
@@ -725,6 +743,7 @@ Input(
   batch_size=None,
   dtype=None,
   sparse=None,
+  ragged=None,
   batch_shape=None,
   name=None,
   tensor=None,
@@ -735,6 +754,7 @@ InputLayer(
   batch_size=None,
   dtype=None,
   sparse=None,
+  ragged=None,
   batch_shape=None,
   input_tensor=None,
   optional=False,
@@ -1008,10 +1028,28 @@ RandomCrop(
   name=None,
   **kwargs
 )
+RandomErasing(
+  factor=1.0,
+  scale=(0.02, 0.33),
+  fill_value=None,
+  value_range=(0, 255),
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 RandomFlip(
   mode='horizontal_and_vertical',
   seed=None,
   data_format=None,
+  **kwargs
+)
+RandomGaussianBlur(
+  factor=1.0,
+  kernel_size=3,
+  sigma=1.0,
+  value_range=(0, 255),
+  data_format=None,
+  seed=None,
   **kwargs
 )
 RandomGrayscale(
@@ -1025,6 +1063,22 @@ RandomHue(
   value_range=(0, 255),
   data_format=None,
   seed=None,
+  **kwargs
+)
+RandomInvert(
+  factor=1.0,
+  value_range=(0, 255),
+  seed=None,
+  data_format=None,
+  **kwargs
+)
+RandomPerspective(
+  factor=1.0,
+  scale=1.0,
+  interpolation='bilinear',
+  fill_value=0.0,
+  seed=None,
+  data_format=None,
   **kwargs
 )
 RandomPosterization(
@@ -1108,7 +1162,13 @@ Resizing(
   pad_to_aspect_ratio=False,
   fill_mode='constant',
   fill_value=0.0,
+  antialias=False,
   data_format=None,
+  **kwargs
+)
+RMSNormalization(
+  axis=-1,
+  epsilon=1e-06,
   **kwargs
 )
 RNN(

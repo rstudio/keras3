@@ -27,7 +27,7 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |          and `[2., +inf)`.
  |          If this option is set, `adapt()` should not be called.
  |      num_bins: The integer number of bins to compute.
- |          If this option is set,
+ |          If this option is set, `bin_boundaries` should not be set and
  |          `adapt()` should be called to learn the bin boundaries.
  |      epsilon: Error tolerance, typically a small fraction
  |          close to zero (e.g. 0.01). Higher values of epsilon increase
@@ -158,6 +158,29 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  reset_state(self)
  |
  |  update_state(self, data)
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config, custom_objects=None)
+ |      Creates an operation from its config.
+ |
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same operation from the config dictionary.
+ |
+ |      Note: If you override this method, you might receive a serialized dtype
+ |      config, which is a `dict`. You can deserialize it as follows:
+ |
+ |      ```python
+ |      if "dtype" in config and isinstance(config["dtype"], dict):
+ |          policy = dtype_policies.deserialize(config["dtype"])
+ |      ```
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the output of `get_config`.
+ |
+ |      Returns:
+ |          An operation instance.
  |
  |  ----------------------------------------------------------------------
  |  Readonly properties defined here:

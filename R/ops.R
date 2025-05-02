@@ -126,6 +126,9 @@ ops$convert_to_numpy(x)
 #'
 #' @description
 #'
+#' Native tensors for the current backend or left unchanged unless the `dtype`,
+#' `sparse` or `ragged` arguments are set.
+#'
 #' # Examples
 #' ```{r}
 #' x <- array(c(1, 2, 3))
@@ -138,7 +141,7 @@ ops$convert_to_numpy(x)
 #' A backend tensor of the specified `dtype` and sparseness.
 #'
 #' @param x
-#' An array (can be nested) or a backend tensor.
+#' An R or NumPy array (can be nested) or a backend tensor.
 #'
 #' @param dtype
 #' The target type. If `NULL`, the type of `x` is used.
@@ -147,6 +150,11 @@ ops$convert_to_numpy(x)
 #' Whether to keep sparse tensors. `FALSE` will cause sparse
 #' tensors to be densified. The default value of `NULL` means that
 #' sparse tensors are kept only if the backend supports them.
+#'
+#' @param ragged
+#' Whether to keep ragged tensors. `FALSE` will cause ragged
+#' tensors to be densified. The default value of `NULL` means that
+#' ragged tensors are kept only if the backend supports them.
 #'
 #' @export
 #' @family core ops
@@ -157,7 +165,7 @@ ops$convert_to_numpy(x)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/convert_to_tensor>
 #' @tether keras.ops.convert_to_tensor
 op_convert_to_tensor <-
-function (x, dtype = NULL, sparse = NULL) {
+function (x, dtype = NULL, sparse = NULL, ragged = NULL) {
   if (!is.null(dtype) && is_string(dtype) &&
       typeof(x) == "double" &&
       grepl("int", dtype, fixed = TRUE))
@@ -7997,4 +8005,62 @@ function (index, branches, ...)
     stop("Arguments supplied to ... must be unnamed")
   index <- as_py_index(index)
   ops$switch(index, branches, ...)
+}
+
+
+#' Rearranges the axes of a Keras tensor according to a specified pattern,
+#'
+#' @description
+#' einops-style.
+#'
+#' @returns
+#' Tensor: A Keras tensor with rearranged axes.
+#'
+#' Follows the logic of:
+#'
+#' 1. If decomposition is needed, reshape to match decomposed dimensions.
+#' 2. Permute known and inferred axes to match the form of the output.
+#' 3. Reshape to match the desired output shape.
+#'
+#' Example Usage:
+#'
+#' ```{r}
+#' images <- op_ones(c(32, 30, 40, 3)) # BHWC format
+#'
+#' # Reordering to BCHW
+#' op_rearrange(images, 'b h w c -> b c h w') |> op_shape()
+#'
+#' # "Merge" along first axis - concat images from a batch
+#' op_rearrange(images, 'b h w c -> (b h) w c') |> op_shape()
+#'
+#' # "Merge" along second axis - concat images horizontally
+#' op_rearrange(images, 'b h w c -> h (b w) c') |> op_shape()
+#'
+#' # Flatten images into a CHW vector
+#' op_rearrange(images, 'b h w c -> b (c h w)') |> op_shape()
+#'
+#' # Decompose H and W axes into 4 smaller patches
+#' op_rearrange(images, 'b (h1 h) (w1 w) c -> (b h1 w1) h w c', h1 = 2, w1 = 2) |> op_shape()
+#'
+#' # Space-to-depth decomposition of input axes
+#' op_rearrange(images, 'b (h h1) (w w1) c -> b h w (c h1 w1)', h1 = 2, w1 = 2) |> op_shape()
+#' ```
+#'
+#' @param tensor
+#' Input Keras tensor.
+#'
+#' @param pattern
+#' String describing the rearrangement in einops notation.
+#'
+#' @param ...
+#' `axes_lengths`, named arguments specifying lengths of axes
+#' when axes decomposition is used.
+#'
+#' @export
+#' @tether keras.ops.rearrange
+#' @family core ops
+#' @family ops
+op_rearrange <- function (tensor, pattern, ...) {
+  args <- c(list(tensor, pattern), lapply(list(...), as_integer))
+  do.call(keras$ops$rearrange, args)
 }

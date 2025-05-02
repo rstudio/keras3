@@ -175,6 +175,8 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
  |
+ |  iterations
+ |
  |  variables
  |
  |  ----------------------------------------------------------------------

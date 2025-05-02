@@ -20,6 +20,14 @@ compute_float8_scale(
   margin=0
 )
 deserialize(config, custom_objects=None)
+fake_quant_with_min_max_vars(
+  inputs,
+  min_vals,
+  max_vals,
+  num_bits=8,
+  narrow_range=False,
+  axis=None
+)
 get(identifier, **kwargs)
 quantize_and_dequantize(
   inputs,

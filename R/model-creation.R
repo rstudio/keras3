@@ -90,6 +90,13 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #' value of 0. This feature is only supported with the TensorFlow
 #' backend. Defaults to `FALSE`.
 #'
+#' @param ragged
+#' A boolean specifying whether the expected input will be ragged
+#' tensors. Note that, if `ragged` is `FALSE`, ragged tensors can still
+#' be passed into the input - they will be densified with a default
+#' value of 0. This feature is only supported with the TensorFlow
+#' backend. Defaults to `FALSE`.
+#'
 #' @param batch_shape
 #' Optional shape list (list of integers or `NULL` objects),
 #' including the batch size.
@@ -115,7 +122,7 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #'
 #' @tether keras.layers.Input
 keras_input <-
-function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
+function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL, ragged = NULL,
     batch_shape = NULL, name = NULL, tensor = NULL, optional = FALSE)
 {
     args <- capture_args(list(shape = normalize_shape, batch_size = as_integer,
@@ -169,6 +176,8 @@ function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
 #' Boolean, whether the input is optional or not.
 #' An optional input can accept `NULL` values.
 #'
+#' @param input_ragged bool.
+#'
 #' @param ... additional arguments passed on to `keras.layers.InputLayer`.
 #'
 #' @param layers List of layers to add to the model.
@@ -217,6 +226,7 @@ function(input_shape = NULL, name = NULL,
          input_dtype = NULL,
          input_batch_size = NULL,
          input_sparse = NULL,
+         input_ragged = NULL,
          input_batch_shape = NULL,
          input_name = NULL,
          input_tensor = NULL,
@@ -253,6 +263,7 @@ function(input_shape = NULL,
          input_batch_size = NULL,
          input_dtype = NULL,
          input_sparse = NULL,
+         input_ragged = NULL,
          input_batch_shape = NULL,
          input_name = NULL,
          input_tensor = NULL,
@@ -284,6 +295,7 @@ function(input_shape = NULL,
                  dtype = "input_dtype",
 
                  sparse = "input_sparse",
+                 ragged = "input_ragged",
 
                  optional = "input_optional",
 
@@ -468,14 +480,18 @@ get_layer <- function(object, name = NULL, index = NULL) {
 #' Remove the last layer in a Sequential model
 #'
 #' @param object Sequential keras model object
-#' @returns The input `object`, invisibly.
+#' @param rebuild
+#' `bool`. Whether to rebuild the model after removing
+#' the layer. Defaults to `TRUE`.
+#'
+#' @returns The removed layer.
 #'
 #' @family model functions
 #'
 #' @export
-pop_layer <- function(object) {
-  object$pop()
-  invisible(object)
+pop_layer <- function(object, rebuild = TRUE) {
+  args <- capture_args(ignore = "object")
+  do.call(object$pop, args)
 }
 
 

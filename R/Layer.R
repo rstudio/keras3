@@ -193,12 +193,10 @@
 #'   * trainable: Boolean, whether the layer's variables should be trainable.
 #'   * name: String name of the layer.
 #'   * dtype: The dtype of the layer's computations and weights. Can also be a
-#'       `keras$DTypePolicy`,
-#'       which allows the computation and
-#'       weight dtype to differ. Defaults to `NULL`. `NULL` means to use
-#'       `config_dtype_policy()`,
-#'       which is a `"float32"` policy unless set to different value
-#'       (via `config_set_dtype_policy()`).
+#'       `keras$DTypePolicy`, which allows the computation and weight dtype
+#'       to differ. Defaults to `NULL`. `NULL` means to use
+#'       `config_dtype_policy()`, which is a `"float32"` policy unless
+#'       set to different value (via `config_set_dtype_policy()`).
 #'
 #' * ```r
 #'   add_loss(loss)
@@ -390,6 +388,18 @@
 #' * ```r
 #'   quantized_call(...)
 #'   ```
+#'
+#' * ```r
+#'   rematerialized_call(layer_call, ...)
+#'   ```
+#'   Enable rematerialization dynamically for a layer's `call` method.
+#'
+#'   Args:
+#'   * `layer_call`: The original `call` method of a layer.
+#'   * `...`: additional args
+#'
+#'   Returns:
+#'   A rematerialized version of the layer's `call` method.
 #'
 #' * ```r
 #'   load_own_variables(store)

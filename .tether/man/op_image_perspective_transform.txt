@@ -1,0 +1,80 @@
+__signature__
+keras.ops.image.perspective_transform(
+  images,
+  start_points,
+  end_points,
+  interpolation='bilinear',
+  fill_value=0,
+  data_format=None
+)
+__doc__
+Applies a perspective transformation to the image(s).
+
+Args:
+    images: Input image or batch of images. Must be 3D or 4D.
+    start_points: A tensor of shape `(N, 4, 2)` or `(4, 2)`,
+        representing the source points in the original image
+        that define the transformation.
+    end_points: A tensor of shape `(N, 4, 2)` or `(4, 2)`,
+        representing the target points in the output image
+        after transformation.
+    interpolation: Interpolation method. Available methods are `"nearest"`,
+        and `"bilinear"`. Defaults to `"bilinear"`.
+    fill_value: Value used for points outside the boundaries of the input if
+        extrapolation is needed. Defaults to `0`.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
+
+Returns:
+    Applied perspective transform image or batch of images.
+
+Examples:
+
+>>> x = np.random.random((2, 64, 80, 3))  # batch of 2 RGB images
+>>> start_points = np.array(
+...     [
+...         [[0, 0], [0, 64], [80, 0], [80, 64]],
+...         [[0, 0], [0, 64], [80, 0], [80, 64]],
+...     ]
+... )
+>>> end_points = np.array(
+...     [
+...         [[3, 5], [7, 64], [76, -10], [84, 61]],
+...         [[8, 10], [10, 61], [65, 3], [88, 43]],
+...     ]
+... )
+>>> y = keras.ops.image.perspective_transform(x, start_points, end_points)
+>>> y.shape
+(2, 64, 80, 3)
+
+>>> x = np.random.random((64, 80, 3))  # single RGB image
+>>> start_points = np.array([[0, 0], [0, 64], [80, 0], [80, 64]])
+>>> end_points = np.array([[3, 5], [7, 64], [76, -10], [84, 61]])
+>>> y = keras.ops.image.perspective_transform(x, start_points, end_points)
+>>> y.shape
+(64, 80, 3)
+
+>>> x = np.random.random((2, 3, 64, 80))  # batch of 2 RGB images
+>>> start_points = np.array(
+...     [
+...         [[0, 0], [0, 64], [80, 0], [80, 64]],
+...         [[0, 0], [0, 64], [80, 0], [80, 64]],
+...     ]
+... )
+>>> end_points = np.array(
+...     [
+...         [[3, 5], [7, 64], [76, -10], [84, 61]],
+...         [[8, 10], [10, 61], [65, 3], [88, 43]],
+...     ]
+... )
+>>> y = keras.ops.image.perspective_transform(
+...     x, start_points, end_points, data_format="channels_first"
+... )
+>>> y.shape
+(2, 3, 64, 80)
+

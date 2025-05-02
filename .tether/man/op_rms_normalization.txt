@@ -1,0 +1,37 @@
+__signature__
+keras.ops.rms_normalization(
+  x,
+  scale=1,
+  axis=-1,
+  epsilon=None
+)
+__doc__
+Performs Root Mean Square (RMS) normalization on `x`.
+
+The Keras operation implements the operation as described in
+[Root Mean Square Layer Normalization](https://arxiv.org/pdf/1910.07467)
+by Biao Zhang et al.
+
+The operation is different from LayerNormalization with RMS scaling.
+
+It is defined as `rms_normalization(x) = x * rsqrt(mean(square(x))) * scale`
+
+Args:
+    x: Input tensor.
+    axis: The axis or axes along which to perform normalization.
+        Default to -1.
+    scale: Optional scaling factor for the normalization.
+    epsilon: A lower bound value for the norm.
+        Defaults to `backend.epsilon()`.
+
+Returns:
+    The normalized array.
+
+Example:
+
+>>> x = np.random.rand(1, 10)
+>>> x_norm = keras.ops.rms_normalization(x, (10,))
+>>> print(x_norm)
+array([[0.69384296, 0.94444374, 0.16551171, 0.05749961, 1.11008865,
+    0.52475186, 1.57686807, 1.69893307, 1.27292764, 0.30819128]])
+

@@ -122,6 +122,7 @@ one_hot(
   dtype=None,
   sparse=False
 )
+polar(abs_, angle)
 psnr(
   x1,
   x2,
@@ -129,6 +130,12 @@ psnr(
 )
 relu(x)
 relu6(x)
+rms_normalization(
+  x,
+  scale=1,
+  axis=-1,
+  epsilon=None
+)
 selu(x)
 separable_conv(
   inputs,

@@ -11,6 +11,7 @@ keras_model_sequential(
   input_dtype = NULL,
   input_batch_size = NULL,
   input_sparse = NULL,
+  input_ragged = NULL,
   input_batch_shape = NULL,
   input_name = NULL,
   input_tensor = NULL,
@@ -41,6 +42,8 @@ tensors. Note that, if \code{sparse} is \code{FALSE}, sparse tensors can still
 be passed into the input - they will be densified with a default
 value of \code{0}. This feature is only supported with the TensorFlow
 backend. Defaults to \code{FALSE}.}
+
+\item{input_ragged}{bool.}
 
 \item{input_batch_shape}{An optional way to specify \code{batch_size} and \code{input_shape} as one argument.}
 

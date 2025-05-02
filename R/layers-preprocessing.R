@@ -258,7 +258,7 @@ function (object, max_number, fill_value = -1L, ...)
 #'
 #' @param num_bins
 #' The integer number of bins to compute.
-#' If this option is set,
+#' If this option is set, `bin_boundaries` should not be set and
 #' `adapt()` should be called to learn the bin boundaries.
 #'
 #' @param epsilon
@@ -1473,7 +1473,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
 #' according to the given mode. Available methods are `"constant"`,
-#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"reflect"`.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
 #'     The input is extended by reflecting about the edge of the last
 #'     pixel.
@@ -1593,7 +1593,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
 #' according to the given mode. Available methods are `"constant"`,
-#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"reflect"`.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
 #'     The input is extended by reflecting about the edge of the last
 #'     pixel.
@@ -1768,6 +1768,8 @@ function (object, scale, offset = 0, ...)
 #' @param fill_value
 #' Float. Padding value to use when `pad_to_aspect_ratio=TRUE`.
 #'
+#' @param antialias bool
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -1797,7 +1799,7 @@ layer_resizing <-
 function (object, height, width, interpolation = "bilinear",
     crop_to_aspect_ratio = FALSE,
     pad_to_aspect_ratio = FALSE, fill_mode = "constant", fill_value = 0,
-    data_format = NULL, ...)
+    data_format = NULL, ..., antialias = FALSE)
 {
     args <- capture_args(list(height = as_integer, width = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
@@ -2542,7 +2544,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' @param fill_mode
 #' Points outside the boundaries of the input are filled
 #' according to the given mode. Available methods are `"constant"`,
-#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' `"nearest"`, `"wrap"` and `"reflect"`. Defaults to `"reflect"`.
 #' - `"reflect"`: `(d c b a | a b c d | d c b a)`
 #'     The input is extended by reflecting about the edge of the
 #'     last pixel.
@@ -2586,6 +2588,357 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$RandomShear, object, args)
+}
+
+#' Random Erasing data augmentation technique.
+#'
+#' @description
+#' Random Erasing is a data augmentation method where random patches of
+#' an image are erased (replaced by a constant value or noise)
+#' during training to improve generalization.
+#'
+#' # References
+#'    - [Random Erasing paper](https://arxiv.org/abs/1708.04896).
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the probability of applying the transformation.
+#' - `factor=0.0` ensures no erasing is applied.
+#' - `factor=1.0` means erasing is always applied.
+#' - If a tuple `(min, max)` is provided, a probability value
+#'   is sampled between `min` and `max` for each image.
+#' - If a single float is provided, a probability is sampled
+#'   between `0.0` and the given float.
+#' Default is 1.0.
+#'
+#' @param scale
+#' A tuple of two floats representing the aspect ratio range of
+#' the erased patch. This defines the width-to-height ratio of
+#' the patch to be erased. It can help control the rw shape of
+#' the erased region. Default is (0.02, 0.33).
+#'
+#' @param fill_value
+#' A value to fill the erased region with. This can be set to
+#' a constant value or `None` to sample a random value
+#' from a normal distribution. Default is `None`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_center_crop
+#'
+#' @export
+#' @tether keras.layers.RandomErasing
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_erasing <-
+function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
+    value_range = list(0L, 255L), seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomErasing, object, args)
+}
+
+#' Applies random Gaussian blur to images for data augmentation.
+#'
+#' @description
+#' This layer performs a Gaussian blur operation on input images with a
+#' randomly selected degree of blurring, controlled by the `factor` and
+#' `sigma` arguments.
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the extent to which the image hue is impacted.
+#' `factor=0.0` makes this layer perform a no-op operation,
+#' while a value of `1.0` performs the most aggressive
+#' blurring available. If a tuple is used, a `factor` is
+#' sampled between the two values for every image augmented. If a
+#' single float is used, a value between `0.0` and the passed float is
+#' sampled. Default is 1.0.
+#'
+#' @param kernel_size
+#' Integer. Size of the Gaussian kernel used for blurring.
+#' Must be an odd integer. Default is 3.
+#'
+#' @param sigma
+#' Float or tuple of two floats. Standard deviation of the Gaussian
+#' kernel. Controls the intensity of the blur. If a tuple is provided,
+#' a value is sampled between the two for each image. Default is 1.0.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_center_crop
+#'
+#' @export
+#' @tether keras.layers.RandomGaussianBlur
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_gaussian_blur <-
+function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
+    0L, 255L), data_format = NULL, seed = NULL, ...)
+{
+    args <- capture_args(list(kernel_size = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$RandomGaussianBlur, object, args)
+}
+
+#' Preprocessing layer for random inversion of image colors.
+#'
+#' @description
+#' This layer randomly inverts the colors of input images with a specified
+#' probability range. When applied, each image has a chance of having its
+#' colors inverted, where the pixel values are transformed to their
+#' complementary values. Images that are not selected for inversion
+#' remain unchanged.
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the probability of inverting the image colors.
+#' If a tuple is provided, the value is sampled between the two values
+#' for each image, where `factor[0]` is the minimum and `factor[1]` is
+#' the maximum probability. If a single float is provided, a value
+#' between `0.0` and the provided float is sampled.
+#' Defaults to `(0, 1)`.
+#'
+#' @param value_range
+#' a tuple or a list of two elements. The first value
+#' represents the lower bound for values in passed images, the second
+#' represents the upper bound. Images passed to the layer should have
+#' values within `value_range`. Defaults to `(0, 255)`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @inheritParams layer_center_crop
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomInvert
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_invert <-
+function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
+    data_format = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomInvert, object, args)
+}
+
+#' A preprocessing layer that applies random perspective transformations.
+#'
+#' @description
+#' This layer distorts the perspective of input images by shifting their
+#' corner points, simulating a 3D-like transformation. The amount of distortion
+#' is controlled by the `factor` and `scale` parameters.
+#'
+#' @param factor
+#' A float or a tuple of two floats.
+#' Represents the probability of applying the perspective
+#' transformation to each image in the batch.
+#' - `factor=0.0` ensures no transformation is applied.
+#' - `factor=1.0` means the transformation is always applied.
+#' - If a tuple `(min, max)` is provided, a probability is randomly
+#'   sampled between `min` and `max` for each image.
+#' - If a single float is given, the probability is sampled between
+#'   `0.0` and the provided float.
+#' Default is 1.0.
+#'
+#' @param scale
+#' A float defining the relative amount of perspective shift.
+#' Determines how much the image corners are displaced, affecting
+#' the intensity of the perspective effect.
+#'
+#' @param interpolation
+#' Interpolation mode. Supported values: `"nearest"`,
+#' `"bilinear"`.
+#'
+#' @param fill_value
+#' a float represents the value to be filled outside the
+#' boundaries when `fill_mode="constant"`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @inheritParams layer_center_crop
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomPerspective
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_perspective <-
+function (object, factor = 1, scale = 1, interpolation = "bilinear",
+    fill_value = 0, seed = NULL, data_format = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomPerspective, object, args)
+}
+
+#' Performs the AugMix data augmentation technique.
+#'
+#' @description
+#' AugMix aims to produce images with variety while preserving the image
+#' semantics and local statistics. During the augmentation process,
+#' the same augmentation is applied across all images in the batch
+#' in num_chains different ways, with each chain consisting of
+#' chain_depth augmentations.
+#'
+#' # References
+#' - [AugMix paper](https://arxiv.org/pdf/1912.02781)
+#' - [Official Code](https://github.com/google-research/augmix)
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two number tuple written (low, high).
+#' This is typically either `(0, 1)` or `(0, 255)` depending
+#' on how your preprocessing pipeline is set up.
+#'
+#' @param num_chains
+#' an integer representing the number of different chains to
+#' be mixed, defaults to 3.
+#'
+#' @param chain_depth
+#' an integer representing the maximum number of
+#' transformations to be applied in each chain. The actual number
+#' of transformations in each chain will be sampled randomly
+#' from the range `[0, `chain_depth`]`. Defaults to 3.
+#'
+#' @param factor
+#' The strength of the augmentation as a normalized value
+#' between 0 and 1. Default is 0.3.
+#'
+#' @param alpha
+#' a float value used as the probability coefficients for the
+#' Beta and Dirichlet distributions, defaults to 1.0.
+#'
+#' @param all_ops
+#' Use all operations (including random_brightness,
+#' random_color_degeneration, random_contrast and random_sharpness).
+#' Default is True.
+#'
+#' @param interpolation
+#' The interpolation method to use for resizing operations.
+#' Options include `"nearest"`, `"bilinear"`. Default is `"bilinear"`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @inheritParams layer_center_crop
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.AugMix
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_aug_mix <-
+function (object, value_range = c(0L, 255L), num_chains = 3L,
+    chain_depth = 3L, factor = 0.3, alpha = 1, all_ops = TRUE,
+    interpolation = "bilinear", seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(num_chains = as_integer, chain_depth = as_integer,
+        seed = as_integer, input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
+    create_layer(keras$layers$AugMix, object, args)
+}
+
+#' CutMix data augmentation technique.
+#'
+#' @description
+#' CutMix is a data augmentation method where patches are cut and pasted
+#' between two images in the dataset, while the labels are also mixed
+#' proportionally to the area of the patches.
+#'
+#' # References
+#'    - [CutMix paper]( https://arxiv.org/abs/1905.04899).
+#'
+#' @param factor
+#' A single float or a tuple of two floats between 0 and 1.
+#' If a tuple of numbers is passed, a `factor` is sampled
+#' between the two values.
+#' If a single float is passed, a value between 0 and the passed
+#' float is sampled. These values define the range from which the
+#' mixing weight is sampled. A higher factor increases the variability
+#' in patch sizes, leading to more diverse and larger mixed patches.
+#' Defaults to 1.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @inheritParams layer_center_crop
+#'
+#' @export
+#' @tether keras.layers.CutMix
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_cut_mix <-
+function (object, factor = 1, seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$CutMix, object, args)
 }
 
 #' Applies a series of layers to an input.

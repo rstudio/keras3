@@ -2,10 +2,14 @@ __signature__
 keras.ops.convert_to_tensor(
   x,
   dtype=None,
-  sparse=None
+  sparse=None,
+  ragged=None
 )
 __doc__
-Convert a NumPy array to a tensor.
+Convert a NumPy array or Python array to a tensor.
+
+Native tensors for the current backend or left unchanged unless the `dtype`,
+`sparse` or `ragged` arguments are set.
 
 Args:
     x: A NumPy array, Python array (can be nested) or a backend tensor.
@@ -13,6 +17,9 @@ Args:
     sparse: Whether to keep sparse tensors. `False` will cause sparse
         tensors to be densified. The default value of `None` means that
         sparse tensors are kept only if the backend supports them.
+    ragged: Whether to keep ragged tensors. `False` will cause ragged
+        tensors to be densified. The default value of `None` means that
+        ragged tensors are kept only if the backend supports them.
 
 Returns:
     A backend tensor of the specified `dtype` and sparseness.

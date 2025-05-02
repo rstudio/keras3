@@ -579,3 +579,92 @@ function (indices, shape)
     args <- capture_args(list(indices = as_index, shape = normalize_shape))
     do.call(ops$unravel_index, args)
 }
+
+#' Constructs a complex tensor whose elements are Cartesian
+#'
+#' @description
+#' coordinates corresponding to the polar coordinates
+#' with absolute value `abs` and angle `angle`.
+#'
+#' The operation is numerically equivalent to `torch.polar()`.
+#' It is not equivalent to `scipy.lingalg.polar()` which performs
+#' Singular Value Decomposition.
+#'
+#' Given the magnitude (`abs_`) and angle (`angle`), this function computes the
+#' corresponding complex number in the form of `real + imaginary * 1i`, where:
+#' - `real = abs_ * cos(angle)`
+#' - `imaginary = abs_ * sin(angle)`
+#'
+#' # Examples
+#' ```{r}
+#' abs_ <- random_normal(c(1, 2))
+#' angle <- random_normal(c(1, 2))
+#' op_shape(op_polar(abs_, angle))
+#' op_polar(abs_, angle)
+#' ```
+#'
+#' @returns
+#' A complex number (or array of complex numbers) with the same shape as
+#' `abs_` and `angle`.
+#'
+#' @param abs_
+#' The magnitude (absolute value) of the complex number.
+#'
+#' @param angle
+#' The angle (in radians) of the complex number.
+#'
+#' @export
+#' @tether keras.ops.polar
+#' @family nn ops
+#' @family ops
+op_polar <-
+  function (abs_, angle)
+    keras$ops$polar(abs_, angle)
+
+
+#' Performs Root Mean Square (RMS) normalization on `x`.
+#'
+#' @description
+#' The Keras operation implements the operation as described in
+#' [Root Mean Square Layer Normalization](https://arxiv.org/pdf/1910.07467)
+#' by Biao Zhang et al.
+#'
+#' The operation is different from LayerNormalization with RMS scaling.
+#'
+#' It is defined as `rms_normalization(x) = x * rsqrt(mean(square(x))) * scale`
+#'
+#' # Examples
+#'
+#' ```python
+#' x <- random_uniform(c(1, 10))
+#' x_norm <- op_rms_normalization(x, scale = 10)
+#' x_norm
+#' ```
+#'
+#' @returns
+#' The normalized array.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' The axis or axes along which to perform normalization.
+#' Default to -1.
+#'
+#' @param scale
+#' Optional scaling factor for the normalization.
+#'
+#' @param epsilon
+#' A lower bound value for the norm.
+#' Defaults to `config_epsilon()`.
+#'
+#' @export
+#' @tether keras.ops.rms_normalization
+#' @family nn ops
+#' @family ops
+op_rms_normalization <-
+function (x, scale = 1L, axis = -1L, epsilon = NULL)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$ops$rms_normalization, args)
+}
