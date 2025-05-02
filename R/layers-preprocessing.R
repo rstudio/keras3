@@ -2709,6 +2709,54 @@ function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
     create_layer(keras$layers$RandomGaussianBlur, object, args)
 }
 
+#' Preprocessing layer for random inversion of image colors.
+#'
+#' @description
+#' This layer randomly inverts the colors of input images with a specified
+#' probability range. When applied, each image has a chance of having its
+#' colors inverted, where the pixel values are transformed to their
+#' complementary values. Images that are not selected for inversion
+#' remain unchanged.
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the probability of inverting the image colors.
+#' If a tuple is provided, the value is sampled between the two values
+#' for each image, where `factor[0]` is the minimum and `factor[1]` is
+#' the maximum probability. If a single float is provided, a value
+#' between `0.0` and the provided float is sampled.
+#' Defaults to `(0, 1)`.
+#'
+#' @param value_range
+#' a tuple or a list of two elements. The first value
+#' represents the lower bound for values in passed images, the second
+#' represents the upper bound. Images passed to the layer should have
+#' values within `value_range`. Defaults to `(0, 255)`.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomInvert
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_invert <-
+function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
+    data_format = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomInvert, object, args)
+}
+
 
 #' Performs the AugMix data augmentation technique.
 #'

@@ -1065,6 +1065,13 @@ RandomHue(
   seed=None,
   **kwargs
 )
+RandomInvert(
+  factor=1.0,
+  value_range=(0, 255),
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 RandomPosterization(
   factor,
   value_range=(0, 255),
