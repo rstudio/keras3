@@ -124,11 +124,7 @@ get_compiled_model <- function() {
   model |> compile(
     optimizer = optimizer_adam(),
     loss = loss_sparse_categorical_crossentropy(from_logits = TRUE),
-    metrics = list(metric_sparse_categorical_accuracy()),
-
-    # XLA compilation is temporarily disabled due to a bug
-    # https://github.com/keras-team/keras/issues/19005
-    jit_compile = FALSE
+    metrics = list(metric_sparse_categorical_accuracy())
   )
   model
 }
@@ -136,8 +132,8 @@ get_compiled_model <- function() {
 get_dataset <- function(batch_size = 64) {
 
   c(c(x_train, y_train), c(x_test, y_test)) %<-% dataset_mnist()
-  x_train <- array_reshape(x_train, c(-1, 784))
-  x_test <- array_reshape(x_test, c(-1, 784))
+  x_train <- array_reshape(x_train, c(-1, 784)) / 255
+  x_test <- array_reshape(x_test, c(-1, 784)) / 255
 
   # Reserve 10,000 samples for validation.
   val_i <- sample.int(nrow(x_train), 10000)
@@ -146,18 +142,25 @@ get_dataset <- function(batch_size = 64) {
   x_train = x_train[-val_i,]
   y_train = y_train[-val_i]
 
+  y_train <- array_reshape(y_train, c(-1, 1))
+  y_val <- array_reshape(y_val, c(-1, 1))
+  y_test <- array_reshape(y_test, c(-1, 1))
+
   # Prepare the training dataset.
   train_dataset <- list(x_train, y_train) |>
+    lapply(np_array, "float32") |>
     tensor_slices_dataset() |>
     dataset_batch(batch_size)
 
   # Prepare the validation dataset.
   val_dataset <- list(x_val, y_val) |>
+    lapply(np_array, "float32") |>
     tensor_slices_dataset() |>
     dataset_batch(batch_size)
 
   # Prepare the test dataset.
   test_dataset <- list(x_test, y_test) |>
+    lapply(np_array, "float32") |>
     tensor_slices_dataset() |>
     dataset_batch(batch_size)
 
@@ -193,18 +196,18 @@ with(strategy$scope(), {
 
 ```
 ## Epoch 1/2
-## 782/782 - 4s - 6ms/step - loss: 2.1409 - sparse_categorical_accuracy: 0.8896 - val_loss: 0.7223 - val_sparse_categorical_accuracy: 0.9216
+## 782/782 - 7s - 9ms/step - loss: nan - sparse_categorical_accuracy: nan - val_loss: nan - val_sparse_categorical_accuracy: nan
 ## Epoch 2/2
-## 782/782 - 3s - 4ms/step - loss: 0.4292 - sparse_categorical_accuracy: 0.9387 - val_loss: 0.3693 - val_sparse_categorical_accuracy: 0.9404
-## 157/157 - 0s - 2ms/step - loss: 0.3976 - sparse_categorical_accuracy: 0.9386
+## 782/782 - 5s - 7ms/step - loss: nan - sparse_categorical_accuracy: nan - val_loss: nan - val_sparse_categorical_accuracy: nan
+## 157/157 - 1s - 5ms/step - loss: nan - sparse_categorical_accuracy: nan
 ```
 
 ```
 ## $loss
-## [1] 0.3976028
+## [1] NaN
 ##
 ## $sparse_categorical_accuracy
-## [1] 0.9386
+## [1] NaN
 ```
 
 ## Using callbacks to ensure fault tolerance
@@ -274,7 +277,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.1485 - sparse_categorical_accuracy: 0.9627 - val_loss: 0.2062 - val_sparse_categorical_accuracy: 0.9560
+## 782/782 - 5s - 7ms/step - loss: nan - sparse_categorical_accuracy: nan - val_loss: nan - val_sparse_categorical_accuracy: nan
 ```
 
 ``` r
@@ -283,7 +286,7 @@ run_training(epochs = 1)
 ```
 
 ```
-## 782/782 - 4s - 5ms/step - loss: 0.1227 - sparse_categorical_accuracy: 0.9673 - val_loss: 0.2007 - val_sparse_categorical_accuracy: 0.9602
+## 782/782 - 6s - 7ms/step - loss: nan - sparse_categorical_accuracy: nan - val_loss: nan - val_sparse_categorical_accuracy: nan
 ```
 
 ## `tf$data` performance tips

@@ -119,6 +119,14 @@ a Sequential model behaves very much like a stack of layers.
 
 ``` r
 model |> pop_layer()
+```
+
+```
+## <Dense name=dense_8, built=False>
+##  signature: (*args, **kwargs)
+```
+
+``` r
 length(model$layers)  # 2
 ```
 

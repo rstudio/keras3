@@ -240,8 +240,8 @@ d2 <- get_layer(model, "d2")
 d2$kernel$value |> jax$debug$visualize_array_sharding()
 d2$bias$value |> jax$debug$visualize_array_sharding()
 
-x_batch <- dataset |>  
-  as_iterator() |> iter_next() |> 
+x_batch <- dataset |>
+  as_iterator() |> iter_next() |>
   _[[1]] |> op_convert_to_tensor()
 
 output_array <- model(x_batch)

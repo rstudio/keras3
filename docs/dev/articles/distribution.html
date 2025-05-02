@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Distributed training with Keras 3 • keras3</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -32,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,7 +135,7 @@ semantics.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keras3.posit.co/">keras3</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># The distribution API is only implemented for the JAX backend for now.</span></span>
-<span><span class="fu"><a href="../reference/use_backend.html">use_backend</a></span><span class="op">(</span><span class="st">"jax"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/use_backend.html">use_backend</a></span><span class="op">(</span><span class="st">"jax"</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">jax</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"jax"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/tfdatasets" class="external-link">tfdatasets</a></span>, exclude <span class="op">=</span> <span class="st">"shape"</span><span class="op">)</span> <span class="co"># For dataset input.</span></span></code></pre></div>
@@ -255,16 +254,16 @@ input data.</p>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 8/8 - 0s - 38ms/step - loss: 1.1533</span></span>
+<span><span class="co">## 8/8 - 0s - 40ms/step - loss: 1.1536</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 1.0621</span></span>
+<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 1.0540</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 8/8 - 0s - 7ms/step - loss: 1.0163</span></span></code></pre>
+<span><span class="co">## 8/8 - 0s - 6ms/step - loss: 1.0072</span></span></code></pre>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 8/8 - 0s - 7ms/step - loss: 0.9673</span></span></code></pre>
+<pre><code><span><span class="co">## 8/8 - 0s - 9ms/step - loss: 0.9620</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.9673058</span></span></code></pre>
+<span><span class="co">## [1] 0.9620273</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="modelparallel-and-layoutmap">
@@ -331,28 +330,80 @@ input key again. If there are multiple matches, a
 <span>              activation <span class="op">=</span> <span class="st">"softmax"</span>,</span>
 <span>              name <span class="op">=</span> <span class="st">"d2"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span>inputs <span class="op">=</span> <span class="va">inputs</span>, outputs <span class="op">=</span> <span class="va">outputs</span><span class="op">)</span></span></code></pre></div>
+<p>We can visualize how individual weights will be sharded</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"d1"</span><span class="op">)</span></span>
+<span><span class="va">d1</span><span class="op">$</span><span class="va">kernel</span><span class="op">$</span><span class="va">value</span> <span class="op">|&gt;</span> <span class="va">jax</span><span class="op">$</span><span class="va">debug</span><span class="op">$</span><span class="fu">visualize_array_sharding</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ┌───────┬───────┬───────┬───────┐</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │CPU 0,4│CPU 1,5│CPU 2,6│CPU 3,7│</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## │       │       │       │       │</span></span>
+<span><span class="co">## └───────┴───────┴───────┴───────┘</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_layer.html">get_layer</a></span><span class="op">(</span><span class="va">model</span>, <span class="st">"d2"</span><span class="op">)</span></span>
+<span><span class="va">d2</span><span class="op">$</span><span class="va">kernel</span><span class="op">$</span><span class="va">value</span> <span class="op">|&gt;</span> <span class="va">jax</span><span class="op">$</span><span class="va">debug</span><span class="op">$</span><span class="fu">visualize_array_sharding</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ┌───────────────────┐</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │CPU 0,1,2,3,4,5,6,7│</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## │                   │</span></span>
+<span><span class="co">## └───────────────────┘</span></span></code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d2</span><span class="op">$</span><span class="va">bias</span><span class="op">$</span><span class="va">value</span> <span class="op">|&gt;</span> <span class="va">jax</span><span class="op">$</span><span class="va">debug</span><span class="op">$</span><span class="fu">visualize_array_sharding</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ┌───────────────────┐</span></span>
+<span><span class="co">## │CPU 0,1,2,3,4,5,6,7│</span></span>
+<span><span class="co">## └───────────────────┘</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x_batch</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">as_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iter_next</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="va">_</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># The data will be sharded across the "data" dimension of the method, which</span></span>
+<span><span class="va">output_array</span> <span class="op">&lt;-</span> <span class="fu">model</span><span class="op">(</span><span class="va">x_batch</span><span class="op">)</span></span>
+<span><span class="va">output_array</span> <span class="op">|&gt;</span> <span class="va">jax</span><span class="op">$</span><span class="va">debug</span><span class="op">$</span><span class="fu">visualize_array_sharding</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ┌─────────────┐</span></span>
+<span><span class="co">## │             │</span></span>
+<span><span class="co">## │ CPU 0,1,2,3 │</span></span>
+<span><span class="co">## │             │</span></span>
+<span><span class="co">## │             │</span></span>
+<span><span class="co">## ├─────────────┤</span></span>
+<span><span class="co">## │             │</span></span>
+<span><span class="co">## │ CPU 4,5,6,7 │</span></span>
+<span><span class="co">## │             │</span></span>
+<span><span class="co">## │             │</span></span>
+<span><span class="co">## └─────────────┘</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># The data will be sharded across the "data" dimension of the method, which</span></span>
 <span><span class="co"># has 2 devices.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">dataset</span>, epochs <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 8/8 - 0s - 42ms/step - loss: 1.1424</span></span>
+<span><span class="co">## 8/8 - 0s - 46ms/step - loss: 1.1676</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 8/8 - 0s - 7ms/step - loss: 1.0528</span></span>
+<span><span class="co">## 8/8 - 0s - 4ms/step - loss: 1.1134</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 8/8 - 0s - 7ms/step - loss: 1.0393</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<span><span class="co">## 8/8 - 0s - 5ms/step - loss: 1.1034</span></span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 8/8 - 0s - 9ms/step - loss: 1.0088</span></span></code></pre>
+<pre><code><span><span class="co">## 8/8 - 0s - 8ms/step - loss: 1.0676</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 1.008847</span></span></code></pre>
+<span><span class="co">## [1] 1.067567</span></span></code></pre>
 <p>It is also easy to change the mesh structure to tune the computation
 between more data parallel or model parallel. You can do this by
 adjusting the shape of the mesh. And no changes are needed for any other
 code.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">full_data_parallel_mesh</span> <span class="op">&lt;-</span> <span class="va">keras</span><span class="op">$</span><span class="va">distribution</span><span class="op">$</span><span class="fu">DeviceMesh</span><span class="op">(</span></span>
 <span>  shape <span class="op">=</span> <span class="fu"><a href="../reference/shape.html">shape</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  axis_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"model"</span><span class="op">)</span>,</span>
@@ -401,7 +452,7 @@ DTensors with tf.keras</a></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
     </footer>

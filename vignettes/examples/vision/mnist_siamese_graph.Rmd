@@ -161,45 +161,45 @@ history <- model %>% fit(
 
 ```
 ## Epoch 1/20
-## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7566 - loss: 0.1639 - val_binary_accuracy: 0.8824 - val_loss: 0.0976
+## 469/469 - 6s - 13ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974
 ## Epoch 2/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8906 - loss: 0.0862 - val_binary_accuracy: 0.9223 - val_loss: 0.0623
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8899 - loss: 0.0866 - val_binary_accuracy: 0.9227 - val_loss: 0.0626
 ## Epoch 3/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9246 - loss: 0.0595 - val_binary_accuracy: 0.9372 - val_loss: 0.0497
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9233 - loss: 0.0603 - val_binary_accuracy: 0.9398 - val_loss: 0.0497
 ## Epoch 4/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9434 - loss: 0.0451 - val_binary_accuracy: 0.9502 - val_loss: 0.0401
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9423 - loss: 0.0460 - val_binary_accuracy: 0.9480 - val_loss: 0.0399
 ## Epoch 5/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9555 - loss: 0.0353 - val_binary_accuracy: 0.9593 - val_loss: 0.0322
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9561 - loss: 0.0356 - val_binary_accuracy: 0.9578 - val_loss: 0.0330
 ## Epoch 6/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9642 - loss: 0.0287 - val_binary_accuracy: 0.9626 - val_loss: 0.0298
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9637 - loss: 0.0295 - val_binary_accuracy: 0.9613 - val_loss: 0.0313
 ## Epoch 7/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9699 - loss: 0.0243 - val_binary_accuracy: 0.9655 - val_loss: 0.0277
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9686 - loss: 0.0252 - val_binary_accuracy: 0.9645 - val_loss: 0.0275
 ## Epoch 8/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9733 - loss: 0.0209 - val_binary_accuracy: 0.9684 - val_loss: 0.0258
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9730 - loss: 0.0217 - val_binary_accuracy: 0.9672 - val_loss: 0.0264
 ## Epoch 9/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9776 - loss: 0.0186 - val_binary_accuracy: 0.9664 - val_loss: 0.0263
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9768 - loss: 0.0190 - val_binary_accuracy: 0.9686 - val_loss: 0.0246
 ## Epoch 10/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9790 - loss: 0.0166 - val_binary_accuracy: 0.9698 - val_loss: 0.0246
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9793 - loss: 0.0169 - val_binary_accuracy: 0.9701 - val_loss: 0.0242
 ## Epoch 11/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9813 - loss: 0.0150 - val_binary_accuracy: 0.9729 - val_loss: 0.0216
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9805 - loss: 0.0158 - val_binary_accuracy: 0.9719 - val_loss: 0.0233
 ## Epoch 12/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9821 - loss: 0.0144 - val_binary_accuracy: 0.9723 - val_loss: 0.0218
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9822 - loss: 0.0148 - val_binary_accuracy: 0.9718 - val_loss: 0.0230
 ## Epoch 13/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9839 - loss: 0.0131 - val_binary_accuracy: 0.9740 - val_loss: 0.0210
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9833 - loss: 0.0135 - val_binary_accuracy: 0.9702 - val_loss: 0.0234
 ## Epoch 14/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9845 - loss: 0.0126 - val_binary_accuracy: 0.9744 - val_loss: 0.0201
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9846 - loss: 0.0129 - val_binary_accuracy: 0.9730 - val_loss: 0.0220
 ## Epoch 15/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9861 - loss: 0.0114 - val_binary_accuracy: 0.9735 - val_loss: 0.0213
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9857 - loss: 0.0117 - val_binary_accuracy: 0.9759 - val_loss: 0.0193
 ## Epoch 16/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9871 - loss: 0.0106 - val_binary_accuracy: 0.9733 - val_loss: 0.0218
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9868 - loss: 0.0111 - val_binary_accuracy: 0.9749 - val_loss: 0.0217
 ## Epoch 17/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9872 - loss: 0.0103 - val_binary_accuracy: 0.9762 - val_loss: 0.0188
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9872 - loss: 0.0106 - val_binary_accuracy: 0.9741 - val_loss: 0.0211
 ## Epoch 18/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9876 - loss: 0.0103 - val_binary_accuracy: 0.9751 - val_loss: 0.0200
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9880 - loss: 0.0099 - val_binary_accuracy: 0.9746 - val_loss: 0.0201
 ## Epoch 19/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9881 - loss: 0.0096 - val_binary_accuracy: 0.9747 - val_loss: 0.0207
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9756 - val_loss: 0.0207
 ## Epoch 20/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9890 - loss: 0.0088 - val_binary_accuracy: 0.9756 - val_loss: 0.0201
+## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9888 - loss: 0.0091 - val_binary_accuracy: 0.9776 - val_loss: 0.0184
 ```
 
 ``` r
@@ -218,7 +218,7 @@ tr_pred <- predict(model, list(tr$pair1, tr$pair2))[,1]
 ```
 
 ```
-## 1875/1875 - 2s - 847us/step
+## 1875/1875 - 2s - 1ms/step
 ```
 
 ``` r
@@ -227,7 +227,7 @@ te_pred <- predict(model, list(te$pair1, te$pair2))[,1]
 ```
 
 ```
-## 313/313 - 0s - 1ms/step
+## 313/313 - 1s - 2ms/step
 ```
 
 ``` r
@@ -237,7 +237,7 @@ sprintf('* Accuracy on training set: %0.2f%%', (100 * tr_acc))
 ```
 
 ```
-## [1] "* Accuracy on training set: 99.65%"
+## [1] "* Accuracy on training set: 99.67%"
 ```
 
 ``` r
@@ -245,7 +245,7 @@ sprintf('* Accuracy on test set: %0.2f%%', (100 * te_acc))
 ```
 
 ```
-## [1] "* Accuracy on test set: 98.14%"
+## [1] "* Accuracy on test set: 98.25%"
 ```
 
 ## Plots
