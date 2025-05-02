@@ -621,3 +621,50 @@ op_polar <-
   function (abs_, angle)
     keras$ops$polar(abs_, angle)
 
+
+#' Performs Root Mean Square (RMS) normalization on `x`.
+#'
+#' @description
+#' The Keras operation implements the operation as described in
+#' [Root Mean Square Layer Normalization](https://arxiv.org/pdf/1910.07467)
+#' by Biao Zhang et al.
+#'
+#' The operation is different from LayerNormalization with RMS scaling.
+#'
+#' It is defined as `rms_normalization(x) = x * rsqrt(mean(square(x))) * scale`
+#'
+#' # Examples
+#'
+#' ```python
+#' x <- random_uniform(c(1, 10))
+#' x_norm <- op_rms_normalization(x, scale = 10)
+#' x_norm
+#' ```
+#'
+#' @returns
+#' The normalized array.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param axis
+#' The axis or axes along which to perform normalization.
+#' Default to -1.
+#'
+#' @param scale
+#' Optional scaling factor for the normalization.
+#'
+#' @param epsilon
+#' A lower bound value for the norm.
+#' Defaults to `config_epsilon()`.
+#'
+#' @export
+#' @tether keras.ops.rms_normalization
+#' @family nn ops
+#' @family ops
+op_rms_normalization <-
+function (x, scale = 1L, axis = -1L, epsilon = NULL)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(keras$ops$rms_normalization, args)
+}
