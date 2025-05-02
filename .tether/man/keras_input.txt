@@ -4,6 +4,7 @@ keras.layers.Input(
   batch_size=None,
   dtype=None,
   sparse=None,
+  ragged=None,
   batch_shape=None,
   name=None,
   tensor=None,
@@ -32,6 +33,11 @@ Args:
         (e.g. `"float32"`, `"int32"`...)
     sparse: A boolean specifying whether the expected input will be sparse
         tensors. Note that, if `sparse` is `False`, sparse tensors can still
+        be passed into the input - they will be densified with a default
+        value of 0. This feature is only supported with the TensorFlow and
+        the JAX backends. Defaults to `False`.
+    ragged: A boolean specifying whether the expected input will be ragged
+        tensors. Note that, if `ragged` is `False`, ragged tensors can still
         be passed into the input - they will be densified with a default
         value of 0. This feature is only supported with the TensorFlow
         backend. Defaults to `False`.

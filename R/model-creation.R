@@ -90,6 +90,13 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #' value of 0. This feature is only supported with the TensorFlow
 #' backend. Defaults to `FALSE`.
 #'
+#' @param ragged
+#' A boolean specifying whether the expected input will be ragged
+#' tensors. Note that, if `ragged` is `FALSE`, ragged tensors can still
+#' be passed into the input - they will be densified with a default
+#' value of 0. This feature is only supported with the TensorFlow
+#' backend. Defaults to `FALSE`.
+#'
 #' @param batch_shape
 #' Optional shape list (list of integers or `NULL` objects),
 #' including the batch size.
@@ -115,7 +122,7 @@ keras_model <- function(inputs = NULL, outputs = NULL, ...) {
 #'
 #' @tether keras.layers.Input
 keras_input <-
-function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL,
+function (shape = NULL, batch_size = NULL, dtype = NULL, sparse = NULL, ragged = NULL,
     batch_shape = NULL, name = NULL, tensor = NULL, optional = FALSE)
 {
     args <- capture_args(list(shape = normalize_shape, batch_size = as_integer,
