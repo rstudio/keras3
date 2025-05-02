@@ -30,6 +30,14 @@ files <- list.files("vignettes-src",
 
 for (f in files) {
   cli::cli_h1(f)
+  output <- sub("vignettes-src/", "vignettes/", f, fixed=TRUE)
+  if (file.exists(output)) {
+    age <- difftime(Sys.time(), file.info(output)$mtime, units = "days")
+    if (age < 1) {
+      cli::cli_inform(c("*" = "recently rendered, skipping"))
+      next
+    }
+  }
   knit_vignette(f, external = TRUE)
 }
 

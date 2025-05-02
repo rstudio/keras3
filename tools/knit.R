@@ -6,6 +6,7 @@ knit_keras_init <- function(backend = NULL) {
   # reticulate::use_virtualenv("r-keras")
   if(!is.null(backend))
     keras3::use_backend(backend)
+
   options(width = 76)
 
   keras_init <- function() {
