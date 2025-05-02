@@ -26,12 +26,10 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |      trainable: Boolean, whether the layer's variables should be trainable.
  |      name: String name of the layer.
  |      dtype: The dtype of the layer's computations and weights. Can also be a
- |          `keras.DTypePolicy`,
- |          which allows the computation and
- |          weight dtype to differ. Defaults to `None`. `None` means to use
- |          `keras.config.dtype_policy()`,
- |          which is a `float32` policy unless set to different value
- |          (via `keras.config.set_dtype_policy()`).
+ |          `keras.DTypePolicy`, which allows the computation and weight dtype
+ |          to differ. Defaults to `None`. `None` means to use
+ |          `keras.config.dtype_policy()`, which is a `float32` policy unless
+ |          set to different value (via `keras.config.set_dtype_policy()`).
  |
  |  Attributes:
  |      name: The name of the layer (string).
@@ -372,6 +370,20 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |    *args,
  |    **kwargs
  |  )
+ |
+ |  rematerialized_call(
+ |    self,
+ |    layer_call,
+ |    *args,
+ |    **kwargs
+ |  )
+ |      Enable rematerialization dynamically for layer's call method.
+ |
+ |      Args:
+ |          layer_call: The original `call` method of a layer.
+ |
+ |      Returns:
+ |          Rematerialized layer's `call` method.
  |
  |  save_own_variables(self, store)
  |      Saves the state of the layer.
