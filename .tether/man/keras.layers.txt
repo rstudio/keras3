@@ -1028,6 +1028,15 @@ RandomCrop(
   name=None,
   **kwargs
 )
+RandomErasing(
+  factor=1.0,
+  scale=(0.02, 0.33),
+  fill_value=None,
+  value_range=(0, 255),
+  seed=None,
+  data_format=None,
+  **kwargs
+)
 RandomFlip(
   mode='horizontal_and_vertical',
   seed=None,

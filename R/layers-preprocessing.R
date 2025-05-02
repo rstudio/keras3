@@ -2590,6 +2590,70 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
     create_layer(keras$layers$RandomShear, object, args)
 }
 
+#' Random Erasing data augmentation technique.
+#'
+#' @description
+#' Random Erasing is a data augmentation method where random patches of
+#' an image are erased (replaced by a constant value or noise)
+#' during training to improve generalization.
+#'
+#' # References
+#'    - [Random Erasing paper](https://arxiv.org/abs/1708.04896).
+#'
+#' @param factor
+#' A single float or a tuple of two floats.
+#' `factor` controls the probability of applying the transformation.
+#' - `factor=0.0` ensures no erasing is applied.
+#' - `factor=1.0` means erasing is always applied.
+#' - If a tuple `(min, max)` is provided, a probability value
+#'   is sampled between `min` and `max` for each image.
+#' - If a single float is provided, a probability is sampled
+#'   between `0.0` and the given float.
+#' Default is 1.0.
+#'
+#' @param scale
+#' A tuple of two floats representing the aspect ratio range of
+#' the erased patch. This defines the width-to-height ratio of
+#' the patch to be erased. It can help control the rw shape of
+#' the erased region. Default is (0.02, 0.33).
+#'
+#' @param fill_value
+#' A value to fill the erased region with. This can be set to
+#' a constant value or `None` to sample a random value
+#' from a normal distribution. Default is `None`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have.
+#' Represented as a two-number tuple written `[low, high]`. This is
+#' typically either `[0, 1]` or `[0, 255]` depending on how your
+#' preprocessing pipeline is set up.
+#'
+#' @param seed
+#' Integer. Used to create a random seed.
+#'
+#' @param object
+#' Object to compose the layer with. A tensor, array, or sequential model.
+#'
+#' @param ...
+#' For forward/backward compatability.
+#'
+#' @export
+#' @tether keras.layers.RandomErasing
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_erasing <-
+function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
+    value_range = list(0L, 255L), seed = NULL, data_format = NULL,
+    ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomErasing, object, args)
+}
+
+
 #' Performs the AugMix data augmentation technique.
 #'
 #' @description
