@@ -330,6 +330,10 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' **Note:** This feature is currently supported only with TensorFlow, JAX
 #' and Torch backends.
 #'
+#' **Note:** Be aware that the exported artifact may contain information
+#' from the local file system when using `format="onnx"`, `verbose=TRUE`
+#' and Torch backend.
+#'
 #' # Examples
 #' ```r
 #' # Create the artifact
@@ -391,7 +395,9 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' `NULL`.
 #'
 #' @param verbose
-#' whether to print all the variables of the exported model.
+#' Bool. Whether to print all the variables of the exported model. Defaults
+#' to `NULL`, which uses the default value set by different
+#' backends and formats.
 #'
 #' @returns This is called primarily for the side effect of exporting `object`.
 #'   The first argument, `object` is also returned, invisibly, to enable usage
@@ -403,7 +409,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 # @seealso
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/export>
 export_savedmodel.keras.src.models.model.Model <-
-function(object, export_dir_base, ..., format = 'tf_saved_model', verbose = TRUE, input_signature = NULL) {
+function(object, export_dir_base, ..., format = 'tf_saved_model', verbose = NULL, input_signature = NULL) {
   args <- capture_args(ignore = c("object", "export_dir_base"), force = "format")
   # export_dir_base is called 'filename' in method. Pass it as a positional arg
   args <- c(list(export_dir_base), args)
