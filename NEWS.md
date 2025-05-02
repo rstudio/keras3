@@ -40,6 +40,36 @@
 
 - new `op_convert_to_array()` to convert a tensor to an R array.
 
+- Added compatibility with Keras v3.9.2.
+  - New operations added:
+
+    - `op_rot90()`
+    - `op_rearrange()` (Einops-style)
+    - `op_signbit()`
+    - `op_polar()`
+    - `op_image_perspective_transform()`
+    - `op_image_gaussian_blur()`
+
+  - New layers introduced:
+
+    - `layer_rms_normalization()`
+    - `layer_aug_mix()`
+    - `layer_cut_mix()`
+    - `layer_random_invert()`
+    - `layer_random_erasing()`
+    - `layer_random_gaussian_blur()`
+    - `layer_random_perspective()`
+
+  - `layer_resizing()` gains an `antialias` argument.
+
+  - `keras_input()`, `keras_model_sequential()`, and `op_convert_to_tensor()` gain a `ragged` argument.
+
+  - `layer$pop_layer()` gains a `rebuild` argument and now returns the removed layer.
+
+  - New `rematerialized_call()` method added to `Layer` objects.
+
+  - Documentation improvements and minor fixes.
+
 - Fixed an issue where `op_shape()` would sometimes return a TensorFlow `TensorShape`
 
 - Fixes for `metric_iou()`, `op_top_k()`, and `op_eye()` being called with R atomic doubles
