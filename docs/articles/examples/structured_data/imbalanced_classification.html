@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="Demonstration of how to handle highly imbalanced classification problems.">
 <title>Imbalanced classification: credit card fraud detection • keras3</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../../favicon-32x32.png">
@@ -14,65 +15,81 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../../apple-touch-icon-60x60.png">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
-<link href="../../../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../../deps/search-1.0.0/fuse.min.js"></script><script src="../../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
+<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Imbalanced classification: credit card fraud detection">
-<meta name="description" content="Demonstration of how to handle highly imbalanced classification problems.">
 <meta property="og:description" content="Demonstration of how to handle highly imbalanced classification problems.">
-<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
+<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]--><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
-
+    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
+    
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.0</small>
 
-
+    
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item"><a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
-<li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
-    <li><a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a></li>
-    <li><a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6></li>
-    <li><a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a></li>
-    <li><a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a></li>
-    <li><a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a></li>
-    <li><a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a></li>
-    <li><a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a></li>
-    <li><a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a></li>
-    <li><h6 class="dropdown-header" data-toc-skip>Other topics</h6></li>
-    <li><a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a></li>
-    <li><a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a></li>
-    <li><a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a></li>
-  </ul>
+<li class="nav-item">
+  <a class="nav-link" href="../../../articles/getting_started.html">Getting Started</a>
 </li>
-<li class="active nav-item"><a class="nav-link" href="../../../articles/examples/index.html">Examples</a></li>
-<li class="nav-item"><a class="nav-link" href="../../../reference/index.html">Reference</a></li>
-<li class="nav-item"><a class="nav-link" href="../../../news/index.html">News</a></li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
+    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
+    <a class="dropdown-item" href="../../../articles/sequential_model.html">Sequential Model</a>
+    <a class="dropdown-item" href="../../../articles/functional_api.html">Functional API</a>
+    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
+    <a class="dropdown-item" href="../../../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
+    <a class="dropdown-item" href="../../../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
+    <a class="dropdown-item" href="../../../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
+    <a class="dropdown-item" href="../../../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
+    <a class="dropdown-item" href="../../../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
+    <a class="dropdown-item" href="../../../articles/serialization_and_saving.html">Serialization and Saving</a>
+    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
+    <a class="dropdown-item" href="../../../articles/transfer_learning.html">Transfer learning and fine tuning</a>
+    <a class="dropdown-item" href="../../../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
+    <a class="dropdown-item" href="../../../articles/distribution.html">Distributed training with Jax</a>
+  </div>
+</li>
+<li class="active nav-item">
+  <a class="nav-link" href="../../../articles/examples/index.html">Examples</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../../../reference/index.html">Reference</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../../../news/index.html">News</a>
+</li>
       </ul>
-<ul class="navbar-nav">
-<li class="nav-item"><form class="form-inline" role="search">
- <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../../../search.json">
-</form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../../../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
 </div>
 
-
+    
   </div>
 </nav><div class="container template-article">
 
@@ -81,8 +98,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-
-      <h1>Imbalanced classification: credit card fraud detection</h1>
+      <img src="" class="logo" alt=""><h1>Imbalanced classification: credit card fraud detection</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/vignettes/examples/structured_data/imbalanced_classification.Rmd" class="external-link"><code>vignettes/examples/structured_data/imbalanced_classification.Rmd</code></a></small>
@@ -121,37 +137,37 @@ run the following:</p>
 <span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Rows: 284,807</span></span>
 <span><span class="co">## Columns: 31</span></span>
-<span><span class="co">## $ Time   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0, 0, 1, 1, 2, 2, 4, 7, 7, 9, 10, 10, 10, 11, 12, 12, 12, 1…</span></span>
-<span><span class="co">## $ V1     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -1.3598071, 1.1918571, -1.3583541, -0.9662717, -1.1582331, …</span></span>
-<span><span class="co">## $ V2     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.07278117, 0.26615071, -1.34016307, -0.18522601, 0.877736…</span></span>
-<span><span class="co">## $ V3     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.53634674, 0.16648011, 1.77320934, 1.79299334, 1.54871785,…</span></span>
-<span><span class="co">## $ V4     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.37815522, 0.44815408, 0.37977959, -0.86329128, 0.40303393…</span></span>
-<span><span class="co">## $ V5     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.33832077, 0.06001765, -0.50319813, -0.01030888, -0.40719…</span></span>
-<span><span class="co">## $ V6     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.46238778, -0.08236081, 1.80049938, 1.24720317, 0.09592146…</span></span>
-<span><span class="co">## $ V7     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.239598554, -0.078802983, 0.791460956, 0.237608940, 0.5929…</span></span>
-<span><span class="co">## $ V8     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.098697901, 0.085101655, 0.247675787, 0.377435875, -0.2705…</span></span>
-<span><span class="co">## $ V9     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.3637870, -0.2554251, -1.5146543, -1.3870241, 0.8177393, -…</span></span>
-<span><span class="co">## $ V10    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.09079417, -0.16697441, 0.20764287, -0.05495192, 0.7530744…</span></span>
-<span><span class="co">## $ V11    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.55159953, 1.61272666, 0.62450146, -0.22648726, -0.822842…</span></span>
-<span><span class="co">## $ V12    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.61780086, 1.06523531, 0.06608369, 0.17822823, 0.53819555…</span></span>
-<span><span class="co">## $ V13    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.99138985, 0.48909502, 0.71729273, 0.50775687, 1.34585159…</span></span>
-<span><span class="co">## $ V14    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.31116935, -0.14377230, -0.16594592, -0.28792375, -1.1196…</span></span>
-<span><span class="co">## $ V15    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.468176972, 0.635558093, 2.345864949, -0.631418118, 0.1751…</span></span>
-<span><span class="co">## $ V16    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.47040053, 0.46391704, -2.89008319, -1.05964725, -0.45144…</span></span>
-<span><span class="co">## $ V17    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.207971242, -0.114804663, 1.109969379, -0.684092786, -0.23…</span></span>
-<span><span class="co">## $ V18    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.02579058, -0.18336127, -0.12135931, 1.96577500, -0.038194…</span></span>
-<span><span class="co">## $ V19    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.40399296, -0.14578304, -2.26185710, -1.23262197, 0.803486…</span></span>
-<span><span class="co">## $ V20    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.25141210, -0.06908314, 0.52497973, -0.20803778, 0.4085423…</span></span>
-<span><span class="co">## $ V21    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.018306778, -0.225775248, 0.247998153, -0.108300452, -0.0…</span></span>
-<span><span class="co">## $ V22    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.277837576, -0.638671953, 0.771679402, 0.005273597, 0.7982…</span></span>
-<span><span class="co">## $ V23    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.110473910, 0.101288021, 0.909412262, -0.190320519, -0.13…</span></span>
-<span><span class="co">## $ V24    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.06692807, -0.33984648, -0.68928096, -1.17557533, 0.141266…</span></span>
-<span><span class="co">## $ V25    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.12853936, 0.16717040, -0.32764183, 0.64737603, -0.2060095…</span></span>
-<span><span class="co">## $ V26    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.18911484, 0.12589453, -0.13909657, -0.22192884, 0.502292…</span></span>
-<span><span class="co">## $ V27    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.133558377, -0.008983099, -0.055352794, 0.062722849, 0.219…</span></span>
-<span><span class="co">## $ V28    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.021053053, 0.014724169, -0.059751841, 0.061457629, 0.215…</span></span>
-<span><span class="co">## $ Amount <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 149.62, 2.69, 378.66, 123.50, 69.99, 3.67, 4.99, 40.80, 93.…</span></span>
-<span><span class="co">## $ Class  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span></span></code></pre>
+<span><span class="co">## $ Time   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>1<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>2<span style="color: #949494;">, </span>4<span style="color: #949494;">, </span>7<span style="color: #949494;">, </span>7<span style="color: #949494;">, </span>9<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>10<span style="color: #949494;">, </span>11<span style="color: #949494;">, </span>12<span style="color: #949494;">, </span>12<span style="color: #949494;">, </span>12<span style="color: #949494;">, </span>1…</span></span>
+<span><span class="co">## $ V1     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -1.3598071<span style="color: #949494;">, </span>1.1918571<span style="color: #949494;">, </span>-1.3583541<span style="color: #949494;">, </span>-0.9662717<span style="color: #949494;">, </span>-1.1582331<span style="color: #949494;">, </span>…</span></span>
+<span><span class="co">## $ V2     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.07278117<span style="color: #949494;">, </span>0.26615071<span style="color: #949494;">, </span>-1.34016307<span style="color: #949494;">, </span>-0.18522601<span style="color: #949494;">, </span>0.877736…</span></span>
+<span><span class="co">## $ V3     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 2.53634674<span style="color: #949494;">, </span>0.16648011<span style="color: #949494;">, </span>1.77320934<span style="color: #949494;">, </span>1.79299334<span style="color: #949494;">, </span>1.54871785<span style="color: #949494;">,</span>…</span></span>
+<span><span class="co">## $ V4     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.37815522<span style="color: #949494;">, </span>0.44815408<span style="color: #949494;">, </span>0.37977959<span style="color: #949494;">, </span>-0.86329128<span style="color: #949494;">, </span>0.40303393…</span></span>
+<span><span class="co">## $ V5     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.33832077<span style="color: #949494;">, </span>0.06001765<span style="color: #949494;">, </span>-0.50319813<span style="color: #949494;">, </span>-0.01030888<span style="color: #949494;">, </span>-0.40719…</span></span>
+<span><span class="co">## $ V6     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.46238778<span style="color: #949494;">, </span>-0.08236081<span style="color: #949494;">, </span>1.80049938<span style="color: #949494;">, </span>1.24720317<span style="color: #949494;">, </span>0.09592146…</span></span>
+<span><span class="co">## $ V7     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.239598554<span style="color: #949494;">, </span>-0.078802983<span style="color: #949494;">, </span>0.791460956<span style="color: #949494;">, </span>0.237608940<span style="color: #949494;">, </span>0.5929…</span></span>
+<span><span class="co">## $ V8     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.098697901<span style="color: #949494;">, </span>0.085101655<span style="color: #949494;">, </span>0.247675787<span style="color: #949494;">, </span>0.377435875<span style="color: #949494;">, </span>-0.2705…</span></span>
+<span><span class="co">## $ V9     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.3637870<span style="color: #949494;">, </span>-0.2554251<span style="color: #949494;">, </span>-1.5146543<span style="color: #949494;">, </span>-1.3870241<span style="color: #949494;">, </span>0.8177393<span style="color: #949494;">, </span>-…</span></span>
+<span><span class="co">## $ V10    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.09079417<span style="color: #949494;">, </span>-0.16697441<span style="color: #949494;">, </span>0.20764287<span style="color: #949494;">, </span>-0.05495192<span style="color: #949494;">, </span>0.7530744…</span></span>
+<span><span class="co">## $ V11    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.55159953<span style="color: #949494;">, </span>1.61272666<span style="color: #949494;">, </span>0.62450146<span style="color: #949494;">, </span>-0.22648726<span style="color: #949494;">, </span>-0.822842…</span></span>
+<span><span class="co">## $ V12    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.61780086<span style="color: #949494;">, </span>1.06523531<span style="color: #949494;">, </span>0.06608369<span style="color: #949494;">, </span>0.17822823<span style="color: #949494;">, </span>0.53819555…</span></span>
+<span><span class="co">## $ V13    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.99138985<span style="color: #949494;">, </span>0.48909502<span style="color: #949494;">, </span>0.71729273<span style="color: #949494;">, </span>0.50775687<span style="color: #949494;">, </span>1.34585159…</span></span>
+<span><span class="co">## $ V14    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.31116935<span style="color: #949494;">, </span>-0.14377230<span style="color: #949494;">, </span>-0.16594592<span style="color: #949494;">, </span>-0.28792375<span style="color: #949494;">, </span>-1.1196…</span></span>
+<span><span class="co">## $ V15    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.468176972<span style="color: #949494;">, </span>0.635558093<span style="color: #949494;">, </span>2.345864949<span style="color: #949494;">, </span>-0.631418118<span style="color: #949494;">, </span>0.1751…</span></span>
+<span><span class="co">## $ V16    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.47040053<span style="color: #949494;">, </span>0.46391704<span style="color: #949494;">, </span>-2.89008319<span style="color: #949494;">, </span>-1.05964725<span style="color: #949494;">, </span>-0.45144…</span></span>
+<span><span class="co">## $ V17    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.207971242<span style="color: #949494;">, </span>-0.114804663<span style="color: #949494;">, </span>1.109969379<span style="color: #949494;">, </span>-0.684092786<span style="color: #949494;">, </span>-0.23…</span></span>
+<span><span class="co">## $ V18    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.02579058<span style="color: #949494;">, </span>-0.18336127<span style="color: #949494;">, </span>-0.12135931<span style="color: #949494;">, </span>1.96577500<span style="color: #949494;">, </span>-0.038194…</span></span>
+<span><span class="co">## $ V19    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.40399296<span style="color: #949494;">, </span>-0.14578304<span style="color: #949494;">, </span>-2.26185710<span style="color: #949494;">, </span>-1.23262197<span style="color: #949494;">, </span>0.803486…</span></span>
+<span><span class="co">## $ V20    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.25141210<span style="color: #949494;">, </span>-0.06908314<span style="color: #949494;">, </span>0.52497973<span style="color: #949494;">, </span>-0.20803778<span style="color: #949494;">, </span>0.4085423…</span></span>
+<span><span class="co">## $ V21    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.018306778<span style="color: #949494;">, </span>-0.225775248<span style="color: #949494;">, </span>0.247998153<span style="color: #949494;">, </span>-0.108300452<span style="color: #949494;">, </span>-0.0…</span></span>
+<span><span class="co">## $ V22    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.277837576<span style="color: #949494;">, </span>-0.638671953<span style="color: #949494;">, </span>0.771679402<span style="color: #949494;">, </span>0.005273597<span style="color: #949494;">, </span>0.7982…</span></span>
+<span><span class="co">## $ V23    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.110473910<span style="color: #949494;">, </span>0.101288021<span style="color: #949494;">, </span>0.909412262<span style="color: #949494;">, </span>-0.190320519<span style="color: #949494;">, </span>-0.13…</span></span>
+<span><span class="co">## $ V24    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.06692807<span style="color: #949494;">, </span>-0.33984648<span style="color: #949494;">, </span>-0.68928096<span style="color: #949494;">, </span>-1.17557533<span style="color: #949494;">, </span>0.141266…</span></span>
+<span><span class="co">## $ V25    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.12853936<span style="color: #949494;">, </span>0.16717040<span style="color: #949494;">, </span>-0.32764183<span style="color: #949494;">, </span>0.64737603<span style="color: #949494;">, </span>-0.2060095…</span></span>
+<span><span class="co">## $ V26    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.18911484<span style="color: #949494;">, </span>0.12589453<span style="color: #949494;">, </span>-0.13909657<span style="color: #949494;">, </span>-0.22192884<span style="color: #949494;">, </span>0.502292…</span></span>
+<span><span class="co">## $ V27    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 0.133558377<span style="color: #949494;">, </span>-0.008983099<span style="color: #949494;">, </span>-0.055352794<span style="color: #949494;">, </span>0.062722849<span style="color: #949494;">, </span>0.219…</span></span>
+<span><span class="co">## $ V28    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> -0.021053053<span style="color: #949494;">, </span>0.014724169<span style="color: #949494;">, </span>-0.059751841<span style="color: #949494;">, </span>0.061457629<span style="color: #949494;">, </span>0.215…</span></span>
+<span><span class="co">## $ Amount <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 149.62<span style="color: #949494;">, </span>2.69<span style="color: #949494;">, </span>378.66<span style="color: #949494;">, </span>123.50<span style="color: #949494;">, </span>69.99<span style="color: #949494;">, </span>3.67<span style="color: #949494;">, </span>4.99<span style="color: #949494;">, </span>40.80<span style="color: #949494;">, </span>93.…</span></span>
+<span><span class="co">## $ Class  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">, </span>0<span style="color: #949494;">,</span>…</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="prepare-a-validation-set">Prepare a validation set<a class="anchor" aria-label="anchor" href="#prepare-a-validation-set"></a>
@@ -175,11 +191,11 @@ run the following:</p>
 <span><span class="va">counts</span></span></code></pre></div>
 <pre><code><span><span class="co">##</span></span>
 <span><span class="co">##      0      1</span></span>
-<span><span class="co">## 227455    391</span></span></code></pre>
+<span><span class="co">## 227451    395</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Number of positive samples in training data: %i (%.2f%% of total)"</span>,</span>
 <span>            <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span>, <span class="fl">100</span> <span class="op">*</span> <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Number of positive samples in training data: 391 (0.17% of total)</span></span></code></pre>
+<pre><code><span><span class="co">## Number of positive samples in training data: 395 (0.17% of total)</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">weight_for_0</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">counts</span><span class="op">[</span><span class="st">"0"</span><span class="op">]</span></span>
 <span><span class="va">weight_for_1</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="va">counts</span><span class="op">[</span><span class="st">"1"</span><span class="op">]</span></span></code></pre></div>
@@ -268,70 +284,70 @@ run the following:</p>
 <span>  verbose <span class="op">=</span> <span class="fl">2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/30</span></span>
-<span><span class="co">## 112/112 - 3s - 28ms/step - fn: 45.0000 - fp: 23707.0000 - loss: 2.2081e-06 - precision: 0.0144 - recall: 0.8849 - tn: 203748.0000 - tp: 346.0000 - val_fn: 9.0000 - val_fp: 2721.0000 - val_loss: 0.1728 - val_precision: 0.0327 - val_recall: 0.9109 - val_tn: 54139.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 5s - 41ms/step - fn: 36.0000 - fp: 30458.0000 - loss: 2.3118e-06 - precision: 0.0116 - recall: 0.9089 - tn: 196993.0000 - tp: 359.0000 - val_fn: 14.0000 - val_fp: 714.0000 - val_loss: 0.0906 - val_precision: 0.1041 - val_recall: 0.8557 - val_tn: 56150.0000 - val_tp: 83.0000</span></span>
 <span><span class="co">## Epoch 2/30</span></span>
-<span><span class="co">## 112/112 - 1s - 6ms/step - fn: 35.0000 - fp: 9264.0000 - loss: 1.6928e-06 - precision: 0.0370 - recall: 0.9105 - tn: 218191.0000 - tp: 356.0000 - val_fn: 9.0000 - val_fp: 1195.0000 - val_loss: 0.1100 - val_precision: 0.0715 - val_recall: 0.9109 - val_tn: 55665.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 1s - 11ms/step - fn: 34.0000 - fp: 5698.0000 - loss: 1.4544e-06 - precision: 0.0596 - recall: 0.9139 - tn: 221753.0000 - tp: 361.0000 - val_fn: 6.0000 - val_fp: 2982.0000 - val_loss: 0.1611 - val_precision: 0.0296 - val_recall: 0.9381 - val_tn: 53882.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 3/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 28.0000 - fp: 8603.0000 - loss: 1.2127e-06 - precision: 0.0405 - recall: 0.9284 - tn: 218852.0000 - tp: 363.0000 - val_fn: 6.0000 - val_fp: 4727.0000 - val_loss: 0.2568 - val_precision: 0.0197 - val_recall: 0.9406 - val_tn: 52133.0000 - val_tp: 95.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 30.0000 - fp: 7494.0000 - loss: 1.1267e-06 - precision: 0.0464 - recall: 0.9241 - tn: 219957.0000 - tp: 365.0000 - val_fn: 9.0000 - val_fp: 2262.0000 - val_loss: 0.1346 - val_precision: 0.0374 - val_recall: 0.9072 - val_tn: 54602.0000 - val_tp: 88.0000</span></span>
 <span><span class="co">## Epoch 4/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 25.0000 - fp: 6697.0000 - loss: 1.0623e-06 - precision: 0.0518 - recall: 0.9361 - tn: 220758.0000 - tp: 366.0000 - val_fn: 12.0000 - val_fp: 1079.0000 - val_loss: 0.0645 - val_precision: 0.0762 - val_recall: 0.8812 - val_tn: 55781.0000 - val_tp: 89.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 25.0000 - fp: 5976.0000 - loss: 9.9649e-07 - precision: 0.0583 - recall: 0.9367 - tn: 221475.0000 - tp: 370.0000 - val_fn: 9.0000 - val_fp: 1593.0000 - val_loss: 0.0781 - val_precision: 0.0523 - val_recall: 0.9072 - val_tn: 55271.0000 - val_tp: 88.0000</span></span>
 <span><span class="co">## Epoch 5/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 25.0000 - fp: 6461.0000 - loss: 9.4882e-07 - precision: 0.0536 - recall: 0.9361 - tn: 220994.0000 - tp: 366.0000 - val_fn: 8.0000 - val_fp: 2180.0000 - val_loss: 0.1322 - val_precision: 0.0409 - val_recall: 0.9208 - val_tn: 54680.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 22.0000 - fp: 7713.0000 - loss: 9.5664e-07 - precision: 0.0461 - recall: 0.9443 - tn: 219738.0000 - tp: 373.0000 - val_fn: 10.0000 - val_fp: 613.0000 - val_loss: 0.0444 - val_precision: 0.1243 - val_recall: 0.8969 - val_tn: 56251.0000 - val_tp: 87.0000</span></span>
 <span><span class="co">## Epoch 6/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 14.0000 - fp: 6436.0000 - loss: 7.0306e-07 - precision: 0.0553 - recall: 0.9642 - tn: 221019.0000 - tp: 377.0000 - val_fn: 12.0000 - val_fp: 927.0000 - val_loss: 0.0489 - val_precision: 0.0876 - val_recall: 0.8812 - val_tn: 55933.0000 - val_tp: 89.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 18.0000 - fp: 8517.0000 - loss: 9.6051e-07 - precision: 0.0424 - recall: 0.9544 - tn: 218934.0000 - tp: 377.0000 - val_fn: 12.0000 - val_fp: 1033.0000 - val_loss: 0.0643 - val_precision: 0.0760 - val_recall: 0.8763 - val_tn: 55831.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 7/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 20.0000 - fp: 8652.0000 - loss: 9.5322e-07 - precision: 0.0411 - recall: 0.9488 - tn: 218803.0000 - tp: 371.0000 - val_fn: 9.0000 - val_fp: 1213.0000 - val_loss: 0.0587 - val_precision: 0.0705 - val_recall: 0.9109 - val_tn: 55647.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 17.0000 - fp: 6409.0000 - loss: 7.3375e-07 - precision: 0.0557 - recall: 0.9570 - tn: 221042.0000 - tp: 378.0000 - val_fn: 10.0000 - val_fp: 1549.0000 - val_loss: 0.0697 - val_precision: 0.0532 - val_recall: 0.8969 - val_tn: 55315.0000 - val_tp: 87.0000</span></span>
 <span><span class="co">## Epoch 8/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 16.0000 - fp: 8275.0000 - loss: 8.6911e-07 - precision: 0.0434 - recall: 0.9591 - tn: 219180.0000 - tp: 375.0000 - val_fn: 13.0000 - val_fp: 771.0000 - val_loss: 0.0680 - val_precision: 0.1024 - val_recall: 0.8713 - val_tn: 56089.0000 - val_tp: 88.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 14.0000 - fp: 6080.0000 - loss: 6.5853e-07 - precision: 0.0590 - recall: 0.9646 - tn: 221371.0000 - tp: 381.0000 - val_fn: 10.0000 - val_fp: 2677.0000 - val_loss: 0.1178 - val_precision: 0.0315 - val_recall: 0.8969 - val_tn: 54187.0000 - val_tp: 87.0000</span></span>
 <span><span class="co">## Epoch 9/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 5889.0000 - loss: 6.6022e-07 - precision: 0.0606 - recall: 0.9719 - tn: 221566.0000 - tp: 380.0000 - val_fn: 9.0000 - val_fp: 564.0000 - val_loss: 0.0321 - val_precision: 0.1402 - val_recall: 0.9109 - val_tn: 56296.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 11.0000 - fp: 6592.0000 - loss: 5.9467e-07 - precision: 0.0550 - recall: 0.9722 - tn: 220859.0000 - tp: 384.0000 - val_fn: 9.0000 - val_fp: 2094.0000 - val_loss: 0.0806 - val_precision: 0.0403 - val_recall: 0.9072 - val_tn: 54770.0000 - val_tp: 88.0000</span></span>
 <span><span class="co">## Epoch 10/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 5360.0000 - loss: 4.7577e-07 - precision: 0.0665 - recall: 0.9770 - tn: 222095.0000 - tp: 382.0000 - val_fn: 8.0000 - val_fp: 1314.0000 - val_loss: 0.0550 - val_precision: 0.0661 - val_recall: 0.9208 - val_tn: 55546.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 6334.0000 - loss: 5.3129e-07 - precision: 0.0577 - recall: 0.9823 - tn: 221117.0000 - tp: 388.0000 - val_fn: 10.0000 - val_fp: 850.0000 - val_loss: 0.0396 - val_precision: 0.0928 - val_recall: 0.8969 - val_tn: 56014.0000 - val_tp: 87.0000</span></span>
 <span><span class="co">## Epoch 11/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 20.0000 - fp: 9677.0000 - loss: 1.0933e-06 - precision: 0.0369 - recall: 0.9488 - tn: 217778.0000 - tp: 371.0000 - val_fn: 10.0000 - val_fp: 1706.0000 - val_loss: 0.0974 - val_precision: 0.0506 - val_recall: 0.9010 - val_tn: 55154.0000 - val_tp: 91.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 5922.0000 - loss: 5.0009e-07 - precision: 0.0613 - recall: 0.9797 - tn: 221529.0000 - tp: 387.0000 - val_fn: 12.0000 - val_fp: 1488.0000 - val_loss: 0.0506 - val_precision: 0.0540 - val_recall: 0.8763 - val_tn: 55376.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 12/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 5843.0000 - loss: 5.5728e-07 - precision: 0.0614 - recall: 0.9770 - tn: 221612.0000 - tp: 382.0000 - val_fn: 7.0000 - val_fp: 2226.0000 - val_loss: 0.1175 - val_precision: 0.0405 - val_recall: 0.9307 - val_tn: 54634.0000 - val_tp: 94.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 7243.0000 - loss: 5.7125e-07 - precision: 0.0507 - recall: 0.9797 - tn: 220208.0000 - tp: 387.0000 - val_fn: 11.0000 - val_fp: 1014.0000 - val_loss: 0.0414 - val_precision: 0.0782 - val_recall: 0.8866 - val_tn: 55850.0000 - val_tp: 86.0000</span></span>
 <span><span class="co">## Epoch 13/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 12.0000 - fp: 8078.0000 - loss: 8.7332e-07 - precision: 0.0448 - recall: 0.9693 - tn: 219377.0000 - tp: 379.0000 - val_fn: 8.0000 - val_fp: 2571.0000 - val_loss: 0.0926 - val_precision: 0.0349 - val_recall: 0.9208 - val_tn: 54289.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 4141.0000 - loss: 3.7800e-07 - precision: 0.0859 - recall: 0.9848 - tn: 223310.0000 - tp: 389.0000 - val_fn: 8.0000 - val_fp: 2491.0000 - val_loss: 0.0986 - val_precision: 0.0345 - val_recall: 0.9175 - val_tn: 54373.0000 - val_tp: 89.0000</span></span>
 <span><span class="co">## Epoch 14/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 9.0000 - fp: 6035.0000 - loss: 5.1023e-07 - precision: 0.0595 - recall: 0.9770 - tn: 221420.0000 - tp: 382.0000 - val_fn: 9.0000 - val_fp: 998.0000 - val_loss: 0.0420 - val_precision: 0.0844 - val_recall: 0.9109 - val_tn: 55862.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 6.0000 - fp: 6118.0000 - loss: 5.4537e-07 - precision: 0.0598 - recall: 0.9848 - tn: 221333.0000 - tp: 389.0000 - val_fn: 9.0000 - val_fp: 2488.0000 - val_loss: 0.1019 - val_precision: 0.0342 - val_recall: 0.9072 - val_tn: 54376.0000 - val_tp: 88.0000</span></span>
 <span><span class="co">## Epoch 15/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4814.0000 - loss: 4.2882e-07 - precision: 0.0744 - recall: 0.9898 - tn: 222641.0000 - tp: 387.0000 - val_fn: 7.0000 - val_fp: 2388.0000 - val_loss: 0.2131 - val_precision: 0.0379 - val_recall: 0.9307 - val_tn: 54472.0000 - val_tp: 94.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4646.0000 - loss: 4.0941e-07 - precision: 0.0776 - recall: 0.9899 - tn: 222805.0000 - tp: 391.0000 - val_fn: 8.0000 - val_fp: 2949.0000 - val_loss: 0.1263 - val_precision: 0.0293 - val_recall: 0.9175 - val_tn: 53915.0000 - val_tp: 89.0000</span></span>
 <span><span class="co">## Epoch 16/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 14.0000 - fp: 6866.0000 - loss: 6.4459e-07 - precision: 0.0521 - recall: 0.9642 - tn: 220589.0000 - tp: 377.0000 - val_fn: 8.0000 - val_fp: 1106.0000 - val_loss: 0.0472 - val_precision: 0.0776 - val_recall: 0.9208 - val_tn: 55754.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 7978.0000 - loss: 8.1907e-07 - precision: 0.0460 - recall: 0.9747 - tn: 219473.0000 - tp: 385.0000 - val_fn: 8.0000 - val_fp: 3430.0000 - val_loss: 0.2915 - val_precision: 0.0253 - val_recall: 0.9175 - val_tn: 53434.0000 - val_tp: 89.0000</span></span>
 <span><span class="co">## Epoch 17/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 7243.0000 - loss: 5.1227e-07 - precision: 0.0502 - recall: 0.9795 - tn: 220212.0000 - tp: 383.0000 - val_fn: 8.0000 - val_fp: 1185.0000 - val_loss: 0.0483 - val_precision: 0.0728 - val_recall: 0.9208 - val_tn: 55675.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 23.0000 - fp: 12673.0000 - loss: 3.1681e-06 - precision: 0.0285 - recall: 0.9418 - tn: 214778.0000 - tp: 372.0000 - val_fn: 12.0000 - val_fp: 3416.0000 - val_loss: 0.7861 - val_precision: 0.0243 - val_recall: 0.8763 - val_tn: 53448.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 18/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3529.0000 - loss: 3.2284e-07 - precision: 0.0988 - recall: 0.9898 - tn: 223926.0000 - tp: 387.0000 - val_fn: 8.0000 - val_fp: 1655.0000 - val_loss: 0.0717 - val_precision: 0.0532 - val_recall: 0.9208 - val_tn: 55205.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 23.0000 - fp: 11244.0000 - loss: 2.3250e-06 - precision: 0.0320 - recall: 0.9418 - tn: 216207.0000 - tp: 372.0000 - val_fn: 11.0000 - val_fp: 1717.0000 - val_loss: 0.1895 - val_precision: 0.0477 - val_recall: 0.8866 - val_tn: 55147.0000 - val_tp: 86.0000</span></span>
 <span><span class="co">## Epoch 19/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 4189.0000 - loss: 3.3201e-07 - precision: 0.0850 - recall: 0.9949 - tn: 223266.0000 - tp: 389.0000 - val_fn: 10.0000 - val_fp: 775.0000 - val_loss: 0.0351 - val_precision: 0.1051 - val_recall: 0.9010 - val_tn: 56085.0000 - val_tp: 91.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 16.0000 - fp: 8824.0000 - loss: 1.3502e-06 - precision: 0.0412 - recall: 0.9595 - tn: 218627.0000 - tp: 379.0000 - val_fn: 6.0000 - val_fp: 5161.0000 - val_loss: 0.1947 - val_precision: 0.0173 - val_recall: 0.9381 - val_tn: 51703.0000 - val_tp: 91.0000</span></span>
 <span><span class="co">## Epoch 20/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3593.0000 - loss: 4.7423e-07 - precision: 0.0975 - recall: 0.9923 - tn: 223862.0000 - tp: 388.0000 - val_fn: 9.0000 - val_fp: 982.0000 - val_loss: 0.0459 - val_precision: 0.0857 - val_recall: 0.9109 - val_tn: 55878.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 8621.0000 - loss: 1.0916e-06 - precision: 0.0427 - recall: 0.9747 - tn: 218830.0000 - tp: 385.0000 - val_fn: 12.0000 - val_fp: 1107.0000 - val_loss: 0.1877 - val_precision: 0.0713 - val_recall: 0.8763 - val_tn: 55757.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 21/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4057.0000 - loss: 5.4189e-07 - precision: 0.0871 - recall: 0.9898 - tn: 223398.0000 - tp: 387.0000 - val_fn: 12.0000 - val_fp: 603.0000 - val_loss: 0.0544 - val_precision: 0.1286 - val_recall: 0.8812 - val_tn: 56257.0000 - val_tp: 89.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 10.0000 - fp: 7096.0000 - loss: 1.0528e-06 - precision: 0.0515 - recall: 0.9747 - tn: 220355.0000 - tp: 385.0000 - val_fn: 11.0000 - val_fp: 1099.0000 - val_loss: 0.0539 - val_precision: 0.0726 - val_recall: 0.8866 - val_tn: 55765.0000 - val_tp: 86.0000</span></span>
 <span><span class="co">## Epoch 22/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 4709.0000 - loss: 5.5967e-07 - precision: 0.0759 - recall: 0.9898 - tn: 222746.0000 - tp: 387.0000 - val_fn: 8.0000 - val_fp: 1645.0000 - val_loss: 0.0862 - val_precision: 0.0535 - val_recall: 0.9208 - val_tn: 55215.0000 - val_tp: 93.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 3ms/step - fn: 11.0000 - fp: 5263.0000 - loss: 5.9445e-07 - precision: 0.0680 - recall: 0.9722 - tn: 222188.0000 - tp: 384.0000 - val_fn: 10.0000 - val_fp: 1399.0000 - val_loss: 0.0632 - val_precision: 0.0585 - val_recall: 0.8969 - val_tn: 55465.0000 - val_tp: 87.0000</span></span>
 <span><span class="co">## Epoch 23/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 13.0000 - fp: 7337.0000 - loss: 9.8862e-07 - precision: 0.0490 - recall: 0.9668 - tn: 220118.0000 - tp: 378.0000 - val_fn: 11.0000 - val_fp: 683.0000 - val_loss: 0.0500 - val_precision: 0.1164 - val_recall: 0.8911 - val_tn: 56177.0000 - val_tp: 90.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 4ms/step - fn: 8.0000 - fp: 5412.0000 - loss: 6.1044e-07 - precision: 0.0667 - recall: 0.9797 - tn: 222039.0000 - tp: 387.0000 - val_fn: 12.0000 - val_fp: 873.0000 - val_loss: 0.0727 - val_precision: 0.0887 - val_recall: 0.8763 - val_tn: 55991.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 24/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 8.0000 - fp: 4145.0000 - loss: 5.6664e-07 - precision: 0.0846 - recall: 0.9795 - tn: 223310.0000 - tp: 383.0000 - val_fn: 9.0000 - val_fp: 3412.0000 - val_loss: 0.1944 - val_precision: 0.0263 - val_recall: 0.9109 - val_tn: 53448.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 3ms/step - fn: 5.0000 - fp: 3469.0000 - loss: 4.1501e-07 - precision: 0.1011 - recall: 0.9873 - tn: 223982.0000 - tp: 390.0000 - val_fn: 11.0000 - val_fp: 1369.0000 - val_loss: 0.0758 - val_precision: 0.0591 - val_recall: 0.8866 - val_tn: 55495.0000 - val_tp: 86.0000</span></span>
 <span><span class="co">## Epoch 25/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 4869.0000 - loss: 4.9343e-07 - precision: 0.0740 - recall: 0.9949 - tn: 222586.0000 - tp: 389.0000 - val_fn: 10.0000 - val_fp: 879.0000 - val_loss: 0.0453 - val_precision: 0.0938 - val_recall: 0.9010 - val_tn: 55981.0000 - val_tp: 91.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 7.0000 - fp: 4489.0000 - loss: 6.9404e-07 - precision: 0.0796 - recall: 0.9823 - tn: 222962.0000 - tp: 388.0000 - val_fn: 11.0000 - val_fp: 1580.0000 - val_loss: 0.1499 - val_precision: 0.0516 - val_recall: 0.8866 - val_tn: 55284.0000 - val_tp: 86.0000</span></span>
 <span><span class="co">## Epoch 26/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 3203.0000 - loss: 3.2283e-07 - precision: 0.1076 - recall: 0.9872 - tn: 224252.0000 - tp: 386.0000 - val_fn: 9.0000 - val_fp: 1163.0000 - val_loss: 0.0681 - val_precision: 0.0733 - val_recall: 0.9109 - val_tn: 55697.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 4.0000 - fp: 3469.0000 - loss: 4.4795e-07 - precision: 0.1013 - recall: 0.9899 - tn: 223982.0000 - tp: 391.0000 - val_fn: 12.0000 - val_fp: 951.0000 - val_loss: 0.0502 - val_precision: 0.0820 - val_recall: 0.8763 - val_tn: 55913.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 27/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 3.0000 - fp: 3169.0000 - loss: 3.0544e-07 - precision: 0.1091 - recall: 0.9923 - tn: 224286.0000 - tp: 388.0000 - val_fn: 9.0000 - val_fp: 1845.0000 - val_loss: 0.0807 - val_precision: 0.0475 - val_recall: 0.9109 - val_tn: 55015.0000 - val_tp: 92.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 5.0000 - fp: 4854.0000 - loss: 7.1714e-07 - precision: 0.0744 - recall: 0.9873 - tn: 222597.0000 - tp: 390.0000 - val_fn: 13.0000 - val_fp: 1354.0000 - val_loss: 0.0818 - val_precision: 0.0584 - val_recall: 0.8660 - val_tn: 55510.0000 - val_tp: 84.0000</span></span>
 <span><span class="co">## Epoch 28/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 3077.0000 - loss: 2.6160e-07 - precision: 0.1122 - recall: 0.9949 - tn: 224378.0000 - tp: 389.0000 - val_fn: 12.0000 - val_fp: 275.0000 - val_loss: 0.0220 - val_precision: 0.2445 - val_recall: 0.8812 - val_tn: 56585.0000 - val_tp: 89.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 3ms/step - fn: 6.0000 - fp: 4904.0000 - loss: 4.4107e-07 - precision: 0.0735 - recall: 0.9848 - tn: 222547.0000 - tp: 389.0000 - val_fn: 12.0000 - val_fp: 651.0000 - val_loss: 0.0420 - val_precision: 0.1155 - val_recall: 0.8763 - val_tn: 56213.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 29/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 2628.0000 - loss: 2.5775e-07 - precision: 0.1289 - recall: 0.9949 - tn: 224827.0000 - tp: 389.0000 - val_fn: 13.0000 - val_fp: 1013.0000 - val_loss: 0.0520 - val_precision: 0.0799 - val_recall: 0.8713 - val_tn: 55847.0000 - val_tp: 88.0000</span></span>
+<span><span class="co">## 112/112 - 0s - 3ms/step - fn: 4.0000 - fp: 3909.0000 - loss: 4.2965e-07 - precision: 0.0909 - recall: 0.9899 - tn: 223542.0000 - tp: 391.0000 - val_fn: 12.0000 - val_fp: 817.0000 - val_loss: 0.0405 - val_precision: 0.0942 - val_recall: 0.8763 - val_tn: 56047.0000 - val_tp: 85.0000</span></span>
 <span><span class="co">## Epoch 30/30</span></span>
-<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 4318.0000 - loss: 4.4087e-07 - precision: 0.0826 - recall: 0.9949 - tn: 223137.0000 - tp: 389.0000 - val_fn: 11.0000 - val_fp: 903.0000 - val_loss: 0.0561 - val_precision: 0.0906 - val_recall: 0.8911 - val_tn: 55957.0000 - val_tp: 90.0000</span></span></code></pre>
+<span><span class="co">## 112/112 - 0s - 2ms/step - fn: 2.0000 - fp: 2985.0000 - loss: 2.8492e-07 - precision: 0.1163 - recall: 0.9949 - tn: 224466.0000 - tp: 393.0000 - val_fn: 12.0000 - val_fp: 1040.0000 - val_loss: 0.0593 - val_precision: 0.0756 - val_recall: 0.8763 - val_tn: 55824.0000 - val_tp: 85.0000</span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">val_pred</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">val_features</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="op">{</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">.</span> <span class="op">&gt;</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">}</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1781/1781 - 1s - 424us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1781/1781 - 1s - 436us/step</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pred_correct</span> <span class="op">&lt;-</span> <span class="va">val_df</span><span class="op">$</span><span class="va">Class</span> <span class="op">==</span> <span class="va">val_pred</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Validation accuracy: %.2f"</span>, <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">pred_correct</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -349,9 +365,10 @@ run the following:</p>
 <p>At the end of training, out of 56,961 validation transactions, we
 are:</p>
 <ul>
-<li>Correctly identifying 90 of them as fraudulent</li>
-<li>Missing 11 fraudulent transactions</li>
-<li>At the cost of incorrectly flagging 903 legitimate transactions</li>
+<li>Correctly identifying 85 of them as fraudulent</li>
+<li>Missing 12 fraudulent transactions</li>
+<li>At the cost of incorrectly flagging 1,040 legitimate
+transactions</li>
 </ul>
 <p>In the real world, one would put an even higher weight on class 1, so
 as to reflect that False Negatives are more costly than False
@@ -363,7 +380,7 @@ is why.</p>
 <!-- | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Model-Imbalanced%20Classification-black.svg)](https://huggingface.co/keras-io/imbalanced_classification) | [![Generic badge](https://img.shields.io/badge/%F0%9F%A4%97%20Spaces-Imbalanced%20Classification-black.svg)](https://huggingface.co/spaces/keras-io/Credit_Card_Fraud_Detection) | -->
 <!-- : Example available on HuggingFace. -->
 </div>
-  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -374,15 +391,15 @@ is why.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
 </div>
 
     </footer>
 </div>
 
+  
 
-
-
+  
 
   </body>
 </html>
