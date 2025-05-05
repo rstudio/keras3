@@ -1,3 +1,5 @@
+# keras3 (development version)
+
 # keras3 1.4.0
 
 - New `op_subset()` and `x@r[...]` methods enable tensor subsetting
