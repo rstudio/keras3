@@ -66,7 +66,11 @@ install_keras <- function(
       # tensorflow <- c("tensorflow", "tensorflow-metal")
     } else if (is_linux()) {
       jax <- c("jax[cuda12]")
-      tensorflow <- "tensorflow-cpu"
+      # if there is only one backend, it must be "tensorflow"
+      # for the Linux user requesting only tensorflow and GPU,
+      # we should install the "tensorflow[and-gpu]"
+      # otherwise (requesting other backends), only cpu version is installed
+      tensorflow <- if (length(backend) == 1) "tensorflow[and-gpu]" else "tensorflow-cpu"
     }
   } else { # no GPU
     jax <- "jax[cpu]"
