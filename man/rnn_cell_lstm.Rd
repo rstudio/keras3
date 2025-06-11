@@ -114,7 +114,7 @@ shape(output)
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{rnn <- layer_rnn(cell = rnn_cell_lstm(4),
                  return_sequences = T,
                  return_state = T)
-c(whole_sequence_output, ...final_state) \%<-\% rnn(inputs)
+c(whole_sequence_output, ..final_state) \%<-\% rnn(inputs)
 str(whole_sequence_output)
 }\if{html}{\out{</div>}}
 

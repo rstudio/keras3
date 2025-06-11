@@ -1248,7 +1248,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' rnn <- layer_rnn(cell = rnn_cell_lstm(4),
 #'                  return_sequences = T,
 #'                  return_state = T)
-#' c(whole_sequence_output, ...final_state) %<-% rnn(inputs)
+#' c(whole_sequence_output, ..final_state) %<-% rnn(inputs)
 #' str(whole_sequence_output)
 #' str(final_state)
 #' ```
