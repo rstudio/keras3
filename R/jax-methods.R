@@ -48,15 +48,15 @@ as.numeric.jaxlib.xla_extension.ArrayImpl <- as.numeric.jax.Array
 
 
 #' @exportS3Method str jax.Array
-str.jax.Array <- function(x, ...) {
-  shape <- py_to_r(x$shape)
+str.jax.Array <- function(object, ..., nest.lev = 0L) {
+  shape <- py_to_r(object$shape)
   shape <- unlist(lapply(shape, function(axis) {
     if (is.null(axis)) NA_integer_ else as.integer(axis)
   }))
   shape <- paste0(as.integer(shape), collapse = ", ")
-  dtype <- as.character(py_to_r(x$dtype$name))
+  dtype <- as.character(py_to_r(object$dtype$name))
   cat(sep = "",
-      if (nest.lev > 0) " ",
+      if (nest.lev > 0L) " ",
       sprintf("<jax.Array shape(%s), dtype=%s>\n", shape, dtype))
 }
 
@@ -78,7 +78,7 @@ type_sum.keras.src.backend.jax.core.Variable <- function(x) {
   x <- reticulate::py_repr(x)
   x <- strsplit(x, "\n", fixed = TRUE)[[1L]]
   if (length(x) > 1L || nchar(x) > getOption("width")) {
-    x <- sub("(value=.+)", "value=[…]>", x[1L])
+    x <- sub("(value=.+)", "value=[\u2026]>", x[1L])
   }
   # compact shapes like (None, 10) to (None) for readability
   x <- sub("shape=\\((None|[[:digit:]]+),\\)", "shape=(\\1)", x)
