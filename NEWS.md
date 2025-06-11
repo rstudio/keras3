@@ -1,5 +1,12 @@
 # keras3 (development version)
 
+- Added S3 methods for JAX array: `str`, `as.array`, `as.double`, `as.integer`, `as.numeric`.
+
+- Added `str` S3 method for Keras Variables.
+
+- Updated dependencies declared by `use_backend("jax", gpu=TRUE)`
+  for compatability with `keras-hub`.
+
 # keras3 1.4.0
 
 - New `op_subset()` and `x@r[...]` methods enable tensor subsetting
