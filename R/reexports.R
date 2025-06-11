@@ -113,6 +113,10 @@ generics::fit
 #' @export
 generics::compile
 
+#' @importFrom generics generate
+#' @export
+generics::generate
+
 # ' @importFrom generics evaluate
 # ' @export
 # generics::evaluate
