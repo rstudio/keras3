@@ -216,6 +216,7 @@ use_backend <- function(backend, gpu = NA) {
     },
 
     Linux_tensorflow = {
+      py_require(c("jax[cuda12]", "jax[cpu]"), action = "remove")
 
       if (is.na(gpu))
         gpu <- has_gpu()
@@ -230,13 +231,15 @@ use_backend <- function(backend, gpu = NA) {
     },
 
     Linux_jax = {
-      py_require(c("tensorflow", "tensorflow[and-cuda]", "jax[cuda12]", "jax[cpu]"), action = "remove")
+      py_require(action = "remove",
+                 c("tensorflow", "tensorflow[and-cuda]",
+                   "jax[cuda12]", "jax[cpu]"))
 
       if (is.na(gpu))
         gpu <- has_gpu()
 
       if (gpu) {
-        py_require(c("tensorflow-cpu", "jax[cuda12]"))
+        py_require(c("tensorflow-cpu", "jax[cuda12]!=0.6.1"))
       } else {
         py_require(c("tensorflow-cpu", "jax[cpu]"))
       }
