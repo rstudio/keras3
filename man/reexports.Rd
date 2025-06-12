@@ -25,6 +25,7 @@
 \alias{run_dir}
 \alias{fit}
 \alias{compile}
+\alias{generate}
 \alias{evaluate}
 \alias{.}
 \title{Objects exported from other packages}
@@ -36,7 +37,7 @@ below to see their documentation.
 \describe{
   \item{dotty}{\code{\link[dotty:dotty]{.}}}
 
-  \item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}}
+  \item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}, \code{\link[generics]{generate}}}
 
   \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
 
