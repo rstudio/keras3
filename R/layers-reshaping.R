@@ -398,10 +398,20 @@ function (object, n, ...)
 layer_reshape <-
 function (object, target_shape, ...)
 {
-    args <- capture_args(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape,
-        target_shape = as_integer), ignore = "object")
-    create_layer(keras$layers$Reshape, object, args)
+  args <- capture_args(
+    list(
+      input_shape = normalize_shape,
+      batch_input_shape = normalize_shape,
+      batch_size = as_integer,
+      target_shape = function(shp) {
+        tuple(lapply(py_to_r(normalize_shape(shp)), function(d) {
+          if (is.null(d) || is.na(d)) - 1L else d
+        }))
+      }
+    ),
+    ignore = "object"
+  )
+  create_layer(keras$layers$Reshape, object, args)
 }
 
 

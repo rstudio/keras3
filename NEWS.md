@@ -4,6 +4,8 @@
 
 - Added `str` S3 method for Keras Variables.
 
+- `layer_reshape()` can now accept `-1` as a sentinel for an automatically calculated axis size.
+
 - Updated dependencies declared by `use_backend("jax", gpu=TRUE)`
   for compatability with `keras-hub`.
 
