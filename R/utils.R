@@ -590,16 +590,17 @@ keras_array <- function(x, dtype = NULL) {
 #' @param show_trainable
 #' whether to display if a layer is trainable.
 #'
-#' @returns Nothing, called for it's side effects.
+#' @returns Nothing, called for it side effects.
 #'
 #' @section Raises: ValueError: if `plot(model)` is called before the model is
-#'   built, unless a `input_shape = ` argument was supplied to
+#'   built, unless an `input_shape = ` argument was supplied to
 #'   `keras_model_sequential()`.
 #'
 #' @section Requirements:
 #'   This function requires pydot and graphviz.
+#'
 #'   `pydot` is by default installed by `install_keras()`, but if you installed
-#'   keras by other means, you can install `pydot` directly with :
+#'   Keras by other means, you can install `pydot` directly with:
 #'   ````r
 #'   reticulate::py_install("pydot", pip = TRUE)
 #'   ````
@@ -610,6 +611,10 @@ keras_array <- function(x, dtype = NULL) {
 #'   For example, on Ubuntu/Debian you can install with
 #'   ```sh
 #'   sudo apt install graphviz
+#'   ```
+#'   On macOS you can install graphviz using `brew`:
+#'   ```sh
+#'   brew install graphviz
 #'   ```
 #'   In a conda environment, you can install graphviz with:
 #'   ```r

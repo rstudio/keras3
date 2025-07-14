@@ -26,7 +26,7 @@ magrittr::`%<>%`
 #' @rdname multi-assign
 #' @keywords internal
 #' @returns The right-hand-side argument, `value`, invisibly. This called
-#'   primarily for it's side-effect of assigning symbols in the current frame.
+#'   primarily for its side-effect of assigning symbols in the current frame.
 #' @export
 #' @importFrom zeallot %<-%
 #' @usage x \%<-\% value
