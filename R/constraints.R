@@ -88,7 +88,7 @@ constraint_minmaxnorm <- function(min_value = 0.0, max_value = 1.0, rate = 1.0, 
 #'
 #' @docType class
 #'
-#' @format An [R6Class] generator object
+#' @format An [R6::R6Class] generator object
 #'
 #' @section Methods:
 #' \describe{

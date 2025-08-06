@@ -5,7 +5,7 @@
 \alias{KerasConstraint}
 \title{(Deprecated) Base R6 class for Keras constraints}
 \format{
-An \link{R6Class} generator object
+An \link[R6:R6Class]{R6::R6Class} generator object
 }
 \description{
 New custom constraints are encouraged to subclass \code{keras$constraints$Constraint} directly.
