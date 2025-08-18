@@ -22,3 +22,5 @@ inst/doc
 .Rprofile
 .Renviron
 revdep
+keras.Rproj
+keras2.Rproj

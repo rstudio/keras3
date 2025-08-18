@@ -30,8 +30,8 @@ See the package website at \url{https://tensorflow.rstudio.com} for complete doc
 Useful links:
 \itemize{
   \item \url{https://tensorflow.rstudio.com/}
-  \item \url{https://github.com/rstudio/keras/tree/r2}
-  \item Report bugs at \url{https://github.com/rstudio/keras/issues}
+  \item \url{https://github.com/rstudio/keras3/tree/r2}
+  \item Report bugs at \url{https://github.com/rstudio/keras3/issues}
 }
 
 }

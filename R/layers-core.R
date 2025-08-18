@@ -563,5 +563,6 @@ compose_layer.keras.models.Sequential <- function(object, layer, ...) {
   object
 }
 
+#' @export
 compose_layer.keras.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
 # compose_layer.keras.src.engine.sequential.Sequential <- compose_layer.keras.models.Sequential
