@@ -103,6 +103,7 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
+  Sys.setenv(TF_USE_LEGACY_KERAS = 1)
 
   # resolve the implementation module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
@@ -111,6 +112,14 @@ keras <- NULL
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
     Sys.setenv(RETICULATE_PYTHON = keras_python)
+
+  reticulate::py_require(
+    c(
+      "tf-keras",
+      "numpy<2",
+      as.vector(default_extra_packages())
+    )
+  )
 
   # delay load keras
   keras <<- import(implementation_module, delay_load = list(
