@@ -169,6 +169,9 @@ keras <- NULL
     # replace "tensorflow.python.keras.*" with "keras.*"
     classes <- sub(paste0("^", module), "keras", classes)
 
+    # replace legacy keras module name: tf_keras -> keras
+    classes <- sub("^tf_keras\\.", "keras.", classes)
+
     # All python symbols moved in v2.13 under .src
     # Preserve the original symbols for compatability with keras3,
     # interleaving the back-compat class names after the originals.
