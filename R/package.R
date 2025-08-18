@@ -96,8 +96,7 @@ keras <- NULL
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    "The keras package is deprecated. Use the keras3 package instead.",
-    "To use legacy keras via py_require(), call py_require_legacy_keras() at the start of the R session."
+    "The keras package is deprecated. Use the keras3 package instead."
   )
 }
 
@@ -167,6 +166,9 @@ py_require_legacy_keras <- function(extra_packages = TRUE) {
     },
 
     on_error = function(e) {
+      message(
+        "To use legacy Keras via py_require(), call py_require_legacy_keras() at the start of the R session."
+      )
       if (is_tensorflow_implementation())
         stop(tf_config()$error_message, call. = FALSE)
       else {
