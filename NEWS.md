@@ -1,5 +1,14 @@
 # keras (development version)
 
+- Updates for usage with Legacy Keras (#1515). 
+
+  - A package startup message is now displayed encouraging users to migrate to keras3.
+  - New function `py_require_legacy_keras()`.
+  - `install_keras()` now installs legacy keras `tf-keras`.
+  - `TF_USE_LEGACY_KERAS=1` envvar is now set on package startup.
+
+- Documentation updates for CRAN (#1514)
+
 # keras 2.15.0
 
 - Default TensorFlow/Keras version installed by `install_keras()` is now 2.15. 
