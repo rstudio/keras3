@@ -128,6 +128,12 @@ py_require_legacy_keras <- function(extra_packages = TRUE) {
 
   Sys.setenv(TF_USE_LEGACY_KERAS = 1L)
 
+  ## In a future update, we will declare these dependencies by default.
+  ## We're making this opt-in for now to minimize breaking user code
+  ## and give package maintainers an opportunity to make updates
+  if (tolower(Sys.getenv("PY_REQUIRE_LEGACY_KERAS")) %in% c("1", "true", "yes"))
+    py_require_legacy_keras()
+
   # resolve the implementation module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
 
@@ -135,11 +141,6 @@ py_require_legacy_keras <- function(extra_packages = TRUE) {
   keras_python <- get_keras_python()
   if (!is.null(keras_python))
     Sys.setenv(RETICULATE_PYTHON = keras_python)
-
-  ## In a future update, we will declare these dependencies by default.
-  ## We're making this opt-in for now to minimize breaking user code
-  ## and give package maintainers an opportunity to make updates
-  # py_require_legacy_keras()
 
   # delay load keras
   keras <<- import(implementation_module, delay_load = list(
