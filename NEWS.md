@@ -1,4 +1,4 @@
-# keras (development version)
+# keras 2.16.0
 
 - Updates for usage with Legacy Keras (#1515). 
 
