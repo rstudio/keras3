@@ -2,7 +2,7 @@
 % Please edit documentation in R/install.R
 \name{install_keras}
 \alias{install_keras}
-\title{Install TensorFlow and Keras, including all Python dependencies}
+\title{Install TensorFlow and Legacy Keras, including all Python dependencies}
 \usage{
 install_keras(
   method = c("auto", "virtualenv", "conda"),
@@ -46,6 +46,22 @@ TensorFlow.}
 \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
 }
 \description{
+This function can be used to create a persistent virtual environment.
+Note that recent versions of reticulate will automatically manage environemnts
+if dependencies are declared with \code{reticulate::py_require()}. Instead of using
+this \code{install_keras()} function, new users are encouraged instead to run this code at the start of the R session, before loading keras:
+}
+\details{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# declare requirements for legacy keras (tf-keras)
+reticulate::py_require(c("tensorflow", "tf-keras", "numpy<2"))
+
+# also declare optional dependencies
+reticulate::py_require(c(
+  "tensorflow-hub", "tensorflow-datasets", "scipy",
+  "requests", "Pillow", "h5py", "pandas", "pydot"
+))
+}\if{html}{\out{</div>}}
+
 This function will install Tensorflow and all Keras dependencies. This is a
 thin wrapper around \code{\link[tensorflow:install_tensorflow]{tensorflow::install_tensorflow()}}, with the only
 difference being that this includes by default additional extra packages that
@@ -53,8 +69,7 @@ keras expects, and the default version of tensorflow installed by
 \code{install_keras()} may at times be different from the default installed
 \code{install_tensorflow()}. The default version of tensorflow installed by
 \code{install_keras()} is "2.15".
-}
-\details{
+
 The default additional packages are:
 tensorflow-hub, tensorflow-datasets, scipy, requests, pyyaml, Pillow, h5py, pandas, pydot, with their
 versions potentially constrained for compatibility with the

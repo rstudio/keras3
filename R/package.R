@@ -115,7 +115,7 @@ keras <- NULL
 
   reticulate::py_require(
     c(
-      "tf-keras",
+      "tf-keras", "tensorflow",
       "numpy<2",
       as.vector(default_extra_packages())
     )

@@ -1,4 +1,20 @@
-#' Install TensorFlow and Keras, including all Python dependencies
+#' Install TensorFlow and Legacy Keras, including all Python dependencies
+#'
+#' This function can be used to create a persistent virtual environment.
+#' Note that recent versions of reticulate will automatically manage environemnts
+#' if dependencies are declared with `reticulate::py_require()`. Instead of using
+#' this `install_keras()` function, new users are encouraged instead to run this code at the start of the R session, before loading keras:
+#'
+#' ```r
+#' # declare requirements for legacy keras (tf-keras)
+#' reticulate::py_require(c("tensorflow", "tf-keras", "numpy<2"))
+#'
+#' # also declare optional dependencies
+#' reticulate::py_require(c(
+#'   "tensorflow-hub", "tensorflow-datasets", "scipy",
+#'   "requests", "Pillow", "h5py", "pandas", "pydot"
+#' ))
+#' ```
 #'
 #' This function will install Tensorflow and all Keras dependencies. This is a
 #' thin wrapper around [`tensorflow::install_tensorflow()`], with the only
@@ -44,7 +60,7 @@ install_keras <- function(method = c("auto", "virtualenv", "conda"),
     method = method,
     conda = conda,
     version = tensorflow,
-    extra_packages = pkgs,
+    extra_packages = c(pkgs, "tf-keras"),
     # envname = envname,
     # new_env = new_env,
     ...
