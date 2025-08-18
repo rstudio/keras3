@@ -166,7 +166,8 @@ py_require_legacy_keras <- function(extra_packages = TRUE) {
     },
 
     on_error = function(e) {
-      message(
+      emit <- base::message
+      emit(
         "To use legacy Keras via py_require(), call py_require_legacy_keras() at the start of the R session."
       )
       if (is_tensorflow_implementation())
