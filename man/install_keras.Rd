@@ -46,12 +46,18 @@ TensorFlow.}
 \code{\link[reticulate:virtualenv-tools]{reticulate::virtualenv_install()}}, depending on the \code{method} used.}
 }
 \description{
-This function can be used to create a persistent virtual environment.
-Note that recent versions of reticulate will automatically manage environemnts
-if dependencies are declared with \code{reticulate::py_require()}. Instead of using
-this \code{install_keras()} function, new users are encouraged instead to run this code at the start of the R session, before loading keras:
+This function can be used to create a persistent virtual environment for usage
+with Legacy Keras. New code is recommended to use the \code{keras3} package which
+works automatically and does any special configuration like this.
 }
 \details{
+Note that recent versions of reticulate will automatically manage
+environments if dependencies are declared with \code{reticulate::py_require()}.
+Instead of using this \code{install_keras()} function, new users are first
+encouraged to use \code{keras3}. If that's not an option, instead of creating a
+persistent venv, you can this code at the start of the R session, before
+loading keras:
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# declare requirements for legacy keras (tf-keras)
 reticulate::py_require(c("tensorflow", "tf-keras", "numpy<2"))
 

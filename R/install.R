@@ -1,9 +1,15 @@
 #' Install TensorFlow and Legacy Keras, including all Python dependencies
 #'
-#' This function can be used to create a persistent virtual environment.
-#' Note that recent versions of reticulate will automatically manage environemnts
-#' if dependencies are declared with `reticulate::py_require()`. Instead of using
-#' this `install_keras()` function, new users are encouraged instead to run this code at the start of the R session, before loading keras:
+#' This function can be used to create a persistent virtual environment for usage
+#' with Legacy Keras. New code is recommended to use the `keras3` package which
+#' works automatically and does any special configuration like this.
+#'
+#' Note that recent versions of reticulate will automatically manage
+#' environments if dependencies are declared with `reticulate::py_require()`.
+#' Instead of using this `install_keras()` function, new users are first
+#' encouraged to use `keras3`. If that's not an option, instead of creating a
+#' persistent venv, you can this code at the start of the R session, before
+#' loading keras:
 #'
 #' ```r
 #' # declare requirements for legacy keras (tf-keras)
