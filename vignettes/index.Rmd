@@ -202,7 +202,7 @@ Keras provides a vocabulary for building deep learning models that is simple, el
 
 ### Deep Learning with R Book
 
-If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R](https://www.amazon.com/Deep-Learning-R-Francois-Chollet/dp/161729554X) book from Manning. This book is a collaboration between François Chollet, the creator of Keras, and J.J. Allaire, who wrote the R interface to Keras.
+If you want a more comprehensive introduction to both Keras and the concepts and practice of deep learning, we recommend the [Deep Learning with R](https://www.manning.com/books/deep-learning-with-r-second-edition) book from Manning. This book is a collaboration between François Chollet, the creator of Keras, J.J. Allaire, who wrote the original R interface to Keras, and Tomasz Kalinowski, who maintains the R interface today.
 
 The book presumes no significant knowledge of machine learning and deep learning, and goes all the way from basic theory to advanced practical applications, all using the R interface to Keras. 
 
