@@ -5,7 +5,7 @@
 \alias{KerasWrapper}
 \title{(Deprecated) Base R6 class for Keras wrappers}
 \format{
-An \link{R6Class} generator object
+An \link[R6:R6Class]{R6::R6Class} generator object
 }
 \value{
 \link{KerasWrapper}.

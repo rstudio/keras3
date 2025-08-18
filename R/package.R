@@ -96,6 +96,10 @@ keras <- NULL
 
 .onLoad <- function(libname, pkgname) {
 
+  packageStartupMessage(
+    "The keras package is deprecated. Use the keras3 package instead."
+  )
+
   # resolve the implementation module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
 

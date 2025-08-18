@@ -556,7 +556,7 @@ callback_lambda <- function(on_epoch_begin = NULL, on_epoch_end = NULL,
 #'
 #' @docType class
 #'
-#' @format An [R6Class] generator object
+#' @format An [R6::R6Class] generator object
 #'
 #' @field params Named list with training parameters (eg. verbosity, batch size, number of epochs...).
 #' @field model Reference to the Keras model being trained.

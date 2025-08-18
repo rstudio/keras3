@@ -8,7 +8,7 @@
 #'
 #' @docType class
 #'
-#' @format An [R6Class] generator object
+#' @format An [R6::R6Class] generator object
 #'
 #' @section Methods: \describe{
 #'   \item{\code{build(input_shape)}}{Builds the wrapped layer.
