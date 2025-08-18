@@ -20,6 +20,14 @@
 #'   "tensorflow-hub", "tensorflow-datasets", "scipy",
 #'   "requests", "Pillow", "h5py", "pandas", "pydot"
 #' ))
+#' library(keras)
+#' ```
+#'
+#' Or more simply, call `py_require_legacy_keras()`
+#'
+#' ```r
+#' library(keras)
+#' py_require_legacy_keras()
 #' ```
 #'
 #' This function will install Tensorflow and all Keras dependencies. This is a

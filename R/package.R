@@ -96,14 +96,37 @@ keras <- NULL
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    "The keras package is deprecated. Use the keras3 package instead."
+    "The keras package is deprecated. Use the keras3 package instead.",
+    "To use legacy keras via py_require(), call py_require_legacy_keras() at the start of the R session."
   )
 }
 
+#' @export
+#' @rdname install_keras
+py_require_legacy_keras <- function(extra_packages = TRUE) {
+  Sys.setenv(TF_USE_LEGACY_KERAS = 1L)
+  reticulate::py_require(
+    c(
+      "tf-keras", "tensorflow", "numpy<2",
+      if (extra_packages) {
+        c(
+          "tensorflow-hub",
+          "tensorflow-datasets",
+          "scipy",
+          "requests",
+          "Pillow",
+          "h5py",
+          "pandas",
+          "pydot"
+        )
+      }
+    )
+  )
+}
 
 .onLoad <- function(libname, pkgname) {
 
-  Sys.setenv(TF_USE_LEGACY_KERAS = 1)
+  Sys.setenv(TF_USE_LEGACY_KERAS = 1L)
 
   # resolve the implementation module (might be keras proper or might be tensorflow)
   implementation_module <- resolve_implementation_module()
@@ -113,13 +136,10 @@ keras <- NULL
   if (!is.null(keras_python))
     Sys.setenv(RETICULATE_PYTHON = keras_python)
 
-  reticulate::py_require(
-    c(
-      "tf-keras", "tensorflow",
-      "numpy<2",
-      as.vector(default_extra_packages())
-    )
-  )
+  ## In a future update, we will declare these dependencies by default.
+  ## We're making this opt-in for now to minimize breaking user code
+  ## and give package maintainers an opportunity to make updates
+  # py_require_legacy_keras()
 
   # delay load keras
   keras <<- import(implementation_module, delay_load = list(
