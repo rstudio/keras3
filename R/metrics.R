@@ -23,8 +23,17 @@
 #' ```{r}
 #' y_true <- rbind(c(0, 1), c(0, 0))
 #' y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
-#' loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma=2)
-#' loss
+#' # In this instance, the first sample in the second batch is the
+#' # 'easier' example.
+#' focal_loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma = 2)
+#' focal_loss
+#' # Compare with binary_crossentropy
+#' bce_loss <- loss_binary_focal_crossentropy(y_true, y_pred)
+#' bce_loss
+#' # Binary focal crossentropy loss attributes more importance to the
+#' # harder example which results in a higher loss for the first batch
+#' # when normalized by binary cross entropy loss
+#' focal_loss / bce_loss
 #' ```
 #'
 #' @returns
@@ -1405,7 +1414,7 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 #' model |> compile(
 #'   optimizer = 'sgd',
 #'   loss = 'binary_crossentropy',
-#'   metrics = list(metric_sensitivity_at_specificity())
+#'   metrics = list(metric_sensitivity_at_specificity(specificity = 0.5))
 #' )
 #' ```
 #'
@@ -1497,7 +1506,7 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 #' model |> compile(
 #'   optimizer = 'sgd',
 #'   loss = 'binary_crossentropy',
-#'   metrics = list(metric_sensitivity_at_specificity())
+#'   metrics = list(metric_specificity_at_sensitivity(sensitivity = 0.3))
 #' )
 #' ```
 #'
