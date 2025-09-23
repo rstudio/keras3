@@ -1,7 +1,7 @@
 Help on class Embedding in module keras.src.layers.core.embedding:
 
 class Embedding(keras.src.layers.layer.Layer)
- |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, weights=None, lora_rank=None, **kwargs)
+ |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, weights=None, lora_rank=None, lora_alpha=None, **kwargs)
  |
  |  Turns nonnegative integers (indexes) into dense vectors of fixed size.
  |
@@ -55,6 +55,11 @@ class Embedding(keras.src.layers.layer.Layer)
  |          computation cost of fine-tuning large embedding layers.
  |          You can also enable LoRA on an existing
  |          `Embedding` layer by calling `layer.enable_lora(rank)`.
+ |      lora_alpha: Optional integer. If set, this parameter scales the
+ |          low-rank adaptation delta (computed as the product of two lower-rank
+ |          trainable matrices) during the forward pass. The delta is scaled by
+ |          `lora_alpha / lora_rank`, allowing you to fine-tune the strength of
+ |          the LoRA adjustment independently of `lora_rank`.
  |
  |  Input shape:
  |      2D tensor with shape: `(batch_size, input_length)`.
@@ -85,6 +90,7 @@ class Embedding(keras.src.layers.layer.Layer)
  |    mask_zero=False,
  |    weights=None,
  |    lora_rank=None,
+ |    lora_alpha=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -101,9 +107,12 @@ class Embedding(keras.src.layers.layer.Layer)
  |
  |  compute_output_shape(self, input_shape)
  |
+ |  compute_output_spec(self, inputs)
+ |
  |  enable_lora(
  |    self,
  |    rank,
+ |    lora_alpha=None,
  |    a_initializer='he_uniform',
  |    b_initializer='zeros'
  |  )
@@ -131,7 +140,7 @@ class Embedding(keras.src.layers.layer.Layer)
  |
  |  quantized_build(
  |    self,
- |    input_shape,
+ |    embeddings_shape,
  |    mode
  |  )
  |
