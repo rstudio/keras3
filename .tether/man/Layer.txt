@@ -1,6 +1,6 @@
 Help on class Layer in module keras.src.layers.layer:
 
-class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.Operation, keras.src.saving.keras_saveable.KerasSaveable)
+class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.Operation)
  |  Layer(*args, **kwargs)
  |
  |  This is the class from which all layers inherit.
@@ -243,6 +243,7 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |    regularizer=None,
  |    constraint=None,
  |    aggregation='none',
+ |    overwrite_with_gradient=False,
  |    name=None
  |  )
  |      Add a weight variable to the layer.
@@ -274,6 +275,9 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |              the type of multi-replica aggregation to be used for this
  |              variable when writing custom data parallel training loops.
  |              Defaults to `"none"`.
+ |          overwrite_with_gradient: Boolean, whether to overwrite the variable
+ |              with the computed gradient. This is useful for float8 training.
+ |              Defaults to `False`.
  |          name: String name of the variable. Useful for debugging purposes.
  |
  |  build(self, input_shape)
@@ -447,6 +451,12 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |      ):
  |          ref_var.assign(value)
  |      ```
+ |
+ |  symbolic_call(
+ |    self,
+ |    *args,
+ |    **kwargs
+ |  )
  |
  |  ----------------------------------------------------------------------
  |  Static methods defined here:

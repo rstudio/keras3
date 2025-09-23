@@ -71,6 +71,9 @@
 #'
 #'     A typical signature for this method is `call(inputs)`, and user
 #'     could optionally add `training` and `mask` if the layer need them.
+#' * `symbolic_call(...)`: Method that executes when the layer is invoked on
+#'     symbolic tensors. By default this simply forwards to `call()`, but it can
+#'     be overridden to customize symbolic tracing behavior.
 #' * `get_config()`: Returns a named list containing the configuration
 #'     used to initialize this layer. If the list names differ from the arguments
 #'     in `initialize()`, then override `from_config()` as well.
@@ -234,6 +237,7 @@
 #'              regularizer = NULL,
 #'              constraint = NULL,
 #'              aggregation = 'none',
+#'              overwrite_with_gradient = FALSE,
 #'              name = NULL)
 #'   ```
 #'   Add a weight variable to the layer.
@@ -272,6 +276,9 @@
 #'      the type of multi-replica aggregation to be used for this
 #'      variable when writing custom data parallel training loops.
 #'      Defaults to `"none"`.
+#'   * `overwrite_with_gradient`: Boolean, whether to overwrite the
+#'       variable with the computed gradient. This is useful for float8
+#'       training. Defaults to `FALSE`.
 #'   * `name`: String name of the variable. Useful for debugging purposes.
 #'
 #'   Returns:
@@ -324,6 +331,10 @@
 #'
 #' * ```r
 #'   compute_output_spec(...)
+#'   ```
+#'
+#' * ```r
+#'   symbolic_call(...)
 #'   ```
 #'
 #' * ```r
@@ -692,5 +703,3 @@ function(classname,
 # ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally
 # have `object` as the first argument, which allows users to instantiate
 # (`initialize`) and `call` one motion.
-
-
