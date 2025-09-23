@@ -1,7 +1,7 @@
 Help on class TorchModuleWrapper in module keras.src.utils.torch_utils:
 
 class TorchModuleWrapper(keras.src.layers.layer.Layer)
- |  TorchModuleWrapper(module, name=None, **kwargs)
+ |  TorchModuleWrapper(module, name=None, output_shape=None, **kwargs)
  |
  |  Torch module wrapper layer.
  |
@@ -17,6 +17,8 @@ class TorchModuleWrapper(keras.src.layers.layer.Layer)
  |          instance, then its parameters must be initialized before
  |          passing the instance to `TorchModuleWrapper` (e.g. by calling
  |          it once).
+ |      output_shape :The shape of the output of this layer. It helps Keras
+ |          perform automatic shape inference.
  |      name: The name of the layer (string).
  |
  |  Example:
@@ -88,6 +90,7 @@ class TorchModuleWrapper(keras.src.layers.layer.Layer)
  |    self,
  |    module,
  |    name=None,
+ |    output_shape=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -98,6 +101,8 @@ class TorchModuleWrapper(keras.src.layers.layer.Layer)
  |    training=None,
  |    **kwargs
  |  )
+ |
+ |  compute_output_shape(self, input_shape)
  |
  |  get_config(self)
  |      Returns the config of the object.

@@ -76,6 +76,10 @@
 #' passing the instance to `layer_torch_module_wrapper` (e.g. by calling
 #' it once).
 #'
+#' @param output_shape
+#' Optional shape specification for the wrapped module's outputs when it
+#' cannot be inferred automatically.
+#'
 #' @param name
 #' The name of the layer (string).
 #'
@@ -91,10 +95,11 @@
 #' @family layers
 #' @tether keras.layers.TorchModuleWrapper
 layer_torch_module_wrapper <-
-function (object, module, name = NULL, ...)
+function (object, module, output_shape = NULL, name = NULL, ...)
 {
     args <- capture_args(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
+        batch_size = as_integer, batch_input_shape = normalize_shape,
+        output_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$TorchModuleWrapper, object, args)
 }
