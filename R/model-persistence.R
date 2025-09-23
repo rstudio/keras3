@@ -166,18 +166,32 @@ function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 }
 
 
-#' Saves all layer weights to a `.weights.h5` file.
+#' Saves all weights to a single file or sharded files.
 #'
-#' @param model A keras Model object
+#' By default, the weights will be saved in a single `.weights.h5` file. If
+#' sharding is enabled (`max_shard_size` is not `NULL`), the weights will be
+#' saved in multiple files, each with a size at most `max_shard_size` (in GB).
+#' Additionally, a configuration file `.weights.json` will contain the metadata
+#' for the sharded files.
+#'
+#' The saved sharded files contain:
+#'
+#' - `*.weights.json`: The configuration file containing metadata and the weight map.
+#' - `*_xxxxxx.weights.h5`: The sharded files containing only the weights.
+#'
+#' @param model A keras Model object.
 #'
 #' @param filepath
-#' string.
-#' Path where to save the model. Must end in `.weights.h5`.
+#' `string`. Path where to save the weights. When sharding, the filepath must
+#' end in `.weights.json`. If `.weights.h5` is provided, it will be overridden.
 #'
 #' @param overwrite
-#' Whether we should overwrite any existing model
-#' at the target location, or instead ask the user
-#' via an interactive prompt.
+#' Whether to overwrite any existing weights at the target location or instead
+#' ask the user via an interactive prompt.
+#'
+#' @param max_shard_size
+#' Numeric. Maximum size (in GB) for each sharded file. If `NULL`, no sharding
+#' will be performed.
 #'
 #' @returns This is called primarily for side effects. `model` is returned,
 #'   invisibly, to enable usage with the pipe.
@@ -188,10 +202,11 @@ function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 #' + <https://keras.io/api/models/model_saving_apis/weights_saving_and_loading#saveweights-method>
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/save_weights>
 save_model_weights <-
-function (model, filepath, overwrite = FALSE)
+function (model, filepath, overwrite = FALSE, max_shard_size = NULL)
 {
     overwrite <- confirm_overwrite(filepath, overwrite)
-    keras$Model$save_weights(model, filepath, overwrite = overwrite)
+    keras$Model$save_weights(model, filepath, overwrite = overwrite,
+        max_shard_size = max_shard_size)
     invisible(model)
 }
 
@@ -199,30 +214,41 @@ function (model, filepath, overwrite = FALSE)
 #' Load weights from a file saved via `save_model_weights()`.
 #'
 #' @description
-#' Weights are loaded based on the network's
-#' topology. This means the architecture should be the same as when the
-#' weights were saved. Note that layers that don't have weights are not
-#' taken into account in the topological ordering, so adding or removing
-#' layers is fine as long as they don't have weights.
+#' Weights are loaded based on the network's topology. This means the
+#' architecture should be the same as when the weights were saved. Note that
+#' layers without weights are not taken into account in the topological
+#' ordering, so adding or removing such layers is fine.
 #'
 #' **Partial weight loading**
 #'
-#' If you have modified your model, for instance by adding a new layer
-#' (with weights) or by changing the shape of the weights of a layer,
-#' you can choose to ignore errors and continue loading
-#' by setting `skip_mismatch=TRUE`. In this case any layer with
-#' mismatching weights will be skipped. A warning will be displayed
-#' for each skipped layer.
+#' If you have modified your model, for instance by adding a new layer (with
+#' weights) or by changing the shape of the weights of a layer, you can choose
+#' to ignore errors and continue loading by setting `skip_mismatch = TRUE`. In
+#' this case any layer with mismatching weights will be skipped. A warning will
+#' be displayed for each skipped layer.
+#'
+#' **Sharding**
+#'
+#' When loading sharded weights, specify a `filepath` that ends with
+#' `*.weights.json`, which is used as the configuration file. The sharded files
+#' `*_xxxxx.weights.h5` must live in the same directory as the configuration
+#' file.
 #'
 #' @param filepath
-#' String, path to the weights file to load.
-#' It can either be a `.weights.h5` file
-#' or a legacy `.h5` weights file.
+#' `string` or `pathlib.Path`. Path to the weights file. When sharding, the
+#' filepath must end in `.weights.json`.
 #'
 #' @param skip_mismatch
 #' Boolean, whether to skip loading of layers where
 #' there is a mismatch in the number of weights, or a mismatch in
 #' the shape of the weights.
+#'
+#' @examples
+#' ## Load the weights in a single file.
+#' model |> load_model_weights("model.weights.h5")
+#'
+#' ## Load the weights in sharded files.
+#' model |> load_model_weights("model.weights.json")
 #'
 #' @param ...
 #' For forward/backward compatability.
