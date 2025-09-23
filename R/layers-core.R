@@ -35,6 +35,7 @@
 #' - ```r
 #'   enable_lora(
 #'     rank,
+#'     lora_alpha = NULL,
 #'     a_initializer = 'he_uniform',
 #'     b_initializer = 'zeros'
 #'   )
@@ -92,7 +93,12 @@
 #' trainable matrices. This can be useful to reduce the
 #' computation cost of fine-tuning large dense layers.
 #' You can also enable LoRA on an existing
-#' `Dense` layer by calling `layer$enable_lora(rank)`.
+#' `Dense` layer by calling `layer$enable_lora(rank, lora_alpha = NULL)`.
+#'
+#' @param lora_alpha
+#' Optional integer scaling factor applied to the LoRA delta. The delta is
+#' scaled by `lora_alpha / lora_rank`, enabling finer control over the strength
+#' of the adaptation. Defaults to `NULL` (no additional scaling).
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -119,9 +125,11 @@ function (object, units, activation = NULL, use_bias = TRUE,
     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, lora_rank = NULL,
+    lora_alpha = NULL,
     ...)
 {
     args <- capture_args(list(units = as_integer, lora_rank = as_integer,
+        lora_alpha = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Dense, object, args)
@@ -191,6 +199,7 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' - ```r
 #'   enable_lora(
 #'     rank,
+#'     lora_alpha = NULL,
 #'     a_initializer = 'he_uniform',
 #'     b_initializer = 'zeros'
 #'   )
@@ -259,7 +268,12 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' This can be useful to reduce the
 #' computation cost of fine-tuning large dense layers.
 #' You can also enable LoRA on an existing
-#' `EinsumDense` layer by calling `layer$enable_lora(rank)`.
+#' `EinsumDense` layer by calling `layer$enable_lora(rank, lora_alpha = NULL)`.
+#'
+#' @param lora_alpha
+#' Optional integer scaling factor applied to the LoRA delta. The delta is
+#' scaled by `lora_alpha / lora_rank`, enabling finer control over the strength
+#' of the adaptation. Defaults to `NULL`.
 #'
 #' @param ...
 #' Base layer keyword arguments, such as `name` and `dtype`.
@@ -280,9 +294,10 @@ function (object, equation, output_shape, activation = NULL,
     bias_axes = NULL, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, lora_rank = NULL,
-    ...)
+    lora_alpha = NULL, ...)
 {
-    args <- capture_args(list(lora_rank = as_integer, input_shape = normalize_shape,
+    args <- capture_args(list(lora_rank = as_integer, lora_alpha = as_integer,
+        input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         output_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$EinsumDense, object, args)
