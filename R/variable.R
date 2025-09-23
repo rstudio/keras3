@@ -17,6 +17,8 @@
 #' - `value`: The current value of the variable (NumPy array or tensor).
 #' - `name`: The name of the variable (string).
 #' - `path`: The path of the variable within the Keras model or layer (string).
+#' - `synchronization`: The synchronization strategy for this variable
+#'   in distributed settings.
 #'
 #' # Examples
 #' **Initializing a `Variable` with a NumPy array:**
@@ -88,15 +90,23 @@
 #' to be taken into account by downstream backends or users. Defaults
 #' to `"none"`.
 #'
+#' @param synchronization
+#' Optional string describing the synchronization mode for this variable.
+#' Defaults to `"auto"`.
+#'
 #' @param name
 #' Optional. A unique name for the variable. Automatically generated
 #' if not set.
+#'
+#' @param ...
+#' Additional backend-specific keyword arguments.
 #'
 #' @export
 #' @tether keras.src.backend.common.variables.Variable
 keras_variable <-
 function (initializer, shape = NULL, dtype = NULL, trainable = TRUE,
-          autocast = TRUE, aggregation = "none", name = NULL)
+          autocast = TRUE, aggregation = "none", synchronization = "auto",
+          name = NULL, ...)
 {
   args <- capture_args(list(shape = normalize_shape))
   do.call(keras$Variable, args)
