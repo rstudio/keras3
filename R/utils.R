@@ -324,11 +324,11 @@ function (x, axis = -1L, order = 2L)
 #' ```
 #'
 #' ```{r}
-#' b <- array(c(.9, .04, .03, .03,
+#' b <- matrix(c(.9, .04, .03, .03,
 #'               .3, .45, .15, .13,
 #'               .04, .01, .94, .05,
 #'               .12, .21, .5, .17),
-#'               dim = c(4, 4))
+#'               nrow = 4, byrow = TRUE)
 #' loss <- op_categorical_crossentropy(a, b)
 #' loss
 #' ```
