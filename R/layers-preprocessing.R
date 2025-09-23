@@ -1681,10 +1681,14 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 #' (independently of which backend you're using).
 #'
 #' @param scale
-#' Float, the scale to apply to the inputs.
+#' Numeric scalar or vector specifying the scale to apply to the inputs.
+#' If scalar, the same scale is applied to every feature or channel. If a
+#' vector (numeric, list, or array), scaling is applied per channel.
 #'
 #' @param offset
-#' Float, the offset to apply to the inputs.
+#' Numeric scalar or vector specifying the offset to apply to the inputs.
+#' If scalar, the same offset is applied to every feature or channel. If a
+#' vector (numeric, list, or array), offsets are applied per channel.
 #'
 #' @param ...
 #' Base layer keyword arguments, such as `name` and `dtype`.
