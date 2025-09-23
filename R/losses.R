@@ -820,12 +820,12 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #'                   1,   0, 1, 0.9), dim = c(2, 2, 2, 1))
 #'
 #' axis <- c(2, 3, 4)
-#' loss <- loss_dice(y_true, y_pred, axis = axis)
+#' loss_fn <- loss_dice(axis = axis, reduction = NULL)
+#' loss <- loss_fn(y_true, y_pred)
 #' stopifnot(shape(loss) == shape(2))
 #' loss
 #'
-#'
-#' loss = loss_dice(y_true, y_pred)
+#' loss <- loss_dice()(y_true, y_pred)
 #' stopifnot(shape(loss) == shape())
 #' loss
 #' ```
