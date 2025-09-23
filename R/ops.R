@@ -1886,7 +1886,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose>
 #' @tether keras.ops.conv_transpose
 op_conv_transpose <-
-function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
+function (inputs, kernel, strides = 1L, padding = "valid", output_padding = NULL,
     data_format = NULL, dilation_rate = 1L)
 {
     args <- capture_args(list(strides = as_integer, output_padding = as_integer,
