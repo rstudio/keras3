@@ -154,6 +154,7 @@ convert_to_tensor(
   ragged=None
 )
 copy(x)
+corrcoef(x)
 correlate(
   x1,
   x2,

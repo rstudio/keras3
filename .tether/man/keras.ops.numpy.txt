@@ -89,6 +89,7 @@ concatenate(xs, axis=0)
 conj(x)
 conjugate(x)
 copy(x)
+corrcoef(x)
 correlate(
   x1,
   x2,

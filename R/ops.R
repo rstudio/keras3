@@ -3921,6 +3921,34 @@ function (x)
 ops$cbrt(x)
 
 
+#' Pearson correlation coefficient matrix.
+#'
+#' @description
+#' Computes the pairwise Pearson correlation coefficients for the variables in `x`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(matrix(c(1, 2, 3, 2, 4, 6), nrow = 2))
+#' op_corrcoef(x)
+#' ```
+#'
+#' @returns
+#' Tensor of shape `(N, N)` where `N` is the number of variables.
+#'
+#' @param x
+#' 2D tensor of shape `(N, D)`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#corrcoef-function>
+#' @tether keras.ops.corrcoef
+op_corrcoef <-
+function (x)
+ops$corrcoef(x)
+
+
 #' Count the number of occurrences of each value in a tensor of integers.
 #'
 #' @description
