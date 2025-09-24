@@ -3949,6 +3949,33 @@ function (x)
 ops$corrcoef(x)
 
 
+#' Convert angles from degrees to radians.
+#'
+#' @description
+#' Converts the input using `radians = degrees * (pi / 180)`.
+#'
+#' # Examples
+#' ```{r}
+#' op_deg2rad(c(0, 90, 180))
+#' ```
+#'
+#' @returns
+#' Tensor with angles expressed in radians.
+#'
+#' @param x
+#' Input tensor of angles in degrees.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#deg2rad-function>
+#' @tether keras.ops.deg2rad
+op_deg2rad <-
+function (x)
+ops$deg2rad(x)
+
+
 #' Count the number of occurrences of each value in a tensor of integers.
 #'
 #' @description

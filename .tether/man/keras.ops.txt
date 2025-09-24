@@ -198,6 +198,7 @@ cumsum(
   dtype=None
 )
 custom_gradient(f)
+deg2rad(x)
 depthwise_conv(
   inputs,
   kernel,

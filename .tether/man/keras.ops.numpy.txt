@@ -116,6 +116,7 @@ cumsum(
   axis=None,
   dtype=None
 )
+deg2rad(x)
 diag(x, k=0)
 diagflat(x, k=0)
 diagonal(
