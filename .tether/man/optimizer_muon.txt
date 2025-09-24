@@ -1,0 +1,160 @@
+Help on class Muon in module keras.src.optimizers.muon:
+
+class Muon(keras.src.optimizers.optimizer.Optimizer)
+ |  Muon(learning_rate=0.001, adam_beta_1=0.9, adam_beta_2=0.999, epsilon=1e-07, weight_decay=0.1, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='muon', exclude_layers=None, exclude_embeddings=True, muon_a=3.4445, muon_b=-4.775, muon_c=2.0315, adam_lr_ratio=0.1, momentum=0.95, ns_steps=6, nesterov=True, **kwargs)
+ |
+ |  Optimizer that implements the Muon algorithm.
+ |
+ |  Note that this optimizer should not be used in the following layers:
+ |
+ |  1. Embedding layer
+ |  2. Final output fully connected layer
+ |  3. Any {0,1}-D variables
+ |
+ |  These should all be optimized using AdamW.
+ |
+ |  The Muon optimizer can use both the Muon update step or the
+ |  AdamW update step based on the following:
+ |
+ |  - For any variable that isn't 2D, 3D or 4D, the AdamW step
+ |      will be used. This is not configurable.
+ |  - If the argument `exclude_embeddings` (defaults to `True`) is set
+ |  to `True`, the AdamW step will be used.
+ |  - For any variablewith a name that matches an expression
+ |      listed in the argument `exclude_layers` (a list), the
+ |      AdamW step will be used.
+ |  - Any other variable uses the Muon step.
+ |
+ |  Typically, you only need to pass the name of your densely-connected
+ |  output layer to `exclude_layers`, e.g.
+ |  `exclude_layers=["output_dense"]`.
+ |
+ |  References:
+ |      - [Original implementation](https://github.com/KellerJordan/Muon)
+ |      - [Liu et al, 2025](https://arxiv.org/abs/2502.16982)
+ |
+ |  Args:
+ |      learning_rate: A float,
+ |          `keras.optimizers.schedules.LearningRateSchedule` instance, or
+ |          a callable that takes no arguments and returns the actual value to
+ |          use. The learning rate. Defaults to `0.001`.
+ |      adam_beta_1: A float value or a constant float tensor, or a callable
+ |          that takes no arguments and returns the actual value to use.
+ |          The exponential decay rate for the 1st moment estimates. Defaults to
+ |          `0.9`.
+ |      adam_beta_2: A float value or a constant float tensor, ora callable
+ |          that takes no arguments and returns the actual value to use.
+ |          The exponential decay rate for the 2nd moment estimates. Defaults to
+ |          `0.999`.
+ |      epsilon: A small constant for numerical stability. This is
+ |          "epsilon hat" in the Kingma and Ba paper
+ |          (in the formula just before Section 2.1),
+ |          not the epsilon in Algorithm 1 of the paper.
+ |          It be used at Adamw.Defaults to `1e-7`.
+ |      exclude_layers: List of strings, keywords of layer names to exclude.
+ |          All layers with keywords in their path will use adamw.
+ |      exclude_embeddings: Boolean value
+ |          If True, embedding layers will use adamw.
+ |      muon_a: Float, parameter a of the muon algorithm.
+ |          It is recommended to use the default value
+ |      muon_b: Float, parameter b of the muon algorithm.
+ |          It is recommended to use the default value
+ |      muon_c: Float, parameter c of the muon algorithm.
+ |          It is recommended to use the default value
+ |      adam_lr_ratio: Float, the ratio of the learning rate when
+ |              using Adam to the main learning rate.
+ |              it is recommended to set it to 0.1
+ |      momentum: Float, momentum used by internal SGD.
+ |      ns_steps: Integer, number of Newton-Schulz iterations to run.
+ |      nesterov: Boolean, whether to use Nesterov-style momentum
+ |      {{base_optimizer_keyword_args}}
+ |
+ |  Method resolution order:
+ |      Muon
+ |      keras.src.optimizers.optimizer.Optimizer
+ |      keras.src.backend.tensorflow.optimizer.TFOptimizer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.optimizers.base_optimizer.BaseOptimizer
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    learning_rate=0.001,
+ |    adam_beta_1=0.9,
+ |    adam_beta_2=0.999,
+ |    epsilon=1e-07,
+ |    weight_decay=0.1,
+ |    clipnorm=None,
+ |    clipvalue=None,
+ |    global_clipnorm=None,
+ |    use_ema=False,
+ |    ema_momentum=0.99,
+ |    ema_overwrite_frequency=None,
+ |    loss_scale_factor=None,
+ |    gradient_accumulation_steps=None,
+ |    name='muon',
+ |    exclude_layers=None,
+ |    exclude_embeddings=True,
+ |    muon_a=3.4445,
+ |    muon_b=-4.775,
+ |    muon_c=2.0315,
+ |    adam_lr_ratio=0.1,
+ |    momentum=0.95,
+ |    ns_steps=6,
+ |    nesterov=True,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  build(self, var_list)
+ |      Initialize optimizer variables.
+ |
+ |      Adam optimizer has 3 types of variables: momentums, velocities and
+ |      velocity_hat (only set when amsgrad is applied),
+ |
+ |      Args:
+ |          var_list: list of model variables to build Adam variables on.
+ |
+ |  get_config(self)
+ |      Returns the config of the optimizer.
+ |
+ |      An optimizer config is a Python dictionary (serializable)
+ |      containing the configuration of an optimizer.
+ |      The same optimizer can be reinstantiated later
+ |      (without any saved state) from this configuration.
+ |
+ |      Subclass optimizer should override this method to include other
+ |      hyperparameters.
+ |
+ |      Returns:
+ |          Python dictionary.
+ |
+ |  transpose_last_axis(self, X)
+ |
+ |  update_step(
+ |    self,
+ |    gradient,
+ |    variable,
+ |    learning_rate
+ |  )
+ |
+ |  zeropower_via_newtonschulz5(
+ |    self,
+ |    x,
+ |    steps: int
+ |  )
+ |      We apply the Newton-Schulz iteration to compute matrix G.
+ |
+ |      We select a quintic iteration that maximizes the slope at zero. This
+ |      approach helps minimize steps, even if the iteration doesn't fully
+ |      converge across the interval. The result isn't exactly UV^T (from the
+ |      SVD of G), but rather an approximation like US'V^T. Despite this
+ |      approximation, model performance remains unaffected compared to using
+ |      the exact UV^T from the SVD.
+ |
+
