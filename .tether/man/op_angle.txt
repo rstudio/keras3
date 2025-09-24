@@ -1,0 +1,18 @@
+__signature__
+keras.ops.angle(x)
+__doc__
+Element-wise angle of a complex tensor.
+
+Arguments:
+    x: Input tensor. Can be real or complex.
+
+Returns:
+    Output tensor of same shape as x. containing the angle of each element
+    (in radians).
+
+Example:
+>>> x = keras.ops.convert_to_tensor([[1 + 3j, 2 - 5j], [4 - 3j, 3 + 2j]])
+>>> keras.ops.angle(x)
+array([[ 1.2490457, -1.19029  ],
+   [-0.6435011,  0.5880026]], dtype=float32)
+

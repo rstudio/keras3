@@ -16,6 +16,7 @@ amin(
   axis=None,
   keepdims=False
 )
+angle(x)
 any(
   x,
   axis=None,

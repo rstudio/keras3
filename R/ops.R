@@ -3239,6 +3239,34 @@ function (start, end, step = 1L, dtype = NULL,
 }
 
 
+#' Element-wise angle of a complex tensor.
+#'
+#' @description
+#' Returns the phase angle (in radians) for each element in `x`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(matrix(c(1+3i, 2-5i, 4-3i, 3+2i), nrow = 2))
+#' op_angle(x)
+#' ```
+#'
+#' @returns
+#' Tensor with the same shape as `x`, containing the angle of each element in radians.
+#'
+#' @param x
+#' Input tensor. Can be real or complex.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#angle-function>
+#' @tether keras.ops.angle
+op_angle <-
+function (x)
+ops$angle(x)
+
+
 #' Trigonometric inverse cosine, element-wise.
 #'
 #' @description
