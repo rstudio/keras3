@@ -2670,9 +2670,9 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
 #' @param factor
 #' A single float or a list of two floats.
 #' `factor` controls the probability of applying the transformation.
-#' - `factor=0.0` ensures no erasing is applied.
-#' - `factor=1.0` means erasing is always applied.
-#' - If a length-2 sequence `(min, max)` is provided, a probability value
+#' - `factor = 0` ensures no transformation is applied.
+#' - `factor = 1` means the transformation is always applied.
+#' - If a length-2 numeric vector `(min, max)` is provided, a probability value
 #'   is sampled between `min` and `max` for each image.
 #' - If a single float is provided, a probability is sampled
 #'   between `0.0` and the given float.
@@ -2681,7 +2681,7 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
 #' @param scale
 #' A float or a list of two floats defining the magnitude of the distortion
 #' applied.
-#' - If a length-2 sequence `(min, max)` is provided, a random scale value is
+#' - If a length-2 numeric vector `(min, max)` is provided, a random scale value is
 #'   sampled within this range.
 #' - If a single float is provided, a random scale value is sampled
 #'   between `0.0` and the given float.
