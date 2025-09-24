@@ -3962,6 +3962,41 @@ function (x)
 ops$hanning(x)
 
 
+#' Kaiser window function.
+#'
+#' @description
+#' The Kaiser window is defined as:
+#'
+#' `w[n] = I0(beta * sqrt(1 - (2 * n / (N - 1) - 1)^2)) / I0(beta)`
+#'
+#' where `I0` is the modified zeroth-order Bessel function of the first kind.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(5)
+#' op_kaiser(x, beta = 14)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the Kaiser window values.
+#'
+#' @param x
+#' Scalar or 1D tensor specifying the window length.
+#'
+#' @param beta
+#' Float shape parameter for the Kaiser window.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#kaiser-function>
+#' @tether keras.ops.kaiser
+op_kaiser <-
+function (x, beta)
+ops$kaiser(x, beta)
+
+
 #' Heaviside step function.
 #'
 #' @description
