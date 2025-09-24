@@ -3962,6 +3962,43 @@ function (x)
 ops$hanning(x)
 
 
+#' Heaviside step function.
+#'
+#' @description
+#' The Heaviside step function is defined as:
+#'
+#' `heaviside(x1, x2) = 0` if `x1 < 0`,
+#'
+#' `heaviside(x1, x2) = 1` if `x1 > 0`,
+#'
+#' `heaviside(x1, x2) = x2` if `x1 == 0`.
+#'
+#' # Examples
+#' ```{r}
+#' x1 <- op_convert_to_tensor(c(-2, 0, 3))
+#' op_heaviside(x1, 0.5)
+#' ```
+#'
+#' @returns
+#' A tensor whose shape is determined by broadcasting `x1` and `x2`.
+#'
+#' @param x1
+#' Tensor input.
+#'
+#' @param x2
+#' Scalar or tensor value returned where `x1 == 0`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#heaviside-function>
+#' @tether keras.ops.heaviside
+op_heaviside <-
+function (x1, x2)
+ops$heaviside(x1, x2)
+
+
 #' Element-wise cube root.
 #'
 #' # Examples
