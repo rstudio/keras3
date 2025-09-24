@@ -78,6 +78,7 @@ bitwise_right_shift(x, y)
 bitwise_xor(x, y)
 blackman(x)
 broadcast_to(x, shape)
+cbrt(x)
 ceil(x)
 clip(
   x,

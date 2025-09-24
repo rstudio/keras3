@@ -1,0 +1,14 @@
+__signature__
+keras.ops.cbrt(x)
+__doc__
+Computes the cube root of the input tensor, element-wise.
+
+This operation returns the real-valued cube root of `x`, handling
+negative numbers properly in the real domain.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    A tensor containing the cube root of each element in `x`.
+

@@ -112,6 +112,7 @@ categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+cbrt(x)
 ceil(x)
 celu(x, alpha=1.0)
 cholesky(x)

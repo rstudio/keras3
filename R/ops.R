@@ -3896,6 +3896,31 @@ function (x)
 ops$blackman(x)
 
 
+#' Element-wise cube root.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(c(-8, 0, 8))
+#' op_cbrt(x)
+#' ```
+#'
+#' @returns
+#' A tensor containing the cube root of each element in `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#cbrt-function>
+#' @tether keras.ops.cbrt
+op_cbrt <-
+function (x)
+ops$cbrt(x)
+
+
 #' Count the number of occurrences of each value in a tensor of integers.
 #'
 #' @description
