@@ -793,6 +793,21 @@ function (x)
     keras$activations$sparse_plus(x)
 }
 
+#' Sparse sigmoid activation function.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.activations.sparse_sigmoid
+#' @family activations
+#' @inherit activation_elu return
+activation_sparse_sigmoid <-
+function (x)
+{
+    keras$activations$sparse_sigmoid(x)
+}
+
 #' Sparsemax activation function.
 #'
 #' @description
