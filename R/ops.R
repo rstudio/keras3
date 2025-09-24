@@ -3930,6 +3930,38 @@ function (x)
 ops$hamming(x)
 
 
+#' Hanning window function.
+#'
+#' @description
+#' The Hanning window is defined as
+#'
+#' `w[n] = 0.5 - 0.5 * cos(2 * pi * n / (N - 1))`
+#'
+#' for `0 <= n <= N - 1`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(5)
+#' op_hanning(x)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the Hanning window values.
+#'
+#' @param x
+#' Scalar or 1D tensor specifying the window length.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#hanning-function>
+#' @tether keras.ops.hanning
+op_hanning <-
+function (x)
+ops$hanning(x)
+
+
 #' Element-wise cube root.
 #'
 #' # Examples

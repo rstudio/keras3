@@ -134,7 +134,11 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
-einsum(subscripts, *operands)
+einsum(
+  subscripts,
+  *operands,
+  **kwargs
+)
 empty(shape, dtype=None)
 equal(x1, x2)
 exp(x)
@@ -164,6 +168,8 @@ get_item(x, key)
 greater(x1, x2)
 greater_equal(x1, x2)
 hamming(x)
+hanning(x)
+heaviside(x1, x2)
 histogram(
   x,
   bins=10,
@@ -183,6 +189,7 @@ isclose(
 isfinite(x)
 isinf(x)
 isnan(x)
+kaiser(x, beta)
 left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
@@ -300,6 +307,11 @@ rot90(
   axes=(0, 1)
 )
 round(x, decimals=0)
+searchsorted(
+  sorted_sequence,
+  values,
+  side='left'
+)
 select(
   condlist,
   choicelist,

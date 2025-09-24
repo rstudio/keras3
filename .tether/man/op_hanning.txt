@@ -1,0 +1,19 @@
+__signature__
+keras.ops.hanning(x)
+__doc__
+Hanning window function.
+
+The Hanning window is defined as:
+`w[n] = 0.5 - 0.5 * cos(2 * pi * n / (N - 1))` for `0 <= n <= N - 1`.
+
+Args:
+    x: Scalar or 1D Tensor. The window length.
+
+Returns:
+    A 1D tensor containing the Hanning window values.
+
+Example:
+>>> x = keras.ops.convert_to_tensor(5)
+>>> keras.ops.hanning(x)
+array([0. , 0.5, 1. , 0.5, 0. ], dtype=float32)
+
