@@ -75,7 +75,8 @@ dot_product_attention(
   mask=None,
   scale=None,
   is_causal=False,
-  flash_attention=None
+  flash_attention=None,
+  attn_logits_soft_cap=None
 )
 elu(x, alpha=1.0)
 gelu(x, approximate=True)
