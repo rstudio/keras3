@@ -3896,6 +3896,40 @@ function (x)
 ops$blackman(x)
 
 
+#' Hamming window function.
+#'
+#' @description
+#' The Hamming window is defined as
+#'
+#' ```
+#' w[n] = 0.54 - 0.46 * cos(2 * pi * n / (N - 1))
+#' ```
+#'
+#' for `0 <= n <= N - 1`. It is commonly used in signal processing.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(5)
+#' op_hamming(x)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the Hamming window values.
+#'
+#' @param x
+#' Scalar or 1D tensor specifying the window length.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#hamming-function>
+#' @tether keras.ops.hamming
+op_hamming <-
+function (x)
+ops$hamming(x)
+
+
 #' Element-wise cube root.
 #'
 #' # Examples

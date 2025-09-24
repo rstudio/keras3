@@ -163,6 +163,7 @@ full_like(
 get_item(x, key)
 greater(x1, x2)
 greater_equal(x1, x2)
+hamming(x)
 histogram(
   x,
   bins=10,
