@@ -608,6 +608,7 @@ sparse_categorical_crossentropy(
   axis=-1
 )
 sparse_plus(x)
+sparse_sigmoid(x)
 sparsemax(x, axis=-1)
 split(
   x,
