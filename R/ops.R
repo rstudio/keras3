@@ -3840,6 +3840,34 @@ function (x, axis = NULL, weights = NULL)
 }
 
 
+#' Bartlett window function.
+#'
+#' @description
+#' Generates a triangular window that rises and then falls linearly.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(5)
+#' op_bartlett(x)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the Bartlett window values.
+#'
+#' @param x
+#' Scalar or 1D tensor specifying the window length.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#bartlett-function>
+#' @tether keras.ops.bartlett
+op_bartlett <-
+function (x)
+ops$bartlett(x)
+
+
 #' Count the number of occurrences of each value in a tensor of integers.
 #'
 #' @description

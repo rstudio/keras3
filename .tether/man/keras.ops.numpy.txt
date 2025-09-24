@@ -62,6 +62,7 @@ average(
   axis=None,
   weights=None
 )
+bartlett(x)
 bincount(
   x,
   weights=None,
