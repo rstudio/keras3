@@ -2659,6 +2659,82 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
     create_layer(keras$layers$RandomErasing, object, args)
 }
 
+#' A preprocessing layer that applies random elastic transformations.
+#'
+#' @description
+#' This layer distorts input images by applying elastic deformations,
+#' simulating a physically realistic transformation. The magnitude of the
+#' distortion is controlled by the `scale` parameter, while the `factor`
+#' determines the probability of applying the transformation.
+#'
+#' @param factor
+#' A single float or a list of two floats.
+#' `factor` controls the probability of applying the transformation.
+#' - `factor=0.0` ensures no erasing is applied.
+#' - `factor=1.0` means erasing is always applied.
+#' - If a length-2 sequence `(min, max)` is provided, a probability value
+#'   is sampled between `min` and `max` for each image.
+#' - If a single float is provided, a probability is sampled
+#'   between `0.0` and the given float.
+#' Default is 1.0.
+#'
+#' @param scale
+#' A float or a list of two floats defining the magnitude of the distortion
+#' applied.
+#' - If a length-2 sequence `(min, max)` is provided, a random scale value is
+#'   sampled within this range.
+#' - If a single float is provided, a random scale value is sampled
+#'   between `0.0` and the given float.
+#' Default is 1.0.
+#'
+#' @param interpolation
+#' Interpolation mode. Supported values: `"nearest"`, `"bilinear"`.
+#'
+#' @param fill_mode
+#' Points outside the boundaries of the input are filled according to the
+#' given mode. Available methods are `"constant"`, `"nearest"`,
+#' `"wrap"` and `"reflect"`. Defaults to `"constant"`.
+#' - `"reflect"`: `(d c b a | a b c d | d c b a)`
+#'     The input is extended by reflecting about the edge of the
+#'     last pixel.
+#' - `"constant"`: `(k k k k | a b c d | k k k k)`
+#'     The input is extended by filling all values beyond the edge with the
+#'     same constant value `k` specified by `fill_value`.
+#' - `"wrap"`: `(a b c d | a b c d | a b c d)`
+#'     The input is extended by wrapping around to the opposite edge.
+#' - `"nearest"`: `(a a a a | a b c d | d d d d)`
+#'     The input is extended by the nearest pixel.
+#' Note that when using torch backend, `"reflect"` is redirected to
+#' `"mirror"` `(c d c b | a b c d | c b a b)` because torch does not
+#' support `"reflect"`.
+#' Note that torch backend does not support `"wrap"`.
+#'
+#' @param fill_value
+#' a float represents the value to be filled outside the boundaries when
+#' `fill_mode="constant"`.
+#'
+#' @param value_range
+#' the range of values the incoming images will have. Represented as a
+#' length-2 sequence written `[low, high]`. This is typically either `[0, 1]`
+#' or `[0, 255]` depending on how your preprocessing pipeline is set up.
+#'
+#' @export
+#' @inheritParams layer_random_grayscale
+#' @tether keras.layers.RandomElasticTransform
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+layer_random_elastic_transform <-
+function (object, factor = 1, scale = 1, interpolation = "bilinear",
+    fill_mode = "reflect", fill_value = 0, value_range = list(0L, 255L),
+    data_format = NULL, seed = NULL, ...)
+{
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape),
+        ignore = "object")
+    create_layer(keras$layers$RandomElasticTransform, object, args)
+}
+
 #' Applies random Gaussian blur to images for data augmentation.
 #'
 #' @description
