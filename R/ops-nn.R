@@ -515,6 +515,52 @@ op_sparse_sigmoid <-
 function (x)
 ops$sparse_sigmoid(x)
 
+#' Layer normalization layer (Ba et al., 2016).
+#'
+#' @description
+#' Normalize the activations of the previous layer for each given example in a
+#' batch independently, rather than across a batch like Batch Normalization.
+#' i.e. applies a transformation that maintains the mean activation within each
+#' example close to 0 and the activation standard deviation close to 1.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_arange(5, dtype = "float32")
+#' op_layer_normalization(x)
+#' ```
+#'
+#' @returns
+#' The normalized array.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param gamma
+#' Optional scaling factor for the normalization.
+#'
+#' @param beta
+#' Optional add offset for the normalized tensor.
+#'
+#' @param axis
+#' The axis or axes along which to perform normalization. Defaults to `-1`.
+#'
+#' @param epsilon
+#' A lower bound value for the norm. Defaults to `config_epsilon()`.
+#'
+#' @param ...
+#' Additional keyword arguments forwarded to the underlying op.
+#'
+#' @export
+#' @tether keras.ops.layer_normalization
+#' @family nn ops
+#' @family ops
+op_layer_normalization <-
+function (x, gamma = NULL, beta = NULL, axis = -1L, epsilon = NULL, ...)
+{
+    args <- capture_args(list(axis = as_axis))
+    do.call(ops$layer_normalization, args)
+}
+
 #' Sparsemax activation function.
 #'
 #' @description
