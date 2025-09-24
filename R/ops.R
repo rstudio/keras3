@@ -6765,6 +6765,33 @@ op_ravel <-
 function (x)
 ops$ravel(x)
 
+#' Convert a real tensor with shape `(..., 2)` to a complex tensor.
+#'
+#' Converts a real tensor with shape `(..., 2)` to a complex tensor,
+#' where the last dimension represents the real and imaginary components
+#' of a complex tensor.
+#'
+#' @returns
+#' A complex tensor with shape `op_shape(x) |> head(-1)` (drops the last axis).
+#'
+#' @param x
+#' A real tensor with last dimension of size 2.
+#'
+#' # Examples
+#' ```{r}
+#' real_imag <- array(c(1, 2, 3, 4), dim = c(2, 2))
+#' complex_tensor <- op_view_as_complex(real_imag)
+#' complex_tensor
+#' ```
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.view_as_complex
+op_view_as_complex <-
+function (x)
+ops$view_as_complex(x)
+
 
 #' Return the real part of the complex argument.
 #'

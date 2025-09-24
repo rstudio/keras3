@@ -1,0 +1,25 @@
+__signature__
+keras.ops.view_as_complex(x)
+__doc__
+Converts a real tensor with shape `(..., 2)` to a complex tensor,
+where the last dimension represents the real and imaginary components
+of a complex tensor.
+
+Args:
+    x: A real tensor with last dimension of size 2.
+
+Returns:
+    A complex tensor with shape `x.shape[:-1]`.
+
+Example:
+
+```
+>>> import numpy as np
+>>> from keras import ops
+
+>>> real_imag = np.array([[1.0, 2.0], [3.0, 4.0]])
+>>> complex_tensor = ops.view_as_complex(real_imag)
+>>> complex_tensor
+array([1.+2.j, 3.+4.j])
+```
+
