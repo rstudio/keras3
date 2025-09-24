@@ -145,6 +145,7 @@ Other optimizers: \cr
 \code{\link{optimizer_lamb}()} \cr
 \code{\link{optimizer_lion}()} \cr
 \code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_muon}()} \cr
 \code{\link{optimizer_nadam}()} \cr
 \code{\link{optimizer_sgd}()} \cr
 }

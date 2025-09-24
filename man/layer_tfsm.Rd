@@ -59,8 +59,8 @@ model |> export_savedmodel("path/to/artifact")
 ## Output Type:
 ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
 ## Captures:
-##   131061000739280: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   131061000735824: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   131995556197968: TensorSpec(shape=(), dtype=tf.resource, name=None)
+##   131995556198160: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
 }\if{html}{\out{</div>}}
 
@@ -179,6 +179,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

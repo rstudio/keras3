@@ -10,6 +10,7 @@ layer_conv_3d_transpose(
   kernel_size,
   strides = list(1L, 1L, 1L),
   padding = "valid",
+  output_padding = NULL,
   data_format = NULL,
   dilation_rate = list(1L, 1L, 1L),
   activation = NULL,
@@ -42,6 +43,11 @@ of the transposed convolution. \code{strides > 1} is incompatible with
 the left/right or up/down of the input. When \code{padding="same"} and
 \code{strides=1}, the output has the same size as the input.}
 
+\item{output_padding}{Optional integer or list/tuple of 3 integers specifying the amount of
+padding along the depth, height, and width of the output tensor. Each value
+must be lower than the corresponding stride. If \code{NULL}, the output shape is
+inferred.}
+
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
 corresponds to inputs with shape
@@ -52,8 +58,11 @@ It defaults to the \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be \code{"channels_last"}.}
 
-\item{dilation_rate}{int or list of 1 integers, specifying the dilation
-rate to use for dilated transposed convolution.}
+\item{dilation_rate}{An integer or list/tuple of 3 integers, specifying the dilation
+rate to use for dilated convolution. Can be a single integer to specify
+the same value for all spatial dimensions. Currently, specifying any
+\code{dilation_rate} value != 1 is incompatible with specifying any stride
+value != 1.}
 
 \item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
@@ -239,6 +248,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

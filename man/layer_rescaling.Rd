@@ -9,9 +9,13 @@ layer_rescaling(object, scale, offset = 0, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{scale}{Float, the scale to apply to the inputs.}
+\item{scale}{Numeric scalar or vector specifying the scale to apply to the inputs.
+If scalar, the same scale is applied to every feature or channel. If a
+vector (numeric, list, or array), scaling is applied per channel.}
 
-\item{offset}{Float, the offset to apply to the inputs.}
+\item{offset}{Numeric scalar or vector specifying the offset to apply to the inputs.
+If scalar, the same offset is applied to every feature or channel. If a
+vector (numeric, list, or array), offsets are applied per channel.}
 
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
@@ -61,6 +65,7 @@ Other image preprocessing layers: \cr
 \code{\link{layer_rand_augment}()} \cr
 \code{\link{layer_random_color_degeneration}()} \cr
 \code{\link{layer_random_color_jitter}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr
 \code{\link{layer_random_grayscale}()} \cr
@@ -96,6 +101,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr
@@ -203,6 +209,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

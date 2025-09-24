@@ -44,8 +44,8 @@ Note that the callbacks expects positional arguments, as:
 \code{epoch}, \code{logs}
 \item \code{on_train_begin} and \code{on_train_end} expect one positional argument:
 \code{logs}
-\item \code{on_train_batch_begin} and \code{on_train_batch_end} expect two positional
-arguments: \code{batch}, \code{logs}
+\item \code{on_train_batch_begin} and \code{on_train_batch_end} expect a positional
+argument \code{batch} and a keyword argument \code{logs}
 \item See \code{Callback} class definition for the full list of functions and their
 expected arguments.
 }

@@ -84,6 +84,7 @@ Other image utils: \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_elastic_transform}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr

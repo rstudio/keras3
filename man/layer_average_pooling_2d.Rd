@@ -66,7 +66,7 @@ shape (number of rows or columns) of:
 (when \code{input_shape >= pool_size})
 
 The resulting output shape when using the \code{"same"} padding option is:
-\code{output_shape = math.floor((input_shape - 1) / strides) + 1}
+\code{output_shape = input_shape}
 }
 \section{Input Shape}{
 \itemize{
@@ -254,6 +254,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

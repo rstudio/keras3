@@ -57,22 +57,23 @@ have an \code{activation} property).}
 model is drawn on the default graphics device. Otherwise, a file is saved.}
 }
 \value{
-Nothing, called for it's side effects.
+Nothing, called for it side effects.
 }
 \description{
 Plot a Keras model
 }
 \section{Raises}{
  ValueError: if \code{plot(model)} is called before the model is
-built, unless a \verb{input_shape = } argument was supplied to
+built, unless an \verb{input_shape = } argument was supplied to
 \code{keras_model_sequential()}.
 }
 
 \section{Requirements}{
 
 This function requires pydot and graphviz.
+
 \code{pydot} is by default installed by \code{install_keras()}, but if you installed
-keras by other means, you can install \code{pydot} directly with :
+Keras by other means, you can install \code{pydot} directly with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{reticulate::py_install("pydot", pip = TRUE)
 }\if{html}{\out{</div>}}
@@ -84,6 +85,11 @@ On most Linux platforms, can install graphviz via the package manager.
 For example, on Ubuntu/Debian you can install with
 
 \if{html}{\out{<div class="sourceCode sh">}}\preformatted{sudo apt install graphviz
+}\if{html}{\out{</div>}}
+
+On macOS you can install graphviz using \code{brew}:
+
+\if{html}{\out{<div class="sourceCode sh">}}\preformatted{brew install graphviz
 }\if{html}{\out{</div>}}
 
 In a conda environment, you can install graphviz with:

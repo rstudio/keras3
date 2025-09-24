@@ -4,7 +4,13 @@
 \alias{layer_torch_module_wrapper}
 \title{Torch module wrapper layer.}
 \usage{
-layer_torch_module_wrapper(object, module, name = NULL, ...)
+layer_torch_module_wrapper(
+  object,
+  module,
+  output_shape = NULL,
+  name = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
@@ -13,6 +19,9 @@ layer_torch_module_wrapper(object, module, name = NULL, ...)
 instance, then its parameters must be initialized before
 passing the instance to \code{layer_torch_module_wrapper} (e.g. by calling
 it once).}
+
+\item{output_shape}{Optional shape specification for the wrapped module's outputs when it
+cannot be inferred automatically.}
 
 \item{name}{The name of the layer (string).}
 
@@ -189,6 +198,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

@@ -8,7 +8,7 @@ x \%<-\% value
 }
 \value{
 The right-hand-side argument, \code{value}, invisibly. This called
-primarily for it's side-effect of assigning symbols in the current frame.
+primarily for its side-effect of assigning symbols in the current frame.
 }
 \description{
 See \code{\link[zeallot]{\%<-\%}} for more details.

@@ -4,7 +4,7 @@
 \alias{op_rms_normalization}
 \title{Performs Root Mean Square (RMS) normalization on \code{x}.}
 \usage{
-op_rms_normalization(x, scale = 1L, axis = -1L, epsilon = NULL)
+op_rms_normalization(x, scale = NULL, axis = -1L, epsilon = NULL)
 }
 \arguments{
 \item{x}{Input tensor.}
@@ -12,7 +12,7 @@ op_rms_normalization(x, scale = 1L, axis = -1L, epsilon = NULL)
 \item{scale}{Optional scaling factor for the normalization.}
 
 \item{axis}{The axis or axes along which to perform normalization.
-Default to -1.}
+Defaults to \code{-1}.}
 
 \item{epsilon}{A lower bound value for the norm.
 Defaults to \code{config_epsilon()}.}
@@ -30,10 +30,19 @@ The operation is different from LayerNormalization with RMS scaling.
 It is defined as \code{rms_normalization(x) = x * rsqrt(mean(square(x))) * scale}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x <- random_uniform(c(1, 10))
-x_norm <- op_rms_normalization(x, scale = 10)
-x_norm
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_normal(c(1, 10))
+op_rms_normalization(x)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[-1.1701705   0.9987454   0.27809578 -0.18452731  1.5731977   1.8934134
+##    0.10656697  1.0256069   0.6185074  -0.12678868]], shape=(1, 10), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+[-1.1701705   0.9987454   0.27809578 -0.18452731  1.5731977   1.8934134
+\subsection{0.10656697  1.0256069   0.6185074  -0.12678868]: R:-1.1701705\%20\%20\%200.9987454\%20\%20\%200.27809578\%20-0.18452731\%20\%201.5731977\%20\%20\%201.8934134\%0A##\%20\%20\%20\%200.10656697\%20\%201.0256069\%20\%20\%200.6185074\%20\%20-0.12678868}{
+}
 }
 
 \seealso{
@@ -55,6 +64,7 @@ Other nn ops: \cr
 \code{\link{op_hard_sigmoid}()} \cr
 \code{\link{op_hard_silu}()} \cr
 \code{\link{op_hard_tanh}()} \cr
+\code{\link{op_layer_normalization}()} \cr
 \code{\link{op_leaky_relu}()} \cr
 \code{\link{op_log_sigmoid}()} \cr
 \code{\link{op_log_softmax}()} \cr
@@ -77,6 +87,7 @@ Other nn ops: \cr
 \code{\link{op_softsign}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
 \code{\link{op_sparse_plus}()} \cr
+\code{\link{op_sparse_sigmoid}()} \cr
 \code{\link{op_sparsemax}()} \cr
 \code{\link{op_squareplus}()} \cr
 \code{\link{op_tanh_shrink}()} \cr
@@ -87,6 +98,7 @@ Other ops: \cr
 \code{\link{op_abs}()} \cr
 \code{\link{op_add}()} \cr
 \code{\link{op_all}()} \cr
+\code{\link{op_angle}()} \cr
 \code{\link{op_any}()} \cr
 \code{\link{op_append}()} \cr
 \code{\link{op_arange}()} \cr
@@ -105,6 +117,7 @@ Other ops: \cr
 \code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
+\code{\link{op_bartlett}()} \cr
 \code{\link{op_batch_normalization}()} \cr
 \code{\link{op_binary_crossentropy}()} \cr
 \code{\link{op_bincount}()} \cr
@@ -115,9 +128,11 @@ Other ops: \cr
 \code{\link{op_bitwise_or}()} \cr
 \code{\link{op_bitwise_right_shift}()} \cr
 \code{\link{op_bitwise_xor}()} \cr
+\code{\link{op_blackman}()} \cr
 \code{\link{op_broadcast_to}()} \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_categorical_crossentropy}()} \cr
+\code{\link{op_cbrt}()} \cr
 \code{\link{op_ceil}()} \cr
 \code{\link{op_celu}()} \cr
 \code{\link{op_cholesky}()} \cr
@@ -130,6 +145,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_corrcoef}()} \cr
 \code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
@@ -140,6 +156,7 @@ Other ops: \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
 \code{\link{op_custom_gradient}()} \cr
+\code{\link{op_deg2rad}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -179,10 +196,13 @@ Other ops: \cr
 \code{\link{op_glu}()} \cr
 \code{\link{op_greater}()} \cr
 \code{\link{op_greater_equal}()} \cr
+\code{\link{op_hamming}()} \cr
+\code{\link{op_hanning}()} \cr
 \code{\link{op_hard_shrink}()} \cr
 \code{\link{op_hard_sigmoid}()} \cr
 \code{\link{op_hard_silu}()} \cr
 \code{\link{op_hard_tanh}()} \cr
+\code{\link{op_heaviside}()} \cr
 \code{\link{op_histogram}()} \cr
 \code{\link{op_hstack}()} \cr
 \code{\link{op_identity}()} \cr
@@ -190,6 +210,7 @@ Other ops: \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_elastic_transform}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
@@ -209,6 +230,8 @@ Other ops: \cr
 \code{\link{op_isinf}()} \cr
 \code{\link{op_isnan}()} \cr
 \code{\link{op_istft}()} \cr
+\code{\link{op_kaiser}()} \cr
+\code{\link{op_layer_normalization}()} \cr
 \code{\link{op_leaky_relu}()} \cr
 \code{\link{op_left_shift}()} \cr
 \code{\link{op_less}()} \cr
@@ -307,6 +330,7 @@ Other ops: \cr
 \code{\link{op_sort}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
 \code{\link{op_sparse_plus}()} \cr
+\code{\link{op_sparse_sigmoid}()} \cr
 \code{\link{op_sparsemax}()} \cr
 \code{\link{op_split}()} \cr
 \code{\link{op_sqrt}()} \cr
@@ -344,6 +368,8 @@ Other ops: \cr
 \code{\link{op_vdot}()} \cr
 \code{\link{op_vectorize}()} \cr
 \code{\link{op_vectorized_map}()} \cr
+\code{\link{op_view_as_complex}()} \cr
+\code{\link{op_view_as_real}()} \cr
 \code{\link{op_vstack}()} \cr
 \code{\link{op_where}()} \cr
 \code{\link{op_while_loop}()} \cr

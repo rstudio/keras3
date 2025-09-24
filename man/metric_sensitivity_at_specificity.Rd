@@ -86,7 +86,7 @@ Usage with \code{compile()} API:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(
   optimizer = 'sgd',
   loss = 'binary_crossentropy',
-  metrics = list(metric_sensitivity_at_specificity())
+  metrics = list(metric_sensitivity_at_specificity(specificity = 0.5))
 )
 }\if{html}{\out{</div>}}
 }
