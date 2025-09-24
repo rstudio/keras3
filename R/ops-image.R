@@ -690,6 +690,79 @@ function (images, kernel_size = list(3L, 3L), sigma = list(1,
   do.call(keras$ops$image$gaussian_blur, args)
 }
 
+#' Applies elastic deformation to the image(s).
+#'
+#' @description
+#' Randomly displaces pixels using smooth displacement fields sampled from
+#' a Gaussian distribution.
+#'
+#' # Examples
+#' ```{r}
+#' x <- random_uniform(c(2, 64, 80, 3))  # batch of 2 RGB images
+#' y <- op_image_elastic_transform(x)
+#' op_shape(y)
+#'
+#' x <- random_uniform(c(64, 80, 3))  # single RGB image
+#' y <- op_image_elastic_transform(x)
+#' op_shape(y)
+#'
+#' x <- random_uniform(c(2, 3, 64, 80))  # batch of 2 RGB images
+#' y <- op_image_elastic_transform(x, data_format = "channels_first")
+#' op_shape(y)
+#' ```
+#'
+#' @returns
+#' Transformed image or batch of images with elastic deformation.
+#'
+#' @param images
+#' Input image or batch of images. Must be 3D or 4D.
+#'
+#' @param alpha
+#' Scaling factor controlling the intensity of the deformation. Defaults to 20.
+#'
+#' @param sigma
+#' Standard deviation of the Gaussian filter used to smooth
+#' the displacement fields. Defaults to 5.
+#'
+#' @param interpolation
+#' Interpolation method. One of `"nearest"` or `"bilinear"`.
+#'
+#' @param fill_mode
+#' Points outside the boundaries are filled according to this mode.
+#' Supported values: `"constant"`, `"nearest"`, `"wrap"`, `"reflect"`.
+#'
+#' @param fill_value
+#' Value used outside the boundaries if `fill_mode = "constant"`.
+#'
+#' @param seed
+#' Optional random seed ensuring deterministic results.
+#'
+#' @param data_format
+#' Data format of the input tensor. Either `"channels_last"` or
+#' `"channels_first"`. Defaults to `keras.config.image_data_format`.
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/image#elastictransform-function>
+#' @tether keras.ops.image.elastic_transform
+op_image_elastic_transform <-
+function (images, alpha = 20, sigma = 5, interpolation = "bilinear",
+          fill_mode = "reflect", fill_value = 0, seed = NULL,
+          data_format = NULL)
+{
+    args <- capture_args(list(
+        alpha = as.numeric,
+        sigma = as.numeric,
+        fill_value = as.numeric,
+        data_format = normalize_data_format
+    ))
+    args <- args_to_positional(args, "images")
+    do.call(keras$ops$image$elastic_transform, args)
+}
+
 #' Applies a perspective transformation to the image(s).
 #'
 #' @description
