@@ -3868,6 +3868,34 @@ function (x)
 ops$bartlett(x)
 
 
+#' Blackman window function.
+#'
+#' @description
+#' Generates a taper window using a weighted cosine.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(5)
+#' op_blackman(x)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the Blackman window values.
+#'
+#' @param x
+#' Scalar or 1D tensor specifying the window length.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/numpy#blackman-function>
+#' @tether keras.ops.blackman
+op_blackman <-
+function (x)
+ops$blackman(x)
+
+
 #' Count the number of occurrences of each value in a tensor of integers.
 #'
 #' @description
