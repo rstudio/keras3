@@ -6792,6 +6792,32 @@ op_view_as_complex <-
 function (x)
 ops$view_as_complex(x)
 
+#' Convert a complex tensor to a real tensor with shape `(..., 2)`.
+#'
+#' Converts a complex tensor to a real tensor with shape `(..., 2)`,
+#' where the last dimension represents the real and imaginary components.
+#'
+#' @returns
+#' A real tensor where the last dimension contains the real and imaginary parts.
+#'
+#' @param x
+#' A complex tensor.
+#'
+#' # Examples
+#' ```{r}
+#' complex_tensor <- array(c(1 + 2i, 3 + 4i))
+#' real <- op_view_as_real(complex_tensor)
+#' real
+#' ```
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.view_as_real
+op_view_as_real <-
+function (x)
+ops$view_as_real(x)
+
 
 #' Return the real part of the complex argument.
 #'
