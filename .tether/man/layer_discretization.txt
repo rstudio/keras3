@@ -132,8 +132,6 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |              repeating dataset, you must specify the `steps` argument. This
  |              argument is not supported with array inputs or list inputs.
  |
- |  build(self, input_shape=None)
- |
  |  call(self, inputs)
  |
  |  compute_output_spec(self, inputs)
