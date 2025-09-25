@@ -639,10 +639,10 @@ op_polar <-
 #'
 #' # Examples
 #'
-#' ```python
-#' x <- random_uniform(c(1, 10))
-#' x_norm <- op_rms_normalization(x, scale = 10)
-#' x_norm
+#' ```{r}
+#' x <- random_normal(c(1, 10))
+#' op_rms_normalization(x)
+#' op_rms_normalization(x, scale = 10)
 #' ```
 #'
 #' @returns
@@ -651,12 +651,11 @@ op_polar <-
 #' @param x
 #' Input tensor.
 #'
-#' @param axis
-#' The axis or axes along which to perform normalization.
-#' Default to -1.
-#'
 #' @param scale
 #' Optional scaling factor for the normalization.
+#'
+#' @param axis
+#' The axis or axes along which to perform normalization. Defaults to `-1`.
 #'
 #' @param epsilon
 #' A lower bound value for the norm.
@@ -667,7 +666,7 @@ op_polar <-
 #' @family nn ops
 #' @family ops
 op_rms_normalization <-
-function (x, scale = 1L, axis = -1L, epsilon = NULL)
+function (x, scale = NULL, axis = -1L, epsilon = NULL)
 {
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$rms_normalization, args)
