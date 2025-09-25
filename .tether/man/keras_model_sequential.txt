@@ -87,7 +87,8 @@ class Sequential(keras.src.models.model.Model)
  |    self,
  |    inputs,
  |    training=None,
- |    mask=None
+ |    mask=None,
+ |    **kwargs
  |  )
  |
  |  compute_output_shape(self, input_shape)
@@ -96,7 +97,8 @@ class Sequential(keras.src.models.model.Model)
  |    self,
  |    inputs,
  |    training=None,
- |    mask=None
+ |    mask=None,
+ |    **kwargs
  |  )
  |
  |  get_config(self)
