@@ -534,9 +534,8 @@ function (schedule, verbose = 0L)
 #' decision to overwrite the current save file is made based on either
 #' the maximization or the minimization of the monitored quantity.
 #' For `val_acc`, this should be `"max"`, for `val_loss` this should be
-#' `"min"`, etc. In `"auto"` mode, the mode is set to `"max"` if the
-#' quantities monitored are `"acc"` or start with `"fmeasure"` and are
-#' set to `"min"` for the rest of the quantities.
+#' `"min"`, etc. In `"auto"` mode, the direction is automatically inferred from
+#' the name of the monitored quantity.
 #'
 #' @param save_weights_only
 #' if TRUE, then only the model's weights will be saved
