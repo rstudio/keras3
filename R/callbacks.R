@@ -251,8 +251,8 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #'   `epoch`, `logs`
 #' - `on_train_begin` and `on_train_end` expect one positional argument:
 #'   `logs`
-#' - `on_train_batch_begin` and `on_train_batch_end` expect two positional
-#'   arguments: `batch`, `logs`
+#' - `on_train_batch_begin` and `on_train_batch_end` expect a positional
+#'   argument `batch` and a named argument `logs`
 #' - See `Callback` class definition for the full list of functions and their
 #'   expected arguments.
 #'
@@ -326,7 +326,7 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #' Any function in [`Callback()`] that you want to override by
 #' passing `function_name = function`. For example,
 #' `callback_lambda(.., on_train_end = train_end_fn)`. The custom function
-#' needs to have same arguments as the ones defined in [`Callback()`].
+#' needs to have the same arguments as the ones defined in [`Callback()`].
 #'
 #' @inherit callback_backup_and_restore return
 #' @export
@@ -995,4 +995,3 @@ normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callba
 
   callbacks
 }
-
