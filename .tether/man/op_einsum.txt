@@ -1,5 +1,9 @@
 __signature__
-keras.ops.einsum(subscripts, *operands)
+keras.ops.einsum(
+  subscripts,
+  *operands,
+  **kwargs
+)
 __doc__
 Evaluates the Einstein summation convention on the operands.
 

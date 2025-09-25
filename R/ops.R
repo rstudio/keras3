@@ -4668,14 +4668,14 @@ ops$dot(x1, x2)
 #' output form.
 #'
 #' @param ...
-#' The operands to compute the Einstein sum of.
+#' The operands to compute the Einstein sum of as unnamed arguments.
+#' Additional named arguments are forwarded to the underlying backend.
 #'
 #' @export
 #' @family numpy ops
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/numpy#einsum-function>
-#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/einsum>
 #' @tether keras.ops.einsum
 op_einsum <-
 function (subscripts, ...)
