@@ -12,7 +12,8 @@ op_dot_product_attention(
   mask = NULL,
   scale = NULL,
   is_causal = FALSE,
-  flash_attention = NULL
+  flash_attention = NULL,
+  attn_logits_soft_cap = NULL
 )
 }
 \arguments{
@@ -43,6 +44,9 @@ to \code{1.0 / sqrt(H)}.}
 attempt to use flash attention if the required conditions are met.
 Typically, the inputs must be in float16 and bfloat16 dtype and the
 input layout requirements may vary depending on the backend.}
+
+\item{attn_logits_soft_cap}{Optional numeric cap on the attention logits before softmax. Only supported
+on the JAX TPU backend.}
 }
 \value{
 An array of the attention output with the same shape of \code{query}.

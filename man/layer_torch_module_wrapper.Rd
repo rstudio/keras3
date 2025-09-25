@@ -4,7 +4,13 @@
 \alias{layer_torch_module_wrapper}
 \title{Torch module wrapper layer.}
 \usage{
-layer_torch_module_wrapper(object, module, name = NULL, ...)
+layer_torch_module_wrapper(
+  object,
+  module,
+  output_shape = NULL,
+  name = NULL,
+  ...
+)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
@@ -13,6 +19,8 @@ layer_torch_module_wrapper(object, module, name = NULL, ...)
 instance, then its parameters must be initialized before
 passing the instance to \code{layer_torch_module_wrapper} (e.g. by calling
 it once).}
+
+\item{output_shape}{Shape of the output from this layer. Helps Keras infer shapes.}
 
 \item{name}{The name of the layer (string).}
 

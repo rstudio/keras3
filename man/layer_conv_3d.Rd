@@ -53,7 +53,7 @@ It defaults to the \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json}. If you never set it, then it
 will be \code{"channels_last"}.}
 
-\item{dilation_rate}{int or list of 3 integers, specifying the dilation
+\item{dilation_rate}{int or vector of 3 ints, specifying the dilation
 rate to use for dilated convolution.}
 
 \item{groups}{A positive int specifying the number of groups in which the

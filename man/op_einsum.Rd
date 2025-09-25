@@ -13,7 +13,8 @@ summation) calculation is performed unless the explicit indicator
 \verb{->} is included as well as subscript labels of the precise
 output form.}
 
-\item{...}{The operands to compute the Einstein sum of.}
+\item{...}{The operands to compute the Einstein sum of as unnamed arguments.
+Additional named arguments are forwarded to the underlying backend.}
 }
 \value{
 The calculation based on the Einstein summation convention.

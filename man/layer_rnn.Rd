@@ -184,7 +184,6 @@ First, let's define a RNN Cell, as a layer subclass.
       initializer = 'uniform',
       name = 'recurrent_kernel'
     )
-    self$built <- TRUE
   \},
 
   call = function(inputs, states) \{

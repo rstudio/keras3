@@ -62,9 +62,8 @@ overwritten by each new better model.}
 decision to overwrite the current save file is made based on either
 the maximization or the minimization of the monitored quantity.
 For \code{val_acc}, this should be \code{"max"}, for \code{val_loss} this should be
-\code{"min"}, etc. In \code{"auto"} mode, the mode is set to \code{"max"} if the
-quantities monitored are \code{"acc"} or start with \code{"fmeasure"} and are
-set to \code{"min"} for the rest of the quantities.}
+\code{"min"}, etc. In \code{"auto"} mode, the direction is automatically inferred from
+the name of the monitored quantity.}
 
 \item{save_freq}{\code{"epoch"} or integer. When using \code{"epoch"}, the callback
 saves the model after each epoch. When using integer, the callback

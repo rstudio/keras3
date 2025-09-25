@@ -4,15 +4,14 @@
 \alias{op_rms_normalization}
 \title{Performs Root Mean Square (RMS) normalization on \code{x}.}
 \usage{
-op_rms_normalization(x, scale = 1L, axis = -1L, epsilon = NULL)
+op_rms_normalization(x, scale = NULL, axis = -1L, epsilon = NULL)
 }
 \arguments{
 \item{x}{Input tensor.}
 
 \item{scale}{Optional scaling factor for the normalization.}
 
-\item{axis}{The axis or axes along which to perform normalization.
-Default to -1.}
+\item{axis}{The axis or axes along which to perform normalization. Defaults to \code{-1}.}
 
 \item{epsilon}{A lower bound value for the norm.
 Defaults to \code{config_epsilon()}.}
@@ -30,10 +29,33 @@ The operation is different from LayerNormalization with RMS scaling.
 It is defined as \code{rms_normalization(x) = x * rsqrt(mean(square(x))) * scale}
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode python">}}\preformatted{x <- random_uniform(c(1, 10))
-x_norm <- op_rms_normalization(x, scale = 10)
-x_norm
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- random_normal(c(1, 10))
+op_rms_normalization(x)
 }\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[-1.1701705   0.9987454   0.27809578 -0.18452731  1.5731977   1.8934134
+##    0.10656697  1.0256069   0.6185074  -0.12678868]], shape=(1, 10), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_rms_normalization(x, scale = 10)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
+## [[-11.701706    9.987453    2.7809577  -1.845273   15.731977   18.934134
+##     1.0656698  10.256069    6.185074   -1.2678868]], shape=(1, 10), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+[-1.1701705   0.9987454   0.27809578 -0.18452731  1.5731977   1.8934134
+\subsection{0.10656697  1.0256069   0.6185074  -0.12678868]: R:-1.1701705\%20\%20\%200.9987454\%20\%20\%200.27809578\%20-0.18452731\%20\%201.5731977\%20\%20\%201.8934134\%0A##\%20\%20\%20\%200.10656697\%20\%201.0256069\%20\%20\%200.6185074\%20\%20-0.12678868}{
+
+[-11.701706    9.987453    2.7809577  -1.845273   15.731977   18.934134
+}
+
+\subsection{1.0656698  10.256069    6.185074   -1.2678868]: R:-11.701706\%20\%20\%20\%209.987453\%20\%20\%20\%202.7809577\%20\%20-1.845273\%20\%20\%2015.731977\%20\%20\%2018.934134\%0A##\%20\%20\%20\%20\%201.0656698\%20\%2010.256069\%20\%20\%20\%206.185074\%20\%20\%20-1.2678868}{
+}
 }
 
 \seealso{

@@ -28,7 +28,7 @@ op_conv(
 \item{strides}{int or int tuple/list of \code{len(inputs_spatial_shape)},
 specifying the strides of the convolution along each spatial
 dimension. If \code{strides} is int, then every spatial dimension shares
-the same \code{strides}.}
+the same \code{strides}. Defaults to \code{1}.}
 
 \item{padding}{string, either \code{"valid"} or \code{"same"}. \code{"valid"} means no
 padding is applied, and \code{"same"} results in padding evenly to the

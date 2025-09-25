@@ -14,6 +14,7 @@ layer_embedding(
   mask_zero = FALSE,
   weights = NULL,
   lora_rank = NULL,
+  lora_alpha = NULL,
   ...
 )
 }
@@ -57,6 +58,10 @@ trainable matrices. This can be useful to reduce the
 computation cost of fine-tuning large embedding layers.
 You can also enable LoRA on an existing
 \code{Embedding} layer instance by calling \code{layer$enable_lora(rank)}.}
+
+\item{lora_alpha}{Optional integer. Scales the low-rank adaptation delta during the forward
+pass. The delta is scaled by \code{lora_alpha / lora_rank}, letting you tune the
+LoRA adjustment strength independently of \code{lora_rank}.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -111,9 +116,14 @@ dim(output_array)    # (32, 10, 64)
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
   rank,
+  lora_alpha = NULL,
   a_initializer = 'he_uniform',
   b_initializer = 'zeros'
 )
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{compute_output_spec(...)
 }\if{html}{\out{</div>}}
 \item
 

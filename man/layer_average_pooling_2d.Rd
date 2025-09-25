@@ -66,7 +66,7 @@ shape (number of rows or columns) of:
 (when \code{input_shape >= pool_size})
 
 The resulting output shape when using the \code{"same"} padding option is:
-\code{output_shape = math.floor((input_shape - 1) / strides) + 1}
+\code{output_shape = input_shape}
 }
 \section{Input Shape}{
 \itemize{

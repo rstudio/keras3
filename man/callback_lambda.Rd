@@ -30,7 +30,7 @@ callback_lambda(
 \item{...}{Any function in \code{\link[=Callback]{Callback()}} that you want to override by
 passing \verb{function_name = function}. For example,
 \code{callback_lambda(.., on_train_end = train_end_fn)}. The custom function
-needs to have same arguments as the ones defined in \code{\link[=Callback]{Callback()}}.}
+needs to have the same arguments as the ones defined in \code{\link[=Callback]{Callback()}}.}
 }
 \value{
 A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
@@ -44,8 +44,8 @@ Note that the callbacks expects positional arguments, as:
 \code{epoch}, \code{logs}
 \item \code{on_train_begin} and \code{on_train_end} expect one positional argument:
 \code{logs}
-\item \code{on_train_batch_begin} and \code{on_train_batch_end} expect two positional
-arguments: \code{batch}, \code{logs}
+\item \code{on_train_batch_begin} and \code{on_train_batch_end} expect a positional
+argument \code{batch} and a named argument \code{logs}
 \item See \code{Callback} class definition for the full list of functions and their
 expected arguments.
 }

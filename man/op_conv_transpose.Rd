@@ -7,7 +7,7 @@
 op_conv_transpose(
   inputs,
   kernel,
-  strides,
+  strides = 1L,
   padding = "valid",
   output_padding = NULL,
   data_format = NULL,

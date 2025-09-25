@@ -9,7 +9,7 @@ activation_elu(x, alpha = 1)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{alpha}{Numeric. See description for details.}
+\item{alpha}{A scalar, slope of positive section. Defaults to \code{1.0}.}
 }
 \value{
 A tensor, the result from applying the activation to the input tensor \code{x}.

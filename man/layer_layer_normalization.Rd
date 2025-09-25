@@ -10,7 +10,6 @@ layer_layer_normalization(
   epsilon = 0.001,
   center = TRUE,
   scale = TRUE,
-  rms_scaling = FALSE,
   beta_initializer = "zeros",
   gamma_initializer = "ones",
   beta_regularizer = NULL,
@@ -38,13 +37,6 @@ Defaults to 1e-3.}
 When the next layer is linear (also e.g. \code{layer_activation_relu()}), this can be
 disabled since the scaling will be done by the next layer.
 Defaults to \code{TRUE}.}
-
-\item{rms_scaling}{If \code{TRUE}, \code{center} and \code{scale} are ignored, and the
-inputs are scaled by \code{gamma} and the inverse square root
-of the square of all inputs. This is an approximate and faster
-approach that avoids ever computing the mean of the input. Note that
-this \emph{isn't} equivalent to the computation that the
-\code{layer_rms_normalization} layer performs.}
 
 \item{beta_initializer}{Initializer for the beta weight. Defaults to zeros.}
 
