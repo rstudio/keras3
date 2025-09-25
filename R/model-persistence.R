@@ -196,7 +196,7 @@ function (model, filepath, overwrite = FALSE)
 }
 
 
-#' Load weights from a file saved via `save_model_weights()`.
+#' Load the weights from a single file or sharded files.
 #'
 #' @description
 #' Weights are loaded based on the network's
@@ -204,6 +204,12 @@ function (model, filepath, overwrite = FALSE)
 #' weights were saved. Note that layers that don't have weights are not
 #' taken into account in the topological ordering, so adding or removing
 #' layers is fine as long as they don't have weights.
+#'
+#' **Sharding**
+#'
+#' When loading sharded weights, specify a `filepath` ending in
+#' `".weights.json"` (the configuration file), with the corresponding shard files
+#' (`*_xxxxx.weights.h5`) located alongside it.
 #'
 #' **Partial weight loading**
 #'
@@ -214,10 +220,16 @@ function (model, filepath, overwrite = FALSE)
 #' mismatching weights will be skipped. A warning will be displayed
 #' for each skipped layer.
 #'
+#' # Examples
+#' ```r
+#' model |> load_model_weights("model.weights.h5")
+#' model |> load_model_weights("model.weights.json")
+#' ```
+#'
 #' @param filepath
-#' String, path to the weights file to load.
-#' It can either be a `.weights.h5` file
-#' or a legacy `.h5` weights file.
+#' Path or path-like object to the weights. Accepts `.weights.h5`, legacy `.h5`,
+#' or sharded weights through a `.weights.json` manifest sitting alongside the
+#' shard files (`*_xxxxx.weights.h5`).
 #'
 #' @param skip_mismatch
 #' Boolean, whether to skip loading of layers where
