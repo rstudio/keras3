@@ -19,6 +19,7 @@ and the information that is propagated to the next layer.
 
 Args:
     x: Input tensor.
+    alpha: A scalar, slope of positive section. Defaults to `1.0`.
 
 Reference:
 

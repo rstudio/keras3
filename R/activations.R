@@ -25,7 +25,7 @@
 #' Input tensor.
 #'
 #' @param alpha
-#' Numeric. See description for details.
+#' A scalar, slope of positive section. Defaults to `1.0`.
 #'
 #' @returns A tensor, the result from applying the activation to the input tensor `x`.
 #' @export
