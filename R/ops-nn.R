@@ -214,13 +214,17 @@ ops$psnr(x1, x2, max_val)
 #' Typically, the inputs must be in float16 and bfloat16 dtype and the
 #' input layout requirements may vary depending on the backend.
 #'
+#' @param attn_logits_soft_cap
+#' Optional numeric cap on the attention logits before softmax. Only supported
+#' on the JAX TPU backend.
+#'
 #' @export
 #' @tether keras.ops.dot_product_attention
 #' @family nn ops
 #' @family ops
 op_dot_product_attention <-
 function (query, key, value, bias = NULL, mask = NULL, scale = NULL,
-          is_causal = FALSE, flash_attention = NULL)
+          is_causal = FALSE, flash_attention = NULL, attn_logits_soft_cap = NULL)
 {
   args <- capture_args()
   do.call(ops$dot_product_attention, args)
