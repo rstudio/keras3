@@ -1,7 +1,7 @@
 Help on class EinsumDense in module keras.src.layers.core.einsum_dense:
 
 class EinsumDense(keras.src.layers.layer.Layer)
- |  EinsumDense(equation, output_shape, activation=None, bias_axes=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, **kwargs)
+ |  EinsumDense(equation, output_shape, activation=None, bias_axes=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, lora_alpha=None, **kwargs)
  |
  |  A layer that uses `einsum` as the backing computation.
  |
@@ -43,6 +43,11 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |          computation cost of fine-tuning large dense layers.
  |          You can also enable LoRA on an existing
  |          `EinsumDense` layer by calling `layer.enable_lora(rank)`.
+ |       lora_alpha: Optional integer. If set, this parameter scales the
+ |          low-rank adaptation delta (computed as the product of two lower-rank
+ |          trainable matrices) during the forward pass. The delta is scaled by
+ |          `lora_alpha / lora_rank`, allowing you to fine-tune the strength of
+ |          the LoRA adjustment independently of `lora_rank`.
  |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
  |
  |  Examples:
@@ -122,6 +127,7 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |    kernel_constraint=None,
  |    bias_constraint=None,
  |    lora_rank=None,
+ |    lora_alpha=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -139,6 +145,7 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |  enable_lora(
  |    self,
  |    rank,
+ |    lora_alpha=None,
  |    a_initializer='he_uniform',
  |    b_initializer='zeros'
  |  )
@@ -166,7 +173,7 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |
  |  quantized_build(
  |    self,
- |    input_shape,
+ |    kernel_shape,
  |    mode
  |  )
  |

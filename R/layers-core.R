@@ -269,6 +269,11 @@ function (object, units, activation = NULL, use_bias = TRUE,
 #' You can also enable LoRA on an existing
 #' `EinsumDense` layer by calling `layer$enable_lora(rank)`.
 #'
+#' @param lora_alpha
+#' Optional integer. Scales the low-rank adaptation delta during the forward
+#' pass. The delta is scaled by `lora_alpha / lora_rank`, letting you tune the
+#' LoRA adjustment strength independently of `lora_rank`.
+#'
 #' @param ...
 #' Base layer keyword arguments, such as `name` and `dtype`.
 #'
@@ -288,10 +293,10 @@ function (object, equation, output_shape, activation = NULL,
     bias_axes = NULL, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, lora_rank = NULL,
-    ...)
+    lora_alpha = NULL, ...)
 {
-    args <- capture_args(list(lora_rank = as_integer, input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape,
+    args <- capture_args(list(lora_rank = as_integer, lora_alpha = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer, batch_input_shape = normalize_shape,
         output_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$EinsumDense, object, args)
 }
