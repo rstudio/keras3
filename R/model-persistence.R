@@ -166,18 +166,48 @@ function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 }
 
 
-#' Saves all layer weights to a `.weights.h5` file.
+#' Saves all weights to a single file or sharded files.
 #'
-#' @param model A keras Model object
+#' @description
+#' By default, the weights are saved in a single `.weights.h5` file. Enable
+#' sharding via `max_shard_size` to split weights across multiple files (in GB)
+#' and produce a `.weights.json` manifest that tracks shard metadata.
+#'
+#' The saved sharded files contain:
+#'
+#' * `*.weights.json`: configuration file containing `metadata` and
+#'   `weight_map` entries.
+#' * `*_xxxxxx.weights.h5`: weight shards limited by `max_shard_size`.
+#'
+#' ```{r}
+#' model <-
+#'   keras_model_sequential(input_shape = 2) |>
+#'   layer_dense(4)
+#'
+#' path_h5 <- tempfile(fileext = ".weights.h5")
+#' path_json <- tempfile(fileext = ".weights.json")
+#'
+#' model |> save_model_weights(path_h5)
+#' model |> save_model_weights(path_json, max_shard_size = 0.01)
+#'
+#' model |> load_model_weights(path_h5)
+#' model |> load_model_weights(path_json)
+#' ```
+#'
+#' @param model A keras Model object.
 #'
 #' @param filepath
-#' string.
-#' Path where to save the model. Must end in `.weights.h5`.
+#' Path where the weights will be saved. Accepts `.weights.h5`, or when sharding
+#' is enabled, a `.weights.json` manifest path. If `.weights.h5` is provided
+#' while sharding, the filename will be overridden to end in `.weights.json`.
 #'
 #' @param overwrite
-#' Whether we should overwrite any existing model
-#' at the target location, or instead ask the user
-#' via an interactive prompt.
+#' Whether to overwrite any existing weights at the target location, or instead
+#' ask the user via an interactive prompt.
+#'
+#' @param max_shard_size
+#' Numeric size in GB for each sharded file. Use `NULL` to disable sharding.
+#'
 #'
 #' @returns This is called primarily for side effects. `model` is returned,
 #'   invisibly, to enable usage with the pipe.
@@ -186,12 +216,16 @@ function (model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 #' @tether keras.Model.save_weights
 #' @seealso
 #' + <https://keras.io/api/models/model_saving_apis/weights_saving_and_loading#saveweights-method>
-#  + <https://www.tensorflow.org/api_docs/python/tf/keras/Model/save_weights>
 save_model_weights <-
-function (model, filepath, overwrite = FALSE)
+function (model, filepath, overwrite = FALSE, max_shard_size = NULL)
 {
     overwrite <- confirm_overwrite(filepath, overwrite)
-    keras$Model$save_weights(model, filepath, overwrite = overwrite)
+    keras$Model$save_weights(
+      model,
+      filepath,
+      overwrite = overwrite,
+      max_shard_size = max_shard_size
+    )
     invisible(model)
 }
 
