@@ -1442,7 +1442,6 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #'       initializer = 'uniform',
 #'       name = 'recurrent_kernel'
 #'     )
-#'     self$built <- TRUE
 #'   },
 #'
 #'   call = function(inputs, states) {
