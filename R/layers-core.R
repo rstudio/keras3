@@ -35,6 +35,7 @@
 #' - ```r
 #'   enable_lora(
 #'     rank,
+#'     lora_alpha = NULL,
 #'     a_initializer = 'he_uniform',
 #'     b_initializer = 'zeros'
 #'   )
@@ -94,6 +95,11 @@
 #' You can also enable LoRA on an existing
 #' `Dense` layer by calling `layer$enable_lora(rank)`.
 #'
+#' @param lora_alpha
+#' Optional integer. Scales the low-rank adaptation delta during the forward
+#' pass. The delta is scaled by `lora_alpha / lora_rank`, letting you tune the
+#' LoRA adjustment strength independently of `lora_rank`.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -119,9 +125,11 @@ function (object, units, activation = NULL, use_bias = TRUE,
     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, lora_rank = NULL,
+    lora_alpha = NULL,
     ...)
 {
     args <- capture_args(list(units = as_integer, lora_rank = as_integer,
+        lora_alpha = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Dense, object, args)

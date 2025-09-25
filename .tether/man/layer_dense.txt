@@ -1,7 +1,7 @@
 Help on class Dense in module keras.src.layers.core.dense:
 
 class Dense(keras.src.layers.layer.Layer)
- |  Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, **kwargs)
+ |  Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, lora_alpha=None, **kwargs)
  |
  |  Just your regular densely-connected NN layer.
  |
@@ -46,6 +46,11 @@ class Dense(keras.src.layers.layer.Layer)
  |          computation cost of fine-tuning large dense layers.
  |          You can also enable LoRA on an existing
  |          `Dense` layer by calling `layer.enable_lora(rank)`.
+ |      lora_alpha: Optional integer. If set, this parameter scales the
+ |          low-rank adaptation delta (computed as the product of two lower-rank
+ |          trainable matrices) during the forward pass. The delta is scaled by
+ |          `lora_alpha / lora_rank`, allowing you to fine-tune the strength of
+ |          the LoRA adjustment independently of `lora_rank`.
  |
  |  Input shape:
  |      N-D tensor with shape: `(batch_size, ..., input_dim)`.
@@ -83,6 +88,7 @@ class Dense(keras.src.layers.layer.Layer)
  |    kernel_constraint=None,
  |    bias_constraint=None,
  |    lora_rank=None,
+ |    lora_alpha=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -100,6 +106,7 @@ class Dense(keras.src.layers.layer.Layer)
  |  enable_lora(
  |    self,
  |    rank,
+ |    lora_alpha=None,
  |    a_initializer='he_uniform',
  |    b_initializer='zeros'
  |  )
@@ -127,7 +134,7 @@ class Dense(keras.src.layers.layer.Layer)
  |
  |  quantized_build(
  |    self,
- |    input_shape,
+ |    kernel_shape,
  |    mode
  |  )
  |
