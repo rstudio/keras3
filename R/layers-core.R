@@ -332,9 +332,14 @@ function (object, equation, output_shape, activation = NULL,
 #' - ```r
 #'   enable_lora(
 #'     rank,
+#'     lora_alpha = NULL,
 #'     a_initializer = 'he_uniform',
 #'     b_initializer = 'zeros'
 #'   )
+#'   ```
+#'
+#' - ```r
+#'   compute_output_spec(...)
 #'   ```
 #'
 #' - ```r
@@ -399,6 +404,11 @@ function (object, equation, output_shape, activation = NULL,
 #' You can also enable LoRA on an existing
 #' `Embedding` layer instance by calling `layer$enable_lora(rank)`.
 #'
+#' @param lora_alpha
+#' Optional integer. Scales the low-rank adaptation delta during the forward
+#' pass. The delta is scaled by `lora_alpha / lora_rank`, letting you tune the
+#' LoRA adjustment strength independently of `lora_rank`.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -416,11 +426,13 @@ function (object, equation, output_shape, activation = NULL,
 layer_embedding <-
 function (object, input_dim, output_dim, embeddings_initializer = "uniform",
     embeddings_regularizer = NULL, embeddings_constraint = NULL,
-    mask_zero = FALSE, weights = NULL, lora_rank = NULL, ...)
+    mask_zero = FALSE, weights = NULL, lora_rank = NULL, lora_alpha = NULL,
+    ...)
 {
     args <- capture_args(list(input_dim = as_integer, output_dim = as_integer,
-        input_shape = normalize_shape, batch_size = as_integer,
-        batch_input_shape = normalize_shape, input_length = as_integer),
+        lora_rank = as_integer, lora_alpha = as_integer, input_shape = normalize_shape,
+        batch_size = as_integer, batch_input_shape = normalize_shape,
+        input_length = as_integer),
         ignore = "object")
     create_layer(keras$layers$Embedding, object, args)
 }
