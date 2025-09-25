@@ -1541,37 +1541,34 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #'
 #' # Examples
 #' ```{r}
-#' y_true <- c(1, 2)
-#' y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+#' y_true <- op_array(c(1L, 2L))
+#' y_pred <- op_array(rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 #' loss <- loss_sparse_categorical_crossentropy(y_true, y_pred)
 #' loss
 #' ```
 #' ```{r}
-#' y_true <- c(1, 2)
-#' y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+#' y_true <- op_array(c(1L, 2L))
+#' y_pred <- op_array(rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 #' # Using 'auto'/'sum_over_batch_size' reduction type.
 #' scce <- loss_sparse_categorical_crossentropy()
-#' scce(op_array(y_true), op_array(y_pred))
-#' # 1.177
+#' scce(y_true, y_pred)
 #' ```
 #'
 #' ```{r}
 #' # Calling with 'sample_weight'.
-#' scce(op_array(y_true), op_array(y_pred), sample_weight = op_array(c(0.3, 0.7)))
+#' scce(y_true, y_pred, sample_weight = op_array(c(0.3, 0.7)))
 #' ```
 #'
 #' ```{r}
 #' # Using 'sum' reduction type.
 #' scce <- loss_sparse_categorical_crossentropy(reduction="sum")
-#' scce(op_array(y_true), op_array(y_pred))
-#' # 2.354
+#' scce(y_true, y_pred)
 #' ```
 #'
 #' ```{r}
 #' # Using 'none' reduction type.
 #' scce <- loss_sparse_categorical_crossentropy(reduction=NULL)
-#' scce(op_array(y_true), op_array(y_pred))
-#' # array([0.0513, 2.303], dtype=float32)
+#' scce(y_true, y_pred)
 #' ```
 #'
 #' Usage with the `compile()` API:

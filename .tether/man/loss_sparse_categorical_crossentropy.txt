@@ -1,7 +1,7 @@
 Help on class SparseCategoricalCrossentropy in module keras.src.losses.losses:
 
 class SparseCategoricalCrossentropy(LossFunctionWrapper)
- |  SparseCategoricalCrossentropy(from_logits=False, ignore_class=None, reduction='sum_over_batch_size', name='sparse_categorical_crossentropy', dtype=None)
+ |  SparseCategoricalCrossentropy(from_logits=False, ignore_class=None, reduction='sum_over_batch_size', axis=-1, name='sparse_categorical_crossentropy', dtype=None)
  |
  |  Computes the crossentropy loss between the labels and predictions.
  |
@@ -28,6 +28,8 @@ class SparseCategoricalCrossentropy(LossFunctionWrapper)
  |          sample size, and `"mean_with_sample_weight"` sums the loss and
  |          divides by the sum of the sample weights. `"none"` and `None`
  |          perform no aggregation. Defaults to `"sum_over_batch_size"`.
+ |      axis: The axis along which to compute crossentropy (the features
+ |          axis). Defaults to `-1`.
  |      name: Optional name for the loss instance.
  |      dtype: The dtype of the loss's computations. Defaults to `None`, which
  |          means using `keras.backend.floatx()`. `keras.backend.floatx()` is a
@@ -37,8 +39,8 @@ class SparseCategoricalCrossentropy(LossFunctionWrapper)
  |
  |  Examples:
  |
- |  >>> y_true = [1, 2]
- |  >>> y_pred = [[0.05, 0.95, 0], [0.1, 0.8, 0.1]]
+ |  >>> y_true = np.array([1, 2])
+ |  >>> y_pred = np.array([[0.05, 0.95, 0], [0.1, 0.8, 0.1]])
  |  >>> # Using 'auto'/'sum_over_batch_size' reduction type.
  |  >>> scce = keras.losses.SparseCategoricalCrossentropy()
  |  >>> scce(y_true, y_pred)
@@ -81,6 +83,7 @@ class SparseCategoricalCrossentropy(LossFunctionWrapper)
  |    from_logits=False,
  |    ignore_class=None,
  |    reduction='sum_over_batch_size',
+ |    axis=-1,
  |    name='sparse_categorical_crossentropy',
  |    dtype=None
  |  )
