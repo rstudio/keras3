@@ -361,35 +361,42 @@ function (inputs, indices, updates)
     do.call(ops$scatter_update, args)
 }
 
-#' Perform a binary search
+#' Perform a binary search.
 #'
 #' @description
-#' Perform a binary search, returning indices for insertion of `values`
-#' into `sorted_sequence` that maintain the sorting order.
+#' Return insertion indices that keep `values` in sorted order when placed
+#' into `sorted_sequence`.
+#'
+#' # Examples
+#' ```{r}
+#' sorted <- op_array(c(-1, 0, 2, 4))
+#' queries <- c(-2, 0, 3, 7)
+#' op_searchsorted(sorted, queries)
+#' op_searchsorted(sorted, queries, side = "right", zero_indexed = TRUE)
+#' ```
 #'
 #' @returns
-#' Tensor of insertion indices of same shape as `values`.
+#' Tensor of insertion indices with the same shape as `values`.
 #'
 #' @param sorted_sequence
-#' 1-D input tensor, sorted along the innermost
-#' dimension.
+#' 1-D input tensor that is sorted along its innermost dimension.
 #'
 #' @param values
 #' N-D tensor of query insertion values.
 #'
 #' @param side
-#' `'left'` or `'right'`, specifying the direction in which to insert
-#' for the equality case (tie-breaker).
+#' Either `"left"` or `"right"`, choosing which side to insert on ties.
 #'
 #' @param zero_indexed
-#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' If `TRUE`, the returned indices are zero-based (`0` encodes the first
 #' position); if `FALSE` (default), the returned indices are one-based (`1`
-#' encodes to first position).
+#' encodes the first position).
 #'
 #' @export
 #' @family core ops
 #' @family ops
 #' @tether keras.ops.searchsorted
+#' @tether keras.ops.numpy.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left", zero_indexed = FALSE) {
 

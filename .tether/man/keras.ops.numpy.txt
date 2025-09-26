@@ -303,6 +303,11 @@ rot90(
   axes=(0, 1)
 )
 round(x, decimals=0)
+searchsorted(
+  sorted_sequence,
+  values,
+  side='left'
+)
 select(
   condlist,
   choicelist,
