@@ -46,7 +46,8 @@ KerasTensor(
   sparse=False,
   ragged=False,
   record_history=True,
-  name=None
+  name=None,
+  **kwargs
 )
 Layer(*args, **kwargs)
 layers: Module(keras.layers)
@@ -97,7 +98,9 @@ Variable(
   trainable=True,
   autocast=True,
   aggregation='none',
-  name=None
+  synchronization='auto',
+  name=None,
+  **kwargs
 )
 version()
 visualization: Module(keras.visualization)
