@@ -4026,6 +4026,32 @@ function (x)
 ops$conjugate(x)
 
 
+#' Element-wise angle of a complex tensor.
+#'
+#' @description
+#' Returns the phase angle (in radians) of each element in `x`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(matrix(c(1 + 3i, 2 - 5i, 4 - 3i, 3 + 2i), nrow = 2))
+#' op_angle(x)
+#' ```
+#'
+#' @returns
+#' Tensor with the same shape as `x`, containing element-wise angles.
+#'
+#' @param x
+#' Input tensor. Can be real or complex.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.angle
+op_angle <-
+function (x)
+ops$angle(x)
+
+
 #' Returns a copy of `x`.
 #'
 #' @returns
