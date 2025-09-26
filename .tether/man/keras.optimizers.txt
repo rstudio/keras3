@@ -141,7 +141,7 @@ Lamb(
   name='lamb',
   **kwargs
 )
-legacy: Module(keras.api.optimizers.legacy)
+legacy: Module(keras.optimizers.legacy)
 Lion(
   learning_rate=0.001,
   beta_1=0.9,
@@ -200,7 +200,7 @@ RMSprop(
   name='rmsprop',
   **kwargs
 )
-schedules: Module(keras.api.optimizers.schedules)
+schedules: Module(keras.optimizers.schedules)
 serialize(optimizer)
 SGD(
   learning_rate=0.01,
