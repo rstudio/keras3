@@ -11,6 +11,14 @@
 }
 
 
+#' @export
+Arg.keras.src.backend.common.keras_tensor.KerasTensor <- function(z) {
+  op_angle(z)
+}
+#' @export
+Arg.keras.src.backend.Tensor <- Arg.keras.src.backend.common.keras_tensor.KerasTensor
+
+
 
 #' @export
 as.array.keras.src.backend.common.variables.KerasVariable <- function(x, ...) {
@@ -101,5 +109,4 @@ py_to_r__keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$l
 #       get(sprintf("%s.keras.src.backend.common.keras_tensor.KerasTensor", generic)))
 # }
 # rm(list = c("generic", "cls"))
-
 
