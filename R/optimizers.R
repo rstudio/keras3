@@ -1270,6 +1270,121 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
     do.call(keras$optimizers$LossScaleOptimizer, args)
 }
 
+#' Optimizer that implements the Muon algorithm.
+#'
+#' @description
+#' Note that this optimizer should not be used in the following layers:
+#'
+#' 1. Embedding layer
+#' 2. Final output fully connected layer
+#' 3. Any {0,1}-D variables
+#'
+#' These should all be optimized using AdamW.
+#'
+#' The Muon optimizer can use both the Muon update step or the
+#' AdamW update step based on the following:
+#'
+#' - For any variable that isn't 2D, 3D or 4D, the AdamW step
+#'     will be used. This is not configurable.
+#' - If the argument `exclude_embeddings` (defaults to `TRUE`) is set
+#' to `TRUE`, the AdamW step will be used.
+#' - For any variablewith a name that matches an expression
+#'     listed in the argument `exclude_layers` (a list), the
+#'     AdamW step will be used.
+#' - Any other variable uses the Muon step.
+#'
+#' Typically, you only need to pass the name of your densely-connected
+#' output layer to `exclude_layers`, e.g.
+#' `exclude_layers=["output_dense"]`.
+#'
+#' # References
+#' - [Original implementation](https://github.com/KellerJordan/Muon)
+#' - [Liu et al, 2025](https://arxiv.org/abs/2502.16982)
+#'
+#' @param learning_rate
+#' A float,
+#' `LearningRateSchedule()` instance, or
+#' a callable that takes no arguments and returns the actual value to
+#' use. The learning rate. Defaults to `0.001`.
+#'
+#' @param adam_beta_1
+#' A float value or a constant float tensor, or a callable
+#' that takes no arguments and returns the actual value to use.
+#' The exponential decay rate for the 1st moment estimates. Defaults to
+#' `0.9`.
+#'
+#' @param adam_beta_2
+#' A float value or a constant float tensor, ora callable
+#' that takes no arguments and returns the actual value to use.
+#' The exponential decay rate for the 2nd moment estimates. Defaults to
+#' `0.999`.
+#'
+#' @param epsilon
+#' A small constant for numerical stability. This is
+#' "epsilon hat" in the Kingma and Ba paper
+#' (in the formula just before Section 2.1),
+#' not the epsilon in Algorithm 1 of the paper.
+#' It be used at Adamw.Defaults to `1e-7`.
+#'
+#' @param exclude_layers
+#' List of strings, keywords of layer names to exclude.
+#' All layers with keywords in their path will use adamw.
+#'
+#' @param exclude_embeddings
+#' Boolean value
+#' If `TRUE`, embedding layers will use adamw.
+#'
+#' @param muon_a
+#' Float, parameter a of the muon algorithm.
+#' It is recommended to use the default value.
+#'
+#' @param muon_b
+#' Float, parameter b of the muon algorithm.
+#' It is recommended to use the default value.
+#'
+#' @param muon_c
+#' Float, parameter c of the muon algorithm.
+#' It is recommended to use the default value.
+#'
+#' @param adam_lr_ratio
+#' Float, the ratio of the learning rate when
+#' using Adam to the main learning rate.
+#' it is recommended to set it to `0.1`.
+#'
+#' @param momentum
+#' Float, momentum used by internal SGD.
+#'
+#' @param ns_steps
+#' Integer, number of Newton-Schulz iterations to run.
+#'
+#' @param nesterov
+#' Boolean, whether to use Nesterov-style momentum.
+#'
+#' @param name
+#' String, name for the object
+#'
+#' @param ...
+#' For forward/backward compatibility.
+#'
+#' @export
+#' @tether keras.optimizers.Muon
+optimizer_muon <-
+function (learning_rate = 0.001, adam_beta_1 = 0.9, adam_beta_2 = 0.999,
+    epsilon = 1e-07, weight_decay = 0.1, clipnorm = NULL, clipvalue = NULL,
+    global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
+    ema_overwrite_frequency = NULL, loss_scale_factor = NULL,
+    gradient_accumulation_steps = NULL, name = "muon", exclude_layers = NULL,
+    exclude_embeddings = TRUE, muon_a = 3.4445, muon_b = -4.775,
+    muon_c = 2.0315, adam_lr_ratio = 0.1, momentum = 0.95, ns_steps = 6L,
+    nesterov = TRUE, ...)
+{
+    args <- capture_args(list(
+        ema_overwrite_frequency = as_integer,
+        gradient_accumulation_steps = as_integer,
+        ns_steps = as_integer))
+    do.call(keras$optimizers$Muon, args)
+}
+
 
 #' Optimizer that implements the Nadam algorithm.
 #'
