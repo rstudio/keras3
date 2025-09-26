@@ -1288,14 +1288,14 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #'     will be used. This is not configurable.
 #' - If the argument `exclude_embeddings` (defaults to `TRUE`) is set
 #' to `TRUE`, the AdamW step will be used.
-#' - For any variablewith a name that matches an expression
+#' - For any variable with a name that matches an expression
 #'     listed in the argument `exclude_layers` (a list), the
 #'     AdamW step will be used.
 #' - Any other variable uses the Muon step.
 #'
 #' Typically, you only need to pass the name of your densely-connected
 #' output layer to `exclude_layers`, e.g.
-#' `exclude_layers=["output_dense"]`.
+#' `exclude_layers = "output_dense"`.
 #'
 #' # References
 #' - [Original implementation](https://github.com/KellerJordan/Muon)
@@ -1324,15 +1324,15 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' "epsilon hat" in the Kingma and Ba paper
 #' (in the formula just before Section 2.1),
 #' not the epsilon in Algorithm 1 of the paper.
-#' It be used at Adamw.Defaults to `1e-7`.
+#' It is used as in AdamW. Defaults to `1e-7`.
 #'
 #' @param exclude_layers
 #' List of strings, keywords of layer names to exclude.
-#' All layers with keywords in their path will use adamw.
+#' All layers with keywords in their path will use AdamW.
 #'
 #' @param exclude_embeddings
-#' Boolean value
-#' If `TRUE`, embedding layers will use adamw.
+#' Boolean value.
+#' If `TRUE`, embedding layers will use AdamW.
 #'
 #' @param muon_a
 #' Float, parameter a of the muon algorithm.
