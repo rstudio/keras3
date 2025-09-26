@@ -71,6 +71,31 @@ function (x, kth, axis = -1L, zero_indexed = FALSE)
 }
 
 
+#' Bartlett window function.
+#'
+#' @description
+#' Generates a Bartlett (triangular) window of length `x`.
+#'
+#' # Examples
+#' ```{r}
+#' op_bartlett(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.bartlett
+op_bartlett <-
+function (x)
+ops$bartlett(as_integer(x))
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description

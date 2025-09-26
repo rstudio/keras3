@@ -75,6 +75,7 @@ average_pool(
   padding='valid',
   data_format=None
 )
+bartlett(x)
 batch_normalization(
   x,
   mean,
