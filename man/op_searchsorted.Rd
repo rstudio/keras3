@@ -2,30 +2,36 @@
 % Please edit documentation in R/ops.R
 \name{op_searchsorted}
 \alias{op_searchsorted}
-\title{Perform a binary search}
+\title{Perform a binary search.}
 \usage{
 op_searchsorted(sorted_sequence, values, side = "left", zero_indexed = FALSE)
 }
 \arguments{
-\item{sorted_sequence}{1-D input tensor, sorted along the innermost
-dimension.}
+\item{sorted_sequence}{1-D input tensor that is sorted along its innermost dimension.}
 
 \item{values}{N-D tensor of query insertion values.}
 
-\item{side}{\code{'left'} or \code{'right'}, specifying the direction in which to insert
-for the equality case (tie-breaker).}
+\item{side}{Either \code{"left"} or \code{"right"}, choosing which side to insert on ties.}
 
-\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes to first
+\item{zero_indexed}{If \code{TRUE}, the returned indices are zero-based (\code{0} encodes the first
 position); if \code{FALSE} (default), the returned indices are one-based (\code{1}
-encodes to first position).}
+encodes the first position).}
 }
 \value{
-Tensor of insertion indices of same shape as \code{values}.
+Tensor of insertion indices with the same shape as \code{values}.
 }
 \description{
-Perform a binary search, returning indices for insertion of \code{values}
-into \code{sorted_sequence} that maintain the sorting order.
+Return insertion indices that keep \code{values} in sorted order when placed
+into \code{sorted_sequence}.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{sorted <- op_array(c(-1, 0, 2, 4))
+queries <- c(-2, 0, 3, 7)
+op_searchsorted(sorted, queries)
+op_searchsorted(sorted, queries, side = "right", zero_indexed = TRUE)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other core ops: \cr
 \code{\link{op_associative_scan}()} \cr
