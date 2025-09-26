@@ -140,7 +140,7 @@ conv(
 conv_transpose(
   inputs,
   kernel,
-  strides,
+  strides=1,
   padding='valid',
   output_padding=None,
   data_format=None,
@@ -233,12 +233,17 @@ dot_product_attention(
   mask=None,
   scale=None,
   is_causal=False,
-  flash_attention=None
+  flash_attention=None,
+  attn_logits_soft_cap=None
 )
 dtype(x)
 eig(x)
 eigh(x)
-einsum(subscripts, *operands)
+einsum(
+  subscripts,
+  *operands,
+  **kwargs
+)
 elu(x, alpha=1.0)
 empty(shape, dtype=None)
 equal(x1, x2)
@@ -302,7 +307,7 @@ hstack(xs)
 identity(n, dtype=None)
 ifft2(x)
 imag(x)
-image: Module(keras.api.ops.image)
+image: Module(keras.ops.image)
 in_top_k(
   targets,
   predictions,
@@ -344,7 +349,7 @@ leaky_relu(x, negative_slope=0.2)
 left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
-linalg: Module(keras.api.ops.linalg)
+linalg: Module(keras.ops.linalg)
 linspace(
   start,
   stop,
@@ -449,7 +454,7 @@ nan_to_num(
 )
 ndim(x)
 negative(x)
-nn: Module(keras.api.ops.nn)
+nn: Module(keras.ops.nn)
 nonzero(x)
 norm(
   x,
@@ -464,7 +469,7 @@ normalize(
   epsilon=None
 )
 not_equal(x1, x2)
-numpy: Module(keras.api.ops.numpy)
+numpy: Module(keras.ops.numpy)
 one_hot(
   x,
   num_classes,
@@ -522,7 +527,7 @@ rfft(x, fft_length=None)
 right_shift(x, y)
 rms_normalization(
   x,
-  scale=1,
+  scale=None,
   axis=-1,
   epsilon=None
 )
@@ -739,6 +744,8 @@ vectorize(
   signature=None
 )
 vectorized_map(function, elements)
+view_as_complex(x)
+view_as_real(x)
 vstack(xs)
 where(
   condition,
@@ -753,6 +760,4 @@ while_loop(
 )
 zeros(shape, dtype=None)
 zeros_like(x, dtype=None)
-view_as_complex(x)
-view_as_real(x)
 
