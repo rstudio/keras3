@@ -647,6 +647,85 @@ function (y_true, y_pred, alpha = 0.25, gamma = 2,
 }
 
 
+
+#' Computes the generalized cross entropy loss.
+#'
+#' @description
+#' The generalized cross entropy (GCE) loss offers robustness to noisy labels by
+#' interpolating between categorical cross entropy (`q -> 0`) and mean absolute
+#' error (`q -> 1`). For a true-class probability `p` and noise parameter `q`,
+#' the loss is `loss = (1 - p^q) / q`.
+#'
+#' # References
+#' - Zhang & Sabuncu (2018), "Generalized Cross Entropy Loss for Training Deep
+#'   Neural Networks with Noisy Labels"
+#'
+#' # Examples
+#' ```{r}
+#' y_true <- c(0L, 1L, 0L, 1L)
+#' y_pred <- rbind(
+#'   c(0.7, 0.3),
+#'   c(0.2, 0.8),
+#'   c(0.6, 0.4),
+#'   c(0.4, 0.6)
+#' )
+#' gce <- loss_categorical_generalized_cross_entropy(q = 0.7)
+#' gce(y_true, y_pred)
+#' ```
+#'
+#' @returns
+#' Generalized cross entropy loss value(s).
+#'
+#' @param q
+#' Float in `(0, 1)`. Controls the transition between cross entropy and mean
+#' absolute error. Defaults to `0.5`.
+#'
+#' - As `q` approaches `0`: behaves like categorical cross entropy.
+#' - As `q` approaches `1`: behaves like mean absolute error.
+#'
+#' @param reduction
+#' Type of reduction to apply to the loss. In almost all cases
+#' this should be `"sum_over_batch_size"`. Supported options are
+#' `"sum"`, `"sum_over_batch_size"`, `"mean"`,
+#' `"mean_with_sample_weight"` or `NULL`. `"sum"` sums the loss,
+#' `"sum_over_batch_size"` and `"mean"` sum the loss and divide by the
+#' sample size, and `"mean_with_sample_weight"` sums the loss and
+#' divides by the sum of the sample weights. `"none"` and `NULL`
+#' perform no aggregation. Defaults to `"sum_over_batch_size"`.
+#'
+#' @param name
+#' Optional name for the loss instance.
+#'
+#' @param dtype
+#' Dtype used for loss computations. Defaults to `config_floatx()` (the global
+#' float type).
+#'
+#' @param y_true
+#' Integer class indices with shape `(batch_size)` or `(batch_size, 1)`.
+#'
+#' @param y_pred
+#' Predicted class probabilities with shape `(batch_size, num_classes)`.
+#'
+#' @param ...
+#' For forward/backward compatibility.
+#'
+#' @export
+#' @family losses
+#' @tether keras.losses.CategoricalGeneralizedCrossEntropy
+loss_categorical_generalized_cross_entropy <-
+function (y_true, y_pred, q = 0.5, ..., reduction = "sum_over_batch_size",
+          name = "categorical_generalized_cross_entropy", dtype = NULL)
+{
+    args <- capture_args(list(
+      y_true = as_py_array,
+      y_pred = as_py_array
+    ))
+    callable <- if (missing(y_true) && missing(y_pred))
+        keras$losses$CategoricalGeneralizedCrossEntropy
+    else keras$losses$categorical_generalized_cross_entropy
+    do.call(callable, args)
+}
+
 #' Computes the categorical hinge loss between `y_true` & `y_pred`.
 #'
 #' @description
