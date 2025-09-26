@@ -396,7 +396,6 @@ function (inputs, indices, updates)
 #' @family core ops
 #' @family ops
 #' @tether keras.ops.searchsorted
-#' @tether keras.ops.numpy.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left", zero_indexed = FALSE) {
 
