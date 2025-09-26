@@ -208,6 +208,7 @@ SparseCategoricalCrossentropy(
   from_logits=False,
   ignore_class=None,
   reduction='sum_over_batch_size',
+  axis=-1,
   name='sparse_categorical_crossentropy',
   dtype=None
 )
