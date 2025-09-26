@@ -205,6 +205,36 @@ function (x1, x2)
 ops$heaviside(x1, x2)
 
 
+#' Kaiser window function.
+#'
+#' @description
+#' The Kaiser window is defined as:
+#' `w[n] = I0(beta * sqrt(1 - (2 * n / (N - 1) - 1)^2)) / I0(beta)` where
+#' `I0` is the modified zeroth-order Bessel function of the first kind.
+#'
+#' # Examples
+#' ```{r}
+#' op_kaiser(5, beta = 14)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @param beta
+#' Shape parameter for the window.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.kaiser
+op_kaiser <-
+function (x, beta)
+ops$kaiser(as_integer(x), beta)
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description

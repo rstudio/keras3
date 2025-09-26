@@ -182,6 +182,7 @@ isclose(
 isfinite(x)
 isinf(x)
 isnan(x)
+kaiser(x, beta)
 left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)

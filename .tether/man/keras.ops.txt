@@ -328,6 +328,7 @@ istft(
   window='hann',
   center=True
 )
+kaiser(x, beta)
 leaky_relu(x, negative_slope=0.2)
 left_shift(x, y)
 less(x1, x2)
