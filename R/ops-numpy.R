@@ -74,7 +74,7 @@ function (x, kth, axis = -1L, zero_indexed = FALSE)
 #' Bartlett window function.
 #'
 #' @description
-#' Generates a Bartlett (triangular) window of length `x`.
+#' The Bartlett window is a triangular window that rises then falls linearly.
 #'
 #' # Examples
 #' ```{r}
@@ -99,7 +99,7 @@ ops$bartlett(as_integer(x))
 #' Blackman window function.
 #'
 #' @description
-#' Generates a Blackman window of length `x`.
+#' The Blackman window is a taper formed by using a weighted cosine.
 #'
 #' # Examples
 #' ```{r}
@@ -124,7 +124,8 @@ ops$blackman(as_integer(x))
 #' Hamming window function.
 #'
 #' @description
-#' Generates a Hamming window of length `x`.
+#' The Hamming window is defined as:
+#' `w[n] = 0.54 - 0.46 * cos(2 * pi * n / (N - 1))` for `0 <= n <= N - 1`.
 #'
 #' # Examples
 #' ```{r}
@@ -149,7 +150,8 @@ ops$hamming(as_integer(x))
 #' Hanning window function.
 #'
 #' @description
-#' Generates a Hanning window of length `x`.
+#' The Hanning window is defined as:
+#' `w[n] = 0.5 - 0.5 * cos(2 * pi * n / (N - 1))` for `0 <= n <= N - 1`.
 #'
 #' # Examples
 #' ```{r}
@@ -174,7 +176,10 @@ ops$hanning(as_integer(x))
 #' Heaviside step function.
 #'
 #' @description
-#' Computes the Heaviside step function element-wise.
+#' The Heaviside step function is defined as:
+#' `heaviside(x1, x2) = 0` if `x1 < 0`,
+#' `heaviside(x1, x2) = 1` if `x1 > 0`, and
+#' `heaviside(x1, x2) = x2` if `x1 == 0`.
 #'
 #' # Examples
 #' ```{r}
