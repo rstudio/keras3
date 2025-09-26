@@ -4052,6 +4052,62 @@ function (x)
 ops$angle(x)
 
 
+#' Convert a real tensor with two channels into a complex tensor.
+#'
+#' @description
+#' Expects a real-valued tensor whose last dimension has size `2`, holding the
+#' real and imaginary parts. Returns the corresponding complex tensor with the
+#' last dimension removed.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
+#' op_view_as_complex(x)
+#' ```
+#'
+#' @returns
+#' A complex tensor with shape `op_shape(x)[-length(op_shape(x))]`.
+#'
+#' @param x
+#' Real-valued tensor whose trailing dimension encodes the complex components.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.view_as_complex
+op_view_as_complex <-
+function (x)
+ops$view_as_complex(x)
+
+
+#' Convert a complex tensor into a stacked real representation.
+#'
+#' @description
+#' Produces a real-valued tensor where the last dimension gathers the real and
+#' imaginary parts of the complex input.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
+#' z <- op_view_as_complex(x)
+#' op_view_as_real(z)
+#' ```
+#'
+#' @returns
+#' A real tensor with shape `c(op_shape(x), 2)` containing real and imaginary parts.
+#'
+#' @param x
+#' Complex-valued tensor to be converted.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.view_as_real
+op_view_as_real <-
+function (x)
+ops$view_as_real(x)
+
+
 #' Returns a copy of `x`.
 #'
 #' @returns

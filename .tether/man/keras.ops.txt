@@ -745,4 +745,6 @@ while_loop(
 )
 zeros(shape, dtype=None)
 zeros_like(x, dtype=None)
+view_as_complex(x)
+view_as_real(x)
 
