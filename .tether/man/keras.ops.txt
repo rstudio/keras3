@@ -289,6 +289,7 @@ hard_sigmoid(x)
 hard_silu(x)
 hard_swish(x)
 hard_tanh(x)
+heaviside(x1, x2)
 histogram(
   x,
   bins=10,

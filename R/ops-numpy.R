@@ -171,6 +171,35 @@ function (x)
 ops$hanning(as_integer(x))
 
 
+#' Heaviside step function.
+#'
+#' @description
+#' Computes the Heaviside step function element-wise.
+#'
+#' # Examples
+#' ```{r}
+#' x1 <- op_array(c(-2, 0, 3))
+#' op_heaviside(x1, 0.5)
+#' ```
+#'
+#' @returns
+#' A tensor broadcast from `x1` and `x2` containing `0`, `1`, or `x2`.
+#'
+#' @param x1
+#' Tensor input.
+#'
+#' @param x2
+#' Value to use when `x1 == 0`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.heaviside
+op_heaviside <-
+function (x1, x2)
+ops$heaviside(x1, x2)
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description
