@@ -36,6 +36,7 @@ Other ops: \cr
 \code{\link{op_abs}()} \cr
 \code{\link{op_add}()} \cr
 \code{\link{op_all}()} \cr
+\code{\link{op_angle}()} \cr
 \code{\link{op_any}()} \cr
 \code{\link{op_append}()} \cr
 \code{\link{op_arange}()} \cr
@@ -54,6 +55,7 @@ Other ops: \cr
 \code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
+\code{\link{op_bartlett}()} \cr
 \code{\link{op_batch_normalization}()} \cr
 \code{\link{op_binary_crossentropy}()} \cr
 \code{\link{op_bincount}()} \cr
@@ -64,9 +66,11 @@ Other ops: \cr
 \code{\link{op_bitwise_or}()} \cr
 \code{\link{op_bitwise_right_shift}()} \cr
 \code{\link{op_bitwise_xor}()} \cr
+\code{\link{op_blackman}()} \cr
 \code{\link{op_broadcast_to}()} \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_categorical_crossentropy}()} \cr
+\code{\link{op_cbrt}()} \cr
 \code{\link{op_ceil}()} \cr
 \code{\link{op_celu}()} \cr
 \code{\link{op_cholesky}()} \cr
@@ -79,6 +83,7 @@ Other ops: \cr
 \code{\link{op_convert_to_numpy}()} \cr
 \code{\link{op_convert_to_tensor}()} \cr
 \code{\link{op_copy}()} \cr
+\code{\link{op_corrcoef}()} \cr
 \code{\link{op_correlate}()} \cr
 \code{\link{op_cos}()} \cr
 \code{\link{op_cosh}()} \cr
@@ -89,6 +94,7 @@ Other ops: \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
 \code{\link{op_custom_gradient}()} \cr
+\code{\link{op_deg2rad}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -128,10 +134,13 @@ Other ops: \cr
 \code{\link{op_glu}()} \cr
 \code{\link{op_greater}()} \cr
 \code{\link{op_greater_equal}()} \cr
+\code{\link{op_hamming}()} \cr
+\code{\link{op_hanning}()} \cr
 \code{\link{op_hard_shrink}()} \cr
 \code{\link{op_hard_sigmoid}()} \cr
 \code{\link{op_hard_silu}()} \cr
 \code{\link{op_hard_tanh}()} \cr
+\code{\link{op_heaviside}()} \cr
 \code{\link{op_histogram}()} \cr
 \code{\link{op_hstack}()} \cr
 \code{\link{op_identity}()} \cr
@@ -158,6 +167,8 @@ Other ops: \cr
 \code{\link{op_isinf}()} \cr
 \code{\link{op_isnan}()} \cr
 \code{\link{op_istft}()} \cr
+\code{\link{op_kaiser}()} \cr
+\code{\link{op_layer_normalization}()} \cr
 \code{\link{op_leaky_relu}()} \cr
 \code{\link{op_left_shift}()} \cr
 \code{\link{op_less}()} \cr
@@ -256,6 +267,7 @@ Other ops: \cr
 \code{\link{op_sort}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
 \code{\link{op_sparse_plus}()} \cr
+\code{\link{op_sparse_sigmoid}()} \cr
 \code{\link{op_sparsemax}()} \cr
 \code{\link{op_split}()} \cr
 \code{\link{op_sqrt}()} \cr
@@ -293,6 +305,8 @@ Other ops: \cr
 \code{\link{op_vdot}()} \cr
 \code{\link{op_vectorize}()} \cr
 \code{\link{op_vectorized_map}()} \cr
+\code{\link{op_view_as_complex}()} \cr
+\code{\link{op_view_as_real}()} \cr
 \code{\link{op_vstack}()} \cr
 \code{\link{op_where}()} \cr
 \code{\link{op_while_loop}()} \cr

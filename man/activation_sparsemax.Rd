@@ -52,6 +52,7 @@ Other activations: \cr
 \code{\link{activation_softplus}()} \cr
 \code{\link{activation_softsign}()} \cr
 \code{\link{activation_sparse_plus}()} \cr
+\code{\link{activation_sparse_sigmoid}()} \cr
 \code{\link{activation_squareplus}()} \cr
 \code{\link{activation_tanh}()} \cr
 \code{\link{activation_tanh_shrink}()} \cr
