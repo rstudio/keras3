@@ -289,6 +289,70 @@ function (data_format)
 }
 
 
+#' Configure the default training loop limits.
+#'
+#' @description
+#' These helpers control the caps that built-in training loops obey when running
+#' `fit()`, `evaluate()`, or `predict()`. The values can also be provided via the
+#' `KERAS_MAX_EPOCHS` or `KERAS_MAX_STEPS_PER_EPOCH` environment variables to
+#' quickly constrain a run without modifying source code.
+#'
+#' @returns
+#' `config_max_epochs()` and `config_max_steps_per_epoch()` return the current
+#' integer limits (or `NULL` if the cap is unset). The setter variants return
+#' `NULL` invisibly and are called for side effects.
+#'
+#' @param max_epochs
+#' Integer upper bound for epochs processed by built-in training loops. Use
+#' `NULL` to remove the cap.
+#'
+#' @param max_steps_per_epoch
+#' Integer upper bound for steps processed per epoch by built-in training
+#' loops. Use `NULL` to remove the cap.
+#'
+#' @name config_training_limits
+#' @family config
+#' @rdname config_training_limits
+#' @export
+#' @tether keras.config.max_epochs
+config_max_epochs <-
+function ()
+{
+    args <- capture_args()
+    do.call(keras$config$max_epochs, args)
+}
+
+#' @rdname config_training_limits
+#' @export
+#' @tether keras.config.set_max_epochs
+config_set_max_epochs <-
+function (max_epochs)
+{
+    args <- capture_args(list(max_epochs = as_integer))
+    do.call(keras$config$set_max_epochs, args)
+}
+
+#' @rdname config_training_limits
+#' @export
+#' @tether keras.config.max_steps_per_epoch
+config_max_steps_per_epoch <-
+function ()
+{
+    args <- capture_args()
+    do.call(keras$config$max_steps_per_epoch, args)
+}
+
+#' @rdname config_training_limits
+#' @export
+#' @tether keras.config.set_max_steps_per_epoch
+config_set_max_steps_per_epoch <-
+function (max_steps_per_epoch)
+{
+    args <- capture_args(list(max_steps_per_epoch = as_integer))
+    do.call(keras$config$set_max_steps_per_epoch, args)
+}
+
+
 #' Disables safe mode globally, allowing deserialization of lambdas.
 #'
 #' @returns No return value, called for side effects.
@@ -375,6 +439,21 @@ function ()
 {
     args <- capture_args()
     do.call(keras$config$is_interactive_logging_enabled, args)
+}
+
+
+#' Check whether NNX-specific features are enabled on the JAX backend.
+#'
+#' @returns
+#' Logical flag; `TRUE` if NNX backend features are enabled, `FALSE` otherwise.
+#'
+#' @export
+#' @family config
+#' @tether keras.config.is_nnx_enabled
+config_is_nnx_enabled <-
+function ()
+{
+    keras$config$is_nnx_enabled()
 }
 
 
