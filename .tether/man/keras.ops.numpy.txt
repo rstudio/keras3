@@ -76,6 +76,7 @@ bitwise_not(x)
 bitwise_or(x, y)
 bitwise_right_shift(x, y)
 bitwise_xor(x, y)
+blackman(x)
 broadcast_to(x, shape)
 ceil(x)
 clip(

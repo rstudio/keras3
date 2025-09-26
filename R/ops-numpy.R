@@ -96,6 +96,31 @@ function (x)
 ops$bartlett(as_integer(x))
 
 
+#' Blackman window function.
+#'
+#' @description
+#' Generates a Blackman window of length `x`.
+#'
+#' # Examples
+#' ```{r}
+#' op_blackman(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.blackman
+op_blackman <-
+function (x)
+ops$blackman(as_integer(x))
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description
