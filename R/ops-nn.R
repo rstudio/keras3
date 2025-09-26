@@ -111,6 +111,55 @@ function (x, axis = -1L, order = 2L, epsilon = NULL)
 }
 
 
+#' Layer normalization (Ba et al., 2016).
+#'
+#' @description
+#' Normalizes activations in `x` for each example independently by centering to
+#' mean 0 and scaling to unit variance along the specified `axis`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_arange(5, dtype = "float32")
+#' op_layer_normalization(x)
+#' ```
+#'
+#' @returns
+#' Tensor with the same shape as `x` containing the normalized values.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param gamma
+#' Optional scaling factor applied to the normalized output.
+#'
+#' @param beta
+#' Optional offset added to the normalized output.
+#'
+#' @param axis
+#' Axis or axes along which to compute statistics. Defaults to `-1`.
+#'
+#' @param epsilon
+#' Small constant added to the variance for numerical stability.
+#'
+#' @param ...
+#' For forward/backward compatibility.
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @tether keras.ops.layer_normalization
+op_layer_normalization <-
+function (x, gamma = NULL, beta = NULL, axis = -1L, epsilon = NULL, ...)
+{
+    args <- capture_args(list(
+      axis = as_axis,
+      gamma = as_array,
+      beta = as_array
+    ))
+    do.call(ops$layer_normalization, args)
+}
+
+
 #' Peak Signal-to-Noise Ratio (PSNR) function.
 #'
 #' @description
