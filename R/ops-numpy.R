@@ -121,6 +121,31 @@ function (x)
 ops$blackman(as_integer(x))
 
 
+#' Hamming window function.
+#'
+#' @description
+#' Generates a Hamming window of length `x`.
+#'
+#' # Examples
+#' ```{r}
+#' op_hamming(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.hamming
+op_hamming <-
+function (x)
+ops$hamming(as_integer(x))
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description
