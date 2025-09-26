@@ -112,6 +112,7 @@ categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+cbrt(x)
 ceil(x)
 celu(x, alpha=1.0)
 cholesky(x)
@@ -153,6 +154,7 @@ convert_to_tensor(
   ragged=None
 )
 copy(x)
+corrcoef(x)
 correlate(
   x1,
   x2,
@@ -196,6 +198,7 @@ cumsum(
   dtype=None
 )
 custom_gradient(f)
+deg2rad(x)
 depthwise_conv(
   inputs,
   kernel,

@@ -78,6 +78,7 @@ bitwise_right_shift(x, y)
 bitwise_xor(x, y)
 blackman(x)
 broadcast_to(x, shape)
+cbrt(x)
 ceil(x)
 clip(
   x,
@@ -95,6 +96,7 @@ correlate(
 )
 cos(x)
 cosh(x)
+corrcoef(x)
 count_nonzero(x, axis=None)
 cross(
   x1,
@@ -117,6 +119,7 @@ cumsum(
 diag(x, k=0)
 diagflat(x, k=0)
 diagonal(
+deg2rad(x)
   x,
   offset=0,
   axis1=0,

@@ -71,6 +71,83 @@ function (x, kth, axis = -1L, zero_indexed = FALSE)
 }
 
 
+#' Compute the Pearson correlation coefficient matrix.
+#'
+#' @returns
+#' A tensor of shape `(N, N)` representing the correlation matrix.
+#'
+#' @param x
+#' A 2D tensor of shape `(N, D)`, where `N` is the number of variables
+#' and `D` is the number of observations.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(matrix(c(1, 2, 3,
+#'                        2, 3, 4), nrow = 2, byrow = TRUE))
+#' op_corrcoef(x)
+#' ```
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.corrcoef
+op_corrcoef <-
+function (x)
+ops$corrcoef(x)
+
+
+#' Computes the cube root of the input tensor, element-wise.
+#'
+#' @description
+#' Returns the real-valued cube root of `x`, handling negative inputs in the
+#' real domain.
+#'
+#' @returns
+#' A tensor containing the cube root of each element in `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' # Examples
+#' ```{r}
+#' op_cbrt(c(-8, 0, 8))
+#' ```
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.cbrt
+op_cbrt <-
+function (x)
+ops$cbrt(x)
+
+
+#' Convert angles from degrees to radians.
+#'
+#' @description
+#' The conversion is defined as:
+#' `rad = deg * (pi / 180)`.
+#'
+#' # Examples
+#' ```{r}
+#' op_deg2rad(c(0, 90, 180))
+#' ```
+#'
+#' @returns
+#' A tensor containing angles converted to radians.
+#'
+#' @param x
+#' Input tensor of angles in degrees.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.deg2rad
+op_deg2rad <-
+function (x)
+ops$deg2rad(x)
+
+
 #' Bartlett window function.
 #'
 #' @description

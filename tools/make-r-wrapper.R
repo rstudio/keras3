@@ -13,5 +13,5 @@ suppressWarnings(suppressMessages(
 # Example usage:
 # tools/make-r-wrapper.R keras.ops.add
 for (py_expr in commandArgs(TRUE)) {
-  writeLines(mk_export(py_expr)$dump)
+  writeLines(c("", mk_export(py_expr)$dump, ""))
 }
