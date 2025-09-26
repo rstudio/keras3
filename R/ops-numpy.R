@@ -146,6 +146,31 @@ function (x)
 ops$hamming(as_integer(x))
 
 
+#' Hanning window function.
+#'
+#' @description
+#' Generates a Hanning window of length `x`.
+#'
+#' # Examples
+#' ```{r}
+#' op_hanning(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.hanning
+op_hanning <-
+function (x)
+ops$hanning(as_integer(x))
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description

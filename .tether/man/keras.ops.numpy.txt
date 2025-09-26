@@ -161,6 +161,7 @@ get_item(x, key)
 greater(x1, x2)
 greater_equal(x1, x2)
 hamming(x)
+hanning(x)
 histogram(
   x,
   bins=10,
