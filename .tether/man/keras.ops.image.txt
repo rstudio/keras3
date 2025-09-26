@@ -16,6 +16,16 @@ crop_images(
   target_width=None,
   data_format=None
 )
+elastic_transform(
+  images,
+  alpha=20.0,
+  sigma=5.0,
+  interpolation='bilinear',
+  fill_mode='reflect',
+  fill_value=0.0,
+  seed=None,
+  data_format=None
+)
 extract_patches(
   images,
   size,
