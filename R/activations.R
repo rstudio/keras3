@@ -793,6 +793,30 @@ function (x)
     keras$activations$sparse_plus(x)
 }
 
+#' Sparse sigmoid activation function.
+#'
+#' @description
+#' It is defined as
+#'
+#' `f(x) = 0` for `x <= -1`,
+#' `f(x) = 0.5 * (x + 1)` for `-1 < x < 1`,
+#' `f(x) = 1` for `x >= 1`.
+#'
+#' # Reference
+#' - [M. Blondel, A. F. T. Martins, V. Niculae, 2019](https://arxiv.org/pdf/1901.02324)
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @family activations
+#' @inherit activation_elu return
+#' @export
+#' @tether keras.activations.sparse_sigmoid
+activation_sparse_sigmoid <-
+function (x) {
+  keras$activations$sparse_sigmoid(x)
+}
+
 #' Sparsemax activation function.
 #'
 #' @description

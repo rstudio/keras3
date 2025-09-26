@@ -485,6 +485,35 @@ op_sparse_plus <-
 function (x)
 ops$sparse_plus(x)
 
+#' Sparse sigmoid activation function.
+#'
+#' @description
+#' It is defined as
+#'
+#' `f(x) = 0` for `x <= -1`,
+#' `f(x) = 0.5 * (x + 1)` for `-1 < x < 1`,
+#' `f(x) = 1` for `x >= 1`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0))
+#' op_sparse_sigmoid(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.ops.sparse_sigmoid
+#' @family nn ops
+#' @family ops
+op_sparse_sigmoid <-
+function (x)
+ops$sparse_sigmoid(x)
+
 #' Sparsemax activation function.
 #'
 #' @description
