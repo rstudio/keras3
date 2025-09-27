@@ -82,6 +82,9 @@ it is recommended to set it to \code{0.1}.}
 
 \item{...}{For forward/backward compatibility.}
 }
+\value{
+an \code{Optimizer} instance
+}
 \description{
 Note that this optimizer should not be used in the following layers:
 \enumerate{
@@ -116,3 +119,20 @@ output layer to \code{exclude_layers}, e.g.
 }
 }
 
+\seealso{
+Other optimizers: \cr
+\code{\link{optimizer_adadelta}()} \cr
+\code{\link{optimizer_adafactor}()} \cr
+\code{\link{optimizer_adagrad}()} \cr
+\code{\link{optimizer_adam}()} \cr
+\code{\link{optimizer_adam_w}()} \cr
+\code{\link{optimizer_adamax}()} \cr
+\code{\link{optimizer_ftrl}()} \cr
+\code{\link{optimizer_lamb}()} \cr
+\code{\link{optimizer_lion}()} \cr
+\code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_nadam}()} \cr
+\code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_sgd}()} \cr
+}
+\concept{optimizers}

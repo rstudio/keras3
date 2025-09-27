@@ -1367,6 +1367,8 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' For forward/backward compatibility.
 #'
 #' @export
+#' @family optimizers
+#' @returns an `Optimizer` instance
 #' @tether keras.optimizers.Muon
 optimizer_muon <-
 function (learning_rate = 0.001, adam_beta_1 = 0.9, adam_beta_2 = 0.999,
