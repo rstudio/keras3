@@ -43,6 +43,10 @@ of the transposed convolution. \code{strides > 1} is incompatible with
 the left/right or up/down of the input. When \code{padding="same"} and
 \code{strides=1}, the output has the same size as the input.}
 
+\item{output_padding}{Scalar integer or vector of two integers. Amount of padding to add to the
+height and width of the output tensor. Each element must be smaller than the
+corresponding stride. When \code{NULL} (default) the output size is inferred.}
+
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
 corresponds to inputs with shape

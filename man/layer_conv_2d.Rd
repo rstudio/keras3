@@ -89,10 +89,6 @@ are not safe to use when doing asynchronous distributed training.}
 bias after being updated by an \code{Optimizer}.}
 
 \item{...}{For forward/backward compatability.}
-
-\item{output_padding}{Scalar integer or vector of two integers. Amount of padding to add to the output
-depth, height, and width. Each element must be smaller than the corresponding
-stride. When \code{NULL} (default) the output size is inferred.}
 }
 \value{
 A 4D tensor representing \code{activation(conv2d(inputs, kernel) + bias)}.
