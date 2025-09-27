@@ -50,7 +50,7 @@ ImageNet dataset, and retraining it on the Kaggle "cats vs dogs" classification
  dataset.
 
 This is adapted from
-[Deep Learning with Python](https://www.manning.com/books/deep-learning-with-python)
+[Deep Learning with R](https://www.manning.com/books/deep-learning-with-r-third-edition)
 and the 2016 blog post
 ["building powerful image classification models using very little data"](https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html).
 
@@ -194,7 +194,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 0s - 487ms/step - loss: 2.8362
+## 1/1 - 0s - 436ms/step - loss: 2.8362
 ```
 
 ``` r
@@ -648,7 +648,7 @@ model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ```
-## 146/146 - 53s - 360ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
+## 146/146 - 57s - 389ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -709,7 +709,7 @@ model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ```
-## 146/146 - 97s - 664ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
+## 146/146 - 86s - 592ms/step - binary_accuracy: 0.8660 - loss: 0.3212 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
@@ -721,7 +721,7 @@ model |> evaluate(test_ds)
 ```
 
 ```
-## 37/37 - 2s - 46ms/step - binary_accuracy: 0.9540 - loss: 0.1103
+## 37/37 - 2s - 43ms/step - binary_accuracy: 0.9540 - loss: 0.1102
 ```
 
 ```
@@ -729,5 +729,5 @@ model |> evaluate(test_ds)
 ## [1] 0.9539983
 ##
 ## $loss
-## [1] 0.1102593
+## [1] 0.1102476
 ```
