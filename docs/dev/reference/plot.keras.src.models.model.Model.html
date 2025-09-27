@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,27 +142,29 @@ model is drawn on the default graphics device. Otherwise, a file is saved.</p></
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Nothing, called for it's side effects.</p>
+    <p>Nothing, called for it side effects.</p>
     </div>
     <div class="section level2">
     <h2 id="raises">Raises<a class="anchor" aria-label="anchor" href="#raises"></a></h2>
     <p>ValueError: if <code>plot(model)</code> is called before the model is
-built, unless a <code>input_shape = </code> argument was supplied to
+built, unless an <code>input_shape = </code> argument was supplied to
 <code><a href="keras_model_sequential.html">keras_model_sequential()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="requirements">Requirements<a class="anchor" aria-label="anchor" href="#requirements"></a></h2>
 
 
-<p>This function requires pydot and graphviz.
-<code>pydot</code> is by default installed by <code><a href="install_keras.html">install_keras()</a></code>, but if you installed
-keras by other means, you can install <code>pydot</code> directly with :</p>
+<p>This function requires pydot and graphviz.</p>
+<p><code>pydot</code> is by default installed by <code><a href="install_keras.html">install_keras()</a></code>, but if you installed
+Keras by other means, you can install <code>pydot</code> directly with:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/py_install.html" class="external-link">py_install</a></span><span class="op">(</span><span class="st">"pydot"</span>, pip <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>You can install graphviz directly from here:
 <a href="https://graphviz.gitlab.io/download/" class="external-link">https://graphviz.gitlab.io/download/</a></p>
 <p>On most Linux platforms, can install graphviz via the package manager.
 For example, on Ubuntu/Debian you can install with</p>
 <p></p><div class="sourceCode sh"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">sudo</span> apt install graphviz</span></code></pre><p></p></div>
+<p>On macOS you can install graphviz using <code>brew</code>:</p>
+<p></p><div class="sourceCode sh"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">brew</span> install graphviz</span></code></pre><p></p></div>
 <p>In a conda environment, you can install graphviz with:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/conda-tools.html" class="external-link">conda_install</a></span><span class="op">(</span>packages <span class="op">=</span> <span class="st">"graphviz"</span><span class="op">)</span></span>
 <span><span class="co"># Restart the R session after install.</span></span></code></pre><p></p></div>
@@ -177,7 +179,7 @@ For example, on Ubuntu/Debian you can install with</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
