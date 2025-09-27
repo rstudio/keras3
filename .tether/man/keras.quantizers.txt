@@ -29,6 +29,7 @@ fake_quant_with_min_max_vars(
   axis=None
 )
 get(identifier, **kwargs)
+pack_int4(arr, axis=0)
 quantize_and_dequantize(
   inputs,
   scale,
@@ -37,4 +38,9 @@ quantize_and_dequantize(
 )
 Quantizer(output_dtype='int8')
 serialize(initializer)
+unpack_int4(
+  packed,
+  orig_len,
+  axis=0
+)
 
