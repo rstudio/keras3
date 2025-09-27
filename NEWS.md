@@ -9,6 +9,53 @@
 - Updated dependencies declared by `use_backend("jax", gpu=TRUE)`
   for compatability with `keras-hub`.
 
+- Added training loop configuration helpers:
+  `config_max_epochs()`, `config_set_max_epochs()`, `config_max_steps_per_epoch()`,
+  and `config_set_max_steps_per_epoch()`. The caps can also be set via the
+  `KERAS_MAX_EPOCHS` and `KERAS_MAX_STEPS_PER_EPOCH` environment variables.
+  Added `config_is_nnx_enabled()` to check whether JAX NNX features are enabled.
+
+- LoRA-enabled layers (`layer_dense()`, `layer_embedding()`, `layer_einsum_dense()`)
+  gain a `lora_alpha` argument to scale the adaptation delta independently of the
+  chosen rank.
+
+- `keras_variable()` now accepts a `synchronization` argument for distributed
+  strategies.
+
+- `Layer$add_weight()` gains an `overwrite_with_gradient` option and
+  layers now provide a `symbolic_call()` method.
+
+- Transposed convolution utilities now follow the latest Keras API:
+  `op_conv_transpose()` defaults `strides = 1` and the `layer_conv_*_transpose()`
+  layers expose `output_padding` for precise shape control.
+
+- `layer_torch_module_wrapper()` gains an `output_shape` argument to help Keras
+  infer shapes when wrapping PyTorch modules.
+
+- `save_model_weights()` adds a `max_shard_size` argument to split large weight
+  files into manageable shards.
+
+- Added elastic deformation utilities for images: `layer_random_elastic_transform()`
+  and the lower-level `op_image_elastic_transform()`.
+
+- Added `loss_categorical_generalized_cross_entropy()` for training with noisy
+  labels.
+
+- Added the Muon optimizer via `optimizer_muon()`.
+
+- Added complex-valued helpers: S3 `Arg()` methods for tensors, `op_angle()`,
+  and conversions `op_view_as_real()` / `op_view_as_complex()`.
+
+- Added signal window operations: `op_bartlett()`, `op_blackman()`,
+  `op_hamming()`, `op_hanning()`, and `op_kaiser()`.
+
+- Expanded numeric operations with `op_layer_normalization()`, `op_cbrt()`,
+  `op_corrcoef()`, `op_deg2rad()`, `op_heaviside()`, the new `op_sparse_sigmoid()`
+  plus matching `activation_sparse_sigmoid()`, and an `attn_logits_soft_cap`
+  argument for `op_dot_product_attention()`.
+
+- `layer_layer_normalization()` removes the `rms_scaling` argument.
+
 # keras3 1.4.0
 
 - New `op_subset()` and `x@r[...]` methods enable tensor subsetting
