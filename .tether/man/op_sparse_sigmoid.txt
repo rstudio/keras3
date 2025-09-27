@@ -1,0 +1,23 @@
+__signature__
+keras.ops.sparse_sigmoid(x)
+__doc__
+Sparse sigmoid activation function.
+
+It is defined as
+
+`f(x) = 0` for `x <= -1`,
+`f(x) = 0.5 * (x + 1)` for `-1 < x < 1`,
+`f(x) = 1` for `x >= 1`.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    A tensor with the same shape as `x`.
+
+Example:
+
+>>> x = keras.ops.convert_to_tensor([-6.0, 1.0, 0.0, 1.0, 6.0])
+>>> keras.ops.sparse_sigmoid(x)
+array([0. , 1. , 0.5, 1. , 1. ], dtype=float32)
+

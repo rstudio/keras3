@@ -89,6 +89,7 @@ concatenate(xs, axis=0)
 conj(x)
 conjugate(x)
 copy(x)
+corrcoef(x)
 correlate(
   x1,
   x2,
@@ -96,7 +97,6 @@ correlate(
 )
 cos(x)
 cosh(x)
-corrcoef(x)
 count_nonzero(x, axis=None)
 cross(
   x1,
@@ -116,10 +116,10 @@ cumsum(
   axis=None,
   dtype=None
 )
+deg2rad(x)
 diag(x, k=0)
 diagflat(x, k=0)
 diagonal(
-deg2rad(x)
   x,
   offset=0,
   axis1=0,
@@ -134,7 +134,11 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
-einsum(subscripts, *operands)
+einsum(
+  subscripts,
+  *operands,
+  **kwargs
+)
 empty(shape, dtype=None)
 equal(x1, x2)
 exp(x)

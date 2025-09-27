@@ -1,0 +1,13 @@
+__signature__
+keras.config.max_epochs()
+__doc__
+Get the maximum number of epochs for any call to fit.
+
+Retrieves the limit on the number of epochs set by
+`keras.config.set_max_epochs` or the `KERAS_MAX_EPOCHS` environment
+variable.
+
+Returns:
+    The integer limit on the number of epochs or `None`, if no limit has
+    been set.
+

@@ -1,0 +1,17 @@
+__signature__
+keras.ops.bartlett(x)
+__doc__
+Bartlett window function.
+The Bartlett window is a triangular window that rises then falls linearly.
+
+Args:
+    x: Scalar or 1D Tensor. Window length.
+
+Returns:
+    A 1D tensor containing the Bartlett window values.
+
+Example:
+>>> x = keras.ops.convert_to_tensor(5)
+>>> keras.ops.bartlett(x)
+array([0. , 0.5, 1. , 0.5, 0. ], dtype=float32)
+

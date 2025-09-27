@@ -1,0 +1,21 @@
+__signature__
+keras.ops.deg2rad(x)
+__doc__
+Convert angles from degrees to radians.
+
+The conversion is defined as:
+`rad = deg * (π / 180)`
+
+Args:
+    x: Input tensor of angles in degrees.
+
+Returns:
+    A tensor containing angles converted to radians.
+
+Examples:
+>>> from keras import ops
+>>> ops.deg2rad(180.0)
+3.141592653589793
+>>> ops.deg2rad([0.0, 90.0, 180.0])
+array([0., 1.57079633, 3.14159265])
+

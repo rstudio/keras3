@@ -1,0 +1,9 @@
+__signature__
+keras.config.is_nnx_enabled()
+__doc__
+Checks whether NNX specific features are enabled for the JAX backend.
+
+Returns:
+    bool: `True` if NNX backend features are enabled, `False` otherwise.
+    Defaults to `False`.
+

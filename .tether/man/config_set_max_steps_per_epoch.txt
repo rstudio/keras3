@@ -1,0 +1,14 @@
+__signature__
+keras.config.set_max_steps_per_epoch(max_steps_per_epoch)
+__doc__
+Limit the maximum number of steps for any call to fit/evaluate/predict.
+
+This will cap the number of steps for single epoch of a call to `fit()`,
+`evaluate()`, or `predict()`. This is purely for debugging, and can also be
+set via the `KERAS_MAX_STEPS_PER_EPOCH` environment variable to quickly run
+a scrip without modifying its source.
+
+Args:
+    max_epochs: The integer limit on the number of epochs or `None`. If
+        `None`, no limit is applied.
+

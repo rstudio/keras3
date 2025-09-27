@@ -1,0 +1,35 @@
+__signature__
+keras.ops.layer_normalization(
+  x,
+  gamma=None,
+  beta=None,
+  axis=-1,
+  epsilon=None,
+  **kwargs
+)
+__doc__
+Layer normalization layer (Ba et al., 2016).
+
+Normalize the activations of the previous layer for each given example in a
+batch independently, rather than across a batch like Batch Normalization.
+i.e. applies a transformation that maintains the mean activation within each
+example close to 0 and the activation standard deviation close to 1.
+
+Args:
+    x: Input tensor.
+    gamma: Optional scaling factor for the normalization.
+    beta: Optional add offset for the normalized tensor.
+    axis: The axis or axes along which to perform normalization. Default to
+        `-1`.
+    epsilon: A lower bound value for the norm.
+        Defaults to `backend.epsilon()`.
+
+Returns:
+    The normalized array.
+
+Example:
+
+>>> x = keras.ops.arange(5, dtype="float32")
+>>> keras.ops.layer_normalization(x)
+array([-1.4142135, -0.70710677, 0.0, 0.7071067, 1.4142135])
+
