@@ -348,11 +348,6 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' the left/right or up/down of the input. When `padding="same"` and
 #' `strides=1`, the output has the same size as the input.
 #'
-#' @param output_padding
-#' Scalar integer or vector of two integers. Amount of padding to add to the output
-#' depth, height, and width. Each element must be smaller than the corresponding
-#' stride. When `NULL` (default) the output size is inferred.
-#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -499,6 +494,11 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' `"valid"` means no padding. `"same"` results in padding evenly to
 #' the left/right or up/down of the input. When `padding="same"` and
 #' `strides=1`, the output has the same size as the input.
+#'
+#' @param output_padding
+#' Scalar integer or vector of two integers. Amount of padding to add to the
+#' height and width of the output tensor. Each element must be smaller than the
+#' corresponding stride. When `NULL` (default) the output size is inferred.
 #'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
@@ -790,6 +790,12 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' `"valid"` means no padding. `"same"` results in padding evenly to
 #' the left/right or up/down of the input. When `padding="same"` and
 #' `strides=1`, the output has the same size as the input.
+#'
+#' @param output_padding
+#' Scalar integer or vector of three integers. Amount of padding to add to the
+#' depth, height, and width of the output tensor. Each element must be smaller
+#' than the corresponding stride. When `NULL` (default) the output size is
+#' inferred.
 #'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
