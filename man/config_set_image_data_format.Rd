@@ -75,7 +75,9 @@ Other config: \cr
 \code{\link{config_floatx}()} \cr
 \code{\link{config_image_data_format}()} \cr
 \code{\link{config_is_interactive_logging_enabled}()} \cr
+\code{\link{config_is_nnx_enabled}()} \cr
 \code{\link{config_is_traceback_filtering_enabled}()} \cr
+\code{\link{config_max_epochs}()} \cr
 \code{\link{config_set_backend}()} \cr
 \code{\link{config_set_dtype_policy}()} \cr
 \code{\link{config_set_epsilon}()} \cr

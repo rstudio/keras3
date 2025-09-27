@@ -310,9 +310,9 @@ function (data_format)
 #' Integer upper bound for steps processed per epoch by built-in training
 #' loops. Use `NULL` to remove the cap.
 #'
-#' @name config_training_limits
+#' @name config_max_epochs
 #' @family config
-#' @rdname config_training_limits
+#' @rdname config_max_epochs
 #' @export
 #' @tether keras.config.max_epochs
 config_max_epochs <-
@@ -322,7 +322,7 @@ function ()
     do.call(keras$config$max_epochs, args)
 }
 
-#' @rdname config_training_limits
+#' @rdname config_max_epochs
 #' @export
 #' @tether keras.config.set_max_epochs
 config_set_max_epochs <-
@@ -332,7 +332,7 @@ function (max_epochs)
     do.call(keras$config$set_max_epochs, args)
 }
 
-#' @rdname config_training_limits
+#' @rdname config_max_epochs
 #' @export
 #' @tether keras.config.max_steps_per_epoch
 config_max_steps_per_epoch <-
@@ -342,7 +342,7 @@ function ()
     do.call(keras$config$max_steps_per_epoch, args)
 }
 
-#' @rdname config_training_limits
+#' @rdname config_max_epochs
 #' @export
 #' @tether keras.config.set_max_steps_per_epoch
 config_set_max_steps_per_epoch <-
