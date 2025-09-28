@@ -124,6 +124,13 @@ the left/right or up/down of the input. When <code>padding="same"</code> and
 <code>strides=1</code>, the output has the same size as the input.</p></dd>
 
 
+<dt id="arg-output-padding">output_padding<a class="anchor" aria-label="anchor" href="#arg-output-padding"></a></dt>
+<dd><p>Scalar integer or vector of three integers. Amount of padding to add to the
+depth, height, and width of the output tensor. Each element must be smaller
+than the corresponding stride. When <code>NULL</code> (default) the output size is
+inferred.</p></dd>
+
+
 <dt id="arg-data-format">data_format<a class="anchor" aria-label="anchor" href="#arg-data-format"></a></dt>
 <dd><p>string, either <code>"channels_last"</code> or <code>"channels_first"</code>.
 The ordering of the dimensions in the inputs. <code>"channels_last"</code>

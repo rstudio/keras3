@@ -102,29 +102,8 @@ Defaults to <code><a href="config_epsilon.html">config_epsilon()</a></code>.</p>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
     <p></p><div class="sourceCode r"><pre><code><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/op_rms_normalization.html">op_rms_normalization</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[-1.1701705   0.9987454   0.27809578 -0.18452731  1.5731977   1.8934134</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##    0.10656697  1.0256069   0.6185074  -0.12678868]], shape=(1, 10), dtype=float32)</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span></code></pre><p></p></div>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/op_rms_normalization.html">op_rms_normalization</a></span><span class="op">(</span><span class="va">x</span>, scale <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre><p></p></div>
-<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## tf.Tensor(</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">## [[-11.701706    9.987453    2.7809577  -1.845273   15.731977   18.934134</span></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##     1.0656698  10.256069    6.185074   -1.2678868]], shape=(1, 10), dtype=float32)</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span></code></pre><p></p></div>
-<p>[-1.1701705   0.9987454   0.27809578 -0.18452731  1.5731977   1.8934134</p><div class="section">
-<h3 id="-r-a-">0.10656697  1.0256069   0.6185074  -0.12678868]: R:-1.1701705%20%20%200.9987454%20%20%200.27809578%20-0.18452731%20%201.5731977%20%20%201.8934134%0A##%20%20%20%200.10656697%20%201.0256069%20%20%200.6185074%20%20-0.12678868<a class="anchor" aria-label="anchor" href="#-r-a-"></a></h3>
-
-
-<p>[-11.701706    9.987453    2.7809577  -1.845273   15.731977   18.934134</p>
-</div>
-
-<div class="section">
-<h3 id="-r-a--1">1.0656698  10.256069    6.185074   -1.2678868]: R:-11.701706%20%20%20%209.987453%20%20%20%202.7809577%20%20-1.845273%20%20%2015.731977%20%20%2018.934134%0A##%20%20%20%20%201.0656698%20%2010.256069%20%20%20%206.185074%20%20%20-1.2678868<a class="anchor" aria-label="anchor" href="#-r-a--1"></a></h3>
-
-
-</div>
-
+<span><span class="fu"><a href="../reference/op_rms_normalization.html">op_rms_normalization</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/op_rms_normalization.html">op_rms_normalization</a></span><span class="op">(</span><span class="va">x</span>, scale <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

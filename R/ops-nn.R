@@ -717,7 +717,7 @@ op_polar <-
 #'
 #' # Examples
 #'
-#' ```{r}
+#' ```{r, eval = FALSE}
 #' x <- random_normal(c(1, 10))
 #' op_rms_normalization(x)
 #' op_rms_normalization(x, scale = 10)

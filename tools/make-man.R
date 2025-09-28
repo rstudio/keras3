@@ -1,11 +1,7 @@
 #!/usr/bin/env Rscript
-writeLines(format(Sys.getpid()), "pidfile")
-Sys.setenv(
-  "KERAS_BACKEND" = "tensorflow-cpu"
-  # "KERAS_BACKEND_CONFIGURED" = "yes"
-)
-# options(warn = 2, error = browser)
-# keras3:::op_blackman(5)
+
+Sys.setenv("KERAS_BACKEND" = "tensorflow-cpu")
+
 devtools::document()
 
 # reticulate::py_require(c(
@@ -18,7 +14,6 @@ library(stringr)
 envir::import_from(magrittr, `%<>%`)
 envir::import_from(purrr, walk)
 str_prefix <- function(x, prefix, ...) str_c(prefix, x, ...)
-
 
 
 # rd_file <- "man/activation_elu.Rd"
