@@ -25,10 +25,20 @@ Return insertion indices that keep \code{values} in sorted order when placed
 into \code{sorted_sequence}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode {r}">}}\preformatted{sorted <- op_array(c(-1, 0, 2, 4))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{sorted <- op_array(c(-1, 0, 2, 4))
 queries <- c(-2, 0, 3, 7)
 op_searchsorted(sorted, queries)
-op_searchsorted(sorted, queries, side = "right", zero_indexed = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 4 5], shape=(4), dtype=int32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_searchsorted(sorted, queries, side = "right", zero_indexed = TRUE)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0 2 3 4], shape=(4), dtype=int32)
+
 }\if{html}{\out{</div>}}
 }
 

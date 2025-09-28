@@ -73,12 +73,6 @@ function (x, kth, axis = -1L, zero_indexed = FALSE)
 
 #' Compute the Pearson correlation coefficient matrix.
 #'
-#' @returns
-#' A tensor of shape `(N, N)` representing the correlation matrix.
-#'
-#' @param x
-#' A 2D tensor of shape `(N, D)`, where `N` is the number of variables
-#' and `D` is the number of observations.
 #'
 #' # Examples
 #' ```{r}
@@ -86,6 +80,13 @@ function (x, kth, axis = -1L, zero_indexed = FALSE)
 #'                        2, 3, 4), nrow = 2, byrow = TRUE))
 #' op_corrcoef(x)
 #' ```
+#'
+#' @param x
+#' A 2D tensor of shape `(N, D)`, where `N` is the number of variables
+#' and `D` is the number of observations.
+#'
+#' @returns
+#' A tensor of shape `(N, N)` representing the correlation matrix.
 #'
 #' @export
 #' @family numpy ops
@@ -102,16 +103,16 @@ ops$corrcoef(x)
 #' Returns the real-valued cube root of `x`, handling negative inputs in the
 #' real domain.
 #'
-#' @returns
-#' A tensor containing the cube root of each element in `x`.
-#'
-#' @param x
-#' Input tensor.
-#'
 #' # Examples
 #' ```{r}
 #' op_cbrt(c(-8, 0, 8))
 #' ```
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @returns
+#' A tensor containing the cube root of each element in `x`.
 #'
 #' @export
 #' @family numpy ops
@@ -178,16 +179,11 @@ ops$bartlett(as_integer(x))
 #' @description
 #' The Blackman window is a taper formed by using a weighted cosine.
 #'
-#' # Examples
-#' ```{r}
-#' op_blackman(5)
-#' ```
+#' @param x
+#' Length of the window. Must be a positive integer.
 #'
 #' @returns
 #' A 1D tensor containing the window values.
-#'
-#' @param x
-#' Length of the window. Must be a positive integer.
 #'
 #' @export
 #' @family numpy ops

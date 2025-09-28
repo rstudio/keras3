@@ -7,14 +7,7 @@
 op_cbrt(x)
 }
 \arguments{
-\item{x}{Input tensor.Examples
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_cbrt(c(-8, 0, 8))
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-2.  0.  2.], shape=(3), dtype=float32)
-
-}\if{html}{\out{</div>}}}
+\item{x}{Input tensor.}
 }
 \value{
 A tensor containing the cube root of each element in \code{x}.
@@ -23,6 +16,15 @@ A tensor containing the cube root of each element in \code{x}.
 Returns the real-valued cube root of \code{x}, handling negative inputs in the
 real domain.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_cbrt(c(-8, 0, 8))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-2.  0.  2.], shape=(3), dtype=float32)
+
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other numpy ops: \cr
 \code{\link{op_abs}()} \cr

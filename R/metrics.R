@@ -27,11 +27,12 @@
 #' focal_loss
 #'
 #' # Compare with binary crossentropy.
-#' # Binary focal crossentropy emphasises harder examples, yielding a larger
+#' # Binary focal crossentropy emphasizes harder examples, yielding a larger
 #' # relative loss where the model struggles.
 #' bce_loss <- loss_binary_crossentropy(y_true, y_pred)
-#' cbind(focal_loss, bce_loss,
-#'       ratio = focal_loss / bce_loss)
+#' cbind(focal_loss = as.array(focal_loss),
+#'       bce_loss = as.array(bce_loss),
+#'       ratio = as.array(focal_loss / bce_loss))
 #' ```
 #'
 #' @returns

@@ -8,8 +8,15 @@ op_corrcoef(x)
 }
 \arguments{
 \item{x}{A 2D tensor of shape \verb{(N, D)}, where \code{N} is the number of variables
-and \code{D} is the number of observations.Examples
-
+and \code{D} is the number of observations.}
+}
+\value{
+A tensor of shape \verb{(N, N)} representing the correlation matrix.
+}
+\description{
+Compute the Pearson correlation coefficient matrix.
+}
+\section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(matrix(c(1, 2, 3,
                        2, 3, 4), nrow = 2, byrow = TRUE))
 op_corrcoef(x)
@@ -19,14 +26,9 @@ op_corrcoef(x)
 ## [[1. 1.]
 ##  [1. 1.]], shape=(2, 2), dtype=float64)
 
-}\if{html}{\out{</div>}}}
+}\if{html}{\out{</div>}}
 }
-\value{
-A tensor of shape \verb{(N, N)} representing the correlation matrix.
-}
-\description{
-Compute the Pearson correlation coefficient matrix.
-}
+
 \seealso{
 Other numpy ops: \cr
 \code{\link{op_abs}()} \cr

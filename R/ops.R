@@ -398,8 +398,7 @@ function (inputs, indices, updates)
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left", zero_indexed = FALSE) {
-
-  result <- ops$searchsorted(as_array(sorted_sequence), as_array(values), side)
+  result <- ops$searchsorted(as_py_array(sorted_sequence), as_py_array(values), side)
   if (zero_indexed) result else result + 1L
 }
 

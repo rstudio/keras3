@@ -15,21 +15,6 @@ A 1D tensor containing the window values.
 \description{
 The Blackman window is a taper formed by using a weighted cosine.
 }
-\section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{op_blackman(5)
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [-1.4901161e-08  3.4000003e-01  9.9999994e-01  3.3999997e-01
-##  -1.4901161e-08], shape=(5), dtype=float32)
-
-}\if{html}{\out{</div>}}
-
-[-1.4901161e-08  3.4000003e-01  9.9999994e-01  3.3999997e-01
-\subsection{-1.4901161e-08]: R:-1.4901161e-08\%20\%203.4000003e-01\%20\%209.9999994e-01\%20\%203.3999997e-01\%0A##\%20\%20-1.4901161e-08}{
-}
-}
-
 \seealso{
 Other numpy ops: \cr
 \code{\link{op_abs}()} \cr

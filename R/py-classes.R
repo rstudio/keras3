@@ -493,7 +493,7 @@ custom_fn <- function(name, fn) {
 #' @export
 #' @aliases py_class
 #' @keywords internal
-#' @seealso [`%<-active%()`]
+#' @seealso \code{\link{\%<-active\%}}
 #'
 #' @examples
 #' \dontrun{
@@ -754,10 +754,10 @@ function(x) {
 #' @returns `value`, invisibly
 #' @export
 #'
-#' @details Active bindings defined in a [`%py_class%`] are converted to
+#' @details Active bindings defined in a \code{\link{\%py_class\%}} are converted to
 #'   `@property` decorated methods.
 #'
-#' @seealso [`makeActiveBinding()`]
+#' @seealso [`makeActiveBinding()`], \code{\link{\%py_class\%}}
 #' @keywords internal
 #'
 #' @examples
