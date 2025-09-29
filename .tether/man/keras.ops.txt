@@ -16,6 +16,7 @@ amin(
   axis=None,
   keepdims=False
 )
+angle(x)
 any(
   x,
   axis=None,
@@ -74,6 +75,7 @@ average_pool(
   padding='valid',
   data_format=None
 )
+bartlett(x)
 batch_normalization(
   x,
   mean,
@@ -101,6 +103,7 @@ bitwise_not(x)
 bitwise_or(x, y)
 bitwise_right_shift(x, y)
 bitwise_xor(x, y)
+blackman(x)
 broadcast_to(x, shape)
 cast(x, dtype)
 categorical_crossentropy(
@@ -109,6 +112,7 @@ categorical_crossentropy(
   from_logits=False,
   axis=-1
 )
+cbrt(x)
 ceil(x)
 celu(x, alpha=1.0)
 cholesky(x)
@@ -136,7 +140,7 @@ conv(
 conv_transpose(
   inputs,
   kernel,
-  strides,
+  strides=1,
   padding='valid',
   output_padding=None,
   data_format=None,
@@ -150,6 +154,7 @@ convert_to_tensor(
   ragged=None
 )
 copy(x)
+corrcoef(x)
 correlate(
   x1,
   x2,
@@ -193,6 +198,7 @@ cumsum(
   dtype=None
 )
 custom_gradient(f)
+deg2rad(x)
 depthwise_conv(
   inputs,
   kernel,
@@ -227,12 +233,17 @@ dot_product_attention(
   mask=None,
   scale=None,
   is_causal=False,
-  flash_attention=None
+  flash_attention=None,
+  attn_logits_soft_cap=None
 )
 dtype(x)
 eig(x)
 eigh(x)
-einsum(subscripts, *operands)
+einsum(
+  subscripts,
+  *operands,
+  **kwargs
+)
 elu(x, alpha=1.0)
 empty(shape, dtype=None)
 equal(x1, x2)
@@ -279,11 +290,14 @@ get_item(x, key)
 glu(x, axis=-1)
 greater(x1, x2)
 greater_equal(x1, x2)
+hamming(x)
+hanning(x)
 hard_shrink(x, threshold=0.5)
 hard_sigmoid(x)
 hard_silu(x)
 hard_swish(x)
 hard_tanh(x)
+heaviside(x1, x2)
 histogram(
   x,
   bins=10,
@@ -293,7 +307,7 @@ hstack(xs)
 identity(n, dtype=None)
 ifft2(x)
 imag(x)
-image: Module(keras.api.ops.image)
+image: Module(keras.ops.image)
 in_top_k(
   targets,
   predictions,
@@ -322,11 +336,20 @@ istft(
   window='hann',
   center=True
 )
+kaiser(x, beta)
+layer_normalization(
+  x,
+  gamma=None,
+  beta=None,
+  axis=-1,
+  epsilon=None,
+  **kwargs
+)
 leaky_relu(x, negative_slope=0.2)
 left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
-linalg: Module(keras.api.ops.linalg)
+linalg: Module(keras.ops.linalg)
 linspace(
   start,
   stop,
@@ -431,7 +454,7 @@ nan_to_num(
 )
 ndim(x)
 negative(x)
-nn: Module(keras.api.ops.nn)
+nn: Module(keras.ops.nn)
 nonzero(x)
 norm(
   x,
@@ -446,7 +469,7 @@ normalize(
   epsilon=None
 )
 not_equal(x1, x2)
-numpy: Module(keras.api.ops.numpy)
+numpy: Module(keras.ops.numpy)
 one_hot(
   x,
   num_classes,
@@ -504,7 +527,7 @@ rfft(x, fft_length=None)
 right_shift(x, y)
 rms_normalization(
   x,
-  scale=1,
+  scale=None,
   axis=-1,
   epsilon=None
 )
@@ -608,6 +631,7 @@ sparse_categorical_crossentropy(
   axis=-1
 )
 sparse_plus(x)
+sparse_sigmoid(x)
 sparsemax(x, axis=-1)
 split(
   x,
@@ -720,6 +744,8 @@ vectorize(
   signature=None
 )
 vectorized_map(function, elements)
+view_as_complex(x)
+view_as_real(x)
 vstack(xs)
 where(
   condition,

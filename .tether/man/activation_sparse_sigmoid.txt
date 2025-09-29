@@ -1,0 +1,18 @@
+__signature__
+keras.activations.sparse_sigmoid(x)
+__doc__
+Sparse sigmoid activation function.
+
+It is defined as
+
+`f(x) = 0` for `x <= -1`,
+`f(x) = 0.5 * (x + 1)` for `-1 < x < 1`,
+`f(x) = 1` for `x >= 1`.
+
+Args:
+    x: Input tensor.
+
+Reference:
+
+- [M. Blondel, A. F. T. Martins, V. Niculae, 2019](https://arxiv.org/pdf/1901.02324)
+

@@ -1,0 +1,13 @@
+__signature__
+keras.config.set_max_epochs(max_epochs)
+__doc__
+Limit the maximum number of epochs for any call to fit.
+
+This will cap the number of epochs for any training run using `model.fit()`.
+This is purely for debugging, and can also be set via the `KERAS_MAX_EPOCHS`
+environment variable to quickly run a script without modifying its source.
+
+Args:
+    max_epochs: The integer limit on the number of epochs or `None`. If
+        `None`, no limit is applied.
+

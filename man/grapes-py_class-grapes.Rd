@@ -98,6 +98,6 @@ inst1$an_active_property <- 11
 }
 }
 \seealso{
-\code{\link[=\%<-active\%]{\%<-active\%()}}
+\code{\link{\%<-active\%}}
 }
 \keyword{internal}

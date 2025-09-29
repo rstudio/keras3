@@ -102,13 +102,13 @@ an \code{Optimizer} instance
 \description{
 The Lion optimizer is a stochastic-gradient-descent method that uses the
 sign operator to control the magnitude of the update, unlike other adaptive
-optimizers such as Adam that rely on second-order moments. This make
+optimizers such as Adam that rely on second-order moments. This makes
 Lion more memory-efficient as it only keeps track of the momentum. According
 to the authors (see reference), its performance gain over Adam grows with
 the batch size. Because the update of Lion is produced through the sign
 operation, resulting in a larger norm, a suitable learning rate for Lion is
 typically 3-10x smaller than that for AdamW. The weight decay for Lion
-should be in turn 3-10x larger than that for AdamW to maintain a
+should in turn be 3-10x larger than that for AdamW to maintain a
 similar strength (lr * wd).
 }
 \section{References}{
@@ -129,6 +129,7 @@ Other optimizers: \cr
 \code{\link{optimizer_ftrl}()} \cr
 \code{\link{optimizer_lamb}()} \cr
 \code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_muon}()} \cr
 \code{\link{optimizer_nadam}()} \cr
 \code{\link{optimizer_rmsprop}()} \cr
 \code{\link{optimizer_sgd}()} \cr

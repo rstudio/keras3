@@ -1,6 +1,6 @@
 Help on class EarlyStopping in module keras.src.callbacks.early_stopping:
 
-class EarlyStopping(keras.src.callbacks.callback.Callback)
+class EarlyStopping(keras.src.callbacks.monitor_callback.MonitorCallback)
  |  EarlyStopping(monitor='val_loss', min_delta=0, patience=0, verbose=0, mode='auto', baseline=None, restore_best_weights=False, start_from_epoch=0)
  |
  |  Stop training when a monitored metric has stopped improving.
@@ -60,6 +60,7 @@ class EarlyStopping(keras.src.callbacks.callback.Callback)
  |
  |  Method resolution order:
  |      EarlyStopping
+ |      keras.src.callbacks.monitor_callback.MonitorCallback
  |      keras.src.callbacks.callback.Callback
  |      builtins.object
  |

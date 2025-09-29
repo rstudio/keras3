@@ -1,0 +1,13 @@
+__signature__
+keras.config.max_steps_per_epoch()
+__doc__
+Get the maximum number of steps for any call to fit/evaluate/predict.
+
+Retrieves the limit on the number of epochs set by
+`keras.config.set_max_steps_per_epoch` or the `KERAS_MAX_STEPS_PER_EPOCH`
+environment variable.
+
+Args:
+    max_epochs: The integer limit on the number of epochs or `None`. If
+        `None`, no limit is applied.
+

@@ -37,7 +37,7 @@ conv(
 conv_transpose(
   inputs,
   kernel,
-  strides,
+  strides=1,
   padding='valid',
   output_padding=None,
   data_format=None,
@@ -75,7 +75,8 @@ dot_product_attention(
   mask=None,
   scale=None,
   is_causal=False,
-  flash_attention=None
+  flash_attention=None,
+  attn_logits_soft_cap=None
 )
 elu(x, alpha=1.0)
 gelu(x, approximate=True)
@@ -85,6 +86,14 @@ hard_sigmoid(x)
 hard_silu(x)
 hard_swish(x)
 hard_tanh(x)
+layer_normalization(
+  x,
+  gamma=None,
+  beta=None,
+  axis=-1,
+  epsilon=None,
+  **kwargs
+)
 leaky_relu(x, negative_slope=0.2)
 log_sigmoid(x)
 log_softmax(x, axis=-1)
@@ -132,7 +141,7 @@ relu(x)
 relu6(x)
 rms_normalization(
   x,
-  scale=1,
+  scale=None,
   axis=-1,
   epsilon=None
 )
@@ -159,6 +168,7 @@ sparse_categorical_crossentropy(
   axis=-1
 )
 sparse_plus(x)
+sparse_sigmoid(x)
 sparsemax(x, axis=-1)
 squareplus(x, b=4)
 swish(x)

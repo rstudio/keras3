@@ -349,14 +349,6 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 #' disabled since the scaling will be done by the next layer.
 #' Defaults to `TRUE`.
 #'
-#' @param rms_scaling
-#' If `TRUE`, `center` and `scale` are ignored, and the
-#' inputs are scaled by `gamma` and the inverse square root
-#' of the square of all inputs. This is an approximate and faster
-#' approach that avoids ever computing the mean of the input. Note that
-#' this *isn't* equivalent to the computation that the
-#' `layer_rms_normalization` layer performs.
-#'
 #' @param beta_initializer
 #' Initializer for the beta weight. Defaults to zeros.
 #'
@@ -395,7 +387,7 @@ function (object, groups = 32L, axis = -1L, epsilon = 0.001,
 #' @tether keras.layers.LayerNormalization
 layer_layer_normalization <-
 function (object, axis = -1L, epsilon = 0.001, center = TRUE,
-    scale = TRUE, rms_scaling = FALSE, beta_initializer = "zeros",
+    scale = TRUE, beta_initializer = "zeros",
     gamma_initializer = "ones", beta_regularizer = NULL, gamma_regularizer = NULL,
     beta_constraint = NULL, gamma_constraint = NULL, ...)
 {

@@ -1,7 +1,7 @@
 #!/usr/bin/env Rscript
 
 
-pkgdown::build_site()
+pkgdown::build_site(devel = FALSE)
 
 
 envir::import_from(magrittr, `%<>%`)

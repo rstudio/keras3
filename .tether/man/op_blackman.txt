@@ -1,0 +1,18 @@
+__signature__
+keras.ops.blackman(x)
+__doc__
+Blackman window function.
+The Blackman window is a taper formed by using a weighted cosine.
+
+Args:
+    x: Scalar or 1D Tensor. Window length.
+
+Returns:
+    A 1D tensor containing the Blackman window values.
+
+Example:
+>>> x = keras.ops.convert_to_tensor(5)
+>>> keras.ops.blackman(x)
+array([-1.3877788e-17,  3.4000000e-01,  1.0000000e+00,  3.4000000e-01,
+       -1.3877788e-17], dtype=float32)
+

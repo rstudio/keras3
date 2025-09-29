@@ -48,7 +48,7 @@ resolve_rmd_tether <- function(url) {
 }
 
 # resolve_rmd_tether <- NULL
-resolve_roxy_tether <- NULL
+# resolve_roxy_tether <- NULL
 
 
 # options(warn = 2)

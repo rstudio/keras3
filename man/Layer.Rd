@@ -300,6 +300,7 @@ Alias of \code{add_weight()}.
            regularizer = NULL,
            constraint = NULL,
            aggregation = 'none',
+           overwrite_with_gradient = FALSE,
            name = NULL)
 }\if{html}{\out{</div>}}
 
@@ -340,6 +341,8 @@ Defaults to \code{NULL}.
 the type of multi-replica aggregation to be used for this
 variable when writing custom data parallel training loops.
 Defaults to \code{"none"}.
+\item \code{overwrite_with_gradient}: Boolean, whether to overwrite the variable with
+the computed gradient. Useful for float8 training. Defaults to \code{FALSE}.
 \item \code{name}: String name of the variable. Useful for debugging purposes.
 }
 
@@ -401,6 +404,10 @@ See description above
 \item
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{compute_output_spec(...)
+}\if{html}{\out{</div>}}
+\item
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{symbolic_call(...)
 }\if{html}{\out{</div>}}
 \item
 
@@ -776,6 +783,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

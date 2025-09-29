@@ -251,8 +251,8 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #'   `epoch`, `logs`
 #' - `on_train_begin` and `on_train_end` expect one positional argument:
 #'   `logs`
-#' - `on_train_batch_begin` and `on_train_batch_end` expect two positional
-#'   arguments: `batch`, `logs`
+#' - `on_train_batch_begin` and `on_train_batch_end` expect a positional
+#'   argument `batch` and a named argument `logs`
 #' - See `Callback` class definition for the full list of functions and their
 #'   expected arguments.
 #'
@@ -326,7 +326,7 @@ function (monitor = "val_loss", min_delta = 0L, patience = 0L,
 #' Any function in [`Callback()`] that you want to override by
 #' passing `function_name = function`. For example,
 #' `callback_lambda(.., on_train_end = train_end_fn)`. The custom function
-#' needs to have same arguments as the ones defined in [`Callback()`].
+#' needs to have the same arguments as the ones defined in [`Callback()`].
 #'
 #' @inherit callback_backup_and_restore return
 #' @export
@@ -534,9 +534,8 @@ function (schedule, verbose = 0L)
 #' decision to overwrite the current save file is made based on either
 #' the maximization or the minimization of the monitored quantity.
 #' For `val_acc`, this should be `"max"`, for `val_loss` this should be
-#' `"min"`, etc. In `"auto"` mode, the mode is set to `"max"` if the
-#' quantities monitored are `"acc"` or start with `"fmeasure"` and are
-#' set to `"min"` for the rest of the quantities.
+#' `"min"`, etc. In `"auto"` mode, the direction is automatically inferred from
+#' the name of the monitored quantity.
 #'
 #' @param save_weights_only
 #' if TRUE, then only the model's weights will be saved
@@ -995,4 +994,3 @@ normalize_callbacks_with_metrics <- function(view_metrics, initial_epoch, callba
 
   callbacks
 }
-

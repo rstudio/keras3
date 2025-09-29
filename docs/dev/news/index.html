@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +54,27 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="keras3-development-version">keras3 (development version)<a class="anchor" aria-label="anchor" href="#keras3-development-version"></a></h2>
+<ul><li><p>Added S3 methods for JAX array: <code>str</code>, <code>as.array</code>, <code>as.double</code>, <code>as.integer</code>, <code>as.numeric</code>.</p></li>
+<li><p>Added <code>str</code> S3 method for Keras Variables.</p></li>
+<li><p><code><a href="../reference/layer_reshape.html">layer_reshape()</a></code> can now accept <code>-1</code> as a sentinel for an automatically calculated axis size.</p></li>
+<li><p>Updated dependencies declared by <code>use_backend("jax", gpu=TRUE)</code> for compatability with <code>keras-hub</code>.</p></li>
+<li><p>Added training loop configuration helpers: <code><a href="../reference/config_max_epochs.html">config_max_epochs()</a></code>, <code><a href="../reference/config_max_epochs.html">config_set_max_epochs()</a></code>, <code><a href="../reference/config_max_epochs.html">config_max_steps_per_epoch()</a></code>, and <code><a href="../reference/config_max_epochs.html">config_set_max_steps_per_epoch()</a></code>. The caps can also be set via the <code>KERAS_MAX_EPOCHS</code> and <code>KERAS_MAX_STEPS_PER_EPOCH</code> environment variables. Added <code><a href="../reference/config_is_nnx_enabled.html">config_is_nnx_enabled()</a></code> to check whether JAX NNX features are enabled.</p></li>
+<li><p>LoRA-enabled layers (<code><a href="../reference/layer_dense.html">layer_dense()</a></code>, <code><a href="../reference/layer_embedding.html">layer_embedding()</a></code>, <code><a href="../reference/layer_einsum_dense.html">layer_einsum_dense()</a></code>) gain a <code>lora_alpha</code> argument to scale the adaptation delta independently of the chosen rank.</p></li>
+<li><p><code><a href="../reference/keras_variable.html">keras_variable()</a></code> now accepts a <code>synchronization</code> argument for distributed strategies.</p></li>
+<li><p><code>Layer$add_weight()</code> gains an <code>overwrite_with_gradient</code> option and layers now provide a <code>symbolic_call()</code> method.</p></li>
+<li><p>Transposed convolution utilities now follow the latest Keras API: <code><a href="../reference/op_conv_transpose.html">op_conv_transpose()</a></code> defaults <code>strides = 1</code> and the <code>layer_conv_*_transpose()</code> layers expose <code>output_padding</code> for precise shape control.</p></li>
+<li><p><code><a href="../reference/layer_torch_module_wrapper.html">layer_torch_module_wrapper()</a></code> gains an <code>output_shape</code> argument to help Keras infer shapes when wrapping PyTorch modules.</p></li>
+<li><p><code><a href="../reference/save_model_weights.html">save_model_weights()</a></code> adds a <code>max_shard_size</code> argument to split large weight files into manageable shards.</p></li>
+<li><p>Added elastic deformation utilities for images: <code><a href="../reference/layer_random_elastic_transform.html">layer_random_elastic_transform()</a></code> and the lower-level <code><a href="../reference/op_image_elastic_transform.html">op_image_elastic_transform()</a></code>.</p></li>
+<li><p>Added <code><a href="../reference/loss_categorical_generalized_cross_entropy.html">loss_categorical_generalized_cross_entropy()</a></code> for training with noisy labels.</p></li>
+<li><p>Added the Muon optimizer via <code><a href="../reference/optimizer_muon.html">optimizer_muon()</a></code>.</p></li>
+<li><p>Added complex-valued helpers: S3 <code><a href="https://rdrr.io/r/base/complex.html" class="external-link">Arg()</a></code> methods for tensors, <code><a href="../reference/op_angle.html">op_angle()</a></code>, and conversions <code><a href="../reference/op_view_as_real.html">op_view_as_real()</a></code> / <code><a href="../reference/op_view_as_complex.html">op_view_as_complex()</a></code>.</p></li>
+<li><p>Added signal window operations: <code><a href="../reference/op_bartlett.html">op_bartlett()</a></code>, <code><a href="../reference/op_blackman.html">op_blackman()</a></code>, <code><a href="../reference/op_hamming.html">op_hamming()</a></code>, <code><a href="../reference/op_hanning.html">op_hanning()</a></code>, and <code><a href="../reference/op_kaiser.html">op_kaiser()</a></code>.</p></li>
+<li><p>Expanded numeric operations with <code><a href="../reference/op_layer_normalization.html">op_layer_normalization()</a></code>, <code><a href="../reference/op_cbrt.html">op_cbrt()</a></code>, <code><a href="../reference/op_corrcoef.html">op_corrcoef()</a></code>, <code><a href="../reference/op_deg2rad.html">op_deg2rad()</a></code>, <code><a href="../reference/op_heaviside.html">op_heaviside()</a></code>, the new <code><a href="../reference/op_sparse_sigmoid.html">op_sparse_sigmoid()</a></code> plus matching <code><a href="../reference/activation_sparse_sigmoid.html">activation_sparse_sigmoid()</a></code>, and an <code>attn_logits_soft_cap</code> argument for <code><a href="../reference/op_dot_product_attention.html">op_dot_product_attention()</a></code>.</p></li>
+<li><p><code><a href="../reference/layer_layer_normalization.html">layer_layer_normalization()</a></code> removes the <code>rms_scaling</code> argument.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.4.0" id="keras3-140">keras3 1.4.0<a class="anchor" aria-label="anchor" href="#keras3-140"></a></h2><p class="text-muted">CRAN release: 2025-05-04</p>
 <ul><li><p>New <code><a href="../reference/op_subset.html">op_subset()</a></code> and <code>x@r[...]</code> methods enable tensor subsetting using R’s <code>[</code> semantics and idioms.</p></li>
 <li><p>New subset assignment methods implemented for tensors: <code>op_subset(x, ...) &lt;- value</code> and <code>x@r[...] &lt;- value</code></p></li>
 <li><p>Breaking changes: All operations prefixed with <code>op_</code> now return 1-based indices by default. The following functions that return or consume indices have changed: <code><a href="../reference/op_argmax.html">op_argmax()</a></code>, <code><a href="../reference/op_argmin.html">op_argmin()</a></code>, <code><a href="../reference/op_top_k.html">op_top_k()</a></code>, <code><a href="../reference/op_argpartition.html">op_argpartition()</a></code>, <code><a href="../reference/op_searchsorted.html">op_searchsorted()</a></code>, <code><a href="../reference/op_argsort.html">op_argsort()</a></code>, <code><a href="../reference/op_digitize.html">op_digitize()</a></code>, <code><a href="../reference/op_nonzero.html">op_nonzero()</a></code>, <code><a href="../reference/op_split.html">op_split()</a></code>, <code><a href="../reference/op_trace.html">op_trace()</a></code>, <code><a href="../reference/op_swapaxes.html">op_swapaxes()</a></code>, <code><a href="../reference/op_ctc_decode.html">op_ctc_decode()</a></code>, <code><a href="../reference/op_ctc_loss.html">op_ctc_loss()</a></code>, <code><a href="../reference/op_one_hot.html">op_one_hot()</a></code>, <code><a href="../reference/op_arange.html">op_arange()</a></code></p></li>
@@ -421,7 +442,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

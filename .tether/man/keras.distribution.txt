@@ -21,6 +21,7 @@ ModelParallel(
   *,
   layout_map=None,
   batch_dim_name=None,
+  auto_shard_dataset=True,
   **kwargs
 )
 set_distribution(value)

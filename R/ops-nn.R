@@ -111,6 +111,55 @@ function (x, axis = -1L, order = 2L, epsilon = NULL)
 }
 
 
+#' Layer normalization (Ba et al., 2016).
+#'
+#' @description
+#' Normalizes activations in `x` for each example independently by centering to
+#' mean 0 and scaling to unit variance along the specified `axis`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_arange(5, dtype = "float32")
+#' op_layer_normalization(x)
+#' ```
+#'
+#' @returns
+#' Tensor with the same shape as `x` containing the normalized values.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @param gamma
+#' Optional scaling factor applied to the normalized output.
+#'
+#' @param beta
+#' Optional offset added to the normalized output.
+#'
+#' @param axis
+#' Axis or axes along which to compute statistics. Defaults to `-1`.
+#'
+#' @param epsilon
+#' Small constant added to the variance for numerical stability.
+#'
+#' @param ...
+#' For forward/backward compatibility.
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @tether keras.ops.layer_normalization
+op_layer_normalization <-
+function (x, gamma = NULL, beta = NULL, axis = -1L, epsilon = NULL, ...)
+{
+    args <- capture_args(list(
+      axis = as_axis,
+      gamma = as_array,
+      beta = as_array
+    ))
+    do.call(ops$layer_normalization, args)
+}
+
+
 #' Peak Signal-to-Noise Ratio (PSNR) function.
 #'
 #' @description
@@ -214,13 +263,17 @@ ops$psnr(x1, x2, max_val)
 #' Typically, the inputs must be in float16 and bfloat16 dtype and the
 #' input layout requirements may vary depending on the backend.
 #'
+#' @param attn_logits_soft_cap
+#' Optional numeric cap on the attention logits before softmax. Only supported
+#' on the JAX TPU backend.
+#'
 #' @export
 #' @tether keras.ops.dot_product_attention
 #' @family nn ops
 #' @family ops
 op_dot_product_attention <-
 function (query, key, value, bias = NULL, mask = NULL, scale = NULL,
-          is_causal = FALSE, flash_attention = NULL)
+          is_causal = FALSE, flash_attention = NULL, attn_logits_soft_cap = NULL)
 {
   args <- capture_args()
   do.call(ops$dot_product_attention, args)
@@ -481,6 +534,35 @@ op_sparse_plus <-
 function (x)
 ops$sparse_plus(x)
 
+#' Sparse sigmoid activation function.
+#'
+#' @description
+#' It is defined as
+#'
+#' `f(x) = 0` for `x <= -1`,
+#' `f(x) = 0.5 * (x + 1)` for `-1 < x < 1`,
+#' `f(x) = 1` for `x >= 1`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(c(-1.0, 0.0, 1.0))
+#' op_sparse_sigmoid(x)
+#' ```
+#'
+#' @returns
+#' A tensor with the same shape as `x`.
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @export
+#' @tether keras.ops.sparse_sigmoid
+#' @family nn ops
+#' @family ops
+op_sparse_sigmoid <-
+function (x)
+ops$sparse_sigmoid(x)
+
 #' Sparsemax activation function.
 #'
 #' @description
@@ -635,10 +717,10 @@ op_polar <-
 #'
 #' # Examples
 #'
-#' ```python
-#' x <- random_uniform(c(1, 10))
-#' x_norm <- op_rms_normalization(x, scale = 10)
-#' x_norm
+#' ```{r, eval = FALSE}
+#' x <- random_normal(c(1, 10))
+#' op_rms_normalization(x)
+#' op_rms_normalization(x, scale = 10)
 #' ```
 #'
 #' @returns
@@ -647,12 +729,11 @@ op_polar <-
 #' @param x
 #' Input tensor.
 #'
-#' @param axis
-#' The axis or axes along which to perform normalization.
-#' Default to -1.
-#'
 #' @param scale
 #' Optional scaling factor for the normalization.
+#'
+#' @param axis
+#' The axis or axes along which to perform normalization. Defaults to `-1`.
 #'
 #' @param epsilon
 #' A lower bound value for the norm.
@@ -663,7 +744,7 @@ op_polar <-
 #' @family nn ops
 #' @family ops
 op_rms_normalization <-
-function (x, scale = 1L, axis = -1L, epsilon = NULL)
+function (x, scale = NULL, axis = -1L, epsilon = NULL)
 {
     args <- capture_args(list(axis = as_axis))
     do.call(keras$ops$rms_normalization, args)

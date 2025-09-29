@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -262,13 +262,13 @@
           <code><a href="save_model_weights.html">save_model_weights()</a></code>
 
         </dt>
-        <dd>Saves all layer weights to a <code>.weights.h5</code> file.</dd>
+        <dd>Saves all weights to a single file or sharded files.</dd>
       </dl><dl><dt>
 
           <code><a href="load_model_weights.html">load_model_weights()</a></code>
 
         </dt>
-        <dd>Load weights from a file saved via <code><a href="../reference/save_model_weights.html">save_model_weights()</a></code>.</dd>
+        <dd>Load the weights from a single file or sharded files.</dd>
       </dl><dl><dt>
 
           <code><a href="save_model_config.html">save_model_config()</a></code> <code><a href="save_model_config.html">load_model_config()</a></code>
@@ -1070,6 +1070,12 @@
         <dd>A preprocessing layer which randomly crops images during training.</dd>
       </dl><dl><dt>
 
+          <code><a href="layer_random_elastic_transform.html">layer_random_elastic_transform()</a></code>
+
+        </dt>
+        <dd>A preprocessing layer that applies random elastic transformations.</dd>
+      </dl><dl><dt>
+
           <code><a href="layer_random_erasing.html">layer_random_erasing()</a></code>
 
         </dt>
@@ -1488,7 +1494,7 @@
           <code><a href="op_searchsorted.html">op_searchsorted()</a></code>
 
         </dt>
-        <dd>Perform a binary search</dd>
+        <dd>Perform a binary search.</dd>
       </dl><dl><dt>
 
           <code><a href="op_shape.html">op_shape()</a></code>
@@ -1693,6 +1699,12 @@
         <dd>Test whether all array elements along a given axis evaluate to <code>TRUE</code>.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_angle.html">op_angle()</a></code>
+
+        </dt>
+        <dd>Element-wise angle of a complex tensor.</dd>
+      </dl><dl><dt>
+
           <code><a href="op_any.html">op_any()</a></code>
 
         </dt>
@@ -1789,6 +1801,12 @@
         <dd>Compute the weighted average along the specified axis.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_bartlett.html">op_bartlett()</a></code>
+
+        </dt>
+        <dd>Bartlett window function.</dd>
+      </dl><dl><dt>
+
           <code><a href="op_bincount.html">op_bincount()</a></code>
 
         </dt>
@@ -1837,10 +1855,22 @@
         <dd>Compute the bit-wise XOR of two arrays element-wise.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_blackman.html">op_blackman()</a></code>
+
+        </dt>
+        <dd>Blackman window function.</dd>
+      </dl><dl><dt>
+
           <code><a href="op_broadcast_to.html">op_broadcast_to()</a></code>
 
         </dt>
         <dd>Broadcast a tensor to a new shape.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_cbrt.html">op_cbrt()</a></code>
+
+        </dt>
+        <dd>Computes the cube root of the input tensor, element-wise.</dd>
       </dl><dl><dt>
 
           <code><a href="op_ceil.html">op_ceil()</a></code>
@@ -1871,6 +1901,12 @@
 
         </dt>
         <dd>Returns a copy of <code>x</code>.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_corrcoef.html">op_corrcoef()</a></code>
+
+        </dt>
+        <dd>Compute the Pearson correlation coefficient matrix.</dd>
       </dl><dl><dt>
 
           <code><a href="op_correlate.html">op_correlate()</a></code>
@@ -1919,6 +1955,12 @@
 
         </dt>
         <dd>Returns the cumulative sum of elements along a given axis.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_deg2rad.html">op_deg2rad()</a></code>
+
+        </dt>
+        <dd>Convert angles from degrees to radians.</dd>
       </dl><dl><dt>
 
           <code><a href="op_diag.html">op_diag()</a></code>
@@ -2065,6 +2107,24 @@
         <dd>Return the truth value of <code>x1 &gt;= x2</code> element-wise.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_hamming.html">op_hamming()</a></code>
+
+        </dt>
+        <dd>Hamming window function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_hanning.html">op_hanning()</a></code>
+
+        </dt>
+        <dd>Hanning window function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_heaviside.html">op_heaviside()</a></code>
+
+        </dt>
+        <dd>Heaviside step function.</dd>
+      </dl><dl><dt>
+
           <code><a href="op_histogram.html">op_histogram()</a></code>
 
         </dt>
@@ -2117,6 +2177,12 @@
 
         </dt>
         <dd>Test element-wise for NaN and return result as a boolean tensor.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_kaiser.html">op_kaiser()</a></code>
+
+        </dt>
+        <dd>Kaiser window function.</dd>
       </dl><dl><dt>
 
           <code><a href="op_left_shift.html">op_left_shift()</a></code>
@@ -2599,6 +2665,18 @@
         <dd>Turn a function into a vectorized function.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_view_as_complex.html">op_view_as_complex()</a></code>
+
+        </dt>
+        <dd>Convert a real tensor with two channels into a complex tensor.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_view_as_real.html">op_view_as_real()</a></code>
+
+        </dt>
+        <dd>Convert a complex tensor into a stacked real representation.</dd>
+      </dl><dl><dt>
+
           <code><a href="op_vstack.html">op_vstack()</a></code>
 
         </dt>
@@ -2734,6 +2812,12 @@
 
         </dt>
         <dd>Applies the HardTanh function element-wise.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_layer_normalization.html">op_layer_normalization()</a></code>
+
+        </dt>
+        <dd>Layer normalization (Ba et al., 2016).</dd>
       </dl><dl><dt>
 
           <code><a href="op_leaky_relu.html">op_leaky_relu()</a></code>
@@ -2872,6 +2956,12 @@
 
         </dt>
         <dd>SparsePlus activation function.</dd>
+      </dl><dl><dt>
+
+          <code><a href="op_sparse_sigmoid.html">op_sparse_sigmoid()</a></code>
+
+        </dt>
+        <dd>Sparse sigmoid activation function.</dd>
       </dl><dl><dt>
 
           <code><a href="op_sparsemax.html">op_sparsemax()</a></code>
@@ -3091,6 +3181,12 @@
 
         </dt>
         <dd>Computes the alpha balanced focal crossentropy loss.</dd>
+      </dl><dl><dt>
+
+          <code><a href="loss_categorical_generalized_cross_entropy.html">loss_categorical_generalized_cross_entropy()</a></code>
+
+        </dt>
+        <dd>Computes the generalized cross entropy loss.</dd>
       </dl><dl><dt>
 
           <code><a href="loss_categorical_hinge.html">loss_categorical_hinge()</a></code>
@@ -3768,6 +3864,12 @@
         <dd>Crop <code>images</code> to a specified <code>height</code> and <code>width</code>.</dd>
       </dl><dl><dt>
 
+          <code><a href="op_image_elastic_transform.html">op_image_elastic_transform()</a></code>
+
+        </dt>
+        <dd>Applies elastic deformation to the image(s).</dd>
+      </dl><dl><dt>
+
           <code><a href="op_image_extract_patches.html">op_image_extract_patches()</a></code>
 
         </dt>
@@ -3961,6 +4063,12 @@
 
         </dt>
         <dd>An optimizer that dynamically scales the loss to prevent underflow.</dd>
+      </dl><dl><dt>
+
+          <code><a href="optimizer_muon.html">optimizer_muon()</a></code>
+
+        </dt>
+        <dd>Optimizer that implements the Muon algorithm.</dd>
       </dl><dl><dt>
 
           <code><a href="optimizer_nadam.html">optimizer_nadam()</a></code>
@@ -4372,6 +4480,12 @@
         <dd>SparsePlus activation function.</dd>
       </dl><dl><dt>
 
+          <code><a href="activation_sparse_sigmoid.html">activation_sparse_sigmoid()</a></code>
+
+        </dt>
+        <dd>Sparse sigmoid activation function.</dd>
+      </dl><dl><dt>
+
           <code><a href="activation_sparsemax.html">activation_sparsemax()</a></code>
 
         </dt>
@@ -4633,10 +4747,22 @@
         <dd>Check if interactive logging is enabled.</dd>
       </dl><dl><dt>
 
+          <code><a href="config_is_nnx_enabled.html">config_is_nnx_enabled()</a></code>
+
+        </dt>
+        <dd>Check whether NNX-specific features are enabled on the JAX backend.</dd>
+      </dl><dl><dt>
+
           <code><a href="config_is_traceback_filtering_enabled.html">config_is_traceback_filtering_enabled()</a></code>
 
         </dt>
         <dd>Check if traceback filtering is enabled.</dd>
+      </dl><dl><dt>
+
+          <code><a href="config_max_epochs.html">config_max_epochs()</a></code> <code><a href="config_max_epochs.html">config_set_max_epochs()</a></code> <code><a href="config_max_epochs.html">config_max_steps_per_epoch()</a></code> <code><a href="config_max_epochs.html">config_set_max_steps_per_epoch()</a></code>
+
+        </dt>
+        <dd>Configure the default training loop limits.</dd>
       </dl><dl><dt>
 
           <code><a href="config_set_backend.html">config_set_backend()</a></code>
@@ -5268,7 +5394,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

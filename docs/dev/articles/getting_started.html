@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -261,12 +261,12 @@ includes loss and accuracy metrics which we can plot:</p>
 <p>Evaluate the model’s performance on the test data:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 1s - 3ms/step - accuracy: 0.9815 - loss: 0.0803</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step - accuracy: 0.9810 - loss: 0.0842</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.9815</span></span>
+<span><span class="co">## [1] 0.981</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.08029716</span></span></code></pre>
+<span><span class="co">## [1] 0.08419506</span></span></code></pre>
 <p>Generate predictions on new data:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">probs</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
@@ -276,7 +276,7 @@ includes loss and accuracy metrics which we can plot:</p>
 <pre><code><span><span class="co">##   [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7</span></span>
 <span><span class="co">##  [36] 2 7 1 2 1 1 7 4 2 3 5 1 2 4 4 6 3 5 5 6 0 4 1 9 5 7 8 9 3 7 4 6 4 3 0</span></span>
 <span><span class="co">##  [71] 7 0 2 9 1 7 3 2 9 7 7 6 2 7 8 4 7 3 6 1 3 6 9 3 1 4 1 7 6 9</span></span>
-<span><span class="co">##  [ reached getOption("max.print") -- omitted 9900 entries ]</span></span></code></pre>
+<span><span class="co">##  [ reached 'max' / getOption("max.print") -- omitted 9900 entries ]</span></span></code></pre>
 <p>Keras provides a vocabulary for building deep learning models that is
 simple, elegant, and intuitive. Building a question answering system, an
 image classification model, a neural Turing machine, or any other model
@@ -334,7 +334,7 @@ Odyssey 19. 562 ff (Shewring translation).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

@@ -24,8 +24,16 @@ class Rescaling(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  (independently of which backend you're using).
  |
  |  Args:
- |      scale: Float, the scale to apply to the inputs.
- |      offset: Float, the offset to apply to the inputs.
+ |      scale: Float, int, list, tuple or np.ndarray.
+ |          The scale to apply to the inputs.
+ |          If scalar, the same scale will be applied to
+ |          all features or channels of input. If a list, tuple or
+ |          1D array, the scaling is applied per channel.
+ |      offset: Float, int, list/tuple or numpy ndarray.
+ |          The offset to apply to the inputs.
+ |          If scalar, the same scale will be applied to
+ |          all features or channels of input. If a list, tuple or
+ |          1D array, the scaling is applied per channel.
  |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
  |
  |  Method resolution order:

@@ -510,7 +510,7 @@ layer_custom_dropout <- Layer(
   },
   call = function(inputs, training = NULL) {
     if (isTRUE(training))
-      return(random_dropout(inputs, rate = self$rate, 
+      return(random_dropout(inputs, rate = self$rate,
                             seed = self.seed_generator))
     inputs
   }
@@ -624,7 +624,7 @@ layer_sampling <- Layer(
     c(z_mean, z_log_var) %<-% inputs
     batch <- op_shape(z_mean)[[1]]
     dim <- op_shape(z_mean)[[2]]
-    epsilon <- random_normal(shape = c(batch, dim), 
+    epsilon <- random_normal(shape = c(batch, dim),
                              seed=self$seed_generator)
     z_mean + op_exp(0.5 * z_log_var) * epsilon
   }

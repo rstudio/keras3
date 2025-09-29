@@ -74,10 +74,11 @@
 #' conv_base
 #'
 #' # Freeze only layers of a certain type, e.g, BatchNorm layers
-#' batch_norm_layer_class_name <- class(layer_batch_normalization())[1]
-#' is_batch_norm_layer <- function(x) inherits(x, batch_norm_layer_class_name)
+#' # batch_norm_layer_class_name <- class(layer_batch_normalization())[1]
+#' # is_batch_norm_layer <- function(x) inherits(x, batch_norm_layer_class_name)
+#' is_batch_norm_layer <- function(x) inherits(x, keras$layers$BatchNormalization)
 #'
-#' model <- application_efficientnet_b0()
+#' model <- application_efficientnet_v2b0()
 #' freeze_weights(model, which = is_batch_norm_layer)
 #' # print(model)
 #'

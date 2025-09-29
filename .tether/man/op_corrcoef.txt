@@ -1,0 +1,12 @@
+__signature__
+keras.ops.corrcoef(x)
+__doc__
+Compute the Pearson correlation coefficient matrix.
+
+Args:
+    x: A 2D tensor of shape `(N, D)`, where N is the number of variables
+       and D is the number of observations.
+
+Returns:
+    A tensor of shape `(N, N)` representing the correlation matrix.
+

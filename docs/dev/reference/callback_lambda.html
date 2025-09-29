@@ -6,8 +6,8 @@ on_epoch_begin and on_epoch_end expect two positional arguments:
 epoch, logs
 on_train_begin and on_train_end expect one positional argument:
 logs
-on_train_batch_begin and on_train_batch_end expect two positional
-arguments: batch, logs
+on_train_batch_begin and on_train_batch_end expect a positional
+argument batch and a named argument logs
 See Callback class definition for the full list of functions and their
 expected arguments.
 
@@ -18,8 +18,8 @@ on_epoch_begin and on_epoch_end expect two positional arguments:
 epoch, logs
 on_train_begin and on_train_end expect one positional argument:
 logs
-on_train_batch_begin and on_train_batch_end expect two positional
-arguments: batch, logs
+on_train_batch_begin and on_train_batch_end expect a positional
+argument batch and a named argument logs
 See Callback class definition for the full list of functions and their
 expected arguments.
 
@@ -32,7 +32,7 @@ expected arguments.
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.3.0.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,8 +84,8 @@ Note that the callbacks expects positional arguments, as:</p><ul><li><p><code>on
 <code>epoch</code>, <code>logs</code></p></li>
 <li><p><code>on_train_begin</code> and <code>on_train_end</code> expect one positional argument:
 <code>logs</code></p></li>
-<li><p><code>on_train_batch_begin</code> and <code>on_train_batch_end</code> expect two positional
-arguments: <code>batch</code>, <code>logs</code></p></li>
+<li><p><code>on_train_batch_begin</code> and <code>on_train_batch_end</code> expect a positional
+argument <code>batch</code> and a named argument <code>logs</code></p></li>
 <li><p>See <code>Callback</code> class definition for the full list of functions and their
 expected arguments.</p></li>
 </ul></div>
@@ -135,7 +135,7 @@ expected arguments.</p></li>
 <dd><p>Any function in <code><a href="Callback.html">Callback()</a></code> that you want to override by
 passing <code>function_name = function</code>. For example,
 <code>callback_lambda(.., on_train_end = train_end_fn)</code>. The custom function
-needs to have same arguments as the ones defined in <code><a href="Callback.html">Callback()</a></code>.</p></dd>
+needs to have the same arguments as the ones defined in <code><a href="Callback.html">Callback()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -204,7 +204,7 @@ needs to have same arguments as the ones defined in <code><a href="Callback.html
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

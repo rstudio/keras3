@@ -17,6 +17,7 @@ layer_dense(
   kernel_constraint = NULL,
   bias_constraint = NULL,
   lora_rank = NULL,
+  lora_alpha = NULL,
   ...
 )
 }
@@ -57,6 +58,10 @@ trainable matrices. This can be useful to reduce the
 computation cost of fine-tuning large dense layers.
 You can also enable LoRA on an existing
 \code{Dense} layer by calling \code{layer$enable_lora(rank)}.}
+
+\item{lora_alpha}{Optional integer. Scales the low-rank adaptation delta during the forward
+pass. The delta is scaled by \code{lora_alpha / lora_rank}, letting you tune the
+LoRA adjustment strength independently of \code{lora_rank}.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -108,6 +113,7 @@ the output would have shape \verb{(batch_size, units)}.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{enable_lora(
   rank,
+  lora_alpha = NULL,
   a_initializer = 'he_uniform',
   b_initializer = 'zeros'
 )
@@ -223,6 +229,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

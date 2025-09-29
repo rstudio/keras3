@@ -1,6 +1,6 @@
 Help on class ModelCheckpoint in module keras.src.callbacks.model_checkpoint:
 
-class ModelCheckpoint(keras.src.callbacks.callback.Callback)
+class ModelCheckpoint(keras.src.callbacks.monitor_callback.MonitorCallback)
  |  ModelCheckpoint(filepath, monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', save_freq='epoch', initial_value_threshold=None)
  |
  |  Callback to save the Keras model or model weights at some frequency.
@@ -95,9 +95,8 @@ class ModelCheckpoint(keras.src.callbacks.callback.Callback)
  |          decision to overwrite the current save file is made based on either
  |          the maximization or the minimization of the monitored quantity.
  |          For `val_acc`, this should be `"max"`, for `val_loss` this should be
- |          `"min"`, etc. In `"auto"` mode, the mode is set to `"max"` if the
- |          quantities monitored are `"acc"` or start with `"fmeasure"` and are
- |          set to `"min"` for the rest of the quantities.
+ |          `"min"`, etc. In `"auto"` mode, the direction is automatically
+ |          inferred from the name of the monitored quantity.
  |      save_weights_only: if `True`, then only the model's weights will be
  |          saved (`model.save_weights(filepath)`), else the full model is
  |          saved (`model.save(filepath)`).
@@ -116,6 +115,7 @@ class ModelCheckpoint(keras.src.callbacks.callback.Callback)
  |
  |  Method resolution order:
  |      ModelCheckpoint
+ |      keras.src.callbacks.monitor_callback.MonitorCallback
  |      keras.src.callbacks.callback.Callback
  |      builtins.object
  |

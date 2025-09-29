@@ -2,26 +2,51 @@
 % Please edit documentation in R/model-persistence.R
 \name{save_model_weights}
 \alias{save_model_weights}
-\title{Saves all layer weights to a \code{.weights.h5} file.}
+\title{Saves all weights to a single file or sharded files.}
 \usage{
-save_model_weights(model, filepath, overwrite = FALSE)
+save_model_weights(model, filepath, overwrite = FALSE, max_shard_size = NULL)
 }
 \arguments{
-\item{model}{A keras Model object}
+\item{model}{A keras Model object.}
 
-\item{filepath}{string.
-Path where to save the model. Must end in \code{.weights.h5}.}
+\item{filepath}{Path where the weights will be saved. Accepts \code{.weights.h5}, or when sharding
+is enabled, a \code{.weights.json} manifest path. If \code{.weights.h5} is provided
+while sharding, the filename will be overridden to end in \code{.weights.json}.}
 
-\item{overwrite}{Whether we should overwrite any existing model
-at the target location, or instead ask the user
-via an interactive prompt.}
+\item{overwrite}{Whether to overwrite any existing weights at the target location, or instead
+ask the user via an interactive prompt.}
+
+\item{max_shard_size}{Numeric size in GB for each sharded file. Use \code{NULL} to disable sharding.}
 }
 \value{
 This is called primarily for side effects. \code{model} is returned,
 invisibly, to enable usage with the pipe.
 }
 \description{
-Saves all layer weights to a \code{.weights.h5} file.
+By default, the weights are saved in a single \code{.weights.h5} file. Enable
+sharding via \code{max_shard_size} to split weights across multiple files (in GB)
+and produce a \code{.weights.json} manifest that tracks shard metadata.
+
+The saved sharded files contain:
+\itemize{
+\item \verb{*.weights.json}: configuration file containing \code{metadata} and
+\code{weight_map} entries.
+\item \verb{*_xxxxxx.weights.h5}: weight shards limited by \code{max_shard_size}.
+}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <-
+  keras_model_sequential(input_shape = 2) |>
+  layer_dense(4)
+
+path_h5 <- tempfile(fileext = ".weights.h5")
+path_json <- tempfile(fileext = ".weights.json")
+
+model |> save_model_weights(path_h5)
+model |> save_model_weights(path_json, max_shard_size = 0.01)
+
+model |> load_model_weights(path_h5)
+model |> load_model_weights(path_json)
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \itemize{

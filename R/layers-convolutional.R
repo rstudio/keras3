@@ -204,6 +204,10 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' the left/right or up/down of the input such that output has the same
 #' height/width dimension as the input.
 #'
+#' @param output_padding
+#' Scalar integer. Amount of padding to add to the output length. Must be less
+#' than the stride. When `NULL` (default) the output size is inferred.
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -214,8 +218,9 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' If you never set it, then it will be `"channels_last"`.
 #'
 #' @param dilation_rate
-#' int or list of 1 integers, specifying the dilation
-#' rate to use for dilated transposed convolution.
+#' Scalar integer. Specifies the dilation rate. Values other
+#' than 1 currently require `strides = 1` and rates greater than 1 are not
+#' supported.
 #'
 #' @param activation
 #' Activation function. If `NULL`, no activation is applied.
@@ -267,13 +272,14 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' @tether keras.layers.Conv1DTranspose
 layer_conv_1d_transpose <-
 function (object, filters, kernel_size, strides = 1L, padding = "valid",
-    data_format = NULL, dilation_rate = 1L, activation = NULL,
+    output_padding = NULL, data_format = NULL, dilation_rate = 1L, activation = NULL,
     use_bias = TRUE, kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
     kernel_constraint = NULL, bias_constraint = NULL, ...)
 {
     args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
-        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        strides = as_integer_tuple, output_padding = as_integer_tuple,
+        dilation_rate = as_integer_tuple,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Conv1DTranspose, object, args)
@@ -489,6 +495,11 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' the left/right or up/down of the input. When `padding="same"` and
 #' `strides=1`, the output has the same size as the input.
 #'
+#' @param output_padding
+#' Scalar integer or vector of two integers. Amount of padding to add to the
+#' height and width of the output tensor. Each element must be smaller than the
+#' corresponding stride. When `NULL` (default) the output size is inferred.
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -501,8 +512,9 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' `"channels_last"`.
 #'
 #' @param dilation_rate
-#' int or list of 1 integers, specifying the dilation
-#' rate to use for dilated transposed convolution.
+#' Scalar integer or vector of 2 integers specifying the dilation rate. Values
+#' other than 1 require `strides = 1`; different rates per dimension are not
+#' supported.
 #'
 #' @param activation
 #' Activation function. If `NULL`, no activation is applied.
@@ -554,14 +566,15 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' @tether keras.layers.Conv2DTranspose
 layer_conv_2d_transpose <-
 function (object, filters, kernel_size, strides = list(1L, 1L),
-    padding = "valid", data_format = NULL, dilation_rate = list(
-        1L, 1L), activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform",
+    padding = "valid", output_padding = NULL, data_format = NULL,
+    dilation_rate = list(1L, 1L), activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
     ...)
 {
     args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
-        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        strides = as_integer_tuple, output_padding = as_integer_tuple,
+        dilation_rate = as_integer_tuple,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Conv2DTranspose, object, args)
@@ -639,7 +652,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' will be `"channels_last"`.
 #'
 #' @param dilation_rate
-#' int or list of 3 integers, specifying the dilation
+#' int or vector of 3 ints, specifying the dilation
 #' rate to use for dilated convolution.
 #'
 #' @param groups
@@ -778,6 +791,12 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' the left/right or up/down of the input. When `padding="same"` and
 #' `strides=1`, the output has the same size as the input.
 #'
+#' @param output_padding
+#' Scalar integer or vector of three integers. Amount of padding to add to the
+#' depth, height, and width of the output tensor. Each element must be smaller
+#' than the corresponding stride. When `NULL` (default) the output size is
+#' inferred.
+#'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
 #' The ordering of the dimensions in the inputs. `"channels_last"`
@@ -790,8 +809,9 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' will be `"channels_last"`.
 #'
 #' @param dilation_rate
-#' int or list of 1 integers, specifying the dilation
-#' rate to use for dilated transposed convolution.
+#' Scalar integer or vector of 3 integers specifying the dilation rate. Values
+#' other than 1 require `strides = 1`; different rates per dimension are not
+#' supported.
 #'
 #' @param activation
 #' Activation function. If `NULL`, no activation is applied.
@@ -843,14 +863,15 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' @tether keras.layers.Conv3DTranspose
 layer_conv_3d_transpose <-
 function (object, filters, kernel_size, strides = list(1L, 1L,
-    1L), padding = "valid", data_format = NULL, dilation_rate = list(
-    1L, 1L, 1L), activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform",
+    1L), padding = "valid", output_padding = NULL, data_format = NULL,
+    dilation_rate = list(1L, 1L, 1L), activation = NULL, use_bias = TRUE, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
     ...)
 {
     args <- capture_args(list(filters = as_integer, kernel_size = as_integer_tuple,
-        strides = as_integer_tuple, dilation_rate = as_integer_tuple,
+        strides = as_integer_tuple, output_padding = as_integer_tuple,
+        dilation_rate = as_integer_tuple,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Conv3DTranspose, object, args)

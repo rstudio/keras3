@@ -71,6 +71,243 @@ function (x, kth, axis = -1L, zero_indexed = FALSE)
 }
 
 
+#' Compute the Pearson correlation coefficient matrix.
+#'
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(matrix(c(1, 2, 3,
+#'                        2, 3, 4), nrow = 2, byrow = TRUE))
+#' op_corrcoef(x)
+#' ```
+#'
+#' @param x
+#' A 2D tensor of shape `(N, D)`, where `N` is the number of variables
+#' and `D` is the number of observations.
+#'
+#' @returns
+#' A tensor of shape `(N, N)` representing the correlation matrix.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.corrcoef
+op_corrcoef <-
+function (x)
+ops$corrcoef(x)
+
+
+#' Computes the cube root of the input tensor, element-wise.
+#'
+#' @description
+#' Returns the real-valued cube root of `x`, handling negative inputs in the
+#' real domain.
+#'
+#' # Examples
+#' ```{r}
+#' op_cbrt(c(-8, 0, 8))
+#' ```
+#'
+#' @param x
+#' Input tensor.
+#'
+#' @returns
+#' A tensor containing the cube root of each element in `x`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.cbrt
+op_cbrt <-
+function (x)
+ops$cbrt(x)
+
+
+#' Convert angles from degrees to radians.
+#'
+#' @description
+#' The conversion is defined as:
+#' `rad = deg * (pi / 180)`.
+#'
+#' # Examples
+#' ```{r}
+#' op_deg2rad(c(0, 90, 180))
+#' ```
+#'
+#' @returns
+#' A tensor containing angles converted to radians.
+#'
+#' @param x
+#' Input tensor of angles in degrees.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.deg2rad
+op_deg2rad <-
+function (x)
+ops$deg2rad(x)
+
+
+#' Bartlett window function.
+#'
+#' @description
+#' The Bartlett window is a triangular window that rises then falls linearly.
+#'
+#' # Examples
+#' ```{r}
+#' op_bartlett(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.bartlett
+op_bartlett <-
+function (x)
+ops$bartlett(as_integer(x))
+
+
+#' Blackman window function.
+#'
+#' @description
+#' The Blackman window is a taper formed by using a weighted cosine.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.blackman
+op_blackman <-
+function (x)
+ops$blackman(as_integer(x))
+
+
+#' Hamming window function.
+#'
+#' @description
+#' The Hamming window is defined as:
+#' `w[n] = 0.54 - 0.46 * cos(2 * pi * n / (N - 1))` for `0 <= n <= N - 1`.
+#'
+#' # Examples
+#' ```{r}
+#' op_hamming(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.hamming
+op_hamming <-
+function (x)
+ops$hamming(as_integer(x))
+
+
+#' Hanning window function.
+#'
+#' @description
+#' The Hanning window is defined as:
+#' `w[n] = 0.5 - 0.5 * cos(2 * pi * n / (N - 1))` for `0 <= n <= N - 1`.
+#'
+#' # Examples
+#' ```{r}
+#' op_hanning(5)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.hanning
+op_hanning <-
+function (x)
+ops$hanning(as_integer(x))
+
+
+#' Heaviside step function.
+#'
+#' @description
+#' The Heaviside step function is defined as:
+#' `heaviside(x1, x2) = 0` if `x1 < 0`,
+#' `heaviside(x1, x2) = 1` if `x1 > 0`, and
+#' `heaviside(x1, x2) = x2` if `x1 == 0`.
+#'
+#' # Examples
+#' ```{r}
+#' x1 <- op_array(c(-2, 0, 3))
+#' op_heaviside(x1, 0.5)
+#' ```
+#'
+#' @returns
+#' A tensor broadcast from `x1` and `x2` containing `0`, `1`, or `x2`.
+#'
+#' @param x1
+#' Tensor input.
+#'
+#' @param x2
+#' Value to use when `x1 == 0`.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.heaviside
+op_heaviside <-
+function (x1, x2)
+ops$heaviside(x1, x2)
+
+
+#' Kaiser window function.
+#'
+#' @description
+#' The Kaiser window is defined as:
+#' `w[n] = I0(beta * sqrt(1 - (2 * n / (N - 1) - 1)^2)) / I0(beta)` where
+#' `I0` is the modified zeroth-order Bessel function of the first kind.
+#'
+#' # Examples
+#' ```{r}
+#' op_kaiser(5, beta = 14)
+#' ```
+#'
+#' @returns
+#' A 1D tensor containing the window values.
+#'
+#' @param x
+#' Length of the window. Must be a positive integer.
+#'
+#' @param beta
+#' Shape parameter for the window.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.kaiser
+op_kaiser <-
+function (x, beta)
+ops$kaiser(as_integer(x), beta)
+
+
 #' Compute the bit-wise AND of two arrays element-wise.
 #'
 #' @description

@@ -140,7 +140,6 @@ class RNN(keras.src.layers.layer.Layer)
  |              shape=(self.units, self.units),
  |              initializer='uniform',
  |              name='recurrent_kernel')
- |          self.built = True
  |
  |      def call(self, inputs, states):
  |          prev_output = states[0]

@@ -11,7 +11,9 @@ keras_variable(
   trainable = TRUE,
   autocast = TRUE,
   aggregation = "none",
-  name = NULL
+  synchronization = "auto",
+  name = NULL,
+  ...
 )
 }
 \arguments{
@@ -38,8 +40,13 @@ variable will be aggregated. This serves as a semantic annotation,
 to be taken into account by downstream backends or users. Defaults
 to \code{"none"}.}
 
+\item{synchronization}{Optional string specifying how distributed values should be synchronized.
+Defaults to \code{"auto"}.}
+
 \item{name}{Optional. A unique name for the variable. Automatically generated
 if not set.}
+
+\item{...}{Additional backend-specific keyword arguments forwarded to \code{keras$Variable()}.}
 }
 \description{
 A \code{Variable} acts as a container for state. It holds a tensor value and can
@@ -55,6 +62,7 @@ a piece of computation to turn it into a stateless function.
 \item \code{trainable}: Whether the variable is trainable (boolean).
 \item \code{autocast}: Whether the variable supports autocasting (boolean).
 \item \code{aggregation}: How a distributed variable will be aggregated (string).
+\item \code{synchronization}: Strategy for synchronizing the variable across devices (string).
 \item \code{value}: The current value of the variable (NumPy array or tensor).
 \item \code{name}: The name of the variable (string).
 \item \code{path}: The path of the variable within the Keras model or layer (string).

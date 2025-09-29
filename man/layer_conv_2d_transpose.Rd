@@ -10,6 +10,7 @@ layer_conv_2d_transpose(
   kernel_size,
   strides = list(1L, 1L),
   padding = "valid",
+  output_padding = NULL,
   data_format = NULL,
   dilation_rate = list(1L, 1L),
   activation = NULL,
@@ -42,6 +43,10 @@ of the transposed convolution. \code{strides > 1} is incompatible with
 the left/right or up/down of the input. When \code{padding="same"} and
 \code{strides=1}, the output has the same size as the input.}
 
+\item{output_padding}{Scalar integer or vector of two integers. Amount of padding to add to the
+height and width of the output tensor. Each element must be smaller than the
+corresponding stride. When \code{NULL} (default) the output size is inferred.}
+
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
 corresponds to inputs with shape
@@ -52,8 +57,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 
-\item{dilation_rate}{int or list of 1 integers, specifying the dilation
-rate to use for dilated transposed convolution.}
+\item{dilation_rate}{Scalar integer or vector of 2 integers specifying the dilation rate. Values
+other than 1 require \code{strides = 1}; different rates per dimension are not
+supported.}
 
 \item{activation}{Activation function. If \code{NULL}, no activation is applied.}
 
@@ -239,6 +245,7 @@ Other layers: \cr
 \code{\link{layer_random_color_jitter}()} \cr
 \code{\link{layer_random_contrast}()} \cr
 \code{\link{layer_random_crop}()} \cr
+\code{\link{layer_random_elastic_transform}()} \cr
 \code{\link{layer_random_erasing}()} \cr
 \code{\link{layer_random_flip}()} \cr
 \code{\link{layer_random_gaussian_blur}()} \cr

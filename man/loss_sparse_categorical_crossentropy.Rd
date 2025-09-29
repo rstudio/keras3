@@ -69,32 +69,29 @@ In the snippet below, there is a single floating point value per example for
 is \verb{[batch_size, num_classes]}.
 }
 \section{Examples}{
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- c(1, 2)
-y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- op_array(c(1L, 2L))
+y_pred <- op_array(rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 loss <- loss_sparse_categorical_crossentropy(y_true, y_pred)
 loss
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129344 2.3025851 ], shape=(2), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129339 2.30258509], shape=(2), dtype=float64)
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- c(1, 2)
-y_pred <- rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1))
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- op_array(c(1L, 2L))
+y_pred <- op_array(rbind(c(0.05, 0.95, 0), c(0.1, 0.8, 0.1)))
 # Using 'auto'/'sum_over_batch_size' reduction type.
 scce <- loss_sparse_categorical_crossentropy()
-scce(op_array(y_true), op_array(y_pred))
+scce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(1.1769392, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 1.177
-}\if{html}{\out{</div>}}
-
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Calling with 'sample_weight'.
-scce(op_array(y_true), op_array(y_pred), sample_weight = op_array(c(0.3, 0.7)))
+scce(y_true, y_pred, sample_weight = op_array(c(0.3, 0.7)))
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(0.8135988, shape=(), dtype=float32)
@@ -103,26 +100,20 @@ scce(op_array(y_true), op_array(y_pred), sample_weight = op_array(c(0.3, 0.7)))
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'sum' reduction type.
 scce <- loss_sparse_categorical_crossentropy(reduction="sum")
-scce(op_array(y_true), op_array(y_pred))
+scce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.3538785, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# 2.354
-}\if{html}{\out{</div>}}
-
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Using 'none' reduction type.
 scce <- loss_sparse_categorical_crossentropy(reduction=NULL)
-scce(op_array(y_true), op_array(y_pred))
+scce(y_true, y_pred)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.05129344 2.3025851 ], shape=(2), dtype=float32)
 
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# array([0.0513, 2.303], dtype=float32)
 }\if{html}{\out{</div>}}
 
 Usage with the \code{compile()} API:
@@ -143,6 +134,7 @@ Other losses: \cr
 \code{\link{loss_binary_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_generalized_cross_entropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr

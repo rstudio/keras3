@@ -63,7 +63,8 @@ y_pred <- array(c(0, 0.4, 0,   0,
                   1,   0, 1, 0.9), dim = c(2, 2, 2, 1))
 
 axis <- c(2, 3, 4)
-loss <- loss_dice(y_true, y_pred, axis = axis)
+loss_fn <- loss_dice(axis = axis, reduction = NULL)
+loss <- loss_fn(y_true, y_pred)
 stopifnot(shape(loss) == shape(2))
 loss
 }\if{html}{\out{</div>}}
@@ -72,7 +73,8 @@ loss
 
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss = loss_dice(y_true, y_pred)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{loss_fn <- loss_dice()
+loss <- loss_fn(y_true, y_pred)
 stopifnot(shape(loss) == shape())
 loss
 }\if{html}{\out{</div>}}
@@ -89,6 +91,7 @@ Other losses: \cr
 \code{\link{loss_binary_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_generalized_cross_entropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr

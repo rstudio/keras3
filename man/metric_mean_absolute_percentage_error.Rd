@@ -48,7 +48,7 @@ m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
 m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(250000000.0, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(2.5e+08, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -58,7 +58,7 @@ m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
 m$result()
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(500000000.0, shape=(), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(5e+08, shape=(), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
@@ -82,6 +82,7 @@ Other losses: \cr
 \code{\link{loss_binary_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_generalized_cross_entropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr

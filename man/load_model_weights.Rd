@@ -2,16 +2,16 @@
 % Please edit documentation in R/model-persistence.R
 \name{load_model_weights}
 \alias{load_model_weights}
-\title{Load weights from a file saved via \code{save_model_weights()}.}
+\title{Load the weights from a single file or sharded files.}
 \usage{
 load_model_weights(model, filepath, skip_mismatch = FALSE, ...)
 }
 \arguments{
 \item{model}{A keras model.}
 
-\item{filepath}{String, path to the weights file to load.
-It can either be a \code{.weights.h5} file
-or a legacy \code{.h5} weights file.}
+\item{filepath}{Path or path-like object to the weights. Accepts \code{.weights.h5}, legacy \code{.h5},
+or sharded weights through a \code{.weights.json} manifest sitting alongside the
+shard files (\verb{*_xxxxx.weights.h5}).}
 
 \item{skip_mismatch}{Boolean, whether to skip loading of layers where
 there is a mismatch in the number of weights, or a mismatch in
@@ -30,6 +30,12 @@ weights were saved. Note that layers that don't have weights are not
 taken into account in the topological ordering, so adding or removing
 layers is fine as long as they don't have weights.
 
+\strong{Sharding}
+
+When loading sharded weights, specify a \code{filepath} ending in
+\code{".weights.json"} (the configuration file), with the corresponding shard files
+(\verb{*_xxxxx.weights.h5}) located alongside it.
+
 \strong{Partial weight loading}
 
 If you have modified your model, for instance by adding a new layer
@@ -39,6 +45,12 @@ by setting \code{skip_mismatch=TRUE}. In this case any layer with
 mismatching weights will be skipped. A warning will be displayed
 for each skipped layer.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> load_model_weights("model.weights.h5")
+model |> load_model_weights("model.weights.json")
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/models/model_saving_apis/weights_saving_and_loading#loadweights-method}

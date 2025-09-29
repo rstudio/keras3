@@ -1,4 +1,4 @@
-convnext: Module(keras.api.applications.convnext)
+convnext: Module(keras.applications.convnext)
 ConvNeXtBase(
   include_top=True,
   include_preprocessing=True,
@@ -54,7 +54,7 @@ ConvNeXtXLarge(
   classifier_activation='softmax',
   name='convnext_xlarge'
 )
-densenet: Module(keras.api.applications.densenet)
+densenet: Module(keras.applications.densenet)
 DenseNet121(
   include_top=True,
   weights='imagenet',
@@ -85,8 +85,8 @@ DenseNet201(
   classifier_activation='softmax',
   name='densenet201'
 )
-efficientnet: Module(keras.api.applications.efficientnet)
-efficientnet_v2: Module(keras.api.applications.efficientnet_v2)
+efficientnet: Module(keras.applications.efficientnet)
+efficientnet_v2: Module(keras.applications.efficientnet_v2)
 EfficientNetB0(
   include_top=True,
   weights='imagenet',
@@ -244,9 +244,9 @@ EfficientNetV2S(
   include_preprocessing=True,
   name='efficientnetv2-s'
 )
-imagenet_utils: Module(keras.api.applications.imagenet_utils)
-inception_resnet_v2: Module(keras.api.applications.inception_resnet_v2)
-inception_v3: Module(keras.api.applications.inception_v3)
+imagenet_utils: Module(keras.applications.imagenet_utils)
+inception_resnet_v2: Module(keras.applications.inception_resnet_v2)
+inception_v3: Module(keras.applications.inception_v3)
 InceptionResNetV2(
   include_top=True,
   weights='imagenet',
@@ -267,7 +267,7 @@ InceptionV3(
   classifier_activation='softmax',
   name='inception_v3'
 )
-mobilenet: Module(keras.api.applications.mobilenet)
+mobilenet: Module(keras.applications.mobilenet)
 MobileNet(
   input_shape=None,
   alpha=1.0,
@@ -281,8 +281,8 @@ MobileNet(
   classifier_activation='softmax',
   name=None
 )
-mobilenet_v2: Module(keras.api.applications.mobilenet_v2)
-mobilenet_v3: Module(keras.api.applications.mobilenet_v3)
+mobilenet_v2: Module(keras.applications.mobilenet_v2)
+mobilenet_v3: Module(keras.applications.mobilenet_v3)
 MobileNetV2(
   input_shape=None,
   alpha=1.0,
@@ -322,7 +322,7 @@ MobileNetV3Small(
   include_preprocessing=True,
   name='MobileNetV3Small'
 )
-nasnet: Module(keras.api.applications.nasnet)
+nasnet: Module(keras.applications.nasnet)
 NASNetLarge(
   input_shape=None,
   include_top=True,
@@ -343,8 +343,8 @@ NASNetMobile(
   classifier_activation='softmax',
   name='nasnet_mobile'
 )
-resnet: Module(keras.api.applications.resnet)
-resnet_v2: Module(keras.api.applications.resnet_v2)
+resnet: Module(keras.applications.resnet)
+resnet_v2: Module(keras.applications.resnet_v2)
 ResNet101(
   include_top=True,
   weights='imagenet',
@@ -385,7 +385,7 @@ ResNet152V2(
   classifier_activation='softmax',
   name='resnet152v2'
 )
-resnet50: Module(keras.api.applications.resnet50)
+resnet50: Module(keras.applications.resnet50)
 ResNet50(
   include_top=True,
   weights='imagenet',
@@ -406,7 +406,7 @@ ResNet50V2(
   classifier_activation='softmax',
   name='resnet50v2'
 )
-vgg16: Module(keras.api.applications.vgg16)
+vgg16: Module(keras.applications.vgg16)
 VGG16(
   include_top=True,
   weights='imagenet',
@@ -417,7 +417,7 @@ VGG16(
   classifier_activation='softmax',
   name='vgg16'
 )
-vgg19: Module(keras.api.applications.vgg19)
+vgg19: Module(keras.applications.vgg19)
 VGG19(
   include_top=True,
   weights='imagenet',
@@ -428,7 +428,7 @@ VGG19(
   classifier_activation='softmax',
   name='vgg19'
 )
-xception: Module(keras.api.applications.xception)
+xception: Module(keras.applications.xception)
 Xception(
   include_top=True,
   weights='imagenet',

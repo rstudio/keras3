@@ -38,6 +38,7 @@ save_weights(
   model,
   filepath,
   overwrite=True,
+  max_shard_size=None,
   **kwargs
 )
 serialize_keras_object(obj)

@@ -1,12 +1,20 @@
 #!/usr/bin/env Rscript
+
 Sys.setenv("KERAS_BACKEND" = "tensorflow-cpu")
+
 devtools::document()
 
 # reticulate::py_require(c(
 #   "keras",
 #   if (Sys.info()[["sysname"]] == "Linux") "tensorflow-cpu" else "tensorflow"
 # ))
-if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
+# if(!"source:tools/utils.R" %in% search()) envir::attach_source("tools/utils.R")
+
+library(stringr)
+envir::import_from(magrittr, `%<>%`)
+envir::import_from(purrr, walk)
+str_prefix <- function(x, prefix, ...) str_c(prefix, x, ...)
+
 
 # rd_file <- "man/activation_elu.Rd"
 itemize_family <- function(rd_file) {
@@ -46,6 +54,4 @@ Sys.glob("man/*.Rd") %>%
   walk(cr_family)
   # walk(itemize_family)
 
-
-remotes::install_local(force = TRUE)
-
+system2("Rscript", "-e 'remotes::install_local(force = TRUE)'")

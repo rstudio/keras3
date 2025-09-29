@@ -50,6 +50,11 @@ categorical_focal_crossentropy(
   label_smoothing=0.0,
   axis=-1
 )
+categorical_generalized_cross_entropy(
+  y_true,
+  y_pred,
+  q
+)
 categorical_hinge(y_true, y_pred)
 CategoricalCrossentropy(
   from_logits=False,
@@ -67,6 +72,12 @@ CategoricalFocalCrossentropy(
   axis=-1,
   reduction='sum_over_batch_size',
   name='categorical_focal_crossentropy',
+  dtype=None
+)
+CategoricalGeneralizedCrossEntropy(
+  q=0.5,
+  reduction='sum_over_batch_size',
+  name='categorical_generalized_cross_entropy',
   dtype=None
 )
 CategoricalHinge(
@@ -197,6 +208,7 @@ SparseCategoricalCrossentropy(
   from_logits=False,
   ignore_class=None,
   reduction='sum_over_batch_size',
+  axis=-1,
   name='sparse_categorical_crossentropy',
   dtype=None
 )

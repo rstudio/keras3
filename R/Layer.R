@@ -234,6 +234,7 @@
 #'              regularizer = NULL,
 #'              constraint = NULL,
 #'              aggregation = 'none',
+#'              overwrite_with_gradient = FALSE,
 #'              name = NULL)
 #'   ```
 #'   Add a weight variable to the layer.
@@ -268,10 +269,12 @@
 #'       or string name of a built-in constraint.
 #'       Defaults to `NULL`.
 #'   * `aggregation`: Optional string, one of `NULL`, `"none"`, `"mean"`,
-#'      `"sum"` or `"only_first_replica"`. Annotates the variable with
-#'      the type of multi-replica aggregation to be used for this
-#'      variable when writing custom data parallel training loops.
-#'      Defaults to `"none"`.
+#'       `"sum"` or `"only_first_replica"`. Annotates the variable with
+#'       the type of multi-replica aggregation to be used for this
+#'       variable when writing custom data parallel training loops.
+#'       Defaults to `"none"`.
+#'   * `overwrite_with_gradient`: Boolean, whether to overwrite the variable with
+#'       the computed gradient. Useful for float8 training. Defaults to `FALSE`.
 #'   * `name`: String name of the variable. Useful for debugging purposes.
 #'
 #'   Returns:
@@ -324,6 +327,10 @@
 #'
 #' * ```r
 #'   compute_output_spec(...)
+#'   ```
+#'
+#' * ```r
+#'   symbolic_call(...)
 #'   ```
 #'
 #' * ```r
@@ -692,5 +699,3 @@ function(classname,
 # ' @param .composing Bare Keras Layers (`layer_*` functions) conventionally
 # have `object` as the first argument, which allows users to instantiate
 # (`initialize`) and `call` one motion.
-
-

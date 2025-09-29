@@ -122,7 +122,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' (when `input_shape >= pool_size`)
 #'
 #' The resulting output shape when using the `"same"` padding option is:
-#' `output_shape = math.floor((input_shape - 1) / strides) + 1`
+#' `output_shape = input_shape`
 #'
 #' # Input Shape
 #' - If `data_format="channels_last"`:

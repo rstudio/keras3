@@ -63,11 +63,26 @@ where \code{alpha} is a float in the range of \verb{[0, 1]}.
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{y_true <- rbind(c(0, 1), c(0, 0))
 y_pred <- rbind(c(0.6, 0.4), c(0.4, 0.6))
-loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma=2)
-loss
+focal_loss <- loss_binary_focal_crossentropy(y_true, y_pred, gamma = 2)
+focal_loss
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([0.32986468 0.20579839], shape=(2), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Compare with binary crossentropy.
+# Binary focal crossentropy emphasizes harder examples, yielding a larger
+# relative loss where the model struggles.
+bce_loss <- loss_binary_crossentropy(y_true, y_pred)
+cbind(focal_loss = as.array(focal_loss),
+      bce_loss = as.array(bce_loss),
+      ratio = as.array(focal_loss / bce_loss))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{##      focal_loss  bce_loss     ratio
+## [1,]  0.3298647 0.9162908 0.3600000
+## [2,]  0.2057984 0.7135582 0.2884115
 
 }\if{html}{\out{</div>}}
 }
@@ -79,6 +94,7 @@ Other losses: \cr
 \code{\link{loss_binary_focal_crossentropy}()} \cr
 \code{\link{loss_categorical_crossentropy}()} \cr
 \code{\link{loss_categorical_focal_crossentropy}()} \cr
+\code{\link{loss_categorical_generalized_cross_entropy}()} \cr
 \code{\link{loss_categorical_hinge}()} \cr
 \code{\link{loss_circle}()} \cr
 \code{\link{loss_cosine_similarity}()} \cr

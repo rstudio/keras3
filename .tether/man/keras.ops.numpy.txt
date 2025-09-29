@@ -16,6 +16,7 @@ amin(
   axis=None,
   keepdims=False
 )
+angle(x)
 any(
   x,
   axis=None,
@@ -61,6 +62,7 @@ average(
   axis=None,
   weights=None
 )
+bartlett(x)
 bincount(
   x,
   weights=None,
@@ -74,7 +76,9 @@ bitwise_not(x)
 bitwise_or(x, y)
 bitwise_right_shift(x, y)
 bitwise_xor(x, y)
+blackman(x)
 broadcast_to(x, shape)
+cbrt(x)
 ceil(x)
 clip(
   x,
@@ -85,6 +89,7 @@ concatenate(xs, axis=0)
 conj(x)
 conjugate(x)
 copy(x)
+corrcoef(x)
 correlate(
   x1,
   x2,
@@ -111,6 +116,7 @@ cumsum(
   axis=None,
   dtype=None
 )
+deg2rad(x)
 diag(x, k=0)
 diagflat(x, k=0)
 diagonal(
@@ -128,7 +134,11 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
-einsum(subscripts, *operands)
+einsum(
+  subscripts,
+  *operands,
+  **kwargs
+)
 empty(shape, dtype=None)
 equal(x1, x2)
 exp(x)
@@ -157,6 +167,9 @@ full_like(
 get_item(x, key)
 greater(x1, x2)
 greater_equal(x1, x2)
+hamming(x)
+hanning(x)
+heaviside(x1, x2)
 histogram(
   x,
   bins=10,
@@ -176,6 +189,7 @@ isclose(
 isfinite(x)
 isinf(x)
 isnan(x)
+kaiser(x, beta)
 left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
@@ -293,6 +307,11 @@ rot90(
   axes=(0, 1)
 )
 round(x, decimals=0)
+searchsorted(
+  sorted_sequence,
+  values,
+  side='left'
+)
 select(
   condlist,
   choicelist,

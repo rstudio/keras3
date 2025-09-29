@@ -38,6 +38,6 @@ x
 rm(x) # cleanup
 }
 \seealso{
-\code{\link[=makeActiveBinding]{makeActiveBinding()}}
+\code{\link[=makeActiveBinding]{makeActiveBinding()}}, \code{\link{\%py_class\%}}
 }
 \keyword{internal}

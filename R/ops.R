@@ -361,30 +361,36 @@ function (inputs, indices, updates)
     do.call(ops$scatter_update, args)
 }
 
-#' Perform a binary search
+#' Perform a binary search.
 #'
 #' @description
-#' Perform a binary search, returning indices for insertion of `values`
-#' into `sorted_sequence` that maintain the sorting order.
+#' Return insertion indices that keep `values` in sorted order when placed
+#' into `sorted_sequence`.
+#'
+#' # Examples
+#' ```{r}
+#' sorted <- op_array(c(-1, 0, 2, 4))
+#' queries <- c(-2, 0, 3, 7)
+#' op_searchsorted(sorted, queries)
+#' op_searchsorted(sorted, queries, side = "right", zero_indexed = TRUE)
+#' ```
 #'
 #' @returns
-#' Tensor of insertion indices of same shape as `values`.
+#' Tensor of insertion indices with the same shape as `values`.
 #'
 #' @param sorted_sequence
-#' 1-D input tensor, sorted along the innermost
-#' dimension.
+#' 1-D input tensor that is sorted along its innermost dimension.
 #'
 #' @param values
 #' N-D tensor of query insertion values.
 #'
 #' @param side
-#' `'left'` or `'right'`, specifying the direction in which to insert
-#' for the equality case (tie-breaker).
+#' Either `"left"` or `"right"`, choosing which side to insert on ties.
 #'
 #' @param zero_indexed
-#' If `TRUE`, the returned indices are zero-based (`0` encodes to first
+#' If `TRUE`, the returned indices are zero-based (`0` encodes the first
 #' position); if `FALSE` (default), the returned indices are one-based (`1`
-#' encodes to first position).
+#' encodes the first position).
 #'
 #' @export
 #' @family core ops
@@ -392,8 +398,7 @@ function (inputs, indices, updates)
 #' @tether keras.ops.searchsorted
 op_searchsorted <-
 function (sorted_sequence, values, side = "left", zero_indexed = FALSE) {
-
-  result <- ops$searchsorted(as_array(sorted_sequence), as_array(values), side)
+  result <- ops$searchsorted(as_py_array(sorted_sequence), as_py_array(values), side)
   if (zero_indexed) result else result + 1L
 }
 
@@ -1784,7 +1789,7 @@ function (target, output, from_logits = FALSE, axis = -1L)
 #' int or int tuple/list of `len(inputs_spatial_shape)`,
 #' specifying the strides of the convolution along each spatial
 #' dimension. If `strides` is int, then every spatial dimension shares
-#' the same `strides`.
+#' the same `strides`. Defaults to `1`.
 #'
 #' @param padding
 #' string, either `"valid"` or `"same"`. `"valid"` means no
@@ -1886,7 +1891,7 @@ function (inputs, kernel, strides = 1L, padding = "valid", data_format = NULL,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/conv_transpose>
 #' @tether keras.ops.conv_transpose
 op_conv_transpose <-
-function (inputs, kernel, strides, padding = "valid", output_padding = NULL,
+function (inputs, kernel, strides = 1L, padding = "valid", output_padding = NULL,
     data_format = NULL, dilation_rate = 1L)
 {
     args <- capture_args(list(strides = as_integer, output_padding = as_integer,
@@ -4026,6 +4031,88 @@ function (x)
 ops$conjugate(x)
 
 
+#' Element-wise angle of a complex tensor.
+#'
+#' @description
+#' Returns the phase angle (in radians) of each element in `x`.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_convert_to_tensor(matrix(c(1 + 3i, 2 - 5i, 4 - 3i, 3 + 2i), nrow = 2))
+#' op_angle(x)
+#' ```
+#'
+#' @returns
+#' Tensor with the same shape as `x`, containing element-wise angles.
+#'
+#' @param x
+#' Input tensor. Can be real or complex.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.angle
+op_angle <-
+function (x)
+ops$angle(x)
+
+
+#' Convert a real tensor with two channels into a complex tensor.
+#'
+#' @description
+#' Expects a real-valued tensor whose last dimension has size `2`, holding the
+#' real and imaginary parts. Returns the corresponding complex tensor with the
+#' last dimension removed.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
+#' op_view_as_complex(x)
+#' ```
+#'
+#' @returns
+#' A complex tensor with shape `op_shape(x)[-length(op_shape(x))]`.
+#'
+#' @param x
+#' Real-valued tensor whose trailing dimension encodes the complex components.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.view_as_complex
+op_view_as_complex <-
+function (x)
+ops$view_as_complex(x)
+
+
+#' Convert a complex tensor into a stacked real representation.
+#'
+#' @description
+#' Produces a real-valued tensor where the last dimension gathers the real and
+#' imaginary parts of the complex input.
+#'
+#' # Examples
+#' ```{r}
+#' x <- op_array(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
+#' z <- op_view_as_complex(x)
+#' op_view_as_real(z)
+#' ```
+#'
+#' @returns
+#' A real tensor with shape `c(op_shape(x), 2)` containing real and imaginary parts.
+#'
+#' @param x
+#' Complex-valued tensor to be converted.
+#'
+#' @export
+#' @family numpy ops
+#' @family ops
+#' @tether keras.ops.view_as_real
+op_view_as_real <-
+function (x)
+ops$view_as_real(x)
+
+
 #' Returns a copy of `x`.
 #'
 #' @returns
@@ -4668,14 +4755,14 @@ ops$dot(x1, x2)
 #' output form.
 #'
 #' @param ...
-#' The operands to compute the Einstein sum of.
+#' The operands to compute the Einstein sum of as unnamed arguments.
+#' Additional named arguments are forwarded to the underlying backend.
 #'
 #' @export
 #' @family numpy ops
 #' @family ops
 #' @seealso
 #' + <https://keras.io/api/ops/numpy#einsum-function>
-#  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/einsum>
 #' @tether keras.ops.einsum
 op_einsum <-
 function (subscripts, ...)

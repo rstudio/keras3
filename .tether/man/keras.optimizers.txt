@@ -141,7 +141,7 @@ Lamb(
   name='lamb',
   **kwargs
 )
-legacy: Module(keras.api.optimizers.legacy)
+legacy: Module(keras.optimizers.legacy)
 Lion(
   learning_rate=0.001,
   beta_1=0.9,
@@ -162,6 +162,32 @@ LossScaleOptimizer(
   inner_optimizer,
   initial_scale=32768.0,
   dynamic_growth_steps=2000,
+  **kwargs
+)
+Muon(
+  learning_rate=0.001,
+  adam_beta_1=0.9,
+  adam_beta_2=0.999,
+  epsilon=1e-07,
+  weight_decay=0.1,
+  clipnorm=None,
+  clipvalue=None,
+  global_clipnorm=None,
+  use_ema=False,
+  ema_momentum=0.99,
+  ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
+  name='muon',
+  exclude_layers=None,
+  exclude_embeddings=True,
+  muon_a=3.4445,
+  muon_b=-4.775,
+  muon_c=2.0315,
+  adam_lr_ratio=0.1,
+  momentum=0.95,
+  ns_steps=6,
+  nesterov=True,
   **kwargs
 )
 Nadam(
@@ -200,7 +226,7 @@ RMSprop(
   name='rmsprop',
   **kwargs
 )
-schedules: Module(keras.api.optimizers.schedules)
+schedules: Module(keras.optimizers.schedules)
 serialize(optimizer)
 SGD(
   learning_rate=0.01,

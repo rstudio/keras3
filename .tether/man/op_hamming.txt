@@ -1,0 +1,19 @@
+__signature__
+keras.ops.hamming(x)
+__doc__
+Hamming window function.
+
+The Hamming window is defined as:
+`w[n] = 0.54 - 0.46 * cos(2 * pi * n / (N - 1))` for `0 <= n <= N - 1`.
+
+Args:
+    x: Scalar or 1D Tensor. The window length.
+
+Returns:
+    A 1D tensor containing the Hamming window values.
+
+Example:
+>>> x = keras.ops.convert_to_tensor(5)
+>>> keras.ops.hamming(x)
+array([0.08, 0.54, 1.  , 0.54, 0.08], dtype=float32)
+

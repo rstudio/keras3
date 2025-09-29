@@ -20,7 +20,7 @@ audio_dataset_from_directory(
   follow_links=False,
   verbose=True
 )
-bounding_boxes: Module(keras.api.utils.bounding_boxes)
+bounding_boxes: Module(keras.utils.bounding_boxes)
 clear_session(free_memory=True)
 Config(**kwargs)
 custom_object_scope(custom_objects)
@@ -89,7 +89,7 @@ img_to_array(
 )
 is_interactive_logging_enabled()
 is_keras_tensor(x)
-legacy: Module(keras.api.utils.legacy)
+legacy: Module(keras.utils.legacy)
 load_img(
   path,
   color_mode='rgb',
