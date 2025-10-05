@@ -1,0 +1,9 @@
+
+# unconstrained keras-hub in a larger requirements list might resolve to v0.19.0,
+# which is over a year old and generally what people want, and arguably a bug with `uv`.
+# This is a workaround to nudge uv to resolve the latest keras-hub.
+keras-hub>0.19.0
+
+
+# tensorflow-text 2.19 fails to load with tensorflow-cpu>=2.19
+tensorflow-cpu==2.18.*
