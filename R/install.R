@@ -224,11 +224,11 @@ use_backend <- function(backend, gpu = NA) {
         gpu <- has_gpu()
 
       if (gpu) {
-        uv_unset_tf_cpu_override()
+        uv_unset_override_tf_cpu()
         py_require(action = "remove", c("tensorflow", "tensorflow-cpu"))
         py_require("tensorflow[and-cuda]")
       } else {
-        py_require_tf_cpu()
+        uv_set_override_tf_cpu()
       }
     },
 
@@ -236,7 +236,7 @@ use_backend <- function(backend, gpu = NA) {
       py_require(action = "remove",
                  c("tensorflow", "tensorflow[and-cuda]",
                    "jax[cuda12]", "jax[cpu]"))
-      py_require_tf_cpu()
+      uv_set_override_tf_cpu()
 
       if (is.na(gpu))
         gpu <- has_gpu()
@@ -251,7 +251,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Linux_torch = {
       py_require(c("tensorflow", "tensorflow[and-cuda]"), action = "remove")
-      py_require_tf_cpu()
+      uv_set_override_tf_cpu()
 
       if (is.na(gpu))
         gpu <- has_gpu()
@@ -268,7 +268,7 @@ use_backend <- function(backend, gpu = NA) {
     },
 
     Linux_numpy = {
-      py_require_tf_cpu()
+      uv_set_override_tf_cpu()
       py_require(c("tensorflow", "tensorflow[and-cuda]"), action = "remove")
       py_require(c("tensorflow-cpu", "numpy", "jax[cpu]"))
     },
@@ -337,7 +337,7 @@ set_envvar <- function(
   invisible(old)
 }
 
-py_require_tf_cpu <- function() {
+uv_set_override_tf_cpu <- function() {
   py_require(action = "remove", c(
     "tensorflow", "tensorflow[and-cuda]", "tensorflow-cpu",
     "tensorflow-metal", "tensorflow-macos"
@@ -347,7 +347,7 @@ py_require_tf_cpu <- function() {
              action = "append", sep = " ", unique = TRUE)
 }
 
-uv_unset_tf_cpu_override <- function() {
+uv_unset_override_tf_cpu <- function() {
   override <- Sys.getenv("UV_OVERRIDE", NA)
   if (is.na(override)) return()
   cpu_override <- pkg_file("tf-cpu-override.txt")
