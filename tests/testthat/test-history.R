@@ -5,8 +5,8 @@ test_succeeds("as.data.frame works for history with early stopping", {
 
   early_stop <- callback_early_stopping(monitor = "loss", patience = 1)
 
-  model <- keras_model_sequential() %>%
-    layer_dense(1, input_shape = 1)
+  model <- keras_model_sequential(input_shape = 1) %>%
+    layer_dense(1)
 
   model %>% compile(loss = "mse", optimizer = "adam")
 
