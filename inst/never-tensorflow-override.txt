@@ -1,0 +1,3 @@
+# packages like tensorflow-text pull in tensorflow, even if we specify
+# tensorflow-cpu. This override it to allow forcing `tensorflow-cpu`
+tensorflow; sys_platform == "never"
