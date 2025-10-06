@@ -333,7 +333,9 @@ set_envvar <- function(
     }
   }
 
-  do.call(Sys.setenv, setNames(list(value), name))
+  value <- list(value)
+  names(value) <- name
+  do.call(Sys.setenv, value)
   invisible(old)
 }
 
