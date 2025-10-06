@@ -84,3 +84,13 @@ type_sum.keras.src.backend.jax.core.Variable <- function(x) {
   x <- sub("shape=\\((None|[[:digit:]]+),\\)", "shape=(\\1)", x)
   x
 }
+
+## new S3 class names in Keras 3.11
+#' @exportS3Method str keras.src.backend.jax.core.JaxVariable
+str.keras.src.backend.jax.core.JaxVariable <- str.keras.src.backend.jax.core.Variable
+
+#' @exportS3Method pillar::type_sum keras.src.backend.jax.core.JaxVariable
+type_sum.keras.src.backend.jax.core.JaxVariable <- type_sum.keras.src.backend.jax.core.Variable
+
+# "keras.src.backend.Variable" too?
+# "keras.src.backend.common.variables.Variable" too?
