@@ -27,7 +27,7 @@ where \code{P(X) ~ N(0, 1)}.
 op_gelu(x)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.158808  0.        0.841192], shape=(3), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0.15880796  0.          0.841192  ], shape=(3), dtype=float32)
 
 }\if{html}{\out{</div>}}
 
