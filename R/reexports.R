@@ -65,6 +65,12 @@ reticulate::iterate
 #' @export
 reticulate::as_iterator
 
+#' @export
+reticulate::py_require
+
+#' @export
+reticulate::import
+
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard

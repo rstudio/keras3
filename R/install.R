@@ -170,6 +170,12 @@ use_backend <- function(backend, gpu = NA) {
     reticulate::import("os")$environ$update(list(KERAS_BACKEND = backend))
   }
 
+  # tensorflow requirements are by default registered from .onLoad (unless KERAS_BACKEND envvar is set). Undo that action first.
+  # in case user has multiple conflicting `use_backend()` calls, last one wins
+  py_require_remove_all_tensorflow()
+  py_require_remove_all_jax()
+  py_require_remove_all_torch()
+
   set_envvar("UV_CONSTRAINT", pkg_file("keras-constraints.txt"),
              action = "append", sep = " ", unique = TRUE)
 
@@ -184,15 +190,12 @@ use_backend <- function(backend, gpu = NA) {
       if (gpu) {
         py_require(c("tensorflow", "tensorflow-metal"))
       } else {
-        py_require(action = "remove", c("tensorflow-macos", "tensorflow-metal"))
         py_require("tensorflow")
       }
 
     },
 
     macOS_jax = {
-      py_require(c("tensorflow-metal", "tensorflow-macos"), action = "remove")
-
       if (is.na(gpu))
         gpu <- TRUE
 
@@ -207,71 +210,60 @@ use_backend <- function(backend, gpu = NA) {
       if(isTRUE(gpu))
         warning("GPU usage not supported on macOS. Please use a different backend to use the GPU (jax)")
 
-      py_require(c("tensorflow-metal", "tensorflow-macos"), action = "remove")
-
       py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
     },
 
     macOS_numpy = {
-      py_require(c("tensorflow-metal", "tensorflow-macos"), action = "remove")
       py_require(c("tensorflow", "numpy", "jax[cpu]")) # numpy backend requires jax for some image ops
     },
 
+
     Linux_tensorflow = {
-      py_require(c("jax[cuda12]", "jax[cpu]"), action = "remove")
 
       if (is.na(gpu))
         gpu <- has_gpu()
 
       if (gpu) {
-        uv_unset_override_tf_cpu()
-        py_require(action = "remove", c("tensorflow", "tensorflow-cpu"))
         py_require("tensorflow[and-cuda]")
       } else {
-        uv_set_override_tf_cpu()
+        py_require_tensorflow_cpu()
       }
     },
 
     Linux_jax = {
-      py_require(action = "remove",
-                 c("tensorflow", "tensorflow[and-cuda]",
-                   "jax[cuda12]", "jax[cpu]"))
-      uv_set_override_tf_cpu()
+      py_require_tensorflow_cpu()
 
       if (is.na(gpu))
         gpu <- has_gpu()
 
       if (gpu) {
         Sys.setenv("XLA_PYTHON_CLIENT_MEM_FRACTION" = "1.00")
-        py_require(c("tensorflow-cpu", "jax[cuda12]!=0.6.1"))
+        py_require(c("jax[cuda12]!=0.6.1"))
       } else {
-        py_require(c("tensorflow-cpu", "jax[cpu]"))
+        py_require(c("jax[cpu]"))
       }
     },
 
     Linux_torch = {
-      py_require(c("tensorflow", "tensorflow[and-cuda]"), action = "remove")
-      uv_set_override_tf_cpu()
+      py_require_tensorflow_cpu()
 
       if (is.na(gpu))
         gpu <- has_gpu()
 
       if (gpu) {
-        py_require(c("tensorflow-cpu", "torch", "torchvision", "torchaudio"))
+        py_require(c("torch", "torchvision", "torchaudio"))
       } else {
-        Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
-          "https://download.pytorch.org/whl/cpu",
-          Sys.getenv("UV_INDEX")
-        )))
-        py_require(c("tensorflow-cpu", "torch", "torchvision", "torchaudio"))
+        set_envvar("UV_INDEX", "https://download.pytorch.org/whl/cpu",
+                   action = "append", sep = " ", unique = TRUE)
+        py_require(c("torch", "torchvision", "torchaudio"))
       }
     },
 
     Linux_numpy = {
-      uv_set_override_tf_cpu()
-      py_require(c("tensorflow", "tensorflow[and-cuda]"), action = "remove")
-      py_require(c("tensorflow-cpu", "numpy", "jax[cpu]"))
+      py_require_tensorflow_cpu()
+      py_require(c("numpy", "jax[cpu]"))
     },
+
 
     Windows_tensorflow = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
@@ -288,10 +280,8 @@ use_backend <- function(backend, gpu = NA) {
         gpu <- FALSE
 
       if (gpu) {
-        Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
-          "https://download.pytorch.org/whl/cu126",
-          Sys.getenv("UV_INDEX")
-        )))
+        set_envvar("UV_INDEX", "https://download.pytorch.org/whl/cu129",
+                   action = "append", sep = " ", unique = TRUE)
         py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
       } else {
         py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
@@ -329,6 +319,7 @@ set_envvar <- function(
     )
     if (unique) {
       value <- unique(unlist(strsplit(value, sep, fixed = TRUE)))
+      value <- value[nzchar(value)]
       value <- paste0(value, collapse = sep)
     }
   }
@@ -339,20 +330,63 @@ set_envvar <- function(
   invisible(old)
 }
 
-uv_set_override_tf_cpu <- function() {
-  py_require(action = "remove", c(
-    "tensorflow", "tensorflow[and-cuda]", "tensorflow-cpu",
-    "tensorflow-metal", "tensorflow-macos"
-  ))
-  py_require(if (is_linux()) "tensorflow-cpu" else "tensorflow")
-  set_envvar("UV_OVERRIDE", pkg_file("tf-cpu-override.txt"),
+
+py_require_remove_all_tensorflow <- function() {
+  pkgs <- py_require()$packages
+  tf_pkgs <- grep(
+    "^tensorflow(-cpu|-metal|-macos|\\[and-cuda\\])?[=~*!<>0-9.]*$",
+    pkgs, value = TRUE
+  )
+  py_require(tf_pkgs, action = "remove")
+  uv_unset_override_never_tensorflow()
+}
+
+py_require_remove_all_jax <- function() {
+  pkgs <- py_require()$packages
+  jax_pkgs <- grep(
+    "^(jax(-metal)?|jax\\[[^]]*\\]|jaxlib)[=~*!<>0-9A-Za-z.+-]*$",
+    pkgs, value = TRUE
+  )
+  py_require(jax_pkgs, action = "remove")
+}
+
+py_require_remove_all_torch <- function() {
+  pkgs <- py_require()$packages
+  torch_pkgs <- grep(
+    "^(torch|torchvision|torchaudio)(\\[[^]]+\\])?[=~*!<>0-9A-Za-z.+-]*$",
+    pkgs, value = TRUE, perl = TRUE
+  )
+  py_require(torch_pkgs, action = "remove")
+  uv_unset_index_download_pytorch()
+}
+
+py_require_tensorflow_cpu <- function() {
+  if (is_linux()) {
+
+    # pin 2.18.* because later versions of 'tensorflow-cpu' are not
+    # compatible with 'tensorflow-text', used by 'keras-hub'
+    py_require("tensorflow-cpu==2.18.*")
+
+    # set override so tensorflow-text is prevented from pulling in 'tensorflow'
+    uv_set_override_never_tensorflow()
+
+  } else {
+    # macOS and Windows only support CPU
+    py_require("tensorflow")
+  }
+}
+
+uv_set_override_never_tensorflow <- function() {
+  # packages like tensorflow-text pull in tensorflow, even if we specify
+  # tensorflow-cpu. This override it to allow forcing `tensorflow-cpu`
+  set_envvar("UV_OVERRIDE", pkg_file("never-tensorflow-override.txt"),
              action = "append", sep = " ", unique = TRUE)
 }
 
-uv_unset_override_tf_cpu <- function() {
+uv_unset_override_never_tensorflow <- function() {
   override <- Sys.getenv("UV_OVERRIDE", NA)
   if (is.na(override)) return()
-  cpu_override <- pkg_file("tf-cpu-override.txt")
+  cpu_override <- pkg_file("never-tensorflow-override.txt")
   if (override == cpu_override) {
     Sys.unsetenv(override)
   } else {
@@ -361,6 +395,27 @@ uv_unset_override_tf_cpu <- function() {
     Sys.setenv("UV_OVERRIDE" = new)
   }
   invisible(override)
+}
+
+uv_unset_index_download_pytorch <- function() {
+  index <- Sys.getenv("UV_INDEX", NA)
+  if (is.na(index) || !nzchar(index))
+    return(invisible(index))
+
+  entries <- strsplit(trimws(index), "[[:space:]]+")[[1L]]
+  entries <- entries[nzchar(entries)]
+  if (!length(entries))
+    return(invisible(index))
+
+  keep <- entries[!startsWith(entries, "https://download.pytorch.org/whl/")]
+
+  if (length(keep)) {
+    Sys.setenv("UV_INDEX" = paste(keep, collapse = " "))
+  } else {
+    Sys.unsetenv("UV_INDEX")
+  }
+
+  invisible(index)
 }
 
 get_os <- function() {
@@ -381,7 +436,7 @@ is_keras_loaded <- function() {
 }
 
 pkg_file <- function(..., package = "keras3") {
-  path <- system.file(..., package = "keras3", mustWork = TRUE)
+  path <- system.file(..., package = package, mustWork = TRUE)
   if(is_windows())
     path <- utils::shortPathName(path)
   path
