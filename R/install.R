@@ -353,8 +353,8 @@ py_require_remove_all_jax <- function() {
 py_require_remove_all_torch <- function() {
   pkgs <- py_require()$packages
   torch_pkgs <- grep(
-    "^(torch|torchvision|torchaudio)(\\[[^]]*\\])?[=~*!<>0-9A-Za-z.+-]*$",
-    pkgs, value = TRUE, invert = TRUE
+    "^(torch|torchvision|torchaudio)(\\[[^]]+\\])?[=~*!<>0-9A-Za-z.+-]*$",
+    pkgs, value = TRUE, perl = TRUE
   )
   py_require(torch_pkgs, action = "remove")
   uv_unset_index_download_pytorch()
@@ -436,7 +436,7 @@ is_keras_loaded <- function() {
 }
 
 pkg_file <- function(..., package = "keras3") {
-  path <- system.file(..., package = "keras3", mustWork = TRUE)
+  path <- system.file(..., package = package, mustWork = TRUE)
   if(is_windows())
     path <- utils::shortPathName(path)
   path
