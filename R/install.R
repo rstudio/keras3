@@ -217,6 +217,7 @@ use_backend <- function(backend, gpu = NA) {
       py_require(c("tensorflow", "numpy", "jax[cpu]")) # numpy backend requires jax for some image ops
     },
 
+
     Linux_tensorflow = {
 
       if (is.na(gpu))
@@ -237,9 +238,9 @@ use_backend <- function(backend, gpu = NA) {
 
       if (gpu) {
         Sys.setenv("XLA_PYTHON_CLIENT_MEM_FRACTION" = "1.00")
-        py_require(c("tensorflow-cpu", "jax[cuda12]!=0.6.1"))
+        py_require(c("jax[cuda12]!=0.6.1"))
       } else {
-        py_require(c("tensorflow-cpu", "jax[cpu]"))
+        py_require(c("jax[cpu]"))
       }
     },
 
@@ -250,13 +251,11 @@ use_backend <- function(backend, gpu = NA) {
         gpu <- has_gpu()
 
       if (gpu) {
-        py_require(c("tensorflow-cpu", "torch", "torchvision", "torchaudio"))
+        py_require(c("torch", "torchvision", "torchaudio"))
       } else {
-        Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
-          "https://download.pytorch.org/whl/cpu",
-          Sys.getenv("UV_INDEX")
-        )))
-        py_require(c("tensorflow-cpu", "torch", "torchvision", "torchaudio"))
+        set_envvar("UV_INDEX", "https://download.pytorch.org/whl/cpu",
+                   action = "append", sep = " ", unique = TRUE)
+        py_require(c("torch", "torchvision", "torchaudio"))
       }
     },
 
@@ -264,6 +263,7 @@ use_backend <- function(backend, gpu = NA) {
       py_require_tensorflow_cpu()
       py_require(c("numpy", "jax[cpu]"))
     },
+
 
     Windows_tensorflow = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
@@ -280,10 +280,8 @@ use_backend <- function(backend, gpu = NA) {
         gpu <- FALSE
 
       if (gpu) {
-        Sys.setenv("UV_INDEX" = trimws(paste(sep = " ",
-          "https://download.pytorch.org/whl/cu126",
-          Sys.getenv("UV_INDEX")
-        )))
+        set_envvar("UV_INDEX", "https://download.pytorch.org/whl/cu129",
+                   action = "append", sep = " ", unique = TRUE)
         py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
       } else {
         py_require(c("tensorflow", "torch", "torchvision", "torchaudio"))
@@ -321,6 +319,7 @@ set_envvar <- function(
     )
     if (unique) {
       value <- unique(unlist(strsplit(value, sep, fixed = TRUE)))
+      value <- value[nzchar(value)]
       value <- paste0(value, collapse = sep)
     }
   }
