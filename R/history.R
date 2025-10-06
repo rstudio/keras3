@@ -113,7 +113,7 @@ plot.keras_training_history <- function(x, y, metrics = NULL, method = c("auto",
     environment(smooth_args$formula) <- baseenv()
 
     if (theme_bw) {
-      smooth_args$size <- 0.5
+      smooth_args$linewidth <- 0.5
       smooth_args$color <- "gray47"
       p <- p +
         ggplot2::theme_bw() +
