@@ -14,7 +14,8 @@ dataset_reuters(
   seed = 113L,
   start_char = 1L,
   oov_char = 2L,
-  index_from = 3L
+  index_from = 3L,
+  convert = TRUE
 )
 
 dataset_reuters_word_index(path = "reuters_word_index.pkl")
@@ -42,12 +43,63 @@ Set to 1 because 0 is usually the padding character.}
 \code{skip_top} limit will be replaced with this character.}
 
 \item{index_from}{index actual words with this index and higher.}
+
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}
 with same format as \code{\link[=dataset_imdb]{dataset_imdb()}}. The \code{dataset_reuters_word_index()}
 function returns a list where the names are words and the values are
 integer. e.g. \code{word_index[["giraffe"]]} might return \code{1234}.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{train/
+├─ x
+└─ y
+test/
+├─ x
+└─ y
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_reuters())
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x:List of 8982
+##   .. ..$ : int [1:87] 1 27595 28842 8 43 10 447 5 25 207 ...
+##   .. ..$ : int [1:56] 1 3267 699 3434 2295 56 16784 7511 9 56 ...
+##   .. ..$ : int [1:139] 1 53 12 284 15 14 272 26 53 959 ...
+##   .. ..$ : int [1:224] 1 4 686 867 558 4 37 38 309 2276 ...
+##   .. ..$ : int [1:101] 1 8295 111 8 25 166 40 638 10 436 ...
+##   .. ..$ : int [1:116] 1 4 37 38 309 213 349 1632 48 193 ...
+##   .. .. [list output truncated]
+##   ..$ y: int [1:8982] 3 4 3 4 4 4 4 3 3 16 ...
+##  $ test :List of 2
+##   ..$ x:List of 2246
+##   .. ..$ : int [1:145] 1 4 1378 2025 9 697 4622 111 8 25 ...
+##   .. ..$ : int [1:745] 1 2768 283 122 7 4 89 544 463 29 ...
+##   .. ..$ : int [1:228] 1 4 309 2276 4759 5 2015 403 1920 33 ...
+##   .. ..$ : int [1:172] 1 11786 13716 65 9 249 1096 8 16 515 ...
+##   .. ..$ : int [1:187] 1 470 354 18270 4231 62 2373 509 1687 5138 ...
+##   .. ..$ : int [1:80] 1 53 134 26 14 102 26 39 5150 18 ...
+##   .. .. [list output truncated]
+##   ..$ y: int [1:2246] 3 10 1 4 4 3 3 3 3 3 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_reuters(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(8982), dtype=object>
+##   ..$ y: <numpy.ndarray shape(8982), dtype=int64>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(2246), dtype=object>
+##   ..$ y: <numpy.ndarray shape(2246), dtype=int64>
+
+}\if{html}{\out{</div>}}
 }
 \description{
 Dataset of 11,228 newswires from Reuters, labeled over 46 topics. As with

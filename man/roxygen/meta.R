@@ -13,6 +13,15 @@ local({
   }
   if (isNamespaceLoaded('roxygen2')) register_tether_tag_parser()
   else setHook(packageEvent("roxygen2", "onLoad"), register_tether_tag_parser)
+
+  options(
+    paged.print = FALSE,
+    str = utils::strOptions(list.len = 6),
+    width = 76,
+    scipen = 1, # default ==0, positive valus bias fixed, negative bias scientific
+    keras.plot.history.theme_bw = TRUE,
+    pillar.print_min = 5
+  )
 })
 
 local({

@@ -4,15 +4,44 @@
 \alias{dataset_mnist}
 \title{MNIST database of handwritten digits}
 \usage{
-dataset_mnist(path = "mnist.npz")
+dataset_mnist(path = "mnist.npz", convert = TRUE)
 }
 \arguments{
 \item{path}{Path where to cache the dataset locally (relative to ~/.keras/datasets).}
+
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}, where
 \code{x} is an array of grayscale image data with shape (num_samples, 28, 28) and \code{y}
 is an array of digit labels (integers in range 0-9) with shape (num_samples).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_mnist())
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: int [1:60000, 1:28, 1:28] 0 0 0 0 0 0 0 0 0 0 ...
+##   ..$ y: int [1:60000(1d)] 5 0 4 1 9 2 1 3 1 4 ...
+##  $ test :List of 2
+##   ..$ x: int [1:10000, 1:28, 1:28] 0 0 0 0 0 0 0 0 0 0 ...
+##   ..$ y: int [1:10000(1d)] 7 2 1 0 4 1 4 9 5 9 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_mnist(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(60000,28,28), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(60000), dtype=uint8>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(10000,28,28), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(10000), dtype=uint8>
+
+}\if{html}{\out{</div>}}
 }
 \description{
 Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.

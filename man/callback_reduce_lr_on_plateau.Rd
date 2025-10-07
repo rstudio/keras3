@@ -10,7 +10,7 @@ callback_reduce_lr_on_plateau(
   patience = 10L,
   verbose = 0L,
   mode = "auto",
-  min_delta = 1e-04,
+  min_delta = 0.0001,
   cooldown = 0L,
   min_lr = 0,
   ...

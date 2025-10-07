@@ -6,7 +6,18 @@
 #' Dataset of 50,000 32x32 color training images, labeled over 10 categories,
 #' and 10,000 test images.
 #'
+#' @param convert When `TRUE` (default) the datasets are returned as R arrays.
+#' If `FALSE`, objects are returned as NumPy arrays.
+#'
 #' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#'
+#' ```{r cifar10-str-true}
+#' str(dataset_cifar10())
+#' ```
+#'
+#' ```{r cifar10-str-false}
+#' str(dataset_cifar10(convert = FALSE))
+#' ```
 #'
 #' The `x` data is an array of RGB image data with shape (num_samples, 3, 32,
 #' 32).
@@ -17,8 +28,11 @@
 #' @family datasets
 #'
 #' @export
-dataset_cifar10 <- function() {
-  dataset <- keras$datasets$cifar10$load_data()
+dataset_cifar10 <- function(convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$cifar10$load_data,
+    convert = convert
+  )
   as_dataset_list(dataset)
 }
 
@@ -30,8 +44,17 @@ dataset_cifar10 <- function() {
 #' and 10,000 test images.
 #'
 #' @param label_mode one of "fine", "coarse".
+#' @inheritParams dataset_cifar10
 #'
 #' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#'
+#' ```{r cifar100-str-true}
+#' str(dataset_cifar100())
+#' ```
+#'
+#' ```{r cifar100-str-false}
+#' str(dataset_cifar100(convert = FALSE))
+#' ```
 #'
 #' The `x` data is an array of RGB image data with shape (num_samples, 3, 32, 32).
 #'
@@ -40,9 +63,13 @@ dataset_cifar10 <- function() {
 #' @family datasets
 #'
 #' @export
-dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
-  dataset <- keras$datasets$cifar100$load_data(
-    label_mode = match.arg(label_mode)
+dataset_cifar100 <- function(label_mode = c("fine", "coarse"), convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$cifar100$load_data,
+    convert = convert,
+    args = list(
+      label_mode = match.arg(label_mode)
+    )
   )
   as_dataset_list(dataset)
 }
@@ -75,8 +102,18 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #' @param oov_char Words that were cut out because of the `num_words` or
 #'   `skip_top` limit will be replaced with this character.
 #' @param index_from Index actual words with this index and higher.
+#' @inheritParams dataset_cifar10
 #'
 #' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
+#'
+#' ```
+#' train/
+#' ├─ x
+#' └─ y
+#' test/
+#' ├─ x
+#' └─ y
+#' ```
 #'
 #'   The `x` data includes integer sequences. If the `num_words` argument was
 #'   specific, the maximum possible index value is `num_words-1`. If the
@@ -85,6 +122,14 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #'
 #'   The `y` data includes a set of integer labels (0 or 1).
 #'
+#' ```{r imdb-str-true}
+#' str(dataset_imdb())
+#' ```
+#'
+#' ```{r imdb-str-false}
+#' str(dataset_imdb(convert = FALSE))
+#' ```
+#'
 #'   The `dataset_imdb_word_index()` function returns a list where the
 #'   names are words and the values are integer.
 #'
@@ -92,19 +137,24 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse")) {
 #'
 #' @export
 dataset_imdb <- function(path = "imdb.npz", num_words = NULL, skip_top = 0L, maxlen = NULL,
-                         seed = 113L, start_char = 1L, oov_char = 2L, index_from = 3L) {
-  dataset <- keras$datasets$imdb$load_data(
-    path = path,
-    num_words = as_nullable_integer(num_words),
-    skip_top = as.integer(skip_top),
-    maxlen = as_nullable_integer(maxlen),
-    seed = as.integer(seed),
-    start_char = as.integer(start_char),
-    oov_char = as.integer(oov_char),
-    index_from = as.integer(index_from)
+                         seed = 113L, start_char = 1L, oov_char = 2L, index_from = 3L,
+                         convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$imdb$load_data,
+    convert = convert,
+    args = list(
+      path = path,
+      num_words = as_nullable_integer(num_words),
+      skip_top = as.integer(skip_top),
+      maxlen = as_nullable_integer(maxlen),
+      seed = as.integer(seed),
+      start_char = as.integer(start_char),
+      oov_char = as.integer(oov_char),
+      index_from = as.integer(index_from)
+    )
   )
 
-  as_sequences_dataset_list(dataset)
+  as_sequences_dataset_list(dataset, convert = convert)
 
 }
 
@@ -136,30 +186,52 @@ dataset_imdb_word_index <- function(path = "imdb_word_index.json") {
 #' @param oov_char words that were cut out because of the `num_words` or
 #'   `skip_top` limit will be replaced with this character.
 #' @param index_from index actual words with this index and higher.
+#' @inheritParams dataset_cifar10
 #'
 #' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`
 #'   with same format as [dataset_imdb()]. The `dataset_reuters_word_index()`
 #'   function returns a list where the names are words and the values are
 #'   integer. e.g. `word_index[["giraffe"]]` might return `1234`.
 #'
+#' ```
+#' train/
+#' ├─ x
+#' └─ y
+#' test/
+#' ├─ x
+#' └─ y
+#' ```
+#'
+#' ```{r reuters-str-true}
+#' str(dataset_reuters())
+#' ```
+#'
+#' ```{r reuters-str-false}
+#' str(dataset_reuters(convert = FALSE))
+#' ```
+#'
 #' @family datasets
 #'
 #' @export
 dataset_reuters <- function(path = "reuters.npz", num_words = NULL, skip_top = 0L, maxlen = NULL,
                             test_split = 0.2, seed = 113L, start_char = 1L, oov_char = 2L,
-                            index_from = 3L) {
-  dataset <- keras$datasets$reuters$load_data(
-    path = path,
-    num_words = as_nullable_integer(num_words),
-    skip_top = as.integer(skip_top),
-    maxlen = as_nullable_integer(maxlen),
-    test_split = test_split,
-    seed = as.integer(seed),
-    start_char = as.integer(start_char),
-    oov_char = as.integer(oov_char),
-    index_from = as.integer(index_from)
+                            index_from = 3L, convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$reuters$load_data,
+    convert = convert,
+    args = list(
+      path = path,
+      num_words = as_nullable_integer(num_words),
+      skip_top = as.integer(skip_top),
+      maxlen = as_nullable_integer(maxlen),
+      test_split = test_split,
+      seed = as.integer(seed),
+      start_char = as.integer(start_char),
+      oov_char = as.integer(oov_char),
+      index_from = as.integer(index_from)
+    )
   )
-  as_sequences_dataset_list(dataset)
+  as_sequences_dataset_list(dataset, convert = convert)
 }
 
 
@@ -176,16 +248,29 @@ dataset_reuters_word_index <- function(path = "reuters_word_index.pkl") {
 #' Dataset of 60,000 28x28 grayscale images of the 10 digits, along with a test set of 10,000 images.
 #'
 #' @param path Path where to cache the dataset locally (relative to ~/.keras/datasets).
+#' @inheritParams dataset_cifar10
 #'
 #' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`, where
 #'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
 #'   is an array of digit labels (integers in range 0-9) with shape (num_samples).
 #'
+#' ```{r mnist-str-true}
+#' str(dataset_mnist())
+#' ```
+#'
+#' ```{r mnist-str-false}
+#' str(dataset_mnist(convert = FALSE))
+#' ```
+#'
 #' @family datasets
 #'
 #' @export
-dataset_mnist <- function(path = "mnist.npz") {
-  dataset <- keras$datasets$mnist$load_data(path)
+dataset_mnist <- function(path = "mnist.npz", convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$mnist$load_data,
+    convert = convert,
+    args = list(path = path)
+  )
   as_dataset_list(dataset)
 }
 
@@ -224,18 +309,6 @@ dataset_mnist <- function(path = "mnist.npz") {
 #' values for block groups with few households and many empty houses,
 #' such as vacation resorts.
 #'
-#' @returns
-#' Nested list of arrays: `(x_train, y_train), (x_test, y_test)`.
-#'
-#' **`x_train`, `x_test`**: arrays with shape `(num_samples, 8)`
-#'   containing either the training samples (for `x_train`),
-#'   or test samples (for `y_train`).
-#'
-#' **`y_train`, `y_test`**: arrays of shape `(num_samples)`
-#'     containing the target scalars. The targets are float scalars
-#'     typically between 25,000 and 500,000 that represent
-#'     the home prices in dollars.
-#'
 #' @param version
 #' `"small"` or `"large"`. The small version
 #' contains 600 samples, the large version contains
@@ -254,15 +327,32 @@ dataset_mnist <- function(path = "mnist.npz") {
 #' Random seed for shuffling the data
 #' before computing the test split.
 #'
+#' @inheritParams dataset_cifar10
+#'
+#' @returns
+#' Nested list of arrays: `(x_train, y_train), (x_test, y_test)`.
+#'
+#' ```{r california-housing-str-true}
+#' str(dataset_california_housing())
+#' ```
+#'
+#' ```{r california-housing-str-false}
+#' str(dataset_california_housing(convert = FALSE))
+#' ```
+#'
 #' @export
 #' @family datasets
 #' @tether keras.datasets.california_housing.load_data
 dataset_california_housing <-
 function (version = "large", path = "california_housing.npz",
-    test_split = 0.2, seed = 113L)
+    test_split = 0.2, seed = 113L, convert = TRUE)
 {
-    args <- capture_args(list(seed = as_integer))
-    dataset <- do.call(keras$datasets$california_housing$load_data, args)
+    args <- capture_args(list(seed = as_integer), ignore = "convert")
+    dataset <- call_dataset_loader(
+      loader = keras$datasets$california_housing$load_data,
+      convert = convert,
+      args = args
+    )
     as_dataset_list(dataset)
 }
 
@@ -280,6 +370,14 @@ function (version = "large", path = "california_housing.npz",
 #'   `x` is an array of grayscale image data with shape (num_samples, 28, 28) and `y`
 #'   is an array of article labels (integers in range 0-9) with shape (num_samples).
 #'
+#' ```{r fashion-mnist-str-true}
+#' str(dataset_fashion_mnist())
+#' ```
+#'
+#' ```{r fashion-mnist-str-false}
+#' str(dataset_fashion_mnist(convert = FALSE))
+#' ```
+#'
 #' @details Dataset of 60,000 28x28 grayscale images of 10 fashion categories,
 #' along with a test set of 10,000 images. This dataset can be used as a drop-in
 #' replacement for MNIST. The class labels are:
@@ -294,12 +392,16 @@ function (version = "large", path = "california_housing.npz",
 #' * 7 - Sneaker
 #' * 8 - Bag
 #' * 9 - Ankle boot
+#' @inheritParams dataset_cifar10
 #'
 #' @family datasets
 #'
 #' @export
-dataset_fashion_mnist <- function() {
-  dataset <- keras$datasets$fashion_mnist$load_data()
+dataset_fashion_mnist <- function(convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$fashion_mnist$load_data,
+    convert = convert
+  )
   as_dataset_list(dataset)
 }
 
@@ -314,6 +416,7 @@ dataset_fashion_mnist <- function() {
 #' @param test_split fraction of the data to reserve as test set.
 #' @param seed Random seed for shuffling the data before computing the test
 #'   split.
+#' @inheritParams dataset_cifar10
 #'
 #' @returns Lists of training and test data: `train$x, train$y, test$x, test$y`.
 #'
@@ -321,19 +424,42 @@ dataset_fashion_mnist <- function() {
 #' the Boston suburbs in the late 1970s. Targets are the median values of the
 #' houses at a location (in k$).
 #'
+#' ```{r boston-housing-str-true}
+#' str(dataset_boston_housing())
+#' ```
+#'
+#' ```{r boston-housing-str-false}
+#' str(dataset_boston_housing(convert = FALSE))
+#' ```
+#'
 #' @family datasets
 #'
 #' @export
-dataset_boston_housing <- function(path = "boston_housing.npz", test_split = 0.2, seed = 113L) {
-  dataset <- keras$datasets$boston_housing$load_data(
-    path = path,
-    seed = as.integer(seed),
-    test_split = test_split
+dataset_boston_housing <- function(path = "boston_housing.npz", test_split = 0.2, seed = 113L,
+                                   convert = TRUE) {
+  dataset <- call_dataset_loader(
+    loader = keras$datasets$boston_housing$load_data,
+    convert = convert,
+    args = list(
+      path = path,
+      seed = as.integer(seed),
+      test_split = test_split
+    )
   )
   as_dataset_list(dataset)
 }
 
 
+
+
+call_dataset_loader <- function(loader, convert, args = list()) {
+  if (convert) {
+    return(do.call(loader, args))
+  }
+
+  dataset <- do.call(r_to_py(loader), args)
+  iterate(dataset, iterate, simplify = FALSE)
+}
 
 
 as_dataset_list <- function(dataset) {
@@ -349,15 +475,28 @@ as_dataset_list <- function(dataset) {
   )
 }
 
-as_sequences_dataset_list <- function(dataset) {
-  list(
-    train = list(
-      x = lapply(dataset[[1]][[1]], identity),
-      y = as.integer(dataset[[1]][[2]])
-    ),
-    test = list(
-      x = lapply(dataset[[2]][[1]], identity),
-      y = as.integer(dataset[[2]][[2]])
+as_sequences_dataset_list <- function(dataset, convert) {
+  if (convert) {
+    list(
+      train = list(
+        x = lapply(dataset[[1]][[1]], identity),
+        y = as.integer(dataset[[1]][[2]])
+      ),
+      test = list(
+        x = lapply(dataset[[2]][[1]], identity),
+        y = as.integer(dataset[[2]][[2]])
+      )
     )
-  )
+  } else {
+    list(
+      train = list(
+        x = dataset[[1]][[1]],
+        y = dataset[[1]][[2]]
+      ),
+      test = list(
+        x = dataset[[2]][[1]],
+        y = dataset[[2]][[2]]
+      )
+    )
+  }
 }

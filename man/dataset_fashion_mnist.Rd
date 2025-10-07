@@ -4,12 +4,42 @@
 \alias{dataset_fashion_mnist}
 \title{Fashion-MNIST database of fashion articles}
 \usage{
-dataset_fashion_mnist()
+dataset_fashion_mnist(convert = TRUE)
+}
+\arguments{
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}, where
 \code{x} is an array of grayscale image data with shape (num_samples, 28, 28) and \code{y}
 is an array of article labels (integers in range 0-9) with shape (num_samples).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_fashion_mnist())
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: int [1:60000, 1:28, 1:28] 0 0 0 0 0 0 0 0 0 0 ...
+##   ..$ y: int [1:60000(1d)] 9 0 0 3 0 2 7 2 5 5 ...
+##  $ test :List of 2
+##   ..$ x: int [1:10000, 1:28, 1:28] 0 0 0 0 0 0 0 0 0 0 ...
+##   ..$ y: int [1:10000(1d)] 9 2 1 1 6 1 4 6 5 7 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_fashion_mnist(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(60000,28,28), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(60000), dtype=uint8>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(10000,28,28), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(10000), dtype=uint8>
+
+}\if{html}{\out{</div>}}
 }
 \description{
 Dataset of 60,000 28x28 grayscale images of the 10 fashion article classes,

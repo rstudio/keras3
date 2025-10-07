@@ -4,10 +4,40 @@
 \alias{dataset_cifar10}
 \title{CIFAR10 small image classification}
 \usage{
-dataset_cifar10()
+dataset_cifar10(convert = TRUE)
+}
+\arguments{
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_cifar10())
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: int [1:50000, 1:32, 1:32, 1:3] 59 154 255 28 170 159 164 28 134 125 ...
+##   ..$ y: int [1:50000, 1] 6 9 9 4 1 1 2 7 8 3 ...
+##  $ test :List of 2
+##   ..$ x: int [1:10000, 1:32, 1:32, 1:3] 158 235 158 155 65 179 160 83 23 217 ...
+##   ..$ y: int [1:10000, 1] 3 8 8 0 6 6 1 6 3 1 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_cifar10(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(50000,32,32,3), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(50000,1), dtype=uint8>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(10000,32,32,3), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(10000,1), dtype=uint8>
+
+}\if{html}{\out{</div>}}
 
 The \code{x} data is an array of RGB image data with shape (num_samples, 3, 32,
 32).

@@ -13,7 +13,8 @@ dataset_imdb(
   seed = 113L,
   start_char = 1L,
   oov_char = 2L,
-  index_from = 3L
+  index_from = 3L,
+  convert = TRUE
 )
 
 dataset_imdb_word_index(path = "imdb_word_index.json")
@@ -39,9 +40,20 @@ Set to 1 because 0 is usually the padding character.}
 \code{skip_top} limit will be replaced with this character.}
 
 \item{index_from}{Index actual words with this index and higher.}
+
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{train/
+├─ x
+└─ y
+test/
+├─ x
+└─ y
+}\if{html}{\out{</div>}}
 
 The \code{x} data includes integer sequences. If the \code{num_words} argument was
 specific, the maximum possible index value is \code{num_words-1}. If the
@@ -49,6 +61,46 @@ specific, the maximum possible index value is \code{num_words-1}. If the
 \code{maxlen}.
 
 The \code{y} data includes a set of integer labels (0 or 1).
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_imdb())
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x:List of 25000
+##   .. ..$ : int [1:218] 1 14 22 16 43 530 973 1622 1385 65 ...
+##   .. ..$ : int [1:189] 1 194 1153 194 8255 78 228 5 6 1463 ...
+##   .. ..$ : int [1:141] 1 14 47 8 30 31 7 4 249 108 ...
+##   .. ..$ : int [1:550] 1 4 18609 16085 33 2804 4 2040 432 111 ...
+##   .. ..$ : int [1:147] 1 249 1323 7 61 113 10 10 13 1637 ...
+##   .. ..$ : int [1:43] 1 778 128 74 12 630 163 15 4 1766 ...
+##   .. .. [list output truncated]
+##   ..$ y: int [1:25000] 1 0 0 1 0 0 1 0 1 0 ...
+##  $ test :List of 2
+##   ..$ x:List of 25000
+##   .. ..$ : int [1:68] 1 591 202 14 31 6 717 10 10 18142 ...
+##   .. ..$ : int [1:260] 1 14 22 3443 6 176 7 5063 88 12 ...
+##   .. ..$ : int [1:603] 1 111 748 4368 1133 33782 24563 4 87 1551 ...
+##   .. ..$ : int [1:181] 1 13 1228 119 14 552 7 20 190 14 ...
+##   .. ..$ : int [1:108] 1 40 49 85 84 1040 146 6 783 254 ...
+##   .. ..$ : int [1:132] 1 146 427 5718 14 20 218 112 2962 32 ...
+##   .. .. [list output truncated]
+##   ..$ y: int [1:25000] 0 1 1 0 1 1 1 0 0 1 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_imdb(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(25000), dtype=object>
+##   ..$ y: <numpy.ndarray shape(25000), dtype=int64>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(25000), dtype=object>
+##   ..$ y: <numpy.ndarray shape(25000), dtype=int64>
+
+}\if{html}{\out{</div>}}
 
 The \code{dataset_imdb_word_index()} function returns a list where the
 names are words and the values are integer.

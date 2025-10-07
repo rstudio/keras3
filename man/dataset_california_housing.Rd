@@ -8,7 +8,8 @@ dataset_california_housing(
   version = "large",
   path = "california_housing.npz",
   test_split = 0.2,
-  seed = 113L
+  seed = 113L,
+  convert = TRUE
 )
 }
 \arguments{
@@ -25,18 +26,38 @@ deprecated \code{boston_housing} dataset.}
 
 \item{seed}{Random seed for shuffling the data
 before computing the test split.}
+
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Nested list of arrays: \verb{(x_train, y_train), (x_test, y_test)}.
 
-\strong{\code{x_train}, \code{x_test}}: arrays with shape \verb{(num_samples, 8)}
-containing either the training samples (for \code{x_train}),
-or test samples (for \code{y_train}).
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_california_housing())
+}\if{html}{\out{</div>}}
 
-\strong{\code{y_train}, \code{y_test}}: arrays of shape \code{(num_samples)}
-containing the target scalars. The targets are float scalars
-typically between 25,000 and 500,000 that represent
-the home prices in dollars.
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: num [1:16512, 1:8] -118 -118 -122 -118 -123 ...
+##   ..$ y: num [1:16512(1d)] 252300 146900 290900 141300 500001 ...
+##  $ test :List of 2
+##   ..$ x: num [1:4128, 1:8] -118 -120 -121 -122 -117 ...
+##   ..$ y: num [1:4128(1d)] 397900 227900 172100 186500 148900 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_california_housing(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(16512,8), dtype=float32>
+##   ..$ y: <numpy.ndarray shape(16512), dtype=float32>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(4128,8), dtype=float32>
+##   ..$ y: <numpy.ndarray shape(4128), dtype=float32>
+
+}\if{html}{\out{</div>}}
 }
 \description{
 This dataset was obtained from the \href{https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html}{StatLib repository}.
