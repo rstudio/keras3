@@ -7,7 +7,7 @@
 learning_rate_schedule_polynomial_decay(
   initial_learning_rate,
   decay_steps,
-  end_learning_rate = 1e-04,
+  end_learning_rate = 0.0001,
   power = 1,
   cycle = FALSE,
   name = "PolynomialDecay"
