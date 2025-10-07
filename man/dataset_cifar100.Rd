@@ -4,13 +4,42 @@
 \alias{dataset_cifar100}
 \title{CIFAR100 small image classification}
 \usage{
-dataset_cifar100(label_mode = c("fine", "coarse"))
+dataset_cifar100(label_mode = c("fine", "coarse"), convert = TRUE)
 }
 \arguments{
 \item{label_mode}{one of "fine", "coarse".}
+
+\item{convert}{When \code{TRUE} (default) the datasets are returned as R arrays.
+If \code{FALSE}, objects are returned as NumPy arrays.}
 }
 \value{
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_cifar100())
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: int [1:50000, 1:32, 1:32, 1:3] 255 255 250 124 43 190 50 178 122 255 ...
+##   ..$ y: num [1:50000, 1] 19 29 0 11 1 86 90 28 23 31 ...
+##  $ test :List of 2
+##   ..$ x: int [1:10000, 1:32, 1:32, 1:3] 199 113 61 93 80 168 37 175 233 182 ...
+##   ..$ y: num [1:10000, 1] 49 33 72 51 71 92 15 14 23 0 ...
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_cifar100(convert = FALSE))
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## List of 2
+##  $ train:List of 2
+##   ..$ x: <numpy.ndarray shape(50000,32,32,3), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(50000,1), dtype=int64>
+##  $ test :List of 2
+##   ..$ x: <numpy.ndarray shape(10000,32,32,3), dtype=uint8>
+##   ..$ y: <numpy.ndarray shape(10000,1), dtype=int64>
+
+}\if{html}{\out{</div>}}
 
 The \code{x} data is an array of RGB image data with shape (num_samples, 3, 32, 32).
 
