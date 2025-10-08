@@ -71,6 +71,12 @@ reticulate::py_require
 #' @export
 reticulate::import
 
+#' @export
+reticulate::py_to_r
+
+#' @export
+reticulate::r_to_py
+
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard

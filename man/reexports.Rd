@@ -15,6 +15,8 @@
 \alias{as_iterator}
 \alias{py_require}
 \alias{import}
+\alias{py_to_r}
+\alias{r_to_py}
 \alias{tensorboard}
 \alias{export_savedmodel}
 \alias{as_tensor}
@@ -43,7 +45,7 @@ below to see their documentation.
 
   \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
 
-  \item{reticulate}{\code{\link[reticulate:with-as-operator]{\%as\%}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate:iterate]{as_iterator}}, \code{\link[reticulate]{import}}, \code{\link[reticulate:iterate]{iter_next}}, \code{\link[reticulate]{iterate}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{py_require}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
+  \item{reticulate}{\code{\link[reticulate:with-as-operator]{\%as\%}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate:iterate]{as_iterator}}, \code{\link[reticulate]{import}}, \code{\link[reticulate:iterate]{iter_next}}, \code{\link[reticulate]{iterate}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{py_require}}, \code{\link[reticulate:r-py-conversion]{py_to_r}}, \code{\link[reticulate:r-py-conversion]{r_to_py}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
 
   \item{tensorflow}{\code{\link[tensorflow]{all_dims}}, \code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{tensorboard}}}
 
