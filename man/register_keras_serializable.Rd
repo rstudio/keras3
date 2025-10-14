@@ -16,8 +16,8 @@ register_keras_serializable(object, name = NULL, package = NULL)
 Defaults to the current package name, or \code{"Custom"} outside of a package.}
 }
 \value{
-\code{object} is returned invisibly, for convenient piping. This is
-primarily called for side effects.
+The registered \code{object} (and converted) is returned. This returned object is what you
+should must use when building and serializing the model.
 }
 \description{
 This function registers a custom class or function with the Keras custom
@@ -36,8 +36,14 @@ defaults to the object name if not passed.
 # the `name` argument is not provided, `'MyDense'` is used as the `name`.
 layer_my_dense <- Layer("MyDense")
 register_keras_serializable(layer_my_dense, package = "my_package")
+}\if{html}{\out{</div>}}
 
-MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <class '<r-namespace:keras3>.MyDense'>
+##  signature: (*args, **kwargs)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
 stopifnot(exprs = \{
   get_registered_object('my_package>MyDense') == MyDense
   get_registered_name(MyDense) == 'my_package>MyDense'

@@ -48,7 +48,7 @@ op_irfft(c(real, imag))
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{all.equal(op_irfft(op_rfft(real, 5), 5), real)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] TRUE
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#> [1] "Mean relative difference: 5.960465e-08"
 
 }\if{html}{\out{</div>}}
 }

@@ -95,8 +95,18 @@ loss_modified_mse <- Loss(
 
 # register the custom object
 register_keras_serializable(loss_modified_mse)
+}\if{html}{\out{</div>}}
 
-# confirm object is registered
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>
+##  signature: (
+##    reduction='sum_over_batch_size',
+##    name='mean_squared_error',
+##    dtype=None
+## )
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# confirm object is registered
 get_custom_objects()
 }\if{html}{\out{</div>}}
 
