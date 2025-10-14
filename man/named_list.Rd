@@ -6,6 +6,10 @@
 \usage{
 named_list(...)
 }
+\arguments{
+\item{...}{Arguments to collect in a list. These dots are
+\link[rlang:dyn-dots]{dynamic}.}
+}
 \value{
 A named list.
 }

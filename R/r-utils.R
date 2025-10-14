@@ -52,6 +52,8 @@ drop_nulls <- function(x, i = NULL) {
 #' - `.preserve_empty = FALSE`
 #' - `.check_assign = FALSE`
 #'
+#' @inheritParams rlang::dots_list
+#'
 #' @inheritParams dots_list
 #'
 #' @return A named list.
