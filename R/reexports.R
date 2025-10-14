@@ -77,6 +77,9 @@ reticulate::py_to_r
 #' @export
 reticulate::r_to_py
 
+#' @export
+reticulate::py_help
+
 #' @importFrom tensorflow tensorboard
 #' @export
 tensorflow::tensorboard

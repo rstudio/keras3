@@ -369,6 +369,8 @@ to_categorical <-
 function (x, num_classes = NULL)
 {
   if (inherits(x, "factor")) {
+    # if (length(DIM(x)) == 1)
+    #    return(diag(nrow = num_classes %||% length(levels(x)))[as.integer(x), ])
     x <- array(as.integer(x) - 1L, dim = dim(x) %||% length(x))
     if (is.null(num_classes))
       num_classes <- length(levels(x))
@@ -631,7 +633,7 @@ function(x,
          ...,
          rankdir = "TB",
          expand_nested = FALSE,
-         dpi = 200,
+         dpi = getOption("keras.plot.model.dpi", 200L),
          layer_range = NULL,
          show_layer_activations = FALSE,
          show_trainable = NA,

@@ -119,12 +119,16 @@ function(classname,
       type = `__class__`,
       object_or_type = base::get("self", envir = base::parent.frame()))
       {
-        convert <- base::get("convert", envir = base::as.environment(object_or_type))
-        py_builtins <- reticulate::import_builtins(convert)
-        reticulate::py_call(py_builtins$super, type, object_or_type)
-      }
+      convert <- base::get("convert", object_or_type)
+      py_super <- reticulate::py_eval(
+        "__import__('builtins').super",
+        convert = convert
+      )
+      py_super(type, object_or_type)
+    }
     class(super) <- "python_builtin_super_getter"
-  }))
+  })
+)
 
 
   py_class
@@ -137,15 +141,23 @@ function(classname,
 #' @export
 `$.python_builtin_super_getter` <- function(x, name) {
   super <- do.call(x, list(), envir = parent.frame()) # call super()
+  `[[.python.builtin.super`(super, name)
+}
+
+#' @export
+`[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
+
+#' @export
+`$.python.builtin.super` <- function(x, name) {
   name <- switch(name, initialize = "__init__", finalize = "__del__", name)
-  out <- py_get_attr(super, name)
+  out <- py_get_attr(x, name)
   convert <- get0("convert", as.environment(out), inherits = FALSE,
                   ifnotfound = TRUE)
   if (convert) py_to_r(out) else out
 }
 
 #' @export
-`[[.python_builtin_super_getter` <- `$.python_builtin_super_getter`
+`[[.python.builtin.super` <- `$.python.builtin.super`
 
 # No .DollarNames.python_builtin_super_getter because the python.builtin.super
 # object doesn't have populated attributes itself, only a dynamic `__getattr__`

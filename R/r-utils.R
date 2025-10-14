@@ -40,15 +40,34 @@ drop_nulls <- function(x, i = NULL) {
   x[!drop]
 }
 
+#' Create a named list from arguments
+#'
+#' Constructs a list from the provided arguments where all elements are named.
+#' This wraps [rlang::dots_list()] but changes two defaults:
+#' - `.named` is set to `TRUE`
+#' - `.homonyms` is set to `"error"`
+#'
+#' Other parameters retain their defaults from [rlang::dots_list()]:
+#' - `.ignore_empty = "trailing"`
+#' - `.preserve_empty = FALSE`
+#' - `.check_assign = FALSE`
+#'
+#' @inheritParams rlang::dots_list
+#'
+#' @inheritParams dots_list
+#'
+#' @return A named list.
+#'
+#' @seealso [rlang::dots_list()]
+#'
+#' @export
 #' @importFrom rlang dots_list
-# identical to rlang::list2(), except .named = TRUE
 named_list <- function(...)
   dots_list(...,
-            .named = TRUE,
-            # not the default
+            .named = TRUE, # not default
             .ignore_empty = "trailing",
             .preserve_empty = FALSE,
-            .homonyms = "error",
+            .homonyms = "error", # not default
             .check_assign = FALSE)
 
 `append1<-` <- function(x, value) {

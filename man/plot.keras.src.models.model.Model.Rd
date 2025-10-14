@@ -12,7 +12,7 @@
   ...,
   rankdir = "TB",
   expand_nested = FALSE,
-  dpi = 200,
+  dpi = getOption("keras.plot.model.dpi", 200L),
   layer_range = NULL,
   show_layer_activations = FALSE,
   show_trainable = NA,
