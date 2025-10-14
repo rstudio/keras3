@@ -585,8 +585,8 @@ function (object, filepath, call_endpoint = "serve", call_training_endpoint = NU
 #' @param object
 #' A keras object.
 #'
-#' @returns `object` is returned invisibly, for convenient piping. This is
-#'   primarily called for side effects.
+#' @returns The registered `object` (and converted) is returned. This returned object is what you
+#' should must use when building and serializing the model.
 #' @export
 #' @family saving and loading functions
 #' @family serialization utilities
@@ -605,7 +605,7 @@ function (object, name = NULL, package = NULL)
                 c("", "base", "R_GlobalEnv"), "Custom")
 
   keras$saving$register_keras_serializable(package, name)(py_object)
-  invisible(object)
+  py_object
 }
 
 
