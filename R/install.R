@@ -388,7 +388,7 @@ uv_unset_override_never_tensorflow <- function() {
   if (is.na(override)) return()
   cpu_override <- pkg_file("never-tensorflow-override.txt")
   if (override == cpu_override) {
-    Sys.unsetenv(override)
+    Sys.unsetenv("UV_OVERRIDE")
   } else {
     new <- gsub(cpu_override, "", override, fixed = TRUE)
     new <- gsub(" +", " ", new)
