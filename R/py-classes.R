@@ -119,12 +119,16 @@ function(classname,
       type = `__class__`,
       object_or_type = base::get("self", envir = base::parent.frame()))
       {
-        convert <- base::get("convert", envir = base::as.environment(object_or_type))
-        py_builtins <- reticulate::import_builtins(convert)
-        reticulate::py_call(py_builtins$super, type, object_or_type)
-      }
+      convert <- base::get("convert", object_or_type)
+      py_super <- reticulate::py_eval(
+        "__import__('builtins').super",
+        convert = convert
+      )
+      py_super(type, object_or_type)
+    }
     class(super) <- "python_builtin_super_getter"
-  }))
+  })
+)
 
 
   py_class
