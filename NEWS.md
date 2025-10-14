@@ -1,5 +1,32 @@
 # keras3 (development version)
 
+- `plot(model)` DPI is now globally configurable via the
+  `keras.plot.model.dpi` option.
+
+- Reexported reticulate functions: `py_help()`, `py_to_r()`, `r_to_py()`,
+  `py_require()`, and `import()`.
+
+- Support `super()$initialize()` in subclassed Keras classes; improved
+  `super()` behavior in subclasses.
+
+- Added base-array compatibility methods for backend tensors: `t()`,
+  `aperm()`, and `all.equal()`.
+
+- Fixed `register_keras_serializable()` when passed bare functions.
+
+- Fixed an issue when switching backends twice in a row.
+
+- Exported `named_list()` utility.
+
+- Built-in datasets now accept `convert = FALSE` to return NumPy arrays
+  instead of R arrays.
+
+- Updated `plot(history, theme_bw = TRUE)` for `ggplot2` 3.4.0
+  compatibility.
+
+- Added `pillar::type_sum()` for JAX variables and `JaxVariable`;
+  extended `str()` coverage to the new JAX variable class.
+
 - Added S3 methods for JAX array: `str`, `as.array`, `as.double`, `as.integer`, `as.numeric`.
 
 - Added `str` S3 method for Keras Variables.
