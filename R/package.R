@@ -186,7 +186,12 @@ keras <- NULL
     keras <- import("keras")
     convert_to_tensor <- import("keras.ops", convert = FALSE)$convert_to_tensor
     with(keras$device("cpu:0"), {
-      backend_tensor_class <- class(convert_to_tensor(array(1L)))[1L]
+      all_backend_tensor_s3_classes <- class(convert_to_tensor(array(1L)))
+      backend_tensor_class <- all_backend_tensor_s3_classes[1L]
+      if ("jax.Array" %in% all_backend_tensor_s3_classes)
+        backend_tensor_class <- "jax.Array"
+      # message("setting methods on backend_tensor_class: ", backend_tensor_class,
+      #         "\nother options: ", paste0(all_backend_tensor_s3_classes, collapse = " "))
     })
     symbolic_tensor_class <- nameOfClass__python.builtin.type(keras$KerasTensor)
 
@@ -207,6 +212,9 @@ keras <- NULL
     registerS3method("as.array", backend_tensor_class, op_convert_to_array, baseenv())
     registerS3method("^", backend_tensor_class, `^__keras.backend.tensor`, baseenv())
     registerS3method("%*%", backend_tensor_class, op_matmul, baseenv())
+    registerS3method("t", backend_tensor_class, op_transpose, baseenv())
+    registerS3method("aperm", backend_tensor_class, op_transpose, baseenv())
+    registerS3method("all.equal", backend_tensor_class, all.equal.numpy.ndarray, baseenv())
 
     if(keras$config$backend() == "jax") {
       for(py_type in import("jax")$Array$`__subclasses__`()) {
@@ -269,6 +277,13 @@ keras <- NULL
     }
   )))
 
+}
+
+## should this live in reticulate?? probably...
+#' @export
+all.equal.numpy.ndarray <- function(target, current, ...) {
+  # or use numpy.allequal?
+  all.equal(as.array(target), as.array(current), ...)
 }
 
 
