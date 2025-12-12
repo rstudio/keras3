@@ -110,3 +110,7 @@ py_to_r__keras.src.utils.tracking.TrackedSet <- function(x) import("builtins")$l
 # }
 # rm(list = c("generic", "cls"))
 
+#' @exportS3Method base::as.array
+as.array.PIL.Image.Image <- function(x, ...) {
+  as.array(image_to_array(x, ...))
+}
