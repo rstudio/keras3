@@ -1,0 +1,488 @@
+# The Sequential model
+
+## Setup
+
+``` r
+library(keras3)
+```
+
+## When to use a Sequential model
+
+A `Sequential` model is appropriate for **a plain stack of layers**
+where each layer has **exactly one input tensor and one output tensor**.
+
+Schematically, the following `Sequential` model:
+
+``` r
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu", name = "layer1") |>
+  layer_dense(units = 3, activation = "relu", name = "layer2") |>
+  layer_dense(units = 4, name = "layer3")
+
+# Call model on a test input
+x <- op_ones(c(3, 3))
+y <- model(x)
+```
+
+is equivalent to this function:
+
+``` r
+# Create 3 layers
+layer1 <- layer_dense(units = 2, activation="relu", name="layer1")
+layer2 <- layer_dense(units = 3, activation="relu", name="layer2")
+layer3 <- layer_dense(units = 4, name="layer3")
+
+# Call layers on a test input
+x <- op_ones(c(3, 3))
+y <- x |> layer1() |> layer2() |> layer3()
+```
+
+A Sequential model is **not appropriate** when:
+
+- Your model has multiple inputs or multiple outputs
+- Any of your layers has multiple inputs or multiple outputs
+- You need to do layer sharing
+- You want non-linear topology (e.g. a residual connection, a
+  multi-branch model)
+
+## Creating a Sequential model
+
+You can create a Sequential model by piping layers into the
+[`keras_model_sequential()`](https://keras3.posit.co/dev/reference/keras_model_sequential.md)
+object:
+
+``` r
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu") |>
+  layer_dense(units = 4)
+```
+
+or by passing a list of layers to
+[`keras_model_sequential()`](https://keras3.posit.co/dev/reference/keras_model_sequential.md):
+
+``` r
+model <- keras_model_sequential(layers = list(
+  layer_dense(units = 2, activation = "relu"),
+  layer_dense(units = 3, activation = "relu"),
+  layer_dense(units = 4)
+))
+```
+
+Its layers are accessible via the `layers` attribute:
+
+``` r
+model$layers
+```
+
+    ## [[1]]
+    ## <Dense name=dense_3, built=False>
+    ##  signature: (*args, **kwargs)
+    ##
+    ## [[2]]
+    ## <Dense name=dense_4, built=False>
+    ##  signature: (*args, **kwargs)
+    ##
+    ## [[3]]
+    ## <Dense name=dense_5, built=False>
+    ##  signature: (*args, **kwargs)
+
+You can also create a Sequential model incrementally:
+
+``` r
+model <- keras_model_sequential()
+model |> layer_dense(units = 2, activation="relu")
+model |> layer_dense(units = 3, activation="relu")
+model |> layer_dense(units = 4)
+```
+
+Note that there’s also a corresponding
+[`pop_layer()`](https://keras3.posit.co/dev/reference/pop_layer.md)
+method to remove layers: a Sequential model behaves very much like a
+stack of layers.
+
+``` r
+model |> pop_layer()
+```
+
+    ## <Dense name=dense_8, built=False>
+    ##  signature: (*args, **kwargs)
+
+``` r
+length(model$layers)  # 2
+```
+
+    ## [1] 2
+
+Also note that the Sequential constructor accepts a `name` argument,
+just like any layer or model in Keras. This is useful to annotate
+TensorBoard graphs with semantically meaningful names.
+
+``` r
+model <- keras_model_sequential(name = "my_sequential")
+model |> layer_dense(units = 2, activation="relu", name = "layer1")
+model |> layer_dense(units = 3, activation="relu", name = "layer2")
+model |> layer_dense(units = 4, name = "layer3")
+```
+
+## Specifying the input shape in advance
+
+Generally, all layers in Keras need to know the shape of their inputs in
+order to be able to create their weights. So when you create a layer
+like this, initially, it has no weights:
+
+``` r
+layer <- layer_dense(units = 3)
+layer$weights  # Empty
+```
+
+    ## list()
+
+It creates its weights the first time it is called on an input, since
+the shape of the weights depends on the shape of the inputs:
+
+``` r
+# Call layer on a test input
+x <- op_ones(c(1, 4))
+y <- layer(x)
+layer$weights  # Now it has weights, of shape (4, 3) and (3,)
+```
+
+    ## [[1]]
+    ## <Variable path=dense_9/kernel, shape=(4, 3), dtype=float32, value=[[ 0.48581433  0.78749573  0.61015   ]
+    ##  [ 0.7962619   0.7261175  -0.8046875 ]
+    ##  [-0.6189915   0.37973273  0.50559556]
+    ##  [-0.5455791  -0.60714126  0.19791973]]>
+    ##
+    ## [[2]]
+    ## <Variable path=dense_9/bias, shape=(3), dtype=float32, value=[0. 0. 0.]>
+
+Naturally, this also applies to Sequential models. When you instantiate
+a Sequential model without an input shape, it isn’t “built”: it has no
+weights (and calling `model$weights` results in an error stating just
+this). The weights are created when the model first sees some input
+data:
+
+``` r
+model <- keras_model_sequential() |>
+  layer_dense(units = 2, activation = "relu") |>
+  layer_dense(units = 3, activation = "relu") |>
+  layer_dense(units = 4)
+# No weights at this stage!
+
+# At this point, you can't do this:
+# model$weights
+
+
+# Call the model on a test input
+x <- op_ones(c(1, 4))
+y <- model(x)
+length(model$weights)
+```
+
+    ## [1] 6
+
+Once a model is “built”, you can call its
+[`summary()`](https://rdrr.io/r/base/summary.html) method to display its
+contents:
+
+``` r
+summary(model)
+```
+
+    ## Model: "sequential_4"
+    ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+    ## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+    ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+    ## │ dense_10 (Dense)                │ (1, 2)                 │            10 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ dense_11 (Dense)                │ (1, 3)                 │             9 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ dense_12 (Dense)                │ (1, 4)                 │            16 │
+    ## └─────────────────────────────────┴────────────────────────┴───────────────┘
+    ##  Total params: 35 (140.00 B)
+    ##  Trainable params: 35 (140.00 B)
+    ##  Non-trainable params: 0 (0.00 B)
+
+However, it can be very useful when building a Sequential model
+incrementally to be able to display the summary of the model so far,
+including the current output shape. In this case, you should start your
+model by passing an `input_shape` argument to your model, so that it
+knows its input shape from the start:
+
+``` r
+model <- keras_model_sequential(input_shape = 4) |>
+  layer_dense(units = 2, activation = "relu")
+summary(model)
+```
+
+    ## Model: "sequential_5"
+    ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+    ## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+    ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+    ## │ dense_13 (Dense)                │ (None, 2)              │            10 │
+    ## └─────────────────────────────────┴────────────────────────┴───────────────┘
+    ##  Total params: 10 (40.00 B)
+    ##  Trainable params: 10 (40.00 B)
+    ##  Non-trainable params: 0 (0.00 B)
+
+``` r
+model$layers
+```
+
+    ## [[1]]
+    ## <Dense name=dense_13, built=True>
+    ##  signature: (*args, **kwargs)
+
+Models built with a predefined input shape like this always have weights
+(even before seeing any data) and always have a defined output shape.
+
+In general, it’s a recommended best practice to always specify the input
+shape of a Sequential model in advance if you know what it is.
+
+## A common debugging workflow: add layers + `summary()`
+
+When building a new Sequential architecture, it’s useful to
+incrementally stack layers with `|>` and frequently print model
+summaries. For instance, this enables you to monitor how a stack of
+`Conv2D` and `MaxPooling2D` layers is downsampling image feature maps:
+
+``` r
+model <- keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = c(3, 3))
+
+# Can you guess what the current output shape is at this point? Probably not.
+# Let's just print it:
+summary(model)
+```
+
+    ## Model: "sequential_6"
+    ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+    ## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+    ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+    ## │ conv2d (Conv2D)                 │ (None, 123, 123, 32)   │         2,432 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ conv2d_1 (Conv2D)               │ (None, 121, 121, 32)   │         9,248 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ max_pooling2d (MaxPooling2D)    │ (None, 40, 40, 32)     │             0 │
+    ## └─────────────────────────────────┴────────────────────────┴───────────────┘
+    ##  Total params: 11,680 (45.62 KB)
+    ##  Trainable params: 11,680 (45.62 KB)
+    ##  Non-trainable params: 0 (0.00 B)
+
+``` r
+# The answer was: (40, 40, 32), so we can keep downsampling...
+
+model |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = 3) |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_max_pooling_2d(pool_size = 2)
+
+# And now?
+summary(model)
+```
+
+    ## Model: "sequential_6"
+    ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+    ## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+    ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+    ## │ conv2d (Conv2D)                 │ (None, 123, 123, 32)   │         2,432 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ conv2d_1 (Conv2D)               │ (None, 121, 121, 32)   │         9,248 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ max_pooling2d (MaxPooling2D)    │ (None, 40, 40, 32)     │             0 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ conv2d_2 (Conv2D)               │ (None, 38, 38, 32)     │         9,248 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ conv2d_3 (Conv2D)               │ (None, 36, 36, 32)     │         9,248 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ max_pooling2d_1 (MaxPooling2D)  │ (None, 12, 12, 32)     │             0 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ conv2d_4 (Conv2D)               │ (None, 10, 10, 32)     │         9,248 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ conv2d_5 (Conv2D)               │ (None, 8, 8, 32)       │         9,248 │
+    ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
+    ## │ max_pooling2d_2 (MaxPooling2D)  │ (None, 4, 4, 32)       │             0 │
+    ## └─────────────────────────────────┴────────────────────────┴───────────────┘
+    ##  Total params: 48,672 (190.12 KB)
+    ##  Trainable params: 48,672 (190.12 KB)
+    ##  Non-trainable params: 0 (0.00 B)
+
+``` r
+# Now that we have 4x4 feature maps, time to apply global max pooling.
+model |>
+  layer_global_max_pooling_2d()
+
+# Finally, we add a classification layer.
+model |>
+  layer_dense(units = 10, activation = "softmax")
+```
+
+Very practical, right?
+
+Note that `|>` is equivalent to calling `model$add()`, it modifies the
+model in-place, so you don’t need to reassign the `model` symbol at each
+step.
+
+## What to do once you have a model
+
+Once your model architecture is ready, you will want to:
+
+- Train your model, evaluate it, and run inference. See our [guide to
+  training & evaluation with the built-in
+  loops](https://keras3.posit.co/dev/articles/training_with_built_in_methods.md)
+- Save your model to disk and restore it. See our [guide to
+  serialization &
+  saving](https://keras3.posit.co/dev/articles/serialization_and_saving.md).
+
+## Feature extraction with a Sequential model
+
+Once a Sequential model has been built, it behaves like a [Functional
+API model](https://keras3.posit.co/dev/articles/functional_api.md). This
+means that every layer has an `input` and `output` attribute. These
+attributes can be used to do neat things, like quickly creating a model
+that extracts the outputs of all intermediate layers in a Sequential
+model:
+
+``` r
+initial_model <- keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
+
+
+feature_extractor <- keras_model(
+    inputs = initial_model$inputs,
+    outputs = lapply(initial_model$layers, function(x) x$output),
+)
+
+# Call feature extractor on test input.
+x <- op_ones(c(1, 250, 250, 3))
+features <- feature_extractor(x)
+```
+
+Here’s a similar example that only extract features from one layer:
+
+``` r
+initial_model <-
+  keras_model_sequential(input_shape = c(250, 250, 3)) |>
+  layer_conv_2d(filters = 32, kernel_size = 5, strides = 2,
+                activation = "relu") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu",
+                name = "my_intermediate_layer") |>
+  layer_conv_2d(filters = 32, kernel_size = 3, activation = "relu")
+
+feature_extractor <- keras_model(
+  inputs = initial_model$inputs,
+  outputs = get_layer(initial_model, "my_intermediate_layer")$output,
+)
+
+# Call feature extractor on test input.
+x <- op_ones(c(1, 250, 250, 3))
+features <- feature_extractor(x)
+```
+
+## Transfer learning with a Sequential model
+
+Transfer learning consists of freezing the bottom layers in a model and
+only training the top layers. If you aren’t familiar with it, make sure
+to read our [guide to transfer
+learning](https://keras3.posit.co/dev/articles/transfer_learning.md).
+
+Here are two common transfer learning blueprint involving Sequential
+models.
+
+First, let’s say that you have a Sequential model, and you want to
+freeze all layers except the last one. In this case, you can call
+[`freeze_weights()`](https://keras3.posit.co/dev/reference/freeze_weights.md).
+Alternatively, you can iterate over `model$layers` and set
+`layer$trainable <- FALSE` on each layer, except the last one. Like
+this:
+
+``` r
+model <- keras_model_sequential(input_shape = 784) |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 32, activation = "relu") |>
+  layer_dense(units = 10)
+```
+
+``` r
+# Presumably you would want to first load pre-trained weights.
+model |> load_model_weights(...)
+```
+
+``` r
+# Freeze all layers except the last one.
+model |> freeze_weights(from = 1, to = -2)
+model # note the "Trainable" column now visible in the summary table
+```
+
+    ## Model: "sequential_9"
+    ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
+    ## ┃ Layer (type)                ┃ Output Shape          ┃    Param # ┃ Trai… ┃
+    ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
+    ## │ dense_15 (Dense)            │ (None, 32)            │     25,120 │   N   │
+    ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
+    ## │ dense_16 (Dense)            │ (None, 32)            │      1,056 │   N   │
+    ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
+    ## │ dense_17 (Dense)            │ (None, 32)            │      1,056 │   N   │
+    ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
+    ## │ dense_18 (Dense)            │ (None, 10)            │        330 │   Y   │
+    ## └─────────────────────────────┴───────────────────────┴────────────┴───────┘
+    ##  Total params: 27,562 (107.66 KB)
+    ##  Trainable params: 330 (1.29 KB)
+    ##  Non-trainable params: 27,232 (106.38 KB)
+
+``` r
+# Another way to freeze all layers except the last one.
+for (layer in model$layers[-length(model$layers)]) {
+  layer$trainable <- FALSE
+}
+
+# Recompile and train (this will only update the weights of the last layer).
+model |> compile(...)
+model |> fit(...)
+```
+
+Another common blueprint is to use a Sequential model to stack a
+pre-trained model and some freshly initialized classification layers.
+Like this:
+
+``` r
+# Load a convolutional base with pre-trained weights
+base_model <- application_xception(weights = 'imagenet',
+                                   include_top = FALSE,
+                                   pooling = 'avg')
+
+# Freeze the base model
+freeze_weights(base_model)
+
+# Use a Sequential model to add a trainable classifier on top
+model <- keras_model_sequential() |>
+  base_model() |>
+  layer_dense(1000)
+```
+
+``` r
+# Compile & train
+model |> compile(...)
+model |> fit(...)
+```
+
+If you do transfer learning, you will probably find yourself frequently
+using these two patterns.
+
+That’s about all you need to know about Sequential models!
+
+To find out more about building models in Keras, see:
+
+- [Guide to the Functional
+  API](https://keras3.posit.co/dev/articles/functional_api.md)
+- [Guide to making new Layers & Models via
+  subclassing](https://keras3.posit.co/dev/articles/making_new_layers_and_models_via_subclassing.md)

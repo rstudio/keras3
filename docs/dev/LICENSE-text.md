@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2024
+    COPYRIGHT HOLDER: Posit Software, PBC; Google, Inc; François Chollet; Yuan Tang
