@@ -468,6 +468,16 @@ test_call_succeeds("layer_concatenate", {
   keras_model(merge_inputs, output)
 })
 
+test_call_succeeds("layer_concatenate handles named args with positional inputs", {
+  merge_inputs <- get_merge_inputs()
+  output <- layer_concatenate(
+    merge_inputs[[1]],
+    merge_inputs[[2]],
+    name = "concatenate_features"
+  )
+  keras_model(merge_inputs[1:2], output)
+})
+
 test_call_succeeds("layer_batch_normalization", {
   keras_model_sequential() %>%
     layer_dense(32, input_shape = c(784)) %>%
