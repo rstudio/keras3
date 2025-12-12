@@ -111,7 +111,7 @@ output
 ## [[0 2 3 1]
 ##  [1 3 2 1]
 ##  [0 1 1 2]
-##  [2 3 3 3]], shape=(4, 4), dtype=int64)
+##  [2 3 3 3]], shape=(4, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 
@@ -126,7 +126,7 @@ layer(input)
 ## [[0 2 3 1]
 ##  [1 3 2 1]
 ##  [0 1 1 2]
-##  [2 3 3 3]], shape=(4, 4), dtype=int64)
+##  [2 3 3 3]], shape=(4, 4), dtype=int32)
 
 }\if{html}{\out{</div>}}
 }

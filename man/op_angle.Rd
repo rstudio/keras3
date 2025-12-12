@@ -21,8 +21,8 @@ op_angle(x)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor(
-## [[ 1.24904577 -0.64350111]
-##  [-1.19028995  0.5880026 ]], shape=(2, 2), dtype=float64)
+## [[ 1.2490457 -0.6435011]
+##  [-1.19029    0.5880026]], shape=(2, 2), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }
