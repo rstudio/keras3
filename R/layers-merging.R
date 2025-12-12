@@ -52,7 +52,7 @@ function (inputs, ...)
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -116,7 +116,7 @@ function (inputs, ...)
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -177,7 +177,7 @@ function (inputs, ..., axis = -1L)
     args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -260,7 +260,7 @@ function (inputs, ..., axes, normalize = FALSE)
     args <- capture_args(list(axes = as_axis, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -322,7 +322,7 @@ function (inputs, ...)
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -384,7 +384,7 @@ function (inputs, ...)
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -446,7 +446,7 @@ function (inputs, ...)
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))
@@ -509,7 +509,7 @@ function (inputs, ...)
     args <- capture_args(list(input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = c("...", "inputs"))
-    dots <- split_dots_named_unnamed(list(...))
+    dots <- split_dots_named_unnamed(list2(...))
     if (missing(inputs))
         inputs <- NULL
     else if (!is.null(inputs) && !is.list(inputs))

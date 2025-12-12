@@ -27,7 +27,9 @@ split_dots_named_unnamed <- function(dots) {
   if (is.null(nms))
     return(list(unnamed = dots, named = list()))
   named <- nzchar(nms)
-  list(unnamed = dots[!named], named = dots[named])
+  unnamed <- dots[!named]
+  names(unnamed) <- NULL
+  list(unnamed = unnamed, named = dots[named])
 }
 
 drop_nulls <- function(x, i = NULL) {

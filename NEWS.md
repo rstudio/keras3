@@ -23,6 +23,8 @@
 - Added elastic deformation utilities for images: `layer_random_elastic_transform()`
   and the lower-level `op_image_elastic_transform()`.
 
+- Added `as.array()` support for `PIL.Image.Image` objects.
+
 - Transposed convolution utilities now follow the latest Keras API:
   `op_conv_transpose()` defaults `strides = 1` and the `layer_conv_*_transpose()`
   layers expose `output_padding` for precise shape control.
@@ -37,6 +39,11 @@
   strategies.
 
 - `layer_layer_normalization()` removes the `rms_scaling` argument.
+
+- Merging layers now capture `...` with tidy dots (fixes #1525).
+
+- Fixed Ops on JAX `_DimExpr` so symbolic shapes survive arithmetic with R
+  double scalars.
 
 - `layer_reshape()` can now accept `-1` as a sentinel for an automatically calculated axis size.
 

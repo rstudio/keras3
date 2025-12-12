@@ -94,3 +94,20 @@ type_sum.keras.src.backend.jax.core.JaxVariable <- type_sum.keras.src.backend.ja
 
 # "keras.src.backend.Variable" too?
 # "keras.src.backend.common.variables.Variable" too?
+
+#' @exportS3Method Ops jax._src.export.shape_poly._DimExpr
+Ops.jax._src.export.shape_poly._DimExpr <- function(e1, e2) {
+  if (missing(e2)) {
+    return(e1)
+  }
+  conv <- function(x) {
+    if (is.double(x) && isTRUE(all(x == suppressWarnings(as.integer(x))))) {
+      storage.mode(x) <- "integer"
+    }
+    x
+  }
+  e1 <- conv(e1)
+  e2 <- conv(e2)
+  NextMethod()
+}
+
