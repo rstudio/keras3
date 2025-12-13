@@ -85,7 +85,8 @@ words, but eliminate the top 20 most common words".</p>
 <span>  seed <span class="op">=</span> <span class="fl">113L</span>,</span>
 <span>  start_char <span class="op">=</span> <span class="fl">1L</span>,</span>
 <span>  oov_char <span class="op">=</span> <span class="fl">2L</span>,</span>
-<span>  index_from <span class="op">=</span> <span class="fl">3L</span></span>
+<span>  index_from <span class="op">=</span> <span class="fl">3L</span>,</span>
+<span>  convert <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">dataset_imdb_word_index</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"imdb_word_index.json"</span><span class="op">)</span></span></code></pre></div>
@@ -131,15 +132,58 @@ Set to 1 because 0 is usually the padding character.</p></dd>
 <dt id="arg-index-from">index_from<a class="anchor" aria-label="anchor" href="#arg-index-from"></a></dt>
 <dd><p>Index actual words with this index and higher.</p></dd>
 
+
+<dt id="arg-convert">convert<a class="anchor" aria-label="anchor" href="#arg-convert"></a></dt>
+<dd><p>When <code>TRUE</code> (default) the datasets are returned as R arrays.
+If <code>FALSE</code>, objects are returned as NumPy arrays.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>Lists of training and test data: <code>train$x, train$y, test$x, test$y</code>.</p>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>train<span class="sc">/</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>├─ x</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>└─ y</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>test<span class="sc">/</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>├─ x</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>└─ y</span></code></pre><p></p></div>
 <p>The <code>x</code> data includes integer sequences. If the <code>num_words</code> argument was
 specific, the maximum possible index value is <code>num_words-1</code>. If the
 <code>maxlen</code> argument was specified, the largest possible sequence length is
 <code>maxlen</code>.</p>
 <p>The <code>y</code> data includes a set of integer labels (0 or 1).</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/dataset_imdb.html">dataset_imdb</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## List of 2</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">##  $ train:List of 2</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##   ..$ x:List of 25000</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:218] 1 14 22 16 43 530 973 1622 1385 65 ...</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:189] 1 194 1153 194 8255 78 228 5 6 1463 ...</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:141] 1 14 47 8 30 31 7 4 249 108 ...</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:550] 1 4 18609 16085 33 2804 4 2040 432 111 ...</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:147] 1 249 1323 7 61 113 10 10 13 1637 ...</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:43] 1 778 128 74 12 630 163 15 4 1766 ...</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="do">##   .. .. [list output truncated]</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="do">##   ..$ y: int [1:25000] 1 0 0 1 0 0 1 0 1 0 ...</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="do">##  $ test :List of 2</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="do">##   ..$ x:List of 25000</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:68] 1 591 202 14 31 6 717 10 10 18142 ...</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:260] 1 14 22 3443 6 176 7 5063 88 12 ...</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:603] 1 111 748 4368 1133 33782 24563 4 87 1551 ...</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:181] 1 13 1228 119 14 552 7 20 190 14 ...</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:108] 1 40 49 85 84 1040 146 6 783 254 ...</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="do">##   .. ..$ : int [1:132] 1 146 427 5718 14 20 218 112 2962 32 ...</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="do">##   .. .. [list output truncated]</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="do">##   ..$ y: int [1:25000] 0 1 1 0 1 1 1 0 0 1 ...</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/dataset_imdb.html">dataset_imdb</a></span><span class="op">(</span>convert <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode"><pre><code><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="do">## List of 2</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="do">##  $ train:List of 2</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="do">##   ..$ x: &lt;numpy.ndarray shape(25000), dtype=object&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="do">##   ..$ y: &lt;numpy.ndarray shape(25000), dtype=int64&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="do">##  $ test :List of 2</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="do">##   ..$ x: &lt;numpy.ndarray shape(25000), dtype=object&gt;</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="do">##   ..$ y: &lt;numpy.ndarray shape(25000), dtype=int64&gt;</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span></code></pre><p></p></div>
 <p>The <code>dataset_imdb_word_index()</code> function returns a list where the
 names are words and the values are integer.</p>
     </div>
@@ -150,7 +194,7 @@ to encode any unknown word.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other datasets: <br><code><a href="dataset_boston_housing.html">dataset_boston_housing</a>()</code> <br><code><a href="dataset_california_housing.html">dataset_california_housing</a>()</code> <br><code><a href="dataset_cifar10.html">dataset_cifar10</a>()</code> <br><code><a href="dataset_cifar100.html">dataset_cifar100</a>()</code> <br><code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist</a>()</code> <br><code><a href="dataset_mnist.html">dataset_mnist</a>()</code> <br><code><a href="dataset_reuters.html">dataset_reuters</a>()</code> <br></p></div>
+    <div class="dont-index"><p>Other datasets: <br><code><a href="dataset_boston_housing.html">dataset_boston_housing()</a></code> <br><code><a href="dataset_california_housing.html">dataset_california_housing()</a></code> <br><code><a href="dataset_cifar10.html">dataset_cifar10()</a></code> <br><code><a href="dataset_cifar100.html">dataset_cifar100()</a></code> <br><code><a href="dataset_fashion_mnist.html">dataset_fashion_mnist()</a></code> <br><code><a href="dataset_mnist.html">dataset_mnist()</a></code> <br><code><a href="dataset_reuters.html">dataset_reuters()</a></code> <br></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -162,7 +206,7 @@ to encode any unknown word.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
