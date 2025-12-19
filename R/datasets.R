@@ -278,8 +278,8 @@ dataset_mnist <- function(path = "mnist.npz", convert = TRUE) {
 #' Loads the California Housing dataset.
 #'
 #' @description
-#' This dataset was obtained from the [StatLib repository](
-#' https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html).
+#' This dataset was obtained from the StatLib repository
+#' (`https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html`).
 #'
 #' It's a continuous regression dataset with 20,640 samples with
 #' 8 features each.
