@@ -1,9 +1,9 @@
 # keras3 (development version)
 
-- Expanded numeric operations with `op_layer_normalization()`, `op_cbrt()`,
-  `op_corrcoef()`, `op_deg2rad()`, `op_heaviside()`, the new `op_sparse_sigmoid()`
-  plus matching `activation_sparse_sigmoid()`, and an `attn_logits_soft_cap`
-  argument for `op_dot_product_attention()`.
+- Numeric ops now include `op_layer_normalization()`, `op_cbrt()`,
+  `op_corrcoef()`, `op_deg2rad()`, `op_heaviside()`, `op_sparse_sigmoid()`,
+  and `activation_sparse_sigmoid()`. `op_dot_product_attention()` gains
+  `attn_logits_soft_cap`.
 
 - Added signal window operations: `op_bartlett()`, `op_blackman()`,
   `op_hamming()`, `op_hanning()`, and `op_kaiser()`.
@@ -11,23 +11,25 @@
 - Added `loss_categorical_generalized_cross_entropy()` for training with noisy
   labels.
 
-- LoRA-enabled layers (`layer_dense()`, `layer_embedding()`, `layer_einsum_dense()`)
-  gain a `lora_alpha` argument to scale the adaptation delta independently of the
-  chosen rank.
+- LoRA-enabled layers (`layer_dense()`, `layer_embedding()`,
+  `layer_einsum_dense()`) gain a `lora_alpha` argument to scale the adaptation
+  delta independently of the chosen rank.
 
 - Added complex-valued helpers: S3 `Arg()` methods for tensors, `op_angle()`,
   and conversions `op_view_as_real()` / `op_view_as_complex()`.
 
 - Added the Muon optimizer via `optimizer_muon()`.
 
-- Added elastic deformation utilities for images: `layer_random_elastic_transform()`
-  and the lower-level `op_image_elastic_transform()`.
+- Added elastic deformation utilities for images:
+  `layer_random_elastic_transform()` and the lower-level
+  `op_image_elastic_transform()`.
 
 - Added `as.array()` support for `PIL.Image.Image` objects.
 
 - Transposed convolution utilities now follow the latest Keras API:
-  `op_conv_transpose()` defaults `strides = 1` and the `layer_conv_*_transpose()`
-  layers expose `output_padding` for precise shape control.
+  `op_conv_transpose()` defaults to `strides = 1`, and
+  `layer_conv_*_transpose()` layers expose `output_padding` for precise shape
+  control.
 
 - `register_keras_serializable()` now returns a registered Python callable,
   making it easier to use with bare R functions.
@@ -38,58 +40,59 @@
 - `keras_variable()` now accepts a `synchronization` argument for distributed
   strategies.
 
-- `layer_layer_normalization()` removes the `rms_scaling` argument.
+- `layer_layer_normalization()` now omits the
+  `rms_scaling` argument.
 
-- Merging layers now capture `...` with tidy dots (fixes #1525).
+- Merging layers now capture `...` with tidy dots (#1525).
 
-- Fixed Ops on JAX `_DimExpr` so symbolic shapes survive arithmetic with R
-  double scalars.
+- JAX `_DimExpr` shapes now remain symbolic when combined with R double scalars.
 
-- `layer_reshape()` can now accept `-1` as a sentinel for an automatically calculated axis size.
+- `layer_reshape()` now accepts `-1` as a sentinel for an automatically
+  calculated axis size.
 
 - `layer_torch_module_wrapper()` gains an `output_shape` argument to help Keras
   infer shapes when wrapping PyTorch modules.
 
-- `Layer$add_weight()` gains an `overwrite_with_gradient` option and
-  layers now provide a `symbolic_call()` method.
+- `Layer$add_weight()` gains an `overwrite_with_gradient` option, and layers
+  now provide a `symbolic_call()` method.
 
-- Added `str()` S3 method for Keras Variables.
+- Added `str()` S3 method for Keras `Variable`s.
 
-- Added S3 methods for JAX array:
-  `str()`, `as.array()`, `as.double()`, `as.integer()`, `as.numeric()`.
+- JAX arrays now have S3 methods for `str()`, `as.array()`, `as.double()`,
+  `as.integer()`, and `as.numeric()`.
 
-- Added base-array compatibility methods for backend tensors: `t()`,
-  `aperm()`, and `all.equal()`.
+- Backend tensors now support base array helpers: `t()`, `aperm()`, and
+  `all.equal()`.
 
-- Added `pillar::type_sum()` for JAX variables and `JaxVariable`;
-  extended `str()` coverage to the new JAX variable class.
+- Added `pillar::type_sum()` for JAX variables and `JaxVariable`; `str()` now
+  covers the new JAX variable class.
 
-- `config_max_epochs()`, `config_set_max_epochs()`, `config_max_steps_per_epoch()`,
-  and `config_set_max_steps_per_epoch()`. The caps can also be set via the
-  `KERAS_MAX_EPOCHS` and `KERAS_MAX_STEPS_PER_EPOCH` environment variables.
-  Added `config_is_nnx_enabled()` to check whether JAX NNX features are enabled.
+- Added training caps via `config_max_epochs()`, `config_set_max_epochs()`,
+  `config_max_steps_per_epoch()`, and `config_set_max_steps_per_epoch()`. The
+  caps can also be set via the `KERAS_MAX_EPOCHS` and
+  `KERAS_MAX_STEPS_PER_EPOCH` environment variables. Added
+  `config_is_nnx_enabled()` to check whether JAX NNX features are enabled.
 
 - Built-in dataset loaders now accept `convert = FALSE` to return NumPy arrays
   instead of R arrays.
 
-- Updated `plot(history, theme_bw = TRUE)` for `ggplot2` 3.4.0
-  compatibility.
+- `plot(history, theme_bw = TRUE)` is now compatible with `ggplot2` 3.4.0.
 
-- `plot(model)` DPI is now globally configurable via
-  `options(keras.plot.model.dpi = )`, (defaults to  `200`).
+- `plot(model)` now reads DPI from `options(keras.plot.model.dpi = 200)`
+  (default is 200).
 
 - Reexported reticulate functions: `py_help()`, `py_to_r()`, `r_to_py()`,
   `py_require()`, and `import()`.
 
-- Support `super()$initialize()` in subclassed Keras classes; improved
-  `super()` behavior in subclasses.
+- `super()$initialize()` now works in subclassed Keras classes, and `super()`
+  behavior is improved in subclasses.
 
-- Updated dependencies declared by `use_backend("jax", gpu=TRUE)`
-  for compatability with `keras-hub`.
+- `use_backend("jax", gpu = TRUE)` now declares dependencies compatible with
+  `keras-hub`.
 
-- Exported `named_list()` utility.
+- Exported `named_list()`.
 
-- Fixed an issue when switching backends twice in a row.
+- Switching backends twice in a row now works reliably.
 
 # keras3 1.4.0
 
