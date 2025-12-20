@@ -97,6 +97,9 @@
 
 - Switching backends twice in a row now works reliably.
 
+- `layer_dropout()` now preserves `noise_shape` as an integer array so
+  length-one shapes are passed to Keras as iterables.
+
 # keras3 1.4.0
 
 - New `op_subset()` and `x@r[...]` methods enable tensor subsetting
