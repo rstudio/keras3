@@ -704,7 +704,6 @@ of a model where a `from_config` override is necessary.
 <!-- <a name="registration_example"></a> -->
 
 ```{r}
-`%||%` <- \(x, y) if(is.null(x)) y else x
 layer_custom_model <- register_keras_serializable(
   package = "ComplexModels",
   object = Layer(
@@ -728,7 +727,11 @@ layer_custom_model <- register_keras_serializable(
       config$first_layer %<>% deserialize_keras_object()
       config$second_layer %<>% deserialize_keras_object()
       # note that the class is available in methods under the classname symbol,
-      # (`CustomModel` for this class), and also under the symbol `__class__`
+      # (`CustomModel` for this class), and also under the symbol `__class__`.
+      # `from_config()` also provides `cls` for the class; these are equivalent:
+      # - CustomModel(!!!config)
+      # - `__class__`(!!!config)
+      # - cls(!!!config)
       cls(!!!config)
       # CustomModel(!!!config)
     },

@@ -1,5 +1,8 @@
 # keras3 (development version)
 
+- `register_keras_serializable()` now updates R layer wrappers to use the
+  registered class when called.
+
 - Numeric ops now include `op_layer_normalization()`, `op_cbrt()`,
   `op_corrcoef()`, `op_deg2rad()`, `op_heaviside()`, `op_sparse_sigmoid()`,
   and `activation_sparse_sigmoid()`. `op_dot_product_attention()` gains

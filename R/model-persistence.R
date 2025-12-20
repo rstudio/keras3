@@ -605,7 +605,18 @@ function (object, name = NULL, package = NULL)
                 c("", "base", "R_GlobalEnv"), "Custom")
 
   keras$saving$register_keras_serializable(package, name)(py_object)
-  py_object
+  # Try to update a wrapper, e.g., returned by `Layer()`
+  if(is.function(object) && exists("__class__", env <- environment(object))) {
+    old_py_object <- get("__class__", env)
+    for(nm in names(env)) {
+      if(identical(get(nm, env), old_py_object))
+        assign(nm, py_object, env)
+    }
+    object
+  } else {
+    # return the registered py_object
+    py_object
+  }
 }
 
 
