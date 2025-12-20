@@ -17,9 +17,10 @@ files <- unique(c(files, grep("index", files, value = TRUE)), fromLast = TRUE)
 for (f in files) {
   output <- sub("vignettes-src/", "vignettes/", f, fixed=TRUE)
   if (file.exists(output)) {
-    age <- difftime(Sys.time(), file.info(output)$mtime, units = "days")
-    if (age < 1) {
-      cli::cli_inform(c("*" = "recently rendered, skipping"))
+    src_mtime <- file.info(f)$mtime
+    out_mtime <- file.info(output)$mtime
+    if (!is.na(src_mtime) && !is.na(out_mtime) && out_mtime >= src_mtime) {
+      cli::cli_inform(c("*" = "up to date, skipping"))
       next
     }
   }
