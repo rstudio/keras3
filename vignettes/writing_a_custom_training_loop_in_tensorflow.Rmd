@@ -156,21 +156,21 @@ for (epoch in seq_len(epochs)) {
 ## Seen so far: 12800 samples
 ## Training loss (for one batch) at step 400: 1.6450
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6477
+## Training loss (for one batch) at step 600: 0.7421
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.5088
+## Training loss (for one batch) at step 200: 0.8495
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.2798
+## Training loss (for one batch) at step 400: 0.3543
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.3972
+## Training loss (for one batch) at step 600: 0.5087
 ## Seen so far: 38400 samples
 ## Start of epoch  3
-## Training loss (for one batch) at step 200: 0.4365
+## Training loss (for one batch) at step 200: 0.3673
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.4717
+## Training loss (for one batch) at step 400: 0.5512
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.2702
+## Training loss (for one batch) at step 600: 0.2054
 ## Seen so far: 38400 samples
 ```
 
@@ -281,7 +281,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 39.4617 secs
+## Time difference of 43.02717 secs
 ```
 
 ## Speeding-up your training step with `tf_function()`
@@ -380,7 +380,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 0.4011955 secs
+## Time difference of 0.4525867 secs
 ```
 
 Much faster, isn't it?
