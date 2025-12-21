@@ -97,7 +97,7 @@ function (object, l1 = 0, l2 = 0, ...)
 layer_dropout <-
 function (object, rate, noise_shape = NULL, seed = NULL, ...)
 {
-    args <- capture_args(list(noise_shape = as_integer_array, seed = as_integer,
+    args <- capture_args(list(noise_shape = normalize_shape, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$Dropout, object, args)
@@ -150,7 +150,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 layer_alpha_dropout <-
 function (object, rate, noise_shape = NULL, seed = NULL, ...)
 {
-    args <- capture_args(list(noise_shape = as_integer_array, seed = as_integer,
+    args <- capture_args(list(noise_shape = normalize_shape, seed = as_integer,
         input_shape = normalize_shape, batch_size = as_integer,
         batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$AlphaDropout, object, args)
