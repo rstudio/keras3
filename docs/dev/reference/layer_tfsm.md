@@ -82,8 +82,8 @@ If `object` is:
     ## Output Type:
     ##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
     ## Captures:
-    ##   135791107628240: TensorSpec(shape=(), dtype=tf.resource, name=None)
-    ##   135791107634576: TensorSpec(shape=(), dtype=tf.resource, name=None)
+    ##   139039300955856: TensorSpec(shape=(), dtype=tf.resource, name=None)
+    ##   139039300956432: TensorSpec(shape=(), dtype=tf.resource, name=None)
 
     reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
     input <- random_normal(c(2, 784))

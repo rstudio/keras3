@@ -208,11 +208,12 @@ layer_custom <- Layer(
 # Upon registration, you can optionally specify a package or a name.
 # If left blank, the package defaults to "Custom" and the name defaults to
 # the class name.
-register_keras_serializable(layer_custom, package = "MyLayers")
+layer_custom <- register_keras_serializable(layer_custom, package = "MyLayers")
 
 custom_fn <- keras3:::py_func2(function(x) x^2, name = "custom_fn", convert = TRUE)
 
-register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
+custom_fn <-
+  register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
 
 
 # Create the model.
@@ -352,33 +353,34 @@ str(layer_config)
 ```
 
 ```
-## List of 12
-##  $ name              : chr "dense_4"
-##  $ trainable         : logi TRUE
-##  $ dtype             :List of 4
+## List of 13
+##  $ name               : chr "dense_4"
+##  $ trainable          : logi TRUE
+##  $ dtype              :List of 4
 ##   ..$ module         : chr "keras"
 ##   ..$ class_name     : chr "DTypePolicy"
 ##   ..$ config         :List of 1
 ##   .. ..$ name: chr "float32"
 ##   ..$ registered_name: NULL
-##  $ units             : int 3
-##  $ activation        : chr "relu"
-##  $ use_bias          : logi TRUE
-##  $ kernel_initializer:List of 4
+##  $ units              : int 3
+##  $ activation         : chr "relu"
+##  $ use_bias           : logi TRUE
+##  $ kernel_initializer :List of 4
 ##   ..$ module         : chr "keras.initializers"
 ##   ..$ class_name     : chr "GlorotUniform"
 ##   ..$ config         :List of 1
 ##   .. ..$ seed: NULL
 ##   ..$ registered_name: NULL
-##  $ bias_initializer  :List of 4
+##  $ bias_initializer   :List of 4
 ##   ..$ module         : chr "keras.initializers"
 ##   ..$ class_name     : chr "Zeros"
 ##   ..$ config         : Named list()
 ##   ..$ registered_name: NULL
-##  $ kernel_regularizer: NULL
-##  $ bias_regularizer  : NULL
-##  $ kernel_constraint : NULL
-##  $ bias_constraint   : NULL
+##  $ kernel_regularizer : NULL
+##  $ bias_regularizer   : NULL
+##  $ kernel_constraint  : NULL
+##  $ bias_constraint    : NULL
+##  $ quantization_config: NULL
 ##  - attr(*, "__class__")=<class 'keras.src.layers.core.dense.Dense'>
 ```
 
@@ -805,7 +807,6 @@ of a model where a `from_config` override is necessary.
 
 
 ``` r
-`%||%` <- \(x, y) if(is.null(x)) y else x
 layer_custom_model <- register_keras_serializable(
   package = "ComplexModels",
   object = Layer(
@@ -829,7 +830,11 @@ layer_custom_model <- register_keras_serializable(
       config$first_layer %<>% deserialize_keras_object()
       config$second_layer %<>% deserialize_keras_object()
       # note that the class is available in methods under the classname symbol,
-      # (`CustomModel` for this class), and also under the symbol `__class__`
+      # (`CustomModel` for this class), and also under the symbol `__class__`.
+      # `from_config()` also provides `cls` for the class; these are equivalent:
+      # - CustomModel(!!!config)
+      # - `__class__`(!!!config)
+      # - cls(!!!config)
       cls(!!!config)
       # CustomModel(!!!config)
     },

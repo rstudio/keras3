@@ -46,10 +46,8 @@ model.
     # Note that `'my_package'` is used as the `package` argument here, and since
     # the `name` argument is not provided, `'MyDense'` is used as the `name`.
     layer_my_dense <- Layer("MyDense")
-    register_keras_serializable(layer_my_dense, package = "my_package")
-
-    ## <class '<r-namespace:keras3>.MyDense'>
-    ##  signature: (*args, **kwargs)
+    layer_my_dense <-
+      register_keras_serializable(layer_my_dense, package = "my_package")
 
     MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
     stopifnot(exprs = {

@@ -422,15 +422,17 @@ result in a model that cannot be used at inference time).</p>
 <span></span>
 <span></span>
 <span>  get_causal_attention_mask <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="va">sequence_length</span>, <span class="va">encoding_length</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../../../reference/op_shape.html">op_shape</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
+<span>    <span class="va">.</span><span class="op">[</span><span class="va">batch_size</span>, <span class="va">sequence_length</span>, <span class="va">encoding_length</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_shape.html">op_shape</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span></span>
 <span>    <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">0L</span>, <span class="va">sequence_length</span>, include_end <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span>    <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span>, <span class="cn">NULL</span><span class="op">]</span></span>
-<span>    <span class="va">j</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="cn">NULL</span>, <span class="op">]</span></span>
+<span>    <span class="va">i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span>, <span class="va">newaxis</span><span class="op">]</span></span>
+<span>    <span class="va">j</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">newaxis</span>, <span class="op">]</span></span>
 <span>    <span class="va">mask</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_cast.html">op_cast</a></span><span class="op">(</span><span class="va">i</span> <span class="op">&gt;=</span> <span class="va">j</span>, <span class="st">"int32"</span><span class="op">)</span></span>
 <span></span>
-<span>    <span class="va">repeats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_stack.html">op_stack</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span><span class="op">)</span></span>
-<span>    <span class="fu"><a href="../../../reference/op_tile.html">op_tile</a></span><span class="op">(</span><span class="va">mask</span><span class="op">[</span><span class="cn">NULL</span>, , <span class="op">]</span>, <span class="va">repeats</span><span class="op">)</span></span>
+<span>    <span class="fu"><a href="../../../reference/op_tile.html">op_tile</a></span><span class="op">(</span></span>
+<span>      <span class="va">mask</span><span class="op">[</span><span class="va">newaxis</span>, , <span class="op">]</span>,</span>
+<span>      <span class="fu"><a href="../../../reference/shape.html">shape</a></span><span class="op">(</span><span class="va">batch_size</span>, <span class="fl">1L</span>, <span class="fl">1L</span><span class="op">)</span></span>
+<span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span>,</span>
 <span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span>, <span class="va">mask</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
@@ -483,7 +485,7 @@ result in a model that cannot be used at inference time).</p>
 <span>  <span class="op">}</span>,</span>
 <span></span>
 <span>  call <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">.</span>, <span class="va">len</span><span class="op">)</span> <span class="op"><a href="../../../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../../../reference/op_shape.html">op_shape</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="co"># (batch_size, seq_len)</span></span>
+<span>    <span class="va">.</span><span class="op">[</span><span class="va">.</span>, <span class="va">len</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_shape.html">op_shape</a></span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span> <span class="co"># (batch_size, seq_len)</span></span>
 <span>    <span class="va">positions</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/op_arange.html">op_arange</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">len</span>, dtype <span class="op">=</span> <span class="st">"int32"</span>, include_end <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span>    <span class="va">embedded_tokens</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">token_embeddings</span><span class="op">(</span><span class="va">inputs</span><span class="op">)</span></span>
 <span>    <span class="va">embedded_positions</span> <span class="op">&lt;-</span> <span class="va">self</span><span class="op">$</span><span class="fu">position_embeddings</span><span class="op">(</span><span class="va">positions</span><span class="op">)</span></span>
@@ -587,7 +589,7 @@ converge you should train for at least 30 epochs.</p>
 <span></span>
 <span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>,</span>
 <span>                   validation_data <span class="op">=</span> <span class="va">val_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1297/1297 - 55s - 42ms/step - accuracy: 0.1592 - loss: 3.8833 - val_accuracy: 0.1691 - val_loss: 3.1841</span></span></code></pre>
+<pre><code><span><span class="co">## 1297/1297 - 55s - 42ms/step - accuracy: 0.3949 - loss: 3.8943 - val_accuracy: 0.4274 - val_loss: 3.1756</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="decoding-test-sentences">Decoding test sentences<a class="anchor" aria-label="anchor" href="#decoding-test-sentences"></a>

@@ -221,7 +221,7 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <span>    <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/20</span></span>
-<span><span class="co">## 469/469 - 6s - 13ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974</span></span>
+<span><span class="co">## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974</span></span>
 <span><span class="co">## Epoch 2/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8899 - loss: 0.0866 - val_binary_accuracy: 0.9227 - val_loss: 0.0626</span></span>
 <span><span class="co">## Epoch 3/20</span></span>
@@ -273,11 +273,11 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <code class="sourceCode R"><span><span class="co"># compute final accuracy on training and test sets</span></span>
 <span></span>
 <span><span class="va">tr_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tr</span><span class="op">$</span><span class="va">pair1</span>, <span class="va">tr</span><span class="op">$</span><span class="va">pair2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1875/1875 - 2s - 1ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1875/1875 - 2s - 888us/step</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tr_acc</span>  <span class="op">&lt;-</span> <span class="fu">compute_accuracy</span><span class="op">(</span><span class="va">tr_pred</span>, <span class="va">tr</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">te_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">te</span><span class="op">$</span><span class="va">pair1</span>, <span class="va">te</span><span class="op">$</span><span class="va">pair2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 0s - 1ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">te_acc</span>  <span class="op">&lt;-</span> <span class="fu">compute_accuracy</span><span class="op">(</span><span class="va">te_pred</span>, <span class="va">te</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
 <span></span>

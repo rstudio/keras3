@@ -35,7 +35,7 @@ for (f in files) {
     age <- difftime(Sys.time(), file.info(output)$mtime, units = "days")
     if (age < 1) {
       cli::cli_inform(c("*" = "recently rendered, skipping"))
-      next
+      # next
     }
   }
   knit_vignette(f, external = TRUE)

@@ -21,7 +21,7 @@ for (f in files) {
     out_mtime <- file.info(output)$mtime
     if (!is.na(src_mtime) && !is.na(out_mtime) && out_mtime >= src_mtime) {
       cli::cli_inform(c("*" = "up to date, skipping"))
-      next
+      # next
     }
   }
   knit_vignette(f, external = TRUE)

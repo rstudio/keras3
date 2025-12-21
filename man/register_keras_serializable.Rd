@@ -35,15 +35,10 @@ defaults to the object name if not passed.
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# Note that `'my_package'` is used as the `package` argument here, and since
 # the `name` argument is not provided, `'MyDense'` is used as the `name`.
 layer_my_dense <- Layer("MyDense")
-register_keras_serializable(layer_my_dense, package = "my_package")
-}\if{html}{\out{</div>}}
+layer_my_dense <-
+  register_keras_serializable(layer_my_dense, package = "my_package")
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <class '<r-namespace:keras3>.MyDense'>
-##  signature: (*args, **kwargs)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
+MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
 stopifnot(exprs = \{
   get_registered_object('my_package>MyDense') == MyDense
   get_registered_name(MyDense) == 'my_package>MyDense'

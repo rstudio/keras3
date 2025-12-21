@@ -97,12 +97,13 @@ loss_modified_mse <- Loss(
 register_keras_serializable(loss_modified_mse)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>
-##  signature: (
-##    reduction='sum_over_batch_size',
-##    name='mean_squared_error',
-##    dtype=None
-## )
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## function (reduction = "sum_over_batch_size", name = "mean_squared_error",
+##     dtype = NULL)
+## \{
+##     args <- capture_args(enforce_all_dots_named = FALSE)
+##     do.call(ModifiedMeanSquaredError, args)
+## \}
+## <environment: 0x5dddb2eef3e0>
 
 }\if{html}{\out{</div>}}
 

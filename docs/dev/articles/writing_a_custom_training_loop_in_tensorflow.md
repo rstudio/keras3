@@ -150,21 +150,21 @@ for (epoch in seq_len(epochs)) {
     ## Seen so far: 12800 samples
     ## Training loss (for one batch) at step 400: 1.6450
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.7421
+    ## Training loss (for one batch) at step 600: 0.6477
     ## Seen so far: 38400 samples
     ## Start of epoch  2
-    ## Training loss (for one batch) at step 200: 0.7254
+    ## Training loss (for one batch) at step 200: 0.5088
     ## Seen so far: 12800 samples
-    ## Training loss (for one batch) at step 400: 0.2476
+    ## Training loss (for one batch) at step 400: 0.2798
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.3578
+    ## Training loss (for one batch) at step 600: 0.3972
     ## Seen so far: 38400 samples
     ## Start of epoch  3
-    ## Training loss (for one batch) at step 200: 0.2974
+    ## Training loss (for one batch) at step 200: 0.4365
     ## Seen so far: 12800 samples
-    ## Training loss (for one batch) at step 400: 0.4441
+    ## Training loss (for one batch) at step 400: 0.4717
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.1461
+    ## Training loss (for one batch) at step 600: 0.2702
     ## Seen so far: 38400 samples
 
 ## Low-level handling of metrics
@@ -248,29 +248,29 @@ for (epoch in seq_len(epochs)) {
 ```
 
     ## Start of epoch  1
-    ## Training loss (for one batch) at step 200: 1.9564
+    ## Training loss (for one batch) at step 200: 1.6268
     ## Seen so far: 12800 samples
-    ## Training loss (for one batch) at step 400: 1.3562
+    ## Training loss (for one batch) at step 400: 1.2241
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.4850
+    ## Training loss (for one batch) at step 600: 0.4987
     ## Seen so far: 38400 samples
-    ## Training acc over epoch: 0.7836
-    ## Validation acc: 0.8681
+    ## Training acc over epoch: 0.7844
+    ## Validation acc: 0.8680
     ## Start of epoch  2
-    ## Training loss (for one batch) at step 200: 0.7679
+    ## Training loss (for one batch) at step 200: 0.4626
     ## Seen so far: 12800 samples
-    ## Training loss (for one batch) at step 400: 0.5674
+    ## Training loss (for one batch) at step 400: 0.4654
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.4705
+    ## Training loss (for one batch) at step 600: 0.5022
     ## Seen so far: 38400 samples
-    ## Training acc over epoch: 0.8838
-    ## Validation acc: 0.9049
+    ## Training acc over epoch: 0.8836
+    ## Validation acc: 0.9028
 
 ``` r
 Sys.time() - time
 ```
 
-    ## Time difference of 39.32149 secs
+    ## Time difference of 39.4617 secs
 
 ## Speeding-up your training step with `tf_function()`
 
@@ -353,16 +353,16 @@ for (epoch in seq_len(epochs)) {
 
     ## Start of epoch  1
     ## Training acc over epoch: 0.0000
-    ## Validation acc: 0.9049
+    ## Validation acc: 0.9028
     ## Start of epoch  2
     ## Training acc over epoch: 0.0000
-    ## Validation acc: 0.9049
+    ## Validation acc: 0.9028
 
 ``` r
 Sys.time() - time
 ```
 
-    ## Time difference of 0.4121809 secs
+    ## Time difference of 0.4011955 secs
 
 Much faster, isn’t it?
 
@@ -561,7 +561,7 @@ loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
 
 train_step <- tf_function(function(real_images) {
   # Sample random points in the latent space
-  c(batch_size, ...) %<-% op_shape(real_images)
+  .[batch_size, ..] <- op_shape(real_images)
   random_latent_vectors <-
     tf$random$normal(shape(batch_size, latent_dim))
 
@@ -637,7 +637,7 @@ for (epoch in seq_len(epochs)) {
   while (!is.null(real_images <- iter_next(train_iterator))) {
     step <- step + 1
     # Train the discriminator & generator on one batch of real images.
-    c(d_loss, g_loss, generated_images) %<-% train_step(real_images)
+    .[d_loss, g_loss, generated_images] <- train_step(real_images)
 
     # Logging.
     if (step %% 200 == 0) {
