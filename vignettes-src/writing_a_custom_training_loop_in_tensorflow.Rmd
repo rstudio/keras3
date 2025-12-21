@@ -453,7 +453,7 @@ loss_fn <- loss_binary_crossentropy(from_logits = TRUE)
 
 train_step <- tf_function(function(real_images) {
   # Sample random points in the latent space
-  c(batch_size, ...) %<-% op_shape(real_images)
+  .[batch_size, ..] <- op_shape(real_images)
   random_latent_vectors <-
     tf$random$normal(shape(batch_size, latent_dim))
 
@@ -528,7 +528,7 @@ for (epoch in seq_len(epochs)) {
   while (!is.null(real_images <- iter_next(train_iterator))) {
     step <- step + 1
     # Train the discriminator & generator on one batch of real images.
-    c(d_loss, g_loss, generated_images) %<-% train_step(real_images)
+    .[d_loss, g_loss, generated_images] <- train_step(real_images)
 
     # Logging.
     if (step %% 200 == 0) {
