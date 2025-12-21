@@ -461,7 +461,7 @@ samples were correctly classified as belonging to a given class:</p>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 782/782 - 1s - 1ms/step - categorical_true_positives: 284268.0000 - loss: 0.1658</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 782/782 - 1s - 1ms/step - categorical_true_positives: 284173.0000 - loss: 0.1207</span></span></code></pre>
+<span><span class="co">## 782/782 - 1s - 1ms/step - categorical_true_positives: 284201.0000 - loss: 0.1207</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="handling-losses-and-metrics-that-dont-fit-the-standard-signature">Handling losses and metrics that don’t fit the standard
@@ -545,7 +545,7 @@ compiled without a <code>loss</code> argument, like this:</p>
 <span>  targets <span class="op">=</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">data</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 450ms/step - loss: 0.9638</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 454ms/step - loss: 0.9638</span></span></code></pre>
 <p>For more information about training multi-input models, see the
 section <strong>Passing data to multi-input, multi-output
 models</strong>.</p>
@@ -674,7 +674,7 @@ Dataset before moving on to the next epoch.</p>
 <span><span class="va">val_dataset</span> <span class="op">&lt;-</span> <span class="va">val_dataset</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">val_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 2s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291</span></span></code></pre>
 <p>At the end of each epoch, the model will iterate over the validation
 dataset and compute the validation loss and validation metrics.</p>
 <p>If you want to run validation only on a specific number of batches
@@ -1071,7 +1071,7 @@ mapping output names to arrays</strong>.</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span>    epochs<span class="op">=</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 4/4 - 2s - 557ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676</span></span></code></pre>
+<pre><code><span><span class="co">## 4/4 - 2s - 566ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676</span></span></code></pre>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Alternatively, fit on named lists (names matching)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span></span>
@@ -1092,7 +1092,7 @@ mapping output names to arrays</strong>.</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 4/4 - 2s - 422ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01</span></span></code></pre>
+<pre><code><span><span class="co">## 4/4 - 2s - 423ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01</span></span></code></pre>
 <p>Here’s the <code>Dataset</code> use case: similarly as what we did
 for R arrays, the <code>Dataset</code> should return a tuple of named
 lists (dicts).</p>
@@ -1106,7 +1106,7 @@ lists (dicts).</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 2/2 - 1s - 718ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01</span></span></code></pre>
+<pre><code><span><span class="co">## 2/2 - 1s - 706ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks">Using callbacks<a class="anchor" aria-label="anchor" href="#using-callbacks"></a>

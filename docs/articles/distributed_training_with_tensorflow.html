@@ -265,13 +265,13 @@ objects to load data in a multi-device or distributed workflow.</p>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">## 782/782 - 6s - 8ms/step - loss: 0.2616 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1514 - val_sparse_categorical_accuracy: 0.9522</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.1041 - sparse_categorical_accuracy: 0.9682 - val_loss: 0.0995 - val_sparse_categorical_accuracy: 0.9686</span></span>
-<span><span class="co">## 157/157 - 0s - 3ms/step - loss: 0.1001 - sparse_categorical_accuracy: 0.9675</span></span></code></pre>
+<span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.1041 - sparse_categorical_accuracy: 0.9682 - val_loss: 0.1025 - val_sparse_categorical_accuracy: 0.9668</span></span>
+<span><span class="co">## 157/157 - 0s - 3ms/step - loss: 0.1048 - sparse_categorical_accuracy: 0.9667</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.1001396</span></span>
+<span><span class="co">## [1] 0.104846</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $sparse_categorical_accuracy</span></span>
-<span><span class="co">## [1] 0.9675</span></span></code></pre>
+<span><span class="co">## [1] 0.9667</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks-to-ensure-fault-tolerance">Using callbacks to ensure fault tolerance<a class="anchor" aria-label="anchor" href="#using-callbacks-to-ensure-fault-tolerance"></a>
@@ -340,7 +340,7 @@ saved model.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 5s - 7ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9693 - val_loss: 0.1185 - val_sparse_categorical_accuracy: 0.9602</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9693 - val_loss: 0.1185 - val_sparse_categorical_accuracy: 0.9602</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">

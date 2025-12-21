@@ -173,23 +173,23 @@ history <- model |> fit(
 ```
 
     ## Epoch 1/2
-    ## 750/750 - 2s - 3ms/step - accuracy: 0.8980 - loss: 0.3540 - val_accuracy: 0.9444 - val_loss: 0.1898
+    ## 750/750 - 2s - 3ms/step - accuracy: 0.8979 - loss: 0.3540 - val_accuracy: 0.9448 - val_loss: 0.1903
     ## Epoch 2/2
-    ## 750/750 - 1s - 1ms/step - accuracy: 0.9512 - loss: 0.1633 - val_accuracy: 0.9605 - val_loss: 0.1387
+    ## 750/750 - 1s - 1ms/step - accuracy: 0.9511 - loss: 0.1634 - val_accuracy: 0.9605 - val_loss: 0.1386
 
 ``` r
 test_scores <- model |> evaluate(x_test, y_test, verbose=2)
 ```
 
-    ## 313/313 - 1s - 2ms/step - accuracy: 0.9598 - loss: 0.1322
+    ## 313/313 - 1s - 2ms/step - accuracy: 0.9593 - loss: 0.1323
 
 ``` r
 cat("Test loss:", test_scores$loss, "\n")
 cat("Test accuracy:", test_scores$accuracy, "\n")
 ```
 
-    ## Test loss: 0.1321879
-    ## Test accuracy: 0.9598
+    ## Test loss: 0.1323339
+    ## Test accuracy: 0.9593
 
 For further reading, see the [training and
 evaluation](https://keras3.posit.co/articles/training_with_built_in_methods.md)
@@ -713,7 +713,7 @@ model |> fit(
 )
 ```
 
-    ## 13/13 - 5s - 416ms/step - acc: 0.1262 - loss: 2.3007 - val_acc: 0.1150 - val_loss: 2.2966
+    ## 13/13 - 5s - 420ms/step - acc: 0.1225 - loss: 2.3007 - val_acc: 0.1100 - val_loss: 2.2938
 
 ## Shared layers
 

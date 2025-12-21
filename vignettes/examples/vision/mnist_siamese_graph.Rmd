@@ -218,7 +218,7 @@ tr_pred <- predict(model, list(tr$pair1, tr$pair2))[,1]
 ```
 
 ```
-## 1875/1875 - 2s - 965us/step
+## 1875/1875 - 2s - 921us/step
 ```
 
 ``` r
