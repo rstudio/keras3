@@ -108,11 +108,11 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse"), convert = TRUE) {
 #'
 #' ```
 #' train/
-#' ├─ x
-#' └─ y
+#'   - x
+#'   - y
 #' test/
-#' ├─ x
-#' └─ y
+#'   - x
+#'   - y
 #' ```
 #'
 #'   The `x` data includes integer sequences. If the `num_words` argument was
@@ -195,11 +195,11 @@ dataset_imdb_word_index <- function(path = "imdb_word_index.json") {
 #'
 #' ```
 #' train/
-#' ├─ x
-#' └─ y
+#'   - x
+#'   - y
 #' test/
-#' ├─ x
-#' └─ y
+#'   - x
+#'   - y
 #' ```
 #'
 #' ```{r reuters-str-true}
