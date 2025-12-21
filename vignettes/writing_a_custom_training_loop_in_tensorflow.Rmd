@@ -156,21 +156,21 @@ for (epoch in seq_len(epochs)) {
 ## Seen so far: 12800 samples
 ## Training loss (for one batch) at step 400: 1.6450
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7421
+## Training loss (for one batch) at step 600: 0.6477
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.8495
+## Training loss (for one batch) at step 200: 0.5089
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.3543
+## Training loss (for one batch) at step 400: 0.2498
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.5087
+## Training loss (for one batch) at step 600: 0.4186
 ## Seen so far: 38400 samples
 ## Start of epoch  3
-## Training loss (for one batch) at step 200: 0.3673
+## Training loss (for one batch) at step 200: 0.3609
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.5512
+## Training loss (for one batch) at step 400: 0.4127
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.2054
+## Training loss (for one batch) at step 600: 0.1738
 ## Seen so far: 38400 samples
 ```
 
@@ -272,8 +272,8 @@ for (epoch in seq_len(epochs)) {
 ## Seen so far: 25600 samples
 ## Training loss (for one batch) at step 600: 0.5022
 ## Seen so far: 38400 samples
-## Training acc over epoch: 0.8836
-## Validation acc: 0.9028
+## Training acc over epoch: 0.8837
+## Validation acc: 0.9031
 ```
 
 ``` r
@@ -281,7 +281,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 43.02717 secs
+## Time difference of 42.24861 secs
 ```
 
 ## Speeding-up your training step with `tf_function()`
@@ -369,10 +369,10 @@ for (epoch in seq_len(epochs)) {
 ```
 ## Start of epoch  1
 ## Training acc over epoch: 0.0000
-## Validation acc: 0.9028
+## Validation acc: 0.9031
 ## Start of epoch  2
 ## Training acc over epoch: 0.0000
-## Validation acc: 0.9028
+## Validation acc: 0.9031
 ```
 
 ``` r
@@ -380,7 +380,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 0.4525867 secs
+## Time difference of 0.4167948 secs
 ```
 
 Much faster, isn't it?

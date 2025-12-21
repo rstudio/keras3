@@ -103,7 +103,7 @@ register_keras_serializable(loss_modified_mse)
 ##     args <- capture_args(enforce_all_dots_named = FALSE)
 ##     do.call(ModifiedMeanSquaredError, args)
 ## \}
-## <environment: 0x5923de915a50>
+## <environment: 0x5a0137f9ef60>
 
 }\if{html}{\out{</div>}}
 
