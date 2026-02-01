@@ -10,14 +10,13 @@ use_backend(backend, gpu = NA)
 \item{backend}{string, can be \code{"tensorflow"}, \code{"jax"}, \code{"numpy"}, or
 \code{"torch"}.}
 
-\item{gpu}{bool, whether to use the GPU. If \code{NA} (default), it will attempt
-to detect GPU availability on Linux. On M-series Macs, it defaults to
-\code{FALSE} for TensorFlow and \code{TRUE} for JAX. On Windows, it defaults to
-\code{FALSE}.}
+\item{gpu}{bool, whether to use the GPU. If \code{NA} (default), it will
+attempt to detect GPU availability on Linux. On macOS and Windows it
+defaults to \code{FALSE}.}
 }
 \value{
-Called primarily for side effects. Returns the provided \code{backend},
-invisibly.
+Called primarily for side effects. Returns the provided
+\code{backend}, invisibly.
 }
 \description{
 Configure a Keras backend
@@ -29,8 +28,14 @@ only one backend can be configured at a time.
 The function should be called after \code{library(keras3)} and before calling
 other functions within the package (see below for an example).
 
+Note that macOS packages like \code{tensorflow-metal} and \code{jax-metal} that
+purportedly enabled GPU usage on M-series macs all are currently broken
+and seemingly abandoned.
+
 There is experimental support for changing the backend after keras has
-initialized. using \code{config_set_backend()}.
+initialized with \code{config_set_backend()}. Usage of \code{config_set_backend} is
+generall not recommended for regular workflow---restarting the R session
+is the only reliable way to change the backend.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(keras3)
 use_backend("tensorflow")
