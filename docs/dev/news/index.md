@@ -2,18 +2,20 @@
 
 ## keras3 (development version)
 
-- Expanded numeric operations with
+- [`register_keras_serializable()`](https://keras3.posit.co/dev/reference/register_keras_serializable.md)
+  now updates R layer wrappers to use the registered class when called.
+
+- Numeric ops now include
   [`op_layer_normalization()`](https://keras3.posit.co/dev/reference/op_layer_normalization.md),
   [`op_cbrt()`](https://keras3.posit.co/dev/reference/op_cbrt.md),
   [`op_corrcoef()`](https://keras3.posit.co/dev/reference/op_corrcoef.md),
   [`op_deg2rad()`](https://keras3.posit.co/dev/reference/op_deg2rad.md),
   [`op_heaviside()`](https://keras3.posit.co/dev/reference/op_heaviside.md),
-  the new
-  [`op_sparse_sigmoid()`](https://keras3.posit.co/dev/reference/op_sparse_sigmoid.md)
-  plus matching
-  [`activation_sparse_sigmoid()`](https://keras3.posit.co/dev/reference/activation_sparse_sigmoid.md),
-  and an `attn_logits_soft_cap` argument for
-  [`op_dot_product_attention()`](https://keras3.posit.co/dev/reference/op_dot_product_attention.md).
+  [`op_sparse_sigmoid()`](https://keras3.posit.co/dev/reference/op_sparse_sigmoid.md),
+  and
+  [`activation_sparse_sigmoid()`](https://keras3.posit.co/dev/reference/activation_sparse_sigmoid.md).
+  [`op_dot_product_attention()`](https://keras3.posit.co/dev/reference/op_dot_product_attention.md)
+  gains `attn_logits_soft_cap`.
 
 - Added signal window operations:
   [`op_bartlett()`](https://keras3.posit.co/dev/reference/op_bartlett.md),
@@ -55,7 +57,7 @@
 
 - Transposed convolution utilities now follow the latest Keras API:
   [`op_conv_transpose()`](https://keras3.posit.co/dev/reference/op_conv_transpose.md)
-  defaults `strides = 1` and the `layer_conv_*_transpose()` layers
+  defaults to `strides = 1`, and `layer_conv_*_transpose()` layers
   expose `output_padding` for precise shape control.
 
 - [`register_keras_serializable()`](https://keras3.posit.co/dev/reference/register_keras_serializable.md)
@@ -70,47 +72,48 @@
   now accepts a `synchronization` argument for distributed strategies.
 
 - [`layer_layer_normalization()`](https://keras3.posit.co/dev/reference/layer_layer_normalization.md)
-  removes the `rms_scaling` argument.
+  now omits the `rms_scaling` argument.
 
-- Merging layers now capture `...` with tidy dots (fixes
-  [\#1525](https://github.com/rstudio/keras3/issues/1525)).
+- Merging layers now capture `...` with tidy dots
+  ([\#1525](https://github.com/rstudio/keras3/issues/1525)).
 
-- Fixed Ops on JAX `_DimExpr` so symbolic shapes survive arithmetic with
-  R double scalars.
+- JAX `_DimExpr` shapes now remain symbolic when combined with R double
+  scalars.
 
 - [`layer_reshape()`](https://keras3.posit.co/dev/reference/layer_reshape.md)
-  can now accept `-1` as a sentinel for an automatically calculated axis
+  now accepts `-1` as a sentinel for an automatically calculated axis
   size.
 
 - [`layer_torch_module_wrapper()`](https://keras3.posit.co/dev/reference/layer_torch_module_wrapper.md)
   gains an `output_shape` argument to help Keras infer shapes when
   wrapping PyTorch modules.
 
-- `Layer$add_weight()` gains an `overwrite_with_gradient` option and
+- `Layer$add_weight()` gains an `overwrite_with_gradient` option, and
   layers now provide a `symbolic_call()` method.
 
 - Added [`str()`](https://rdrr.io/r/utils/str.html) S3 method for Keras
-  Variables.
+  `Variable`s.
 
-- Added S3 methods for JAX array:
+- JAX arrays now have S3 methods for
   [`str()`](https://rdrr.io/r/utils/str.html),
   [`as.array()`](https://rdrr.io/r/base/array.html),
   [`as.double()`](https://rdrr.io/r/base/double.html),
-  [`as.integer()`](https://rdrr.io/r/base/integer.html),
+  [`as.integer()`](https://rdrr.io/r/base/integer.html), and
   [`as.numeric()`](https://rdrr.io/r/base/numeric.html).
 
-- Added base-array compatibility methods for backend tensors:
+- Backend tensors now support base array helpers:
   [`t()`](https://rdrr.io/r/base/t.html),
   [`aperm()`](https://rdrr.io/r/base/aperm.html), and
   [`all.equal()`](https://rdrr.io/r/base/all.equal.html).
 
 - Added
   [`pillar::type_sum()`](https://pillar.r-lib.org/reference/type_sum.html)
-  for JAX variables and `JaxVariable`; extended
-  [`str()`](https://rdrr.io/r/utils/str.html) coverage to the new JAX
+  for JAX variables and `JaxVariable`;
+  [`str()`](https://rdrr.io/r/utils/str.html) now covers the new JAX
   variable class.
 
-- [`config_max_epochs()`](https://keras3.posit.co/dev/reference/config_max_epochs.md),
+- Added training caps via
+  [`config_max_epochs()`](https://keras3.posit.co/dev/reference/config_max_epochs.md),
   [`config_set_max_epochs()`](https://keras3.posit.co/dev/reference/config_max_epochs.md),
   [`config_max_steps_per_epoch()`](https://keras3.posit.co/dev/reference/config_max_epochs.md),
   and
@@ -123,11 +126,11 @@
 - Built-in dataset loaders now accept `convert = FALSE` to return NumPy
   arrays instead of R arrays.
 
-- Updated `plot(history, theme_bw = TRUE)` for `ggplot2` 3.4.0
-  compatibility.
+- `plot(history, theme_bw = TRUE)` is now compatible with `ggplot2`
+  3.4.0.
 
-- `plot(model)` DPI is now globally configurable via
-  `options(keras.plot.model.dpi = )`, (defaults to `200`).
+- `plot(model)` now reads DPI from `options(keras.plot.model.dpi = 200)`
+  (default is 200).
 
 - Reexported reticulate functions:
   [`py_help()`](https://rstudio.github.io/reticulate/reference/py_help.html),
@@ -137,17 +140,20 @@
   and
   [`import()`](https://rstudio.github.io/reticulate/reference/import.html).
 
-- Support `super()$initialize()` in subclassed Keras classes; improved
-  `super()` behavior in subclasses.
+- `super()$initialize()` now works in subclassed Keras classes, and
+  `super()` behavior is improved in subclasses.
 
-- Updated dependencies declared by `use_backend("jax", gpu=TRUE)` for
-  compatability with `keras-hub`.
+- `use_backend("jax", gpu = TRUE)` now declares dependencies compatible
+  with `keras-hub`.
 
 - Exported
-  [`named_list()`](https://keras3.posit.co/dev/reference/named_list.md)
-  utility.
+  [`named_list()`](https://keras3.posit.co/dev/reference/named_list.md).
 
-- Fixed an issue when switching backends twice in a row.
+- Switching backends twice in a row now works reliably.
+
+- [`layer_dropout()`](https://keras3.posit.co/dev/reference/layer_dropout.md)
+  now preserves `noise_shape` as an integer array so length-one shapes
+  are passed to Keras as iterables.
 
 ## keras3 1.4.0
 

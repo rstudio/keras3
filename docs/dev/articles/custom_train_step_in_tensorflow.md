@@ -123,9 +123,9 @@ model |> fit(x, y, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 20ms/step - mae: 1.4339 - loss: 3.2271
+    ## 32/32 - 1s - 19ms/step - mae: 1.4339 - loss: 3.2271
     ## Epoch 2/3
-    ## 32/32 - 0s - 3ms/step - mae: 1.3605 - loss: 2.9034
+    ## 32/32 - 0s - 2ms/step - mae: 1.3605 - loss: 2.9034
     ## Epoch 3/3
     ## 32/32 - 0s - 2ms/step - mae: 1.2960 - loss: 2.6272
 
@@ -284,7 +284,7 @@ model |> fit(x, y, sample_weight = sw, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 20ms/step - mae: 1.3434 - loss: 0.1681
+    ## 32/32 - 1s - 19ms/step - mae: 1.3434 - loss: 0.1681
     ## Epoch 2/3
     ## 32/32 - 0s - 2ms/step - mae: 1.3364 - loss: 0.1394
     ## Epoch 3/3
@@ -332,7 +332,7 @@ y <- random_normal(c(1000, 1))
 model |> evaluate(x, y)
 ```
 
-    ## 32/32 - 0s - 10ms/step - mae: 1.3871 - loss: 0.0000e+00
+    ## 32/32 - 0s - 8ms/step - mae: 1.3871 - loss: 0.0000e+00
 
     ## $loss
     ## tf.Tensor(0.0, shape=(), dtype=float32)

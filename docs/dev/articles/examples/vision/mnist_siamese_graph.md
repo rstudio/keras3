@@ -141,7 +141,7 @@ history <- model %>% fit(
 ```
 
     ## Epoch 1/20
-    ## 469/469 - 6s - 13ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974
+    ## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974
     ## Epoch 2/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8899 - loss: 0.0866 - val_binary_accuracy: 0.9227 - val_loss: 0.0626
     ## Epoch 3/20
@@ -198,14 +198,14 @@ plot of chunk unnamed-chunk-5
 tr_pred <- predict(model, list(tr$pair1, tr$pair2))[,1]
 ```
 
-    ## 1875/1875 - 2s - 1ms/step
+    ## 1875/1875 - 2s - 888us/step
 
 ``` r
 tr_acc  <- compute_accuracy(tr_pred, tr$y)
 te_pred <- predict(model, list(te$pair1, te$pair2))[,1]
 ```
 
-    ## 313/313 - 1s - 2ms/step
+    ## 313/313 - 0s - 1ms/step
 
 ``` r
 te_acc  <- compute_accuracy(te_pred, te$y)

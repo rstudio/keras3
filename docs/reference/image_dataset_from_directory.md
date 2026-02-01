@@ -1,0 +1,236 @@
+# Generates a `tf.data.Dataset` from image files in a directory.
+
+If your directory structure is:
+
+    main_directory/
+    ...class_a/
+    ......a_image_1.jpg
+    ......a_image_2.jpg
+    ...class_b/
+    ......b_image_1.jpg
+    ......b_image_2.jpg
+
+Then calling
+`image_dataset_from_directory(main_directory, labels = 'inferred')` will
+return a `tf.data.Dataset` that yields batches of images from the
+subdirectories `class_a` and `class_b`, together with labels 0 and 1 (0
+corresponding to `class_a` and 1 corresponding to `class_b`).
+
+Supported image formats: `.jpeg`, `.jpg`, `.png`, `.bmp`, `.gif`.
+Animated gifs are truncated to the first frame.
+
+## Usage
+
+``` r
+image_dataset_from_directory(
+  directory,
+  labels = "inferred",
+  label_mode = "int",
+  class_names = NULL,
+  color_mode = "rgb",
+  batch_size = 32L,
+  image_size = c(256L, 256L),
+  shuffle = TRUE,
+  seed = NULL,
+  validation_split = NULL,
+  subset = NULL,
+  interpolation = "bilinear",
+  follow_links = FALSE,
+  crop_to_aspect_ratio = FALSE,
+  pad_to_aspect_ratio = FALSE,
+  data_format = NULL,
+  verbose = TRUE
+)
+```
+
+## Arguments
+
+- directory:
+
+  Directory where the data is located. If `labels` is `"inferred"`, it
+  should contain subdirectories, each containing images for a class.
+  Otherwise, the directory structure is ignored.
+
+- labels:
+
+  Either `"inferred"` (labels are generated from the directory
+  structure), `NULL` (no labels), or a list/tuple of integer labels of
+  the same size as the number of image files found in the directory.
+  Labels should be sorted according to the alphanumeric order of the
+  image file paths (obtained via `os.walk(directory)` in Python).
+
+- label_mode:
+
+  String describing the encoding of `labels`. Options are:
+
+  - `"int"`: means that the labels are encoded as integers (e.g. for
+    `sparse_categorical_crossentropy` loss).
+
+  - `"categorical"` means that the labels are encoded as a categorical
+    vector (e.g. for `categorical_crossentropy` loss).
+
+  - `"binary"` means that the labels (there can be only 2) are encoded
+    as `float32` scalars with values 0 or 1 (e.g. for
+    `binary_crossentropy`).
+
+  - `NULL` (no labels).
+
+- class_names:
+
+  Only valid if `labels` is `"inferred"`. This is the explicit list of
+  class names (must match names of subdirectories). Used to control the
+  order of the classes (otherwise alphanumerical order is used).
+
+- color_mode:
+
+  One of `"grayscale"`, `"rgb"`, `"rgba"`. Whether the images will be
+  converted to have 1, 3, or 4 channels. Defaults to `"rgb"`.
+
+- batch_size:
+
+  Size of the batches of data. Defaults to 32. If `NULL`, the data will
+  not be batched (the dataset will yield individual samples).
+
+- image_size:
+
+  Size to resize images to after they are read from disk, specified as
+  `(height, width)`. Since the pipeline processes batches of images that
+  must all have the same size, this must be provided. Defaults to
+  `(256, 256)`.
+
+- shuffle:
+
+  Whether to shuffle the data. Defaults to `TRUE`. If set to `FALSE`,
+  sorts the data in alphanumeric order.
+
+- seed:
+
+  Optional random seed for shuffling and transformations.
+
+- validation_split:
+
+  Optional float between 0 and 1, fraction of data to reserve for
+  validation.
+
+- subset:
+
+  Subset of the data to return. One of `"training"`, `"validation"`, or
+  `"both"`. Only used if `validation_split` is set. When
+  `subset = "both"`, the utility returns a tuple of two datasets (the
+  training and validation datasets respectively).
+
+- interpolation:
+
+  String, the interpolation method used when resizing images. Supports
+  `"bilinear"`, `"nearest"`, `"bicubic"`, `"area"`, `"lanczos3"`,
+  `"lanczos5"`, `"gaussian"`, `"mitchellcubic"`. Defaults to
+  `"bilinear"`.
+
+- follow_links:
+
+  Whether to visit subdirectories pointed to by symlinks. Defaults to
+  `FALSE`.
+
+- crop_to_aspect_ratio:
+
+  If `TRUE`, resize the images without aspect ratio distortion. When the
+  original aspect ratio differs from the target aspect ratio, the output
+  image will be cropped so as to return the largest possible window in
+  the image (of size `image_size`) that matches the target aspect ratio.
+  By default (`crop_to_aspect_ratio = FALSE`), aspect ratio may not be
+  preserved.
+
+- pad_to_aspect_ratio:
+
+  If `TRUE`, resize the images without aspect ratio distortion. When the
+  original aspect ratio differs from the target aspect ratio, the output
+  image will be padded so as to return the largest possible window in
+  the image (of size `image_size`) that matches the target aspect ratio.
+  By default (`pad_to_aspect_ratio=FALSE`), aspect ratio may not be
+  preserved.
+
+- data_format:
+
+  If `NULL` uses
+  [`config_image_data_format()`](https://keras3.posit.co/reference/config_image_data_format.md)
+  otherwise either `'channel_last'` or `'channel_first'`.
+
+- verbose:
+
+  Whether to display number information on classes and number of files
+  found. Defaults to `TRUE`.
+
+## Value
+
+A `tf.data.Dataset` object.
+
+- If `label_mode` is `NULL`, it yields `float32` tensors of shape
+  `(batch_size, image_size[1], image_size[2], num_channels)`, encoding
+  images (see below for rules regarding `num_channels`).
+
+- Otherwise, it yields a tuple `(images, labels)`, where `images` has
+  shape `(batch_size, image_size[1], image_size[2], num_channels)`, and
+  `labels` follows the format described below.
+
+Rules regarding labels format:
+
+- if `label_mode` is `"int"`, the labels are an `int32` tensor of shape
+  `(batch_size,)`.
+
+- if `label_mode` is `"binary"`, the labels are a `float32` tensor of 1s
+  and 0s of shape `(batch_size, 1)`.
+
+- if `label_mode` is `"categorical"`, the labels are a `float32` tensor
+  of shape `(batch_size, num_classes)`, representing a one-hot encoding
+  of the class index.
+
+Rules regarding number of channels in the yielded images:
+
+- if `color_mode` is `"grayscale"`, there's 1 channel in the image
+  tensors.
+
+- if `color_mode` is `"rgb"`, there are 3 channels in the image tensors.
+
+- if `color_mode` is `"rgba"`, there are 4 channels in the image
+  tensors.
+
+## See also
+
+- <https://keras.io/api/data_loading/image#imagedatasetfromdirectory-function>
+
+Other dataset utils:  
+[`audio_dataset_from_directory()`](https://keras3.posit.co/reference/audio_dataset_from_directory.md)  
+[`split_dataset()`](https://keras3.posit.co/reference/split_dataset.md)  
+[`text_dataset_from_directory()`](https://keras3.posit.co/reference/text_dataset_from_directory.md)  
+[`timeseries_dataset_from_array()`](https://keras3.posit.co/reference/timeseries_dataset_from_array.md)  
+
+Other utils:  
+[`audio_dataset_from_directory()`](https://keras3.posit.co/reference/audio_dataset_from_directory.md)  
+[`clear_session()`](https://keras3.posit.co/reference/clear_session.md)  
+[`config_disable_interactive_logging()`](https://keras3.posit.co/reference/config_disable_interactive_logging.md)  
+[`config_disable_traceback_filtering()`](https://keras3.posit.co/reference/config_disable_traceback_filtering.md)  
+[`config_enable_interactive_logging()`](https://keras3.posit.co/reference/config_enable_interactive_logging.md)  
+[`config_enable_traceback_filtering()`](https://keras3.posit.co/reference/config_enable_traceback_filtering.md)  
+[`config_is_interactive_logging_enabled()`](https://keras3.posit.co/reference/config_is_interactive_logging_enabled.md)  
+[`config_is_traceback_filtering_enabled()`](https://keras3.posit.co/reference/config_is_traceback_filtering_enabled.md)  
+[`get_file()`](https://keras3.posit.co/reference/get_file.md)  
+[`get_source_inputs()`](https://keras3.posit.co/reference/get_source_inputs.md)  
+[`image_array_save()`](https://keras3.posit.co/reference/image_array_save.md)  
+[`image_from_array()`](https://keras3.posit.co/reference/image_from_array.md)  
+[`image_load()`](https://keras3.posit.co/reference/image_load.md)  
+[`image_smart_resize()`](https://keras3.posit.co/reference/image_smart_resize.md)  
+[`image_to_array()`](https://keras3.posit.co/reference/image_to_array.md)  
+[`layer_feature_space()`](https://keras3.posit.co/reference/layer_feature_space.md)  
+[`normalize()`](https://keras3.posit.co/reference/normalize.md)  
+[`pad_sequences()`](https://keras3.posit.co/reference/pad_sequences.md)  
+[`set_random_seed()`](https://keras3.posit.co/reference/set_random_seed.md)  
+[`split_dataset()`](https://keras3.posit.co/reference/split_dataset.md)  
+[`text_dataset_from_directory()`](https://keras3.posit.co/reference/text_dataset_from_directory.md)  
+[`timeseries_dataset_from_array()`](https://keras3.posit.co/reference/timeseries_dataset_from_array.md)  
+[`to_categorical()`](https://keras3.posit.co/reference/to_categorical.md)  
+[`zip_lists()`](https://keras3.posit.co/reference/zip_lists.md)  
+
+Other preprocessing:  
+[`image_smart_resize()`](https://keras3.posit.co/reference/image_smart_resize.md)  
+[`text_dataset_from_directory()`](https://keras3.posit.co/reference/text_dataset_from_directory.md)  
+[`timeseries_dataset_from_array()`](https://keras3.posit.co/reference/timeseries_dataset_from_array.md)  

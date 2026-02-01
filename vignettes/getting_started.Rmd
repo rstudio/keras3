@@ -196,7 +196,7 @@ model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step - accuracy: 0.9810 - loss: 0.0842
+## 313/313 - 1s - 3ms/step - accuracy: 0.9810 - loss: 0.0842
 ```
 
 ```

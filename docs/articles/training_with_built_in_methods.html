@@ -5,91 +5,73 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Complete guide to training &amp; evaluation with `fit()` and `evaluate()`.">
 <title>Training &amp; evaluation with the built-in methods • keras3</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Training &amp; evaluation with the built-in methods">
+<meta name="description" content="Complete guide to training &amp; evaluation with `fit()` and `evaluate()`.">
 <meta property="og:description" content="Complete guide to training &amp; evaluation with `fit()` and `evaluate()`.">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
+<!-- Google Tag Manager --><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-KHBDBW7');</script><!-- End Google Tag Manager -->
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
     <!-- Google Tag Manager (noscript) --> <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KHBDBW7" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> <!-- End Google Tag Manager (noscript) -->
 
 
-    <nav class="navbar fixed-top navbar-inverse navbar-expand-lg bg-primary" data-bs-theme="inverse"><div class="container">
-    
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="inverse" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/getting_started.html">Getting Started</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/getting_started.html">Getting Started</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-guides">Guides</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-guides">
-    <h6 class="dropdown-header" data-toc-skip>Model definition</h6>
-    <a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a>
-    <a class="dropdown-item" href="../articles/functional_api.html">Functional API</a>
-    <h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6>
-    <a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a>
-    <a class="dropdown-item" href="../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a>
-    <a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a>
-    <a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a>
-    <a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a>
-    <a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a>
-    <h6 class="dropdown-header" data-toc-skip>Other topics</h6>
-    <a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a>
-    <a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a>
-    <a class="dropdown-item" href="../articles/distribution.html">Distributed training with Jax</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-guides" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Guides</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-guides">
+<li><h6 class="dropdown-header" data-toc-skip>Model definition</h6></li>
+    <li><a class="dropdown-item" href="../articles/sequential_model.html">Sequential Model</a></li>
+    <li><a class="dropdown-item" href="../articles/functional_api.html">Functional API</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Extending and customizing</h6></li>
+    <li><a class="dropdown-item" href="../articles/training_with_built_in_methods.html">Training &amp; evaluation with the built-in methods</a></li>
+    <li><a class="dropdown-item" href="../articles/custom_train_step_in_tensorflow.html">Customizing `fit()` with Tensorflow</a></li>
+    <li><a class="dropdown-item" href="../articles/writing_your_own_callbacks.html">Writing your own callbacks</a></li>
+    <li><a class="dropdown-item" href="../articles/making_new_layers_and_models_via_subclassing.html">Making new layers and models via subclassing</a></li>
+    <li><a class="dropdown-item" href="../articles/writing_a_custom_training_loop_in_tensorflow.html">Writing a training loop from scratch in TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../articles/serialization_and_saving.html">Serialization and Saving</a></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Other topics</h6></li>
+    <li><a class="dropdown-item" href="../articles/transfer_learning.html">Transfer learning and fine tuning</a></li>
+    <li><a class="dropdown-item" href="../articles/distributed_training_with_tensorflow.html">Distributed training with TensorFlow</a></li>
+    <li><a class="dropdown-item" href="../articles/distribution.html">Distributed training with Jax</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../articles/examples/index.html">Examples</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">News</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/examples/index.html">Examples</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">News</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/rstudio/keras3/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -98,7 +80,8 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Training &amp; evaluation with the built-in methods</h1>
+
+      <h1>Training &amp; evaluation with the built-in methods</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/rstudio/keras3/blob/HEAD/vignettes-src/training_with_built_in_methods.Rmd" class="external-link"><code>vignettes-src/training_with_built_in_methods.Rmd</code></a></small>
@@ -227,7 +210,7 @@ iterating over the entire dataset for a given number of
 <span>  validation_data <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_val</span>, <span class="va">y_val</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.3410 - sparse_categorical_accuracy: 0.9034 - val_loss: 0.1855 - val_sparse_categorical_accuracy: 0.9460</span></span>
+<span><span class="co">## 782/782 - 3s - 3ms/step - loss: 0.3410 - sparse_categorical_accuracy: 0.9034 - val_loss: 0.1855 - val_sparse_categorical_accuracy: 0.9460</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 782/782 - 1s - 1ms/step - loss: 0.1590 - sparse_categorical_accuracy: 0.9538 - val_loss: 0.1323 - val_sparse_categorical_accuracy: 0.9621</span></span></code></pre>
 <p>The returned <code>history</code> object holds a record of the loss
@@ -255,7 +238,7 @@ values and metric values during training:</p>
 <code class="sourceCode R"><span><span class="co"># Generate predictions (probabilities -- the output of the last layer)</span></span>
 <span><span class="co"># on new data using `predict`</span></span>
 <span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>,<span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 191ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 166ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">predictions</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1]  2 10</span></span></code></pre>
@@ -478,7 +461,7 @@ samples were correctly classified as belonging to a given class:</p>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 782/782 - 1s - 1ms/step - categorical_true_positives: 284268.0000 - loss: 0.1658</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 782/782 - 1s - 1ms/step - categorical_true_positives: 284173.0000 - loss: 0.1207</span></span></code></pre>
+<span><span class="co">## 782/782 - 1s - 1ms/step - categorical_true_positives: 284201.0000 - loss: 0.1207</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="handling-losses-and-metrics-that-dont-fit-the-standard-signature">Handling losses and metrics that don’t fit the standard
@@ -562,7 +545,7 @@ compiled without a <code>loss</code> argument, like this:</p>
 <span>  targets <span class="op">=</span> <span class="fu"><a href="../reference/random_normal.html">random_normal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">data</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1/1 - 0s - 460ms/step - loss: 0.9638</span></span></code></pre>
+<pre><code><span><span class="co">## 1/1 - 0s - 454ms/step - loss: 0.9638</span></span></code></pre>
 <p>For more information about training multi-input models, see the
 section <strong>Passing data to multi-input, multi-output
 models</strong>.</p>
@@ -670,7 +653,7 @@ Dataset before moving on to the next epoch.</p>
 <span><span class="co"># Only use the 100 batches per epoch (that's 64 * 100 samples)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">3</span>, steps_per_epoch <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 100/100 - 1s - 11ms/step - loss: 0.8017 - sparse_categorical_accuracy: 0.7806</span></span>
+<span><span class="co">## 100/100 - 1s - 9ms/step - loss: 0.8017 - sparse_categorical_accuracy: 0.7806</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
 <span><span class="co">## 100/100 - 0s - 1ms/step - loss: 0.3661 - sparse_categorical_accuracy: 0.9006</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
@@ -691,7 +674,7 @@ Dataset before moving on to the next epoch.</p>
 <span><span class="va">val_dataset</span> <span class="op">&lt;-</span> <span class="va">val_dataset</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">val_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 2s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291</span></span></code></pre>
 <p>At the end of each epoch, the model will iterate over the validation
 dataset and compute the validation loss and validation metrics.</p>
 <p>If you want to run validation only on a specific number of batches
@@ -932,7 +915,7 @@ contribution of certain samples to the total loss).</p>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_compiled_model</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 2s - 3ms/step - loss: 0.3654 - sparse_categorical_accuracy: 0.9057</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 2s - 2ms/step - loss: 0.3654 - sparse_categorical_accuracy: 0.9057</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -1088,7 +1071,7 @@ mapping output names to arrays</strong>.</p>
 <span>    batch_size<span class="op">=</span><span class="fl">32</span>,</span>
 <span>    epochs<span class="op">=</span><span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 4/4 - 2s - 559ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676</span></span></code></pre>
+<pre><code><span><span class="co">## 4/4 - 2s - 566ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676</span></span></code></pre>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Alternatively, fit on named lists (names matching)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span></span>
@@ -1109,7 +1092,7 @@ mapping output names to arrays</strong>.</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span>,</span>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 4/4 - 2s - 418ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01</span></span></code></pre>
+<pre><code><span><span class="co">## 4/4 - 2s - 423ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01</span></span></code></pre>
 <p>Here’s the <code>Dataset</code> use case: similarly as what we did
 for R arrays, the <code>Dataset</code> should return a tuple of named
 lists (dicts).</p>
@@ -1123,7 +1106,7 @@ lists (dicts).</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/dataset_batch.html" class="external-link">dataset_batch</a></span><span class="op">(</span><span class="fl">64</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 2/2 - 2s - 757ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01</span></span></code></pre>
+<pre><code><span><span class="co">## 2/2 - 1s - 706ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="using-callbacks">Using callbacks<a class="anchor" aria-label="anchor" href="#using-callbacks"></a>
@@ -1172,11 +1155,11 @@ where a certain performance threshold is exceeded</li>
 <pre><code><span><span class="co">## Epoch 1/20</span></span>
 <span><span class="co">## 625/625 - 2s - 3ms/step - loss: 0.3695 - sparse_categorical_accuracy: 0.8961 - val_loss: 0.1873 - val_sparse_categorical_accuracy: 0.9469</span></span>
 <span><span class="co">## Epoch 2/20</span></span>
-<span><span class="co">## 625/625 - 1s - 2ms/step - loss: 0.1752 - sparse_categorical_accuracy: 0.9488 - val_loss: 0.1405 - val_sparse_categorical_accuracy: 0.9576</span></span>
+<span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.1752 - sparse_categorical_accuracy: 0.9488 - val_loss: 0.1405 - val_sparse_categorical_accuracy: 0.9576</span></span>
 <span><span class="co">## Epoch 3/20</span></span>
 <span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.1277 - sparse_categorical_accuracy: 0.9626 - val_loss: 0.1217 - val_sparse_categorical_accuracy: 0.9644</span></span>
 <span><span class="co">## Epoch 4/20</span></span>
-<span><span class="co">## 625/625 - 1s - 2ms/step - loss: 0.1009 - sparse_categorical_accuracy: 0.9702 - val_loss: 0.1138 - val_sparse_categorical_accuracy: 0.9667</span></span>
+<span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.1009 - sparse_categorical_accuracy: 0.9702 - val_loss: 0.1138 - val_sparse_categorical_accuracy: 0.9667</span></span>
 <span><span class="co">## Epoch 5/20</span></span>
 <span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.0823 - sparse_categorical_accuracy: 0.9758 - val_loss: 0.1086 - val_sparse_categorical_accuracy: 0.9679</span></span>
 <span><span class="co">## Epoch 6/20</span></span>
@@ -1272,12 +1255,16 @@ to save checkpoints of your model at frequent intervals.</p>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
 <span><span class="co">##</span></span>
-<span><span class="co">## Epoch 1: val_loss improved from inf to 0.19488, saving model to mymodel_1.keras</span></span>
+<span><span class="co">## Epoch 1: val_loss improved from None to 0.19488, saving model to mymodel_1.keras</span></span>
+<span><span class="co">##</span></span>
+<span><span class="co">## Epoch 1: finished saving model to mymodel_1.keras</span></span>
 <span><span class="co">## 625/625 - 2s - 3ms/step - loss: 0.3793 - sparse_categorical_accuracy: 0.8936 - val_loss: 0.1949 - val_sparse_categorical_accuracy: 0.9447</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## Epoch 2: val_loss improved from 0.19488 to 0.14489, saving model to mymodel_2.keras</span></span>
-<span><span class="co">## 625/625 - 1s - 2ms/step - loss: 0.1777 - sparse_categorical_accuracy: 0.9475 - val_loss: 0.1449 - val_sparse_categorical_accuracy: 0.9590</span></span></code></pre>
+<span><span class="co">##</span></span>
+<span><span class="co">## Epoch 2: finished saving model to mymodel_2.keras</span></span>
+<span><span class="co">## 625/625 - 1s - 1ms/step - loss: 0.1777 - sparse_categorical_accuracy: 0.9475 - val_loss: 0.1449 - val_sparse_categorical_accuracy: 0.9590</span></span></code></pre>
 <p>The <code>ModelCheckpoint</code> callback can be used to implement
 fault-tolerance: the ability to restart training from the last saved
 state of the model in case training gets randomly interrupted. Here’s a
@@ -1399,7 +1386,7 @@ write logs, and you’re good to go:</p>
 <p>For more information, see <code><a href="../reference/callback_tensorboard.html">callback_tensorboard()</a></code>.</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -1410,15 +1397,15 @@ write logs, and you’re good to go:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>

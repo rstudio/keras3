@@ -565,7 +565,8 @@ function (object, filepath, call_endpoint = "serve", call_training_endpoint = NU
 #' # Note that `'my_package'` is used as the `package` argument here, and since
 #' # the `name` argument is not provided, `'MyDense'` is used as the `name`.
 #' layer_my_dense <- Layer("MyDense")
-#' register_keras_serializable(layer_my_dense, package = "my_package")
+#' layer_my_dense <-
+#'   register_keras_serializable(layer_my_dense, package = "my_package")
 #'
 #' MyDense <- environment(layer_my_dense)$`__class__` # the python class obj
 #' stopifnot(exprs = {
@@ -605,7 +606,18 @@ function (object, name = NULL, package = NULL)
                 c("", "base", "R_GlobalEnv"), "Custom")
 
   keras$saving$register_keras_serializable(package, name)(py_object)
-  py_object
+  # Try to update a wrapper, e.g., returned by `Layer()`
+  if(is.function(object) && exists("__class__", env <- environment(object))) {
+    old_py_object <- get("__class__", env)
+    for(nm in names(env)) {
+      if(identical(get(nm, env), old_py_object))
+        assign(nm, py_object, env)
+    }
+    object
+  } else {
+    # return the registered py_object
+    py_object
+  }
 }
 
 

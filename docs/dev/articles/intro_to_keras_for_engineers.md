@@ -162,23 +162,21 @@ model |> fit(
 ```
 
     ## Epoch 1/10
-    ## 399/399 - 7s - 17ms/step - acc: 0.7464 - loss: 0.7476 - val_acc: 0.9627 - val_loss: 0.1272
+    ## 399/399 - 7s - 17ms/step - acc: 0.7495 - loss: 0.7395 - val_acc: 0.9643 - val_loss: 0.1229
     ## Epoch 2/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9376 - loss: 0.2072 - val_acc: 0.9771 - val_loss: 0.0776
+    ## 399/399 - 2s - 5ms/step - acc: 0.9388 - loss: 0.2049 - val_acc: 0.9760 - val_loss: 0.0783
     ## Epoch 3/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9571 - loss: 0.1475 - val_acc: 0.9816 - val_loss: 0.0633
+    ## 399/399 - 2s - 5ms/step - acc: 0.9566 - loss: 0.1466 - val_acc: 0.9817 - val_loss: 0.0631
     ## Epoch 4/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9652 - loss: 0.1175 - val_acc: 0.9863 - val_loss: 0.0488
+    ## 399/399 - 2s - 5ms/step - acc: 0.9658 - loss: 0.1165 - val_acc: 0.9861 - val_loss: 0.0473
     ## Epoch 5/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9713 - loss: 0.1004 - val_acc: 0.9870 - val_loss: 0.0469
+    ## 399/399 - 2s - 5ms/step - acc: 0.9720 - loss: 0.0981 - val_acc: 0.9882 - val_loss: 0.0421
     ## Epoch 6/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9754 - loss: 0.0854 - val_acc: 0.9879 - val_loss: 0.0407
+    ## 399/399 - 2s - 5ms/step - acc: 0.9754 - loss: 0.0854 - val_acc: 0.9881 - val_loss: 0.0403
     ## Epoch 7/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9767 - loss: 0.0788 - val_acc: 0.9899 - val_loss: 0.0378
+    ## 399/399 - 2s - 5ms/step - acc: 0.9767 - loss: 0.0789 - val_acc: 0.9889 - val_loss: 0.0408
     ## Epoch 8/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9795 - loss: 0.0688 - val_acc: 0.9867 - val_loss: 0.0438
-    ## Epoch 9/10
-    ## 399/399 - 2s - 5ms/step - acc: 0.9799 - loss: 0.0666 - val_acc: 0.9893 - val_loss: 0.0396
+    ## 399/399 - 2s - 5ms/step - acc: 0.9797 - loss: 0.0676 - val_acc: 0.9874 - val_loss: 0.0434
 
 ``` r
 score <- model |> evaluate(x_test, y_test, verbose = 0)
@@ -332,7 +330,7 @@ model |> fit(
 )
 ```
 
-    ## 399/399 - 6s - 15ms/step - acc: 0.7355 - loss: 0.7721 - val_acc: 0.9287 - val_loss: 0.2384
+    ## 399/399 - 6s - 15ms/step - acc: 0.7344 - loss: 0.7754 - val_acc: 0.9248 - val_loss: 0.2444
 
 ## Training models on arbitrary data sources
 
@@ -375,7 +373,7 @@ model |> compile(
 model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
-    ## 469/469 - 7s - 15ms/step - acc: 0.7502 - loss: 0.7455 - val_acc: 0.9107 - val_loss: 0.2982
+    ## 469/469 - 7s - 15ms/step - acc: 0.7500 - loss: 0.7470 - val_acc: 0.9086 - val_loss: 0.3072
 
 ## Further reading
 

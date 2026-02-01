@@ -198,11 +198,12 @@ layer_custom <- Layer(
 # Upon registration, you can optionally specify a package or a name.
 # If left blank, the package defaults to "Custom" and the name defaults to
 # the class name.
-register_keras_serializable(layer_custom, package = "MyLayers")
+layer_custom <- register_keras_serializable(layer_custom, package = "MyLayers")
 
 custom_fn <- keras3:::py_func2(function(x) x^2, name = "custom_fn", convert = TRUE)
 
-register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
+custom_fn <- 
+  register_keras_serializable(custom_fn, name="custom_fn", package="my_package")
 
 
 # Create the model.
@@ -704,7 +705,6 @@ of a model where a `from_config` override is necessary.
 <!-- <a name="registration_example"></a> -->
 
 ```{r}
-`%||%` <- \(x, y) if(is.null(x)) y else x
 layer_custom_model <- register_keras_serializable(
   package = "ComplexModels",
   object = Layer(
@@ -728,7 +728,11 @@ layer_custom_model <- register_keras_serializable(
       config$first_layer %<>% deserialize_keras_object()
       config$second_layer %<>% deserialize_keras_object()
       # note that the class is available in methods under the classname symbol,
-      # (`CustomModel` for this class), and also under the symbol `__class__`
+      # (`CustomModel` for this class), and also under the symbol `__class__`.
+      # `from_config()` also provides `cls` for the class; these are equivalent:
+      # - CustomModel(!!!config)
+      # - `__class__`(!!!config)
+      # - cls(!!!config)
       cls(!!!config)
       # CustomModel(!!!config)
     },

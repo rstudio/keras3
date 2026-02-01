@@ -48,11 +48,11 @@ If \code{FALSE}, objects are returned as NumPy arrays.}
 Lists of training and test data: \verb{train$x, train$y, test$x, test$y}.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{train/
-├─ x
-└─ y
+  - x
+  - y
 test/
-├─ x
-└─ y
+  - x
+  - y
 }\if{html}{\out{</div>}}
 
 The \code{x} data includes integer sequences. If the \code{num_words} argument was

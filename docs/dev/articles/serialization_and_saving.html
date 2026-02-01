@@ -272,11 +272,12 @@ custom activation function to demonstrate this.</p>
 <span><span class="co"># Upon registration, you can optionally specify a package or a name.</span></span>
 <span><span class="co"># If left blank, the package defaults to "Custom" and the name defaults to</span></span>
 <span><span class="co"># the class name.</span></span>
-<span><span class="fu"><a href="../reference/register_keras_serializable.html">register_keras_serializable</a></span><span class="op">(</span><span class="va">layer_custom</span>, package <span class="op">=</span> <span class="st">"MyLayers"</span><span class="op">)</span></span>
+<span><span class="va">layer_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/register_keras_serializable.html">register_keras_serializable</a></span><span class="op">(</span><span class="va">layer_custom</span>, package <span class="op">=</span> <span class="st">"MyLayers"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">custom_fn</span> <span class="op">&lt;-</span> <span class="fu">keras3</span><span class="fu">:::</span><span class="fu">py_func2</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span>, name <span class="op">=</span> <span class="st">"custom_fn"</span>, convert <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/register_keras_serializable.html">register_keras_serializable</a></span><span class="op">(</span><span class="va">custom_fn</span>, name<span class="op">=</span><span class="st">"custom_fn"</span>, package<span class="op">=</span><span class="st">"my_package"</span><span class="op">)</span></span>
+<span><span class="va">custom_fn</span> <span class="op">&lt;-</span></span>
+<span>  <span class="fu"><a href="../reference/register_keras_serializable.html">register_keras_serializable</a></span><span class="op">(</span><span class="va">custom_fn</span>, name<span class="op">=</span><span class="st">"custom_fn"</span>, package<span class="op">=</span><span class="st">"my_package"</span><span class="op">)</span></span>
 <span></span>
 <span></span>
 <span><span class="co"># Create the model.</span></span>
@@ -422,33 +423,34 @@ or layer.</p>
 <code class="sourceCode R"><span><span class="va">layer</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>, <span class="fl">3</span>, activation<span class="op">=</span><span class="st">"relu"</span><span class="op">)</span></span>
 <span><span class="va">layer_config</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_config.html">get_config</a></span><span class="op">(</span><span class="va">layer</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">layer_config</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## List of 12</span></span>
-<span><span class="co">##  $ name              : chr "dense_4"</span></span>
-<span><span class="co">##  $ trainable         : logi TRUE</span></span>
-<span><span class="co">##  $ dtype             :List of 4</span></span>
+<pre><code><span><span class="co">## List of 13</span></span>
+<span><span class="co">##  $ name               : chr "dense_4"</span></span>
+<span><span class="co">##  $ trainable          : logi TRUE</span></span>
+<span><span class="co">##  $ dtype              :List of 4</span></span>
 <span><span class="co">##   ..$ module         : chr "keras"</span></span>
 <span><span class="co">##   ..$ class_name     : chr "DTypePolicy"</span></span>
 <span><span class="co">##   ..$ config         :List of 1</span></span>
 <span><span class="co">##   .. ..$ name: chr "float32"</span></span>
 <span><span class="co">##   ..$ registered_name: NULL</span></span>
-<span><span class="co">##  $ units             : int 3</span></span>
-<span><span class="co">##  $ activation        : chr "relu"</span></span>
-<span><span class="co">##  $ use_bias          : logi TRUE</span></span>
-<span><span class="co">##  $ kernel_initializer:List of 4</span></span>
+<span><span class="co">##  $ units              : int 3</span></span>
+<span><span class="co">##  $ activation         : chr "relu"</span></span>
+<span><span class="co">##  $ use_bias           : logi TRUE</span></span>
+<span><span class="co">##  $ kernel_initializer :List of 4</span></span>
 <span><span class="co">##   ..$ module         : chr "keras.initializers"</span></span>
 <span><span class="co">##   ..$ class_name     : chr "GlorotUniform"</span></span>
 <span><span class="co">##   ..$ config         :List of 1</span></span>
 <span><span class="co">##   .. ..$ seed: NULL</span></span>
 <span><span class="co">##   ..$ registered_name: NULL</span></span>
-<span><span class="co">##  $ bias_initializer  :List of 4</span></span>
+<span><span class="co">##  $ bias_initializer   :List of 4</span></span>
 <span><span class="co">##   ..$ module         : chr "keras.initializers"</span></span>
 <span><span class="co">##   ..$ class_name     : chr "Zeros"</span></span>
 <span><span class="co">##   ..$ config         : Named list()</span></span>
 <span><span class="co">##   ..$ registered_name: NULL</span></span>
-<span><span class="co">##  $ kernel_regularizer: NULL</span></span>
-<span><span class="co">##  $ bias_regularizer  : NULL</span></span>
-<span><span class="co">##  $ kernel_constraint : NULL</span></span>
-<span><span class="co">##  $ bias_constraint   : NULL</span></span>
+<span><span class="co">##  $ kernel_regularizer : NULL</span></span>
+<span><span class="co">##  $ bias_regularizer   : NULL</span></span>
+<span><span class="co">##  $ kernel_constraint  : NULL</span></span>
+<span><span class="co">##  $ bias_constraint    : NULL</span></span>
+<span><span class="co">##  $ quantization_config: NULL</span></span>
 <span><span class="co">##  - attr(*, "__class__")=&lt;class 'keras.src.layers.core.dense.Dense'&gt;</span></span></code></pre>
 <p>Now let’s reconstruct the layer using the <code><a href="../reference/get_config.html">from_config()</a></code>
 method:</p>
@@ -836,8 +838,7 @@ these objects. Let’s take a look at an example of a model where a
 <p><strong>Example:</strong>
 <!-- <a name="registration_example"></a> --></p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">`%||%`</span> <span class="op">&lt;-</span> \<span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="va">y</span> <span class="kw">else</span> <span class="va">x</span></span>
-<span><span class="va">layer_custom_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/register_keras_serializable.html">register_keras_serializable</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">layer_custom_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/register_keras_serializable.html">register_keras_serializable</a></span><span class="op">(</span></span>
 <span>  package <span class="op">=</span> <span class="st">"ComplexModels"</span>,</span>
 <span>  object <span class="op">=</span> <span class="fu"><a href="../reference/Layer.html">Layer</a></span><span class="op">(</span></span>
 <span>    <span class="st">"CustomModel"</span>,</span>
@@ -860,7 +861,11 @@ these objects. Let’s take a look at an example of a model where a
 <span>      <span class="va">config</span><span class="op">$</span><span class="va">first_layer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>      <span class="va">config</span><span class="op">$</span><span class="va">second_layer</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="../reference/deserialize_keras_object.html">deserialize_keras_object</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>      <span class="co"># note that the class is available in methods under the classname symbol,</span></span>
-<span>      <span class="co"># (`CustomModel` for this class), and also under the symbol `__class__`</span></span>
+<span>      <span class="co"># (`CustomModel` for this class), and also under the symbol `__class__`.</span></span>
+<span>      <span class="co"># `from_config()` also provides `cls` for the class; these are equivalent:</span></span>
+<span>      <span class="co"># - CustomModel(!!!config)</span></span>
+<span>      <span class="co"># - `__class__`(!!!config)</span></span>
+<span>      <span class="co"># - cls(!!!config)</span></span>
 <span>      <span class="fu">cls</span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">config</span><span class="op">)</span></span>
 <span>      <span class="co"># CustomModel(!!!config)</span></span>
 <span>    <span class="op">}</span>,</span>

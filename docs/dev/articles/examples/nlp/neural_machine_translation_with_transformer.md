@@ -355,15 +355,17 @@ layer_transformer_decoder <- Layer(
 
 
   get_causal_attention_mask = function(inputs) {
-    c(batch_size, sequence_length, encoding_length) %<-% op_shape(inputs)
+    .[batch_size, sequence_length, encoding_length] <- op_shape(inputs)
 
     x <- op_arange(0L, sequence_length, include_end = FALSE)
-    i <- x[, NULL]
-    j <- x[NULL, ]
+    i <- x[, newaxis]
+    j <- x[newaxis, ]
     mask <- op_cast(i >= j, "int32")
 
-    repeats <- op_stack(c(batch_size, 1L, 1L))
-    op_tile(mask[NULL, , ], repeats)
+    op_tile(
+      mask[newaxis, , ],
+      shape(batch_size, 1L, 1L)
+    )
   },
 
   call = function(inputs, mask = NULL) {
@@ -416,7 +418,7 @@ layer_positional_embedding <- Layer(
   },
 
   call = function(inputs) {
-    c(., len) %<-% op_shape(inputs) # (batch_size, seq_len)
+    .[., len] <- op_shape(inputs) # (batch_size, seq_len)
     positions <- op_arange(0, len, dtype = "int32", include_end = FALSE)
     embedded_tokens <- self$token_embeddings(inputs)
     embedded_positions <- self$position_embeddings(positions)
@@ -530,7 +532,7 @@ transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
 ```
 
-    ## 1297/1297 - 55s - 42ms/step - accuracy: 0.1592 - loss: 3.8833 - val_accuracy: 0.1691 - val_loss: 3.1841
+    ## 1297/1297 - 55s - 42ms/step - accuracy: 0.3949 - loss: 3.8943 - val_accuracy: 0.4274 - val_loss: 3.1756
 
 ## Decoding test sentences
 

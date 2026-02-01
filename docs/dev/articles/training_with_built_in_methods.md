@@ -167,7 +167,7 @@ str(results)
 predictions <- model |> predict(x_test[1:2,])
 ```
 
-    ## 1/1 - 0s - 172ms/step
+    ## 1/1 - 0s - 159ms/step
 
 ``` r
 dim(predictions)
@@ -410,7 +410,7 @@ history <- model |> fit(x_train, y_train, batch_size = 64, epochs = 3)
     ## Epoch 2/3
     ## 782/782 - 1s - 1ms/step - categorical_true_positives: 284268.0000 - loss: 0.1658
     ## Epoch 3/3
-    ## 782/782 - 1s - 973us/step - categorical_true_positives: 284173.0000 - loss: 0.1207
+    ## 782/782 - 1s - 1ms/step - categorical_true_positives: 284173.0000 - loss: 0.1207
 
 ### Handling losses and metrics that don’t fit the standard signature
 
@@ -502,7 +502,7 @@ data <- list(
 model |> fit(data, epochs = 1)
 ```
 
-    ## 1/1 - 0s - 439ms/step - loss: 0.9638
+    ## 1/1 - 0s - 437ms/step - loss: 0.9638
 
 For more information about training multi-input models, see the section
 **Passing data to multi-input, multi-output models**.
@@ -599,7 +599,7 @@ model |> fit(train_dataset, epochs = 3)
 result <- model |> evaluate(test_dataset)
 ```
 
-    ## 157/157 - 1s - 3ms/step - loss: 0.1213 - sparse_categorical_accuracy: 0.9596
+    ## 157/157 - 1s - 4ms/step - loss: 0.1213 - sparse_categorical_accuracy: 0.9596
 
 ``` r
 result
@@ -637,7 +637,7 @@ model |> fit(train_dataset, epochs = 3, steps_per_epoch = 100)
     ## Epoch 2/3
     ## 100/100 - 0s - 1ms/step - loss: 0.3661 - sparse_categorical_accuracy: 0.9006
     ## Epoch 3/3
-    ## 100/100 - 0s - 960us/step - loss: 0.3009 - sparse_categorical_accuracy: 0.9106
+    ## 100/100 - 0s - 1ms/step - loss: 0.3009 - sparse_categorical_accuracy: 0.9106
 
 You can also pass a `Dataset` instance as the `validation_data` argument
 in [`fit()`](https://generics.r-lib.org/reference/fit.html):
@@ -1011,7 +1011,7 @@ model |> fit(
 )
 ```
 
-    ## 4/4 - 2s - 392ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01
+    ## 4/4 - 2s - 400ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01
 
 Here’s the `Dataset` use case: similarly as what we did for R arrays,
 the `Dataset` should return a tuple of named lists (dicts).
@@ -1028,7 +1028,7 @@ train_dataset <- train_dataset |>
 model |> fit(train_dataset, epochs = 1)
 ```
 
-    ## 2/2 - 1s - 706ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01
+    ## 2/2 - 1s - 681ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01
 
 ## Using callbacks
 
@@ -1184,10 +1184,14 @@ model |> fit(
     ## Epoch 1/2
     ##
     ## Epoch 1: val_loss improved from None to 0.19488, saving model to mymodel_1.keras
+    ##
+    ## Epoch 1: finished saving model to mymodel_1.keras
     ## 625/625 - 2s - 3ms/step - loss: 0.3793 - sparse_categorical_accuracy: 0.8936 - val_loss: 0.1949 - val_sparse_categorical_accuracy: 0.9447
     ## Epoch 2/2
     ##
     ## Epoch 2: val_loss improved from 0.19488 to 0.14489, saving model to mymodel_2.keras
+    ##
+    ## Epoch 2: finished saving model to mymodel_2.keras
     ## 625/625 - 1s - 1ms/step - loss: 0.1777 - sparse_categorical_accuracy: 0.9475 - val_loss: 0.1449 - val_sparse_categorical_accuracy: 0.9590
 
 The `ModelCheckpoint` callback can be used to implement fault-tolerance:

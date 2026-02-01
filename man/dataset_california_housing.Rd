@@ -60,7 +60,8 @@ Nested list of arrays: \verb{(x_train, y_train), (x_test, y_test)}.
 }\if{html}{\out{</div>}}
 }
 \description{
-This dataset was obtained from the \href{https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html}{StatLib repository}.
+This dataset was obtained from the StatLib repository
+(\verb{https://www.dcc.fc.up.pt/~ltorgo/Regression/cal_housing.html}).
 
 It's a continuous regression dataset with 20,640 samples with
 8 features each.

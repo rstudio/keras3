@@ -73,12 +73,13 @@ loss:
     # register the custom object
     register_keras_serializable(loss_modified_mse)
 
-    ## <class '<r-namespace:keras3>.ModifiedMeanSquaredError'>
-    ##  signature: (
-    ##    reduction='sum_over_batch_size',
-    ##    name='mean_squared_error',
-    ##    dtype=None
-    ## )
+    ## function (reduction = "sum_over_batch_size", name = "mean_squared_error",
+    ##     dtype = NULL)
+    ## {
+    ##     args <- capture_args(enforce_all_dots_named = FALSE)
+    ##     do.call(ModifiedMeanSquaredError, args)
+    ## }
+    ## <environment: 0x5dddb2eef3e0>
 
     # confirm object is registered
     get_custom_objects()

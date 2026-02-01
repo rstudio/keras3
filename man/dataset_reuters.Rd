@@ -54,11 +54,11 @@ function returns a list where the names are words and the values are
 integer. e.g. \code{word_index[["giraffe"]]} might return \code{1234}.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{train/
-├─ x
-└─ y
+  - x
+  - y
 test/
-├─ x
-└─ y
+  - x
+  - y
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{str(dataset_reuters())
