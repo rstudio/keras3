@@ -216,15 +216,24 @@ keras <- NULL
     registerS3method("aperm", backend_tensor_class, op_transpose, baseenv())
     registerS3method("all.equal", backend_tensor_class, all.equal.numpy.ndarray, baseenv())
 
-    if(keras$config$backend() == "jax") {
-      for(py_type in import("jax")$Array$`__subclasses__`()) {
-        s3_classname <- nameOfClass__python.builtin.type(py_type)
-        registerS3method("@"       , s3_classname, at.keras_backend_tensor, baseenv())
-        registerS3method("@<-"     , s3_classname, at_set.keras_backend_tensor, baseenv())
-        registerS3method("as.array", s3_classname, op_convert_to_array, baseenv())
-        registerS3method("^"       , s3_classname, `^__keras.backend.tensor`, baseenv())
-        registerS3method("%*%"     , s3_classname, op_matmul, baseenv())
-      }
+    # "jax._src.core.Tracer"
+    if (keras$config$backend() == "jax") {
+      local({
+        #
+        jax <- import("jax")
+        jax_types <- c(
+          jax$Array$`__subclasses__`(),
+          jax$core$Tracer
+        )
+        for (py_type in jax_types) {
+          s3_classname <- nameOfClass__python.builtin.type(py_type)
+          registerS3method("@"       , s3_classname, at.keras_backend_tensor, baseenv())
+          registerS3method("@<-"     , s3_classname, at_set.keras_backend_tensor, baseenv())
+          registerS3method("as.array", s3_classname, op_convert_to_array, baseenv())
+          registerS3method("^"       , s3_classname, `^__keras.backend.tensor`, baseenv())
+          registerS3method("%*%"     , s3_classname, op_matmul, baseenv())
+        }
+      })
     }
   })
 
