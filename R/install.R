@@ -371,9 +371,7 @@ py_require_remove_all_torch <- function() {
 py_require_tensorflow_cpu <- function() {
   if (is_linux()) {
 
-    # pin 2.18.* because later versions of 'tensorflow-cpu' are not
-    # compatible with 'tensorflow-text', used by 'keras-hub'
-    py_require("tensorflow-cpu==2.18.*")
+    py_require("tensorflow-cpu")
 
     # set override so tensorflow-text is prevented from pulling in 'tensorflow'
     uv_set_override_never_tensorflow()
