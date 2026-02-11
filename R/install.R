@@ -134,10 +134,9 @@ is_linux <- function() {
 #'
 #' @param backend string, can be `"tensorflow"`, `"jax"`, `"numpy"`, or
 #'   `"torch"`.
-#' @param gpu bool, whether to use the GPU. If `NA` (default), it will attempt
-#'   to detect GPU availability on Linux. On M-series Macs, it defaults to
-#'   `FALSE` for TensorFlow and `TRUE` for JAX. On Windows, it defaults to
-#'   `FALSE`.
+#' @param gpu bool, whether to use the GPU. If `NA` (default), it will
+#'   attempt to detect GPU availability on Linux. On macOS and Windows it
+#'   defaults to `FALSE`.
 #'
 #' @details
 #'
@@ -147,14 +146,21 @@ is_linux <- function() {
 #' The function should be called after `library(keras3)` and before calling
 #' other functions within the package (see below for an example).
 #'
+#' Note that macOS packages like `tensorflow-metal` and `jax-metal` that
+#' purportedly enabled GPU usage on M-series macs all are currently broken
+#' and seemingly abandoned.
+#'
 #' There is experimental support for changing the backend after keras has
-#' initialized. using `config_set_backend()`.
+#' initialized with `config_set_backend()`. Usage of `config_set_backend` is
+#' generall not recommended for regular workflow---restarting the R session
+#' is the only reliable way to change the backend.
+#'
 #' ```r
 #' library(keras3)
 #' use_backend("tensorflow")
 #' ```
-#' @returns Called primarily for side effects. Returns the provided `backend`,
-#'   invisibly.
+#' @returns Called primarily for side effects. Returns the provided
+#'   `backend`, invisibly.
 #' @export
 use_backend <- function(backend, gpu = NA) {
 
@@ -197,12 +203,14 @@ use_backend <- function(backend, gpu = NA) {
 
     macOS_jax = {
       if (is.na(gpu))
-        gpu <- TRUE
+        gpu <- FALSE
 
       if (gpu) {
+        # jax-metal is abandoned
+        # https://github.com/jax-ml/jax/issues/34109#issuecomment-3774392604
         py_require(c("tensorflow", "jax", "jax-metal"))
       } else {
-        py_require(c("tensorflow", "jax[cpu]"))
+        py_require(c("tensorflow", "jax")) # jax[cpu] ?
       }
     },
 
@@ -363,9 +371,7 @@ py_require_remove_all_torch <- function() {
 py_require_tensorflow_cpu <- function() {
   if (is_linux()) {
 
-    # pin 2.18.* because later versions of 'tensorflow-cpu' are not
-    # compatible with 'tensorflow-text', used by 'keras-hub'
-    py_require("tensorflow-cpu==2.18.*")
+    py_require("tensorflow-cpu")
 
     # set override so tensorflow-text is prevented from pulling in 'tensorflow'
     uv_set_override_never_tensorflow()
