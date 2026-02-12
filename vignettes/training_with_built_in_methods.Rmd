@@ -1305,7 +1305,7 @@ A callback has access to its associated model through the
 class property `self$model`.
 
 Make sure to read the
-[complete guide to writing custom callbacks](../writing_your_own_callbacks.html).
+[complete guide to writing custom callbacks](https://keras3.posit.co/articles/writing_your_own_callbacks.html).
 
 Here's a simple example saving a list of per-batch loss values during training:
 
