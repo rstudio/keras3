@@ -1,5 +1,14 @@
 # keras3 (development version)
 
+- `use_backend("jax")` on macOS now defaults to `gpu = FALSE`, so `jax-metal`
+  is no longer selected automatically.
+
+- JAX now registers backend tensor S3 methods for `jax.core.Tracer` objects,
+  improving compatibility for traced computations.
+
+- On Linux, `tensorflow-cpu` is no longer pinned to `2.18.*` when resolving
+  Python dependencies.
+
 # keras3 1.5.0
 
 - `register_keras_serializable()` now updates R layer wrappers to use the
