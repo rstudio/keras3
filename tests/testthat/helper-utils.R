@@ -4,13 +4,26 @@
 # 2 = INFO and WARNING messages are not printed
 # 3 = INFO, WARNING, and ERROR messages are not printed
 
-if(!reticulate::py_available() && reticulate::virtualenv_exists("r-tensorflow"))
-  reticulate::use_virtualenv("r-tensorflow")
+if (!reticulate::py_available()) {
+
+  if (reticulate::virtualenv_exists("r-tensorflow")) {
+    reticulate::use_virtualenv("r-tensorflow")
+  }
+
+  if (identical(Sys.getenv("NOT_CRAN"), "true")) {
+    py_require_legacy_keras()
+  }
+}
+
+print_py_env_stat <- function() {
+  print(reticulate::py_config())
+  print(reticulate::py_require())
+}
 
 if(reticulate::py_available()) {
-  print(reticulate::py_config())
+  print_py_env_stat()
 } else {
-  setHook("reticulate.onPyInit", function() print(reticulate::py_config()))
+  setHook("reticulate.onPyInit", print_py_env_stat)
 }
 
 # Sys.setenv(RETICULATE_PYTHON = "~/.local/share/r-miniconda/envs/tf-2.7-cpu/bin/python")
