@@ -36,8 +36,11 @@ The function should be called after
 functions within the package (see below for an example).
 
 There is experimental support for changing the backend after keras has
-initialized. using
+initialized with
 [`config_set_backend()`](https://keras3.posit.co/dev/reference/config_set_backend.md).
+Usage of `config_set_backend` is generally not recommended for regular
+workflow---restarting the R session is the only reliable way to change the
+backend.
 
     library(keras3)
     use_backend("tensorflow")
