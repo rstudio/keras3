@@ -269,8 +269,10 @@ created it (the code of the model subclass). Alternatively, you could be
 serializing this code as bytecode (e.g. via pickling), but that's unsafe 
 and generally not portable.
 
-For more information about these differences, see the article 
-["What are Symbolic and Imperative APIs in TensorFlow 2.0?"](https://medium.com/tensorflow/what-are-symbolic-and-imperative-apis-in-tensorflow-2-0-dfccecb01021).
+For more information about these differences, see the TensorFlow guides on
+[the Functional API](https://www.tensorflow.org/guide/keras/functional_api)
+and
+[making new layers and models via subclassing](https://www.tensorflow.org/guide/keras/making_new_layers_and_models_via_subclassing).
 
 Let's consider the following subclassed model, which follows the same structure as the model from the first section:
 
@@ -370,4 +372,3 @@ first_batch_loss == new_first_batch_loss
 ```
 
 You've reached the end of this guide! This covers everything you need to know about saving and serializing models with Keras in TensorFlow 2.0.
-

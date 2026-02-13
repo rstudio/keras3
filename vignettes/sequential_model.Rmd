@@ -198,17 +198,17 @@ model %>% fit(data, one_hot_labels, epochs=10, batch_size=32)
 
 Here are a few examples to get you started!
 
-On the [examples](https://tensorflow.rstudio.com/guide/keras/examples/) page you will also find example models for real datasets:
+On the [examples](https://tensorflow.rstudio.com/examples/) page you will also find example models for real datasets:
 
-- [CIFAR10 small images classification](https://tensorflow.rstudio.com/guide/keras/examples/cifar10_cnn) 
+- [CIFAR10 small images classification](https://tensorflow.rstudio.com/examples/cifar10_cnn) 
 
-- [IMDB movie review sentiment classification](https://tensorflow.rstudio.com/guide/keras/examples/imdb_cnn_lstm) 
+- [IMDB movie review sentiment classification](https://tensorflow.rstudio.com/examples/imdb_cnn_lstm) 
 
-- [Reuters newswires topic classification](https://tensorflow.rstudio.com/guide/keras/examples/reuters_mlp) 
+- [Reuters newswires topic classification](https://tensorflow.rstudio.com/examples/reuters_mlp) 
 
-- [MNIST handwritten digits classification](https://tensorflow.rstudio.com/guide/keras/examples/mnist_mlp)
+- [MNIST handwritten digits classification](https://tensorflow.rstudio.com/examples/mnist_mlp)
 
-- [Character-level text generation with LSTM](https://tensorflow.rstudio.com/guide/keras/examples/lstm_text_generation)
+- [Character-level text generation with LSTM](https://tensorflow.rstudio.com/examples/lstm_text_generation)
 
 Some additional examples are provided below.
 
@@ -439,7 +439,7 @@ model %>% fit(
 
 A stateful recurrent model is one for which the internal states (memories) obtained after processing a batch of samples are reused as initial states for the samples of the next batch. This allows to process longer sequences while keeping computational complexity manageable.
 
-[You can read more about stateful RNNs in the FAQ.](https://tensorflow.rstudio.com/articles/faq.html#how-can-i-use-stateful-rnns)
+[You can read more about stateful RNNs in the FAQ.](faq.html#how-can-i-use-stateful-rnns)
 
 ```{r}
 library(keras)
