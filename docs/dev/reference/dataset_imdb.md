@@ -74,11 +74,11 @@ dataset_imdb_word_index(path = "imdb_word_index.json")
 Lists of training and test data: `train$x, train$y, test$x, test$y`.
 
     train/
-    ├─ x
-    └─ y
+      - x
+      - y
     test/
-    ├─ x
-    └─ y
+      - x
+      - y
 
 The `x` data includes integer sequences. If the `num_words` argument was
 specific, the maximum possible index value is `num_words-1`. If the

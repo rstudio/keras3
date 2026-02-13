@@ -584,7 +584,7 @@ model |> fit(
 ```
 
     ## Epoch 1/2
-    ## 40/40 - 3s - 67ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
+    ## 40/40 - 3s - 65ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
     ## Epoch 2/2
     ## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828
 
@@ -713,7 +713,7 @@ model |> fit(
 )
 ```
 
-    ## 13/13 - 5s - 420ms/step - acc: 0.1225 - loss: 2.3007 - val_acc: 0.1100 - val_loss: 2.2938
+    ## 13/13 - 5s - 394ms/step - acc: 0.1138 - loss: 2.2990 - val_acc: 0.0800 - val_loss: 2.3004
 
 ## Shared layers
 

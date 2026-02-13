@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -178,12 +178,12 @@ inputs and outputs in the graph of layers:</p>
 <p>You can also plot the model as a graph:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-10-1.png" width="176"></p>
+<p><img src="functional_api/unnamed-chunk-10-1.png" alt="" width="176"></p>
 <p>And, optionally, display the input and output shapes of each layer in
 the plotted graph:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-11-1.png" width="580"></p>
+<p><img src="functional_api/unnamed-chunk-11-1.png" alt="" width="580"></p>
 <p>This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.</p>
 <p>A “graph of layers” is an intuitive mental image for a deep learning
@@ -548,7 +548,7 @@ the set of departments).</li>
 <p>Now plot the model:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-20-1.png" width="1637"></p>
+<p><img src="functional_api/unnamed-chunk-20-1.png" alt="" width="1637"></p>
 <p>When compiling this model, you can assign different losses to each
 output. You can even assign different weights to each loss – to modulate
 their contribution to the total training loss.</p>
@@ -591,7 +591,7 @@ targets:</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 67ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976</span></span>
+<span><span class="co">## 40/40 - 3s - 65ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
@@ -683,7 +683,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <p>Plot the model:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="functional_api/unnamed-chunk-25-1.png" width="953"></p>
+<p><img src="functional_api/unnamed-chunk-25-1.png" alt="" width="953"></p>
 <p>Now train the model:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/multi-assign.html">%&lt;-%</a></span> <span class="fu"><a href="../reference/dataset_cifar10.html">dataset_cifar10</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -706,7 +706,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 420ms/step - acc: 0.1225 - loss: 2.3007 - val_acc: 0.1100 - val_loss: 2.2938</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 5s - 394ms/step - acc: 0.1138 - loss: 2.2990 - val_acc: 0.0800 - val_loss: 2.3004</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">

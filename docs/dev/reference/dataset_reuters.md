@@ -81,11 +81,11 @@ names are words and the values are integer. e.g.
 `word_index[["giraffe"]]` might return `1234`.
 
     train/
-    ├─ x
-    └─ y
+      - x
+      - y
     test/
-    ├─ x
-    └─ y
+      - x
+      - y
 
     str(dataset_reuters())
 

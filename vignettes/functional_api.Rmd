@@ -149,7 +149,7 @@ You can also plot the model as a graph:
 plot(model)
 ```
 
-<img src="functional_api/unnamed-chunk-10-1.png" width="176" />
+<img src="functional_api/unnamed-chunk-10-1.png" alt="" width="176" />
 
 And, optionally, display the input and output shapes of each layer
 in the plotted graph:
@@ -159,7 +159,7 @@ in the plotted graph:
 plot(model, show_shapes = TRUE)
 ```
 
-<img src="functional_api/unnamed-chunk-11-1.png" width="580" />
+<img src="functional_api/unnamed-chunk-11-1.png" alt="" width="580" />
 
 This figure and the code are almost identical. In the code version,
 the connection arrows are replaced by the call operation.
@@ -587,7 +587,7 @@ Now plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-<img src="functional_api/unnamed-chunk-20-1.png" width="1637" />
+<img src="functional_api/unnamed-chunk-20-1.png" alt="" width="1637" />
 
 When compiling this model, you can assign different losses to each output.
 You can even assign different weights to each loss -- to modulate
@@ -643,7 +643,7 @@ model |> fit(
 
 ```
 ## Epoch 1/2
-## 40/40 - 3s - 67ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
+## 40/40 - 3s - 65ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
 ## Epoch 2/2
 ## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828
 ```
@@ -747,7 +747,7 @@ Plot the model:
 plot(model, show_shapes = TRUE)
 ```
 
-<img src="functional_api/unnamed-chunk-25-1.png" width="953" />
+<img src="functional_api/unnamed-chunk-25-1.png" alt="" width="953" />
 
 Now train the model:
 
@@ -776,7 +776,7 @@ model |> fit(
 ```
 
 ```
-## 13/13 - 5s - 420ms/step - acc: 0.1225 - loss: 2.3007 - val_acc: 0.1100 - val_loss: 2.2938
+## 13/13 - 5s - 394ms/step - acc: 0.1138 - loss: 2.2990 - val_acc: 0.0800 - val_loss: 2.3004
 ```
 
 ## Shared layers

@@ -4,7 +4,7 @@ This is conceptually similar to
 [`zip()`](https://rdrr.io/r/utils/zip.html) in Python, or R functions
 [`purrr::transpose()`](https://purrr.tidyverse.org/reference/transpose.html)
 and
-[`data.table::transpose()`](https://rdatatable.gitlab.io/data.table/reference/transpose.html)
+[`data.table::transpose()`](https://rdrr.io/pkg/data.table/man/transpose.html)
 (albeit, accepting elements in `...` instead of a single list), with one
 crucial difference: if the provided objects are named, then matching is
 done by names, not positions.

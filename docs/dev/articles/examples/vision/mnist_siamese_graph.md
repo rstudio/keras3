@@ -198,7 +198,7 @@ plot of chunk unnamed-chunk-5
 tr_pred <- predict(model, list(tr$pair1, tr$pair2))[,1]
 ```
 
-    ## 1875/1875 - 2s - 888us/step
+    ## 1875/1875 - 2s - 868us/step
 
 ``` r
 tr_acc  <- compute_accuracy(tr_pred, tr$y)
