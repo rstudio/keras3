@@ -32,7 +32,7 @@ A tensor with the same shape as `x`.
     x <- op_array(c(-1., 0., 1.))
     op_gelu(x)
 
-    ## tf.Tensor([-0.15880796  0.          0.841192  ], shape=(3), dtype=float32)
+    ## tf.Tensor([-0.158808  0.        0.841192], shape=(3), dtype=float32)
 
     op_gelu(x, FALSE)
 

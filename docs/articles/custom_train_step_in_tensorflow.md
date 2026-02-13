@@ -123,7 +123,7 @@ model |> fit(x, y, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 20ms/step - mae: 1.4339 - loss: 3.2271
+    ## 32/32 - 1s - 19ms/step - mae: 1.4339 - loss: 3.2271
     ## Epoch 2/3
     ## 32/32 - 0s - 2ms/step - mae: 1.3605 - loss: 2.9034
     ## Epoch 3/3
@@ -214,7 +214,7 @@ model |> fit(x, y, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 19ms/step - loss: 2.5170 - mae: 1.2923
+    ## 32/32 - 1s - 17ms/step - loss: 2.5170 - mae: 1.2923
     ## Epoch 2/3
     ## 32/32 - 0s - 2ms/step - loss: 2.2689 - mae: 1.2241
     ## Epoch 3/3
@@ -284,7 +284,7 @@ model |> fit(x, y, sample_weight = sw, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 20ms/step - mae: 1.3434 - loss: 0.1681
+    ## 32/32 - 1s - 19ms/step - mae: 1.3434 - loss: 0.1681
     ## Epoch 2/3
     ## 32/32 - 0s - 2ms/step - mae: 1.3364 - loss: 0.1394
     ## Epoch 3/3
@@ -332,7 +332,7 @@ y <- random_normal(c(1000, 1))
 model |> evaluate(x, y)
 ```
 
-    ## 32/32 - 0s - 9ms/step - mae: 1.3871 - loss: 0.0000e+00
+    ## 32/32 - 0s - 8ms/step - mae: 1.3871 - loss: 0.0000e+00
 
     ## $loss
     ## tf.Tensor(0.0, shape=(), dtype=float32)
@@ -504,7 +504,7 @@ gan |> fit(
 )
 ```
 
-    ## 100/100 - 5s - 53ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+    ## 100/100 - 5s - 49ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 
 The ideas behind deep learning are simple, so why should their
 implementation be painful?

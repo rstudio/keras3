@@ -152,7 +152,7 @@ is_linux <- function() {
 #'
 #' There is experimental support for changing the backend after keras has
 #' initialized with `config_set_backend()`. Usage of `config_set_backend` is
-#' generall not recommended for regular workflow---restarting the R session
+#' generally not recommended for regular workflow---restarting the R session
 #' is the only reliable way to change the backend.
 #'
 #' ```r

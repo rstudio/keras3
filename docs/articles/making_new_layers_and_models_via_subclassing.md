@@ -440,7 +440,7 @@ model |> compile(optimizer = "adam", loss = "mse")
 model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
-    ## 1/1 - 0s - 134ms/step - loss: 1.9081
+    ## 1/1 - 0s - 129ms/step - loss: 1.9081
 
 ``` r
 # It's also possible not to pass any loss in `compile`,
@@ -450,7 +450,7 @@ model |> compile(optimizer = "adam")
 model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
-    ## 1/1 - 0s - 113ms/step - loss: 1.6613
+    ## 1/1 - 0s - 108ms/step - loss: 1.6613
 
 ## You can optionally enable serialization on your layers
 
@@ -810,6 +810,6 @@ vae |> fit(x_train, x_train, epochs = 2, batch_size = 64)
 ```
 
     ## Epoch 1/2
-    ## 938/938 - 4s - 5ms/step - loss: 0.0748
+    ## 938/938 - 4s - 4ms/step - loss: 0.0748
     ## Epoch 2/2
     ## 938/938 - 1s - 1ms/step - loss: 0.0676

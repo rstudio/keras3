@@ -440,7 +440,7 @@ model |> compile(optimizer = "adam", loss = "mse")
 model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
-    ## 1/1 - 0s - 129ms/step - loss: 1.9081
+    ## 1/1 - 0s - 132ms/step - loss: 1.9081
 
 ``` r
 # It's also possible not to pass any loss in `compile`,

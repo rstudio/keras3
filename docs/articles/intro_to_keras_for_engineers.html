@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -228,25 +228,21 @@ unseen data.</p>
 <span>  callbacks <span class="op">=</span> <span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7472 - loss: 0.7457 - val_acc: 0.9647 - val_loss: 0.1205</span></span>
+<span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7468 - loss: 0.7458 - val_acc: 0.9653 - val_loss: 0.1197</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9377 - loss: 0.2080 - val_acc: 0.9770 - val_loss: 0.0784</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9374 - loss: 0.2080 - val_acc: 0.9768 - val_loss: 0.0793</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9563 - loss: 0.1489 - val_acc: 0.9820 - val_loss: 0.0623</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9560 - loss: 0.1490 - val_acc: 0.9826 - val_loss: 0.0621</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9645 - loss: 0.1190 - val_acc: 0.9858 - val_loss: 0.0492</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9647 - loss: 0.1187 - val_acc: 0.9859 - val_loss: 0.0492</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9710 - loss: 0.1007 - val_acc: 0.9871 - val_loss: 0.0449</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9708 - loss: 0.1008 - val_acc: 0.9870 - val_loss: 0.0471</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9750 - loss: 0.0873 - val_acc: 0.9881 - val_loss: 0.0395</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9747 - loss: 0.0877 - val_acc: 0.9886 - val_loss: 0.0395</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9765 - loss: 0.0791 - val_acc: 0.9893 - val_loss: 0.0388</span></span>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9765 - loss: 0.0797 - val_acc: 0.9893 - val_loss: 0.0397</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9789 - loss: 0.0693 - val_acc: 0.9877 - val_loss: 0.0420</span></span>
-<span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9802 - loss: 0.0666 - val_acc: 0.9901 - val_loss: 0.0369</span></span>
-<span><span class="co">## Epoch 10/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9823 - loss: 0.0589 - val_acc: 0.9911 - val_loss: 0.0339</span></span></code></pre>
+<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9791 - loss: 0.0694 - val_acc: 0.9886 - val_loss: 0.0413</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -375,7 +371,7 @@ layers:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>, <span class="co"># For speed</span></span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 6s - 16ms/step - acc: 0.7349 - loss: 0.7742 - val_acc: 0.9261 - val_loss: 0.2408</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 6s - 15ms/step - acc: 0.7352 - loss: 0.7736 - val_acc: 0.9252 - val_loss: 0.2436</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -443,7 +439,7 @@ your Keras backend.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 7s - 16ms/step - acc: 0.7505 - loss: 0.7455 - val_acc: 0.9088 - val_loss: 0.3040</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 7s - 15ms/step - acc: 0.7497 - loss: 0.7471 - val_acc: 0.9057 - val_loss: 0.3122</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>

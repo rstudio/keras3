@@ -79,7 +79,7 @@ loss:
     ##     args <- capture_args(enforce_all_dots_named = FALSE)
     ##     do.call(ModifiedMeanSquaredError, args)
     ## }
-    ## <environment: 0x5dddb2eef3e0>
+    ## <environment: 0x64c008b80da0>
 
     # confirm object is registered
     get_custom_objects()

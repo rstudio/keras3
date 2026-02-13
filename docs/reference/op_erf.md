@@ -23,7 +23,7 @@ A tensor with the same dtype as `x`.
     x <- op_array(c(-3, -2, -1, 0, 1))
     op_erf(x)
 
-    ## tf.Tensor([-0.99997777 -0.9953222  -0.84270084  0.          0.84270084], shape=(5), dtype=float32)
+    ## tf.Tensor([-0.999978   -0.99532235 -0.84270084  0.          0.84270084], shape=(5), dtype=float32)
 
     # array([-0.99998 , -0.99532, -0.842701,  0.,  0.842701], dtype=float32)
 

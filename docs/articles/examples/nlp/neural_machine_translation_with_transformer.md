@@ -56,7 +56,7 @@ the token `"[end]"` to the Spanish sentence.
 text_file <- "spa-eng/spa.txt"
 text_pairs <- text_file %>%
   readr::read_tsv(col_names = c("english", "spanish"),
-                  col_types = c("cc")) %>%
+                  col_types = c("cc"), quote = "") %>%
   within(spanish %<>% paste("[start]", ., "[end]"))
 ```
 
@@ -127,10 +127,10 @@ glue(r"(
 })
 ```
 
-    ## 118,493 total pairs
-    ## 82,945 training pairs
-    ## 17,774 validation pairs
-    ## 17,774 test pairs
+    ## 118,964 total pairs
+    ## 83,274 training pairs
+    ## 17,845 validation pairs
+    ## 17,845 test pairs
 
 ## Vectorizing the text data
 
@@ -532,7 +532,7 @@ transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
 ```
 
-    ## 1297/1297 - 57s - 44ms/step - accuracy: 0.3957 - loss: 3.8895 - val_accuracy: 0.3890 - val_loss: 3.3673
+    ## 1302/1302 - 56s - 43ms/step - accuracy: 0.3913 - loss: 3.9161 - val_accuracy: 0.3988 - val_loss: 3.2150
 
 ## Decoding test sentences
 

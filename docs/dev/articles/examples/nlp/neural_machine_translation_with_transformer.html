@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.4.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,7 +147,7 @@ the Spanish sentence.</p>
 <code class="sourceCode R"><span><span class="va">text_file</span> <span class="op">&lt;-</span> <span class="st">"spa-eng/spa.txt"</span></span>
 <span><span class="va">text_pairs</span> <span class="op">&lt;-</span> <span class="va">text_file</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_tsv</a></span><span class="op">(</span>col_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"english"</span>, <span class="st">"spanish"</span><span class="op">)</span>,</span>
-<span>                  col_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cc"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
+<span>                  col_types <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"cc"</span><span class="op">)</span>, quote <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op"><a href="../../../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">within</a></span><span class="op">(</span><span class="va">spanish</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/compound.html" class="external-link">%&lt;&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"[start]"</span>, <span class="va">.</span>, <span class="st">"[end]"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Here’s what our sentence pairs look like:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -206,10 +206,10 @@ set, and a test set.</p>
 <span>  <span class="va">val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eval.html" class="external-link">eval</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/parse.html" class="external-link">str2lang</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span>, <span class="va">envir</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/formatc.html" class="external-link">prettyNum</a></span><span class="op">(</span><span class="va">val</span>, big.mark <span class="op">=</span> <span class="st">","</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 118,493 total pairs</span></span>
-<span><span class="co">## 82,945 training pairs</span></span>
-<span><span class="co">## 17,774 validation pairs</span></span>
-<span><span class="co">## 17,774 test pairs</span></span></code></pre>
+<pre><code><span><span class="co">## 118,964 total pairs</span></span>
+<span><span class="co">## 83,274 training pairs</span></span>
+<span><span class="co">## 17,845 validation pairs</span></span>
+<span><span class="co">## 17,845 test pairs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="vectorizing-the-text-data">Vectorizing the text data<a class="anchor" aria-label="anchor" href="#vectorizing-the-text-data"></a>
@@ -589,7 +589,7 @@ converge you should train for at least 30 epochs.</p>
 <span></span>
 <span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>,</span>
 <span>                   validation_data <span class="op">=</span> <span class="va">val_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1297/1297 - 55s - 42ms/step - accuracy: 0.3949 - loss: 3.8943 - val_accuracy: 0.4274 - val_loss: 3.1756</span></span></code></pre>
+<pre><code><span><span class="co">## 1302/1302 - 56s - 43ms/step - accuracy: 0.3919 - loss: 3.9165 - val_accuracy: 0.4060 - val_loss: 3.1852</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="decoding-test-sentences">Decoding test sentences<a class="anchor" aria-label="anchor" href="#decoding-test-sentences"></a>

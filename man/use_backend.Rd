@@ -34,7 +34,7 @@ and seemingly abandoned.
 
 There is experimental support for changing the backend after keras has
 initialized with \code{config_set_backend()}. Usage of \code{config_set_backend} is
-generall not recommended for regular workflow---restarting the R session
+generally not recommended for regular workflow---restarting the R session
 is the only reliable way to change the backend.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(keras3)

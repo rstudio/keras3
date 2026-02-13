@@ -58,14 +58,14 @@ Standalone usage:
     m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)))
     m$result()
 
-    ## tf.Tensor(250000000.0, shape=(), dtype=float32)
+    ## tf.Tensor(2.5e+08, shape=(), dtype=float32)
 
     m$reset_state()
     m$update_state(rbind(c(0, 1), c(0, 0)), rbind(c(1, 1), c(0, 0)),
                    sample_weight = c(1, 0))
     m$result()
 
-    ## tf.Tensor(500000000.0, shape=(), dtype=float32)
+    ## tf.Tensor(5e+08, shape=(), dtype=float32)
 
 Usage with
 [`compile()`](https://generics.r-lib.org/reference/compile.html) API:

@@ -141,7 +141,7 @@ history <- model %>% fit(
 ```
 
     ## Epoch 1/20
-    ## 469/469 - 6s - 12ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974
+    ## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974
     ## Epoch 2/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8899 - loss: 0.0866 - val_binary_accuracy: 0.9227 - val_loss: 0.0626
     ## Epoch 3/20
@@ -165,19 +165,19 @@ history <- model %>% fit(
     ## Epoch 12/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9822 - loss: 0.0148 - val_binary_accuracy: 0.9718 - val_loss: 0.0230
     ## Epoch 13/20
-    ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9833 - loss: 0.0135 - val_binary_accuracy: 0.9702 - val_loss: 0.0234
+    ## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9833 - loss: 0.0135 - val_binary_accuracy: 0.9702 - val_loss: 0.0234
     ## Epoch 14/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9846 - loss: 0.0129 - val_binary_accuracy: 0.9730 - val_loss: 0.0220
     ## Epoch 15/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9857 - loss: 0.0117 - val_binary_accuracy: 0.9759 - val_loss: 0.0193
     ## Epoch 16/20
-    ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9868 - loss: 0.0111 - val_binary_accuracy: 0.9749 - val_loss: 0.0217
+    ## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9868 - loss: 0.0111 - val_binary_accuracy: 0.9749 - val_loss: 0.0217
     ## Epoch 17/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9872 - loss: 0.0106 - val_binary_accuracy: 0.9741 - val_loss: 0.0211
     ## Epoch 18/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9880 - loss: 0.0099 - val_binary_accuracy: 0.9746 - val_loss: 0.0201
     ## Epoch 19/20
-    ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9756 - val_loss: 0.0207
+    ## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9756 - val_loss: 0.0207
     ## Epoch 20/20
     ## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9888 - loss: 0.0091 - val_binary_accuracy: 0.9776 - val_loss: 0.0184
 
@@ -198,7 +198,7 @@ plot of chunk unnamed-chunk-5
 tr_pred <- predict(model, list(tr$pair1, tr$pair2))[,1]
 ```
 
-    ## 1875/1875 - 2s - 921us/step
+    ## 1875/1875 - 2s - 876us/step
 
 ``` r
 tr_acc  <- compute_accuracy(tr_pred, tr$y)
