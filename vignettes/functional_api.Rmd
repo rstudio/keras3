@@ -56,7 +56,7 @@ model %>% compile(
 )
 ```
 
-Note that Keras objects are [modified in place](faq.html#why-are-keras-objects-modified-in-place) which is why it's not necessary for `model` to be assigned back to after it is compiled.
+Note that Keras objects are [modified in place](https://tensorflow.rstudio.com/guides/keras/basics) which is why it's not necessary for `model` to be assigned back to after it is compiled.
 
 
 ## All models are callable, just like layers
@@ -477,8 +477,6 @@ output <- layer_concatenate(c(encoded_video, encoded_video_question)) %>%
 
 video_qa_model <- keras_model(inputs= c(video_input, video_question_input), outputs = output)
 ```
-
-
 
 
 

@@ -1,8 +1,10 @@
 # keras 2.16.1
 
+- Internal updates for CRAN R-devel (4.6)
+
 # keras 2.16.0
 
-- Updates for usage with Legacy Keras (#1515). 
+- Updates for usage with Legacy Keras (#1515).
 
   - A package startup message is now displayed encouraging users to migrate to keras3.
   - New function `py_require_legacy_keras()`.
@@ -13,8 +15,8 @@
 
 # keras 2.15.0
 
-- Default TensorFlow/Keras version installed by `install_keras()` is now 2.15. 
-  This is the last Tensorflow version where where Keras 2 is the default. 
+- Default TensorFlow/Keras version installed by `install_keras()` is now 2.15.
+  This is the last Tensorflow version where where Keras 2 is the default.
   To use Keras with Tensorflow v2.16 and up, use the new {keras3} R package.
 
 - Updates to allow both R packages {keras} and {keras3} to be loaded.
@@ -32,20 +34,20 @@
 
 - Fixed deadlock when an R generator was passed to `fit()`, `predict()`, and other endpoints.
 
-- When `fit(verbose = "auto")` is evaluated in the context of a knitr document 
-  (e.g., quarto or rmarkdown document being rendered), verbose will now 
+- When `fit(verbose = "auto")` is evaluated in the context of a knitr document
+  (e.g., quarto or rmarkdown document being rendered), verbose will now
   default to `2`, showing one line per epoch.
 
 # keras 2.11.1
 
 - Update S3 method formals per new CRAN requirement (`r_to_py.keras_layer_wrapper()`)
 
-- Fixed an issue where `get_file()` would place incorrectly 
+- Fixed an issue where `get_file()` would place incorrectly
   save files in the current working directory. (#1365)
 
 # keras 2.11.0
 
-- Default TensorFlow version installed by `install_keras()` is now 2.11. 
+- Default TensorFlow version installed by `install_keras()` is now 2.11.
 
 - All optimizers have been updated for keras/tensorflow version 2.11.
   Arguments to all the optimizers have changed. To access the previous
@@ -64,7 +66,7 @@
   - `layer_normalization()` gains an `invert` argument.
   - `layer_string_lookup()` gains an `idf_weights` argument.
 
-- Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`  
+- Fixed issue where `input_shape` supplied to custom layers defined with `new_layer_class()`
   would result in an error (#1338)
 
 - New `callback_backup_and_restore()`, for resuming an interrupted `fit()` call.
@@ -74,14 +76,14 @@
   e.g. something like this now works:
   ```r
   block_1_output <- ...
-  block_2_output <- block_1_output %>% 
-    layer_conv_2d(64, 3, activation = "relu", padding = "same") %>% 
+  block_2_output <- block_1_output %>%
+    layer_conv_2d(64, 3, activation = "relu", padding = "same") %>%
     layer_add(block_1_output)
   ```
-  
-- `model$get_config()` method now returns an R object that can be safely serialized 
+
+- `model$get_config()` method now returns an R object that can be safely serialized
   to rds.
-  
+
 - `keras_array()` now reflects unconverted Python objects. This enables passing
   objects like `pandas.Series()` to `fit()` and `evaluate()` methods. (#1341)
 
