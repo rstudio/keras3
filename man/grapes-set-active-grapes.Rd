@@ -18,7 +18,7 @@ sym \%<-active\% value
 Make an Active Binding
 }
 \details{
-Active bindings defined in a \code{\link{\%py_class\%}} are converted to
+Active bindings defined in a \verb{\%py_class\%} are converted to
 \verb{@property} decorated methods.
 }
 \examples{
