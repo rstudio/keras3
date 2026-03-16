@@ -214,13 +214,13 @@ Evaluate the model’s performance on the test data:
 model |> evaluate(x_test, y_test)
 ```
 
-    ## 313/313 - 1s - 3ms/step - accuracy: 0.9810 - loss: 0.0842
+    ## 313/313 - 1s - 2ms/step - accuracy: 0.9829 - loss: 0.0749
 
     ## $accuracy
-    ## [1] 0.981
+    ## [1] 0.9829
     ##
     ## $loss
-    ## [1] 0.08419506
+    ## [1] 0.07485336
 
 Generate predictions on new data:
 

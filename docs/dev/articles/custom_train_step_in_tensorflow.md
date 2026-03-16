@@ -214,7 +214,7 @@ model |> fit(x, y, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 18ms/step - loss: 2.5170 - mae: 1.2923
+    ## 32/32 - 1s - 17ms/step - loss: 2.5170 - mae: 1.2923
     ## Epoch 2/3
     ## 32/32 - 0s - 2ms/step - loss: 2.2689 - mae: 1.2241
     ## Epoch 3/3
@@ -284,7 +284,7 @@ model |> fit(x, y, sample_weight = sw, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 32/32 - 1s - 19ms/step - mae: 1.3434 - loss: 0.1681
+    ## 32/32 - 1s - 18ms/step - mae: 1.3434 - loss: 0.1681
     ## Epoch 2/3
     ## 32/32 - 0s - 2ms/step - mae: 1.3364 - loss: 0.1394
     ## Epoch 3/3
@@ -504,7 +504,7 @@ gan |> fit(
 )
 ```
 
-    ## 100/100 - 5s - 51ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
+    ## 100/100 - 5s - 50ms/step - d_loss: 0.0000e+00 - g_loss: 0.0000e+00
 
 The ideas behind deep learning are simple, so why should their
 implementation be painful?

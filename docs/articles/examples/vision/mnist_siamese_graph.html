@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -220,7 +220,7 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <span>    <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/20</span></span>
-<span><span class="co">## 469/469 - 6s - 12ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974</span></span>
+<span><span class="co">## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974</span></span>
 <span><span class="co">## Epoch 2/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8899 - loss: 0.0866 - val_binary_accuracy: 0.9227 - val_loss: 0.0626</span></span>
 <span><span class="co">## Epoch 3/20</span></span>
@@ -244,19 +244,19 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <span><span class="co">## Epoch 12/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9822 - loss: 0.0148 - val_binary_accuracy: 0.9718 - val_loss: 0.0230</span></span>
 <span><span class="co">## Epoch 13/20</span></span>
-<span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9833 - loss: 0.0135 - val_binary_accuracy: 0.9702 - val_loss: 0.0234</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9833 - loss: 0.0135 - val_binary_accuracy: 0.9702 - val_loss: 0.0234</span></span>
 <span><span class="co">## Epoch 14/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9846 - loss: 0.0129 - val_binary_accuracy: 0.9730 - val_loss: 0.0220</span></span>
 <span><span class="co">## Epoch 15/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9857 - loss: 0.0117 - val_binary_accuracy: 0.9759 - val_loss: 0.0193</span></span>
 <span><span class="co">## Epoch 16/20</span></span>
-<span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9868 - loss: 0.0111 - val_binary_accuracy: 0.9749 - val_loss: 0.0217</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9868 - loss: 0.0111 - val_binary_accuracy: 0.9749 - val_loss: 0.0217</span></span>
 <span><span class="co">## Epoch 17/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9872 - loss: 0.0106 - val_binary_accuracy: 0.9741 - val_loss: 0.0211</span></span>
 <span><span class="co">## Epoch 18/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9880 - loss: 0.0099 - val_binary_accuracy: 0.9746 - val_loss: 0.0201</span></span>
 <span><span class="co">## Epoch 19/20</span></span>
-<span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9756 - val_loss: 0.0207</span></span>
+<span><span class="co">## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9756 - val_loss: 0.0207</span></span>
 <span><span class="co">## Epoch 20/20</span></span>
 <span><span class="co">## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9888 - loss: 0.0091 - val_binary_accuracy: 0.9776 - val_loss: 0.0184</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -272,7 +272,7 @@ remaining classes for the rest of the digits (from <code>1</code> until
 <code class="sourceCode R"><span><span class="co"># compute final accuracy on training and test sets</span></span>
 <span></span>
 <span><span class="va">tr_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tr</span><span class="op">$</span><span class="va">pair1</span>, <span class="va">tr</span><span class="op">$</span><span class="va">pair2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1875/1875 - 2s - 921us/step</span></span></code></pre>
+<pre><code><span><span class="co">## 1875/1875 - 2s - 876us/step</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tr_acc</span>  <span class="op">&lt;-</span> <span class="fu">compute_accuracy</span><span class="op">(</span><span class="va">tr_pred</span>, <span class="va">tr</span><span class="op">$</span><span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">te_pred</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">model</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">te</span><span class="op">$</span><span class="va">pair1</span>, <span class="va">te</span><span class="op">$</span><span class="va">pair2</span><span class="op">)</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span></span></code></pre></div>

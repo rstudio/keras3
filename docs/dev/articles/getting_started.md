@@ -214,13 +214,13 @@ Evaluate the model’s performance on the test data:
 model |> evaluate(x_test, y_test)
 ```
 
-    ## 313/313 - 1s - 2ms/step - accuracy: 0.9820 - loss: 0.0875
+    ## 313/313 - 1s - 2ms/step - accuracy: 0.9810 - loss: 0.0842
 
     ## $accuracy
-    ## [1] 0.982
+    ## [1] 0.981
     ##
     ## $loss
-    ## [1] 0.08749502
+    ## [1] 0.08419506
 
 Generate predictions on new data:
 
@@ -234,7 +234,7 @@ probs <- model |> predict(x_test)
 max.col(probs) - 1L
 ```
 
-    ##   [1] 7 2 1 0 4 1 4 9 6 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7
+    ##   [1] 7 2 1 0 4 1 4 9 5 9 0 6 9 0 1 5 9 7 3 4 9 6 6 5 4 0 7 4 0 1 3 1 3 4 7
     ##  [36] 2 7 1 2 1 1 7 4 2 3 5 1 2 4 4 6 3 5 5 6 0 4 1 9 5 7 8 9 3 7 4 6 4 3 0
     ##  [71] 7 0 2 9 1 7 3 2 9 7 7 6 2 7 8 4 7 3 6 1 3 6 9 3 1 4 1 7 6 9
     ##  [ reached 'max' / getOption("max.print") -- omitted 9900 entries ]

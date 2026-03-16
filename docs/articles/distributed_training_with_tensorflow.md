@@ -190,16 +190,16 @@ with(strategy$scope(), {
 ```
 
     ## Epoch 1/2
-    ## 782/782 - 6s - 8ms/step - loss: 0.2616 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1514 - val_sparse_categorical_accuracy: 0.9522
+    ## 782/782 - 6s - 7ms/step - loss: 0.2616 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1510 - val_sparse_categorical_accuracy: 0.9524
     ## Epoch 2/2
-    ## 782/782 - 4s - 5ms/step - loss: 0.1041 - sparse_categorical_accuracy: 0.9682 - val_loss: 0.1025 - val_sparse_categorical_accuracy: 0.9668
-    ## 157/157 - 0s - 3ms/step - loss: 0.1048 - sparse_categorical_accuracy: 0.9667
+    ## 782/782 - 4s - 5ms/step - loss: 0.1045 - sparse_categorical_accuracy: 0.9682 - val_loss: 0.1035 - val_sparse_categorical_accuracy: 0.9680
+    ## 157/157 - 0s - 3ms/step - loss: 0.1023 - sparse_categorical_accuracy: 0.9685
 
     ## $loss
-    ## [1] 0.104846
+    ## [1] 0.10227
     ##
     ## $sparse_categorical_accuracy
-    ## [1] 0.9667
+    ## [1] 0.9685
 
 ## Using callbacks to ensure fault tolerance
 
@@ -267,14 +267,14 @@ run_training <- function(epochs = 1) {
 run_training(epochs = 1)
 ```
 
-    ## 782/782 - 5s - 6ms/step - loss: 0.2575 - sparse_categorical_accuracy: 0.9237 - val_loss: 0.1428 - val_sparse_categorical_accuracy: 0.9537
+    ## 782/782 - 4s - 6ms/step - loss: 0.2575 - sparse_categorical_accuracy: 0.9237 - val_loss: 0.1428 - val_sparse_categorical_accuracy: 0.9537
 
 ``` r
 # Calling the same function again will resume from where we left off
 run_training(epochs = 1)
 ```
 
-    ## 782/782 - 5s - 6ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9693 - val_loss: 0.1185 - val_sparse_categorical_accuracy: 0.9602
+    ## 782/782 - 4s - 6ms/step - loss: 0.1007 - sparse_categorical_accuracy: 0.9693 - val_loss: 0.1252 - val_sparse_categorical_accuracy: 0.9598
 
 ## `tf$data` performance tips
 
