@@ -4170,6 +4170,12 @@ ops$copy(x)
 #' `"full"` mode returns the convolution at each point of
 #' overlap, with an output length of `N+M-1`.
 #'
+#' @note
+#' Complex-valued inputs are not currently fully supported by the TensorFlow
+#' and PyTorch backends. They are cast to floating-point types and their
+#' imaginary components are discarded. This behavior may change in a future
+#' release; see Keras issue 21617.
+#'
 #' @export
 #' @family numpy ops
 #' @family ops

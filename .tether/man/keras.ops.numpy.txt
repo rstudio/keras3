@@ -6,6 +6,13 @@ all(
   axis=None,
   keepdims=False
 )
+allclose(
+  x1,
+  x2,
+  rtol=1e-05,
+  atol=1e-08,
+  equal_nan=False
+)
 amax(
   x,
   axis=None,
@@ -30,7 +37,7 @@ append(
 arange(
   start,
   stop=None,
-  step=1,
+  step=None,
   dtype=None
 )
 arccos(x)
@@ -57,6 +64,11 @@ argpartition(
 )
 argsort(x, axis=-1)
 array(x, dtype=None)
+array_split(
+  x,
+  indices_or_sections,
+  axis=0
+)
 average(
   x,
   axis=None,
@@ -134,12 +146,14 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
+dstack(xs)
 einsum(
   subscripts,
   *operands,
   **kwargs
 )
 empty(shape, dtype=None)
+empty_like(x, dtype=None)
 equal(x1, x2)
 exp(x)
 exp2(x)
@@ -152,8 +166,11 @@ eye(
   dtype=None
 )
 flip(x, axis=None)
+fliplr(x)
+flipud(x)
 floor(x)
 floor_divide(x1, x2)
+fmod(x1, x2)
 full(
   shape,
   fill_value,
@@ -163,6 +180,15 @@ full_like(
   x,
   fill_value,
   dtype=None
+)
+gcd(x1, x2)
+geomspace(
+  start,
+  stop,
+  num=50,
+  endpoint=True,
+  dtype=None,
+  axis=0
 )
 get_item(x, key)
 greater(x1, x2)
@@ -175,7 +201,10 @@ histogram(
   bins=10,
   range=None
 )
+hsplit(x, indices_or_sections)
 hstack(xs)
+hypot(x1, x2)
+i0(x)
 identity(n, dtype=None)
 imag(x)
 inner(x1, x2)
@@ -187,9 +216,21 @@ isclose(
   equal_nan=False
 )
 isfinite(x)
+isin(
+  x1,
+  x2,
+  assume_unique=False,
+  invert=False
+)
 isinf(x)
 isnan(x)
+isneginf(x)
+isposinf(x)
+isreal(x)
 kaiser(x, beta)
+kron(x1, x2)
+lcm(x1, x2)
+ldexp(x1, x2)
 left_shift(x, y)
 less(x1, x2)
 less_equal(x1, x2)
@@ -207,6 +248,7 @@ log10(x)
 log1p(x)
 log2(x)
 logaddexp(x1, x2)
+logaddexp2(x1, x2)
 logical_and(x1, x2)
 logical_not(x)
 logical_or(x1, x2)
@@ -259,8 +301,76 @@ nan_to_num(
   posinf=None,
   neginf=None
 )
+nanargmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanargmin(
+  x,
+  axis=None,
+  keepdims=False
+)
+nancumprod(
+  x,
+  axis=None,
+  dtype=None
+)
+nancumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+nanmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanmean(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanmedian(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanmin(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanprod(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanquantile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
+nanstd(
+  x,
+  axis=None,
+  keepdims=False
+)
+nansum(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanvar(
+  x,
+  axis=None,
+  keepdims=False
+)
 ndim(x)
 negative(x)
+nextafter(x1, x2)
 nonzero(x)
 not_equal(x1, x2)
 ones(shape, dtype=None)
@@ -279,6 +389,11 @@ prod(
   keepdims=False,
   dtype=None
 )
+ptp(
+  x,
+  axis=None,
+  keepdims=False
+)
 quantile(
   x,
   q,
@@ -286,6 +401,7 @@ quantile(
   method='linear',
   keepdims=False
 )
+rad2deg(x)
 ravel(x)
 real(x)
 reciprocal(x)
@@ -320,6 +436,7 @@ select(
 sign(x)
 signbit(x)
 sin(x)
+sinc(x)
 sinh(x)
 size(x)
 slogdet(x)
@@ -374,6 +491,12 @@ trace(
   axis2=1
 )
 transpose(x, axes=None)
+trapezoid(
+  y,
+  x=None,
+  dx=1.0,
+  axis=-1
+)
 tri(
   N,
   M=None,
@@ -385,6 +508,11 @@ triu(x, k=0)
 true_divide(x1, x2)
 trunc(x)
 unravel_index(indices, shape)
+vander(
+  x,
+  N=None,
+  increasing=False
+)
 var(
   x,
   axis=None,
@@ -397,6 +525,8 @@ vectorize(
   excluded=None,
   signature=None
 )
+view(x, dtype=None)
+vsplit(x, indices_or_sections)
 vstack(xs)
 where(
   condition,
