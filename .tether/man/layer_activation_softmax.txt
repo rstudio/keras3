@@ -26,8 +26,10 @@ class Softmax(keras.src.layers.layer.Layer)
  |
  |  Call arguments:
  |      inputs: The inputs (logits) to the softmax layer.
- |      mask: A boolean mask of the same shape as `inputs`. The mask
- |          specifies 1 to keep and 0 to mask. Defaults to `None`.
+ |      mask: A boolean mask that is broadcastable to `inputs`. The mask
+ |          specifies 1 to keep and 0 to mask. Each dimension of the mask
+ |          must either be 1 or match the corresponding dimension of
+ |          `inputs`; it must not be larger. Defaults to `None`.
  |
  |  Returns:
  |      Softmaxed output with the same shape as `inputs`.

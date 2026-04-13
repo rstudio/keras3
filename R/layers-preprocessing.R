@@ -10,7 +10,7 @@
 #' inputs. For integer inputs where the total number of tokens is not known,
 #' use `layer_integer_lookup()` instead.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Examples
@@ -225,7 +225,7 @@ function (object, max_number, fill_value = -1L, ..., padding_value = NULL)
 #' contiguous ranges and output an integer index indicating which range each
 #' element was placed in.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1017,13 +1017,15 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' The mean value(s) to use during normalization. The passed value(s)
 #' will be broadcast to the shape of the kept axes above;
 #' if the value(s) cannot be broadcast, an error will be raised when
-#' this layer's `build()` method is called.
+#' this layer's `build()` method is called. `mean` and `variance` must be
+#' specified together.
 #'
 #' @param variance
 #' The variance value(s) to use during normalization. The passed
 #' value(s) will be broadcast to the shape of the kept axes above;
 #' if the value(s) cannot be broadcast, an error will be raised when
-#' this layer's `build()` method is called.
+#' this layer's `build()` method is called. `mean` and `variance` must be
+#' specified together.
 #'
 #' @param invert
 #' If `TRUE`, this layer will apply the inverse transformation
@@ -3785,6 +3787,9 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' A preprocessing layer to convert raw audio signals to Mel spectrograms.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer takes `float32`/`float64` single or batched audio signal as
 #' inputs and computes the Mel spectrogram using Short-Time Fourier Transform
 #' and Mel scaling. The input should be a 1D (unbatched) or 2D (batched) tensor
@@ -4140,8 +4145,10 @@ function (object, mode = "log", frame_length = 256L, frame_step = NULL,
 #'
 #' @param object Preprocessing layer object
 #'
-#' @param data The data to train on. It can be passed either as a
-#'   `tf.data.Dataset` or as an R array.
+#' @param data The data to train on. It can be an R array, a backend-native
+#'   eager tensor, a batched `tf.data.Dataset`, a Grain dataset, a
+#'   `keras.utils.PyDataset`, or an iterable of batches such as a list of
+#'   arrays or a generator. Dataset and iterable inputs must be batched.
 #'
 #' @param batch_size Integer or `NULL`. Number of asamples per state update. If
 #'   unspecified, `batch_size` will default to `32`. Do not specify the
