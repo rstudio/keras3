@@ -156,15 +156,47 @@ reset_state <- function(object) {
 #'
 #' @description
 #' Note that the model must be built first before calling this method.
-#' `quantize_weights()` will recursively call `layer$quantize(mode)` in all layers and
+#' `quantize_weights()` will recursively call `layer$quantize(...)` in all layers and
 #' will be skipped if the layer doesn't implement the function.
 #'
-#' Currently only `Dense` and `EinsumDense` layers support quantization.
+#' Pass a `mode` string to use the default configuration for int8, int4, or
+#' float8 quantization. AWQ and GPTQ require a corresponding `config` object.
+#' A `config` can also customize the quantizers used for weights and
+#' activations.
+#'
+#' # Examples
+#' Quantize a model to int8 with the default configuration:
+#'
+#' ```{r, eval = FALSE}
+#' model <- keras_model_sequential(input_shape = 10) |>
+#'   layer_dense(10)
+#' model |> quantize_weights("int8")
+#' ```
+#'
+#' Quantize with a custom configuration:
+#'
+#' ```{r, eval = FALSE}
+#' model <- keras_model_sequential(input_shape = 10) |>
+#'   layer_dense(10)
+#' config <- quantizer_int4_quantization_config(block_size = 64)
+#' model |> quantize_weights(config = config)
+#' ```
 #'
 #' @param object A Keras Model or Layer.
 #' @param mode
-#' The mode of the quantization. Only 'int8' is supported at this
-#' time.
+#' Quantization mode. Supported modes are `"int8"`, `"int4"`, `"float8"`,
+#' `"gptq"`, and `"awq"`. GPTQ and AWQ require a corresponding `config`.
+#' Optional when `config` is supplied.
+#'
+#' @param config
+#' A `keras.quantizers.QuantizationConfig` object specifying additional
+#' quantization options, including custom weight and activation quantizers.
+#'
+#' @param filters
+#' Optional filters controlling which layers are quantized. May be a regular
+#' expression string, a list of regular expression strings, or a callable.
+#' Only layers matching the filter conditions are quantized.
+#'
 #' @param ... Passed on to the `object` quantization method.
 #'
 #' @export
@@ -174,7 +206,8 @@ reset_state <- function(object) {
 #' @family layer methods
 #' @tether keras.Model.quantize
 quantize_weights <-
-function (object, mode, ...)
+function (object, mode = NULL, config = NULL, filters = NULL, ...)
 {
-  object$quantize(mode, ...)
+  object$quantize(mode = mode, config = config, filters = filters, ...)
+  invisible(object)
 }

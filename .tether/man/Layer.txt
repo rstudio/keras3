@@ -235,6 +235,7 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |
  |  add_weight(
  |    self,
+ |    *args,
  |    shape=None,
  |    initializer=None,
  |    dtype=None,
@@ -359,8 +360,9 @@ class Layer(keras.src.backend.tensorflow.layer.TFLayer, keras.src.ops.operation.
  |
  |  quantize(
  |    self,
- |    mode,
- |    type_check=True
+ |    mode=None,
+ |    type_check=True,
+ |    config=None
  |  )
  |
  |  quantized_build(

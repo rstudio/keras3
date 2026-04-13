@@ -126,7 +126,7 @@ function (model, filepath = NULL, overwrite = FALSE, zipped = NULL, ...)
 #' will be compiled. Otherwise, the model will be left uncompiled.
 #'
 #' @param model
-#' string, path to the saved model file,
+#' string, path to the saved model file or Orbax checkpoint directory,
 #' or a raw vector, as returned by `save_model(filepath = NULL)`
 #'
 #' @param custom_objects
@@ -431,7 +431,7 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' @param object A keras model.
 #'
 #' @param format string. The export format. Supported values:
-#' `"tf_saved_model"` and `"onnx"`.  Defaults to
+#' `"tf_saved_model"`, `"onnx"`, `"openvino"`, and `"litert"`. Defaults to
 #' `"tf_saved_model"`.
 #'
 #' @param input_signature Optional. Specifies the shape and dtype of the
@@ -444,6 +444,11 @@ load_model_config <- function(filepath, custom_objects = NULL)
 #' Bool. Whether to print all the variables of the exported model. Defaults
 #' to `NULL`, which uses the default value set by different
 #' backends and formats.
+#'
+#' @param ...
+#' Additional backend- or format-specific export options. This includes JAX
+#' options such as `is_static` and `jax2tf_kwargs`, ONNX options such as
+#' `opset_version`, and LiteRT converter options when `format = "litert"`.
 #'
 #' @returns This is called primarily for the side effect of exporting `object`.
 #'   The first argument, `object` is also returned, invisibly, to enable usage
@@ -472,7 +477,7 @@ function(object, export_dir_base, ..., format = 'tf_saved_model', verbose = NULL
 #' # Examples
 #' ```{r}
 #' model <- keras_model_sequential(input_shape = c(784)) |> layer_dense(10)
-#' model |> export_savedmodel("path/to/artifact")
+#' model |> export_savedmodel("path/to/artifact", verbose = FALSE)
 #' reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
 #' input <- random_normal(c(2, 784))
 #' output <- reloaded_layer(input)
@@ -888,7 +893,7 @@ function (obj)
 #'   inherit = loss_mean_squared_error)
 #'
 #' # register the custom object
-#' register_keras_serializable(loss_modified_mse)
+#' loss_modified_mse <- register_keras_serializable(loss_modified_mse)
 #'
 #' # confirm object is registered
 #' get_custom_objects()

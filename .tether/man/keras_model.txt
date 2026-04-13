@@ -159,8 +159,8 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |          filepath: `str` or `pathlib.Path` object. The path to save the
  |              artifact.
  |          format: `str`. The export format. Supported values:
- |              `"tf_saved_model"` and `"onnx"`.  Defaults to
- |              `"tf_saved_model"`.
+ |              `"tf_saved_model"`, `"onnx"`, `"openvino"`, and `"litert"`.
+ |              Defaults to `"tf_saved_model"`.
  |          verbose: `bool`. Whether to print a message during export. Defaults
  |              to `None`, which uses the default value set by different
  |              backends and formats.
@@ -169,17 +169,27 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |              `tf.TensorSpec`, `backend.KerasTensor`, or backend tensor. If
  |              not provided, it will be automatically computed. Defaults to
  |              `None`.
- |          **kwargs: Additional keyword arguments:
- |              - Specific to the JAX backend and `format="tf_saved_model"`:
- |                  - `is_static`: Optional `bool`. Indicates whether `fn` is
- |                      static. Set to `False` if `fn` involves state updates
- |                      (e.g., RNG seeds and counters).
- |                  - `jax2tf_kwargs`: Optional `dict`. Arguments for
- |                      `jax2tf.convert`. See the documentation for
- |                      [`jax2tf.convert`](
- |                          https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md).
- |                      If `native_serialization` and `polymorphic_shapes` are
- |                      not provided, they will be automatically computed.
+ |          **kwargs: Additional keyword arguments.
+ |              - `is_static`: Optional `bool`. Specific to the JAX backend and
+ |                  `format="tf_saved_model"`. Indicates whether `fn` is static.
+ |                  Set to `False` if `fn` involves state updates (e.g., RNG
+ |                  seeds and counters).
+ |              - `jax2tf_kwargs`: Optional `dict`. Specific to the JAX backend
+ |                  and `format="tf_saved_model"`. Arguments for
+ |                  `jax2tf.convert`. See the documentation for
+ |                  [`jax2tf.convert`](
+ |                      https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md).
+ |                  If `native_serialization` and `polymorphic_shapes` are not
+ |                  provided, they will be automatically computed.
+ |              - `opset_version`: Optional `int`. Specific to `format="onnx"`.
+ |                  An integer value that specifies the ONNX opset version.
+ |              - LiteRT-specific options: Optional keyword arguments specific
+ |                  to `format="litert"`. These are passed directly to the
+ |                  TensorFlow Lite converter and include options like
+ |                  `optimizations`, `representative_dataset`,
+ |                  `experimental_new_quantizer`, `allow_custom_ops`,
+ |                  `enable_select_tf_ops`, etc. See TensorFlow Lite
+ |                  documentation for all available options.
  |
  |      **Note:** This feature is currently supported only with TensorFlow, JAX
  |      and Torch backends.
@@ -215,6 +225,24 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |      predictions = ort_session.run(None, ort_inputs)
  |      ```
  |
+ |      Here's how to export a LiteRT (TFLite) for inference.
+ |
+ |      ```python
+ |      # Export the model as a LiteRT artifact
+ |      model.export("path/to/location", format="litert")
+ |
+ |      # Load the artifact in a different process/environment
+ |      interpreter = tf.lite.Interpreter(model_path="path/to/location")
+ |      interpreter.allocate_tensors()
+ |      interpreter.set_tensor(
+ |          interpreter.get_input_details()[0]['index'], input_data
+ |      )
+ |      interpreter.invoke()
+ |      output_data = interpreter.get_tensor(
+ |          interpreter.get_output_details()[0]['index']
+ |      )
+ |      ```
+ |
  |  get_layer(
  |    self,
  |    name=None,
@@ -231,6 +259,26 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |
  |      Returns:
  |          A layer instance.
+ |
+ |  get_quantization_layer_structure(self, mode=None)
+ |      Returns the quantization structure for the model.
+ |
+ |      This method is intended to be overridden by model authors to provide
+ |      topology information required for structure-aware quantization modes
+ |      like 'gptq'.
+ |
+ |      Args:
+ |          mode: The quantization mode.
+ |
+ |      Returns:
+ |          A dictionary describing the topology, e.g.:
+ |          `{'pre_block_layers': [list], 'sequential_blocks': [list]}`
+ |          or `None` if the mode does not require structure or is not
+ |          supported. `'pre_block_layers'` is a list of layers that
+ |          the inputs should be passed through, before being passed to
+ |          the sequential blocks. For example, inputs to an LLM must
+ |          first be passed through an embedding layer, followed by
+ |          the transformer.
  |
  |  get_state_tree(self, value_format='backend_tensor')
  |      Retrieves tree-like structure of model variables.
@@ -346,18 +394,79 @@ class Model(keras.src.backend.tensorflow.trainer.TensorFlowTrainer, keras.src.tr
  |
  |  quantize(
  |    self,
- |    mode,
+ |    mode=None,
+ |    config=None,
+ |    filters=None,
  |    **kwargs
  |  )
  |      Quantize the weights of the model.
  |
  |      Note that the model must be built first before calling this method.
- |      `quantize` will recursively call `quantize(mode)` in all layers and
+ |      `quantize` will recursively call `quantize(...)` in all layers and
  |      will be skipped if the layer doesn't implement the function.
  |
+ |      This method can be called by passing a `mode` string, which uses the
+ |      default configuration for that mode. Alternatively, a `config` object
+ |      can be passed to customize the behavior of the quantization (e.g. to
+ |      use specific quantizers for weights or activations).
+ |
  |      Args:
- |          mode: The mode of the quantization. Only 'int8' is supported at this
- |              time.
+ |          mode: The mode of the quantization. Supported modes are:
+ |              `"int8"`, `"int4"`, `"float8"`, `"gptq"`. This is
+ |              optional if `config` is provided.
+ |          config: The configuration object specifying additional
+ |              quantization options. This argument allows to configure
+ |              the weight and activation quantizers. be an instance of
+ |              `keras.quantizers.QuantizationConfig`.
+ |          filters: Optional filters to apply to the quantization. Can be a
+ |              regex string, a list of regex strings, or a callable. Only the
+ |              layers which match the filter conditions will be quantized.
+ |          **kwargs: Additional keyword arguments.
+ |
+ |      Example:
+ |
+ |      Quantize a model to int8 with default configuration:
+ |
+ |      ```python
+ |      # Build the model
+ |      model = keras.Sequential([
+ |          keras.Input(shape=(10,)),
+ |          keras.layers.Dense(10),
+ |      ])
+ |      model.build((None, 10))
+ |
+ |      # Quantize with default int8 config
+ |      model.quantize("int8")
+ |      ```
+ |
+ |      Quantize a model to int8 with a custom configuration:
+ |
+ |      ```python
+ |      from keras.quantizers import Int8QuantizationConfig
+ |      from keras.quantizers import AbsMaxQuantizer
+ |
+ |      # Build the model
+ |      model = keras.Sequential([
+ |          keras.Input(shape=(10,)),
+ |          keras.layers.Dense(10),
+ |      ])
+ |      model.build((None, 10))
+ |
+ |      # Create a custom config
+ |      config = Int8QuantizationConfig(
+ |          weight_quantizer=AbsMaxQuantizer(
+ |              axis=0,
+ |              value_range=(-127, 127)
+ |          ),
+ |          activation_quantizer=AbsMaxQuantizer(
+ |              axis=-1,
+ |              value_range=(-127, 127)
+ |          ),
+ |      )
+ |
+ |      # Quantize with custom config
+ |      model.quantize(config=config)
+ |      ```
  |
  |  save(
  |    self,
