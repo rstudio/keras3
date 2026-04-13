@@ -1,5 +1,12 @@
 context("optimizers")
 
+test_that("Muon preserves fractional Adam learning-rate ratios", {
+  skip_if_no_keras("3.14.0")
+
+  optimizer <- optimizer_muon(adam_lr_ratio = 0.5)
+
+  expect_equal(optimizer$adam_lr_ratio, 0.5)
+})
 
 
 test_optimizer <- function(name) {

@@ -1319,6 +1319,9 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' The exponential decay rate for the 2nd moment estimates. Defaults to
 #' `0.999`.
 #'
+#' @param adam_weight_decay
+#' Weight decay to apply when Muon falls back to AdamW updates.
+#'
 #' @param epsilon
 #' A small constant for numerical stability. This is
 #' "epsilon hat" in the Kingma and Ba paper
@@ -1404,7 +1407,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' @param adam_lr_ratio
 #' Float, the ratio of the learning rate when
 #' using Adam to the main learning rate.
-#' it is recommended to set it to `0.1`.
+#' it is recommended to set it to `1`.
 #'
 #' @param momentum
 #' Float, momentum used by internal SGD.
@@ -1414,6 +1417,12 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #'
 #' @param nesterov
 #' Boolean, whether to use Nesterov-style momentum.
+#'
+#' @param rms_rate
+#' Float. A parameter from [Liu et al., 2025](https://arxiv.org/abs/2502.16982)
+#' that can improve Muon's stability, allowing it to use the same learning rate
+#' and weight decay as Adam. Defaults to `0.2`. Set to `NULL` to disable this
+#' feature.
 #'
 #' @param name
 #' String, name for the object
@@ -1427,13 +1436,14 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' @tether keras.optimizers.Muon
 optimizer_muon <-
 function (learning_rate = 0.001, adam_beta_1 = 0.9, adam_beta_2 = 0.999,
-    epsilon = 1e-07, weight_decay = 0.1, clipnorm = NULL, clipvalue = NULL,
+    adam_weight_decay = 0.004, epsilon = 1e-07, weight_decay = 0.004,
+    clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL, name = "muon", exclude_layers = NULL,
     exclude_embeddings = TRUE, muon_a = 3.4445, muon_b = -4.775,
-    muon_c = 2.0315, adam_lr_ratio = 0.1, momentum = 0.95, ns_steps = 6L,
-    nesterov = TRUE, ...)
+    muon_c = 2.0315, adam_lr_ratio = 1L, momentum = 0.95, ns_steps = 5L,
+    nesterov = TRUE, rms_rate = 0.2, ...)
 {
     args <- capture_args(list(
         ema_overwrite_frequency = as_integer,
