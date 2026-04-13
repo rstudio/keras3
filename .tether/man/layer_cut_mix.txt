@@ -5,28 +5,55 @@ class CutMix(keras.src.layers.preprocessing.image_preprocessing.base_image_prepr
  |
  |  CutMix data augmentation technique.
  |
- |  CutMix is a data augmentation method where patches are cut and pasted
- |  between two images in the dataset, while the labels are also mixed
- |  proportionally to the area of the patches.
+ |      CutMix is a data augmentation method where patches are cut and pasted
+ |      between two images in the dataset, while the labels are also mixed
+ |      proportionally to the area of the patches.
  |
- |  Args:
- |      factor: A single float or a tuple of two floats between 0 and 1.
- |          If a tuple of numbers is passed, a `factor` is sampled
- |          between the two values.
- |          If a single float is passed, a value between 0 and the passed
- |          float is sampled. These values define the range from which the
- |          mixing weight is sampled. A higher factor increases the variability
- |          in patch sizes, leading to more diverse and larger mixed patches.
- |          Defaults to 1.
- |      seed: Integer. Used to create a random seed.
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
  |
- |  References:
- |     - [CutMix paper]( https://arxiv.org/abs/1905.04899).
+ |      References:
+ |         - [CutMix paper]( https://arxiv.org/abs/1905.04899).
+ |
+ |      Args:
+ |          factor: A single float or a tuple of two floats between 0 and 1.
+ |              If a tuple of numbers is passed, a `factor` is sampled
+ |              between the two values.
+ |              If a single float is passed, a value between 0 and the passed
+ |              float is sampled. These values define the range from which the
+ |              mixing weight is sampled. A higher factor increases the variability
+ |              in patch sizes, leading to more diverse and larger mixed patches.
+ |              Defaults to 1.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.CutMix(value_range=(0, 255))
+ |  images = np.random.randint(0, 255, (8, 224, 224, 3), dtype="uint8")
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 0, 1, 2, 0, 1]),
+ |      num_classes=3
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (8, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      CutMix
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

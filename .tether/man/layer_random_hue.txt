@@ -11,6 +11,9 @@ class RandomHue(keras.src.layers.preprocessing.image_preprocessing.base_image_pr
  |  The image hue is adjusted by converting the image(s) to HSV and rotating the
  |  hue channel (H) by delta. The image is then converted back to RGB.
  |
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |  (independently of which backend you're using).
+ |
  |  Args:
  |      factor: A single float or a tuple of two floats.
  |          `factor` controls the extent to which the
@@ -39,7 +42,7 @@ class RandomHue(keras.src.layers.preprocessing.image_preprocessing.base_image_pr
  |  Method resolution order:
  |      RandomHue
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

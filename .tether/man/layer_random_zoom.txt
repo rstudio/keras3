@@ -12,6 +12,9 @@ class RandomZoom(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |  of integer or floating point dtype.
  |  By default, the layer will output floats.
  |
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |  (independently of which backend you're using).
+ |
  |  Input shape:
  |      3D (unbatched) or 4D (batched) tensor with shape:
  |      `(..., height, width, channels)`, in `"channels_last"` format,
@@ -22,9 +25,6 @@ class RandomZoom(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |      `(..., target_height, target_width, channels)`,
  |      or `(..., channels, target_height, target_width)`,
  |      in `"channels_first"` format.
- |
- |  **Note:** This layer is safe to use inside a `tf.data` pipeline
- |  (independently of which backend you're using).
  |
  |  Args:
  |      height_factor: a float represented as fraction of value, or a tuple of
@@ -86,7 +86,7 @@ class RandomZoom(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |  Method resolution order:
  |      RandomZoom
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
@@ -149,23 +149,9 @@ class RandomZoom(keras.src.layers.preprocessing.image_preprocessing.base_image_p
  |    training=True
  |  )
  |
- |  transform_images(
- |    self,
- |    images,
- |    transformation,
- |    training=True
- |  )
- |
  |  transform_labels(
  |    self,
  |    labels,
- |    transformation,
- |    training=True
- |  )
- |
- |  transform_segmentation_masks(
- |    self,
- |    segmentation_masks,
  |    transformation,
  |    training=True
  |  )

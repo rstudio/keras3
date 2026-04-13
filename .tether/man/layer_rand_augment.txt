@@ -5,29 +5,67 @@ class RandAugment(keras.src.layers.preprocessing.image_preprocessing.base_image_
  |
  |  RandAugment performs the Rand Augment operation on input images.
  |
- |  This layer can be thought of as an all-in-one image augmentation layer. The
- |  policy implemented by this layer has been benchmarked extensively and is
- |  effective on a wide variety of datasets.
+ |      This layer can be thought of as an all-in-one image augmentation layer. The
+ |      policy implemented by this layer has been benchmarked extensively and is
+ |      effective on a wide variety of datasets.
  |
- |  References:
- |      - [RandAugment](https://arxiv.org/abs/1909.13719)
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
  |
- |  Args:
- |      value_range: The range of values the input image can take.
- |          Default is `(0, 255)`. Typically, this would be `(0, 1)`
- |          for normalized images or `(0, 255)` for raw images.
- |      num_ops: The number of augmentation operations to apply sequentially
- |          to each image. Default is 2.
- |      factor: The strength of the augmentation as a normalized value
- |          between 0 and 1. Default is 0.5.
- |      interpolation: The interpolation method to use for resizing operations.
- |          Options include `nearest`, `bilinear`. Default is `bilinear`.
- |      seed: Integer. Used to create a random seed.
+ |      References:
+ |          - [RandAugment](https://arxiv.org/abs/1909.13719)
+ |
+ |      Args:
+ |          value_range: The range of values the input image can take.
+ |              Default is `(0, 255)`. Typically, this would be `(0, 1)`
+ |              for normalized images or `(0, 255)` for raw images.
+ |          num_ops: The number of augmentation operations to apply sequentially
+ |              to each image. Default is 2.
+ |          factor: The strength of the augmentation as a normalized value
+ |              between 0 and 1. Default is 0.5.
+ |          interpolation: The interpolation method to use for resizing operations.
+ |              Options include `nearest`, `bilinear`. Default is `bilinear`.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandAugment(bounding_box_format="xyxy")
+ |  images = np.random.randint(0, 255, (4, 224, 224, 3), dtype="uint8")
+ |
+ |  bounding_boxes = {
+ |      "boxes": np.array([
+ |          [[10, 20, 100, 150], [50, 60, 200, 250]],
+ |          [[15, 25, 110, 160], [55, 65, 210, 260]],
+ |          [[20, 30, 120, 170], [60, 70, 220, 270]],
+ |          [[25, 35, 130, 180], [65, 75, 230, 280]],
+ |      ], dtype="float32"),
+ |      "labels": np.array([[0, 1], [1, 2], [2, 3], [0, 3]], dtype="int32")
+ |  }
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 3]),
+ |      num_classes=4
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (4, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "bounding_boxes": bounding_boxes,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandAugment
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

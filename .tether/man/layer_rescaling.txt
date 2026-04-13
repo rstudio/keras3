@@ -1,6 +1,6 @@
 Help on class Rescaling in module keras.src.layers.preprocessing.rescaling:
 
-class Rescaling(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class Rescaling(keras.src.layers.preprocessing.data_layer.DataLayer)
  |  Rescaling(scale, offset=0.0, **kwargs)
  |
  |  A preprocessing layer which rescales input values to a new range.
@@ -20,25 +20,17 @@ class Rescaling(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  of integer or floating point dtype, and by default the layer will output
  |  floats.
  |
- |  **Note:** This layer is safe to use inside a `tf.data` pipeline
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
  |  (independently of which backend you're using).
  |
  |  Args:
- |      scale: Float, int, list, tuple or np.ndarray.
- |          The scale to apply to the inputs.
- |          If scalar, the same scale will be applied to
- |          all features or channels of input. If a list, tuple or
- |          1D array, the scaling is applied per channel.
- |      offset: Float, int, list/tuple or numpy ndarray.
- |          The offset to apply to the inputs.
- |          If scalar, the same scale will be applied to
- |          all features or channels of input. If a list, tuple or
- |          1D array, the scaling is applied per channel.
+ |      scale: Float, the scale to apply to the inputs.
+ |      offset: Float, the offset to apply to the inputs.
  |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
  |
  |  Method resolution order:
  |      Rescaling
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

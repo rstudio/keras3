@@ -139,7 +139,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' If the input height/width is even and the target height/width is odd (or
 #' inversely), the input image is left-padded by 1 pixel.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param height
@@ -1064,7 +1064,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' images. At inference time, the output will be identical to the input.
 #' Call the layer with `training=TRUE` to adjust the brightness of the input.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Inputs
@@ -1156,7 +1156,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' in integer or floating point dtype.
 #' By default, the layer will output floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1234,7 +1234,7 @@ function (object, factor, value_range = c(0L, 255L), seed = NULL, ...)
 #' of integer or floating point dtype. By default, the layer will output
 #' floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1296,7 +1296,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' of integer or floating point dtype.
 #' By default, the layer will output floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1359,7 +1359,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' of integer or floating point dtype.
 #' By default, the layer will output floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1470,7 +1470,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #'     or `(..., channels, target_height, target_width)`,
 #'     in `"channels_first"` format.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param height_factor
@@ -1583,7 +1583,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #'     or `(..., channels, target_height, target_width)`,
 #'     in `"channels_first"` format.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Examples
@@ -1701,7 +1701,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 #' of integer or floating point dtype, and by default the layer will output
 #' floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param scale
@@ -1758,7 +1758,7 @@ function (object, scale, offset = 0, ...)
 #'     or `(..., channels, target_height, target_width)`,
 #'     in `"channels_first"` format.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param height
@@ -1839,6 +1839,9 @@ function (object, height, width, interpolation = "bilinear",
 #' Performs the auto-contrast operation on an image.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' Auto contrast stretches the values of an image across the entire available
 #' `value_range`. This makes differences between pixels more obvious. An
 #' example of this is if an image only has values `[0, 1]` out of the range
@@ -1881,6 +1884,9 @@ function (object, value_range = tuple(0L, 255L), ...)
 #' Applies `(max_value - pixel + min_value)` for each pixel in the image.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' When created without `threshold` parameter, the layer performs solarization
 #' to all values. When created with specified `threshold` the layer only
 #' augments pixels that are above the `threshold` value.
@@ -1961,7 +1967,7 @@ function (object, addition_factor = 0, threshold_factor = 0,
 #' equalization independently on each color channel. At inference time,
 #' the equalization is consistently applied.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' ## Input Shape
@@ -2032,6 +2038,9 @@ function (object, value_range = list(0L, 255L), bins = 256L,
 #' MixUp implements the MixUp data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #'
 #' # References
 #' - [MixUp paper](https://arxiv.org/abs/1710.09412).
@@ -2081,6 +2090,9 @@ function (object, alpha = 0.2, data_format = NULL, seed = NULL,
 #' RandAugment performs the Rand Augment operation on input images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer can be thought of as an all-in-one image augmentation layer. The
 #' policy implemented by this layer has been benchmarked extensively and is
 #' effective on a wide variety of datasets.
@@ -2135,6 +2147,9 @@ function (object, value_range = list(0L, 255L), num_ops = 2L,
 #' Randomly performs the color degeneration operation on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' The sharpness operation first converts an image to gray scale, then back to
 #' color. It then takes a weighted average between original image and the
 #' degenerated image. This makes colors appear more dull.
@@ -2183,11 +2198,14 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
         args)
 }
 
-#' Randomly apply brightness, contrast, saturation
+#' Randomly apply brightness, contrast, saturation, and hue.
 #'
 #' @description
-#' and hue image processing operation sequentially and randomly on the
+#' Applies these image processing operations sequentially and randomly to the
 #' input.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
 #'
 #' @param value_range
 #' the range of values the incoming images will have.
@@ -2278,7 +2296,7 @@ function (object, value_range = list(0L, 255L), brightness_factor = NULL,
 #' image using standard RGB to grayscale conversion coefficients. Images
 #' that are not selected for conversion remain unchanged.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -2332,6 +2350,9 @@ function (object, factor = 0.5, data_format = NULL, seed = NULL,
 #' Randomly adjusts the hue on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer will randomly increase/reduce the hue for the input RGB
 #' images.
 #'
@@ -2391,6 +2412,9 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Reduces the number of bits for each color channel.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #'
 #' # References
 #' - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
@@ -2434,6 +2458,9 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Randomly adjusts the saturation on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer will randomly increase/reduce the saturation for the input RGB
 #' images.
 #'
@@ -2491,6 +2518,9 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Randomly performs the sharpness operation on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' The sharpness operation first performs a blur, then blends between the
 #' original image and the processed image. This operation adjusts the clarity
 #' of the edges in an image, ranging from blurred to enhanced sharpness.
@@ -2538,16 +2568,17 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
     create_layer(keras$layers$RandomSharpness, object, args)
 }
 
-#' A preprocessing layer that randomly applies shear transformations
+#' A preprocessing layer that randomly applies shear transformations to images.
 #'
 #' @description
-#' images.
-#'
 #' This layer shears the input images along the x-axis and/or y-axis by a
 #' randomly selected factor within the specified range. The shear
 #' transformation is applied to each image independently in a batch. Empty
 #' regions created during the transformation are filled according to the
 #' `fill_mode` and `fill_value` parameters.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
 #'
 #' @param x_factor
 #' A tuple of two floats. For each augmented image, a value
@@ -2621,6 +2652,9 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
 #' Random Erasing data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' Random Erasing is a data augmentation method where random patches of
 #' an image are erased (replaced by a constant value or noise)
 #' during training to improve generalization.
@@ -2687,6 +2721,9 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
 #' A preprocessing layer that applies random elastic transformations.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer distorts input images by applying elastic deformations,
 #' simulating a physically realistic transformation. The magnitude of the
 #' distortion is controlled by the `scale` parameter, while the `factor`
@@ -2775,6 +2812,9 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' Applies random Gaussian blur to images for data augmentation.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer performs a Gaussian blur operation on input images with a
 #' randomly selected degree of blurring, controlled by the `factor` and
 #' `sigma` arguments.
@@ -2833,6 +2873,9 @@ function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
 #' Preprocessing layer for random inversion of image colors.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer randomly inverts the colors of input images with a specified
 #' probability range. When applied, each image has a chance of having its
 #' colors inverted, where the pixel values are transformed to their
@@ -2883,6 +2926,9 @@ function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
 #' A preprocessing layer that applies random perspective transformations.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer distorts the perspective of input images by shifting their
 #' corner points, simulating a 3D-like transformation. The amount of distortion
 #' is controlled by the `factor` and `scale` parameters.
@@ -2941,6 +2987,9 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' Performs the AugMix data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' AugMix aims to produce images with variety while preserving the image
 #' semantics and local statistics. During the augmentation process,
 #' the same augmentation is applied across all images in the batch
@@ -3015,6 +3064,9 @@ function (object, value_range = c(0L, 255L), num_chains = 3L,
 #' CutMix data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' CutMix is a data augmentation method where patches are cut and pasted
 #' between two images in the dataset, while the labels are also mixed
 #' proportionally to the area of the patches.

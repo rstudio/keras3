@@ -5,34 +5,72 @@ class RandomPerspective(keras.src.layers.preprocessing.image_preprocessing.base_
  |
  |  A preprocessing layer that applies random perspective transformations.
  |
- |  This layer distorts the perspective of input images by shifting their
- |  corner points, simulating a 3D-like transformation. The amount of distortion
- |  is controlled by the `factor` and `scale` parameters.
+ |      This layer distorts the perspective of input images by shifting their
+ |      corner points, simulating a 3D-like transformation. The amount of distortion
+ |      is controlled by the `factor` and `scale` parameters.
  |
- |  Args:
- |      factor: A float or a tuple of two floats.
- |          Represents the probability of applying the perspective
- |          transformation to each image in the batch.
- |          - `factor=0.0` ensures no transformation is applied.
- |          - `factor=1.0` means the transformation is always applied.
- |          - If a tuple `(min, max)` is provided, a probability is randomly
- |            sampled between `min` and `max` for each image.
- |          - If a single float is given, the probability is sampled between
- |            `0.0` and the provided float.
- |          Default is 1.0.
- |      scale: A float defining the relative amount of perspective shift.
- |          Determines how much the image corners are displaced, affecting
- |          the intensity of the perspective effect.
- |      interpolation: Interpolation mode. Supported values: `"nearest"`,
- |          `"bilinear"`.
- |      fill_value: a float represents the value to be filled outside the
- |          boundaries when `fill_mode="constant"`.
- |      seed: Integer. Used to create a random seed.
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
+ |
+ |      Args:
+ |          factor: A float or a tuple of two floats.
+ |              Represents the probability of applying the perspective
+ |              transformation to each image in the batch.
+ |              - `factor=0.0` ensures no transformation is applied.
+ |              - `factor=1.0` means the transformation is always applied.
+ |              - If a tuple `(min, max)` is provided, a probability is randomly
+ |                sampled between `min` and `max` for each image.
+ |              - If a single float is given, the probability is sampled between
+ |                `0.0` and the provided float.
+ |              Default is 1.0.
+ |          scale: A float defining the relative amount of perspective shift.
+ |              Determines how much the image corners are displaced, affecting
+ |              the intensity of the perspective effect.
+ |          interpolation: Interpolation mode. Supported values: `"nearest"`,
+ |              `"bilinear"`.
+ |          fill_value: a float represents the value to be filled outside the
+ |              boundaries when `fill_mode="constant"`.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandomPerspective(bounding_box_format="xyxy")
+ |  images = np.random.randint(0, 255, (4, 224, 224, 3), dtype="uint8")
+ |
+ |  bounding_boxes = {
+ |      "boxes": np.array([
+ |          [[10, 20, 100, 150], [50, 60, 200, 250]],
+ |          [[15, 25, 110, 160], [55, 65, 210, 260]],
+ |          [[20, 30, 120, 170], [60, 70, 220, 270]],
+ |          [[25, 35, 130, 180], [65, 75, 230, 280]],
+ |      ], dtype="float32"),
+ |      "labels": np.array([[0, 1], [1, 2], [2, 3], [0, 3]], dtype="int32")
+ |  }
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 3]),
+ |      num_classes=4
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (4, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "bounding_boxes": bounding_boxes,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandomPerspective
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
@@ -78,23 +116,9 @@ class RandomPerspective(keras.src.layers.preprocessing.image_preprocessing.base_
  |    training=True
  |  )
  |
- |  transform_images(
- |    self,
- |    images,
- |    transformation,
- |    training=True
- |  )
- |
  |  transform_labels(
  |    self,
  |    labels,
- |    transformation,
- |    training=True
- |  )
- |
- |  transform_segmentation_masks(
- |    self,
- |    segmentation_masks,
  |    transformation,
  |    training=True
  |  )
