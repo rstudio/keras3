@@ -119,6 +119,25 @@
 #' wrapped in a `LossScaleOptimizer`, which will dynamically
 #' scale the loss to prevent underflow.
 #'
+#' Trainable variables are determined at `compile()` time. If you modify the
+#' `trainable` property of a layer after calling `compile()`, those changes
+#' will not take effect during `fit()` unless `compile()` is called again.
+#'
+#' Recommended workflow when changing trainable variables:
+#'
+#' ```{r, eval = FALSE}
+#' model |> compile(optimizer = "adam", loss = "mse")
+#' model |> fit(x_train, y_train)
+#'
+#' layer$trainable <- FALSE # or TRUE
+#'
+#' model |> compile(optimizer = "adam", loss = "mse")
+#' model |> fit(x_train, y_train)
+#' ```
+#'
+#' This behavior applies to all Keras backends and is also described in the
+#' transfer learning guide.
+#'
 #' @returns This is called primarily for the side effect of modifying `object`
 #'   in-place. The first argument `object` is also returned, invisibly, to
 #'   enable usage with the pipe.
