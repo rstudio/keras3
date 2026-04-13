@@ -16,7 +16,7 @@ A Keras model
 }
 \description{
 \code{keras_model_custom()} is soft-deprecated. Please define custom models by
-subclassing \code{keras$Model} directly using \code{\link{\%py_class\%}} or \code{\link[R6:R6Class]{R6::R6Class()}},
+subclassing \code{keras$Model} directly using \verb{\%py_class\%} or \code{\link[R6:R6Class]{R6::R6Class()}},
 or by calling \code{new_model_class()}.
 }
 \keyword{internal}

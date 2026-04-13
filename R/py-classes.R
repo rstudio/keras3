@@ -589,7 +589,7 @@ type_sum.py_R6ClassGenerator <- function(x) {
 #' @return `value`, invisibly
 #' @export
 #'
-#' @details Active bindings defined in a [`%py_class%`] are converted to
+#' @details Active bindings defined in a `%py_class%` are converted to
 #'   `@property` decorated methods.
 #'
 #' @seealso [`makeActiveBinding()`]
@@ -668,4 +668,3 @@ mark_active <- function(x) {
 
 is_marked_active <- function(x)
   identical(attr(x, "marked_active", TRUE), TRUE)
-

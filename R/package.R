@@ -96,9 +96,13 @@ keras <- NULL
 
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage(
-    "The keras package is deprecated. Use the keras3 package instead."
+    paste0(
+      "The keras package is deprecated. Please use the keras3 package instead.\n",
+      "Alternatively, to continue using legacy keras, call `py_require_legacy_keras()`."
+    )
   )
 }
+
 
 #' @export
 #' @rdname install_keras
