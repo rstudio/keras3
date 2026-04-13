@@ -2,11 +2,13 @@
 #' Computes the Cholesky decomposition of a positive semi-definite matrix.
 #'
 #' @returns
-#' A tensor of shape `(..., M, M)` representing the lower triangular
-#' Cholesky factor of `x`.
+#' A tensor of shape `(..., M, M)` representing the Cholesky factor of `x`.
 #'
 #' @param x
 #' Input tensor of shape `(..., M, M)`.
+#'
+#' @param upper If `TRUE`, return the upper-triangular Cholesky factor instead
+#' of the default lower-triangular factor.
 #'
 #' @export
 #' @family linear algebra ops
@@ -15,8 +17,8 @@
 # @seealso
 # + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/cholesky>
 op_cholesky <-
-function (x)
-ops$cholesky(x)
+function (x, upper = FALSE)
+ops$cholesky(x, upper)
 
 
 #' Computes the determinant of a square tensor.

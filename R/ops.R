@@ -333,6 +333,15 @@ function (indices, values, shape)
 #' op_scatter_update(inputs, indices, updates)
 #' ```
 #'
+#' Use `reduction = "add"` to accumulate updates at the same index:
+#'
+#' ```{r}
+#' inputs <- op_zeros(c(4))
+#' indices <- rbind(1, 1, 2)
+#' updates <- op_array(c(1, 1, 1), "float32")
+#' op_scatter_update(inputs, indices, updates, reduction = "add")
+#' ```
+#'
 #' @returns
 #' A tensor, has the same shape and dtype as `inputs`.
 #'
@@ -347,6 +356,15 @@ function (indices, values, shape)
 #' @param updates
 #' A tensor, the new values to be put to `inputs` at `indices`.
 #'
+#' @param reduction
+#' Optional string specifying the reduction to apply when multiple updates
+#' target the same index:
+#' - `NULL` (the default): updates replace existing values; the last write wins.
+#' - `"add"`: add updates to existing values.
+#' - `"max"`: keep the maximum of updates and existing values.
+#' - `"min"`: keep the minimum of updates and existing values.
+#' - `"mul"`: multiply updates by existing values.
+#'
 #' @export
 #' @family core ops
 #' @family ops
@@ -355,9 +373,9 @@ function (indices, values, shape)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update>
 #' @tether keras.ops.scatter_update
 op_scatter_update <-
-function (inputs, indices, updates)
+function (inputs, indices, updates, reduction = NULL)
 {
-    args <- capture_args(list(indices = as_index, updates = as_array))
+    args <- capture_args(list(indices = as_index))
     do.call(ops$scatter_update, args)
 }
 
@@ -7796,26 +7814,26 @@ ops$hard_swish(x)
 #' a more efficient or numerically stable gradient for a sequence of
 #' operations.
 #'
-#' # Example
+#' # Examples
+#' This backend-agnostic implementation accepts the positional inputs used by
+#' PyTorch as well as the upstream gradient used by all backends.
 #'
-#' Backend-agnostic example.
 #' ```{r}
-#' log1pexp <- op_custom_gradient(\(x) {
+#' log1pexp <- op_custom_gradient(function(x) {
+#'   e <- op_exp(x)
 #'
-#'     e <- op_exp(x)
+#'   grad <- function(..., upstream = NULL) {
+#'     if (is.null(upstream))
+#'       upstream <- list(...)[[1]]
+#'     op_multiply(upstream, 1 - 1 / op_add(1, e))
+#'   }
 #'
-#'     grad <- function(..., upstream = NULL) {
-#'       upstream <- upstream %||% ..1
-#'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
-#'     }
-#'
-#'     tuple(op_log(1 + e), grad)
-#'
+#'   tuple(op_log(1 + e), grad)
 #' })
 #'
-#' if(config_backend() == "tensorflow") {
+#' if (config_backend() == "tensorflow") {
 #'   tf <- tensorflow::tf
-#'   x <- op_convert_to_tensor(100.0)
+#'   x <- op_convert_to_tensor(100)
 #'   with(tf$GradientTape() %as% tape, {
 #'     tape$watch(x)
 #'     y <- log1pexp(x)
@@ -7830,32 +7848,22 @@ ops$hard_swish(x)
 #' gradient is determined by `f(...)[[2]]`.
 #'
 #' @param f
-#' Function `f(...)` that returns a tuple `(output, grad_fn)` where:
-#' - `...` is a sequence of unnamed arguments,
-#'   each a tensor input or nested structure of tensor inputs to the
-#'    function.
-#' - `output` is a (potentially nested structure of) tensor outputs of applying
-#'     operations in forward_fn `f()` to `...`.
-#' - `grad_fn` is a function with the signature `grad_fn(..., upstream)` which
-#'     returns a list of tensors the same size as (flattened) `...`: the
-#'     derivatives of tensors in `output` with respect to the tensors in
-#'     `...`. `upstream` is a tensor or
+#' Function `f(...)` that returns a tuple `(output, grad_fn)`, where:
+#' - `...` is a sequence of tensor inputs or nested structures of tensor inputs.
+#' - `output` is a (nested structure of) tensor outputs of applying
+#'     the operations in `f()` to `...`.
+#' - `grad_fn` has signature `grad_fn(..., upstream)` and returns a tuple of
+#'     tensors the same size as flattened `...`: the derivatives of tensors in
+#'     `output` with respect to the tensors in `...`. `upstream` is a tensor or
 #'     sequence of tensors holding the initial value gradients for each
 #'     tensor in `output`.
 #'
 #' @note
-#'
-#' Note that the `grad` function that returns gradient computation
-#' requires `...` as well as an `upstream` named argument, depending
-#' on the backend being set. With the JAX and TensorFlow backends,
-#' it requires only one argument, whereas it might use the `upstream`
-#' argument in the case of the PyTorch backend.
-#'
-#' When working with TensorFlow/JAX backend, `grad(upstream)`
-#' is sufficient. With PyTorch, the `grad` function requires
-#' `...` as well as `upstream`, e.g. `grad <- \(..., upstream)`.
-#' Follow the example above to use `op_custom_gradient()` in
-#' a way that is compatible with all backends.
+#' The gradient function's signature depends on the backend. With TensorFlow
+#' and JAX, `grad(upstream)` is sufficient. With PyTorch, the gradient function
+#' may also receive the original positional inputs, so define `grad` with `...`
+#' and `upstream` formals when they are required. The backend-agnostic example
+#' above accepts both calling conventions.
 #'
 #' @export
 #' @family core ops
