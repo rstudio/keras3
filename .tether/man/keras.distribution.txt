@@ -10,6 +10,7 @@ DeviceMesh(
 )
 distribute_tensor(tensor, layout)
 distribution()
+get_device_count(device_type=None)
 initialize(
   job_addresses=None,
   num_processes=None,

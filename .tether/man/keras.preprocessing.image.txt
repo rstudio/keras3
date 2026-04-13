@@ -29,6 +29,6 @@ smart_resize(
   size,
   interpolation='bilinear',
   data_format='channels_last',
-  backend_module=None
+  **kwargs
 )
 

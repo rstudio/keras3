@@ -9,7 +9,11 @@ flatten_with_path(structure)
 is_nested(structure)
 lists_to_tuples(structure)
 map_shape_structure(func, structure)
-map_structure(func, *structures)
+map_structure(
+  func,
+  *structures,
+  none_is_leaf=True
+)
 map_structure_up_to(
   shallow_structure,
   func,

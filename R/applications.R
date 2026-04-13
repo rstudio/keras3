@@ -2779,6 +2779,8 @@ function (input_shape = NULL, alpha = 1, include_top = TRUE,
 #' controls the width of the network. This is known as the
 #' depth multiplier in the MobileNetV3 paper, but the name is kept for
 #' consistency with MobileNetV1 in Keras.
+#' When `weights = "imagenet"`, `alpha` can be `0.75` or `1` for
+#' non-minimalistic models, and must be `1` for minimalistic models.
 #' - If `alpha < 1.0`, proportionally decreases the number
 #'     of filters in each layer.
 #' - If `alpha > 1.0`, proportionally increases the number
@@ -2928,6 +2930,8 @@ function (input_shape = NULL, alpha = 1, minimalistic = FALSE,
 #' controls the width of the network. This is known as the
 #' depth multiplier in the MobileNetV3 paper, but the name is kept for
 #' consistency with MobileNetV1 in Keras.
+#' When `weights = "imagenet"`, `alpha` can be `0.75` or `1` for
+#' non-minimalistic models, and must be `1` for minimalistic models.
 #' - If `alpha < 1.0`, proportionally decreases the number
 #'     of filters in each layer.
 #' - If `alpha > 1.0`, proportionally increases the number

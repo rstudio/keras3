@@ -4,6 +4,36 @@ ActivityRegularization(
   l2=0.0,
   **kwargs
 )
+AdaptiveAveragePooling1D(
+  output_size,
+  data_format=None,
+  **kwargs
+)
+AdaptiveAveragePooling2D(
+  output_size,
+  data_format=None,
+  **kwargs
+)
+AdaptiveAveragePooling3D(
+  output_size,
+  data_format=None,
+  **kwargs
+)
+AdaptiveMaxPooling1D(
+  output_size,
+  data_format=None,
+  **kwargs
+)
+AdaptiveMaxPooling2D(
+  output_size,
+  data_format=None,
+  **kwargs
+)
+AdaptiveMaxPooling3D(
+  output_size,
+  data_format=None,
+  **kwargs
+)
 add(inputs, **kwargs)
 Add(**kwargs)
 AdditiveAttention(
@@ -101,6 +131,9 @@ BatchNormalization(
   gamma_regularizer=None,
   beta_constraint=None,
   gamma_constraint=None,
+  renorm=False,
+  renorm_clipping=None,
+  renorm_momentum=0.99,
   synchronized=False,
   **kwargs
 )
@@ -129,6 +162,13 @@ concatenate(
   **kwargs
 )
 Concatenate(axis=-1, **kwargs)
+ContrastLimitedAdaptiveHistogramEqualization(
+  value_range=(0, 255),
+  clip_limit=4.0,
+  tile_grid_size=(8, 8),
+  data_format=None,
+  **kwargs
+)
 Conv1D(
   filters,
   kernel_size,
@@ -477,6 +517,7 @@ Dense(
   bias_constraint=None,
   lora_rank=None,
   lora_alpha=None,
+  quantization_config=None,
   **kwargs
 )
 DepthwiseConv1D(
@@ -554,6 +595,8 @@ EinsumDense(
   bias_constraint=None,
   lora_rank=None,
   lora_alpha=None,
+  gptq_unpacked_column_size=None,
+  quantization_config=None,
   **kwargs
 )
 ELU(alpha=1.0, **kwargs)
@@ -567,6 +610,7 @@ Embedding(
   weights=None,
   lora_rank=None,
   lora_alpha=None,
+  quantization_config=None,
   **kwargs
 )
 Equalization(
@@ -680,6 +724,7 @@ GroupQueryAttention(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  use_gate=False,
   seed=None,
   **kwargs
 )
@@ -793,6 +838,8 @@ IntegerLookup(
   output_mode='int',
   sparse=False,
   pad_to_max_tokens=False,
+  oov_method='floormod',
+  salt=None,
   name=None,
   **kwargs
 )
@@ -802,6 +849,7 @@ JaxLayer(
   params=None,
   state=None,
   seed=None,
+  native_serialization_platforms=None,
   **kwargs
 )
 Lambda(
@@ -969,6 +1017,7 @@ MultiHeadAttention(
   activity_regularizer=None,
   kernel_constraint=None,
   bias_constraint=None,
+  use_gate=False,
   seed=None,
   **kwargs
 )
@@ -1185,6 +1234,18 @@ Resizing(
   data_format=None,
   **kwargs
 )
+ReversibleEmbedding(
+  input_dim,
+  output_dim,
+  tie_weights=True,
+  embeddings_initializer='uniform',
+  embeddings_regularizer=None,
+  embeddings_constraint=None,
+  mask_zero=False,
+  reverse_dtype=None,
+  logit_soft_cap=None,
+  **kwargs
+)
 RMSNormalization(
   axis=-1,
   epsilon=1e-06,
@@ -1391,6 +1452,7 @@ StringLookup(
   sparse=False,
   encoding='utf-8',
   name=None,
+  salt=None,
   **kwargs
 )
 subtract(inputs, **kwargs)

@@ -48,6 +48,18 @@ ModelCheckpoint(
   save_freq='epoch',
   initial_value_threshold=None
 )
+OrbaxCheckpoint(
+  directory,
+  monitor='val_loss',
+  verbose=0,
+  save_best_only=False,
+  mode='auto',
+  save_freq='epoch',
+  initial_value_threshold=None,
+  max_to_keep=1,
+  save_on_background=True,
+  save_weights_only=False
+)
 ProgbarLogger()
 ReduceLROnPlateau(
   monitor='val_loss',
@@ -79,5 +91,5 @@ TensorBoard(
   embeddings_freq=0,
   embeddings_metadata=None
 )
-TerminateOnNaN()
+TerminateOnNaN(raise_error: bool = False)
 
