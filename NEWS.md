@@ -1,3 +1,5 @@
+# keras3 (development version)
+
 # keras3 1.5.1
 
 - `use_backend("jax")` on macOS now defaults to `gpu = FALSE`, so `jax-metal`
