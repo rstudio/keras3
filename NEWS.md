@@ -7,6 +7,22 @@
   `XLA_PYTHON_CLIENT_MEM_FRACTION`, preserving the JAX default or a
   user-provided value.
 
+- Updated wrappers and tethers for Keras 3.14.0.
+
+- Dataset loaders `image_dataset_from_directory()`,
+  `text_dataset_from_directory()`, and
+  `timeseries_dataset_from_array()` now expose `format`, and
+  `split_dataset()` gains `preferred_backend`.
+
+- Attention and lookup layers gain recent Keras arguments including
+  `use_gate`, `oov_method`, and `salt`.
+
+- LoRA-capable layers now expose current quantization-related arguments, and
+  `layer_batch_normalization()` gains renormalization options.
+
+- `callback_terminate_on_nan()`, `op_cholesky()`, `op_scatter_update()`, and
+  `optimizer_muon()` now follow the current Keras signatures more closely.
+
 # keras3 1.5.1
 
 - `use_backend("jax")` on macOS now defaults to `gpu = FALSE`, so `jax-metal`
