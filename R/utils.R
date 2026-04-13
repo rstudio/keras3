@@ -398,6 +398,8 @@ function (x, num_classes = NULL)
 #' - the Python NumPy seed: `import numpy; numpy.random.seed(seed)`
 #' - the TensorFlow seed: `tf$random$set_seed(seed)` (only if TF is installed)
 #' - The Torch seed: `import("torch")$manual_seed(seed)` (only if the backend is torch)
+#' - the global Keras `SeedGenerator`, used by `keras.random` functions when
+#'   their `seed` argument is not supplied.
 #' - and disables Python hash randomization.
 #'
 #' Note that the TensorFlow seed is set even if you're not using TensorFlow

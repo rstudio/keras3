@@ -27,6 +27,14 @@ class MeanAbsolutePercentageError(LossFunctionWrapper)
  |          (via `keras.backend.set_floatx()`). If a `keras.DTypePolicy` is
  |          provided, then the `compute_dtype` will be utilized.
  |
+ |  Examples:
+ |
+ |  >>> y_true = keras.ops.array([100.0, 200.0, 300.0])
+ |  >>> y_pred = keras.ops.array([90.0, 210.0, 310.0])
+ |  >>> loss = keras.losses.MeanAbsolutePercentageError()
+ |  >>> loss(y_true, y_pred)
+ |  6.111111
+ |
  |  Method resolution order:
  |      MeanAbsolutePercentageError
  |      LossFunctionWrapper

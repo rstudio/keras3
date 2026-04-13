@@ -9,7 +9,7 @@ are involved (e.g. parameter server distribution), which creates additional
 sources of randomness, or when certain non-deterministic cuDNN ops are
 involved.
 
-Calling this utility is equivalent to the following:
+Calling this utility does the following:
 
 ```python
 import random
@@ -24,6 +24,9 @@ tf.random.set_seed(seed)
 import torch  # Only if the backend is 'torch'
 torch.manual_seed(seed)
 ```
+
+Additionally, it resets the global Keras `SeedGenerator`, which is used by
+`keras.random` functions when the `seed` is not provided.
 
 Note that the TensorFlow seed is set even if you're not using TensorFlow
 as your backend framework, since many workflows leverage `tf.data`
