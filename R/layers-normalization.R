@@ -129,6 +129,26 @@
 #' @param gamma_constraint
 #' Optional constraint for the gamma weight.
 #'
+#' @param renorm
+#' Whether to use [Batch Renormalization](https://arxiv.org/abs/1702.03275).
+#' This adds extra variables during training. Inference is the same for either
+#' value of this parameter.
+#'
+#' @param renorm_clipping
+#' Named list, valid only if `renorm = TRUE`. Maps optional keys `"rmax"`,
+#' `"rmin"`, and `"dmax"` to numeric values used to clip the renormalization
+#' correction. The correction `(r, d)` is used as
+#' `corrected_value = normalized_value * r + d`, with `r` clipped to
+#' `[rmin, rmax]` and `d` clipped to `[-dmax, dmax]`. Missing `rmax`, `rmin`,
+#' and `dmax` values default to `Inf`, `0`, and `Inf`, respectively.
+#'
+#' @param renorm_momentum
+#' Momentum used to update the moving means and standard deviations for
+#' renormalization. Valid only if `renorm = TRUE`. Unlike `momentum`, this
+#' affects training and should be neither too small, which would add noise, nor
+#' too large, which would give stale estimates. `momentum` is still applied to
+#' obtain the means and variances used for inference.
+#'
 #' @param synchronized
 #' Only applicable with the TensorFlow backend.
 #' If `TRUE`, synchronizes the global batch statistics (mean and
@@ -156,6 +176,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
     gamma_initializer = "ones", moving_mean_initializer = "zeros",
     moving_variance_initializer = "ones", beta_regularizer = NULL,
     gamma_regularizer = NULL, beta_constraint = NULL, gamma_constraint = NULL,
+    renorm = FALSE, renorm_clipping = NULL, renorm_momentum = 0.99,
     synchronized = FALSE, ...)
 {
     args <- capture_args(list(axis = as_axis, input_shape = normalize_shape,

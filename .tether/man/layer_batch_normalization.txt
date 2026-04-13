@@ -1,7 +1,7 @@
 Help on class BatchNormalization in module keras.src.layers.normalization.batch_normalization:
 
 class BatchNormalization(keras.src.layers.layer.Layer)
- |  BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001, center=True, scale=True, beta_initializer='zeros', gamma_initializer='ones', moving_mean_initializer='zeros', moving_variance_initializer='ones', beta_regularizer=None, gamma_regularizer=None, beta_constraint=None, gamma_constraint=None, synchronized=False, **kwargs)
+ |  BatchNormalization(axis=-1, momentum=0.99, epsilon=0.001, center=True, scale=True, beta_initializer='zeros', gamma_initializer='ones', moving_mean_initializer='zeros', moving_variance_initializer='ones', beta_regularizer=None, gamma_regularizer=None, beta_constraint=None, gamma_constraint=None, renorm=False, renorm_clipping=None, renorm_momentum=0.99, synchronized=False, **kwargs)
  |
  |  Layer that normalizes its inputs.
  |
@@ -65,6 +65,22 @@ class BatchNormalization(keras.src.layers.layer.Layer)
  |          variance) for the layer across all devices at each training step
  |          in a distributed training strategy.
  |          If `False`, each replica uses its own local batch statistics.
+ |      renorm: Whether to use
+ |          [Batch Renormalization](https://arxiv.org/abs/1702.03275). This
+ |          adds extra variables during training. The inference is the same
+ |          for either value of this parameter.
+ |      renorm_clipping: Dictionary, valid only if `renorm = True`.
+ |          Maps optional keys `"rmax"`, `"rmin"`, `"dmax"` to floats used to
+ |          clip the renorm correction. The correction `(r, d)` is used as
+ |          `corrected_value = normalized_value * r + d`, with `r` clipped to
+ |          `[rmin, rmax]`, and `d` to `[-dmax, dmax]`. Missing `rmax`, `rmin`,
+ |          `dmax` are set to `inf`, `0`, `inf`, respectively.
+ |      renorm_momentum: Momentum used to update the moving means and standard
+ |          deviations with renorm. Valid only if `renorm= True`. Unlike
+ |          `momentum`, this affects training and should be neither too small
+ |          (which would add noise) nor too large (which would give stale
+ |          estimates). Note that `momentum` is still applied to get the means
+ |          and variances for inference.
  |      **kwargs: Base layer keyword arguments (e.g. `name` and `dtype`).
  |
  |  Call arguments:
@@ -141,6 +157,9 @@ class BatchNormalization(keras.src.layers.layer.Layer)
  |    gamma_regularizer=None,
  |    beta_constraint=None,
  |    gamma_constraint=None,
+ |    renorm=False,
+ |    renorm_clipping=None,
+ |    renorm_momentum=0.99,
  |    synchronized=False,
  |    **kwargs
  |  )
