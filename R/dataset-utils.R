@@ -245,8 +245,10 @@ function (directory, labels = "inferred", label_mode = "int",
 #' ```
 #'
 #' @returns
-#' A list of two `tf$data$Dataset` objects:
-#' the left and right splits.
+#' A list of two dataset objects, the left and right splits. The exact type
+#' depends on `preferred_backend` and on the input dataset type. For example,
+#' the TensorFlow backend returns `tf.data.Dataset` objects and the Torch
+#' backend returns `torch.utils.data.Dataset` objects.
 #'
 #' @param dataset
 #' A `tf$data$Dataset`, a `torch$utils$data$Dataset` object,
@@ -273,6 +275,12 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @param seed
 #' A random seed for shuffling.
 #'
+#' @param preferred_backend Optional string specifying which backend to use,
+#'   such as `"tensorflow"` or `"torch"`. If `NULL`, the backend is inferred
+#'   from `dataset`: TensorFlow is used for a `tf.data.Dataset`, Torch is used
+#'   for a `torch.utils.data.Dataset`, and the current Keras backend is used
+#'   for an R list or array. Defaults to `NULL`.
+#'
 #' @export
 #' @family dataset utils
 #' @family utils
@@ -283,7 +291,7 @@ function (directory, labels = "inferred", label_mode = "int",
 #' @tether keras.utils.split_dataset
 split_dataset <-
 function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
-          seed = NULL)
+          seed = NULL, preferred_backend = NULL)
 {
   args <- capture_args(list(left_size = function (x)
     ifelse(x < 1, x, as_integer(x)), right_size = function (x)
@@ -316,8 +324,12 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' Supported image formats: `.jpeg`, `.jpg`, `.png`, `.bmp`, `.gif`.
 #' Animated gifs are truncated to the first frame.
 #'
+#' By default this returns a `tf.data.Dataset`. Set `format = "grain"` to
+#' return a framework-agnostic Grain dataset instead.
+#'
 #' @returns
-#' A `tf.data.Dataset` object.
+#' A `tf.data.Dataset` object when `format = "tf"`, or a
+#' `grain.IterDataset` when `format = "grain"`.
 #'
 #' - If `label_mode` is `NULL`, it yields `float32` tensors of shape
 #'     `(batch_size, image_size[1], image_size[2], num_channels)`,
@@ -445,6 +457,13 @@ function (dataset, left_size = NULL, right_size = NULL, shuffle = FALSE,
 #' If `NULL` uses [`config_image_data_format()`]
 #' otherwise either `'channel_last'` or `'channel_first'`.
 #'
+#' @param format Format of the returned object. Defaults to `"tf"`. Available
+#'   options are:
+#'   - `"tf"`: returns a `tf.data.Dataset` object. Requires TensorFlow to be
+#'     installed.
+#'   - `"grain"`: returns a `grain.IterDataset` object. Requires Grain to be
+#'     installed.
+#'
 #' @param verbose
 #' Whether to display number information on classes and
 #' number of files found. Defaults to `TRUE`.
@@ -464,7 +483,8 @@ function (directory, labels = "inferred", label_mode = "int",
           image_size = c(256L, 256L), shuffle = TRUE, seed = NULL,
           validation_split = NULL, subset = NULL, interpolation = "bilinear",
           follow_links = FALSE, crop_to_aspect_ratio = FALSE,
-          pad_to_aspect_ratio = FALSE, data_format = NULL, verbose = TRUE)
+          pad_to_aspect_ratio = FALSE, data_format = NULL, format = "tf",
+          verbose = TRUE)
 {
   args <- capture_args(list(labels = as_integer,
                             image_size = function(x) lapply(x, as_integer),
@@ -496,8 +516,12 @@ function (directory, labels = "inferred", label_mode = "int",
 #'
 #' Only `.txt` files are supported at this time.
 #'
+#' By default this returns a `tf.data.Dataset`. Set `format = "grain"` to
+#' return a framework-agnostic Grain dataset instead.
+#'
 #' @returns
-#' A `tf.data.Dataset` object.
+#' A `tf.data.Dataset` object when `format = "tf"`, or a
+#' `grain.IterDataset` when `format = "grain"`.
 #'
 #' - If `label_mode` is `NULL`, it yields `string` tensors of shape
 #'     `(batch_size,)`, containing the contents of a batch of text files.
@@ -581,6 +605,13 @@ function (directory, labels = "inferred", label_mode = "int",
 #' Whether to visits subdirectories pointed to by symlinks.
 #' Defaults to `FALSE`.
 #'
+#' @param format Format of the returned object. Defaults to `"tf"`. Available
+#'   options are:
+#'   - `"tf"`: returns a `tf.data.Dataset` object. Requires TensorFlow to be
+#'     installed.
+#'   - `"grain"`: returns a `grain.IterDataset` object. Requires Grain to be
+#'     installed.
+#'
 #' @param verbose
 #' Whether to display number information on classes and
 #' number of files found. Defaults to `TRUE`.
@@ -598,7 +629,7 @@ text_dataset_from_directory <-
 function (directory, labels = "inferred", label_mode = "int",
     class_names = NULL, batch_size = 32L, max_length = NULL,
     shuffle = TRUE, seed = NULL, validation_split = NULL, subset = NULL,
-    follow_links = FALSE, verbose = TRUE)
+    follow_links = FALSE, format = "tf", verbose = TRUE)
 {
     args <- capture_args(list(labels = as_integer, label_mode = as_integer,
         batch_size = as_integer, seed = as_integer))
@@ -615,9 +646,10 @@ function (directory, labels = "inferred", label_mode = "int",
 #' to produce batches of timeseries inputs and targets.
 #'
 #' @returns
-#' A `tf$data$Dataset` instance. If `targets` was passed, the dataset yields
-#' list `(batch_of_sequences, batch_of_targets)`. If not, the dataset yields
-#' only `batch_of_sequences`.
+#' A dataset instance. If `format = "tf"`, this is a `tf.data.Dataset`.
+#' If `format = "grain"`, this is a Grain dataset. If `targets` was passed,
+#' the dataset yields list `(batch_of_sequences, batch_of_targets)`. If not,
+#' the dataset yields only `batch_of_sequences`.
 #'
 #' Example 1:
 #'
@@ -728,6 +760,11 @@ function (directory, labels = "inferred", label_mode = "int",
 #' will not be used in the output sequences.
 #' This is useful to reserve part of the data for test or validation.
 #'
+#' @param format Optional string; either `"tf"` (the default) for a
+#'   `tf.data.Dataset`, or `"grain"` for a Grain dataset. Grain datasets are
+#'   framework-agnostic and work with JAX, PyTorch, and NumPy backends without
+#'   requiring TensorFlow.
+#'
 #' @export
 #' @family dataset utils
 #' @family timesery dataset utils
@@ -741,7 +778,7 @@ function (directory, labels = "inferred", label_mode = "int",
 timeseries_dataset_from_array <-
 function (data, targets, sequence_length, sequence_stride = 1L,
     sampling_rate = 1L, batch_size = 128L, shuffle = FALSE, seed = NULL,
-    start_index = NULL, end_index = NULL)
+    start_index = NULL, end_index = NULL, format = "tf")
 {
     args <- capture_args(list(sequence_stride = as_integer,
         sampling_rate = as_integer, batch_size = as_integer,
