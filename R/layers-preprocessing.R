@@ -188,6 +188,9 @@ function (object, height, width, data_format = NULL, ...)
 #' Desired output number of bounding boxes.
 #'
 #' @param fill_value
+#' Deprecated alias for `padding_value`.
+#'
+#' @param padding_value
 #' The fill value of the `boxes` and `labels` in
 #' `bounding_boxes`. Defaults to `-1`.
 #'
@@ -204,11 +207,13 @@ function (object, height, width, data_format = NULL, ...)
 #' @family layers
 #' @tether keras.layers.MaxNumBoundingBoxes
 layer_max_num_bounding_boxes <-
-function (object, max_number, fill_value = -1L, ...)
+function (object, max_number, fill_value = -1L, ..., padding_value = NULL)
 {
+    if (!is.null(padding_value))
+        fill_value <- padding_value
     args <- capture_args(list(fill_value = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
+        ignore = c("object", "padding_value"), force = "fill_value")
     create_layer(keras$layers$MaxNumBoundingBoxes, object, args)
 }
 
@@ -882,6 +887,23 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' backend. If `TRUE`, returns a `SparseTensor`
 #' instead of a dense `Tensor`. Defaults to `FALSE`.
 #'
+#' @param oov_method
+#' Only relevant when `num_oov_indices > 1`. Controls how OOV tokens are
+#' assigned to OOV buckets:
+#' - `"floormod"` (the default) uses `token %% num_oov_indices`. This preserves
+#'   backwards compatibility, but can produce severe bucket imbalance when
+#'   input IDs share a common factor with `num_oov_indices`, such as all-even
+#'   IDs with an even bucket count.
+#' - `"farmhash"` applies FarmHash64, which distributes OOV tokens uniformly
+#'   regardless of the arithmetic structure of the input IDs.
+#' This parameter is ignored for string inputs, which always use FarmHash64.
+#'
+#' @param salt
+#' Only valid when `oov_method = "farmhash"`. If supplied, OOV bucket
+#' assignment uses SipHash64, with these values as an additional input (a
+#' "salt" in cryptography). May be a pair of integers, or a single integer
+#' used for both key components. If `NULL` (the default), FarmHash64 is used.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -905,11 +927,13 @@ layer_integer_lookup <-
 function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
     oov_token = -1L, vocabulary = NULL, vocabulary_dtype = "int64",
     idf_weights = NULL, invert = FALSE, output_mode = "int",
-    sparse = FALSE, pad_to_max_tokens = FALSE, name = NULL, ...)
+    sparse = FALSE, pad_to_max_tokens = FALSE, oov_method = "floormod",
+    salt = NULL, name = NULL, ...)
 {
     args <- capture_args(list(num_oov_indices = as_integer,
         mask_token = as_integer, oov_token = as_integer, vocabulary = as_integer,
-        invert = as_integer, output_mode = as_integer, input_shape = normalize_shape,
+        invert = as_integer, output_mode = as_integer, salt = as_integer,
+        input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$IntegerLookup, object, args)
@@ -3331,10 +3355,6 @@ function (layers, name = NULL)
 #' in the vocabulary. If this argument is set,
 #' there is no need to `adapt()` the layer.
 #'
-#' @param vocabulary_dtype
-#' The dtype of the vocabulary terms, for example
-#' `"int64"` or `"int32"`. Defaults to `"int64"`.
-#'
 #' @param idf_weights
 #' Only valid when `output_mode` is `"tf_idf"`.
 #' A list, list, 1D NumPy array, or 1D tensor or the same length
@@ -3394,6 +3414,12 @@ function (layers, name = NULL)
 #' Optional. The text encoding to use to interpret the input
 #' strings. Defaults to `"utf-8"`.
 #'
+#' @param salt
+#' Only valid when `num_oov_indices > 1`. If supplied, OOV bucket assignment
+#' uses SipHash64, with these values as an additional input (a "salt" in
+#' cryptography). May be a pair of integers, or a single integer used for both
+#' key components. If `NULL` (the default), FarmHash64 is used.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -3417,11 +3443,11 @@ layer_string_lookup <-
 function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
     oov_token = "[UNK]", vocabulary = NULL, idf_weights = NULL,
     invert = FALSE, output_mode = "int", pad_to_max_tokens = FALSE,
-    sparse = FALSE, encoding = "utf-8", name = NULL, ..., vocabulary_dtype = NULL)
+    sparse = FALSE, encoding = "utf-8", name = NULL, salt = NULL, ...)
 {
     args <- capture_args(list(num_oov_indices = as_integer,
         mask_token = as_integer, vocabulary = as_integer, invert = as_integer,
-        output_mode = as_integer, input_shape = normalize_shape,
+        output_mode = as_integer, salt = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$StringLookup, object, args)
