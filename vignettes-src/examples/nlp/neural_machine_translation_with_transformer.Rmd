@@ -67,7 +67,7 @@ We prepend the token `"[start]"` and we append the token `"[end]"` to the Spanis
 text_file <- "spa-eng/spa.txt"
 text_pairs <- text_file %>%
   readr::read_tsv(col_names = c("english", "spanish"),
-                  col_types = c("cc")) %>%
+                  col_types = c("cc"), quote = "") %>%
   within(spanish %<>% paste("[start]", ., "[end]"))
 ```
 
@@ -345,7 +345,7 @@ layer_transformer_decoder <- Layer(
     mask <- op_cast(i >= j, "int32")
 
     op_tile(
-      mask[newaxis, , ], 
+      mask[newaxis, , ],
       shape(batch_size, 1L, 1L)
     )
   },

@@ -150,21 +150,21 @@ for (epoch in seq_len(epochs)) {
     ## Seen so far: 12800 samples
     ## Training loss (for one batch) at step 400: 1.6450
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.6477
+    ## Training loss (for one batch) at step 600: 0.7421
     ## Seen so far: 38400 samples
     ## Start of epoch  2
-    ## Training loss (for one batch) at step 200: 0.5088
+    ## Training loss (for one batch) at step 200: 0.7258
     ## Seen so far: 12800 samples
-    ## Training loss (for one batch) at step 400: 0.2798
+    ## Training loss (for one batch) at step 400: 0.2621
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.3972
+    ## Training loss (for one batch) at step 600: 0.4378
     ## Seen so far: 38400 samples
     ## Start of epoch  3
-    ## Training loss (for one batch) at step 200: 0.4365
+    ## Training loss (for one batch) at step 200: 0.3170
     ## Seen so far: 12800 samples
-    ## Training loss (for one batch) at step 400: 0.4717
+    ## Training loss (for one batch) at step 400: 0.5630
     ## Seen so far: 25600 samples
-    ## Training loss (for one batch) at step 600: 0.2702
+    ## Training loss (for one batch) at step 600: 0.2245
     ## Seen so far: 38400 samples
 
 ## Low-level handling of metrics
@@ -263,14 +263,14 @@ for (epoch in seq_len(epochs)) {
     ## Seen so far: 25600 samples
     ## Training loss (for one batch) at step 600: 0.5022
     ## Seen so far: 38400 samples
-    ## Training acc over epoch: 0.8836
-    ## Validation acc: 0.9028
+    ## Training acc over epoch: 0.8837
+    ## Validation acc: 0.9031
 
 ``` r
 Sys.time() - time
 ```
 
-    ## Time difference of 39.4617 secs
+    ## Time difference of 38.95867 secs
 
 ## Speeding-up your training step with `tf_function()`
 
@@ -353,16 +353,16 @@ for (epoch in seq_len(epochs)) {
 
     ## Start of epoch  1
     ## Training acc over epoch: 0.0000
-    ## Validation acc: 0.9028
+    ## Validation acc: 0.9031
     ## Start of epoch  2
     ## Training acc over epoch: 0.0000
-    ## Validation acc: 0.9028
+    ## Validation acc: 0.9031
 
 ``` r
 Sys.time() - time
 ```
 
-    ## Time difference of 0.4011955 secs
+    ## Time difference of 0.3918645 secs
 
 Much faster, isn’t it?
 

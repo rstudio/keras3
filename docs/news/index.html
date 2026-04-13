@@ -8,7 +8,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,13 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.5.0" id="keras3-150">keras3 1.5.0<a class="anchor" aria-label="anchor" href="#keras3-150"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.5.1" id="keras3-151">keras3 1.5.1<a class="anchor" aria-label="anchor" href="#keras3-151"></a></h2>
+<ul><li><p><code>use_backend("jax")</code> on macOS now defaults to <code>gpu = FALSE</code>, so <code>jax-metal</code> is no longer selected automatically.</p></li>
+<li><p>JAX now registers backend tensor S3 methods for <code>jax.core.Tracer</code> objects, improving compatibility for traced computations.</p></li>
+<li><p>On Linux, <code>tensorflow-cpu</code> is no longer pinned to <code>2.18.*</code> when resolving Python dependencies.</p></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.5.0" id="keras3-150">keras3 1.5.0<a class="anchor" aria-label="anchor" href="#keras3-150"></a></h2><p class="text-muted">CRAN release: 2025-12-22</p>
 <ul><li><p><code><a href="../reference/register_keras_serializable.html">register_keras_serializable()</a></code> now updates R layer wrappers to use the registered class when called.</p></li>
 <li><p>Numeric ops now include <code><a href="../reference/op_layer_normalization.html">op_layer_normalization()</a></code>, <code><a href="../reference/op_cbrt.html">op_cbrt()</a></code>, <code><a href="../reference/op_corrcoef.html">op_corrcoef()</a></code>, <code><a href="../reference/op_deg2rad.html">op_deg2rad()</a></code>, <code><a href="../reference/op_heaviside.html">op_heaviside()</a></code>, <code><a href="../reference/op_sparse_sigmoid.html">op_sparse_sigmoid()</a></code>, and <code><a href="../reference/activation_sparse_sigmoid.html">activation_sparse_sigmoid()</a></code>. <code><a href="../reference/op_dot_product_attention.html">op_dot_product_attention()</a></code> gains <code>attn_logits_soft_cap</code>.</p></li>
 <li><p>Added signal window operations: <code><a href="../reference/op_bartlett.html">op_bartlett()</a></code>, <code><a href="../reference/op_blackman.html">op_blackman()</a></code>, <code><a href="../reference/op_hamming.html">op_hamming()</a></code>, <code><a href="../reference/op_hanning.html">op_hanning()</a></code>, and <code><a href="../reference/op_kaiser.html">op_kaiser()</a></code>.</p></li>

@@ -154,7 +154,7 @@ summary(model)
 plot(model)
 ```
 
-<img src="getting_started/unnamed-chunk-9-1.png" width="145" style="display: block; margin: auto;" />
+<img src="getting_started/unnamed-chunk-9-1.png" alt="" width="145" style="display: block; margin: auto;" />
 Next, compile the model with appropriate loss function, optimizer, and metrics:
 
 
@@ -196,15 +196,15 @@ model |> evaluate(x_test, y_test)
 ```
 
 ```
-## 313/313 - 1s - 3ms/step - accuracy: 0.9810 - loss: 0.0842
+## 313/313 - 1s - 2ms/step - accuracy: 0.9829 - loss: 0.0749
 ```
 
 ```
 ## $accuracy
-## [1] 0.981
+## [1] 0.9829
 ##
 ## $loss
-## [1] 0.08419506
+## [1] 0.07485336
 ```
 
 Generate predictions on new data:

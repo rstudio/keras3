@@ -169,7 +169,7 @@ model |> compile(optimizer = "adam", loss = "mse")
 model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
-    ## 1/1 - 0s - 450ms/step - loss: 2.8362
+    ## 1/1 - 0s - 421ms/step - loss: 2.8362
 
 ``` r
 # Check that the weights of layer1 have not changed during training
@@ -621,7 +621,7 @@ epochs <- 1
 model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
-    ## 146/146 - 57s - 393ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
+    ## 146/146 - 55s - 379ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
 
 ## Do a round of fine-tuning of the entire model
 
@@ -677,7 +677,7 @@ epochs <- 1
 model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
-    ## 146/146 - 89s - 610ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
+    ## 146/146 - 85s - 580ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
 
 After 10 epochs, fine-tuning gains us a nice improvement here. Let’s
 evaluate the model on the test dataset:
@@ -686,10 +686,10 @@ evaluate the model on the test dataset:
 model |> evaluate(test_ds)
 ```
 
-    ## 37/37 - 2s - 45ms/step - binary_accuracy: 0.9540 - loss: 0.1103
+    ## 37/37 - 2s - 42ms/step - binary_accuracy: 0.9540 - loss: 0.1103
 
     ## $binary_accuracy
     ## [1] 0.9539983
     ##
     ## $loss
-    ## [1] 0.1102541
+    ## [1] 0.1102625

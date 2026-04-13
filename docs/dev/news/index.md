@@ -2,6 +2,10 @@
 
 ## keras3 (development version)
 
+## keras3 1.5.0
+
+CRAN release: 2025-12-22
+
 - [`register_keras_serializable()`](https://keras3.posit.co/dev/reference/register_keras_serializable.md)
   now updates R layer wrappers to use the registered class when called.
 
