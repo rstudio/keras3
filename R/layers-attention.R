@@ -262,6 +262,14 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param bias_constraint
 #' Constraint for dense layer kernels.
 #'
+#' @param use_gate
+#' Logical, whether to apply a gated attention mechanism. When `TRUE`, an
+#' additional gating branch is added based on
+#' [Gated Attention for Large Language Models](https://arxiv.org/abs/2505.06708).
+#' It applies a sigmoid-activated linear projection to the query, which then
+#' gates the attention output. This helps improve training stability and
+#' eliminates "attention sinks".
+#'
 #' @param seed
 #' Optional integer to seed the dropout layer.
 #'
@@ -282,9 +290,9 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
     dropout = 0, use_bias = TRUE, flash_attention = NULL, kernel_initializer = "glorot_uniform",
     bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
     activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
-    seed = NULL, ...)
+    use_gate = FALSE, seed = NULL, ...)
 {
-    args <- capture_args(list(input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$GroupQueryAttention, object, args)
@@ -416,6 +424,14 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @param bias_constraint
 #' Constraint for dense layer kernels.
 #'
+#' @param use_gate
+#' Logical, whether to apply a gated attention mechanism. When `TRUE`, an
+#' additional gating branch is added based on
+#' [Gated Attention for Large Language Models](https://arxiv.org/abs/2505.06708).
+#' It applies a sigmoid-activated linear projection to the query, which then
+#' gates the attention output. This helps improve training stability and
+#' eliminates "attention sinks".
+#'
 #' @param seed
 #' Optional integer to seed the dropout layer.
 #'
@@ -438,9 +454,10 @@ function (inputs, num_heads, key_dim, value_dim = NULL, dropout = 0,
     use_bias = TRUE, output_shape = NULL, attention_axes = NULL, flash_attention=NULL,
     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-    kernel_constraint = NULL, bias_constraint = NULL, seed = NULL, ...)
+    kernel_constraint = NULL, bias_constraint = NULL, use_gate = FALSE,
+    seed = NULL, ...)
 {
-    args <- capture_args(list(input_shape = normalize_shape,
+    args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape,
         num_heads = as_integer, key_dim = as_integer, value_dim = as_integer,
         attention_axes = as_integer), ignore = "inputs")
