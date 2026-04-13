@@ -1,7 +1,7 @@
 Help on class Embedding in module keras.src.layers.core.embedding:
 
 class Embedding(keras.src.layers.layer.Layer)
- |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, weights=None, lora_rank=None, lora_alpha=None, **kwargs)
+ |  Embedding(input_dim, output_dim, embeddings_initializer='uniform', embeddings_regularizer=None, embeddings_constraint=None, mask_zero=False, weights=None, lora_rank=None, lora_alpha=None, quantization_config=None, **kwargs)
  |
  |  Turns nonnegative integers (indexes) into dense vectors of fixed size.
  |
@@ -91,6 +91,7 @@ class Embedding(keras.src.layers.layer.Layer)
  |    weights=None,
  |    lora_rank=None,
  |    lora_alpha=None,
+ |    quantization_config=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -134,20 +135,16 @@ class Embedding(keras.src.layers.layer.Layer)
  |
  |  quantize(
  |    self,
- |    mode,
- |    type_check=True
+ |    mode=None,
+ |    type_check=True,
+ |    config=None
  |  )
  |
  |  quantized_build(
  |    self,
  |    embeddings_shape,
- |    mode
- |  )
- |
- |  quantized_call(
- |    self,
- |    *args,
- |    **kwargs
+ |    mode,
+ |    config=None
  |  )
  |
  |  save_own_variables(self, store)
@@ -160,8 +157,38 @@ class Embedding(keras.src.layers.layer.Layer)
  |          store: Dict where the state of the model will be saved.
  |
  |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config)
+ |      Creates an operation from its config.
+ |
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same operation from the config dictionary.
+ |
+ |      Note: If you override this method, you might receive a serialized dtype
+ |      config, which is a `dict`. You can deserialize it as follows:
+ |
+ |      ```python
+ |      if "dtype" in config and isinstance(config["dtype"], dict):
+ |          policy = dtype_policies.deserialize(config["dtype"])
+ |      ```
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the output of `get_config`.
+ |
+ |      Returns:
+ |          An operation instance.
+ |
+ |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
  |
  |  embeddings
+ |
+ |  variable_serialization_spec
+ |      Returns a dict mapping quantization modes to variable names in order.
+ |
+ |      This spec is used by `save_own_variables` and `load_own_variables` to
+ |      determine the correct ordering of variables during serialization for
+ |      each quantization mode. `None` means no quantization.
  |
 

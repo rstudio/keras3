@@ -1,7 +1,7 @@
 Help on class EinsumDense in module keras.src.layers.core.einsum_dense:
 
 class EinsumDense(keras.src.layers.layer.Layer)
- |  EinsumDense(equation, output_shape, activation=None, bias_axes=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, lora_alpha=None, **kwargs)
+ |  EinsumDense(equation, output_shape, activation=None, bias_axes=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, lora_alpha=None, gptq_unpacked_column_size=None, quantization_config=None, **kwargs)
  |
  |  A layer that uses `einsum` as the backing computation.
  |
@@ -128,6 +128,8 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |    bias_constraint=None,
  |    lora_rank=None,
  |    lora_alpha=None,
+ |    gptq_unpacked_column_size=None,
+ |    quantization_config=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -167,14 +169,16 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |
  |  quantize(
  |    self,
- |    mode,
- |    type_check=True
+ |    mode=None,
+ |    type_check=True,
+ |    config=None
  |  )
  |
  |  quantized_build(
  |    self,
  |    kernel_shape,
- |    mode
+ |    mode,
+ |    config=None
  |  )
  |
  |  save_own_variables(self, store)
@@ -187,8 +191,38 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |          store: Dict where the state of the model will be saved.
  |
  |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config)
+ |      Creates an operation from its config.
+ |
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same operation from the config dictionary.
+ |
+ |      Note: If you override this method, you might receive a serialized dtype
+ |      config, which is a `dict`. You can deserialize it as follows:
+ |
+ |      ```python
+ |      if "dtype" in config and isinstance(config["dtype"], dict):
+ |          policy = dtype_policies.deserialize(config["dtype"])
+ |      ```
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the output of `get_config`.
+ |
+ |      Returns:
+ |          An operation instance.
+ |
+ |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
  |
  |  kernel
+ |
+ |  variable_serialization_spec
+ |      Returns a dict mapping quantization modes to variable names in order.
+ |
+ |      This spec is used by `save_own_variables` and `load_own_variables` to
+ |      determine the correct ordering of variables during serialization for
+ |      each quantization mode. `None` means no quantization.
  |
 

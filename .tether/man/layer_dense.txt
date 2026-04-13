@@ -1,7 +1,7 @@
 Help on class Dense in module keras.src.layers.core.dense:
 
 class Dense(keras.src.layers.layer.Layer)
- |  Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, lora_alpha=None, **kwargs)
+ |  Dense(units, activation=None, use_bias=True, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, lora_rank=None, lora_alpha=None, quantization_config=None, **kwargs)
  |
  |  Just your regular densely-connected NN layer.
  |
@@ -10,7 +10,9 @@ class Dense(keras.src.layers.layer.Layer)
  |  where `activation` is the element-wise activation function
  |  passed as the `activation` argument, `kernel` is a weights matrix
  |  created by the layer, and `bias` is a bias vector created by the layer
- |  (only applicable if `use_bias` is `True`).
+ |  (only applicable if `use_bias` is `True`). When this layer is
+ |  followed by a `BatchNormalization` layer, it is recommended to set
+ |  `use_bias=False` as `BatchNormalization` has its own bias term.
  |
  |  Note: If the input to the layer has a rank greater than 2, `Dense`
  |  computes the dot product between the `inputs` and the `kernel` along the
@@ -89,6 +91,7 @@ class Dense(keras.src.layers.layer.Layer)
  |    bias_constraint=None,
  |    lora_rank=None,
  |    lora_alpha=None,
+ |    quantization_config=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -128,14 +131,16 @@ class Dense(keras.src.layers.layer.Layer)
  |
  |  quantize(
  |    self,
- |    mode,
- |    type_check=True
+ |    mode=None,
+ |    type_check=True,
+ |    config=None
  |  )
  |
  |  quantized_build(
  |    self,
  |    kernel_shape,
- |    mode
+ |    mode,
+ |    config=None
  |  )
  |
  |  save_own_variables(self, store)
@@ -148,8 +153,38 @@ class Dense(keras.src.layers.layer.Layer)
  |          store: Dict where the state of the model will be saved.
  |
  |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config)
+ |      Creates an operation from its config.
+ |
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same operation from the config dictionary.
+ |
+ |      Note: If you override this method, you might receive a serialized dtype
+ |      config, which is a `dict`. You can deserialize it as follows:
+ |
+ |      ```python
+ |      if "dtype" in config and isinstance(config["dtype"], dict):
+ |          policy = dtype_policies.deserialize(config["dtype"])
+ |      ```
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the output of `get_config`.
+ |
+ |      Returns:
+ |          An operation instance.
+ |
+ |  ----------------------------------------------------------------------
  |  Readonly properties defined here:
  |
  |  kernel
+ |
+ |  variable_serialization_spec
+ |      Returns a dict mapping quantization modes to variable names in order.
+ |
+ |      This spec is used by `save_own_variables` and `load_own_variables` to
+ |      determine the correct ordering of variables during serialization for
+ |      each quantization mode. `None` means no quantization.
  |
 
