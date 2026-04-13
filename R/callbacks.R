@@ -489,6 +489,41 @@ function (schedule, verbose = 0L)
 #' model |> load_model_weights(checkpoint_filepath)
 #' ```
 #'
+#' ## Resuming training from weight-only checkpoints
+#'
+#' When using `save_weights_only = TRUE`, the weights file includes the state
+#' of the optimizer, including its iteration count and learning-rate state, if
+#' the model is compiled at the time of saving.
+#'
+#' To correctly resume training and restore the optimizer state—for example,
+#' to continue a learning-rate schedule without resetting it—compile the model
+#' before loading the weights.
+#'
+#' ```{r, eval = FALSE}
+#' lr_schedule <- learning_rate_schedule_exponential_decay(
+#'   initial_learning_rate = 0.1,
+#'   decay_steps = 100000,
+#'   decay_rate = 0.96,
+#'   staircase = TRUE
+#' )
+#'
+#' # 1. Create a fresh model instance.
+#' model <- get_model()
+#'
+#' # 2. Compile the model before loading weights.
+#' model |> compile(
+#'   optimizer = optimizer_rmsprop(learning_rate = lr_schedule),
+#'   loss = "sparse_categorical_crossentropy",
+#'   metrics = "accuracy"
+#' )
+#'
+#' # 3. Load weights; the optimizer state is restored automatically.
+#' model |> load_model_weights(checkpoint_filepath)
+#'
+#' # 4. Continue training.
+#' model |> fit(x_train, y_train, epochs = 10)
+#' ```
+#'
 #' @param filepath
 #' string, path to save the model file.
 #' `filepath` can contain named formatting options,
@@ -896,6 +931,32 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 
 #' Callback that terminates training when a NaN loss is encountered.
 #'
+#' @description
+#' This callback monitors the loss during training and terminates training when
+#' a NaN or Inf loss is detected. By default, training stops gracefully by
+#' setting the model's `stop_training` flag, which allows callback cleanup
+#' methods such as `on_train_end()` to run.
+#'
+#' Set `raise_error = TRUE` to raise an error immediately when a NaN or Inf is
+#' detected. In this mode, `on_train_end()` is not called on other callbacks.
+#' This can preserve backup states or prevent unintended cleanup after a
+#' training failure.
+#'
+#' # Examples
+#' ```{r, eval = FALSE}
+#' # Graceful termination (default)
+#' callback <- callback_terminate_on_nan()
+#' model |> fit(x, y, callbacks = list(callback))
+#'
+#' # Immediate error
+#' callback <- callback_terminate_on_nan(raise_error = TRUE)
+#' model |> fit(x, y, callbacks = list(callback))
+#' ```
+#'
+#' @param raise_error If `FALSE`, stop training gracefully. If `TRUE`, raise an
+#'   error immediately when a NaN or Inf loss is detected, bypassing callback
+#'   cleanup methods.
+#'
 #' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
@@ -904,9 +965,9 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN>
 #' @tether keras.callbacks.TerminateOnNaN
 callback_terminate_on_nan <-
-function ()
+function (raise_error = FALSE)
 {
-    args <- capture_args()
+    args <- capture_args(NULL)
     do.call(keras$callbacks$TerminateOnNaN, args)
 }
 
