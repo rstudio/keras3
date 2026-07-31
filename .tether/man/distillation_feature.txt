@@ -1,0 +1,115 @@
+Help on class FeatureDistillation in module keras.src.distillation.distillation_loss:
+
+class FeatureDistillation(DistillationLoss)
+ |  FeatureDistillation(loss='mse', teacher_layer_name=None, student_layer_name=None)
+ |
+ |  Feature distillation loss.
+ |
+ |  Feature distillation transfers knowledge from intermediate layers of the
+ |  teacher model to corresponding layers of the student model. This approach
+ |  helps the student learn better internal representations and often leads
+ |  to better performance compared to logits-only distillation.
+ |
+ |  Arguments:
+ |      loss: Loss function to use for feature distillation. Can be:
+ |          - String identifier (e.g., 'mse', 'cosine_similarity', 'mae')
+ |          - Keras loss instance
+ |          - Nested structure of losses matching the layer output structure
+ |          - `None` to skip distillation for that output (useful for
+ |            multi-output models where you only want to distill some outputs)
+ |          At least one loss must be non-`None`. Defaults to 'mse'.
+ |      teacher_layer_name: Name of the teacher layer to extract features from.
+ |          If `None`, uses the final output. Defaults to `None`.
+ |      student_layer_name: Name of the student layer to extract features from.
+ |          If `None`, uses the final output. Defaults to `None`.
+ |
+ |  Examlpe(s):
+ |
+ |  ```python
+ |  # Basic feature distillation from final outputs
+ |  distillation_loss = FeatureDistillation(loss="mse")
+ |
+ |  # Distill from specific intermediate layers
+ |  distillation_loss = FeatureDistillation(
+ |      loss="mse",
+ |      teacher_layer_name="dense_1",
+ |      student_layer_name="dense_1"
+ |  )
+ |
+ |  # Use cosine similarity for different feature sizes
+ |  distillation_loss = FeatureDistillation(
+ |      loss="cosine_similarity",
+ |      teacher_layer_name="conv2d_2",
+ |      student_layer_name="conv2d_1"
+ |  )
+ |
+ |  # With custom loss instance
+ |  distillation_loss = FeatureDistillation(
+ |      loss=keras.losses.MeanAbsoluteError()
+ |  )
+ |
+ |  # For multi-output models
+ |  distillation_loss = FeatureDistillation(
+ |      loss=["mse", "cosine_similarity"]
+ |  )
+ |
+ |  # For multi-output models, only distill some outputs
+ |  distillation_loss = FeatureDistillation(
+ |      loss=["mse", None, "cosine_similarity"]  # Skip middle output
+ |  )
+ |  ```
+ |
+ |  Method resolution order:
+ |      FeatureDistillation
+ |      DistillationLoss
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    loss='mse',
+ |    teacher_layer_name=None,
+ |    student_layer_name=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  compute_loss(
+ |    self,
+ |    teacher_outputs,
+ |    student_outputs,
+ |    **kwargs
+ |  )
+ |      Compute feature distillation loss using extracted features.
+ |
+ |      Arguments:
+ |          teacher_outputs: Extracted features from teacher layer.
+ |          student_outputs: Extracted features from student layer.
+ |          **kwargs: Additional arguments (ignored).
+ |      Returns:
+ |          Scalar distillation loss tensor.
+ |
+ |  get_config(self)
+ |      Get configuration for serialization.
+ |
+ |  validate_model_compatibility(
+ |    self,
+ |    teacher,
+ |    student
+ |  )
+ |      Validate that teacher and student models are compatible for feature
+ |      distillation.
+ |
+ |  validate_outputs(
+ |    self,
+ |    teacher_outputs,
+ |    student_outputs
+ |  )
+ |      Validate that outputs are compatible for feature distillation.
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config)
+ |      Create instance from configuration.
+ |

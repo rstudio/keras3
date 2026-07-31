@@ -1,0 +1,16 @@
+DistillationLoss()
+Distiller(
+  teacher,
+  student,
+  distillation_losses,
+  distillation_loss_weights=None,
+  student_loss_weight=0.5,
+  name='distiller',
+  **kwargs
+)
+FeatureDistillation(
+  loss='mse',
+  teacher_layer_name=None,
+  student_layer_name=None
+)
+LogitsDistillation(temperature=3.0, loss='kl_divergence')

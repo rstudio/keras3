@@ -1,0 +1,70 @@
+Help on class DistillationLoss in module keras.src.distillation.distillation_loss:
+
+class DistillationLoss(builtins.object)
+ |  Base class for distillation loss computation.
+ |
+ |  Distillation losses define how to compute the distillation loss
+ |  between teacher and student outputs. Each loss implements a specific
+ |  approach to knowledge transfer, from simple logits matching to feature-based
+ |  distillation.
+ |
+ |  To create custom distillation losses, subclass this class and
+ |  override the `compute_loss` method.
+ |
+ |  Methods defined here:
+ |
+ |  compute_loss(
+ |    self,
+ |    teacher_outputs,
+ |    student_outputs,
+ |    **kwargs
+ |  )
+ |      Compute distillation loss between teacher and student outputs.
+ |
+ |      This method should implement the specific distillation logic for
+ |      transferring knowledge from teacher to student.
+ |
+ |      Arguments:
+ |          teacher_outputs: Outputs from the teacher model. Can be a single
+ |              tensor or a list/tuple of tensors for multi-output models.
+ |          student_outputs: Outputs from the student model. Can be a single
+ |              tensor or a list/tuple of tensors for multi-output models.
+ |          **kwargs: Additional arguments for custom distillation_loss.
+ |      Returns:
+ |          Distillation loss tensor.
+ |
+ |  validate_model_compatibility(
+ |    self,
+ |    teacher,
+ |    student
+ |  )
+ |      Validate that teacher and student models are compatible.
+ |
+ |      Arguments:
+ |          teacher: The teacher model.
+ |          student: The student model.
+ |      Raises:
+ |          ValueError: If models are not compatible with this distillation
+ |              loss.
+ |
+ |  validate_outputs(
+ |    self,
+ |    teacher_outputs,
+ |    student_outputs
+ |  )
+ |      Validate that teacher and student outputs are compatible.
+ |
+ |      Arguments:
+ |          teacher_outputs: Outputs from the teacher model.
+ |          student_outputs: Outputs from the student model.
+ |      Raises:
+ |          ValueError: If outputs are not compatible.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
