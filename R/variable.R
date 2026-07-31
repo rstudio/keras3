@@ -97,6 +97,10 @@
 #' Optional. A unique name for the variable. Automatically generated
 #' if not set.
 #'
+#' @param layout
+#' Optional. Sharding layout for the variable. Can be a
+#' `keras.distribution.TensorLayout` or a backend-specific layout.
+#'
 #' @param ...
 #' Additional backend-specific keyword arguments forwarded to `keras$Variable()`.
 #'
@@ -105,7 +109,7 @@
 keras_variable <-
 function (initializer, shape = NULL, dtype = NULL, trainable = TRUE,
           autocast = TRUE, aggregation = "none", synchronization = "auto",
-          name = NULL, ...)
+          name = NULL, layout = NULL, ...)
 {
   args <- capture_args(list(shape = normalize_shape))
   do.call(keras$Variable, args)

@@ -101,6 +101,7 @@ Variable(
   aggregation='none',
   synchronization='auto',
   name=None,
+  layout=None,
   **kwargs
 )
 version()
