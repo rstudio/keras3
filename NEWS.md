@@ -1,5 +1,8 @@
 # keras3 (development version)
 
+- TensorBoard is now declared explicitly as a Python dependency, restoring
+  `callback_tensorboard()` with TensorFlow 2.21.
+
 - On Linux, `use_backend("jax", gpu = TRUE)` no longer overrides
   `XLA_PYTHON_CLIENT_MEM_FRACTION`, preserving the JAX default or a
   user-provided value.
