@@ -4,7 +4,7 @@ test_that("model plots forward spline configuration", {
 
   model <- keras_model_sequential(input_shape = 2L) |>
     layer_dense(1L)
-  path <- tempfile(fileext = ".dot")
+  path <- tempfile(fileext = ".raw")
   on.exit(unlink(path))
 
   plot(model, to_file = path, splines = "curved")
