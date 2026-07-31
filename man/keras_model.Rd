@@ -52,6 +52,7 @@ Other model functions: \cr
 \code{\link{summary.keras.src.models.model.Model}()} \cr
 
 Other model creation: \cr
+\code{\link{distiller}()} \cr
 \code{\link{keras_input}()} \cr
 \code{\link{keras_model_sequential}()} \cr
 }

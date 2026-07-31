@@ -19,6 +19,9 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
+  renorm = FALSE,
+  renorm_clipping = NULL,
+  renorm_momentum = 0.99,
   synchronized = FALSE,
   ...
 )
@@ -56,6 +59,12 @@ since the scaling will be done by the next layer.}
 \item{beta_constraint}{Optional constraint for the beta weight.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
+
+\item{renorm}{Whether to use batch renormalization during training.}
+
+\item{renorm_clipping}{Optional clipping configuration used when \code{renorm = TRUE}.}
+
+\item{renorm_momentum}{Momentum used for renormalization statistics when \code{renorm = TRUE}.}
 
 \item{synchronized}{Only applicable with the TensorFlow backend.
 If \code{TRUE}, synchronizes the global batch statistics (mean and
@@ -190,6 +199,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -204,6 +219,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -286,6 +302,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

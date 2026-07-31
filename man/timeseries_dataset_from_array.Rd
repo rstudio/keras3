@@ -14,7 +14,8 @@ timeseries_dataset_from_array(
   shuffle = FALSE,
   seed = NULL,
   start_index = NULL,
-  end_index = NULL
+  end_index = NULL,
+  format = "tf"
 )
 }
 \arguments{
@@ -58,11 +59,15 @@ data for test or validation.}
 \item{end_index}{Optional int; data points later (exclusive) than \code{end_index}
 will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.}
+
+\item{format}{Return either a TensorFlow dataset (\code{"tf"}) or a
+framework-agnostic Grain dataset (\code{"grain"}).}
 }
 \value{
-A \code{tf$data$Dataset} instance. If \code{targets} was passed, the dataset yields
-list \verb{(batch_of_sequences, batch_of_targets)}. If not, the dataset yields
-only \code{batch_of_sequences}.
+A dataset instance. If \code{format = "tf"}, this is a \code{tf.data.Dataset}.
+If \code{format = "grain"}, this is a Grain dataset. If \code{targets} was passed,
+the dataset yields list \verb{(batch_of_sequences, batch_of_targets)}. If not,
+the dataset yields only \code{batch_of_sequences}.
 
 Example 1:
 

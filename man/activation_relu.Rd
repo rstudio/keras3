@@ -55,7 +55,7 @@ activation_relu(x)
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{activation_relu(x, threshold = 5)
 }\if{html}{\out{</div>}}
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([ 0.  0.  0.  0. 10.], shape=(5), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

@@ -9,7 +9,7 @@ image_smart_resize(
   size,
   interpolation = "bilinear",
   data_format = "channels_last",
-  backend_module = NULL
+  ...
 )
 }
 \arguments{
@@ -26,8 +26,7 @@ Defaults to \code{'bilinear'}.}
 
 \item{data_format}{\code{"channels_last"} or \code{"channels_first"}.}
 
-\item{backend_module}{Backend module to use (if different from the default
-backend).}
+\item{...}{For forward/backward compatability.}
 }
 \value{
 Array with shape \verb{(size[1], size[2], channels)}.
@@ -85,6 +84,7 @@ Other image utils: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_extract_patches_3d}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
@@ -93,6 +93,9 @@ Other image utils: \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
+\code{\link{op_image_scale_and_translate}()} \cr
+\code{\link{op_image_sobel_edges}()} \cr
+\code{\link{op_image_ssim}()} \cr
 
 Other utils: \cr
 \code{\link{audio_dataset_from_directory}()} \cr

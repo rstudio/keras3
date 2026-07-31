@@ -13,6 +13,7 @@ layer_multi_head_attention(
   use_bias = TRUE,
   output_shape = NULL,
   attention_axes = NULL,
+  sliding_window = NULL,
   flash_attention = NULL,
   kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros",
@@ -21,6 +22,7 @@ layer_multi_head_attention(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
+  use_gate = FALSE,
   seed = NULL,
   ...
 )
@@ -45,6 +47,11 @@ feature dim (the query input's last dimension).}
 \item{attention_axes}{axes over which the attention is applied. \code{NULL} means
 attention over all axes, but batch, heads, and features.}
 
+\item{sliding_window}{Optional positive integer. If set, each query position attends only to key
+positions within \code{sliding_window - 1} of itself. This combines with
+\code{use_causal_mask = TRUE} to provide causal sliding-window attention.
+Defaults to \code{NULL}, which uses full attention.}
+
 \item{flash_attention}{If \code{NULL}, the layer attempts to use flash
 attention for faster and more memory-efficient attention
 computations when possible. This behavior can be configured using
@@ -64,6 +71,8 @@ computations when possible. This behavior can be configured using
 \item{kernel_constraint}{Constraint for dense layer kernels.}
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
+
+\item{use_gate}{Whether to add the gated attention branch used by recent attention models.}
 
 \item{seed}{Optional integer to seed the dropout layer.}
 
@@ -177,6 +186,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -192,6 +207,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -273,6 +289,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

@@ -7,24 +7,24 @@
 op_custom_gradient(f)
 }
 \arguments{
-\item{f}{Function \code{f(...)} that returns a tuple \verb{(output, grad_fn)} where:
+\item{f}{Function \verb{f(*args)} that returns a tuple
+\verb{(output, grad_fn)}, where:
 \itemize{
-\item \code{...} is a sequence of unnamed arguments,
-each a tensor input or nested structure of tensor inputs to the
-function.
-\item \code{output} is a (potentially nested structure of) tensor outputs of applying
-operations in forward_fn \code{f()} to \code{...}.
-\item \code{grad_fn} is a function with the signature \code{grad_fn(..., upstream)} which
-returns a list of tensors the same size as (flattened) \code{...}: the
-derivatives of tensors in \code{output} with respect to the tensors in
-\code{...}. \code{upstream} is a tensor or
+\item \code{args} is a sequence of (nested structures of) tensor inputs to
+the function.
+\item \code{output} is a (nested structure of) tensor outputs of applying
+operations in \code{forward_fn} to \code{args}.
+\item \code{grad_fn} is a function with the signature \verb{grad_fn(*args, upstream)} which returns a tuple of tensors the same size as
+(flattened) \code{args}: the derivatives of tensors in \code{output} with
+respect to the tensors in \code{args}. \code{upstream} is a tensor or
 sequence of tensors holding the initial value gradients for each
 tensor in \code{output}.
 }}
 }
 \value{
-A function \code{h(...)} which returns the same value as \code{f(...)[[1]]} and whose
-gradient is determined by \code{f(...)[[2]]}.
+A function \verb{h(*args)} which returns the same value as
+\verb{f(*args)[0]} and whose gradient is determined by
+\verb{f(*args)[1]}.
 }
 \description{
 This decorator allows fine grained control over the gradients of a sequence
@@ -32,46 +32,16 @@ for operations. This may be useful for multiple reasons, including providing
 a more efficient or numerically stable gradient for a sequence of
 operations.
 }
-\note{
-Note that the \code{grad} function that returns gradient computation
-requires \code{...} as well as an \code{upstream} named argument, depending
-on the backend being set. With the JAX and TensorFlow backends,
-it requires only one argument, whereas it might use the \code{upstream}
-argument in the case of the PyTorch backend.
+\section{Examples}{
+Backend-agnostic usage wraps a function like \code{log1pexp(x)} with
+\code{ops.custom_gradient(log1pexp)} and returns both the forward value and
+a gradient function.
 
-When working with TensorFlow/JAX backend, \code{grad(upstream)}
-is sufficient. With PyTorch, the \code{grad} function requires
-\code{...} as well as \code{upstream}, e.g. \verb{grad <- \\(..., upstream)}.
-Follow the example above to use \code{op_custom_gradient()} in
-a way that is compatible with all backends.
-}
-\section{Example}{
-Backend-agnostic example.
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{log1pexp <- op_custom_gradient(\\(x) \{
-
-    e <- op_exp(x)
-
-    grad <- function(..., upstream = NULL) \{
-      upstream <- upstream \%||\% ..1
-      op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
-    \}
-
-    tuple(op_log(1 + e), grad)
-
-\})
-
-if(config_backend() == "tensorflow") \{
-  tf <- tensorflow::tf
-  x <- op_convert_to_tensor(100.0)
-  with(tf$GradientTape() \%as\% tape, \{
-    tape$watch(x)
-    y <- log1pexp(x)
-  \})
-  dy_dx <- tape$gradient(y, x)
-  stopifnot(as.numeric(dy_dx) == 1)
-\}
-}\if{html}{\out{</div>}}
+The gradient function may need different signatures depending on the backend.
+A backend-agnostic implementation can use \verb{grad(*args, upstream = None)}.
+With TensorFlow and JAX, \code{grad(upstream)} is typically sufficient.
+With PyTorch, use \verb{grad(*args, upstream)} when both positional inputs and
+the upstream gradient are required.
 }
 
 \seealso{
@@ -88,6 +58,7 @@ Other core ops: \cr
 \code{\link{op_dtype}()} \cr
 \code{\link{op_fori_loop}()} \cr
 \code{\link{op_is_tensor}()} \cr
+\code{\link{op_jvp}()} \cr
 \code{\link{op_map}()} \cr
 \code{\link{op_rearrange}()} \cr
 \code{\link{op_scan}()} \cr
@@ -106,8 +77,11 @@ Other core ops: \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
+\code{\link{op_adaptive_average_pool}()} \cr
+\code{\link{op_adaptive_max_pool}()} \cr
 \code{\link{op_add}()} \cr
 \code{\link{op_all}()} \cr
+\code{\link{op_allclose}()} \cr
 \code{\link{op_angle}()} \cr
 \code{\link{op_any}()} \cr
 \code{\link{op_append}()} \cr
@@ -124,6 +98,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_array_split}()} \cr
 \code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
@@ -143,9 +118,11 @@ Other ops: \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_categorical_crossentropy}()} \cr
 \code{\link{op_cbrt}()} \cr
+\code{\link{op_cdist}()} \cr
 \code{\link{op_ceil}()} \cr
 \code{\link{op_celu}()} \cr
 \code{\link{op_cholesky}()} \cr
+\code{\link{op_cholesky_inverse}()} \cr
 \code{\link{op_clip}()} \cr
 \code{\link{op_concatenate}()} \cr
 \code{\link{op_cond}()} \cr
@@ -166,6 +143,7 @@ Other ops: \cr
 \code{\link{op_cumprod}()} \cr
 \code{\link{op_cumsum}()} \cr
 \code{\link{op_deg2rad}()} \cr
+\code{\link{op_depth_to_space}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -177,14 +155,18 @@ Other ops: \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
 \code{\link{op_dot_product_attention}()} \cr
+\code{\link{op_dsplit}()} \cr
+\code{\link{op_dstack}()} \cr
 \code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
 \code{\link{op_elu}()} \cr
 \code{\link{op_empty}()} \cr
+\code{\link{op_empty_like}()} \cr
 \code{\link{op_equal}()} \cr
 \code{\link{op_erf}()} \cr
+\code{\link{op_erfc}()} \cr
 \code{\link{op_erfinv}()} \cr
 \code{\link{op_exp}()} \cr
 \code{\link{op_exp2}()} \cr
@@ -192,15 +174,24 @@ Other ops: \cr
 \code{\link{op_expm1}()} \cr
 \code{\link{op_extract_sequences}()} \cr
 \code{\link{op_eye}()} \cr
+\code{\link{op_fabs}()} \cr
 \code{\link{op_fft}()} \cr
 \code{\link{op_fft2}()} \cr
 \code{\link{op_flip}()} \cr
+\code{\link{op_fliplr}()} \cr
+\code{\link{op_flipud}()} \cr
 \code{\link{op_floor}()} \cr
 \code{\link{op_floor_divide}()} \cr
+\code{\link{op_fmax}()} \cr
+\code{\link{op_fmin}()} \cr
+\code{\link{op_fmod}()} \cr
+\code{\link{op_fold}()} \cr
 \code{\link{op_fori_loop}()} \cr
 \code{\link{op_full}()} \cr
 \code{\link{op_full_like}()} \cr
+\code{\link{op_gcd}()} \cr
 \code{\link{op_gelu}()} \cr
+\code{\link{op_geomspace}()} \cr
 \code{\link{op_get_item}()} \cr
 \code{\link{op_glu}()} \cr
 \code{\link{op_greater}()} \cr
@@ -213,13 +204,17 @@ Other ops: \cr
 \code{\link{op_hard_tanh}()} \cr
 \code{\link{op_heaviside}()} \cr
 \code{\link{op_histogram}()} \cr
+\code{\link{op_hsplit}()} \cr
 \code{\link{op_hstack}()} \cr
+\code{\link{op_hypot}()} \cr
+\code{\link{op_i0}()} \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_ifft2}()} \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_extract_patches_3d}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
@@ -228,6 +223,9 @@ Other ops: \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
+\code{\link{op_image_scale_and_translate}()} \cr
+\code{\link{op_image_sobel_edges}()} \cr
+\code{\link{op_image_ssim}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inner}()} \cr
 \code{\link{op_inv}()} \cr
@@ -235,11 +233,19 @@ Other ops: \cr
 \code{\link{op_is_tensor}()} \cr
 \code{\link{op_isclose}()} \cr
 \code{\link{op_isfinite}()} \cr
+\code{\link{op_isin}()} \cr
 \code{\link{op_isinf}()} \cr
 \code{\link{op_isnan}()} \cr
+\code{\link{op_isneginf}()} \cr
+\code{\link{op_isposinf}()} \cr
+\code{\link{op_isreal}()} \cr
 \code{\link{op_istft}()} \cr
+\code{\link{op_jvp}()} \cr
 \code{\link{op_kaiser}()} \cr
+\code{\link{op_kron}()} \cr
 \code{\link{op_layer_normalization}()} \cr
+\code{\link{op_lcm}()} \cr
+\code{\link{op_ldexp}()} \cr
 \code{\link{op_leaky_relu}()} \cr
 \code{\link{op_left_shift}()} \cr
 \code{\link{op_less}()} \cr
@@ -252,6 +258,7 @@ Other ops: \cr
 \code{\link{op_log_sigmoid}()} \cr
 \code{\link{op_log_softmax}()} \cr
 \code{\link{op_logaddexp}()} \cr
+\code{\link{op_logaddexp2}()} \cr
 \code{\link{op_logdet}()} \cr
 \code{\link{op_logical_and}()} \cr
 \code{\link{op_logical_not}()} \cr
@@ -263,6 +270,7 @@ Other ops: \cr
 \code{\link{op_lu_factor}()} \cr
 \code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
+\code{\link{op_matrix_rank}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
 \code{\link{op_maximum}()} \cr
@@ -277,8 +285,23 @@ Other ops: \cr
 \code{\link{op_multi_hot}()} \cr
 \code{\link{op_multiply}()} \cr
 \code{\link{op_nan_to_num}()} \cr
+\code{\link{op_nanargmax}()} \cr
+\code{\link{op_nanargmin}()} \cr
+\code{\link{op_nancumprod}()} \cr
+\code{\link{op_nancumsum}()} \cr
+\code{\link{op_nanmax}()} \cr
+\code{\link{op_nanmean}()} \cr
+\code{\link{op_nanmedian}()} \cr
+\code{\link{op_nanmin}()} \cr
+\code{\link{op_nanpercentile}()} \cr
+\code{\link{op_nanprod}()} \cr
+\code{\link{op_nanquantile}()} \cr
+\code{\link{op_nanstd}()} \cr
+\code{\link{op_nansum}()} \cr
+\code{\link{op_nanvar}()} \cr
 \code{\link{op_ndim}()} \cr
 \code{\link{op_negative}()} \cr
+\code{\link{op_nextafter}()} \cr
 \code{\link{op_nonzero}()} \cr
 \code{\link{op_norm}()} \cr
 \code{\link{op_normalize}()} \cr
@@ -288,12 +311,16 @@ Other ops: \cr
 \code{\link{op_ones_like}()} \cr
 \code{\link{op_outer}()} \cr
 \code{\link{op_pad}()} \cr
+\code{\link{op_percentile}()} \cr
+\code{\link{op_pinv}()} \cr
 \code{\link{op_polar}()} \cr
 \code{\link{op_power}()} \cr
 \code{\link{op_prod}()} \cr
 \code{\link{op_psnr}()} \cr
+\code{\link{op_ptp}()} \cr
 \code{\link{op_qr}()} \cr
 \code{\link{op_quantile}()} \cr
+\code{\link{op_rad2deg}()} \cr
 \code{\link{op_ravel}()} \cr
 \code{\link{op_real}()} \cr
 \code{\link{op_rearrange}()} \cr
@@ -315,6 +342,8 @@ Other ops: \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_max}()} \cr
+\code{\link{op_segment_min}()} \cr
+\code{\link{op_segment_prod}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr
 \code{\link{op_selu}()} \cr
@@ -325,6 +354,7 @@ Other ops: \cr
 \code{\link{op_signbit}()} \cr
 \code{\link{op_silu}()} \cr
 \code{\link{op_sin}()} \cr
+\code{\link{op_sinc}()} \cr
 \code{\link{op_sinh}()} \cr
 \code{\link{op_size}()} \cr
 \code{\link{op_slice}()} \cr
@@ -337,6 +367,7 @@ Other ops: \cr
 \code{\link{op_solve}()} \cr
 \code{\link{op_solve_triangular}()} \cr
 \code{\link{op_sort}()} \cr
+\code{\link{op_space_to_depth}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
 \code{\link{op_sparse_plus}()} \cr
 \code{\link{op_sparse_sigmoid}()} \cr
@@ -367,18 +398,24 @@ Other ops: \cr
 \code{\link{op_top_k}()} \cr
 \code{\link{op_trace}()} \cr
 \code{\link{op_transpose}()} \cr
+\code{\link{op_trapezoid}()} \cr
 \code{\link{op_tri}()} \cr
 \code{\link{op_tril}()} \cr
 \code{\link{op_triu}()} \cr
 \code{\link{op_trunc}()} \cr
+\code{\link{op_unfold}()} \cr
+\code{\link{op_unique}()} \cr
 \code{\link{op_unravel_index}()} \cr
 \code{\link{op_unstack}()} \cr
+\code{\link{op_vander}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vdot}()} \cr
 \code{\link{op_vectorize}()} \cr
 \code{\link{op_vectorized_map}()} \cr
+\code{\link{op_view}()} \cr
 \code{\link{op_view_as_complex}()} \cr
 \code{\link{op_view_as_real}()} \cr
+\code{\link{op_vsplit}()} \cr
 \code{\link{op_vstack}()} \cr
 \code{\link{op_where}()} \cr
 \code{\link{op_while_loop}()} \cr

@@ -16,10 +16,12 @@ layer_flax_module_wrapper(object, module, method = NULL, variables = NULL, ...)
 can also be a function not defined in the \code{Module}, in which case it
 must take the \code{Module} as the first argument. It is used for both
 \code{Module.init} and \code{Module.apply}. Details are documented in the
-\code{method} argument of \href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html#flax.linen.apply}{\code{flax.linen.Module.apply()}}.}
+\code{method} argument of
+\href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html#flax.linen.apply}{flax.linen.Module.apply()}.}
 
 \item{variables}{A \code{dict} (named R list) containing all the variables of the module in the
-same format as what is returned by \href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html#flax.linen.init}{\code{flax.linen.Module.init()}}.
+same format as what is returned by
+\href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html#flax.linen.init}{flax.linen.Module.init()}.
 It should contain a \code{"params"} key and, if applicable, other keys for
 collections of variables for non-trainable state. This allows
 passing trained parameters and learned non-trainable state or
@@ -42,7 +44,7 @@ returned, invisibly.
 }
 \description{
 This layer enables the use of Flax components in the form of
-\href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html}{\code{flax.linen.Module}}
+\href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html}{flax.linen.Module}
 instances within Keras when using JAX as the backend for Keras.
 
 The module method to use for the forward pass can be specified via the
@@ -58,55 +60,29 @@ or inference mode, \code{TRUE} is passed in training mode.
 
 \code{FlaxLayer} handles the non-trainable state of your model and required RNGs
 automatically. Note that the \code{mutable} parameter of
-\href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html#flax.linen.apply}{\code{flax.linen.Module.apply()}}
+\href{https://flax.readthedocs.io/en/latest/api_reference/flax.linen/module.html#flax.linen.apply}{flax.linen.Module.apply()}
 is set to \verb{DenyList(["params"])}, therefore making the assumption that all
 the variables outside of the "params" collection are non-trainable weights.
 
 This example shows how to create a \code{FlaxLayer} from a Flax \code{Module} with
 the default \verb{__call__} method and no training argument:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{# keras3::use_backend("jax")
-# py_install("flax", "r-keras")
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{class MyFlaxModule(flax.linen.Module):
+    @flax.linen.compact
+    def __call__(self, inputs):
+        x = inputs
+        x = flax.linen.Conv(features=32, kernel_size=(3, 3))(x)
+        x = flax.linen.relu(x)
+        x = flax.linen.avg_pool(x, window_shape=(2, 2), strides=(2, 2))
+        x = x.reshape((x.shape[0], -1))  # flatten
+        x = flax.linen.Dense(features=200)(x)
+        x = flax.linen.relu(x)
+        x = flax.linen.Dense(features=10)(x)
+        x = flax.linen.softmax(x)
+        return x
 
-if(config_backend() == "jax" &&
-   reticulate::py_module_available("flax")) \{
-
-flax <- import("flax")
-
-MyFlaxModule(flax$linen$Module) \%py_class\% \{
-  `__call__` <- flax$linen$compact(\\(self, inputs) \{
-    inputs |>
-      (flax$linen$Conv(features = 32L, kernel_size = tuple(3L, 3L)))() |>
-      flax$linen$relu() |>
-      flax$linen$avg_pool(window_shape = tuple(2L, 2L),
-                          strides = tuple(2L, 2L)) |>
-      # flatten all except batch_size axis
-      (\\(x) x$reshape(tuple(x$shape[[1]], -1L)))() |>
-      (flax$linen$Dense(features = 200L))() |>
-      flax$linen$relu() |>
-      (flax$linen$Dense(features = 10L))() |>
-      flax$linen$softmax()
-  \})
-\}
-
-# typical usage:
-input <- keras_input(c(28, 28, 3))
-output <- input |>
-  layer_flax_module_wrapper(MyFlaxModule())
-
-model <- keras_model(input, output)
-
-# to instantiate the layer before composing:
-flax_module <- MyFlaxModule()
-keras_layer <- layer_flax_module_wrapper(module = flax_module)
-
-input <- keras_input(c(28, 28, 3))
-output <- input |>
-  keras_layer()
-
-model <- keras_model(input, output)
-
-\}
+flax_module = MyFlaxModule()
+keras_layer = FlaxLayer(flax_module)
 }\if{html}{\out{</div>}}
 
 This example shows how to wrap the module method to conform to the required
@@ -114,24 +90,21 @@ signature. This allows having multiple input arguments and a training
 argument that has a different name and values. This additionally shows how
 to use a function that is not bound to the module.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{flax <- import("flax")
+\if{html}{\out{<div class="sourceCode python">}}\preformatted{class MyFlaxModule(flax.linen.Module):
+    @flax.linen.compact
+    def forward(self, input1, input2, deterministic):
+        ...
+        return outputs
 
-MyFlaxModule(flax$linen$Module) \\\%py_class\\\% \{
-  forward <-
-    flax$linen$compact(\\(self, inputs1, input2, deterministic) \{
-      # do work ....
-      outputs # return
-    \})
-\}
+def my_flax_module_wrapper(module, inputs, training):
+    input1, input2 = inputs
+    return module.forward(input1, input2, not training)
 
-my_flax_module_wrapper <- function(module, inputs, training) \{
-  c(input1, input2) \\\%<-\\\% inputs
-  module$forward(input1, input2,!training)
-\}
-
-flax_module <- MyFlaxModule()
-keras_layer <- layer_flax_module_wrapper(module = flax_module,
-                                         method = my_flax_module_wrapper)
+flax_module = MyFlaxModule()
+keras_layer = FlaxLayer(
+    module=flax_module,
+    method=my_flax_module_wrapper,
+)
 }\if{html}{\out{</div>}}
 }
 \seealso{
@@ -152,6 +125,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -167,6 +146,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -248,6 +228,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

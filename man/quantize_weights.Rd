@@ -4,13 +4,20 @@
 \alias{quantize_weights}
 \title{Quantize the weights of a model.}
 \usage{
-quantize_weights(object, mode, ...)
+quantize_weights(object, mode = NULL, config = NULL, filters = NULL, ...)
 }
 \arguments{
 \item{object}{A Keras Model or Layer.}
 
-\item{mode}{The mode of the quantization. Only 'int8' is supported at this
-time.}
+\item{mode}{Optional quantization mode. Recent Keras releases support modes such as
+\code{"int8"}, \code{"int4"}, \code{"float8"}, and \code{"gptq"}.}
+
+\item{config}{Optional quantization configuration object. When supplied, this can be used
+instead of \code{mode} to customize the quantizers used for weights or
+activations.}
+
+\item{filters}{Optional filters controlling which layers are quantized. This may be a regex
+string, a list of regex strings, or a callable.}
 
 \item{...}{Passed on to the \code{object} quantization method.}
 }
@@ -20,10 +27,11 @@ model is modified in-place.
 }
 \description{
 Note that the model must be built first before calling this method.
-\code{quantize_weights()} will recursively call \code{layer$quantize(mode)} in all layers and
+\code{quantize_weights()} will recursively call \code{layer$quantize(...)} in all layers and
 will be skipped if the layer doesn't implement the function.
 
-Currently only \code{Dense} and \code{EinsumDense} layers support quantization.
+Available quantization modes and supported layer types depend on the current
+Keras backend and release.
 }
 \seealso{
 Other layer methods: \cr

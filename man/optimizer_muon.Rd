@@ -8,8 +8,9 @@ optimizer_muon(
   learning_rate = 0.001,
   adam_beta_1 = 0.9,
   adam_beta_2 = 0.999,
+  adam_weight_decay = 0.004,
   epsilon = 1e-07,
-  weight_decay = 0.1,
+  weight_decay = 0.004,
   clipnorm = NULL,
   clipvalue = NULL,
   global_clipnorm = NULL,
@@ -18,16 +19,17 @@ optimizer_muon(
   ema_overwrite_frequency = NULL,
   loss_scale_factor = NULL,
   gradient_accumulation_steps = NULL,
-  name = "muon",
+  name = NULL,
   exclude_layers = NULL,
   exclude_embeddings = TRUE,
   muon_a = 3.4445,
   muon_b = -4.775,
   muon_c = 2.0315,
-  adam_lr_ratio = 0.1,
+  adam_lr_ratio = 1L,
   momentum = 0.95,
-  ns_steps = 6L,
+  ns_steps = 5L,
   nesterov = TRUE,
+  rms_rate = 0.2,
   ...
 )
 }
@@ -46,6 +48,8 @@ The exponential decay rate for the 1st moment estimates. Defaults to
 that takes no arguments and returns the actual value to use.
 The exponential decay rate for the 2nd moment estimates. Defaults to
 \code{0.999}.}
+
+\item{adam_weight_decay}{Weight decay to apply when Muon falls back to AdamW updates.}
 
 \item{epsilon}{A small constant for numerical stability. This is
 "epsilon hat" in the Kingma and Ba paper
@@ -117,13 +121,15 @@ It is recommended to use the default value.}
 
 \item{adam_lr_ratio}{Float, the ratio of the learning rate when
 using Adam to the main learning rate.
-it is recommended to set it to \code{0.1}.}
+it is recommended to set it to \code{1}.}
 
 \item{momentum}{Float, momentum used by internal SGD.}
 
 \item{ns_steps}{Integer, number of Newton-Schulz iterations to run.}
 
 \item{nesterov}{Boolean, whether to use Nesterov-style momentum.}
+
+\item{rms_rate}{Optional RMS-rate stabilization parameter for the Muon update.}
 
 \item{...}{For forward/backward compatibility.}
 }
@@ -176,8 +182,11 @@ Other optimizers: \cr
 \code{\link{optimizer_lamb}()} \cr
 \code{\link{optimizer_lion}()} \cr
 \code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_map}()} \cr
+\code{\link{optimizer_multi}()} \cr
 \code{\link{optimizer_nadam}()} \cr
 \code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_schedule_free_adam_w}()} \cr
 \code{\link{optimizer_sgd}()} \cr
 }
 \concept{optimizers}

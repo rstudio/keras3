@@ -131,6 +131,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_discretization}()} \cr
 \code{\link{layer_equalization}()} \cr
@@ -178,6 +179,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -193,6 +200,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -274,6 +282,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

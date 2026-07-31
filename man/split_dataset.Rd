@@ -9,7 +9,8 @@ split_dataset(
   left_size = NULL,
   right_size = NULL,
   shuffle = FALSE,
-  seed = NULL
+  seed = NULL,
+  preferred_backend = NULL
 )
 }
 \arguments{
@@ -32,10 +33,13 @@ Defaults to \code{NULL}.}
 \item{shuffle}{Boolean, whether to shuffle the data before splitting it.}
 
 \item{seed}{A random seed for shuffling.}
+
+\item{preferred_backend}{Optional backend name to prefer for the returned
+dataset objects when \code{dataset} itself does not imply one.}
 }
 \value{
-A list of two \code{tf$data$Dataset} objects:
-the left and right splits.
+A list of two dataset objects, the left and right splits. The exact type
+depends on \code{preferred_backend} and on the input dataset type.
 }
 \description{
 Splits a dataset into a left half and a right half (e.g. train / test).

@@ -18,6 +18,7 @@ layer_dense(
   bias_constraint = NULL,
   lora_rank = NULL,
   lora_alpha = NULL,
+  quantization_config = NULL,
   ...
 )
 }
@@ -62,6 +63,8 @@ You can also enable LoRA on an existing
 \item{lora_alpha}{Optional integer. Scales the low-rank adaptation delta during the forward
 pass. The delta is scaled by \code{lora_alpha / lora_rank}, letting you tune the
 LoRA adjustment strength independently of \code{lora_rank}.}
+
+\item{quantization_config}{Optional quantization configuration passed through to Keras.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -142,6 +145,7 @@ Other core layers: \cr
 \code{\link{layer_identity}()} \cr
 \code{\link{layer_lambda}()} \cr
 \code{\link{layer_masking}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 
 Other layers: \cr
 \code{\link{Layer}()} \cr
@@ -152,6 +156,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -167,6 +177,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -248,6 +259,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

@@ -16,6 +16,7 @@
   layer_range = NULL,
   show_layer_activations = FALSE,
   show_trainable = NA,
+  splines = "ortho",
   to_file = NULL
 )
 }

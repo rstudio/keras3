@@ -16,21 +16,22 @@ learning_rate_schedule_cosine_decay(
 \arguments{
 \item{initial_learning_rate}{A float. The initial learning rate.}
 
-\item{decay_steps}{A int. Number of steps to decay over.}
+\item{decay_steps}{An integer. Number of steps to decay over.}
 
 \item{alpha}{A float. Minimum learning rate value for decay as a
-fraction of \code{initial_learning_rate}.}
+fraction of \code{warmup_target} or, if \code{warmup_target} is \code{NULL},
+\code{initial_learning_rate}.}
 
 \item{name}{String. Optional name of the operation.  Defaults to
 \code{"CosineDecay"}.}
 
 \item{warmup_target}{A float. The target learning rate for our
 warmup phase. Will cast to the \code{initial_learning_rate} datatype.
-Setting to \code{NULL} will skip warmup and begins decay phase from
-\code{initial_learning_rate}. Otherwise scheduler will warmup from
+Setting to \code{NULL} skips warmup and begins the decay phase from
+\code{initial_learning_rate}. Otherwise, the schedule warms up from
 \code{initial_learning_rate} to \code{warmup_target}.}
 
-\item{warmup_steps}{A int. Number of steps to warmup over.}
+\item{warmup_steps}{An integer. Number of steps to warm up over.}
 }
 \value{
 A 1-arg callable learning rate schedule that takes the current optimizer
@@ -42,17 +43,18 @@ See \href{https://arxiv.org/abs/1608.03983}{Loshchilov & Hutter, ICLR2016},
 SGDR: Stochastic Gradient Descent with Warm Restarts.
 
 For the idea of a linear warmup of our learning rate,
-see \href{https://arxiv.org/pdf/1706.02677}{Goyal et al.}.
+see \href{https://arxiv.org/pdf/1706.02677.pdf}{Goyal et al.}.
 
 When we begin training a model, we often want an initial increase in our
-learning rate followed by a decay. If \code{warmup_target} is an int, this
+learning rate followed by a decay. If \code{warmup_target} is provided, this
 schedule applies a linear increase per optimizer step to our learning rate
 from \code{initial_learning_rate} to \code{warmup_target} for a duration of
 \code{warmup_steps}. Afterwards, it applies a cosine decay function taking our
-learning rate from \code{warmup_target} to \code{alpha} for a duration of
-\code{decay_steps}. If \code{warmup_target} is NULL we skip warmup and our decay
-will take our learning rate from \code{initial_learning_rate} to \code{alpha}.
-It requires a \code{step} value to  compute the learning rate. You can
+learning rate from \code{warmup_target} to \code{warmup_target * alpha} for a
+duration of \code{decay_steps}. If \code{warmup_target} is \code{NULL}, we skip warmup and
+our decay will take our learning rate from \code{initial_learning_rate} to
+\code{initial_learning_rate * alpha}.
+It requires a \code{step} value to compute the learning rate. You can
 just pass a backend variable that you increment at each training step.
 
 The schedule is a 1-arg callable that produces a warmup followed by a
@@ -64,7 +66,7 @@ Our warmup is computed as:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{warmup_learning_rate <- function(step) \{
   completed_fraction <- step / warmup_steps
-  total_delta <- target_warmup - initial_learning_rate
+  total_delta <- warmup_target - initial_learning_rate
   completed_fraction * total_delta
 \}
 }\if{html}{\out{</div>}}
@@ -105,7 +107,7 @@ lr_warmup_decayed_fn <- learning_rate_schedule_cosine_decay(
 )
 }\if{html}{\out{</div>}}
 
-You can pass this schedule directly into a \code{optimizer}
+You can pass this schedule directly into an optimizer
 as the learning rate. The learning rate schedule is also serializable and
 deserializable using \code{keras$optimizers$schedules$serialize} and
 \code{keras$optimizers$schedules$deserialize}.
