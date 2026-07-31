@@ -1,0 +1,125 @@
+Help on class OptimizerMap in module keras.src.optimizers.multi_optimizer:
+
+class OptimizerMap(collections.abc.MutableMapping)
+ |  OptimizerMap(default_optimizer, optimizer_map=None)
+ |
+ |  A class mapping variables to optimizers.
+ |
+ |  Args:
+ |      default_optimizer: Default Keras `Optimizer`
+ |          for any unmapped variables.
+ |
+ |  Method resolution order:
+ |      OptimizerMap
+ |      collections.abc.MutableMapping
+ |      collections.abc.Mapping
+ |      collections.abc.Collection
+ |      collections.abc.Sized
+ |      collections.abc.Iterable
+ |      collections.abc.Container
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __call__(self, variable)
+ |      Call self as a function.
+ |
+ |  __delitem__(self, key)
+ |
+ |  __getitem__(self, key)
+ |      Retrieves the corresponding `Optimizer` by the string key.
+ |
+ |      This method first attempts an exact key match. If no exact match is
+ |      found, it treats all keys in the map as regular expression patterns
+ |      and uses `re.fullmatch` to find a policy.
+ |
+ |      For example,
+ |      to apply a optimizer to all sublayers of an `encoder` block,
+ |      the key should be explicitly set to `"encoder/.*"`. A key of
+ |      `"encoder"` will only match the layer with that exact path.
+ |
+ |      Args:
+ |          key: str. The key to query for an `Optimizer`.
+ |
+ |      Returns:
+ |          The corresponding `Optimizer`. If no match is found, this method
+ |          returns `self.default_optimizer`.
+ |
+ |      Raises:
+ |          ValueError: If the `key` matches more than one regex pattern in the
+ |          map.
+ |
+ |      Example:
+ |
+ |      ```python
+ |      >>> from keras.src import optimizers
+ |      >>> from keras.src.optimizers.multi_optimizer import OptimizerMap
+ |      >>> opt_adam = optimizers.Adam()
+ |      >>> opt_sgd = optimizers.SGD()
+ |      >>> opt_rmsprop = optimizers.RMSprop()
+ |      >>> optimizer_map = OptimizerMap(default_optimizer=opt_rmsprop)
+ |      >>> optimizer_map["encoder/layer_0/dense"] = opt_adam
+ |      >>> optimizer_map["encoder/.*"] = opt_sgd
+ |      >>> optimizer_map["decoder"] = opt_adam
+ |
+ |      >>> optimizer_map["decoder"].name
+ |      'adam'
+ |
+ |      >>> optimizer_map["encoder/layer_0/dense"].name
+ |      'adam'
+ |
+ |      >>> optimizer_map["encoder/layer_0/attention/query"].name
+ |      'sgd'
+ |
+ |      >>> optimizer_map["decoder/layer_0/dense"].name
+ |      'rmsprop'
+ |      ```
+ |
+ |  __init__(
+ |    self,
+ |    default_optimizer,
+ |    optimizer_map=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  __iter__(self)
+ |
+ |  __len__(self)
+ |
+ |  __setitem__(
+ |    self,
+ |    key,
+ |    optimizer
+ |  )
+ |      Set optimizer for a given variable.
+ |
+ |      Args:
+ |          key: string representing the variable path or regex pattern
+ |          optimizer: Keras Optimizer instance
+ |
+ |  get_config(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config, custom_objects=None)
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  default_optimizer
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __abstractmethods__ = frozenset()
+ |

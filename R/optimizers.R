@@ -1270,6 +1270,83 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
     do.call(keras$optimizers$LossScaleOptimizer, args)
 }
 
+
+#' Map variables to optimizers
+#'
+#' When retrieving an optimizer, the map first attempts an exact key match. If
+#' no exact match is found, it treats every key as a regular-expression pattern
+#' and performs a full match against the variable path. For example,
+#' `"encoder"` matches only the layer with that exact path; use
+#' `"encoder/.*"` to match its sublayers. Exact matches take precedence. If
+#' more than one regular expression matches, lookup raises an error. Variables
+#' not matched by the map use `default_optimizer`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' optimizers <- optimizer_map(
+#'   default_optimizer = optimizer_sgd(),
+#'   optimizer_map = list("encoder/.*" = optimizer_adam())
+#' )
+#' ```
+#'
+#' @param default_optimizer Keras optimizer used for unmatched variables.
+#' @param optimizer_map Optional named list mapping exact variable paths or
+#'   regular expressions to optimizer instances.
+#'
+#' @returns An `OptimizerMap` instance.
+#' @export
+#' @family optimizers
+#' @tether keras.optimizers.OptimizerMap
+optimizer_map <-
+function(default_optimizer, optimizer_map = NULL)
+{
+  args <- capture_args()
+  do.call(keras$optimizers$OptimizerMap, args)
+}
+
+
+#' Delegate variables to multiple optimizers
+#'
+#' Wraps an [`optimizer_map()`] or a callable that selects an optimizer for a
+#' variable. Access the sub-optimizers through `optimizer$optimizers`, for
+#' example to inspect their learning rates, iterations, or loss-scale factors.
+#' A multi-optimizer does not expose a single `learning_rate`, because its
+#' sub-optimizers may have different learning rates. Optimizer-specific
+#' callbacks are not currently supported.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' optimizers <- optimizer_map(
+#'   default_optimizer = optimizer_sgd(),
+#'   optimizer_map = list("encoder/.*" = optimizer_adam())
+#' )
+#' optimizer <- optimizer_multi(optimizers)
+#'
+#' # A callable can also select an optimizer for each variable.
+#' optimizer <- optimizer_multi(function(variable) {
+#'   if (grepl("encoder", variable$path)) optimizer_adam() else optimizer_sgd()
+#' })
+#' ```
+#'
+#' @param optimizer_map An `OptimizerMap` or callable that accepts a variable
+#'   and returns its optimizer.
+#' @param loss_scale_factor Optional loss scale overriding the value on each
+#'   sub-optimizer.
+#' @param name Optional optimizer name.
+#'
+#' @returns A `MultiOptimizer` instance.
+#' @export
+#' @family optimizers
+#' @tether keras.optimizers.MultiOptimizer
+optimizer_multi <-
+function(optimizer_map, loss_scale_factor = NULL, name = NULL)
+{
+  args <- capture_args()
+  do.call(keras$optimizers$MultiOptimizer, args)
+}
+
 #' Optimizer that implements the Muon algorithm.
 #'
 #' @description
