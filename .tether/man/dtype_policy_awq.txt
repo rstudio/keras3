@@ -1,0 +1,47 @@
+Help on class AWQDTypePolicy in module keras.src.dtype_policies.dtype_policy:
+
+class AWQDTypePolicy(QuantizedDTypePolicy)
+ |  AWQDTypePolicy(mode, source_name=None)
+ |
+ |  Quantized dtype policy for AWQ quantization.
+ |
+ |  This policy helps propagate quantization settings for AWQ
+ |  when loading an AWQ quantized model in Keras format.
+ |
+ |  Args:
+ |      mode: The quantization mode. This should be a string in the format
+ |          `"awq/<weight_bits>/<group_size>"`.
+ |          -   `"awq"`: The identifier for the quantization algorithm.
+ |          -   `<weight_bits>`: Number of bits to quantize weights to.
+ |              AWQ presently only supports 4-bit quantization.
+ |          -   `<group_size>`: The group size for quantization. Supported
+ |              values are -1 (for per-channel quantization) or any
+ |              positive integer.
+ |          Example: `"awq/4/128"`.
+ |      source_name: The source dtype policy name, e.g. "float32".
+ |
+ |  Method resolution order:
+ |      AWQDTypePolicy
+ |      QuantizedDTypePolicy
+ |      DTypePolicy
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __eq__(self, other)
+ |      Return self==value.
+ |
+ |  __init__(
+ |    self,
+ |    mode,
+ |    source_name=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __hash__ = None
+ |

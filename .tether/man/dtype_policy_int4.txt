@@ -1,0 +1,45 @@
+Help on class Int4DTypePolicy in module keras.src.dtype_policies.dtype_policy:
+
+class Int4DTypePolicy(QuantizedDTypePolicy)
+ |  Int4DTypePolicy(mode, source_name=None)
+ |
+ |  Quantized dtype policy for int4 quantization.
+ |
+ |  This policy helps propagate quantization settings for int4 sub-channel
+ |  quantization when loading a quantized model in Keras format.
+ |
+ |  Args:
+ |      mode: The quantization mode. This should be a string in the format
+ |          `"int4/<block_size>"`.
+ |          -   `"int4"`: The identifier for the quantization algorithm.
+ |          -   `<block_size>`: The block size for sub-channel quantization.
+ |              Use -1 for per-channel (legacy) quantization. Any positive
+ |              integer enables sub-channel quantization with that block size.
+ |          Example: `"int4/128"` for sub-channel with 128-element groups.
+ |      source_name: The source dtype policy name, e.g. "float32".
+ |
+ |  Method resolution order:
+ |      Int4DTypePolicy
+ |      QuantizedDTypePolicy
+ |      DTypePolicy
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __eq__(self, other)
+ |      Return self==value.
+ |
+ |  __init__(
+ |    self,
+ |    mode,
+ |    source_name=None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  get_config(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __hash__ = None
+ |
