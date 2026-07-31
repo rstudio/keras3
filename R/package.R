@@ -70,7 +70,7 @@ keras <- NULL
     Sys.setenv(RETICULATE_PYTHON = keras_python)
 
   py_require(c(
-    "keras", "pydot", "scipy", "pandas", "Pillow", "ipython"
+    "keras", "tensorboard", "pydot", "scipy", "pandas", "Pillow", "ipython"
     #, "tensorflow_datasets"
   ))
 
