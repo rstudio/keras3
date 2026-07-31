@@ -150,6 +150,7 @@ Progbar(
   verbose=1,
   interval=0.05,
   stateful_metrics=None,
+  stateless_metrics=None,
   unit_name='step'
 )
 PyDataset(
