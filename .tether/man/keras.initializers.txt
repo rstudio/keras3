@@ -2,22 +2,70 @@ constant(value=0.0)
 Constant(value=0.0)
 deserialize(config, custom_objects=None)
 get(identifier)
-glorot_normal(seed=None)
-glorot_uniform(seed=None)
-GlorotNormal(seed=None)
-GlorotUniform(seed=None)
-he_normal(seed=None)
-he_uniform(seed=None)
-HeNormal(seed=None)
-HeUniform(seed=None)
+glorot_normal(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+glorot_uniform(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+GlorotNormal(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+GlorotUniform(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+he_normal(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+he_uniform(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+HeNormal(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+HeUniform(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
 identity(gain=1.0)
 Identity(gain=1.0)
 IdentityInitializer(gain=1.0)
 Initializer()
-lecun_normal(seed=None)
-lecun_uniform(seed=None)
-LecunNormal(seed=None)
-LecunUniform(seed=None)
+lecun_normal(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+lecun_uniform(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+LecunNormal(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
+LecunUniform(
+  seed=None,
+  input_axes=None,
+  output_axes=None
+)
 ones()
 Ones()
 orthogonal(gain=1.0, seed=None)
@@ -76,13 +124,17 @@ variance_scaling(
   scale=1.0,
   mode='fan_in',
   distribution='truncated_normal',
-  seed=None
+  seed=None,
+  input_axes=None,
+  output_axes=None
 )
 VarianceScaling(
   scale=1.0,
   mode='fan_in',
   distribution='truncated_normal',
-  seed=None
+  seed=None,
+  input_axes=None,
+  output_axes=None
 )
 zeros()
 Zeros()

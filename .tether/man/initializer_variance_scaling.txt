@@ -1,7 +1,7 @@
 Help on class VarianceScaling in module keras.src.initializers.random_initializers:
 
 class VarianceScaling(RandomInitializer)
- |  VarianceScaling(scale=1.0, mode='fan_in', distribution='truncated_normal', seed=None)
+ |  VarianceScaling(scale=1.0, mode='fan_in', distribution='truncated_normal', seed=None, input_axes=None, output_axes=None)
  |
  |  Initializer that adapts its scale to the shape of its input tensors.
  |
@@ -42,6 +42,10 @@ class VarianceScaling(RandomInitializer)
  |          across multiple calls. To get different random values
  |          across multiple calls, use as seed an instance
  |          of `keras.backend.SeedGenerator`.
+ |      input_axes: Optional list of integers. The axes of the input tensor
+ |          that should be considered for computing the fan-in.
+ |      output_axes: Optional list of integers. The axes of the output tensor
+ |          that should be considered for computing the fan-out.
  |
  |  Method resolution order:
  |      VarianceScaling
@@ -67,7 +71,9 @@ class VarianceScaling(RandomInitializer)
  |    scale=1.0,
  |    mode='fan_in',
  |    distribution='truncated_normal',
- |    seed=None
+ |    seed=None,
+ |    input_axes=None,
+ |    output_axes=None
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
