@@ -3545,8 +3545,14 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #'    serializables (see [`register_keras_serializable()`]
 #'    for more details).
 #' 2. When using a custom callable for `standardize`, the data received
-#'    by the callable will be exactly as passed to this layer. The callable
-#'    should return a tensor of the same shape as the input.
+#'    by the callable depends on the active Keras backend. With the TensorFlow
+#'    backend, the callable receives a `tf.Tensor` of dtype `string`, so it
+#'    should use `tensorflow::tf$strings` operations. With the JAX, NumPy,
+#'    PyTorch, or OpenVINO backend, the callable receives a NumPy array of
+#'    Unicode strings, so it should use `reticulate::import("numpy")$char` /
+#'    `reticulate::import("numpy")$strings` operations or other vectorized
+#'    string logic. The callable should return data with the same shape as the
+#'    input.
 #' 3. When using a custom callable for `split`, the data received by the
 #'    callable will have the 1st dimension squeezed out - instead of
 #'    `list("string to split", "another string to split")`, the Callable will
