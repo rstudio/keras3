@@ -457,6 +457,65 @@ function (object, input_dim, output_dim, embeddings_initializer = "uniform",
 }
 
 
+#' Embedding layer with a reverse projection
+#'
+#' Extends [`layer_embedding()`] for language models with a reverse projection
+#' from the embedding dimension to the vocabulary dimension. Call the layer
+#' with `reverse = TRUE` to perform this projection. By default, the reverse
+#' projection uses the transpose of the embedding matrix, tying the two sets of
+#' weights. With `tie_weights = FALSE`, it uses a separate trainable variable.
+#' This layer has no bias terms.
+#'
+#' ## Call arguments
+#'
+#' - `inputs`: Tensor inputs to the layer.
+#' - `reverse`: Boolean. Whether to project from `output_dim` to `input_dim`
+#'   instead of performing a normal embedding lookup. Defaults to `FALSE`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' embedding <- layer_reversible_embedding(input_dim = 8, output_dim = 4)
+#' token_ids <- op_array(matrix(c(0L, 1L, 2L), nrow = 1), dtype = "int32")
+#' hidden_states <- embedding(token_ids)
+#' logits <- embedding(hidden_states, reverse = TRUE)
+#' shape(logits)
+#' ```
+#'
+#' @param tie_weights Boolean. Whether the embedding and reverse-projection
+#'   matrices share the same weights. Defaults to `TRUE`.
+#' @param reverse_dtype Dtype used for the reverse-projection computation.
+#'   Defaults to the layer's compute dtype.
+#' @param logit_soft_cap Optional positive number. When set,
+#'   reverse-projection logits are scaled by
+#'   `tanh(logits / logit_soft_cap) * logit_soft_cap`. This narrows the range
+#'   of output logits and can improve training.
+#' @inheritParams layer_embedding
+#' @inherit layer_dense return
+#' @export
+#' @family core layers
+#' @family layers
+#' @references
+#' - [Vaswani et al., 2017](https://arxiv.org/abs/1706.03762)
+#' - [Press and Wolf, 2016](https://arxiv.org/abs/1608.05859)
+#' @tether keras.layers.ReversibleEmbedding
+layer_reversible_embedding <-
+function(object, input_dim, output_dim, tie_weights = TRUE,
+         embeddings_initializer = "uniform", embeddings_regularizer = NULL,
+         embeddings_constraint = NULL, mask_zero = FALSE,
+         reverse_dtype = NULL, logit_soft_cap = NULL, ...)
+{
+  args <- capture_args(list(
+    input_dim = as_integer,
+    output_dim = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$ReversibleEmbedding, object, args)
+}
+
+
 #' Identity layer.
 #'
 #' @description
