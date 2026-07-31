@@ -87,3 +87,7 @@ model |> fit(
 score <- model |> evaluate(x_test, y_test, verbose = 0)
 score
 ```
+
+## Relevant Chapters from Deep Learning with Python
+
+- [Chapter 8: Image classification](https://deeplearningwithpython.io/chapters/chapter08_image-classification)
