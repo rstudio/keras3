@@ -1,0 +1,107 @@
+Help on class AWQConfig in module keras.src.quantizers.awq_config:
+
+class AWQConfig(keras.src.quantizers.quantization_config.QuantizationConfig)
+ |  AWQConfig(dataset, tokenizer, *, weight_bits: int = 4, num_samples: int = 128, sequence_length: int = 512, group_size: int = 128, num_grid_points: int = 20, quantization_layer_structure: dict = None)
+ |
+ |  Configuration class for AWQ (Activation-aware Weight Quantization).
+ |
+ |  AWQ is a post-training quantization method that identifies and protects
+ |  salient weights based on activation magnitudes. It applies per-channel
+ |  scaling before quantization to minimize accuracy loss.
+ |
+ |  Methodology:
+ |  1. Collects activation statistics from calibration data
+ |  2. Identifies salient weight channels based on activation magnitudes
+ |  3. Searches for optimal per-channel scaling factors via grid search
+ |  4. Applies scaling before quantization to protect important weights
+ |
+ |  References:
+ |  - Original AWQ paper: "AWQ: Activation-aware Weight Quantization for
+ |    LLM Compression and Acceleration" (https://arxiv.org/abs/2306.00978)
+ |  - Reference implementation: https://github.com/mit-han-lab/llm-awq
+ |
+ |  Args:
+ |      dataset: The calibration dataset. It can be an iterable that yields
+ |          strings or pre-tokenized numerical tensors (e.g., a list of
+ |          strings, a generator, or a NumPy array). This data is used to
+ |          analyze activation patterns.
+ |      tokenizer: A tokenizer instance (or a similar callable) that is used
+ |          to process the `dataset`.
+ |      weight_bits: The number of bits for weight quantization. AWQ presently
+ |          only supports 4-bit quantization. Defaults to 4.
+ |      num_samples: The number of calibration data samples to use from the
+ |          dataset. Defaults to 128.
+ |      sequence_length: The sequence length to use for each calibration
+ |          sample. Defaults to 512.
+ |      group_size: The size of weight groups to quantize together. A
+ |          `group_size` of -1 indicates per-channel quantization.
+ |          Defaults to 128.
+ |      num_grid_points: The number of grid search points for finding optimal
+ |          per-channel scales. Higher values may find better scales but
+ |          take longer. Defaults to 20.
+ |      quantization_layer_structure: A dictionary defining the model's
+ |          quantization structure. It should contain:
+ |          - "pre_block_layers": list of layers to run before the first
+ |            block (e.g., embedding layer).
+ |          - "sequential_blocks": list of transformer blocks to quantize
+ |            sequentially.
+ |          If not provided, the model must implement
+ |          `get_quantization_layer_structure`.
+ |
+ |  Example:
+ |  ```python
+ |  from keras.quantizers import AWQConfig
+ |
+ |  # Create configuration for 4-bit AWQ quantization
+ |  config = AWQConfig(
+ |      dataset=calibration_data,          # Your calibration dataset
+ |      tokenizer=your_tokenizer,          # Tokenizer for text data
+ |      num_samples=128,                   # Number of calibration samples
+ |      sequence_length=512,               # Sequence length for each sample
+ |      group_size=128,                    # Weight grouping for quantization
+ |      num_grid_points=20,                # Grid search points for scale search
+ |  )
+ |
+ |  # Apply quantization to your model
+ |  model.quantize("awq", config=config)
+ |  ```
+ |
+ |  Method resolution order:
+ |      AWQConfig
+ |      keras.src.quantizers.quantization_config.QuantizationConfig
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    dataset,
+ |    tokenizer,
+ |    *,
+ |    weight_bits: int = 4,
+ |    num_samples: int = 128,
+ |    sequence_length: int = 512,
+ |    group_size: int = 128,
+ |    num_grid_points: int = 20,
+ |    quantization_layer_structure: dict = None
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  dtype_policy_string(self)
+ |      Returns the dtype policy string for this configuration.
+ |
+ |      Returns:
+ |          A string representing the dtype policy, e.g. "awq/4/128".
+ |
+ |  get_config(self)
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config)
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  mode
+ |

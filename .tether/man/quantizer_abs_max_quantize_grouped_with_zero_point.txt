@@ -1,0 +1,50 @@
+__signature__
+keras.quantizers.abs_max_quantize_grouped_with_zero_point(
+  inputs,
+  block_size,
+  value_range=(-8, 7),
+  dtype='int8',
+  epsilon=1e-07,
+  to_numpy=False
+)
+__doc__
+Quantizes a 2D tensor using grouped asymmetric quantization with
+zero point.
+
+Groups are formed along axis 0 (the input/contracting dimension).
+Each group of `block_size` rows gets its own scale factor and zero point
+per column. This is useful for weight distributions that are not centered
+around zero.
+
+Args:
+    inputs: Input tensor to quantize. Shape: `(input_dim, output_dim)`.
+    block_size: Number of elements per group along axis 0.
+    value_range: Tuple of `(min, max)` quantization range.
+    dtype: Data type of quantized output.
+    epsilon: Small value to avoid division by zero.
+    to_numpy: Whether to perform computation in numpy for memory
+        efficiency.
+
+Returns:
+    A tuple `(quantized_tensor, scale, zero_point)` where:
+        - `quantized_tensor`: Same shape as inputs, dtype=`dtype`.
+        - `scale`: Shape `(n_groups, output_dim)` where
+          `n_groups = ceil(input_dim / block_size)`.
+        - `zero_point`: Shape `(n_groups, output_dim)`, dtype=`uint8`.
+
+Example:
+
+```python
+>>> import numpy as np
+>>> from keras.quantizers import abs_max_quantize_grouped_with_zero_point
+>>> kernel = np.random.randn(512, 256).astype("float32")
+>>> quantized, scale, zero_point = abs_max_quantize_grouped_with_zero_point(
+...     kernel, block_size=128, value_range=(-8, 7)
+... )
+>>> quantized.shape
+(512, 256)
+>>> scale.shape  # 512 / 128 = 4 groups
+(4, 256)
+>>> zero_point.shape
+(4, 256)
+```
