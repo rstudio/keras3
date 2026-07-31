@@ -2037,6 +2037,72 @@ function (object, value_range = list(0L, 255L), bins = 256L,
     create_layer(keras$layers$Equalization, object, args)
 }
 
+
+#' Contrast Limited Adaptive Histogram Equalization
+#'
+#' Contrast Limited Adaptive Histogram Equalization (CLAHE) is a variant of
+#' adaptive histogram equalization that avoids over-amplifying contrast. It
+#' operates on small image regions called tiles rather than on the entire
+#' image, then combines neighboring tiles with bilinear interpolation to remove
+#' artificial boundaries. This can improve image contrast.
+#'
+#' **Note:** This layer computes histograms using backend one-hot operations,
+#' which can be highly memory intensive. Large batches or high-resolution
+#' images can lead to high memory consumption or out-of-memory errors.
+#'
+#' ## Input shape
+#'
+#' A 3D unbatched or 4D batched tensor with shape
+#' `(..., height, width, channels)` when `data_format = "channels_last"`, or
+#' `(..., channels, height, width)` when `data_format = "channels_first"`.
+#'
+#' ## Output shape
+#'
+#' A tensor with the same rank and shape as the input.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' image <- op_reshape(op_arange(16, dtype = "float32"), c(1, 4, 4, 1))
+#' output <- image |>
+#'   layer_contrast_limited_adaptive_histogram_equalization(
+#'     value_range = c(0, 15),
+#'     tile_grid_size = c(2, 2)
+#'   )
+#' shape(output)
+#' ```
+#'
+#' @param value_range Two numbers giving the lower and upper limits of input
+#'   values. Defaults to `c(0, 255)`.
+#' @param clip_limit Number that limits noise amplification in near-constant
+#'   regions. Defaults to 4.
+#' @param tile_grid_size Two integers, `(height, width)`, giving the number of
+#'   tiles into which to divide the image. Defaults to `c(8, 8)`.
+#' @inheritParams layer_equalization
+#' @inherit layer_dense return
+#' @export
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+#' @tether keras.layers.ContrastLimitedAdaptiveHistogramEqualization
+layer_contrast_limited_adaptive_histogram_equalization <-
+function(object, value_range = c(0L, 255L), clip_limit = 4,
+         tile_grid_size = c(8L, 8L), data_format = NULL, ...)
+{
+  args <- capture_args(list(
+    value_range = as_tuple,
+    tile_grid_size = as_integer_tuple,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(
+    keras$layers$ContrastLimitedAdaptiveHistogramEqualization,
+    object,
+    args
+  )
+}
+
 #' MixUp implements the MixUp data augmentation technique.
 #'
 #' @description
