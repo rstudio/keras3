@@ -750,6 +750,58 @@ function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
 }
 
 
+#' Schedule-free AdamW optimizer
+#'
+#' Schedule-free learning avoids a separate learning-rate schedule by combining
+#' interpolation and averaging. It removes the need to specify the stopping
+#' time in advance and typically matches or outperforms cosine and linear decay
+#' schedules. The optimizer maintains a momentum sequence to which gradient
+#' updates are applied and an averaged sequence used for evaluation. During
+#' training, model parameters interpolate between the two sequences.
+#'
+#' # Examples
+#'
+#' ```{r, eval = FALSE}
+#' optimizer <- optimizer_schedule_free_adam_w(learning_rate = 0.0025)
+#' model |> compile(optimizer = optimizer, loss = "mse")
+#' model |> fit(x_train, y_train)
+#' ```
+#'
+#' @param learning_rate A number, a [`LearningRateSchedule()`] instance, or a
+#'   callable that takes no arguments and returns the value to use. Defaults to
+#'   `0.0025`.
+#' @param beta_1 Number, constant tensor, or callable returning the exponential
+#'   decay rate for the first-moment estimates. It also controls interpolation
+#'   between the momentum and averaged sequences. Defaults to 0.9.
+#' @param epsilon Small constant for numerical stability. Defaults to `1e-8`.
+#' @param warmup_steps Number of warmup steps. During warmup, the learning rate
+#'   increases linearly from zero to `learning_rate`. Defaults to 0.
+#' @inheritParams optimizer_adam_w
+#'
+#' @returns An `Optimizer` instance.
+#' @export
+#' @family optimizers
+#' @references
+#' - [Defazio et al., 2024](https://arxiv.org/abs/2405.15682)
+#' - [Schedule-Free repository](https://github.com/facebookresearch/schedule_free)
+#' @tether keras.optimizers.ScheduleFreeAdamW
+optimizer_schedule_free_adam_w <-
+function(learning_rate = 0.0025, beta_1 = 0.9, beta_2 = 0.999,
+         epsilon = 1e-8, warmup_steps = 0L, weight_decay = NULL,
+         clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
+         use_ema = FALSE, ema_momentum = 0.99,
+         ema_overwrite_frequency = NULL, loss_scale_factor = NULL,
+         gradient_accumulation_steps = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    warmup_steps = as_integer,
+    ema_overwrite_frequency = as_integer,
+    gradient_accumulation_steps = as_integer
+  ))
+  do.call(keras$optimizers$ScheduleFreeAdamW, args)
+}
+
+
 #' Optimizer that implements the FTRL algorithm.
 #'
 #' @description
