@@ -245,7 +245,6 @@ use_backend <- function(backend, gpu = NA) {
         gpu <- has_gpu()
 
       if (gpu) {
-        Sys.setenv("XLA_PYTHON_CLIENT_MEM_FRACTION" = "1.00")
         py_require(c("jax[cuda12]!=0.6.1"))
       } else {
         py_require(c("jax[cpu]"))
