@@ -1,0 +1,45 @@
+__signature__
+keras.ops.fold(
+  x,
+  output_size,
+  kernel_size,
+  dilation=1,
+  padding=0,
+  stride=1
+)
+__doc__
+Combines an array of sliding local blocks into a large containing
+tensor (reverses `unfold`).
+
+This operation is known as **col2im** when used with convolution.
+It takes a 3-D tensor of flattened patches and reconstructs a 4-D
+image tensor by summing overlapping patches.
+
+Args:
+    x: A 3-D tensor of shape `(N, C * kH * kW, L)` where `L` is
+        the total number of blocks.
+    output_size: int or tuple of two ints `(oH, oW)`, the spatial
+        shape of the output tensor.
+    kernel_size: int or tuple of two ints, the size of the sliding
+        window `(kH, kW)`.  If a single int is given, it is used
+        for both dimensions.
+    dilation: int or tuple of two ints, the spacing between kernel
+        points. Default: 1.
+    padding: int or tuple of two ints, the amount of zero-padding
+        that was applied to the input of `unfold`. Default: 0.
+    stride: int or tuple of two ints, the step size of the sliding
+        window. Default: 1.
+
+Returns:
+    A 4-D tensor of shape `(N, C, oH, oW)`.
+
+Example:
+
+>>> x = keras.ops.ones((1, 2, 4, 4))
+>>> patches = keras.ops.unfold(x, kernel_size=2, stride=2)
+>>> patches.shape
+(1, 8, 4)
+>>> y = keras.ops.fold(patches, output_size=(4, 4),
+...     kernel_size=2, stride=2)
+>>> y.shape
+(1, 2, 4, 4)
