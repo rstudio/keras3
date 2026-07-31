@@ -354,32 +354,32 @@ summary(model)
 ```
 
 ```
-## [1mModel: "functional"[0m
+## Model: "functional"
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-## │ input_layer ([38;5;33mInputLayer[0m)        │ ([38;5;45mNone[0m, [38;5;45mNone[0m)           │             [38;5;34m0[0m │
+## │ input_layer (InputLayer)        │ (None, None)           │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ embedding_1 ([38;5;33mEmbedding[0m)         │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)      │     [38;5;34m2,560,000[0m │
+## │ embedding_1 (Embedding)         │ (None, None, 128)      │     2,560,000 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)      │             [38;5;34m0[0m │
+## │ dropout (Dropout)               │ (None, None, 128)      │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv1d ([38;5;33mConv1D[0m)                 │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)      │       [38;5;34m114,816[0m │
+## │ conv1d (Conv1D)                 │ (None, None, 128)      │       114,816 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv1d_1 ([38;5;33mConv1D[0m)               │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m128[0m)      │       [38;5;34m114,816[0m │
+## │ conv1d_1 (Conv1D)               │ (None, None, 128)      │       114,816 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ global_max_pooling1d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
-## │ ([38;5;33mGlobalMaxPooling1D[0m)            │                        │               │
+## │ global_max_pooling1d            │ (None, 128)            │             0 │
+## │ (GlobalMaxPooling1D)            │                        │               │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │        [38;5;34m16,512[0m │
+## │ dense (Dense)                   │ (None, 128)            │        16,512 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dropout_1 ([38;5;33mDropout[0m)             │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
+## │ dropout_1 (Dropout)             │ (None, 128)            │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ predictions ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m1[0m)              │           [38;5;34m129[0m │
+## │ predictions (Dense)             │ (None, 1)              │           129 │
 ## └─────────────────────────────────┴────────────────────────┴───────────────┘
-## [1m Total params: [0m[38;5;34m2,806,273[0m (10.71 MB)
-## [1m Trainable params: [0m[38;5;34m2,806,273[0m (10.71 MB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+##  Total params: 2,806,273 (10.71 MB)
+##  Trainable params: 2,806,273 (10.71 MB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 ``` r
@@ -401,11 +401,11 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 
 ```
 ## Epoch 1/3
-## 625/625 - 5s - 8ms/step - accuracy: 0.6914 - loss: 0.5297 - val_accuracy: 0.8594 - val_loss: 0.3271
+## 625/625 - 6s - 10ms/step - accuracy: 0.6844 - loss: 0.5331 - val_accuracy: 0.8630 - val_loss: 0.3231
 ## Epoch 2/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9025 - loss: 0.2419 - val_accuracy: 0.8702 - val_loss: 0.3262
+## 625/625 - 2s - 3ms/step - accuracy: 0.9033 - loss: 0.2447 - val_accuracy: 0.8782 - val_loss: 0.3175
 ## Epoch 3/3
-## 625/625 - 2s - 3ms/step - accuracy: 0.9564 - loss: 0.1245 - val_accuracy: 0.8656 - val_loss: 0.3453
+## 625/625 - 2s - 3ms/step - accuracy: 0.9540 - loss: 0.1266 - val_accuracy: 0.8624 - val_loss: 0.3925
 ```
 
 ## Evaluate the model on the test set
@@ -416,15 +416,15 @@ model |> evaluate(test_ds)
 ```
 
 ```
-## 782/782 - 1s - 2ms/step - accuracy: 0.8596 - loss: 0.3648
+## 782/782 - 1s - 1ms/step - accuracy: 0.8494 - loss: 0.4365
 ```
 
 ```
 ## $accuracy
-## [1] 0.85964
+## [1] 0.84944
 ##
 ## $loss
-## [1] 0.3648146
+## [1] 0.4365062
 ```
 
 ## Make an end-to-end model
@@ -454,13 +454,17 @@ end_to_end_model |> evaluate(raw_test_ds)
 ```
 
 ```
-## 782/782 - 3s - 4ms/step - accuracy: 0.8596 - loss: 0.3648
+## 782/782 - 3s - 4ms/step - accuracy: 0.8494 - loss: 0.4365
 ```
 
 ```
 ## $accuracy
-## [1] 0.85964
+## [1] 0.84944
 ##
 ## $loss
-## [1] 0.3648143
+## [1] 0.4365065
 ```
+
+## Relevant Chapters from Deep Learning with Python
+
+- [Chapter 14: Text classification](https://deeplearningwithpython.io/chapters/chapter14_text-classification)
