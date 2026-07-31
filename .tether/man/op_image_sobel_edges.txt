@@ -1,0 +1,36 @@
+__signature__
+keras.ops.image.sobel_edges(images, data_format=None)
+__doc__
+Computes Sobel edge detection on images.
+
+The Sobel operator computes the gradient of the image intensity at each
+pixel, giving the direction of the largest increase from light to dark
+and the rate of change in that direction.
+
+Args:
+    images: Input tensor of shape `(batch, height, width, channels)` if
+        `data_format="channels_last"`, or
+        `(batch, channels, height, width)` if
+        `data_format="channels_first"`.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
+
+Returns:
+    A tensor containing the Sobel edges. For `data_format="channels_last"`,
+    the output shape is `(batch, height, width, channels, 2)` where the
+    last dimension contains `[dy, dx]` representing the vertical and
+    horizontal gradients. For `data_format="channels_first"`, the output
+    shape is `(batch, channels, height, width, 2)`.
+
+Example:
+
+>>> import numpy as np
+>>> from keras import ops
+>>> # Create image with vertical edge
+>>> image = np.zeros((1, 8, 8, 1), dtype="float32")
+>>> image[0, :, 4:, 0] = 1.0
+>>> edges = ops.image.sobel_edges(image)
+>>> edges.shape
+(1, 8, 8, 1, 2)

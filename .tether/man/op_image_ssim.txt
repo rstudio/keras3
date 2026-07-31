@@ -1,0 +1,66 @@
+__signature__
+keras.ops.image.ssim(
+  image1,
+  image2,
+  max_val=1.0,
+  filter_size=11,
+  filter_sigma=1.5,
+  k1=0.01,
+  k2=0.03,
+  data_format=None
+)
+__doc__
+Computes the Structural Similarity Index (SSIM) between two images.
+
+The SSIM index is a method for measuring the similarity between two images.
+It is based on the comparison of luminance, contrast, and structure
+between the images. The resulting SSIM index is a value between -1 and 1,
+where 1 indicates identical images.
+
+This implementation is based on the original SSIM paper:
+Wang, Z., Bovik, A. C., Sheikh, H. R., & Simoncelli, E. P. (2004).
+"Image quality assessment: from error visibility to structural similarity."
+IEEE Transactions on Image Processing.
+
+Args:
+    image1: First image or batch of images. Must be 3D or 4D.
+    image2: Second image or batch of images. Must have the same shape
+        as `image1`.
+    max_val: The maximum possible pixel value of the images. Defaults to
+        `1.0` (for normalized images). Use `255.0` for images with pixel
+        values in `[0, 255]`.
+    filter_size: Size of the Gaussian filter used for computing SSIM.
+        Defaults to `11`. Must be an odd integer >= 1.
+    filter_sigma: Standard deviation of the Gaussian filter. Defaults to
+        `1.5`.
+    k1: First stabilization constant. Defaults to `0.01`.
+    k2: Second stabilization constant. Defaults to `0.03`.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        If not specified, the value will default to
+        `keras.config.image_data_format`.
+
+Returns:
+    A tensor of SSIM values. For batched inputs, returns a 1D tensor
+    with one SSIM value per image pair. For unbatched inputs, returns
+    a scalar tensor.
+
+Examples:
+
+>>> import numpy as np
+>>> from keras import ops
+>>> # Two identical images should have SSIM = 1
+>>> image = np.random.random((32, 32, 3)).astype("float32")
+>>> ssim_value = ops.image.ssim(image, image, max_val=1.0)
+>>> float(ssim_value) > 0.99
+True
+
+>>> # Batched images
+>>> images1 = np.random.random((2, 32, 32, 3)).astype("float32")
+>>> images2 = np.random.random((2, 32, 32, 3)).astype("float32")
+>>> ssim_values = ops.image.ssim(images1, images2, max_val=1.0)
+>>> ssim_values.shape
+(2,)

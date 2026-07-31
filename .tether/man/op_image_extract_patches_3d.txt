@@ -1,0 +1,49 @@
+__signature__
+keras.ops.image.extract_patches_3d(
+  volumes,
+  size,
+  strides=None,
+  dilation_rate=1,
+  padding='valid',
+  data_format=None
+)
+__doc__
+Extracts patches from the volume(s).
+
+Args:
+    volumes: Input volume or batch of volumes. Must be 4D or 5D.
+    size: Patch size int or tuple (patch_depth, patch_height, patch_width)
+    strides: strides along depth, height, and width. If not specified, or
+        if `None`, it defaults to the same value as `size`.
+    dilation_rate: This is the input stride, specifying how far two
+        consecutive patch samples are in the input. Note that using
+        `dilation_rate > 1` is not supported in conjunction with
+        `strides > 1` on the TensorFlow backend.
+    padding: The type of padding algorithm to use: `"same"` or `"valid"`.
+    data_format: A string specifying the data format of the input tensor.
+        It can be either `"channels_last"` or `"channels_first"`.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, depth, height, width, channels)`, while `"channels_first"`
+        corresponds to inputs with shape
+        `(batch, channels, depth, height, width)`. If not specified,
+         the value will default to `keras.config.image_data_format()`.
+
+Returns:
+    Extracted patches 4D (if not batched) or 5D (if batched)
+
+Examples:
+
+>>> import numpy as np
+>>> import keras
+>>> # Batched case
+>>> volumes = np.random.random(
+...     (2, 10, 10, 10, 3)
+... ).astype("float32") # batch of 2 volumes
+>>> patches = keras.ops.image.extract_patches_3d(volumes, (3, 3, 3))
+>>> patches.shape
+(2, 3, 3, 3, 81)
+>>> # Unbatched case
+>>> volume = np.random.random((10, 10, 10, 3)).astype("float32") # 1 volume
+>>> patches = keras.ops.image.extract_patches_3d(volume, (3, 3, 3))
+>>> patches.shape
+(3, 3, 3, 81)
