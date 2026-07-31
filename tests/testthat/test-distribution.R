@@ -1,4 +1,6 @@
 test_that("distributed_get_device_count reports CPU devices", {
+  skip_if_no_keras("3.15.1")
+
   expect_named(formals(distributed_get_device_count), "device_type")
 
   if (!is_backend("jax"))

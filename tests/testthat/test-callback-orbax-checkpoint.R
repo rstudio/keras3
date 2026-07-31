@@ -1,4 +1,6 @@
 test_that("callback_orbax_checkpoint exposes the Orbax callback", {
+  skip_if_no_keras("3.15.1")
+
   expect_true(is.function(callback_orbax_checkpoint))
   expect_named(
     formals(callback_orbax_checkpoint),

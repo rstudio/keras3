@@ -1,4 +1,6 @@
 test_that("adaptive pooling layers produce requested spatial shapes", {
+  skip_if_no_keras("3.15.1")
+
   cases <- list(
     list(layer_adaptive_average_pooling_1d, c(2, 8, 3), 4, c(2L, 4L, 3L)),
     list(layer_adaptive_average_pooling_2d, c(2, 8, 6, 3), c(4, 2), c(2L, 4L, 2L, 3L)),
