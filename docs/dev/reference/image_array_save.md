@@ -60,6 +60,7 @@ Other image utils:
 [`op_image_affine_transform()`](https://keras3.posit.co/dev/reference/op_image_affine_transform.md)  
 [`op_image_crop()`](https://keras3.posit.co/dev/reference/op_image_crop.md)  
 [`op_image_extract_patches()`](https://keras3.posit.co/dev/reference/op_image_extract_patches.md)  
+[`op_image_extract_patches_3d()`](https://keras3.posit.co/dev/reference/op_image_extract_patches_3d.md)  
 [`op_image_gaussian_blur()`](https://keras3.posit.co/dev/reference/op_image_gaussian_blur.md)  
 [`op_image_hsv_to_rgb()`](https://keras3.posit.co/dev/reference/op_image_hsv_to_rgb.md)  
 [`op_image_map_coordinates()`](https://keras3.posit.co/dev/reference/op_image_map_coordinates.md)  
@@ -68,6 +69,9 @@ Other image utils:
 [`op_image_resize()`](https://keras3.posit.co/dev/reference/op_image_resize.md)  
 [`op_image_rgb_to_grayscale()`](https://keras3.posit.co/dev/reference/op_image_rgb_to_grayscale.md)  
 [`op_image_rgb_to_hsv()`](https://keras3.posit.co/dev/reference/op_image_rgb_to_hsv.md)  
+[`op_image_scale_and_translate()`](https://keras3.posit.co/dev/reference/op_image_scale_and_translate.md)  
+[`op_image_sobel_edges()`](https://keras3.posit.co/dev/reference/op_image_sobel_edges.md)  
+[`op_image_ssim()`](https://keras3.posit.co/dev/reference/op_image_ssim.md)  
 
 Other utils:  
 [`audio_dataset_from_directory()`](https://keras3.posit.co/dev/reference/audio_dataset_from_directory.md)  

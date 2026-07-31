@@ -169,7 +169,7 @@ strategy <- tf$distribute$MirroredStrategy()
 cat(sprintf('Number of devices: %d\n', strategy$num_replicas_in_sync))
 ```
 
-    ## Number of devices: 2
+    ## Number of devices: 1
 
 ``` r
 # Open a strategy scope.
@@ -190,16 +190,16 @@ with(strategy$scope(), {
 ```
 
     ## Epoch 1/2
-    ## 782/782 - 6s - 7ms/step - loss: 0.2617 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1461 - val_sparse_categorical_accuracy: 0.9546
+    ## 782/782 - 4s - 6ms/step - loss: 0.2617 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1461 - val_sparse_categorical_accuracy: 0.9546
     ## Epoch 2/2
-    ## 782/782 - 4s - 5ms/step - loss: 0.1044 - sparse_categorical_accuracy: 0.9681 - val_loss: 0.0998 - val_sparse_categorical_accuracy: 0.9677
-    ## 157/157 - 0s - 3ms/step - loss: 0.0998 - sparse_categorical_accuracy: 0.9691
+    ## 782/782 - 3s - 3ms/step - loss: 0.1045 - sparse_categorical_accuracy: 0.9680 - val_loss: 0.0967 - val_sparse_categorical_accuracy: 0.9693
+    ## 157/157 - 0s - 2ms/step - loss: 0.0970 - sparse_categorical_accuracy: 0.9697
 
     ## $loss
-    ## [1] 0.09977275
+    ## [1] 0.09699132
     ##
     ## $sparse_categorical_accuracy
-    ## [1] 0.9691
+    ## [1] 0.9697
 
 ## Using callbacks to ensure fault tolerance
 
@@ -267,14 +267,14 @@ run_training <- function(epochs = 1) {
 run_training(epochs = 1)
 ```
 
-    ## 782/782 - 4s - 6ms/step - loss: 0.2575 - sparse_categorical_accuracy: 0.9237 - val_loss: 0.1428 - val_sparse_categorical_accuracy: 0.9537
+    ## 782/782 - 3s - 4ms/step - loss: 0.2575 - sparse_categorical_accuracy: 0.9237 - val_loss: 0.1428 - val_sparse_categorical_accuracy: 0.9537
 
 ``` r
 # Calling the same function again will resume from where we left off
 run_training(epochs = 1)
 ```
 
-    ## 782/782 - 4s - 6ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9694 - val_loss: 0.1208 - val_sparse_categorical_accuracy: 0.9597
+    ## 782/782 - 3s - 4ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9694 - val_loss: 0.1212 - val_sparse_categorical_accuracy: 0.9598
 
 ## `tf$data` performance tips
 

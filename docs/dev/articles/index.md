@@ -60,8 +60,12 @@
 
   A simple convnet that achieves ~99% test accuracy on MNIST.
 
-- [Train a Siamese MLP on pairs of digits from the MNIST
-  dataset.](https://keras3.posit.co/dev/articles/examples/vision/mnist_siamese_graph.md):
+- [Image similarity estimation using a Siamese Network with a
+  contrastive
+  loss](https://keras3.posit.co/dev/articles/examples/vision/mnist_siamese_graph.md):
+
+  Similarity learning using a Siamese network trained with a contrastive
+  loss.
 
 - [English-to-Spanish translation with a sequence-to-sequence
   Transformer](https://keras3.posit.co/dev/articles/examples/nlp/neural_machine_translation_with_transformer.md):

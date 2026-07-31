@@ -2,6 +2,65 @@
 
 ## keras3 (development version)
 
+- TensorBoard is now declared explicitly as a Python dependency,
+  restoring
+  [`callback_tensorboard()`](https://keras3.posit.co/dev/reference/callback_tensorboard.md)
+  with TensorFlow 2.21.
+
+- On Linux, `use_backend("jax", gpu = TRUE)` no longer overrides
+  `XLA_PYTHON_CLIENT_MEM_FRACTION`, preserving the JAX default or a
+  user-provided value.
+
+- Updated wrappers and tethers for Keras 3.15.1.
+
+- Added recent Keras APIs for distillation, quantization, Orbax
+  checkpoints, optimizer maps, schedule-free AdamW, adaptive pooling,
+  reversible embeddings, image transforms, forward autodiff, NaN-aware
+  reductions, and other NumPy-style operations.
+
+- Variance-scaling initializers now accept custom fan axes, attention
+  layers support sliding windows,
+  [`keras_variable()`](https://keras3.posit.co/dev/reference/keras_variable.md)
+  accepts distributed layouts, and optimizer names default to Keras
+  automatic naming.
+
+- Dataset loaders
+  [`image_dataset_from_directory()`](https://keras3.posit.co/dev/reference/image_dataset_from_directory.md),
+  [`text_dataset_from_directory()`](https://keras3.posit.co/dev/reference/text_dataset_from_directory.md),
+  and
+  [`timeseries_dataset_from_array()`](https://keras3.posit.co/dev/reference/timeseries_dataset_from_array.md)
+  now expose `format`, and
+  [`split_dataset()`](https://keras3.posit.co/dev/reference/split_dataset.md)
+  gains `preferred_backend`.
+
+- Attention and lookup layers gain recent Keras arguments including
+  `use_gate`, `oov_method`, and `salt`.
+
+- LoRA-capable layers now expose current quantization-related arguments,
+  and
+  [`layer_batch_normalization()`](https://keras3.posit.co/dev/reference/layer_batch_normalization.md)
+  gains renormalization options.
+
+- [`callback_terminate_on_nan()`](https://keras3.posit.co/dev/reference/callback_terminate_on_nan.md),
+  [`op_cholesky()`](https://keras3.posit.co/dev/reference/op_cholesky.md),
+  [`op_scatter_update()`](https://keras3.posit.co/dev/reference/op_scatter_update.md),
+  and
+  [`optimizer_muon()`](https://keras3.posit.co/dev/reference/optimizer_muon.md)
+  now follow the current Keras signatures more closely.
+
+## keras3 1.5.1
+
+CRAN release: 2026-02-13
+
+- `use_backend("jax")` on macOS now defaults to `gpu = FALSE`, so
+  `jax-metal` is no longer selected automatically.
+
+- JAX now registers backend tensor S3 methods for `jax.core.Tracer`
+  objects, improving compatibility for traced computations.
+
+- On Linux, `tensorflow-cpu` is no longer pinned to `2.18.*` when
+  resolving Python dependencies.
+
 ## keras3 1.5.0
 
 CRAN release: 2025-12-22

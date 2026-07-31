@@ -189,6 +189,7 @@ Other callbacks:
 [`callback_early_stopping()`](https://keras3.posit.co/dev/reference/callback_early_stopping.md)  
 [`callback_lambda()`](https://keras3.posit.co/dev/reference/callback_lambda.md)  
 [`callback_learning_rate_scheduler()`](https://keras3.posit.co/dev/reference/callback_learning_rate_scheduler.md)  
+[`callback_orbax_checkpoint()`](https://keras3.posit.co/dev/reference/callback_orbax_checkpoint.md)  
 [`callback_reduce_lr_on_plateau()`](https://keras3.posit.co/dev/reference/callback_reduce_lr_on_plateau.md)  
 [`callback_remote_monitor()`](https://keras3.posit.co/dev/reference/callback_remote_monitor.md)  
 [`callback_swap_ema_weights()`](https://keras3.posit.co/dev/reference/callback_swap_ema_weights.md)  

@@ -62,7 +62,7 @@ optimizer_ftrl(
   use_ema = FALSE,
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
-  name = "ftrl",
+  name = NULL,
   ...,
   loss_scale_factor = NULL,
   gradient_accumulation_steps = NULL
@@ -204,7 +204,10 @@ Other optimizers:
 [`optimizer_lamb()`](https://keras3.posit.co/dev/reference/optimizer_lamb.md)  
 [`optimizer_lion()`](https://keras3.posit.co/dev/reference/optimizer_lion.md)  
 [`optimizer_loss_scale()`](https://keras3.posit.co/dev/reference/optimizer_loss_scale.md)  
+[`optimizer_map()`](https://keras3.posit.co/dev/reference/optimizer_map.md)  
+[`optimizer_multi()`](https://keras3.posit.co/dev/reference/optimizer_multi.md)  
 [`optimizer_muon()`](https://keras3.posit.co/dev/reference/optimizer_muon.md)  
 [`optimizer_nadam()`](https://keras3.posit.co/dev/reference/optimizer_nadam.md)  
 [`optimizer_rmsprop()`](https://keras3.posit.co/dev/reference/optimizer_rmsprop.md)  
+[`optimizer_schedule_free_adam_w()`](https://keras3.posit.co/dev/reference/optimizer_schedule_free_adam_w.md)  
 [`optimizer_sgd()`](https://keras3.posit.co/dev/reference/optimizer_sgd.md)  

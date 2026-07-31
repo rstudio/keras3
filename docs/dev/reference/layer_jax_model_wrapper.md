@@ -13,8 +13,8 @@ layer_jax_model_wrapper(
   params = NULL,
   state = NULL,
   seed = NULL,
-  ...,
-  dtype = NULL
+  native_serialization_platforms = NULL,
+  ...
 )
 ```
 
@@ -55,14 +55,14 @@ layer_jax_model_wrapper(
 
   Seed for random number generator. Optional.
 
+- native_serialization_platforms:
+
+  Optional platforms to compile for when exporting native JAX
+  serialization through the TensorFlow backend.
+
 - ...:
 
   For forward/backward compatability.
-
-- dtype:
-
-  The dtype of the layer's computations and weights. Can also be a
-  `keras.DTypePolicy`. Optional. Defaults to the default policy.
 
 ## Value
 
@@ -292,6 +292,12 @@ Other layers:
 [`layer_activation_relu()`](https://keras3.posit.co/dev/reference/layer_activation_relu.md)  
 [`layer_activation_softmax()`](https://keras3.posit.co/dev/reference/layer_activation_softmax.md)  
 [`layer_activity_regularization()`](https://keras3.posit.co/dev/reference/layer_activity_regularization.md)  
+[`layer_adaptive_average_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_1d.md)  
+[`layer_adaptive_average_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_2d.md)  
+[`layer_adaptive_average_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_3d.md)  
+[`layer_adaptive_max_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_1d.md)  
+[`layer_adaptive_max_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_2d.md)  
+[`layer_adaptive_max_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_3d.md)  
 [`layer_add()`](https://keras3.posit.co/dev/reference/layer_add.md)  
 [`layer_additive_attention()`](https://keras3.posit.co/dev/reference/layer_additive_attention.md)  
 [`layer_alpha_dropout()`](https://keras3.posit.co/dev/reference/layer_alpha_dropout.md)  
@@ -307,6 +313,7 @@ Other layers:
 [`layer_category_encoding()`](https://keras3.posit.co/dev/reference/layer_category_encoding.md)  
 [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)  
 [`layer_concatenate()`](https://keras3.posit.co/dev/reference/layer_concatenate.md)  
+[`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)  
 [`layer_conv_1d()`](https://keras3.posit.co/dev/reference/layer_conv_1d.md)  
 [`layer_conv_1d_transpose()`](https://keras3.posit.co/dev/reference/layer_conv_1d_transpose.md)  
 [`layer_conv_2d()`](https://keras3.posit.co/dev/reference/layer_conv_2d.md)  
@@ -388,6 +395,7 @@ Other layers:
 [`layer_rescaling()`](https://keras3.posit.co/dev/reference/layer_rescaling.md)  
 [`layer_reshape()`](https://keras3.posit.co/dev/reference/layer_reshape.md)  
 [`layer_resizing()`](https://keras3.posit.co/dev/reference/layer_resizing.md)  
+[`layer_reversible_embedding()`](https://keras3.posit.co/dev/reference/layer_reversible_embedding.md)  
 [`layer_rms_normalization()`](https://keras3.posit.co/dev/reference/layer_rms_normalization.md)  
 [`layer_rnn()`](https://keras3.posit.co/dev/reference/layer_rnn.md)  
 [`layer_separable_conv_1d()`](https://keras3.posit.co/dev/reference/layer_separable_conv_1d.md)  

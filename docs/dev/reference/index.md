@@ -106,6 +106,27 @@
 - [`register_keras_serializable()`](https://keras3.posit.co/dev/reference/register_keras_serializable.md)
   : Registers a custom object with the Keras serialization framework.
 
+## Quantization
+
+- [`dtype_policy_awq()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
+  [`dtype_policy_gptq()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
+  [`dtype_policy_int4()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
+  : Quantized dtype policies
+- [`quantizer_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_quantization_config.md)
+  : Base configuration for model quantization
+- [`quantizer_float8_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_float8_quantization_config.md)
+  : Float8 quantization configuration
+- [`quantizer_int4_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_int4_quantization_config.md)
+  : Int4 quantization configuration
+- [`quantizer_int8_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_int8_quantization_config.md)
+  : Int8 quantization configuration
+- [`quantizer_awq_config()`](https://keras3.posit.co/dev/reference/quantizer_awq_config.md)
+  : AWQ calibration and quantization configuration
+- [`quantizer_gptq_config()`](https://keras3.posit.co/dev/reference/quantizer_gptq_config.md)
+  : GPTQ calibration and quantization configuration
+- [`quantizer_abs_max_quantize_grouped_with_zero_point()`](https://keras3.posit.co/dev/reference/quantizer_abs_max_quantize_grouped_with_zero_point.md)
+  : Grouped asymmetric absolute-maximum quantization
+
 ## Layers
 
 ### Core Layers
@@ -132,6 +153,9 @@
 
 - [`layer_masking()`](https://keras3.posit.co/dev/reference/layer_masking.md)
   : Masks a sequence by using a mask value to skip timesteps.
+
+- [`layer_reversible_embedding()`](https://keras3.posit.co/dev/reference/layer_reversible_embedding.md)
+  : Embedding layer with a reverse projection
 
 ### Reshaping Layers
 
@@ -187,6 +211,18 @@
 
 ### Pooling Layers
 
+- [`layer_adaptive_average_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_1d.md)
+  : Adaptive average pooling for 1D data
+- [`layer_adaptive_average_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_2d.md)
+  : Adaptive average pooling for 2D data
+- [`layer_adaptive_average_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_3d.md)
+  : Adaptive average pooling for 3D data
+- [`layer_adaptive_max_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_1d.md)
+  : Adaptive max pooling for 1D data
+- [`layer_adaptive_max_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_2d.md)
+  : Adaptive max pooling for 2D data
+- [`layer_adaptive_max_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_3d.md)
+  : Adaptive max pooling for 3D data
 - [`layer_average_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_average_pooling_1d.md)
   : Average pooling for temporal data.
 - [`layer_average_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_average_pooling_2d.md)
@@ -338,6 +374,9 @@
 
 - [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)
   : A preprocessing layer which crops images.
+
+- [`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)
+  : Contrast Limited Adaptive Histogram Equalization
 
 - [`layer_cut_mix()`](https://keras3.posit.co/dev/reference/layer_cut_mix.md)
   : CutMix data augmentation technique.
@@ -534,6 +573,9 @@
 - [`callback_model_checkpoint()`](https://keras3.posit.co/dev/reference/callback_model_checkpoint.md)
   : Callback to save the Keras model or model weights at some frequency.
 
+- [`callback_orbax_checkpoint()`](https://keras3.posit.co/dev/reference/callback_orbax_checkpoint.md)
+  : Save and restore model state with Orbax
+
 - [`callback_backup_and_restore()`](https://keras3.posit.co/dev/reference/callback_backup_and_restore.md)
   : Callback to back up and restore the training state.
 
@@ -602,6 +644,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`op_is_tensor()`](https://keras3.posit.co/dev/reference/op_is_tensor.md)
   : Check whether the given object is a tensor.
+
+- [`op_jvp()`](https://keras3.posit.co/dev/reference/op_jvp.md) :
+  Compute a forward-mode Jacobian-vector product.
 
 - [`op_map()`](https://keras3.posit.co/dev/reference/op_map.md) : Map a
   function over leading array axes.
@@ -710,6 +755,12 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_segment_max()`](https://keras3.posit.co/dev/reference/op_segment_max.md)
   : Computes the max of segments in a tensor.
 
+- [`op_segment_min()`](https://keras3.posit.co/dev/reference/op_segment_min.md)
+  : Compute the minimum of segments in a tensor.
+
+- [`op_segment_prod()`](https://keras3.posit.co/dev/reference/op_segment_prod.md)
+  : Compute the product of segments in a tensor.
+
 - [`op_segment_sum()`](https://keras3.posit.co/dev/reference/op_segment_sum.md)
   : Computes the sum of segments in a tensor.
 
@@ -734,6 +785,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_all()`](https://keras3.posit.co/dev/reference/op_all.md) :
 
   Test whether all array elements along a given axis evaluate to `TRUE`.
+
+- [`op_allclose()`](https://keras3.posit.co/dev/reference/op_allclose.md)
+  : Test whether two tensors are equal within a tolerance.
 
 - [`op_angle()`](https://keras3.posit.co/dev/reference/op_angle.md) :
   Element-wise angle of a complex tensor.
@@ -787,6 +841,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_array()`](https://keras3.posit.co/dev/reference/op_array.md) :
   Create a tensor.
 
+- [`op_array_split()`](https://keras3.posit.co/dev/reference/op_array_split.md)
+  : Split a tensor into possibly uneven chunks.
+
 - [`op_average()`](https://keras3.posit.co/dev/reference/op_average.md)
   : Compute the weighted average along the specified axis.
 
@@ -827,8 +884,14 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_cbrt()`](https://keras3.posit.co/dev/reference/op_cbrt.md) :
   Computes the cube root of the input tensor, element-wise.
 
+- [`op_cdist()`](https://keras3.posit.co/dev/reference/op_cdist.md) :
+  Compute pairwise Euclidean distances between vectors.
+
 - [`op_ceil()`](https://keras3.posit.co/dev/reference/op_ceil.md) :
   Return the ceiling of the input, element-wise.
+
+- [`op_cholesky_inverse()`](https://keras3.posit.co/dev/reference/op_cholesky_inverse.md)
+  : Compute a matrix inverse from its Cholesky factor.
 
 - [`op_clip()`](https://keras3.posit.co/dev/reference/op_clip.md) : Clip
   (limit) the values in a tensor.
@@ -902,6 +965,12 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_dot()`](https://keras3.posit.co/dev/reference/op_dot.md) : Dot
   product of two tensors.
 
+- [`op_dsplit()`](https://keras3.posit.co/dev/reference/op_dsplit.md) :
+  Split a tensor depth-wise.
+
+- [`op_dstack()`](https://keras3.posit.co/dev/reference/op_dstack.md) :
+  Stack tensors depth-wise along the third axis.
+
 - [`op_einsum()`](https://keras3.posit.co/dev/reference/op_einsum.md) :
   Evaluates the Einstein summation convention on the operands.
 
@@ -909,9 +978,15 @@ Functions that are safe to call with both symbolic and eager tensor.
   Return a tensor of given shape and type filled with uninitialized
   data.
 
+- [`op_empty_like()`](https://keras3.posit.co/dev/reference/op_empty_like.md)
+  : Create an uninitialized tensor matching another tensor.
+
 - [`op_equal()`](https://keras3.posit.co/dev/reference/op_equal.md) :
 
   Returns `(x1 == x2)` element-wise.
+
+- [`op_erfc()`](https://keras3.posit.co/dev/reference/op_erfc.md) :
+  Compute the complementary error function element-wise.
 
 - [`op_exp()`](https://keras3.posit.co/dev/reference/op_exp.md) :
   Calculate the exponential of all elements in the input tensor.
@@ -929,8 +1004,17 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_eye()`](https://keras3.posit.co/dev/reference/op_eye.md) : Return
   a 2-D tensor with ones on the diagonal and zeros elsewhere.
 
+- [`op_fabs()`](https://keras3.posit.co/dev/reference/op_fabs.md) :
+  Compute floating-point absolute values element-wise.
+
 - [`op_flip()`](https://keras3.posit.co/dev/reference/op_flip.md) :
   Reverse the order of elements in the tensor along the given axis.
+
+- [`op_fliplr()`](https://keras3.posit.co/dev/reference/op_fliplr.md) :
+  Reverse the columns of a tensor.
+
+- [`op_flipud()`](https://keras3.posit.co/dev/reference/op_flipud.md) :
+  Reverse the rows of a tensor.
 
 - [`op_floor()`](https://keras3.posit.co/dev/reference/op_floor.md) :
   Return the floor of the input, element-wise.
@@ -939,6 +1023,17 @@ Functions that are safe to call with both symbolic and eager tensor.
   : Returns the largest integer smaller or equal to the division of
   inputs.
 
+- [`op_fmax()`](https://keras3.posit.co/dev/reference/op_fmax.md) :
+
+  Compute the element-wise maximum while ignoring `NaN` values.
+
+- [`op_fmin()`](https://keras3.posit.co/dev/reference/op_fmin.md) :
+
+  Compute the element-wise minimum while ignoring `NaN` values.
+
+- [`op_fmod()`](https://keras3.posit.co/dev/reference/op_fmod.md) :
+  Compute the element-wise remainder using truncated division.
+
 - [`op_full()`](https://keras3.posit.co/dev/reference/op_full.md) :
 
   Return a new tensor of given shape and type, filled with `fill_value`.
@@ -946,6 +1041,12 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_full_like()`](https://keras3.posit.co/dev/reference/op_full_like.md)
   : Return a full tensor with the same shape and type as the given
   tensor.
+
+- [`op_gcd()`](https://keras3.posit.co/dev/reference/op_gcd.md) :
+  Compute the greatest common divisor element-wise.
+
+- [`op_geomspace()`](https://keras3.posit.co/dev/reference/op_geomspace.md)
+  : Return values spaced evenly on a logarithmic scale.
 
 - [`op_get_item()`](https://keras3.posit.co/dev/reference/op_get_item.md)
   :
@@ -976,8 +1077,17 @@ Functions that are safe to call with both symbolic and eager tensor.
 
   Computes a histogram of the data tensor `x`.
 
+- [`op_hsplit()`](https://keras3.posit.co/dev/reference/op_hsplit.md) :
+  Split a tensor horizontally.
+
 - [`op_hstack()`](https://keras3.posit.co/dev/reference/op_hstack.md) :
   Stack tensors in sequence horizontally (column wise).
+
+- [`op_hypot()`](https://keras3.posit.co/dev/reference/op_hypot.md) :
+  Compute hypotenuses element-wise.
+
+- [`op_i0()`](https://keras3.posit.co/dev/reference/op_i0.md) : Compute
+  the modified Bessel function of the first kind, order zero.
 
 - [`op_identity()`](https://keras3.posit.co/dev/reference/op_identity.md)
   : Return the identity tensor.
@@ -994,14 +1104,35 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_isfinite()`](https://keras3.posit.co/dev/reference/op_isfinite.md)
   : Return whether a tensor is finite, element-wise.
 
+- [`op_isin()`](https://keras3.posit.co/dev/reference/op_isin.md) : Test
+  whether elements of one tensor occur in another.
+
 - [`op_isinf()`](https://keras3.posit.co/dev/reference/op_isinf.md) :
   Test element-wise for positive or negative infinity.
 
 - [`op_isnan()`](https://keras3.posit.co/dev/reference/op_isnan.md) :
   Test element-wise for NaN and return result as a boolean tensor.
 
+- [`op_isneginf()`](https://keras3.posit.co/dev/reference/op_isneginf.md)
+  : Test element-wise for negative infinity.
+
+- [`op_isposinf()`](https://keras3.posit.co/dev/reference/op_isposinf.md)
+  : Test element-wise for positive infinity.
+
+- [`op_isreal()`](https://keras3.posit.co/dev/reference/op_isreal.md) :
+  Test element-wise for real numbers.
+
 - [`op_kaiser()`](https://keras3.posit.co/dev/reference/op_kaiser.md) :
   Kaiser window function.
+
+- [`op_kron()`](https://keras3.posit.co/dev/reference/op_kron.md) :
+  Compute the Kronecker product of two tensors.
+
+- [`op_lcm()`](https://keras3.posit.co/dev/reference/op_lcm.md) :
+  Compute the least common multiple element-wise.
+
+- [`op_ldexp()`](https://keras3.posit.co/dev/reference/op_ldexp.md) :
+  Multiply by an integer power of two element-wise.
 
 - [`op_left_shift()`](https://keras3.posit.co/dev/reference/op_left_shift.md)
   : Shift the bits of an integer to the left.
@@ -1035,6 +1166,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_logaddexp()`](https://keras3.posit.co/dev/reference/op_logaddexp.md)
   : Logarithm of the sum of exponentiations of the inputs.
 
+- [`op_logaddexp2()`](https://keras3.posit.co/dev/reference/op_logaddexp2.md)
+  : Compute the base-two logarithm of summed exponentials.
+
 - [`op_logdet()`](https://keras3.posit.co/dev/reference/op_logdet.md) :
   Computes log of the determinant of a hermitian positive definite
   matrix.
@@ -1061,6 +1195,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`op_matmul()`](https://keras3.posit.co/dev/reference/op_matmul.md) :
   Matrix product of two tensors.
+
+- [`op_matrix_rank()`](https://keras3.posit.co/dev/reference/op_matrix_rank.md)
+  : Compute matrix rank using singular value decomposition.
 
 - [`op_max()`](https://keras3.posit.co/dev/reference/op_max.md) : Return
   the maximum of a tensor or maximum along an axis.
@@ -1099,11 +1236,81 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_nan_to_num()`](https://keras3.posit.co/dev/reference/op_nan_to_num.md)
   : Replace NaN with zero and infinity with large finite numbers.
 
+- [`op_nanargmax()`](https://keras3.posit.co/dev/reference/op_nanargmax.md)
+  :
+
+  Return indices of maximum values along an axis, ignoring `NaN`s.
+
+- [`op_nanargmin()`](https://keras3.posit.co/dev/reference/op_nanargmin.md)
+  :
+
+  Return indices of minimum values along an axis, ignoring `NaN`s.
+
+- [`op_nancumprod()`](https://keras3.posit.co/dev/reference/op_nancumprod.md)
+  :
+
+  Return cumulative products, treating `NaN`s as one.
+
+- [`op_nancumsum()`](https://keras3.posit.co/dev/reference/op_nancumsum.md)
+  :
+
+  Return cumulative sums, treating `NaN`s as zero.
+
+- [`op_nanmax()`](https://keras3.posit.co/dev/reference/op_nanmax.md) :
+
+  Compute a maximum while ignoring `NaN`s.
+
+- [`op_nanmean()`](https://keras3.posit.co/dev/reference/op_nanmean.md)
+  :
+
+  Compute a mean while ignoring `NaN`s.
+
+- [`op_nanmedian()`](https://keras3.posit.co/dev/reference/op_nanmedian.md)
+  :
+
+  Compute a median while ignoring `NaN`s.
+
+- [`op_nanmin()`](https://keras3.posit.co/dev/reference/op_nanmin.md) :
+
+  Compute a minimum while ignoring `NaN`s.
+
+- [`op_nanpercentile()`](https://keras3.posit.co/dev/reference/op_nanpercentile.md)
+  :
+
+  Compute percentiles while ignoring `NaN`s.
+
+- [`op_nanprod()`](https://keras3.posit.co/dev/reference/op_nanprod.md)
+  :
+
+  Compute a product while ignoring `NaN`s.
+
+- [`op_nanquantile()`](https://keras3.posit.co/dev/reference/op_nanquantile.md)
+  :
+
+  Compute quantiles while ignoring `NaN`s.
+
+- [`op_nanstd()`](https://keras3.posit.co/dev/reference/op_nanstd.md) :
+
+  Compute a standard deviation while ignoring `NaN`s.
+
+- [`op_nansum()`](https://keras3.posit.co/dev/reference/op_nansum.md) :
+
+  Compute a sum while ignoring `NaN`s.
+
+- [`op_nanvar()`](https://keras3.posit.co/dev/reference/op_nanvar.md) :
+
+  Compute a variance while ignoring `NaN`s.
+
 - [`op_ndim()`](https://keras3.posit.co/dev/reference/op_ndim.md) :
   Return the number of dimensions of a tensor.
 
 - [`op_negative()`](https://keras3.posit.co/dev/reference/op_negative.md)
   : Numerical negative, element-wise.
+
+- [`op_nextafter()`](https://keras3.posit.co/dev/reference/op_nextafter.md)
+  :
+
+  Return the next floating-point values from `x1` toward `x2`.
 
 - [`op_nonzero()`](https://keras3.posit.co/dev/reference/op_nonzero.md)
   : Return the indices of the elements that are non-zero.
@@ -1127,6 +1334,12 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_pad()`](https://keras3.posit.co/dev/reference/op_pad.md) : Pad a
   tensor.
 
+- [`op_percentile()`](https://keras3.posit.co/dev/reference/op_percentile.md)
+  : Compute percentiles along an axis.
+
+- [`op_pinv()`](https://keras3.posit.co/dev/reference/op_pinv.md) :
+  Compute the Moore-Penrose pseudoinverse of a matrix.
+
 - [`op_power()`](https://keras3.posit.co/dev/reference/op_power.md) :
   First tensor elements raised to powers from second tensor,
   element-wise.
@@ -1134,8 +1347,14 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_prod()`](https://keras3.posit.co/dev/reference/op_prod.md) :
   Return the product of tensor elements over a given axis.
 
+- [`op_ptp()`](https://keras3.posit.co/dev/reference/op_ptp.md) :
+  Compute the peak-to-peak range along an axis.
+
 - [`op_quantile()`](https://keras3.posit.co/dev/reference/op_quantile.md)
   : Compute the q-th quantile(s) of the data along the specified axis.
+
+- [`op_rad2deg()`](https://keras3.posit.co/dev/reference/op_rad2deg.md)
+  : Convert angles from radians to degrees.
 
 - [`op_ravel()`](https://keras3.posit.co/dev/reference/op_ravel.md) :
   Return a contiguous flattened tensor.
@@ -1182,6 +1401,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`op_sin()`](https://keras3.posit.co/dev/reference/op_sin.md) :
   Trigonometric sine, element-wise.
+
+- [`op_sinc()`](https://keras3.posit.co/dev/reference/op_sinc.md) :
+  Compute the normalized sinc function.
 
 - [`op_sinh()`](https://keras3.posit.co/dev/reference/op_sinh.md) :
   Hyperbolic sine, element-wise.
@@ -1251,6 +1473,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 
   Returns a tensor with `axes` transposed.
 
+- [`op_trapezoid()`](https://keras3.posit.co/dev/reference/op_trapezoid.md)
+  : Integrate using the composite trapezoidal rule.
+
 - [`op_tri()`](https://keras3.posit.co/dev/reference/op_tri.md) : Return
   a tensor with ones at and below a diagonal and zeros elsewhere.
 
@@ -1263,6 +1488,12 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_trunc()`](https://keras3.posit.co/dev/reference/op_trunc.md) :
   Return the truncated value of the input, element-wise.
 
+- [`op_unique()`](https://keras3.posit.co/dev/reference/op_unique.md) :
+  Find unique elements of a tensor.
+
+- [`op_vander()`](https://keras3.posit.co/dev/reference/op_vander.md) :
+  Generate a Vandermonde matrix.
+
 - [`op_var()`](https://keras3.posit.co/dev/reference/op_var.md) :
   Compute the variance along the specified axes.
 
@@ -1272,11 +1503,17 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_vectorize()`](https://keras3.posit.co/dev/reference/op_vectorize.md)
   : Turn a function into a vectorized function.
 
+- [`op_view()`](https://keras3.posit.co/dev/reference/op_view.md) :
+  Create a bitwise view of tensor data with another data type.
+
 - [`op_view_as_complex()`](https://keras3.posit.co/dev/reference/op_view_as_complex.md)
   : Convert a real tensor with two channels into a complex tensor.
 
 - [`op_view_as_real()`](https://keras3.posit.co/dev/reference/op_view_as_real.md)
   : Convert a complex tensor into a stacked real representation.
+
+- [`op_vsplit()`](https://keras3.posit.co/dev/reference/op_vsplit.md) :
+  Split an array vertically.
 
 - [`op_vstack()`](https://keras3.posit.co/dev/reference/op_vstack.md) :
   Stack tensors in sequence vertically (row wise).
@@ -1294,6 +1531,12 @@ Functions that are safe to call with both symbolic and eager tensor.
   Return a tensor of zeros with the same shape and type as `x`.
 
 ### Neural Network Operations
+
+- [`op_adaptive_average_pool()`](https://keras3.posit.co/dev/reference/op_adaptive_average_pool.md)
+  : Adaptive average pooling operation.
+
+- [`op_adaptive_max_pool()`](https://keras3.posit.co/dev/reference/op_adaptive_max_pool.md)
+  : Adaptive max pooling operation.
 
 - [`op_average_pool()`](https://keras3.posit.co/dev/reference/op_average_pool.md)
   : Average pooling operation.
@@ -1322,6 +1565,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_ctc_loss()`](https://keras3.posit.co/dev/reference/op_ctc_loss.md)
   : CTC (Connectionist Temporal Classification) loss.
 
+- [`op_depth_to_space()`](https://keras3.posit.co/dev/reference/op_depth_to_space.md)
+  : Rearrange channels into blocks of spatial data.
+
 - [`op_depthwise_conv()`](https://keras3.posit.co/dev/reference/op_depthwise_conv.md)
   : General N-D depthwise convolution.
 
@@ -1330,6 +1576,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`op_elu()`](https://keras3.posit.co/dev/reference/op_elu.md) :
   Exponential Linear Unit activation function.
+
+- [`op_fold()`](https://keras3.posit.co/dev/reference/op_fold.md) :
+  Combine sliding local blocks into an image.
 
 - [`op_gelu()`](https://keras3.posit.co/dev/reference/op_gelu.md) :
   Gaussian Error Linear Unit (GELU) activation function.
@@ -1424,6 +1673,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_softsign()`](https://keras3.posit.co/dev/reference/op_softsign.md)
   : Softsign activation function.
 
+- [`op_space_to_depth()`](https://keras3.posit.co/dev/reference/op_space_to_depth.md)
+  : Rearrange blocks of spatial data into channels.
+
 - [`op_sparse_categorical_crossentropy()`](https://keras3.posit.co/dev/reference/op_sparse_categorical_crossentropy.md)
   : Computes sparse categorical cross-entropy loss.
 
@@ -1444,6 +1696,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`op_threshold()`](https://keras3.posit.co/dev/reference/op_threshold.md)
   : Threshold activation function.
+
+- [`op_unfold()`](https://keras3.posit.co/dev/reference/op_unfold.md) :
+  Extract sliding local blocks from a batched image.
 
 - [`op_unravel_index()`](https://keras3.posit.co/dev/reference/op_unravel_index.md)
   : Convert flat indices to coordinate arrays in a given array shape.
@@ -1500,6 +1755,9 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`op_image_extract_patches()`](https://keras3.posit.co/dev/reference/op_image_extract_patches.md)
   : Extracts patches from the image(s).
 
+- [`op_image_extract_patches_3d()`](https://keras3.posit.co/dev/reference/op_image_extract_patches_3d.md)
+  : Extract patches from 3D volumes.
+
 - [`op_image_gaussian_blur()`](https://keras3.posit.co/dev/reference/op_image_gaussian_blur.md)
   : Applies a Gaussian blur to the image(s).
 
@@ -1525,6 +1783,15 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`op_image_rgb_to_hsv()`](https://keras3.posit.co/dev/reference/op_image_rgb_to_hsv.md)
   : Convert RGB images to HSV.
+
+- [`op_image_scale_and_translate()`](https://keras3.posit.co/dev/reference/op_image_scale_and_translate.md)
+  : Scale and translate images.
+
+- [`op_image_sobel_edges()`](https://keras3.posit.co/dev/reference/op_image_sobel_edges.md)
+  : Compute Sobel edges for images.
+
+- [`op_image_ssim()`](https://keras3.posit.co/dev/reference/op_image_ssim.md)
+  : Compute the structural similarity index between images.
 
 ## Losses
 
@@ -1626,6 +1893,17 @@ Functions that are safe to call with both symbolic and eager tensor.
 - [`Loss()`](https://keras3.posit.co/dev/reference/Loss.md) :
 
   Subclass the base `Loss` class
+
+## Distillation
+
+- [`distiller()`](https://keras3.posit.co/dev/reference/distiller.md) :
+  Model for transferring knowledge from a teacher to a student
+- [`distillation_loss()`](https://keras3.posit.co/dev/reference/distillation_loss.md)
+  : Base class for distillation loss computation
+- [`distillation_feature()`](https://keras3.posit.co/dev/reference/distillation_feature.md)
+  : Feature distillation loss
+- [`distillation_logits()`](https://keras3.posit.co/dev/reference/distillation_logits.md)
+  : Logits distillation loss
 
 ## Metrics
 
@@ -1938,6 +2216,9 @@ transform your input dataset before training.
 - [`op_image_extract_patches()`](https://keras3.posit.co/dev/reference/op_image_extract_patches.md)
   : Extracts patches from the image(s).
 
+- [`op_image_extract_patches_3d()`](https://keras3.posit.co/dev/reference/op_image_extract_patches_3d.md)
+  : Extract patches from 3D volumes.
+
 - [`op_image_gaussian_blur()`](https://keras3.posit.co/dev/reference/op_image_gaussian_blur.md)
   : Applies a Gaussian blur to the image(s).
 
@@ -1963,6 +2244,15 @@ transform your input dataset before training.
 
 - [`op_image_rgb_to_hsv()`](https://keras3.posit.co/dev/reference/op_image_rgb_to_hsv.md)
   : Convert RGB images to HSV.
+
+- [`op_image_scale_and_translate()`](https://keras3.posit.co/dev/reference/op_image_scale_and_translate.md)
+  : Scale and translate images.
+
+- [`op_image_sobel_edges()`](https://keras3.posit.co/dev/reference/op_image_sobel_edges.md)
+  : Compute Sobel edges for images.
+
+- [`op_image_ssim()`](https://keras3.posit.co/dev/reference/op_image_ssim.md)
+  : Compute the structural similarity index between images.
 
 ### Image augmentation Layers
 
@@ -2012,12 +2302,18 @@ transform your input dataset before training.
   : Optimizer that implements the Lion algorithm.
 - [`optimizer_loss_scale()`](https://keras3.posit.co/dev/reference/optimizer_loss_scale.md)
   : An optimizer that dynamically scales the loss to prevent underflow.
+- [`optimizer_map()`](https://keras3.posit.co/dev/reference/optimizer_map.md)
+  : Map variables to optimizers
+- [`optimizer_multi()`](https://keras3.posit.co/dev/reference/optimizer_multi.md)
+  : Delegate variables to multiple optimizers
 - [`optimizer_muon()`](https://keras3.posit.co/dev/reference/optimizer_muon.md)
   : Optimizer that implements the Muon algorithm.
 - [`optimizer_nadam()`](https://keras3.posit.co/dev/reference/optimizer_nadam.md)
   : Optimizer that implements the Nadam algorithm.
 - [`optimizer_rmsprop()`](https://keras3.posit.co/dev/reference/optimizer_rmsprop.md)
   : Optimizer that implements the RMSprop algorithm.
+- [`optimizer_schedule_free_adam_w()`](https://keras3.posit.co/dev/reference/optimizer_schedule_free_adam_w.md)
+  : Schedule-free AdamW optimizer
 - [`optimizer_sgd()`](https://keras3.posit.co/dev/reference/optimizer_sgd.md)
   : Gradient descent (with momentum) optimizer.
 
@@ -2291,6 +2587,11 @@ transform your input dataset before training.
   : Set the default float dtype.
 - [`config_set_image_data_format()`](https://keras3.posit.co/dev/reference/config_set_image_data_format.md)
   : Set the value of the image data format convention.
+
+## Distribution
+
+- [`distributed_get_device_count()`](https://keras3.posit.co/dev/reference/distributed_get_device_count.md)
+  : Count available devices of one type
 
 ## Utils
 

@@ -35,8 +35,9 @@ optimizer_muon(
   learning_rate = 0.001,
   adam_beta_1 = 0.9,
   adam_beta_2 = 0.999,
+  adam_weight_decay = 0.004,
   epsilon = 1e-07,
-  weight_decay = 0.1,
+  weight_decay = 0.004,
   clipnorm = NULL,
   clipvalue = NULL,
   global_clipnorm = NULL,
@@ -45,16 +46,17 @@ optimizer_muon(
   ema_overwrite_frequency = NULL,
   loss_scale_factor = NULL,
   gradient_accumulation_steps = NULL,
-  name = "muon",
+  name = NULL,
   exclude_layers = NULL,
   exclude_embeddings = TRUE,
   muon_a = 3.4445,
   muon_b = -4.775,
   muon_c = 2.0315,
-  adam_lr_ratio = 0.1,
+  adam_lr_ratio = 1L,
   momentum = 0.95,
-  ns_steps = 6L,
+  ns_steps = 5L,
   nesterov = TRUE,
+  rms_rate = 0.2,
   ...
 )
 ```
@@ -79,6 +81,10 @@ optimizer_muon(
   A float value or a constant float tensor, ora callable that takes no
   arguments and returns the actual value to use. The exponential decay
   rate for the 2nd moment estimates. Defaults to `0.999`.
+
+- adam_weight_decay:
+
+  Weight decay to apply when Muon falls back to AdamW updates.
 
 - epsilon:
 
@@ -185,7 +191,7 @@ optimizer_muon(
 - adam_lr_ratio:
 
   Float, the ratio of the learning rate when using Adam to the main
-  learning rate. it is recommended to set it to `0.1`.
+  learning rate. it is recommended to set it to `1`.
 
 - momentum:
 
@@ -198,6 +204,10 @@ optimizer_muon(
 - nesterov:
 
   Boolean, whether to use Nesterov-style momentum.
+
+- rms_rate:
+
+  Optional RMS-rate stabilization parameter for the Muon update.
 
 - ...:
 
@@ -226,6 +236,9 @@ Other optimizers:
 [`optimizer_lamb()`](https://keras3.posit.co/dev/reference/optimizer_lamb.md)  
 [`optimizer_lion()`](https://keras3.posit.co/dev/reference/optimizer_lion.md)  
 [`optimizer_loss_scale()`](https://keras3.posit.co/dev/reference/optimizer_loss_scale.md)  
+[`optimizer_map()`](https://keras3.posit.co/dev/reference/optimizer_map.md)  
+[`optimizer_multi()`](https://keras3.posit.co/dev/reference/optimizer_multi.md)  
 [`optimizer_nadam()`](https://keras3.posit.co/dev/reference/optimizer_nadam.md)  
 [`optimizer_rmsprop()`](https://keras3.posit.co/dev/reference/optimizer_rmsprop.md)  
+[`optimizer_schedule_free_adam_w()`](https://keras3.posit.co/dev/reference/optimizer_schedule_free_adam_w.md)  
 [`optimizer_sgd()`](https://keras3.posit.co/dev/reference/optimizer_sgd.md)  

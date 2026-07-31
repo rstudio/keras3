@@ -55,7 +55,7 @@ A tensor with the same shape and dtype as input `x`.
 
     activation_relu(x, threshold = 5)
 
-    ## tf.Tensor([-0. -0.  0.  0. 10.], shape=(5), dtype=float32)
+    ## tf.Tensor([ 0.  0.  0.  0. 10.], shape=(5), dtype=float32)
 
 ## See also
 

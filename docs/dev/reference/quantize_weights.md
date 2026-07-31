@@ -1,15 +1,16 @@
 # Quantize the weights of a model.
 
 Note that the model must be built first before calling this method.
-`quantize_weights()` will recursively call `layer$quantize(mode)` in all
+`quantize_weights()` will recursively call `layer$quantize(...)` in all
 layers and will be skipped if the layer doesn't implement the function.
 
-Currently only `Dense` and `EinsumDense` layers support quantization.
+Available quantization modes and supported layer types depend on the
+current Keras backend and release.
 
 ## Usage
 
 ``` r
-quantize_weights(object, mode, ...)
+quantize_weights(object, mode = NULL, config = NULL, filters = NULL, ...)
 ```
 
 ## Arguments
@@ -20,7 +21,19 @@ quantize_weights(object, mode, ...)
 
 - mode:
 
-  The mode of the quantization. Only 'int8' is supported at this time.
+  Optional quantization mode. Recent Keras releases support modes such
+  as `"int8"`, `"int4"`, `"float8"`, and `"gptq"`.
+
+- config:
+
+  Optional quantization configuration object. When supplied, this can be
+  used instead of `mode` to customize the quantizers used for weights or
+  activations.
+
+- filters:
+
+  Optional filters controlling which layers are quantized. This may be a
+  regex string, a list of regex strings, or a callable.
 
 - ...:
 

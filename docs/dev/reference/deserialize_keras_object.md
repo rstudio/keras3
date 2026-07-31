@@ -71,15 +71,7 @@ loss:
       inherit = loss_mean_squared_error)
 
     # register the custom object
-    register_keras_serializable(loss_modified_mse)
-
-    ## function (reduction = "sum_over_batch_size", name = "mean_squared_error",
-    ##     dtype = NULL)
-    ## {
-    ##     args <- capture_args(enforce_all_dots_named = FALSE)
-    ##     do.call(ModifiedMeanSquaredError, args)
-    ## }
-    ## <environment: 0x64c008b80da0>
+    loss_modified_mse <- register_keras_serializable(loss_modified_mse)
 
     # confirm object is registered
     get_custom_objects()

@@ -18,6 +18,9 @@ corresponding to `class_a` and 1 corresponding to `class_b`).
 
 Only `.txt` files are supported at this time.
 
+By default this returns a `tf.data.Dataset`. Set `format = "grain"` to
+return a framework-agnostic Grain dataset instead.
+
 ## Usage
 
 ``` r
@@ -33,6 +36,7 @@ text_dataset_from_directory(
   validation_split = NULL,
   subset = NULL,
   follow_links = FALSE,
+  format = "tf",
   verbose = TRUE
 )
 ```
@@ -111,6 +115,11 @@ text_dataset_from_directory(
   Whether to visits subdirectories pointed to by symlinks. Defaults to
   `FALSE`.
 
+- format:
+
+  Return either a TensorFlow dataset (`"tf"`) or a framework-agnostic
+  Grain dataset (`"grain"`).
+
 - verbose:
 
   Whether to display number information on classes and number of files
@@ -118,7 +127,8 @@ text_dataset_from_directory(
 
 ## Value
 
-A `tf.data.Dataset` object.
+A `tf.data.Dataset` object when `format = "tf"`, or a
+`grain.IterDataset` when `format = "grain"`.
 
 - If `label_mode` is `NULL`, it yields `string` tensors of shape
   `(batch_size,)`, containing the contents of a batch of text files.

@@ -10,7 +10,8 @@ split_dataset(
   left_size = NULL,
   right_size = NULL,
   shuffle = FALSE,
-  seed = NULL
+  seed = NULL,
+  preferred_backend = NULL
 )
 ```
 
@@ -43,9 +44,15 @@ split_dataset(
 
   A random seed for shuffling.
 
+- preferred_backend:
+
+  Optional backend name to prefer for the returned dataset objects when
+  `dataset` itself does not imply one.
+
 ## Value
 
-A list of two `tf$data$Dataset` objects: the left and right splits.
+A list of two dataset objects, the left and right splits. The exact type
+depends on `preferred_backend` and on the input dataset type.
 
 ## Examples
 

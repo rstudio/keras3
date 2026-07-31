@@ -83,6 +83,16 @@ A simple convnet that achieves ~99% test accuracy on MNIST.
 [See
 code](https://keras3.posit.co/dev/articles/examples/vision/mnist_convnet.md)
 
+##### Image similarity estimation using a Siamese Network with a contrastive loss
+
+intermediate
+
+Similarity learning using a Siamese network trained with a contrastive
+loss.
+
+[See
+code](https://keras3.posit.co/dev/articles/examples/vision/mnist_siamese_graph.md)
+
 ##### Image segmentation with a U-Net-like architecture
 
 intermediate

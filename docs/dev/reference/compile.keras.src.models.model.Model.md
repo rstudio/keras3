@@ -130,11 +130,21 @@ compile(
 - jit_compile:
 
   Bool or `"auto"`. Whether to use XLA compilation when compiling a
-  model. For `jax` and `tensorflow` backends, `jit_compile="auto"`
+  model. For `jax` and `tensorflow` backends, `jit_compile = "auto"`
   enables XLA compilation if the model supports it, and disabled
   otherwise. For `torch` backend, `"auto"` will default to eager
-  execution and `jit_compile=True` will run with `torch.compile` with
-  the `"inductor"` backend.
+  execution and `jit_compile = TRUE` will run with `torch.compile` with
+  the `"inductor"` backend. On the JAX backend, compilation happens on
+  the first step and can take several seconds. JAX can persist the
+  compiled result to disk and reuse it across runs and processes, so the
+  same model only pays that cost once. Enable it before the first step
+  with:
+
+      jax <- reticulate::import("jax")
+      jax$config$update("jax_compilation_cache_dir", "/path/to/cache")
+
+  See the JAX persistent compilation cache documentation for the
+  available thresholds.
 
 - auto_scale_loss:
 
@@ -142,6 +152,15 @@ compile(
   passed optimizer will be automatically wrapped in a
   `LossScaleOptimizer`, which will dynamically scale the loss to prevent
   underflow.
+
+  Trainable variables are determined at
+  [`compile()`](https://generics.r-lib.org/reference/compile.html) time.
+  If you modify the `trainable` property of a layer after calling
+  [`compile()`](https://generics.r-lib.org/reference/compile.html),
+  those changes will not take effect during
+  [`fit()`](https://generics.r-lib.org/reference/fit.html) unless
+  [`compile()`](https://generics.r-lib.org/reference/compile.html) is
+  called again.
 
 ## Value
 

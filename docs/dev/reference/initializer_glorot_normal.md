@@ -8,7 +8,7 @@ units in the weight tensor.
 ## Usage
 
 ``` r
-initializer_glorot_normal(seed = NULL)
+initializer_glorot_normal(seed = NULL, input_axes = NULL, output_axes = NULL)
 ```
 
 ## Arguments
@@ -22,6 +22,16 @@ initializer_glorot_normal(seed = NULL)
   produce the same random values across multiple calls. To get different
   random values across multiple calls, use as seed an instance of
   [`random_seed_generator()`](https://keras3.posit.co/dev/reference/random_seed_generator.md).
+
+- input_axes:
+
+  Optional integer vector. The 1-based axes of the input tensor to use
+  when computing the fan-in.
+
+- output_axes:
+
+  Optional integer vector. The 1-based axes of the output tensor to use
+  when computing the fan-out.
 
 ## Value
 

@@ -19,6 +19,9 @@ corresponding to `class_a` and 1 corresponding to `class_b`).
 Supported image formats: `.jpeg`, `.jpg`, `.png`, `.bmp`, `.gif`.
 Animated gifs are truncated to the first frame.
 
+By default this returns a `tf.data.Dataset`. Set `format = "grain"` to
+return a framework-agnostic Grain dataset instead.
+
 ## Usage
 
 ``` r
@@ -39,6 +42,7 @@ image_dataset_from_directory(
   crop_to_aspect_ratio = FALSE,
   pad_to_aspect_ratio = FALSE,
   data_format = NULL,
+  format = "tf",
   verbose = TRUE
 )
 ```
@@ -155,6 +159,11 @@ image_dataset_from_directory(
   [`config_image_data_format()`](https://keras3.posit.co/dev/reference/config_image_data_format.md)
   otherwise either `'channel_last'` or `'channel_first'`.
 
+- format:
+
+  Return either a TensorFlow dataset (`"tf"`) or a framework-agnostic
+  Grain dataset (`"grain"`).
+
 - verbose:
 
   Whether to display number information on classes and number of files
@@ -162,7 +171,8 @@ image_dataset_from_directory(
 
 ## Value
 
-A `tf.data.Dataset` object.
+A `tf.data.Dataset` object when `format = "tf"`, or a
+`grain.IterDataset` when `format = "grain"`.
 
 - If `label_mode` is `NULL`, it yields `float32` tensors of shape
   `(batch_size, image_size[1], image_size[2], num_channels)`, encoding

@@ -23,7 +23,9 @@ initializer_variance_scaling(
   scale = 1,
   mode = "fan_in",
   distribution = "truncated_normal",
-  seed = NULL
+  seed = NULL,
+  input_axes = NULL,
+  output_axes = NULL
 )
 ```
 
@@ -51,6 +53,16 @@ initializer_variance_scaling(
   produce the same random values across multiple calls. To get different
   random values across multiple calls, use as seed an instance of
   [`random_seed_generator()`](https://keras3.posit.co/dev/reference/random_seed_generator.md).
+
+- input_axes:
+
+  Optional integer vector. The 1-based axes of the input tensor to use
+  when computing the fan-in.
+
+- output_axes:
+
+  Optional integer vector. The 1-based axes of the output tensor to use
+  when computing the fan-out.
 
 ## Value
 
