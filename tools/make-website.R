@@ -3,20 +3,24 @@
 
 agents_path <- "AGENTS.md"
 agents_tmp <- NULL
-if (file.exists(agents_path)) {
-  agents_tmp <- tempfile(fileext = ".md")
-  file.copy(agents_path, agents_tmp, overwrite = TRUE)
-  unlink(agents_path)
-  on.exit({
-    if (!file.exists(agents_path) && !is.null(agents_tmp) &&
-        file.exists(agents_tmp)) {
-      file.copy(agents_tmp, agents_path, overwrite = TRUE)
-      unlink(agents_tmp)
-    }
-  }, add = TRUE)
+restore_agents <- function() {
+  if (!file.exists(agents_path) && !is.null(agents_tmp) &&
+      file.exists(agents_tmp)) {
+    stopifnot(file.copy(agents_tmp, agents_path, overwrite = TRUE))
+    unlink(agents_tmp)
+  }
 }
 
-pkgdown::build_site(devel = FALSE)
+if (file.exists(agents_path)) {
+  agents_tmp <- tempfile(fileext = ".md")
+  stopifnot(file.copy(agents_path, agents_tmp, overwrite = TRUE))
+  unlink(agents_path)
+}
+
+tryCatch(
+  pkgdown::build_site(devel = FALSE),
+  finally = restore_agents()
+)
 
 pkg <- pkgdown::as_pkgdown(".")
 agents_html <- file.path(pkg$dst_path, "AGENTS.html")
