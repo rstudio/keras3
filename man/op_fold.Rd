@@ -10,19 +10,21 @@ op_fold(x, output_size, kernel_size, dilation = 1L, padding = 0L, stride = 1L)
 \item{x}{A tensor of shape \verb{(batch, channels * kernel_height * kernel_width, number_of_patches)}.}
 
 \item{output_size}{Integer or integer vector of length two specifying the
-output height and width.}
+output spatial shape \verb{(output_height, output_width)}.}
 
 \item{kernel_size}{Integer or integer vector of length two specifying the
-sliding window size.}
+sliding window size \verb{(kernel_height, kernel_width)}. A scalar is used for
+both dimensions.}
 
 \item{dilation}{Integer or integer vector of length two specifying the
-spacing between kernel points.}
+spacing between kernel points. Defaults to \code{1}.}
 
-\item{padding}{Integer or integer vector of length two specifying zero
-padding for both spatial dimensions.}
+\item{padding}{Integer or integer vector of length two specifying the
+zero-padding that was applied to the input of \code{\link[=op_unfold]{op_unfold()}}. Defaults to
+\code{0}.}
 
 \item{stride}{Integer or integer vector of length two specifying the sliding
-window stride.}
+window step. Defaults to \code{1}.}
 }
 \value{
 A tensor of shape \verb{(batch, channels, output_height, output_width)}.

@@ -7,27 +7,33 @@
 op_jvp(fun, primals, tangents, has_aux = FALSE)
 }
 \arguments{
-\item{fun}{Function to differentiate. Its positional arguments and return
-value may be tensors, scalars, or nested containers of them.}
+\item{fun}{Function to differentiate. Its arguments and return value may be
+tensors, scalars, or nested containers of tensors or scalars.}
 
-\item{primals}{List of primal argument values at which to evaluate \code{fun}.}
+\item{primals}{List of primal argument values at which to evaluate the
+Jacobian of \code{fun}. Its length must equal the number of positional
+parameters of \code{fun}.}
 
-\item{tangents}{List with the same structure as \code{primals} containing the
-tangent vector.}
+\item{tangents}{List of tangent values with the same nested structure and
+tensor shapes as \code{primals}.}
 
-\item{has_aux}{Whether \code{fun} returns an additional auxiliary value.}
+\item{has_aux}{Whether \code{fun} returns a pair whose first element is the
+mathematical output to differentiate and whose second element is
+auxiliary data. Defaults to \code{FALSE}.}
 }
 \value{
-If \code{has_aux = FALSE}, a list containing the value of \code{fun} and the
-Jacobian-vector product. If \code{has_aux = TRUE}, the auxiliary value is the
-third element.
+If \code{has_aux = FALSE}, a list containing \code{fun} evaluated at
+\code{primals} and its Jacobian-vector product evaluated with \code{tangents}. The
+product has the same nested structure and tensor shapes as the output of
+\code{fun}. If \code{has_aux = TRUE}, the auxiliary data is returned as a third
+element.
 }
 \description{
 Compute a forward-mode Jacobian-vector product.
 }
 \examples{
 x <- op_convert_to_tensor(3)
-op_jvp(\(x) op_square(x), list(x), list(op_convert_to_tensor(1)))
+op_jvp(function(x) op_square(x), list(x), list(op_convert_to_tensor(1)))
 
 }
 \seealso{

@@ -87,6 +87,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer distorts input images by applying elastic deformations,
 simulating a physically realistic transformation. The magnitude of the
 distortion is controlled by the \code{scale} parameter, while the \code{factor}

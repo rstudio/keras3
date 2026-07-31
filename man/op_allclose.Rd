@@ -9,9 +9,9 @@ op_allclose(x1, x2, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE)
 \arguments{
 \item{x1, x2}{Input tensors.}
 
-\item{rtol}{Relative tolerance.}
+\item{rtol}{Positive relative tolerance, typically a small value.}
 
-\item{atol}{Absolute tolerance.}
+\item{atol}{Positive absolute tolerance, typically a small value.}
 
 \item{equal_nan}{Whether \code{NaN} values in the same positions compare equal.}
 }

@@ -111,12 +111,12 @@ strings. Defaults to \code{"utf-8"}.}
 
 \item{name}{String, name for the object}
 
-\item{salt}{Optional salt used when hashing OOV string values.}
+\item{salt}{Only valid when \code{num_oov_indices > 1}. If supplied, OOV bucket assignment
+uses SipHash64, with these values as an additional input (a "salt" in
+cryptography). May be a pair of integers, or a single integer used for both
+key components. If \code{NULL} (the default), FarmHash64 is used.}
 
 \item{...}{For forward/backward compatability.}
-
-\item{vocabulary_dtype}{The dtype of the vocabulary terms, for example
-\code{"int64"} or \code{"int32"}. Defaults to \code{"int64"}.}
 }
 \value{
 The return value depends on the value provided for the first argument.

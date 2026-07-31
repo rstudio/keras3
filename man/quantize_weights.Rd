@@ -9,15 +9,16 @@ quantize_weights(object, mode = NULL, config = NULL, filters = NULL, ...)
 \arguments{
 \item{object}{A Keras Model or Layer.}
 
-\item{mode}{Optional quantization mode. Recent Keras releases support modes such as
-\code{"int8"}, \code{"int4"}, \code{"float8"}, and \code{"gptq"}.}
+\item{mode}{Quantization mode. Supported modes are \code{"int8"}, \code{"int4"}, \code{"float8"},
+\code{"gptq"}, and \code{"awq"}. GPTQ and AWQ require a corresponding \code{config}.
+Optional when \code{config} is supplied.}
 
-\item{config}{Optional quantization configuration object. When supplied, this can be used
-instead of \code{mode} to customize the quantizers used for weights or
-activations.}
+\item{config}{A \code{keras.quantizers.QuantizationConfig} object specifying additional
+quantization options, including custom weight and activation quantizers.}
 
-\item{filters}{Optional filters controlling which layers are quantized. This may be a regex
-string, a list of regex strings, or a callable.}
+\item{filters}{Optional filters controlling which layers are quantized. May be a regular
+expression string, a list of regular expression strings, or a callable.
+Only layers matching the filter conditions are quantized.}
 
 \item{...}{Passed on to the \code{object} quantization method.}
 }
@@ -30,9 +31,28 @@ Note that the model must be built first before calling this method.
 \code{quantize_weights()} will recursively call \code{layer$quantize(...)} in all layers and
 will be skipped if the layer doesn't implement the function.
 
-Available quantization modes and supported layer types depend on the current
-Keras backend and release.
+Pass a \code{mode} string to use the default configuration for int8, int4, or
+float8 quantization. AWQ and GPTQ require a corresponding \code{config} object.
+A \code{config} can also customize the quantizers used for weights and
+activations.
 }
+\section{Examples}{
+Quantize a model to int8 with the default configuration:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = 10) |>
+  layer_dense(10)
+model |> quantize_weights("int8")
+}\if{html}{\out{</div>}}
+
+Quantize with a custom configuration:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = 10) |>
+  layer_dense(10)
+config <- quantizer_int4_quantization_config(block_size = 64)
+model |> quantize_weights(config = config)
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 Other layer methods: \cr
 \code{\link{count_params}()} \cr

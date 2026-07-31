@@ -38,8 +38,11 @@ non-trainable state of the model.}
 
 \item{seed}{Seed for random number generator. Optional.}
 
-\item{native_serialization_platforms}{Optional platforms to compile for when
-exporting native JAX serialization through the TensorFlow backend.}
+\item{native_serialization_platforms}{Optional sequence of platforms (\code{"cpu"}, \code{"cuda"}, \code{"rocm"}, or \code{"tpu"})
+to compile for when using \code{jax2tf.convert()} with native serialization. This
+is used only when the Keras backend is TensorFlow. If \code{NULL}, the function
+is compiled for the default backend. If multiple platforms are supplied,
+the exported module is device-polymorphic.}
 
 \item{...}{For forward/backward compatability.}
 }

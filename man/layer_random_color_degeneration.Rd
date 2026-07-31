@@ -44,6 +44,9 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 The sharpness operation first converts an image to gray scale, then back to
 color. It then takes a weighted average between original image and the
 degenerated image. This makes colors appear more dull.

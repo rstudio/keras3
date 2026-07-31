@@ -20,7 +20,11 @@ A \code{MultiOptimizer} instance.
 }
 \description{
 Wraps an \code{\link[=optimizer_map]{optimizer_map()}} or a callable that selects an optimizer for a
-variable. Optimizer-specific callbacks are not currently supported.
+variable. Access the sub-optimizers through \code{optimizer$optimizers}, for
+example to inspect their learning rates, iterations, or loss-scale factors.
+A multi-optimizer does not expose a single \code{learning_rate}, because its
+sub-optimizers may have different learning rates. Optimizer-specific
+callbacks are not currently supported.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{optimizers <- optimizer_map(
@@ -28,6 +32,11 @@ variable. Optimizer-specific callbacks are not currently supported.
   optimizer_map = list("encoder/.*" = optimizer_adam())
 )
 optimizer <- optimizer_multi(optimizers)
+
+# A callable can also select an optimizer for each variable.
+optimizer <- optimizer_multi(function(variable) \{
+  if (grepl("encoder", variable$path)) optimizer_adam() else optimizer_sgd()
+\})
 }\if{html}{\out{</div>}}
 }
 

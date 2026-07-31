@@ -15,7 +15,8 @@ layer_dot(inputs, ..., axes, normalize = FALSE)
 take the dot product. If a list, should be two integers
 corresponding to the desired axis from the first input and the
 desired axis from the second input, respectively. Note that the
-size of the two selected axes must match.}
+size of the two selected axes must match, and axis 1 (the batch axis in R)
+cannot be included.}
 
 \item{normalize}{Whether to L2-normalize samples along the dot product axis
 before taking the dot product. If set to \code{TRUE}, then

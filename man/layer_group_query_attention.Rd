@@ -39,9 +39,10 @@ layer_group_query_attention(
 \item{use_bias}{Boolean, whether the dense layers use bias vectors/matrices.}
 
 \item{sliding_window}{Optional positive integer. If set, each query position attends only to key
-positions within \code{sliding_window - 1} of itself. This combines with
-\code{use_causal_mask = TRUE} to provide causal sliding-window attention.
-Defaults to \code{NULL}, which uses full attention.}
+positions within \code{sliding_window - 1} of itself, forming a symmetric band.
+This combines with \code{use_causal_mask = TRUE} to provide the causal sliding
+window used by Mistral, Llama 3 long-context, and Phi-3. Defaults to \code{NULL},
+which uses full attention.}
 
 \item{flash_attention}{If \code{NULL}, the layer attempts to use flash
 attention for faster and more memory-efficient attention
@@ -63,8 +64,12 @@ computations when possible. This behavior can be configured using
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
 
-\item{use_gate}{Whether to add the gated attention branch used by recent grouped-query
-attention variants.}
+\item{use_gate}{Logical, whether to apply a gated attention mechanism. When \code{TRUE}, an
+additional gating branch is added based on
+\href{https://arxiv.org/abs/2505.06708}{Gated Attention for Large Language Models}.
+It applies a sigmoid-activated linear projection to the query, which then
+gates the attention output. This helps improve training stability and
+eliminates "attention sinks".}
 
 \item{seed}{Optional integer to seed the dropout layer.}
 

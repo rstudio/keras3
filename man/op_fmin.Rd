@@ -13,7 +13,8 @@ op_fmin(x1, x2)
 A tensor containing the element-wise minimum of \code{x1} and \code{x2}.
 }
 \description{
-Compute the element-wise minimum while ignoring \code{NaN} values.
+If one compared element is \code{NaN}, the non-\code{NaN} element is returned. If both
+elements are \code{NaN}, \code{NaN} is returned.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_fmin(c(2, NaN), c(1, 4))

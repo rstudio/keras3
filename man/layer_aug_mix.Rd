@@ -61,6 +61,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 AugMix aims to produce images with variety while preserving the image
 semantics and local statistics. During the augmentation process,
 the same augmentation is applied across all images in the batch

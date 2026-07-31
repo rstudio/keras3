@@ -14,7 +14,8 @@ A tensor with the same shape as \code{x}.
 }
 \description{
 The normalized sinc function is \code{sin(pi * x) / (pi * x)} when \code{x != 0}
-and one when \code{x == 0}.
+and one when \code{x == 0}. The value at zero is defined by this limit, making
+the function continuous and infinitely differentiable.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_sinc(c(0, 1, 2))

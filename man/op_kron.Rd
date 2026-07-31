@@ -13,7 +13,8 @@ op_kron(x1, x2)
 A tensor containing the Kronecker product of \code{x1} and \code{x2}.
 }
 \description{
-Compute the Kronecker product of two tensors.
+If \code{x1} has shape \verb{(a1, ..., an)} and \code{x2} has shape \verb{(b1, ..., bn)}, the
+result has shape \verb{(a1 * b1, ..., an * bn)}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_kron(c(1, 2), c(3, 4))

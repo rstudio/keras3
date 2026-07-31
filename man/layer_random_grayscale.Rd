@@ -42,7 +42,7 @@ The conversion preserves the perceived luminance of the original color
 image using standard RGB to grayscale conversion coefficients. Images
 that are not selected for conversion remain unchanged.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 \section{Input Shape}{

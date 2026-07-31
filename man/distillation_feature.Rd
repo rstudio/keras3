@@ -12,22 +12,26 @@ distillation_feature(
 }
 \arguments{
 \item{loss}{Loss function used for feature distillation. This can be a
-string identifier, a Keras loss instance, or a nested list matching the
-layer-output structure. Use \code{NULL} within a list to skip an output.}
+string identifier such as \code{"mse"}, \code{"cosine_similarity"}, or \code{"mae"}; a
+Keras loss instance; or a nested list of losses matching the layer-output
+structure. Use \code{NULL} within a list to skip distillation for that output.
+At least one loss must be non-\code{NULL}. Defaults to \code{"mse"}.}
 
-\item{teacher_layer_name}{Optional name of the teacher layer from which to
-extract features. The final output is used when \code{NULL}.}
+\item{teacher_layer_name}{Name of the teacher layer from which to extract
+features. The final output is used when \code{NULL}, the default.}
 
-\item{student_layer_name}{Optional name of the student layer from which to
-extract features. The final output is used when \code{NULL}.}
+\item{student_layer_name}{Name of the student layer from which to extract
+features. The final output is used when \code{NULL}, the default.}
 }
 \value{
 A \code{FeatureDistillation} instance.
 }
 \description{
 Feature distillation transfers knowledge from intermediate layers of the
-teacher model to corresponding layers of the student model. If layer names
-are omitted, the final model outputs are used.
+teacher model to corresponding layers of the student model. This can help
+the student learn better internal representations and often leads to better
+performance than logits-only distillation. If layer names are omitted, the
+final model outputs are used.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- distillation_feature(

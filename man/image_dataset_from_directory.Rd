@@ -112,8 +112,14 @@ preserved.}
 \item{data_format}{If \code{NULL} uses \code{\link[=config_image_data_format]{config_image_data_format()}}
 otherwise either \code{'channel_last'} or \code{'channel_first'}.}
 
-\item{format}{Return either a TensorFlow dataset (\code{"tf"}) or a
-framework-agnostic Grain dataset (\code{"grain"}).}
+\item{format}{Format of the returned object. Defaults to \code{"tf"}. Available
+options are:
+\itemize{
+\item \code{"tf"}: returns a \code{tf.data.Dataset} object. Requires TensorFlow to be
+installed.
+\item \code{"grain"}: returns a \code{grain.IterDataset} object. Requires Grain to be
+installed.
+}}
 
 \item{verbose}{Whether to display number information on classes and
 number of files found. Defaults to \code{TRUE}.}

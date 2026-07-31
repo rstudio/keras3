@@ -17,34 +17,47 @@ quantizer_awq_config(
 )
 }
 \arguments{
-\item{dataset}{Calibration data yielding strings or pre-tokenized tensors.}
+\item{dataset}{Calibration data used to analyze activation patterns. It can
+be an iterable that yields strings or pre-tokenized numeric tensors, such
+as a character vector, generator, R array, or NumPy array.}
 
-\item{tokenizer}{Tokenizer or compatible callable used for \code{dataset}.}
+\item{tokenizer}{Tokenizer or compatible callable used to process \code{dataset}
+when it contains strings.}
 
 \item{...}{For forward/backward compatibility. Arguments after \code{...} must be
 named.}
 
-\item{weight_bits}{Number of weight bits. AWQ currently supports 4.}
+\item{weight_bits}{Number of bits used for weight quantization. AWQ currently
+supports only 4. Defaults to 4.}
 
-\item{num_samples}{Number of calibration samples.}
+\item{num_samples}{Number of calibration samples to use. Defaults to 128.}
 
-\item{sequence_length}{Sequence length of each calibration sample.}
+\item{sequence_length}{Sequence length of each calibration sample. Defaults
+to 512.}
 
 \item{group_size}{Number of weights quantized together. Use \code{-1} for
-per-channel quantization.}
+per-channel quantization. Defaults to 128.}
 
-\item{num_grid_points}{Number of grid-search points used to find scales.}
+\item{num_grid_points}{Number of grid-search points used to find optimal
+per-channel scales. Higher values can find better scales but take longer.
+Defaults to 20.}
 
 \item{quantization_layer_structure}{Optional named list describing
-\code{pre_block_layers} and \code{sequential_blocks}. If omitted, the model must
-provide \code{get_quantization_layer_structure()}.}
+the model's quantization structure. It should contain
+\code{pre_block_layers}, a list of layers to run before the first block, and
+\code{sequential_blocks}, a list of transformer blocks to quantize
+sequentially. If omitted, the model must provide
+\code{get_quantization_layer_structure()}.}
 }
 \value{
 An \code{AWQConfig} instance.
 }
 \description{
-Activation-aware Weight Quantization uses calibration activations to find
-per-channel scales that protect salient weights.
+Activation-aware Weight Quantization is a post-training method that
+identifies and protects salient weights based on activation magnitudes. It
+uses calibration data to collect activation statistics, identifies salient
+weight channels, searches a grid for optimal per-channel scales, and applies
+those scales before quantization to reduce accuracy loss.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{config <- quantizer_awq_config(
@@ -56,6 +69,12 @@ model |> quantize_weights(mode = "awq", config = config)
 }\if{html}{\out{</div>}}
 }
 
+\references{
+\itemize{
+\item \href{https://arxiv.org/abs/2306.00978}{Lin et al., 2023, \emph{AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration}}
+\item \href{https://github.com/mit-han-lab/llm-awq}{Reference implementation}
+}
+}
 \seealso{
 Other quantizers: \cr
 \code{\link{quantizer_abs_max_quantize_grouped_with_zero_point}()} \cr

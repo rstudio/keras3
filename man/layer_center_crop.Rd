@@ -58,7 +58,7 @@ in \code{"channels_first"} format.
 If the input height/width is even and the target height/width is odd (or
 inversely), the input image is left-padded by 1 pixel.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 

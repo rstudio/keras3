@@ -32,6 +32,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 CutMix is a data augmentation method where patches are cut and pasted
 between two images in the dataset, while the labels are also mixed
 proportionally to the area of the patches.

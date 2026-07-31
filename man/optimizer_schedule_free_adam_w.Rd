@@ -24,12 +24,13 @@ optimizer_schedule_free_adam_w(
 )
 }
 \arguments{
-\item{learning_rate}{Initial learning rate. Defaults to \code{0.0025}.}
+\item{learning_rate}{A number, a \code{\link[=LearningRateSchedule]{LearningRateSchedule()}} instance, or a
+callable that takes no arguments and returns the value to use. Defaults to
+\code{0.0025}.}
 
-\item{beta_1}{A float value or a constant float tensor, or a callable
-that takes no arguments and returns the actual value to use. The
-exponential decay rate for the 1st moment estimates.
-Defaults to \code{0.9}.}
+\item{beta_1}{Number, constant tensor, or callable returning the exponential
+decay rate for the first-moment estimates. It also controls interpolation
+between the momentum and averaged sequences. Defaults to 0.9.}
 
 \item{beta_2}{A float value or a constant float tensor, or a callable
 that takes no arguments and returns the actual value to use. The
@@ -39,7 +40,7 @@ Defaults to \code{0.999}.}
 \item{epsilon}{Small constant for numerical stability. Defaults to \code{1e-8}.}
 
 \item{warmup_steps}{Number of warmup steps. During warmup, the learning rate
-increases linearly from zero to \code{learning_rate}.}
+increases linearly from zero to \code{learning_rate}. Defaults to 0.}
 
 \item{weight_decay}{Float. If set, weight decay is applied.}
 
@@ -105,9 +106,11 @@ An \code{Optimizer} instance.
 }
 \description{
 Schedule-free learning avoids a separate learning-rate schedule by combining
-interpolation and averaging. The optimizer maintains a momentum sequence for
-gradient updates and an averaged sequence for evaluation. During training,
-model parameters interpolate between the two sequences.
+interpolation and averaging. It removes the need to specify the stopping
+time in advance and typically matches or outperforms cosine and linear decay
+schedules. The optimizer maintains a momentum sequence to which gradient
+updates are applied and an averaged sequence used for evaluation. During
+training, model parameters interpolate between the two sequences.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{optimizer <- optimizer_schedule_free_adam_w(learning_rate = 0.0025)
@@ -116,6 +119,12 @@ model |> fit(x_train, y_train)
 }\if{html}{\out{</div>}}
 }
 
+\references{
+\itemize{
+\item \href{https://arxiv.org/abs/2405.15682}{Defazio et al., 2024}
+\item \href{https://github.com/facebookresearch/schedule_free}{Schedule-Free repository}
+}
+}
 \seealso{
 Other optimizers: \cr
 \code{\link{optimizer_adadelta}()} \cr

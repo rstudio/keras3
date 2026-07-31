@@ -36,7 +36,8 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
-Reduces the number of bits for each color channel.
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
 }
 \section{References}{
 \itemize{

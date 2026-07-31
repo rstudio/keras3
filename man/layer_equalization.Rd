@@ -44,7 +44,7 @@ This layer works with both grayscale and color images, performing
 equalization independently on each color channel. At inference time,
 the equalization is consistently applied.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 \subsection{Input Shape}{
 

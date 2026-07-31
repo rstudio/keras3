@@ -7,18 +7,22 @@
 op_image_sobel_edges(images, data_format = NULL)
 }
 \arguments{
-\item{images}{A rank-4 image tensor in channels-last or channels-first
-format.}
+\item{images}{Input tensor with shape \verb{(batch, height, width, channels)} for
+channels-last format or \verb{(batch, channels, height, width)} for
+channels-first format.}
 
 \item{data_format}{One of \code{"channels_last"} or \code{"channels_first"}. \code{NULL}
-uses the configured image data format.}
+defaults to \code{\link[=config_image_data_format]{config_image_data_format()}}.}
 }
 \value{
-A tensor with a final dimension of length two containing the
-vertical and horizontal gradients.
+For channels-last input, a tensor with shape
+\verb{(batch, height, width, channels, 2)}. For channels-first input, a tensor
+with shape \verb{(batch, channels, height, width, 2)}. The final dimension is
+\verb{[dy, dx]}, containing the vertical and horizontal gradients.
 }
 \description{
-Compute Sobel edges for images.
+The Sobel operator computes the gradient of image intensity at each pixel,
+giving the direction and rate of the largest change from light to dark.
 }
 \examples{
 images <- op_ones(c(1, 8, 8, 1))

@@ -44,6 +44,9 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 The sharpness operation first performs a blur, then blends between the
 original image and the processed image. This operation adjusts the clarity
 of the edges in an image, ranging from blurred to enhanced sharpness.

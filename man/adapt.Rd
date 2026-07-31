@@ -9,8 +9,10 @@ adapt(object, data, ..., batch_size = NULL, steps = NULL)
 \arguments{
 \item{object}{Preprocessing layer object}
 
-\item{data}{The data to train on. It can be passed either as a
-\code{tf.data.Dataset} or as an R array.}
+\item{data}{The data to train on. It can be an R array, a backend-native
+eager tensor, a batched \code{tf.data.Dataset}, a Grain dataset, a
+\code{keras.utils.PyDataset}, or an iterable of batches such as a list of
+arrays or a generator. Dataset and iterable inputs must be batched.}
 
 \item{...}{Used for forwards and backwards compatibility. Passed on to the underlying method.}
 

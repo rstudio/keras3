@@ -13,7 +13,8 @@ op_flipud(x)
 A tensor with its rows reversed.
 }
 \description{
-Reverse the rows of a tensor.
+For a two-dimensional tensor, this reverses the entries in each column from
+top to bottom. Rows are preserved but appear in reverse order.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_flipud(op_reshape(op_arange(6), c(2, 3)))

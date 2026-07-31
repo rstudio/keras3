@@ -26,6 +26,8 @@ This sets:
 \item the Python NumPy seed: \verb{import numpy; numpy.random.seed(seed)}
 \item the TensorFlow seed: \code{tf$random$set_seed(seed)} (only if TF is installed)
 \item The Torch seed: \code{import("torch")$manual_seed(seed)} (only if the backend is torch)
+\item the global Keras \code{SeedGenerator}, used by \code{keras.random} functions when
+their \code{seed} argument is not supplied.
 \item and disables Python hash randomization.
 }
 

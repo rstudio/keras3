@@ -52,7 +52,7 @@ This layer will randomly increase/reduce the brightness for the input RGB
 images. At inference time, the output will be identical to the input.
 Call the layer with \code{training=TRUE} to adjust the brightness of the input.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 \section{Inputs}{

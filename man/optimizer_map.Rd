@@ -7,7 +7,7 @@
 optimizer_map(default_optimizer, optimizer_map = NULL)
 }
 \arguments{
-\item{default_optimizer}{Optimizer used for unmatched variables.}
+\item{default_optimizer}{Keras optimizer used for unmatched variables.}
 
 \item{optimizer_map}{Optional named list mapping exact variable paths or
 regular expressions to optimizer instances.}
@@ -16,7 +16,12 @@ regular expressions to optimizer instances.}
 An \code{OptimizerMap} instance.
 }
 \description{
-Exact variable paths take precedence over regular-expression keys. Variables
+When retrieving an optimizer, the map first attempts an exact key match. If
+no exact match is found, it treats every key as a regular-expression pattern
+and performs a full match against the variable path. For example,
+\code{"encoder"} matches only the layer with that exact path; use
+\code{"encoder/.*"} to match its sublayers. Exact matches take precedence. If
+more than one regular expression matches, lookup raises an error. Variables
 not matched by the map use \code{default_optimizer}.
 }
 \section{Examples}{

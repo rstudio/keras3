@@ -17,8 +17,10 @@ quantizer_int4_quantization_config(
 selects weight-only int4 quantization.}
 
 \item{block_size}{Group size along the input dimension. A positive integer
-uses sub-channel quantization; \code{NULL} or \code{-1} uses per-channel
-quantization.}
+uses sub-channel quantization with
+\code{ceiling(input_dim / block_size)} groups; \code{NULL} or \code{-1} uses per-channel
+quantization with one scale per output channel. Sub-channel quantization
+does not support custom weight or activation quantizers. Defaults to 128.}
 }
 \value{
 An \code{Int4QuantizationConfig} instance.

@@ -7,24 +7,21 @@
 op_custom_gradient(f)
 }
 \arguments{
-\item{f}{Function \verb{f(*args)} that returns a tuple
-\verb{(output, grad_fn)}, where:
+\item{f}{Function \code{f(...)} that returns a tuple \verb{(output, grad_fn)}, where:
 \itemize{
-\item \code{args} is a sequence of (nested structures of) tensor inputs to
-the function.
+\item \code{...} is a sequence of tensor inputs or nested structures of tensor inputs.
 \item \code{output} is a (nested structure of) tensor outputs of applying
-operations in \code{forward_fn} to \code{args}.
-\item \code{grad_fn} is a function with the signature \verb{grad_fn(*args, upstream)} which returns a tuple of tensors the same size as
-(flattened) \code{args}: the derivatives of tensors in \code{output} with
-respect to the tensors in \code{args}. \code{upstream} is a tensor or
+the operations in \code{f()} to \code{...}.
+\item \code{grad_fn} has signature \code{grad_fn(..., upstream)} and returns a tuple of
+tensors the same size as flattened \code{...}: the derivatives of tensors in
+\code{output} with respect to the tensors in \code{...}. \code{upstream} is a tensor or
 sequence of tensors holding the initial value gradients for each
 tensor in \code{output}.
 }}
 }
 \value{
-A function \verb{h(*args)} which returns the same value as
-\verb{f(*args)[0]} and whose gradient is determined by
-\verb{f(*args)[1]}.
+A function \code{h(...)} which returns the same value as \code{f(...)[[1]]} and whose
+gradient is determined by \code{f(...)[[2]]}.
 }
 \description{
 This decorator allows fine grained control over the gradients of a sequence
@@ -32,16 +29,40 @@ for operations. This may be useful for multiple reasons, including providing
 a more efficient or numerically stable gradient for a sequence of
 operations.
 }
+\note{
+The gradient function's signature depends on the backend. With TensorFlow
+and JAX, \code{grad(upstream)} is sufficient. With PyTorch, the gradient function
+may also receive the original positional inputs, so define \code{grad} with \code{...}
+and \code{upstream} formals when they are required. The backend-agnostic example
+above accepts both calling conventions.
+}
 \section{Examples}{
-Backend-agnostic usage wraps a function like \code{log1pexp(x)} with
-\code{ops.custom_gradient(log1pexp)} and returns both the forward value and
-a gradient function.
+This backend-agnostic implementation accepts the positional inputs used by
+PyTorch as well as the upstream gradient used by all backends.
 
-The gradient function may need different signatures depending on the backend.
-A backend-agnostic implementation can use \verb{grad(*args, upstream = None)}.
-With TensorFlow and JAX, \code{grad(upstream)} is typically sufficient.
-With PyTorch, use \verb{grad(*args, upstream)} when both positional inputs and
-the upstream gradient are required.
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{log1pexp <- op_custom_gradient(function(x) \{
+  e <- op_exp(x)
+
+  grad <- function(..., upstream = NULL) \{
+    if (is.null(upstream))
+      upstream <- list(...)[[1]]
+    op_multiply(upstream, 1 - 1 / op_add(1, e))
+  \}
+
+  tuple(op_log(1 + e), grad)
+\})
+
+if (config_backend() == "tensorflow") \{
+  tf <- tensorflow::tf
+  x <- op_convert_to_tensor(100)
+  with(tf$GradientTape() \%as\% tape, \{
+    tape$watch(x)
+    y <- log1pexp(x)
+  \})
+  dy_dx <- tape$gradient(y, x)
+  stopifnot(as.numeric(dy_dx) == 1)
+\}
+}\if{html}{\out{</div>}}
 }
 
 \seealso{

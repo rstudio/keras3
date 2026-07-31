@@ -55,6 +55,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer distorts the perspective of input images by shifting their
 corner points, simulating a 3D-like transformation. The amount of distortion
 is controlled by the \code{factor} and \code{scale} parameters.

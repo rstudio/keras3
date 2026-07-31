@@ -129,7 +129,10 @@ it is recommended to set it to \code{1}.}
 
 \item{nesterov}{Boolean, whether to use Nesterov-style momentum.}
 
-\item{rms_rate}{Optional RMS-rate stabilization parameter for the Muon update.}
+\item{rms_rate}{Float. A parameter from \href{https://arxiv.org/abs/2502.16982}{Liu et al., 2025}
+that can improve Muon's stability, allowing it to use the same learning rate
+and weight decay as Adam. Defaults to \code{0.2}. Set to \code{NULL} to disable this
+feature.}
 
 \item{...}{For forward/backward compatibility.}
 }

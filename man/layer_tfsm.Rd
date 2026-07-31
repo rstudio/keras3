@@ -49,22 +49,8 @@ Reload a Keras model/layer that was saved via \code{export_savedmodel()}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = c(784)) |> layer_dense(10)
-model |> export_savedmodel("path/to/artifact")
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{## Saved artifact at 'path/to/artifact'. The following endpoints are available:
-##
-## * Endpoint 'serve'
-##   args_0 (POSITIONAL_ONLY): TensorSpec(shape=(None, 784), dtype=tf.float32, name='keras_tensor')
-## Output Type:
-##   TensorSpec(shape=(None, 10), dtype=tf.float32, name=None)
-## Captures:
-##   133893930115792: TensorSpec(shape=(), dtype=tf.resource, name=None)
-##   133893930112912: TensorSpec(shape=(), dtype=tf.resource, name=None)
-
-}\if{html}{\out{</div>}}
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
+model |> export_savedmodel("path/to/artifact", verbose = FALSE)
+reloaded_layer <- layer_tfsm(filepath = "path/to/artifact")
 input <- random_normal(c(2, 784))
 output <- reloaded_layer(input)
 stopifnot(all.equal(as.array(output), as.array(model(input))))

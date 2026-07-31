@@ -8,18 +8,24 @@ distillation_logits(temperature = 3, loss = "kl_divergence")
 }
 \arguments{
 \item{temperature}{Temperature used for softmax scaling. Higher values
-produce softer probability distributions.}
+produce softer probability distributions that are easier for the student
+to learn. Typical values range from 3 to 5. Defaults to 3.}
 
 \item{loss}{Loss function used for distillation. This can be a string
-identifier, a Keras loss instance, or a nested list matching the model
-output structure. Use \code{NULL} within a list to skip an output.}
+identifier such as \code{"kl_divergence"} or
+\code{"categorical_crossentropy"}; a Keras loss instance; or a nested list of
+losses matching the model-output structure. Use \code{NULL} within a list to
+skip distillation for that output. At least one loss must be non-\code{NULL}.
+Defaults to \code{"kl_divergence"}.}
 }
 \value{
 A \code{LogitsDistillation} instance.
 }
 \description{
-Applies temperature scaling to teacher logits before computing the loss
-between teacher and student predictions.
+Transfers knowledge from final model outputs. This loss applies temperature
+scaling to the teacher logits before computing the loss between teacher and
+student predictions. It is the most common approach to knowledge
+distillation.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{loss <- distillation_logits(temperature = 3)

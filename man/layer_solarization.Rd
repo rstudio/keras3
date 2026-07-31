@@ -42,6 +42,9 @@ are \verb{(0, 255)} (RGB image) or \verb{(0., 1.)} (scaled image).}
 \item{...}{Base layer keyword arguments, such as \code{name} and \code{dtype}.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 When created without \code{threshold} parameter, the layer performs solarization
 to all values. When created with specified \code{threshold} the layer only
 augments pixels that are above the \code{threshold} value.

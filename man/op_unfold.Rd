@@ -10,19 +10,22 @@ op_unfold(x, kernel_size, dilation = 1L, padding = 0L, stride = 1L)
 \item{x}{A tensor of shape \verb{(batch, channels, height, width)}.}
 
 \item{kernel_size}{Integer or integer vector of length two specifying the
-sliding window size.}
+sliding window size \verb{(kernel_height, kernel_width)}. A scalar is used for
+both dimensions.}
 
 \item{dilation}{Integer or integer vector of length two specifying the
-spacing between kernel points.}
+spacing between kernel points, also known as dilation or atrous
+convolution. Defaults to \code{1}.}
 
 \item{padding}{Integer or integer vector of length two specifying zero
-padding for both spatial dimensions.}
+padding for both spatial dimensions. Defaults to \code{0}.}
 
 \item{stride}{Integer or integer vector of length two specifying the sliding
-window stride.}
+window step. Defaults to \code{1}.}
 }
 \value{
-A tensor of shape \verb{(batch, channels * kernel_height * kernel_width, number_of_patches)}.
+A tensor of shape \verb{(batch, channels * kernel_height * kernel_width, L)}, where \code{L} is the product of the numbers of patches along the height
+and width dimensions.
 }
 \description{
 Also known as \code{im2col}, this extracts flattened patches from a rank-4

@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_color_jitter}
 \alias{layer_random_color_jitter}
-\title{Randomly apply brightness, contrast, saturation}
+\title{Randomly apply brightness, contrast, saturation, and hue.}
 \usage{
 layer_random_color_jitter(
   object,
@@ -74,8 +74,11 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
-and hue image processing operation sequentially and randomly on the
+Applies these image processing operations sequentially and randomly to the
 input.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
 }
 \seealso{
 Other image preprocessing layers: \cr

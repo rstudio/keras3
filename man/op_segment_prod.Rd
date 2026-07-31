@@ -9,13 +9,13 @@ op_segment_prod(data, segment_ids, num_segments = NULL, sorted = FALSE)
 \arguments{
 \item{data}{Input tensor.}
 
-\item{segment_ids}{Tensor containing 1-based segment indices. Its leading
-dimensions must match the corresponding dimensions of \code{data}.}
+\item{segment_ids}{A 1-D tensor containing 1-based segment indices for
+elements in \code{data}. Its length must match the first dimension of \code{data}.}
 
 \item{num_segments}{Optional total number of segments. When \code{NULL}, it is
-inferred from \code{segment_ids}.}
+inferred from the maximum value in \code{segment_ids}.}
 
-\item{sorted}{Whether \code{segment_ids} is sorted.}
+\item{sorted}{Whether \code{segment_ids} is sorted. Defaults to \code{FALSE}.}
 }
 \value{
 A tensor containing the product of values for each segment.

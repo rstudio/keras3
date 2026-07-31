@@ -38,8 +38,10 @@ softmax_layer(input)
 \section{Call Arguments}{
 \itemize{
 \item \code{inputs}: The inputs (logits) to the softmax layer.
-\item \code{mask}: A boolean mask of the same shape as \code{inputs}. The mask
-specifies 1 to keep and 0 to mask. Defaults to \code{NULL}.
+\item \code{mask}: A boolean mask broadcastable to \code{inputs}. The mask specifies 1 to
+keep and 0 to mask. Each mask dimension must be 1 or match the
+corresponding dimension of \code{inputs}; it must not be larger. Defaults to
+\code{NULL}.
 }
 }
 

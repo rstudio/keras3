@@ -15,14 +15,16 @@ the shape is \verb{(batch, height, width, channels)}; with
 output height and width. A scalar uses the same size for both dimensions.}
 
 \item{data_format}{One of \code{"channels_last"} or \code{"channels_first"}. \code{NULL}
-uses the configured image data format.}
+defaults to \code{\link[=config_image_data_format]{config_image_data_format()}}.}
 }
 \value{
 A rank-4 tensor with the requested spatial dimensions.
 }
 \description{
-Pools a rank-4 input to a fixed spatial size by computing the required
-kernel size and stride from the input shape.
+Applies adaptive average pooling that automatically computes the kernel size
+and stride needed to produce \code{output_size}. This is useful when a fixed
+output size is required regardless of input size, as in global feature
+extraction for models such as ResNet.
 }
 \examples{
 x <- op_ones(c(2, 64, 80, 3))

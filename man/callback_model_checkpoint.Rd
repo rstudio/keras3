@@ -157,6 +157,40 @@ model |> fit(x = random_uniform(c(2, 10)), y = op_ones(2, 1),
 # The model weights (that are considered the best) can be loaded
 model |> load_model_weights(checkpoint_filepath)
 }\if{html}{\out{</div>}}
+\subsection{Resuming training from weight-only checkpoints}{
+
+When using \code{save_weights_only = TRUE}, the weights file includes the state
+of the optimizer, including its iteration count and learning-rate state, if
+the model is compiled at the time of saving.
+
+To correctly resume training and restore the optimizer state—for example,
+to continue a learning-rate schedule without resetting it—compile the model
+before loading the weights.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{lr_schedule <- learning_rate_schedule_exponential_decay(
+  initial_learning_rate = 0.1,
+  decay_steps = 100000,
+  decay_rate = 0.96,
+  staircase = TRUE
+)
+
+# 1. Create a fresh model instance.
+model <- get_model()
+
+# 2. Compile the model before loading weights.
+model |> compile(
+  optimizer = optimizer_rmsprop(learning_rate = lr_schedule),
+  loss = "sparse_categorical_crossentropy",
+  metrics = "accuracy"
+)
+
+# 3. Load weights; the optimizer state is restored automatically.
+model |> load_model_weights(checkpoint_filepath)
+
+# 4. Continue training.
+model |> fit(x_train, y_train, epochs = 10)
+}\if{html}{\out{</div>}}
+}
 }
 
 \seealso{

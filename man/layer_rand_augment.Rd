@@ -43,6 +43,9 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer can be thought of as an all-in-one image augmentation layer. The
 policy implemented by this layer has been benchmarked extensively and is
 effective on a wide variety of datasets.

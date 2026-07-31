@@ -10,13 +10,15 @@ op_matrix_rank(x, tol = NULL)
 \item{x}{Input tensor of shape \verb{(..., M, N)}.}
 
 \item{tol}{Optional absolute threshold below which singular values are
-treated as zero. If \code{NULL}, the backend default is used.}
+treated as zero. If \code{NULL}, the backend default described above is used.}
 }
 \value{
 An integer tensor of shape \code{(...)} containing each matrix rank.
 }
 \description{
-Compute matrix rank using singular value decomposition.
+The rank is the number of singular values greater than \code{tol}. When \code{tol} is
+\code{NULL}, each backend derives its default threshold from the largest singular
+value and the matrix dimensions.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(rbind(c(1, 2), c(2, 4)), dtype = "float32")

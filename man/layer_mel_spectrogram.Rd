@@ -74,6 +74,9 @@ returned, invisibly.
 }
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer takes \code{float32}/\code{float64} single or batched audio signal as
 inputs and computes the Mel spectrogram using Short-Time Fourier Transform
 and Mel scaling. The input should be a 1D (unbatched) or 2D (batched) tensor

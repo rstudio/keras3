@@ -13,7 +13,9 @@ op_dstack(xs)
 A tensor formed by stacking \code{xs} along the third axis.
 }
 \description{
-Stack tensors depth-wise along the third axis.
+This is equivalent to concatenation along the third axis after
+two-dimensional tensors of shape \verb{(M, N)} are reshaped to \verb{(M, N, 1)} and
+one-dimensional tensors of shape \code{(N)} are reshaped to \verb{(1, N, 1)}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_dstack(list(op_array(1:3), op_array(4:6)))

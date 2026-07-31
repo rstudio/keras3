@@ -23,12 +23,15 @@ height, and width.}
 along depth, height, and width. \code{NULL} uses \code{size}.}
 
 \item{dilation_rate}{Integer or integer vector of length three specifying the
-spacing between consecutive patch samples.}
+input stride between consecutive patch samples. On the TensorFlow backend,
+\code{dilation_rate > 1} cannot be combined with \code{strides > 1}.}
 
 \item{padding}{One of \code{"valid"} or \code{"same"}.}
 
-\item{data_format}{One of \code{"channels_last"} or \code{"channels_first"}. \code{NULL}
-uses the configured image data format.}
+\item{data_format}{\code{"channels_last"} for input with shape
+\verb{(batch, depth, height, width, channels)} or \code{"channels_first"} for input
+with shape \verb{(batch, channels, depth, height, width)}. \code{NULL} defaults to
+\code{\link[=config_image_data_format]{config_image_data_format()}}.}
 }
 \value{
 Extracted patches as a rank-4 tensor for an unbatched volume or a

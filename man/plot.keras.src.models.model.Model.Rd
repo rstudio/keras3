@@ -54,6 +54,10 @@ have an \code{activation} property).}
 
 \item{show_trainable}{whether to display if a layer is trainable.}
 
+\item{splines}{Controls how edges are drawn in the graph. Defaults to
+\code{"ortho"} (right-angle lines). Other options include \code{"curved"},
+\code{"polyline"}, \code{"spline"}, and \code{"line"}.}
+
 \item{to_file}{File name of the plot image. If \code{NULL} (the default), the
 model is drawn on the default graphics device. Otherwise, a file is saved.}
 }

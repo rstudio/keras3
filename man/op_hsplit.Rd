@@ -9,9 +9,10 @@ op_hsplit(x, indices_or_sections)
 \arguments{
 \item{x}{Input tensor.}
 
-\item{indices_or_sections}{Either the number of sections or a vector of
-1-based positions at which to split the second axis. For a one-dimensional
-tensor, the first axis is split.}
+\item{indices_or_sections}{If an integer \code{N}, split into \code{N} equal sections
+along the second axis, or the first axis for a one-dimensional tensor. If
+a one-dimensional vector of sorted integers, its entries give the 1-based
+positions at which to split that axis.}
 }
 \value{
 A list of tensors.

@@ -85,7 +85,7 @@ This layer will place each element of its input data into one of several
 contiguous ranges and output an integer index indicating which range each
 element was placed in.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 \section{Input Shape}{

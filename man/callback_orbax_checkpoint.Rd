@@ -18,24 +18,28 @@ callback_orbax_checkpoint(
 )
 }
 \arguments{
-\item{directory}{Directory in which to save checkpoints.}
+\item{directory}{Path to the directory in which to save checkpoints.}
 
-\item{monitor}{Metric name to monitor.}
+\item{monitor}{Metric name to monitor, such as \code{"val_loss"}.}
 
 \item{verbose}{Verbosity mode, 0 or 1.}
 
-\item{save_best_only}{Whether to save only when \code{monitor} improves.}
+\item{save_best_only}{Whether to save only when the model is considered the
+best according to the monitored quantity.}
 
-\item{mode}{One of \code{"auto"}, \code{"min"}, or \code{"max"}.}
+\item{mode}{One of \code{"auto"}, \code{"min"}, or \code{"max"}. Used with
+\code{save_best_only}.}
 
 \item{save_freq}{\code{"epoch"} or an integer number of batches between saves.}
 
-\item{initial_value_threshold}{Initial best value for \code{monitor}.}
+\item{initial_value_threshold}{Floating-point initial best value for
+\code{monitor}, used with \code{save_best_only}.}
 
 \item{max_to_keep}{Maximum number of recent checkpoints to retain. Use
-\code{NULL} to retain all checkpoints.}
+\code{NULL} to retain all checkpoints. Defaults to 1.}
 
-\item{save_on_background}{Whether to save asynchronously in the background.}
+\item{save_on_background}{Whether to save asynchronously in the background.
+Defaults to \code{TRUE}.}
 
 \item{save_weights_only}{Whether to save only trainable and non-trainable
 variables, excluding model configuration, optimizer state, and assets.}
@@ -44,9 +48,12 @@ variables, excluding model configuration, optimizer state, and assets.}
 A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
 }
 \description{
-Saves model weights and optimizer state asynchronously with Orbax. On the
-JAX backend, checkpointing is coordinated across hosts. The Python
-\code{orbax-checkpoint} package is required.
+By default, this callback saves model weights and optimizer state
+asynchronously with Orbax, allowing training to continue without blocking
+for I/O. In a multi-host distributed training environment with the JAX
+backend, it automatically coordinates checkpointing across all hosts for
+consistency and synchronization. Multi-host checkpointing is only supported
+with JAX. The Python \code{orbax-checkpoint} package is required.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{checkpoint <- callback_orbax_checkpoint(
@@ -56,6 +63,12 @@ JAX backend, checkpointing is coordinated across hosts. The Python
   save_best_only = TRUE
 )
 model |> fit(x, y, validation_split = 0.2, callbacks = list(checkpoint))
+
+# Alternatively, save a checkpoint every 100 batches.
+checkpoint <- callback_orbax_checkpoint(
+  directory = tempfile("orbax-checkpoints-"),
+  save_freq = 100
+)
 }\if{html}{\out{</div>}}
 }
 

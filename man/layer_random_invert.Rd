@@ -43,6 +43,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer randomly inverts the colors of input images with a specified
 probability range. When applied, each image has a chance of having its
 colors inverted, where the pixel values are transformed to their

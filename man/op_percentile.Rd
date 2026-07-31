@@ -14,14 +14,17 @@ op_percentile(x, q, axis = NULL, method = "linear", keepdims = FALSE)
 \item{axis}{Axis or axes along which to compute percentiles. By default, the input is
 flattened.}
 
-\item{method}{Interpolation method. One of \code{"linear"}, \code{"lower"}, \code{"higher"},
-\code{"midpoint"}, or \code{"nearest"}.}
+\item{method}{Method used when the requested percentile lies between data points \code{i < j}.
+\code{"linear"} returns \code{i + (j - i) * fraction}; \code{"lower"} returns \code{i};
+\code{"higher"} returns \code{j}; \code{"midpoint"} returns \code{(i + j) / 2}; and \code{"nearest"}
+returns whichever of \code{i} or \code{j} is nearest. Defaults to \code{"linear"}.}
 
 \item{keepdims}{Whether to retain reduced axes as dimensions of size one.}
 }
 \value{
-A tensor containing the requested percentiles. When \code{q} contains multiple
-percentiles, the first result axis corresponds to \code{q}.
+If \code{q} is a single percentile and \code{axis = NULL}, a scalar tensor. If \code{q}
+contains multiple percentiles, the first result axis corresponds to \code{q};
+the other axes are those remaining after reduction of \code{x}.
 }
 \description{
 Compute percentiles along an axis.

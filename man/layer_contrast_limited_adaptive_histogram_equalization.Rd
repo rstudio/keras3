@@ -17,12 +17,13 @@ layer_contrast_limited_adaptive_histogram_equalization(
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{value_range}{Two numbers giving the lower and upper limits of input
-values.}
+values. Defaults to \code{c(0, 255)}.}
 
-\item{clip_limit}{Maximum local histogram contrast amplification.}
+\item{clip_limit}{Number that limits noise amplification in near-constant
+regions. Defaults to 4.}
 
-\item{tile_grid_size}{Two integers giving the number of tile rows and
-columns.}
+\item{tile_grid_size}{Two integers, \verb{(height, width)}, giving the number of
+tiles into which to divide the image. Defaults to \code{c(8, 8)}.}
 
 \item{data_format}{String, one of \code{"channels_last"} (default) or
 \code{"channels_first"}. The ordering of the dimensions in the inputs.
@@ -45,9 +46,27 @@ returned, invisibly.
 }
 }
 \description{
-Applies histogram equalization within image tiles, clips excessive local
-contrast, and combines neighboring tiles with interpolation. Histogram
-computation can be memory intensive for large batches or images.
+Contrast Limited Adaptive Histogram Equalization (CLAHE) is a variant of
+adaptive histogram equalization that avoids over-amplifying contrast. It
+operates on small image regions called tiles rather than on the entire
+image, then combines neighboring tiles with bilinear interpolation to remove
+artificial boundaries. This can improve image contrast.
+}
+\details{
+\strong{Note:} This layer computes histograms using backend one-hot operations,
+which can be highly memory intensive. Large batches or high-resolution
+images can lead to high memory consumption or out-of-memory errors.
+\subsection{Input shape}{
+
+A 3D unbatched or 4D batched tensor with shape
+\verb{(..., height, width, channels)} when \code{data_format = "channels_last"}, or
+\verb{(..., channels, height, width)} when \code{data_format = "channels_first"}.
+}
+
+\subsection{Output shape}{
+
+A tensor with the same rank and shape as the input.
+}
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{image <- op_reshape(op_arange(16, dtype = "float32"), c(1, 4, 4, 1))

@@ -34,12 +34,17 @@ Defaults to \code{NULL}.}
 
 \item{seed}{A random seed for shuffling.}
 
-\item{preferred_backend}{Optional backend name to prefer for the returned
-dataset objects when \code{dataset} itself does not imply one.}
+\item{preferred_backend}{Optional string specifying which backend to use,
+such as \code{"tensorflow"} or \code{"torch"}. If \code{NULL}, the backend is inferred
+from \code{dataset}: TensorFlow is used for a \code{tf.data.Dataset}, Torch is used
+for a \code{torch.utils.data.Dataset}, and the current Keras backend is used
+for an R list or array. Defaults to \code{NULL}.}
 }
 \value{
 A list of two dataset objects, the left and right splits. The exact type
-depends on \code{preferred_backend} and on the input dataset type.
+depends on \code{preferred_backend} and on the input dataset type. For example,
+the TensorFlow backend returns \code{tf.data.Dataset} objects and the Torch
+backend returns \code{torch.utils.data.Dataset} objects.
 }
 \description{
 Splits a dataset into a left half and a right half (e.g. train / test).

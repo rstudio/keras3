@@ -91,7 +91,7 @@ or \verb{(..., channels, height, width)}, in \code{"channels_first"} format.
 or \verb{(..., channels, target_height, target_width)},
 in \code{"channels_first"} format.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 

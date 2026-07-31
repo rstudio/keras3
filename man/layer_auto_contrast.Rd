@@ -18,6 +18,9 @@ Defaults to \verb{(0, 255)}.}
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 Auto contrast stretches the values of an image across the entire available
 \code{value_range}. This makes differences between pixels more obvious. An
 example of this is if an image only has values \verb{[0, 1]} out of the range

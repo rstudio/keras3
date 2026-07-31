@@ -53,6 +53,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer performs a Gaussian blur operation on input images with a
 randomly selected degree of blurring, controlled by the \code{factor} and
 \code{sigma} arguments.

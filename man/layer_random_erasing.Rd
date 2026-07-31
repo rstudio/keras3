@@ -58,6 +58,9 @@ while \code{"channels_first"} corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 Random Erasing is a data augmentation method where random patches of
 an image are erased (replaced by a constant value or noise)
 during training to improve generalization.

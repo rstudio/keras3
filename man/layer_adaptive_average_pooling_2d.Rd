@@ -16,7 +16,8 @@ layer_adaptive_average_pooling_2d(
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{output_size}{Integer or two integers giving the target height and
-width.}
+width. If a single integer is provided, the same value is used for both
+dimensions.}
 
 \item{data_format}{string, either \code{"channels_last"} or \code{"channels_first"}.
 The ordering of the dimensions in the inputs. \code{"channels_last"}
@@ -43,7 +44,29 @@ returned, invisibly.
 }
 }
 \description{
-Pools an input to the requested output height and width.
+Applies adaptive average pooling to spatial data so that the output has the
+target spatial size specified by \code{output_size}, regardless of the input
+spatial size. The kernel size and stride are computed automatically to
+achieve the target output size.
+}
+\details{
+\subsection{Input shape}{
+\itemize{
+\item With \code{data_format = "channels_last"}: a 4D tensor with shape
+\verb{(batch_size, height, width, channels)}.
+\item With \code{data_format = "channels_first"}: a 4D tensor with shape
+\verb{(batch_size, channels, height, width)}.
+}
+}
+
+\subsection{Output shape}{
+\itemize{
+\item With \code{data_format = "channels_last"}:
+\verb{(batch_size, output_height, output_width, channels)}.
+\item With \code{data_format = "channels_first"}:
+\verb{(batch_size, channels, output_height, output_width)}.
+}
+}
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_reshape(op_arange(144, dtype = "float32"), c(1, 8, 6, 3))

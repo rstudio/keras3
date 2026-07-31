@@ -11,9 +11,11 @@ A \code{DistillationLoss} instance.
 }
 \description{
 Distillation losses define how to compute the loss between teacher and
-student outputs. Custom distillation losses can subclass this class and
-implement \code{compute_loss()}. This base class does not implement a loss;
-use \code{\link[=distillation_feature]{distillation_feature()}} or \code{\link[=distillation_logits]{distillation_logits()}} directly.
+student outputs. Each loss implements a specific approach to knowledge
+transfer, from logits matching to feature-based distillation. Custom
+distillation losses can subclass this class and implement \code{compute_loss()}.
+This base class does not implement a loss; use
+\code{\link[=distillation_feature]{distillation_feature()}} or \code{\link[=distillation_logits]{distillation_logits()}} directly.
 }
 \seealso{
 Other distillation: \cr

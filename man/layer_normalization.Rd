@@ -32,12 +32,14 @@ In this case, consider passing \code{axis=NULL}. Defaults to \code{-1}.}
 \item{mean}{The mean value(s) to use during normalization. The passed value(s)
 will be broadcast to the shape of the kept axes above;
 if the value(s) cannot be broadcast, an error will be raised when
-this layer's \code{build()} method is called.}
+this layer's \code{build()} method is called. \code{mean} and \code{variance} must be
+specified together.}
 
 \item{variance}{The variance value(s) to use during normalization. The passed
 value(s) will be broadcast to the shape of the kept axes above;
 if the value(s) cannot be broadcast, an error will be raised when
-this layer's \code{build()} method is called.}
+this layer's \code{build()} method is called. \code{mean} and \code{variance} must be
+specified together.}
 
 \item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
 to its inputs: it would turn a normalized input back into its

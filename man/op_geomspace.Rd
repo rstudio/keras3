@@ -9,16 +9,19 @@ op_geomspace(start, stop, num = 50L, endpoint = TRUE, dtype = NULL, axis = 1L)
 \arguments{
 \item{start}{Starting value.}
 
-\item{stop}{Final value when \code{endpoint = TRUE}.}
+\item{stop}{Final value when \code{endpoint = TRUE}. When \code{endpoint = FALSE},
+\code{num + 1} values are spaced over the interval in log space and the final
+value is omitted.}
 
-\item{num}{Number of samples.}
+\item{num}{Number of samples. Defaults to \code{50}.}
 
-\item{endpoint}{Whether \code{stop} is included.}
+\item{endpoint}{Whether \code{stop} is included. Defaults to \code{TRUE}.}
 
 \item{dtype}{Optional output dtype.}
 
-\item{axis}{Axis in the result along which samples are stored. Defaults to
-\code{1}, the first axis. The Torch backend does not support this argument.}
+\item{axis}{Axis in the result along which samples are stored. This matters
+only when \code{start} or \code{stop} is array-like. Defaults to \code{1}, the first axis.
+The Torch backend does not support this argument.}
 }
 \value{
 A tensor containing \code{num} samples on a logarithmic scale.

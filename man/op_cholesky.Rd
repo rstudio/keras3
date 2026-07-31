@@ -13,8 +13,7 @@ op_cholesky(x, upper = FALSE)
 of the default lower-triangular factor.}
 }
 \value{
-A tensor of shape \verb{(..., M, M)} representing the lower triangular
-Cholesky factor of \code{x}.
+A tensor of shape \verb{(..., M, M)} representing the Cholesky factor of \code{x}.
 }
 \description{
 Computes the Cholesky decomposition of a positive semi-definite matrix.

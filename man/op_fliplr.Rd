@@ -13,7 +13,8 @@ op_fliplr(x)
 A tensor with its columns reversed.
 }
 \description{
-Reverse the columns of a tensor.
+For a two-dimensional tensor, this reverses the entries in each row from
+left to right. Columns are preserved but appear in reverse order.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_fliplr(op_reshape(op_arange(6), c(2, 3)))

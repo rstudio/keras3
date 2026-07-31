@@ -26,7 +26,8 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
-MixUp implements the MixUp data augmentation technique.
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
 }
 \section{References}{
 \itemize{

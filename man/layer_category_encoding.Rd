@@ -62,7 +62,7 @@ values as inputs, and it outputs a dense or sparse representation of those
 inputs. For integer inputs where the total number of tokens is not known,
 use \code{layer_integer_lookup()} instead.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 \section{Examples}{

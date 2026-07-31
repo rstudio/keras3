@@ -21,18 +21,22 @@ op_image_ssim(
 \item{image2}{Second image or batch of images with the same shape as
 \code{image1}.}
 
-\item{max_val}{Maximum possible image value.}
+\item{max_val}{Maximum possible image value. Defaults to \code{1} for normalized
+images; use \code{255} for images with pixel values in \verb{[0, 255]}.}
 
-\item{filter_size}{Odd integer Gaussian filter size.}
+\item{filter_size}{Gaussian filter size. Must be an odd integer greater than
+or equal to 1. Defaults to \code{11}.}
 
-\item{filter_sigma}{Gaussian filter standard deviation.}
+\item{filter_sigma}{Gaussian filter standard deviation. Defaults to \code{1.5}.}
 
-\item{k1}{First stabilization constant.}
+\item{k1}{First stabilization constant. Defaults to \code{0.01}.}
 
-\item{k2}{Second stabilization constant.}
+\item{k2}{Second stabilization constant. Defaults to \code{0.03}.}
 
-\item{data_format}{One of \code{"channels_last"} or \code{"channels_first"}. \code{NULL}
-uses the configured image data format.}
+\item{data_format}{\code{"channels_last"} for input with shape
+\verb{(batch, height, width, channels)} or \code{"channels_first"} for input with
+shape \verb{(batch, channels, height, width)}. \code{NULL} defaults to
+\code{\link[=config_image_data_format]{config_image_data_format()}}.}
 }
 \value{
 A scalar tensor for unbatched images or one SSIM value per image
@@ -41,6 +45,11 @@ for batched inputs.
 \description{
 SSIM compares luminance, contrast, and structure. Its value ranges from
 -1 to 1, with 1 indicating identical images.
+}
+\details{
+This implementation follows Wang, Bovik, Sheikh, and Simoncelli (2004),
+"Image quality assessment: From error visibility to structural similarity,"
+\emph{IEEE Transactions on Image Processing}.
 }
 \examples{
 image <- op_ones(c(32, 32, 3))

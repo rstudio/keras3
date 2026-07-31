@@ -7,7 +7,9 @@
 distributed_get_device_count(device_type = NULL)
 }
 \arguments{
-\item{device_type}{Optional string: \code{"cpu"}, \code{"gpu"}, or \code{"tpu"}.}
+\item{device_type}{String, one of \code{"cpu"}, \code{"gpu"}, or \code{"tpu"}. If \code{NULL},
+Keras counts GPU or TPU devices when available and otherwise counts CPU
+devices.}
 }
 \value{
 An integer number of devices.

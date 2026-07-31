@@ -60,8 +60,10 @@ data for test or validation.}
 will not be used in the output sequences.
 This is useful to reserve part of the data for test or validation.}
 
-\item{format}{Return either a TensorFlow dataset (\code{"tf"}) or a
-framework-agnostic Grain dataset (\code{"grain"}).}
+\item{format}{Optional string; either \code{"tf"} (the default) for a
+\code{tf.data.Dataset}, or \code{"grain"} for a Grain dataset. Grain datasets are
+framework-agnostic and work with JAX, PyTorch, and NumPy backends without
+requiring TensorFlow.}
 }
 \value{
 A dataset instance. If \code{format = "tf"}, this is a \code{tf.data.Dataset}.

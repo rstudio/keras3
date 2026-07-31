@@ -9,18 +9,30 @@ op_depth_to_space(x, block_size, data_format = "channels_last")
 \arguments{
 \item{x}{A rank-4 input tensor.}
 
-\item{block_size}{Integer spatial block size.}
+\item{block_size}{Integer spatial block size. The number of channels must be
+divisible by \code{block_size^2}.}
 
-\item{data_format}{One of \code{"channels_last"} or \code{"channels_first"}.}
+\item{data_format}{\code{"channels_last"} for input with shape
+\verb{(batch, height, width, channels)} or \code{"channels_first"} for input with
+shape \verb{(batch, channels, height, width)}. Defaults to \code{"channels_last"}.}
 }
 \value{
-A tensor with spatial dimensions multiplied by \code{block_size} and
-channel depth divided by \code{block_size^2}.
+A tensor with the same dtype as \code{x}, with shape
+\verb{(N, H * block_size, W * block_size, C \%/\% block_size^2)} for channels-last
+input or \verb{(N, C \%/\% block_size^2, H * block_size, W * block_size)} for
+channels-first input.
 }
 \description{
-Also known as pixel shuffle, this rearranges an input of shape
-\verb{(N, H, W, C * block_size^2)} into \verb{(N, H * block_size, W * block_size, C)} for channels-last inputs. It is the inverse of
-\code{\link[=op_space_to_depth]{op_space_to_depth()}}.
+This operation is useful for resizing activations between convolutions while
+retaining all data, and for training purely convolutional models.
+}
+\details{
+Also known as pixel shuffle, it rearranges
+\verb{(N, H, W, C * block_size^2)} to
+\verb{(N, H * block_size, W * block_size, C)} for channels-last input, or
+\verb{(N, C * block_size^2, H, W)} to
+\verb{(N, C, H * block_size, W * block_size)} for channels-first input. It is the
+inverse of \code{\link[=op_space_to_depth]{op_space_to_depth()}}.
 }
 \examples{
 x <- op_reshape(op_arange(16), c(1, 2, 2, 4))

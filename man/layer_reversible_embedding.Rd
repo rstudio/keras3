@@ -26,8 +26,8 @@ i.e. maximum integer index + 1.}
 
 \item{output_dim}{Integer. Dimension of the dense embedding.}
 
-\item{tie_weights}{Whether the embedding and reverse-projection matrices
-share weights.}
+\item{tie_weights}{Boolean. Whether the embedding and reverse-projection
+matrices share the same weights. Defaults to \code{TRUE}.}
 
 \item{embeddings_initializer}{Initializer for the \code{embeddings}
 matrix (see \verb{keras3::initializer_*}).}
@@ -48,11 +48,13 @@ If \code{mask_zero} is set to \code{TRUE}, as a consequence,
 index 0 cannot be used in the vocabulary (\code{input_dim} should
 equal size of vocabulary + 1).}
 
-\item{reverse_dtype}{Optional dtype used for the reverse projection.}
+\item{reverse_dtype}{Dtype used for the reverse-projection computation.
+Defaults to the layer's compute dtype.}
 
-\item{logit_soft_cap}{Optional positive value. When set, reverse-projection
-logits are limited with
-\code{tanh(logits / logit_soft_cap) * logit_soft_cap}.}
+\item{logit_soft_cap}{Optional positive number. When set,
+reverse-projection logits are scaled by
+\code{tanh(logits / logit_soft_cap) * logit_soft_cap}. This narrows the range
+of output logits and can improve training.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -68,9 +70,21 @@ returned, invisibly.
 }
 }
 \description{
-Extends an embedding layer with a reverse projection from the embedding
-dimension to the vocabulary dimension. By default, the reverse projection
-reuses the transposed embedding matrix.
+Extends \code{\link[=layer_embedding]{layer_embedding()}} for language models with a reverse projection
+from the embedding dimension to the vocabulary dimension. Call the layer
+with \code{reverse = TRUE} to perform this projection. By default, the reverse
+projection uses the transpose of the embedding matrix, tying the two sets of
+weights. With \code{tie_weights = FALSE}, it uses a separate trainable variable.
+This layer has no bias terms.
+}
+\details{
+\subsection{Call arguments}{
+\itemize{
+\item \code{inputs}: Tensor inputs to the layer.
+\item \code{reverse}: Boolean. Whether to project from \code{output_dim} to \code{input_dim}
+instead of performing a normal embedding lookup. Defaults to \code{FALSE}.
+}
+}
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{embedding <- layer_reversible_embedding(input_dim = 8, output_dim = 4)
@@ -85,6 +99,12 @@ shape(logits)
 }\if{html}{\out{</div>}}
 }
 
+\references{
+\itemize{
+\item \href{https://arxiv.org/abs/1706.03762}{Vaswani et al., 2017}
+\item \href{https://arxiv.org/abs/1608.05859}{Press and Wolf, 2016}
+}
+}
 \seealso{
 Other core layers: \cr
 \code{\link{layer_dense}()} \cr

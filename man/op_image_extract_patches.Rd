@@ -2,7 +2,7 @@
 % Please edit documentation in R/ops-image.R
 \name{op_image_extract_patches}
 \alias{op_image_extract_patches}
-\title{Extracts patches from the image(s).}
+\title{Extracts patches from image(s) or volume(s).}
 \usage{
 op_image_extract_patches(
   images,
@@ -14,33 +14,36 @@ op_image_extract_patches(
 )
 }
 \arguments{
-\item{images}{Input image or batch of images. Must be 3D or 4D.}
+\item{images}{Input image, volume, or batch. For 2D patches, a 3D \verb{(H, W, C)} image or 4D
+\verb{(N, H, W, C)} batch. For 3D patches, a 4D \verb{(D, H, W, C)} volume or 5D
+\verb{(N, D, H, W, C)} batch.}
 
-\item{size}{Patch size int or list (patch_height, patch_width)}
+\item{size}{Patch size as an integer or integer vector. Use a length-2 vector
+\verb{(patch_height, patch_width)} or a scalar for 2D patches, and a length-3
+vector \verb{(patch_depth, patch_height, patch_width)} for 3D patches.}
 
-\item{strides}{strides along height and width. If not specified, or
-if \code{NULL}, it defaults to the same value as \code{size}.}
+\item{strides}{Strides for patch extraction. If \code{NULL}, defaults to \code{size}, producing
+non-overlapping patches.}
 
-\item{dilation_rate}{This is the input stride, specifying how far two
-consecutive patch samples are in the input. For value other than 1,
-strides must be 1. NOTE: \code{strides > 1} is not supported in
-conjunction with \code{dilation_rate > 1}}
+\item{dilation_rate}{Dilation rate for patch extraction. \code{dilation_rate > 1} is not supported
+together with \code{strides > 1}.}
 
 \item{padding}{The type of padding algorithm to use: \code{"same"} or \code{"valid"}.}
 
 \item{data_format}{A string specifying the data format of the input tensor.
 It can be either \code{"channels_last"} or \code{"channels_first"}.
-\code{"channels_last"} corresponds to inputs with shape
-\verb{(batch, height, width, channels)}, while \code{"channels_first"}
-corresponds to inputs with shape \verb{(batch, channels, height, width)}.
-If not specified, the value will default to
+\code{"channels_last"} places channels last in images and volumes, while
+\code{"channels_first"} places channels immediately after the batch dimension.
+Defaults to \code{"channels_last"}; pass \code{NULL} to use
 \code{config_image_data_format()}.}
 }
 \value{
-Extracted patches 3D (if not batched) or 4D (if batched)
+Extracted patches whose rank depends on the input and \code{size}: 3D or 4D for
+2D patches, and 4D or 5D for 3D patches.
 }
 \description{
-Extracts patches from the image(s).
+The length of \code{size} selects 2D or 3D patch extraction, in the same way that
+the dimensionality of a convolution is selected by its kernel size.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{image <- random_uniform(c(2, 20, 20, 3), dtype = "float32") # batch of 2 RGB images
@@ -63,6 +66,28 @@ shape(patches)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (18, 18, 27)
+
+volumes <- random_uniform(c(2, 10, 10, 10, 3), dtype = "float32")
+patches <- op_image_extract_patches(volumes, c(3, 3, 3))
+shape(patches)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3, 3, 3, 81)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 3, 3, 3, 81)
+
+volume <- random_uniform(c(10, 10, 10, 3), dtype = "float32")
+patches <- op_image_extract_patches(volume, c(3, 3, 3))
+shape(patches)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(3, 3, 3, 81)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (3, 3, 3, 81)
 }\if{html}{\out{</div>}}
 }
 

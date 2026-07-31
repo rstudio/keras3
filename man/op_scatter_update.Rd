@@ -15,8 +15,15 @@ equal to the first dimension of \code{updates}.}
 
 \item{updates}{A tensor, the new values to be put to \code{inputs} at \code{indices}.}
 
-\item{reduction}{Optional reduction to apply when multiple updates target the
-same index.}
+\item{reduction}{Optional string specifying the reduction to apply when multiple updates
+target the same index:
+\itemize{
+\item \code{NULL} (the default): updates replace existing values; the last write wins.
+\item \code{"add"}: add updates to existing values.
+\item \code{"max"}: keep the maximum of updates and existing values.
+\item \code{"min"}: keep the minimum of updates and existing values.
+\item \code{"mul"}: multiply updates by existing values.
+}}
 }
 \value{
 A tensor, has the same shape and dtype as \code{inputs}.
@@ -101,6 +108,18 @@ op_scatter_update(inputs, indices, updates)
 ##   [0. 0. 0. 0.]
 ##   [0. 0. 0. 0.]
 ##   [0. 0. 0. 0.]]], shape=(4, 4, 4), dtype=float32)
+
+}\if{html}{\out{</div>}}
+
+Use \code{reduction = "add"} to accumulate updates at the same index:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{inputs <- op_zeros(c(4))
+indices <- rbind(1, 1, 2)
+updates <- op_array(c(1, 1, 1), "float32")
+op_scatter_update(inputs, indices, updates, reduction = "add")
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([2. 1. 0. 0.], shape=(4), dtype=float32)
 
 }\if{html}{\out{</div>}}
 }

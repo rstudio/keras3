@@ -17,29 +17,44 @@ op_image_scale_and_translate(
 \arguments{
 \item{images}{Input array.}
 
-\item{output_shape}{Integer output shape.}
+\item{output_shape}{Integer vector giving the output shape, with one value
+per image dimension.}
 
-\item{scale}{Numeric vector with one scale per spatial dimension.}
+\item{scale}{Numeric length-\code{K} vector containing the scale for each selected
+spatial dimension.}
 
-\item{translation}{Numeric vector with one translation per spatial
-dimension.}
+\item{translation}{Numeric length-\code{K} vector containing the translation for
+each selected spatial dimension.}
 
-\item{spatial_dims}{Integer vector of 1-based spatial dimensions to which
-\code{scale} and \code{translation} apply.}
+\item{spatial_dims}{Integer length-\code{K} vector of 1-based spatial dimensions
+to which \code{scale} and \code{translation} apply.}
 
 \item{method}{Resampling method. Supported values include \code{"linear"},
 \code{"bilinear"}, \code{"trilinear"}, \code{"triangle"}, \code{"cubic"}, \code{"bicubic"},
 \code{"tricubic"}, \code{"lanczos3"}, and \code{"lanczos5"}.}
 
-\item{antialias}{Whether to apply an antialiasing filter when downsampling.}
+\item{antialias}{Whether to apply an antialiasing filter when downsampling.
+This has no effect when upsampling. Defaults to \code{TRUE}.}
 }
 \value{
 The scaled and translated images.
 }
 \description{
-Resamples \code{images} into \code{output_shape} using an inverse warp determined by
-\code{scale} and \code{translation} along the selected spatial dimensions. Locations
-outside the input are filled with zero.
+Generates images with \code{output_shape} by resampling \code{images}. For 2-D images,
+an input location \verb{(x, y)} is transformed to
+\verb{(x * scale[[2]] + translation[[2]], y * scale[[1]] + translation[[1]])}. The inverse warp is used to generate
+sample locations.
+}
+\details{
+Pixels are half-centered: the pixel at integer row and column has coordinates
+\code{y = row + 0.5} and \code{x = column + 0.5}. Output locations that map outside
+the input boundaries are set to zero.
+
+Linear methods (\code{"linear"}, \code{"bilinear"}, \code{"trilinear"}, and \code{"triangle"})
+use linear interpolation and, when \code{antialias = TRUE}, a triangular filter
+while downsampling. Cubic methods (\code{"cubic"}, \code{"bicubic"}, and \code{"tricubic"})
+use the Keys cubic kernel. \code{"lanczos3"} and \code{"lanczos5"} use Lanczos kernels
+of radius 3 and 5, respectively.
 }
 \examples{
 image <- op_reshape(op_arange(9, dtype = "float32"), c(3, 3))

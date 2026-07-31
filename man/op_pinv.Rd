@@ -9,15 +9,18 @@ op_pinv(x, rcond = NULL)
 \arguments{
 \item{x}{Input matrix or batch of matrices.}
 
-\item{rcond}{Cutoff ratio for small singular values. If \code{NULL}, the backend default is
-used.}
+\item{rcond}{Cutoff ratio for small singular values. Values less than or equal to
+\code{rcond * largest_singular_value} are treated as zero. If \code{NULL}, the backend
+default is used.}
 }
 \value{
 A tensor of shape \verb{(..., N, M)} containing the pseudoinverse of each input
 matrix of shape \verb{(..., M, N)}.
 }
 \description{
-Compute the Moore-Penrose pseudoinverse of a matrix.
+The pseudoinverse is computed using singular value decomposition. Singular
+values less than or equal to \code{rcond} times the largest singular value for
+each matrix are treated as zero.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_array(matrix(1:6, nrow = 3), dtype = "float32")

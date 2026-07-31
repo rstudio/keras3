@@ -13,7 +13,7 @@ op_rad2deg(x)
 A tensor containing angles in degrees.
 }
 \description{
-Convert angles from radians to degrees.
+The conversion is \code{degrees = radians * (180 / pi)}.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_rad2deg(c(0, pi / 2, pi))

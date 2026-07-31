@@ -78,8 +78,14 @@ When \code{subset="both"}, the utility returns a tuple of two datasets
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
 Defaults to \code{FALSE}.}
 
-\item{format}{Return either a TensorFlow dataset (\code{"tf"}) or a
-framework-agnostic Grain dataset (\code{"grain"}).}
+\item{format}{Format of the returned object. Defaults to \code{"tf"}. Available
+options are:
+\itemize{
+\item \code{"tf"}: returns a \code{tf.data.Dataset} object. Requires TensorFlow to be
+installed.
+\item \code{"grain"}: returns a \code{grain.IterDataset} object. Requires Grain to be
+installed.
+}}
 
 \item{verbose}{Whether to display number information on classes and
 number of files found. Defaults to \code{TRUE}.}

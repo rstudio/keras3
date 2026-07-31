@@ -135,7 +135,21 @@ scale the loss to prevent underflow.
 
 Trainable variables are determined at \code{compile()} time. If you modify the
 \code{trainable} property of a layer after calling \code{compile()}, those changes
-will not take effect during \code{fit()} unless \code{compile()} is called again.}
+will not take effect during \code{fit()} unless \code{compile()} is called again.
+
+Recommended workflow when changing trainable variables:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(optimizer = "adam", loss = "mse")
+model |> fit(x_train, y_train)
+
+layer$trainable <- FALSE # or TRUE
+
+model |> compile(optimizer = "adam", loss = "mse")
+model |> fit(x_train, y_train)
+}\if{html}{\out{</div>}}
+
+This behavior applies to all Keras backends and is also described in the
+transfer learning guide.}
 }
 \value{
 This is called primarily for the side effect of modifying \code{object}

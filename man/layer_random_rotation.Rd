@@ -91,7 +91,7 @@ Input pixel values can be of any range (e.g. \verb{[0., 1.)} or \verb{[0, 255]})
 of integer or floating point dtype.
 By default, the layer will output floats.
 
-\strong{Note:} This layer is safe to use inside a \code{tf.data} pipeline
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
 (independently of which backend you're using).
 }
 \section{Input Shape}{

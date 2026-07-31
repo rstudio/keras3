@@ -24,6 +24,12 @@ Output tensor, cross-correlation of \code{x1} and \code{x2}.
 \description{
 Compute the cross-correlation of two 1-dimensional tensors.
 }
+\note{
+Complex-valued inputs are not currently fully supported by the TensorFlow
+and PyTorch backends. They are cast to floating-point types and their
+imaginary components are discarded. This behavior may change in a future
+release; see Keras issue 21617.
+}
 \seealso{
 Other numpy ops: \cr
 \code{\link{op_abs}()} \cr

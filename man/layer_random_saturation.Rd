@@ -44,6 +44,9 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
+
 This layer will randomly increase/reduce the saturation for the input RGB
 images.
 }

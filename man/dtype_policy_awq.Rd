@@ -13,9 +13,22 @@ dtype_policy_gptq(mode, source_name = NULL)
 dtype_policy_int4(mode, source_name = NULL)
 }
 \arguments{
-\item{mode}{Quantization mode. For AWQ and GPTQ, use
-\code{"<algorithm>/<weight_bits>/<group_size>"}, such as \code{"awq/4/128"}.
-For int4, use \code{"int4/<block_size>"}, such as \code{"int4/128"}.}
+\item{mode}{Quantization mode, with a format determined by the policy:
+\itemize{
+\item For \code{\link[=dtype_policy_awq]{dtype_policy_awq()}}, use
+\code{"awq/<weight_bits>/<group_size>"}. AWQ supports 4-bit weights.
+A \verb{<group_size>} of \code{-1} selects per-channel quantization; any positive
+integer selects grouped quantization. For example, \code{"awq/4/128"}.
+\item For \code{\link[=dtype_policy_gptq]{dtype_policy_gptq()}}, use
+\code{"gptq/<weight_bits>/<group_size>"}. GPTQ supports 2-, 3-, 4-, and 8-bit
+weights. A \verb{<group_size>} of \code{-1} selects whole-tensor quantization; any
+positive integer selects grouped quantization. Smaller groups typically
+give better accuracy but slower speed. For example, \code{"gptq/4/128"}.
+\item For \code{\link[=dtype_policy_int4]{dtype_policy_int4()}}, use \code{"int4/<block_size>"}.
+A \verb{<block_size>} of \code{-1} selects legacy per-channel quantization; any
+positive integer selects sub-channel quantization with that block size.
+For example, \code{"int4/128"} uses 128-element groups.
+}}
 
 \item{source_name}{Optional source dtype policy name, such as \code{"float32"}.}
 }
@@ -23,8 +36,8 @@ For int4, use \code{"int4/<block_size>"}, such as \code{"int4/128"}.}
 A quantized \code{DTypePolicy} instance.
 }
 \description{
-These policies propagate quantization settings when loading quantized
-models in Keras format.
+These policies propagate AWQ, GPTQ, or int4 quantization settings when
+loading a quantized model in Keras format.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{awq_policy <- dtype_policy_awq("awq/4/128")

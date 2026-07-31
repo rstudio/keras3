@@ -21,24 +21,27 @@ The teacher is frozen by the distiller.}
 \item{student}{Keras model to train.}
 
 \item{distillation_losses}{A distillation loss or list of distillation
-losses.}
+losses, such as \code{\link[=distillation_logits]{distillation_logits()}},
+\code{\link[=distillation_feature]{distillation_feature()}}, or custom distillation losses.}
 
-\item{distillation_loss_weights}{Optional numeric vector of weights, one for
-each element of \code{distillation_losses}.}
+\item{distillation_loss_weights}{Numeric vector of weights for the
+distillation losses. It must have the same length as
+\code{distillation_losses}. If \code{NULL}, equal weights are used.}
 
 \item{student_loss_weight}{Weight of the student's supervised loss. Must be
-between 0 and 1.}
+between 0 and 1. Defaults to 0.5.}
 
-\item{name}{Name of the distiller model.}
+\item{name}{Name of the distiller model. Defaults to \code{"distiller"}.}
 
-\item{...}{Additional arguments passed to \code{keras.Model}.}
+\item{...}{Additional arguments passed to the parent Keras \code{Model} class.}
 }
 \value{
 A Keras \code{Distiller} model.
 }
 \description{
 A distiller trains a student model from both ground-truth labels and the
-predictions or intermediate features of a frozen teacher model.
+predictions or intermediate features of a frozen teacher model. After
+training, access \code{model$student} to use the trained student independently.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{teacher <- keras_model_sequential(input_shape = 4) |>

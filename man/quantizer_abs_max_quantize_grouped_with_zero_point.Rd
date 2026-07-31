@@ -29,12 +29,21 @@ values.}
 efficiency.}
 }
 \value{
-A list containing the quantized tensor, group scales, and group
-zero points.
+A list containing:
+\itemize{
+\item \code{quantized_tensor}: a tensor with the same shape as \code{inputs} and dtype
+\code{dtype}.
+\item \code{scale}: a tensor with shape \verb{(n_groups, output_dim)}, where
+\code{n_groups = ceiling(input_dim / block_size)}.
+\item \code{zero_point}: a \code{uint8} tensor with shape
+\verb{(n_groups, output_dim)}.
+}
 }
 \description{
 Quantizes a 2D tensor in row groups. Each group receives a scale and zero
-point for every output column.
+point for every output column. Groups are formed along the first axis, the
+input or contracting dimension. Asymmetric quantization is useful for weight
+distributions that are not centered around zero.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{kernel <- op_reshape(op_arange(16, dtype = "float32"), c(4, 4))

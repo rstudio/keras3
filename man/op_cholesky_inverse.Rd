@@ -2,7 +2,8 @@
 % Please edit documentation in R/ops-numpy.R
 \name{op_cholesky_inverse}
 \alias{op_cholesky_inverse}
-\title{Compute a matrix inverse from its Cholesky factor.}
+\title{Compute the inverse of a symmetric positive-definite matrix from its
+Cholesky factor.}
 \usage{
 op_cholesky_inverse(x, upper = FALSE)
 }
@@ -18,7 +19,8 @@ A tensor of shape \verb{(..., M, M)} containing the inverse of the
 matrix represented by \code{x}.
 }
 \description{
-Compute a matrix inverse from its Cholesky factor.
+Compute the inverse of a symmetric positive-definite matrix from its
+Cholesky factor.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{factor <- op_array(diag(c(2, 3)), dtype = "float32")

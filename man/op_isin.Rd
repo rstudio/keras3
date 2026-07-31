@@ -9,12 +9,15 @@ op_isin(x1, x2, assume_unique = FALSE, invert = FALSE)
 \arguments{
 \item{x1}{Values to test.}
 
-\item{x2}{Values against which to test each element of \code{x1}.}
+\item{x2}{Values against which to test each element of \code{x1}. May be a tensor,
+list, or scalar.}
 
 \item{assume_unique}{Whether both inputs can be assumed to contain unique
-elements.}
+elements. \code{TRUE} can improve performance; \code{FALSE} handles duplicates
+correctly. Defaults to \code{FALSE}.}
 
-\item{invert}{Whether to invert the result.}
+\item{invert}{Whether to invert the result, returning \code{TRUE} where elements
+of \code{x1} are absent from \code{x2}. Defaults to \code{FALSE}.}
 }
 \value{
 A boolean tensor with the same shape as \code{x1}.

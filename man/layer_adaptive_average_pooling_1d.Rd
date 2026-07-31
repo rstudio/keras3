@@ -41,8 +41,29 @@ returned, invisibly.
 }
 }
 \description{
-Pools an input to the requested output length, computing the kernel size and
-stride from the input length.
+Applies adaptive average pooling to temporal or spatial data so that the
+output has the target length specified by \code{output_size}, regardless of the
+input length. The kernel size and stride are computed automatically to
+achieve the target output size.
+}
+\details{
+\subsection{Input shape}{
+\itemize{
+\item With \code{data_format = "channels_last"}: a 3D tensor with shape
+\verb{(batch_size, length, channels)}.
+\item With \code{data_format = "channels_first"}: a 3D tensor with shape
+\verb{(batch_size, channels, length)}.
+}
+}
+
+\subsection{Output shape}{
+\itemize{
+\item With \code{data_format = "channels_last"}:
+\verb{(batch_size, output_length, channels)}.
+\item With \code{data_format = "channels_first"}:
+\verb{(batch_size, channels, output_length)}.
+}
+}
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{x <- op_reshape(op_arange(48, dtype = "float32"), c(1, 16, 3))

@@ -19,21 +19,25 @@ op_unique(
 \arguments{
 \item{x}{Input tensor.}
 
-\item{sorted}{Whether to sort unique elements in ascending order.}
+\item{sorted}{Whether to sort unique elements in ascending order. Defaults to \code{TRUE}.}
 
-\item{return_index}{Whether to return indices of the first occurrence of each unique element.}
+\item{return_index}{Whether to return indices of the first occurrence of each unique element.
+Defaults to \code{FALSE}.}
 
-\item{return_inverse}{Whether to return indices that reconstruct \code{x} from the unique values.}
+\item{return_inverse}{Whether to return indices of the unique values, or unique subarrays when
+\code{axis} is supplied, that reconstruct \code{x}. Defaults to \code{FALSE}.}
 
-\item{return_counts}{Whether to return the number of occurrences of each unique element.}
+\item{return_counts}{Whether to return the number of occurrences of each unique element. Defaults
+to \code{FALSE}.}
 
-\item{axis}{Axis along which to find unique subarrays. By default, \code{x} is flattened.}
+\item{axis}{Axis along which subarrays are treated as elements. If \code{NULL}, \code{x} is
+flattened. Defaults to \code{NULL}.}
 
-\item{size}{Optional fixed number of unique values to return. Results are padded or
-truncated to this size.}
+\item{size}{Optional fixed number of unique values to return. If fewer values are found,
+the output is padded with \code{fill_value}; if more are found, it is truncated.}
 
 \item{fill_value}{Value used to pad results when \code{size} is larger than the number of unique
-values.}
+values. \code{NULL} uses the upstream default of zero.}
 
 \item{zero_indexed}{Whether returned first-occurrence and inverse indices are zero-based.
 Defaults to \code{FALSE}, returning indices suitable for R indexing.}
@@ -42,20 +46,12 @@ Defaults to \code{FALSE}, returning indices suitable for R indexing.}
 A tensor of unique values. If any \verb{return_*} argument is \code{TRUE}, returns a
 list containing the values followed, in argument order, by the requested
 first-occurrence indices, inverse indices, and counts. Indices are one-based
-unless \code{zero_indexed = TRUE}.
+unless \code{zero_indexed = TRUE}. When \code{size} is supplied and \code{axis = NULL}, the
+unique-values tensor has shape \code{(size)}.
 }
 \description{
-Find unique elements of a tensor.
-}
-\details{
-c(values, first, inverse, counts) \%<-\% op_unique(
-c(3L, 1L, 2L, 1L, 3L, 2L),
-return_index = TRUE,
-return_inverse = TRUE,
-return_counts = TRUE
-)
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{}\if{html}{\out{</div>}}
+When \code{size} is supplied, the output shape is fixed, making the operation
+compatible with JIT compilation such as JAX and TensorFlow graph mode.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{op_unique(c(3L, 1L, 2L, 1L, 3L, 2L))
@@ -63,6 +59,14 @@ return_counts = TRUE
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{## tf.Tensor([1 2 3], shape=(3), dtype=int32)
 
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{c(values, first, inverse, counts) \%<-\% op_unique(
+  c(3L, 1L, 2L, 1L, 3L, 2L),
+  return_index = TRUE,
+  return_inverse = TRUE,
+  return_counts = TRUE
+)
 }\if{html}{\out{</div>}}
 }
 

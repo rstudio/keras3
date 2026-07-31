@@ -60,11 +60,22 @@ since the scaling will be done by the next layer.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
 
-\item{renorm}{Whether to use batch renormalization during training.}
+\item{renorm}{Whether to use \href{https://arxiv.org/abs/1702.03275}{Batch Renormalization}.
+This adds extra variables during training. Inference is the same for either
+value of this parameter.}
 
-\item{renorm_clipping}{Optional clipping configuration used when \code{renorm = TRUE}.}
+\item{renorm_clipping}{Named list, valid only if \code{renorm = TRUE}. Maps optional keys \code{"rmax"},
+\code{"rmin"}, and \code{"dmax"} to numeric values used to clip the renormalization
+correction. The correction \verb{(r, d)} is used as
+\code{corrected_value = normalized_value * r + d}, with \code{r} clipped to
+\verb{[rmin, rmax]} and \code{d} clipped to \verb{[-dmax, dmax]}. Missing \code{rmax}, \code{rmin},
+and \code{dmax} values default to \code{Inf}, \code{0}, and \code{Inf}, respectively.}
 
-\item{renorm_momentum}{Momentum used for renormalization statistics when \code{renorm = TRUE}.}
+\item{renorm_momentum}{Momentum used to update the moving means and standard deviations for
+renormalization. Valid only if \code{renorm = TRUE}. Unlike \code{momentum}, this
+affects training and should be neither too small, which would add noise, nor
+too large, which would give stale estimates. \code{momentum} is still applied to
+obtain the means and variances used for inference.}
 
 \item{synchronized}{Only applicable with the TensorFlow backend.
 If \code{TRUE}, synchronizes the global batch statistics (mean and

@@ -9,8 +9,9 @@ op_dsplit(x, indices_or_sections)
 \arguments{
 \item{x}{Input tensor with at least three dimensions.}
 
-\item{indices_or_sections}{Either the number of sections or a vector of
-1-based positions at which to split the third axis.}
+\item{indices_or_sections}{If an integer \code{N}, split into \code{N} equal sections
+along the third axis. If a one-dimensional vector of sorted integers, its
+entries give the 1-based positions at which to split the third axis.}
 }
 \value{
 A list of tensors.

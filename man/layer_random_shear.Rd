@@ -2,7 +2,7 @@
 % Please edit documentation in R/layers-preprocessing.R
 \name{layer_random_shear}
 \alias{layer_random_shear}
-\title{A preprocessing layer that randomly applies shear transformations}
+\title{A preprocessing layer that randomly applies shear transformations to images.}
 \usage{
 layer_random_shear(
   object,
@@ -71,13 +71,14 @@ corresponds to inputs with shape
 \item{...}{For forward/backward compatability.}
 }
 \description{
-images.
-
 This layer shears the input images along the x-axis and/or y-axis by a
 randomly selected factor within the specified range. The shear
 transformation is applied to each image independently in a batch. Empty
 regions created during the transformation are filled according to the
 \code{fill_mode} and \code{fill_value} parameters.
+
+\strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
+independently of the active backend.
 }
 \seealso{
 Other image preprocessing layers: \cr

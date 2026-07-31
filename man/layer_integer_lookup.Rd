@@ -110,10 +110,22 @@ of unique tokens in the vocabulary is less than \code{max_tokens},
 resulting in a tensor of shape \verb{(batch_size, max_tokens)}
 regardless of vocabulary size. Defaults to \code{FALSE}.}
 
-\item{oov_method}{Strategy used to assign integer OOV tokens to OOV buckets when
-\code{num_oov_indices > 1}.}
+\item{oov_method}{Only relevant when \code{num_oov_indices > 1}. Controls how OOV tokens are
+assigned to OOV buckets:
+\itemize{
+\item \code{"floormod"} (the default) uses \code{token \%\% num_oov_indices}. This preserves
+backwards compatibility, but can produce severe bucket imbalance when
+input IDs share a common factor with \code{num_oov_indices}, such as all-even
+IDs with an even bucket count.
+\item \code{"farmhash"} applies FarmHash64, which distributes OOV tokens uniformly
+regardless of the arithmetic structure of the input IDs.
+This parameter is ignored for string inputs, which always use FarmHash64.
+}}
 
-\item{salt}{Optional salt used when hashing OOV values.}
+\item{salt}{Only valid when \code{oov_method = "farmhash"}. If supplied, OOV bucket
+assignment uses SipHash64, with these values as an additional input (a
+"salt" in cryptography). May be a pair of integers, or a single integer
+used for both key components. If \code{NULL} (the default), FarmHash64 is used.}
 
 \item{name}{String, name for the object}
 
