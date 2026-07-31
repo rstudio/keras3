@@ -146,6 +146,7 @@ digitize(x, bins)
 divide(x1, x2)
 divide_no_nan(x1, x2)
 dot(x1, x2)
+dsplit(x, indices_or_sections)
 dstack(xs)
 einsum(
   subscripts,
@@ -165,11 +166,14 @@ eye(
   k=0,
   dtype=None
 )
+fabs(x)
 flip(x, axis=None)
 fliplr(x)
 flipud(x)
 floor(x)
 floor_divide(x1, x2)
+fmax(x1, x2)
+fmin(x1, x2)
 fmod(x1, x2)
 full(
   shape,
@@ -341,6 +345,13 @@ nanmin(
   axis=None,
   keepdims=False
 )
+nanpercentile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
 nanprod(
   x,
   axis=None,
@@ -381,6 +392,13 @@ pad(
   pad_width,
   mode='constant',
   constant_values=None
+)
+percentile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
 )
 power(x1, x2)
 prod(
@@ -507,6 +525,16 @@ tril(x, k=0)
 triu(x, k=0)
 true_divide(x1, x2)
 trunc(x)
+unique(
+  x,
+  sorted=True,
+  return_index=False,
+  return_inverse=False,
+  return_counts=False,
+  axis=None,
+  size=None,
+  fill_value=None
+)
 unravel_index(indices, shape)
 vander(
   x,

@@ -1,0 +1,15 @@
+__signature__
+keras.ops.kron(x1, x2)
+__doc__
+Kronecker product of `x1` and `x2`.
+
+Computes the Kronecker product of two input tensors. If `x1` has shape
+`(a0, a1, ..., an)` and `x2` has shape `(b0, b1, ..., bn)`, then the
+output will have shape `(a0*b0, a1*b1, ..., an*bn)`.
+
+Args:
+    x1: First input tensor.
+    x2: Second input tensor.
+
+Returns:
+    A tensor representing the Kronecker product of `x1` and `x2`.

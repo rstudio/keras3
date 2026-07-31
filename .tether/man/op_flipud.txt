@@ -1,0 +1,14 @@
+__signature__
+keras.ops.flipud(x)
+__doc__
+Reverse the order of elements along axis 0 (up/down).
+
+For a 2-D tensor, this flips the entries in each column in the
+up/down direction. Rows are preserved, but appear in a different
+order than before.
+
+Args:
+    x: Input tensor, must be at least 1-D.
+
+Returns:
+    Output tensor with rows reversed.

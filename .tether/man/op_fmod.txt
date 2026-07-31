@@ -1,0 +1,16 @@
+__signature__
+keras.ops.fmod(x1, x2)
+__doc__
+Returns the element-wise remainder of division with truncation.
+
+Computes the remainder complementary to the `floor_divide` function,
+equivalent to the C library function ``fmod``. The result has the same
+sign as the dividend ``x1``. This is different from `keras.ops.mod`
+which has the same sign as the divisor ``x2``.
+
+Args:
+    x1: First tensor, the dividend.
+    x2: Second tensor, the divisor.
+
+Returns:
+    Output tensor, element-wise remainder with truncation.

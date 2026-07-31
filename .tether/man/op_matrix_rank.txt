@@ -1,0 +1,23 @@
+__signature__
+keras.ops.matrix_rank(x, tol=None)
+__doc__
+Return the matrix rank of one or more matrices using SVD.
+
+The rank is the number of singular values that exceed `tol`. If `tol`
+is `None`, each backend uses its own default threshold derived from
+the largest singular value and the matrix dimensions.
+
+Args:
+    x: Input tensor of shape `(..., M, N)`.
+    tol: Absolute threshold below which singular values are treated
+        as zero. If `None` (default), the backend's default is used.
+
+Returns:
+    An integer tensor of shape `(...,)` with the rank of each matrix
+    in the batch.
+
+Example:
+
+>>> a = keras.ops.convert_to_tensor([[1., 2.], [2., 4.]])
+>>> keras.ops.matrix_rank(a)
+1

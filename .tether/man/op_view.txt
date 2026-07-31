@@ -1,0 +1,19 @@
+__signature__
+keras.ops.view(x, dtype=None)
+__doc__
+Create a new bitwise view of the same data with the specified dtype.
+
+Args:
+    x: Input tensor.
+    dtype: Data-type descriptor of the returned view,
+        e.g., float32 or int16.
+
+Returns:
+    View of a tensor with data type dtype.
+
+Examples:
+>>> x = keras.ops.array([1, 2, 3])
+>>> x
+array([1, 2, 3], dtype=int32)
+>>> keras.ops.view(x, dtype="float32")
+array([1.0e-45, 3.0e-45, 4.0e-45], dtype=float32)

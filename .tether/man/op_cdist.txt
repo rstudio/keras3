@@ -1,0 +1,21 @@
+__signature__
+keras.ops.cdist(x, y)
+__doc__
+Computes pairwise distances between two collections of vectors.
+
+This function computes the Euclidean distance between each pair of the two
+collections of inputs.
+
+Args:
+    x: Tensor of shape `(..., m, d)`.
+    y: Tensor of shape `(..., n, d)`.
+
+Returns:
+    A tensor of shape `(..., m, n)` with the pairwise distances.
+
+Example:
+>>> x = keras.ops.convert_to_tensor([[0.0, 0.0], [1.0, 1.0]])
+>>> y = keras.ops.convert_to_tensor([[1.0, 0.0], [0.0, 1.0]])
+>>> keras.ops.cdist(x, y)
+array([[1.       , 1.       ],
+       [1.       , 1.4142135]], dtype=float32)

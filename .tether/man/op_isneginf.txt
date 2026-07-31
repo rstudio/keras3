@@ -1,0 +1,10 @@
+__signature__
+keras.ops.isneginf(x)
+__doc__
+Test element-wise for negative infinity.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output boolean tensor.

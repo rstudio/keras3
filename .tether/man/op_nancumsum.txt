@@ -1,0 +1,30 @@
+__signature__
+keras.ops.nancumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+__doc__
+Returns the cumulative sum of elements along a given axis,
+treating NaNs as zero.
+
+Args:
+    x: Input tensor.
+    axis: Axis along which the cumulative sum is computed.
+        By default the input is flattened.
+    dtype: dtype of returned tensor. Defaults to x.dtype.
+
+Returns:
+    Output tensor.
+
+Examples:
+>>> import numpy as np
+>>> from keras import ops
+>>> x = np.array([[1.0, np.nan, 3.0],
+...               [np.nan, 2.0, 1.0]])
+>>> ops.nancumsum(x)
+array([1., 1., 4., 4., 6., 7.])
+
+>>> ops.nancumsum(x, axis=1)
+array([[1., 1., 4.],
+       [0., 2., 3.]])

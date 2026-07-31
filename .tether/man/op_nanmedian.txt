@@ -1,0 +1,37 @@
+__signature__
+keras.ops.nanmedian(
+  x,
+  axis=None,
+  keepdims=False
+)
+__doc__
+Median of a tensor over the given axes, ignoring NaNs.
+
+This function computes the median along the specified axis or axes,
+skipping any NaN values. If all values along a reduced axis are NaN,
+the result is NaN.
+
+Args:
+    x: Input tensor.
+    axis: Axis or axes along which the median is computed.
+        If None (default), the median of the flattened tensor is returned.
+    keepdims: If True, the reduced axes are retained as dimensions
+        with size one. Defaults to False.
+
+Returns:
+    Tensor with the median values, ignoring NaNs.
+
+Examples:
+>>> import numpy as np
+>>> from keras import ops
+>>> x = np.array([[1.0, np.nan, 3.0],
+...               [np.nan, 2.0, 1.0]])
+>>> ops.nanmedian(x)
+1.5
+
+>>> ops.nanmedian(x, axis=1)
+array([2., 1.5])
+
+>>> ops.nanmedian(x, axis=1, keepdims=True)
+array([[2. ],
+       [1.5]])

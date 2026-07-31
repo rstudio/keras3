@@ -1,0 +1,28 @@
+__signature__
+keras.ops.vsplit(x, indices_or_sections)
+__doc__
+Split an array into multiple sub-arrays vertically (row-wise).
+
+Args:
+    x: Input tensor.
+    indices_or_sections: If an integer, N, the tensor will be split into N
+        equal sections along axis 0. If a 1-D array of sorted integers,
+        the entries indicate indices at which the tensor will be split
+        along axis 0.
+
+Returns:
+    A list of sub-arrays.
+
+Example:
+
+>>> x = keras.ops.arange(12).reshape((4, 3))
+>>> keras.ops.vsplit(x, 2)
+[array([[0, 1, 2],
+       [3, 4, 5]]),
+ array([[ 6,  7,  8],
+       [ 9, 10, 11]])]
+>>> keras.ops.vsplit(x, [1, 3])
+[array([[0, 1, 2]]),
+ array([[3, 4, 5],
+       [6, 7, 8]]),
+ array([[ 9, 10, 11]])]

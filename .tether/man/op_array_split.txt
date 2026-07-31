@@ -1,0 +1,31 @@
+__signature__
+keras.ops.array_split(
+  x,
+  indices_or_sections,
+  axis=0
+)
+__doc__
+Splits an array into multiple sub-arrays (unevenly).
+
+This is similar to `keras.ops.split`, but it allows for
+unequal splits. `indices_or_sections` must be an integer
+that indicates the total number of sub-arrays to create.
+If the tensor cannot be divided evenly, the first `remainder`
+splits will have size `quotient + 1`, and the rest will
+have size `quotient`.
+
+Args:
+    x: Input tensor.
+    indices_or_sections: An integer indicating the number of
+        sub-arrays to create.
+    axis: The axis along which to split. Defaults to 0.
+
+Returns:
+    A list of sub-tensors.
+
+Example:
+>>> x = keras.ops.arange(10)
+>>> keras.ops.array_split(x, 3)
+(array([0, 1, 2, 3], dtype=int32),
+ array([4, 5, 6], dtype=int32),
+ array([7, 8, 9], dtype=int32))
