@@ -1,0 +1,16 @@
+__signature__
+keras.distribution.get_device_count(device_type=None)
+__doc__
+Returns the number of available devices based on the device type.
+
+When `device_type` is not provided, the count of devices of the default type
+is returned. This function nevers counts a mix of device types, for instance
+GPUs and CPUs.
+
+Args:
+    device_type: string, one of `"cpu"`, `"gpu"` or `"tpu"`. Defaults to
+        `"gpu"` or `"tpu"` if available when `device_type` is not provided.
+        Otherwise returns the `"cpu"` devices.
+
+Returns:
+    int: The total number of devices for the specified type.
