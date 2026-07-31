@@ -1,7 +1,7 @@
 Help on class GroupedQueryAttention in module keras.src.layers.attention.grouped_query_attention:
 
 class GroupedQueryAttention(keras.src.layers.layer.Layer)
- |  GroupedQueryAttention(head_dim, num_query_heads, num_key_value_heads, dropout=0.0, use_bias=True, flash_attention=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, use_gate=False, seed=None, **kwargs)
+ |  GroupedQueryAttention(head_dim, num_query_heads, num_key_value_heads, dropout=0.0, use_bias=True, sliding_window=None, flash_attention=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, use_gate=False, seed=None, **kwargs)
  |
  |  Grouped Query Attention layer.
  |
@@ -26,6 +26,12 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |      num_key_value_heads: Number of key and value attention heads.
  |      dropout: Dropout probability.
  |      use_bias: Boolean, whether the dense layers use bias vectors/matrices.
+ |      sliding_window: Optional positive integer. If set, restricts each
+ |          query position to attend only to key positions within
+ |          `sliding_window - 1` of itself (a symmetric band). Composes
+ |          naturally with `use_causal_mask=True` to give the causal
+ |          sliding window used by Mistral, Llama-3 long-context, and
+ |          Phi-3. Defaults to `None` (full attention).
  |      flash_attention: If `None`, the layer attempts to use flash
  |          attention for faster and more memory-efficient attention
  |          computations when possible. This behavior can be configured using
@@ -101,6 +107,7 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |    num_key_value_heads,
  |    dropout=0.0,
  |    use_bias=True,
+ |    sliding_window=None,
  |    flash_attention=None,
  |    kernel_initializer='glorot_uniform',
  |    bias_initializer='zeros',
@@ -141,6 +148,20 @@ class GroupedQueryAttention(keras.src.layers.layer.Layer)
  |    query_shape,
  |    value_shape,
  |    key_shape=None
+ |  )
+ |
+ |  compute_output_spec(
+ |    self,
+ |    query,
+ |    value,
+ |    key=None,
+ |    query_mask=None,
+ |    value_mask=None,
+ |    key_mask=None,
+ |    attention_mask=None,
+ |    return_attention_scores=False,
+ |    training=None,
+ |    use_causal_mask=False
  |  )
  |
  |  get_config(self)
