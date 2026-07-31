@@ -289,6 +289,7 @@ keras <- NULL
 }
 
 ## should this live in reticulate?? probably...
+#' @method all.equal numpy.ndarray
 #' @export
 all.equal.numpy.ndarray <- function(target, current, ...) {
   # or use numpy.allequal?
