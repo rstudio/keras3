@@ -1,3 +1,303 @@
+#' Adaptive average pooling for 1D data
+#'
+#' Applies adaptive average pooling to temporal or spatial data so that the
+#' output has the target length specified by `output_size`, regardless of the
+#' input length. The kernel size and stride are computed automatically to
+#' achieve the target output size.
+#'
+#' ## Input shape
+#'
+#' - With `data_format = "channels_last"`: a 3D tensor with shape
+#'   `(batch_size, length, channels)`.
+#' - With `data_format = "channels_first"`: a 3D tensor with shape
+#'   `(batch_size, channels, length)`.
+#'
+#' ## Output shape
+#'
+#' - With `data_format = "channels_last"`:
+#'   `(batch_size, output_length, channels)`.
+#' - With `data_format = "channels_first"`:
+#'   `(batch_size, channels, output_length)`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_reshape(op_arange(48, dtype = "float32"), c(1, 16, 3))
+#' y <- x |> layer_adaptive_average_pooling_1d(output_size = 4)
+#' shape(y)
+#' ```
+#'
+#' @param output_size Integer target output length.
+#' @inheritParams layer_average_pooling_1d
+#' @inherit layer_dense return
+#' @export
+#' @family pooling layers
+#' @family layers
+#' @tether keras.layers.AdaptiveAveragePooling1D
+layer_adaptive_average_pooling_1d <-
+function(object, output_size, data_format = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$AdaptiveAveragePooling1D, object, args)
+}
+
+
+#' Adaptive average pooling for 2D data
+#'
+#' Applies adaptive average pooling to spatial data so that the output has the
+#' target spatial size specified by `output_size`, regardless of the input
+#' spatial size. The kernel size and stride are computed automatically to
+#' achieve the target output size.
+#'
+#' ## Input shape
+#'
+#' - With `data_format = "channels_last"`: a 4D tensor with shape
+#'   `(batch_size, height, width, channels)`.
+#' - With `data_format = "channels_first"`: a 4D tensor with shape
+#'   `(batch_size, channels, height, width)`.
+#'
+#' ## Output shape
+#'
+#' - With `data_format = "channels_last"`:
+#'   `(batch_size, output_height, output_width, channels)`.
+#' - With `data_format = "channels_first"`:
+#'   `(batch_size, channels, output_height, output_width)`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_reshape(op_arange(144, dtype = "float32"), c(1, 8, 6, 3))
+#' y <- x |> layer_adaptive_average_pooling_2d(output_size = c(4, 2))
+#' shape(y)
+#' ```
+#'
+#' @param output_size Integer or two integers giving the target height and
+#'   width. If a single integer is provided, the same value is used for both
+#'   dimensions.
+#' @inheritParams layer_average_pooling_2d
+#' @inherit layer_dense return
+#' @export
+#' @family pooling layers
+#' @family layers
+#' @tether keras.layers.AdaptiveAveragePooling2D
+layer_adaptive_average_pooling_2d <-
+function(object, output_size, data_format = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$AdaptiveAveragePooling2D, object, args)
+}
+
+
+#' Adaptive average pooling for 3D data
+#'
+#' Applies adaptive average pooling to volumetric data so that the output has
+#' the target spatial size specified by `output_size`, regardless of the input
+#' spatial size. The kernel size and stride are computed automatically to
+#' achieve the target output size.
+#'
+#' ## Input shape
+#'
+#' - With `data_format = "channels_last"`: a 5D tensor with shape
+#'   `(batch_size, depth, height, width, channels)`.
+#' - With `data_format = "channels_first"`: a 5D tensor with shape
+#'   `(batch_size, channels, depth, height, width)`.
+#'
+#' ## Output shape
+#'
+#' - With `data_format = "channels_last"`:
+#'   `(batch_size, output_depth, output_height, output_width, channels)`.
+#' - With `data_format = "channels_first"`:
+#'   `(batch_size, channels, output_depth, output_height, output_width)`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_reshape(op_arange(576, dtype = "float32"), c(1, 8, 6, 4, 3))
+#' y <- x |> layer_adaptive_average_pooling_3d(output_size = c(4, 3, 2))
+#' shape(y)
+#' ```
+#'
+#' @param output_size Integer or three integers giving the target depth,
+#'   height, and width. If a single integer is provided, the same value is used
+#'   for all three dimensions.
+#' @inheritParams layer_average_pooling_3d
+#' @inherit layer_dense return
+#' @export
+#' @family pooling layers
+#' @family layers
+#' @tether keras.layers.AdaptiveAveragePooling3D
+layer_adaptive_average_pooling_3d <-
+function(object, output_size, data_format = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$AdaptiveAveragePooling3D, object, args)
+}
+
+
+#' Adaptive max pooling for 1D data
+#'
+#' Applies adaptive max pooling to temporal or spatial data so that the output
+#' has the target length specified by `output_size`, regardless of the input
+#' length. The kernel size and stride are computed automatically to achieve the
+#' target output size.
+#'
+#' ## Input shape
+#'
+#' - With `data_format = "channels_last"`: a 3D tensor with shape
+#'   `(batch_size, length, channels)`.
+#' - With `data_format = "channels_first"`: a 3D tensor with shape
+#'   `(batch_size, channels, length)`.
+#'
+#' ## Output shape
+#'
+#' - With `data_format = "channels_last"`:
+#'   `(batch_size, output_length, channels)`.
+#' - With `data_format = "channels_first"`:
+#'   `(batch_size, channels, output_length)`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_reshape(op_arange(48, dtype = "float32"), c(1, 16, 3))
+#' y <- x |> layer_adaptive_max_pooling_1d(output_size = 4)
+#' shape(y)
+#' ```
+#'
+#' @param output_size Integer target output length.
+#' @inheritParams layer_max_pooling_1d
+#' @inherit layer_dense return
+#' @export
+#' @family pooling layers
+#' @family layers
+#' @tether keras.layers.AdaptiveMaxPooling1D
+layer_adaptive_max_pooling_1d <-
+function(object, output_size, data_format = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$AdaptiveMaxPooling1D, object, args)
+}
+
+
+#' Adaptive max pooling for 2D data
+#'
+#' Applies adaptive max pooling to spatial data so that the output has the
+#' target spatial size specified by `output_size`, regardless of the input
+#' spatial size. The kernel size and stride are computed automatically to
+#' achieve the target output size.
+#'
+#' ## Input shape
+#'
+#' - With `data_format = "channels_last"`: a 4D tensor with shape
+#'   `(batch_size, height, width, channels)`.
+#' - With `data_format = "channels_first"`: a 4D tensor with shape
+#'   `(batch_size, channels, height, width)`.
+#'
+#' ## Output shape
+#'
+#' - With `data_format = "channels_last"`:
+#'   `(batch_size, output_height, output_width, channels)`.
+#' - With `data_format = "channels_first"`:
+#'   `(batch_size, channels, output_height, output_width)`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_reshape(op_arange(144, dtype = "float32"), c(1, 8, 6, 3))
+#' y <- x |> layer_adaptive_max_pooling_2d(output_size = c(4, 2))
+#' shape(y)
+#' ```
+#'
+#' @param output_size Integer or two integers giving the target height and
+#'   width. If a single integer is provided, the same value is used for both
+#'   dimensions.
+#' @inheritParams layer_max_pooling_2d
+#' @inherit layer_dense return
+#' @export
+#' @family pooling layers
+#' @family layers
+#' @tether keras.layers.AdaptiveMaxPooling2D
+layer_adaptive_max_pooling_2d <-
+function(object, output_size, data_format = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$AdaptiveMaxPooling2D, object, args)
+}
+
+
+#' Adaptive max pooling for 3D data
+#'
+#' Applies adaptive max pooling to volumetric data so that the output has the
+#' target spatial size specified by `output_size`, regardless of the input
+#' spatial size. The kernel size and stride are computed automatically to
+#' achieve the target output size.
+#'
+#' ## Input shape
+#'
+#' - With `data_format = "channels_last"`: a 5D tensor with shape
+#'   `(batch_size, depth, height, width, channels)`.
+#' - With `data_format = "channels_first"`: a 5D tensor with shape
+#'   `(batch_size, channels, depth, height, width)`.
+#'
+#' ## Output shape
+#'
+#' - With `data_format = "channels_last"`:
+#'   `(batch_size, output_depth, output_height, output_width, channels)`.
+#' - With `data_format = "channels_first"`:
+#'   `(batch_size, channels, output_depth, output_height, output_width)`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' x <- op_reshape(op_arange(576, dtype = "float32"), c(1, 8, 6, 4, 3))
+#' y <- x |> layer_adaptive_max_pooling_3d(output_size = c(4, 3, 2))
+#' shape(y)
+#' ```
+#'
+#' @param output_size Integer or three integers giving the target depth,
+#'   height, and width. If a single integer is provided, the same value is used
+#'   for all three dimensions.
+#' @inheritParams layer_max_pooling_3d
+#' @inherit layer_dense return
+#' @export
+#' @family pooling layers
+#' @family layers
+#' @tether keras.layers.AdaptiveMaxPooling3D
+layer_adaptive_max_pooling_3d <-
+function(object, output_size, data_format = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(keras$layers$AdaptiveMaxPooling3D, object, args)
+}
 
 
 
