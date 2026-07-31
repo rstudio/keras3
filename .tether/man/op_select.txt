@@ -16,7 +16,7 @@ Args:
     choicelist: List of tensors.
         The list of tensors from which the output elements are taken.
         This list has to be of the same length as `condlist`.
-    defaults: Optional scalar value.
+    default: Optional scalar value.
         The element inserted in the output
         when all conditions evaluate to `False`.
 
