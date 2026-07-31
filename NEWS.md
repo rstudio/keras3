@@ -1,5 +1,9 @@
 # keras3 (development version)
 
+- On Linux, `use_backend("jax", gpu = TRUE)` no longer overrides
+  `XLA_PYTHON_CLIENT_MEM_FRACTION`, preserving the JAX default or a
+  user-provided value.
+
 # keras3 1.5.1
 
 - `use_backend("jax")` on macOS now defaults to `gpu = FALSE`, so `jax-metal`
