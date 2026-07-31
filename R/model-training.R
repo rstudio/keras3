@@ -107,11 +107,22 @@
 #' @param jit_compile
 #' Bool or `"auto"`. Whether to use XLA compilation when
 #' compiling a model. For `jax` and `tensorflow` backends,
-#' `jit_compile="auto"` enables XLA compilation if the model
+#' `jit_compile = "auto"` enables XLA compilation if the model
 #' supports it, and disabled otherwise.
 #' For `torch` backend, `"auto"` will default to eager
-#' execution and `jit_compile=True` will run with `torch.compile`
+#' execution and `jit_compile = TRUE` will run with `torch.compile`
 #' with the `"inductor"` backend.
+#' On the JAX backend, compilation happens on the first step and
+#' can take several seconds. JAX can persist the compiled result
+#' to disk and reuse it across runs and processes, so the same
+#' model only pays that cost once. Enable it before the first
+#' step with:
+#' ```{r, eval = FALSE}
+#' jax <- reticulate::import("jax")
+#' jax$config$update("jax_compilation_cache_dir", "/path/to/cache")
+#' ```
+#' See the JAX persistent compilation cache documentation for the
+#' available thresholds.
 #'
 #' @param auto_scale_loss
 #' Bool. If `TRUE` and the model dtype policy is
