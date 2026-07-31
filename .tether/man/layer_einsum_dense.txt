@@ -142,7 +142,7 @@ class EinsumDense(keras.src.layers.layer.Layer)
  |    training=None
  |  )
  |
- |  compute_output_shape(self, _)
+ |  compute_output_shape(self, input_shape)
  |
  |  enable_lora(
  |    self,
