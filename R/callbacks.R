@@ -610,6 +610,69 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 }
 
 
+#' Save and restore model state with Orbax
+#'
+#' By default, this callback saves model weights and optimizer state
+#' asynchronously with Orbax, allowing training to continue without blocking
+#' for I/O. In a multi-host distributed training environment with the JAX
+#' backend, it automatically coordinates checkpointing across all hosts for
+#' consistency and synchronization. Multi-host checkpointing is only supported
+#' with JAX. The Python `orbax-checkpoint` package is required.
+#'
+#' # Examples
+#'
+#' ```{r, eval = FALSE}
+#' checkpoint <- callback_orbax_checkpoint(
+#'   directory = tempfile("orbax-checkpoints-"),
+#'   monitor = "val_accuracy",
+#'   mode = "max",
+#'   save_best_only = TRUE
+#' )
+#' model |> fit(x, y, validation_split = 0.2, callbacks = list(checkpoint))
+#'
+#' # Alternatively, save a checkpoint every 100 batches.
+#' checkpoint <- callback_orbax_checkpoint(
+#'   directory = tempfile("orbax-checkpoints-"),
+#'   save_freq = 100
+#' )
+#' ```
+#'
+#' @param directory Path to the directory in which to save checkpoints.
+#' @param monitor Metric name to monitor, such as `"val_loss"`.
+#' @param verbose Verbosity mode, 0 or 1.
+#' @param save_best_only Whether to save only when the model is considered the
+#'   best according to the monitored quantity.
+#' @param mode One of `"auto"`, `"min"`, or `"max"`. Used with
+#'   `save_best_only`.
+#' @param save_freq `"epoch"` or an integer number of batches between saves.
+#' @param initial_value_threshold Floating-point initial best value for
+#'   `monitor`, used with `save_best_only`.
+#' @param max_to_keep Maximum number of recent checkpoints to retain. Use
+#'   `NULL` to retain all checkpoints. Defaults to 1.
+#' @param save_on_background Whether to save asynchronously in the background.
+#'   Defaults to `TRUE`.
+#' @param save_weights_only Whether to save only trainable and non-trainable
+#'   variables, excluding model configuration, optimizer state, and assets.
+#'
+#' @inherit callback_backup_and_restore return
+#' @export
+#' @family callbacks
+#' @tether keras.callbacks.OrbaxCheckpoint
+callback_orbax_checkpoint <-
+function(directory, monitor = "val_loss", verbose = 0L,
+         save_best_only = FALSE, mode = "auto", save_freq = "epoch",
+         initial_value_threshold = NULL, max_to_keep = 1L,
+         save_on_background = TRUE, save_weights_only = FALSE)
+{
+  args <- capture_args(list(
+    verbose = as_integer,
+    save_freq = as_integer,
+    max_to_keep = as_integer
+  ))
+  do.call(keras$callbacks$OrbaxCheckpoint, args)
+}
+
+
 #  Callback that prints metrics to stdout.
 #
 #  @description
