@@ -368,8 +368,10 @@ str(layer_config)
 ##  $ kernel_initializer :List of 4
 ##   ..$ module         : chr "keras.initializers"
 ##   ..$ class_name     : chr "GlorotUniform"
-##   ..$ config         :List of 1
-##   .. ..$ seed: NULL
+##   ..$ config         :List of 3
+##   .. ..$ seed       : NULL
+##   .. ..$ input_axes : NULL
+##   .. ..$ output_axes: NULL
 ##   ..$ registered_name: NULL
 ##  $ bias_initializer   :List of 4
 ##   ..$ module         : chr "keras.initializers"
@@ -661,19 +663,19 @@ summary(model)
 ```
 
 ```
-## [1mModel: "sequential_4"[0m
+## Model: "sequential_4"
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-## │ dense_1 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)             │        [38;5;34m50,240[0m │
+## │ dense_1 (Dense)                 │ (None, 64)             │        50,240 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dense_2 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m64[0m)             │         [38;5;34m4,160[0m │
+## │ dense_2 (Dense)                 │ (None, 64)             │         4,160 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dense_3 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m5[0m)              │           [38;5;34m325[0m │
+## │ dense_3 (Dense)                 │ (None, 5)              │           325 │
 ## └─────────────────────────────────┴────────────────────────┴───────────────┘
-## [1m Total params: [0m[38;5;34m54,725[0m (213.77 KB)
-## [1m Trainable params: [0m[38;5;34m54,725[0m (213.77 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+##  Total params: 54,725 (213.77 KB)
+##  Trainable params: 54,725 (213.77 KB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 ### Appendix: Handling custom objects
