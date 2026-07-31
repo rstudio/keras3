@@ -155,6 +155,17 @@ reference:
     - layer_tfsm
     - register_keras_serializable
 
+  - title: "Quantization"
+  - contents:
+    - dtype_policy_awq
+    - quantizer_quantization_config
+    - quantizer_float8_quantization_config
+    - quantizer_int4_quantization_config
+    - quantizer_int8_quantization_config
+    - quantizer_awq_config
+    - quantizer_gptq_config
+    - quantizer_abs_max_quantize_grouped_with_zero_point
+
 
   - title: "Layers"
 
@@ -237,6 +248,7 @@ reference:
   - title: "Callbacks"
   - contents:
     - callback_model_checkpoint
+    - callback_orbax_checkpoint
     - callback_backup_and_restore
     - callback_early_stopping
     - callback_terminate_on_nan
@@ -282,6 +294,13 @@ reference:
   - contents:
     - starts_with("loss_")
     - Loss
+
+  - title: "Distillation"
+  - contents:
+    - distiller
+    - distillation_loss
+    - distillation_feature
+    - distillation_logits
 
   - title: "Metrics"
   - contents:
@@ -406,6 +425,10 @@ reference:
   - title: "Configuration"
   - contents:
     - starts_with("config_")
+
+  - title: "Distribution"
+  - contents:
+    - distributed_get_device_count
 
   - title: "Utils"
   - contents:
