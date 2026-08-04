@@ -12,27 +12,32 @@ op_jvp(fun, primals, tangents, has_aux = FALSE)
 
 - fun:
 
-  Function to differentiate. Its positional arguments and return value
-  may be tensors, scalars, or nested containers of them.
+  Function to differentiate. Its arguments and return value may be
+  tensors, scalars, or nested containers of tensors or scalars.
 
 - primals:
 
-  List of primal argument values at which to evaluate `fun`.
+  List of primal argument values at which to evaluate the Jacobian of
+  `fun`. Its length must equal the number of positional parameters of
+  `fun`.
 
 - tangents:
 
-  List with the same structure as `primals` containing the tangent
-  vector.
+  List of tangent values with the same nested structure and tensor
+  shapes as `primals`.
 
 - has_aux:
 
-  Whether `fun` returns an additional auxiliary value.
+  Whether `fun` returns a pair whose first element is the mathematical
+  output to differentiate and whose second element is auxiliary data.
+  Defaults to `FALSE`.
 
 ## Value
 
-If `has_aux = FALSE`, a list containing the value of `fun` and the
-Jacobian-vector product. If `has_aux = TRUE`, the auxiliary value is the
-third element.
+If `has_aux = FALSE`, a list containing `fun` evaluated at `primals` and
+its Jacobian-vector product evaluated with `tangents`. The product has
+the same nested structure and tensor shapes as the output of `fun`. If
+`has_aux = TRUE`, the auxiliary data is returned as a third element.
 
 ## See also
 
@@ -415,7 +420,7 @@ Other ops:
 
 ``` r
 x <- op_convert_to_tensor(3)
-op_jvp(\(x) op_square(x), list(x), list(op_convert_to_tensor(1)))
+op_jvp(function(x) op_square(x), list(x), list(op_convert_to_tensor(1)))
 #> [[1]]
 #> tf.Tensor(9.0, shape=(), dtype=float32)
 #> 

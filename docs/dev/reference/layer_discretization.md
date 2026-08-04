@@ -4,8 +4,8 @@ This layer will place each element of its input data into one of several
 contiguous ranges and output an integer index indicating which range
 each element was placed in.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## Usage
 

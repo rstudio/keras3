@@ -14,7 +14,8 @@ distributed_get_device_count(device_type = NULL)
 
 - device_type:
 
-  Optional string: `"cpu"`, `"gpu"`, or `"tpu"`.
+  String, one of `"cpu"`, `"gpu"`, or `"tpu"`. If `NULL`, Keras counts
+  GPU or TPU devices when available and otherwise counts CPU devices.
 
 ## Value
 

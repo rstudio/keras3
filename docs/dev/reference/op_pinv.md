@@ -1,6 +1,8 @@
 # Compute the Moore-Penrose pseudoinverse of a matrix.
 
-Compute the Moore-Penrose pseudoinverse of a matrix.
+The pseudoinverse is computed using singular value decomposition.
+Singular values less than or equal to `rcond` times the largest singular
+value for each matrix are treated as zero.
 
 ## Usage
 
@@ -16,8 +18,9 @@ op_pinv(x, rcond = NULL)
 
 - rcond:
 
-  Cutoff ratio for small singular values. If `NULL`, the backend default
-  is used.
+  Cutoff ratio for small singular values. Values less than or equal to
+  `rcond * largest_singular_value` are treated as zero. If `NULL`, the
+  backend default is used.
 
 ## Value
 

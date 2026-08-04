@@ -15,8 +15,8 @@ The rescaling is applied both during training and inference. Inputs can
 be of integer or floating point dtype, and by default the layer will
 output floats.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## Usage
 

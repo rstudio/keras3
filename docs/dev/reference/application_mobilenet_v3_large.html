@@ -95,7 +95,9 @@ E.g. <code>(160, 160, 3)</code> would be one valid value.</p></dd>
 <dt id="arg-alpha">alpha<a class="anchor" aria-label="anchor" href="#arg-alpha"></a></dt>
 <dd><p>controls the width of the network. This is known as the
 depth multiplier in the MobileNetV3 paper, but the name is kept for
-consistency with MobileNetV1 in Keras.</p><ul><li><p>If <code>alpha &lt; 1.0</code>, proportionally decreases the number
+consistency with MobileNetV1 in Keras.
+When <code>weights = "imagenet"</code>, <code>alpha</code> can be <code>0.75</code> or <code>1</code> for
+non-minimalistic models, and must be <code>1</code> for minimalistic models.</p><ul><li><p>If <code>alpha &lt; 1.0</code>, proportionally decreases the number
 of filters in each layer.</p></li>
 <li><p>If <code>alpha &gt; 1.0</code>, proportionally increases the number
 of filters in each layer.</p></li>

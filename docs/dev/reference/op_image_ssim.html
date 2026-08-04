@@ -88,34 +88,44 @@
 
 
 <dt id="arg-max-val">max_val<a class="anchor" aria-label="anchor" href="#arg-max-val"></a></dt>
-<dd><p>Maximum possible image value.</p></dd>
+<dd><p>Maximum possible image value. Defaults to <code>1</code> for normalized
+images; use <code>255</code> for images with pixel values in <code>[0, 255]</code>.</p></dd>
 
 
 <dt id="arg-filter-size">filter_size<a class="anchor" aria-label="anchor" href="#arg-filter-size"></a></dt>
-<dd><p>Odd integer Gaussian filter size.</p></dd>
+<dd><p>Gaussian filter size. Must be an odd integer greater than
+or equal to 1. Defaults to <code>11</code>.</p></dd>
 
 
 <dt id="arg-filter-sigma">filter_sigma<a class="anchor" aria-label="anchor" href="#arg-filter-sigma"></a></dt>
-<dd><p>Gaussian filter standard deviation.</p></dd>
+<dd><p>Gaussian filter standard deviation. Defaults to <code>1.5</code>.</p></dd>
 
 
 <dt id="arg-k-">k1<a class="anchor" aria-label="anchor" href="#arg-k-"></a></dt>
-<dd><p>First stabilization constant.</p></dd>
+<dd><p>First stabilization constant. Defaults to <code>0.01</code>.</p></dd>
 
 
 <dt id="arg-k-">k2<a class="anchor" aria-label="anchor" href="#arg-k-"></a></dt>
-<dd><p>Second stabilization constant.</p></dd>
+<dd><p>Second stabilization constant. Defaults to <code>0.03</code>.</p></dd>
 
 
 <dt id="arg-data-format">data_format<a class="anchor" aria-label="anchor" href="#arg-data-format"></a></dt>
-<dd><p>One of <code>"channels_last"</code> or <code>"channels_first"</code>. <code>NULL</code>
-uses the configured image data format.</p></dd>
+<dd><p><code>"channels_last"</code> for input with shape
+<code>(batch, height, width, channels)</code> or <code>"channels_first"</code> for input with
+shape <code>(batch, channels, height, width)</code>. <code>NULL</code> defaults to
+<code><a href="config_image_data_format.html">config_image_data_format()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A scalar tensor for unbatched images or one SSIM value per image
 for batched inputs.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This implementation follows Wang, Bovik, Sheikh, and Simoncelli (2004),
+"Image quality assessment: From error visibility to structural similarity,"
+<em>IEEE Transactions on Image Processing</em>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

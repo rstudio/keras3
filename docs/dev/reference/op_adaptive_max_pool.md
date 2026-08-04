@@ -1,7 +1,9 @@
 # Adaptive max pooling operation.
 
-Pools a rank-4 input to a fixed spatial size by computing the required
-kernel size and stride from the input shape.
+Applies adaptive max pooling that automatically computes the kernel size
+and stride needed to produce `output_size`. This is useful when a fixed
+output size is required regardless of input size, as in global feature
+extraction for models such as ResNet.
 
 ## Usage
 
@@ -25,8 +27,8 @@ op_adaptive_max_pool(inputs, output_size, data_format = NULL)
 
 - data_format:
 
-  One of `"channels_last"` or `"channels_first"`. `NULL` uses the
-  configured image data format.
+  One of `"channels_last"` or `"channels_first"`. `NULL` defaults to
+  [`config_image_data_format()`](https://keras3.posit.co/dev/reference/config_image_data_format.md).
 
 ## Value
 

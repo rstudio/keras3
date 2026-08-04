@@ -104,14 +104,19 @@ Defaults to <code>NULL</code>.</p></dd>
 
 
 <dt id="arg-preferred-backend">preferred_backend<a class="anchor" aria-label="anchor" href="#arg-preferred-backend"></a></dt>
-<dd><p>Optional backend name to prefer for the returned
-dataset objects when <code>dataset</code> itself does not imply one.</p></dd>
+<dd><p>Optional string specifying which backend to use,
+such as <code>"tensorflow"</code> or <code>"torch"</code>. If <code>NULL</code>, the backend is inferred
+from <code>dataset</code>: TensorFlow is used for a <code>tf.data.Dataset</code>, Torch is used
+for a <code>torch.utils.data.Dataset</code>, and the current Keras backend is used
+for an R list or array. Defaults to <code>NULL</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A list of two dataset objects, the left and right splits. The exact type
-depends on <code>preferred_backend</code> and on the input dataset type.</p>
+depends on <code>preferred_backend</code> and on the input dataset type. For example,
+the TensorFlow backend returns <code>tf.data.Dataset</code> objects and the Torch
+backend returns <code>torch.utils.data.Dataset</code> objects.</p>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>

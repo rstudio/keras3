@@ -1,5 +1,8 @@
 # Applies random Gaussian blur to images for data augmentation.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 This layer performs a Gaussian blur operation on input images with a
 randomly selected degree of blurring, controlled by the `factor` and
 `sigma` arguments.

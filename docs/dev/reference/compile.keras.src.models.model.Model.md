@@ -162,6 +162,19 @@ compile(
   [`compile()`](https://generics.r-lib.org/reference/compile.html) is
   called again.
 
+  Recommended workflow when changing trainable variables:
+
+      model |> compile(optimizer = "adam", loss = "mse")
+      model |> fit(x_train, y_train)
+
+      layer$trainable <- FALSE # or TRUE
+
+      model |> compile(optimizer = "adam", loss = "mse")
+      model |> fit(x_train, y_train)
+
+  This behavior applies to all Keras backends and is also described in
+  the transfer learning guide.
+
 ## Value
 
 This is called primarily for the side effect of modifying `object`

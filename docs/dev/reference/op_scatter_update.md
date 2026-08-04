@@ -75,6 +75,15 @@ and `inputs[2, 3, ]` as `[1, 1, 1, 1]`, then `indices` would have shape
     ##   [0. 0. 0. 0.]
     ##   [0. 0. 0. 0.]]], shape=(4, 4, 4), dtype=float32)
 
+Use `reduction = "add"` to accumulate updates at the same index:
+
+    inputs <- op_zeros(c(4))
+    indices <- rbind(1, 1, 2)
+    updates <- op_array(c(1, 1, 1), "float32")
+    op_scatter_update(inputs, indices, updates, reduction = "add")
+
+    ## tf.Tensor([2. 1. 0. 0.], shape=(4), dtype=float32)
+
 ## Usage
 
 ``` r
@@ -99,8 +108,19 @@ op_scatter_update(inputs, indices, updates, reduction = NULL)
 
 - reduction:
 
-  Optional reduction to apply when multiple updates target the same
-  index.
+  Optional string specifying the reduction to apply when multiple
+  updates target the same index:
+
+  - `NULL` (the default): updates replace existing values; the last
+    write wins.
+
+  - `"add"`: add updates to existing values.
+
+  - `"max"`: keep the maximum of updates and existing values.
+
+  - `"min"`: keep the minimum of updates and existing values.
+
+  - `"mul"`: multiply updates by existing values.
 
 ## Value
 

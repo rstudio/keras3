@@ -12,8 +12,8 @@ Input pixel values can be of any range (e.g. `[0., 1.)` or `[0, 255]`)
 and in integer or floating point dtype. By default, the layer will
 output floats.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## Usage
 

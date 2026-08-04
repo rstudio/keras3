@@ -25,8 +25,11 @@ op_percentile(x, q, axis = NULL, method = "linear", keepdims = FALSE)
 
 - method:
 
-  Interpolation method. One of `"linear"`, `"lower"`, `"higher"`,
-  `"midpoint"`, or `"nearest"`.
+  Method used when the requested percentile lies between data points
+  `i < j`. `"linear"` returns `i + (j - i) * fraction`; `"lower"`
+  returns `i`; `"higher"` returns `j`; `"midpoint"` returns
+  `(i + j) / 2`; and `"nearest"` returns whichever of `i` or `j` is
+  nearest. Defaults to `"linear"`.
 
 - keepdims:
 
@@ -34,8 +37,9 @@ op_percentile(x, q, axis = NULL, method = "linear", keepdims = FALSE)
 
 ## Value
 
-A tensor containing the requested percentiles. When `q` contains
-multiple percentiles, the first result axis corresponds to `q`.
+If `q` is a single percentile and `axis = NULL`, a scalar tensor. If `q`
+contains multiple percentiles, the first result axis corresponds to `q`;
+the other axes are those remaining after reduction of `x`.
 
 ## Examples
 

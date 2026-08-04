@@ -1,7 +1,9 @@
 # Adaptive max pooling for 2D data
 
-Pools an input to the requested output height and width by taking
-maxima.
+Applies adaptive max pooling to spatial data so that the output has the
+target spatial size specified by `output_size`, regardless of the input
+spatial size. The kernel size and stride are computed automatically to
+achieve the target output size.
 
 ## Usage
 
@@ -24,7 +26,9 @@ layer_adaptive_max_pooling_2d(
 
 - output_size:
 
-  Integer or two integers giving the target height and width.
+  Integer or two integers giving the target height and width. If a
+  single integer is provided, the same value is used for both
+  dimensions.
 
 - data_format:
 
@@ -61,6 +65,24 @@ If `object` is:
   then the output tensor from calling `layer(input)` is returned.
 
 - `NULL` or missing, then a `Layer` instance is returned.
+
+## Details
+
+### Input shape
+
+- With `data_format = "channels_last"`: a 4D tensor with shape
+  `(batch_size, height, width, channels)`.
+
+- With `data_format = "channels_first"`: a 4D tensor with shape
+  `(batch_size, channels, height, width)`.
+
+### Output shape
+
+- With `data_format = "channels_last"`:
+  `(batch_size, output_height, output_width, channels)`.
+
+- With `data_format = "channels_first"`:
+  `(batch_size, channels, output_height, output_width)`.
 
 ## Examples
 

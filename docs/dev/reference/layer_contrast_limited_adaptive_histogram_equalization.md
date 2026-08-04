@@ -1,8 +1,10 @@
 # Contrast Limited Adaptive Histogram Equalization
 
-Applies histogram equalization within image tiles, clips excessive local
-contrast, and combines neighboring tiles with interpolation. Histogram
-computation can be memory intensive for large batches or images.
+Contrast Limited Adaptive Histogram Equalization (CLAHE) is a variant of
+adaptive histogram equalization that avoids over-amplifying contrast. It
+operates on small image regions called tiles rather than on the entire
+image, then combines neighboring tiles with bilinear interpolation to
+remove artificial boundaries. This can improve image contrast.
 
 ## Usage
 
@@ -27,14 +29,17 @@ layer_contrast_limited_adaptive_histogram_equalization(
 - value_range:
 
   Two numbers giving the lower and upper limits of input values.
+  Defaults to `c(0, 255)`.
 
 - clip_limit:
 
-  Maximum local histogram contrast amplification.
+  Number that limits noise amplification in near-constant regions.
+  Defaults to 4.
 
 - tile_grid_size:
 
-  Two integers giving the number of tile rows and columns.
+  Two integers, `(height, width)`, giving the number of tiles into which
+  to divide the image. Defaults to `c(8, 8)`.
 
 - data_format:
 
@@ -64,6 +69,24 @@ If `object` is:
   then the output tensor from calling `layer(input)` is returned.
 
 - `NULL` or missing, then a `Layer` instance is returned.
+
+## Details
+
+**Note:** This layer computes histograms using backend one-hot
+operations, which can be highly memory intensive. Large batches or
+high-resolution images can lead to high memory consumption or
+out-of-memory errors.
+
+### Input shape
+
+A 3D unbatched or 4D batched tensor with shape
+`(..., height, width, channels)` when `data_format = "channels_last"`,
+or `(..., channels, height, width)` when
+`data_format = "channels_first"`.
+
+### Output shape
+
+A tensor with the same rank and shape as the input.
 
 ## Examples
 

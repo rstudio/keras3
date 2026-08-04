@@ -1,6 +1,11 @@
 # Map variables to optimizers
 
-Exact variable paths take precedence over regular-expression keys.
+When retrieving an optimizer, the map first attempts an exact key match.
+If no exact match is found, it treats every key as a regular-expression
+pattern and performs a full match against the variable path. For
+example, `"encoder"` matches only the layer with that exact path; use
+`"encoder/.*"` to match its sublayers. Exact matches take precedence. If
+more than one regular expression matches, lookup raises an error.
 Variables not matched by the map use `default_optimizer`.
 
 ## Usage
@@ -13,7 +18,7 @@ optimizer_map(default_optimizer, optimizer_map = NULL)
 
 - default_optimizer:
 
-  Optimizer used for unmatched variables.
+  Keras optimizer used for unmatched variables.
 
 - optimizer_map:
 

@@ -1,6 +1,7 @@
 # Reverse the columns of a tensor.
 
-Reverse the columns of a tensor.
+For a two-dimensional tensor, this reverses the entries in each row from
+left to right. Columns are preserved but appear in reverse order.
 
 ## Usage
 

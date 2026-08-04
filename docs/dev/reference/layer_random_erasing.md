@@ -1,5 +1,8 @@
 # Random Erasing data augmentation technique.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 Random Erasing is a data augmentation method where random patches of an
 image are erased (replaced by a constant value or noise) during training
 to improve generalization.

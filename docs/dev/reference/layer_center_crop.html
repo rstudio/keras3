@@ -128,7 +128,7 @@ or <code>(..., channels, target_height, target_width)</code>,
 in <code>"channels_first"</code> format.</p>
 <p>If the input height/width is even and the target height/width is odd (or
 inversely), the input image is left-padded by 1 pixel.</p>
-<p><strong>Note:</strong> This layer is safe to use inside a <code>tf.data</code> pipeline
+<p><strong>Note:</strong> This layer is safe to use inside a <code>tf.data</code> or <code>grain</code> pipeline
 (independently of which backend you're using).</p>
     </div>
     <div class="section level2">

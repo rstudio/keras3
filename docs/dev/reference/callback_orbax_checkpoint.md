@@ -1,8 +1,12 @@
 # Save and restore model state with Orbax
 
-Saves model weights and optimizer state asynchronously with Orbax. On
-the JAX backend, checkpointing is coordinated across hosts. The Python
-`orbax-checkpoint` package is required.
+By default, this callback saves model weights and optimizer state
+asynchronously with Orbax, allowing training to continue without
+blocking for I/O. In a multi-host distributed training environment with
+the JAX backend, it automatically coordinates checkpointing across all
+hosts for consistency and synchronization. Multi-host checkpointing is
+only supported with JAX. The Python `orbax-checkpoint` package is
+required.
 
 ## Usage
 
@@ -25,11 +29,11 @@ callback_orbax_checkpoint(
 
 - directory:
 
-  Directory in which to save checkpoints.
+  Path to the directory in which to save checkpoints.
 
 - monitor:
 
-  Metric name to monitor.
+  Metric name to monitor, such as `"val_loss"`.
 
 - verbose:
 
@@ -37,11 +41,12 @@ callback_orbax_checkpoint(
 
 - save_best_only:
 
-  Whether to save only when `monitor` improves.
+  Whether to save only when the model is considered the best according
+  to the monitored quantity.
 
 - mode:
 
-  One of `"auto"`, `"min"`, or `"max"`.
+  One of `"auto"`, `"min"`, or `"max"`. Used with `save_best_only`.
 
 - save_freq:
 
@@ -49,16 +54,17 @@ callback_orbax_checkpoint(
 
 - initial_value_threshold:
 
-  Initial best value for `monitor`.
+  Floating-point initial best value for `monitor`, used with
+  `save_best_only`.
 
 - max_to_keep:
 
   Maximum number of recent checkpoints to retain. Use `NULL` to retain
-  all checkpoints.
+  all checkpoints. Defaults to 1.
 
 - save_on_background:
 
-  Whether to save asynchronously in the background.
+  Whether to save asynchronously in the background. Defaults to `TRUE`.
 
 - save_weights_only:
 
@@ -79,6 +85,12 @@ A `Callback` instance that can be passed to
       save_best_only = TRUE
     )
     model |> fit(x, y, validation_split = 0.2, callbacks = list(checkpoint))
+
+    # Alternatively, save a checkpoint every 100 batches.
+    checkpoint <- callback_orbax_checkpoint(
+      directory = tempfile("orbax-checkpoints-"),
+      save_freq = 100
+    )
 
 ## See also
 

@@ -1,8 +1,10 @@
 # Schedule-free AdamW optimizer
 
 Schedule-free learning avoids a separate learning-rate schedule by
-combining interpolation and averaging. The optimizer maintains a
-momentum sequence for gradient updates and an averaged sequence for
+combining interpolation and averaging. It removes the need to specify
+the stopping time in advance and typically matches or outperforms cosine
+and linear decay schedules. The optimizer maintains a momentum sequence
+to which gradient updates are applied and an averaged sequence used for
 evaluation. During training, model parameters interpolate between the
 two sequences.
 
@@ -33,13 +35,16 @@ optimizer_schedule_free_adam_w(
 
 - learning_rate:
 
-  Initial learning rate. Defaults to `0.0025`.
+  A number, a
+  [`LearningRateSchedule()`](https://keras3.posit.co/dev/reference/LearningRateSchedule.md)
+  instance, or a callable that takes no arguments and returns the value
+  to use. Defaults to `0.0025`.
 
 - beta_1:
 
-  A float value or a constant float tensor, or a callable that takes no
-  arguments and returns the actual value to use. The exponential decay
-  rate for the 1st moment estimates. Defaults to `0.9`.
+  Number, constant tensor, or callable returning the exponential decay
+  rate for the first-moment estimates. It also controls interpolation
+  between the momentum and averaged sequences. Defaults to 0.9.
 
 - beta_2:
 
@@ -54,7 +59,7 @@ optimizer_schedule_free_adam_w(
 - warmup_steps:
 
   Number of warmup steps. During warmup, the learning rate increases
-  linearly from zero to `learning_rate`.
+  linearly from zero to `learning_rate`. Defaults to 0.
 
 - weight_decay:
 
@@ -141,6 +146,13 @@ An `Optimizer` instance.
     optimizer <- optimizer_schedule_free_adam_w(learning_rate = 0.0025)
     model |> compile(optimizer = optimizer, loss = "mse")
     model |> fit(x_train, y_train)
+
+## References
+
+- [Defazio et al., 2024](https://arxiv.org/abs/2405.15682)
+
+- [Schedule-Free
+  repository](https://github.com/facebookresearch/schedule_free)
 
 ## See also
 

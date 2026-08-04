@@ -18,27 +18,30 @@ op_unfold(x, kernel_size, dilation = 1L, padding = 0L, stride = 1L)
 - kernel_size:
 
   Integer or integer vector of length two specifying the sliding window
-  size.
+  size `(kernel_height, kernel_width)`. A scalar is used for both
+  dimensions.
 
 - dilation:
 
   Integer or integer vector of length two specifying the spacing between
-  kernel points.
+  kernel points, also known as dilation or atrous convolution. Defaults
+  to `1`.
 
 - padding:
 
   Integer or integer vector of length two specifying zero padding for
-  both spatial dimensions.
+  both spatial dimensions. Defaults to `0`.
 
 - stride:
 
   Integer or integer vector of length two specifying the sliding window
-  stride.
+  step. Defaults to `1`.
 
 ## Value
 
-A tensor of shape
-`(batch, channels * kernel_height * kernel_width, number_of_patches)`.
+A tensor of shape `(batch, channels * kernel_height * kernel_width, L)`,
+where `L` is the product of the numbers of patches along the height and
+width dimensions.
 
 ## See also
 

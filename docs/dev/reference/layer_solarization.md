@@ -1,5 +1,8 @@
 # Applies `(max_value - pixel + min_value)` for each pixel in the image.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 When created without `threshold` parameter, the layer performs
 solarization to all values. When created with specified `threshold` the
 layer only augments pixels that are above the `threshold` value.

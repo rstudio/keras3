@@ -75,27 +75,30 @@ channels-first input.</p>
 
 <dt id="arg-kernel-size">kernel_size<a class="anchor" aria-label="anchor" href="#arg-kernel-size"></a></dt>
 <dd><p>Integer or integer vector of length two specifying the
-sliding window size.</p></dd>
+sliding window size <code>(kernel_height, kernel_width)</code>. A scalar is used for
+both dimensions.</p></dd>
 
 
 <dt id="arg-dilation">dilation<a class="anchor" aria-label="anchor" href="#arg-dilation"></a></dt>
 <dd><p>Integer or integer vector of length two specifying the
-spacing between kernel points.</p></dd>
+spacing between kernel points, also known as dilation or atrous
+convolution. Defaults to <code>1</code>.</p></dd>
 
 
 <dt id="arg-padding">padding<a class="anchor" aria-label="anchor" href="#arg-padding"></a></dt>
 <dd><p>Integer or integer vector of length two specifying zero
-padding for both spatial dimensions.</p></dd>
+padding for both spatial dimensions. Defaults to <code>0</code>.</p></dd>
 
 
 <dt id="arg-stride">stride<a class="anchor" aria-label="anchor" href="#arg-stride"></a></dt>
 <dd><p>Integer or integer vector of length two specifying the sliding
-window stride.</p></dd>
+window step. Defaults to <code>1</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A tensor of shape <code>(batch, channels * kernel_height * kernel_width, number_of_patches)</code>.</p>
+    <p>A tensor of shape <code>(batch, channels * kernel_height * kernel_width, L)</code>, where <code>L</code> is the product of the numbers of patches along the height
+and width dimensions.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

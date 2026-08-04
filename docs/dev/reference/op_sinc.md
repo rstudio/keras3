@@ -1,7 +1,8 @@
 # Compute the normalized sinc function.
 
 The normalized sinc function is `sin(pi * x) / (pi * x)` when `x != 0`
-and one when `x == 0`.
+and one when `x == 0`. The value at zero is defined by this limit,
+making the function continuous and infinitely differentiable.
 
 ## Usage
 

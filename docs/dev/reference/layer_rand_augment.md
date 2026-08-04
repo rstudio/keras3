@@ -1,5 +1,8 @@
 # RandAugment performs the Rand Augment operation on input images.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 This layer can be thought of as an all-in-one image augmentation layer.
 The policy implemented by this layer has been benchmarked extensively
 and is effective on a wide variety of datasets.

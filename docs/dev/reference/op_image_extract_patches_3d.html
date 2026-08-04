@@ -89,7 +89,8 @@ along depth, height, and width. <code>NULL</code> uses <code>size</code>.</p></d
 
 <dt id="arg-dilation-rate">dilation_rate<a class="anchor" aria-label="anchor" href="#arg-dilation-rate"></a></dt>
 <dd><p>Integer or integer vector of length three specifying the
-spacing between consecutive patch samples.</p></dd>
+input stride between consecutive patch samples. On the TensorFlow backend,
+<code>dilation_rate &gt; 1</code> cannot be combined with <code>strides &gt; 1</code>.</p></dd>
 
 
 <dt id="arg-padding">padding<a class="anchor" aria-label="anchor" href="#arg-padding"></a></dt>
@@ -97,8 +98,10 @@ spacing between consecutive patch samples.</p></dd>
 
 
 <dt id="arg-data-format">data_format<a class="anchor" aria-label="anchor" href="#arg-data-format"></a></dt>
-<dd><p>One of <code>"channels_last"</code> or <code>"channels_first"</code>. <code>NULL</code>
-uses the configured image data format.</p></dd>
+<dd><p><code>"channels_last"</code> for input with shape
+<code>(batch, depth, height, width, channels)</code> or <code>"channels_first"</code> for input
+with shape <code>(batch, channels, depth, height, width)</code>. <code>NULL</code> defaults to
+<code><a href="config_image_data_format.html">config_image_data_format()</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -74,15 +74,17 @@ multiple of the previous sample.</p>
 
 
 <dt id="arg-stop">stop<a class="anchor" aria-label="anchor" href="#arg-stop"></a></dt>
-<dd><p>Final value when <code>endpoint = TRUE</code>.</p></dd>
+<dd><p>Final value when <code>endpoint = TRUE</code>. When <code>endpoint = FALSE</code>,
+<code>num + 1</code> values are spaced over the interval in log space and the final
+value is omitted.</p></dd>
 
 
 <dt id="arg-num">num<a class="anchor" aria-label="anchor" href="#arg-num"></a></dt>
-<dd><p>Number of samples.</p></dd>
+<dd><p>Number of samples. Defaults to <code>50</code>.</p></dd>
 
 
 <dt id="arg-endpoint">endpoint<a class="anchor" aria-label="anchor" href="#arg-endpoint"></a></dt>
-<dd><p>Whether <code>stop</code> is included.</p></dd>
+<dd><p>Whether <code>stop</code> is included. Defaults to <code>TRUE</code>.</p></dd>
 
 
 <dt id="arg-dtype">dtype<a class="anchor" aria-label="anchor" href="#arg-dtype"></a></dt>
@@ -90,8 +92,9 @@ multiple of the previous sample.</p>
 
 
 <dt id="arg-axis">axis<a class="anchor" aria-label="anchor" href="#arg-axis"></a></dt>
-<dd><p>Axis in the result along which samples are stored. Defaults to
-<code>1</code>, the first axis. The Torch backend does not support this argument.</p></dd>
+<dd><p>Axis in the result along which samples are stored. This matters
+only when <code>start</code> or <code>stop</code> is array-like. Defaults to <code>1</code>, the first axis.
+The Torch backend does not support this argument.</p></dd>
 
 </dl></div>
     <div class="section level2">

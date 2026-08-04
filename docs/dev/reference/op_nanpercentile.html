@@ -80,8 +80,10 @@ flattened.</p></dd>
 
 
 <dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
-<dd><p>Interpolation method. One of <code>"linear"</code>, <code>"lower"</code>, <code>"higher"</code>,
-<code>"midpoint"</code>, or <code>"nearest"</code>.</p></dd>
+<dd><p>Method used when the requested percentile lies between data points <code>i &lt; j</code>.
+<code>"linear"</code> returns <code>i + (j - i) * fraction</code>; <code>"lower"</code> returns <code>i</code>;
+<code>"higher"</code> returns <code>j</code>; <code>"midpoint"</code> returns <code>(i + j) / 2</code>; and <code>"nearest"</code>
+returns whichever of <code>i</code> or <code>j</code> is nearest. Defaults to <code>"linear"</code>.</p></dd>
 
 
 <dt id="arg-keepdims">keepdims<a class="anchor" aria-label="anchor" href="#arg-keepdims"></a></dt>

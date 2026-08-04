@@ -1,12 +1,13 @@
-# A preprocessing layer that randomly applies shear transformations
-
-images.
+# A preprocessing layer that randomly applies shear transformations to images.
 
 This layer shears the input images along the x-axis and/or y-axis by a
 randomly selected factor within the specified range. The shear
 transformation is applied to each image independently in a batch. Empty
 regions created during the transformation are filled according to the
 `fill_mode` and `fill_value` parameters.
+
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
 
 ## Usage
 

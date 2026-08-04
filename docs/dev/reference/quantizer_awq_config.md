@@ -1,7 +1,10 @@
 # AWQ calibration and quantization configuration
 
-Activation-aware Weight Quantization uses calibration activations to
-find per-channel scales that protect salient weights.
+Activation-aware Weight Quantization is a post-training method that
+identifies and protects salient weights based on activation magnitudes.
+It uses calibration data to collect activation statistics, identifies
+salient weight channels, searches a grid for optimal per-channel scales,
+and applies those scales before quantization to reduce accuracy loss.
 
 ## Usage
 
@@ -23,11 +26,14 @@ quantizer_awq_config(
 
 - dataset:
 
-  Calibration data yielding strings or pre-tokenized tensors.
+  Calibration data used to analyze activation patterns. It can be an
+  iterable that yields strings or pre-tokenized numeric tensors, such as
+  a character vector, generator, R array, or NumPy array.
 
 - tokenizer:
 
-  Tokenizer or compatible callable used for `dataset`.
+  Tokenizer or compatible callable used to process `dataset` when it
+  contains strings.
 
 - ...:
 
@@ -36,29 +42,33 @@ quantizer_awq_config(
 
 - weight_bits:
 
-  Number of weight bits. AWQ currently supports 4.
+  Number of bits used for weight quantization. AWQ currently supports
+  only 4. Defaults to 4.
 
 - num_samples:
 
-  Number of calibration samples.
+  Number of calibration samples to use. Defaults to 128.
 
 - sequence_length:
 
-  Sequence length of each calibration sample.
+  Sequence length of each calibration sample. Defaults to 512.
 
 - group_size:
 
   Number of weights quantized together. Use `-1` for per-channel
-  quantization.
+  quantization. Defaults to 128.
 
 - num_grid_points:
 
-  Number of grid-search points used to find scales.
+  Number of grid-search points used to find optimal per-channel scales.
+  Higher values can find better scales but take longer. Defaults to 20.
 
 - quantization_layer_structure:
 
-  Optional named list describing `pre_block_layers` and
-  `sequential_blocks`. If omitted, the model must provide
+  Optional named list describing the model's quantization structure. It
+  should contain `pre_block_layers`, a list of layers to run before the
+  first block, and `sequential_blocks`, a list of transformer blocks to
+  quantize sequentially. If omitted, the model must provide
   `get_quantization_layer_structure()`.
 
 ## Value
@@ -73,6 +83,13 @@ An `AWQConfig` instance.
       group_size = 128
     )
     model |> quantize_weights(mode = "awq", config = config)
+
+## References
+
+- [Lin et al., 2023, *AWQ: Activation-aware Weight Quantization for LLM
+  Compression and Acceleration*](https://arxiv.org/abs/2306.00978)
+
+- [Reference implementation](https://github.com/mit-han-lab/llm-awq)
 
 ## See also
 

@@ -17,15 +17,17 @@ op_geomspace(start, stop, num = 50L, endpoint = TRUE, dtype = NULL, axis = 1L)
 
 - stop:
 
-  Final value when `endpoint = TRUE`.
+  Final value when `endpoint = TRUE`. When `endpoint = FALSE`, `num + 1`
+  values are spaced over the interval in log space and the final value
+  is omitted.
 
 - num:
 
-  Number of samples.
+  Number of samples. Defaults to `50`.
 
 - endpoint:
 
-  Whether `stop` is included.
+  Whether `stop` is included. Defaults to `TRUE`.
 
 - dtype:
 
@@ -33,8 +35,9 @@ op_geomspace(start, stop, num = 50L, endpoint = TRUE, dtype = NULL, axis = 1L)
 
 - axis:
 
-  Axis in the result along which samples are stored. Defaults to `1`,
-  the first axis. The Torch backend does not support this argument.
+  Axis in the result along which samples are stored. This matters only
+  when `start` or `stop` is array-like. Defaults to `1`, the first axis.
+  The Torch backend does not support this argument.
 
 ## Value
 

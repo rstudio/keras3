@@ -125,7 +125,8 @@ the artifact.</p></dd>
 <a href="https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md" class="external-link"><code>jax2tf.convert</code></a>.
 If <code>native_serialization</code> and <code>polymorphic_shapes</code> are not provided, they
 are computed automatically.</p></li>
-<li><p><code>opset_version</code>: Optional integer specific to <code>format = "onnx"</code>.</p></li>
+<li><p><code>opset_version</code>: Optional integer specific to <code>format = "onnx"</code> that
+specifies the ONNX opset version.</p></li>
 <li><p>LiteRT-specific options. With the TensorFlow backend these are passed to
 the TensorFlow Lite converter and include <code>optimizations</code>,
 <code>representative_dataset</code>, <code>experimental_new_quantizer</code>,
@@ -191,6 +192,17 @@ with the pipe.</p>
 <span><span class="va">input_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">....</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">input_data</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">ort_session</span><span class="op">$</span><span class="fu">get_inputs</span><span class="op">(</span><span class="op">)</span>, <span class="va">`[[`</span>, <span class="st">"name"</span><span class="op">)</span></span>
 <span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">ort_session</span><span class="op">$</span><span class="fu">run</span><span class="op">(</span><span class="cn">NULL</span>, <span class="va">input_data</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Here's how to export a LiteRT (TFLite) artifact for inference.</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel</a></span><span class="op">(</span><span class="st">"path/to/model.tflite"</span>, format <span class="op">=</span> <span class="st">"litert"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu">reticulate</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/reticulate/reference/import.html" class="external-link">import</a></span><span class="op">(</span><span class="st">"tensorflow"</span><span class="op">)</span></span>
+<span><span class="va">interpreter</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">lite</span><span class="op">$</span><span class="fu">Interpreter</span><span class="op">(</span>model_path <span class="op">=</span> <span class="st">"path/to/model.tflite"</span><span class="op">)</span></span>
+<span><span class="va">interpreter</span><span class="op">$</span><span class="fu">allocate_tensors</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">interpreter</span><span class="op">$</span><span class="fu">set_tensor</span><span class="op">(</span><span class="va">interpreter</span><span class="op">$</span><span class="fu">get_input_details</span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">index</span>, <span class="va">input_data</span><span class="op">)</span></span>
+<span><span class="va">interpreter</span><span class="op">$</span><span class="fu">invoke</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">output_data</span> <span class="op">&lt;-</span> <span class="va">interpreter</span><span class="op">$</span><span class="fu">get_tensor</span><span class="op">(</span></span>
+<span>  <span class="va">interpreter</span><span class="op">$</span><span class="fu">get_output_details</span><span class="op">(</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">index</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Here's how to export a PyTorch <code>ExportedProgram</code> for inference.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="co"># Export the model as a PyTorch ExportedProgram</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/export_savedmodel.html" class="external-link">export_savedmodel</a></span><span class="op">(</span><span class="st">"path/to/model.pt2"</span>, format <span class="op">=</span> <span class="st">"torch"</span><span class="op">)</span></span>

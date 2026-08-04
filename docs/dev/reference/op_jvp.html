@@ -67,28 +67,34 @@
 
 
 <dl><dt id="arg-fun">fun<a class="anchor" aria-label="anchor" href="#arg-fun"></a></dt>
-<dd><p>Function to differentiate. Its positional arguments and return
-value may be tensors, scalars, or nested containers of them.</p></dd>
+<dd><p>Function to differentiate. Its arguments and return value may be
+tensors, scalars, or nested containers of tensors or scalars.</p></dd>
 
 
 <dt id="arg-primals">primals<a class="anchor" aria-label="anchor" href="#arg-primals"></a></dt>
-<dd><p>List of primal argument values at which to evaluate <code>fun</code>.</p></dd>
+<dd><p>List of primal argument values at which to evaluate the
+Jacobian of <code>fun</code>. Its length must equal the number of positional
+parameters of <code>fun</code>.</p></dd>
 
 
 <dt id="arg-tangents">tangents<a class="anchor" aria-label="anchor" href="#arg-tangents"></a></dt>
-<dd><p>List with the same structure as <code>primals</code> containing the
-tangent vector.</p></dd>
+<dd><p>List of tangent values with the same nested structure and
+tensor shapes as <code>primals</code>.</p></dd>
 
 
 <dt id="arg-has-aux">has_aux<a class="anchor" aria-label="anchor" href="#arg-has-aux"></a></dt>
-<dd><p>Whether <code>fun</code> returns an additional auxiliary value.</p></dd>
+<dd><p>Whether <code>fun</code> returns a pair whose first element is the
+mathematical output to differentiate and whose second element is
+auxiliary data. Defaults to <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>If <code>has_aux = FALSE</code>, a list containing the value of <code>fun</code> and the
-Jacobian-vector product. If <code>has_aux = TRUE</code>, the auxiliary value is the
-third element.</p>
+    <p>If <code>has_aux = FALSE</code>, a list containing <code>fun</code> evaluated at
+<code>primals</code> and its Jacobian-vector product evaluated with <code>tangents</code>. The
+product has the same nested structure and tensor shapes as the output of
+<code>fun</code>. If <code>has_aux = TRUE</code>, the auxiliary data is returned as a third
+element.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -101,7 +107,7 @@ third element.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">op_jvp</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="op_square.html">op_square</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">op_jvp</span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="op_square.html">op_square</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> tf.Tensor(9.0, shape=(), dtype=float32)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

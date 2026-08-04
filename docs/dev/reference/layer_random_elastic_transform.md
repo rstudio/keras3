@@ -1,5 +1,8 @@
 # A preprocessing layer that applies random elastic transformations.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 This layer distorts input images by applying elastic deformations,
 simulating a physically realistic transformation. The magnitude of the
 distortion is controlled by the `scale` parameter, while the `factor`

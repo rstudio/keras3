@@ -181,7 +181,11 @@ layer_string_lookup(
 
 - salt:
 
-  Optional salt used when hashing OOV string values.
+  Only valid when `num_oov_indices > 1`. If supplied, OOV bucket
+  assignment uses SipHash64, with these values as an additional input (a
+  "salt" in cryptography). May be a pair of integers, or a single
+  integer used for both key components. If `NULL` (the default),
+  FarmHash64 is used.
 
 - ...:
 

@@ -17,11 +17,11 @@ op_allclose(x1, x2, rtol = 1e-05, atol = 1e-08, equal_nan = FALSE)
 
 - rtol:
 
-  Relative tolerance.
+  Positive relative tolerance, typically a small value.
 
 - atol:
 
-  Absolute tolerance.
+  Positive absolute tolerance, typically a small value.
 
 - equal_nan:
 

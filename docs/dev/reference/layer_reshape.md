@@ -18,7 +18,8 @@ layer_reshape(object, target_shape, ...)
 - target_shape:
 
   Target shape. List of integers, does not include the samples dimension
-  (batch size).
+  (batch size). One element may be `-1`, in which case its size is
+  inferred from the input size and the remaining dimensions.
 
 - ...:
 
@@ -43,10 +44,7 @@ If `object` is:
 
 ## Input Shape
 
-Arbitrary, although all dimensions in the input shape must be
-known/fixed. Use the keyword argument `input_shape` (list of integers,
-does not include the samples/batch size axis) when using this layer as
-the first layer in a model.
+Arbitrary, but required to be compatible with `target_shape`.
 
 ## Output Shape
 

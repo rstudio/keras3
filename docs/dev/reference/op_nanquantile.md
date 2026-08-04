@@ -25,8 +25,11 @@ op_nanquantile(x, q, axis = NULL, method = "linear", keepdims = FALSE)
 
 - method:
 
-  Interpolation method. One of `"linear"`, `"lower"`, `"higher"`,
-  `"midpoint"`, or `"nearest"`.
+  Method used when the requested percentile lies between data points
+  `i < j`. `"linear"` returns `i + (j - i) * fraction`; `"lower"`
+  returns `i`; `"higher"` returns `j`; `"midpoint"` returns
+  `(i + j) / 2`; and `"nearest"` returns whichever of `i` or `j` is
+  nearest. Defaults to `"linear"`.
 
 - keepdims:
 

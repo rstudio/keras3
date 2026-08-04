@@ -43,8 +43,10 @@ Softmaxed output with the same shape as `inputs`.
 
 - `inputs`: The inputs (logits) to the softmax layer.
 
-- `mask`: A boolean mask of the same shape as `inputs`. The mask
-  specifies 1 to keep and 0 to mask. Defaults to `NULL`.
+- `mask`: A boolean mask broadcastable to `inputs`. The mask specifies 1
+  to keep and 0 to mask. Each mask dimension must be 1 or match the
+  corresponding dimension of `inputs`; it must not be larger. Defaults
+  to `NULL`.
 
 ## See also
 

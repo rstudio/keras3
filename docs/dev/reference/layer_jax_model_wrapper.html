@@ -113,8 +113,11 @@ non-trainable state of the model.</p></dd>
 
 
 <dt id="arg-native-serialization-platforms">native_serialization_platforms<a class="anchor" aria-label="anchor" href="#arg-native-serialization-platforms"></a></dt>
-<dd><p>Optional platforms to compile for when
-exporting native JAX serialization through the TensorFlow backend.</p></dd>
+<dd><p>Optional sequence of platforms (<code>"cpu"</code>, <code>"cuda"</code>, <code>"rocm"</code>, or <code>"tpu"</code>)
+to compile for when using <code>jax2tf.convert()</code> with native serialization. This
+is used only when the Keras backend is TensorFlow. If <code>NULL</code>, the function
+is compiled for the default backend. If multiple platforms are supplied,
+the exported module is device-polymorphic.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

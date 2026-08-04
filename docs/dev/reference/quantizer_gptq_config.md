@@ -1,7 +1,11 @@
 # GPTQ calibration and quantization configuration
 
-GPTQ uses calibration data and a Hessian approximation to quantize
-weights while reducing quantization error.
+GPTQ is a post-training method that quantizes weights to lower precision
+while reducing the impact on model accuracy. It uses calibration data to
+estimate a Hessian for each layer, applies iterative quantization with
+error correction, optionally reorders weights by activation importance,
+and minimizes quantization error. It can reduce model size and memory
+use and does not require retraining a pretrained model.
 
 ## Usage
 
@@ -26,11 +30,14 @@ quantizer_gptq_config(
 
 - dataset:
 
-  Calibration data yielding strings or pre-tokenized tensors.
+  Calibration data used to analyze activation patterns. It can be an
+  iterable that yields strings or pre-tokenized numeric tensors, such as
+  a character vector, generator, R array, or NumPy array.
 
 - tokenizer:
 
-  Tokenizer or compatible callable used for `dataset`.
+  Tokenizer or compatible callable used to process `dataset` when it
+  contains strings.
 
 - ...:
 
@@ -39,47 +46,59 @@ quantizer_gptq_config(
 
 - weight_bits:
 
-  Number of weight bits. GPTQ supports 2, 3, 4, and 8.
+  Number of bits used for weight quantization. GPTQ supports 2, 3, 4,
+  and 8. Defaults to 4.
 
 - num_samples:
 
-  Number of calibration samples.
+  Number of calibration samples to use. Defaults to 128.
 
 - per_channel:
 
   Whether to calculate quantization parameters per output channel.
+  Defaults to `TRUE`.
 
 - sequence_length:
 
-  Sequence length of each calibration sample.
+  Sequence length of each calibration sample. Defaults to 512.
 
 - hessian_damping:
 
-  Fraction of Hessian damping used for numerical stability. Must be
-  between 0 and 1.
+  Fraction of Hessian damping used to stabilize the inverse calculation.
+  Must be between 0 and 1. Defaults to 0.01.
 
 - group_size:
 
   Number of weights quantized together. Use `-1` for per-channel
-  quantization.
+  quantization. Defaults to 128.
 
 - symmetric:
 
-  Whether to use symmetric quantization.
+  Whether to use symmetric rather than asymmetric quantization. Defaults
+  to `FALSE`.
 
 - activation_order:
 
-  Whether to reorder weight columns by activation magnitude.
+  Whether to reorder weight columns by activation magnitude, which can
+  improve quantization accuracy. Defaults to `FALSE`.
 
 - quantization_layer_structure:
 
-  Optional named list describing `pre_block_layers` and
-  `sequential_blocks`. If omitted, the model must provide
+  Optional named list describing the model's quantization structure. It
+  should contain `pre_block_layers`, a list of layers to run before the
+  first block, and `sequential_blocks`, a list of transformer blocks to
+  quantize sequentially. If omitted, the model must provide
   `get_quantization_layer_structure()`.
 
 ## Value
 
 A `GPTQConfig` instance.
+
+## Details
+
+Quantization quality depends heavily on the calibration dataset. For
+best results, use representative data covering the expected input
+distribution.
 
 ## Examples
 
@@ -90,6 +109,14 @@ A `GPTQConfig` instance.
       group_size = 128
     )
     model |> quantize_weights(mode = "gptq", config = config)
+
+## References
+
+- [Frantar et al., 2022, *GPTQ: Accurate Post-Training Quantization for
+  Generative Pre-trained
+  Transformers*](https://arxiv.org/abs/2210.17323)
+
+- [Reference implementation](https://github.com/IST-DASLab/gptq)
 
 ## See also
 

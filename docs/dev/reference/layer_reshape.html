@@ -72,7 +72,8 @@
 
 <dt id="arg-target-shape">target_shape<a class="anchor" aria-label="anchor" href="#arg-target-shape"></a></dt>
 <dd><p>Target shape. List of integers, does not include the
-samples dimension (batch size).</p></dd>
+samples dimension (batch size). One element may be <code>-1</code>, in which case its
+size is inferred from the input size and the remaining dimensions.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -90,10 +91,7 @@ returned, invisibly.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="input-shape">Input Shape<a class="anchor" aria-label="anchor" href="#input-shape"></a></h2>
-    <p>Arbitrary, although all dimensions in the input shape must be
-known/fixed. Use the keyword argument <code>input_shape</code> (list of integers,
-does not include the samples/batch size axis) when using this layer as
-the first layer in a model.</p>
+    <p>Arbitrary, but required to be compatible with <code>target_shape</code>.</p>
     </div>
     <div class="section level2">
     <h2 id="output-shape">Output Shape<a class="anchor" aria-label="anchor" href="#output-shape"></a></h2>

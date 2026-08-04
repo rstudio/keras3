@@ -46,13 +46,18 @@ split_dataset(
 
 - preferred_backend:
 
-  Optional backend name to prefer for the returned dataset objects when
-  `dataset` itself does not imply one.
+  Optional string specifying which backend to use, such as
+  `"tensorflow"` or `"torch"`. If `NULL`, the backend is inferred from
+  `dataset`: TensorFlow is used for a `tf.data.Dataset`, Torch is used
+  for a `torch.utils.data.Dataset`, and the current Keras backend is
+  used for an R list or array. Defaults to `NULL`.
 
 ## Value
 
 A list of two dataset objects, the left and right splits. The exact type
-depends on `preferred_backend` and on the input dataset type.
+depends on `preferred_backend` and on the input dataset type. For
+example, the TensorFlow backend returns `tf.data.Dataset` objects and
+the Torch backend returns `torch.utils.data.Dataset` objects.
 
 ## Examples
 

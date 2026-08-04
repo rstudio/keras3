@@ -207,7 +207,10 @@ optimizer_muon(
 
 - rms_rate:
 
-  Optional RMS-rate stabilization parameter for the Muon update.
+  Float. A parameter from [Liu et al.,
+  2025](https://arxiv.org/abs/2502.16982) that can improve Muon's
+  stability, allowing it to use the same learning rate and weight decay
+  as Adam. Defaults to `0.2`. Set to `NULL` to disable this feature.
 
 - ...:
 

@@ -1,5 +1,8 @@
 # A preprocessing layer that applies random perspective transformations.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 This layer distorts the perspective of input images by shifting their
 corner points, simulating a 3D-like transformation. The amount of
 distortion is controlled by the `factor` and `scale` parameters.

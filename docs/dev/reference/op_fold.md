@@ -19,28 +19,31 @@ op_fold(x, output_size, kernel_size, dilation = 1L, padding = 0L, stride = 1L)
 
 - output_size:
 
-  Integer or integer vector of length two specifying the output height
-  and width.
+  Integer or integer vector of length two specifying the output spatial
+  shape `(output_height, output_width)`.
 
 - kernel_size:
 
   Integer or integer vector of length two specifying the sliding window
-  size.
+  size `(kernel_height, kernel_width)`. A scalar is used for both
+  dimensions.
 
 - dilation:
 
   Integer or integer vector of length two specifying the spacing between
-  kernel points.
+  kernel points. Defaults to `1`.
 
 - padding:
 
-  Integer or integer vector of length two specifying zero padding for
-  both spatial dimensions.
+  Integer or integer vector of length two specifying the zero-padding
+  that was applied to the input of
+  [`op_unfold()`](https://keras3.posit.co/dev/reference/op_unfold.md).
+  Defaults to `0`.
 
 - stride:
 
   Integer or integer vector of length two specifying the sliding window
-  stride.
+  step. Defaults to `1`.
 
 ## Value
 

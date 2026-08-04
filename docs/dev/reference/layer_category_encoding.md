@@ -8,8 +8,8 @@ number of tokens is not known, use
 [`layer_integer_lookup()`](https://keras3.posit.co/dev/reference/layer_integer_lookup.md)
 instead.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## Usage
 

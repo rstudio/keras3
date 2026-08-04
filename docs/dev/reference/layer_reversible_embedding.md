@@ -1,8 +1,13 @@
 # Embedding layer with a reverse projection
 
-Extends an embedding layer with a reverse projection from the embedding
-dimension to the vocabulary dimension. By default, the reverse
-projection reuses the transposed embedding matrix.
+Extends
+[`layer_embedding()`](https://keras3.posit.co/dev/reference/layer_embedding.md)
+for language models with a reverse projection from the embedding
+dimension to the vocabulary dimension. Call the layer with
+`reverse = TRUE` to perform this projection. By default, the reverse
+projection uses the transpose of the embedding matrix, tying the two
+sets of weights. With `tie_weights = FALSE`, it uses a separate
+trainable variable. This layer has no bias terms.
 
 ## Usage
 
@@ -39,7 +44,8 @@ layer_reversible_embedding(
 
 - tie_weights:
 
-  Whether the embedding and reverse-projection matrices share weights.
+  Boolean. Whether the embedding and reverse-projection matrices share
+  the same weights. Defaults to `TRUE`.
 
 - embeddings_initializer:
 
@@ -67,12 +73,14 @@ layer_reversible_embedding(
 
 - reverse_dtype:
 
-  Optional dtype used for the reverse projection.
+  Dtype used for the reverse-projection computation. Defaults to the
+  layer's compute dtype.
 
 - logit_soft_cap:
 
-  Optional positive value. When set, reverse-projection logits are
-  limited with `tanh(logits / logit_soft_cap) * logit_soft_cap`.
+  Optional positive number. When set, reverse-projection logits are
+  scaled by `tanh(logits / logit_soft_cap) * logit_soft_cap`. This
+  narrows the range of output logits and can improve training.
 
 - ...:
 
@@ -95,6 +103,16 @@ If `object` is:
 
 - `NULL` or missing, then a `Layer` instance is returned.
 
+## Details
+
+### Call arguments
+
+- `inputs`: Tensor inputs to the layer.
+
+- `reverse`: Boolean. Whether to project from `output_dim` to
+  `input_dim` instead of performing a normal embedding lookup. Defaults
+  to `FALSE`.
+
 ## Examples
 
     embedding <- layer_reversible_embedding(input_dim = 8, output_dim = 4)
@@ -104,6 +122,12 @@ If `object` is:
     shape(logits)
 
     ## shape(1, 3, 8)
+
+## References
+
+- [Vaswani et al., 2017](https://arxiv.org/abs/1706.03762)
+
+- [Press and Wolf, 2016](https://arxiv.org/abs/1608.05859)
 
 ## See also
 

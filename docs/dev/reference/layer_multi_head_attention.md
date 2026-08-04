@@ -89,9 +89,10 @@ layer_multi_head_attention(
 - sliding_window:
 
   Optional positive integer. If set, each query position attends only to
-  key positions within `sliding_window - 1` of itself. This combines
-  with `use_causal_mask = TRUE` to provide causal sliding-window
-  attention. Defaults to `NULL`, which uses full attention.
+  key positions within `sliding_window - 1` of itself, forming a
+  symmetric band. This combines with `use_causal_mask = TRUE` to provide
+  the causal sliding window used by Mistral, Llama 3 long-context, and
+  Phi-3. Defaults to `NULL`, which uses full attention.
 
 - flash_attention:
 
@@ -132,8 +133,12 @@ layer_multi_head_attention(
 
 - use_gate:
 
-  Whether to add the gated attention branch used by recent attention
-  models.
+  Logical, whether to apply a gated attention mechanism. When `TRUE`, an
+  additional gating branch is added based on [Gated Attention for Large
+  Language Models](https://arxiv.org/abs/2505.06708). It applies a
+  sigmoid-activated linear projection to the query, which then gates the
+  attention output. This helps improve training stability and eliminates
+  "attention sinks".
 
 - seed:
 

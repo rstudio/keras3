@@ -32,7 +32,7 @@ layer_dot(inputs, ..., axes, normalize = FALSE)
   product. If a list, should be two integers corresponding to the
   desired axis from the first input and the desired axis from the second
   input, respectively. Note that the size of the two selected axes must
-  match.
+  match, and axis 1 (the batch axis in R) cannot be included.
 
 - normalize:
 

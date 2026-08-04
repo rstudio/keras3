@@ -16,8 +16,9 @@ op_dsplit(x, indices_or_sections)
 
 - indices_or_sections:
 
-  Either the number of sections or a vector of 1-based positions at
-  which to split the third axis.
+  If an integer `N`, split into `N` equal sections along the third axis.
+  If a one-dimensional vector of sorted integers, its entries give the
+  1-based positions at which to split the third axis.
 
 ## Value
 

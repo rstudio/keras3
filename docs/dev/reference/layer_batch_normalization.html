@@ -298,15 +298,26 @@ since the scaling will be done by the next layer.</p></dd>
 
 
 <dt id="arg-renorm">renorm<a class="anchor" aria-label="anchor" href="#arg-renorm"></a></dt>
-<dd><p>Whether to use batch renormalization during training.</p></dd>
+<dd><p>Whether to use <a href="https://arxiv.org/abs/1702.03275" class="external-link">Batch Renormalization</a>.
+This adds extra variables during training. Inference is the same for either
+value of this parameter.</p></dd>
 
 
 <dt id="arg-renorm-clipping">renorm_clipping<a class="anchor" aria-label="anchor" href="#arg-renorm-clipping"></a></dt>
-<dd><p>Optional clipping configuration used when <code>renorm = TRUE</code>.</p></dd>
+<dd><p>Named list, valid only if <code>renorm = TRUE</code>. Maps optional keys <code>"rmax"</code>,
+<code>"rmin"</code>, and <code>"dmax"</code> to numeric values used to clip the renormalization
+correction. The correction <code>(r, d)</code> is used as
+<code>corrected_value = normalized_value * r + d</code>, with <code>r</code> clipped to
+<code>[rmin, rmax]</code> and <code>d</code> clipped to <code>[-dmax, dmax]</code>. Missing <code>rmax</code>, <code>rmin</code>,
+and <code>dmax</code> values default to <code>Inf</code>, <code>0</code>, and <code>Inf</code>, respectively.</p></dd>
 
 
 <dt id="arg-renorm-momentum">renorm_momentum<a class="anchor" aria-label="anchor" href="#arg-renorm-momentum"></a></dt>
-<dd><p>Momentum used for renormalization statistics when <code>renorm = TRUE</code>.</p></dd>
+<dd><p>Momentum used to update the moving means and standard deviations for
+renormalization. Valid only if <code>renorm = TRUE</code>. Unlike <code>momentum</code>, this
+affects training and should be neither too small, which would add noise, nor
+too large, which would give stale estimates. <code>momentum</code> is still applied to
+obtain the means and variances used for inference.</p></dd>
 
 
 <dt id="arg-synchronized">synchronized<a class="anchor" aria-label="anchor" href="#arg-synchronized"></a></dt>

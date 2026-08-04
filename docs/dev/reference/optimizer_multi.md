@@ -2,8 +2,12 @@
 
 Wraps an
 [`optimizer_map()`](https://keras3.posit.co/dev/reference/optimizer_map.md)
-or a callable that selects an optimizer for a variable.
-Optimizer-specific callbacks are not currently supported.
+or a callable that selects an optimizer for a variable. Access the
+sub-optimizers through `optimizer$optimizers`, for example to inspect
+their learning rates, iterations, or loss-scale factors. A
+multi-optimizer does not expose a single `learning_rate`, because its
+sub-optimizers may have different learning rates. Optimizer-specific
+callbacks are not currently supported.
 
 ## Usage
 
@@ -37,6 +41,11 @@ A `MultiOptimizer` instance.
       optimizer_map = list("encoder/.*" = optimizer_adam())
     )
     optimizer <- optimizer_multi(optimizers)
+
+    # A callable can also select an optimizer for each variable.
+    optimizer <- optimizer_multi(function(variable) {
+      if (grepl("encoder", variable$path)) optimizer_adam() else optimizer_sgd()
+    })
 
 ## See also
 

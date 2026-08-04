@@ -1,5 +1,8 @@
 # Randomly performs the color degeneration operation on given images.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 The sharpness operation first converts an image to gray scale, then back
 to color. It then takes a weighted average between original image and
 the degenerated image. This makes colors appear more dull.

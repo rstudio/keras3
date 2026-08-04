@@ -76,8 +76,8 @@ format.
 If the input height/width is even and the target height/width is odd (or
 inversely), the input image is left-padded by 1 pixel.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## See also
 

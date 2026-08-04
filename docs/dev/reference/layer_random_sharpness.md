@@ -1,5 +1,8 @@
 # Randomly performs the sharpness operation on given images.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 The sharpness operation first performs a blur, then blends between the
 original image and the processed image. This operation adjusts the
 clarity of the edges in an image, ranging from blurred to enhanced

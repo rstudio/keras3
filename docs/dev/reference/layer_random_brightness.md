@@ -5,8 +5,8 @@ RGB images. At inference time, the output will be identical to the
 input. Call the layer with `training=TRUE` to adjust the brightness of
 the input.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## Usage
 

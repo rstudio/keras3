@@ -73,7 +73,9 @@ Keras 3.15.1 provides the backend implementation for JAX.</p>
 
 
 <dl><dt id="arg-device-type">device_type<a class="anchor" aria-label="anchor" href="#arg-device-type"></a></dt>
-<dd><p>Optional string: <code>"cpu"</code>, <code>"gpu"</code>, or <code>"tpu"</code>.</p></dd>
+<dd><p>String, one of <code>"cpu"</code>, <code>"gpu"</code>, or <code>"tpu"</code>. If <code>NULL</code>,
+Keras counts GPU or TPU devices when available and otherwise counts CPU
+devices.</p></dd>
 
 </dl></div>
     <div class="section level2">

@@ -169,15 +169,28 @@ layer_batch_normalization(
 
 - renorm:
 
-  Whether to use batch renormalization during training.
+  Whether to use [Batch
+  Renormalization](https://arxiv.org/abs/1702.03275). This adds extra
+  variables during training. Inference is the same for either value of
+  this parameter.
 
 - renorm_clipping:
 
-  Optional clipping configuration used when `renorm = TRUE`.
+  Named list, valid only if `renorm = TRUE`. Maps optional keys
+  `"rmax"`, `"rmin"`, and `"dmax"` to numeric values used to clip the
+  renormalization correction. The correction `(r, d)` is used as
+  `corrected_value = normalized_value * r + d`, with `r` clipped to
+  `[rmin, rmax]` and `d` clipped to `[-dmax, dmax]`. Missing `rmax`,
+  `rmin`, and `dmax` values default to `Inf`, `0`, and `Inf`,
+  respectively.
 
 - renorm_momentum:
 
-  Momentum used for renormalization statistics when `renorm = TRUE`.
+  Momentum used to update the moving means and standard deviations for
+  renormalization. Valid only if `renorm = TRUE`. Unlike `momentum`,
+  this affects training and should be neither too small, which would add
+  noise, nor too large, which would give stale estimates. `momentum` is
+  still applied to obtain the means and variances used for inference.
 
 - synchronized:
 

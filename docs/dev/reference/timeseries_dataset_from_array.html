@@ -149,8 +149,10 @@ This is useful to reserve part of the data for test or validation.</p></dd>
 
 
 <dt id="arg-format">format<a class="anchor" aria-label="anchor" href="#arg-format"></a></dt>
-<dd><p>Return either a TensorFlow dataset (<code>"tf"</code>) or a
-framework-agnostic Grain dataset (<code>"grain"</code>).</p></dd>
+<dd><p>Optional string; either <code>"tf"</code> (the default) for a
+<code>tf.data.Dataset</code>, or <code>"grain"</code> for a Grain dataset. Grain datasets are
+framework-agnostic and work with JAX, PyTorch, and NumPy backends without
+requiring TensorFlow.</p></dd>
 
 </dl></div>
     <div class="section level2">

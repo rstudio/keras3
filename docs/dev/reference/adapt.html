@@ -71,8 +71,10 @@
 
 
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
-<dd><p>The data to train on. It can be passed either as a
-<code>tf.data.Dataset</code> or as an R array.</p></dd>
+<dd><p>The data to train on. It can be an R array, a backend-native
+eager tensor, a batched <code>tf.data.Dataset</code>, a Grain dataset, a
+<code>keras.utils.PyDataset</code>, or an iterable of batches such as a list of
+arrays or a generator. Dataset and iterable inputs must be batched.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

@@ -54,14 +54,16 @@ layer_normalization(
   The mean value(s) to use during normalization. The passed value(s)
   will be broadcast to the shape of the kept axes above; if the value(s)
   cannot be broadcast, an error will be raised when this layer's
-  `build()` method is called.
+  `build()` method is called. `mean` and `variance` must be specified
+  together.
 
 - variance:
 
   The variance value(s) to use during normalization. The passed value(s)
   will be broadcast to the shape of the kept axes above; if the value(s)
   cannot be broadcast, an error will be raised when this layer's
-  `build()` method is called.
+  `build()` method is called. `mean` and `variance` must be specified
+  together.
 
 - invert:
 

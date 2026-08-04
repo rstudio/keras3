@@ -83,8 +83,10 @@ timeseries_dataset_from_array(
 
 - format:
 
-  Return either a TensorFlow dataset (`"tf"`) or a framework-agnostic
-  Grain dataset (`"grain"`).
+  Optional string; either `"tf"` (the default) for a `tf.data.Dataset`,
+  or `"grain"` for a Grain dataset. Grain datasets are
+  framework-agnostic and work with JAX, PyTorch, and NumPy backends
+  without requiring TensorFlow.
 
 ## Value
 

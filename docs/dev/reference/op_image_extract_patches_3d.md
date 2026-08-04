@@ -33,8 +33,9 @@ op_image_extract_patches_3d(
 
 - dilation_rate:
 
-  Integer or integer vector of length three specifying the spacing
-  between consecutive patch samples.
+  Integer or integer vector of length three specifying the input stride
+  between consecutive patch samples. On the TensorFlow backend,
+  `dilation_rate > 1` cannot be combined with `strides > 1`.
 
 - padding:
 
@@ -42,8 +43,11 @@ op_image_extract_patches_3d(
 
 - data_format:
 
-  One of `"channels_last"` or `"channels_first"`. `NULL` uses the
-  configured image data format.
+  `"channels_last"` for input with shape
+  `(batch, depth, height, width, channels)` or `"channels_first"` for
+  input with shape `(batch, channels, depth, height, width)`. `NULL`
+  defaults to
+  [`config_image_data_format()`](https://keras3.posit.co/dev/reference/config_image_data_format.md).
 
 ## Value
 

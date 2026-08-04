@@ -1,6 +1,8 @@
 # Compute matrix rank using singular value decomposition.
 
-Compute matrix rank using singular value decomposition.
+The rank is the number of singular values greater than `tol`. When `tol`
+is `NULL`, each backend derives its default threshold from the largest
+singular value and the matrix dimensions.
 
 ## Usage
 
@@ -17,7 +19,7 @@ op_matrix_rank(x, tol = NULL)
 - tol:
 
   Optional absolute threshold below which singular values are treated as
-  zero. If `NULL`, the backend default is used.
+  zero. If `NULL`, the backend default described above is used.
 
 ## Value
 

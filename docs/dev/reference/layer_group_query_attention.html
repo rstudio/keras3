@@ -144,9 +144,10 @@ tensor.</p>
 
 <dt id="arg-sliding-window">sliding_window<a class="anchor" aria-label="anchor" href="#arg-sliding-window"></a></dt>
 <dd><p>Optional positive integer. If set, each query position attends only to key
-positions within <code>sliding_window - 1</code> of itself. This combines with
-<code>use_causal_mask = TRUE</code> to provide causal sliding-window attention.
-Defaults to <code>NULL</code>, which uses full attention.</p></dd>
+positions within <code>sliding_window - 1</code> of itself, forming a symmetric band.
+This combines with <code>use_causal_mask = TRUE</code> to provide the causal sliding
+window used by Mistral, Llama 3 long-context, and Phi-3. Defaults to <code>NULL</code>,
+which uses full attention.</p></dd>
 
 
 <dt id="arg-flash-attention">flash_attention<a class="anchor" aria-label="anchor" href="#arg-flash-attention"></a></dt>
@@ -186,8 +187,12 @@ computations when possible. This behavior can be configured using
 
 
 <dt id="arg-use-gate">use_gate<a class="anchor" aria-label="anchor" href="#arg-use-gate"></a></dt>
-<dd><p>Whether to add the gated attention branch used by recent grouped-query
-attention variants.</p></dd>
+<dd><p>Logical, whether to apply a gated attention mechanism. When <code>TRUE</code>, an
+additional gating branch is added based on
+<a href="https://arxiv.org/abs/2505.06708" class="external-link">Gated Attention for Large Language Models</a>.
+It applies a sigmoid-activated linear projection to the query, which then
+gates the attention output. This helps improve training stability and
+eliminates "attention sinks".</p></dd>
 
 
 <dt id="arg-seed">seed<a class="anchor" aria-label="anchor" href="#arg-seed"></a></dt>

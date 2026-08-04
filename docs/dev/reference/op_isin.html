@@ -71,16 +71,19 @@
 
 
 <dt id="arg-x-">x2<a class="anchor" aria-label="anchor" href="#arg-x-"></a></dt>
-<dd><p>Values against which to test each element of <code>x1</code>.</p></dd>
+<dd><p>Values against which to test each element of <code>x1</code>. May be a tensor,
+list, or scalar.</p></dd>
 
 
 <dt id="arg-assume-unique">assume_unique<a class="anchor" aria-label="anchor" href="#arg-assume-unique"></a></dt>
 <dd><p>Whether both inputs can be assumed to contain unique
-elements.</p></dd>
+elements. <code>TRUE</code> can improve performance; <code>FALSE</code> handles duplicates
+correctly. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-invert">invert<a class="anchor" aria-label="anchor" href="#arg-invert"></a></dt>
-<dd><p>Whether to invert the result.</p></dd>
+<dd><p>Whether to invert the result, returning <code>TRUE</code> where elements
+of <code>x1</code> are absent from <code>x2</code>. Defaults to <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

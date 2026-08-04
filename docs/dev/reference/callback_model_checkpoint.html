@@ -247,7 +247,40 @@ current model is better than this value.</p></dd>
 <span>             callbacks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">model_checkpoint_callback</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># The model weights (that are considered the best) can be loaded</span></span>
-<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="va">checkpoint_filepath</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="va">checkpoint_filepath</span><span class="op">)</span></span></code></pre><p></p></div><div class="section">
+<h3 id="resuming-training-from-weight-only-checkpoints">Resuming training from weight-only checkpoints<a class="anchor" aria-label="anchor" href="#resuming-training-from-weight-only-checkpoints"></a></h3>
+
+
+<p>When using <code>save_weights_only = TRUE</code>, the weights file includes the state
+of the optimizer, including its iteration count and learning-rate state, if
+the model is compiled at the time of saving.</p>
+<p>To correctly resume training and restore the optimizer state—for example,
+to continue a learning-rate schedule without resetting it—compile the model
+before loading the weights.</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">lr_schedule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/learning_rate_schedule_exponential_decay.html">learning_rate_schedule_exponential_decay</a></span><span class="op">(</span></span>
+<span>  initial_learning_rate <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  decay_steps <span class="op">=</span> <span class="fl">100000</span>,</span>
+<span>  decay_rate <span class="op">=</span> <span class="fl">0.96</span>,</span>
+<span>  staircase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 1. Create a fresh model instance.</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">get_model</span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 2. Compile the model before loading weights.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
+<span>  optimizer <span class="op">=</span> <span class="fu"><a href="../reference/optimizer_rmsprop.html">optimizer_rmsprop</a></span><span class="op">(</span>learning_rate <span class="op">=</span> <span class="va">lr_schedule</span><span class="op">)</span>,</span>
+<span>  loss <span class="op">=</span> <span class="st">"sparse_categorical_crossentropy"</span>,</span>
+<span>  metrics <span class="op">=</span> <span class="st">"accuracy"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 3. Load weights; the optimizer state is restored automatically.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/load_model_weights.html">load_model_weights</a></span><span class="op">(</span><span class="va">checkpoint_filepath</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># 4. Continue training.</span></span>
+<span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">x_train</span>, <span class="va">y_train</span>, epochs <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre><p></p></div>
+</div>
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

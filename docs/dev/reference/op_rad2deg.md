@@ -1,6 +1,6 @@
 # Convert angles from radians to degrees.
 
-Convert angles from radians to degrees.
+The conversion is `degrees = radians * (180 / pi)`.
 
 ## Usage
 

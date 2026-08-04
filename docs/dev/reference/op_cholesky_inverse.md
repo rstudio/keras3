@@ -1,6 +1,7 @@
-# Compute a matrix inverse from its Cholesky factor.
+# Compute the inverse of a symmetric positive-definite matrix from its Cholesky factor.
 
-Compute a matrix inverse from its Cholesky factor.
+Compute the inverse of a symmetric positive-definite matrix from its
+Cholesky factor.
 
 ## Usage
 

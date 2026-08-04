@@ -1,10 +1,7 @@
 # Rearrange channels into blocks of spatial data.
 
-Also known as pixel shuffle, this rearranges an input of shape
-`(N, H, W, C * block_size^2)` into
-`(N, H * block_size, W * block_size, C)` for channels-last inputs. It is
-the inverse of
-[`op_space_to_depth()`](https://keras3.posit.co/dev/reference/op_space_to_depth.md).
+This operation is useful for resizing activations between convolutions
+while retaining all data, and for training purely convolutional models.
 
 ## Usage
 
@@ -20,16 +17,32 @@ op_depth_to_space(x, block_size, data_format = "channels_last")
 
 - block_size:
 
-  Integer spatial block size.
+  Integer spatial block size. The number of channels must be divisible
+  by `block_size^2`.
 
 - data_format:
 
-  One of `"channels_last"` or `"channels_first"`.
+  `"channels_last"` for input with shape
+  `(batch, height, width, channels)` or `"channels_first"` for input
+  with shape `(batch, channels, height, width)`. Defaults to
+  `"channels_last"`.
 
 ## Value
 
-A tensor with spatial dimensions multiplied by `block_size` and channel
-depth divided by `block_size^2`.
+A tensor with the same dtype as `x`, with shape
+`(N, H * block_size, W * block_size, C %/% block_size^2)` for
+channels-last input or
+`(N, C %/% block_size^2, H * block_size, W * block_size)` for
+channels-first input.
+
+## Details
+
+Also known as pixel shuffle, it rearranges `(N, H, W, C * block_size^2)`
+to `(N, H * block_size, W * block_size, C)` for channels-last input, or
+`(N, C * block_size^2, H, W)` to
+`(N, C, H * block_size, W * block_size)` for channels-first input. It is
+the inverse of
+[`op_space_to_depth()`](https://keras3.posit.co/dev/reference/op_space_to_depth.md).
 
 ## See also
 

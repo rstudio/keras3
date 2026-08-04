@@ -306,12 +306,22 @@ regardless of vocabulary size. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-oov-method">oov_method<a class="anchor" aria-label="anchor" href="#arg-oov-method"></a></dt>
-<dd><p>Strategy used to assign integer OOV tokens to OOV buckets when
-<code>num_oov_indices &gt; 1</code>.</p></dd>
+<dd><p>Only relevant when <code>num_oov_indices &gt; 1</code>. Controls how OOV tokens are
+assigned to OOV buckets:</p><ul><li><p><code>"floormod"</code> (the default) uses <code>token %% num_oov_indices</code>. This preserves
+backwards compatibility, but can produce severe bucket imbalance when
+input IDs share a common factor with <code>num_oov_indices</code>, such as all-even
+IDs with an even bucket count.</p></li>
+<li><p><code>"farmhash"</code> applies FarmHash64, which distributes OOV tokens uniformly
+regardless of the arithmetic structure of the input IDs.
+This parameter is ignored for string inputs, which always use FarmHash64.</p></li>
+</ul></dd>
 
 
 <dt id="arg-salt">salt<a class="anchor" aria-label="anchor" href="#arg-salt"></a></dt>
-<dd><p>Optional salt used when hashing OOV values.</p></dd>
+<dd><p>Only valid when <code>oov_method = "farmhash"</code>. If supplied, OOV bucket
+assignment uses SipHash64, with these values as an additional input (a
+"salt" in cryptography). May be a pair of integers, or a single integer
+used for both key components. If <code>NULL</code> (the default), FarmHash64 is used.</p></dd>
 
 
 <dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>

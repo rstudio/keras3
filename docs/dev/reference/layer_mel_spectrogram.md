@@ -1,5 +1,8 @@
 # A preprocessing layer to convert raw audio signals to Mel spectrograms.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 This layer takes `float32`/`float64` single or batched audio signal as
 inputs and computes the Mel spectrogram using Short-Time Fourier
 Transform and Mel scaling. The input should be a 1D (unbatched) or 2D

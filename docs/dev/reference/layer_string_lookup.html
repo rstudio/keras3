@@ -306,7 +306,10 @@ strings. Defaults to <code>"utf-8"</code>.</p></dd>
 
 
 <dt id="arg-salt">salt<a class="anchor" aria-label="anchor" href="#arg-salt"></a></dt>
-<dd><p>Optional salt used when hashing OOV string values.</p></dd>
+<dd><p>Only valid when <code>num_oov_indices &gt; 1</code>. If supplied, OOV bucket assignment
+uses SipHash64, with these values as an additional input (a "salt" in
+cryptography). May be a pair of integers, or a single integer used for both
+key components. If <code>NULL</code> (the default), FarmHash64 is used.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

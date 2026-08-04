@@ -465,7 +465,7 @@ documentation.
   : Randomly performs the color degeneration operation on given images.
 
 - [`layer_random_color_jitter()`](https://keras3.posit.co/dev/reference/layer_random_color_jitter.md)
-  : Randomly apply brightness, contrast, saturation
+  : Randomly apply brightness, contrast, saturation, and hue.
 
 - [`layer_random_contrast()`](https://keras3.posit.co/dev/reference/layer_random_contrast.md)
   : A preprocessing layer which randomly adjusts contrast during
@@ -513,7 +513,8 @@ documentation.
   : Randomly performs the sharpness operation on given images.
 
 - [`layer_random_shear()`](https://keras3.posit.co/dev/reference/layer_random_shear.md)
-  : A preprocessing layer that randomly applies shear transformations
+  : A preprocessing layer that randomly applies shear transformations to
+  images.
 
 - [`layer_random_translation()`](https://keras3.posit.co/dev/reference/layer_random_translation.md)
   : A preprocessing layer which randomly translates images during
@@ -921,7 +922,8 @@ Functions that are safe to call with both symbolic and eager tensor.
   Return the ceiling of the input, element-wise.
 
 - [`op_cholesky_inverse()`](https://keras3.posit.co/dev/reference/op_cholesky_inverse.md)
-  : Compute a matrix inverse from its Cholesky factor.
+  : Compute the inverse of a symmetric positive-definite matrix from its
+  Cholesky factor.
 
 - [`op_clip()`](https://keras3.posit.co/dev/reference/op_clip.md) : Clip
   (limit) the values in a tensor.
@@ -1783,7 +1785,7 @@ Functions that are safe to call with both symbolic and eager tensor.
   Crop `images` to a specified `height` and `width`.
 
 - [`op_image_extract_patches()`](https://keras3.posit.co/dev/reference/op_image_extract_patches.md)
-  : Extracts patches from the image(s).
+  : Extracts patches from image(s) or volume(s).
 
 - [`op_image_extract_patches_3d()`](https://keras3.posit.co/dev/reference/op_image_extract_patches_3d.md)
   : Extract patches from 3D volumes.
@@ -2244,7 +2246,7 @@ transform your input dataset before training.
   : Applies elastic deformation to the image(s).
 
 - [`op_image_extract_patches()`](https://keras3.posit.co/dev/reference/op_image_extract_patches.md)
-  : Extracts patches from the image(s).
+  : Extracts patches from image(s) or volume(s).
 
 - [`op_image_extract_patches_3d()`](https://keras3.posit.co/dev/reference/op_image_extract_patches_3d.md)
   : Extract patches from 3D volumes.

@@ -21,8 +21,7 @@ op_cholesky(x, upper = FALSE)
 
 ## Value
 
-A tensor of shape `(..., M, M)` representing the lower triangular
-Cholesky factor of `x`.
+A tensor of shape `(..., M, M)` representing the Cholesky factor of `x`.
 
 ## See also
 

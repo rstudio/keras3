@@ -27,8 +27,10 @@ quantizer_int4_quantization_config(
 - block_size:
 
   Group size along the input dimension. A positive integer uses
-  sub-channel quantization; `NULL` or `-1` uses per-channel
-  quantization.
+  sub-channel quantization with `ceiling(input_dim / block_size)`
+  groups; `NULL` or `-1` uses per-channel quantization with one scale
+  per output channel. Sub-channel quantization does not support custom
+  weight or activation quantizers. Defaults to 128.
 
 ## Value
 

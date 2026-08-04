@@ -1,5 +1,8 @@
 # Randomly adjusts the hue on given images.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 This layer will randomly increase/reduce the hue for the input RGB
 images.
 

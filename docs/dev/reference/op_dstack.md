@@ -1,6 +1,8 @@
 # Stack tensors depth-wise along the third axis.
 
-Stack tensors depth-wise along the third axis.
+This is equivalent to concatenation along the third axis after
+two-dimensional tensors of shape `(M, N)` are reshaped to `(M, N, 1)`
+and one-dimensional tensors of shape `(N)` are reshaped to `(1, N, 1)`.
 
 ## Usage
 

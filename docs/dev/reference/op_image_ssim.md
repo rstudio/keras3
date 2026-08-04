@@ -30,33 +30,43 @@ op_image_ssim(
 
 - max_val:
 
-  Maximum possible image value.
+  Maximum possible image value. Defaults to `1` for normalized images;
+  use `255` for images with pixel values in `[0, 255]`.
 
 - filter_size:
 
-  Odd integer Gaussian filter size.
+  Gaussian filter size. Must be an odd integer greater than or equal
+  to 1. Defaults to `11`.
 
 - filter_sigma:
 
-  Gaussian filter standard deviation.
+  Gaussian filter standard deviation. Defaults to `1.5`.
 
 - k1:
 
-  First stabilization constant.
+  First stabilization constant. Defaults to `0.01`.
 
 - k2:
 
-  Second stabilization constant.
+  Second stabilization constant. Defaults to `0.03`.
 
 - data_format:
 
-  One of `"channels_last"` or `"channels_first"`. `NULL` uses the
-  configured image data format.
+  `"channels_last"` for input with shape
+  `(batch, height, width, channels)` or `"channels_first"` for input
+  with shape `(batch, channels, height, width)`. `NULL` defaults to
+  [`config_image_data_format()`](https://keras3.posit.co/dev/reference/config_image_data_format.md).
 
 ## Value
 
 A scalar tensor for unbatched images or one SSIM value per image for
 batched inputs.
+
+## Details
+
+This implementation follows Wang, Bovik, Sheikh, and Simoncelli (2004),
+"Image quality assessment: From error visibility to structural
+similarity," *IEEE Transactions on Image Processing*.
 
 ## See also
 

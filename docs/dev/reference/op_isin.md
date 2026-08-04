@@ -16,15 +16,19 @@ op_isin(x1, x2, assume_unique = FALSE, invert = FALSE)
 
 - x2:
 
-  Values against which to test each element of `x1`.
+  Values against which to test each element of `x1`. May be a tensor,
+  list, or scalar.
 
 - assume_unique:
 
-  Whether both inputs can be assumed to contain unique elements.
+  Whether both inputs can be assumed to contain unique elements. `TRUE`
+  can improve performance; `FALSE` handles duplicates correctly.
+  Defaults to `FALSE`.
 
 - invert:
 
-  Whether to invert the result.
+  Whether to invert the result, returning `TRUE` where elements of `x1`
+  are absent from `x2`. Defaults to `FALSE`.
 
 ## Value
 

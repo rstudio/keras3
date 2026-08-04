@@ -1,6 +1,7 @@
 # Find unique elements of a tensor.
 
-Find unique elements of a tensor.
+When `size` is supplied, the output shape is fixed, making the operation
+compatible with JIT compilation such as JAX and TensorFlow graph mode.
 
 ## Usage
 
@@ -26,35 +27,39 @@ op_unique(
 
 - sorted:
 
-  Whether to sort unique elements in ascending order.
+  Whether to sort unique elements in ascending order. Defaults to
+  `TRUE`.
 
 - return_index:
 
   Whether to return indices of the first occurrence of each unique
-  element.
+  element. Defaults to `FALSE`.
 
 - return_inverse:
 
-  Whether to return indices that reconstruct `x` from the unique values.
+  Whether to return indices of the unique values, or unique subarrays
+  when `axis` is supplied, that reconstruct `x`. Defaults to `FALSE`.
 
 - return_counts:
 
   Whether to return the number of occurrences of each unique element.
+  Defaults to `FALSE`.
 
 - axis:
 
-  Axis along which to find unique subarrays. By default, `x` is
-  flattened.
+  Axis along which subarrays are treated as elements. If `NULL`, `x` is
+  flattened. Defaults to `NULL`.
 
 - size:
 
-  Optional fixed number of unique values to return. Results are padded
-  or truncated to this size.
+  Optional fixed number of unique values to return. If fewer values are
+  found, the output is padded with `fill_value`; if more are found, it
+  is truncated.
 
 - fill_value:
 
   Value used to pad results when `size` is larger than the number of
-  unique values.
+  unique values. `NULL` uses the upstream default of zero.
 
 - zero_indexed:
 
@@ -66,18 +71,21 @@ op_unique(
 A tensor of unique values. If any `return_*` argument is `TRUE`, returns
 a list containing the values followed, in argument order, by the
 requested first-occurrence indices, inverse indices, and counts. Indices
-are one-based unless `zero_indexed = TRUE`.
-
-## Details
-
-c(values, first, inverse, counts) %\<-% op_unique( c(3L, 1L, 2L, 1L, 3L,
-2L), return_index = TRUE, return_inverse = TRUE, return_counts = TRUE )
+are one-based unless `zero_indexed = TRUE`. When `size` is supplied and
+`axis = NULL`, the unique-values tensor has shape `(size)`.
 
 ## Examples
 
     op_unique(c(3L, 1L, 2L, 1L, 3L, 2L))
 
     ## tf.Tensor([1 2 3], shape=(3), dtype=int32)
+
+    c(values, first, inverse, counts) %<-% op_unique(
+      c(3L, 1L, 2L, 1L, 3L, 2L),
+      return_index = TRUE,
+      return_inverse = TRUE,
+      return_counts = TRUE
+    )
 
 ## See also
 

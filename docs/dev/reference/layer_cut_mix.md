@@ -1,5 +1,8 @@
 # CutMix data augmentation technique.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 CutMix is a data augmentation method where patches are cut and pasted
 between two images in the dataset, while the labels are also mixed
 proportionally to the area of the patches.

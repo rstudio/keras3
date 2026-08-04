@@ -76,14 +76,12 @@ operations.</p>
 
 
 <dl><dt id="arg-f">f<a class="anchor" aria-label="anchor" href="#arg-f"></a></dt>
-<dd><p>Function <code>f(*args)</code> that returns a tuple
-<code>(output, grad_fn)</code>, where:</p><ul><li><p><code>args</code> is a sequence of (nested structures of) tensor inputs to
-the function.</p></li>
+<dd><p>Function <code>f(...)</code> that returns a tuple <code>(output, grad_fn)</code>, where:</p><ul><li><p><code>...</code> is a sequence of tensor inputs or nested structures of tensor inputs.</p></li>
 <li><p><code>output</code> is a (nested structure of) tensor outputs of applying
-operations in <code>forward_fn</code> to <code>args</code>.</p></li>
-<li><p><code>grad_fn</code> is a function with the signature <code>grad_fn(*args, upstream)</code> which returns a tuple of tensors the same size as
-(flattened) <code>args</code>: the derivatives of tensors in <code>output</code> with
-respect to the tensors in <code>args</code>. <code>upstream</code> is a tensor or
+the operations in <code>f()</code> to <code>...</code>.</p></li>
+<li><p><code>grad_fn</code> has signature <code>grad_fn(..., upstream)</code> and returns a tuple of
+tensors the same size as flattened <code>...</code>: the derivatives of tensors in
+<code>output</code> with respect to the tensors in <code>...</code>. <code>upstream</code> is a tensor or
 sequence of tensors holding the initial value gradients for each
 tensor in <code>output</code>.</p></li>
 </ul></dd>
@@ -91,20 +89,43 @@ tensor in <code>output</code>.</p></li>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A function <code>h(*args)</code> which returns the same value as
-<code>f(*args)[0]</code> and whose gradient is determined by
-<code>f(*args)[1]</code>.</p>
+    <p>A function <code>h(...)</code> which returns the same value as <code>f(...)[[1]]</code> and whose
+gradient is determined by <code>f(...)[[2]]</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>The gradient function's signature depends on the backend. With TensorFlow
+and JAX, <code>grad(upstream)</code> is sufficient. With PyTorch, the gradient function
+may also receive the original positional inputs, so define <code>grad</code> with <code>...</code>
+and <code>upstream</code> formals when they are required. The backend-agnostic example
+above accepts both calling conventions.</p>
     </div>
     <div class="section level2">
     <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a></h2>
-    <p>Backend-agnostic usage wraps a function like <code>log1pexp(x)</code> with
-<code>ops.custom_gradient(log1pexp)</code> and returns both the forward value and
-a gradient function.</p>
-<p>The gradient function may need different signatures depending on the backend.
-A backend-agnostic implementation can use <code>grad(*args, upstream = None)</code>.
-With TensorFlow and JAX, <code>grad(upstream)</code> is typically sufficient.
-With PyTorch, use <code>grad(*args, upstream)</code> when both positional inputs and
-the upstream gradient are required.</p>
+    <p>This backend-agnostic implementation accepts the positional inputs used by
+PyTorch as well as the upstream gradient used by all backends.</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">log1pexp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_custom_gradient.html">op_custom_gradient</a></span><span class="op">(</span><span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_exp.html">op_exp</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">grad</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span>, <span class="va">upstream</span> <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">upstream</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="va">upstream</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
+<span>    <span class="fu"><a href="../reference/op_multiply.html">op_multiply</a></span><span class="op">(</span><span class="va">upstream</span>, <span class="fl">1</span> <span class="op">-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="../reference/op_add.html">op_add</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">e</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/tuple.html" class="external-link">tuple</a></span><span class="op">(</span><span class="fu"><a href="../reference/op_log.html">op_log</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">e</span><span class="op">)</span>, <span class="va">grad</span><span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="../reference/config_backend.html">config_backend</a></span><span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="st">"tensorflow"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">tf</span> <span class="op">&lt;-</span> <span class="fu">tensorflow</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/tensorflow/man/tf.html" class="external-link">tf</a></span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/op_convert_to_tensor.html">op_convert_to_tensor</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">tf</span><span class="op">$</span><span class="fu">GradientTape</span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rstudio.github.io/reticulate/reference/with-as-operator.html" class="external-link">%as%</a></span> <span class="va">tape</span>, <span class="op">{</span></span>
+<span>    <span class="va">tape</span><span class="op">$</span><span class="fu">watch</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>    <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu">log1pexp</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="op">}</span><span class="op">)</span></span>
+<span>  <span class="va">dy_dx</span> <span class="op">&lt;-</span> <span class="va">tape</span><span class="op">$</span><span class="fu">gradient</span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html" class="external-link">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">dy_dx</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>

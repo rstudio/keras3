@@ -71,17 +71,17 @@
 
 
 <dt id="arg-segment-ids">segment_ids<a class="anchor" aria-label="anchor" href="#arg-segment-ids"></a></dt>
-<dd><p>Tensor containing 1-based segment indices. Its leading
-dimensions must match the corresponding dimensions of <code>data</code>.</p></dd>
+<dd><p>A 1-D tensor containing 1-based segment indices for
+elements in <code>data</code>. Its length must match the first dimension of <code>data</code>.</p></dd>
 
 
 <dt id="arg-num-segments">num_segments<a class="anchor" aria-label="anchor" href="#arg-num-segments"></a></dt>
 <dd><p>Optional total number of segments. When <code>NULL</code>, it is
-inferred from <code>segment_ids</code>.</p></dd>
+inferred from the maximum value in <code>segment_ids</code>.</p></dd>
 
 
 <dt id="arg-sorted">sorted<a class="anchor" aria-label="anchor" href="#arg-sorted"></a></dt>
-<dd><p>Whether <code>segment_ids</code> is sorted.</p></dd>
+<dd><p>Whether <code>segment_ids</code> is sorted. Defaults to <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

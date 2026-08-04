@@ -1,6 +1,7 @@
 # Compute the element-wise maximum while ignoring `NaN` values.
 
-Compute the element-wise maximum while ignoring `NaN` values.
+If one compared element is `NaN`, the non-`NaN` element is returned. If
+both elements are `NaN`, `NaN` is returned.
 
 ## Usage
 

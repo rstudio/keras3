@@ -1,6 +1,7 @@
 # Reduces the number of bits for each color channel.
 
-Reduces the number of bits for each color channel.
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
 
 ## Usage
 

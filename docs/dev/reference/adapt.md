@@ -16,8 +16,10 @@ adapt(object, data, ..., batch_size = NULL, steps = NULL)
 
 - data:
 
-  The data to train on. It can be passed either as a `tf.data.Dataset`
-  or as an R array.
+  The data to train on. It can be an R array, a backend-native eager
+  tensor, a batched `tf.data.Dataset`, a Grain dataset, a
+  `keras.utils.PyDataset`, or an iterable of batches such as a list of
+  arrays or a generator. Dataset and iterable inputs must be batched.
 
 - ...:
 

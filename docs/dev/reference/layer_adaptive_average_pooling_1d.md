@@ -1,7 +1,9 @@
 # Adaptive average pooling for 1D data
 
-Pools an input to the requested output length, computing the kernel size
-and stride from the input length.
+Applies adaptive average pooling to temporal or spatial data so that the
+output has the target length specified by `output_size`, regardless of
+the input length. The kernel size and stride are computed automatically
+to achieve the target output size.
 
 ## Usage
 
@@ -60,6 +62,24 @@ If `object` is:
   then the output tensor from calling `layer(input)` is returned.
 
 - `NULL` or missing, then a `Layer` instance is returned.
+
+## Details
+
+### Input shape
+
+- With `data_format = "channels_last"`: a 3D tensor with shape
+  `(batch_size, length, channels)`.
+
+- With `data_format = "channels_first"`: a 3D tensor with shape
+  `(batch_size, channels, length)`.
+
+### Output shape
+
+- With `data_format = "channels_last"`:
+  `(batch_size, output_length, channels)`.
+
+- With `data_format = "channels_first"`:
+  `(batch_size, channels, output_length)`.
 
 ## Examples
 

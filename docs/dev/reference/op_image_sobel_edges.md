@@ -1,6 +1,8 @@
 # Compute Sobel edges for images.
 
-Compute Sobel edges for images.
+The Sobel operator computes the gradient of image intensity at each
+pixel, giving the direction and rate of the largest change from light to
+dark.
 
 ## Usage
 
@@ -12,17 +14,22 @@ op_image_sobel_edges(images, data_format = NULL)
 
 - images:
 
-  A rank-4 image tensor in channels-last or channels-first format.
+  Input tensor with shape `(batch, height, width, channels)` for
+  channels-last format or `(batch, channels, height, width)` for
+  channels-first format.
 
 - data_format:
 
-  One of `"channels_last"` or `"channels_first"`. `NULL` uses the
-  configured image data format.
+  One of `"channels_last"` or `"channels_first"`. `NULL` defaults to
+  [`config_image_data_format()`](https://keras3.posit.co/dev/reference/config_image_data_format.md).
 
 ## Value
 
-A tensor with a final dimension of length two containing the vertical
-and horizontal gradients.
+For channels-last input, a tensor with shape
+`(batch, height, width, channels, 2)`. For channels-first input, a
+tensor with shape `(batch, channels, height, width, 2)`. The final
+dimension is `[dy, dx]`, containing the vertical and horizontal
+gradients.
 
 ## See also
 

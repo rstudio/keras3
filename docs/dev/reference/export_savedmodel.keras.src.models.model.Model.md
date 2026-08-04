@@ -56,7 +56,8 @@ export_savedmodel(
     If `native_serialization` and `polymorphic_shapes` are not provided,
     they are computed automatically.
 
-  - `opset_version`: Optional integer specific to `format = "onnx"`.
+  - `opset_version`: Optional integer specific to `format = "onnx"` that
+    specifies the ONNX opset version.
 
   - LiteRT-specific options. With the TensorFlow backend these are
     passed to the TensorFlow Lite converter and include `optimizations`,
@@ -124,6 +125,19 @@ Here's how to export an ONNX for inference.
     input_data <- list(....)
     names(input_data) <- sapply(ort_session$get_inputs(), `[[`, "name")
     predictions <- ort_session$run(NULL, input_data)
+
+Here's how to export a LiteRT (TFLite) artifact for inference.
+
+    model |> export_savedmodel("path/to/model.tflite", format = "litert")
+
+    tf <- reticulate::import("tensorflow")
+    interpreter <- tf$lite$Interpreter(model_path = "path/to/model.tflite")
+    interpreter$allocate_tensors()
+    interpreter$set_tensor(interpreter$get_input_details()[[1]]$index, input_data)
+    interpreter$invoke()
+    output_data <- interpreter$get_tensor(
+      interpreter$get_output_details()[[1]]$index
+    )
 
 Here's how to export a PyTorch `ExportedProgram` for inference.
 

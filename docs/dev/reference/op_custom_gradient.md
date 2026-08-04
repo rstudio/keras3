@@ -15,38 +15,60 @@ op_custom_gradient(f)
 
 - f:
 
-  Function `f(*args)` that returns a tuple `(output, grad_fn)`, where:
+  Function `f(...)` that returns a tuple `(output, grad_fn)`, where:
 
-  - `args` is a sequence of (nested structures of) tensor inputs to the
-    function.
+  - `...` is a sequence of tensor inputs or nested structures of tensor
+    inputs.
 
-  - `output` is a (nested structure of) tensor outputs of applying
-    operations in `forward_fn` to `args`.
+  - `output` is a (nested structure of) tensor outputs of applying the
+    operations in `f()` to `...`.
 
-  - `grad_fn` is a function with the signature
-    `grad_fn(*args, upstream)` which returns a tuple of tensors the same
-    size as (flattened) `args`: the derivatives of tensors in `output`
-    with respect to the tensors in `args`. `upstream` is a tensor or
-    sequence of tensors holding the initial value gradients for each
-    tensor in `output`.
+  - `grad_fn` has signature `grad_fn(..., upstream)` and returns a tuple
+    of tensors the same size as flattened `...`: the derivatives of
+    tensors in `output` with respect to the tensors in `...`. `upstream`
+    is a tensor or sequence of tensors holding the initial value
+    gradients for each tensor in `output`.
 
 ## Value
 
-A function `h(*args)` which returns the same value as `f(*args)[0]` and
-whose gradient is determined by `f(*args)[1]`.
+A function `h(...)` which returns the same value as `f(...)[[1]]` and
+whose gradient is determined by `f(...)[[2]]`.
+
+## Note
+
+The gradient function's signature depends on the backend. With
+TensorFlow and JAX, `grad(upstream)` is sufficient. With PyTorch, the
+gradient function may also receive the original positional inputs, so
+define `grad` with `...` and `upstream` formals when they are required.
+The backend-agnostic example above accepts both calling conventions.
 
 ## Examples
 
-Backend-agnostic usage wraps a function like `log1pexp(x)` with
-`ops.custom_gradient(log1pexp)` and returns both the forward value and a
-gradient function.
+This backend-agnostic implementation accepts the positional inputs used
+by PyTorch as well as the upstream gradient used by all backends.
 
-The gradient function may need different signatures depending on the
-backend. A backend-agnostic implementation can use
-`grad(*args, upstream = None)`. With TensorFlow and JAX,
-`grad(upstream)` is typically sufficient. With PyTorch, use
-`grad(*args, upstream)` when both positional inputs and the upstream
-gradient are required.
+    log1pexp <- op_custom_gradient(function(x) {
+      e <- op_exp(x)
+
+      grad <- function(..., upstream = NULL) {
+        if (is.null(upstream))
+          upstream <- list(...)[[1]]
+        op_multiply(upstream, 1 - 1 / op_add(1, e))
+      }
+
+      tuple(op_log(1 + e), grad)
+    })
+
+    if (config_backend() == "tensorflow") {
+      tf <- tensorflow::tf
+      x <- op_convert_to_tensor(100)
+      with(tf$GradientTape() %as% tape, {
+        tape$watch(x)
+        y <- log1pexp(x)
+      })
+      dy_dx <- tape$gradient(y, x)
+      stopifnot(as.numeric(dy_dx) == 1)
+    }
 
 ## See also
 

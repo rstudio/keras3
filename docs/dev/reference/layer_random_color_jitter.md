@@ -1,7 +1,10 @@
-# Randomly apply brightness, contrast, saturation
+# Randomly apply brightness, contrast, saturation, and hue.
 
-and hue image processing operation sequentially and randomly on the
-input.
+Applies these image processing operations sequentially and randomly to
+the input.
+
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
 
 ## Usage
 

@@ -1,6 +1,7 @@
 # Compute the Kronecker product of two tensors.
 
-Compute the Kronecker product of two tensors.
+If `x1` has shape `(a1, ..., an)` and `x2` has shape `(b1, ..., bn)`,
+the result has shape `(a1 * b1, ..., an * bn)`.
 
 ## Usage
 

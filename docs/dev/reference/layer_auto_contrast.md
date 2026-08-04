@@ -1,5 +1,8 @@
 # Performs the auto-contrast operation on an image.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 Auto contrast stretches the values of an image across the entire
 available `value_range`. This makes differences between pixels more
 obvious. An example of this is if an image only has values `[0, 1]` out

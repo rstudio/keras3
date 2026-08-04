@@ -1,7 +1,9 @@
 # Grouped asymmetric absolute-maximum quantization
 
 Quantizes a 2D tensor in row groups. Each group receives a scale and
-zero point for every output column.
+zero point for every output column. Groups are formed along the first
+axis, the input or contracting dimension. Asymmetric quantization is
+useful for weight distributions that are not centered around zero.
 
 ## Usage
 
@@ -44,8 +46,15 @@ quantizer_abs_max_quantize_grouped_with_zero_point(
 
 ## Value
 
-A list containing the quantized tensor, group scales, and group zero
-points.
+A list containing:
+
+- `quantized_tensor`: a tensor with the same shape as `inputs` and dtype
+  `dtype`.
+
+- `scale`: a tensor with shape `(n_groups, output_dim)`, where
+  `n_groups = ceiling(input_dim / block_size)`.
+
+- `zero_point`: a `uint8` tensor with shape `(n_groups, output_dim)`.
 
 ## Examples
 

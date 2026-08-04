@@ -30,6 +30,13 @@ op_correlate(x1, x2, mode = "valid")
 
 Output tensor, cross-correlation of `x1` and `x2`.
 
+## Note
+
+Complex-valued inputs are not currently fully supported by the
+TensorFlow and PyTorch backends. They are cast to floating-point types
+and their imaginary components are discarded. This behavior may change
+in a future release; see Keras issue 21617.
+
 ## See also
 
 Other numpy ops:  

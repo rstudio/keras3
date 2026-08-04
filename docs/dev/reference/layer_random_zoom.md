@@ -132,8 +132,8 @@ If `object` is:
 `(..., channels, target_height, target_width)`, in `"channels_first"`
 format.
 
-**Note:** This layer is safe to use inside a `tf.data` pipeline
-(independently of which backend you're using).
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline (independently of which backend you're using).
 
 ## Examples
 

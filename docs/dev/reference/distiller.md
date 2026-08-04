@@ -1,7 +1,9 @@
 # Model for transferring knowledge from a teacher to a student
 
 A distiller trains a student model from both ground-truth labels and the
-predictions or intermediate features of a frozen teacher model.
+predictions or intermediate features of a frozen teacher model. After
+training, access `model$student` to use the trained student
+independently.
 
 ## Usage
 
@@ -30,24 +32,29 @@ distiller(
 
 - distillation_losses:
 
-  A distillation loss or list of distillation losses.
+  A distillation loss or list of distillation losses, such as
+  [`distillation_logits()`](https://keras3.posit.co/dev/reference/distillation_logits.md),
+  [`distillation_feature()`](https://keras3.posit.co/dev/reference/distillation_feature.md),
+  or custom distillation losses.
 
 - distillation_loss_weights:
 
-  Optional numeric vector of weights, one for each element of
-  `distillation_losses`.
+  Numeric vector of weights for the distillation losses. It must have
+  the same length as `distillation_losses`. If `NULL`, equal weights are
+  used.
 
 - student_loss_weight:
 
   Weight of the student's supervised loss. Must be between 0 and 1.
+  Defaults to 0.5.
 
 - name:
 
-  Name of the distiller model.
+  Name of the distiller model. Defaults to `"distiller"`.
 
 - ...:
 
-  Additional arguments passed to `keras.Model`.
+  Additional arguments passed to the parent Keras `Model` class.
 
 ## Value
 

@@ -1,6 +1,7 @@
-# Extracts patches from the image(s).
+# Extracts patches from image(s) or volume(s).
 
-Extracts patches from the image(s).
+The length of `size` selects 2D or 3D patch extraction, in the same way
+that the dimensionality of a convolution is selected by its kernel size.
 
 ## Usage
 
@@ -19,23 +20,26 @@ op_image_extract_patches(
 
 - images:
 
-  Input image or batch of images. Must be 3D or 4D.
+  Input image, volume, or batch. For 2D patches, a 3D `(H, W, C)` image
+  or 4D `(N, H, W, C)` batch. For 3D patches, a 4D `(D, H, W, C)` volume
+  or 5D `(N, D, H, W, C)` batch.
 
 - size:
 
-  Patch size int or list (patch_height, patch_width)
+  Patch size as an integer or integer vector. Use a length-2 vector
+  `(patch_height, patch_width)` or a scalar for 2D patches, and a
+  length-3 vector `(patch_depth, patch_height, patch_width)` for 3D
+  patches.
 
 - strides:
 
-  strides along height and width. If not specified, or if `NULL`, it
-  defaults to the same value as `size`.
+  Strides for patch extraction. If `NULL`, defaults to `size`, producing
+  non-overlapping patches.
 
 - dilation_rate:
 
-  This is the input stride, specifying how far two consecutive patch
-  samples are in the input. For value other than 1, strides must be 1.
-  NOTE: `strides > 1` is not supported in conjunction with
-  `dilation_rate > 1`
+  Dilation rate for patch extraction. `dilation_rate > 1` is not
+  supported together with `strides > 1`.
 
 - padding:
 
@@ -45,15 +49,15 @@ op_image_extract_patches(
 
   A string specifying the data format of the input tensor. It can be
   either `"channels_last"` or `"channels_first"`. `"channels_last"`
-  corresponds to inputs with shape `(batch, height, width, channels)`,
-  while `"channels_first"` corresponds to inputs with shape
-  `(batch, channels, height, width)`. If not specified, the value will
-  default to
+  places channels last in images and volumes, while `"channels_first"`
+  places channels immediately after the batch dimension. Defaults to
+  `"channels_last"`; pass `NULL` to use
   [`config_image_data_format()`](https://keras3.posit.co/dev/reference/config_image_data_format.md).
 
 ## Value
 
-Extracted patches 3D (if not batched) or 4D (if batched)
+Extracted patches whose rank depends on the input and `size`: 3D or 4D
+for 2D patches, and 4D or 5D for 3D patches.
 
 ## Examples
 
@@ -71,6 +75,22 @@ Extracted patches 3D (if not batched) or 4D (if batched)
     ## shape(18, 18, 27)
 
     # (18, 18, 27)
+
+    volumes <- random_uniform(c(2, 10, 10, 10, 3), dtype = "float32")
+    patches <- op_image_extract_patches(volumes, c(3, 3, 3))
+    shape(patches)
+
+    ## shape(2, 3, 3, 3, 81)
+
+    # (2, 3, 3, 3, 81)
+
+    volume <- random_uniform(c(10, 10, 10, 3), dtype = "float32")
+    patches <- op_image_extract_patches(volume, c(3, 3, 3))
+    shape(patches)
+
+    ## shape(3, 3, 3, 81)
+
+    # (3, 3, 3, 81)
 
 ## See also
 

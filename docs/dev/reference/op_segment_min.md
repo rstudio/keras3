@@ -16,17 +16,18 @@ op_segment_min(data, segment_ids, num_segments = NULL, sorted = FALSE)
 
 - segment_ids:
 
-  Tensor containing 1-based segment indices. Its leading dimensions must
-  match the corresponding dimensions of `data`.
+  An N-D tensor containing 1-based segment indices for elements in
+  `data`. Its dimensions must match the corresponding leading dimensions
+  of `data`.
 
 - num_segments:
 
   Optional total number of segments. When `NULL`, it is inferred from
-  `segment_ids`.
+  the maximum value in `segment_ids`.
 
 - sorted:
 
-  Whether `segment_ids` is sorted.
+  Whether `segment_ids` is sorted. Defaults to `FALSE`.
 
 ## Value
 

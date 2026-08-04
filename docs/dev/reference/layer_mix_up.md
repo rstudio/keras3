@@ -1,6 +1,7 @@
 # MixUp implements the MixUp data augmentation technique.
 
-MixUp implements the MixUp data augmentation technique.
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
 
 ## Usage
 

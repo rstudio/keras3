@@ -1,8 +1,9 @@
 # Scale and translate images.
 
-Resamples `images` into `output_shape` using an inverse warp determined
-by `scale` and `translation` along the selected spatial dimensions.
-Locations outside the input are filled with zero.
+Generates images with `output_shape` by resampling `images`. For 2-D
+images, an input location `(x, y)` is transformed to
+`(x * scale[[2]] + translation[[2]], y * scale[[1]] + translation[[1]])`.
+The inverse warp is used to generate sample locations.
 
 ## Usage
 
@@ -26,20 +27,23 @@ op_image_scale_and_translate(
 
 - output_shape:
 
-  Integer output shape.
+  Integer vector giving the output shape, with one value per image
+  dimension.
 
 - scale:
 
-  Numeric vector with one scale per spatial dimension.
+  Numeric length-`K` vector containing the scale for each selected
+  spatial dimension.
 
 - translation:
 
-  Numeric vector with one translation per spatial dimension.
+  Numeric length-`K` vector containing the translation for each selected
+  spatial dimension.
 
 - spatial_dims:
 
-  Integer vector of 1-based spatial dimensions to which `scale` and
-  `translation` apply.
+  Integer length-`K` vector of 1-based spatial dimensions to which
+  `scale` and `translation` apply.
 
 - method:
 
@@ -49,11 +53,24 @@ op_image_scale_and_translate(
 
 - antialias:
 
-  Whether to apply an antialiasing filter when downsampling.
+  Whether to apply an antialiasing filter when downsampling. This has no
+  effect when upsampling. Defaults to `TRUE`.
 
 ## Value
 
 The scaled and translated images.
+
+## Details
+
+Pixels are half-centered: the pixel at integer row and column has
+coordinates `y = row + 0.5` and `x = column + 0.5`. Output locations
+that map outside the input boundaries are set to zero.
+
+Linear methods (`"linear"`, `"bilinear"`, `"trilinear"`, and
+`"triangle"`) use linear interpolation and, when `antialias = TRUE`, a
+triangular filter while downsampling. Cubic methods (`"cubic"`,
+`"bicubic"`, and `"tricubic"`) use the Keys cubic kernel. `"lanczos3"`
+and `"lanczos5"` use Lanczos kernels of radius 3 and 5, respectively.
 
 ## See also
 

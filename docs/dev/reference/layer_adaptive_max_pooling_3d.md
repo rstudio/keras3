@@ -1,7 +1,9 @@
 # Adaptive max pooling for 3D data
 
-Pools an input to the requested output depth, height, and width by
-taking maxima.
+Applies adaptive max pooling to volumetric data so that the output has
+the target spatial size specified by `output_size`, regardless of the
+input spatial size. The kernel size and stride are computed
+automatically to achieve the target output size.
 
 ## Usage
 
@@ -25,6 +27,8 @@ layer_adaptive_max_pooling_3d(
 - output_size:
 
   Integer or three integers giving the target depth, height, and width.
+  If a single integer is provided, the same value is used for all three
+  dimensions.
 
 - data_format:
 
@@ -62,6 +66,24 @@ If `object` is:
   then the output tensor from calling `layer(input)` is returned.
 
 - `NULL` or missing, then a `Layer` instance is returned.
+
+## Details
+
+### Input shape
+
+- With `data_format = "channels_last"`: a 5D tensor with shape
+  `(batch_size, depth, height, width, channels)`.
+
+- With `data_format = "channels_first"`: a 5D tensor with shape
+  `(batch_size, channels, depth, height, width)`.
+
+### Output shape
+
+- With `data_format = "channels_last"`:
+  `(batch_size, output_depth, output_height, output_width, channels)`.
+
+- With `data_format = "channels_first"`:
+  `(batch_size, channels, output_depth, output_height, output_width)`.
 
 ## Examples
 

@@ -117,8 +117,14 @@ text_dataset_from_directory(
 
 - format:
 
-  Return either a TensorFlow dataset (`"tf"`) or a framework-agnostic
-  Grain dataset (`"grain"`).
+  Format of the returned object. Defaults to `"tf"`. Available options
+  are:
+
+  - `"tf"`: returns a `tf.data.Dataset` object. Requires TensorFlow to
+    be installed.
+
+  - `"grain"`: returns a `grain.IterDataset` object. Requires Grain to
+    be installed.
 
 - verbose:
 

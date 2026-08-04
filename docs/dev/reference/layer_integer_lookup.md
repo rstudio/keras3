@@ -179,12 +179,26 @@ layer_integer_lookup(
 
 - oov_method:
 
-  Strategy used to assign integer OOV tokens to OOV buckets when
-  `num_oov_indices > 1`.
+  Only relevant when `num_oov_indices > 1`. Controls how OOV tokens are
+  assigned to OOV buckets:
+
+  - `"floormod"` (the default) uses `token %% num_oov_indices`. This
+    preserves backwards compatibility, but can produce severe bucket
+    imbalance when input IDs share a common factor with
+    `num_oov_indices`, such as all-even IDs with an even bucket count.
+
+  - `"farmhash"` applies FarmHash64, which distributes OOV tokens
+    uniformly regardless of the arithmetic structure of the input IDs.
+    This parameter is ignored for string inputs, which always use
+    FarmHash64.
 
 - salt:
 
-  Optional salt used when hashing OOV values.
+  Only valid when `oov_method = "farmhash"`. If supplied, OOV bucket
+  assignment uses SipHash64, with these values as an additional input (a
+  "salt" in cryptography). May be a pair of integers, or a single
+  integer used for both key components. If `NULL` (the default),
+  FarmHash64 is used.
 
 - name:
 

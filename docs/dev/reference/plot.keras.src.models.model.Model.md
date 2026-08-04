@@ -82,8 +82,9 @@ plot(
 
 - splines:
 
-  Controls how edges are drawn in the graph. Defaults to `"ortho"` for
-  right-angle connectors.
+  Controls how edges are drawn in the graph. Defaults to `"ortho"`
+  (right-angle lines). Other options include `"curved"`, `"polyline"`,
+  `"spline"`, and `"line"`.
 
 - to_file:
 

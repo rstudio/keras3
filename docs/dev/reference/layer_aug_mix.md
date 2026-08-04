@@ -1,5 +1,8 @@
 # Performs the AugMix data augmentation technique.
 
+**Note:** This layer is safe to use inside a `tf.data` or `grain`
+pipeline independently of the active backend.
+
 AugMix aims to produce images with variety while preserving the image
 semantics and local statistics. During the augmentation process, the
 same augmentation is applied across all images in the batch in
