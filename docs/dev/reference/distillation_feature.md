@@ -52,5 +52,4 @@ A `FeatureDistillation` instance.
 
 Other distillation:  
 [`distillation_logits()`](https://keras3.posit.co/dev/reference/distillation_logits.md)  
-[`distillation_loss()`](https://keras3.posit.co/dev/reference/distillation_loss.md)  
 [`distiller()`](https://keras3.posit.co/dev/reference/distiller.md)  

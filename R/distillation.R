@@ -1,24 +1,3 @@
-#' Base class for distillation loss computation
-#'
-#' Distillation losses define how to compute the loss between teacher and
-#' student outputs. Each loss implements a specific approach to knowledge
-#' transfer, from logits matching to feature-based distillation. Custom
-#' distillation losses can subclass this class and implement `compute_loss()`.
-#' This base class does not implement a loss; use
-#' [`distillation_feature()`] or [`distillation_logits()`] directly.
-#'
-#' @returns A `DistillationLoss` instance.
-#' @export
-#' @family distillation
-#' @tether keras.distillation.DistillationLoss
-distillation_loss <-
-function()
-{
-  args <- capture_args()
-  do.call(keras$distillation$DistillationLoss, args)
-}
-
-
 #' Feature distillation loss
 #'
 #' Feature distillation transfers knowledge from intermediate layers of the
@@ -122,7 +101,7 @@ function(temperature = 3, loss = "kl_divergence")
 #' @param student Keras model to train.
 #' @param distillation_losses A distillation loss or list of distillation
 #'   losses, such as [`distillation_logits()`],
-#'   [`distillation_feature()`], or custom distillation losses.
+#'   [`distillation_feature()`], or compatible upstream distillation losses.
 #' @param distillation_loss_weights Numeric vector of weights for the
 #'   distillation losses. It must have the same length as
 #'   `distillation_losses`. If `NULL`, equal weights are used.

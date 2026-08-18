@@ -35,7 +35,6 @@ distillation.
 \seealso{
 Other distillation: \cr
 \code{\link{distillation_feature}()} \cr
-\code{\link{distillation_loss}()} \cr
 \code{\link{distiller}()} \cr
 }
 \concept{distillation}

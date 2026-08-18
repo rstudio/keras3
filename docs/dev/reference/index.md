@@ -106,13 +106,6 @@
 - [`register_keras_serializable()`](https://keras3.posit.co/dev/reference/register_keras_serializable.md)
   : Registers a custom object with the Keras serialization framework.
 
-## Quantization
-
-- [`dtype_policy_awq()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
-  [`dtype_policy_gptq()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
-  [`dtype_policy_int4()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
-  : Quantized dtype policies
-
 ## Layers
 
 ### Core Layers
@@ -1886,8 +1879,6 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 - [`distiller()`](https://keras3.posit.co/dev/reference/distiller.md) :
   Model for transferring knowledge from a teacher to a student
-- [`distillation_loss()`](https://keras3.posit.co/dev/reference/distillation_loss.md)
-  : Base class for distillation loss computation
 - [`distillation_feature()`](https://keras3.posit.co/dev/reference/distillation_feature.md)
   : Feature distillation loss
 - [`distillation_logits()`](https://keras3.posit.co/dev/reference/distillation_logits.md)

@@ -1,11 +1,9 @@
-test_that("distillation loss constructors expose the public API", {
+test_that("concrete distillation loss constructors expose the public API", {
   skip_if_no_keras("3.15.1")
 
-  expect_true(is.function(distillation_loss))
   expect_true(is.function(distillation_feature))
   expect_true(is.function(distillation_logits))
 
-  expect_length(formals(distillation_loss), 0)
   expect_s3_class(
     distillation_feature(loss = "mse"),
     "keras.src.distillation.distillation_loss.FeatureDistillation"
@@ -16,7 +14,7 @@ test_that("distillation loss constructors expose the public API", {
   )
 })
 
-test_that("distiller has an R model-constructor signature", {
+test_that("distiller trains with a concrete distillation loss", {
   skip_if_no_keras("3.15.1")
 
   expect_true(is.function(distiller))
@@ -40,4 +38,14 @@ test_that("distiller has an R model-constructor signature", {
   )
 
   expect_s3_class(model, "keras.src.distillation.distiller.Distiller")
+
+  model |> compile(optimizer = "adam", loss = "mse")
+  x <- matrix(seq_len(8) / 8, ncol = 2)
+  y <- matrix(rowSums(x), ncol = 1)
+  history <- model |> fit(x, y, epochs = 1, verbose = 0)
+
+  expect_true(all(
+    c("distillation_loss", "student_loss", "total_loss") %in%
+      names(history$metrics)
+  ))
 })

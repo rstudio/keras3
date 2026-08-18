@@ -22,7 +22,7 @@ The teacher is frozen by the distiller.}
 
 \item{distillation_losses}{A distillation loss or list of distillation
 losses, such as \code{\link[=distillation_logits]{distillation_logits()}},
-\code{\link[=distillation_feature]{distillation_feature()}}, or custom distillation losses.}
+\code{\link[=distillation_feature]{distillation_feature()}}, or compatible upstream distillation losses.}
 
 \item{distillation_loss_weights}{Numeric vector of weights for the
 distillation losses. It must have the same length as
@@ -63,7 +63,6 @@ model |> compile(optimizer = "adam", loss = "mse")
 Other distillation: \cr
 \code{\link{distillation_feature}()} \cr
 \code{\link{distillation_logits}()} \cr
-\code{\link{distillation_loss}()} \cr
 
 Other model creation: \cr
 \code{\link{keras_input}()} \cr

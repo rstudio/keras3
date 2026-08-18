@@ -155,10 +155,6 @@ reference:
     - layer_tfsm
     - register_keras_serializable
 
-  - title: "Quantization"
-  - contents:
-    - dtype_policy_awq
-
   - title: "Layers"
 
   - subtitle: "Core Layers"
@@ -290,7 +286,6 @@ reference:
   - title: "Distillation"
   - contents:
     - distiller
-    - distillation_loss
     - distillation_feature
     - distillation_logits
 

@@ -35,7 +35,7 @@ distiller(
   A distillation loss or list of distillation losses, such as
   [`distillation_logits()`](https://keras3.posit.co/dev/reference/distillation_logits.md),
   [`distillation_feature()`](https://keras3.posit.co/dev/reference/distillation_feature.md),
-  or custom distillation losses.
+  or compatible upstream distillation losses.
 
 - distillation_loss_weights:
 
@@ -80,7 +80,6 @@ A Keras `Distiller` model.
 Other distillation:  
 [`distillation_feature()`](https://keras3.posit.co/dev/reference/distillation_feature.md)  
 [`distillation_logits()`](https://keras3.posit.co/dev/reference/distillation_logits.md)  
-[`distillation_loss()`](https://keras3.posit.co/dev/reference/distillation_loss.md)  
 
 Other model creation:  
 [`keras_input()`](https://keras3.posit.co/dev/reference/keras_input.md)  
