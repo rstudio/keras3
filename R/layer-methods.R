@@ -159,10 +159,9 @@ reset_state <- function(object) {
 #' `quantize_weights()` will recursively call `layer$quantize(...)` in all layers and
 #' will be skipped if the layer doesn't implement the function.
 #'
-#' Pass a `mode` string to use the default configuration for int8, int4, or
-#' float8 quantization. AWQ and GPTQ require a corresponding `config` object.
-#' A `config` can also customize the quantizers used for weights and
-#' activations.
+#' Pass a `mode` string to use the default configuration for that mode.
+#' Advanced users can pass an upstream Keras quantization configuration object
+#' via `config`.
 #'
 #' # Examples
 #' Quantize a model to int8 with the default configuration:
@@ -173,24 +172,13 @@ reset_state <- function(object) {
 #' model |> quantize_weights("int8")
 #' ```
 #'
-#' Quantize with a custom configuration:
-#'
-#' ```{r, eval = FALSE}
-#' model <- keras_model_sequential(input_shape = 10) |>
-#'   layer_dense(10)
-#' config <- quantizer_int4_quantization_config(block_size = 64)
-#' model |> quantize_weights(config = config)
-#' ```
-#'
 #' @param object A Keras Model or Layer.
 #' @param mode
-#' Quantization mode. Supported modes are `"int8"`, `"int4"`, `"float8"`,
-#' `"gptq"`, and `"awq"`. GPTQ and AWQ require a corresponding `config`.
-#' Optional when `config` is supplied.
+#' Quantization mode supported by the installed Keras version. Optional when
+#' `config` is supplied.
 #'
 #' @param config
-#' A `keras.quantizers.QuantizationConfig` object specifying additional
-#' quantization options, including custom weight and activation quantizers.
+#' An optional upstream Keras quantization configuration object.
 #'
 #' @param filters
 #' Optional filters controlling which layers are quantized. May be a regular

@@ -1,7 +1,7 @@
 test_that("core layers preserve quantization configurations", {
   skip_if_no_keras("3.15.1")
 
-  quantization_config <- quantizer_int8_quantization_config()
+  quantization_config <- keras$quantizers$Int8QuantizationConfig()
   dense <- layer_dense(
     units = 2L,
     quantization_config = quantization_config

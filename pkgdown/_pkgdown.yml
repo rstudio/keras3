@@ -158,14 +158,6 @@ reference:
   - title: "Quantization"
   - contents:
     - dtype_policy_awq
-    - quantizer_quantization_config
-    - quantizer_float8_quantization_config
-    - quantizer_int4_quantization_config
-    - quantizer_int8_quantization_config
-    - quantizer_awq_config
-    - quantizer_gptq_config
-    - quantizer_abs_max_quantize_grouped_with_zero_point
-
 
   - title: "Layers"
 

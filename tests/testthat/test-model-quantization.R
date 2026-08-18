@@ -1,4 +1,4 @@
-test_that("model quantization accepts configs and filters", {
+test_that("model quantization accepts modes and filters", {
   skip_if_no_keras("3.15.1")
 
   model <- keras_model_sequential(input_shape = 2L) |>
@@ -8,7 +8,7 @@ test_that("model quantization accepts configs and filters", {
 
   result <- withVisible(quantize_weights(
     model,
-    config = quantizer_int8_quantization_config(),
+    mode = "int8",
     filters = "keep"
   ))
 

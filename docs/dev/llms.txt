@@ -142,20 +142,6 @@ documentation.
   [`dtype_policy_gptq()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
   [`dtype_policy_int4()`](https://keras3.posit.co/dev/reference/dtype_policy_awq.md)
   : Quantized dtype policies
-- [`quantizer_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_quantization_config.md)
-  : Base configuration for model quantization
-- [`quantizer_float8_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_float8_quantization_config.md)
-  : Float8 quantization configuration
-- [`quantizer_int4_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_int4_quantization_config.md)
-  : Int4 quantization configuration
-- [`quantizer_int8_quantization_config()`](https://keras3.posit.co/dev/reference/quantizer_int8_quantization_config.md)
-  : Int8 quantization configuration
-- [`quantizer_awq_config()`](https://keras3.posit.co/dev/reference/quantizer_awq_config.md)
-  : AWQ calibration and quantization configuration
-- [`quantizer_gptq_config()`](https://keras3.posit.co/dev/reference/quantizer_gptq_config.md)
-  : GPTQ calibration and quantization configuration
-- [`quantizer_abs_max_quantize_grouped_with_zero_point()`](https://keras3.posit.co/dev/reference/quantizer_abs_max_quantize_grouped_with_zero_point.md)
-  : Grouped asymmetric absolute-maximum quantization
 
 ## Layers
 

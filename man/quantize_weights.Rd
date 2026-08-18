@@ -9,12 +9,10 @@ quantize_weights(object, mode = NULL, config = NULL, filters = NULL, ...)
 \arguments{
 \item{object}{A Keras Model or Layer.}
 
-\item{mode}{Quantization mode. Supported modes are \code{"int8"}, \code{"int4"}, \code{"float8"},
-\code{"gptq"}, and \code{"awq"}. GPTQ and AWQ require a corresponding \code{config}.
-Optional when \code{config} is supplied.}
+\item{mode}{Quantization mode supported by the installed Keras version. Optional when
+\code{config} is supplied.}
 
-\item{config}{A \code{keras.quantizers.QuantizationConfig} object specifying additional
-quantization options, including custom weight and activation quantizers.}
+\item{config}{An optional upstream Keras quantization configuration object.}
 
 \item{filters}{Optional filters controlling which layers are quantized. May be a regular
 expression string, a list of regular expression strings, or a callable.
@@ -31,10 +29,9 @@ Note that the model must be built first before calling this method.
 \code{quantize_weights()} will recursively call \code{layer$quantize(...)} in all layers and
 will be skipped if the layer doesn't implement the function.
 
-Pass a \code{mode} string to use the default configuration for int8, int4, or
-float8 quantization. AWQ and GPTQ require a corresponding \code{config} object.
-A \code{config} can also customize the quantizers used for weights and
-activations.
+Pass a \code{mode} string to use the default configuration for that mode.
+Advanced users can pass an upstream Keras quantization configuration object
+via \code{config}.
 }
 \section{Examples}{
 Quantize a model to int8 with the default configuration:
@@ -44,13 +41,6 @@ Quantize a model to int8 with the default configuration:
 model |> quantize_weights("int8")
 }\if{html}{\out{</div>}}
 
-Quantize with a custom configuration:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = 10) |>
-  layer_dense(10)
-config <- quantizer_int4_quantization_config(block_size = 64)
-model |> quantize_weights(config = config)
-}\if{html}{\out{</div>}}
 }
 
 \seealso{

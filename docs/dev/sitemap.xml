@@ -817,13 +817,6 @@
 <url><loc>https://keras3.posit.co/dev/reference/predict_on_batch.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/process_utils.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/quantize_weights.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_abs_max_quantize_grouped_with_zero_point.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_awq_config.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_float8_quantization_config.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_gptq_config.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_int4_quantization_config.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_int8_quantization_config.html</loc></url>
-<url><loc>https://keras3.posit.co/dev/reference/quantizer_quantization_config.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/random_beta.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/random_binomial.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/random_categorical.html</loc></url>
@@ -865,4 +858,3 @@
 <url><loc>https://keras3.posit.co/dev/reference/with_custom_object_scope.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/zip_lists.html</loc></url>
 </urlset>
-
