@@ -2567,11 +2567,6 @@ transform your input dataset before training.
 - [`config_set_image_data_format()`](https://keras3.posit.co/dev/reference/config_set_image_data_format.md)
   : Set the value of the image data format convention.
 
-## Distribution
-
-- [`distributed_get_device_count()`](https://keras3.posit.co/dev/reference/distributed_get_device_count.md)
-  : Count available devices of one type
-
 ## Utils
 
 - [`install_keras()`](https://keras3.posit.co/dev/reference/install_keras.md)

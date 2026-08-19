@@ -413,10 +413,6 @@ reference:
   - contents:
     - starts_with("config_")
 
-  - title: "Distribution"
-  - contents:
-    - distributed_get_device_count
-
   - title: "Utils"
   - contents:
     - install_keras
