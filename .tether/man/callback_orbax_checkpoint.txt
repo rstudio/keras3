@@ -1,0 +1,151 @@
+Help on class OrbaxCheckpoint in module keras.src.callbacks.orbax_checkpoint:
+
+class OrbaxCheckpoint(keras.src.callbacks.monitor_callback.MonitorCallback)
+ |  OrbaxCheckpoint(directory, monitor='val_loss', verbose=0, save_best_only=False, mode='auto', save_freq='epoch', initial_value_threshold=None, max_to_keep=1, save_on_background=True, save_weights_only=False)
+ |
+ |  Callback to save and load model state using Orbax with a similar API to
+ |  ModelCheckpoint.
+ |
+ |  This callback saves the model's weights and optimizer state asynchronously
+ |  using Orbax, allowing training to continue without blocking for I/O.
+ |
+ |  **Multi-host Support**: When running in a multi-host distributed training
+ |  environment with JAX backend, this callback automatically coordinates
+ |  checkpointing across all hosts to ensure consistency and proper
+ |  synchronization. Multi-host checkpointing is only supported on JAX.
+ |
+ |  Example:
+ |
+ |  ```python
+ |  model.compile(loss=..., optimizer=..., metrics=['accuracy'])
+ |
+ |  EPOCHS = 10
+ |  checkpoint_dir = '/tmp/ckpt'
+ |  orbax_checkpoint_callback = keras.callbacks.OrbaxCheckpoint(
+ |      directory=checkpoint_dir,
+ |      monitor='val_accuracy',
+ |      mode='max',
+ |      save_best_only=True)
+ |
+ |  # Model is saved at the end of every epoch, if it's the best seen so far.
+ |  model.fit(epochs=EPOCHS, callbacks=[orbax_checkpoint_callback])
+ |
+ |  # Alternatively, save checkpoints every N batches -
+ |  orbax_checkpoint_callback = keras.callbacks.OrbaxCheckpoint(
+ |      directory=checkpoint_dir,
+ |      save_freq=100)  # Save every 100 batches
+ |
+ |  model.fit(epochs=EPOCHS, callbacks=[orbax_checkpoint_callback])
+ |  ```
+ |
+ |  Args:
+ |      directory: path to the directory where to save the checkpoints.
+ |      monitor: The metric name to monitor (e.g., 'val_loss').
+ |      verbose: Verbosity mode, 0 or 1.
+ |      save_best_only: if `save_best_only=True`, it only saves when the model
+ |          is considered the "best" based on the monitored quantity.
+ |      mode: one of {'auto', 'min', 'max'}. Used with `save_best_only`.
+ |      save_freq: `'epoch'` or integer. Frequency to save checkpoints.
+ |      max_to_keep: Integer, maximum number of recent checkpoints to keep.
+ |          If None, keeps all. Defaults to 1.
+ |      save_on_background: Boolean, whether to save asynchronously in the
+ |          background. Defaults to True.
+ |      initial_value_threshold: Floating point initial "best" value for the
+ |          monitor, used with `save_best_only`.
+ |
+ |  Method resolution order:
+ |      OrbaxCheckpoint
+ |      keras.src.callbacks.monitor_callback.MonitorCallback
+ |      keras.src.callbacks.callback.Callback
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    directory,
+ |    monitor='val_loss',
+ |    verbose=0,
+ |    save_best_only=False,
+ |    mode='auto',
+ |    save_freq='epoch',
+ |    initial_value_threshold=None,
+ |    max_to_keep=1,
+ |    save_on_background=True,
+ |    save_weights_only=False
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  is_multihost_enabled(self)
+ |      Return True if multi-host checkpointing is enabled and initialized.
+ |
+ |      This method can be used to check if the callback is operating in
+ |      a multi-host distributed training environment. Multi-host checkpointing
+ |      is only supported on JAX backend.
+ |
+ |      Returns:
+ |          bool: True if multi-host support is active, False otherwise.
+ |
+ |  is_primary_host(self)
+ |      Return True if this process is the primary host in multi-host setup.
+ |
+ |      In multi-host environments, only the primary host typically handles
+ |      logging and coordination tasks. Multi-host checkpointing is only
+ |      supported on JAX backend.
+ |
+ |      Returns:
+ |          bool: True if this is the primary host, False otherwise.
+ |          Always returns True in single-host environments.
+ |
+ |  on_epoch_end(
+ |    self,
+ |    epoch,
+ |    logs=None
+ |  )
+ |      Called at the end of an epoch.
+ |
+ |      Subclasses should override for any actions to run. This function should
+ |      only be called during TRAIN mode.
+ |
+ |      Args:
+ |          epoch: Integer, index of epoch.
+ |          logs: Dict, metric results for this training epoch, and for the
+ |            validation epoch if validation is performed. Validation result
+ |            keys are prefixed with `val_`. For training epoch, the values of
+ |            the `Model`'s metrics are returned. Example:
+ |            `{'loss': 0.2, 'accuracy': 0.7}`.
+ |
+ |  on_train_batch_end(
+ |    self,
+ |    batch,
+ |    logs=None
+ |  )
+ |      Called at the end of a training batch in `fit` methods.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Note that if the `steps_per_execution` argument to `compile` in
+ |      `Model` is set to `N`, this method will only be called every
+ |      `N` batches.
+ |
+ |      Args:
+ |          batch: Integer, index of batch within the current epoch.
+ |          logs: Dict. Aggregated metric results up until this batch.
+ |
+ |  on_train_end(self, logs=None)
+ |      Called at the end of training.
+ |
+ |      Subclasses should override for any actions to run.
+ |
+ |      Args:
+ |          logs: Dict. Currently the output of the last call to
+ |            `on_epoch_end()` is passed to this argument for this method but
+ |            that may change in the future.
+ |
+ |  set_model(self, model)
+ |
+ |  wait_until_finished(self)
+ |      Wait for any in-progress checkpoint operations to complete.
+ |      This method blocks until all asynchronous checkpoint save operations
+ |      have completed across all hosts in a multi-host setup.
+ |

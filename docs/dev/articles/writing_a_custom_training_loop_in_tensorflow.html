@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Writing a training loop from scratch in TensorFlow">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -229,21 +229,21 @@ based on the gradients</li>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
 <span><span class="co">## Training loss (for one batch) at step 400: 1.6450</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.7421</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.6477</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Start of epoch  2</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.7258</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.6265</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.2621</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.2505</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.4378</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.3682</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span>
 <span><span class="co">## Start of epoch  3</span></span>
-<span><span class="co">## Training loss (for one batch) at step 200: 0.3170</span></span>
+<span><span class="co">## Training loss (for one batch) at step 200: 0.4912</span></span>
 <span><span class="co">## Seen so far: 12800 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 400: 0.5630</span></span>
+<span><span class="co">## Training loss (for one batch) at step 400: 0.3082</span></span>
 <span><span class="co">## Seen so far: 25600 samples</span></span>
-<span><span class="co">## Training loss (for one batch) at step 600: 0.2245</span></span>
+<span><span class="co">## Training loss (for one batch) at step 600: 0.2189</span></span>
 <span><span class="co">## Seen so far: 38400 samples</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -341,7 +341,7 @@ each epoch:</p>
 <span><span class="co">## Validation acc: 0.9031</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 38.95867 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 41.80026 secs</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="speeding-up-your-training-step-with-tf_function">Speeding-up your training step with <code>tf_function()</code><a class="anchor" aria-label="anchor" href="#speeding-up-your-training-step-with-tf_function"></a>
@@ -421,7 +421,7 @@ step:</p>
 <span><span class="co">## Validation acc: 0.9031</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="va">time</span></span></code></pre></div>
-<pre><code><span><span class="co">## Time difference of 0.3918645 secs</span></span></code></pre>
+<pre><code><span><span class="co">## Time difference of 0.5170646 secs</span></span></code></pre>
 <p>Much faster, isn’t it?</p>
 </div>
 <div class="section level2">
@@ -529,26 +529,26 @@ meant to classify fake vs real digits:</p>
 <span>  <span class="fu"><a href="../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">discriminator</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "discriminator"</span></span></span>
+<pre><code><span><span class="co">## Model: "discriminator"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">64</span>)     │           <span style="color: #00AF00;">640</span> │</span></span>
+<span><span class="co">## │ conv2d (Conv2D)                 │ (None, 14, 14, 64)     │           640 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu (<span style="color: #0087FF;">LeakyReLU</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">64</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu (LeakyReLU)         │ (None, 14, 14, 64)     │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)      │        <span style="color: #00AF00;">73,856</span> │</span></span>
+<span><span class="co">## │ conv2d_1 (Conv2D)               │ (None, 7, 7, 128)      │        73,856 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_1 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_1 (LeakyReLU)       │ (None, 7, 7, 128)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                        │               │</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ (None, 128)            │             0 │</span></span>
+<span><span class="co">## │ (GlobalMaxPooling2D)            │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense_6 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)              │           <span style="color: #00AF00;">129</span> │</span></span>
+<span><span class="co">## │ dense_6 (Dense)                 │ (None, 1)              │           129 │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">74,625</span> (291.50 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">74,625</span> (291.50 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 74,625 (291.50 KB)</span></span>
+<span><span class="co">##  Trainable params: 74,625 (291.50 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>Then let’s create a generator network, that turns latent vectors into
 outputs of shape <code>(28, 28, 1)</code> (representing MNIST
 digits):</p>
@@ -571,31 +571,31 @@ digits):</p>
 <span>                activation <span class="op">=</span> <span class="st">"sigmoid"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">generator</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "generator"</span></span></span>
+<pre><code><span><span class="co">## Model: "generator"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ dense_7 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6272</span>)           │       <span style="color: #00AF00;">809,088</span> │</span></span>
+<span><span class="co">## │ dense_7 (Dense)                 │ (None, 6272)           │       809,088 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_2 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6272</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_2 (LeakyReLU)       │ (None, 6272)           │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ reshape (<span style="color: #0087FF;">Reshape</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">128</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ reshape (Reshape)               │ (None, 7, 7, 128)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">128</span>)    │       <span style="color: #00AF00;">262,272</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose                │ (None, 14, 14, 128)    │       262,272 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_3 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">14</span>, <span style="color: #00AF00;">128</span>)    │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_3 (LeakyReLU)       │ (None, 14, 14, 128)    │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_1              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">128</span>)    │       <span style="color: #00AF00;">262,272</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_1              │ (None, 28, 28, 128)    │       262,272 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ leaky_re_lu_4 (<span style="color: #0087FF;">LeakyReLU</span>)       │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">128</span>)    │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ leaky_re_lu_4 (LeakyReLU)       │ (None, 28, 28, 128)    │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │         <span style="color: #00AF00;">6,273</span> │</span></span>
+<span><span class="co">## │ conv2d_2 (Conv2D)               │ (None, 28, 28, 1)      │         6,273 │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">1,339,905</span> (5.11 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">1,339,905</span> (5.11 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 1,339,905 (5.11 MB)</span></span>
+<span><span class="co">##  Trainable params: 1,339,905 (5.11 MB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>Here’s the key bit: the training loop. As you can see it is quite
 straightforward. The training step function only takes 17 lines.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
@@ -710,7 +710,7 @@ of training on a GPU.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

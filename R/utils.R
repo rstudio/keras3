@@ -259,6 +259,11 @@ function (fname = NULL, origin = NULL, ...,
 #  @param show_trainable
 #  whether to display if a layer is trainable.
 #
+#  @param splines
+#  Controls how edges are drawn in the graph. Defaults to `"ortho"`
+#  (right-angle lines). Other options include `"curved"`, `"polyline"`,
+#  `"spline"`, and `"line"`.
+#
 #  @param ...
 #  For forward/backward compatability.
 #
@@ -398,6 +403,8 @@ function (x, num_classes = NULL)
 #' - the Python NumPy seed: `import numpy; numpy.random.seed(seed)`
 #' - the TensorFlow seed: `tf$random$set_seed(seed)` (only if TF is installed)
 #' - The Torch seed: `import("torch")$manual_seed(seed)` (only if the backend is torch)
+#' - the global Keras `SeedGenerator`, used by `keras.random` functions when
+#'   their `seed` argument is not supplied.
 #' - and disables Python hash randomization.
 #'
 #' Note that the TensorFlow seed is set even if you're not using TensorFlow
@@ -591,6 +598,9 @@ keras_array <- function(x, dtype = NULL) {
 #'   have an `activation` property).
 #' @param show_trainable
 #' whether to display if a layer is trainable.
+#' @param splines Controls how edges are drawn in the graph. Defaults to
+#'   `"ortho"` (right-angle lines). Other options include `"curved"`,
+#'   `"polyline"`, `"spline"`, and `"line"`.
 #'
 #' @returns Nothing, called for it side effects.
 #'
@@ -637,6 +647,7 @@ function(x,
          layer_range = NULL,
          show_layer_activations = FALSE,
          show_trainable = NA,
+         splines = "ortho",
          to_file = NULL) {
 
   args <- capture_args(ignore = c("x", "to_file", "show_trainable"),

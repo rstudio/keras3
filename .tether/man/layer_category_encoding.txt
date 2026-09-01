@@ -1,6 +1,6 @@
 Help on class CategoryEncoding in module keras.src.layers.preprocessing.category_encoding:
 
-class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class CategoryEncoding(keras.src.layers.preprocessing.data_layer.DataLayer)
  |  CategoryEncoding(num_tokens=None, output_mode='multi_hot', sparse=False, **kwargs)
  |
  |  A preprocessing layer which encodes integer features.
@@ -11,7 +11,7 @@ class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  inputs. For integer inputs where the total number of tokens is not known,
  |  use `keras.layers.IntegerLookup` instead.
  |
- |  **Note:** This layer is safe to use inside a `tf.data` pipeline
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
  |  (independently of which backend you're using).
  |
  |  Examples:
@@ -82,7 +82,7 @@ class CategoryEncoding(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |  Method resolution order:
  |      CategoryEncoding
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

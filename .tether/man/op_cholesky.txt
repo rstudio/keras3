@@ -1,12 +1,13 @@
 __signature__
-keras.ops.cholesky(x)
+keras.ops.cholesky(x, upper=False)
 __doc__
 Computes the Cholesky decomposition of a positive semi-definite matrix.
 
 Args:
     x: Input tensor of shape `(..., M, M)`.
+    upper (bool): If True, returns the upper-triangular Cholesky factor.
+        If False (default), returns the lower-triangular Cholesky factor.
 
 Returns:
-    A tensor of shape `(..., M, M)` representing the lower triangular
-    Cholesky factor of `x`.
+    A tensor of shape `(..., M, M)` representing the Cholesky factor of `x`.
 

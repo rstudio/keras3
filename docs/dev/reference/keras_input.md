@@ -95,5 +95,6 @@ A Keras tensor, which can passed to the `inputs` argument of
 ## See also
 
 Other model creation:  
+[`distiller()`](https://keras3.posit.co/dev/reference/distiller.md)  
 [`keras_model()`](https://keras3.posit.co/dev/reference/keras_model.md)  
 [`keras_model_sequential()`](https://keras3.posit.co/dev/reference/keras_model_sequential.md)  

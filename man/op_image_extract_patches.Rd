@@ -2,7 +2,7 @@
 % Please edit documentation in R/ops-image.R
 \name{op_image_extract_patches}
 \alias{op_image_extract_patches}
-\title{Extracts patches from the image(s).}
+\title{Extracts patches from image(s) or volume(s).}
 \usage{
 op_image_extract_patches(
   images,
@@ -14,33 +14,36 @@ op_image_extract_patches(
 )
 }
 \arguments{
-\item{images}{Input image or batch of images. Must be 3D or 4D.}
+\item{images}{Input image, volume, or batch. For 2D patches, a 3D \verb{(H, W, C)} image or 4D
+\verb{(N, H, W, C)} batch. For 3D patches, a 4D \verb{(D, H, W, C)} volume or 5D
+\verb{(N, D, H, W, C)} batch.}
 
-\item{size}{Patch size int or list (patch_height, patch_width)}
+\item{size}{Patch size as an integer or integer vector. Use a length-2 vector
+\verb{(patch_height, patch_width)} or a scalar for 2D patches, and a length-3
+vector \verb{(patch_depth, patch_height, patch_width)} for 3D patches.}
 
-\item{strides}{strides along height and width. If not specified, or
-if \code{NULL}, it defaults to the same value as \code{size}.}
+\item{strides}{Strides for patch extraction. If \code{NULL}, defaults to \code{size}, producing
+non-overlapping patches.}
 
-\item{dilation_rate}{This is the input stride, specifying how far two
-consecutive patch samples are in the input. For value other than 1,
-strides must be 1. NOTE: \code{strides > 1} is not supported in
-conjunction with \code{dilation_rate > 1}}
+\item{dilation_rate}{Dilation rate for patch extraction. \code{dilation_rate > 1} is not supported
+together with \code{strides > 1}.}
 
 \item{padding}{The type of padding algorithm to use: \code{"same"} or \code{"valid"}.}
 
 \item{data_format}{A string specifying the data format of the input tensor.
 It can be either \code{"channels_last"} or \code{"channels_first"}.
-\code{"channels_last"} corresponds to inputs with shape
-\verb{(batch, height, width, channels)}, while \code{"channels_first"}
-corresponds to inputs with shape \verb{(batch, channels, height, width)}.
-If not specified, the value will default to
+\code{"channels_last"} places channels last in images and volumes, while
+\code{"channels_first"} places channels immediately after the batch dimension.
+Defaults to \code{"channels_last"}; pass \code{NULL} to use
 \code{config_image_data_format()}.}
 }
 \value{
-Extracted patches 3D (if not batched) or 4D (if batched)
+Extracted patches whose rank depends on the input and \code{size}: 3D or 4D for
+2D patches, and 4D or 5D for 3D patches.
 }
 \description{
-Extracts patches from the image(s).
+The length of \code{size} selects 2D or 3D patch extraction, in the same way that
+the dimensionality of a convolution is selected by its kernel size.
 }
 \section{Examples}{
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{image <- random_uniform(c(2, 20, 20, 3), dtype = "float32") # batch of 2 RGB images
@@ -63,6 +66,28 @@ shape(patches)
 }\if{html}{\out{</div>}}
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{# (18, 18, 27)
+
+volumes <- random_uniform(c(2, 10, 10, 10, 3), dtype = "float32")
+patches <- op_image_extract_patches(volumes, c(3, 3, 3))
+shape(patches)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(2, 3, 3, 3, 81)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (2, 3, 3, 3, 81)
+
+volume <- random_uniform(c(10, 10, 10, 3), dtype = "float32")
+patches <- op_image_extract_patches(volume, c(3, 3, 3))
+shape(patches)
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{## shape(3, 3, 3, 81)
+
+}\if{html}{\out{</div>}}
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# (3, 3, 3, 81)
 }\if{html}{\out{</div>}}
 }
 
@@ -74,6 +99,7 @@ shape(patches)
 Other image ops: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_extract_patches_3d}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
@@ -82,6 +108,9 @@ Other image ops: \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
+\code{\link{op_image_scale_and_translate}()} \cr
+\code{\link{op_image_sobel_edges}()} \cr
+\code{\link{op_image_ssim}()} \cr
 
 Other image utils: \cr
 \code{\link{image_array_save}()} \cr
@@ -91,6 +120,7 @@ Other image utils: \cr
 \code{\link{image_to_array}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_extract_patches_3d}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
@@ -99,11 +129,17 @@ Other image utils: \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
+\code{\link{op_image_scale_and_translate}()} \cr
+\code{\link{op_image_sobel_edges}()} \cr
+\code{\link{op_image_ssim}()} \cr
 
 Other ops: \cr
 \code{\link{op_abs}()} \cr
+\code{\link{op_adaptive_average_pool}()} \cr
+\code{\link{op_adaptive_max_pool}()} \cr
 \code{\link{op_add}()} \cr
 \code{\link{op_all}()} \cr
+\code{\link{op_allclose}()} \cr
 \code{\link{op_angle}()} \cr
 \code{\link{op_any}()} \cr
 \code{\link{op_append}()} \cr
@@ -120,6 +156,7 @@ Other ops: \cr
 \code{\link{op_argpartition}()} \cr
 \code{\link{op_argsort}()} \cr
 \code{\link{op_array}()} \cr
+\code{\link{op_array_split}()} \cr
 \code{\link{op_associative_scan}()} \cr
 \code{\link{op_average}()} \cr
 \code{\link{op_average_pool}()} \cr
@@ -139,9 +176,11 @@ Other ops: \cr
 \code{\link{op_cast}()} \cr
 \code{\link{op_categorical_crossentropy}()} \cr
 \code{\link{op_cbrt}()} \cr
+\code{\link{op_cdist}()} \cr
 \code{\link{op_ceil}()} \cr
 \code{\link{op_celu}()} \cr
 \code{\link{op_cholesky}()} \cr
+\code{\link{op_cholesky_inverse}()} \cr
 \code{\link{op_clip}()} \cr
 \code{\link{op_concatenate}()} \cr
 \code{\link{op_cond}()} \cr
@@ -163,6 +202,7 @@ Other ops: \cr
 \code{\link{op_cumsum}()} \cr
 \code{\link{op_custom_gradient}()} \cr
 \code{\link{op_deg2rad}()} \cr
+\code{\link{op_depth_to_space}()} \cr
 \code{\link{op_depthwise_conv}()} \cr
 \code{\link{op_det}()} \cr
 \code{\link{op_diag}()} \cr
@@ -174,14 +214,18 @@ Other ops: \cr
 \code{\link{op_divide_no_nan}()} \cr
 \code{\link{op_dot}()} \cr
 \code{\link{op_dot_product_attention}()} \cr
+\code{\link{op_dsplit}()} \cr
+\code{\link{op_dstack}()} \cr
 \code{\link{op_dtype}()} \cr
 \code{\link{op_eig}()} \cr
 \code{\link{op_eigh}()} \cr
 \code{\link{op_einsum}()} \cr
 \code{\link{op_elu}()} \cr
 \code{\link{op_empty}()} \cr
+\code{\link{op_empty_like}()} \cr
 \code{\link{op_equal}()} \cr
 \code{\link{op_erf}()} \cr
+\code{\link{op_erfc}()} \cr
 \code{\link{op_erfinv}()} \cr
 \code{\link{op_exp}()} \cr
 \code{\link{op_exp2}()} \cr
@@ -189,15 +233,24 @@ Other ops: \cr
 \code{\link{op_expm1}()} \cr
 \code{\link{op_extract_sequences}()} \cr
 \code{\link{op_eye}()} \cr
+\code{\link{op_fabs}()} \cr
 \code{\link{op_fft}()} \cr
 \code{\link{op_fft2}()} \cr
 \code{\link{op_flip}()} \cr
+\code{\link{op_fliplr}()} \cr
+\code{\link{op_flipud}()} \cr
 \code{\link{op_floor}()} \cr
 \code{\link{op_floor_divide}()} \cr
+\code{\link{op_fmax}()} \cr
+\code{\link{op_fmin}()} \cr
+\code{\link{op_fmod}()} \cr
+\code{\link{op_fold}()} \cr
 \code{\link{op_fori_loop}()} \cr
 \code{\link{op_full}()} \cr
 \code{\link{op_full_like}()} \cr
+\code{\link{op_gcd}()} \cr
 \code{\link{op_gelu}()} \cr
+\code{\link{op_geomspace}()} \cr
 \code{\link{op_get_item}()} \cr
 \code{\link{op_glu}()} \cr
 \code{\link{op_greater}()} \cr
@@ -210,12 +263,16 @@ Other ops: \cr
 \code{\link{op_hard_tanh}()} \cr
 \code{\link{op_heaviside}()} \cr
 \code{\link{op_histogram}()} \cr
+\code{\link{op_hsplit}()} \cr
 \code{\link{op_hstack}()} \cr
+\code{\link{op_hypot}()} \cr
+\code{\link{op_i0}()} \cr
 \code{\link{op_identity}()} \cr
 \code{\link{op_ifft2}()} \cr
 \code{\link{op_imag}()} \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
+\code{\link{op_image_extract_patches_3d}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
@@ -224,6 +281,9 @@ Other ops: \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
+\code{\link{op_image_scale_and_translate}()} \cr
+\code{\link{op_image_sobel_edges}()} \cr
+\code{\link{op_image_ssim}()} \cr
 \code{\link{op_in_top_k}()} \cr
 \code{\link{op_inner}()} \cr
 \code{\link{op_inv}()} \cr
@@ -231,11 +291,19 @@ Other ops: \cr
 \code{\link{op_is_tensor}()} \cr
 \code{\link{op_isclose}()} \cr
 \code{\link{op_isfinite}()} \cr
+\code{\link{op_isin}()} \cr
 \code{\link{op_isinf}()} \cr
 \code{\link{op_isnan}()} \cr
+\code{\link{op_isneginf}()} \cr
+\code{\link{op_isposinf}()} \cr
+\code{\link{op_isreal}()} \cr
 \code{\link{op_istft}()} \cr
+\code{\link{op_jvp}()} \cr
 \code{\link{op_kaiser}()} \cr
+\code{\link{op_kron}()} \cr
 \code{\link{op_layer_normalization}()} \cr
+\code{\link{op_lcm}()} \cr
+\code{\link{op_ldexp}()} \cr
 \code{\link{op_leaky_relu}()} \cr
 \code{\link{op_left_shift}()} \cr
 \code{\link{op_less}()} \cr
@@ -248,6 +316,7 @@ Other ops: \cr
 \code{\link{op_log_sigmoid}()} \cr
 \code{\link{op_log_softmax}()} \cr
 \code{\link{op_logaddexp}()} \cr
+\code{\link{op_logaddexp2}()} \cr
 \code{\link{op_logdet}()} \cr
 \code{\link{op_logical_and}()} \cr
 \code{\link{op_logical_not}()} \cr
@@ -259,6 +328,7 @@ Other ops: \cr
 \code{\link{op_lu_factor}()} \cr
 \code{\link{op_map}()} \cr
 \code{\link{op_matmul}()} \cr
+\code{\link{op_matrix_rank}()} \cr
 \code{\link{op_max}()} \cr
 \code{\link{op_max_pool}()} \cr
 \code{\link{op_maximum}()} \cr
@@ -273,8 +343,23 @@ Other ops: \cr
 \code{\link{op_multi_hot}()} \cr
 \code{\link{op_multiply}()} \cr
 \code{\link{op_nan_to_num}()} \cr
+\code{\link{op_nanargmax}()} \cr
+\code{\link{op_nanargmin}()} \cr
+\code{\link{op_nancumprod}()} \cr
+\code{\link{op_nancumsum}()} \cr
+\code{\link{op_nanmax}()} \cr
+\code{\link{op_nanmean}()} \cr
+\code{\link{op_nanmedian}()} \cr
+\code{\link{op_nanmin}()} \cr
+\code{\link{op_nanpercentile}()} \cr
+\code{\link{op_nanprod}()} \cr
+\code{\link{op_nanquantile}()} \cr
+\code{\link{op_nanstd}()} \cr
+\code{\link{op_nansum}()} \cr
+\code{\link{op_nanvar}()} \cr
 \code{\link{op_ndim}()} \cr
 \code{\link{op_negative}()} \cr
+\code{\link{op_nextafter}()} \cr
 \code{\link{op_nonzero}()} \cr
 \code{\link{op_norm}()} \cr
 \code{\link{op_normalize}()} \cr
@@ -284,12 +369,16 @@ Other ops: \cr
 \code{\link{op_ones_like}()} \cr
 \code{\link{op_outer}()} \cr
 \code{\link{op_pad}()} \cr
+\code{\link{op_percentile}()} \cr
+\code{\link{op_pinv}()} \cr
 \code{\link{op_polar}()} \cr
 \code{\link{op_power}()} \cr
 \code{\link{op_prod}()} \cr
 \code{\link{op_psnr}()} \cr
+\code{\link{op_ptp}()} \cr
 \code{\link{op_qr}()} \cr
 \code{\link{op_quantile}()} \cr
+\code{\link{op_rad2deg}()} \cr
 \code{\link{op_ravel}()} \cr
 \code{\link{op_real}()} \cr
 \code{\link{op_rearrange}()} \cr
@@ -311,6 +400,8 @@ Other ops: \cr
 \code{\link{op_scatter_update}()} \cr
 \code{\link{op_searchsorted}()} \cr
 \code{\link{op_segment_max}()} \cr
+\code{\link{op_segment_min}()} \cr
+\code{\link{op_segment_prod}()} \cr
 \code{\link{op_segment_sum}()} \cr
 \code{\link{op_select}()} \cr
 \code{\link{op_selu}()} \cr
@@ -321,6 +412,7 @@ Other ops: \cr
 \code{\link{op_signbit}()} \cr
 \code{\link{op_silu}()} \cr
 \code{\link{op_sin}()} \cr
+\code{\link{op_sinc}()} \cr
 \code{\link{op_sinh}()} \cr
 \code{\link{op_size}()} \cr
 \code{\link{op_slice}()} \cr
@@ -333,6 +425,7 @@ Other ops: \cr
 \code{\link{op_solve}()} \cr
 \code{\link{op_solve_triangular}()} \cr
 \code{\link{op_sort}()} \cr
+\code{\link{op_space_to_depth}()} \cr
 \code{\link{op_sparse_categorical_crossentropy}()} \cr
 \code{\link{op_sparse_plus}()} \cr
 \code{\link{op_sparse_sigmoid}()} \cr
@@ -363,18 +456,24 @@ Other ops: \cr
 \code{\link{op_top_k}()} \cr
 \code{\link{op_trace}()} \cr
 \code{\link{op_transpose}()} \cr
+\code{\link{op_trapezoid}()} \cr
 \code{\link{op_tri}()} \cr
 \code{\link{op_tril}()} \cr
 \code{\link{op_triu}()} \cr
 \code{\link{op_trunc}()} \cr
+\code{\link{op_unfold}()} \cr
+\code{\link{op_unique}()} \cr
 \code{\link{op_unravel_index}()} \cr
 \code{\link{op_unstack}()} \cr
+\code{\link{op_vander}()} \cr
 \code{\link{op_var}()} \cr
 \code{\link{op_vdot}()} \cr
 \code{\link{op_vectorize}()} \cr
 \code{\link{op_vectorized_map}()} \cr
+\code{\link{op_view}()} \cr
 \code{\link{op_view_as_complex}()} \cr
 \code{\link{op_view_as_real}()} \cr
+\code{\link{op_vsplit}()} \cr
 \code{\link{op_vstack}()} \cr
 \code{\link{op_where}()} \cr
 \code{\link{op_while_loop}()} \cr

@@ -156,15 +156,35 @@ reset_state <- function(object) {
 #'
 #' @description
 #' Note that the model must be built first before calling this method.
-#' `quantize_weights()` will recursively call `layer$quantize(mode)` in all layers and
+#' `quantize_weights()` will recursively call `layer$quantize(...)` in all layers and
 #' will be skipped if the layer doesn't implement the function.
 #'
-#' Currently only `Dense` and `EinsumDense` layers support quantization.
+#' Pass a `mode` string to use the default configuration for that mode.
+#' Advanced users can pass an upstream Keras quantization configuration object
+#' via `config`.
+#'
+#' # Examples
+#' Quantize a model to int8 with the default configuration:
+#'
+#' ```{r, eval = FALSE}
+#' model <- keras_model_sequential(input_shape = 10) |>
+#'   layer_dense(10)
+#' model |> quantize_weights("int8")
+#' ```
 #'
 #' @param object A Keras Model or Layer.
 #' @param mode
-#' The mode of the quantization. Only 'int8' is supported at this
-#' time.
+#' Quantization mode supported by the installed Keras version. Optional when
+#' `config` is supplied.
+#'
+#' @param config
+#' An optional upstream Keras quantization configuration object.
+#'
+#' @param filters
+#' Optional filters controlling which layers are quantized. May be a regular
+#' expression string, a list of regular expression strings, or a callable.
+#' Only layers matching the filter conditions are quantized.
+#'
 #' @param ... Passed on to the `object` quantization method.
 #'
 #' @export
@@ -174,7 +194,8 @@ reset_state <- function(object) {
 #' @family layer methods
 #' @tether keras.Model.quantize
 quantize_weights <-
-function (object, mode, ...)
+function (object, mode = NULL, config = NULL, filters = NULL, ...)
 {
-  object$quantize(mode, ...)
+  object$quantize(mode = mode, config = config, filters = filters, ...)
+  invisible(object)
 }

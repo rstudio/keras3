@@ -1,12 +1,14 @@
 ---
-title: Train a Siamese MLP on pairs of digits from the MNIST dataset.
-date-created: 2020/05/30
-last-modified: 2020/04/21
+title: Image similarity estimation using a Siamese Network with a contrastive loss
+date-created: 2021/05/06
+last-modified: 2026/01/28
+description: Similarity learning using a Siamese network trained with a contrastive
+  loss.
 domain: vision
 category: intermediate
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Train a Siamese MLP on pairs of digits from the MNIST dataset.}
+  %\VignetteIndexEntry{Image similarity estimation using a Siamese Network with a contrastive loss}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,283 +20,434 @@ are neural networks which share weights between two or more sister networks,
 each producing embedding vectors of its respective inputs.
 
 In supervised similarity learning, the networks are then trained to maximize the
-contrast (distance) between embeddings of inputs of different classes, while minimizing the distance between
-embeddings of similar classes, resulting in embedding spaces that reflect
-the class segmentation of the training inputs.
+contrast (distance) between embeddings of inputs of different classes, while
+minimizing the distance between embeddings of similar classes, resulting in
+embedding spaces that reflect the class segmentation of the training inputs.
 
-This implementation loosely follows Hadsell-et-al.'06 [1] (see paper for mode
-details) but the euclidean distance is replaced by a subtraction
-layer and one fully-connect (FC) layer.
-
-[1] "Dimensionality Reduction by Learning an Invariant Mapping"
-     https://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
-
-Gets to 98.11% test accuracy after 20 epochs. 3 seconds per epoch
-on a AMD Ryzen 7 PRO 4750U (CPU)
+## Setup
 
 
 ``` r
 library(keras3)
 ```
 
+## Hyperparameters
 
 
 ``` r
-contrastive_loss <- function(y_true, y_pred) {
-    # Contrastive loss from Hadsell-et-al.'06
-    # https://yann.lecun.com/exdb/publis/pdf/hadsell-chopra-lecun-06.pdf
-    margin = 1
-    margin_square = op_square(op_maximum(margin - (y_pred), 0))
-    op_mean((1 - y_true) * op_square(y_pred) + (y_true) * margin_square)
+epochs <- 10
+batch_size <- 16
+margin <- 1  # Margin for contrastive loss.
+```
+
+## Load the MNIST dataset
+
+
+``` r
+c(c(x_train_val, y_train_val), c(x_test, y_test)) %<-% dataset_mnist()
+```
+
+## Define training and validation sets
+
+
+``` r
+# Keep 50% of the training data in the validation set.
+train_indices <- seq_len(30000L)
+validation_indices <- seq.int(30001L, nrow(x_train_val))
+
+x_train <- x_train_val[train_indices, , , drop = FALSE]
+x_val <- x_train_val[validation_indices, , , drop = FALSE]
+y_train <- y_train_val[train_indices]
+y_val <- y_train_val[validation_indices]
+rm(x_train_val, y_train_val)
+
+# Change the data type to a floating point format and make the channel
+# dimension explicit.
+as_image_tensor <- function(x) {
+  x |>
+    op_convert_to_tensor(dtype = "float32") |>
+    op_expand_dims(axis = -1)
 }
+
+x_train <- as_image_tensor(x_train)
+x_val <- as_image_tensor(x_val)
+x_test <- as_image_tensor(x_test)
 ```
 
 ## Create pairs of images
 
-We will train the model to differentiate between digits of different classes. For
-example, digit `0` needs to be differentiated from the rest of the
-digits (`1` through `9`), digit `1` - from `0` and `2` through `9`, and so on.
-To carry this out, we will select N random images from class A (for example,
-for digit `0`) and pair them with N random images from another class B
-(for example, for digit `1`). Then, we can repeat this process for all classes
-of digits (until digit `9`). Once we have paired digit `0` with other digits,
-we can repeat this process for the remaining classes for the rest of the digits
-(from `1` until `9`).
+We will train the model to differentiate between digits of different classes.
+For example, digit `0` needs to be differentiated from the rest of the digits
+(`1` through `9`), digit `1` from `0` and `2` through `9`, and so on.
+To carry this out, we select N random images from class A (for example, digit
+`0`) and pair them with N random images from another class B (for example,
+digit `1`). We repeat this process for all classes of digits.
+
 
 ``` r
-create_pairs <- function(x, y) {
-    # Positive and negative pair creation.
-    # Alternates between positive and negative pairs.
-    digit_indices <- tapply(1:length(y), y, list)
-    y1 <- y
-    y2 <- sapply(y, function(a) sample(0:9,1,prob=0.1+0.8*(0:9==a)))
-    idx1 <- 1:nrow(x)
-    idx2 <- sapply(as.character(y2), function(a) sample(digit_indices[[a]],1))
-    is_same  <- 1*(y1==y2)
-    list(pair1 = x[idx1,], pair2 = x[idx2,], y = is_same)
+make_pairs <- function(x, y) {
+  num_classes <- max(y) + 1L
+  digit_indices <- lapply(
+    seq_len(num_classes) - 1L,
+    \(label) which(y == label)
+  )
+
+  matching_indices <- vapply(
+    seq_along(y),
+    \(i) sample(digit_indices[[y[[i]] + 1L]], size = 1L),
+    integer(1)
+  )
+
+  nonmatching_labels <- vapply(
+    y,
+    \(label) {
+      candidates <- setdiff(seq_len(num_classes) - 1L, label)
+      as.integer(sample(candidates, size = 1L))
+    },
+    integer(1)
+  )
+  nonmatching_indices <- vapply(
+    seq_along(y),
+    \(i) {
+      sample(digit_indices[[nonmatching_labels[[i]] + 1L]], size = 1L)
+    },
+    integer(1)
+  )
+
+  first_indices <- rep(seq_along(y), each = 2L)
+  second_indices <- as.vector(rbind(matching_indices, nonmatching_indices))
+
+  list(
+    pair1 = op_take(x, first_indices, axis = 1),
+    pair2 = op_take(x, second_indices, axis = 1),
+    labels = as.numeric(rep(c(0, 1), times = length(y)))
+  )
 }
 
-compute_accuracy <- function(predictions, labels) {
-    # Compute classification accuracy with a fixed threshold on distances.
-    mean(labels[predictions > 0.5])
+pairs_train <- make_pairs(x_train, y_train)
+pairs_val <- make_pairs(x_val, y_val)
+pairs_test <- make_pairs(x_test, y_test)
+
+rm(x_train, x_val, x_test, y_train, y_val, y_test)
+```
+
+We get 60,000 training pairs. Each pair contains two images, and each image has
+shape `(28, 28, 1)`.
+
+
+``` r
+dim(pairs_train$pair1)
+```
+
+```
+## [1] 60000    28    28     1
+```
+
+Split the training pairs:
+
+
+``` r
+x_train_1 <- pairs_train$pair1
+x_train_2 <- pairs_train$pair2
+labels_train <- pairs_train$labels
+```
+
+Split the validation pairs:
+
+
+``` r
+x_val_1 <- pairs_val$pair1
+x_val_2 <- pairs_val$pair2
+labels_val <- pairs_val$labels
+```
+
+Split the test pairs:
+
+
+``` r
+x_test_1 <- pairs_test$pair1
+x_test_2 <- pairs_test$pair2
+labels_test <- pairs_test$labels
+```
+
+## Visualize pairs and their labels
+
+
+``` r
+visualize <- function(pairs, labels, to_show = 6L, num_col = 3L,
+                      predictions = NULL, test = FALSE) {
+  num_row <- max(to_show %/% num_col, 1L)
+  to_show <- num_row * num_col
+  indices <- seq_len(to_show)
+
+  pair1 <- op_take(pairs$pair1, indices, axis = 1) |> as.array()
+  pair2 <- op_take(pairs$pair2, indices, axis = 1) |> as.array()
+  prediction_values <- if (is.null(predictions)) {
+    NULL
+  } else {
+    drop(as.array(predictions))[indices]
+  }
+
+  old_par <- par(no.readonly = TRUE)
+  on.exit(par(old_par), add = TRUE)
+  par(mfrow = c(num_row, num_col), mar = c(0, 0, 2, 0))
+
+  for (i in indices) {
+    image <- cbind(pair1[i, , , 1L], pair2[i, , , 1L])
+    plot(as.raster(image / 255))
+
+    label <- if (test) {
+      sprintf(
+        "True: %d | Pred: %.5f",
+        as.integer(labels[[i]]),
+        prediction_values[[i]]
+      )
+    } else {
+      sprintf("Label: %d", as.integer(labels[[i]]))
+    }
+    title(main = label)
+  }
+
+  invisible(NULL)
 }
 ```
 
+Inspect training pairs:
 
 
 ``` r
-# the data, shuffled and split between train and test sets
-mnist   <- dataset_mnist()
-x_train <- mnist$train$x
-y_train <- mnist$train$y
-x_test  <- mnist$test$x
-y_test  <- mnist$test$y
-x_train <- array_reshape(x_train, c(nrow(x_train), 784))
-x_test  <- array_reshape(x_test, c(nrow(x_test), 784))
-x_train <- x_train / 255
-x_test  <- x_test / 255
-
-# create training+test positive and negative pairs
-tr <- create_pairs(x_train, y_train)
-te <- create_pairs(x_test,  y_test)
-
-names(tr)
+visualize(pairs_train, labels_train, to_show = 4L, num_col = 4L)
 ```
 
-```
-## [1] "pair1" "pair2" "y"
-```
+![plot of chunk unnamed-chunk-10](mnist_siamese_graph/unnamed-chunk-10-1.png)
 
-## Network definition
+Inspect validation pairs:
 
 
 ``` r
-# input layers
-input_dim = 784
-input_1 <- layer_input(shape = c(input_dim))
-input_2 <- layer_input(shape = c(input_dim))
-
-# definition of the base network that will be shared
-base_network <- keras_model_sequential() %>%
-    layer_dense(units = 128, activation = 'relu') %>%
-    layer_dropout(rate = 0.1) %>%
-    layer_dense(units = 128, activation = 'relu') %>%
-    layer_dropout(rate = 0.1) %>%
-    layer_dense(units = 128, activation = 'relu')
-
-# because we re-use the same instance `base_network`, the weights of
-# the network will be shared across the two branches
-branch_1 <- base_network(input_1)
-branch_2 <- base_network(input_2)
-
-# merging layer
-out <- layer_subtract(list(branch_1, branch_2)) %>%
-    layer_dropout(rate = 0.1) %>%
-    layer_dense(units = 16, activation = 'relu') %>%
-    layer_dense(1, activation = "sigmoid")
-
-# create and compile model
-model <- keras_model(list(input_1, input_2), out)
+visualize(pairs_val, labels_val, to_show = 4L, num_col = 4L)
 ```
 
-## Train
+![plot of chunk unnamed-chunk-11](mnist_siamese_graph/unnamed-chunk-11-1.png)
+
+Inspect test pairs:
 
 
 ``` r
-model %>% compile(
-    optimizer = "rmsprop",
-    #loss = "binary_crossentropy",
-    loss = contrastive_loss,
-    metrics = metric_binary_accuracy
+visualize(pairs_test, labels_test, to_show = 4L, num_col = 4L)
+```
+
+![plot of chunk unnamed-chunk-12](mnist_siamese_graph/unnamed-chunk-12-1.png)
+
+## Define the model
+
+There are two input layers, each leading to its own network, which produces
+embeddings. A `Lambda` layer then merges them using
+[Euclidean distance](https://en.wikipedia.org/wiki/Euclidean_distance).
+
+
+``` r
+euclidean_distance <- function(vectors) {
+  c(x, y) %<-% vectors
+  sum_square <- op_sum(op_square(x - y), axis = 2, keepdims = TRUE)
+  op_sqrt(op_maximum(sum_square, config_epsilon()))
+}
+
+create_embedding_network <- function() {
+  inputs <- keras_input(shape = c(28, 28, 1))
+  outputs <- inputs |>
+    layer_batch_normalization() |>
+    layer_conv_2d(
+      filters = 4, kernel_size = c(5, 5), activation = "tanh"
+    ) |>
+    layer_average_pooling_2d(pool_size = c(2, 2)) |>
+    layer_conv_2d(
+      filters = 16, kernel_size = c(5, 5), activation = "tanh"
+    ) |>
+    layer_average_pooling_2d(pool_size = c(2, 2)) |>
+    layer_flatten() |>
+    layer_batch_normalization() |>
+    layer_dense(units = 10, activation = "tanh")
+
+  keras_model(inputs, outputs, name = "embedding")
+}
+
+embedding_network <- create_embedding_network()
+
+input_1 <- keras_input(shape = c(28, 28, 1))
+input_2 <- keras_input(shape = c(28, 28, 1))
+
+# Reusing the same embedding network shares its weights between the towers.
+tower_1 <- embedding_network(input_1)
+tower_2 <- embedding_network(input_2)
+
+# Distance is the output; there is no final dense sigmoid layer.
+distance <- list(tower_1, tower_2) |>
+  layer_lambda(euclidean_distance)
+siamese <- keras_model(
+  inputs = list(input_1, input_2),
+  outputs = distance
 )
+```
 
-history <- model %>% fit(
-    list(tr$pair1, tr$pair2), tr$y,
-    batch_size = 128,
-    epochs = 20,
-    validation_data = list(
-        list(te$pair1, te$pair2),
-        te$y
+## Define the contrastive loss
+
+
+``` r
+contrastive_loss <- function(margin = 1) {
+  function(y_true, y_pred) {
+    square_pred <- op_square(y_pred)
+    margin_square <- op_square(op_maximum(margin - y_pred, 0))
+    op_mean(
+      (1 - y_true) * square_pred +
+        y_true * margin_square
     )
+  }
+}
+```
+
+## Define the accuracy metric
+
+
+``` r
+accuracy <- function(y_true, y_pred) {
+  y_true <- op_cast(y_true, "float32")
+  y_true <- op_reshape(y_true, c(-1))
+  y_pred <- op_reshape(y_pred, c(-1))
+
+  # 0 for similar (< 0.5), 1 for dissimilar (> 0.5).
+  predictions <- op_cast(y_pred > 0.5, "float32")
+  op_mean(op_equal(y_true, predictions))
+}
+```
+
+## Compile the model with the contrastive loss
+
+
+``` r
+siamese |> compile(
+  loss = contrastive_loss(margin),
+  optimizer = "rmsprop",
+  metrics = list(accuracy)
+)
+summary(siamese)
+```
+
+```
+## Model: "functional"
+## ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━┓
+## ┃ Layer (type)      ┃ Output Shape    ┃   Param # ┃ Connected to   ┃ Trai… ┃
+## ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━┩
+## │ input_layer_1     │ (None, 28, 28,  │         0 │ -              │   -   │
+## │ (InputLayer)      │ 1)              │           │                │       │
+## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤
+## │ input_layer_2     │ (None, 28, 28,  │         0 │ -              │   -   │
+## │ (InputLayer)      │ 1)              │           │                │       │
+## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤
+## │ embedding         │ (None, 10)      │     5,318 │ input_layer_1… │   Y   │
+## │ (Functional)      │                 │           │ input_layer_2… │       │
+## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤
+## │ lambda (Lambda)   │ (None, 1)       │         0 │ embedding[0][… │   -   │
+## │                   │                 │           │ embedding[1][… │       │
+## └───────────────────┴─────────────────┴───────────┴────────────────┴───────┘
+##  Total params: 5,318 (20.77 KB)
+##  Trainable params: 4,804 (18.77 KB)
+##  Non-trainable params: 514 (2.01 KB)
+```
+
+## Train the model
+
+
+``` r
+history <- siamese |> fit(
+  x = list(x_train_1, x_train_2),
+  y = labels_train,
+  validation_data = list(
+    list(x_val_1, x_val_2),
+    labels_val
+  ),
+  batch_size = batch_size,
+  epochs = epochs
 )
 ```
 
 ```
-## Epoch 1/20
-## 469/469 - 5s - 11ms/step - binary_accuracy: 0.7569 - loss: 0.1640 - val_binary_accuracy: 0.8798 - val_loss: 0.0974
-## Epoch 2/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.8899 - loss: 0.0866 - val_binary_accuracy: 0.9227 - val_loss: 0.0626
-## Epoch 3/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9233 - loss: 0.0603 - val_binary_accuracy: 0.9398 - val_loss: 0.0497
-## Epoch 4/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9423 - loss: 0.0460 - val_binary_accuracy: 0.9480 - val_loss: 0.0399
-## Epoch 5/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9561 - loss: 0.0356 - val_binary_accuracy: 0.9578 - val_loss: 0.0330
-## Epoch 6/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9637 - loss: 0.0295 - val_binary_accuracy: 0.9613 - val_loss: 0.0313
-## Epoch 7/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9686 - loss: 0.0252 - val_binary_accuracy: 0.9645 - val_loss: 0.0275
-## Epoch 8/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9730 - loss: 0.0217 - val_binary_accuracy: 0.9672 - val_loss: 0.0264
-## Epoch 9/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9768 - loss: 0.0190 - val_binary_accuracy: 0.9686 - val_loss: 0.0246
-## Epoch 10/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9793 - loss: 0.0169 - val_binary_accuracy: 0.9701 - val_loss: 0.0242
-## Epoch 11/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9805 - loss: 0.0158 - val_binary_accuracy: 0.9719 - val_loss: 0.0233
-## Epoch 12/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9822 - loss: 0.0148 - val_binary_accuracy: 0.9718 - val_loss: 0.0230
-## Epoch 13/20
-## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9833 - loss: 0.0135 - val_binary_accuracy: 0.9702 - val_loss: 0.0234
-## Epoch 14/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9846 - loss: 0.0129 - val_binary_accuracy: 0.9730 - val_loss: 0.0220
-## Epoch 15/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9857 - loss: 0.0117 - val_binary_accuracy: 0.9759 - val_loss: 0.0193
-## Epoch 16/20
-## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9868 - loss: 0.0111 - val_binary_accuracy: 0.9749 - val_loss: 0.0217
-## Epoch 17/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9872 - loss: 0.0106 - val_binary_accuracy: 0.9741 - val_loss: 0.0211
-## Epoch 18/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9880 - loss: 0.0099 - val_binary_accuracy: 0.9746 - val_loss: 0.0201
-## Epoch 19/20
-## 469/469 - 1s - 1ms/step - binary_accuracy: 0.9879 - loss: 0.0100 - val_binary_accuracy: 0.9756 - val_loss: 0.0207
-## Epoch 20/20
-## 469/469 - 1s - 2ms/step - binary_accuracy: 0.9888 - loss: 0.0091 - val_binary_accuracy: 0.9776 - val_loss: 0.0184
+## Epoch 1/10
+## 3750/3750 - 14s - 4ms/step - custom_metric_1: 0.7390 - loss: 0.2347 - val_custom_metric_1: 0.8233 - val_loss: 0.1280
+## Epoch 2/10
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8402 - loss: 0.1236 - val_custom_metric_1: 0.8798 - val_loss: 0.0998
+## Epoch 3/10
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8807 - loss: 0.1023 - val_custom_metric_1: 0.9042 - val_loss: 0.0848
+## Epoch 4/10
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9021 - loss: 0.0904 - val_custom_metric_1: 0.9207 - val_loss: 0.0748
+## Epoch 5/10
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9168 - loss: 0.0829 - val_custom_metric_1: 0.9319 - val_loss: 0.0682
+## Epoch 6/10
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9262 - loss: 0.0779 - val_custom_metric_1: 0.9387 - val_loss: 0.0636
+## Epoch 7/10
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9447 - val_loss: 0.0604
+## Epoch 8/10
+## 3750/3750 - 11s - 3ms/step - custom_metric_1: 0.9367 - loss: 0.0716 - val_custom_metric_1: 0.9496 - val_loss: 0.0581
+## Epoch 9/10
+## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9398 - loss: 0.0696 - val_custom_metric_1: 0.9525 - val_loss: 0.0564
+## Epoch 10/10
+## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9418 - loss: 0.0680 - val_custom_metric_1: 0.9548 - val_loss: 0.0548
 ```
+
+## Visualize results
+
 
 ``` r
 plot(history)
 ```
 
-![plot of chunk unnamed-chunk-5](mnist_siamese_graph/unnamed-chunk-5-1.png)
+![plot of chunk unnamed-chunk-18](mnist_siamese_graph/unnamed-chunk-18-1.png)
 
-## Evaluate
-
-
-``` r
-# compute final accuracy on training and test sets
-
-tr_pred <- predict(model, list(tr$pair1, tr$pair2))[,1]
-```
-
-```
-## 1875/1875 - 2s - 876us/step
-```
-
-``` r
-tr_acc  <- compute_accuracy(tr_pred, tr$y)
-te_pred <- predict(model, list(te$pair1, te$pair2))[,1]
-```
-
-```
-## 313/313 - 0s - 1ms/step
-```
-
-``` r
-te_acc  <- compute_accuracy(te_pred, te$y)
-
-sprintf('* Accuracy on training set: %0.2f%%', (100 * tr_acc))
-```
-
-```
-## [1] "* Accuracy on training set: 99.67%"
-```
-
-``` r
-sprintf('* Accuracy on test set: %0.2f%%', (100 * te_acc))
-```
-
-```
-## [1] "* Accuracy on test set: 98.25%"
-```
-
-## Plots
+## Evaluate the model
 
 
 ``` r
-par(mfrow=c(1,1))
-vioplot::vioplot( te_pred ~ te$y )
+results <- siamese |> evaluate(
+  list(x_test_1, x_test_2),
+  labels_test
+)
 ```
 
-![plot of chunk unnamed-chunk-7](mnist_siamese_graph/unnamed-chunk-7-1.png)
+```
+## 625/625 - 2s - 3ms/step - custom_metric_1: 0.9573 - loss: 0.0519
+```
 
 ``` r
-i=3
-visualizePair <- function(i) {
-    image(rbind(matrix( te$pair1[i,],28,28)[,28:1], matrix( te$pair2[i,],28,28)[,28:1]))
-    title(paste("true:", te$y[i],"|  pred:", round(te_pred[i],5)))
-}
-par(mfrow=c(3,3))
-lapply(1:9, visualizePair)
+results
 ```
 
-![plot of chunk unnamed-chunk-7](mnist_siamese_graph/unnamed-chunk-7-2.png)
+```
+## $custom_metric_1
+## [1] 0.9573
+##
+## $loss
+## [1] 0.05186361
+```
+
+## Visualize the predictions
+
+
+``` r
+predictions <- siamese |> predict(list(x_test_1, x_test_2))
+```
 
 ```
-## [[1]]
-## NULL
-##
-## [[2]]
-## NULL
-##
-## [[3]]
-## NULL
-##
-## [[4]]
-## NULL
-##
-## [[5]]
-## NULL
-##
-## [[6]]
-## NULL
-##
-## [[7]]
-## NULL
-##
-## [[8]]
-## NULL
-##
-## [[9]]
-## NULL
+## 625/625 - 1s - 2ms/step
 ```
+
+``` r
+visualize(
+  pairs_test,
+  labels_test,
+  to_show = 3L,
+  predictions = predictions,
+  test = TRUE
+)
+```
+
+![plot of chunk unnamed-chunk-20](mnist_siamese_graph/unnamed-chunk-20-1.png)

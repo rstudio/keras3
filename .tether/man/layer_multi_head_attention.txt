@@ -1,7 +1,7 @@
 Help on class MultiHeadAttention in module keras.src.layers.attention.multi_head_attention:
 
 class MultiHeadAttention(keras.src.layers.layer.Layer)
- |  MultiHeadAttention(num_heads, key_dim, value_dim=None, dropout=0.0, use_bias=True, output_shape=None, attention_axes=None, flash_attention=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, seed=None, **kwargs)
+ |  MultiHeadAttention(num_heads, key_dim, value_dim=None, dropout=0.0, use_bias=True, output_shape=None, attention_axes=None, sliding_window=None, flash_attention=None, kernel_initializer='glorot_uniform', bias_initializer='zeros', kernel_regularizer=None, bias_regularizer=None, activity_regularizer=None, kernel_constraint=None, bias_constraint=None, use_gate=False, seed=None, **kwargs)
  |
  |  MultiHeadAttention layer.
  |
@@ -37,6 +37,12 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |          feature dim (the query input's last dimension).
  |      attention_axes: axes over which the attention is applied. `None` means
  |          attention over all axes, but batch, heads, and features.
+ |      sliding_window: Optional positive integer. If set, restricts each
+ |          query position to attend only to key positions within
+ |          `sliding_window - 1` of itself (a symmetric band). Composes
+ |          naturally with `use_causal_mask=True` to give the causal
+ |          sliding window used by Mistral, Llama-3 long-context, and
+ |          Phi-3. Defaults to `None` (full attention).
  |      flash_attention: If `None`, the layer attempts to use flash
  |          attention for faster and more memory-efficient attention
  |          computations when possible. This behavior can be configured using
@@ -49,6 +55,12 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |      activity_regularizer: Regularizer for dense layer activity.
  |      kernel_constraint: Constraint for dense layer kernels.
  |      bias_constraint: Constraint for dense layer kernels.
+ |      use_gate: Boolean, whether to apply a gated attention mechanism.
+ |          When True, an additional gating branch is added based on the
+ |          (Gated Attention for Large Language Models)[https://arxiv.org/abs/2505.06708].
+ |          It applies a sigmoid-activated linear projection to the query
+ |          which then gates the attention output. This helps improve training
+ |          stability and eliminates "attention sinks".
  |      seed: Optional integer to seed the dropout layer.
  |
  |  Call arguments:
@@ -106,6 +118,7 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |    use_bias=True,
  |    output_shape=None,
  |    attention_axes=None,
+ |    sliding_window=None,
  |    flash_attention=None,
  |    kernel_initializer='glorot_uniform',
  |    bias_initializer='zeros',
@@ -114,6 +127,7 @@ class MultiHeadAttention(keras.src.layers.layer.Layer)
  |    activity_regularizer=None,
  |    kernel_constraint=None,
  |    bias_constraint=None,
+ |    use_gate=False,
  |    seed=None,
  |    **kwargs
  |  )

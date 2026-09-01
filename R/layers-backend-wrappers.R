@@ -185,17 +185,17 @@ function (object, module, output_shape = NULL, name = NULL, ...)
 #' ```r
 #' flax <- import("flax")
 #'
-#' MyFlaxModule(flax$linen$Module) \%py_class\% {
+#' MyFlaxModule(flax$linen$Module) %py_class% {
 #'   forward <-
-#'     flax$linen$compact(\(self, inputs1, input2, deterministic) {
+#'     flax$linen$compact(\(self, input1, input2, deterministic) {
 #'       # do work ....
 #'       outputs # return
 #'     })
 #' }
 #'
 #' my_flax_module_wrapper <- function(module, inputs, training) {
-#'   c(input1, input2) \%<-\% inputs
-#'   module$forward(input1, input2,!training)
+#'   c(input1, input2) %<-% inputs
+#'   module$forward(input1, input2, !training)
 #' }
 #'
 #' flax_module <- MyFlaxModule()
@@ -464,8 +464,12 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' @param seed
 #' Seed for random number generator. Optional.
 #'
-#' @param dtype The dtype of the layer's computations and weights. Can also be a
-#' `keras.DTypePolicy`. Optional. Defaults to the default policy.
+#' @param native_serialization_platforms
+#' Optional sequence of platforms (`"cpu"`, `"cuda"`, `"rocm"`, or `"tpu"`)
+#' to compile for when using `jax2tf.convert()` with native serialization. This
+#' is used only when the Keras backend is TensorFlow. If `NULL`, the function
+#' is compiled for the default backend. If multiple platforms are supplied,
+#' the exported module is device-polymorphic.
 #'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
@@ -480,7 +484,7 @@ function (object, module, method = NULL, variables = NULL, ...)
 #' @tether keras.layers.JaxLayer
 layer_jax_model_wrapper <-
 function (object, call_fn, init_fn = NULL, params = NULL, state = NULL,
-    seed = NULL, ..., dtype = NULL)
+    seed = NULL, native_serialization_platforms = NULL, ...)
 {
     args <- capture_args(list(seed = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),

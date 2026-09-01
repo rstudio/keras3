@@ -532,7 +532,7 @@ transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
 ```
 
-    ## 1302/1302 - 56s - 43ms/step - accuracy: 0.3919 - loss: 3.9165 - val_accuracy: 0.4060 - val_loss: 3.1852
+    ## 1302/1302 - 59s - 45ms/step - accuracy: 0.3991 - loss: 3.8775 - val_accuracy: 0.4050 - val_loss: 3.1681
 
 ## Decoding test sentences
 
@@ -595,3 +595,10 @@ After 30 epochs, we get results such as:
     English: I'm sure everything will be fine.
     Correct Translation: [start] estoy segura de que todo irá bien. [end]
       Model Translation: [start] estoy seguro de que todo va bien [end]
+
+## Relevant Chapters from Deep Learning with Python
+
+- [Chapter 15: Language models and the
+  Transformer](https://deeplearningwithpython.io/chapters/chapter15_language-models-and-the-transformer)
+- [Chapter 16: Text
+  generation](https://deeplearningwithpython.io/chapters/chapter16_text-generation)

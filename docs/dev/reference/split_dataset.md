@@ -10,7 +10,8 @@ split_dataset(
   left_size = NULL,
   right_size = NULL,
   shuffle = FALSE,
-  seed = NULL
+  seed = NULL,
+  preferred_backend = NULL
 )
 ```
 
@@ -43,9 +44,20 @@ split_dataset(
 
   A random seed for shuffling.
 
+- preferred_backend:
+
+  Optional string specifying which backend to use, such as
+  `"tensorflow"` or `"torch"`. If `NULL`, the backend is inferred from
+  `dataset`: TensorFlow is used for a `tf.data.Dataset`, Torch is used
+  for a `torch.utils.data.Dataset`, and the current Keras backend is
+  used for an R list or array. Defaults to `NULL`.
+
 ## Value
 
-A list of two `tf$data$Dataset` objects: the left and right splits.
+A list of two dataset objects, the left and right splits. The exact type
+depends on `preferred_backend` and on the input dataset type. For
+example, the TensorFlow backend returns `tf.data.Dataset` objects and
+the Torch backend returns `torch.utils.data.Dataset` objects.
 
 ## Examples
 

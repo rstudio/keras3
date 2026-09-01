@@ -1,0 +1,26 @@
+__signature__
+keras.ops.dsplit(x, indices_or_sections)
+__doc__
+Split an array into multiple sub-arrays depth-wise.
+
+Args:
+    x: Input tensor.
+    indices_or_sections: If an integer, N, the tensor will be split into N
+        equal sections along axis 2. If a 1-D array of sorted integers,
+        the entries indicate indices at which the tensor will be split
+        along axis 2.
+Returns:
+    A list of sub-arrays.
+
+Example:
+
+>>> x = keras.ops.arange(16.0).reshape((2, 2, 4))
+>>> keras.ops.dsplit(x, 2)
+[array([[[ 0.,  1.],
+        [ 4.,  5.]],
+       [[ 8.,  9.],
+        [12., 13.]]]),
+ array([[[ 2.,  3.],
+        [ 6.,  7.]],
+       [[10., 11.],
+        [14., 15.]]])]

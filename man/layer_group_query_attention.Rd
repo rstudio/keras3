@@ -11,6 +11,7 @@ layer_group_query_attention(
   num_key_value_heads,
   dropout = 0,
   use_bias = TRUE,
+  sliding_window = NULL,
   flash_attention = NULL,
   kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros",
@@ -19,6 +20,7 @@ layer_group_query_attention(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
+  use_gate = FALSE,
   seed = NULL,
   ...
 )
@@ -35,6 +37,12 @@ layer_group_query_attention(
 \item{dropout}{Dropout probability.}
 
 \item{use_bias}{Boolean, whether the dense layers use bias vectors/matrices.}
+
+\item{sliding_window}{Optional positive integer. If set, each query position attends only to key
+positions within \code{sliding_window - 1} of itself, forming a symmetric band.
+This combines with \code{use_causal_mask = TRUE} to provide the causal sliding
+window used by Mistral, Llama 3 long-context, and Phi-3. Defaults to \code{NULL},
+which uses full attention.}
 
 \item{flash_attention}{If \code{NULL}, the layer attempts to use flash
 attention for faster and more memory-efficient attention
@@ -55,6 +63,13 @@ computations when possible. This behavior can be configured using
 \item{kernel_constraint}{Constraint for dense layer kernels.}
 
 \item{bias_constraint}{Constraint for dense layer kernels.}
+
+\item{use_gate}{Logical, whether to apply a gated attention mechanism. When \code{TRUE}, an
+additional gating branch is added based on
+\href{https://arxiv.org/abs/2505.06708}{Gated Attention for Large Language Models}.
+It applies a sigmoid-activated linear projection to the query, which then
+gates the attention output. This helps improve training stability and
+eliminates "attention sinks".}
 
 \item{seed}{Optional integer to seed the dropout layer.}
 
@@ -129,6 +144,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -144,6 +165,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -225,6 +247,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

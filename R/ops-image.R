@@ -107,9 +107,11 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
 }
 
 
-#' Extracts patches from the image(s).
+#' Extracts patches from image(s) or volume(s).
 #'
 #' @description
+#' The length of `size` selects 2D or 3D patch extraction, in the same way that
+#' the dimensionality of a convolution is selected by its kernel size.
 #'
 #' # Examples
 #' ```{r}
@@ -121,26 +123,39 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
 #' patches <- op_image_extract_patches(image, c(3, 3), c(1, 1))
 #' shape(patches)
 #' # (18, 18, 27)
+#'
+#' volumes <- random_uniform(c(2, 10, 10, 10, 3), dtype = "float32")
+#' patches <- op_image_extract_patches(volumes, c(3, 3, 3))
+#' shape(patches)
+#' # (2, 3, 3, 3, 81)
+#'
+#' volume <- random_uniform(c(10, 10, 10, 3), dtype = "float32")
+#' patches <- op_image_extract_patches(volume, c(3, 3, 3))
+#' shape(patches)
+#' # (3, 3, 3, 81)
 #' ```
 #'
 #' @returns
-#' Extracted patches 3D (if not batched) or 4D (if batched)
+#' Extracted patches whose rank depends on the input and `size`: 3D or 4D for
+#' 2D patches, and 4D or 5D for 3D patches.
 #'
 #' @param images
-#' Input image or batch of images. Must be 3D or 4D.
+#' Input image, volume, or batch. For 2D patches, a 3D `(H, W, C)` image or 4D
+#' `(N, H, W, C)` batch. For 3D patches, a 4D `(D, H, W, C)` volume or 5D
+#' `(N, D, H, W, C)` batch.
 #'
 #' @param size
-#' Patch size int or list (patch_height, patch_width)
+#' Patch size as an integer or integer vector. Use a length-2 vector
+#' `(patch_height, patch_width)` or a scalar for 2D patches, and a length-3
+#' vector `(patch_depth, patch_height, patch_width)` for 3D patches.
 #'
 #' @param strides
-#' strides along height and width. If not specified, or
-#' if `NULL`, it defaults to the same value as `size`.
+#' Strides for patch extraction. If `NULL`, defaults to `size`, producing
+#' non-overlapping patches.
 #'
 #' @param dilation_rate
-#' This is the input stride, specifying how far two
-#' consecutive patch samples are in the input. For value other than 1,
-#' strides must be 1. NOTE: `strides > 1` is not supported in
-#' conjunction with `dilation_rate > 1`
+#' Dilation rate for patch extraction. `dilation_rate > 1` is not supported
+#' together with `strides > 1`.
 #'
 #' @param padding
 #' The type of padding algorithm to use: `"same"` or `"valid"`.
@@ -148,10 +163,9 @@ function (images, transform, interpolation = "bilinear", fill_mode = "constant",
 #' @param data_format
 #' A string specifying the data format of the input tensor.
 #' It can be either `"channels_last"` or `"channels_first"`.
-#' `"channels_last"` corresponds to inputs with shape
-#' `(batch, height, width, channels)`, while `"channels_first"`
-#' corresponds to inputs with shape `(batch, channels, height, width)`.
-#' If not specified, the value will default to
+#' `"channels_last"` places channels last in images and volumes, while
+#' `"channels_first"` places channels immediately after the batch dimension.
+#' Defaults to `"channels_last"`; pass `NULL` to use
 #' `config_image_data_format()`.
 #'
 #' @export
@@ -172,6 +186,49 @@ function (images, size, strides = NULL, dilation_rate = 1L, padding = "valid",
     args <- args_to_positional(args, "images")
 
     do.call(ops$image$extract_patches, args)
+}
+
+
+#' Extract patches from 3D volumes.
+#'
+#' @param volumes A volume or batch of volumes. The input must be rank 4 or 5.
+#' @param size Integer or integer vector of length three specifying patch depth,
+#'   height, and width.
+#' @param strides Integer or integer vector of length three specifying strides
+#'   along depth, height, and width. `NULL` uses `size`.
+#' @param dilation_rate Integer or integer vector of length three specifying the
+#'   input stride between consecutive patch samples. On the TensorFlow backend,
+#'   `dilation_rate > 1` cannot be combined with `strides > 1`.
+#' @param padding One of `"valid"` or `"same"`.
+#' @param data_format `"channels_last"` for input with shape
+#'   `(batch, depth, height, width, channels)` or `"channels_first"` for input
+#'   with shape `(batch, channels, depth, height, width)`. `NULL` defaults to
+#'   [`config_image_data_format()`].
+#'
+#' @returns Extracted patches as a rank-4 tensor for an unbatched volume or a
+#'   rank-5 tensor for batched volumes.
+#'
+#' @examples
+#' volumes <- op_ones(c(2, 10, 10, 10, 3))
+#' op_image_extract_patches_3d(volumes, c(3, 3, 3))
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/image#extractpatches3d-function>
+#' @tether keras.ops.image.extract_patches_3d
+op_image_extract_patches_3d <-
+function(volumes, size, strides = NULL, dilation_rate = 1L,
+         padding = "valid", data_format = NULL)
+{
+  args <- capture_args(list(
+    size = as_integer,
+    strides = as_integer,
+    dilation_rate = as_integer
+  ))
+  do.call(ops$image$extract_patches_3d, args)
 }
 
 
@@ -403,6 +460,71 @@ function (images, size, interpolation = "bilinear", antialias = FALSE,
     args <- capture_args(list(size = as_integer))
     args <- args_to_positional(args, "images")
     do.call(ops$image$resize, args)
+}
+
+
+#' Scale and translate images.
+#'
+#' Generates images with `output_shape` by resampling `images`. For 2-D images,
+#' an input location `(x, y)` is transformed to
+#' `(x * scale[[2]] + translation[[2]],
+#' y * scale[[1]] + translation[[1]])`. The inverse warp is used to generate
+#' sample locations.
+#'
+#' Pixels are half-centered: the pixel at integer row and column has coordinates
+#' `y = row + 0.5` and `x = column + 0.5`. Output locations that map outside
+#' the input boundaries are set to zero.
+#'
+#' Linear methods (`"linear"`, `"bilinear"`, `"trilinear"`, and `"triangle"`)
+#' use linear interpolation and, when `antialias = TRUE`, a triangular filter
+#' while downsampling. Cubic methods (`"cubic"`, `"bicubic"`, and `"tricubic"`)
+#' use the Keys cubic kernel. `"lanczos3"` and `"lanczos5"` use Lanczos kernels
+#' of radius 3 and 5, respectively.
+#'
+#' @param images Input array.
+#' @param output_shape Integer vector giving the output shape, with one value
+#'   per image dimension.
+#' @param scale Numeric length-`K` vector containing the scale for each selected
+#'   spatial dimension.
+#' @param translation Numeric length-`K` vector containing the translation for
+#'   each selected spatial dimension.
+#' @param spatial_dims Integer length-`K` vector of 1-based spatial dimensions
+#'   to which `scale` and `translation` apply.
+#' @param method Resampling method. Supported values include `"linear"`,
+#'   `"bilinear"`, `"trilinear"`, `"triangle"`, `"cubic"`, `"bicubic"`,
+#'   `"tricubic"`, `"lanczos3"`, and `"lanczos5"`.
+#' @param antialias Whether to apply an antialiasing filter when downsampling.
+#'   This has no effect when upsampling. Defaults to `TRUE`.
+#'
+#' @returns The scaled and translated images.
+#'
+#' @examples
+#' image <- op_reshape(op_arange(9, dtype = "float32"), c(3, 3))
+#' op_image_scale_and_translate(
+#'   image,
+#'   output_shape = c(5, 5),
+#'   scale = c(2, 2),
+#'   translation = c(-0.5, -0.5),
+#'   spatial_dims = c(1, 2),
+#'   method = "linear"
+#' )
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/image#scaleandtranslate-function>
+#' @tether keras.ops.image.scale_and_translate
+op_image_scale_and_translate <-
+function(images, output_shape, scale, translation, spatial_dims, method,
+         antialias = TRUE)
+{
+  args <- capture_args(list(
+    output_shape = normalize_shape,
+    spatial_dims = as_axis
+  ))
+  do.call(ops$image$scale_and_translate, args)
 }
 
 
@@ -870,4 +992,83 @@ function (images, start_points, end_points, interpolation = "bilinear",
 {
     args <- capture_args(list(fill_value = as_integer))
     do.call(keras$ops$image$perspective_transform, args)
+}
+
+
+#' Compute Sobel edges for images.
+#'
+#' The Sobel operator computes the gradient of image intensity at each pixel,
+#' giving the direction and rate of the largest change from light to dark.
+#'
+#' @param images Input tensor with shape `(batch, height, width, channels)` for
+#'   channels-last format or `(batch, channels, height, width)` for
+#'   channels-first format.
+#' @param data_format One of `"channels_last"` or `"channels_first"`. `NULL`
+#'   defaults to [`config_image_data_format()`].
+#'
+#' @returns For channels-last input, a tensor with shape
+#'   `(batch, height, width, channels, 2)`. For channels-first input, a tensor
+#'   with shape `(batch, channels, height, width, 2)`. The final dimension is
+#'   `[dy, dx]`, containing the vertical and horizontal gradients.
+#'
+#' @examples
+#' images <- op_ones(c(1, 8, 8, 1))
+#' op_image_sobel_edges(images)
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/image#sobeledges-function>
+#' @tether keras.ops.image.sobel_edges
+op_image_sobel_edges <-
+function(images, data_format = NULL)
+ops$image$sobel_edges(images, data_format)
+
+
+#' Compute the structural similarity index between images.
+#'
+#' SSIM compares luminance, contrast, and structure. Its value ranges from
+#' -1 to 1, with 1 indicating identical images.
+#'
+#' This implementation follows Wang, Bovik, Sheikh, and Simoncelli (2004),
+#' "Image quality assessment: From error visibility to structural similarity,"
+#' *IEEE Transactions on Image Processing*.
+#'
+#' @param image1 First image or batch of images. Must be rank 3 or 4.
+#' @param image2 Second image or batch of images with the same shape as
+#'   `image1`.
+#' @param max_val Maximum possible image value. Defaults to `1` for normalized
+#'   images; use `255` for images with pixel values in `[0, 255]`.
+#' @param filter_size Gaussian filter size. Must be an odd integer greater than
+#'   or equal to 1. Defaults to `11`.
+#' @param filter_sigma Gaussian filter standard deviation. Defaults to `1.5`.
+#' @param k1 First stabilization constant. Defaults to `0.01`.
+#' @param k2 Second stabilization constant. Defaults to `0.03`.
+#' @param data_format `"channels_last"` for input with shape
+#'   `(batch, height, width, channels)` or `"channels_first"` for input with
+#'   shape `(batch, channels, height, width)`. `NULL` defaults to
+#'   [`config_image_data_format()`].
+#'
+#' @returns A scalar tensor for unbatched images or one SSIM value per image
+#'   for batched inputs.
+#'
+#' @examples
+#' image <- op_ones(c(32, 32, 3))
+#' op_image_ssim(image, image)
+#'
+#' @export
+#' @family image ops
+#' @family image utils
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/image#ssim-function>
+#' @tether keras.ops.image.ssim
+op_image_ssim <-
+function(image1, image2, max_val = 1, filter_size = 11L,
+         filter_sigma = 1.5, k1 = 0.01, k2 = 0.03, data_format = NULL)
+{
+  args <- capture_args(list(filter_size = as_integer))
+  do.call(ops$image$ssim, args)
 }

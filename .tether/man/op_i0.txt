@@ -1,0 +1,11 @@
+__signature__
+keras.ops.i0(x)
+__doc__
+Modified Bessel function of the first kind, order 0.
+
+Args:
+    x: Input tensor.
+
+Returns:
+    Output tensor, element-wise modified Bessel function of the
+    first kind, order 0 of `x`.

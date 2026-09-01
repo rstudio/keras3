@@ -37,7 +37,9 @@ application_mobilenet_v3_large(
 
   controls the width of the network. This is known as the depth
   multiplier in the MobileNetV3 paper, but the name is kept for
-  consistency with MobileNetV1 in Keras.
+  consistency with MobileNetV1 in Keras. When `weights = "imagenet"`,
+  `alpha` can be `0.75` or `1` for non-minimalistic models, and must be
+  `1` for minimalistic models.
 
   - If `alpha < 1.0`, proportionally decreases the number of filters in
     each layer.

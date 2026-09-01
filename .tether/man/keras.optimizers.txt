@@ -11,7 +11,7 @@ Adadelta(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='adadelta',
+  name=None,
   **kwargs
 )
 Adafactor(
@@ -30,7 +30,7 @@ Adafactor(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='adafactor',
+  name=None,
   **kwargs
 )
 Adagrad(
@@ -46,7 +46,7 @@ Adagrad(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='adagrad',
+  name=None,
   **kwargs
 )
 Adam(
@@ -64,7 +64,7 @@ Adam(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='adam',
+  name=None,
   **kwargs
 )
 Adamax(
@@ -81,7 +81,7 @@ Adamax(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='adamax',
+  name=None,
   **kwargs
 )
 AdamW(
@@ -99,7 +99,7 @@ AdamW(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='adamw',
+  name=None,
   **kwargs
 )
 deserialize(config, custom_objects=None)
@@ -120,7 +120,7 @@ Ftrl(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='ftrl',
+  name=None,
   **kwargs
 )
 get(identifier)
@@ -138,7 +138,7 @@ Lamb(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='lamb',
+  name=None,
   **kwargs
 )
 legacy: Module(keras.optimizers.legacy)
@@ -155,21 +155,28 @@ Lion(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='lion',
+  name=None,
   **kwargs
 )
 LossScaleOptimizer(
   inner_optimizer,
   initial_scale=32768.0,
   dynamic_growth_steps=2000,
+  name=None,
   **kwargs
+)
+MultiOptimizer(
+  optimizer_map,
+  loss_scale_factor=None,
+  name=None
 )
 Muon(
   learning_rate=0.001,
   adam_beta_1=0.9,
   adam_beta_2=0.999,
+  adam_weight_decay=0.004,
   epsilon=1e-07,
-  weight_decay=0.1,
+  weight_decay=0.004,
   clipnorm=None,
   clipvalue=None,
   global_clipnorm=None,
@@ -178,16 +185,17 @@ Muon(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='muon',
+  name=None,
   exclude_layers=None,
   exclude_embeddings=True,
   muon_a=3.4445,
   muon_b=-4.775,
   muon_c=2.0315,
-  adam_lr_ratio=0.1,
+  adam_lr_ratio=1,
   momentum=0.95,
-  ns_steps=6,
+  ns_steps=5,
   nesterov=True,
+  rms_rate=0.2,
   **kwargs
 )
 Nadam(
@@ -204,10 +212,11 @@ Nadam(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='nadam',
+  name=None,
   **kwargs
 )
 Optimizer(*args, **kwargs)
+OptimizerMap(default_optimizer, optimizer_map=None)
 RMSprop(
   learning_rate=0.001,
   rho=0.9,
@@ -223,7 +232,25 @@ RMSprop(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='rmsprop',
+  name=None,
+  **kwargs
+)
+ScheduleFreeAdamW(
+  learning_rate=0.0025,
+  beta_1=0.9,
+  beta_2=0.999,
+  epsilon=1e-08,
+  warmup_steps=0,
+  weight_decay=None,
+  clipnorm=None,
+  clipvalue=None,
+  global_clipnorm=None,
+  use_ema=False,
+  ema_momentum=0.99,
+  ema_overwrite_frequency=None,
+  loss_scale_factor=None,
+  gradient_accumulation_steps=None,
+  name=None,
   **kwargs
 )
 schedules: Module(keras.optimizers.schedules)
@@ -241,7 +268,7 @@ SGD(
   ema_overwrite_frequency=None,
   loss_scale_factor=None,
   gradient_accumulation_steps=None,
-  name='SGD',
+  name=None,
   **kwargs
 )
 

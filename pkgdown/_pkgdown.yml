@@ -155,7 +155,6 @@ reference:
     - layer_tfsm
     - register_keras_serializable
 
-
   - title: "Layers"
 
   - subtitle: "Core Layers"
@@ -237,6 +236,7 @@ reference:
   - title: "Callbacks"
   - contents:
     - callback_model_checkpoint
+    - callback_orbax_checkpoint
     - callback_backup_and_restore
     - callback_early_stopping
     - callback_terminate_on_nan
@@ -282,6 +282,12 @@ reference:
   - contents:
     - starts_with("loss_")
     - Loss
+
+  - title: "Distillation"
+  - contents:
+    - distiller
+    - distillation_feature
+    - distillation_logits
 
   - title: "Metrics"
   - contents:

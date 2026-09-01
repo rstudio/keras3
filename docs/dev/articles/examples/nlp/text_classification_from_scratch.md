@@ -358,11 +358,11 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 ```
 
     ## Epoch 1/3
-    ## 625/625 - 5s - 8ms/step - accuracy: 0.6982 - loss: 0.5221 - val_accuracy: 0.8662 - val_loss: 0.3202
+    ## 625/625 - 6s - 10ms/step - accuracy: 0.6844 - loss: 0.5331 - val_accuracy: 0.8630 - val_loss: 0.3231
     ## Epoch 2/3
-    ## 625/625 - 2s - 3ms/step - accuracy: 0.9056 - loss: 0.2364 - val_accuracy: 0.8718 - val_loss: 0.3282
+    ## 625/625 - 2s - 3ms/step - accuracy: 0.9033 - loss: 0.2447 - val_accuracy: 0.8782 - val_loss: 0.3175
     ## Epoch 3/3
-    ## 625/625 - 2s - 3ms/step - accuracy: 0.9571 - loss: 0.1233 - val_accuracy: 0.8516 - val_loss: 0.4155
+    ## 625/625 - 2s - 3ms/step - accuracy: 0.9540 - loss: 0.1266 - val_accuracy: 0.8624 - val_loss: 0.3925
 
 ## Evaluate the model on the test set
 
@@ -370,13 +370,13 @@ model |> fit(train_ds, validation_data = val_ds, epochs = epochs)
 model |> evaluate(test_ds)
 ```
 
-    ## 782/782 - 1s - 2ms/step - accuracy: 0.8369 - loss: 0.4511
+    ## 782/782 - 1s - 1ms/step - accuracy: 0.8494 - loss: 0.4365
 
     ## $accuracy
-    ## [1] 0.83692
+    ## [1] 0.84944
     ##
     ## $loss
-    ## [1] 0.4510888
+    ## [1] 0.4365062
 
 ## Make an end-to-end model
 
@@ -403,10 +403,15 @@ end_to_end_model |> compile(
 end_to_end_model |> evaluate(raw_test_ds)
 ```
 
-    ## 782/782 - 3s - 4ms/step - accuracy: 0.8369 - loss: 0.4511
+    ## 782/782 - 3s - 4ms/step - accuracy: 0.8494 - loss: 0.4365
 
     ## $accuracy
-    ## [1] 0.83692
+    ## [1] 0.84944
     ##
     ## $loss
-    ## [1] 0.4510888
+    ## [1] 0.4365065
+
+## Relevant Chapters from Deep Learning with Python
+
+- [Chapter 14: Text
+  classification](https://deeplearningwithpython.io/chapters/chapter14_text-classification)

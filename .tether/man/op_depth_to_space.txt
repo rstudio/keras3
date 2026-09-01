@@ -1,0 +1,50 @@
+__signature__
+keras.ops.depth_to_space(
+  x,
+  block_size,
+  data_format='channels_last'
+)
+__doc__
+Rearranges data from depth into blocks of spatial data.
+
+This operation is useful for resizing the activations between convolutions
+(but keeping all data), e.g., instead of pooling. It is also useful for
+training purely convolutional models.
+
+Also known as pixel shuffle, this operation rearranges elements in a tensor
+of shape `(N, H, W, C * r^2)` to `(N, H * r, W * r, C)` where `r` is the
+`block_size` for `data_format="channels_last"`, or from
+`(N, C * r^2, H, W)` to `(N, C, H * r, W * r)` for
+`data_format="channels_first"`.
+
+This is the reverse transformation of `space_to_depth`.
+
+Args:
+    x: Input tensor. Must be 4D.
+    block_size: An integer specifying the size of the spatial block.
+        The depth (number of channels) must be divisible by
+        `block_size ** 2`.
+    data_format: A string specifying the data format of the input tensor.
+        `"channels_last"` corresponds to inputs with shape
+        `(batch, height, width, channels)` while `"channels_first"`
+        corresponds to inputs with shape `(batch, channels, height, width)`.
+        Defaults to `"channels_last"`.
+
+Returns:
+    A tensor with the same dtype as `x`, with shape
+    `(N, H * block_size, W * block_size, C // block_size ** 2)` for
+    `data_format="channels_last"` or
+    `(N, C // block_size ** 2, H * block_size, W * block_size)` for
+    `data_format="channels_first"`.
+
+Example:
+
+>>> x = keras.ops.reshape(keras.ops.arange(1 * 2 * 2 * 12), (1, 2, 2, 12))
+>>> keras.ops.depth_to_space(x, block_size=2).shape
+(1, 4, 4, 3)
+
+>>> # channels_first example
+>>> x = keras.ops.reshape(keras.ops.arange(1 * 12 * 2 * 2), (1, 12, 2, 2))
+>>> keras.ops.depth_to_space(x, block_size=2,
+...                          data_format="channels_first").shape
+(1, 3, 4, 4)

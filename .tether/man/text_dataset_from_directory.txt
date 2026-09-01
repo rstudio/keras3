@@ -11,10 +11,11 @@ keras.utils.text_dataset_from_directory(
   validation_split=None,
   subset=None,
   follow_links=False,
+  format='tf',
   verbose=True
 )
 __doc__
-Generates a `tf.data.Dataset` from text files in a directory.
+Generates a dataset from text files in a directory.
 
 If your directory structure is:
 
@@ -29,11 +30,15 @@ main_directory/
 ```
 
 Then calling `text_dataset_from_directory(main_directory,
-labels='inferred')` will return a `tf.data.Dataset` that yields batches of
+labels='inferred')` will return a dataset that yields batches of
 texts from the subdirectories `class_a` and `class_b`, together with labels
 0 and 1 (0 corresponding to `class_a` and 1 corresponding to `class_b`).
 
 Only `.txt` files are supported at this time.
+
+By default, this function will return a `tf.data.Dataset` object. You can
+set `format="grain"` to return a `grain.IterDataset` object instead, which
+removes the TensorFlow dependency.
 
 Args:
     directory: Directory where the data is located.
@@ -80,17 +85,32 @@ Args:
         (the training and validation datasets respectively).
     follow_links: Whether to visits subdirectories pointed to by symlinks.
         Defaults to `False`.
+    format: The format of the return object. Defaults to `"tf"`. Available
+        options are:
+        - `"tf"`: returns a `tf.data.Dataset` object. Requires
+            TensorFlow to be installed.
+        - `"grain"`: returns a `grain.IterDataset` object. Requires
+            Grain to be installed.
     verbose: Whether to display number information on classes and
         number of files found. Defaults to `True`.
 
 Returns:
 
-A `tf.data.Dataset` object.
+A `tf.data.Dataset` (`format="tf"`) or `grain.IterDataset`
+(`format="grain"`) object.
 
+When `format="tf"`:
 - If `label_mode` is `None`, it yields `string` tensors of shape
     `(batch_size,)`, containing the contents of a batch of text files.
 - Otherwise, it yields a tuple `(texts, labels)`, where `texts`
     has shape `(batch_size,)` and `labels` follows the format described
+    below.
+
+When `format="grain"`:
+- If `label_mode` is `None`, it yields a list of Python strings containing
+    the contents of a batch of text files.
+- Otherwise, it yields a tuple `(texts, labels)`, where `texts`
+    is a list of Python strings and `labels` follows the format described
     below.
 
 Rules regarding labels format:

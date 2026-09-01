@@ -16,6 +16,7 @@ image_dataset_from_directory(
   crop_to_aspect_ratio=False,
   pad_to_aspect_ratio=False,
   data_format=None,
+  format='tf',
   verbose=True
 )
 sequence: Module(keras.preprocessing.sequence)
@@ -31,6 +32,7 @@ text_dataset_from_directory(
   validation_split=None,
   subset=None,
   follow_links=False,
+  format='tf',
   verbose=True
 )
 timeseries_dataset_from_array(
@@ -43,6 +45,7 @@ timeseries_dataset_from_array(
   shuffle=False,
   seed=None,
   start_index=None,
-  end_index=None
+  end_index=None,
+  format='tf'
 )
 

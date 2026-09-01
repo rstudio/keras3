@@ -489,6 +489,41 @@ function (schedule, verbose = 0L)
 #' model |> load_model_weights(checkpoint_filepath)
 #' ```
 #'
+#' ## Resuming training from weight-only checkpoints
+#'
+#' When using `save_weights_only = TRUE`, the weights file includes the state
+#' of the optimizer, including its iteration count and learning-rate state, if
+#' the model is compiled at the time of saving.
+#'
+#' To correctly resume training and restore the optimizer state—for example,
+#' to continue a learning-rate schedule without resetting it—compile the model
+#' before loading the weights.
+#'
+#' ```{r, eval = FALSE}
+#' lr_schedule <- learning_rate_schedule_exponential_decay(
+#'   initial_learning_rate = 0.1,
+#'   decay_steps = 100000,
+#'   decay_rate = 0.96,
+#'   staircase = TRUE
+#' )
+#'
+#' # 1. Create a fresh model instance.
+#' model <- get_model()
+#'
+#' # 2. Compile the model before loading weights.
+#' model |> compile(
+#'   optimizer = optimizer_rmsprop(learning_rate = lr_schedule),
+#'   loss = "sparse_categorical_crossentropy",
+#'   metrics = "accuracy"
+#' )
+#'
+#' # 3. Load weights; the optimizer state is restored automatically.
+#' model |> load_model_weights(checkpoint_filepath)
+#'
+#' # 4. Continue training.
+#' model |> fit(x_train, y_train, epochs = 10)
+#' ```
+#'
 #' @param filepath
 #' string, path to save the model file.
 #' `filepath` can contain named formatting options,
@@ -572,6 +607,69 @@ function (filepath, monitor = "val_loss", verbose = 0L, save_best_only = FALSE,
 {
     args <- capture_args(list(verbose = as_integer, save_freq = as_integer))
     do.call(keras$callbacks$ModelCheckpoint, args)
+}
+
+
+#' Save and restore model state with Orbax
+#'
+#' By default, this callback saves model weights and optimizer state
+#' asynchronously with Orbax, allowing training to continue without blocking
+#' for I/O. In a multi-host distributed training environment with the JAX
+#' backend, it automatically coordinates checkpointing across all hosts for
+#' consistency and synchronization. Multi-host checkpointing is only supported
+#' with JAX. The Python `orbax-checkpoint` package is required.
+#'
+#' # Examples
+#'
+#' ```{r, eval = FALSE}
+#' checkpoint <- callback_orbax_checkpoint(
+#'   directory = tempfile("orbax-checkpoints-"),
+#'   monitor = "val_accuracy",
+#'   mode = "max",
+#'   save_best_only = TRUE
+#' )
+#' model |> fit(x, y, validation_split = 0.2, callbacks = list(checkpoint))
+#'
+#' # Alternatively, save a checkpoint every 100 batches.
+#' checkpoint <- callback_orbax_checkpoint(
+#'   directory = tempfile("orbax-checkpoints-"),
+#'   save_freq = 100
+#' )
+#' ```
+#'
+#' @param directory Path to the directory in which to save checkpoints.
+#' @param monitor Metric name to monitor, such as `"val_loss"`.
+#' @param verbose Verbosity mode, 0 or 1.
+#' @param save_best_only Whether to save only when the model is considered the
+#'   best according to the monitored quantity.
+#' @param mode One of `"auto"`, `"min"`, or `"max"`. Used with
+#'   `save_best_only`.
+#' @param save_freq `"epoch"` or an integer number of batches between saves.
+#' @param initial_value_threshold Floating-point initial best value for
+#'   `monitor`, used with `save_best_only`.
+#' @param max_to_keep Maximum number of recent checkpoints to retain. Use
+#'   `NULL` to retain all checkpoints. Defaults to 1.
+#' @param save_on_background Whether to save asynchronously in the background.
+#'   Defaults to `TRUE`.
+#' @param save_weights_only Whether to save only trainable and non-trainable
+#'   variables, excluding model configuration, optimizer state, and assets.
+#'
+#' @inherit callback_backup_and_restore return
+#' @export
+#' @family callbacks
+#' @tether keras.callbacks.OrbaxCheckpoint
+callback_orbax_checkpoint <-
+function(directory, monitor = "val_loss", verbose = 0L,
+         save_best_only = FALSE, mode = "auto", save_freq = "epoch",
+         initial_value_threshold = NULL, max_to_keep = 1L,
+         save_on_background = TRUE, save_weights_only = FALSE)
+{
+  args <- capture_args(list(
+    verbose = as_integer,
+    save_freq = as_integer,
+    max_to_keep = as_integer
+  ))
+  do.call(keras$callbacks$OrbaxCheckpoint, args)
 }
 
 
@@ -896,6 +994,32 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 
 #' Callback that terminates training when a NaN loss is encountered.
 #'
+#' @description
+#' This callback monitors the loss during training and terminates training when
+#' a NaN or Inf loss is detected. By default, training stops gracefully by
+#' setting the model's `stop_training` flag, which allows callback cleanup
+#' methods such as `on_train_end()` to run.
+#'
+#' Set `raise_error = TRUE` to raise an error immediately when a NaN or Inf is
+#' detected. In this mode, `on_train_end()` is not called on other callbacks.
+#' This can preserve backup states or prevent unintended cleanup after a
+#' training failure.
+#'
+#' # Examples
+#' ```{r, eval = FALSE}
+#' # Graceful termination (default)
+#' callback <- callback_terminate_on_nan()
+#' model |> fit(x, y, callbacks = list(callback))
+#'
+#' # Immediate error
+#' callback <- callback_terminate_on_nan(raise_error = TRUE)
+#' model |> fit(x, y, callbacks = list(callback))
+#' ```
+#'
+#' @param raise_error If `FALSE`, stop training gracefully. If `TRUE`, raise an
+#'   error immediately when a NaN or Inf loss is detected, bypassing callback
+#'   cleanup methods.
+#'
 #' @inherit callback_backup_and_restore return
 #' @export
 #' @family callbacks
@@ -904,9 +1028,9 @@ function (log_dir = "logs", histogram_freq = 0L, write_graph = TRUE,
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/callbacks/TerminateOnNaN>
 #' @tether keras.callbacks.TerminateOnNaN
 callback_terminate_on_nan <-
-function ()
+function (raise_error = FALSE)
 {
-    args <- capture_args()
+    args <- capture_args(NULL)
     do.call(keras$callbacks$TerminateOnNaN, args)
 }
 

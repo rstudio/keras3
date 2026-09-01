@@ -32,12 +32,14 @@ In this case, consider passing \code{axis=NULL}. Defaults to \code{-1}.}
 \item{mean}{The mean value(s) to use during normalization. The passed value(s)
 will be broadcast to the shape of the kept axes above;
 if the value(s) cannot be broadcast, an error will be raised when
-this layer's \code{build()} method is called.}
+this layer's \code{build()} method is called. \code{mean} and \code{variance} must be
+specified together.}
 
 \item{variance}{The variance value(s) to use during normalization. The passed
 value(s) will be broadcast to the shape of the kept axes above;
 if the value(s) cannot be broadcast, an error will be raised when
-this layer's \code{build()} method is called.}
+this layer's \code{build()} method is called. \code{mean} and \code{variance} must be
+specified together.}
 
 \item{invert}{If \code{TRUE}, this layer will apply the inverse transformation
 to its inputs: it would turn a normalized input back into its
@@ -141,6 +143,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_discretization}()} \cr
 \code{\link{layer_equalization}()} \cr
@@ -188,6 +191,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -203,6 +212,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -284,6 +294,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

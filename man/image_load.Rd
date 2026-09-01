@@ -76,6 +76,7 @@ Other image utils: \cr
 \code{\link{op_image_affine_transform}()} \cr
 \code{\link{op_image_crop}()} \cr
 \code{\link{op_image_extract_patches}()} \cr
+\code{\link{op_image_extract_patches_3d}()} \cr
 \code{\link{op_image_gaussian_blur}()} \cr
 \code{\link{op_image_hsv_to_rgb}()} \cr
 \code{\link{op_image_map_coordinates}()} \cr
@@ -84,6 +85,9 @@ Other image utils: \cr
 \code{\link{op_image_resize}()} \cr
 \code{\link{op_image_rgb_to_grayscale}()} \cr
 \code{\link{op_image_rgb_to_hsv}()} \cr
+\code{\link{op_image_scale_and_translate}()} \cr
+\code{\link{op_image_sobel_edges}()} \cr
+\code{\link{op_image_ssim}()} \cr
 
 Other utils: \cr
 \code{\link{audio_dataset_from_directory}()} \cr

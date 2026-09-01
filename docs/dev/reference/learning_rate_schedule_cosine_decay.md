@@ -4,18 +4,19 @@ See [Loshchilov & Hutter, ICLR2016](https://arxiv.org/abs/1608.03983),
 SGDR: Stochastic Gradient Descent with Warm Restarts.
 
 For the idea of a linear warmup of our learning rate, see [Goyal et
-al.](https://arxiv.org/pdf/1706.02677).
+al.](https://arxiv.org/pdf/1706.02677.pdf).
 
 When we begin training a model, we often want an initial increase in our
-learning rate followed by a decay. If `warmup_target` is an int, this
+learning rate followed by a decay. If `warmup_target` is provided, this
 schedule applies a linear increase per optimizer step to our learning
 rate from `initial_learning_rate` to `warmup_target` for a duration of
 `warmup_steps`. Afterwards, it applies a cosine decay function taking
-our learning rate from `warmup_target` to `alpha` for a duration of
-`decay_steps`. If `warmup_target` is NULL we skip warmup and our decay
-will take our learning rate from `initial_learning_rate` to `alpha`. It
-requires a `step` value to compute the learning rate. You can just pass
-a backend variable that you increment at each training step.
+our learning rate from `warmup_target` to `warmup_target * alpha` for a
+duration of `decay_steps`. If `warmup_target` is `NULL`, we skip warmup
+and our decay will take our learning rate from `initial_learning_rate`
+to `initial_learning_rate * alpha`. It requires a `step` value to
+compute the learning rate. You can just pass a backend variable that you
+increment at each training step.
 
 The schedule is a 1-arg callable that produces a warmup followed by a
 decayed learning rate when passed the current optimizer step. This can
@@ -26,7 +27,7 @@ Our warmup is computed as:
 
     warmup_learning_rate <- function(step) {
       completed_fraction <- step / warmup_steps
-      total_delta <- target_warmup - initial_learning_rate
+      total_delta <- warmup_target - initial_learning_rate
       completed_fraction * total_delta
     }
 
@@ -63,7 +64,7 @@ Example usage with warmup:
         warmup_steps = warmup_steps
     )
 
-You can pass this schedule directly into a `optimizer` as the learning
+You can pass this schedule directly into an optimizer as the learning
 rate. The learning rate schedule is also serializable and deserializable
 using `keras$optimizers$schedules$serialize` and
 `keras$optimizers$schedules$deserialize`.
@@ -89,11 +90,12 @@ learning_rate_schedule_cosine_decay(
 
 - decay_steps:
 
-  A int. Number of steps to decay over.
+  An integer. Number of steps to decay over.
 
 - alpha:
 
   A float. Minimum learning rate value for decay as a fraction of
+  `warmup_target` or, if `warmup_target` is `NULL`,
   `initial_learning_rate`.
 
 - name:
@@ -103,13 +105,13 @@ learning_rate_schedule_cosine_decay(
 - warmup_target:
 
   A float. The target learning rate for our warmup phase. Will cast to
-  the `initial_learning_rate` datatype. Setting to `NULL` will skip
-  warmup and begins decay phase from `initial_learning_rate`. Otherwise
-  scheduler will warmup from `initial_learning_rate` to `warmup_target`.
+  the `initial_learning_rate` datatype. Setting to `NULL` skips warmup
+  and begins the decay phase from `initial_learning_rate`. Otherwise,
+  the schedule warms up from `initial_learning_rate` to `warmup_target`.
 
 - warmup_steps:
 
-  A int. Number of steps to warmup over.
+  An integer. Number of steps to warm up over.
 
 ## Value
 

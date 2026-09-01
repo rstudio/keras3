@@ -8,6 +8,9 @@ class RandomSaturation(keras.src.layers.preprocessing.image_preprocessing.base_i
  |  This layer will randomly increase/reduce the saturation for the input RGB
  |  images.
  |
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |  (independently of which backend you're using).
+ |
  |  Args:
  |      factor: A tuple of two floats or a single float.
  |          `factor` controls the extent to which the image saturation
@@ -36,7 +39,7 @@ class RandomSaturation(keras.src.layers.preprocessing.image_preprocessing.base_i
  |  Method resolution order:
  |      RandomSaturation
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

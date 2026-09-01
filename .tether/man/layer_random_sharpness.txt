@@ -5,31 +5,58 @@ class RandomSharpness(keras.src.layers.preprocessing.image_preprocessing.base_im
  |
  |  Randomly performs the sharpness operation on given images.
  |
- |  The sharpness operation first performs a blur, then blends between the
- |  original image and the processed image. This operation adjusts the clarity
- |  of the edges in an image, ranging from blurred to enhanced sharpness.
+ |      The sharpness operation first performs a blur, then blends between the
+ |      original image and the processed image. This operation adjusts the clarity
+ |      of the edges in an image, ranging from blurred to enhanced sharpness.
  |
- |  Args:
- |      factor: A tuple of two floats or a single float.
- |          `factor` controls the extent to which the image sharpness
- |          is impacted. `factor=0.0` results in a fully blurred image,
- |          `factor=0.5` applies no operation (preserving the original image),
- |          and `factor=1.0` enhances the sharpness beyond the original. Values
- |          should be between `0.0` and `1.0`. If a tuple is used, a `factor`
- |          is sampled between the two values for every image augmented.
- |          If a single float is used, a value between `0.0` and the passed
- |          float is sampled. To ensure the value is always the same,
- |          pass a tuple with two identical floats: `(0.5, 0.5)`.
- |      value_range: the range of values the incoming images will have.
- |          Represented as a two-number tuple written `[low, high]`. This is
- |          typically either `[0, 1]` or `[0, 255]` depending on how your
- |          preprocessing pipeline is set up.
- |      seed: Integer. Used to create a random seed.
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
+ |
+ |      Args:
+ |          factor: A tuple of two floats or a single float.
+ |              `factor` controls the extent to which the image sharpness
+ |              is impacted. `factor=0.0` results in a fully blurred image,
+ |              `factor=0.5` applies no operation (preserving the original image),
+ |              and `factor=1.0` enhances the sharpness beyond the original. Values
+ |              should be between `0.0` and `1.0`. If a tuple is used, a `factor`
+ |              is sampled between the two values for every image augmented.
+ |              If a single float is used, a value between `0.0` and the passed
+ |              float is sampled. To ensure the value is always the same,
+ |              pass a tuple with two identical floats: `(0.5, 0.5)`.
+ |          value_range: the range of values the incoming images will have.
+ |              Represented as a two-number tuple written `[low, high]`. This is
+ |              typically either `[0, 1]` or `[0, 255]` depending on how your
+ |              preprocessing pipeline is set up.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandomSharpness(value_range=(0, 255))
+ |  images = np.random.randint(0, 255, (8, 224, 224, 3), dtype="uint8")
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 0, 1, 2, 0, 1]),
+ |      num_classes=3
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (8, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandomSharpness
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../../../favicon.ico">
 <link rel="manifest" href="../../../site.webmanifest">
 <script src="../../../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../../../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../../../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../../../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../../../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../../../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../../../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../../../deps/headroom-0.11.0/headroom.min.js"></script><script src="../../../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../../../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../../../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../../../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../../../deps/search-1.0.0/fuse.min.js"></script><script src="../../../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../../../pkgdown.js"></script><link href="../../../extra.css" rel="stylesheet">
 <meta property="og:title" content="Text classification from scratch">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../../../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -355,32 +355,32 @@ layer.</p>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">predictions</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional"</span></span></span>
+<pre><code><span><span class="co">## Model: "functional"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ input_layer (InputLayer)        │ (None, None)           │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ embedding_1 (<span style="color: #0087FF;">Embedding</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │     <span style="color: #00AF00;">2,560,000</span> │</span></span>
+<span><span class="co">## │ embedding_1 (Embedding)         │ (None, None, 128)      │     2,560,000 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ dropout (Dropout)               │ (None, None, 128)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv1d (<span style="color: #0087FF;">Conv1D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │       <span style="color: #00AF00;">114,816</span> │</span></span>
+<span><span class="co">## │ conv1d (Conv1D)                 │ (None, None, 128)      │       114,816 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv1d_1 (<span style="color: #0087FF;">Conv1D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)      │       <span style="color: #00AF00;">114,816</span> │</span></span>
+<span><span class="co">## │ conv1d_1 (Conv1D)               │ (None, None, 128)      │       114,816 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling1d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling1D</span>)            │                        │               │</span></span>
+<span><span class="co">## │ global_max_pooling1d            │ (None, 128)            │             0 │</span></span>
+<span><span class="co">## │ (GlobalMaxPooling1D)            │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │        <span style="color: #00AF00;">16,512</span> │</span></span>
+<span><span class="co">## │ dense (Dense)                   │ (None, 128)            │        16,512 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dropout_1 (<span style="color: #0087FF;">Dropout</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ dropout_1 (Dropout)             │ (None, 128)            │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ predictions (<span style="color: #0087FF;">Dense</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)              │           <span style="color: #00AF00;">129</span> │</span></span>
+<span><span class="co">## │ predictions (Dense)             │ (None, 1)              │           129 │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">2,806,273</span> (10.71 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">2,806,273</span> (10.71 MB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 2,806,273 (10.71 MB)</span></span>
+<span><span class="co">##  Trainable params: 2,806,273 (10.71 MB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compile the model with binary crossentropy loss and an adam optimizer.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>loss <span class="op">=</span> <span class="st">"binary_crossentropy"</span>,</span>
@@ -396,23 +396,23 @@ layer.</p>
 <span><span class="co"># Fit the model using the train and test datasets.</span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, validation_data <span class="op">=</span> <span class="va">val_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/3</span></span>
-<span><span class="co">## 625/625 - 5s - 8ms/step - accuracy: 0.6982 - loss: 0.5221 - val_accuracy: 0.8662 - val_loss: 0.3202</span></span>
+<span><span class="co">## 625/625 - 6s - 10ms/step - accuracy: 0.6844 - loss: 0.5331 - val_accuracy: 0.8630 - val_loss: 0.3231</span></span>
 <span><span class="co">## Epoch 2/3</span></span>
-<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9056 - loss: 0.2364 - val_accuracy: 0.8718 - val_loss: 0.3282</span></span>
+<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9033 - loss: 0.2447 - val_accuracy: 0.8782 - val_loss: 0.3175</span></span>
 <span><span class="co">## Epoch 3/3</span></span>
-<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9571 - loss: 0.1233 - val_accuracy: 0.8516 - val_loss: 0.4155</span></span></code></pre>
+<span><span class="co">## 625/625 - 2s - 3ms/step - accuracy: 0.9540 - loss: 0.1266 - val_accuracy: 0.8624 - val_loss: 0.3925</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-model-on-the-test-set">Evaluate the model on the test set<a class="anchor" aria-label="anchor" href="#evaluate-the-model-on-the-test-set"></a>
 </h2>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 1s - 2ms/step - accuracy: 0.8369 - loss: 0.4511</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 1s - 1ms/step - accuracy: 0.8494 - loss: 0.4365</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.83692</span></span>
+<span><span class="co">## [1] 0.84944</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4510888</span></span></code></pre>
+<span><span class="co">## [1] 0.4365062</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="make-an-end-to-end-model">Make an end-to-end model<a class="anchor" aria-label="anchor" href="#make-an-end-to-end-model"></a>
@@ -437,12 +437,20 @@ can simply create a new model (using the weights we just trained):</p>
 <span></span>
 <span><span class="co"># Test it with `raw_test_ds`, which yields raw strings</span></span>
 <span><span class="va">end_to_end_model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">raw_test_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - accuracy: 0.8369 - loss: 0.4511</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - accuracy: 0.8494 - loss: 0.4365</span></span></code></pre>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.83692</span></span>
+<span><span class="co">## [1] 0.84944</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.4510888</span></span></code></pre>
+<span><span class="co">## [1] 0.4365065</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="relevant-chapters-from-deep-learning-with-python">Relevant Chapters from Deep Learning with Python<a class="anchor" aria-label="anchor" href="#relevant-chapters-from-deep-learning-with-python"></a>
+</h2>
+<ul>
+<li><a href="https://deeplearningwithpython.io/chapters/chapter14_text-classification" class="external-link">Chapter
+14: Text classification</a></li>
+</ul>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -455,7 +463,7 @@ can simply create a new model (using the weights we just trained):</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

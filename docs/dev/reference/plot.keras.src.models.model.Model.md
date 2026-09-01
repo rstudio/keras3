@@ -18,6 +18,7 @@ plot(
   layer_range = NULL,
   show_layer_activations = FALSE,
   show_trainable = NA,
+  splines = "ortho",
   to_file = NULL
 )
 ```
@@ -78,6 +79,12 @@ plot(
 - show_trainable:
 
   whether to display if a layer is trainable.
+
+- splines:
+
+  Controls how edges are drawn in the graph. Defaults to `"ortho"`
+  (right-angle lines). Other options include `"curved"`, `"polyline"`,
+  `"spline"`, and `"line"`.
 
 - to_file:
 

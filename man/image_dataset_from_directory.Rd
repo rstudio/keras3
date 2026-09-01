@@ -21,6 +21,7 @@ image_dataset_from_directory(
   crop_to_aspect_ratio = FALSE,
   pad_to_aspect_ratio = FALSE,
   data_format = NULL,
+  format = "tf",
   verbose = TRUE
 )
 }
@@ -111,11 +112,21 @@ preserved.}
 \item{data_format}{If \code{NULL} uses \code{\link[=config_image_data_format]{config_image_data_format()}}
 otherwise either \code{'channel_last'} or \code{'channel_first'}.}
 
+\item{format}{Format of the returned object. Defaults to \code{"tf"}. Available
+options are:
+\itemize{
+\item \code{"tf"}: returns a \code{tf.data.Dataset} object. Requires TensorFlow to be
+installed.
+\item \code{"grain"}: returns a \code{grain.IterDataset} object. Requires Grain to be
+installed.
+}}
+
 \item{verbose}{Whether to display number information on classes and
 number of files found. Defaults to \code{TRUE}.}
 }
 \value{
-A \code{tf.data.Dataset} object.
+A \code{tf.data.Dataset} object when \code{format = "tf"}, or a
+\code{grain.IterDataset} when \code{format = "grain"}.
 \itemize{
 \item If \code{label_mode} is \code{NULL}, it yields \code{float32} tensors of shape
 \verb{(batch_size, image_size[1], image_size[2], num_channels)},
@@ -164,6 +175,9 @@ images from the subdirectories \code{class_a} and \code{class_b}, together with 
 
 Supported image formats: \code{.jpeg}, \code{.jpg}, \code{.png}, \code{.bmp}, \code{.gif}.
 Animated gifs are truncated to the first frame.
+
+By default this returns a \code{tf.data.Dataset}. Set \code{format = "grain"} to
+return a framework-agnostic Grain dataset instead.
 }
 \seealso{
 \itemize{

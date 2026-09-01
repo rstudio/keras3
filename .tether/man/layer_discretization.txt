@@ -1,6 +1,6 @@
 Help on class Discretization in module keras.src.layers.preprocessing.discretization:
 
-class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
+class Discretization(keras.src.layers.preprocessing.data_layer.DataLayer)
  |  Discretization(bin_boundaries=None, num_bins=None, epsilon=0.01, output_mode='int', sparse=False, dtype=None, name=None)
  |
  |  A preprocessing layer which buckets continuous features by ranges.
@@ -9,7 +9,7 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |  contiguous ranges and output an integer index indicating which range each
  |  element was placed in.
  |
- |  **Note:** This layer is safe to use inside a `tf.data` pipeline
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
  |  (independently of which backend you're using).
  |
  |  Input shape:
@@ -79,7 +79,7 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |  Method resolution order:
  |      Discretization
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
@@ -122,8 +122,9 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |      Arguments:
  |          data: The data to train on. It can be passed either as a
- |              batched `tf.data.Dataset`,
- |              or as a NumPy array.
+ |              batched `tf.data.Dataset`, a Grain dataset, as a NumPy
+ |              array, or as any iterable of batches (e.g. a list of
+ |              arrays or a generator yielding batches).
  |          steps: Integer or `None`.
  |              Total number of steps (batches of samples) to process.
  |              If `data` is a `tf.data.Dataset`, and `steps` is `None`,
@@ -133,6 +134,8 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |              argument is not supported with array inputs or list inputs.
  |
  |  call(self, inputs)
+ |
+ |  compute_output_shape(self, input_shape)
  |
  |  compute_output_spec(self, inputs)
  |
@@ -185,5 +188,7 @@ class Discretization(keras.src.layers.preprocessing.tf_data_layer.TFDataLayer)
  |
  |  input_dtype
  |      The dtype layer inputs should be converted to.
+ |
+ |  output_dtype
  |
 

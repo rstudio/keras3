@@ -6,10 +6,11 @@ keras.saving.load_model(
   safe_mode=True
 )
 __doc__
-Loads a model saved via `model.save()`.
+Loads a model saved via `model.save()` or from an Orbax checkpoint.
 
 Args:
-    filepath: `str` or `pathlib.Path` object, path to the saved model file.
+    filepath: `str` or `pathlib.Path` object, path to the saved model file
+        or Orbax checkpoint directory.
     custom_objects: Optional dictionary mapping names
         (strings) to custom classes or functions to be
         considered during deserialization.
@@ -32,8 +33,6 @@ model = keras.Sequential([
     keras.layers.Softmax()])
 model.save("model.keras")
 loaded_model = keras.saving.load_model("model.keras")
-x = np.random.random((10, 3))
-assert np.allclose(model.predict(x), loaded_model.predict(x))
 ```
 
 Note that the model variables may have different name values

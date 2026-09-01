@@ -107,17 +107,47 @@
 #' @param jit_compile
 #' Bool or `"auto"`. Whether to use XLA compilation when
 #' compiling a model. For `jax` and `tensorflow` backends,
-#' `jit_compile="auto"` enables XLA compilation if the model
+#' `jit_compile = "auto"` enables XLA compilation if the model
 #' supports it, and disabled otherwise.
 #' For `torch` backend, `"auto"` will default to eager
-#' execution and `jit_compile=True` will run with `torch.compile`
+#' execution and `jit_compile = TRUE` will run with `torch.compile`
 #' with the `"inductor"` backend.
+#' On the JAX backend, compilation happens on the first step and
+#' can take several seconds. JAX can persist the compiled result
+#' to disk and reuse it across runs and processes, so the same
+#' model only pays that cost once. Enable it before the first
+#' step with:
+#' ```{r, eval = FALSE}
+#' jax <- reticulate::import("jax")
+#' jax$config$update("jax_compilation_cache_dir", "/path/to/cache")
+#' ```
+#' See the JAX persistent compilation cache documentation for the
+#' available thresholds.
 #'
 #' @param auto_scale_loss
 #' Bool. If `TRUE` and the model dtype policy is
 #' `"mixed_float16"`, the passed optimizer will be automatically
 #' wrapped in a `LossScaleOptimizer`, which will dynamically
 #' scale the loss to prevent underflow.
+#'
+#' Trainable variables are determined at `compile()` time. If you modify the
+#' `trainable` property of a layer after calling `compile()`, those changes
+#' will not take effect during `fit()` unless `compile()` is called again.
+#'
+#' Recommended workflow when changing trainable variables:
+#'
+#' ```{r, eval = FALSE}
+#' model |> compile(optimizer = "adam", loss = "mse")
+#' model |> fit(x_train, y_train)
+#'
+#' layer$trainable <- FALSE # or TRUE
+#'
+#' model |> compile(optimizer = "adam", loss = "mse")
+#' model |> fit(x_train, y_train)
+#' ```
+#'
+#' This behavior applies to all Keras backends and is also described in the
+#' transfer learning guide.
 #'
 #' @returns This is called primarily for the side effect of modifying `object`
 #'   in-place. The first argument `object` is also returned, invisibly, to
@@ -180,10 +210,9 @@ as_metrics <- function(x) as_list(as_loss(x, default_name = "custom_metric"))
 #' Computation is done in batches (see the `batch_size` arg.)
 #'
 #' @returns
-#' Scalar test loss (if the model has a single output and no metrics)
-#' or list of scalars (if the model has multiple outputs
-#' and/or metrics). The attribute `model$metrics_names` will give you
-#' the display labels for the scalar outputs.
+#' A named list of scalar metrics, including the loss value. Metric results are
+#' returned with stable names, including compiled metrics that may expand into
+#' multiple reported values.
 #'
 #' @param x
 #' Input data. It can be:

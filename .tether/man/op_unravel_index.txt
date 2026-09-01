@@ -11,8 +11,8 @@ Returns:
     Tuple of arrays for each dimension with unraveled indices.
 
 Example:
-    >>> indices = 5
-    >>> shape = (3, 3)
-    >>> unravel_index(indices, shape)
-    (1, 2)  # 5 is at row 1, column 2 in a 3x3 array
+>>> indices = 5
+>>> shape = (3, 3)
+>>> unravel_index(indices, shape)
+(1, 2)  # 5 is at row 1, column 2 in a 3x3 array
 

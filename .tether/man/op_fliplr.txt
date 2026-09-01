@@ -1,0 +1,14 @@
+__signature__
+keras.ops.fliplr(x)
+__doc__
+Reverse the order of elements along axis 1 (left/right).
+
+For a 2-D tensor, this flips the entries in each row in the
+left/right direction. Columns are preserved, but appear in a
+different order than before.
+
+Args:
+    x: Input tensor, must be at least 2-D.
+
+Returns:
+    Output tensor with columns reversed.

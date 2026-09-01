@@ -1,7 +1,7 @@
 Help on class LecunNormal in module keras.src.initializers.random_initializers:
 
 class LecunNormal(VarianceScaling)
- |  LecunNormal(seed=None)
+ |  LecunNormal(seed=None, input_axes=None, output_axes=None)
  |
  |  Lecun normal initializer.
  |
@@ -46,7 +46,12 @@ class LecunNormal(VarianceScaling)
  |
  |  Methods defined here:
  |
- |  __init__(self, seed=None)
+ |  __init__(
+ |    self,
+ |    seed=None,
+ |    input_axes=None,
+ |    output_axes=None
+ |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
  |  get_config(self)

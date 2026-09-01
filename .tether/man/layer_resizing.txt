@@ -10,6 +10,9 @@ class Resizing(keras.src.layers.preprocessing.image_preprocessing.base_image_pre
  |  format. Input pixel values can be of any range
  |  (e.g. `[0., 1.)` or `[0, 255]`).
  |
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |  (independently of which backend you're using).
+ |
  |  Input shape:
  |      3D (unbatched) or 4D (batched) tensor with shape:
  |      `(..., height, width, channels)`, in `"channels_last"` format,
@@ -20,9 +23,6 @@ class Resizing(keras.src.layers.preprocessing.image_preprocessing.base_image_pre
  |      `(..., target_height, target_width, channels)`,
  |      or `(..., channels, target_height, target_width)`,
  |      in `"channels_first"` format.
- |
- |  **Note:** This layer is safe to use inside a `tf.data` pipeline
- |  (independently of which backend you're using).
  |
  |  Args:
  |      height: Integer, the height of the output shape.
@@ -56,10 +56,20 @@ class Resizing(keras.src.layers.preprocessing.image_preprocessing.base_image_pre
  |          `"channels_last"`.
  |      **kwargs: Base layer keyword arguments, such as `name` and `dtype`.
  |
+ |  Example:
+ |
+ |  ```python
+ |  (x_train, y_train), _ = keras.datasets.cifar10.load_data()
+ |  image = x_train[0]
+ |  resizer = keras.layers.Resizing(128, 128)
+ |  resized_image = resizer(image)
+ |  print("original:", image.shape, "resized:", resized_image.shape)
+ |  ```
+ |
  |  Method resolution order:
  |      Resizing
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

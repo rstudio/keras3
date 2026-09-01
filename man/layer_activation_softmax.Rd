@@ -38,8 +38,10 @@ softmax_layer(input)
 \section{Call Arguments}{
 \itemize{
 \item \code{inputs}: The inputs (logits) to the softmax layer.
-\item \code{mask}: A boolean mask of the same shape as \code{inputs}. The mask
-specifies 1 to keep and 0 to mask. Defaults to \code{NULL}.
+\item \code{mask}: A boolean mask broadcastable to \code{inputs}. The mask specifies 1 to
+keep and 0 to mask. Each mask dimension must be 1 or match the
+corresponding dimension of \code{inputs}; it must not be larger. Defaults to
+\code{NULL}.
 }
 }
 
@@ -63,6 +65,12 @@ Other layers: \cr
 \code{\link{layer_activation_parametric_relu}()} \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -78,6 +86,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -160,6 +169,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

@@ -82,3 +82,5 @@ print("Test loss:", score[0])
 print("Test accuracy:", score[1])
 ```
 
+## Relevant Chapters from Deep Learning with Python
+- [Chapter 8: Image classification](https://deeplearningwithpython.io/chapters/chapter08_image-classification)

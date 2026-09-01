@@ -153,5 +153,6 @@ Other model functions:
 [`summary.keras.src.models.model.Model()`](https://keras3.posit.co/dev/reference/summary.keras.src.models.model.Model.md)  
 
 Other model creation:  
+[`distiller()`](https://keras3.posit.co/dev/reference/distiller.md)  
 [`keras_input()`](https://keras3.posit.co/dev/reference/keras_input.md)  
 [`keras_model()`](https://keras3.posit.co/dev/reference/keras_model.md)  

@@ -113,30 +113,30 @@ summary(model)
 ```
 
 ```
-## [1mModel: "sequential"[0m
+## Model: "sequential"
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m64[0m)     │           [38;5;34m640[0m │
+## │ conv2d (Conv2D)                 │ (None, 26, 26, 64)     │           640 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m64[0m)     │        [38;5;34m36,928[0m │
+## │ conv2d_1 (Conv2D)               │ (None, 24, 24, 64)     │        36,928 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m12[0m, [38;5;34m12[0m, [38;5;34m64[0m)     │             [38;5;34m0[0m │
+## │ max_pooling2d (MaxPooling2D)    │ (None, 12, 12, 64)     │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m10[0m, [38;5;34m10[0m, [38;5;34m128[0m)    │        [38;5;34m73,856[0m │
+## │ conv2d_2 (Conv2D)               │ (None, 10, 10, 128)    │        73,856 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_3 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m128[0m)      │       [38;5;34m147,584[0m │
+## │ conv2d_3 (Conv2D)               │ (None, 8, 8, 128)      │       147,584 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ global_average_pooling2d        │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
-## │ ([38;5;33mGlobalAveragePooling2D[0m)        │                        │               │
+## │ global_average_pooling2d        │ (None, 128)            │             0 │
+## │ (GlobalAveragePooling2D)        │                        │               │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
+## │ dropout (Dropout)               │ (None, 128)            │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m10[0m)             │         [38;5;34m1,290[0m │
+## │ dense (Dense)                   │ (None, 10)             │         1,290 │
 ## └─────────────────────────────────┴────────────────────────┴───────────────┘
-## [1m Total params: [0m[38;5;34m260,298[0m (1016.79 KB)
-## [1m Trainable params: [0m[38;5;34m260,298[0m (1016.79 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+##  Total params: 260,298 (1016.79 KB)
+##  Trainable params: 260,298 (1016.79 KB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 We use the `compile()` method to specify the optimizer, loss function,
@@ -178,21 +178,23 @@ model |> fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 7s - 17ms/step - acc: 0.7468 - loss: 0.7458 - val_acc: 0.9653 - val_loss: 0.1197
+## 399/399 - 10s - 24ms/step - acc: 0.7447 - loss: 0.7516 - val_acc: 0.9639 - val_loss: 0.1245
 ## Epoch 2/10
-## 399/399 - 2s - 5ms/step - acc: 0.9374 - loss: 0.2080 - val_acc: 0.9768 - val_loss: 0.0793
+## 399/399 - 2s - 6ms/step - acc: 0.9378 - loss: 0.2065 - val_acc: 0.9780 - val_loss: 0.0748
 ## Epoch 3/10
-## 399/399 - 2s - 5ms/step - acc: 0.9560 - loss: 0.1490 - val_acc: 0.9826 - val_loss: 0.0621
+## 399/399 - 2s - 6ms/step - acc: 0.9569 - loss: 0.1467 - val_acc: 0.9822 - val_loss: 0.0615
 ## Epoch 4/10
-## 399/399 - 2s - 5ms/step - acc: 0.9647 - loss: 0.1187 - val_acc: 0.9859 - val_loss: 0.0492
+## 399/399 - 2s - 6ms/step - acc: 0.9656 - loss: 0.1162 - val_acc: 0.9869 - val_loss: 0.0468
 ## Epoch 5/10
-## 399/399 - 2s - 5ms/step - acc: 0.9708 - loss: 0.1008 - val_acc: 0.9870 - val_loss: 0.0471
+## 399/399 - 2s - 6ms/step - acc: 0.9722 - loss: 0.0984 - val_acc: 0.9869 - val_loss: 0.0462
 ## Epoch 6/10
-## 399/399 - 2s - 5ms/step - acc: 0.9747 - loss: 0.0877 - val_acc: 0.9886 - val_loss: 0.0395
+## 399/399 - 2s - 6ms/step - acc: 0.9751 - loss: 0.0863 - val_acc: 0.9889 - val_loss: 0.0385
 ## Epoch 7/10
-## 399/399 - 2s - 5ms/step - acc: 0.9765 - loss: 0.0797 - val_acc: 0.9893 - val_loss: 0.0397
+## 399/399 - 2s - 6ms/step - acc: 0.9765 - loss: 0.0781 - val_acc: 0.9900 - val_loss: 0.0341
 ## Epoch 8/10
-## 399/399 - 2s - 5ms/step - acc: 0.9791 - loss: 0.0694 - val_acc: 0.9886 - val_loss: 0.0413
+## 399/399 - 2s - 6ms/step - acc: 0.9791 - loss: 0.0679 - val_acc: 0.9882 - val_loss: 0.0411
+## Epoch 9/10
+## 399/399 - 2s - 6ms/step - acc: 0.9804 - loss: 0.0652 - val_acc: 0.9896 - val_loss: 0.0381
 ```
 
 ``` r
@@ -223,7 +225,7 @@ predictions <- model |> predict(x_test)
 ```
 
 ```
-## 313/313 - 1s - 2ms/step
+## 313/313 - 1s - 3ms/step
 ```
 
 ``` r
@@ -358,7 +360,7 @@ model |> fit(
 ```
 
 ```
-## 399/399 - 6s - 15ms/step - acc: 0.7352 - loss: 0.7736 - val_acc: 0.9252 - val_loss: 0.2436
+## 399/399 - 7s - 17ms/step - acc: 0.7348 - loss: 0.7740 - val_acc: 0.9289 - val_loss: 0.2364
 ```
 
 ## Training models on arbitrary data sources
@@ -435,7 +437,7 @@ model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 7s - 15ms/step - acc: 0.7497 - loss: 0.7471 - val_acc: 0.9057 - val_loss: 0.3122
+## 469/469 - 8s - 18ms/step - acc: 0.7548 - loss: 0.7305 - val_acc: 0.9116 - val_loss: 0.2958
 ```
 
 ## Further reading

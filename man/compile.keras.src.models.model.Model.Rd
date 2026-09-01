@@ -110,16 +110,46 @@ Not supported with the PyTorch backend.}
 
 \item{jit_compile}{Bool or \code{"auto"}. Whether to use XLA compilation when
 compiling a model. For \code{jax} and \code{tensorflow} backends,
-\code{jit_compile="auto"} enables XLA compilation if the model
+\code{jit_compile = "auto"} enables XLA compilation if the model
 supports it, and disabled otherwise.
 For \code{torch} backend, \code{"auto"} will default to eager
-execution and \code{jit_compile=True} will run with \code{torch.compile}
-with the \code{"inductor"} backend.}
+execution and \code{jit_compile = TRUE} will run with \code{torch.compile}
+with the \code{"inductor"} backend.
+On the JAX backend, compilation happens on the first step and
+can take several seconds. JAX can persist the compiled result
+to disk and reuse it across runs and processes, so the same
+model only pays that cost once. Enable it before the first
+step with:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{jax <- reticulate::import("jax")
+jax$config$update("jax_compilation_cache_dir", "/path/to/cache")
+}\if{html}{\out{</div>}}
+
+See the JAX persistent compilation cache documentation for the
+available thresholds.}
 
 \item{auto_scale_loss}{Bool. If \code{TRUE} and the model dtype policy is
 \code{"mixed_float16"}, the passed optimizer will be automatically
 wrapped in a \code{LossScaleOptimizer}, which will dynamically
-scale the loss to prevent underflow.}
+scale the loss to prevent underflow.
+
+Trainable variables are determined at \code{compile()} time. If you modify the
+\code{trainable} property of a layer after calling \code{compile()}, those changes
+will not take effect during \code{fit()} unless \code{compile()} is called again.
+
+Recommended workflow when changing trainable variables:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> compile(optimizer = "adam", loss = "mse")
+model |> fit(x_train, y_train)
+
+layer$trainable <- FALSE # or TRUE
+
+model |> compile(optimizer = "adam", loss = "mse")
+model |> fit(x_train, y_train)
+}\if{html}{\out{</div>}}
+
+This behavior applies to all Keras backends and is also described in the
+transfer learning guide.}
 }
 \value{
 This is called primarily for the side effect of modifying \code{object}

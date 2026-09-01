@@ -5,22 +5,49 @@ class RandomPosterization(keras.src.layers.preprocessing.image_preprocessing.bas
  |
  |  Reduces the number of bits for each color channel.
  |
- |  References:
- |  - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
- |  - [RandAugment: Practical automated data augmentation with a reduced search space](https://arxiv.org/abs/1909.13719)
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
  |
- |  Args:
- |      value_range: a tuple or a list of two elements. The first value
- |          represents the lower bound for values in passed images, the second
- |          represents the upper bound. Images passed to the layer should have
- |          values within `value_range`. Defaults to `(0, 255)`.
- |      factor: integer, the number of bits to keep for each channel. Must be a
- |          value between 1-8.
+ |      References:
+ |      - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
+ |      - [RandAugment: Practical automated data augmentation with a reduced search space](https://arxiv.org/abs/1909.13719)
+ |
+ |      Args:
+ |          value_range: a tuple or a list of two elements. The first value
+ |              represents the lower bound for values in passed images, the second
+ |              represents the upper bound. Images passed to the layer should have
+ |              values within `value_range`. Defaults to `(0, 255)`.
+ |          factor: integer, the number of bits to keep for each channel. Must be a
+ |              value between 1-8.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandomPosterization(value_range=(0, 255))
+ |  images = np.random.randint(0, 255, (8, 224, 224, 3), dtype="uint8")
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 0, 1, 2, 0, 1]),
+ |      num_classes=3
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (8, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandomPosterization
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

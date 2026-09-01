@@ -1,0 +1,17 @@
+__signature__
+keras.ops.lcm(x1, x2)
+__doc__
+Least common multiple of `x1` and `x2`, element-wise.
+
+Args:
+    x1: First input tensor (integer type).
+    x2: Second input tensor (integer type).
+
+Returns:
+    Output tensor, element-wise least common multiple of `x1` and `x2`.
+
+Example:
+>>> x1 = keras.ops.convert_to_tensor([2, 3, 4])
+>>> x2 = keras.ops.convert_to_tensor([5, 6, 7])
+>>> keras.ops.lcm(x1, x2)
+array([10,  6, 28], dtype=int32)

@@ -1,0 +1,71 @@
+Help on class AdaptiveAveragePooling1D in module keras.src.layers.pooling.adaptive_average_pooling1d:
+
+class AdaptiveAveragePooling1D(keras.src.layers.pooling.base_adaptive_pooling.BaseAdaptiveAveragePooling)
+ |  AdaptiveAveragePooling1D(output_size, data_format=None, **kwargs)
+ |
+ |  Adaptive average pooling operation for 1D temporal or spatial data.
+ |
+ |  This layer applies an adaptive average pooling operation, which pools the
+ |  input such that the output has a target length specified by `output_size`,
+ |  regardless of the input length. The kernel size and stride are automatically
+ |  computed to achieve the target output size.
+ |
+ |  Args:
+ |      output_size: Integer specifying the target output length.
+ |      data_format: string, either `"channels_last"` or `"channels_first"`.
+ |          `"channels_last"` corresponds to inputs with shape
+ |          `(batch, length, channels)`.
+ |          `"channels_first"` corresponds to inputs with shape
+ |          `(batch, channels, length)`.
+ |          Defaults to the value found in your Keras config file at
+ |          `~/.keras/keras.json`. If never set, `"channels_last"` is used.
+ |
+ |  Input shape:
+ |      - If `data_format="channels_last"`: 3D tensor
+ |          `(batch_size, length, channels)`
+ |      - If `data_format="channels_first"`: 3D tensor
+ |          `(batch_size, channels, length)`
+ |
+ |  Output shape:
+ |      - If `data_format="channels_last"`:
+ |          `(batch_size, output_length, channels)`
+ |      - If `data_format="channels_first"`:
+ |          `(batch_size, channels, output_length)`
+ |
+ |  Examples:
+ |      >>> import numpy as np
+ |      >>> input_seq = np.random.rand(1, 64, 3)
+ |      >>> layer = AdaptiveAveragePooling1D(output_size=32)
+ |      >>> output_seq = layer(input_seq)
+ |      >>> output_seq.shape
+ |      (1, 32, 3)
+ |
+ |  Method resolution order:
+ |      AdaptiveAveragePooling1D
+ |      keras.src.layers.pooling.base_adaptive_pooling.BaseAdaptiveAveragePooling
+ |      keras.src.layers.pooling.base_adaptive_pooling.BaseAdaptivePooling
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    output_size,
+ |    data_format=None,
+ |    **kwargs
+ |  )
+ |      Initialize base adaptive pooling layer.
+ |
+ |      Args:
+ |          output_size: Normalized spatial output size as a tuple
+ |              (for example, (32,), (32, 32), or (32, 32, 32)).
+ |          data_format: Either "channels_last" or "channels_first".
+ |          **kwargs: Additional layer keyword arguments.
+ |

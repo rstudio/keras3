@@ -13,6 +13,7 @@ keras_variable(
   aggregation = "none",
   synchronization = "auto",
   name = NULL,
+  layout = NULL,
   ...
 )
 }
@@ -45,6 +46,9 @@ Defaults to \code{"auto"}.}
 
 \item{name}{Optional. A unique name for the variable. Automatically generated
 if not set.}
+
+\item{layout}{Optional. Sharding layout for the variable. Can be a
+\code{keras.distribution.TensorLayout} or a backend-specific layout.}
 
 \item{...}{Additional backend-specific keyword arguments forwarded to \code{keras$Variable()}.}
 }

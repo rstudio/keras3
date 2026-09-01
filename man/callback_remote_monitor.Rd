@@ -51,6 +51,7 @@ Other callbacks: \cr
 \code{\link{callback_lambda}()} \cr
 \code{\link{callback_learning_rate_scheduler}()} \cr
 \code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_orbax_checkpoint}()} \cr
 \code{\link{callback_reduce_lr_on_plateau}()} \cr
 \code{\link{callback_swap_ema_weights}()} \cr
 \code{\link{callback_tensorboard}()} \cr

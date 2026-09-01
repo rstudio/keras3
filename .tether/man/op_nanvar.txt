@@ -1,0 +1,34 @@
+__signature__
+keras.ops.nanvar(
+  x,
+  axis=None,
+  keepdims=False
+)
+__doc__
+Compute the variance along the specified axes, ignoring NaNs.
+
+Args:
+    x: Input tensor.
+    axis: Axis or axes along which the variance is computed. The default
+        is to compute the variance of the flattened tensor.
+    keepdims: If `True`, the axes which are reduced are left
+        in the result as dimensions with size one. Defaults to `False`.
+
+Returns:
+    Output tensor containing the variance ignoring NaNs.
+
+Examples:
+>>> import numpy as np
+>>> from keras import ops
+>>> x = np.array([[1.0, np.nan, 3.0],
+...               [np.nan, 2.0, 1.0]])
+
+>>> ops.nanvar(x)
+0.6875
+
+>>> ops.nanvar(x, axis=1)
+array([1.  , 0.25])
+
+>>> ops.nanvar(x, axis=1, keepdims=True)
+array([[1.  ],
+       [0.25]])

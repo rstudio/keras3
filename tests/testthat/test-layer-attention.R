@@ -33,3 +33,43 @@ test_succeeds("multi_head_attention", {
   expect_equal(output_tensor$shape$as_list(), list(NULL, 8, 16))
   expect_equal(weights$shape$as_list(), list(NULL, 2, 8, 4))
 })
+test_that("attention layers preserve gated configurations", {
+  skip_if_no_keras("3.14.0")
+
+  grouped <- layer_group_query_attention(
+    head_dim = 4L,
+    num_query_heads = 4L,
+    num_key_value_heads = 2L,
+    use_gate = TRUE
+  )
+  multi <- layer_multi_head_attention(
+    num_heads = 4L,
+    key_dim = 4L,
+    use_gate = TRUE
+  )
+
+  expect_true(grouped$get_config()$use_gate)
+  expect_true(multi$get_config()$use_gate)
+})
+
+test_that("attention layers accept a sliding window", {
+  skip_if_no_keras("3.15.1")
+
+  expect_true("sliding_window" %in% names(formals(layer_group_query_attention)))
+  expect_true("sliding_window" %in% names(formals(layer_multi_head_attention)))
+
+  grouped <- layer_group_query_attention(
+    head_dim = 4L,
+    num_query_heads = 4L,
+    num_key_value_heads = 2L,
+    sliding_window = 16L
+  )
+  multi <- layer_multi_head_attention(
+    num_heads = 4L,
+    key_dim = 4L,
+    sliding_window = 16L
+  )
+
+  expect_identical(grouped$get_config()$sliding_window, 16L)
+  expect_identical(multi$get_config()$sliding_window, 16L)
+})

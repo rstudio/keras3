@@ -5,34 +5,61 @@ class RandomGaussianBlur(keras.src.layers.preprocessing.image_preprocessing.base
  |
  |  Applies random Gaussian blur to images for data augmentation.
  |
- |  This layer performs a Gaussian blur operation on input images with a
- |  randomly selected degree of blurring, controlled by the `factor` and
- |  `sigma` arguments.
+ |      This layer performs a Gaussian blur operation on input images with a
+ |      randomly selected degree of blurring, controlled by the `factor` and
+ |      `sigma` arguments.
  |
- |  Args:
- |      factor: A single float or a tuple of two floats.
- |          `factor` controls the extent to which the image hue is impacted.
- |          `factor=0.0` makes this layer perform a no-op operation,
- |          while a value of `1.0` performs the most aggressive
- |          blurring available. If a tuple is used, a `factor` is
- |          sampled between the two values for every image augmented. If a
- |          single float is used, a value between `0.0` and the passed float is
- |          sampled. Default is 1.0.
- |      kernel_size: Integer. Size of the Gaussian kernel used for blurring.
- |          Must be an odd integer. Default is 3.
- |      sigma: Float or tuple of two floats. Standard deviation of the Gaussian
- |          kernel. Controls the intensity of the blur. If a tuple is provided,
- |          a value is sampled between the two for each image. Default is 1.0.
- |      value_range: the range of values the incoming images will have.
- |          Represented as a two-number tuple written `[low, high]`. This is
- |          typically either `[0, 1]` or `[0, 255]` depending on how your
- |          preprocessing pipeline is set up.
- |      seed: Integer. Used to create a random seed.
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
+ |
+ |      Args:
+ |          factor: A single float or a tuple of two floats.
+ |              `factor` controls the extent to which the image hue is impacted.
+ |              `factor=0.0` makes this layer perform a no-op operation,
+ |              while a value of `1.0` performs the most aggressive
+ |              blurring available. If a tuple is used, a `factor` is
+ |              sampled between the two values for every image augmented. If a
+ |              single float is used, a value between `0.0` and the passed float is
+ |              sampled. Default is 1.0.
+ |          kernel_size: Integer. Size of the Gaussian kernel used for blurring.
+ |              Must be an odd integer. Default is 3.
+ |          sigma: Float or tuple of two floats. Standard deviation of the Gaussian
+ |              kernel. Controls the intensity of the blur. If a tuple is provided,
+ |              a value is sampled between the two for each image. Default is 1.0.
+ |          value_range: the range of values the incoming images will have.
+ |              Represented as a two-number tuple written `[low, high]`. This is
+ |              typically either `[0, 1]` or `[0, 255]` depending on how your
+ |              preprocessing pipeline is set up.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandomGaussianBlur(value_range=(0, 255))
+ |  images = np.random.randint(0, 255, (8, 224, 224, 3), dtype="uint8")
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 0, 1, 2, 0, 1]),
+ |      num_classes=3
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (8, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandomGaussianBlur
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

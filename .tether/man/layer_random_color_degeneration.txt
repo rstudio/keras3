@@ -5,28 +5,55 @@ class RandomColorDegeneration(keras.src.layers.preprocessing.image_preprocessing
  |
  |  Randomly performs the color degeneration operation on given images.
  |
- |  The sharpness operation first converts an image to gray scale, then back to
- |  color. It then takes a weighted average between original image and the
- |  degenerated image. This makes colors appear more dull.
+ |      The sharpness operation first converts an image to gray scale, then back to
+ |      color. It then takes a weighted average between original image and the
+ |      degenerated image. This makes colors appear more dull.
  |
- |  Args:
- |      factor: A tuple of two floats or a single float.
- |          `factor` controls the extent to which the
- |          image sharpness is impacted. `factor=0.0` makes this layer perform a
- |          no-op operation, while a value of 1.0 uses the degenerated result
- |          entirely. Values between 0 and 1 result in linear interpolation
- |          between the original image and the sharpened image.
- |          Values should be between `0.0` and `1.0`. If a tuple is used, a
- |          `factor` is sampled between the two values for every image
- |          augmented. If a single float is used, a value between `0.0` and the
- |          passed float is sampled. In order to ensure the value is always the
- |          same, please pass a tuple with two identical floats: `(0.5, 0.5)`.
- |      seed: Integer. Used to create a random seed.
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
+ |
+ |      Args:
+ |          factor: A tuple of two floats or a single float.
+ |              `factor` controls the extent to which the
+ |              image sharpness is impacted. `factor=0.0` makes this layer perform a
+ |              no-op operation, while a value of 1.0 uses the degenerated result
+ |              entirely. Values between 0 and 1 result in linear interpolation
+ |              between the original image and the sharpened image.
+ |              Values should be between `0.0` and `1.0`. If a tuple is used, a
+ |              `factor` is sampled between the two values for every image
+ |              augmented. If a single float is used, a value between `0.0` and the
+ |              passed float is sampled. In order to ensure the value is always the
+ |              same, please pass a tuple with two identical floats: `(0.5, 0.5)`.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandomColorDegeneration(value_range=(0, 255))
+ |  images = np.random.randint(0, 255, (8, 224, 224, 3), dtype="uint8")
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 0, 1, 2, 0, 1]),
+ |      num_classes=3
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (8, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandomColorDegeneration
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

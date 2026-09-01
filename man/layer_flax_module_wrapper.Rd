@@ -116,17 +116,17 @@ to use a function that is not bound to the module.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{flax <- import("flax")
 
-MyFlaxModule(flax$linen$Module) \\\%py_class\\\% \{
+MyFlaxModule(flax$linen$Module) \%py_class\% \{
   forward <-
-    flax$linen$compact(\\(self, inputs1, input2, deterministic) \{
+    flax$linen$compact(\\(self, input1, input2, deterministic) \{
       # do work ....
       outputs # return
     \})
 \}
 
 my_flax_module_wrapper <- function(module, inputs, training) \{
-  c(input1, input2) \\\%<-\\\% inputs
-  module$forward(input1, input2,!training)
+  c(input1, input2) \%<-\% inputs
+  module$forward(input1, input2, !training)
 \}
 
 flax_module <- MyFlaxModule()
@@ -152,6 +152,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -167,6 +173,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -248,6 +255,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

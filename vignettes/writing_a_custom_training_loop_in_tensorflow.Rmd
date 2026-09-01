@@ -156,21 +156,21 @@ for (epoch in seq_len(epochs)) {
 ## Seen so far: 12800 samples
 ## Training loss (for one batch) at step 400: 1.6450
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.7421
+## Training loss (for one batch) at step 600: 0.6477
 ## Seen so far: 38400 samples
 ## Start of epoch  2
-## Training loss (for one batch) at step 200: 0.6492
+## Training loss (for one batch) at step 200: 0.6265
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.3032
+## Training loss (for one batch) at step 400: 0.2505
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.6165
+## Training loss (for one batch) at step 600: 0.3682
 ## Seen so far: 38400 samples
 ## Start of epoch  3
-## Training loss (for one batch) at step 200: 0.4175
+## Training loss (for one batch) at step 200: 0.4912
 ## Seen so far: 12800 samples
-## Training loss (for one batch) at step 400: 0.5278
+## Training loss (for one batch) at step 400: 0.3082
 ## Seen so far: 25600 samples
-## Training loss (for one batch) at step 600: 0.2670
+## Training loss (for one batch) at step 600: 0.2189
 ## Seen so far: 38400 samples
 ```
 
@@ -281,7 +281,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 38.69019 secs
+## Time difference of 41.80026 secs
 ```
 
 ## Speeding-up your training step with `tf_function()`
@@ -380,7 +380,7 @@ Sys.time() - time
 ```
 
 ```
-## Time difference of 0.3836133 secs
+## Time difference of 0.5170646 secs
 ```
 
 Much faster, isn't it?
@@ -497,26 +497,26 @@ summary(discriminator)
 ```
 
 ```
-## [1mModel: "discriminator"[0m
+## Model: "discriminator"
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)     │           [38;5;34m640[0m │
+## │ conv2d (Conv2D)                 │ (None, 14, 14, 64)     │           640 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ leaky_re_lu ([38;5;33mLeakyReLU[0m)         │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m64[0m)     │             [38;5;34m0[0m │
+## │ leaky_re_lu (LeakyReLU)         │ (None, 14, 14, 64)     │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)      │        [38;5;34m73,856[0m │
+## │ conv2d_1 (Conv2D)               │ (None, 7, 7, 128)      │        73,856 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ leaky_re_lu_1 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)      │             [38;5;34m0[0m │
+## │ leaky_re_lu_1 (LeakyReLU)       │ (None, 7, 7, 128)      │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ global_max_pooling2d            │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
-## │ ([38;5;33mGlobalMaxPooling2D[0m)            │                        │               │
+## │ global_max_pooling2d            │ (None, 128)            │             0 │
+## │ (GlobalMaxPooling2D)            │                        │               │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dense_6 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m1[0m)              │           [38;5;34m129[0m │
+## │ dense_6 (Dense)                 │ (None, 1)              │           129 │
 ## └─────────────────────────────────┴────────────────────────┴───────────────┘
-## [1m Total params: [0m[38;5;34m74,625[0m (291.50 KB)
-## [1m Trainable params: [0m[38;5;34m74,625[0m (291.50 KB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+##  Total params: 74,625 (291.50 KB)
+##  Trainable params: 74,625 (291.50 KB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 Then let's create a generator network,
@@ -546,31 +546,31 @@ summary(generator)
 ```
 
 ```
-## [1mModel: "generator"[0m
+## Model: "generator"
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
+## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-## │ dense_7 ([38;5;33mDense[0m)                 │ ([38;5;45mNone[0m, [38;5;34m6272[0m)           │       [38;5;34m809,088[0m │
+## │ dense_7 (Dense)                 │ (None, 6272)           │       809,088 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ leaky_re_lu_2 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m6272[0m)           │             [38;5;34m0[0m │
+## │ leaky_re_lu_2 (LeakyReLU)       │ (None, 6272)           │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ reshape ([38;5;33mReshape[0m)               │ ([38;5;45mNone[0m, [38;5;34m7[0m, [38;5;34m7[0m, [38;5;34m128[0m)      │             [38;5;34m0[0m │
+## │ reshape (Reshape)               │ (None, 7, 7, 128)      │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_transpose                │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)    │       [38;5;34m262,272[0m │
-## │ ([38;5;33mConv2DTranspose[0m)               │                        │               │
+## │ conv2d_transpose                │ (None, 14, 14, 128)    │       262,272 │
+## │ (Conv2DTranspose)               │                        │               │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ leaky_re_lu_3 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m14[0m, [38;5;34m14[0m, [38;5;34m128[0m)    │             [38;5;34m0[0m │
+## │ leaky_re_lu_3 (LeakyReLU)       │ (None, 14, 14, 128)    │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_transpose_1              │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)    │       [38;5;34m262,272[0m │
-## │ ([38;5;33mConv2DTranspose[0m)               │                        │               │
+## │ conv2d_transpose_1              │ (None, 28, 28, 128)    │       262,272 │
+## │ (Conv2DTranspose)               │                        │               │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ leaky_re_lu_4 ([38;5;33mLeakyReLU[0m)       │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m128[0m)    │             [38;5;34m0[0m │
+## │ leaky_re_lu_4 (LeakyReLU)       │ (None, 28, 28, 128)    │             0 │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m, [38;5;34m1[0m)      │         [38;5;34m6,273[0m │
+## │ conv2d_2 (Conv2D)               │ (None, 28, 28, 1)      │         6,273 │
 ## └─────────────────────────────────┴────────────────────────┴───────────────┘
-## [1m Total params: [0m[38;5;34m1,339,905[0m (5.11 MB)
-## [1m Trainable params: [0m[38;5;34m1,339,905[0m (5.11 MB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+##  Total params: 1,339,905 (5.11 MB)
+##  Trainable params: 1,339,905 (5.11 MB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 Here's the key bit: the training loop. As you can see it is quite straightforward. The

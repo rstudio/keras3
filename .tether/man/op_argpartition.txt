@@ -12,7 +12,7 @@ of indices of the same shape as `x` that index data along the given axis
 in partitioned order.
 
 Args:
-    a: Array to sort.
+    x: Array to sort.
     kth: Element index to partition by.
         The k-th element will be in its final sorted position and all
         smaller elements will be moved before it and all larger elements

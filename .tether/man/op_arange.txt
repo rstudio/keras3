@@ -2,7 +2,7 @@ __signature__
 keras.ops.arange(
   start,
   stop=None,
-  step=1,
+  step=None,
   dtype=None
 )
 __doc__

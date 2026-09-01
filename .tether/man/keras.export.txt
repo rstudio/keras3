@@ -1,2 +1,2 @@
-ExportArchive()
+ExportArchive(format='saved_model', **kwargs)
 

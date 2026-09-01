@@ -528,32 +528,32 @@ transformer
 ```
 
 ```
-## [1mModel: "transformer"[0m
+## Model: "transformer"
 ## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
-## ┃[1m [0m[1mLayer (type)       [0m[1m [0m┃[1m [0m[1mOutput Shape     [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃[1m [0m[1mConnected to     [0m[1m [0m┃
+## ┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
-## │ encoder_inputs      │ ([38;5;45mNone[0m, [38;5;45mNone[0m)      │          [38;5;34m0[0m │ -                 │
-## │ ([38;5;33mInputLayer[0m)        │                   │            │                   │
+## │ encoder_inputs      │ (None, None)      │          0 │ -                 │
+## │ (InputLayer)        │                   │            │                   │
 ## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
-## │ positional_embeddi… │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m256[0m) │  [38;5;34m3,845,120[0m │ encoder_inputs[[38;5;34m0[0m… │
-## │ ([38;5;33mPositionalEmbeddi…[0m │                   │            │                   │
+## │ positional_embeddi… │ (None, None, 256) │  3,845,120 │ encoder_inputs[0… │
+## │ (PositionalEmbeddi… │                   │            │                   │
 ## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
-## │ not_equal           │ ([38;5;45mNone[0m, [38;5;45mNone[0m)      │          [38;5;34m0[0m │ encoder_inputs[[38;5;34m0[0m… │
-## │ ([38;5;33mNotEqual[0m)          │                   │            │                   │
+## │ not_equal           │ (None, None)      │          0 │ encoder_inputs[0… │
+## │ (NotEqual)          │                   │            │                   │
 ## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
-## │ decoder_inputs      │ ([38;5;45mNone[0m, [38;5;45mNone[0m)      │          [38;5;34m0[0m │ -                 │
-## │ ([38;5;33mInputLayer[0m)        │                   │            │                   │
+## │ decoder_inputs      │ (None, None)      │          0 │ -                 │
+## │ (InputLayer)        │                   │            │                   │
 ## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
-## │ transformer_encoder │ ([38;5;45mNone[0m, [38;5;45mNone[0m, [38;5;34m256[0m) │  [38;5;34m3,155,456[0m │ positional_embed… │
-## │ ([38;5;33mTransformerEncode…[0m │                   │            │ not_equal[[38;5;34m0[0m][[38;5;34m0[0m]   │
+## │ transformer_encoder │ (None, None, 256) │  3,155,456 │ positional_embed… │
+## │ (TransformerEncode… │                   │            │ not_equal[0][0]   │
 ## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤
-## │ functional_3        │ ([38;5;45mNone[0m, [38;5;45mNone[0m,      │ [38;5;34m12,959,640[0m │ decoder_inputs[[38;5;34m0[0m… │
-## │ ([38;5;33mFunctional[0m)        │ [38;5;34m15000[0m)            │            │ transformer_enco… │
-## │                     │                   │            │ not_equal[[38;5;34m0[0m][[38;5;34m0[0m]   │
+## │ functional_3        │ (None, None,      │ 12,959,640 │ decoder_inputs[0… │
+## │ (Functional)        │ 15000)            │            │ transformer_enco… │
+## │                     │                   │            │ not_equal[0][0]   │
 ## └─────────────────────┴───────────────────┴────────────┴───────────────────┘
-## [1m Total params: [0m[38;5;34m19,960,216[0m (76.14 MB)
-## [1m Trainable params: [0m[38;5;34m19,960,216[0m (76.14 MB)
-## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
+##  Total params: 19,960,216 (76.14 MB)
+##  Trainable params: 19,960,216 (76.14 MB)
+##  Non-trainable params: 0 (0.00 B)
 ```
 
 ``` r
@@ -568,7 +568,7 @@ transformer |> fit(train_ds, epochs = epochs,
 ```
 
 ```
-## 1302/1302 - 56s - 43ms/step - accuracy: 0.3913 - loss: 3.9161 - val_accuracy: 0.3988 - val_loss: 3.2150
+## 1302/1302 - 59s - 45ms/step - accuracy: 0.3991 - loss: 3.8775 - val_accuracy: 0.4050 - val_loss: 3.1681
 ```
 
 ## Decoding test sentences
@@ -635,3 +635,9 @@ English: I'm sure everything will be fine.
 Correct Translation: [start] estoy segura de que todo irá bien. [end]
   Model Translation: [start] estoy seguro de que todo va bien [end]
 ```
+
+
+## Relevant Chapters from Deep Learning with Python
+
+- [Chapter 15: Language models and the Transformer](https://deeplearningwithpython.io/chapters/chapter15_language-models-and-the-transformer)
+- [Chapter 16: Text generation](https://deeplearningwithpython.io/chapters/chapter16_text-generation)

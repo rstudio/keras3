@@ -4,17 +4,25 @@
 \alias{layer_max_num_bounding_boxes}
 \title{Ensure the maximum number of bounding boxes.}
 \usage{
-layer_max_num_bounding_boxes(object, max_number, fill_value = -1L, ...)
+layer_max_num_bounding_boxes(
+  object,
+  max_number,
+  fill_value = -1L,
+  ...,
+  padding_value = NULL
+)
 }
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{max_number}{Desired output number of bounding boxes.}
 
-\item{fill_value}{The fill value of the \code{boxes} and \code{labels} in
-\code{bounding_boxes}. Defaults to \code{-1}.}
+\item{fill_value}{Deprecated alias for \code{padding_value}.}
 
 \item{...}{For forward/backward compatability.}
+
+\item{padding_value}{The fill value of the \code{boxes} and \code{labels} in
+\code{bounding_boxes}. Defaults to \code{-1}.}
 }
 \value{
 The return value depends on the value provided for the first argument.
@@ -35,6 +43,7 @@ Other image preprocessing layers: \cr
 \code{\link{layer_aug_mix}()} \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_center_crop}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_equalization}()} \cr
 \code{\link{layer_mix_up}()} \cr
@@ -61,6 +70,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_discretization}()} \cr
 \code{\link{layer_equalization}()} \cr
@@ -108,6 +118,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -123,6 +139,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -204,6 +221,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

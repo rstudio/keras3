@@ -15,19 +15,19 @@ op_custom_gradient(f)
 
 - f:
 
-  Function `f(...)` that returns a tuple `(output, grad_fn)` where:
+  Function `f(...)` that returns a tuple `(output, grad_fn)`, where:
 
-  - `...` is a sequence of unnamed arguments, each a tensor input or
-    nested structure of tensor inputs to the function.
+  - `...` is a sequence of tensor inputs or nested structures of tensor
+    inputs.
 
-  - `output` is a (potentially nested structure of) tensor outputs of
-    applying operations in forward_fn `f()` to `...`.
+  - `output` is a (nested structure of) tensor outputs of applying the
+    operations in `f()` to `...`.
 
-  - `grad_fn` is a function with the signature `grad_fn(..., upstream)`
-    which returns a list of tensors the same size as (flattened) `...`:
-    the derivatives of tensors in `output` with respect to the tensors
-    in `...`. `upstream` is a tensor or sequence of tensors holding the
-    initial value gradients for each tensor in `output`.
+  - `grad_fn` has signature `grad_fn(..., upstream)` and returns a tuple
+    of tensors the same size as flattened `...`: the derivatives of
+    tensors in `output` with respect to the tensors in `...`. `upstream`
+    is a tensor or sequence of tensors holding the initial value
+    gradients for each tensor in `output`.
 
 ## Value
 
@@ -36,38 +36,32 @@ whose gradient is determined by `f(...)[[2]]`.
 
 ## Note
 
-Note that the `grad` function that returns gradient computation requires
-`...` as well as an `upstream` named argument, depending on the backend
-being set. With the JAX and TensorFlow backends, it requires only one
-argument, whereas it might use the `upstream` argument in the case of
-the PyTorch backend.
+The gradient function's signature depends on the backend. With
+TensorFlow and JAX, `grad(upstream)` is sufficient. With PyTorch, the
+gradient function may also receive the original positional inputs, so
+define `grad` with `...` and `upstream` formals when they are required.
+The backend-agnostic example above accepts both calling conventions.
 
-When working with TensorFlow/JAX backend, `grad(upstream)` is
-sufficient. With PyTorch, the `grad` function requires `...` as well as
-`upstream`, e.g. `grad <- \(..., upstream)`. Follow the example above to
-use `op_custom_gradient()` in a way that is compatible with all
-backends.
+## Examples
 
-## Example
+This backend-agnostic implementation accepts the positional inputs used
+by PyTorch as well as the upstream gradient used by all backends.
 
-Backend-agnostic example.
+    log1pexp <- op_custom_gradient(function(x) {
+      e <- op_exp(x)
 
-    log1pexp <- op_custom_gradient(\(x) {
+      grad <- function(..., upstream = NULL) {
+        if (is.null(upstream))
+          upstream <- list(...)[[1]]
+        op_multiply(upstream, 1 - 1 / op_add(1, e))
+      }
 
-        e <- op_exp(x)
-
-        grad <- function(..., upstream = NULL) {
-          upstream <- upstream %||% ..1
-          op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
-        }
-
-        tuple(op_log(1 + e), grad)
-
+      tuple(op_log(1 + e), grad)
     })
 
-    if(config_backend() == "tensorflow") {
+    if (config_backend() == "tensorflow") {
       tf <- tensorflow::tf
-      x <- op_convert_to_tensor(100.0)
+      x <- op_convert_to_tensor(100)
       with(tf$GradientTape() %as% tape, {
         tape$watch(x)
         y <- log1pexp(x)
@@ -89,6 +83,7 @@ Other core ops:
 [`op_dtype()`](https://keras3.posit.co/dev/reference/op_dtype.md)  
 [`op_fori_loop()`](https://keras3.posit.co/dev/reference/op_fori_loop.md)  
 [`op_is_tensor()`](https://keras3.posit.co/dev/reference/op_is_tensor.md)  
+[`op_jvp()`](https://keras3.posit.co/dev/reference/op_jvp.md)  
 [`op_map()`](https://keras3.posit.co/dev/reference/op_map.md)  
 [`op_rearrange()`](https://keras3.posit.co/dev/reference/op_rearrange.md)  
 [`op_scan()`](https://keras3.posit.co/dev/reference/op_scan.md)  
@@ -107,8 +102,11 @@ Other core ops:
 
 Other ops:  
 [`op_abs()`](https://keras3.posit.co/dev/reference/op_abs.md)  
+[`op_adaptive_average_pool()`](https://keras3.posit.co/dev/reference/op_adaptive_average_pool.md)  
+[`op_adaptive_max_pool()`](https://keras3.posit.co/dev/reference/op_adaptive_max_pool.md)  
 [`op_add()`](https://keras3.posit.co/dev/reference/op_add.md)  
 [`op_all()`](https://keras3.posit.co/dev/reference/op_all.md)  
+[`op_allclose()`](https://keras3.posit.co/dev/reference/op_allclose.md)  
 [`op_angle()`](https://keras3.posit.co/dev/reference/op_angle.md)  
 [`op_any()`](https://keras3.posit.co/dev/reference/op_any.md)  
 [`op_append()`](https://keras3.posit.co/dev/reference/op_append.md)  
@@ -125,6 +123,7 @@ Other ops:
 [`op_argpartition()`](https://keras3.posit.co/dev/reference/op_argpartition.md)  
 [`op_argsort()`](https://keras3.posit.co/dev/reference/op_argsort.md)  
 [`op_array()`](https://keras3.posit.co/dev/reference/op_array.md)  
+[`op_array_split()`](https://keras3.posit.co/dev/reference/op_array_split.md)  
 [`op_associative_scan()`](https://keras3.posit.co/dev/reference/op_associative_scan.md)  
 [`op_average()`](https://keras3.posit.co/dev/reference/op_average.md)  
 [`op_average_pool()`](https://keras3.posit.co/dev/reference/op_average_pool.md)  
@@ -144,9 +143,11 @@ Other ops:
 [`op_cast()`](https://keras3.posit.co/dev/reference/op_cast.md)  
 [`op_categorical_crossentropy()`](https://keras3.posit.co/dev/reference/op_categorical_crossentropy.md)  
 [`op_cbrt()`](https://keras3.posit.co/dev/reference/op_cbrt.md)  
+[`op_cdist()`](https://keras3.posit.co/dev/reference/op_cdist.md)  
 [`op_ceil()`](https://keras3.posit.co/dev/reference/op_ceil.md)  
 [`op_celu()`](https://keras3.posit.co/dev/reference/op_celu.md)  
 [`op_cholesky()`](https://keras3.posit.co/dev/reference/op_cholesky.md)  
+[`op_cholesky_inverse()`](https://keras3.posit.co/dev/reference/op_cholesky_inverse.md)  
 [`op_clip()`](https://keras3.posit.co/dev/reference/op_clip.md)  
 [`op_concatenate()`](https://keras3.posit.co/dev/reference/op_concatenate.md)  
 [`op_cond()`](https://keras3.posit.co/dev/reference/op_cond.md)  
@@ -167,6 +168,7 @@ Other ops:
 [`op_cumprod()`](https://keras3.posit.co/dev/reference/op_cumprod.md)  
 [`op_cumsum()`](https://keras3.posit.co/dev/reference/op_cumsum.md)  
 [`op_deg2rad()`](https://keras3.posit.co/dev/reference/op_deg2rad.md)  
+[`op_depth_to_space()`](https://keras3.posit.co/dev/reference/op_depth_to_space.md)  
 [`op_depthwise_conv()`](https://keras3.posit.co/dev/reference/op_depthwise_conv.md)  
 [`op_det()`](https://keras3.posit.co/dev/reference/op_det.md)  
 [`op_diag()`](https://keras3.posit.co/dev/reference/op_diag.md)  
@@ -178,14 +180,18 @@ Other ops:
 [`op_divide_no_nan()`](https://keras3.posit.co/dev/reference/op_divide_no_nan.md)  
 [`op_dot()`](https://keras3.posit.co/dev/reference/op_dot.md)  
 [`op_dot_product_attention()`](https://keras3.posit.co/dev/reference/op_dot_product_attention.md)  
+[`op_dsplit()`](https://keras3.posit.co/dev/reference/op_dsplit.md)  
+[`op_dstack()`](https://keras3.posit.co/dev/reference/op_dstack.md)  
 [`op_dtype()`](https://keras3.posit.co/dev/reference/op_dtype.md)  
 [`op_eig()`](https://keras3.posit.co/dev/reference/op_eig.md)  
 [`op_eigh()`](https://keras3.posit.co/dev/reference/op_eigh.md)  
 [`op_einsum()`](https://keras3.posit.co/dev/reference/op_einsum.md)  
 [`op_elu()`](https://keras3.posit.co/dev/reference/op_elu.md)  
 [`op_empty()`](https://keras3.posit.co/dev/reference/op_empty.md)  
+[`op_empty_like()`](https://keras3.posit.co/dev/reference/op_empty_like.md)  
 [`op_equal()`](https://keras3.posit.co/dev/reference/op_equal.md)  
 [`op_erf()`](https://keras3.posit.co/dev/reference/op_erf.md)  
+[`op_erfc()`](https://keras3.posit.co/dev/reference/op_erfc.md)  
 [`op_erfinv()`](https://keras3.posit.co/dev/reference/op_erfinv.md)  
 [`op_exp()`](https://keras3.posit.co/dev/reference/op_exp.md)  
 [`op_exp2()`](https://keras3.posit.co/dev/reference/op_exp2.md)  
@@ -193,15 +199,24 @@ Other ops:
 [`op_expm1()`](https://keras3.posit.co/dev/reference/op_expm1.md)  
 [`op_extract_sequences()`](https://keras3.posit.co/dev/reference/op_extract_sequences.md)  
 [`op_eye()`](https://keras3.posit.co/dev/reference/op_eye.md)  
+[`op_fabs()`](https://keras3.posit.co/dev/reference/op_fabs.md)  
 [`op_fft()`](https://keras3.posit.co/dev/reference/op_fft.md)  
 [`op_fft2()`](https://keras3.posit.co/dev/reference/op_fft2.md)  
 [`op_flip()`](https://keras3.posit.co/dev/reference/op_flip.md)  
+[`op_fliplr()`](https://keras3.posit.co/dev/reference/op_fliplr.md)  
+[`op_flipud()`](https://keras3.posit.co/dev/reference/op_flipud.md)  
 [`op_floor()`](https://keras3.posit.co/dev/reference/op_floor.md)  
 [`op_floor_divide()`](https://keras3.posit.co/dev/reference/op_floor_divide.md)  
+[`op_fmax()`](https://keras3.posit.co/dev/reference/op_fmax.md)  
+[`op_fmin()`](https://keras3.posit.co/dev/reference/op_fmin.md)  
+[`op_fmod()`](https://keras3.posit.co/dev/reference/op_fmod.md)  
+[`op_fold()`](https://keras3.posit.co/dev/reference/op_fold.md)  
 [`op_fori_loop()`](https://keras3.posit.co/dev/reference/op_fori_loop.md)  
 [`op_full()`](https://keras3.posit.co/dev/reference/op_full.md)  
 [`op_full_like()`](https://keras3.posit.co/dev/reference/op_full_like.md)  
+[`op_gcd()`](https://keras3.posit.co/dev/reference/op_gcd.md)  
 [`op_gelu()`](https://keras3.posit.co/dev/reference/op_gelu.md)  
+[`op_geomspace()`](https://keras3.posit.co/dev/reference/op_geomspace.md)  
 [`op_get_item()`](https://keras3.posit.co/dev/reference/op_get_item.md)  
 [`op_glu()`](https://keras3.posit.co/dev/reference/op_glu.md)  
 [`op_greater()`](https://keras3.posit.co/dev/reference/op_greater.md)  
@@ -214,13 +229,17 @@ Other ops:
 [`op_hard_tanh()`](https://keras3.posit.co/dev/reference/op_hard_tanh.md)  
 [`op_heaviside()`](https://keras3.posit.co/dev/reference/op_heaviside.md)  
 [`op_histogram()`](https://keras3.posit.co/dev/reference/op_histogram.md)  
+[`op_hsplit()`](https://keras3.posit.co/dev/reference/op_hsplit.md)  
 [`op_hstack()`](https://keras3.posit.co/dev/reference/op_hstack.md)  
+[`op_hypot()`](https://keras3.posit.co/dev/reference/op_hypot.md)  
+[`op_i0()`](https://keras3.posit.co/dev/reference/op_i0.md)  
 [`op_identity()`](https://keras3.posit.co/dev/reference/op_identity.md)  
 [`op_ifft2()`](https://keras3.posit.co/dev/reference/op_ifft2.md)  
 [`op_imag()`](https://keras3.posit.co/dev/reference/op_imag.md)  
 [`op_image_affine_transform()`](https://keras3.posit.co/dev/reference/op_image_affine_transform.md)  
 [`op_image_crop()`](https://keras3.posit.co/dev/reference/op_image_crop.md)  
 [`op_image_extract_patches()`](https://keras3.posit.co/dev/reference/op_image_extract_patches.md)  
+[`op_image_extract_patches_3d()`](https://keras3.posit.co/dev/reference/op_image_extract_patches_3d.md)  
 [`op_image_gaussian_blur()`](https://keras3.posit.co/dev/reference/op_image_gaussian_blur.md)  
 [`op_image_hsv_to_rgb()`](https://keras3.posit.co/dev/reference/op_image_hsv_to_rgb.md)  
 [`op_image_map_coordinates()`](https://keras3.posit.co/dev/reference/op_image_map_coordinates.md)  
@@ -229,6 +248,9 @@ Other ops:
 [`op_image_resize()`](https://keras3.posit.co/dev/reference/op_image_resize.md)  
 [`op_image_rgb_to_grayscale()`](https://keras3.posit.co/dev/reference/op_image_rgb_to_grayscale.md)  
 [`op_image_rgb_to_hsv()`](https://keras3.posit.co/dev/reference/op_image_rgb_to_hsv.md)  
+[`op_image_scale_and_translate()`](https://keras3.posit.co/dev/reference/op_image_scale_and_translate.md)  
+[`op_image_sobel_edges()`](https://keras3.posit.co/dev/reference/op_image_sobel_edges.md)  
+[`op_image_ssim()`](https://keras3.posit.co/dev/reference/op_image_ssim.md)  
 [`op_in_top_k()`](https://keras3.posit.co/dev/reference/op_in_top_k.md)  
 [`op_inner()`](https://keras3.posit.co/dev/reference/op_inner.md)  
 [`op_inv()`](https://keras3.posit.co/dev/reference/op_inv.md)  
@@ -236,11 +258,19 @@ Other ops:
 [`op_is_tensor()`](https://keras3.posit.co/dev/reference/op_is_tensor.md)  
 [`op_isclose()`](https://keras3.posit.co/dev/reference/op_isclose.md)  
 [`op_isfinite()`](https://keras3.posit.co/dev/reference/op_isfinite.md)  
+[`op_isin()`](https://keras3.posit.co/dev/reference/op_isin.md)  
 [`op_isinf()`](https://keras3.posit.co/dev/reference/op_isinf.md)  
 [`op_isnan()`](https://keras3.posit.co/dev/reference/op_isnan.md)  
+[`op_isneginf()`](https://keras3.posit.co/dev/reference/op_isneginf.md)  
+[`op_isposinf()`](https://keras3.posit.co/dev/reference/op_isposinf.md)  
+[`op_isreal()`](https://keras3.posit.co/dev/reference/op_isreal.md)  
 [`op_istft()`](https://keras3.posit.co/dev/reference/op_istft.md)  
+[`op_jvp()`](https://keras3.posit.co/dev/reference/op_jvp.md)  
 [`op_kaiser()`](https://keras3.posit.co/dev/reference/op_kaiser.md)  
+[`op_kron()`](https://keras3.posit.co/dev/reference/op_kron.md)  
 [`op_layer_normalization()`](https://keras3.posit.co/dev/reference/op_layer_normalization.md)  
+[`op_lcm()`](https://keras3.posit.co/dev/reference/op_lcm.md)  
+[`op_ldexp()`](https://keras3.posit.co/dev/reference/op_ldexp.md)  
 [`op_leaky_relu()`](https://keras3.posit.co/dev/reference/op_leaky_relu.md)  
 [`op_left_shift()`](https://keras3.posit.co/dev/reference/op_left_shift.md)  
 [`op_less()`](https://keras3.posit.co/dev/reference/op_less.md)  
@@ -253,6 +283,7 @@ Other ops:
 [`op_log_sigmoid()`](https://keras3.posit.co/dev/reference/op_log_sigmoid.md)  
 [`op_log_softmax()`](https://keras3.posit.co/dev/reference/op_log_softmax.md)  
 [`op_logaddexp()`](https://keras3.posit.co/dev/reference/op_logaddexp.md)  
+[`op_logaddexp2()`](https://keras3.posit.co/dev/reference/op_logaddexp2.md)  
 [`op_logdet()`](https://keras3.posit.co/dev/reference/op_logdet.md)  
 [`op_logical_and()`](https://keras3.posit.co/dev/reference/op_logical_and.md)  
 [`op_logical_not()`](https://keras3.posit.co/dev/reference/op_logical_not.md)  
@@ -264,6 +295,7 @@ Other ops:
 [`op_lu_factor()`](https://keras3.posit.co/dev/reference/op_lu_factor.md)  
 [`op_map()`](https://keras3.posit.co/dev/reference/op_map.md)  
 [`op_matmul()`](https://keras3.posit.co/dev/reference/op_matmul.md)  
+[`op_matrix_rank()`](https://keras3.posit.co/dev/reference/op_matrix_rank.md)  
 [`op_max()`](https://keras3.posit.co/dev/reference/op_max.md)  
 [`op_max_pool()`](https://keras3.posit.co/dev/reference/op_max_pool.md)  
 [`op_maximum()`](https://keras3.posit.co/dev/reference/op_maximum.md)  
@@ -278,8 +310,23 @@ Other ops:
 [`op_multi_hot()`](https://keras3.posit.co/dev/reference/op_multi_hot.md)  
 [`op_multiply()`](https://keras3.posit.co/dev/reference/op_multiply.md)  
 [`op_nan_to_num()`](https://keras3.posit.co/dev/reference/op_nan_to_num.md)  
+[`op_nanargmax()`](https://keras3.posit.co/dev/reference/op_nanargmax.md)  
+[`op_nanargmin()`](https://keras3.posit.co/dev/reference/op_nanargmin.md)  
+[`op_nancumprod()`](https://keras3.posit.co/dev/reference/op_nancumprod.md)  
+[`op_nancumsum()`](https://keras3.posit.co/dev/reference/op_nancumsum.md)  
+[`op_nanmax()`](https://keras3.posit.co/dev/reference/op_nanmax.md)  
+[`op_nanmean()`](https://keras3.posit.co/dev/reference/op_nanmean.md)  
+[`op_nanmedian()`](https://keras3.posit.co/dev/reference/op_nanmedian.md)  
+[`op_nanmin()`](https://keras3.posit.co/dev/reference/op_nanmin.md)  
+[`op_nanpercentile()`](https://keras3.posit.co/dev/reference/op_nanpercentile.md)  
+[`op_nanprod()`](https://keras3.posit.co/dev/reference/op_nanprod.md)  
+[`op_nanquantile()`](https://keras3.posit.co/dev/reference/op_nanquantile.md)  
+[`op_nanstd()`](https://keras3.posit.co/dev/reference/op_nanstd.md)  
+[`op_nansum()`](https://keras3.posit.co/dev/reference/op_nansum.md)  
+[`op_nanvar()`](https://keras3.posit.co/dev/reference/op_nanvar.md)  
 [`op_ndim()`](https://keras3.posit.co/dev/reference/op_ndim.md)  
 [`op_negative()`](https://keras3.posit.co/dev/reference/op_negative.md)  
+[`op_nextafter()`](https://keras3.posit.co/dev/reference/op_nextafter.md)  
 [`op_nonzero()`](https://keras3.posit.co/dev/reference/op_nonzero.md)  
 [`op_norm()`](https://keras3.posit.co/dev/reference/op_norm.md)  
 [`op_normalize()`](https://keras3.posit.co/dev/reference/op_normalize.md)  
@@ -289,12 +336,16 @@ Other ops:
 [`op_ones_like()`](https://keras3.posit.co/dev/reference/op_ones_like.md)  
 [`op_outer()`](https://keras3.posit.co/dev/reference/op_outer.md)  
 [`op_pad()`](https://keras3.posit.co/dev/reference/op_pad.md)  
+[`op_percentile()`](https://keras3.posit.co/dev/reference/op_percentile.md)  
+[`op_pinv()`](https://keras3.posit.co/dev/reference/op_pinv.md)  
 [`op_polar()`](https://keras3.posit.co/dev/reference/op_polar.md)  
 [`op_power()`](https://keras3.posit.co/dev/reference/op_power.md)  
 [`op_prod()`](https://keras3.posit.co/dev/reference/op_prod.md)  
 [`op_psnr()`](https://keras3.posit.co/dev/reference/op_psnr.md)  
+[`op_ptp()`](https://keras3.posit.co/dev/reference/op_ptp.md)  
 [`op_qr()`](https://keras3.posit.co/dev/reference/op_qr.md)  
 [`op_quantile()`](https://keras3.posit.co/dev/reference/op_quantile.md)  
+[`op_rad2deg()`](https://keras3.posit.co/dev/reference/op_rad2deg.md)  
 [`op_ravel()`](https://keras3.posit.co/dev/reference/op_ravel.md)  
 [`op_real()`](https://keras3.posit.co/dev/reference/op_real.md)  
 [`op_rearrange()`](https://keras3.posit.co/dev/reference/op_rearrange.md)  
@@ -316,6 +367,8 @@ Other ops:
 [`op_scatter_update()`](https://keras3.posit.co/dev/reference/op_scatter_update.md)  
 [`op_searchsorted()`](https://keras3.posit.co/dev/reference/op_searchsorted.md)  
 [`op_segment_max()`](https://keras3.posit.co/dev/reference/op_segment_max.md)  
+[`op_segment_min()`](https://keras3.posit.co/dev/reference/op_segment_min.md)  
+[`op_segment_prod()`](https://keras3.posit.co/dev/reference/op_segment_prod.md)  
 [`op_segment_sum()`](https://keras3.posit.co/dev/reference/op_segment_sum.md)  
 [`op_select()`](https://keras3.posit.co/dev/reference/op_select.md)  
 [`op_selu()`](https://keras3.posit.co/dev/reference/op_selu.md)  
@@ -326,6 +379,7 @@ Other ops:
 [`op_signbit()`](https://keras3.posit.co/dev/reference/op_signbit.md)  
 [`op_silu()`](https://keras3.posit.co/dev/reference/op_silu.md)  
 [`op_sin()`](https://keras3.posit.co/dev/reference/op_sin.md)  
+[`op_sinc()`](https://keras3.posit.co/dev/reference/op_sinc.md)  
 [`op_sinh()`](https://keras3.posit.co/dev/reference/op_sinh.md)  
 [`op_size()`](https://keras3.posit.co/dev/reference/op_size.md)  
 [`op_slice()`](https://keras3.posit.co/dev/reference/op_slice.md)  
@@ -338,6 +392,7 @@ Other ops:
 [`op_solve()`](https://keras3.posit.co/dev/reference/op_solve.md)  
 [`op_solve_triangular()`](https://keras3.posit.co/dev/reference/op_solve_triangular.md)  
 [`op_sort()`](https://keras3.posit.co/dev/reference/op_sort.md)  
+[`op_space_to_depth()`](https://keras3.posit.co/dev/reference/op_space_to_depth.md)  
 [`op_sparse_categorical_crossentropy()`](https://keras3.posit.co/dev/reference/op_sparse_categorical_crossentropy.md)  
 [`op_sparse_plus()`](https://keras3.posit.co/dev/reference/op_sparse_plus.md)  
 [`op_sparse_sigmoid()`](https://keras3.posit.co/dev/reference/op_sparse_sigmoid.md)  
@@ -368,18 +423,24 @@ Other ops:
 [`op_top_k()`](https://keras3.posit.co/dev/reference/op_top_k.md)  
 [`op_trace()`](https://keras3.posit.co/dev/reference/op_trace.md)  
 [`op_transpose()`](https://keras3.posit.co/dev/reference/op_transpose.md)  
+[`op_trapezoid()`](https://keras3.posit.co/dev/reference/op_trapezoid.md)  
 [`op_tri()`](https://keras3.posit.co/dev/reference/op_tri.md)  
 [`op_tril()`](https://keras3.posit.co/dev/reference/op_tril.md)  
 [`op_triu()`](https://keras3.posit.co/dev/reference/op_triu.md)  
 [`op_trunc()`](https://keras3.posit.co/dev/reference/op_trunc.md)  
+[`op_unfold()`](https://keras3.posit.co/dev/reference/op_unfold.md)  
+[`op_unique()`](https://keras3.posit.co/dev/reference/op_unique.md)  
 [`op_unravel_index()`](https://keras3.posit.co/dev/reference/op_unravel_index.md)  
 [`op_unstack()`](https://keras3.posit.co/dev/reference/op_unstack.md)  
+[`op_vander()`](https://keras3.posit.co/dev/reference/op_vander.md)  
 [`op_var()`](https://keras3.posit.co/dev/reference/op_var.md)  
 [`op_vdot()`](https://keras3.posit.co/dev/reference/op_vdot.md)  
 [`op_vectorize()`](https://keras3.posit.co/dev/reference/op_vectorize.md)  
 [`op_vectorized_map()`](https://keras3.posit.co/dev/reference/op_vectorized_map.md)  
+[`op_view()`](https://keras3.posit.co/dev/reference/op_view.md)  
 [`op_view_as_complex()`](https://keras3.posit.co/dev/reference/op_view_as_complex.md)  
 [`op_view_as_real()`](https://keras3.posit.co/dev/reference/op_view_as_real.md)  
+[`op_vsplit()`](https://keras3.posit.co/dev/reference/op_vsplit.md)  
 [`op_vstack()`](https://keras3.posit.co/dev/reference/op_vstack.md)  
 [`op_where()`](https://keras3.posit.co/dev/reference/op_where.md)  
 [`op_while_loop()`](https://keras3.posit.co/dev/reference/op_while_loop.md)  

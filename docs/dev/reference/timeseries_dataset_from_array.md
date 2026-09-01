@@ -18,7 +18,8 @@ timeseries_dataset_from_array(
   shuffle = FALSE,
   seed = NULL,
   start_index = NULL,
-  end_index = NULL
+  end_index = NULL,
+  format = "tf"
 )
 ```
 
@@ -80,11 +81,19 @@ timeseries_dataset_from_array(
   be used in the output sequences. This is useful to reserve part of the
   data for test or validation.
 
+- format:
+
+  Optional string; either `"tf"` (the default) for a `tf.data.Dataset`,
+  or `"grain"` for a Grain dataset. Grain datasets are
+  framework-agnostic and work with JAX, PyTorch, and NumPy backends
+  without requiring TensorFlow.
+
 ## Value
 
-A `tf$data$Dataset` instance. If `targets` was passed, the dataset
-yields list `(batch_of_sequences, batch_of_targets)`. If not, the
-dataset yields only `batch_of_sequences`.
+A dataset instance. If `format = "tf"`, this is a `tf.data.Dataset`. If
+`format = "grain"`, this is a Grain dataset. If `targets` was passed,
+the dataset yields list `(batch_of_sequences, batch_of_targets)`. If
+not, the dataset yields only `batch_of_sequences`.
 
 Example 1:
 

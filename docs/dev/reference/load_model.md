@@ -13,8 +13,8 @@ load_model(model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 
 - model:
 
-  string, path to the saved model file, or a raw vector, as returned by
-  `save_model(filepath = NULL)`
+  string, path to the saved model file or Orbax checkpoint directory, or
+  a raw vector, as returned by `save_model(filepath = NULL)`
 
 - custom_objects:
 

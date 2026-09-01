@@ -2,7 +2,7 @@ test_that("DimExpr Ops keeps symbolic dims when R uses double scalars", {
   skip_if_not(reticulate::py_module_available("jax"))
 
   export <- reticulate::import("jax.export", convert = FALSE)
-  dim <- export$symbolic_shape("n")[[1]]
+  dim <- export$symbolic_shape("n")[[0L]]
 
   expr <- dim - 1 # 1 is a double in R; Ops method should coerce to int
 

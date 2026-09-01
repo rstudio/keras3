@@ -34,6 +34,14 @@ extract_patches(
   padding='valid',
   data_format=None
 )
+extract_patches_3d(
+  volumes,
+  size,
+  strides=None,
+  dilation_rate=1,
+  padding='valid',
+  data_format=None
+)
 gaussian_blur(
   images,
   kernel_size=(3, 3),
@@ -79,4 +87,24 @@ resize(
 )
 rgb_to_grayscale(images, data_format=None)
 rgb_to_hsv(images, data_format=None)
+scale_and_translate(
+  images,
+  output_shape,
+  scale,
+  translation,
+  spatial_dims,
+  method,
+  antialias=True
+)
+sobel_edges(images, data_format=None)
+ssim(
+  image1,
+  image2,
+  max_val=1.0,
+  filter_size=11,
+  filter_sigma=1.5,
+  k1=0.01,
+  k2=0.03,
+  data_format=None
+)
 

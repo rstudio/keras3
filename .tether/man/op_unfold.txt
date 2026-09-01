@@ -1,0 +1,39 @@
+__signature__
+keras.ops.unfold(
+  x,
+  kernel_size,
+  dilation=1,
+  padding=0,
+  stride=1
+)
+__doc__
+Extract sliding local blocks from a 4-D input (batched image).
+
+This operation is known as **im2col** when used with convolution.
+It rearranges the image into overlapping or non-overlapping patches
+and returns a tensor whose *depth* (last axis) contains the flattened
+patches.
+
+Args:
+    x: A 4-D tensor of shape `(N, C, H, W)` (**channels-first** format).
+    kernel_size: int or tuple of two ints, the size of the sliding window
+        `(kH, kW)`.  If a single int is given, it is used for both
+        dimensions.
+    dilation: int or tuple of two ints, the spacing between kernel points
+        (a.k.a. **dilation** or **atrous** convolution). Default: 1.
+    padding: int or tuple of two ints, the amount of zero-padding to apply
+        to both spatial dimensions. Default: 0.
+    stride: int or tuple of two ints, the step size of the sliding window.
+        Default: 1.
+
+Returns:
+    A 3-D tensor of shape `(N, C * kH * kW, L)` where
+    `L = num_patches_H * num_patches_W` is the total number of patches
+    extracted.
+
+Example:
+
+>>> x = keras.ops.ones((1, 2, 4, 4))
+>>> patches = keras.ops.unfold(x, kernel_size=2, stride=2)
+>>> patches.shape
+(1, 8, 4)

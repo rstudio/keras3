@@ -1,7 +1,7 @@
 Help on class SparseCategoricalCrossentropy in module keras.src.metrics.probabilistic_metrics:
 
 class SparseCategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetricWrapper)
- |  SparseCategoricalCrossentropy(name='sparse_categorical_crossentropy', dtype=None, from_logits=False, axis=-1)
+ |  SparseCategoricalCrossentropy(name='sparse_categorical_crossentropy', dtype=None, from_logits=False, ignore_class=None, axis=-1)
  |
  |  Computes the crossentropy metric between the labels and predictions.
  |
@@ -19,6 +19,8 @@ class SparseCategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetr
  |      from_logits: (Optional) Whether output is expected
  |          to be a logits tensor. By default, we consider that output
  |          encodes a probability distribution.
+ |      ignore_class: (Optional) Integer.
+ |          Class to ignore. If `None`, no class is ignored.
  |      axis: (Optional) Defaults to `-1`.
  |          The dimension along which entropy is computed.
  |
@@ -71,6 +73,7 @@ class SparseCategoricalCrossentropy(keras.src.metrics.reduction_metrics.MeanMetr
  |    name='sparse_categorical_crossentropy',
  |    dtype=None,
  |    from_logits=False,
+ |    ignore_class=None,
  |    axis=-1
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

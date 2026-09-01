@@ -34,6 +34,7 @@ layer_multi_head_attention(
   use_bias = TRUE,
   output_shape = NULL,
   attention_axes = NULL,
+  sliding_window = NULL,
   flash_attention = NULL,
   kernel_initializer = "glorot_uniform",
   bias_initializer = "zeros",
@@ -42,6 +43,7 @@ layer_multi_head_attention(
   activity_regularizer = NULL,
   kernel_constraint = NULL,
   bias_constraint = NULL,
+  use_gate = FALSE,
   seed = NULL,
   ...
 )
@@ -84,6 +86,14 @@ layer_multi_head_attention(
   axes over which the attention is applied. `NULL` means attention over
   all axes, but batch, heads, and features.
 
+- sliding_window:
+
+  Optional positive integer. If set, each query position attends only to
+  key positions within `sliding_window - 1` of itself, forming a
+  symmetric band. This combines with `use_causal_mask = TRUE` to provide
+  the causal sliding window used by Mistral, Llama 3 long-context, and
+  Phi-3. Defaults to `NULL`, which uses full attention.
+
 - flash_attention:
 
   If `NULL`, the layer attempts to use flash attention for faster and
@@ -120,6 +130,15 @@ layer_multi_head_attention(
 - bias_constraint:
 
   Constraint for dense layer kernels.
+
+- use_gate:
+
+  Logical, whether to apply a gated attention mechanism. When `TRUE`, an
+  additional gating branch is added based on [Gated Attention for Large
+  Language Models](https://arxiv.org/abs/2505.06708). It applies a
+  sigmoid-activated linear projection to the query, which then gates the
+  attention output. This helps improve training stability and eliminates
+  "attention sinks".
 
 - seed:
 
@@ -233,6 +252,12 @@ Other layers:
 [`layer_activation_relu()`](https://keras3.posit.co/dev/reference/layer_activation_relu.md)  
 [`layer_activation_softmax()`](https://keras3.posit.co/dev/reference/layer_activation_softmax.md)  
 [`layer_activity_regularization()`](https://keras3.posit.co/dev/reference/layer_activity_regularization.md)  
+[`layer_adaptive_average_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_1d.md)  
+[`layer_adaptive_average_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_2d.md)  
+[`layer_adaptive_average_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_3d.md)  
+[`layer_adaptive_max_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_1d.md)  
+[`layer_adaptive_max_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_2d.md)  
+[`layer_adaptive_max_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_3d.md)  
 [`layer_add()`](https://keras3.posit.co/dev/reference/layer_add.md)  
 [`layer_additive_attention()`](https://keras3.posit.co/dev/reference/layer_additive_attention.md)  
 [`layer_alpha_dropout()`](https://keras3.posit.co/dev/reference/layer_alpha_dropout.md)  
@@ -248,6 +273,7 @@ Other layers:
 [`layer_category_encoding()`](https://keras3.posit.co/dev/reference/layer_category_encoding.md)  
 [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)  
 [`layer_concatenate()`](https://keras3.posit.co/dev/reference/layer_concatenate.md)  
+[`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)  
 [`layer_conv_1d()`](https://keras3.posit.co/dev/reference/layer_conv_1d.md)  
 [`layer_conv_1d_transpose()`](https://keras3.posit.co/dev/reference/layer_conv_1d_transpose.md)  
 [`layer_conv_2d()`](https://keras3.posit.co/dev/reference/layer_conv_2d.md)  
@@ -329,6 +355,7 @@ Other layers:
 [`layer_rescaling()`](https://keras3.posit.co/dev/reference/layer_rescaling.md)  
 [`layer_reshape()`](https://keras3.posit.co/dev/reference/layer_reshape.md)  
 [`layer_resizing()`](https://keras3.posit.co/dev/reference/layer_resizing.md)  
+[`layer_reversible_embedding()`](https://keras3.posit.co/dev/reference/layer_reversible_embedding.md)  
 [`layer_rms_normalization()`](https://keras3.posit.co/dev/reference/layer_rms_normalization.md)  
 [`layer_rnn()`](https://keras3.posit.co/dev/reference/layer_rnn.md)  
 [`layer_separable_conv_1d()`](https://keras3.posit.co/dev/reference/layer_separable_conv_1d.md)  

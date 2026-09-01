@@ -1,7 +1,7 @@
 Help on class Muon in module keras.src.optimizers.muon:
 
 class Muon(keras.src.optimizers.optimizer.Optimizer)
- |  Muon(learning_rate=0.001, adam_beta_1=0.9, adam_beta_2=0.999, epsilon=1e-07, weight_decay=0.1, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name='muon', exclude_layers=None, exclude_embeddings=True, muon_a=3.4445, muon_b=-4.775, muon_c=2.0315, adam_lr_ratio=0.1, momentum=0.95, ns_steps=6, nesterov=True, **kwargs)
+ |  Muon(learning_rate=0.001, adam_beta_1=0.9, adam_beta_2=0.999, adam_weight_decay=0.004, epsilon=1e-07, weight_decay=0.004, clipnorm=None, clipvalue=None, global_clipnorm=None, use_ema=False, ema_momentum=0.99, ema_overwrite_frequency=None, loss_scale_factor=None, gradient_accumulation_steps=None, name=None, exclude_layers=None, exclude_embeddings=True, muon_a=3.4445, muon_b=-4.775, muon_c=2.0315, adam_lr_ratio=1, momentum=0.95, ns_steps=5, nesterov=True, rms_rate=0.2, **kwargs)
  |
  |  Optimizer that implements the Muon algorithm.
  |
@@ -16,7 +16,7 @@ class Muon(keras.src.optimizers.optimizer.Optimizer)
  |  The Muon optimizer can use both the Muon update step or the
  |  AdamW update step based on the following:
  |
- |  - For any variable that isn't 2D, 3D or 4D, the AdamW step
+ |  - For any variable that isn't 2D, the AdamW step
  |      will be used. This is not configurable.
  |  - If the argument `exclude_embeddings` (defaults to `True`) is set
  |  to `True`, the AdamW step will be used.
@@ -42,10 +42,12 @@ class Muon(keras.src.optimizers.optimizer.Optimizer)
  |          that takes no arguments and returns the actual value to use.
  |          The exponential decay rate for the 1st moment estimates. Defaults to
  |          `0.9`.
- |      adam_beta_2: A float value or a constant float tensor, ora callable
+ |      adam_beta_2: A float value or a constant float tensor, or a callable
  |          that takes no arguments and returns the actual value to use.
  |          The exponential decay rate for the 2nd moment estimates. Defaults to
  |          `0.999`.
+ |      adam_weight_decay: Float. If set, weight decay is applied when using
+ |          the Adam optimizer.
  |      epsilon: A small constant for numerical stability. This is
  |          "epsilon hat" in the Kingma and Ba paper
  |          (in the formula just before Section 2.1),
@@ -63,11 +65,15 @@ class Muon(keras.src.optimizers.optimizer.Optimizer)
  |          It is recommended to use the default value
  |      adam_lr_ratio: Float, the ratio of the learning rate when
  |              using Adam to the main learning rate.
- |              it is recommended to set it to 0.1
+ |              It is recommended to set it to 1
  |      momentum: Float, momentum used by internal SGD.
  |      ns_steps: Integer, number of Newton-Schulz iterations to run.
  |      nesterov: Boolean, whether to use Nesterov-style momentum
  |      {{base_optimizer_keyword_args}}
+ |      rms_rate: Float. A parameter from https://arxiv.org/abs/2502.16982
+ |          that can enhance the stability of Muon, allowing it to use the
+ |          same learning rate and weight decay as Adam. Defaults to `0.2`.
+ |          Set to `None` to disable this feature.
  |
  |  Method resolution order:
  |      Muon
@@ -87,8 +93,9 @@ class Muon(keras.src.optimizers.optimizer.Optimizer)
  |    learning_rate=0.001,
  |    adam_beta_1=0.9,
  |    adam_beta_2=0.999,
+ |    adam_weight_decay=0.004,
  |    epsilon=1e-07,
- |    weight_decay=0.1,
+ |    weight_decay=0.004,
  |    clipnorm=None,
  |    clipvalue=None,
  |    global_clipnorm=None,
@@ -97,16 +104,17 @@ class Muon(keras.src.optimizers.optimizer.Optimizer)
  |    ema_overwrite_frequency=None,
  |    loss_scale_factor=None,
  |    gradient_accumulation_steps=None,
- |    name='muon',
+ |    name=None,
  |    exclude_layers=None,
  |    exclude_embeddings=True,
  |    muon_a=3.4445,
  |    muon_b=-4.775,
  |    muon_c=2.0315,
- |    adam_lr_ratio=0.1,
+ |    adam_lr_ratio=1,
  |    momentum=0.95,
- |    ns_steps=6,
+ |    ns_steps=5,
  |    nesterov=True,
+ |    rms_rate=0.2,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -133,6 +141,14 @@ class Muon(keras.src.optimizers.optimizer.Optimizer)
  |
  |      Returns:
  |          Python dictionary.
+ |
+ |  lr_adjust(self, x)
+ |      Adjusts learning rate based on the Moonlight implementation.
+ |      This method enhances the stability of Muon, allowing it to use the same
+ |      learning rate and weight decay as Adam. For details, see
+ |      https://arxiv.org/abs/2502.16982.
+ |      For a 2D matrix, the update is scaled by `sqrt(max(n, m)) * rms_rate`,
+ |      where `n` and `m` are the dimensions of the matrix.
  |
  |  transpose_last_axis(self, X)
  |

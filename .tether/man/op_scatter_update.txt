@@ -2,7 +2,8 @@ __signature__
 keras.ops.scatter_update(
   inputs,
   indices,
-  updates
+  updates,
+  reduction=None
 )
 __doc__
 Update inputs via updates at scattered (sparse) indices.
@@ -46,6 +47,23 @@ Args:
         indices to update. `N` is the number of indices to update, must be
         equal to the first dimension of `updates`.
     updates: A tensor, the new values to be put to `inputs` at `indices`.
+    reduction: A string specifying the reduction operation to apply when
+        multiple updates target the same index. Supported values are:
+        `None` (default): Updates replace existing values (last write wins).
+        `"add"`: Updates are added to existing values.
+        `"max"`: The maximum of updates and existing values is kept.
+        `"min"`: The minimum of updates and existing values is kept.
+        `"mul"`: Updates are multiplied with existing values.
 
 Returns:
     A tensor, has the same shape and dtype as `inputs`.
+
+Example:
+
+Using `reduction="add"` to accumulate values at the same index:
+
+>>> inputs = np.zeros((4,))
+>>> indices = [[0], [0], [1]]
+>>> updates = np.array([1., 1., 1.])
+>>> keras.ops.scatter_update(inputs, indices, updates, reduction="add")
+array([2., 1., 0., 0.])

@@ -19,6 +19,9 @@ layer_batch_normalization(
   gamma_regularizer = NULL,
   beta_constraint = NULL,
   gamma_constraint = NULL,
+  renorm = FALSE,
+  renorm_clipping = NULL,
+  renorm_momentum = 0.99,
   synchronized = FALSE,
   ...
 )
@@ -56,6 +59,23 @@ since the scaling will be done by the next layer.}
 \item{beta_constraint}{Optional constraint for the beta weight.}
 
 \item{gamma_constraint}{Optional constraint for the gamma weight.}
+
+\item{renorm}{Whether to use \href{https://arxiv.org/abs/1702.03275}{Batch Renormalization}.
+This adds extra variables during training. Inference is the same for either
+value of this parameter.}
+
+\item{renorm_clipping}{Named list, valid only if \code{renorm = TRUE}. Maps optional keys \code{"rmax"},
+\code{"rmin"}, and \code{"dmax"} to numeric values used to clip the renormalization
+correction. The correction \verb{(r, d)} is used as
+\code{corrected_value = normalized_value * r + d}, with \code{r} clipped to
+\verb{[rmin, rmax]} and \code{d} clipped to \verb{[-dmax, dmax]}. Missing \code{rmax}, \code{rmin},
+and \code{dmax} values default to \code{Inf}, \code{0}, and \code{Inf}, respectively.}
+
+\item{renorm_momentum}{Momentum used to update the moving means and standard deviations for
+renormalization. Valid only if \code{renorm = TRUE}. Unlike \code{momentum}, this
+affects training and should be neither too small, which would add noise, nor
+too large, which would give stale estimates. \code{momentum} is still applied to
+obtain the means and variances used for inference.}
 
 \item{synchronized}{Only applicable with the TensorFlow backend.
 If \code{TRUE}, synchronizes the global batch statistics (mean and
@@ -190,6 +210,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -204,6 +230,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -286,6 +313,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

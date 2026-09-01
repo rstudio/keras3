@@ -1,0 +1,35 @@
+__signature__
+keras.ops.nanmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+__doc__
+Maximum of a tensor over the given axes, ignoring NaNs.
+
+Args:
+    x: Input tensor.
+    axis: Axis or axes along which the maximum is computed.
+        The default is to compute the maximum of the flattened tensor.
+    keepdims: If this is set to `True`, the axes which are reduced are left
+        in the result as dimensions with size one. Defaults
+        to `False`.
+
+Returns:
+    Output tensor containing the maximum, with NaN values ignored. If all
+    values along a reduced axis are NaN, the result is NaN.
+
+Examples:
+>>> import numpy as np
+>>> from keras import ops
+>>> x = np.array([[1.0, np.nan, 3.0],
+...               [np.nan, 2.0, 1.0]])
+>>> ops.nanmax(x)
+3.0
+
+>>> ops.nanmax(x, axis=1)
+array([3., 2.])
+
+>>> ops.nanmax(x, axis=1, keepdims=True)
+array([[3.],
+       [2.]])

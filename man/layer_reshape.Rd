@@ -10,7 +10,8 @@ layer_reshape(object, target_shape, ...)
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
 \item{target_shape}{Target shape. List of integers, does not include the
-samples dimension (batch size).}
+samples dimension (batch size). One element may be \code{-1}, in which case its
+size is inferred from the input size and the remaining dimensions.}
 
 \item{...}{For forward/backward compatability.}
 }
@@ -29,10 +30,7 @@ returned, invisibly.
 Layer that reshapes inputs into the given shape.
 }
 \section{Input Shape}{
-Arbitrary, although all dimensions in the input shape must be
-known/fixed. Use the keyword argument \code{input_shape} (list of integers,
-does not include the samples/batch size axis) when using this layer as
-the first layer in a model.
+Arbitrary, but required to be compatible with \code{target_shape}.
 }
 
 \section{Output Shape}{
@@ -87,6 +85,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -102,6 +106,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -183,6 +188,7 @@ Other layers: \cr
 \code{\link{layer_repeat_vector}()} \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

@@ -26,8 +26,8 @@ class ReLU(keras.src.layers.layer.Layer)
  |  ```
  |
  |  Args:
- |      max_value: Float >= 0. Maximum activation value. None means unlimited.
- |          Defaults to `None`.
+ |      max_value: Float >= 0. Maximum activation value. `None` means
+ |          unlimited. Defaults to `None`.
  |      negative_slope: Float >= 0. Negative slope coefficient.
  |          Defaults to `0.0`.
  |      threshold: Float >= 0. Threshold value for thresholded activation.

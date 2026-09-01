@@ -4,7 +4,7 @@
 \alias{initializer_lecun_uniform}
 \title{Lecun uniform initializer.}
 \usage{
-initializer_lecun_uniform(seed = NULL)
+initializer_lecun_uniform(seed = NULL, input_axes = NULL, output_axes = NULL)
 }
 \arguments{
 \item{seed}{An integer or instance of
@@ -15,6 +15,12 @@ or \code{NULL} (unseeded) will produce the same random values
 across multiple calls. To get different random values
 across multiple calls, use as seed an instance
 of \code{random_seed_generator()}.}
+
+\item{input_axes}{Optional integer vector. The 1-based axes of the input tensor to use when
+computing the fan-in.}
+
+\item{output_axes}{Optional integer vector. The 1-based axes of the output tensor to use when
+computing the fan-out.}
 }
 \value{
 An \code{Initializer} instance that can be passed to layer or variable

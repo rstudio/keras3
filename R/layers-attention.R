@@ -234,6 +234,13 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param use_bias
 #' Boolean, whether the dense layers use bias vectors/matrices.
 #'
+#' @param sliding_window
+#' Optional positive integer. If set, each query position attends only to key
+#' positions within `sliding_window - 1` of itself, forming a symmetric band.
+#' This combines with `use_causal_mask = TRUE` to provide the causal sliding
+#' window used by Mistral, Llama 3 long-context, and Phi-3. Defaults to `NULL`,
+#' which uses full attention.
+#'
 #' @param flash_attention
 #' If `NULL`, the layer attempts to use flash
 #' attention for faster and more memory-efficient attention
@@ -262,6 +269,14 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @param bias_constraint
 #' Constraint for dense layer kernels.
 #'
+#' @param use_gate
+#' Logical, whether to apply a gated attention mechanism. When `TRUE`, an
+#' additional gating branch is added based on
+#' [Gated Attention for Large Language Models](https://arxiv.org/abs/2505.06708).
+#' It applies a sigmoid-activated linear projection to the query, which then
+#' gates the attention output. This helps improve training stability and
+#' eliminates "attention sinks".
+#'
 #' @param seed
 #' Optional integer to seed the dropout layer.
 #'
@@ -279,14 +294,15 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' @tether keras.layers.GroupQueryAttention
 layer_group_query_attention <-
 function (object, head_dim, num_query_heads, num_key_value_heads,
-    dropout = 0, use_bias = TRUE, flash_attention = NULL, kernel_initializer = "glorot_uniform",
-    bias_initializer = "zeros", kernel_regularizer = NULL, bias_regularizer = NULL,
-    activity_regularizer = NULL, kernel_constraint = NULL, bias_constraint = NULL,
+    dropout = 0, use_bias = TRUE, sliding_window = NULL, flash_attention = NULL,
+    kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
+    kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
+    kernel_constraint = NULL, bias_constraint = NULL, use_gate = FALSE,
     seed = NULL, ...)
 {
-    args <- capture_args(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
+    args <- capture_args(list(sliding_window = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape), ignore = "object")
     create_layer(keras$layers$GroupQueryAttention, object, args)
 }
 
@@ -388,6 +404,13 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' axes over which the attention is applied. `NULL` means
 #' attention over all axes, but batch, heads, and features.
 #'
+#' @param sliding_window
+#' Optional positive integer. If set, each query position attends only to key
+#' positions within `sliding_window - 1` of itself, forming a symmetric band.
+#' This combines with `use_causal_mask = TRUE` to provide the causal sliding
+#' window used by Mistral, Llama 3 long-context, and Phi-3. Defaults to `NULL`,
+#' which uses full attention.
+#'
 #' @param flash_attention
 #' If `NULL`, the layer attempts to use flash
 #' attention for faster and more memory-efficient attention
@@ -416,6 +439,14 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @param bias_constraint
 #' Constraint for dense layer kernels.
 #'
+#' @param use_gate
+#' Logical, whether to apply a gated attention mechanism. When `TRUE`, an
+#' additional gating branch is added based on
+#' [Gated Attention for Large Language Models](https://arxiv.org/abs/2505.06708).
+#' It applies a sigmoid-activated linear projection to the query, which then
+#' gates the attention output. This helps improve training stability and
+#' eliminates "attention sinks".
+#'
 #' @param seed
 #' Optional integer to seed the dropout layer.
 #'
@@ -435,14 +466,17 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' @tether keras.layers.MultiHeadAttention
 layer_multi_head_attention <-
 function (inputs, num_heads, key_dim, value_dim = NULL, dropout = 0,
-    use_bias = TRUE, output_shape = NULL, attention_axes = NULL, flash_attention=NULL,
+    use_bias = TRUE, output_shape = NULL, attention_axes = NULL,
+    sliding_window = NULL, flash_attention = NULL,
     kernel_initializer = "glorot_uniform", bias_initializer = "zeros",
     kernel_regularizer = NULL, bias_regularizer = NULL, activity_regularizer = NULL,
-    kernel_constraint = NULL, bias_constraint = NULL, seed = NULL, ...)
+    kernel_constraint = NULL, bias_constraint = NULL, use_gate = FALSE,
+    seed = NULL, ...)
 {
-    args <- capture_args(list(input_shape = normalize_shape,
-        batch_size = as_integer, batch_input_shape = normalize_shape,
-        num_heads = as_integer, key_dim = as_integer, value_dim = as_integer,
+    args <- capture_args(list(sliding_window = as_integer, seed = as_integer,
+        input_shape = normalize_shape, batch_size = as_integer,
+        batch_input_shape = normalize_shape, num_heads = as_integer,
+        key_dim = as_integer, value_dim = as_integer,
         attention_axes = as_integer), ignore = "inputs")
     layer <- create_layer(keras$layers$MultiHeadAttention, NULL, args)
     if (missing(inputs) || is.null(inputs))

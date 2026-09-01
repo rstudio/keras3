@@ -80,6 +80,7 @@ image_dataset_from_directory(
   crop_to_aspect_ratio=False,
   pad_to_aspect_ratio=False,
   data_format=None,
+  format='tf',
   verbose=True
 )
 img_to_array(
@@ -108,6 +109,7 @@ model_to_dot(
   subgraph=False,
   show_layer_activations=False,
   show_trainable=False,
+  splines='ortho',
   **kwargs
 )
 normalize(
@@ -139,6 +141,7 @@ plot_model(
   dpi=200,
   show_layer_activations=False,
   show_trainable=False,
+  splines='ortho',
   **kwargs
 )
 Progbar(
@@ -147,6 +150,7 @@ Progbar(
   verbose=1,
   interval=0.05,
   stateful_metrics=None,
+  stateless_metrics=None,
   unit_name='step'
 )
 PyDataset(
@@ -175,7 +179,8 @@ split_dataset(
   left_size=None,
   right_size=None,
   shuffle=False,
-  seed=None
+  seed=None,
+  preferred_backend=None
 )
 standardize_dtype(dtype)
 text_dataset_from_directory(
@@ -190,6 +195,7 @@ text_dataset_from_directory(
   validation_split=None,
   subset=None,
   follow_links=False,
+  format='tf',
   verbose=True
 )
 timeseries_dataset_from_array(
@@ -202,7 +208,8 @@ timeseries_dataset_from_array(
   shuffle=False,
   seed=None,
   start_index=None,
-  end_index=None
+  end_index=None,
+  format='tf'
 )
 to_categorical(x, num_classes=None)
 unpack_x_y_sample_weight(data)

@@ -1,0 +1,78 @@
+__signature__
+keras.ops.unique(
+  x,
+  sorted=True,
+  return_index=False,
+  return_inverse=False,
+  return_counts=False,
+  axis=None,
+  size=None,
+  fill_value=None
+)
+__doc__
+Finds the unique elements of a tensor.
+
+This function returns the unique elements of an array, optionally sorted.
+When `size` is provided, the output shape is fixed, making it compatible
+with JIT compilation (e.g., JAX, TensorFlow Graph Mode).
+
+Args:
+    x: Input tensor.
+    sorted: Whether to sort the unique elements in ascending order.
+        Defaults to `True`.
+    return_index: If `True`, also return the indices of the first
+        occurrence of each unique element in `x`. Defaults to `False`.
+    return_inverse: If `True`, also return the indices of the unique tensor
+        (for the specified axis, if provided) that can be used to
+        reconstruct `x`. Defaults to `False`.
+    return_counts: If `True`, also return the number of times each
+        unique item appears in `x`. Defaults to `False`.
+    axis: The axis to operate on. If `None`, `x` will be flattened.
+        If an integer, the subarrays indexed by the given axis will be
+        treated as the elements. Defaults to `None`.
+    size: Optional integer. If provided, the output will always have this
+        fixed size. If the number of unique elements is less than `size`,
+        the output will be padded with `fill_value`. If greater, the
+        output will be truncated.
+    fill_value: The value used to pad the output when `size` is specified
+        and there are fewer unique elements than `size`. Defaults to `0`.
+
+Returns:
+    A tensor or a tuple of tensors.
+    - `unique_values`: The unique values. Shape is `(size,)` if `size` is
+      provided and `axis=None`.
+    - `unique_index` (optional): The indices of the first occurrence of each
+      unique element in `x`. Only provided if `return_index` is `True`.
+    - `unique_inverse` (optional): The indices to reconstruct the original
+      array. Only provided if `return_inverse` is `True`.
+    - `unique_counts` (optional): The number of occurrences of each unique
+      value. Only provided if `return_counts` is `True`.
+
+Examples:
+
+>>> x = keras.ops.convert_to_tensor([3, 1, 2, 1, 3, 2])
+>>> keras.ops.unique(x)
+array([1, 2, 3], dtype=int32)
+
+Fixed size output with padding (JIT-compatible):
+
+>>> x = keras.ops.convert_to_tensor([3, 1, 2, 1])
+>>> values, counts = keras.ops.unique(x, size=5, fill_value=0,
+...                                   return_counts=True)
+>>> values
+array([1, 2, 3, 0, 0], dtype=int32)
+>>> counts
+array([2, 1, 1, 0, 0], dtype=int32)
+
+Fixed size output with truncation:
+
+>>> x = keras.ops.convert_to_tensor([3, 1, 2, 1])
+>>> keras.ops.unique(x, size=2)
+array([1, 2], dtype=int32)
+
+Return unique rows of a 2D array:
+
+>>> x = keras.ops.convert_to_tensor([[1, 0, 0], [0, 1, 0], [1, 0, 0]])
+>>> keras.ops.unique(x, axis=0)
+array([[0, 1, 0],
+       [1, 0, 0]], dtype=int32)

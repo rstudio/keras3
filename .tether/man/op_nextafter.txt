@@ -1,0 +1,22 @@
+__signature__
+keras.ops.nextafter(x1, x2)
+__doc__
+Return the next representable floating-point value after `x1` towards `x2`.
+
+This function computes the next floating-point value
+following `x1` in the direction of `x2`, element-wise.
+
+Args:
+    x1: Input tensor whose values will be moved to the next
+        representable floating-point value.
+    x2: Input tensor indicating the direction toward which
+        `x1` is moved.
+
+Returns:
+    Output tensor
+
+Example:
+>>> x1 = keras.ops.convert_to_tensor([1.0, 1.0])
+>>> x2 = keras.ops.convert_to_tensor([2.0, 0.0])
+>>> keras.ops.nextafter(x1, x2)
+array([1.0000001, 0.99999994], dtype=float32)

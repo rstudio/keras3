@@ -106,10 +106,9 @@ evaluate(
 
 ## Value
 
-Scalar test loss (if the model has a single output and no metrics) or
-list of scalars (if the model has multiple outputs and/or metrics). The
-attribute `model$metrics_names` will give you the display labels for the
-scalar outputs.
+A named list of scalar metrics, including the loss value. Metric results
+are returned with stable names, including compiled metrics that may
+expand into multiple reported values.
 
 ## See also
 

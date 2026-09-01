@@ -176,6 +176,7 @@ function ()
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inheritParams initializer_variance_scaling
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -185,9 +186,10 @@ function ()
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/GlorotNormal>
 #' @tether keras.initializers.GlorotNormal
 initializer_glorot_normal <-
-function (seed = NULL)
+function (seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$GlorotNormal, args)
 }
 
@@ -225,6 +227,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inheritParams initializer_variance_scaling
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -234,9 +237,10 @@ function (seed = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/GlorotUniform>
 #' @tether keras.initializers.GlorotUniform
 initializer_glorot_uniform <-
-function (seed = NULL)
+function (seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$GlorotUniform, args)
 }
 
@@ -274,6 +278,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inheritParams initializer_variance_scaling
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -283,9 +288,10 @@ function (seed = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeNormal>
 #' @tether keras.initializers.HeNormal
 initializer_he_normal <-
-function (seed = NULL)
+function (seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$HeNormal, args)
 }
 
@@ -323,6 +329,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inheritParams initializer_variance_scaling
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -332,9 +339,10 @@ function (seed = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/HeUniform>
 #' @tether keras.initializers.HeUniform
 initializer_he_uniform <-
-function (seed = NULL)
+function (seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$HeUniform, args)
 }
 
@@ -376,6 +384,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inheritParams initializer_variance_scaling
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -384,9 +393,10 @@ function (seed = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunNormal>
 #' @tether keras.initializers.LecunNormal
 initializer_lecun_normal <-
-function (seed = NULL)
+function (seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$LecunNormal, args)
 }
 
@@ -424,6 +434,7 @@ function (seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @inheritParams initializer_variance_scaling
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -432,9 +443,10 @@ function (seed = NULL)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/initializers/LecunUniform>
 #' @tether keras.initializers.LecunUniform
 initializer_lecun_uniform <-
-function (seed = NULL)
+function (seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$LecunUniform, args)
 }
 
@@ -700,6 +712,14 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 #' across multiple calls, use as seed an instance
 #' of `random_seed_generator()`.
 #'
+#' @param input_axes
+#' Optional integer vector. The 1-based axes of the input tensor to use when
+#' computing the fan-in.
+#'
+#' @param output_axes
+#' Optional integer vector. The 1-based axes of the output tensor to use when
+#' computing the fan-out.
+#'
 #' @inherit initializer_constant return
 #' @export
 #' @family random initializers
@@ -710,9 +730,10 @@ function (mean = 0, stddev = 0.05, seed = NULL)
 #' @tether keras.initializers.VarianceScaling
 initializer_variance_scaling <-
 function (scale = 1, mode = "fan_in", distribution = "truncated_normal",
-    seed = NULL)
+    seed = NULL, input_axes = NULL, output_axes = NULL)
 {
-    args <- capture_args(list(seed = as_integer))
+    args <- capture_args(list(seed = as_integer, input_axes = as_axis,
+        output_axes = as_axis))
     do.call(keras$initializers$VarianceScaling, args)
 }
 

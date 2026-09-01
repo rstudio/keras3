@@ -34,6 +34,8 @@ E.g. \verb{(160, 160, 3)} would be one valid value.}
 \item{alpha}{controls the width of the network. This is known as the
 depth multiplier in the MobileNetV3 paper, but the name is kept for
 consistency with MobileNetV1 in Keras.
+When \code{weights = "imagenet"}, \code{alpha} can be \code{0.75} or \code{1} for
+non-minimalistic models, and must be \code{1} for minimalistic models.
 \itemize{
 \item If \code{alpha < 1.0}, proportionally decreases the number
 of filters in each layer.

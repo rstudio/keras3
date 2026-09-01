@@ -16,6 +16,7 @@ text_dataset_from_directory(
   validation_split = NULL,
   subset = NULL,
   follow_links = FALSE,
+  format = "tf",
   verbose = TRUE
 )
 }
@@ -77,11 +78,21 @@ When \code{subset="both"}, the utility returns a tuple of two datasets
 \item{follow_links}{Whether to visits subdirectories pointed to by symlinks.
 Defaults to \code{FALSE}.}
 
+\item{format}{Format of the returned object. Defaults to \code{"tf"}. Available
+options are:
+\itemize{
+\item \code{"tf"}: returns a \code{tf.data.Dataset} object. Requires TensorFlow to be
+installed.
+\item \code{"grain"}: returns a \code{grain.IterDataset} object. Requires Grain to be
+installed.
+}}
+
 \item{verbose}{Whether to display number information on classes and
 number of files found. Defaults to \code{TRUE}.}
 }
 \value{
-A \code{tf.data.Dataset} object.
+A \code{tf.data.Dataset} object when \code{format = "tf"}, or a
+\code{grain.IterDataset} when \code{format = "grain"}.
 \itemize{
 \item If \code{label_mode} is \code{NULL}, it yields \code{string} tensors of shape
 \verb{(batch_size,)}, containing the contents of a batch of text files.
@@ -118,6 +129,9 @@ texts from the subdirectories \code{class_a} and \code{class_b}, together with l
 0 and 1 (0 corresponding to \code{class_a} and 1 corresponding to \code{class_b}).
 
 Only \code{.txt} files are supported at this time.
+
+By default this returns a \code{tf.data.Dataset}. Set \code{format = "grain"} to
+return a framework-agnostic Grain dataset instead.
 }
 \seealso{
 \itemize{

@@ -1,7 +1,7 @@
 Help on class HeUniform in module keras.src.initializers.random_initializers:
 
 class HeUniform(VarianceScaling)
- |  HeUniform(seed=None)
+ |  HeUniform(seed=None, input_axes=None, output_axes=None)
  |
  |  He uniform variance scaling initializer.
  |
@@ -42,7 +42,12 @@ class HeUniform(VarianceScaling)
  |
  |  Methods defined here:
  |
- |  __init__(self, seed=None)
+ |  __init__(
+ |    self,
+ |    seed=None,
+ |    input_axes=None,
+ |    output_axes=None
+ |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
  |  get_config(self)

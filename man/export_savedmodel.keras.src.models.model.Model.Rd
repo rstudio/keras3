@@ -19,34 +19,48 @@
 \item{export_dir_base}{string, file path where to save
 the artifact.}
 
-\item{...}{Additional keyword arguments:
+\item{...}{Additional backend- or format-specific export options:
 \itemize{
-\item Specific to the JAX backend and \code{format="tf_saved_model"}:
-\itemize{
-\item \code{is_static}: Optional \code{bool}. Indicates whether \code{fn} is
-static. Set to \code{FALSE} if \code{fn} involves state updates
-(e.g., RNG seeds and counters).
-\item \code{jax2tf_kwargs}: Optional \code{dict}. Arguments for
-\code{jax2tf.convert}. See the documentation for
-\href{https://github.com/jax-ml/jax/blob/main/jax/experimental/jax2tf/README.md}{\code{jax2tf.convert}}.
-If \code{native_serialization} and \code{polymorphic_shapes} are
-not provided, they will be automatically computed.
-}
+\item \code{is_static}: Optional boolean specific to the JAX backend and
+\code{format = "tf_saved_model"}. Indicates whether \code{fn} is static. Set to
+\code{FALSE} if \code{fn} involves state updates, such as RNG seeds and counters.
+\item \code{jax2tf_kwargs}: Optional dictionary specific to the JAX backend and
+\code{format = "tf_saved_model"}. Arguments for
+\href{https://github.com/google/jax/blob/main/jax/experimental/jax2tf/README.md}{\code{jax2tf.convert}}.
+If \code{native_serialization} and \code{polymorphic_shapes} are not provided, they
+are computed automatically.
+\item \code{opset_version}: Optional integer specific to \code{format = "onnx"} that
+specifies the ONNX opset version.
+\item LiteRT-specific options. With the TensorFlow backend these are passed to
+the TensorFlow Lite converter and include \code{optimizations},
+\code{representative_dataset}, \code{experimental_new_quantizer},
+\code{allow_custom_ops}, and \code{enable_select_tf_ops}. With the PyTorch backend,
+options include \code{optimizations} and installed \code{litert_torch.convert()}
+keyword arguments such as \code{strict_export}, \code{dynamic_shapes},
+\code{lightweight_conversion}, \code{enable_x64}, \code{runtime_constant_folding}, and
+\code{quant_config}.
+\item PyTorch export options specific to \code{format = "torch"}, passed to
+\code{torch.export.export}, including \code{strict}, \code{dynamic_shapes},
+\code{prefer_deferred_runtime_asserts_over_guards}, and
+\code{preserve_module_call_signature}.
 }}
 
 \item{format}{string. The export format. Supported values:
-\code{"tf_saved_model"} and \code{"onnx"}.  Defaults to
-\code{"tf_saved_model"}.}
+\code{"tf_saved_model"}, \code{"onnx"}, \code{"openvino"}, \code{"litert"}, and \code{"torch"}.
+Defaults to \code{"tf_saved_model"}.}
 
-\item{verbose}{Bool. Whether to print all the variables of the exported model. Defaults
-to \code{NULL}, which uses the default value set by different
-backends and formats.}
+\item{verbose}{Bool. Whether to print a message during export. Defaults to \code{NULL}, which
+uses the default value set by different backends and formats.}
 
 \item{input_signature}{Optional. Specifies the shape and dtype of the
 model inputs. Can be a structure of \code{keras.InputSpec},
 \code{tf.TensorSpec}, \code{backend.KerasTensor}, or backend tensor. If
 not provided, it will be automatically computed. Defaults to
-\code{NULL}.}
+\code{NULL}. With \code{format = "litert"} and the PyTorch backend, dynamic input
+shapes are not supported. Any dynamic dimensions are automatically replaced
+with \code{1}, which may cause runtime failures for other shapes. Explicitly pass
+a fixed static \code{input_signature} matching the maximum runtime shape and pad
+inputs to that shape at runtime.}
 }
 \value{
 This is called primarily for the side effect of exporting \code{object}.
@@ -54,15 +68,10 @@ The first argument, \code{object} is also returned, invisibly, to enable usage
 with the pipe.
 }
 \description{
-(e.g. via TF-Serving).
-
-\strong{Note:} This can currently only be used with
-the TensorFlow or JAX backends.
-
-This method lets you export a model to a lightweight SavedModel artifact
-that contains the model's forward pass only (its \code{call()} method)
-and can be served via e.g. TF-Serving. The forward pass is registered
-under the name \code{serve()} (see example below).
+This method lets you export a model to a lightweight artifact that contains
+the model's forward pass only (its \code{call()} method). For TensorFlow
+SavedModel artifacts, the forward pass is registered under the name
+\code{serve()} and can be served via, for example, TF-Serving.
 
 The original code of the model (including any custom layers you may
 have used) is \emph{no longer} necessary to reload the artifact -- it is
@@ -72,7 +81,7 @@ entirely standalone.
 and Torch backends.
 
 \strong{Note:} Be aware that the exported artifact may contain information
-from the local file system when using \code{format="onnx"}, \code{verbose=TRUE}
+from the local file system when using \code{format = "onnx"}, \code{verbose = TRUE}
 and Torch backend.
 }
 \section{Examples}{
@@ -98,6 +107,31 @@ ort_session <- onnxruntime$InferenceSession("path/to/location")
 input_data <- list(....)
 names(input_data) <- sapply(ort_session$get_inputs(), `[[`, "name")
 predictions <- ort_session$run(NULL, input_data)
+}\if{html}{\out{</div>}}
+
+Here's how to export a LiteRT (TFLite) artifact for inference.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model |> export_savedmodel("path/to/model.tflite", format = "litert")
+
+tf <- reticulate::import("tensorflow")
+interpreter <- tf$lite$Interpreter(model_path = "path/to/model.tflite")
+interpreter$allocate_tensors()
+interpreter$set_tensor(interpreter$get_input_details()[[1]]$index, input_data)
+interpreter$invoke()
+output_data <- interpreter$get_tensor(
+  interpreter$get_output_details()[[1]]$index
+)
+}\if{html}{\out{</div>}}
+
+Here's how to export a PyTorch \code{ExportedProgram} for inference.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Export the model as a PyTorch ExportedProgram
+model |> export_savedmodel("path/to/model.pt2", format = "torch")
+
+# Load the artifact in a different process/environment
+torch <- reticulate::import("torch")
+loaded_program <- torch$export$load("path/to/model.pt2")
+predictions <- loaded_program$module()(input_tensor)
 }\if{html}{\out{</div>}}
 }
 

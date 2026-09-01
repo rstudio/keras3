@@ -1,7 +1,7 @@
 Help on class LossScaleOptimizer in module keras.src.optimizers.loss_scale_optimizer:
 
 class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
- |  LossScaleOptimizer(inner_optimizer, initial_scale=32768.0, dynamic_growth_steps=2000, **kwargs)
+ |  LossScaleOptimizer(inner_optimizer, initial_scale=32768.0, dynamic_growth_steps=2000, name=None, **kwargs)
  |
  |  An optimizer that dynamically scales the loss to prevent underflow.
  |
@@ -97,6 +97,7 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |    inner_optimizer,
  |    initial_scale=32768.0,
  |    dynamic_growth_steps=2000,
+ |    name=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
@@ -154,6 +155,19 @@ class LossScaleOptimizer(keras.src.optimizers.optimizer.Optimizer)
  |    grads,
  |    trainable_variables
  |  )
+ |      Stateless version of `apply` that returns modified variables.
+ |
+ |      Args:
+ |          optimizer_variables: list of tensors containing the current values
+ |              for the optimizer variables. These are native tensors and not
+ |              `keras.Variable`s.
+ |          grads: list of gradients to apply.
+ |          trainable_variables: list of tensors containing the current values
+ |              for the model variables. These are native tensors and not
+ |              `keras.Variable`s.
+ |
+ |      Returns: A tuple containing two list of tensors, the updated
+ |          `trainable_variables` and the updated `optimizer_variables`.
  |
  |  ----------------------------------------------------------------------
  |  Class methods defined here:

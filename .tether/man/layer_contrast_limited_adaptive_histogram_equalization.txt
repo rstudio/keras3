@@ -1,0 +1,109 @@
+Help on class ContrastLimitedAdaptiveHistogramEqualization in module keras.src.layers.preprocessing.image_preprocessing.clahe:
+
+class ContrastLimitedAdaptiveHistogramEqualization(keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer)
+ |  ContrastLimitedAdaptiveHistogramEqualization(value_range=(0, 255), clip_limit=4.0, tile_grid_size=(8, 8), data_format=None, **kwargs)
+ |
+ |  Contrast Limited Adaptive Histogram Equalization (CLAHE) layer.
+ |
+ |  CLAHE is a variant of Adaptive Histogram Equalization (AHE) which takes care
+ |  of over-amplification of the contrast. It operates on small regions in the
+ |  image, called tiles, rather than the entire image. The neighboring tiles are
+ |  then combined using bilinear interpolation to remove the artificial
+ |  boundaries. This algorithm can be applied to improve the contrast of an
+ |  image.
+ |
+ |  **Note:** This layer computes histograms using `self.backend.nn.one_hot`,
+ |  which can be highly memory-intensive. For large batch sizes or
+ |  high-resolution images, it may lead to high memory consumption or
+ |  out-of-memory errors.
+ |
+ |  Args:
+ |      value_range: Optional list/tuple of 2 floats specifying the lower
+ |          and upper limits of the input data values. Defaults to `(0, 255)`.
+ |      clip_limit: Float. Limits the noise amplification in near-constant
+ |          regions. Defaults to 4.0.
+ |      tile_grid_size: Tuple of 2 integers `(height, width)`.
+ |          Specifies the number of tiles to divide the image into.
+ |          Defaults to `(8, 8)`.
+ |      data_format: String, either `"channels_last"` or `"channels_first"`.
+ |          The ordering of the dimensions in the inputs. `"channels_last"`
+ |          corresponds to inputs with shape `(batch, height, width, channels)`
+ |          while `"channels_first"` corresponds to inputs with shape
+ |          `(batch, channels, height, width)`. It defaults to the
+ |          `image_data_format` value found in your Keras config file at
+ |          `~/.keras/keras.json`. If you never set it, then it will be
+ |          `"channels_last"`.
+ |
+ |  Input shape:
+ |      3D (unbatched) or 4D (batched) tensor with shape:
+ |      `(..., height, width, channels)`, in `"channels_last"` format,
+ |      or `(..., channels, height, width)`, in `"channels_first"` format.
+ |
+ |  Output shape:
+ |      3D (unbatched) or 4D (batched) tensor with shape:
+ |      `(..., height, width, channels)`,
+ |      or `(..., channels, height, width)`,
+ |      in `"channels_first"` format.
+ |
+ |  Example:
+ |
+ |  ```python
+ |  import keras
+ |  import numpy as np
+ |
+ |  # Create a CLAHE layer with default parameters
+ |  clahe = keras.layers.ContrastLimitedAdaptiveHistogramEqualization()
+ |
+ |  # Apply CLAHE to an image
+ |  # image values should be in the range[0, 255] by default
+ |  input_image = np.random.randint(0, 256, (1, 256, 256, 3))
+ |  output_image = clahe(input_image)
+ |
+ |  # For normalized images[0, 1]
+ |  clahe_normalized=keras.layers.ContrastLimitedAdaptiveHistogramEqualization(
+ |      value_range=(0.0, 1.0)
+ |  )
+ |  norm_image = np.random.rand(1, 256, 256, 3)
+ |  output_norm = clahe_normalized(norm_image)
+ |  ```
+ |
+ |  Method resolution order:
+ |      ContrastLimitedAdaptiveHistogramEqualization
+ |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
+ |      keras.src.layers.layer.Layer
+ |      keras.src.backend.tensorflow.layer.TFLayer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.ops.operation.Operation
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    value_range=(0, 255),
+ |    clip_limit=4.0,
+ |    tile_grid_size=(8, 8),
+ |    data_format=None,
+ |    **kwargs
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  compute_output_shape(self, input_shape)
+ |
+ |  get_config(self)
+ |      Returns the config of the object.
+ |
+ |      An object config is a Python dictionary (serializable)
+ |      containing the information needed to re-instantiate it.
+ |
+ |  transform_images(
+ |    self,
+ |    images,
+ |    transformation=None,
+ |    training=True
+ |  )
+ |

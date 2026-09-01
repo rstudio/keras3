@@ -9,7 +9,8 @@ split_dataset(
   left_size = NULL,
   right_size = NULL,
   shuffle = FALSE,
-  seed = NULL
+  seed = NULL,
+  preferred_backend = NULL
 )
 }
 \arguments{
@@ -32,10 +33,18 @@ Defaults to \code{NULL}.}
 \item{shuffle}{Boolean, whether to shuffle the data before splitting it.}
 
 \item{seed}{A random seed for shuffling.}
+
+\item{preferred_backend}{Optional string specifying which backend to use,
+such as \code{"tensorflow"} or \code{"torch"}. If \code{NULL}, the backend is inferred
+from \code{dataset}: TensorFlow is used for a \code{tf.data.Dataset}, Torch is used
+for a \code{torch.utils.data.Dataset}, and the current Keras backend is used
+for an R list or array. Defaults to \code{NULL}.}
 }
 \value{
-A list of two \code{tf$data$Dataset} objects:
-the left and right splits.
+A list of two dataset objects, the left and right splits. The exact type
+depends on \code{preferred_backend} and on the input dataset type. For example,
+the TensorFlow backend returns \code{tf.data.Dataset} objects and the Torch
+backend returns \code{torch.utils.data.Dataset} objects.
 }
 \description{
 Splits a dataset into a left half and a right half (e.g. train / test).

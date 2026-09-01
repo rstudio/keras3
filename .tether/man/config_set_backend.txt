@@ -5,9 +5,22 @@ Reload the backend (and the Keras package).
 
 Example:
 
-```python
-keras.config.set_backend("jax")
-```
+>>> import os
+>>> os.environ["KERAS_BACKEND"] = "tensorflow"
+>>>
+>>> import keras
+>>> from keras import ops
+>>> type(ops.ones(()))
+<class 'tensorflow.python.framework.ops.EagerTensor'>
+>>>
+>>> keras.config.set_backend("jax")
+UserWarning: Using `keras.config.set_backend` is dangerous...
+>>> del keras, ops
+>>>
+>>> import keras
+>>> from keras import ops
+>>> type(ops.ones(()))
+<class 'jaxlib.xla_extension.ArrayImpl'>
 
 ⚠️ WARNING ⚠️: Using this function is dangerous and should be done
 carefully. Changing the backend will **NOT** convert
@@ -19,5 +32,5 @@ before calling `set_backend()`.
 
 This includes any function or class instance that uses any Keras
 functionality. All such code needs to be re-executed after calling
-`set_backend()`.
+`set_backend()` and re-importing all imported `keras` modules.
 

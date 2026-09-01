@@ -10,7 +10,7 @@
 #' inputs. For integer inputs where the total number of tokens is not known,
 #' use `layer_integer_lookup()` instead.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Examples
@@ -139,7 +139,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' If the input height/width is even and the target height/width is odd (or
 #' inversely), the input image is left-padded by 1 pixel.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param height
@@ -188,6 +188,9 @@ function (object, height, width, data_format = NULL, ...)
 #' Desired output number of bounding boxes.
 #'
 #' @param fill_value
+#' Deprecated alias for `padding_value`.
+#'
+#' @param padding_value
 #' The fill value of the `boxes` and `labels` in
 #' `bounding_boxes`. Defaults to `-1`.
 #'
@@ -204,11 +207,13 @@ function (object, height, width, data_format = NULL, ...)
 #' @family layers
 #' @tether keras.layers.MaxNumBoundingBoxes
 layer_max_num_bounding_boxes <-
-function (object, max_number, fill_value = -1L, ...)
+function (object, max_number, fill_value = -1L, ..., padding_value = NULL)
 {
+    if (!is.null(padding_value))
+        fill_value <- padding_value
     args <- capture_args(list(fill_value = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
-        ignore = "object")
+        ignore = c("object", "padding_value"), force = "fill_value")
     create_layer(keras$layers$MaxNumBoundingBoxes, object, args)
 }
 
@@ -220,7 +225,7 @@ function (object, max_number, fill_value = -1L, ...)
 #' contiguous ranges and output an integer index indicating which range each
 #' element was placed in.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -882,6 +887,23 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' backend. If `TRUE`, returns a `SparseTensor`
 #' instead of a dense `Tensor`. Defaults to `FALSE`.
 #'
+#' @param oov_method
+#' Only relevant when `num_oov_indices > 1`. Controls how OOV tokens are
+#' assigned to OOV buckets:
+#' - `"floormod"` (the default) uses `token %% num_oov_indices`. This preserves
+#'   backwards compatibility, but can produce severe bucket imbalance when
+#'   input IDs share a common factor with `num_oov_indices`, such as all-even
+#'   IDs with an even bucket count.
+#' - `"farmhash"` applies FarmHash64, which distributes OOV tokens uniformly
+#'   regardless of the arithmetic structure of the input IDs.
+#' This parameter is ignored for string inputs, which always use FarmHash64.
+#'
+#' @param salt
+#' Only valid when `oov_method = "farmhash"`. If supplied, OOV bucket
+#' assignment uses SipHash64, with these values as an additional input (a
+#' "salt" in cryptography). May be a pair of integers, or a single integer
+#' used for both key components. If `NULL` (the default), FarmHash64 is used.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -905,11 +927,13 @@ layer_integer_lookup <-
 function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
     oov_token = -1L, vocabulary = NULL, vocabulary_dtype = "int64",
     idf_weights = NULL, invert = FALSE, output_mode = "int",
-    sparse = FALSE, pad_to_max_tokens = FALSE, name = NULL, ...)
+    sparse = FALSE, pad_to_max_tokens = FALSE, oov_method = "floormod",
+    salt = NULL, name = NULL, ...)
 {
     args <- capture_args(list(num_oov_indices = as_integer,
         mask_token = as_integer, oov_token = as_integer, vocabulary = as_integer,
-        invert = as_integer, output_mode = as_integer, input_shape = normalize_shape,
+        invert = as_integer, output_mode = as_integer, salt = as_integer,
+        input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$IntegerLookup, object, args)
@@ -993,13 +1017,15 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' The mean value(s) to use during normalization. The passed value(s)
 #' will be broadcast to the shape of the kept axes above;
 #' if the value(s) cannot be broadcast, an error will be raised when
-#' this layer's `build()` method is called.
+#' this layer's `build()` method is called. `mean` and `variance` must be
+#' specified together.
 #'
 #' @param variance
 #' The variance value(s) to use during normalization. The passed
 #' value(s) will be broadcast to the shape of the kept axes above;
 #' if the value(s) cannot be broadcast, an error will be raised when
-#' this layer's `build()` method is called.
+#' this layer's `build()` method is called. `mean` and `variance` must be
+#' specified together.
 #'
 #' @param invert
 #' If `TRUE`, this layer will apply the inverse transformation
@@ -1040,7 +1066,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' images. At inference time, the output will be identical to the input.
 #' Call the layer with `training=TRUE` to adjust the brightness of the input.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Inputs
@@ -1132,7 +1158,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' in integer or floating point dtype.
 #' By default, the layer will output floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1210,7 +1236,7 @@ function (object, factor, value_range = c(0L, 255L), seed = NULL, ...)
 #' of integer or floating point dtype. By default, the layer will output
 #' floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1272,7 +1298,7 @@ function (object, height, width, seed = NULL, data_format = NULL,
 #' of integer or floating point dtype.
 #' By default, the layer will output floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1335,7 +1361,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' of integer or floating point dtype.
 #' By default, the layer will output floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -1446,7 +1472,7 @@ function (object, factor, fill_mode = "reflect", interpolation = "bilinear",
 #'     or `(..., channels, target_height, target_width)`,
 #'     in `"channels_first"` format.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param height_factor
@@ -1559,7 +1585,7 @@ function (object, height_factor, width_factor, fill_mode = "reflect",
 #'     or `(..., channels, target_height, target_width)`,
 #'     in `"channels_first"` format.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Examples
@@ -1677,7 +1703,7 @@ function (object, height_factor, width_factor = NULL, fill_mode = "reflect",
 #' of integer or floating point dtype, and by default the layer will output
 #' floats.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param scale
@@ -1734,7 +1760,7 @@ function (object, scale, offset = 0, ...)
 #'     or `(..., channels, target_height, target_width)`,
 #'     in `"channels_first"` format.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' @param height
@@ -1815,6 +1841,9 @@ function (object, height, width, interpolation = "bilinear",
 #' Performs the auto-contrast operation on an image.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' Auto contrast stretches the values of an image across the entire available
 #' `value_range`. This makes differences between pixels more obvious. An
 #' example of this is if an image only has values `[0, 1]` out of the range
@@ -1857,6 +1886,9 @@ function (object, value_range = tuple(0L, 255L), ...)
 #' Applies `(max_value - pixel + min_value)` for each pixel in the image.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' When created without `threshold` parameter, the layer performs solarization
 #' to all values. When created with specified `threshold` the layer only
 #' augments pixels that are above the `threshold` value.
@@ -1937,7 +1969,7 @@ function (object, addition_factor = 0, threshold_factor = 0,
 #' equalization independently on each color channel. At inference time,
 #' the equalization is consistently applied.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' ## Input Shape
@@ -2005,9 +2037,78 @@ function (object, value_range = list(0L, 255L), bins = 256L,
     create_layer(keras$layers$Equalization, object, args)
 }
 
+
+#' Contrast Limited Adaptive Histogram Equalization
+#'
+#' Contrast Limited Adaptive Histogram Equalization (CLAHE) is a variant of
+#' adaptive histogram equalization that avoids over-amplifying contrast. It
+#' operates on small image regions called tiles rather than on the entire
+#' image, then combines neighboring tiles with bilinear interpolation to remove
+#' artificial boundaries. This can improve image contrast.
+#'
+#' **Note:** This layer computes histograms using backend one-hot operations,
+#' which can be highly memory intensive. Large batches or high-resolution
+#' images can lead to high memory consumption or out-of-memory errors.
+#'
+#' ## Input shape
+#'
+#' A 3D unbatched or 4D batched tensor with shape
+#' `(..., height, width, channels)` when `data_format = "channels_last"`, or
+#' `(..., channels, height, width)` when `data_format = "channels_first"`.
+#'
+#' ## Output shape
+#'
+#' A tensor with the same rank and shape as the input.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' image <- op_reshape(op_arange(16, dtype = "float32"), c(1, 4, 4, 1))
+#' output <- image |>
+#'   layer_contrast_limited_adaptive_histogram_equalization(
+#'     value_range = c(0, 15),
+#'     tile_grid_size = c(2, 2)
+#'   )
+#' shape(output)
+#' ```
+#'
+#' @param value_range Two numbers giving the lower and upper limits of input
+#'   values. Defaults to `c(0, 255)`.
+#' @param clip_limit Number that limits noise amplification in near-constant
+#'   regions. Defaults to 4.
+#' @param tile_grid_size Two integers, `(height, width)`, giving the number of
+#'   tiles into which to divide the image. Defaults to `c(8, 8)`.
+#' @inheritParams layer_equalization
+#' @inherit layer_dense return
+#' @export
+#' @family image preprocessing layers
+#' @family preprocessing layers
+#' @family layers
+#' @tether keras.layers.ContrastLimitedAdaptiveHistogramEqualization
+layer_contrast_limited_adaptive_histogram_equalization <-
+function(object, value_range = c(0L, 255L), clip_limit = 4,
+         tile_grid_size = c(8L, 8L), data_format = NULL, ...)
+{
+  args <- capture_args(list(
+    value_range = as_tuple,
+    tile_grid_size = as_integer_tuple,
+    input_shape = normalize_shape,
+    batch_size = as_integer,
+    batch_input_shape = normalize_shape
+  ), ignore = "object")
+  create_layer(
+    keras$layers$ContrastLimitedAdaptiveHistogramEqualization,
+    object,
+    args
+  )
+}
+
 #' MixUp implements the MixUp data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #'
 #' # References
 #' - [MixUp paper](https://arxiv.org/abs/1710.09412).
@@ -2057,6 +2158,9 @@ function (object, alpha = 0.2, data_format = NULL, seed = NULL,
 #' RandAugment performs the Rand Augment operation on input images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer can be thought of as an all-in-one image augmentation layer. The
 #' policy implemented by this layer has been benchmarked extensively and is
 #' effective on a wide variety of datasets.
@@ -2111,6 +2215,9 @@ function (object, value_range = list(0L, 255L), num_ops = 2L,
 #' Randomly performs the color degeneration operation on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' The sharpness operation first converts an image to gray scale, then back to
 #' color. It then takes a weighted average between original image and the
 #' degenerated image. This makes colors appear more dull.
@@ -2159,11 +2266,14 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
         args)
 }
 
-#' Randomly apply brightness, contrast, saturation
+#' Randomly apply brightness, contrast, saturation, and hue.
 #'
 #' @description
-#' and hue image processing operation sequentially and randomly on the
+#' Applies these image processing operations sequentially and randomly to the
 #' input.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
 #'
 #' @param value_range
 #' the range of values the incoming images will have.
@@ -2254,7 +2364,7 @@ function (object, value_range = list(0L, 255L), brightness_factor = NULL,
 #' image using standard RGB to grayscale conversion coefficients. Images
 #' that are not selected for conversion remain unchanged.
 #'
-#' **Note:** This layer is safe to use inside a `tf.data` pipeline
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
 #' (independently of which backend you're using).
 #'
 #' # Input Shape
@@ -2308,6 +2418,9 @@ function (object, factor = 0.5, data_format = NULL, seed = NULL,
 #' Randomly adjusts the hue on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer will randomly increase/reduce the hue for the input RGB
 #' images.
 #'
@@ -2367,6 +2480,9 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Reduces the number of bits for each color channel.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #'
 #' # References
 #' - [AutoAugment: Learning Augmentation Policies from Data](https://arxiv.org/abs/1805.09501)
@@ -2410,6 +2526,9 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Randomly adjusts the saturation on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer will randomly increase/reduce the saturation for the input RGB
 #' images.
 #'
@@ -2467,6 +2586,9 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Randomly performs the sharpness operation on given images.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' The sharpness operation first performs a blur, then blends between the
 #' original image and the processed image. This operation adjusts the clarity
 #' of the edges in an image, ranging from blurred to enhanced sharpness.
@@ -2514,16 +2636,17 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
     create_layer(keras$layers$RandomSharpness, object, args)
 }
 
-#' A preprocessing layer that randomly applies shear transformations
+#' A preprocessing layer that randomly applies shear transformations to images.
 #'
 #' @description
-#' images.
-#'
 #' This layer shears the input images along the x-axis and/or y-axis by a
 #' randomly selected factor within the specified range. The shear
 #' transformation is applied to each image independently in a batch. Empty
 #' regions created during the transformation are filled according to the
 #' `fill_mode` and `fill_value` parameters.
+#'
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
 #'
 #' @param x_factor
 #' A tuple of two floats. For each augmented image, a value
@@ -2597,6 +2720,9 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
 #' Random Erasing data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' Random Erasing is a data augmentation method where random patches of
 #' an image are erased (replaced by a constant value or noise)
 #' during training to improve generalization.
@@ -2663,6 +2789,9 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
 #' A preprocessing layer that applies random elastic transformations.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer distorts input images by applying elastic deformations,
 #' simulating a physically realistic transformation. The magnitude of the
 #' distortion is controlled by the `scale` parameter, while the `factor`
@@ -2751,6 +2880,9 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' Applies random Gaussian blur to images for data augmentation.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer performs a Gaussian blur operation on input images with a
 #' randomly selected degree of blurring, controlled by the `factor` and
 #' `sigma` arguments.
@@ -2809,6 +2941,9 @@ function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
 #' Preprocessing layer for random inversion of image colors.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer randomly inverts the colors of input images with a specified
 #' probability range. When applied, each image has a chance of having its
 #' colors inverted, where the pixel values are transformed to their
@@ -2859,6 +2994,9 @@ function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
 #' A preprocessing layer that applies random perspective transformations.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer distorts the perspective of input images by shifting their
 #' corner points, simulating a 3D-like transformation. The amount of distortion
 #' is controlled by the `factor` and `scale` parameters.
@@ -2917,6 +3055,9 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' Performs the AugMix data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' AugMix aims to produce images with variety while preserving the image
 #' semantics and local statistics. During the augmentation process,
 #' the same augmentation is applied across all images in the batch
@@ -2991,6 +3132,9 @@ function (object, value_range = c(0L, 255L), num_chains = 3L,
 #' CutMix data augmentation technique.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' CutMix is a data augmentation method where patches are cut and pasted
 #' between two images in the dataset, while the labels are also mixed
 #' proportionally to the area of the patches.
@@ -3331,10 +3475,6 @@ function (layers, name = NULL)
 #' in the vocabulary. If this argument is set,
 #' there is no need to `adapt()` the layer.
 #'
-#' @param vocabulary_dtype
-#' The dtype of the vocabulary terms, for example
-#' `"int64"` or `"int32"`. Defaults to `"int64"`.
-#'
 #' @param idf_weights
 #' Only valid when `output_mode` is `"tf_idf"`.
 #' A list, list, 1D NumPy array, or 1D tensor or the same length
@@ -3394,6 +3534,12 @@ function (layers, name = NULL)
 #' Optional. The text encoding to use to interpret the input
 #' strings. Defaults to `"utf-8"`.
 #'
+#' @param salt
+#' Only valid when `num_oov_indices > 1`. If supplied, OOV bucket assignment
+#' uses SipHash64, with these values as an additional input (a "salt" in
+#' cryptography). May be a pair of integers, or a single integer used for both
+#' key components. If `NULL` (the default), FarmHash64 is used.
+#'
 #' @param object
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
@@ -3417,11 +3563,11 @@ layer_string_lookup <-
 function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
     oov_token = "[UNK]", vocabulary = NULL, idf_weights = NULL,
     invert = FALSE, output_mode = "int", pad_to_max_tokens = FALSE,
-    sparse = FALSE, encoding = "utf-8", name = NULL, ..., vocabulary_dtype = NULL)
+    sparse = FALSE, encoding = "utf-8", name = NULL, salt = NULL, ...)
 {
     args <- capture_args(list(num_oov_indices = as_integer,
         mask_token = as_integer, vocabulary = as_integer, invert = as_integer,
-        output_mode = as_integer, input_shape = normalize_shape,
+        output_mode = as_integer, salt = as_integer, input_shape = normalize_shape,
         batch_size = as_integer, batch_input_shape = normalize_shape),
         ignore = "object")
     create_layer(keras$layers$StringLookup, object, args)
@@ -3465,8 +3611,14 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #'    serializables (see [`register_keras_serializable()`]
 #'    for more details).
 #' 2. When using a custom callable for `standardize`, the data received
-#'    by the callable will be exactly as passed to this layer. The callable
-#'    should return a tensor of the same shape as the input.
+#'    by the callable depends on the active Keras backend. With the TensorFlow
+#'    backend, the callable receives a `tf.Tensor` of dtype `string`, so it
+#'    should use `tensorflow::tf$strings` operations. With the JAX, NumPy,
+#'    PyTorch, or OpenVINO backend, the callable receives a NumPy array of
+#'    Unicode strings, so it should use `reticulate::import("numpy")$char` /
+#'    `reticulate::import("numpy")$strings` operations or other vectorized
+#'    string logic. The callable should return data with the same shape as the
+#'    input.
 #' 3. When using a custom callable for `split`, the data received by the
 #'    callable will have the 1st dimension squeezed out - instead of
 #'    `list("string to split", "another string to split")`, the Callable will
@@ -3707,6 +3859,9 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' A preprocessing layer to convert raw audio signals to Mel spectrograms.
 #'
 #' @description
+#' **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+#' independently of the active backend.
+#'
 #' This layer takes `float32`/`float64` single or batched audio signal as
 #' inputs and computes the Mel spectrogram using Short-Time Fourier Transform
 #' and Mel scaling. The input should be a 1D (unbatched) or 2D (batched) tensor
@@ -4062,8 +4217,10 @@ function (object, mode = "log", frame_length = 256L, frame_step = NULL,
 #'
 #' @param object Preprocessing layer object
 #'
-#' @param data The data to train on. It can be passed either as a
-#'   `tf.data.Dataset` or as an R array.
+#' @param data The data to train on. It can be an R array, a backend-native
+#'   eager tensor, a batched `tf.data.Dataset`, a Grain dataset, a
+#'   `keras.utils.PyDataset`, or an iterable of batches such as a list of
+#'   arrays or a generator. Dataset and iterable inputs must be batched.
 #'
 #' @param batch_size Integer or `NULL`. Number of asamples per state update. If
 #'   unspecified, `batch_size` will default to `32`. Do not specify the

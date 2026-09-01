@@ -333,6 +333,15 @@ function (indices, values, shape)
 #' op_scatter_update(inputs, indices, updates)
 #' ```
 #'
+#' Use `reduction = "add"` to accumulate updates at the same index:
+#'
+#' ```{r}
+#' inputs <- op_zeros(c(4))
+#' indices <- rbind(1, 1, 2)
+#' updates <- op_array(c(1, 1, 1), "float32")
+#' op_scatter_update(inputs, indices, updates, reduction = "add")
+#' ```
+#'
 #' @returns
 #' A tensor, has the same shape and dtype as `inputs`.
 #'
@@ -347,6 +356,15 @@ function (indices, values, shape)
 #' @param updates
 #' A tensor, the new values to be put to `inputs` at `indices`.
 #'
+#' @param reduction
+#' Optional string specifying the reduction to apply when multiple updates
+#' target the same index:
+#' - `NULL` (the default): updates replace existing values; the last write wins.
+#' - `"add"`: add updates to existing values.
+#' - `"max"`: keep the maximum of updates and existing values.
+#' - `"min"`: keep the minimum of updates and existing values.
+#' - `"mul"`: multiply updates by existing values.
+#'
 #' @export
 #' @family core ops
 #' @family ops
@@ -355,9 +373,9 @@ function (indices, values, shape)
 #  + <https://www.tensorflow.org/api_docs/python/tf/keras/ops/scatter_update>
 #' @tether keras.ops.scatter_update
 op_scatter_update <-
-function (inputs, indices, updates)
+function (inputs, indices, updates, reduction = NULL)
 {
-    args <- capture_args(list(indices = as_index, updates = as_array))
+    args <- capture_args(list(indices = as_index))
     do.call(ops$scatter_update, args)
 }
 
@@ -1348,6 +1366,64 @@ function (data, segment_ids, num_segments = NULL, sorted = FALSE)
 }
 
 
+#' Compute the minimum of segments in a tensor.
+#'
+#' @param data Input tensor.
+#' @param segment_ids An N-D tensor containing 1-based segment indices for
+#'   elements in `data`. Its dimensions must match the corresponding leading
+#'   dimensions of `data`.
+#' @param num_segments Optional total number of segments. When `NULL`, it is
+#'   inferred from the maximum value in `segment_ids`.
+#' @param sorted Whether `segment_ids` is sorted. Defaults to `FALSE`.
+#'
+#' @returns A tensor containing the minimum value for each segment.
+#'
+#' @examples
+#' data <- op_array(c(1, 2, 10, 20, 100, 200))
+#' segment_ids <- op_array(c(1, 1, 2, 2, 3, 3), "int32")
+#' op_segment_min(data, segment_ids)
+#'
+#' @export
+#' @family math ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/core#segmentmin-function>
+#' @tether keras.ops.segment_min
+op_segment_min <-
+function(data, segment_ids, num_segments = NULL, sorted = FALSE)
+{
+  args <- capture_args(list(segment_ids = as_index, num_segments = as_integer))
+  do.call(ops$segment_min, args)
+}
+
+
+#' Compute the product of segments in a tensor.
+#'
+#' @inheritParams op_segment_min
+#' @param segment_ids A 1-D tensor containing 1-based segment indices for
+#'   elements in `data`. Its length must match the first dimension of `data`.
+#'
+#' @returns A tensor containing the product of values for each segment.
+#'
+#' @examples
+#' data <- op_array(c(1, 2, 10, 20, 100, 200))
+#' segment_ids <- op_array(c(1, 1, 2, 2, 3, 3), "int32")
+#' op_segment_prod(data, segment_ids)
+#'
+#' @export
+#' @family math ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/core#segmentprod-function>
+#' @tether keras.ops.segment_prod
+op_segment_prod <-
+function(data, segment_ids, num_segments = NULL, sorted = FALSE)
+{
+  args <- capture_args(list(segment_ids = as_index, num_segments = as_integer))
+  do.call(ops$segment_prod, args)
+}
+
+
 #' Computes the sum of segments in a tensor.
 #'
 #' @description
@@ -1597,6 +1673,70 @@ py_to_r.tensorflow.python.ops.gen_nn_ops.TopKV2 <- function(x) {
   x <- py_eval("tuple")(x)
   names(x) <- c("values", "indices")
   x
+}
+
+
+#' Adaptive average pooling operation.
+#'
+#' Applies adaptive average pooling that automatically computes the kernel size
+#' and stride needed to produce `output_size`. This is useful when a fixed
+#' output size is required regardless of input size, as in global feature
+#' extraction for models such as ResNet.
+#'
+#' @param inputs A rank-4 input tensor. With `data_format = "channels_last"`,
+#'   the shape is `(batch, height, width, channels)`; with
+#'   `data_format = "channels_first"`, it is `(batch, channels, height, width)`.
+#' @param output_size Integer or integer vector of length two specifying the
+#'   output height and width. A scalar uses the same size for both dimensions.
+#' @param data_format One of `"channels_last"` or `"channels_first"`. `NULL`
+#'   defaults to [`config_image_data_format()`].
+#'
+#' @returns A rank-4 tensor with the requested spatial dimensions.
+#'
+#' @examples
+#' x <- op_ones(c(2, 64, 80, 3))
+#' op_adaptive_average_pool(x, c(7, 7))
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/nn#adaptiveaveragepool-function>
+#' @tether keras.ops.adaptive_average_pool
+op_adaptive_average_pool <-
+function(inputs, output_size, data_format = NULL)
+{
+  args <- capture_args(list(output_size = as_integer))
+  do.call(ops$adaptive_average_pool, args)
+}
+
+
+#' Adaptive max pooling operation.
+#'
+#' Applies adaptive max pooling that automatically computes the kernel size and
+#' stride needed to produce `output_size`. This is useful when a fixed output
+#' size is required regardless of input size, as in global feature extraction
+#' for models such as ResNet.
+#'
+#' @inheritParams op_adaptive_average_pool
+#'
+#' @returns A rank-4 tensor with the requested spatial dimensions.
+#'
+#' @examples
+#' x <- op_ones(c(2, 64, 80, 3))
+#' op_adaptive_max_pool(x, c(7, 7))
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/nn#adaptivemaxpool-function>
+#' @tether keras.ops.adaptive_max_pool
+op_adaptive_max_pool <-
+function(inputs, output_size, data_format = NULL)
+{
+  args <- capture_args(list(output_size = as_integer))
+  do.call(ops$adaptive_max_pool, args)
 }
 
 
@@ -1897,6 +2037,90 @@ function (inputs, kernel, strides = 1L, padding = "valid", output_padding = NULL
     args <- capture_args(list(strides = as_integer, output_padding = as_integer,
         dilation_rate = as_integer))
     do.call(ops$conv_transpose, args)
+}
+
+
+#' Rearrange channels into blocks of spatial data.
+#'
+#' This operation is useful for resizing activations between convolutions while
+#' retaining all data, and for training purely convolutional models.
+#'
+#' Also known as pixel shuffle, it rearranges
+#' `(N, H, W, C * block_size^2)` to
+#' `(N, H * block_size, W * block_size, C)` for channels-last input, or
+#' `(N, C * block_size^2, H, W)` to
+#' `(N, C, H * block_size, W * block_size)` for channels-first input. It is the
+#' inverse of [`op_space_to_depth()`].
+#'
+#' @param x A rank-4 input tensor.
+#' @param block_size Integer spatial block size. The number of channels must be
+#'   divisible by `block_size^2`.
+#' @param data_format `"channels_last"` for input with shape
+#'   `(batch, height, width, channels)` or `"channels_first"` for input with
+#'   shape `(batch, channels, height, width)`. Defaults to `"channels_last"`.
+#'
+#' @returns A tensor with the same dtype as `x`, with shape
+#'   `(N, H * block_size, W * block_size, C %/% block_size^2)` for channels-last
+#'   input or `(N, C %/% block_size^2, H * block_size, W * block_size)` for
+#'   channels-first input.
+#'
+#' @examples
+#' x <- op_reshape(op_arange(16), c(1, 2, 2, 4))
+#' op_depth_to_space(x, block_size = 2)
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/nn#depthtospace-function>
+#' @tether keras.ops.depth_to_space
+op_depth_to_space <-
+function(x, block_size, data_format = "channels_last")
+{
+  args <- capture_args(list(block_size = as_integer))
+  do.call(ops$depth_to_space, args)
+}
+
+
+#' Rearrange blocks of spatial data into channels.
+#'
+#' This operation is useful for resizing activations between convolutions while
+#' retaining all data, and for training purely convolutional models.
+#'
+#' It rearranges `(N, H * block_size, W * block_size, C)` to
+#' `(N, H, W, C * block_size^2)` for channels-last input, or
+#' `(N, C, H * block_size, W * block_size)` to
+#' `(N, C * block_size^2, H, W)` for channels-first input. It is the inverse of
+#' [`op_depth_to_space()`].
+#'
+#' @param x A rank-4 input tensor.
+#' @param block_size Integer spatial block size. The input height and width
+#'   must be divisible by `block_size`.
+#' @param data_format `"channels_last"` for input with shape
+#'   `(batch, height, width, channels)` or `"channels_first"` for input with
+#'   shape `(batch, channels, height, width)`. Defaults to `"channels_last"`.
+#'
+#' @returns A tensor with the same dtype as `x`, with shape
+#'   `(N, H %/% block_size, W %/% block_size, C * block_size^2)` for
+#'   channels-last input or
+#'   `(N, C * block_size^2, H %/% block_size, W %/% block_size)` for
+#'   channels-first input.
+#'
+#' @examples
+#' x <- op_reshape(op_arange(16), c(1, 4, 4, 1))
+#' op_space_to_depth(x, block_size = 2)
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/nn#spacetodepth-function>
+#' @tether keras.ops.space_to_depth
+op_space_to_depth <-
+function(x, block_size, data_format = "channels_last")
+{
+  args <- capture_args(list(block_size = as_integer))
+  do.call(ops$space_to_depth, args)
 }
 
 
@@ -2243,6 +2467,98 @@ function (inputs, pool_size, strides = NULL, padding = "valid",
 {
     args <- capture_args(list(pool_size = as_integer, strides = as_integer))
     do.call(ops$max_pool, args)
+}
+
+
+#' Extract sliding local blocks from a batched image.
+#'
+#' Also known as `im2col`, this extracts flattened patches from a rank-4
+#' channels-first input.
+#'
+#' @param x A tensor of shape `(batch, channels, height, width)`.
+#' @param kernel_size Integer or integer vector of length two specifying the
+#'   sliding window size `(kernel_height, kernel_width)`. A scalar is used for
+#'   both dimensions.
+#' @param dilation Integer or integer vector of length two specifying the
+#'   spacing between kernel points, also known as dilation or atrous
+#'   convolution. Defaults to `1`.
+#' @param padding Integer or integer vector of length two specifying zero
+#'   padding for both spatial dimensions. Defaults to `0`.
+#' @param stride Integer or integer vector of length two specifying the sliding
+#'   window step. Defaults to `1`.
+#'
+#' @returns A tensor of shape `(batch, channels * kernel_height * kernel_width,
+#'   L)`, where `L` is the product of the numbers of patches along the height
+#'   and width dimensions.
+#'
+#' @examples
+#' x <- op_ones(c(1, 2, 4, 4))
+#' op_unfold(x, kernel_size = 2, stride = 2)
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/nn#unfold-function>
+#' @tether keras.ops.unfold
+op_unfold <-
+function(x, kernel_size, dilation = 1L, padding = 0L, stride = 1L)
+{
+  args <- capture_args(list(
+    kernel_size = as_integer,
+    dilation = as_integer,
+    padding = as_integer,
+    stride = as_integer
+  ))
+  do.call(ops$unfold, args)
+}
+
+
+#' Combine sliding local blocks into an image.
+#'
+#' Also known as `col2im`, this reverses [`op_unfold()`] by summing overlapping
+#' patches into a rank-4 channels-first output.
+#'
+#' @param x A tensor of shape `(batch, channels * kernel_height * kernel_width,
+#'   number_of_patches)`.
+#' @param output_size Integer or integer vector of length two specifying the
+#'   output spatial shape `(output_height, output_width)`.
+#' @param kernel_size Integer or integer vector of length two specifying the
+#'   sliding window size `(kernel_height, kernel_width)`. A scalar is used for
+#'   both dimensions.
+#' @param dilation Integer or integer vector of length two specifying the
+#'   spacing between kernel points. Defaults to `1`.
+#' @param padding Integer or integer vector of length two specifying the
+#'   zero-padding that was applied to the input of [`op_unfold()`]. Defaults to
+#'   `0`.
+#' @param stride Integer or integer vector of length two specifying the sliding
+#'   window step. Defaults to `1`.
+#'
+#' @returns A tensor of shape `(batch, channels, output_height, output_width)`.
+#'
+#' @examples
+#' x <- op_ones(c(1, 2, 4, 4))
+#' patches <- op_unfold(x, kernel_size = 2, stride = 2)
+#' op_fold(patches, output_size = c(4, 4), kernel_size = 2, stride = 2)
+#'
+#' @export
+#' @family nn ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/nn#fold-function>
+#' @tether keras.ops.fold
+op_fold <-
+function(x, output_size, kernel_size, dilation = 1L, padding = 0L,
+         stride = 1L)
+{
+  args <- capture_args(list(
+    output_size = as_integer,
+    kernel_size = as_integer,
+    dilation = as_integer,
+    padding = as_integer,
+    stride = as_integer
+  ))
+  do.call(ops$fold, args)
 }
 
 
@@ -4151,6 +4467,12 @@ ops$copy(x)
 #' `"same"` returns an output of length `max(M, N)`.
 #' `"full"` mode returns the convolution at each point of
 #' overlap, with an output length of `N+M-1`.
+#'
+#' @note
+#' Complex-valued inputs are not currently fully supported by the TensorFlow
+#' and PyTorch backends. They are cast to floating-point types and their
+#' imaginary components are discarded. This behavior may change in a future
+#' release; see Keras issue 21617.
 #'
 #' @export
 #' @family numpy ops
@@ -7796,26 +8118,26 @@ ops$hard_swish(x)
 #' a more efficient or numerically stable gradient for a sequence of
 #' operations.
 #'
-#' # Example
+#' # Examples
+#' This backend-agnostic implementation accepts the positional inputs used by
+#' PyTorch as well as the upstream gradient used by all backends.
 #'
-#' Backend-agnostic example.
 #' ```{r}
-#' log1pexp <- op_custom_gradient(\(x) {
+#' log1pexp <- op_custom_gradient(function(x) {
+#'   e <- op_exp(x)
 #'
-#'     e <- op_exp(x)
+#'   grad <- function(..., upstream = NULL) {
+#'     if (is.null(upstream))
+#'       upstream <- list(...)[[1]]
+#'     op_multiply(upstream, 1 - 1 / op_add(1, e))
+#'   }
 #'
-#'     grad <- function(..., upstream = NULL) {
-#'       upstream <- upstream %||% ..1
-#'       op_multiply(upstream, 1.0 - 1.0 / op_add(1, e))
-#'     }
-#'
-#'     tuple(op_log(1 + e), grad)
-#'
+#'   tuple(op_log(1 + e), grad)
 #' })
 #'
-#' if(config_backend() == "tensorflow") {
+#' if (config_backend() == "tensorflow") {
 #'   tf <- tensorflow::tf
-#'   x <- op_convert_to_tensor(100.0)
+#'   x <- op_convert_to_tensor(100)
 #'   with(tf$GradientTape() %as% tape, {
 #'     tape$watch(x)
 #'     y <- log1pexp(x)
@@ -7830,32 +8152,22 @@ ops$hard_swish(x)
 #' gradient is determined by `f(...)[[2]]`.
 #'
 #' @param f
-#' Function `f(...)` that returns a tuple `(output, grad_fn)` where:
-#' - `...` is a sequence of unnamed arguments,
-#'   each a tensor input or nested structure of tensor inputs to the
-#'    function.
-#' - `output` is a (potentially nested structure of) tensor outputs of applying
-#'     operations in forward_fn `f()` to `...`.
-#' - `grad_fn` is a function with the signature `grad_fn(..., upstream)` which
-#'     returns a list of tensors the same size as (flattened) `...`: the
-#'     derivatives of tensors in `output` with respect to the tensors in
-#'     `...`. `upstream` is a tensor or
+#' Function `f(...)` that returns a tuple `(output, grad_fn)`, where:
+#' - `...` is a sequence of tensor inputs or nested structures of tensor inputs.
+#' - `output` is a (nested structure of) tensor outputs of applying
+#'     the operations in `f()` to `...`.
+#' - `grad_fn` has signature `grad_fn(..., upstream)` and returns a tuple of
+#'     tensors the same size as flattened `...`: the derivatives of tensors in
+#'     `output` with respect to the tensors in `...`. `upstream` is a tensor or
 #'     sequence of tensors holding the initial value gradients for each
 #'     tensor in `output`.
 #'
 #' @note
-#'
-#' Note that the `grad` function that returns gradient computation
-#' requires `...` as well as an `upstream` named argument, depending
-#' on the backend being set. With the JAX and TensorFlow backends,
-#' it requires only one argument, whereas it might use the `upstream`
-#' argument in the case of the PyTorch backend.
-#'
-#' When working with TensorFlow/JAX backend, `grad(upstream)`
-#' is sufficient. With PyTorch, the `grad` function requires
-#' `...` as well as `upstream`, e.g. `grad <- \(..., upstream)`.
-#' Follow the example above to use `op_custom_gradient()` in
-#' a way that is compatible with all backends.
+#' The gradient function's signature depends on the backend. With TensorFlow
+#' and JAX, `grad(upstream)` is sufficient. With PyTorch, the gradient function
+#' may also receive the original positional inputs, so define `grad` with `...`
+#' and `upstream` formals when they are required. The backend-agnostic example
+#' above accepts both calling conventions.
 #'
 #' @export
 #' @family core ops
@@ -7866,6 +8178,40 @@ ops$hard_swish(x)
 op_custom_gradient <-
 function (f)
 ops$custom_gradient(f)
+
+
+#' Compute a forward-mode Jacobian-vector product.
+#'
+#' @param fun Function to differentiate. Its arguments and return value may be
+#'   tensors, scalars, or nested containers of tensors or scalars.
+#' @param primals List of primal argument values at which to evaluate the
+#'   Jacobian of `fun`. Its length must equal the number of positional
+#'   parameters of `fun`.
+#' @param tangents List of tangent values with the same nested structure and
+#'   tensor shapes as `primals`.
+#' @param has_aux Whether `fun` returns a pair whose first element is the
+#'   mathematical output to differentiate and whose second element is
+#'   auxiliary data. Defaults to `FALSE`.
+#'
+#' @returns If `has_aux = FALSE`, a list containing `fun` evaluated at
+#'   `primals` and its Jacobian-vector product evaluated with `tangents`. The
+#'   product has the same nested structure and tensor shapes as the output of
+#'   `fun`. If `has_aux = TRUE`, the auxiliary data is returned as a third
+#'   element.
+#'
+#' @examples
+#' x <- op_convert_to_tensor(3)
+#' op_jvp(function(x) op_square(x), list(x), list(op_convert_to_tensor(1)))
+#'
+#' @export
+#' @family core ops
+#' @family ops
+#' @seealso
+#' + <https://keras.io/api/ops/core#jvp-function>
+#' @tether keras.ops.jvp
+op_jvp <-
+function(fun, primals, tangents, has_aux = FALSE)
+ops$jvp(fun, primals, tangents, has_aux)
 
 
 #' Return the dtype of the tensor input as a standardized string.

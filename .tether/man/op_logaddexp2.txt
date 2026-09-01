@@ -1,0 +1,20 @@
+__signature__
+keras.ops.logaddexp2(x1, x2)
+__doc__
+Base-2 logarithm of the sum of exponentiations of the inputs.
+
+Calculates `log2(2**x1 + 2**x2)`.
+
+Args:
+    x1: Input tensor.
+    x2: Input tensor.
+
+Returns:
+    Output tensor, element-wise log base 2 of the sum of 2**x1 and 2**x2.
+
+Example:
+>>> from keras import ops
+>>> x1 = ops.array([1, 2, 3])
+>>> x2 = ops.array([1, 2, 3])
+>>> ops.logaddexp2(x1, x2)
+array([2., 3., 4.], dtype=float32)

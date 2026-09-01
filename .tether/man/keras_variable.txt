@@ -10,6 +10,7 @@ class Variable(builtins.object)
  |    aggregation='none',
  |    synchronization='auto',
  |    name=None,
+ |    layout=None,
  |    **kwargs
  |  )
  |
@@ -40,6 +41,9 @@ class Variable(builtins.object)
  |          to `"none"`.
  |      name: Optional. A unique name for the variable. Automatically generated
  |          if not set.
+ |      layout: Optional. Sharding layout for the variable. Can be a
+ |          `keras.distribution.TensorLayout` or a backend-specific layout.
+ |      kwargs: Additional backend-specific keyword arguments.
  |
  |  Attributes:
  |      shape: The shape of the variable (tuple of integers).
@@ -51,7 +55,6 @@ class Variable(builtins.object)
  |      value: The current value of the variable (NumPy array or tensor).
  |      name: The name of the variable (string).
  |      path: The path of the variable within the Keras model or layer (string).
- |      kwargs: Additional backend-specific keyword arguments.
  |
  |  Examples:
  |
@@ -125,6 +128,7 @@ class Variable(builtins.object)
  |    aggregation='none',
  |    synchronization='auto',
  |    name=None,
+ |    layout=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

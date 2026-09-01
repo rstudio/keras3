@@ -1,0 +1,155 @@
+Help on class MultiOptimizer in module keras.src.optimizers.multi_optimizer:
+
+class MultiOptimizer(keras.src.optimizers.optimizer.Optimizer)
+ |  MultiOptimizer(optimizer_map, loss_scale_factor=None, name=None)
+ |
+ |  An optimizer wrapper that delegates variables to different optimizers.
+ |
+ |  Initialize the object with an OptimizerMap instance or a callable
+ |  function that returns an optimizer for a given variable.
+ |
+ |  Example:
+ |      model.compile(
+ |          optimizer=MultiOptimizer(
+ |              OptimizerMap(default_optimizer=optimizers.SGD(),
+ |              {"encoder/.*": optimizers.Adam()})
+ |          ),
+ |          loss="binary_crossentropy",
+ |      )
+ |
+ |      # Or using a callable
+ |      def optimizer_selector(variable):
+ |          if "encoder" in variable.path:
+ |              return optimizers.Adam()
+ |          else:
+ |              return optimizers.SGD()
+ |
+ |      model.compile(
+ |          optimizer=MultiOptimizer(optimizer_selector),
+ |          loss="binary_crossentropy",
+ |      )
+ |
+ |  To access the attributes of the sub-optimizers, iterate over the
+ |  optimizers using `.optimizers`:
+ |
+ |  For example:
+ |
+ |  optimizer = MultiOptimizer(OptimizerMap(
+ |      default_optimizer=optimizers.Adam()
+ |  ))
+ |  optimizer['.encoder'] = optimizers.SGD()
+ |
+ |  for optim in optimizer.optimizers:
+ |      print(optim.learning_rate)
+ |      print(optim.iterations)
+ |      print(optim.loss_scale_factor)
+ |      ...
+ |
+ |  The MultiOptimizer class instances will not expose `learning_rate`
+ |  attribute and will raise an error if accessed. This is because the
+ |  learning rate might be different for different sub-optimizers.
+ |
+ |  Note: Optimizer-specific callbacks are not supported yet.
+ |
+ |  Method resolution order:
+ |      MultiOptimizer
+ |      keras.src.optimizers.optimizer.Optimizer
+ |      keras.src.backend.tensorflow.optimizer.TFOptimizer
+ |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable
+ |      tensorflow.python.trackable.autotrackable.AutoTrackable
+ |      tensorflow.python.trackable.base.Trackable
+ |      keras.src.optimizers.base_optimizer.BaseOptimizer
+ |      keras.src.saving.keras_saveable.KerasSaveable
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  __init__(
+ |    self,
+ |    optimizer_map,
+ |    loss_scale_factor=None,
+ |    name=None
+ |  )
+ |      Initialize the MultiOptimizer.
+ |
+ |      Args:
+ |          optimizer_map: An OptimizerMap instance or a callable function that
+ |              returns an optimizer for a given variable.
+ |          loss_scale_factor: It overrides the loss_scale_factor passed
+ |          to the sub-optimizers.
+ |          name: The name of the optimizer.
+ |
+ |  apply(
+ |    self,
+ |    grads,
+ |    trainable_variables=None
+ |  )
+ |      Update traininable variables according to provided gradient values.
+ |
+ |      `grads` should be a list of gradient tensors
+ |      with 1:1 mapping to the list of variables the optimizer was built with.
+ |
+ |      `trainable_variables` can be provided
+ |      on the first call to build the optimizer.
+ |
+ |  build(self, var_list)
+ |
+ |  finalize_variable_values(self, var_list)
+ |      Set the final value of model's trainable variables.
+ |
+ |      Sometimes there are some extra steps before ending the variable updates,
+ |      such as overriding the model variables with its average value.
+ |
+ |      Args:
+ |        var_list: list of model variables.
+ |
+ |  get_config(self)
+ |      Returns the config of the optimizer.
+ |
+ |      An optimizer config is a Python dictionary (serializable)
+ |      containing the configuration of an optimizer.
+ |      The same optimizer can be reinstantiated later
+ |      (without any saved state) from this configuration.
+ |
+ |      Subclass optimizer should override this method to include other
+ |      hyperparameters.
+ |
+ |      Returns:
+ |          Python dictionary.
+ |
+ |  set_weights(self, weights)
+ |      Set the weights of the optimizer.
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  from_config(config, custom_objects=None)
+ |      Creates an optimizer from its config.
+ |
+ |      This method is the reverse of `get_config`, capable of instantiating the
+ |      same optimizer from the config dictionary.
+ |
+ |      Args:
+ |          config: A Python dictionary, typically the output of get_config.
+ |          custom_objects: A Python dictionary mapping names to additional
+ |            user-defined Python objects needed to recreate this optimizer.
+ |
+ |      Returns:
+ |          An optimizer instance.
+ |
+ |  ----------------------------------------------------------------------
+ |  Readonly properties defined here:
+ |
+ |  iterations
+ |
+ |  optimizers
+ |
+ |  variables
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors defined here:
+ |
+ |  learning_rate
+ |
+ |  loss_scale_factor
+ |

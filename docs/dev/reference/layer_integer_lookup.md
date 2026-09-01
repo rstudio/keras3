@@ -62,6 +62,8 @@ layer_integer_lookup(
   output_mode = "int",
   sparse = FALSE,
   pad_to_max_tokens = FALSE,
+  oov_method = "floormod",
+  salt = NULL,
   name = NULL,
   ...
 )
@@ -174,6 +176,29 @@ layer_integer_lookup(
   less than `max_tokens`, resulting in a tensor of shape
   `(batch_size, max_tokens)` regardless of vocabulary size. Defaults to
   `FALSE`.
+
+- oov_method:
+
+  Only relevant when `num_oov_indices > 1`. Controls how OOV tokens are
+  assigned to OOV buckets:
+
+  - `"floormod"` (the default) uses `token %% num_oov_indices`. This
+    preserves backwards compatibility, but can produce severe bucket
+    imbalance when input IDs share a common factor with
+    `num_oov_indices`, such as all-even IDs with an even bucket count.
+
+  - `"farmhash"` applies FarmHash64, which distributes OOV tokens
+    uniformly regardless of the arithmetic structure of the input IDs.
+    This parameter is ignored for string inputs, which always use
+    FarmHash64.
+
+- salt:
+
+  Only valid when `oov_method = "farmhash"`. If supplied, OOV bucket
+  assignment uses SipHash64, with these values as an additional input (a
+  "salt" in cryptography). May be a pair of integers, or a single
+  integer used for both key components. If `NULL` (the default),
+  FarmHash64 is used.
 
 - name:
 
@@ -427,6 +452,7 @@ Other preprocessing layers:
 [`layer_auto_contrast()`](https://keras3.posit.co/dev/reference/layer_auto_contrast.md)  
 [`layer_category_encoding()`](https://keras3.posit.co/dev/reference/layer_category_encoding.md)  
 [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)  
+[`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)  
 [`layer_cut_mix()`](https://keras3.posit.co/dev/reference/layer_cut_mix.md)  
 [`layer_discretization()`](https://keras3.posit.co/dev/reference/layer_discretization.md)  
 [`layer_equalization()`](https://keras3.posit.co/dev/reference/layer_equalization.md)  
@@ -474,6 +500,12 @@ Other layers:
 [`layer_activation_relu()`](https://keras3.posit.co/dev/reference/layer_activation_relu.md)  
 [`layer_activation_softmax()`](https://keras3.posit.co/dev/reference/layer_activation_softmax.md)  
 [`layer_activity_regularization()`](https://keras3.posit.co/dev/reference/layer_activity_regularization.md)  
+[`layer_adaptive_average_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_1d.md)  
+[`layer_adaptive_average_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_2d.md)  
+[`layer_adaptive_average_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_3d.md)  
+[`layer_adaptive_max_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_1d.md)  
+[`layer_adaptive_max_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_2d.md)  
+[`layer_adaptive_max_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_3d.md)  
 [`layer_add()`](https://keras3.posit.co/dev/reference/layer_add.md)  
 [`layer_additive_attention()`](https://keras3.posit.co/dev/reference/layer_additive_attention.md)  
 [`layer_alpha_dropout()`](https://keras3.posit.co/dev/reference/layer_alpha_dropout.md)  
@@ -489,6 +521,7 @@ Other layers:
 [`layer_category_encoding()`](https://keras3.posit.co/dev/reference/layer_category_encoding.md)  
 [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)  
 [`layer_concatenate()`](https://keras3.posit.co/dev/reference/layer_concatenate.md)  
+[`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)  
 [`layer_conv_1d()`](https://keras3.posit.co/dev/reference/layer_conv_1d.md)  
 [`layer_conv_1d_transpose()`](https://keras3.posit.co/dev/reference/layer_conv_1d_transpose.md)  
 [`layer_conv_2d()`](https://keras3.posit.co/dev/reference/layer_conv_2d.md)  
@@ -570,6 +603,7 @@ Other layers:
 [`layer_rescaling()`](https://keras3.posit.co/dev/reference/layer_rescaling.md)  
 [`layer_reshape()`](https://keras3.posit.co/dev/reference/layer_reshape.md)  
 [`layer_resizing()`](https://keras3.posit.co/dev/reference/layer_resizing.md)  
+[`layer_reversible_embedding()`](https://keras3.posit.co/dev/reference/layer_reversible_embedding.md)  
 [`layer_rms_normalization()`](https://keras3.posit.co/dev/reference/layer_rms_normalization.md)  
 [`layer_rnn()`](https://keras3.posit.co/dev/reference/layer_rnn.md)  
 [`layer_separable_conv_1d()`](https://keras3.posit.co/dev/reference/layer_separable_conv_1d.md)  

@@ -118,7 +118,7 @@ optimizer_adadelta <-
 function (learning_rate = 0.001, rho = 0.95, epsilon = 1e-07,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "adadelta", ..., loss_scale_factor = NULL,
+    name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(
@@ -244,7 +244,7 @@ function (learning_rate = 0.001, beta_2_decay = -0.8, epsilon_1 = 1e-30,
     epsilon_2 = 0.001, clip_threshold = 1, relative_step = TRUE,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "adafactor", ..., loss_scale_factor = NULL, gradient_accumulation_steps = NULL)
+    name = NULL, ..., loss_scale_factor = NULL, gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(
       ema_overwrite_frequency = as_integer,
@@ -353,7 +353,7 @@ optimizer_adagrad <-
 function (learning_rate = 0.001, initial_accumulator_value = 0.1,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "adagrad", ..., loss_scale_factor = NULL,
+    ema_overwrite_frequency = NULL, name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
@@ -476,7 +476,7 @@ optimizer_adam <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, amsgrad = FALSE, weight_decay = NULL, clipnorm = NULL,
     clipvalue = NULL, global_clipnorm = NULL, use_ema = FALSE,
-    ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = "adam",
+    ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = NULL,
     ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
@@ -609,7 +609,7 @@ optimizer_adamax <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "adamax", ..., loss_scale_factor = NULL,
+    ema_overwrite_frequency = NULL, name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
@@ -740,13 +740,65 @@ optimizer_adam_w <-
 function (learning_rate = 0.001, weight_decay = 0.004, beta_1 = 0.9,
     beta_2 = 0.999, epsilon = 1e-07, amsgrad = FALSE, clipnorm = NULL,
     clipvalue = NULL, global_clipnorm = NULL, use_ema = FALSE,
-    ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = "adamw",
+    ema_momentum = 0.99, ema_overwrite_frequency = NULL, name = NULL,
     ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
         gradient_accumulation_steps = as_integer))
     do.call(keras$optimizers$AdamW, args)
+}
+
+
+#' Schedule-free AdamW optimizer
+#'
+#' Schedule-free learning avoids a separate learning-rate schedule by combining
+#' interpolation and averaging. It removes the need to specify the stopping
+#' time in advance and typically matches or outperforms cosine and linear decay
+#' schedules. The optimizer maintains a momentum sequence to which gradient
+#' updates are applied and an averaged sequence used for evaluation. During
+#' training, model parameters interpolate between the two sequences.
+#'
+#' # Examples
+#'
+#' ```{r, eval = FALSE}
+#' optimizer <- optimizer_schedule_free_adam_w(learning_rate = 0.0025)
+#' model |> compile(optimizer = optimizer, loss = "mse")
+#' model |> fit(x_train, y_train)
+#' ```
+#'
+#' @param learning_rate A number, a [`LearningRateSchedule()`] instance, or a
+#'   callable that takes no arguments and returns the value to use. Defaults to
+#'   `0.0025`.
+#' @param beta_1 Number, constant tensor, or callable returning the exponential
+#'   decay rate for the first-moment estimates. It also controls interpolation
+#'   between the momentum and averaged sequences. Defaults to 0.9.
+#' @param epsilon Small constant for numerical stability. Defaults to `1e-8`.
+#' @param warmup_steps Number of warmup steps. During warmup, the learning rate
+#'   increases linearly from zero to `learning_rate`. Defaults to 0.
+#' @inheritParams optimizer_adam_w
+#'
+#' @returns An `Optimizer` instance.
+#' @export
+#' @family optimizers
+#' @references
+#' - [Defazio et al., 2024](https://arxiv.org/abs/2405.15682)
+#' - [Schedule-Free repository](https://github.com/facebookresearch/schedule_free)
+#' @tether keras.optimizers.ScheduleFreeAdamW
+optimizer_schedule_free_adam_w <-
+function(learning_rate = 0.0025, beta_1 = 0.9, beta_2 = 0.999,
+         epsilon = 1e-8, warmup_steps = 0L, weight_decay = NULL,
+         clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
+         use_ema = FALSE, ema_momentum = 0.99,
+         ema_overwrite_frequency = NULL, loss_scale_factor = NULL,
+         gradient_accumulation_steps = NULL, name = NULL, ...)
+{
+  args <- capture_args(list(
+    warmup_steps = as_integer,
+    ema_overwrite_frequency = as_integer,
+    gradient_accumulation_steps = as_integer
+  ))
+  do.call(keras$optimizers$ScheduleFreeAdamW, args)
 }
 
 
@@ -907,7 +959,7 @@ function (learning_rate = 0.001, learning_rate_power = -0.5,
     l2_regularization_strength = 0, l2_shrinkage_regularization_strength = 0,
     beta = 0, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "ftrl", ..., loss_scale_factor = NULL,
+    ema_overwrite_frequency = NULL, name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
@@ -1031,7 +1083,7 @@ function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, loss_scale_factor = NULL,
-    gradient_accumulation_steps = NULL, name = "lamb", ...)
+    gradient_accumulation_steps = NULL, name = NULL, ...)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
         gradient_accumulation_steps = as_integer))
@@ -1148,7 +1200,7 @@ optimizer_lion <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.99,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "lion", ..., loss_scale_factor = NULL,
+    name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
@@ -1270,6 +1322,83 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
     do.call(keras$optimizers$LossScaleOptimizer, args)
 }
 
+
+#' Map variables to optimizers
+#'
+#' When retrieving an optimizer, the map first attempts an exact key match. If
+#' no exact match is found, it treats every key as a regular-expression pattern
+#' and performs a full match against the variable path. For example,
+#' `"encoder"` matches only the layer with that exact path; use
+#' `"encoder/.*"` to match its sublayers. Exact matches take precedence. If
+#' more than one regular expression matches, lookup raises an error. Variables
+#' not matched by the map use `default_optimizer`.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' optimizers <- optimizer_map(
+#'   default_optimizer = optimizer_sgd(),
+#'   optimizer_map = list("encoder/.*" = optimizer_adam())
+#' )
+#' ```
+#'
+#' @param default_optimizer Keras optimizer used for unmatched variables.
+#' @param optimizer_map Optional named list mapping exact variable paths or
+#'   regular expressions to optimizer instances.
+#'
+#' @returns An `OptimizerMap` instance.
+#' @export
+#' @family optimizers
+#' @tether keras.optimizers.OptimizerMap
+optimizer_map <-
+function(default_optimizer, optimizer_map = NULL)
+{
+  args <- capture_args()
+  do.call(keras$optimizers$OptimizerMap, args)
+}
+
+
+#' Delegate variables to multiple optimizers
+#'
+#' Wraps an [`optimizer_map()`] or a callable that selects an optimizer for a
+#' variable. Access the sub-optimizers through `optimizer$optimizers`, for
+#' example to inspect their learning rates, iterations, or loss-scale factors.
+#' A multi-optimizer does not expose a single `learning_rate`, because its
+#' sub-optimizers may have different learning rates. Optimizer-specific
+#' callbacks are not currently supported.
+#'
+#' # Examples
+#'
+#' ```{r}
+#' optimizers <- optimizer_map(
+#'   default_optimizer = optimizer_sgd(),
+#'   optimizer_map = list("encoder/.*" = optimizer_adam())
+#' )
+#' optimizer <- optimizer_multi(optimizers)
+#'
+#' # A callable can also select an optimizer for each variable.
+#' optimizer <- optimizer_multi(function(variable) {
+#'   if (grepl("encoder", variable$path)) optimizer_adam() else optimizer_sgd()
+#' })
+#' ```
+#'
+#' @param optimizer_map An `OptimizerMap` or callable that accepts a variable
+#'   and returns its optimizer.
+#' @param loss_scale_factor Optional loss scale overriding the value on each
+#'   sub-optimizer.
+#' @param name Optional optimizer name.
+#'
+#' @returns A `MultiOptimizer` instance.
+#' @export
+#' @family optimizers
+#' @tether keras.optimizers.MultiOptimizer
+optimizer_multi <-
+function(optimizer_map, loss_scale_factor = NULL, name = NULL)
+{
+  args <- capture_args()
+  do.call(keras$optimizers$MultiOptimizer, args)
+}
+
 #' Optimizer that implements the Muon algorithm.
 #'
 #' @description
@@ -1318,6 +1447,9 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' that takes no arguments and returns the actual value to use.
 #' The exponential decay rate for the 2nd moment estimates. Defaults to
 #' `0.999`.
+#'
+#' @param adam_weight_decay
+#' Weight decay to apply when Muon falls back to AdamW updates.
 #'
 #' @param epsilon
 #' A small constant for numerical stability. This is
@@ -1404,7 +1536,7 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' @param adam_lr_ratio
 #' Float, the ratio of the learning rate when
 #' using Adam to the main learning rate.
-#' it is recommended to set it to `0.1`.
+#' it is recommended to set it to `1`.
 #'
 #' @param momentum
 #' Float, momentum used by internal SGD.
@@ -1414,6 +1546,12 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #'
 #' @param nesterov
 #' Boolean, whether to use Nesterov-style momentum.
+#'
+#' @param rms_rate
+#' Float. A parameter from [Liu et al., 2025](https://arxiv.org/abs/2502.16982)
+#' that can improve Muon's stability, allowing it to use the same learning rate
+#' and weight decay as Adam. Defaults to `0.2`. Set to `NULL` to disable this
+#' feature.
 #'
 #' @param name
 #' String, name for the object
@@ -1427,13 +1565,14 @@ function (inner_optimizer, initial_scale = 32768, dynamic_growth_steps = 2000L,
 #' @tether keras.optimizers.Muon
 optimizer_muon <-
 function (learning_rate = 0.001, adam_beta_1 = 0.9, adam_beta_2 = 0.999,
-    epsilon = 1e-07, weight_decay = 0.1, clipnorm = NULL, clipvalue = NULL,
+    adam_weight_decay = 0.004, epsilon = 1e-07, weight_decay = 0.004,
+    clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
     ema_overwrite_frequency = NULL, loss_scale_factor = NULL,
-    gradient_accumulation_steps = NULL, name = "muon", exclude_layers = NULL,
+    gradient_accumulation_steps = NULL, name = NULL, exclude_layers = NULL,
     exclude_embeddings = TRUE, muon_a = 3.4445, muon_b = -4.775,
-    muon_c = 2.0315, adam_lr_ratio = 0.1, momentum = 0.95, ns_steps = 6L,
-    nesterov = TRUE, ...)
+    muon_c = 2.0315, adam_lr_ratio = 1L, momentum = 0.95, ns_steps = 5L,
+    nesterov = TRUE, rms_rate = 0.2, ...)
 {
     args <- capture_args(list(
         ema_overwrite_frequency = as_integer,
@@ -1549,7 +1688,7 @@ optimizer_nadam <-
 function (learning_rate = 0.001, beta_1 = 0.9, beta_2 = 0.999,
     epsilon = 1e-07, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "nadam", ..., loss_scale_factor = NULL,
+    ema_overwrite_frequency = NULL, name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
@@ -1679,7 +1818,7 @@ optimizer_rmsprop <-
 function (learning_rate = 0.001, rho = 0.9, momentum = 0, epsilon = 1e-07,
     centered = FALSE, weight_decay = NULL, clipnorm = NULL, clipvalue = NULL,
     global_clipnorm = NULL, use_ema = FALSE, ema_momentum = 0.99,
-    ema_overwrite_frequency = NULL, name = "rmsprop", ..., loss_scale_factor = NULL,
+    ema_overwrite_frequency = NULL, name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,
@@ -1800,7 +1939,7 @@ optimizer_sgd <-
 function (learning_rate = 0.01, momentum = 0, nesterov = FALSE,
     weight_decay = NULL, clipnorm = NULL, clipvalue = NULL, global_clipnorm = NULL,
     use_ema = FALSE, ema_momentum = 0.99, ema_overwrite_frequency = NULL,
-    name = "SGD", ..., loss_scale_factor = NULL,
+    name = NULL, ..., loss_scale_factor = NULL,
     gradient_accumulation_steps = NULL)
 {
     args <- capture_args(list(ema_overwrite_frequency = as_integer,

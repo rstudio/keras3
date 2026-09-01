@@ -125,9 +125,9 @@ history <- model |> fit(
 ```
 
     ## Epoch 1/2
-    ## 782/782 - 3s - 3ms/step - loss: 0.3410 - sparse_categorical_accuracy: 0.9034 - val_loss: 0.1855 - val_sparse_categorical_accuracy: 0.9460
+    ## 782/782 - 3s - 4ms/step - loss: 0.3410 - sparse_categorical_accuracy: 0.9034 - val_loss: 0.1855 - val_sparse_categorical_accuracy: 0.9460
     ## Epoch 2/2
-    ## 782/782 - 1s - 1ms/step - loss: 0.1589 - sparse_categorical_accuracy: 0.9538 - val_loss: 0.1323 - val_sparse_categorical_accuracy: 0.9619
+    ## 782/782 - 1s - 1ms/step - loss: 0.1590 - sparse_categorical_accuracy: 0.9538 - val_loss: 0.1323 - val_sparse_categorical_accuracy: 0.9621
 
 The returned `history` object holds a record of the loss values and
 metric values during training:
@@ -138,10 +138,10 @@ history
 
     ##
     ## Final epoch (plot to see history):
-    ##                            loss: 0.1589
+    ##                            loss: 0.159
     ##     sparse_categorical_accuracy: 0.9538
     ##                        val_loss: 0.1323
-    ## val_sparse_categorical_accuracy: 0.9619
+    ## val_sparse_categorical_accuracy: 0.9621
 
 We evaluate the model on the test data via
 [`evaluate()`](https://rdrr.io/pkg/tensorflow/man/evaluate.html):
@@ -151,7 +151,7 @@ We evaluate the model on the test data via
 results <- model |> evaluate(x_test, y_test, batch_size=128)
 ```
 
-    ## 79/79 - 0s - 4ms/step - loss: 0.1267 - sparse_categorical_accuracy: 0.9620
+    ## 79/79 - 0s - 6ms/step - loss: 0.1273 - sparse_categorical_accuracy: 0.9621
 
 ``` r
 str(results)
@@ -167,7 +167,7 @@ str(results)
 predictions <- model |> predict(x_test[1:2,])
 ```
 
-    ## 1/1 - 0s - 159ms/step
+    ## 1/1 - 0s - 195ms/step
 
 ``` r
 dim(predictions)
@@ -293,7 +293,7 @@ model |> fit(x_train, y_train_one_hot, batch_size = 64, epochs = 2)
 ```
 
     ## Epoch 1/2
-    ## 782/782 - 2s - 2ms/step - loss: 0.0157
+    ## 782/782 - 2s - 3ms/step - loss: 0.0157
     ## Epoch 2/2
     ## 782/782 - 1s - 1ms/step - loss: 0.0074
 
@@ -337,7 +337,7 @@ y_train_one_hot <- op_one_hot(y_train, num_classes=10)
 model |> fit(x_train, y_train_one_hot, batch_size=64, epochs=1)
 ```
 
-    ## 782/782 - 2s - 2ms/step - loss: 0.0388
+    ## 782/782 - 2s - 3ms/step - loss: 0.0388
 
 ### Custom metrics
 
@@ -406,11 +406,11 @@ history <- model |> fit(x_train, y_train, batch_size = 64, epochs = 3)
 ```
 
     ## Epoch 1/3
-    ## 782/782 - 2s - 2ms/step - categorical_true_positives: 284996.0000 - loss: 0.3444
+    ## 782/782 - 2s - 2ms/step - categorical_true_positives: 285017.0000 - loss: 0.3444
     ## Epoch 2/3
-    ## 782/782 - 1s - 1ms/step - categorical_true_positives: 284260.0000 - loss: 0.1654
+    ## 782/782 - 1s - 1ms/step - categorical_true_positives: 284268.0000 - loss: 0.1658
     ## Epoch 3/3
-    ## 782/782 - 1s - 1ms/step - categorical_true_positives: 284167.0000 - loss: 0.1202
+    ## 782/782 - 1s - 1ms/step - categorical_true_positives: 284201.0000 - loss: 0.1207
 
 ### Handling losses and metrics that don’t fit the standard signature
 
@@ -453,7 +453,7 @@ model |> compile(optimizer = optimizer_rmsprop(learning_rate = 1e-3),
 model |> fit(x_train, y_train, batch_size = 64, epochs = 1)
 ```
 
-    ## 782/782 - 2s - 2ms/step - loss: 2.3721
+    ## 782/782 - 2s - 3ms/step - loss: 2.3721
 
 Note that when you pass losses via `add_loss()`, it becomes possible to
 call [`compile()`](https://generics.r-lib.org/reference/compile.html)
@@ -502,7 +502,7 @@ data <- list(
 model |> fit(data, epochs = 1)
 ```
 
-    ## 1/1 - 0s - 424ms/step - loss: 0.9638
+    ## 1/1 - 1s - 545ms/step - loss: 0.9638
 
 For more information about training multi-input models, see the section
 **Passing data to multi-input, multi-output models**.
@@ -592,7 +592,7 @@ model |> fit(train_dataset, epochs = 3)
     ## Epoch 2/3
     ## 782/782 - 1s - 1ms/step - loss: 0.1606 - sparse_categorical_accuracy: 0.9521
     ## Epoch 3/3
-    ## 782/782 - 1s - 988us/step - loss: 0.1178 - sparse_categorical_accuracy: 0.9646
+    ## 782/782 - 1s - 1ms/step - loss: 0.1178 - sparse_categorical_accuracy: 0.9646
 
 ``` r
 # You can also evaluate or predict on a dataset.
@@ -606,7 +606,7 @@ result
 ```
 
     ## $loss
-    ## [1] 0.1213006
+    ## [1] 0.1213005
     ##
     ## $sparse_categorical_accuracy
     ## [1] 0.9596
@@ -633,7 +633,7 @@ model |> fit(train_dataset, epochs = 3, steps_per_epoch = 100)
 ```
 
     ## Epoch 1/3
-    ## 100/100 - 1s - 8ms/step - loss: 0.8017 - sparse_categorical_accuracy: 0.7806
+    ## 100/100 - 1s - 9ms/step - loss: 0.8017 - sparse_categorical_accuracy: 0.7806
     ## Epoch 2/3
     ## 100/100 - 0s - 1ms/step - loss: 0.3661 - sparse_categorical_accuracy: 0.9006
     ## Epoch 3/3
@@ -658,7 +658,7 @@ val_dataset <- val_dataset |> dataset_batch(64)
 model |> fit(train_dataset, epochs = 1, validation_data = val_dataset)
 ```
 
-    ## 782/782 - 2s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291
+    ## 782/782 - 3s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291
 
 At the end of each epoch, the model will iterate over the validation
 dataset and compute the validation loss and validation metrics.
@@ -987,7 +987,7 @@ model |> fit(
 )
 ```
 
-    ## 4/4 - 2s - 533ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676
+    ## 4/4 - 4s - 955ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676
 
 ``` r
 # Alternatively, fit on named lists (names matching)
@@ -1011,7 +1011,7 @@ model |> fit(
 )
 ```
 
-    ## 4/4 - 2s - 391ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01
+    ## 4/4 - 2s - 525ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01
 
 Here’s the `Dataset` use case: similarly as what we did for R arrays,
 the `Dataset` should return a tuple of named lists (dicts).
@@ -1028,7 +1028,7 @@ train_dataset <- train_dataset |>
 model |> fit(train_dataset, epochs = 1)
 ```
 
-    ## 2/2 - 1s - 685ms/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01
+    ## 2/2 - 3s - 1s/step - class_output_loss: 3.8547 - loss: 3.5725 - score_output_loss: -1.5209e-01
 
 ## Using callbacks
 
@@ -1081,17 +1081,17 @@ model |> fit(
     ## Epoch 2/20
     ## 625/625 - 1s - 1ms/step - loss: 0.1752 - sparse_categorical_accuracy: 0.9488 - val_loss: 0.1405 - val_sparse_categorical_accuracy: 0.9576
     ## Epoch 3/20
-    ## 625/625 - 1s - 1ms/step - loss: 0.1277 - sparse_categorical_accuracy: 0.9626 - val_loss: 0.1218 - val_sparse_categorical_accuracy: 0.9645
+    ## 625/625 - 1s - 1ms/step - loss: 0.1277 - sparse_categorical_accuracy: 0.9626 - val_loss: 0.1217 - val_sparse_categorical_accuracy: 0.9644
     ## Epoch 4/20
-    ## 625/625 - 1s - 1ms/step - loss: 0.1009 - sparse_categorical_accuracy: 0.9701 - val_loss: 0.1147 - val_sparse_categorical_accuracy: 0.9660
+    ## 625/625 - 1s - 1ms/step - loss: 0.1009 - sparse_categorical_accuracy: 0.9702 - val_loss: 0.1138 - val_sparse_categorical_accuracy: 0.9667
     ## Epoch 5/20
-    ## 625/625 - 1s - 1ms/step - loss: 0.0824 - sparse_categorical_accuracy: 0.9759 - val_loss: 0.1099 - val_sparse_categorical_accuracy: 0.9676
+    ## 625/625 - 1s - 1ms/step - loss: 0.0823 - sparse_categorical_accuracy: 0.9758 - val_loss: 0.1086 - val_sparse_categorical_accuracy: 0.9679
     ## Epoch 6/20
-    ## 625/625 - 1s - 1ms/step - loss: 0.0681 - sparse_categorical_accuracy: 0.9801 - val_loss: 0.1080 - val_sparse_categorical_accuracy: 0.9699
+    ## 625/625 - 1s - 1ms/step - loss: 0.0682 - sparse_categorical_accuracy: 0.9800 - val_loss: 0.1084 - val_sparse_categorical_accuracy: 0.9685
     ## Epoch 7/20
-    ## 625/625 - 1s - 1ms/step - loss: 0.0575 - sparse_categorical_accuracy: 0.9835 - val_loss: 0.1102 - val_sparse_categorical_accuracy: 0.9699
+    ## 625/625 - 1s - 1ms/step - loss: 0.0573 - sparse_categorical_accuracy: 0.9834 - val_loss: 0.1100 - val_sparse_categorical_accuracy: 0.9698
     ## Epoch 8/20
-    ## 625/625 - 1s - 1ms/step - loss: 0.0485 - sparse_categorical_accuracy: 0.9863 - val_loss: 0.1142 - val_sparse_categorical_accuracy: 0.9700
+    ## 625/625 - 1s - 1ms/step - loss: 0.0485 - sparse_categorical_accuracy: 0.9868 - val_loss: 0.1113 - val_sparse_categorical_accuracy: 0.9702
     ## Epoch 8: early stopping
 
 ### Many built-in callbacks are available
@@ -1186,13 +1186,13 @@ model |> fit(
     ## Epoch 1: val_loss improved from None to 0.19488, saving model to mymodel_1.keras
     ##
     ## Epoch 1: finished saving model to mymodel_1.keras
-    ## 625/625 - 2s - 3ms/step - loss: 0.3791 - sparse_categorical_accuracy: 0.8935 - val_loss: 0.1949 - val_sparse_categorical_accuracy: 0.9442
+    ## 625/625 - 2s - 3ms/step - loss: 0.3793 - sparse_categorical_accuracy: 0.8936 - val_loss: 0.1949 - val_sparse_categorical_accuracy: 0.9447
     ## Epoch 2/2
     ##
-    ## Epoch 2: val_loss improved from 0.19488 to 0.14337, saving model to mymodel_2.keras
+    ## Epoch 2: val_loss improved from 0.19488 to 0.14489, saving model to mymodel_2.keras
     ##
     ## Epoch 2: finished saving model to mymodel_2.keras
-    ## 625/625 - 1s - 1ms/step - loss: 0.1773 - sparse_categorical_accuracy: 0.9473 - val_loss: 0.1434 - val_sparse_categorical_accuracy: 0.9594
+    ## 625/625 - 1s - 1ms/step - loss: 0.1777 - sparse_categorical_accuracy: 0.9475 - val_loss: 0.1449 - val_sparse_categorical_accuracy: 0.9590
 
 The `ModelCheckpoint` callback can be used to implement fault-tolerance:
 the ability to restart training from the last saved state of the model

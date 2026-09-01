@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="The Functional API">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -161,21 +161,21 @@ inputs and outputs in the graph of layers:</p>
 <p>Let’s check out what the model summary looks like:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "mnist_model"</span></span></span>
+<pre><code><span><span class="co">## Model: "mnist_model"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">784</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ input_layer (InputLayer)        │ (None, 784)            │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)             │        <span style="color: #00AF00;">50,240</span> │</span></span>
+<span><span class="co">## │ dense (Dense)                   │ (None, 64)             │        50,240 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense_1 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)             │         <span style="color: #00AF00;">4,160</span> │</span></span>
+<span><span class="co">## │ dense_1 (Dense)                 │ (None, 64)             │         4,160 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense_2 (<span style="color: #0087FF;">Dense</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)             │           <span style="color: #00AF00;">650</span> │</span></span>
+<span><span class="co">## │ dense_2 (Dense)                 │ (None, 10)             │           650 │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">55,050</span> (215.04 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">55,050</span> (215.04 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 55,050 (215.04 KB)</span></span>
+<span><span class="co">##  Trainable params: 55,050 (215.04 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>You can also plot the model as a graph:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
@@ -224,12 +224,12 @@ then evaluate the model on the test data:</p>
 <span>    <span class="va">x_train</span>, <span class="va">y_train</span>, batch_size <span class="op">=</span> <span class="fl">64</span>, epochs <span class="op">=</span> <span class="fl">2</span>, validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 750/750 - 2s - 3ms/step - accuracy: 0.8980 - loss: 0.3540 - val_accuracy: 0.9444 - val_loss: 0.1898</span></span>
+<span><span class="co">## 750/750 - 3s - 4ms/step - accuracy: 0.8980 - loss: 0.3540 - val_accuracy: 0.9444 - val_loss: 0.1898</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
 <span><span class="co">## 750/750 - 1s - 1ms/step - accuracy: 0.9512 - loss: 0.1633 - val_accuracy: 0.9605 - val_loss: 0.1387</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">test_scores</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 0s - 2ms/step - accuracy: 0.9598 - loss: 0.1322</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step - accuracy: 0.9598 - loss: 0.1322</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test loss:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">loss</span>, <span class="st">"\n"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Test accuracy:"</span>, <span class="va">test_scores</span><span class="op">$</span><span class="va">accuracy</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
@@ -281,28 +281,28 @@ for training.</p>
 <span></span>
 <span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">encoder_output</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">encoder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "encoder"</span></span></span>
+<pre><code><span><span class="co">## Model: "encoder"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ img (InputLayer)                │ (None, 28, 28, 1)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)     │           <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## │ conv2d (Conv2D)                 │ (None, 26, 26, 16)     │           160 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)     │         <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## │ conv2d_1 (Conv2D)               │ (None, 24, 24, 32)     │         4,640 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ max_pooling2d (MaxPooling2D)    │ (None, 8, 8, 32)       │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)       │         <span style="color: #00AF00;">9,248</span> │</span></span>
+<span><span class="co">## │ conv2d_2 (Conv2D)               │ (None, 6, 6, 32)       │         9,248 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)       │         <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## │ conv2d_3 (Conv2D)               │ (None, 4, 4, 16)       │         4,624 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)             │             <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                        │               │</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ (None, 16)             │             0 │</span></span>
+<span><span class="co">## │ (GlobalMaxPooling2D)            │                        │               │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 18,672 (72.94 KB)</span></span>
+<span><span class="co">##  Trainable params: 18,672 (72.94 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">encoder_output</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/layer_reshape.html">layer_reshape</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -314,44 +314,44 @@ for training.</p>
 <span></span>
 <span><span class="va">autoencoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">decoder_output</span>, name<span class="op">=</span><span class="st">"autoencoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">autoencoder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "autoencoder"</span></span></span>
+<pre><code><span><span class="co">## Model: "autoencoder"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ img (InputLayer)                │ (None, 28, 28, 1)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)     │           <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## │ conv2d (Conv2D)                 │ (None, 26, 26, 16)     │           160 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)     │         <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## │ conv2d_1 (Conv2D)               │ (None, 24, 24, 32)     │         4,640 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ max_pooling2d (MaxPooling2D)    │ (None, 8, 8, 32)       │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)       │         <span style="color: #00AF00;">9,248</span> │</span></span>
+<span><span class="co">## │ conv2d_2 (Conv2D)               │ (None, 6, 6, 32)       │         9,248 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)       │         <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## │ conv2d_3 (Conv2D)               │ (None, 4, 4, 16)       │         4,624 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)             │             <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                        │               │</span></span>
+<span><span class="co">## │ global_max_pooling2d            │ (None, 16)             │             0 │</span></span>
+<span><span class="co">## │ (GlobalMaxPooling2D)            │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ reshape (<span style="color: #0087FF;">Reshape</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">1</span>)        │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ reshape (Reshape)               │ (None, 4, 4, 1)        │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">16</span>)       │           <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose                │ (None, 6, 6, 16)       │           160 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_1              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)       │         <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_1              │ (None, 8, 8, 32)       │         4,640 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ up_sampling2d (<span style="color: #0087FF;">UpSampling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ up_sampling2d (UpSampling2D)    │ (None, 24, 24, 32)     │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_2              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)     │         <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_2              │ (None, 26, 26, 16)     │         4,624 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_3              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │           <span style="color: #00AF00;">145</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_3              │ (None, 28, 28, 1)      │           145 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 28,241 (110.32 KB)</span></span>
+<span><span class="co">##  Trainable params: 28,241 (110.32 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>Here, the decoding architecture is strictly symmetrical to the
 encoding architecture, so the output shape is the same as the input
 shape <code>(28, 28, 1)</code>.</p>
@@ -382,28 +382,28 @@ in two calls to obtain the autoencoder model:</p>
 <span></span>
 <span><span class="va">encoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">encoder_input</span>, <span class="va">encoder_output</span>, name<span class="op">=</span><span class="st">"encoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">encoder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "encoder"</span></span></span>
+<pre><code><span><span class="co">## Model: "encoder"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ img (InputLayer)                │ (None, 28, 28, 1)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_4 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)     │           <span style="color: #00AF00;">160</span> │</span></span>
+<span><span class="co">## │ conv2d_4 (Conv2D)               │ (None, 26, 26, 16)     │           160 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_5 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)     │         <span style="color: #00AF00;">4,640</span> │</span></span>
+<span><span class="co">## │ conv2d_5 (Conv2D)               │ (None, 24, 24, 32)     │         4,640 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ max_pooling2d_1 (MaxPooling2D)  │ (None, 8, 8, 32)       │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_6 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">32</span>)       │         <span style="color: #00AF00;">9,248</span> │</span></span>
+<span><span class="co">## │ conv2d_6 (Conv2D)               │ (None, 6, 6, 32)       │         9,248 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_7 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">16</span>)       │         <span style="color: #00AF00;">4,624</span> │</span></span>
+<span><span class="co">## │ conv2d_7 (Conv2D)               │ (None, 4, 4, 16)       │         4,624 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ global_max_pooling2d_1          │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)             │             <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalMaxPooling2D</span>)            │                        │               │</span></span>
+<span><span class="co">## │ global_max_pooling2d_1          │ (None, 16)             │             0 │</span></span>
+<span><span class="co">## │ (GlobalMaxPooling2D)            │                        │               │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">18,672</span> (72.94 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 18,672 (72.94 KB)</span></span>
+<span><span class="co">##  Trainable params: 18,672 (72.94 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">decoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">16</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"encoded_img"</span><span class="op">)</span></span>
 <span><span class="va">decoder_output</span> <span class="op">&lt;-</span> <span class="va">decoder_input</span> <span class="op">|&gt;</span></span>
@@ -416,31 +416,31 @@ in two calls to obtain the autoencoder model:</p>
 <span></span>
 <span><span class="va">decoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">decoder_input</span>, <span class="va">decoder_output</span>, name <span class="op">=</span> <span class="st">"decoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">decoder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "decoder"</span></span></span>
+<pre><code><span><span class="co">## Model: "decoder"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ encoded_img (<span style="color: #0087FF;">InputLayer</span>)        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)             │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ encoded_img (InputLayer)        │ (None, 16)             │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ reshape_1 (<span style="color: #0087FF;">Reshape</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">4</span>, <span style="color: #00AF00;">1</span>)        │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ reshape_1 (Reshape)             │ (None, 4, 4, 1)        │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_4              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">6</span>, <span style="color: #00AF00;">16</span>)       │           <span style="color: #00AF00;">160</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_4              │ (None, 6, 6, 16)       │           160 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_5              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">32</span>)       │         <span style="color: #00AF00;">4,640</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_5              │ (None, 8, 8, 32)       │         4,640 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ up_sampling2d_1 (<span style="color: #0087FF;">UpSampling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">32</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ up_sampling2d_1 (UpSampling2D)  │ (None, 24, 24, 32)     │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_6              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">16</span>)     │         <span style="color: #00AF00;">4,624</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_6              │ (None, 26, 26, 16)     │         4,624 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_transpose_7              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │           <span style="color: #00AF00;">145</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">Conv2DTranspose</span>)               │                        │               │</span></span>
+<span><span class="co">## │ conv2d_transpose_7              │ (None, 28, 28, 1)      │           145 │</span></span>
+<span><span class="co">## │ (Conv2DTranspose)               │                        │               │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">9,569</span> (37.38 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">9,569</span> (37.38 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 9,569 (37.38 KB)</span></span>
+<span><span class="co">##  Trainable params: 9,569 (37.38 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">autoencoder_input</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_input.html">keras_input</a></span><span class="op">(</span>shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">28</span>, <span class="fl">28</span>, <span class="fl">1</span><span class="op">)</span>, name <span class="op">=</span> <span class="st">"img"</span><span class="op">)</span></span>
 <span><span class="va">encoded_img</span> <span class="op">&lt;-</span> <span class="fu">encoder</span><span class="op">(</span><span class="va">autoencoder_input</span><span class="op">)</span></span>
@@ -448,19 +448,19 @@ in two calls to obtain the autoencoder model:</p>
 <span><span class="va">autoencoder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">autoencoder_input</span>, <span class="va">decoded_img</span>,</span>
 <span>                           name <span class="op">=</span> <span class="st">"autoencoder"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">autoencoder</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "autoencoder"</span></span></span>
+<pre><code><span><span class="co">## Model: "autoencoder"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ img (InputLayer)                │ (None, 28, 28, 1)      │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ encoder (<span style="color: #0087FF;">Functional</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">16</span>)             │        <span style="color: #00AF00;">18,672</span> │</span></span>
+<span><span class="co">## │ encoder (Functional)            │ (None, 16)             │        18,672 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ decoder (<span style="color: #0087FF;">Functional</span>)            │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">1</span>)      │         <span style="color: #00AF00;">9,569</span> │</span></span>
+<span><span class="co">## │ decoder (Functional)            │ (None, 28, 28, 1)      │         9,569 │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">28,241</span> (110.32 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 28,241 (110.32 KB)</span></span>
+<span><span class="co">##  Trainable params: 28,241 (110.32 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>As you can see, the model can be nested: a model can contain
 sub-models (since a model is just like a layer). A common use case for
 model nesting is <em>ensembling</em>. For example, here’s how to
@@ -592,9 +592,9 @@ targets:</p>
 <span>  batch_size <span class="op">=</span> <span class="fl">32</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 40/40 - 3s - 64ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976</span></span>
+<span><span class="co">## 40/40 - 3s - 81ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828</span></span></code></pre>
+<span><span class="co">## 40/40 - 0s - 7ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828</span></span></code></pre>
 <p>When calling fit with a <code>Dataset</code> object, it should yield
 either a list of lists like
 <code>list(list(title_data, body_data, tags_data), list(priority_targets, dept_targets))</code>
@@ -638,49 +638,49 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/keras_model.html">keras_model</a></span><span class="op">(</span><span class="va">inputs</span>, <span class="va">outputs</span>, name <span class="op">=</span> <span class="st">"toy_resnet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "toy_resnet"</span></span></span>
+<pre><code><span><span class="co">## Model: "toy_resnet"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)        </span>┃<span style="font-weight: bold;"> Output Shape      </span>┃<span style="font-weight: bold;">    Param # </span>┃<span style="font-weight: bold;"> Connected to      </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ img (<span style="color: #0087FF;">InputLayer</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">32</span>, <span style="color: #00AF00;">32</span>, <span style="color: #00AF00;">3</span>) │          <span style="color: #00AF00;">0</span> │ -                 │</span></span>
+<span><span class="co">## │ img (InputLayer)    │ (None, 32, 32, 3) │          0 │ -                 │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_8 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">30</span>, <span style="color: #00AF00;">30</span>,    │        <span style="color: #00AF00;">896</span> │ img[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │</span></span>
-<span><span class="co">## │                     │ <span style="color: #00AF00;">32</span>)               │            │                   │</span></span>
+<span><span class="co">## │ conv2d_8 (Conv2D)   │ (None, 30, 30,    │        896 │ img[0][0]         │</span></span>
+<span><span class="co">## │                     │ 32)               │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_9 (<span style="color: #0087FF;">Conv2D</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>,    │     <span style="color: #00AF00;">18,496</span> │ conv2d_8[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │</span></span>
-<span><span class="co">## │                     │ <span style="color: #00AF00;">64</span>)               │            │                   │</span></span>
+<span><span class="co">## │ conv2d_9 (Conv2D)   │ (None, 28, 28,    │     18,496 │ conv2d_8[0][0]    │</span></span>
+<span><span class="co">## │                     │ 64)               │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_2     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │          <span style="color: #00AF00;">0</span> │ conv2d_9[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]    │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">MaxPooling2D</span>)      │                   │            │                   │</span></span>
+<span><span class="co">## │ max_pooling2d_2     │ (None, 9, 9, 64)  │          0 │ conv2d_9[0][0]    │</span></span>
+<span><span class="co">## │ (MaxPooling2D)      │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_10 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">32</span>)  │     <span style="color: #00AF00;">18,464</span> │ max_pooling2d_2[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ conv2d_10 (Conv2D)  │ (None, 9, 9, 32)  │     18,464 │ max_pooling2d_2[… │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_11 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │     <span style="color: #00AF00;">18,496</span> │ conv2d_10[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ conv2d_11 (Conv2D)  │ (None, 9, 9, 64)  │     18,496 │ conv2d_10[0][0]   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ add (<span style="color: #0087FF;">Add</span>)           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │          <span style="color: #00AF00;">0</span> │ conv2d_11[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>],  │</span></span>
-<span><span class="co">## │                     │                   │            │ max_pooling2d_2[<span style="color: #00AF00;">…</span> │</span></span>
+<span><span class="co">## │ add (Add)           │ (None, 9, 9, 64)  │          0 │ conv2d_11[0][0],  │</span></span>
+<span><span class="co">## │                     │                   │            │ max_pooling2d_2[… │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_12 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │     <span style="color: #00AF00;">36,928</span> │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │</span></span>
+<span><span class="co">## │ conv2d_12 (Conv2D)  │ (None, 9, 9, 64)  │     36,928 │ add[0][0]         │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_13 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │     <span style="color: #00AF00;">36,928</span> │ conv2d_12[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
+<span><span class="co">## │ conv2d_13 (Conv2D)  │ (None, 9, 9, 64)  │     36,928 │ conv2d_12[0][0]   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ add_1 (<span style="color: #0087FF;">Add</span>)         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">9</span>, <span style="color: #00AF00;">64</span>)  │          <span style="color: #00AF00;">0</span> │ conv2d_13[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>],  │</span></span>
-<span><span class="co">## │                     │                   │            │ add[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]         │</span></span>
+<span><span class="co">## │ add_1 (Add)         │ (None, 9, 9, 64)  │          0 │ conv2d_13[0][0],  │</span></span>
+<span><span class="co">## │                     │                   │            │ add[0][0]         │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ conv2d_14 (<span style="color: #0087FF;">Conv2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">7</span>, <span style="color: #00AF00;">64</span>)  │     <span style="color: #00AF00;">36,928</span> │ add_1[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]       │</span></span>
+<span><span class="co">## │ conv2d_14 (Conv2D)  │ (None, 7, 7, 64)  │     36,928 │ add_1[0][0]       │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ global_average_poo… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">64</span>)        │          <span style="color: #00AF00;">0</span> │ conv2d_14[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePool…</span> │                   │            │                   │</span></span>
+<span><span class="co">## │ global_average_poo… │ (None, 64)        │          0 │ conv2d_14[0][0]   │</span></span>
+<span><span class="co">## │ (GlobalAveragePool… │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ dense_6 (<span style="color: #0087FF;">Dense</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>)       │     <span style="color: #00AF00;">16,640</span> │ global_average_p… │</span></span>
+<span><span class="co">## │ dense_6 (Dense)     │ (None, 256)       │     16,640 │ global_average_p… │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>)       │          <span style="color: #00AF00;">0</span> │ dense_6[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]     │</span></span>
+<span><span class="co">## │ dropout (Dropout)   │ (None, 256)       │          0 │ dense_6[0][0]     │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ dense_7 (<span style="color: #0087FF;">Dense</span>)     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)        │      <span style="color: #00AF00;">2,570</span> │ dropout[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]     │</span></span>
+<span><span class="co">## │ dense_7 (Dense)     │ (None, 10)        │      2,570 │ dropout[0][0]     │</span></span>
 <span><span class="co">## └─────────────────────┴───────────────────┴────────────┴───────────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">186,346</span> (727.91 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">186,346</span> (727.91 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 186,346 (727.91 KB)</span></span>
+<span><span class="co">##  Trainable params: 186,346 (727.91 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>Plot the model:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">model</span>, show_shapes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -707,7 +707,7 @@ ResNet model for CIFAR10 to demonstrate this:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.2</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 13/13 - 5s - 390ms/step - acc: 0.1238 - loss: 2.3001 - val_acc: 0.1100 - val_loss: 2.2936</span></span></code></pre>
+<pre><code><span><span class="co">## 13/13 - 9s - 668ms/step - acc: 0.1312 - loss: 2.2997 - val_acc: 0.1350 - val_loss: 2.2918</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -1114,7 +1114,7 @@ used in a functional model:</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

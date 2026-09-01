@@ -1,8 +1,11 @@
+AWQDTypePolicy(mode, source_name=None)
 deserialize(config, custom_objects=None)
 DTypePolicy(name=None)
 DTypePolicyMap(default_policy=None, policy_map=None)
 FloatDTypePolicy(name=None)
 get(identifier)
+GPTQDTypePolicy(mode, source_name=None)
+Int4DTypePolicy(mode, source_name=None)
 QuantizedDTypePolicy(mode, source_name=None)
 QuantizedFloat8DTypePolicy(
   mode,

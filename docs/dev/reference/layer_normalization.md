@@ -54,14 +54,16 @@ layer_normalization(
   The mean value(s) to use during normalization. The passed value(s)
   will be broadcast to the shape of the kept axes above; if the value(s)
   cannot be broadcast, an error will be raised when this layer's
-  `build()` method is called.
+  `build()` method is called. `mean` and `variance` must be specified
+  together.
 
 - variance:
 
   The variance value(s) to use during normalization. The passed value(s)
   will be broadcast to the shape of the kept axes above; if the value(s)
   cannot be broadcast, an error will be raised when this layer's
-  `build()` method is called.
+  `build()` method is called. `mean` and `variance` must be specified
+  together.
 
 - invert:
 
@@ -151,6 +153,7 @@ Other preprocessing layers:
 [`layer_auto_contrast()`](https://keras3.posit.co/dev/reference/layer_auto_contrast.md)  
 [`layer_category_encoding()`](https://keras3.posit.co/dev/reference/layer_category_encoding.md)  
 [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)  
+[`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)  
 [`layer_cut_mix()`](https://keras3.posit.co/dev/reference/layer_cut_mix.md)  
 [`layer_discretization()`](https://keras3.posit.co/dev/reference/layer_discretization.md)  
 [`layer_equalization()`](https://keras3.posit.co/dev/reference/layer_equalization.md)  
@@ -198,6 +201,12 @@ Other layers:
 [`layer_activation_relu()`](https://keras3.posit.co/dev/reference/layer_activation_relu.md)  
 [`layer_activation_softmax()`](https://keras3.posit.co/dev/reference/layer_activation_softmax.md)  
 [`layer_activity_regularization()`](https://keras3.posit.co/dev/reference/layer_activity_regularization.md)  
+[`layer_adaptive_average_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_1d.md)  
+[`layer_adaptive_average_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_2d.md)  
+[`layer_adaptive_average_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_average_pooling_3d.md)  
+[`layer_adaptive_max_pooling_1d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_1d.md)  
+[`layer_adaptive_max_pooling_2d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_2d.md)  
+[`layer_adaptive_max_pooling_3d()`](https://keras3.posit.co/dev/reference/layer_adaptive_max_pooling_3d.md)  
 [`layer_add()`](https://keras3.posit.co/dev/reference/layer_add.md)  
 [`layer_additive_attention()`](https://keras3.posit.co/dev/reference/layer_additive_attention.md)  
 [`layer_alpha_dropout()`](https://keras3.posit.co/dev/reference/layer_alpha_dropout.md)  
@@ -213,6 +222,7 @@ Other layers:
 [`layer_category_encoding()`](https://keras3.posit.co/dev/reference/layer_category_encoding.md)  
 [`layer_center_crop()`](https://keras3.posit.co/dev/reference/layer_center_crop.md)  
 [`layer_concatenate()`](https://keras3.posit.co/dev/reference/layer_concatenate.md)  
+[`layer_contrast_limited_adaptive_histogram_equalization()`](https://keras3.posit.co/dev/reference/layer_contrast_limited_adaptive_histogram_equalization.md)  
 [`layer_conv_1d()`](https://keras3.posit.co/dev/reference/layer_conv_1d.md)  
 [`layer_conv_1d_transpose()`](https://keras3.posit.co/dev/reference/layer_conv_1d_transpose.md)  
 [`layer_conv_2d()`](https://keras3.posit.co/dev/reference/layer_conv_2d.md)  
@@ -294,6 +304,7 @@ Other layers:
 [`layer_rescaling()`](https://keras3.posit.co/dev/reference/layer_rescaling.md)  
 [`layer_reshape()`](https://keras3.posit.co/dev/reference/layer_reshape.md)  
 [`layer_resizing()`](https://keras3.posit.co/dev/reference/layer_resizing.md)  
+[`layer_reversible_embedding()`](https://keras3.posit.co/dev/reference/layer_reversible_embedding.md)  
 [`layer_rms_normalization()`](https://keras3.posit.co/dev/reference/layer_rms_normalization.md)  
 [`layer_rnn()`](https://keras3.posit.co/dev/reference/layer_rnn.md)  
 [`layer_separable_conv_1d()`](https://keras3.posit.co/dev/reference/layer_separable_conv_1d.md)  

@@ -6,11 +6,30 @@ abs_max_quantize(
   epsilon=1e-07,
   to_numpy=False
 )
+abs_max_quantize_grouped_with_zero_point(
+  inputs,
+  block_size,
+  value_range=(-8, 7),
+  dtype='int8',
+  epsilon=1e-07,
+  to_numpy=False
+)
 AbsMaxQuantizer(
-  axis,
+  axis=None,
   value_range=(-127, 127),
   epsilon=1e-07,
   output_dtype='int8'
+)
+AWQConfig(
+  dataset,
+  tokenizer,
+  *,
+  weight_bits: int = 4,
+  num_samples: int = 128,
+  sequence_length: int = 512,
+  group_size: int = 128,
+  num_grid_points: int = 20,
+  quantization_layer_structure: dict = None
 )
 compute_float8_amax_history(x, amax_history)
 compute_float8_scale(
@@ -28,8 +47,34 @@ fake_quant_with_min_max_vars(
   narrow_range=False,
   axis=None
 )
+Float8QuantizationConfig()
 get(identifier, **kwargs)
-pack_int4(arr, axis=0)
+GPTQConfig(
+  dataset,
+  tokenizer,
+  *,
+  weight_bits: int = 4,
+  num_samples: int = 128,
+  per_channel: bool = True,
+  sequence_length: int = 512,
+  hessian_damping: float = 0.01,
+  group_size: int = 128,
+  symmetric: bool = False,
+  activation_order: bool = False,
+  quantization_layer_structure: dict = None
+)
+Int4QuantizationConfig(
+  weight_quantizer=None,
+  activation_quantizer='default',
+  block_size=128
+)
+Int8QuantizationConfig(weight_quantizer=None, activation_quantizer='default')
+pack_int4(
+  arr,
+  axis=0,
+  dtype='int8'
+)
+QuantizationConfig(weight_quantizer=None, activation_quantizer=None)
 quantize_and_dequantize(
   inputs,
   scale,
@@ -41,6 +86,7 @@ serialize(initializer)
 unpack_int4(
   packed,
   orig_len,
-  axis=0
+  axis=0,
+  dtype='int8'
 )
 

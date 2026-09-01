@@ -7,7 +7,7 @@
 load_model(model, custom_objects = NULL, compile = TRUE, safe_mode = TRUE)
 }
 \arguments{
-\item{model}{string, path to the saved model file,
+\item{model}{string, path to the saved model file or Orbax checkpoint directory,
 or a raw vector, as returned by \code{save_model(filepath = NULL)}}
 
 \item{custom_objects}{Optional named list mapping names

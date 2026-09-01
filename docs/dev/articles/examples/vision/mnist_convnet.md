@@ -100,35 +100,35 @@ model |> fit(
 ```
 
     ## Epoch 1/15
-    ## 422/422 - 5s - 11ms/step - accuracy: 0.8894 - loss: 0.3635 - val_accuracy: 0.9785 - val_loss: 0.0790
+    ## 422/422 - 7s - 17ms/step - accuracy: 0.8894 - loss: 0.3636 - val_accuracy: 0.9787 - val_loss: 0.0791
     ## Epoch 2/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9665 - loss: 0.1109 - val_accuracy: 0.9850 - val_loss: 0.0550
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9667 - loss: 0.1111 - val_accuracy: 0.9853 - val_loss: 0.0549
     ## Epoch 3/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9746 - loss: 0.0824 - val_accuracy: 0.9883 - val_loss: 0.0441
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9742 - loss: 0.0825 - val_accuracy: 0.9880 - val_loss: 0.0440
     ## Epoch 4/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9784 - loss: 0.0694 - val_accuracy: 0.9892 - val_loss: 0.0399
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9783 - loss: 0.0694 - val_accuracy: 0.9897 - val_loss: 0.0396
     ## Epoch 5/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9805 - loss: 0.0625 - val_accuracy: 0.9907 - val_loss: 0.0352
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9806 - loss: 0.0626 - val_accuracy: 0.9903 - val_loss: 0.0353
     ## Epoch 6/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9821 - loss: 0.0558 - val_accuracy: 0.9913 - val_loss: 0.0331
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9824 - loss: 0.0558 - val_accuracy: 0.9912 - val_loss: 0.0329
     ## Epoch 7/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9839 - loss: 0.0500 - val_accuracy: 0.9917 - val_loss: 0.0314
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9838 - loss: 0.0499 - val_accuracy: 0.9918 - val_loss: 0.0307
     ## Epoch 8/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9850 - loss: 0.0480 - val_accuracy: 0.9917 - val_loss: 0.0308
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0478 - val_accuracy: 0.9923 - val_loss: 0.0304
     ## Epoch 9/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9863 - loss: 0.0445 - val_accuracy: 0.9913 - val_loss: 0.0300
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9861 - loss: 0.0444 - val_accuracy: 0.9920 - val_loss: 0.0299
     ## Epoch 10/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9862 - loss: 0.0441 - val_accuracy: 0.9915 - val_loss: 0.0295
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9865 - loss: 0.0438 - val_accuracy: 0.9913 - val_loss: 0.0297
     ## Epoch 11/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9873 - loss: 0.0392 - val_accuracy: 0.9915 - val_loss: 0.0302
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9874 - loss: 0.0395 - val_accuracy: 0.9912 - val_loss: 0.0307
     ## Epoch 12/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9876 - loss: 0.0374 - val_accuracy: 0.9923 - val_loss: 0.0290
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9874 - loss: 0.0369 - val_accuracy: 0.9922 - val_loss: 0.0289
     ## Epoch 13/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9887 - loss: 0.0348 - val_accuracy: 0.9917 - val_loss: 0.0288
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9885 - loss: 0.0346 - val_accuracy: 0.9918 - val_loss: 0.0296
     ## Epoch 14/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9888 - loss: 0.0343 - val_accuracy: 0.9922 - val_loss: 0.0275
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9888 - loss: 0.0343 - val_accuracy: 0.9918 - val_loss: 0.0277
     ## Epoch 15/15
-    ## 422/422 - 1s - 2ms/step - accuracy: 0.9896 - loss: 0.0319 - val_accuracy: 0.9925 - val_loss: 0.0273
+    ## 422/422 - 1s - 2ms/step - accuracy: 0.9896 - loss: 0.0320 - val_accuracy: 0.9922 - val_loss: 0.0281
 
 ## Evaluate the trained model
 
@@ -138,7 +138,12 @@ score
 ```
 
     ## $accuracy
-    ## [1] 0.9918
+    ## [1] 0.9912
     ##
     ## $loss
-    ## [1] 0.02389547
+    ## [1] 0.02427303
+
+## Relevant Chapters from Deep Learning with Python
+
+- [Chapter 8: Image
+  classification](https://deeplearningwithpython.io/chapters/chapter08_image-classification)

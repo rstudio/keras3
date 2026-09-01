@@ -5,30 +5,57 @@ class RandomInvert(keras.src.layers.preprocessing.image_preprocessing.base_image
  |
  |  Preprocessing layer for random inversion of image colors.
  |
- |  This layer randomly inverts the colors of input images with a specified
- |  probability range. When applied, each image has a chance of having its
- |  colors inverted, where the pixel values are transformed to their
- |  complementary values. Images that are not selected for inversion
- |  remain unchanged.
+ |      This layer randomly inverts the colors of input images with a specified
+ |      probability range. When applied, each image has a chance of having its
+ |      colors inverted, where the pixel values are transformed to their
+ |      complementary values. Images that are not selected for inversion
+ |      remain unchanged.
  |
- |  Args:
- |      factor: A single float or a tuple of two floats.
- |          `factor` controls the probability of inverting the image colors.
- |          If a tuple is provided, the value is sampled between the two values
- |          for each image, where `factor[0]` is the minimum and `factor[1]` is
- |          the maximum probability. If a single float is provided, a value
- |          between `0.0` and the provided float is sampled.
- |          Defaults to `(0, 1)`.
- |      value_range: a tuple or a list of two elements. The first value
- |          represents the lower bound for values in passed images, the second
- |          represents the upper bound. Images passed to the layer should have
- |          values within `value_range`. Defaults to `(0, 255)`.
- |      seed: Integer. Used to create a random seed.
+ |      **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
+ |      (independently of which backend you're using).
+ |
+ |      Args:
+ |          factor: A single float or a tuple of two floats.
+ |              `factor` controls the probability of inverting the image colors.
+ |              If a tuple is provided, the value is sampled between the two values
+ |              for each image, where `factor[0]` is the minimum and `factor[1]` is
+ |              the maximum probability. If a single float is provided, a value
+ |              between `0.0` and the provided float is sampled.
+ |              Defaults to `(0, 1)`.
+ |          value_range: a tuple or a list of two elements. The first value
+ |              represents the lower bound for values in passed images, the second
+ |              represents the upper bound. Images passed to the layer should have
+ |              values within `value_range`. Defaults to `(0, 255)`.
+ |          seed: Integer. Used to create a random seed.
+ |
+ |      Example:
+ |
+ |
+ |  ```python
+ |  layer = keras.layers.RandomInvert(value_range=(0, 255))
+ |  images = np.random.randint(0, 255, (8, 224, 224, 3), dtype="uint8")
+ |
+ |  labels = keras.ops.one_hot(
+ |      np.array([0, 1, 2, 0, 1, 2, 0, 1]),
+ |      num_classes=3
+ |  )
+ |
+ |  segmentation_masks = np.random.randint(0, 3, (8, 224, 224, 1), dtype="uint8")
+ |
+ |  output = layer(
+ |      {
+ |          "images": images,
+ |          "labels": labels,
+ |          "segmentation_masks": segmentation_masks
+ |      },
+ |      training=True
+ |  )
+ |  ```
  |
  |  Method resolution order:
  |      RandomInvert
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

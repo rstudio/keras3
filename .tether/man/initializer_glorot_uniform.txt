@@ -1,7 +1,7 @@
 Help on class GlorotUniform in module keras.src.initializers.random_initializers:
 
 class GlorotUniform(VarianceScaling)
- |  GlorotUniform(seed=None)
+ |  GlorotUniform(seed=None, input_axes=None, output_axes=None)
  |
  |  The Glorot uniform initializer, also called Xavier uniform initializer.
  |
@@ -42,7 +42,12 @@ class GlorotUniform(VarianceScaling)
  |
  |  Methods defined here:
  |
- |  __init__(self, seed=None)
+ |  __init__(
+ |    self,
+ |    seed=None,
+ |    input_axes=None,
+ |    output_axes=None
+ |  )
  |      Initialize self.  See help(type(self)) for accurate signature.
  |
  |  get_config(self)

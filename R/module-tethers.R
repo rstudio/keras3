@@ -47,6 +47,13 @@ NULL
 NULL
 
 
+#' @title keras.distillation
+#' @name keras.distillation
+#' @tether keras.distillation
+#' @noRd
+NULL
+
+
 #' @title keras.distribution
 #' @name keras.distribution
 #' @tether keras.distribution

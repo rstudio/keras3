@@ -184,8 +184,14 @@ this object you should only pass functions that are registered Keras
 serializables (see \code{\link[=register_keras_serializable]{register_keras_serializable()}}
 for more details).
 \item When using a custom callable for \code{standardize}, the data received
-by the callable will be exactly as passed to this layer. The callable
-should return a tensor of the same shape as the input.
+by the callable depends on the active Keras backend. With the TensorFlow
+backend, the callable receives a \code{tf.Tensor} of dtype \code{string}, so it
+should use \code{tensorflow::tf$strings} operations. With the JAX, NumPy,
+PyTorch, or OpenVINO backend, the callable receives a NumPy array of
+Unicode strings, so it should use \code{reticulate::import("numpy")$char} /
+\code{reticulate::import("numpy")$strings} operations or other vectorized
+string logic. The callable should return data with the same shape as the
+input.
 \item When using a custom callable for \code{split}, the data received by the
 callable will have the 1st dimension squeezed out - instead of
 \code{list("string to split", "another string to split")}, the Callable will
@@ -276,6 +282,7 @@ Other preprocessing layers: \cr
 \code{\link{layer_auto_contrast}()} \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_cut_mix}()} \cr
 \code{\link{layer_discretization}()} \cr
 \code{\link{layer_equalization}()} \cr
@@ -323,6 +330,12 @@ Other layers: \cr
 \code{\link{layer_activation_relu}()} \cr
 \code{\link{layer_activation_softmax}()} \cr
 \code{\link{layer_activity_regularization}()} \cr
+\code{\link{layer_adaptive_average_pooling_1d}()} \cr
+\code{\link{layer_adaptive_average_pooling_2d}()} \cr
+\code{\link{layer_adaptive_average_pooling_3d}()} \cr
+\code{\link{layer_adaptive_max_pooling_1d}()} \cr
+\code{\link{layer_adaptive_max_pooling_2d}()} \cr
+\code{\link{layer_adaptive_max_pooling_3d}()} \cr
 \code{\link{layer_add}()} \cr
 \code{\link{layer_additive_attention}()} \cr
 \code{\link{layer_alpha_dropout}()} \cr
@@ -338,6 +351,7 @@ Other layers: \cr
 \code{\link{layer_category_encoding}()} \cr
 \code{\link{layer_center_crop}()} \cr
 \code{\link{layer_concatenate}()} \cr
+\code{\link{layer_contrast_limited_adaptive_histogram_equalization}()} \cr
 \code{\link{layer_conv_1d}()} \cr
 \code{\link{layer_conv_1d_transpose}()} \cr
 \code{\link{layer_conv_2d}()} \cr
@@ -420,6 +434,7 @@ Other layers: \cr
 \code{\link{layer_rescaling}()} \cr
 \code{\link{layer_reshape}()} \cr
 \code{\link{layer_resizing}()} \cr
+\code{\link{layer_reversible_embedding}()} \cr
 \code{\link{layer_rms_normalization}()} \cr
 \code{\link{layer_rnn}()} \cr
 \code{\link{layer_separable_conv_1d}()} \cr

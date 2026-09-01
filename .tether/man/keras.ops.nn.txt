@@ -1,3 +1,13 @@
+adaptive_average_pool(
+  inputs,
+  output_size,
+  data_format=None
+)
+adaptive_max_pool(
+  inputs,
+  output_size,
+  data_format=None
+)
 average_pool(
   inputs,
   pool_size,
@@ -59,6 +69,11 @@ ctc_loss(
   output_length,
   mask_index=0
 )
+depth_to_space(
+  x,
+  block_size,
+  data_format='channels_last'
+)
 depthwise_conv(
   inputs,
   kernel,
@@ -79,6 +94,14 @@ dot_product_attention(
   attn_logits_soft_cap=None
 )
 elu(x, alpha=1.0)
+fold(
+  x,
+  output_size,
+  kernel_size,
+  dilation=1,
+  padding=0,
+  stride=1
+)
 gelu(x, approximate=True)
 glu(x, axis=-1)
 hard_shrink(x, threshold=0.5)
@@ -161,6 +184,11 @@ soft_shrink(x, threshold=0.5)
 softmax(x, axis=-1)
 softplus(x)
 softsign(x)
+space_to_depth(
+  x,
+  block_size,
+  data_format='channels_last'
+)
 sparse_categorical_crossentropy(
   target,
   output,
@@ -177,5 +205,12 @@ threshold(
   x,
   threshold,
   default_value
+)
+unfold(
+  x,
+  kernel_size,
+  dilation=1,
+  padding=0,
+  stride=1
 )
 

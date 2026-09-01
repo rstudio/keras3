@@ -33,3 +33,27 @@ test_initializer("he_uniform")
 test_initializer("he_normal")
 test_initializer("lecun_uniform")
 test_initializer("lecun_normal", required_version = "2.0.6")
+
+test_that("variance-scaling initializers accept custom fan axes", {
+  skip_if_no_keras("3.15.1")
+
+  initializers <- list(
+    initializer_variance_scaling,
+    initializer_glorot_normal,
+    initializer_glorot_uniform,
+    initializer_he_normal,
+    initializer_he_uniform,
+    initializer_lecun_normal,
+    initializer_lecun_uniform
+  )
+
+  for (initializer in initializers) {
+    config <- initializer(
+      input_axes = c(1L, 2L),
+      output_axes = 3L
+    )$get_config()
+
+    expect_identical(config$input_axes, c(0L, 1L))
+    expect_identical(config$output_axes, 2L)
+  }
+})

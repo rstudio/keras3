@@ -1,10 +1,27 @@
 abs(x)
 absolute(x)
+adaptive_average_pool(
+  inputs,
+  output_size,
+  data_format=None
+)
+adaptive_max_pool(
+  inputs,
+  output_size,
+  data_format=None
+)
 add(x1, x2)
 all(
   x,
   axis=None,
   keepdims=False
+)
+allclose(
+  x1,
+  x2,
+  rtol=1e-05,
+  atol=1e-08,
+  equal_nan=False
 )
 amax(
   x,
@@ -30,7 +47,7 @@ append(
 arange(
   start,
   stop=None,
-  step=1,
+  step=None,
   dtype=None
 )
 arccos(x)
@@ -57,6 +74,11 @@ argpartition(
 )
 argsort(x, axis=-1)
 array(x, dtype=None)
+array_split(
+  x,
+  indices_or_sections,
+  axis=0
+)
 associative_scan(
   f,
   elems,
@@ -113,9 +135,11 @@ categorical_crossentropy(
   axis=-1
 )
 cbrt(x)
+cdist(x, y)
 ceil(x)
 celu(x, alpha=1.0)
-cholesky(x)
+cholesky(x, upper=False)
+cholesky_inverse(x, upper=False)
 clip(
   x,
   x_min,
@@ -199,6 +223,11 @@ cumsum(
 )
 custom_gradient(f)
 deg2rad(x)
+depth_to_space(
+  x,
+  block_size,
+  data_format='channels_last'
+)
 depthwise_conv(
   inputs,
   kernel,
@@ -236,6 +265,8 @@ dot_product_attention(
   flash_attention=None,
   attn_logits_soft_cap=None
 )
+dsplit(x, indices_or_sections)
+dstack(xs)
 dtype(x)
 eig(x)
 eigh(x)
@@ -246,8 +277,10 @@ einsum(
 )
 elu(x, alpha=1.0)
 empty(shape, dtype=None)
+empty_like(x, dtype=None)
 equal(x1, x2)
 erf(x)
+erfc(x)
 erfinv(x)
 exp(x)
 exp2(x)
@@ -264,11 +297,25 @@ eye(
   k=0,
   dtype=None
 )
+fabs(x)
 fft(x)
 fft2(x)
 flip(x, axis=None)
+fliplr(x)
+flipud(x)
 floor(x)
 floor_divide(x1, x2)
+fmax(x1, x2)
+fmin(x1, x2)
+fmod(x1, x2)
+fold(
+  x,
+  output_size,
+  kernel_size,
+  dilation=1,
+  padding=0,
+  stride=1
+)
 fori_loop(
   lower,
   upper,
@@ -285,7 +332,16 @@ full_like(
   fill_value,
   dtype=None
 )
+gcd(x1, x2)
 gelu(x, approximate=True)
+geomspace(
+  start,
+  stop,
+  num=50,
+  endpoint=True,
+  dtype=None,
+  axis=0
+)
 get_item(x, key)
 glu(x, axis=-1)
 greater(x1, x2)
@@ -303,7 +359,10 @@ histogram(
   bins=10,
   range=None
 )
+hsplit(x, indices_or_sections)
 hstack(xs)
+hypot(x1, x2)
+i0(x)
 identity(n, dtype=None)
 ifft2(x)
 imag(x)
@@ -325,8 +384,17 @@ isclose(
   equal_nan=False
 )
 isfinite(x)
+isin(
+  x1,
+  x2,
+  assume_unique=False,
+  invert=False
+)
 isinf(x)
 isnan(x)
+isneginf(x)
+isposinf(x)
+isreal(x)
 istft(
   x,
   sequence_length,
@@ -336,7 +404,14 @@ istft(
   window='hann',
   center=True
 )
+jvp(
+  fun,
+  primals,
+  tangents,
+  has_aux=False
+)
 kaiser(x, beta)
+kron(x1, x2)
 layer_normalization(
   x,
   gamma=None,
@@ -345,6 +420,8 @@ layer_normalization(
   epsilon=None,
   **kwargs
 )
+lcm(x1, x2)
+ldexp(x1, x2)
 leaky_relu(x, negative_slope=0.2)
 left_shift(x, y)
 less(x1, x2)
@@ -366,6 +443,7 @@ log10(x)
 log1p(x)
 log2(x)
 logaddexp(x1, x2)
+logaddexp2(x1, x2)
 logdet(x)
 logical_and(x1, x2)
 logical_not(x)
@@ -393,6 +471,7 @@ lstsq(
 lu_factor(x)
 map(f, xs)
 matmul(x1, x2)
+matrix_rank(x, tol=None)
 max(
   x,
   axis=None,
@@ -452,8 +531,83 @@ nan_to_num(
   posinf=None,
   neginf=None
 )
+nanargmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanargmin(
+  x,
+  axis=None,
+  keepdims=False
+)
+nancumprod(
+  x,
+  axis=None,
+  dtype=None
+)
+nancumsum(
+  x,
+  axis=None,
+  dtype=None
+)
+nanmax(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanmean(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanmedian(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanmin(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanpercentile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
+nanprod(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanquantile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
+nanstd(
+  x,
+  axis=None,
+  keepdims=False
+)
+nansum(
+  x,
+  axis=None,
+  keepdims=False
+)
+nanvar(
+  x,
+  axis=None,
+  keepdims=False
+)
 ndim(x)
 negative(x)
+nextafter(x1, x2)
 nn: Module(keras.ops.nn)
 nonzero(x)
 norm(
@@ -486,6 +640,14 @@ pad(
   mode='constant',
   constant_values=None
 )
+percentile(
+  x,
+  q,
+  axis=None,
+  method='linear',
+  keepdims=False
+)
+pinv(x, rcond=None)
 polar(abs_, angle)
 power(x1, x2)
 prod(
@@ -499,6 +661,11 @@ psnr(
   x2,
   max_val
 )
+ptp(
+  x,
+  axis=None,
+  keepdims=False
+)
 qr(x, mode='reduced')
 quantile(
   x,
@@ -507,6 +674,7 @@ quantile(
   method='linear',
   keepdims=False
 )
+rad2deg(x)
 ravel(x)
 real(x)
 rearrange(
@@ -560,7 +728,8 @@ scatter(
 scatter_update(
   inputs,
   indices,
-  updates
+  updates,
+  reduction=None
 )
 searchsorted(
   sorted_sequence,
@@ -568,6 +737,18 @@ searchsorted(
   side='left'
 )
 segment_max(
+  data,
+  segment_ids,
+  num_segments=None,
+  sorted=False
+)
+segment_min(
+  data,
+  segment_ids,
+  num_segments=None,
+  sorted=False
+)
+segment_prod(
   data,
   segment_ids,
   num_segments=None,
@@ -600,6 +781,7 @@ sign(x)
 signbit(x)
 silu(x)
 sin(x)
+sinc(x)
 sinh(x)
 size(x)
 slice(
@@ -624,6 +806,11 @@ solve_triangular(
   lower=False
 )
 sort(x, axis=-1)
+space_to_depth(
+  x,
+  block_size,
+  data_format='channels_last'
+)
 sparse_categorical_crossentropy(
   target,
   output,
@@ -715,6 +902,12 @@ trace(
   axis2=1
 )
 transpose(x, axes=None)
+trapezoid(
+  y,
+  x=None,
+  dx=1.0,
+  axis=-1
+)
 tri(
   N,
   M=None,
@@ -725,11 +918,33 @@ tril(x, k=0)
 triu(x, k=0)
 true_divide(x1, x2)
 trunc(x)
+unfold(
+  x,
+  kernel_size,
+  dilation=1,
+  padding=0,
+  stride=1
+)
+unique(
+  x,
+  sorted=True,
+  return_index=False,
+  return_inverse=False,
+  return_counts=False,
+  axis=None,
+  size=None,
+  fill_value=None
+)
 unravel_index(indices, shape)
 unstack(
   x,
   num=None,
   axis=0
+)
+vander(
+  x,
+  N=None,
+  increasing=False
 )
 var(
   x,
@@ -744,8 +959,10 @@ vectorize(
   signature=None
 )
 vectorized_map(function, elements)
+view(x, dtype=None)
 view_as_complex(x)
 view_as_real(x)
+vsplit(x, indices_or_sections)
 vstack(xs)
 where(
   condition,

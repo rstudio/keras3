@@ -67,9 +67,8 @@
 #' @param data_format
 #' `"channels_last"` or `"channels_first"`.
 #'
-#' @param backend_module
-#' Backend module to use (if different from the default
-#' backend).
+#' @param ...
+#' For forward/backward compatability.
 #'
 #' @export
 #' @family image utils
@@ -80,7 +79,7 @@
 #' @tether keras.preprocessing.image.smart_resize
 image_smart_resize <-
 function (x, size, interpolation = "bilinear", data_format = "channels_last",
-    backend_module = NULL)
+    ...)
 {
     args <- capture_args(list(size = as_integer))
     do.call(keras$preprocessing$image$smart_resize, args)

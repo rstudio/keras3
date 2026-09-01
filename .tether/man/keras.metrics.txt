@@ -254,6 +254,7 @@ SparseCategoricalCrossentropy(
   name='sparse_categorical_crossentropy',
   dtype=None,
   from_logits=False,
+  ignore_class=None,
   axis=-1
 )
 SparseTopKCategoricalAccuracy(

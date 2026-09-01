@@ -1,7 +1,7 @@
 Help on class JaxLayer in module keras.src.utils.jax_layer:
 
 class JaxLayer(keras.src.layers.layer.Layer)
- |  JaxLayer(call_fn, init_fn=None, params=None, state=None, seed=None, **kwargs)
+ |  JaxLayer(call_fn, init_fn=None, params=None, state=None, seed=None, native_serialization_platforms=None, **kwargs)
  |
  |  Keras Layer that wraps a JAX model.
  |
@@ -193,8 +193,12 @@ class JaxLayer(keras.src.layers.layer.Layer)
  |          argument, then `init_fn` is called at build time to initialize the
  |          non-trainable state of the model.
  |    seed: Seed for random number generator. Optional.
- |    dtype: The dtype of the layer's computations and weights. Can also be a
- |          `keras.DTypePolicy`. Optional. Defaults to the default policy.
+ |    native_serialization_platforms: Sequence of platforms ('cpu', 'cuda',
+ |          'rocm', 'tpu') to compile for when using `jax2tf.convert` with
+ |          native serialization. This is only used when the Keras backend is
+ |          `tensorflow`. If `None`, the function is compiled for the
+ |          default backend. If multiple platforms are specified, the exported
+ |          module will be device-polymorphic.
  |
  |  Method resolution order:
  |      JaxLayer
@@ -216,6 +220,7 @@ class JaxLayer(keras.src.layers.layer.Layer)
  |    params=None,
  |    state=None,
  |    seed=None,
+ |    native_serialization_platforms=None,
  |    **kwargs
  |  )
  |      Initialize self.  See help(type(self)) for accurate signature.

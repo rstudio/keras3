@@ -17,7 +17,7 @@ optimizer_adam_w(
   use_ema = FALSE,
   ema_momentum = 0.99,
   ema_overwrite_frequency = NULL,
-  name = "adamw",
+  name = NULL,
   ...,
   loss_scale_factor = NULL,
   gradient_accumulation_steps = NULL
@@ -147,9 +147,12 @@ Other optimizers: \cr
 \code{\link{optimizer_lamb}()} \cr
 \code{\link{optimizer_lion}()} \cr
 \code{\link{optimizer_loss_scale}()} \cr
+\code{\link{optimizer_map}()} \cr
+\code{\link{optimizer_multi}()} \cr
 \code{\link{optimizer_muon}()} \cr
 \code{\link{optimizer_nadam}()} \cr
 \code{\link{optimizer_rmsprop}()} \cr
+\code{\link{optimizer_schedule_free_adam_w}()} \cr
 \code{\link{optimizer_sgd}()} \cr
 }
 \concept{optimizers}

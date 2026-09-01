@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
 <meta property="og:title" content="Introduction to Keras for engineers">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">keras3</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.5.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -174,30 +174,30 @@ cases)</li>
 <p>Here’s our model summary:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential"</span></span></span>
+<pre><code><span><span class="co">## Model: "sequential"</span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
+<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">64</span>)     │           <span style="color: #00AF00;">640</span> │</span></span>
+<span><span class="co">## │ conv2d (Conv2D)                 │ (None, 26, 26, 64)     │           640 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">24</span>, <span style="color: #00AF00;">64</span>)     │        <span style="color: #00AF00;">36,928</span> │</span></span>
+<span><span class="co">## │ conv2d_1 (Conv2D)               │ (None, 24, 24, 64)     │        36,928 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">12</span>, <span style="color: #00AF00;">64</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ max_pooling2d (MaxPooling2D)    │ (None, 12, 12, 64)     │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_2 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">10</span>, <span style="color: #00AF00;">128</span>)    │        <span style="color: #00AF00;">73,856</span> │</span></span>
+<span><span class="co">## │ conv2d_2 (Conv2D)               │ (None, 10, 10, 128)    │        73,856 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_3 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">8</span>, <span style="color: #00AF00;">128</span>)      │       <span style="color: #00AF00;">147,584</span> │</span></span>
+<span><span class="co">## │ conv2d_3 (Conv2D)               │ (None, 8, 8, 128)      │       147,584 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ global_average_pooling2d        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
-<span><span class="co">## │ (<span style="color: #0087FF;">GlobalAveragePooling2D</span>)        │                        │               │</span></span>
+<span><span class="co">## │ global_average_pooling2d        │ (None, 128)            │             0 │</span></span>
+<span><span class="co">## │ (GlobalAveragePooling2D)        │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">128</span>)            │             <span style="color: #00AF00;">0</span> │</span></span>
+<span><span class="co">## │ dropout (Dropout)               │ (None, 128)            │             0 │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)             │         <span style="color: #00AF00;">1,290</span> │</span></span>
+<span><span class="co">## │ dense (Dense)                   │ (None, 10)             │         1,290 │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">260,298</span> (1016.79 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">260,298</span> (1016.79 KB)</span></span>
-<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
+<span><span class="co">##  Total params: 260,298 (1016.79 KB)</span></span>
+<span><span class="co">##  Trainable params: 260,298 (1016.79 KB)</span></span>
+<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
 <p>We use the <code><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile()</a></code> method to specify the optimizer,
 loss function, and the metrics to monitor. Note that with the JAX and
 TensorFlow backends, XLA compilation is turned on by default.</p>
@@ -229,23 +229,23 @@ unseen data.</p>
 <span>  callbacks <span class="op">=</span> <span class="va">callbacks</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7485 - loss: 0.7444 - val_acc: 0.9657 - val_loss: 0.1165</span></span>
+<span><span class="co">## 399/399 - 10s - 24ms/step - acc: 0.7447 - loss: 0.7516 - val_acc: 0.9639 - val_loss: 0.1245</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9385 - loss: 0.2055 - val_acc: 0.9770 - val_loss: 0.0773</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9378 - loss: 0.2065 - val_acc: 0.9780 - val_loss: 0.0748</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9571 - loss: 0.1461 - val_acc: 0.9823 - val_loss: 0.0609</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9569 - loss: 0.1467 - val_acc: 0.9822 - val_loss: 0.0615</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9652 - loss: 0.1169 - val_acc: 0.9863 - val_loss: 0.0490</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9656 - loss: 0.1162 - val_acc: 0.9869 - val_loss: 0.0468</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9710 - loss: 0.0998 - val_acc: 0.9872 - val_loss: 0.0465</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9722 - loss: 0.0984 - val_acc: 0.9869 - val_loss: 0.0462</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9750 - loss: 0.0864 - val_acc: 0.9871 - val_loss: 0.0430</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9751 - loss: 0.0863 - val_acc: 0.9889 - val_loss: 0.0385</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9768 - loss: 0.0778 - val_acc: 0.9893 - val_loss: 0.0392</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9765 - loss: 0.0781 - val_acc: 0.9900 - val_loss: 0.0341</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9797 - loss: 0.0676 - val_acc: 0.9876 - val_loss: 0.0425</span></span>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9791 - loss: 0.0679 - val_acc: 0.9882 - val_loss: 0.0411</span></span>
 <span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 399/399 - 2s - 5ms/step - acc: 0.9799 - loss: 0.0660 - val_acc: 0.9892 - val_loss: 0.0403</span></span></code></pre>
+<span><span class="co">## 399/399 - 2s - 6ms/step - acc: 0.9804 - loss: 0.0652 - val_acc: 0.9896 - val_loss: 0.0381</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
 <p>During training, we were saving a model at the end of each epoch. You
@@ -259,7 +259,7 @@ can also save the model in its latest state like this:</p>
 <code><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict()</a></code>:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">predictions</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">x_test</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 313/313 - 1s - 2ms/step</span></span></code></pre>
+<pre><code><span><span class="co">## 313/313 - 1s - 3ms/step</span></span></code></pre>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">predictions</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 10000    10</span></span></code></pre>
@@ -374,7 +374,7 @@ layers:</p>
 <span>  epochs <span class="op">=</span> <span class="fl">1</span>, <span class="co"># For speed</span></span>
 <span>  validation_split <span class="op">=</span> <span class="fl">0.15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 399/399 - 6s - 15ms/step - acc: 0.7353 - loss: 0.7741 - val_acc: 0.9254 - val_loss: 0.2413</span></span></code></pre>
+<pre><code><span><span class="co">## 399/399 - 7s - 17ms/step - acc: 0.7348 - loss: 0.7740 - val_acc: 0.9289 - val_loss: 0.2364</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="training-models-on-arbitrary-data-sources">Training models on arbitrary data sources<a class="anchor" aria-label="anchor" href="#training-models-on-arbitrary-data-sources"></a>
@@ -442,7 +442,7 @@ your Keras backend.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_dataset</span>, epochs <span class="op">=</span> <span class="fl">1</span>, validation_data <span class="op">=</span> <span class="va">test_dataset</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 469/469 - 7s - 15ms/step - acc: 0.7519 - loss: 0.7412 - val_acc: 0.9081 - val_loss: 0.3064</span></span></code></pre>
+<pre><code><span><span class="co">## 469/469 - 8s - 18ms/step - acc: 0.7548 - loss: 0.7305 - val_acc: 0.9116 - val_loss: 0.2958</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="further-reading">Further reading<a class="anchor" aria-label="anchor" href="#further-reading"></a>
@@ -502,7 +502,7 @@ distributed training with TensorFlow</a>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

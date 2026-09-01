@@ -124,7 +124,11 @@ class TorchModuleWrapper(keras.src.layers.layer.Layer)
  |  ----------------------------------------------------------------------
  |  Class methods defined here:
  |
- |  from_config(config)
+ |  from_config(
+ |    config,
+ |    custom_objects=None,
+ |    safe_mode=None
+ |  )
  |      Creates an operation from its config.
  |
  |      This method is the reverse of `get_config`, capable of instantiating the

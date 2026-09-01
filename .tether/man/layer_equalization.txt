@@ -14,7 +14,7 @@ class Equalization(keras.src.layers.preprocessing.image_preprocessing.base_image
  |  equalization independently on each color channel. At inference time,
  |  the equalization is consistently applied.
  |
- |  **Note:** This layer is safe to use inside a `tf.data` pipeline
+ |  **Note:** This layer is safe to use inside a `tf.data` or `grain` pipeline
  |  (independently of which backend you're using).
  |
  |  Args:
@@ -61,7 +61,7 @@ class Equalization(keras.src.layers.preprocessing.image_preprocessing.base_image
  |  Method resolution order:
  |      Equalization
  |      keras.src.layers.preprocessing.image_preprocessing.base_image_preprocessing_layer.BaseImagePreprocessingLayer
- |      keras.src.layers.preprocessing.tf_data_layer.TFDataLayer
+ |      keras.src.layers.preprocessing.data_layer.DataLayer
  |      keras.src.layers.layer.Layer
  |      keras.src.backend.tensorflow.layer.TFLayer
  |      keras.src.backend.tensorflow.trackable.KerasAutoTrackable

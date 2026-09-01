@@ -9,7 +9,8 @@ keras.utils.timeseries_dataset_from_array(
   shuffle=False,
   seed=None,
   start_index=None,
-  end_index=None
+  end_index=None,
+  format='tf'
 )
 __doc__
 Creates a dataset of sliding windows over a timeseries provided as array.
@@ -51,10 +52,17 @@ Args:
     end_index: Optional int; data points later (exclusive) than `end_index`
         will not be used in the output sequences.
         This is useful to reserve part of the data for test or validation.
+    format: Optional string; either `"tf"` (default) for a
+        `tf.data.Dataset`, or `"grain"` for a Grain dataset. Grain
+        datasets are framework-agnostic and work with JAX, PyTorch,
+        and NumPy backends without requiring TensorFlow.
 
 Returns:
 
-A `tf.data.Dataset` instance. If `targets` was passed, the dataset yields
+A dataset instance. If `format="tf"`, returns a `tf.data.Dataset`.
+If `format="grain"`, returns a Grain `IterDataset` (or `MapDataset`
+when `batch_size` is `None`).
+If `targets` was passed, the dataset yields
 tuple `(batch_of_sequences, batch_of_targets)`. If not, the dataset yields
 only `batch_of_sequences`.
 

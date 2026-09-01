@@ -17,6 +17,7 @@ keras_variable(
   aggregation = "none",
   synchronization = "auto",
   name = NULL,
+  layout = NULL,
   ...
 )
 ```
@@ -65,6 +66,11 @@ keras_variable(
 
   Optional. A unique name for the variable. Automatically generated if
   not set.
+
+- layout:
+
+  Optional. Sharding layout for the variable. Can be a
+  `keras.distribution.TensorLayout` or a backend-specific layout.
 
 - ...:
 

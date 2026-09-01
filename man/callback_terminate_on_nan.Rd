@@ -4,14 +4,38 @@
 \alias{callback_terminate_on_nan}
 \title{Callback that terminates training when a NaN loss is encountered.}
 \usage{
-callback_terminate_on_nan()
+callback_terminate_on_nan(raise_error = FALSE)
+}
+\arguments{
+\item{raise_error}{If \code{FALSE}, stop training gracefully. If \code{TRUE}, raise an
+error immediately when a NaN or Inf loss is detected, bypassing callback
+cleanup methods.}
 }
 \value{
 A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
 }
 \description{
-Callback that terminates training when a NaN loss is encountered.
+This callback monitors the loss during training and terminates training when
+a NaN or Inf loss is detected. By default, training stops gracefully by
+setting the model's \code{stop_training} flag, which allows callback cleanup
+methods such as \code{on_train_end()} to run.
+
+Set \code{raise_error = TRUE} to raise an error immediately when a NaN or Inf is
+detected. In this mode, \code{on_train_end()} is not called on other callbacks.
+This can preserve backup states or prevent unintended cleanup after a
+training failure.
 }
+\section{Examples}{
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{# Graceful termination (default)
+callback <- callback_terminate_on_nan()
+model |> fit(x, y, callbacks = list(callback))
+
+# Immediate error
+callback <- callback_terminate_on_nan(raise_error = TRUE)
+model |> fit(x, y, callbacks = list(callback))
+}\if{html}{\out{</div>}}
+}
+
 \seealso{
 \itemize{
 \item \url{https://keras.io/api/callbacks/terminate_on_nan#terminateonnan-class}
@@ -25,6 +49,7 @@ Other callbacks: \cr
 \code{\link{callback_lambda}()} \cr
 \code{\link{callback_learning_rate_scheduler}()} \cr
 \code{\link{callback_model_checkpoint}()} \cr
+\code{\link{callback_orbax_checkpoint}()} \cr
 \code{\link{callback_reduce_lr_on_plateau}()} \cr
 \code{\link{callback_remote_monitor}()} \cr
 \code{\link{callback_swap_ema_weights}()} \cr

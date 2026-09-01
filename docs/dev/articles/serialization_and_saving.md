@@ -366,8 +366,10 @@ str(layer_config)
     ##  $ kernel_initializer :List of 4
     ##   ..$ module         : chr "keras.initializers"
     ##   ..$ class_name     : chr "GlorotUniform"
-    ##   ..$ config         :List of 1
-    ##   .. ..$ seed: NULL
+    ##   ..$ config         :List of 3
+    ##   .. ..$ seed       : NULL
+    ##   .. ..$ input_axes : NULL
+    ##   .. ..$ output_axes: NULL
     ##   ..$ registered_name: NULL
     ##  $ bias_initializer   :List of 4
     ##   ..$ module         : chr "keras.initializers"

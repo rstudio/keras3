@@ -4,13 +4,19 @@
 \alias{quantize_weights}
 \title{Quantize the weights of a model.}
 \usage{
-quantize_weights(object, mode, ...)
+quantize_weights(object, mode = NULL, config = NULL, filters = NULL, ...)
 }
 \arguments{
 \item{object}{A Keras Model or Layer.}
 
-\item{mode}{The mode of the quantization. Only 'int8' is supported at this
-time.}
+\item{mode}{Quantization mode supported by the installed Keras version. Optional when
+\code{config} is supplied.}
+
+\item{config}{An optional upstream Keras quantization configuration object.}
+
+\item{filters}{Optional filters controlling which layers are quantized. May be a regular
+expression string, a list of regular expression strings, or a callable.
+Only layers matching the filter conditions are quantized.}
 
 \item{...}{Passed on to the \code{object} quantization method.}
 }
@@ -20,11 +26,23 @@ model is modified in-place.
 }
 \description{
 Note that the model must be built first before calling this method.
-\code{quantize_weights()} will recursively call \code{layer$quantize(mode)} in all layers and
+\code{quantize_weights()} will recursively call \code{layer$quantize(...)} in all layers and
 will be skipped if the layer doesn't implement the function.
 
-Currently only \code{Dense} and \code{EinsumDense} layers support quantization.
+Pass a \code{mode} string to use the default configuration for that mode.
+Advanced users can pass an upstream Keras quantization configuration object
+via \code{config}.
 }
+\section{Examples}{
+Quantize a model to int8 with the default configuration:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{model <- keras_model_sequential(input_shape = 10) |>
+  layer_dense(10)
+model |> quantize_weights("int8")
+}\if{html}{\out{</div>}}
+
+}
+
 \seealso{
 Other layer methods: \cr
 \code{\link{count_params}()} \cr
