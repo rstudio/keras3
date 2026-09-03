@@ -34,7 +34,7 @@ metric_recall(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - thresholds:
 

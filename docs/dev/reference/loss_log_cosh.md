@@ -34,7 +34,7 @@ loss_log_cosh(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

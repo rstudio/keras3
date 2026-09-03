@@ -194,7 +194,7 @@ model |> fit(random_normal(c(2, 3)), random_normal(c(2, 3)), epochs = 1)
 ```
 
 ```
-## 1/1 - 1s - 508ms/step - loss: 2.8362
+## 1/1 - 1s - 503ms/step - loss: 2.8362
 ```
 
 ``` r
@@ -611,26 +611,26 @@ summary(model, show_trainable = TRUE)
 ```
 
 ```
-## Model: "functional_8"
+## [1mModel: "functional_8"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
-## ┃ Layer (type)                ┃ Output Shape          ┃    Param # ┃ Trai… ┃
+## ┃[1m [0m[1mLayer (type)               [0m[1m [0m┃[1m [0m[1mOutput Shape         [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
-## │ input_layer_7 (InputLayer)  │ (None, 150, 150, 3)   │          0 │   -   │
+## │ input_layer_7 ([38;5;33mInputLayer[0m)  │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)   │          [38;5;34m0[0m │   [1m-[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ rescaling (Rescaling)       │ (None, 150, 150, 3)   │          0 │   -   │
+## │ rescaling ([38;5;33mRescaling[0m)       │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)   │          [38;5;34m0[0m │   [1m-[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ xception (Functional)       │ (None, 5, 5, 2048)    │ 20,861,480 │   N   │
+## │ xception ([38;5;33mFunctional[0m)       │ ([38;5;45mNone[0m, [38;5;34m5[0m, [38;5;34m5[0m, [38;5;34m2048[0m)    │ [38;5;34m20,861,480[0m │   [1;91mN[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ global_average_pooling2d_1  │ (None, 2048)          │          0 │   -   │
-## │ (GlobalAveragePooling2D)    │                       │            │       │
+## │ global_average_pooling2d_1  │ ([38;5;45mNone[0m, [38;5;34m2048[0m)          │          [38;5;34m0[0m │   [1m-[0m   │
+## │ ([38;5;33mGlobalAveragePooling2D[0m)    │                       │            │       │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ dropout (Dropout)           │ (None, 2048)          │          0 │   -   │
+## │ dropout ([38;5;33mDropout[0m)           │ ([38;5;45mNone[0m, [38;5;34m2048[0m)          │          [38;5;34m0[0m │   [1m-[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ dense_8 (Dense)             │ (None, 1)             │      2,049 │   Y   │
+## │ dense_8 ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m1[0m)             │      [38;5;34m2,049[0m │   [1;38;5;34mY[0m   │
 ## └─────────────────────────────┴───────────────────────┴────────────┴───────┘
-##  Total params: 20,863,529 (79.59 MB)
-##  Trainable params: 2,049 (8.00 KB)
-##  Non-trainable params: 20,861,480 (79.58 MB)
+## [1m Total params: [0m[38;5;34m20,863,529[0m (79.59 MB)
+## [1m Trainable params: [0m[38;5;34m2,049[0m (8.00 KB)
+## [1m Non-trainable params: [0m[38;5;34m20,861,480[0m (79.58 MB)
 ```
 
 ## Train the top layer
@@ -648,7 +648,7 @@ model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ```
-## 146/146 - 46s - 313ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
+## 146/146 - 42s - 285ms/step - binary_accuracy: 0.9183 - loss: 0.1887 - val_binary_accuracy: 0.9669 - val_loss: 0.0926
 ```
 
 ## Do a round of fine-tuning of the entire model
@@ -674,27 +674,27 @@ summary(model, show_trainable = TRUE)
 ```
 
 ```
-## Model: "functional_8"
+## [1mModel: "functional_8"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
-## ┃ Layer (type)                ┃ Output Shape          ┃    Param # ┃ Trai… ┃
+## ┃[1m [0m[1mLayer (type)               [0m[1m [0m┃[1m [0m[1mOutput Shape         [0m[1m [0m┃[1m [0m[1m   Param #[0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━┩
-## │ input_layer_7 (InputLayer)  │ (None, 150, 150, 3)   │          0 │   -   │
+## │ input_layer_7 ([38;5;33mInputLayer[0m)  │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)   │          [38;5;34m0[0m │   [1m-[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ rescaling (Rescaling)       │ (None, 150, 150, 3)   │          0 │   -   │
+## │ rescaling ([38;5;33mRescaling[0m)       │ ([38;5;45mNone[0m, [38;5;34m150[0m, [38;5;34m150[0m, [38;5;34m3[0m)   │          [38;5;34m0[0m │   [1m-[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ xception (Functional)       │ (None, 5, 5, 2048)    │ 20,861,480 │   Y   │
+## │ xception ([38;5;33mFunctional[0m)       │ ([38;5;45mNone[0m, [38;5;34m5[0m, [38;5;34m5[0m, [38;5;34m2048[0m)    │ [38;5;34m20,861,480[0m │   [1;38;5;34mY[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ global_average_pooling2d_1  │ (None, 2048)          │          0 │   -   │
-## │ (GlobalAveragePooling2D)    │                       │            │       │
+## │ global_average_pooling2d_1  │ ([38;5;45mNone[0m, [38;5;34m2048[0m)          │          [38;5;34m0[0m │   [1m-[0m   │
+## │ ([38;5;33mGlobalAveragePooling2D[0m)    │                       │            │       │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ dropout (Dropout)           │ (None, 2048)          │          0 │   -   │
+## │ dropout ([38;5;33mDropout[0m)           │ ([38;5;45mNone[0m, [38;5;34m2048[0m)          │          [38;5;34m0[0m │   [1m-[0m   │
 ## ├─────────────────────────────┼───────────────────────┼────────────┼───────┤
-## │ dense_8 (Dense)             │ (None, 1)             │      2,049 │   Y   │
+## │ dense_8 ([38;5;33mDense[0m)             │ ([38;5;45mNone[0m, [38;5;34m1[0m)             │      [38;5;34m2,049[0m │   [1;38;5;34mY[0m   │
 ## └─────────────────────────────┴───────────────────────┴────────────┴───────┘
-##  Total params: 20,867,629 (79.60 MB)
-##  Trainable params: 20,809,001 (79.38 MB)
-##  Non-trainable params: 54,528 (213.00 KB)
-##  Optimizer params: 4,100 (16.02 KB)
+## [1m Total params: [0m[38;5;34m20,867,629[0m (79.60 MB)
+## [1m Trainable params: [0m[38;5;34m20,809,001[0m (79.38 MB)
+## [1m Non-trainable params: [0m[38;5;34m54,528[0m (213.00 KB)
+## [1m Optimizer params: [0m[38;5;34m4,100[0m (16.02 KB)
 ```
 
 ``` r
@@ -709,7 +709,7 @@ model |> fit(train_ds, epochs = epochs, validation_data = validation_ds)
 ```
 
 ```
-## 146/146 - 99s - 681ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
+## 146/146 - 86s - 591ms/step - binary_accuracy: 0.8660 - loss: 0.3213 - val_binary_accuracy: 0.9652 - val_loss: 0.1022
 ```
 
 After 10 epochs, fine-tuning gains us a nice improvement here.
@@ -721,7 +721,7 @@ model |> evaluate(test_ds)
 ```
 
 ```
-## 37/37 - 2s - 46ms/step - binary_accuracy: 0.9540 - loss: 0.1102
+## 37/37 - 2s - 44ms/step - binary_accuracy: 0.9540 - loss: 0.1103
 ```
 
 ```
@@ -729,5 +729,5 @@ model |> evaluate(test_ds)
 ## [1] 0.9539983
 ##
 ## $loss
-## [1] 0.1102499
+## [1] 0.1102685
 ```

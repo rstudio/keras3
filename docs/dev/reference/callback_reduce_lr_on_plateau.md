@@ -65,7 +65,7 @@ callback_reduce_lr_on_plateau(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -27,7 +27,7 @@ layer_flatten(object, data_format = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -25,7 +25,7 @@ time_distributed(object, layer, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

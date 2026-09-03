@@ -77,7 +77,7 @@ application_efficientnet_b6(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

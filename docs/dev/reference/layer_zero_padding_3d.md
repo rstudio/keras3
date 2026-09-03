@@ -48,7 +48,7 @@ layer_zero_padding_3d(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -34,7 +34,7 @@ loss_squared_hinge(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

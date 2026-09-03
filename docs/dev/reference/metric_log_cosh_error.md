@@ -15,7 +15,7 @@ metric_log_cosh_error(..., name = "logcosh", dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

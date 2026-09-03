@@ -135,7 +135,7 @@ optimizer_schedule_free_adam_w(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

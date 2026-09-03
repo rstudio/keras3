@@ -38,7 +38,7 @@ metric_r2_score(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - class_aggregation:
 

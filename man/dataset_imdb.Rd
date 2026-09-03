@@ -26,7 +26,7 @@ dataset_imdb_word_index(path = "imdb_word_index.json")
 often they occur (in the training set) and only the most frequent words are
 kept}
 
-\item{skip_top}{Skip the top N most frequently occuring words (which may not
+\item{skip_top}{Skip the top N most frequently occurring words (which may not
 be informative).}
 
 \item{maxlen}{sequences longer than this will be filtered out.}
@@ -120,12 +120,12 @@ to encode any unknown word.
 }
 \seealso{
 Other datasets: \cr
-\code{\link{dataset_boston_housing}()} \cr
-\code{\link{dataset_california_housing}()} \cr
-\code{\link{dataset_cifar10}()} \cr
-\code{\link{dataset_cifar100}()} \cr
-\code{\link{dataset_fashion_mnist}()} \cr
-\code{\link{dataset_mnist}()} \cr
-\code{\link{dataset_reuters}()} \cr
+\code{\link[=dataset_boston_housing]{dataset_boston_housing()}} \cr
+\code{\link[=dataset_california_housing]{dataset_california_housing()}} \cr
+\code{\link[=dataset_cifar10]{dataset_cifar10()}} \cr
+\code{\link[=dataset_cifar100]{dataset_cifar100()}} \cr
+\code{\link[=dataset_fashion_mnist]{dataset_fashion_mnist()}} \cr
+\code{\link[=dataset_mnist]{dataset_mnist()}} \cr
+\code{\link[=dataset_reuters]{dataset_reuters()}} \cr
 }
 \concept{datasets}

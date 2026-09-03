@@ -2031,10 +2031,11 @@ function (y_true, y_pred, ref_labels = NULL, ref_embeddings = NULL,
 
 
 
+#' Wrapper for Loss/Metric instances that automatically coerces `y_true` and `y_pred` to the appropriate type.
+#'
 #' @importFrom reticulate py_to_r_wrapper
 #' @export
 #' @keywords internal
-#' Wrapper for Loss/Metric instances that automatically coerces `y_true` and `y_pred` to the appropriate type.
 py_to_r_wrapper.keras.src.losses.loss.Loss <- function(x) {
   force(x)
   as.function.default(c(formals(x), quote({

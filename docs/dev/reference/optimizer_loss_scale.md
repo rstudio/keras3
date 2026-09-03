@@ -60,7 +60,7 @@ optimizer_loss_scale(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

@@ -51,7 +51,7 @@ layer_random_grayscale(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Input Shape
 

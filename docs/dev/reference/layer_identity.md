@@ -18,7 +18,7 @@ layer_identity(object, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

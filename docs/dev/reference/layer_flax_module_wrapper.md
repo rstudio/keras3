@@ -135,7 +135,7 @@ layer_flax_module_wrapper(object, module, method = NULL, variables = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

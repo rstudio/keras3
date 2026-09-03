@@ -167,7 +167,7 @@ str(results)
 predictions <- model |> predict(x_test[1:2,])
 ```
 
-    ## 1/1 - 0s - 195ms/step
+    ## 1/1 - 0s - 197ms/step
 
 ``` r
 dim(predictions)
@@ -502,7 +502,7 @@ data <- list(
 model |> fit(data, epochs = 1)
 ```
 
-    ## 1/1 - 1s - 545ms/step - loss: 0.9638
+    ## 1/1 - 1s - 506ms/step - loss: 0.9638
 
 For more information about training multi-input models, see the section
 **Passing data to multi-input, multi-output models**.
@@ -552,7 +552,7 @@ a PyTorch `DataLoader`, or an R generator function. Let’s take look at
 the former.
 
 The [tfdatasets](https://github.com/rstudio/tfdatasets) R package
-containes a set of utilities for loading and preprocessing data in a way
+contains a set of utilities for loading and preprocessing data in a way
 that’s fast and scalable. For a complete guide about creating
 `Datasets`, see the [tf.data
 documentation](https://www.tensorflow.org/guide/data).
@@ -658,7 +658,7 @@ val_dataset <- val_dataset |> dataset_batch(64)
 model |> fit(train_dataset, epochs = 1, validation_data = val_dataset)
 ```
 
-    ## 782/782 - 3s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291
+    ## 782/782 - 2s - 3ms/step - loss: 0.3428 - sparse_categorical_accuracy: 0.9022 - val_loss: 0.2337 - val_sparse_categorical_accuracy: 0.9291
 
 At the end of each epoch, the model will iterate over the validation
 dataset and compute the validation loss and validation metrics.
@@ -807,7 +807,7 @@ model <- get_compiled_model()
 model |> fit(train_dataset, epochs = 1)
 ```
 
-    ## 782/782 - 2s - 2ms/step - loss: 0.3654 - sparse_categorical_accuracy: 0.9057
+    ## 782/782 - 2s - 3ms/step - loss: 0.3654 - sparse_categorical_accuracy: 0.9057
 
 ## Passing data to multi-input, multi-output models
 
@@ -987,7 +987,7 @@ model |> fit(
 )
 ```
 
-    ## 4/4 - 4s - 955ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676
+    ## 4/4 - 4s - 937ms/step - class_output_categorical_accuracy: 0.2300 - class_output_loss: 1.8162 - loss: 3.8764 - score_output_loss: 1.6820 - score_output_mean_absolute_error: 0.8826 - score_output_mean_absolute_percentage_error: 1826.5676
 
 ``` r
 # Alternatively, fit on named lists (names matching)
@@ -1011,7 +1011,7 @@ model |> fit(
 )
 ```
 
-    ## 4/4 - 2s - 525ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01
+    ## 4/4 - 2s - 513ms/step - class_output_loss: 4.1489 - loss: 4.5443 - score_output_loss: -4.1125e-01
 
 Here’s the `Dataset` use case: similarly as what we did for R arrays,
 the `Dataset` should return a tuple of named lists (dicts).

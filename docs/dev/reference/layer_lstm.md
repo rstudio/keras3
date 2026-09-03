@@ -208,7 +208,7 @@ layer_lstm(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

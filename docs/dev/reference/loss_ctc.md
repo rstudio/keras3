@@ -31,7 +31,7 @@ loss_ctc(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

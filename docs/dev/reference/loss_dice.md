@@ -34,7 +34,7 @@ loss_dice(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

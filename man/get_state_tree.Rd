@@ -103,12 +103,12 @@ For example:
 
 \seealso{
 Other model functions: \cr
-\code{\link{get_config}()} \cr
-\code{\link{get_layer}()} \cr
-\code{\link{keras_model}()} \cr
-\code{\link{keras_model_sequential}()} \cr
-\code{\link{pop_layer}()} \cr
-\code{\link{set_state_tree}()} \cr
-\code{\link{summary.keras.src.models.model.Model}()} \cr
+\code{\link[=get_config]{get_config()}} \cr
+\code{\link[=get_layer]{get_layer()}} \cr
+\code{\link[=keras_model]{keras_model()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
+\code{\link[=pop_layer]{pop_layer()}} \cr
+\code{\link[=set_state_tree]{set_state_tree()}} \cr
+\code{\link[=summary.keras.src.models.model.Model]{summary.keras.src.models.model.Model()}} \cr
 }
 \concept{model functions}

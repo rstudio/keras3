@@ -21,7 +21,7 @@ layer_repeat_vector(object, n, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -183,7 +183,7 @@ layer_conv_lstm_3d(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - unroll:
 

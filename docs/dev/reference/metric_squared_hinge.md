@@ -27,7 +27,7 @@ metric_squared_hinge(y_true, y_pred, ..., name = "squared_hinge", dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

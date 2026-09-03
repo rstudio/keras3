@@ -81,7 +81,7 @@ layer_random_erasing(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## References
 

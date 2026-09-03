@@ -56,7 +56,7 @@ metric_sparse_top_k_categorical_accuracy(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

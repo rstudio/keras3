@@ -51,7 +51,7 @@ layer_random_brightness(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

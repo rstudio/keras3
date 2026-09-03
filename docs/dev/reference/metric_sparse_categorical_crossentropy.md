@@ -53,7 +53,7 @@ metric_sparse_categorical_crossentropy(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

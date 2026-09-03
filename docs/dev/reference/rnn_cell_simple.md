@@ -102,7 +102,7 @@ rnn_cell_simple(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

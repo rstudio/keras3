@@ -60,7 +60,7 @@ layer_random_color_degeneration(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

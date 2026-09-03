@@ -84,7 +84,7 @@ layer_reversible_embedding(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

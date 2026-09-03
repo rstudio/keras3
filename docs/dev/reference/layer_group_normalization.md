@@ -96,7 +96,7 @@ layer_group_normalization(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

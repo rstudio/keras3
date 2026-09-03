@@ -31,7 +31,7 @@ test_on_batch(object, x, y = NULL, sample_weight = NULL, ...)
 
 - ...:
 
-  for forward/backward compatability
+  for forward/backward compatibility
 
 ## Value
 

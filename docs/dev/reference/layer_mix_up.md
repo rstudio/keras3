@@ -36,7 +36,7 @@ layer_mix_up(object, alpha = 0.2, data_format = NULL, seed = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## References
 

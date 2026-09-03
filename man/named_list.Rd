@@ -15,14 +15,14 @@ A named list.
 }
 \description{
 Constructs a list from the provided arguments where all elements are named.
-This wraps \code{\link[rlang:list2]{rlang::dots_list()}} but changes two defaults:
+This wraps \code{\link[rlang:dots_list]{rlang::dots_list()}} but changes two defaults:
 \itemize{
 \item \code{.named} is set to \code{TRUE}
 \item \code{.homonyms} is set to \code{"error"}
 }
 }
 \details{
-Other parameters retain their defaults from \code{\link[rlang:list2]{rlang::dots_list()}}: \cr
+Other parameters retain their defaults from \code{\link[rlang:dots_list]{rlang::dots_list()}}: \cr
 \itemize{
 \item \code{.ignore_empty = "trailing"}
 \item \code{.preserve_empty = FALSE}
@@ -30,5 +30,5 @@ Other parameters retain their defaults from \code{\link[rlang:list2]{rlang::dots
 }
 }
 \seealso{
-\code{\link[rlang:list2]{rlang::dots_list()}}
+\code{\link[rlang:dots_list]{rlang::dots_list()}}
 }

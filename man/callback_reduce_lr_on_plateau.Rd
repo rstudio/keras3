@@ -42,7 +42,7 @@ operation after the learning rate has been reduced.}
 
 \item{min_lr}{Float. Lower bound on the learning rate.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.
@@ -66,17 +66,17 @@ model \%>\% fit(x_train, y_train, callbacks = list(reduce_lr))
 }
 
 Other callbacks: \cr
-\code{\link{Callback}()} \cr
-\code{\link{callback_backup_and_restore}()} \cr
-\code{\link{callback_csv_logger}()} \cr
-\code{\link{callback_early_stopping}()} \cr
-\code{\link{callback_lambda}()} \cr
-\code{\link{callback_learning_rate_scheduler}()} \cr
-\code{\link{callback_model_checkpoint}()} \cr
-\code{\link{callback_orbax_checkpoint}()} \cr
-\code{\link{callback_remote_monitor}()} \cr
-\code{\link{callback_swap_ema_weights}()} \cr
-\code{\link{callback_tensorboard}()} \cr
-\code{\link{callback_terminate_on_nan}()} \cr
+\code{\link[=Callback]{Callback()}} \cr
+\code{\link[=callback_backup_and_restore]{callback_backup_and_restore()}} \cr
+\code{\link[=callback_csv_logger]{callback_csv_logger()}} \cr
+\code{\link[=callback_early_stopping]{callback_early_stopping()}} \cr
+\code{\link[=callback_lambda]{callback_lambda()}} \cr
+\code{\link[=callback_learning_rate_scheduler]{callback_learning_rate_scheduler()}} \cr
+\code{\link[=callback_model_checkpoint]{callback_model_checkpoint()}} \cr
+\code{\link[=callback_orbax_checkpoint]{callback_orbax_checkpoint()}} \cr
+\code{\link[=callback_remote_monitor]{callback_remote_monitor()}} \cr
+\code{\link[=callback_swap_ema_weights]{callback_swap_ema_weights()}} \cr
+\code{\link[=callback_tensorboard]{callback_tensorboard()}} \cr
+\code{\link[=callback_terminate_on_nan]{callback_terminate_on_nan()}} \cr
 }
 \concept{callbacks}

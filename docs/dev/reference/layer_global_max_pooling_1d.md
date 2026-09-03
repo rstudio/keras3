@@ -36,7 +36,7 @@ layer_global_max_pooling_1d(object, data_format = NULL, keepdims = FALSE, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

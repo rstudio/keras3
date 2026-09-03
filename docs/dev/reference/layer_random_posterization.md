@@ -49,7 +49,7 @@ layer_random_posterization(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## References
 

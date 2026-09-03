@@ -146,7 +146,7 @@ layer_multi_head_attention(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

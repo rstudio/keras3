@@ -106,7 +106,7 @@ optimizer_lion(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - loss_scale_factor:
 

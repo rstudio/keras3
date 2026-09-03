@@ -21,7 +21,7 @@ layer_upsampling_1d(object, size = 2L, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

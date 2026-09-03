@@ -218,7 +218,7 @@ layer_gru(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

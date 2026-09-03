@@ -14,7 +14,7 @@ metric_fbeta_score(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{average}{Type of averaging to be performed across per-class results
 in the multi-class case.
@@ -84,58 +84,58 @@ F-Beta Score: float.
 
 \seealso{
 Other f score metrics: \cr
-\code{\link{metric_f1_score}()} \cr
+\code{\link[=metric_f1_score]{metric_f1_score()}} \cr
 
 Other metrics: \cr
-\code{\link{Metric}()} \cr
-\code{\link{custom_metric}()} \cr
-\code{\link{metric_auc}()} \cr
-\code{\link{metric_binary_accuracy}()} \cr
-\code{\link{metric_binary_crossentropy}()} \cr
-\code{\link{metric_binary_focal_crossentropy}()} \cr
-\code{\link{metric_binary_iou}()} \cr
-\code{\link{metric_categorical_accuracy}()} \cr
-\code{\link{metric_categorical_crossentropy}()} \cr
-\code{\link{metric_categorical_focal_crossentropy}()} \cr
-\code{\link{metric_categorical_hinge}()} \cr
-\code{\link{metric_concordance_correlation}()} \cr
-\code{\link{metric_cosine_similarity}()} \cr
-\code{\link{metric_f1_score}()} \cr
-\code{\link{metric_false_negatives}()} \cr
-\code{\link{metric_false_positives}()} \cr
-\code{\link{metric_hinge}()} \cr
-\code{\link{metric_huber}()} \cr
-\code{\link{metric_iou}()} \cr
-\code{\link{metric_kl_divergence}()} \cr
-\code{\link{metric_log_cosh}()} \cr
-\code{\link{metric_log_cosh_error}()} \cr
-\code{\link{metric_mean}()} \cr
-\code{\link{metric_mean_absolute_error}()} \cr
-\code{\link{metric_mean_absolute_percentage_error}()} \cr
-\code{\link{metric_mean_iou}()} \cr
-\code{\link{metric_mean_squared_error}()} \cr
-\code{\link{metric_mean_squared_logarithmic_error}()} \cr
-\code{\link{metric_mean_wrapper}()} \cr
-\code{\link{metric_one_hot_iou}()} \cr
-\code{\link{metric_one_hot_mean_iou}()} \cr
-\code{\link{metric_pearson_correlation}()} \cr
-\code{\link{metric_poisson}()} \cr
-\code{\link{metric_precision}()} \cr
-\code{\link{metric_precision_at_recall}()} \cr
-\code{\link{metric_r2_score}()} \cr
-\code{\link{metric_recall}()} \cr
-\code{\link{metric_recall_at_precision}()} \cr
-\code{\link{metric_root_mean_squared_error}()} \cr
-\code{\link{metric_sensitivity_at_specificity}()} \cr
-\code{\link{metric_sparse_categorical_accuracy}()} \cr
-\code{\link{metric_sparse_categorical_crossentropy}()} \cr
-\code{\link{metric_sparse_top_k_categorical_accuracy}()} \cr
-\code{\link{metric_specificity_at_sensitivity}()} \cr
-\code{\link{metric_squared_hinge}()} \cr
-\code{\link{metric_sum}()} \cr
-\code{\link{metric_top_k_categorical_accuracy}()} \cr
-\code{\link{metric_true_negatives}()} \cr
-\code{\link{metric_true_positives}()} \cr
+\code{\link[=Metric]{Metric()}} \cr
+\code{\link[=custom_metric]{custom_metric()}} \cr
+\code{\link[=metric_auc]{metric_auc()}} \cr
+\code{\link[=metric_binary_accuracy]{metric_binary_accuracy()}} \cr
+\code{\link[=metric_binary_crossentropy]{metric_binary_crossentropy()}} \cr
+\code{\link[=metric_binary_focal_crossentropy]{metric_binary_focal_crossentropy()}} \cr
+\code{\link[=metric_binary_iou]{metric_binary_iou()}} \cr
+\code{\link[=metric_categorical_accuracy]{metric_categorical_accuracy()}} \cr
+\code{\link[=metric_categorical_crossentropy]{metric_categorical_crossentropy()}} \cr
+\code{\link[=metric_categorical_focal_crossentropy]{metric_categorical_focal_crossentropy()}} \cr
+\code{\link[=metric_categorical_hinge]{metric_categorical_hinge()}} \cr
+\code{\link[=metric_concordance_correlation]{metric_concordance_correlation()}} \cr
+\code{\link[=metric_cosine_similarity]{metric_cosine_similarity()}} \cr
+\code{\link[=metric_f1_score]{metric_f1_score()}} \cr
+\code{\link[=metric_false_negatives]{metric_false_negatives()}} \cr
+\code{\link[=metric_false_positives]{metric_false_positives()}} \cr
+\code{\link[=metric_hinge]{metric_hinge()}} \cr
+\code{\link[=metric_huber]{metric_huber()}} \cr
+\code{\link[=metric_iou]{metric_iou()}} \cr
+\code{\link[=metric_kl_divergence]{metric_kl_divergence()}} \cr
+\code{\link[=metric_log_cosh]{metric_log_cosh()}} \cr
+\code{\link[=metric_log_cosh_error]{metric_log_cosh_error()}} \cr
+\code{\link[=metric_mean]{metric_mean()}} \cr
+\code{\link[=metric_mean_absolute_error]{metric_mean_absolute_error()}} \cr
+\code{\link[=metric_mean_absolute_percentage_error]{metric_mean_absolute_percentage_error()}} \cr
+\code{\link[=metric_mean_iou]{metric_mean_iou()}} \cr
+\code{\link[=metric_mean_squared_error]{metric_mean_squared_error()}} \cr
+\code{\link[=metric_mean_squared_logarithmic_error]{metric_mean_squared_logarithmic_error()}} \cr
+\code{\link[=metric_mean_wrapper]{metric_mean_wrapper()}} \cr
+\code{\link[=metric_one_hot_iou]{metric_one_hot_iou()}} \cr
+\code{\link[=metric_one_hot_mean_iou]{metric_one_hot_mean_iou()}} \cr
+\code{\link[=metric_pearson_correlation]{metric_pearson_correlation()}} \cr
+\code{\link[=metric_poisson]{metric_poisson()}} \cr
+\code{\link[=metric_precision]{metric_precision()}} \cr
+\code{\link[=metric_precision_at_recall]{metric_precision_at_recall()}} \cr
+\code{\link[=metric_r2_score]{metric_r2_score()}} \cr
+\code{\link[=metric_recall]{metric_recall()}} \cr
+\code{\link[=metric_recall_at_precision]{metric_recall_at_precision()}} \cr
+\code{\link[=metric_root_mean_squared_error]{metric_root_mean_squared_error()}} \cr
+\code{\link[=metric_sensitivity_at_specificity]{metric_sensitivity_at_specificity()}} \cr
+\code{\link[=metric_sparse_categorical_accuracy]{metric_sparse_categorical_accuracy()}} \cr
+\code{\link[=metric_sparse_categorical_crossentropy]{metric_sparse_categorical_crossentropy()}} \cr
+\code{\link[=metric_sparse_top_k_categorical_accuracy]{metric_sparse_top_k_categorical_accuracy()}} \cr
+\code{\link[=metric_specificity_at_sensitivity]{metric_specificity_at_sensitivity()}} \cr
+\code{\link[=metric_squared_hinge]{metric_squared_hinge()}} \cr
+\code{\link[=metric_sum]{metric_sum()}} \cr
+\code{\link[=metric_top_k_categorical_accuracy]{metric_top_k_categorical_accuracy()}} \cr
+\code{\link[=metric_true_negatives]{metric_true_negatives()}} \cr
+\code{\link[=metric_true_positives]{metric_true_positives()}} \cr
 }
 \concept{f score metrics}
 \concept{metrics}

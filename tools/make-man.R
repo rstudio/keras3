@@ -39,7 +39,7 @@ cr_family <- function(rd_file) {
   for (i in grep("^Other .+:$", x)) {
     # x[i] %<>% str_c("\n\\itemize{")
     x[i] %<>% str_c(" \\cr")
-    while (startsWith(x[i <- i + 1L], "\\code{\\link{"))
+    while (startsWith(x[i <- i + 1L], "\\code{\\link"))
       x[i] %<>% str_remove(",$") %>% str_c(" \\cr")
 
     # x[i] %<>% str_prefix("}\n")

@@ -27,7 +27,7 @@ dataset_reuters_word_index(path = "reuters_word_index.pkl")
 often they occur (in the training set) and only the most frequent words are
 kept}
 
-\item{skip_top}{Skip the top N most frequently occuring words (which may not
+\item{skip_top}{Skip the top N most frequently occurring words (which may not
 be informative).}
 
 \item{maxlen}{Truncate sequences after this length.}
@@ -108,12 +108,12 @@ conventions).
 }
 \seealso{
 Other datasets: \cr
-\code{\link{dataset_boston_housing}()} \cr
-\code{\link{dataset_california_housing}()} \cr
-\code{\link{dataset_cifar10}()} \cr
-\code{\link{dataset_cifar100}()} \cr
-\code{\link{dataset_fashion_mnist}()} \cr
-\code{\link{dataset_imdb}()} \cr
-\code{\link{dataset_mnist}()} \cr
+\code{\link[=dataset_boston_housing]{dataset_boston_housing()}} \cr
+\code{\link[=dataset_california_housing]{dataset_california_housing()}} \cr
+\code{\link[=dataset_cifar10]{dataset_cifar10()}} \cr
+\code{\link[=dataset_cifar100]{dataset_cifar100()}} \cr
+\code{\link[=dataset_fashion_mnist]{dataset_fashion_mnist()}} \cr
+\code{\link[=dataset_imdb]{dataset_imdb()}} \cr
+\code{\link[=dataset_mnist]{dataset_mnist()}} \cr
 }
 \concept{datasets}

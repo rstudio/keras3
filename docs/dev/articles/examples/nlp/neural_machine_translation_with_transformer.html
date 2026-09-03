@@ -554,32 +554,32 @@ converge you should train for at least 30 epochs.</p>
 <code class="sourceCode R"><span><span class="va">epochs</span> <span class="op">&lt;-</span> <span class="fl">1</span>  <span class="co"># This should be at least 30 for convergence</span></span>
 <span></span>
 <span><span class="va">transformer</span></span></code></pre></div>
-<pre><code><span><span class="co">## Model: "transformer"</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "transformer"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)        </span>┃<span style="font-weight: bold;"> Output Shape      </span>┃<span style="font-weight: bold;">    Param # </span>┃<span style="font-weight: bold;"> Connected to      </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ encoder_inputs      │ (None, None)      │          0 │ -                 │</span></span>
-<span><span class="co">## │ (InputLayer)        │                   │            │                   │</span></span>
+<span><span class="co">## │ encoder_inputs      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)      │          <span style="color: #00AF00;">0</span> │ -                 │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)        │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ positional_embeddi… │ (None, None, 256) │  3,845,120 │ encoder_inputs[0… │</span></span>
-<span><span class="co">## │ (PositionalEmbeddi… │                   │            │                   │</span></span>
+<span><span class="co">## │ positional_embeddi… │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>) │  <span style="color: #00AF00;">3,845,120</span> │ encoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">PositionalEmbeddi…</span> │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ not_equal           │ (None, None)      │          0 │ encoder_inputs[0… │</span></span>
-<span><span class="co">## │ (NotEqual)          │                   │            │                   │</span></span>
+<span><span class="co">## │ not_equal           │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)      │          <span style="color: #00AF00;">0</span> │ encoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">NotEqual</span>)          │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ decoder_inputs      │ (None, None)      │          0 │ -                 │</span></span>
-<span><span class="co">## │ (InputLayer)        │                   │            │                   │</span></span>
+<span><span class="co">## │ decoder_inputs      │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>)      │          <span style="color: #00AF00;">0</span> │ -                 │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)        │                   │            │                   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ transformer_encoder │ (None, None, 256) │  3,155,456 │ positional_embed… │</span></span>
-<span><span class="co">## │ (TransformerEncode… │                   │            │ not_equal[0][0]   │</span></span>
+<span><span class="co">## │ transformer_encoder │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">256</span>) │  <span style="color: #00AF00;">3,155,456</span> │ positional_embed… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">TransformerEncode…</span> │                   │            │ not_equal[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
 <span><span class="co">## ├─────────────────────┼───────────────────┼────────────┼───────────────────┤</span></span>
-<span><span class="co">## │ functional_3        │ (None, None,      │ 12,959,640 │ decoder_inputs[0… │</span></span>
-<span><span class="co">## │ (Functional)        │ 15000)            │            │ transformer_enco… │</span></span>
-<span><span class="co">## │                     │                   │            │ not_equal[0][0]   │</span></span>
+<span><span class="co">## │ functional_3        │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00D7FF;">None</span>,      │ <span style="color: #00AF00;">12,959,640</span> │ decoder_inputs[<span style="color: #00AF00;">0</span>… │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Functional</span>)        │ <span style="color: #00AF00;">15000</span>)            │            │ transformer_enco… │</span></span>
+<span><span class="co">## │                     │                   │            │ not_equal[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">0</span>]   │</span></span>
 <span><span class="co">## └─────────────────────┴───────────────────┴────────────┴───────────────────┘</span></span>
-<span><span class="co">##  Total params: 19,960,216 (76.14 MB)</span></span>
-<span><span class="co">##  Trainable params: 19,960,216 (76.14 MB)</span></span>
-<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">19,960,216</span> (76.14 MB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">19,960,216</span> (76.14 MB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span></span>
 <span>  <span class="st">"rmsprop"</span>,</span>
@@ -589,7 +589,7 @@ converge you should train for at least 30 epochs.</p>
 <span></span>
 <span><span class="va">transformer</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/fit.html" class="external-link">fit</a></span><span class="op">(</span><span class="va">train_ds</span>, epochs <span class="op">=</span> <span class="va">epochs</span>,</span>
 <span>                   validation_data <span class="op">=</span> <span class="va">val_ds</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 1302/1302 - 59s - 45ms/step - accuracy: 0.3991 - loss: 3.8775 - val_accuracy: 0.4050 - val_loss: 3.1681</span></span></code></pre>
+<pre><code><span><span class="co">## 1302/1302 - 57s - 44ms/step - accuracy: 0.3993 - loss: 3.8766 - val_accuracy: 0.3961 - val_loss: 3.2365</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="decoding-test-sentences">Decoding test sentences<a class="anchor" aria-label="anchor" href="#decoding-test-sentences"></a>

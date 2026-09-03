@@ -60,7 +60,7 @@ layer_category_encoding(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

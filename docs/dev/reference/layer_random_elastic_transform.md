@@ -112,7 +112,7 @@ layer_random_elastic_transform(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

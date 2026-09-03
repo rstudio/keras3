@@ -28,7 +28,7 @@ layer_cropping_1d(object, cropping = list(1L, 1L), ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

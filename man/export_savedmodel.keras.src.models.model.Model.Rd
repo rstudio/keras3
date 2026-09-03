@@ -137,13 +137,13 @@ predictions <- loaded_program$module()(input_tensor)
 
 \seealso{
 Other saving and loading functions: \cr
-\code{\link{layer_tfsm}()} \cr
-\code{\link{load_model}()} \cr
-\code{\link{load_model_weights}()} \cr
-\code{\link{register_keras_serializable}()} \cr
-\code{\link{save_model}()} \cr
-\code{\link{save_model_config}()} \cr
-\code{\link{save_model_weights}()} \cr
-\code{\link{with_custom_object_scope}()} \cr
+\code{\link[=layer_tfsm]{layer_tfsm()}} \cr
+\code{\link[=load_model]{load_model()}} \cr
+\code{\link[=load_model_weights]{load_model_weights()}} \cr
+\code{\link[=register_keras_serializable]{register_keras_serializable()}} \cr
+\code{\link[=save_model]{save_model()}} \cr
+\code{\link[=save_model_config]{save_model_config()}} \cr
+\code{\link[=save_model_weights]{save_model_weights()}} \cr
+\code{\link[=with_custom_object_scope]{with_custom_object_scope()}} \cr
 }
 \concept{saving and loading functions}

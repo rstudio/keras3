@@ -21,7 +21,7 @@ loss_tversky(
 
 \item{y_pred}{tensor of predicted targets.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{alpha}{The coefficient controlling incidence of false positives.
 Defaults to \code{0.5}.}
@@ -72,43 +72,43 @@ Dice Loss.
 
 \seealso{
 Other losses: \cr
-\code{\link{Loss}()} \cr
-\code{\link{loss_binary_crossentropy}()} \cr
-\code{\link{loss_binary_focal_crossentropy}()} \cr
-\code{\link{loss_categorical_crossentropy}()} \cr
-\code{\link{loss_categorical_focal_crossentropy}()} \cr
-\code{\link{loss_categorical_generalized_cross_entropy}()} \cr
-\code{\link{loss_categorical_hinge}()} \cr
-\code{\link{loss_circle}()} \cr
-\code{\link{loss_cosine_similarity}()} \cr
-\code{\link{loss_ctc}()} \cr
-\code{\link{loss_dice}()} \cr
-\code{\link{loss_hinge}()} \cr
-\code{\link{loss_huber}()} \cr
-\code{\link{loss_kl_divergence}()} \cr
-\code{\link{loss_log_cosh}()} \cr
-\code{\link{loss_mean_absolute_error}()} \cr
-\code{\link{loss_mean_absolute_percentage_error}()} \cr
-\code{\link{loss_mean_squared_error}()} \cr
-\code{\link{loss_mean_squared_logarithmic_error}()} \cr
-\code{\link{loss_poisson}()} \cr
-\code{\link{loss_sparse_categorical_crossentropy}()} \cr
-\code{\link{loss_squared_hinge}()} \cr
-\code{\link{metric_binary_crossentropy}()} \cr
-\code{\link{metric_binary_focal_crossentropy}()} \cr
-\code{\link{metric_categorical_crossentropy}()} \cr
-\code{\link{metric_categorical_focal_crossentropy}()} \cr
-\code{\link{metric_categorical_hinge}()} \cr
-\code{\link{metric_hinge}()} \cr
-\code{\link{metric_huber}()} \cr
-\code{\link{metric_kl_divergence}()} \cr
-\code{\link{metric_log_cosh}()} \cr
-\code{\link{metric_mean_absolute_error}()} \cr
-\code{\link{metric_mean_absolute_percentage_error}()} \cr
-\code{\link{metric_mean_squared_error}()} \cr
-\code{\link{metric_mean_squared_logarithmic_error}()} \cr
-\code{\link{metric_poisson}()} \cr
-\code{\link{metric_sparse_categorical_crossentropy}()} \cr
-\code{\link{metric_squared_hinge}()} \cr
+\code{\link[=Loss]{Loss()}} \cr
+\code{\link[=loss_binary_crossentropy]{loss_binary_crossentropy()}} \cr
+\code{\link[=loss_binary_focal_crossentropy]{loss_binary_focal_crossentropy()}} \cr
+\code{\link[=loss_categorical_crossentropy]{loss_categorical_crossentropy()}} \cr
+\code{\link[=loss_categorical_focal_crossentropy]{loss_categorical_focal_crossentropy()}} \cr
+\code{\link[=loss_categorical_generalized_cross_entropy]{loss_categorical_generalized_cross_entropy()}} \cr
+\code{\link[=loss_categorical_hinge]{loss_categorical_hinge()}} \cr
+\code{\link[=loss_circle]{loss_circle()}} \cr
+\code{\link[=loss_cosine_similarity]{loss_cosine_similarity()}} \cr
+\code{\link[=loss_ctc]{loss_ctc()}} \cr
+\code{\link[=loss_dice]{loss_dice()}} \cr
+\code{\link[=loss_hinge]{loss_hinge()}} \cr
+\code{\link[=loss_huber]{loss_huber()}} \cr
+\code{\link[=loss_kl_divergence]{loss_kl_divergence()}} \cr
+\code{\link[=loss_log_cosh]{loss_log_cosh()}} \cr
+\code{\link[=loss_mean_absolute_error]{loss_mean_absolute_error()}} \cr
+\code{\link[=loss_mean_absolute_percentage_error]{loss_mean_absolute_percentage_error()}} \cr
+\code{\link[=loss_mean_squared_error]{loss_mean_squared_error()}} \cr
+\code{\link[=loss_mean_squared_logarithmic_error]{loss_mean_squared_logarithmic_error()}} \cr
+\code{\link[=loss_poisson]{loss_poisson()}} \cr
+\code{\link[=loss_sparse_categorical_crossentropy]{loss_sparse_categorical_crossentropy()}} \cr
+\code{\link[=loss_squared_hinge]{loss_squared_hinge()}} \cr
+\code{\link[=metric_binary_crossentropy]{metric_binary_crossentropy()}} \cr
+\code{\link[=metric_binary_focal_crossentropy]{metric_binary_focal_crossentropy()}} \cr
+\code{\link[=metric_categorical_crossentropy]{metric_categorical_crossentropy()}} \cr
+\code{\link[=metric_categorical_focal_crossentropy]{metric_categorical_focal_crossentropy()}} \cr
+\code{\link[=metric_categorical_hinge]{metric_categorical_hinge()}} \cr
+\code{\link[=metric_hinge]{metric_hinge()}} \cr
+\code{\link[=metric_huber]{metric_huber()}} \cr
+\code{\link[=metric_kl_divergence]{metric_kl_divergence()}} \cr
+\code{\link[=metric_log_cosh]{metric_log_cosh()}} \cr
+\code{\link[=metric_mean_absolute_error]{metric_mean_absolute_error()}} \cr
+\code{\link[=metric_mean_absolute_percentage_error]{metric_mean_absolute_percentage_error()}} \cr
+\code{\link[=metric_mean_squared_error]{metric_mean_squared_error()}} \cr
+\code{\link[=metric_mean_squared_logarithmic_error]{metric_mean_squared_logarithmic_error()}} \cr
+\code{\link[=metric_poisson]{metric_poisson()}} \cr
+\code{\link[=metric_sparse_categorical_crossentropy]{metric_sparse_categorical_crossentropy()}} \cr
+\code{\link[=metric_squared_hinge]{metric_squared_hinge()}} \cr
 }
 \concept{losses}

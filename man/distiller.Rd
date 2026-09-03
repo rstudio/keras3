@@ -61,13 +61,13 @@ model |> compile(optimizer = "adam", loss = "mse")
 
 \seealso{
 Other distillation: \cr
-\code{\link{distillation_feature}()} \cr
-\code{\link{distillation_logits}()} \cr
+\code{\link[=distillation_feature]{distillation_feature()}} \cr
+\code{\link[=distillation_logits]{distillation_logits()}} \cr
 
 Other model creation: \cr
-\code{\link{keras_input}()} \cr
-\code{\link{keras_model}()} \cr
-\code{\link{keras_model_sequential}()} \cr
+\code{\link[=keras_input]{keras_input()}} \cr
+\code{\link[=keras_model]{keras_model()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
 }
 \concept{distillation}
 \concept{model creation}

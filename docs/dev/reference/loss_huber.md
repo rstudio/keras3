@@ -44,7 +44,7 @@ loss_huber(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

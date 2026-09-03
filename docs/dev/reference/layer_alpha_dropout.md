@@ -38,7 +38,7 @@ layer_alpha_dropout(object, rate, noise_shape = NULL, seed = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -16,7 +16,7 @@ metric_sum(..., name = "sum", dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

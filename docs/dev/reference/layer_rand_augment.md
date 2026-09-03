@@ -64,7 +64,7 @@ layer_rand_augment(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## References
 

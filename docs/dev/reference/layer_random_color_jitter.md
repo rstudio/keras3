@@ -92,7 +92,7 @@ layer_random_color_jitter(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

@@ -11,7 +11,7 @@ random_seed_generator(seed = NULL, name = NULL, ...)
 
 \item{name}{String, name for the object}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A \code{SeedGenerator} instance, which can be passed as the \verb{seed = }
@@ -69,15 +69,15 @@ out(op_ones(10), training = TRUE)
 
 \seealso{
 Other random: \cr
-\code{\link{random_beta}()} \cr
-\code{\link{random_binomial}()} \cr
-\code{\link{random_categorical}()} \cr
-\code{\link{random_dropout}()} \cr
-\code{\link{random_gamma}()} \cr
-\code{\link{random_integer}()} \cr
-\code{\link{random_normal}()} \cr
-\code{\link{random_shuffle}()} \cr
-\code{\link{random_truncated_normal}()} \cr
-\code{\link{random_uniform}()} \cr
+\code{\link[=random_beta]{random_beta()}} \cr
+\code{\link[=random_binomial]{random_binomial()}} \cr
+\code{\link[=random_categorical]{random_categorical()}} \cr
+\code{\link[=random_dropout]{random_dropout()}} \cr
+\code{\link[=random_gamma]{random_gamma()}} \cr
+\code{\link[=random_integer]{random_integer()}} \cr
+\code{\link[=random_normal]{random_normal()}} \cr
+\code{\link[=random_shuffle]{random_shuffle()}} \cr
+\code{\link[=random_truncated_normal]{random_truncated_normal()}} \cr
+\code{\link[=random_uniform]{random_uniform()}} \cr
 }
 \concept{random}

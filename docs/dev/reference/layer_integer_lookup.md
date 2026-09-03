@@ -206,7 +206,7 @@ layer_integer_lookup(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

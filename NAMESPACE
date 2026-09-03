@@ -947,66 +947,82 @@ export(with_custom_object_scope)
 export(zip_lists)
 import(reticulate)
 importFrom(dotty,.)
-importFrom(generics,compile)
-importFrom(generics,fit)
-importFrom(generics,generate)
+importFrom(generics,
+  compile,
+  fit,
+  generate
+)
 importFrom(glue,trim)
-importFrom(graphics,par)
-importFrom(graphics,plot)
-importFrom(graphics,points)
-importFrom(magrittr,"%<>%")
-importFrom(magrittr,"%>%")
-importFrom(reticulate,array_reshape)
-importFrom(reticulate,as_iterator)
-importFrom(reticulate,dict)
-importFrom(reticulate,import)
-importFrom(reticulate,import_builtins)
-importFrom(reticulate,import_from_path)
-importFrom(reticulate,iter_next)
-importFrom(reticulate,iterate)
-importFrom(reticulate,np_array)
-importFrom(reticulate,py_call)
-importFrom(reticulate,py_capture_output)
-importFrom(reticulate,py_clear_last_error)
-importFrom(reticulate,py_del_item)
-importFrom(reticulate,py_dict)
-importFrom(reticulate,py_eval)
-importFrom(reticulate,py_func)
-importFrom(reticulate,py_get_attr)
-importFrom(reticulate,py_get_item)
-importFrom(reticulate,py_has_attr)
-importFrom(reticulate,py_help)
-importFrom(reticulate,py_install)
-importFrom(reticulate,py_is_null_xptr)
-importFrom(reticulate,py_iterator)
-importFrom(reticulate,py_require)
-importFrom(reticulate,py_str)
-importFrom(reticulate,py_to_r)
-importFrom(reticulate,py_to_r_wrapper)
-importFrom(reticulate,r_to_py)
-importFrom(reticulate,tuple)
-importFrom(reticulate,use_python)
-importFrom(reticulate,use_virtualenv)
-importFrom(rlang,"%||%")
-importFrom(rlang,.data)
-importFrom(rlang,dots_list)
-importFrom(rlang,is_string)
-importFrom(rlang,list2)
+importFrom(graphics,
+  par,
+  plot,
+  points
+)
+importFrom(magrittr,
+  "%<>%",
+  "%>%"
+)
+importFrom(reticulate,
+  array_reshape,
+  as_iterator,
+  dict,
+  import,
+  import_builtins,
+  import_from_path,
+  iter_next,
+  iterate,
+  np_array,
+  py_call,
+  py_capture_output,
+  py_clear_last_error,
+  py_del_item,
+  py_dict,
+  py_eval,
+  py_func,
+  py_get_attr,
+  py_get_item,
+  py_has_attr,
+  py_help,
+  py_install,
+  py_is_null_xptr,
+  py_iterator,
+  py_require,
+  py_str,
+  py_to_r,
+  py_to_r_wrapper,
+  r_to_py,
+  tuple,
+  use_python,
+  use_virtualenv
+)
+importFrom(rlang,
+  "%||%",
+  .data,
+  dots_list,
+  is_string,
+  list2
+)
 importFrom(stats,predict)
-importFrom(tensorflow,all_dims)
-importFrom(tensorflow,as_tensor)
-importFrom(tensorflow,evaluate)
-importFrom(tensorflow,export_savedmodel)
-importFrom(tensorflow,install_tensorflow)
-importFrom(tensorflow,tensorboard)
-importFrom(tensorflow,tf_config)
-importFrom(tensorflow,tf_version)
-importFrom(tfruns,flag_boolean)
-importFrom(tfruns,flag_integer)
-importFrom(tfruns,flag_numeric)
-importFrom(tfruns,flag_string)
-importFrom(tfruns,flags)
-importFrom(tfruns,run_dir)
+importFrom(tensorflow,
+  all_dims,
+  as_tensor,
+  evaluate,
+  export_savedmodel,
+  install_tensorflow,
+  tensorboard,
+  tf_config,
+  tf_version
+)
+importFrom(tfruns,
+  flag_boolean,
+  flag_integer,
+  flag_numeric,
+  flag_string,
+  flags,
+  run_dir
+)
 importFrom(utils,modifyList)
-importFrom(zeallot,"%<-%")
-importFrom(zeallot,destructure)
+importFrom(zeallot,
+  "%<-%",
+  destructure
+)

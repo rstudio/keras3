@@ -25,7 +25,7 @@ layer_unit_normalization(object, axis = -1L, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

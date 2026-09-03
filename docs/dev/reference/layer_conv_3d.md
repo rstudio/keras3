@@ -131,7 +131,7 @@ layer_conv_3d(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -75,12 +75,12 @@ to do the following in a setup chunk:
 
 \seealso{
 Other model functions: \cr
-\code{\link{get_config}()} \cr
-\code{\link{get_layer}()} \cr
-\code{\link{get_state_tree}()} \cr
-\code{\link{keras_model}()} \cr
-\code{\link{keras_model_sequential}()} \cr
-\code{\link{pop_layer}()} \cr
-\code{\link{set_state_tree}()} \cr
+\code{\link[=get_config]{get_config()}} \cr
+\code{\link[=get_layer]{get_layer()}} \cr
+\code{\link[=get_state_tree]{get_state_tree()}} \cr
+\code{\link[=keras_model]{keras_model()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
+\code{\link[=pop_layer]{pop_layer()}} \cr
+\code{\link[=set_state_tree]{set_state_tree()}} \cr
 }
 \concept{model functions}

@@ -24,7 +24,7 @@ metric_cosine_similarity(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

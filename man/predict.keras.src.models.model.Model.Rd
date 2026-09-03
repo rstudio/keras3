@@ -27,7 +27,7 @@
 \item A Python generator function.
 }}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{batch_size}{Integer or \code{NULL}.
 Number of samples per batch of computation.
@@ -83,10 +83,10 @@ for more details about the difference between \code{Model} methods
 }
 
 Other model training: \cr
-\code{\link{compile.keras.src.models.model.Model}()} \cr
-\code{\link{evaluate.keras.src.models.model.Model}()} \cr
-\code{\link{predict_on_batch}()} \cr
-\code{\link{test_on_batch}()} \cr
-\code{\link{train_on_batch}()} \cr
+\code{\link[=compile.keras.src.models.model.Model]{compile.keras.src.models.model.Model()}} \cr
+\code{\link[=evaluate.keras.src.models.model.Model]{evaluate.keras.src.models.model.Model()}} \cr
+\code{\link[=predict_on_batch]{predict_on_batch()}} \cr
+\code{\link[=test_on_batch]{test_on_batch()}} \cr
+\code{\link[=train_on_batch]{train_on_batch()}} \cr
 }
 \concept{model training}

@@ -62,7 +62,7 @@ layer_max_pooling_1d(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

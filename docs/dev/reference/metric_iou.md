@@ -38,7 +38,7 @@ metric_iou(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - num_classes:
 

@@ -32,9 +32,9 @@ Constrains the weights incident to each hidden unit to have unit norm.
 }
 
 Other constraints: \cr
-\code{\link{Constraint}()} \cr
-\code{\link{constraint_maxnorm}()} \cr
-\code{\link{constraint_minmaxnorm}()} \cr
-\code{\link{constraint_nonneg}()} \cr
+\code{\link[=Constraint]{Constraint()}} \cr
+\code{\link[=constraint_maxnorm]{constraint_maxnorm()}} \cr
+\code{\link[=constraint_minmaxnorm]{constraint_minmaxnorm()}} \cr
+\code{\link[=constraint_nonneg]{constraint_nonneg()}} \cr
 }
 \concept{constraints}

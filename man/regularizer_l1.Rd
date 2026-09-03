@@ -30,8 +30,8 @@ In this case, the default value used is \code{l1=0.01}.
 }
 
 Other regularizers: \cr
-\code{\link{regularizer_l1_l2}()} \cr
-\code{\link{regularizer_l2}()} \cr
-\code{\link{regularizer_orthogonal}()} \cr
+\code{\link[=regularizer_l1_l2]{regularizer_l1_l2()}} \cr
+\code{\link[=regularizer_l2]{regularizer_l2()}} \cr
+\code{\link[=regularizer_orthogonal]{regularizer_orthogonal()}} \cr
 }
 \concept{regularizers}

@@ -73,7 +73,7 @@ clone_model(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

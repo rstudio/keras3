@@ -40,16 +40,16 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{dotty}{\code{\link[dotty:dotty]{.}}}
+  \item{dotty}{\code{\link[dotty:.]{.}}}
 
-  \item{generics}{\code{\link[generics]{compile}}, \code{\link[generics]{fit}}, \code{\link[generics]{generate}}}
+  \item{generics}{\code{\link[generics:compile]{compile()}}, \code{\link[generics:fit]{fit()}}, \code{\link[generics:generate]{generate()}}}
 
-  \item{magrittr}{\code{\link[magrittr:compound]{\%<>\%}}}
+  \item{magrittr}{\code{\link[magrittr:\%<>\%]{\%<>\%}}}
 
-  \item{reticulate}{\code{\link[reticulate:with-as-operator]{\%as\%}}, \code{\link[reticulate]{array_reshape}}, \code{\link[reticulate:iterate]{as_iterator}}, \code{\link[reticulate]{import}}, \code{\link[reticulate:iterate]{iter_next}}, \code{\link[reticulate]{iterate}}, \code{\link[reticulate]{np_array}}, \code{\link[reticulate]{py_help}}, \code{\link[reticulate]{py_require}}, \code{\link[reticulate:r-py-conversion]{py_to_r}}, \code{\link[reticulate:r-py-conversion]{r_to_py}}, \code{\link[reticulate]{tuple}}, \code{\link[reticulate]{use_python}}, \code{\link[reticulate:use_python]{use_virtualenv}}}
+  \item{reticulate}{\code{\link[reticulate:\%as\%]{\%as\%}}, \code{\link[reticulate:array_reshape]{array_reshape()}}, \code{\link[reticulate:as_iterator]{as_iterator()}}, \code{\link[reticulate:import]{import()}}, \code{\link[reticulate:iter_next]{iter_next()}}, \code{\link[reticulate:iterate]{iterate()}}, \code{\link[reticulate:np_array]{np_array()}}, \code{\link[reticulate:py_help]{py_help()}}, \code{\link[reticulate:py_require]{py_require()}}, \code{\link[reticulate:py_to_r]{py_to_r()}}, \code{\link[reticulate:r_to_py]{r_to_py()}}, \code{\link[reticulate:tuple]{tuple()}}, \code{\link[reticulate:use_python]{use_python()}}, \code{\link[reticulate:use_virtualenv]{use_virtualenv()}}}
 
-  \item{tensorflow}{\code{\link[tensorflow]{all_dims}}, \code{\link[tensorflow]{as_tensor}}, \code{\link[tensorflow]{evaluate}}, \code{\link[tensorflow]{export_savedmodel}}, \code{\link[tensorflow]{tensorboard}}}
+  \item{tensorflow}{\code{\link[tensorflow:all_dims]{all_dims()}}, \code{\link[tensorflow:as_tensor]{as_tensor()}}, \code{\link[tensorflow:evaluate]{evaluate()}}, \code{\link[tensorflow:export_savedmodel]{export_savedmodel()}}, \code{\link[tensorflow:tensorboard]{tensorboard()}}}
 
-  \item{tfruns}{\code{\link[tfruns:flags]{flag_boolean}}, \code{\link[tfruns:flags]{flag_integer}}, \code{\link[tfruns:flags]{flag_numeric}}, \code{\link[tfruns:flags]{flag_string}}, \code{\link[tfruns]{flags}}, \code{\link[tfruns]{run_dir}}}
+  \item{tfruns}{\code{\link[tfruns:flag_boolean]{flag_boolean()}}, \code{\link[tfruns:flag_integer]{flag_integer()}}, \code{\link[tfruns:flag_numeric]{flag_numeric()}}, \code{\link[tfruns:flag_string]{flag_string()}}, \code{\link[tfruns:flags]{flags()}}, \code{\link[tfruns:run_dir]{run_dir()}}}
 }}
 

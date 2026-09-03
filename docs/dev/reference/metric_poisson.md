@@ -22,7 +22,7 @@ metric_poisson(y_true, y_pred, ..., name = "poisson", dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

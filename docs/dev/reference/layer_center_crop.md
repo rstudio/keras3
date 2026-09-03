@@ -41,7 +41,7 @@ layer_center_crop(object, height, width, data_format = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

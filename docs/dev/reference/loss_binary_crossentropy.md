@@ -58,7 +58,7 @@ loss_binary_crossentropy(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

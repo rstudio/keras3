@@ -334,25 +334,25 @@ summary(siamese)
 ```
 
 ```
-## Model: "functional"
+## [1mModel: "functional"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━┓
-## ┃ Layer (type)      ┃ Output Shape    ┃   Param # ┃ Connected to   ┃ Trai… ┃
+## ┃[1m [0m[1mLayer (type)     [0m[1m [0m┃[1m [0m[1mOutput Shape   [0m[1m [0m┃[1m [0m[1m  Param #[0m[1m [0m┃[1m [0m[1mConnected to  [0m[1m [0m┃[1m [0m[1mTrai…[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━┩
-## │ input_layer_1     │ (None, 28, 28,  │         0 │ -              │   -   │
-## │ (InputLayer)      │ 1)              │           │                │       │
+## │ input_layer_1     │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m,  │         [38;5;34m0[0m │ -              │   [1m-[0m   │
+## │ ([38;5;33mInputLayer[0m)      │ [38;5;34m1[0m)              │           │                │       │
 ## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤
-## │ input_layer_2     │ (None, 28, 28,  │         0 │ -              │   -   │
-## │ (InputLayer)      │ 1)              │           │                │       │
+## │ input_layer_2     │ ([38;5;45mNone[0m, [38;5;34m28[0m, [38;5;34m28[0m,  │         [38;5;34m0[0m │ -              │   [1m-[0m   │
+## │ ([38;5;33mInputLayer[0m)      │ [38;5;34m1[0m)              │           │                │       │
 ## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤
-## │ embedding         │ (None, 10)      │     5,318 │ input_layer_1… │   Y   │
-## │ (Functional)      │                 │           │ input_layer_2… │       │
+## │ embedding         │ ([38;5;45mNone[0m, [38;5;34m10[0m)      │     [38;5;34m5,318[0m │ input_layer_1… │   [1;38;5;34mY[0m   │
+## │ ([38;5;33mFunctional[0m)      │                 │           │ input_layer_2… │       │
 ## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤
-## │ lambda (Lambda)   │ (None, 1)       │         0 │ embedding[0][… │   -   │
-## │                   │                 │           │ embedding[1][… │       │
+## │ lambda ([38;5;33mLambda[0m)   │ ([38;5;45mNone[0m, [38;5;34m1[0m)       │         [38;5;34m0[0m │ embedding[[38;5;34m0[0m][[38;5;34m…[0m │   [1m-[0m   │
+## │                   │                 │           │ embedding[[38;5;34m1[0m][[38;5;34m…[0m │       │
 ## └───────────────────┴─────────────────┴───────────┴────────────────┴───────┘
-##  Total params: 5,318 (20.77 KB)
-##  Trainable params: 4,804 (18.77 KB)
-##  Non-trainable params: 514 (2.01 KB)
+## [1m Total params: [0m[38;5;34m5,318[0m (20.77 KB)
+## [1m Trainable params: [0m[38;5;34m4,804[0m (18.77 KB)
+## [1m Non-trainable params: [0m[38;5;34m514[0m (2.01 KB)
 ```
 
 ## Train the model
@@ -373,25 +373,25 @@ history <- siamese |> fit(
 
 ```
 ## Epoch 1/10
-## 3750/3750 - 14s - 4ms/step - custom_metric_1: 0.7390 - loss: 0.2347 - val_custom_metric_1: 0.8233 - val_loss: 0.1280
+## 3750/3750 - 13s - 3ms/step - custom_metric_1: 0.7394 - loss: 0.2346 - val_custom_metric_1: 0.8216 - val_loss: 0.1294
 ## Epoch 2/10
-## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8402 - loss: 0.1236 - val_custom_metric_1: 0.8798 - val_loss: 0.0998
+## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.8402 - loss: 0.1235 - val_custom_metric_1: 0.8794 - val_loss: 0.1000
 ## Epoch 3/10
-## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8807 - loss: 0.1023 - val_custom_metric_1: 0.9042 - val_loss: 0.0848
+## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.8806 - loss: 0.1022 - val_custom_metric_1: 0.9056 - val_loss: 0.0846
 ## Epoch 4/10
-## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9021 - loss: 0.0904 - val_custom_metric_1: 0.9207 - val_loss: 0.0748
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9019 - loss: 0.0904 - val_custom_metric_1: 0.9224 - val_loss: 0.0742
 ## Epoch 5/10
-## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9168 - loss: 0.0829 - val_custom_metric_1: 0.9319 - val_loss: 0.0682
+## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9154 - loss: 0.0829 - val_custom_metric_1: 0.9327 - val_loss: 0.0678
 ## Epoch 6/10
-## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9262 - loss: 0.0779 - val_custom_metric_1: 0.9387 - val_loss: 0.0636
+## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9260 - loss: 0.0779 - val_custom_metric_1: 0.9400 - val_loss: 0.0629
 ## Epoch 7/10
-## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9447 - val_loss: 0.0604
+## 3750/3750 - 9s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9455 - val_loss: 0.0599
 ## Epoch 8/10
-## 3750/3750 - 11s - 3ms/step - custom_metric_1: 0.9367 - loss: 0.0716 - val_custom_metric_1: 0.9496 - val_loss: 0.0581
+## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9369 - loss: 0.0717 - val_custom_metric_1: 0.9498 - val_loss: 0.0580
 ## Epoch 9/10
-## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9398 - loss: 0.0696 - val_custom_metric_1: 0.9525 - val_loss: 0.0564
+## 3750/3750 - 9s - 3ms/step - custom_metric_1: 0.9400 - loss: 0.0696 - val_custom_metric_1: 0.9522 - val_loss: 0.0564
 ## Epoch 10/10
-## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9418 - loss: 0.0680 - val_custom_metric_1: 0.9548 - val_loss: 0.0548
+## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9425 - loss: 0.0680 - val_custom_metric_1: 0.9544 - val_loss: 0.0551
 ```
 
 ## Visualize results
@@ -414,7 +414,7 @@ results <- siamese |> evaluate(
 ```
 
 ```
-## 625/625 - 2s - 3ms/step - custom_metric_1: 0.9573 - loss: 0.0519
+## 625/625 - 1s - 2ms/step - custom_metric_1: 0.9552 - loss: 0.0521
 ```
 
 ``` r
@@ -423,10 +423,10 @@ results
 
 ```
 ## $custom_metric_1
-## [1] 0.9573
+## [1] 0.95515
 ##
 ## $loss
-## [1] 0.05186361
+## [1] 0.05209473
 ```
 
 ## Visualize the predictions

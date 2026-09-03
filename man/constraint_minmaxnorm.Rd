@@ -46,9 +46,9 @@ to have the norm between a lower bound and an upper bound.
 }
 
 Other constraints: \cr
-\code{\link{Constraint}()} \cr
-\code{\link{constraint_maxnorm}()} \cr
-\code{\link{constraint_nonneg}()} \cr
-\code{\link{constraint_unitnorm}()} \cr
+\code{\link[=Constraint]{Constraint()}} \cr
+\code{\link[=constraint_maxnorm]{constraint_maxnorm()}} \cr
+\code{\link[=constraint_nonneg]{constraint_nonneg()}} \cr
+\code{\link[=constraint_unitnorm]{constraint_unitnorm()}} \cr
 }
 \concept{constraints}

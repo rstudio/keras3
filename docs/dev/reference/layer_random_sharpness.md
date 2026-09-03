@@ -61,7 +61,7 @@ layer_random_sharpness(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

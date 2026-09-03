@@ -37,19 +37,19 @@ to the filesystem.
 }
 \seealso{
 Other model functions: \cr
-\code{\link{get_layer}()} \cr
-\code{\link{get_state_tree}()} \cr
-\code{\link{keras_model}()} \cr
-\code{\link{keras_model_sequential}()} \cr
-\code{\link{pop_layer}()} \cr
-\code{\link{set_state_tree}()} \cr
-\code{\link{summary.keras.src.models.model.Model}()} \cr
+\code{\link[=get_layer]{get_layer()}} \cr
+\code{\link[=get_state_tree]{get_state_tree()}} \cr
+\code{\link[=keras_model]{keras_model()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
+\code{\link[=pop_layer]{pop_layer()}} \cr
+\code{\link[=set_state_tree]{set_state_tree()}} \cr
+\code{\link[=summary.keras.src.models.model.Model]{summary.keras.src.models.model.Model()}} \cr
 
 Other layer methods: \cr
-\code{\link{count_params}()} \cr
-\code{\link{get_weights}()} \cr
-\code{\link{quantize_weights}()} \cr
-\code{\link{reset_state}()} \cr
+\code{\link[=count_params]{count_params()}} \cr
+\code{\link[=get_weights]{get_weights()}} \cr
+\code{\link[=quantize_weights]{quantize_weights()}} \cr
+\code{\link[=reset_state]{reset_state()}} \cr
 }
 \concept{layer methods}
 \concept{model functions}

@@ -44,7 +44,7 @@ metric_pearson_correlation(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

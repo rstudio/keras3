@@ -348,25 +348,25 @@ history <- siamese |> fit(
 ```
 
     ## Epoch 1/10
-    ## 3750/3750 - 14s - 4ms/step - custom_metric_1: 0.7390 - loss: 0.2347 - val_custom_metric_1: 0.8233 - val_loss: 0.1280
+    ## 3750/3750 - 13s - 3ms/step - custom_metric_1: 0.7394 - loss: 0.2346 - val_custom_metric_1: 0.8216 - val_loss: 0.1294
     ## Epoch 2/10
-    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8402 - loss: 0.1236 - val_custom_metric_1: 0.8798 - val_loss: 0.0998
+    ## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.8402 - loss: 0.1235 - val_custom_metric_1: 0.8794 - val_loss: 0.1000
     ## Epoch 3/10
-    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8807 - loss: 0.1023 - val_custom_metric_1: 0.9042 - val_loss: 0.0848
+    ## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.8806 - loss: 0.1022 - val_custom_metric_1: 0.9056 - val_loss: 0.0846
     ## Epoch 4/10
-    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9021 - loss: 0.0904 - val_custom_metric_1: 0.9207 - val_loss: 0.0748
+    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9019 - loss: 0.0904 - val_custom_metric_1: 0.9224 - val_loss: 0.0742
     ## Epoch 5/10
-    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9168 - loss: 0.0829 - val_custom_metric_1: 0.9319 - val_loss: 0.0682
+    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9154 - loss: 0.0829 - val_custom_metric_1: 0.9327 - val_loss: 0.0678
     ## Epoch 6/10
-    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9262 - loss: 0.0779 - val_custom_metric_1: 0.9387 - val_loss: 0.0636
+    ## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9260 - loss: 0.0779 - val_custom_metric_1: 0.9400 - val_loss: 0.0629
     ## Epoch 7/10
-    ## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9447 - val_loss: 0.0604
+    ## 3750/3750 - 9s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9455 - val_loss: 0.0599
     ## Epoch 8/10
-    ## 3750/3750 - 11s - 3ms/step - custom_metric_1: 0.9367 - loss: 0.0716 - val_custom_metric_1: 0.9496 - val_loss: 0.0581
+    ## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9369 - loss: 0.0717 - val_custom_metric_1: 0.9498 - val_loss: 0.0580
     ## Epoch 9/10
-    ## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9398 - loss: 0.0696 - val_custom_metric_1: 0.9525 - val_loss: 0.0564
+    ## 3750/3750 - 9s - 3ms/step - custom_metric_1: 0.9400 - loss: 0.0696 - val_custom_metric_1: 0.9522 - val_loss: 0.0564
     ## Epoch 10/10
-    ## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9418 - loss: 0.0680 - val_custom_metric_1: 0.9548 - val_loss: 0.0548
+    ## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9425 - loss: 0.0680 - val_custom_metric_1: 0.9544 - val_loss: 0.0551
 
 ## Visualize results
 
@@ -388,17 +388,17 @@ results <- siamese |> evaluate(
 )
 ```
 
-    ## 625/625 - 2s - 3ms/step - custom_metric_1: 0.9573 - loss: 0.0519
+    ## 625/625 - 1s - 2ms/step - custom_metric_1: 0.9552 - loss: 0.0521
 
 ``` r
 results
 ```
 
     ## $custom_metric_1
-    ## [1] 0.9573
+    ## [1] 0.95515
     ##
     ## $loss
-    ## [1] 0.05186361
+    ## [1] 0.05209473
 
 ## Visualize the predictions
 

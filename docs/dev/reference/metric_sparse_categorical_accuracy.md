@@ -37,7 +37,7 @@ metric_sparse_categorical_accuracy(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

@@ -45,7 +45,7 @@ A tensor, the result from applying the activation to the input tensor
 
 - To be used together with the dropout variant
   [`layer_alpha_dropout()`](https://keras3.posit.co/dev/reference/layer_alpha_dropout.md)
-  (legacy, depracated).
+  (legacy, deprecated).
 
 ## Reference
 

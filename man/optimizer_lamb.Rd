@@ -99,7 +99,7 @@ Learning rate schedules will look at "real" iterations value
 for momentum accumulator weights created by
 the optimizer.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 an \code{Optimizer} instance
@@ -120,21 +120,21 @@ especially for large batch sizes.
 
 \seealso{
 Other optimizers: \cr
-\code{\link{optimizer_adadelta}()} \cr
-\code{\link{optimizer_adafactor}()} \cr
-\code{\link{optimizer_adagrad}()} \cr
-\code{\link{optimizer_adam}()} \cr
-\code{\link{optimizer_adam_w}()} \cr
-\code{\link{optimizer_adamax}()} \cr
-\code{\link{optimizer_ftrl}()} \cr
-\code{\link{optimizer_lion}()} \cr
-\code{\link{optimizer_loss_scale}()} \cr
-\code{\link{optimizer_map}()} \cr
-\code{\link{optimizer_multi}()} \cr
-\code{\link{optimizer_muon}()} \cr
-\code{\link{optimizer_nadam}()} \cr
-\code{\link{optimizer_rmsprop}()} \cr
-\code{\link{optimizer_schedule_free_adam_w}()} \cr
-\code{\link{optimizer_sgd}()} \cr
+\code{\link[=optimizer_adadelta]{optimizer_adadelta()}} \cr
+\code{\link[=optimizer_adafactor]{optimizer_adafactor()}} \cr
+\code{\link[=optimizer_adagrad]{optimizer_adagrad()}} \cr
+\code{\link[=optimizer_adam]{optimizer_adam()}} \cr
+\code{\link[=optimizer_adam_w]{optimizer_adam_w()}} \cr
+\code{\link[=optimizer_adamax]{optimizer_adamax()}} \cr
+\code{\link[=optimizer_ftrl]{optimizer_ftrl()}} \cr
+\code{\link[=optimizer_lion]{optimizer_lion()}} \cr
+\code{\link[=optimizer_loss_scale]{optimizer_loss_scale()}} \cr
+\code{\link[=optimizer_map]{optimizer_map()}} \cr
+\code{\link[=optimizer_multi]{optimizer_multi()}} \cr
+\code{\link[=optimizer_muon]{optimizer_muon()}} \cr
+\code{\link[=optimizer_nadam]{optimizer_nadam()}} \cr
+\code{\link[=optimizer_rmsprop]{optimizer_rmsprop()}} \cr
+\code{\link[=optimizer_schedule_free_adam_w]{optimizer_schedule_free_adam_w()}} \cr
+\code{\link[=optimizer_sgd]{optimizer_sgd()}} \cr
 }
 \concept{optimizers}

@@ -110,9 +110,9 @@ Any objects assigned here are invisible to the Keras framework.
 
 \seealso{
 Other constraints: \cr
-\code{\link{constraint_maxnorm}()} \cr
-\code{\link{constraint_minmaxnorm}()} \cr
-\code{\link{constraint_nonneg}()} \cr
-\code{\link{constraint_unitnorm}()} \cr
+\code{\link[=constraint_maxnorm]{constraint_maxnorm()}} \cr
+\code{\link[=constraint_minmaxnorm]{constraint_minmaxnorm()}} \cr
+\code{\link[=constraint_nonneg]{constraint_nonneg()}} \cr
+\code{\link[=constraint_unitnorm]{constraint_unitnorm()}} \cr
 }
 \concept{constraints}

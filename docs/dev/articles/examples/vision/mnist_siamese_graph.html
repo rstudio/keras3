@@ -375,25 +375,25 @@ distance</a>.</p>
 <span>  metrics <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">accuracy</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">siamese</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Model: "functional"</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "functional"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)      ┃ Output Shape    ┃   Param # ┃ Connected to   ┃ Trai… ┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)      </span>┃<span style="font-weight: bold;"> Output Shape    </span>┃<span style="font-weight: bold;">   Param # </span>┃<span style="font-weight: bold;"> Connected to   </span>┃<span style="font-weight: bold;"> Trai… </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━┩</span></span>
-<span><span class="co">## │ input_layer_1     │ (None, 28, 28,  │         0 │ -              │   -   │</span></span>
-<span><span class="co">## │ (InputLayer)      │ 1)              │           │                │       │</span></span>
+<span><span class="co">## │ input_layer_1     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>,  │         <span style="color: #00AF00;">0</span> │ -              │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)      │ <span style="color: #00AF00;">1</span>)              │           │                │       │</span></span>
 <span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
-<span><span class="co">## │ input_layer_2     │ (None, 28, 28,  │         0 │ -              │   -   │</span></span>
-<span><span class="co">## │ (InputLayer)      │ 1)              │           │                │       │</span></span>
+<span><span class="co">## │ input_layer_2     │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">28</span>, <span style="color: #00AF00;">28</span>,  │         <span style="color: #00AF00;">0</span> │ -              │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">InputLayer</span>)      │ <span style="color: #00AF00;">1</span>)              │           │                │       │</span></span>
 <span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
-<span><span class="co">## │ embedding         │ (None, 10)      │     5,318 │ input_layer_1… │   Y   │</span></span>
-<span><span class="co">## │ (Functional)      │                 │           │ input_layer_2… │       │</span></span>
+<span><span class="co">## │ embedding         │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)      │     <span style="color: #00AF00;">5,318</span> │ input_layer_1… │   <span style="color: #00AF00; font-weight: bold;">Y</span>   │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Functional</span>)      │                 │           │ input_layer_2… │       │</span></span>
 <span><span class="co">## ├───────────────────┼─────────────────┼───────────┼────────────────┼───────┤</span></span>
-<span><span class="co">## │ lambda (Lambda)   │ (None, 1)       │         0 │ embedding[0][… │   -   │</span></span>
-<span><span class="co">## │                   │                 │           │ embedding[1][… │       │</span></span>
+<span><span class="co">## │ lambda (<span style="color: #0087FF;">Lambda</span>)   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1</span>)       │         <span style="color: #00AF00;">0</span> │ embedding[<span style="color: #00AF00;">0</span>][<span style="color: #00AF00;">…</span> │   <span style="font-weight: bold;">-</span>   │</span></span>
+<span><span class="co">## │                   │                 │           │ embedding[<span style="color: #00AF00;">1</span>][<span style="color: #00AF00;">…</span> │       │</span></span>
 <span><span class="co">## └───────────────────┴─────────────────┴───────────┴────────────────┴───────┘</span></span>
-<span><span class="co">##  Total params: 5,318 (20.77 KB)</span></span>
-<span><span class="co">##  Trainable params: 4,804 (18.77 KB)</span></span>
-<span><span class="co">##  Non-trainable params: 514 (2.01 KB)</span></span></code></pre>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">5,318</span> (20.77 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">4,804</span> (18.77 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">514</span> (2.01 KB)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
@@ -410,25 +410,25 @@ distance</a>.</p>
 <span>  epochs <span class="op">=</span> <span class="va">epochs</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/10</span></span>
-<span><span class="co">## 3750/3750 - 14s - 4ms/step - custom_metric_1: 0.7390 - loss: 0.2347 - val_custom_metric_1: 0.8233 - val_loss: 0.1280</span></span>
+<span><span class="co">## 3750/3750 - 13s - 3ms/step - custom_metric_1: 0.7394 - loss: 0.2346 - val_custom_metric_1: 0.8216 - val_loss: 0.1294</span></span>
 <span><span class="co">## Epoch 2/10</span></span>
-<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8402 - loss: 0.1236 - val_custom_metric_1: 0.8798 - val_loss: 0.0998</span></span>
+<span><span class="co">## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.8402 - loss: 0.1235 - val_custom_metric_1: 0.8794 - val_loss: 0.1000</span></span>
 <span><span class="co">## Epoch 3/10</span></span>
-<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.8807 - loss: 0.1023 - val_custom_metric_1: 0.9042 - val_loss: 0.0848</span></span>
+<span><span class="co">## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.8806 - loss: 0.1022 - val_custom_metric_1: 0.9056 - val_loss: 0.0846</span></span>
 <span><span class="co">## Epoch 4/10</span></span>
-<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9021 - loss: 0.0904 - val_custom_metric_1: 0.9207 - val_loss: 0.0748</span></span>
+<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9019 - loss: 0.0904 - val_custom_metric_1: 0.9224 - val_loss: 0.0742</span></span>
 <span><span class="co">## Epoch 5/10</span></span>
-<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9168 - loss: 0.0829 - val_custom_metric_1: 0.9319 - val_loss: 0.0682</span></span>
+<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9154 - loss: 0.0829 - val_custom_metric_1: 0.9327 - val_loss: 0.0678</span></span>
 <span><span class="co">## Epoch 6/10</span></span>
-<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9262 - loss: 0.0779 - val_custom_metric_1: 0.9387 - val_loss: 0.0636</span></span>
+<span><span class="co">## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9260 - loss: 0.0779 - val_custom_metric_1: 0.9400 - val_loss: 0.0629</span></span>
 <span><span class="co">## Epoch 7/10</span></span>
-<span><span class="co">## 3750/3750 - 10s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9447 - val_loss: 0.0604</span></span>
+<span><span class="co">## 3750/3750 - 9s - 3ms/step - custom_metric_1: 0.9327 - loss: 0.0743 - val_custom_metric_1: 0.9455 - val_loss: 0.0599</span></span>
 <span><span class="co">## Epoch 8/10</span></span>
-<span><span class="co">## 3750/3750 - 11s - 3ms/step - custom_metric_1: 0.9367 - loss: 0.0716 - val_custom_metric_1: 0.9496 - val_loss: 0.0581</span></span>
+<span><span class="co">## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9369 - loss: 0.0717 - val_custom_metric_1: 0.9498 - val_loss: 0.0580</span></span>
 <span><span class="co">## Epoch 9/10</span></span>
-<span><span class="co">## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9398 - loss: 0.0696 - val_custom_metric_1: 0.9525 - val_loss: 0.0564</span></span>
+<span><span class="co">## 3750/3750 - 9s - 3ms/step - custom_metric_1: 0.9400 - loss: 0.0696 - val_custom_metric_1: 0.9522 - val_loss: 0.0564</span></span>
 <span><span class="co">## Epoch 10/10</span></span>
-<span><span class="co">## 3750/3750 - 12s - 3ms/step - custom_metric_1: 0.9418 - loss: 0.0680 - val_custom_metric_1: 0.9548 - val_loss: 0.0548</span></span></code></pre>
+<span><span class="co">## 3750/3750 - 9s - 2ms/step - custom_metric_1: 0.9425 - loss: 0.0680 - val_custom_metric_1: 0.9544 - val_loss: 0.0551</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-results">Visualize results<a class="anchor" aria-label="anchor" href="#visualize-results"></a>
@@ -447,14 +447,14 @@ distance</a>.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">x_test_1</span>, <span class="va">x_test_2</span><span class="op">)</span>,</span>
 <span>  <span class="va">labels_test</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 625/625 - 2s - 3ms/step - custom_metric_1: 0.9573 - loss: 0.0519</span></span></code></pre>
+<pre><code><span><span class="co">## 625/625 - 1s - 2ms/step - custom_metric_1: 0.9552 - loss: 0.0521</span></span></code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span></span></code></pre></div>
 <pre><code><span><span class="co">## $custom_metric_1</span></span>
-<span><span class="co">## [1] 0.9573</span></span>
+<span><span class="co">## [1] 0.95515</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.05186361</span></span></code></pre>
+<span><span class="co">## [1] 0.05209473</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-the-predictions">Visualize the predictions<a class="anchor" aria-label="anchor" href="#visualize-the-predictions"></a>
