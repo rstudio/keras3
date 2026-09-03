@@ -387,7 +387,7 @@ function(object, output_size, data_format = NULL, name = NULL, ...)
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -505,7 +505,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -594,7 +594,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -668,7 +668,7 @@ function (object, pool_size, strides = NULL, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -738,7 +738,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -809,7 +809,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -878,7 +878,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -947,7 +947,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1017,7 +1017,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1124,7 +1124,7 @@ function (object, data_format = NULL, keepdims = FALSE, ...)
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1245,7 +1245,7 @@ function (object, pool_size = 2L, strides = NULL, padding = "valid",
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1337,7 +1337,7 @@ function (object, pool_size = list(2L, 2L), strides = NULL, padding = "valid",
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export

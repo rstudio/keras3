@@ -23,7 +23,7 @@
   name: String, name for the object
   seed: Initial seed for the random number generator
   dtype: datatype (e.g., `"float32"`).
-  "...": For forward/backward compatability.
+  "...": For forward/backward compatibility.
 
 "keras.metrics.*":
   y_true: Tensor of true targets.
@@ -132,4 +132,3 @@ keras.utils.FeatureSpace:
 keras.ops.vectorized_map:
   function: a function
   elements: see description
-

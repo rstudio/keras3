@@ -166,7 +166,7 @@ use_backend <- function(backend, gpu = NA) {
 
   if (is_keras_loaded()) {
     if (config_backend() != backend)
-      stop("The keras backend must be set before keras has inititialized. Please restart the R session.")
+      stop("The keras backend must be set before keras has initialized. Please restart the R session.")
     return(invisible())
   }
 

@@ -68,7 +68,7 @@
 #' `"channels_last"` or `"channels_first"`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family image utils

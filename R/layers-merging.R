@@ -32,7 +32,7 @@
 #' ```
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' layers to combine
@@ -96,7 +96,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' layers to combine
@@ -303,7 +303,7 @@ function (inputs, ..., axes, normalize = FALSE)
 #' ```
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' layers to combine
@@ -365,7 +365,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' layers to combine
@@ -427,7 +427,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' layers to combine
@@ -489,7 +489,7 @@ function (inputs, ...)
 #' ```
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' layers to combine

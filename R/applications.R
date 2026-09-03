@@ -863,7 +863,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -962,7 +962,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -1061,7 +1061,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -1160,7 +1160,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -1259,7 +1259,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -1358,7 +1358,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -1457,7 +1457,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso
@@ -1556,7 +1556,7 @@ function (include_top = TRUE, weights = "imagenet", input_tensor = NULL,
 #' The name of the model (string).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @seealso

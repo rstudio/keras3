@@ -110,10 +110,10 @@ test_that("R6 privates", {
               class = "non_convertable_object")
   }
   r_to_py.non_convertable_object <- function(x, convert = FALSE) {
-    stop("object not convertable")
+    stop("object not convertible")
   }
 
-  expect_error(r_to_py(o), "object not convertable")
+  expect_error(r_to_py(o), "object not convertible")
 
   aClass <- R6::R6Class(
     "aClass",

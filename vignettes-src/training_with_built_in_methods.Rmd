@@ -465,7 +465,7 @@ and you've seen how to use the `validation_data` and `validation_split` argument
 Another option is to use an iterator-like, such as a `tf.data.Dataset`, a
 PyTorch `DataLoader`, or an R generator function. Let's take look at the former.
 
-The `{tfdatasets}` R package containes a set of utilities for loading and preprocessing
+The `{tfdatasets}` R package contains a set of utilities for loading and preprocessing
 data in a way that's fast and scalable. For a complete guide about creating `Datasets`,
 see the [tf.data documentation](https://www.tensorflow.org/guide/data).
 
@@ -988,7 +988,7 @@ model |> fit(
 # Alternatively, fit on named lists (names matching)
 model <- keras_model(
   inputs = list(image_input, timeseries_input),
-  outputs = list(score_output = score_output, 
+  outputs = list(score_output = score_output,
                  class_output = class_output)
 ) |> compile(
   optimizer = optimizer_rmsprop(1e-3),

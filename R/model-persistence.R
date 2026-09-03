@@ -53,7 +53,7 @@
 #' (default when saving on the Hugging Face Hub).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param model A keras model.
 #'
@@ -271,7 +271,7 @@ function (model, filepath, overwrite = FALSE, max_shard_size = NULL)
 #' the shape of the weights.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param model A keras model.
 #'
@@ -962,7 +962,7 @@ function (obj)
 #' applicable to the Keras v3 model format. Defaults to `TRUE`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family serialization utilities
@@ -1205,7 +1205,7 @@ normalize_custom_objects <- function(objects) {
 
     object <- resolve_py_obj(
       object, default_name = name %""%
-        stop("object name could not be infered; please supply a named list"))
+        stop("object name could not be inferred; please supply a named list"))
 
     out <- list(object)
     names(out) <- as_r_value(name %""% object$`__name__`)
