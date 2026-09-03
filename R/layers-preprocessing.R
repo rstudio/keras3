@@ -93,7 +93,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -162,7 +162,7 @@ function (object, num_tokens = NULL, output_mode = "multi_hot",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -198,7 +198,7 @@ function (object, height, width, data_format = NULL, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inherit layer_dense return
@@ -911,7 +911,7 @@ function (object, num_bins, mask_value = NULL, salt = NULL, output_mode = "int",
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1036,7 +1036,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1120,7 +1120,7 @@ function (object, axis = -1L, mean = NULL, variance = NULL, invert = FALSE,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1191,7 +1191,7 @@ function (object, factor, value_range = list(0L, 255L), seed = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1418,7 +1418,7 @@ function (object, mode = "horizontal_and_vertical", seed = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param data_format
 #' string, either `"channels_last"` or `"channels_first"`.
@@ -1862,7 +1862,7 @@ function (object, height, width, interpolation = "bilinear",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family image preprocessing layers
@@ -2018,7 +2018,7 @@ function (object, addition_factor = 0, threshold_factor = 0,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_random_grayscale
 #'
@@ -2136,7 +2136,7 @@ function(object, value_range = c(0L, 255L), clip_limit = 4,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_random_grayscale
 #' @export
@@ -2192,7 +2192,7 @@ function (object, alpha = 0.2, data_format = NULL, seed = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_random_grayscale
 #' @export
@@ -2247,7 +2247,7 @@ function (object, value_range = list(0L, 255L), num_ops = 2L,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_random_grayscale
 #' @export
@@ -2331,7 +2331,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_random_grayscale
 #' @export
@@ -2398,7 +2398,7 @@ function (object, value_range = list(0L, 255L), brightness_factor = NULL,
 #' Initial seed for the random number generator
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @tether keras.layers.RandomGrayscale
@@ -2459,7 +2459,7 @@ function (object, factor = 0.5, data_format = NULL, seed = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inheritParams layer_random_grayscale
@@ -2505,7 +2505,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Initial seed for the random number generator
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inheritParams layer_random_grayscale
@@ -2565,7 +2565,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inheritParams layer_random_grayscale
@@ -2618,7 +2618,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inheritParams layer_random_grayscale
@@ -2698,7 +2698,7 @@ function (object, factor, value_range = list(0L, 255L), data_format = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inheritParams layer_random_grayscale
@@ -2765,7 +2765,7 @@ function (object, x_factor = 0, y_factor = 0, interpolation = "bilinear",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_center_crop
 #'
@@ -2857,7 +2857,7 @@ function (object, factor = 1, scale = list(0.02, 0.33), fill_value = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_center_crop
 #'
@@ -2919,7 +2919,7 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_center_crop
 #'
@@ -2974,7 +2974,7 @@ function (object, factor = 1, kernel_size = 3L, sigma = 1, value_range = list(
 #' @inheritParams layer_center_crop
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @tether keras.layers.RandomInvert
@@ -3035,7 +3035,7 @@ function (object, factor = 1, value_range = list(0L, 255L), seed = NULL,
 #' @inheritParams layer_center_crop
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @tether keras.layers.RandomPerspective
@@ -3110,7 +3110,7 @@ function (object, factor = 1, scale = 1, interpolation = "bilinear",
 #' @inheritParams layer_center_crop
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @tether keras.layers.AugMix
@@ -3159,7 +3159,7 @@ function (object, value_range = c(0L, 255L), num_chains = 3L,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inheritParams layer_center_crop
 #'
@@ -3547,7 +3547,7 @@ function (layers, name = NULL)
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -3805,7 +3805,7 @@ function (object, max_tokens = NULL, num_oov_indices = 1L, mask_token = NULL,
 #' String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -3964,7 +3964,7 @@ set_vocabulary <- function(object, vocabulary, idf_weights=NULL, ...) {
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @family audio preprocessing layers
@@ -4133,7 +4133,7 @@ function (object, fft_length = 2048L, sequence_stride = 512L,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @family audio preprocessing layers

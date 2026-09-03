@@ -2643,7 +2643,7 @@ function (x, axes, keepdims = FALSE, synchronized = FALSE)
 #' Whether to return a sparse tensor; for backends that support
 #' sparse tensors.
 #'
-#' @param ... For forward/backwards compatability
+#' @param ... For forward/backwards compatibility
 #'
 #' @export
 #' @family nn ops
@@ -7946,7 +7946,7 @@ function (xs, ...) {
 #' to take scalar tensors as input and output.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family numpy ops

@@ -1845,7 +1845,7 @@ man_src_pull_upstream_updates <- function(directories = dir_ls("man-src/", type 
     }
     # if(length(git("diff --cached --name-only --diff-filter=U")))
     if (continue)
-      stop("Merge Conflicts! Resolve before continuting.")
+      stop("Merge Conflicts! Resolve before continuing.")
   }
 
 }

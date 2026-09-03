@@ -436,7 +436,7 @@ function(input_shape = NULL,
 #' (since it is not applicable to Sequential models).
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #'
 #' @export

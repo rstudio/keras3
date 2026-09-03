@@ -307,7 +307,7 @@ function (y_true, y_pred)
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family accuracy metrics
@@ -392,7 +392,7 @@ function (y_true, y_pred, threshold = 0.5, ..., name = "binary_accuracy",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family accuracy metrics
@@ -470,7 +470,7 @@ function (y_true, y_pred, ..., name = "categorical_accuracy",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family accuracy metrics
@@ -578,7 +578,7 @@ function (y_true, y_pred, ..., name = "sparse_categorical_accuracy",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -653,7 +653,7 @@ function (y_true, y_pred, k = 5L, ..., name = "sparse_top_k_categorical_accuracy
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -825,7 +825,7 @@ function (y_true, y_pred, k = 5L, ..., name = "top_k_categorical_accuracy",
 #' loss should match the AUC `from_logits` constructor argument.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @returns a `Metric` instance is returned. The `Metric` instance can be passed
 #'   directly to `compile(metrics = )`, or used as a standalone object. See
@@ -890,7 +890,7 @@ function (..., num_thresholds = 200L, curve = "ROC", summation_method = "interpo
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -950,7 +950,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1071,7 +1071,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1154,7 +1154,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1258,7 +1258,7 @@ function (..., recall, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1344,7 +1344,7 @@ function (..., thresholds = NULL, top_k = NULL, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1436,7 +1436,7 @@ function (..., precision, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1528,7 +1528,7 @@ function (..., specificity, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1589,7 +1589,7 @@ function (..., sensitivity, num_thresholds = 200L, class_id = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1649,7 +1649,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1726,7 +1726,7 @@ function (..., thresholds = NULL, name = NULL, dtype = NULL)
 #' Optional. Data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1809,7 +1809,7 @@ function (..., average = NULL, threshold = NULL, name = "f1_score",
 #' Optional. Data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -1870,7 +1870,7 @@ function (..., average = NULL, beta = 1, threshold = NULL, name = "fbeta_score",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -1935,7 +1935,7 @@ function (y_true, y_pred, ..., name = "categorical_hinge",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -1999,7 +1999,7 @@ function (y_true, y_pred, ..., name = "hinge", dtype = NULL)
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -2100,7 +2100,7 @@ function (y_true, y_pred, ..., name = "squared_hinge",
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -2202,7 +2202,7 @@ function (..., target_class_ids = list(0L, 1L), threshold = 0.5,
 #' Defaults to `-1`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -2309,7 +2309,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -2425,7 +2425,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -2528,7 +2528,7 @@ function (..., num_classes, target_class_ids, name = NULL, dtype = NULL,
 #' (Optional) The dimension containing the logits. Defaults to `-1`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -2607,7 +2607,7 @@ function (..., num_classes, name = NULL, dtype = NULL, ignore_class = NULL,
 #' The axis along which the mean is computed. Defaults to `-1`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -2706,7 +2706,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -2782,7 +2782,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -2855,7 +2855,7 @@ function (y_true, y_pred, ..., name = "kl_divergence",
 #' The predicted values. shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -2946,7 +2946,7 @@ function (y_true, y_pred, ..., name = "poisson", dtype = NULL)
 #' considered.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -3011,7 +3011,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -3115,7 +3115,7 @@ function (..., fn, name = NULL, dtype = NULL)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -3179,7 +3179,7 @@ function (..., name = "sum", dtype = NULL)
 #' similarity is computed.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -3237,7 +3237,7 @@ function (..., name = "cosine_similarity", dtype = NULL, axis = -1L)
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -3302,7 +3302,7 @@ function (..., name = "logcosh", dtype = NULL)
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inherit metric_binary_accuracy return
@@ -3375,7 +3375,7 @@ function (y_true, y_pred, ..., name = "mean_absolute_error",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -3430,7 +3430,7 @@ function (y_true, y_pred, ..., name = "mean_absolute_percentage_error",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -3504,7 +3504,7 @@ function (y_true, y_pred, ..., name = "mean_squared_error",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_binary_accuracy return
 #' @export
@@ -3585,7 +3585,7 @@ function (y_true, y_pred, ..., name = "mean_squared_logarithmic_error",
 #' Optional. data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -3645,7 +3645,7 @@ function (..., class_aggregation = "uniform_average", num_regressors = 0L,
 #' (Optional) data type of the metric result.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit metric_auc return
 #' @export
@@ -3724,7 +3724,7 @@ function (..., name = "root_mean_squared_error", dtype = NULL)
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @family regression metrics
 #' @family metrics
@@ -3806,7 +3806,7 @@ function (y_true, y_pred, axis = -1L, ...,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @family regression metrics
 #' @family metrics

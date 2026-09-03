@@ -339,7 +339,7 @@ function (x)
 #' - To be used together with
 #'   [`initializer_lecun_normal()`].
 #' - To be used together with the dropout variant
-#'     `layer_alpha_dropout()` (legacy, depracated).
+#'     `layer_alpha_dropout()` (legacy, deprecated).
 #'
 #' # Reference
 #' - [Klambauer et al., 2017](https://arxiv.org/abs/1706.02515)

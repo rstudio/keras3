@@ -198,7 +198,7 @@ function (tensor)
 #' If `TRUE`, the file will always be re-downloaded
 #' regardless of the cache state.
 #'
-#' @param ... For forward/backward compatability.
+#' @param ... For forward/backward compatibility.
 #'
 #' @export
 #' @family utils
@@ -265,7 +265,7 @@ function (fname = NULL, origin = NULL, ...,
 #  `"spline"`, and `"line"`.
 #
 #  @param ...
-#  For forward/backward compatability.
+#  For forward/backward compatibility.
 #
 # @export
 #  @noRd

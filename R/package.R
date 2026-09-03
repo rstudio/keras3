@@ -460,7 +460,7 @@ keras_version <- function() {
 #'
 #' @examples
 #' \dontrun{
-#' # testthat utilty for skipping tests when Keras isn't available
+#' # testthat utility for skipping tests when Keras isn't available
 #' skip_if_no_keras <- function(version = NULL) {
 #'   if (!is_keras_available(version))
 #'     skip("Required keras version not available for testing")

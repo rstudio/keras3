@@ -461,7 +461,7 @@ function (shape, minval = 0, maxval = 1, dtype = NULL, seed = NULL)
 #' @param name String, name for the object
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @returns A `SeedGenerator` instance, which can be passed as the `seed = `
 #'   argument to other random tensor generators.
