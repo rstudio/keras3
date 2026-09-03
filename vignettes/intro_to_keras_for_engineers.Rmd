@@ -113,30 +113,30 @@ summary(model)
 ```
 
 ```
-## Model: "sequential"
+## [1mModel: "sequential"[0m
 ## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
-## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+## ┃[1m [0m[1mLayer (type)                   [0m[1m [0m┃[1m [0m[1mOutput Shape          [0m[1m [0m┃[1m [0m[1m      Param #[0m[1m [0m┃
 ## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-## │ conv2d (Conv2D)                 │ (None, 26, 26, 64)     │           640 │
+## │ conv2d ([38;5;33mConv2D[0m)                 │ ([38;5;45mNone[0m, [38;5;34m26[0m, [38;5;34m26[0m, [38;5;34m64[0m)     │           [38;5;34m640[0m │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_1 (Conv2D)               │ (None, 24, 24, 64)     │        36,928 │
+## │ conv2d_1 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m24[0m, [38;5;34m24[0m, [38;5;34m64[0m)     │        [38;5;34m36,928[0m │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ max_pooling2d (MaxPooling2D)    │ (None, 12, 12, 64)     │             0 │
+## │ max_pooling2d ([38;5;33mMaxPooling2D[0m)    │ ([38;5;45mNone[0m, [38;5;34m12[0m, [38;5;34m12[0m, [38;5;34m64[0m)     │             [38;5;34m0[0m │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_2 (Conv2D)               │ (None, 10, 10, 128)    │        73,856 │
+## │ conv2d_2 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m10[0m, [38;5;34m10[0m, [38;5;34m128[0m)    │        [38;5;34m73,856[0m │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ conv2d_3 (Conv2D)               │ (None, 8, 8, 128)      │       147,584 │
+## │ conv2d_3 ([38;5;33mConv2D[0m)               │ ([38;5;45mNone[0m, [38;5;34m8[0m, [38;5;34m8[0m, [38;5;34m128[0m)      │       [38;5;34m147,584[0m │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ global_average_pooling2d        │ (None, 128)            │             0 │
-## │ (GlobalAveragePooling2D)        │                        │               │
+## │ global_average_pooling2d        │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
+## │ ([38;5;33mGlobalAveragePooling2D[0m)        │                        │               │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dropout (Dropout)               │ (None, 128)            │             0 │
+## │ dropout ([38;5;33mDropout[0m)               │ ([38;5;45mNone[0m, [38;5;34m128[0m)            │             [38;5;34m0[0m │
 ## ├─────────────────────────────────┼────────────────────────┼───────────────┤
-## │ dense (Dense)                   │ (None, 10)             │         1,290 │
+## │ dense ([38;5;33mDense[0m)                   │ ([38;5;45mNone[0m, [38;5;34m10[0m)             │         [38;5;34m1,290[0m │
 ## └─────────────────────────────────┴────────────────────────┴───────────────┘
-##  Total params: 260,298 (1016.79 KB)
-##  Trainable params: 260,298 (1016.79 KB)
-##  Non-trainable params: 0 (0.00 B)
+## [1m Total params: [0m[38;5;34m260,298[0m (1016.79 KB)
+## [1m Trainable params: [0m[38;5;34m260,298[0m (1016.79 KB)
+## [1m Non-trainable params: [0m[38;5;34m0[0m (0.00 B)
 ```
 
 We use the `compile()` method to specify the optimizer, loss function,
@@ -178,23 +178,23 @@ model |> fit(
 
 ```
 ## Epoch 1/10
-## 399/399 - 10s - 24ms/step - acc: 0.7447 - loss: 0.7516 - val_acc: 0.9639 - val_loss: 0.1245
+## 399/399 - 9s - 23ms/step - acc: 0.7456 - loss: 0.7513 - val_acc: 0.9650 - val_loss: 0.1209
 ## Epoch 2/10
-## 399/399 - 2s - 6ms/step - acc: 0.9378 - loss: 0.2065 - val_acc: 0.9780 - val_loss: 0.0748
+## 399/399 - 2s - 6ms/step - acc: 0.9375 - loss: 0.2077 - val_acc: 0.9772 - val_loss: 0.0757
 ## Epoch 3/10
-## 399/399 - 2s - 6ms/step - acc: 0.9569 - loss: 0.1467 - val_acc: 0.9822 - val_loss: 0.0615
+## 399/399 - 2s - 6ms/step - acc: 0.9563 - loss: 0.1479 - val_acc: 0.9824 - val_loss: 0.0602
 ## Epoch 4/10
-## 399/399 - 2s - 6ms/step - acc: 0.9656 - loss: 0.1162 - val_acc: 0.9869 - val_loss: 0.0468
+## 399/399 - 2s - 6ms/step - acc: 0.9659 - loss: 0.1173 - val_acc: 0.9864 - val_loss: 0.0489
 ## Epoch 5/10
-## 399/399 - 2s - 6ms/step - acc: 0.9722 - loss: 0.0984 - val_acc: 0.9869 - val_loss: 0.0462
+## 399/399 - 2s - 6ms/step - acc: 0.9720 - loss: 0.0996 - val_acc: 0.9876 - val_loss: 0.0470
 ## Epoch 6/10
-## 399/399 - 2s - 6ms/step - acc: 0.9751 - loss: 0.0863 - val_acc: 0.9889 - val_loss: 0.0385
+## 399/399 - 2s - 6ms/step - acc: 0.9751 - loss: 0.0865 - val_acc: 0.9891 - val_loss: 0.0378
 ## Epoch 7/10
-## 399/399 - 2s - 6ms/step - acc: 0.9765 - loss: 0.0781 - val_acc: 0.9900 - val_loss: 0.0341
+## 399/399 - 2s - 6ms/step - acc: 0.9764 - loss: 0.0788 - val_acc: 0.9900 - val_loss: 0.0360
 ## Epoch 8/10
-## 399/399 - 2s - 6ms/step - acc: 0.9791 - loss: 0.0679 - val_acc: 0.9882 - val_loss: 0.0411
+## 399/399 - 2s - 6ms/step - acc: 0.9793 - loss: 0.0687 - val_acc: 0.9879 - val_loss: 0.0415
 ## Epoch 9/10
-## 399/399 - 2s - 6ms/step - acc: 0.9804 - loss: 0.0652 - val_acc: 0.9896 - val_loss: 0.0381
+## 399/399 - 2s - 6ms/step - acc: 0.9809 - loss: 0.0651 - val_acc: 0.9889 - val_loss: 0.0397
 ```
 
 ``` r
@@ -225,7 +225,7 @@ predictions <- model |> predict(x_test)
 ```
 
 ```
-## 313/313 - 1s - 3ms/step
+## 313/313 - 1s - 2ms/step
 ```
 
 ``` r
@@ -360,7 +360,7 @@ model |> fit(
 ```
 
 ```
-## 399/399 - 7s - 17ms/step - acc: 0.7348 - loss: 0.7740 - val_acc: 0.9289 - val_loss: 0.2364
+## 399/399 - 7s - 16ms/step - acc: 0.7356 - loss: 0.7722 - val_acc: 0.9271 - val_loss: 0.2375
 ```
 
 ## Training models on arbitrary data sources
@@ -437,7 +437,7 @@ model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
 ```
-## 469/469 - 8s - 18ms/step - acc: 0.7548 - loss: 0.7305 - val_acc: 0.9116 - val_loss: 0.2958
+## 469/469 - 8s - 17ms/step - acc: 0.7533 - loss: 0.7348 - val_acc: 0.9033 - val_loss: 0.3159
 ```
 
 ## Further reading
