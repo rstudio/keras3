@@ -106,7 +106,7 @@ layer_mel_spectrogram(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

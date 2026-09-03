@@ -51,7 +51,7 @@ layer_contrast_limited_adaptive_histogram_equalization(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

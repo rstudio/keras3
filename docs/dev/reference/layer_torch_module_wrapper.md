@@ -42,7 +42,7 @@ layer_torch_module_wrapper(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

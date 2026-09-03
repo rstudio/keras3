@@ -34,7 +34,7 @@ metric_recall_at_precision(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - precision:
 

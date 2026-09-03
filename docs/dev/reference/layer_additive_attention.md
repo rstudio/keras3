@@ -46,7 +46,7 @@ layer_additive_attention(object, use_scale = TRUE, dropout = 0, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

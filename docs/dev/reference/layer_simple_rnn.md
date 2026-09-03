@@ -144,7 +144,7 @@ layer_simple_rnn(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

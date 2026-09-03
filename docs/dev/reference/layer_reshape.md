@@ -23,7 +23,7 @@ layer_reshape(object, target_shape, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -23,7 +23,7 @@ layer_permute(object, dims, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -83,7 +83,7 @@ bidirectional(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

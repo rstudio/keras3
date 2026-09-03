@@ -76,7 +76,7 @@ layer_random_perspective(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

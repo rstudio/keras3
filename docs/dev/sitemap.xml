@@ -813,6 +813,7 @@
 <url><loc>https://keras3.posit.co/dev/reference/predict.keras.src.models.model.Model.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/predict_on_batch.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/process_utils.html</loc></url>
+<url><loc>https://keras3.posit.co/dev/reference/py_to_r_wrapper.keras.src.losses.loss.Loss.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/quantize_weights.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/random_beta.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/random_binomial.html</loc></url>
@@ -855,3 +856,4 @@
 <url><loc>https://keras3.posit.co/dev/reference/with_custom_object_scope.html</loc></url>
 <url><loc>https://keras3.posit.co/dev/reference/zip_lists.html</loc></url>
 </urlset>
+

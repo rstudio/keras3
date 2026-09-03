@@ -39,7 +39,7 @@ metric_sensitivity_at_specificity(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - specificity:
 

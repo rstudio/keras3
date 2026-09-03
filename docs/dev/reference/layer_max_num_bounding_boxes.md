@@ -31,7 +31,7 @@ layer_max_num_bounding_boxes(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - padding_value:
 

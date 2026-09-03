@@ -46,7 +46,7 @@ metric_one_hot_iou(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - num_classes:
 

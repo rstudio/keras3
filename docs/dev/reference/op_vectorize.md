@@ -16,7 +16,7 @@ op_vectorize(func, ..., excluded = NULL, signature = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - excluded:
 

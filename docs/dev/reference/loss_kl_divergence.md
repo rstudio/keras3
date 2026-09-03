@@ -32,7 +32,7 @@ loss_kl_divergence(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

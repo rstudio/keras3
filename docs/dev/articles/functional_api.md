@@ -173,7 +173,7 @@ history <- model |> fit(
 ```
 
     ## Epoch 1/2
-    ## 750/750 - 3s - 4ms/step - accuracy: 0.8980 - loss: 0.3540 - val_accuracy: 0.9444 - val_loss: 0.1898
+    ## 750/750 - 3s - 3ms/step - accuracy: 0.8980 - loss: 0.3540 - val_accuracy: 0.9444 - val_loss: 0.1898
     ## Epoch 2/2
     ## 750/750 - 1s - 1ms/step - accuracy: 0.9512 - loss: 0.1633 - val_accuracy: 0.9605 - val_loss: 0.1387
 
@@ -584,9 +584,9 @@ model |> fit(
 ```
 
     ## Epoch 1/2
-    ## 40/40 - 3s - 81ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
+    ## 40/40 - 3s - 71ms/step - department_loss: 2.8465 - loss: 0.7669 - priority_loss: 0.1976
     ## Epoch 2/2
-    ## 40/40 - 0s - 7ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828
+    ## 40/40 - 0s - 6ms/step - department_loss: 2.8554 - loss: 0.7538 - priority_loss: 0.1828
 
 When calling fit with a `Dataset` object, it should yield either a list
 of lists like
@@ -713,7 +713,7 @@ model |> fit(
 )
 ```
 
-    ## 13/13 - 9s - 668ms/step - acc: 0.1312 - loss: 2.2997 - val_acc: 0.1350 - val_loss: 2.2918
+    ## 13/13 - 8s - 644ms/step - acc: 0.1250 - loss: 2.2995 - val_acc: 0.1300 - val_loss: 2.2965
 
 ## Shared layers
 

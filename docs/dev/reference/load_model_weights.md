@@ -45,7 +45,7 @@ load_model_weights(model, filepath, skip_mismatch = FALSE, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

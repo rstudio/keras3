@@ -33,7 +33,7 @@ layer_auto_contrast(object, value_range = tuple(0L, 255L), ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

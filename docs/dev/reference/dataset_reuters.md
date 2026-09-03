@@ -37,7 +37,7 @@ dataset_reuters_word_index(path = "reuters_word_index.pkl")
 
 - skip_top:
 
-  Skip the top N most frequently occuring words (which may not be
+  Skip the top N most frequently occurring words (which may not be
   informative).
 
 - maxlen:

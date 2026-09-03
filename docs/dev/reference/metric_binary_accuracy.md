@@ -38,7 +38,7 @@ metric_binary_accuracy(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

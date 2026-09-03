@@ -91,7 +91,7 @@ layer_aug_mix(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## References
 

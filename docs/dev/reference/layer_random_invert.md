@@ -62,7 +62,7 @@ layer_random_invert(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

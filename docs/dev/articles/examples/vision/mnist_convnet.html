@@ -141,27 +141,27 @@
 <span>  <span class="fu"><a href="../../../reference/layer_dense.html">layer_dense</a></span><span class="op">(</span>units <span class="op">=</span> <span class="va">num_classes</span>, activation <span class="op">=</span> <span class="st">"softmax"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Model: "sequential"</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv2d (Conv2D)                 │ (None, 26, 26, 32)     │           320 │</span></span>
+<span><span class="co">## │ conv2d (<span style="color: #0087FF;">Conv2D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">26</span>, <span style="color: #00AF00;">32</span>)     │           <span style="color: #00AF00;">320</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d (MaxPooling2D)    │ (None, 13, 13, 32)     │             0 │</span></span>
+<span><span class="co">## │ max_pooling2d (<span style="color: #0087FF;">MaxPooling2D</span>)    │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">13</span>, <span style="color: #00AF00;">32</span>)     │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv2d_1 (Conv2D)               │ (None, 11, 11, 64)     │        18,496 │</span></span>
+<span><span class="co">## │ conv2d_1 (<span style="color: #0087FF;">Conv2D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">11</span>, <span style="color: #00AF00;">64</span>)     │        <span style="color: #00AF00;">18,496</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ max_pooling2d_1 (MaxPooling2D)  │ (None, 5, 5, 64)       │             0 │</span></span>
+<span><span class="co">## │ max_pooling2d_1 (<span style="color: #0087FF;">MaxPooling2D</span>)  │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">5</span>, <span style="color: #00AF00;">64</span>)       │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ flatten (Flatten)               │ (None, 1600)           │             0 │</span></span>
+<span><span class="co">## │ flatten (<span style="color: #0087FF;">Flatten</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dropout (Dropout)               │ (None, 1600)           │             0 │</span></span>
+<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">1600</span>)           │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dense (Dense)                   │ (None, 10)             │        16,010 │</span></span>
+<span><span class="co">## │ dense (<span style="color: #0087FF;">Dense</span>)                   │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">10</span>)             │        <span style="color: #00AF00;">16,010</span> │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">##  Total params: 34,826 (136.04 KB)</span></span>
-<span><span class="co">##  Trainable params: 34,826 (136.04 KB)</span></span>
-<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">34,826</span> (136.04 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">34,826</span> (136.04 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
@@ -183,35 +183,35 @@
 <span>  validation_split <span class="op">=</span> <span class="fl">0.1</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/15</span></span>
-<span><span class="co">## 422/422 - 7s - 17ms/step - accuracy: 0.8894 - loss: 0.3636 - val_accuracy: 0.9787 - val_loss: 0.0791</span></span>
+<span><span class="co">## 422/422 - 7s - 17ms/step - accuracy: 0.8894 - loss: 0.3635 - val_accuracy: 0.9785 - val_loss: 0.0792</span></span>
 <span><span class="co">## Epoch 2/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9667 - loss: 0.1111 - val_accuracy: 0.9853 - val_loss: 0.0549</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9665 - loss: 0.1111 - val_accuracy: 0.9850 - val_loss: 0.0551</span></span>
 <span><span class="co">## Epoch 3/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9742 - loss: 0.0825 - val_accuracy: 0.9880 - val_loss: 0.0440</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9743 - loss: 0.0824 - val_accuracy: 0.9880 - val_loss: 0.0441</span></span>
 <span><span class="co">## Epoch 4/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9783 - loss: 0.0694 - val_accuracy: 0.9897 - val_loss: 0.0396</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9785 - loss: 0.0694 - val_accuracy: 0.9895 - val_loss: 0.0398</span></span>
 <span><span class="co">## Epoch 5/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9806 - loss: 0.0626 - val_accuracy: 0.9903 - val_loss: 0.0353</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9804 - loss: 0.0626 - val_accuracy: 0.9900 - val_loss: 0.0354</span></span>
 <span><span class="co">## Epoch 6/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9824 - loss: 0.0558 - val_accuracy: 0.9912 - val_loss: 0.0329</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9825 - loss: 0.0558 - val_accuracy: 0.9912 - val_loss: 0.0332</span></span>
 <span><span class="co">## Epoch 7/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9838 - loss: 0.0499 - val_accuracy: 0.9918 - val_loss: 0.0307</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9836 - loss: 0.0500 - val_accuracy: 0.9917 - val_loss: 0.0310</span></span>
 <span><span class="co">## Epoch 8/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0478 - val_accuracy: 0.9923 - val_loss: 0.0304</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9851 - loss: 0.0480 - val_accuracy: 0.9922 - val_loss: 0.0304</span></span>
 <span><span class="co">## Epoch 9/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9861 - loss: 0.0444 - val_accuracy: 0.9920 - val_loss: 0.0299</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9862 - loss: 0.0445 - val_accuracy: 0.9920 - val_loss: 0.0301</span></span>
 <span><span class="co">## Epoch 10/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9865 - loss: 0.0438 - val_accuracy: 0.9913 - val_loss: 0.0297</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9865 - loss: 0.0440 - val_accuracy: 0.9912 - val_loss: 0.0296</span></span>
 <span><span class="co">## Epoch 11/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9874 - loss: 0.0395 - val_accuracy: 0.9912 - val_loss: 0.0307</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9872 - loss: 0.0393 - val_accuracy: 0.9917 - val_loss: 0.0304</span></span>
 <span><span class="co">## Epoch 12/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9874 - loss: 0.0369 - val_accuracy: 0.9922 - val_loss: 0.0289</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9877 - loss: 0.0371 - val_accuracy: 0.9923 - val_loss: 0.0285</span></span>
 <span><span class="co">## Epoch 13/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9885 - loss: 0.0346 - val_accuracy: 0.9918 - val_loss: 0.0296</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9884 - loss: 0.0345 - val_accuracy: 0.9918 - val_loss: 0.0290</span></span>
 <span><span class="co">## Epoch 14/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9888 - loss: 0.0343 - val_accuracy: 0.9918 - val_loss: 0.0277</span></span>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9888 - loss: 0.0345 - val_accuracy: 0.9917 - val_loss: 0.0278</span></span>
 <span><span class="co">## Epoch 15/15</span></span>
-<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9896 - loss: 0.0320 - val_accuracy: 0.9922 - val_loss: 0.0281</span></span></code></pre>
+<span><span class="co">## 422/422 - 1s - 2ms/step - accuracy: 0.9897 - loss: 0.0320 - val_accuracy: 0.9923 - val_loss: 0.0281</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="evaluate-the-trained-model">Evaluate the trained model<a class="anchor" aria-label="anchor" href="#evaluate-the-trained-model"></a>
@@ -220,10 +220,10 @@
 <code class="sourceCode R"><span><span class="va">score</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tensorflow/man/evaluate.html" class="external-link">evaluate</a></span><span class="op">(</span><span class="va">x_test</span>, <span class="va">y_test</span>, verbose <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">score</span></span></code></pre></div>
 <pre><code><span><span class="co">## $accuracy</span></span>
-<span><span class="co">## [1] 0.9912</span></span>
+<span><span class="co">## [1] 0.9914</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.02427303</span></span></code></pre>
+<span><span class="co">## [1] 0.02395354</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="relevant-chapters-from-deep-learning-with-python">Relevant Chapters from Deep Learning with Python<a class="anchor" aria-label="anchor" href="#relevant-chapters-from-deep-learning-with-python"></a>

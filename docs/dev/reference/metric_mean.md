@@ -17,7 +17,7 @@ metric_mean(..., name = "mean", dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

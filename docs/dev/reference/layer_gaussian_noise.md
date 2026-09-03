@@ -29,7 +29,7 @@ layer_gaussian_noise(object, stddev, seed = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

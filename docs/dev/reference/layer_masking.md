@@ -27,7 +27,7 @@ layer_masking(object, mask_value = 0, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

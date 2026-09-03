@@ -47,7 +47,7 @@ metric_concordance_correlation(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

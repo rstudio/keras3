@@ -38,7 +38,7 @@ metric_binary_iou(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - target_class_ids:
 

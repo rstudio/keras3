@@ -23,7 +23,7 @@ metric_f1_score(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - average:
 

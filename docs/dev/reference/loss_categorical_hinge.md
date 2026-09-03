@@ -33,7 +33,7 @@ loss_categorical_hinge(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

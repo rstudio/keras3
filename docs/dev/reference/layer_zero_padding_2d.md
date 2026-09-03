@@ -42,7 +42,7 @@ layer_zero_padding_2d(object, padding = list(1L, 1L), data_format = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

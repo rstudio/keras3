@@ -61,7 +61,7 @@ layer_random_hue(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Examples
 

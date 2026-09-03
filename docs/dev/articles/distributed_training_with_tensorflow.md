@@ -94,7 +94,7 @@ strategy <- tf$distribute$MirroredStrategy()
 cat(sprintf('Number of devices: %d\n', strategy$num_replicas_in_sync))
 
 # Open a strategy scope.
-with(startegy$scope(), {
+with(strategy$scope(), {
   # Everything that creates variables should be under the strategy scope.
   # In general this is only model construction & `compile()`.
   model <- Model(...)
@@ -169,7 +169,7 @@ strategy <- tf$distribute$MirroredStrategy()
 cat(sprintf('Number of devices: %d\n', strategy$num_replicas_in_sync))
 ```
 
-    ## Number of devices: 1
+    ## Number of devices: 2
 
 ``` r
 # Open a strategy scope.
@@ -190,13 +190,13 @@ with(strategy$scope(), {
 ```
 
     ## Epoch 1/2
-    ## 782/782 - 4s - 6ms/step - loss: 0.2617 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1461 - val_sparse_categorical_accuracy: 0.9546
+    ## 782/782 - 6s - 8ms/step - loss: 0.2617 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1461 - val_sparse_categorical_accuracy: 0.9546
     ## Epoch 2/2
-    ## 782/782 - 3s - 3ms/step - loss: 0.1045 - sparse_categorical_accuracy: 0.9680 - val_loss: 0.0967 - val_sparse_categorical_accuracy: 0.9693
-    ## 157/157 - 0s - 2ms/step - loss: 0.0970 - sparse_categorical_accuracy: 0.9697
+    ## 782/782 - 4s - 5ms/step - loss: 0.1045 - sparse_categorical_accuracy: 0.9680 - val_loss: 0.0967 - val_sparse_categorical_accuracy: 0.9693
+    ## 157/157 - 1s - 3ms/step - loss: 0.0970 - sparse_categorical_accuracy: 0.9697
 
     ## $loss
-    ## [1] 0.09699132
+    ## [1] 0.09699129
     ##
     ## $sparse_categorical_accuracy
     ## [1] 0.9697
@@ -267,14 +267,14 @@ run_training <- function(epochs = 1) {
 run_training(epochs = 1)
 ```
 
-    ## 782/782 - 3s - 4ms/step - loss: 0.2575 - sparse_categorical_accuracy: 0.9237 - val_loss: 0.1428 - val_sparse_categorical_accuracy: 0.9537
+    ## 782/782 - 5s - 6ms/step - loss: 0.2573 - sparse_categorical_accuracy: 0.9238 - val_loss: 0.1507 - val_sparse_categorical_accuracy: 0.9517
 
 ``` r
 # Calling the same function again will resume from where we left off
 run_training(epochs = 1)
 ```
 
-    ## 782/782 - 3s - 4ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9694 - val_loss: 0.1212 - val_sparse_categorical_accuracy: 0.9598
+    ## 782/782 - 5s - 6ms/step - loss: 0.1008 - sparse_categorical_accuracy: 0.9691 - val_loss: 0.1082 - val_sparse_categorical_accuracy: 0.9646
 
 ## `tf$data` performance tips
 

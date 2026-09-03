@@ -61,7 +61,7 @@ metric_auc(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - num_thresholds:
 

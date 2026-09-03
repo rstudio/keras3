@@ -532,7 +532,7 @@ transformer |> fit(train_ds, epochs = epochs,
                    validation_data = val_ds)
 ```
 
-    ## 1302/1302 - 59s - 45ms/step - accuracy: 0.3991 - loss: 3.8775 - val_accuracy: 0.4050 - val_loss: 3.1681
+    ## 1302/1302 - 57s - 44ms/step - accuracy: 0.3993 - loss: 3.8766 - val_accuracy: 0.3961 - val_loss: 3.2365
 
 ## Decoding test sentences
 

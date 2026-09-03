@@ -228,7 +228,7 @@ values from the training data.</p>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">value</span><span class="op">)</span></span>
 <span>  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../../reference/timeseries_dataset_from_array.html">timeseries_dataset_from_array</a></span><span class="op">(</span><span class="va">x</span>, <span class="cn">NULL</span>, sequence_length <span class="op">=</span> <span class="va">TIME_STEPS</span><span class="op">)</span></span>
 <span>  <span class="co"># Because the dataset is small, cast TF Dataset to an R array for convenience.</span></span>
-<span>  <span class="va">ds</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/as_array_iterator.html" class="external-link">as_array_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">bind_on_rows</span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="va">ds</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/tfdatasets/man/as_array_iterator.html" class="external-link">as_array_iterator</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rstudio.github.io/reticulate/reference/iterate.html" class="external-link">iterate</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://t-kalinowski.github.io/listarrays/reference/bind-arrays.html" class="external-link">bind_on_rows</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">x_train</span> <span class="op">&lt;-</span> <span class="fu">as_dataset</span><span class="op">(</span><span class="va">df_train</span><span class="op">)</span></span>
@@ -268,30 +268,30 @@ output of the same shape. In this case, <code>sequence_length</code> is
 <span></span>
 <span><span class="va">model</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://generics.r-lib.org/reference/compile.html" class="external-link">compile</a></span><span class="op">(</span>optimizer<span class="op">=</span><span class="fu"><a href="../../../reference/optimizer_adam.html">optimizer_adam</a></span><span class="op">(</span>learning_rate<span class="op">=</span><span class="fl">0.001</span><span class="op">)</span>, loss<span class="op">=</span><span class="st">"mse"</span><span class="op">)</span></span>
 <span><span class="va">model</span></span></code></pre></div>
-<pre><code><span><span class="co">## Model: "sequential"</span></span>
+<pre><code><span><span class="co">## <span style="font-weight: bold;">Model: "sequential"</span></span></span>
 <span><span class="co">## ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓</span></span>
-<span><span class="co">## ┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃</span></span>
+<span><span class="co">## ┃<span style="font-weight: bold;"> Layer (type)                    </span>┃<span style="font-weight: bold;"> Output Shape           </span>┃<span style="font-weight: bold;">       Param # </span>┃</span></span>
 <span><span class="co">## ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩</span></span>
-<span><span class="co">## │ conv1d (Conv1D)                 │ (None, 144, 32)        │           256 │</span></span>
+<span><span class="co">## │ conv1d (<span style="color: #0087FF;">Conv1D</span>)                 │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">144</span>, <span style="color: #00AF00;">32</span>)        │           <span style="color: #00AF00;">256</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dropout (Dropout)               │ (None, 144, 32)        │             0 │</span></span>
+<span><span class="co">## │ dropout (<span style="color: #0087FF;">Dropout</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">144</span>, <span style="color: #00AF00;">32</span>)        │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv1d_1 (Conv1D)               │ (None, 72, 16)         │         3,600 │</span></span>
+<span><span class="co">## │ conv1d_1 (<span style="color: #0087FF;">Conv1D</span>)               │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">72</span>, <span style="color: #00AF00;">16</span>)         │         <span style="color: #00AF00;">3,600</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv1d_transpose                │ (None, 144, 16)        │         1,808 │</span></span>
-<span><span class="co">## │ (Conv1DTranspose)               │                        │               │</span></span>
+<span><span class="co">## │ conv1d_transpose                │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">144</span>, <span style="color: #00AF00;">16</span>)        │         <span style="color: #00AF00;">1,808</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv1DTranspose</span>)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ dropout_1 (Dropout)             │ (None, 144, 16)        │             0 │</span></span>
+<span><span class="co">## │ dropout_1 (<span style="color: #0087FF;">Dropout</span>)             │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">144</span>, <span style="color: #00AF00;">16</span>)        │             <span style="color: #00AF00;">0</span> │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv1d_transpose_1              │ (None, 288, 32)        │         3,616 │</span></span>
-<span><span class="co">## │ (Conv1DTranspose)               │                        │               │</span></span>
+<span><span class="co">## │ conv1d_transpose_1              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">288</span>, <span style="color: #00AF00;">32</span>)        │         <span style="color: #00AF00;">3,616</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv1DTranspose</span>)               │                        │               │</span></span>
 <span><span class="co">## ├─────────────────────────────────┼────────────────────────┼───────────────┤</span></span>
-<span><span class="co">## │ conv1d_transpose_2              │ (None, 288, 1)         │           225 │</span></span>
-<span><span class="co">## │ (Conv1DTranspose)               │                        │               │</span></span>
+<span><span class="co">## │ conv1d_transpose_2              │ (<span style="color: #00D7FF;">None</span>, <span style="color: #00AF00;">288</span>, <span style="color: #00AF00;">1</span>)         │           <span style="color: #00AF00;">225</span> │</span></span>
+<span><span class="co">## │ (<span style="color: #0087FF;">Conv1DTranspose</span>)               │                        │               │</span></span>
 <span><span class="co">## └─────────────────────────────────┴────────────────────────┴───────────────┘</span></span>
-<span><span class="co">##  Total params: 9,505 (37.13 KB)</span></span>
-<span><span class="co">##  Trainable params: 9,505 (37.13 KB)</span></span>
-<span><span class="co">##  Non-trainable params: 0 (0.00 B)</span></span></code></pre>
+<span><span class="co">## <span style="font-weight: bold;"> Total params: </span><span style="color: #00AF00;">9,505</span> (37.13 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Trainable params: </span><span style="color: #00AF00;">9,505</span> (37.13 KB)</span></span>
+<span><span class="co">## <span style="font-weight: bold;"> Non-trainable params: </span><span style="color: #00AF00;">0</span> (0.00 B)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="train-the-model">Train the model<a class="anchor" aria-label="anchor" href="#train-the-model"></a>
@@ -310,13 +310,13 @@ and the target since this is a reconstruction model.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/50</span></span>
-<span><span class="co">## 106/106 - 7s - 70ms/step - loss: 0.1863 - val_loss: 0.0316</span></span>
+<span><span class="co">## 106/106 - 6s - 59ms/step - loss: 0.1863 - val_loss: 0.0316</span></span>
 <span><span class="co">## Epoch 2/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0333 - val_loss: 0.0233</span></span>
 <span><span class="co">## Epoch 3/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0248 - val_loss: 0.0201</span></span>
 <span><span class="co">## Epoch 4/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0209 - val_loss: 0.0187</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0209 - val_loss: 0.0186</span></span>
 <span><span class="co">## Epoch 5/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0179 - val_loss: 0.0146</span></span>
 <span><span class="co">## Epoch 6/50</span></span>
@@ -332,35 +332,35 @@ and the target since this is a reconstruction model.</p>
 <span><span class="co">## Epoch 11/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0078 - val_loss: 0.0061</span></span>
 <span><span class="co">## Epoch 12/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0073 - val_loss: 0.0057</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0073 - val_loss: 0.0057</span></span>
 <span><span class="co">## Epoch 13/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0068 - val_loss: 0.0053</span></span>
 <span><span class="co">## Epoch 14/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0064 - val_loss: 0.0050</span></span>
 <span><span class="co">## Epoch 15/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0061 - val_loss: 0.0045</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0061 - val_loss: 0.0045</span></span>
 <span><span class="co">## Epoch 16/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0058 - val_loss: 0.0040</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0058 - val_loss: 0.0040</span></span>
 <span><span class="co">## Epoch 17/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0056 - val_loss: 0.0041</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0056 - val_loss: 0.0041</span></span>
 <span><span class="co">## Epoch 18/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0053 - val_loss: 0.0036</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0053 - val_loss: 0.0035</span></span>
 <span><span class="co">## Epoch 19/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0050 - val_loss: 0.0038</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0050 - val_loss: 0.0037</span></span>
 <span><span class="co">## Epoch 20/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0048 - val_loss: 0.0032</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0048 - val_loss: 0.0032</span></span>
 <span><span class="co">## Epoch 21/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0046 - val_loss: 0.0031</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0046 - val_loss: 0.0031</span></span>
 <span><span class="co">## Epoch 22/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0044 - val_loss: 0.0032</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0044 - val_loss: 0.0032</span></span>
 <span><span class="co">## Epoch 23/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0042 - val_loss: 0.0033</span></span>
+<span><span class="co">## 106/106 - 0s - 2ms/step - loss: 0.0042 - val_loss: 0.0033</span></span>
 <span><span class="co">## Epoch 24/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0041 - val_loss: 0.0031</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0041 - val_loss: 0.0030</span></span>
 <span><span class="co">## Epoch 25/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0039 - val_loss: 0.0033</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0039 - val_loss: 0.0032</span></span>
 <span><span class="co">## Epoch 26/50</span></span>
-<span><span class="co">## 106/106 - 0s - 4ms/step - loss: 0.0037 - val_loss: 0.0030</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0037 - val_loss: 0.0030</span></span>
 <span><span class="co">## Epoch 27/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0035 - val_loss: 0.0031</span></span>
 <span><span class="co">## Epoch 28/50</span></span>
@@ -372,7 +372,7 @@ and the target since this is a reconstruction model.</p>
 <span><span class="co">## Epoch 31/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0031 - val_loss: 0.0024</span></span>
 <span><span class="co">## Epoch 32/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0030 - val_loss: 0.0027</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0030 - val_loss: 0.0028</span></span>
 <span><span class="co">## Epoch 33/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0029 - val_loss: 0.0027</span></span>
 <span><span class="co">## Epoch 34/50</span></span>
@@ -380,13 +380,13 @@ and the target since this is a reconstruction model.</p>
 <span><span class="co">## Epoch 35/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0027 - val_loss: 0.0024</span></span>
 <span><span class="co">## Epoch 36/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0027 - val_loss: 0.0025</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0026 - val_loss: 0.0025</span></span>
 <span><span class="co">## Epoch 37/50</span></span>
 <span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0026 - val_loss: 0.0026</span></span>
 <span><span class="co">## Epoch 38/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0025 - val_loss: 0.0024</span></span>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0025 - val_loss: 0.0025</span></span>
 <span><span class="co">## Epoch 39/50</span></span>
-<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0025 - val_loss: 0.0023</span></span></code></pre>
+<span><span class="co">## 106/106 - 0s - 3ms/step - loss: 0.0025 - val_loss: 0.0024</span></span></code></pre>
 <p>Let’s plot training and validation loss to see how the training
 went.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
@@ -425,11 +425,11 @@ a pattern that it isn’t familiar with. We will label this sample as an
 <code class="sourceCode R"><span><span class="co"># Get reconstruction loss threshold.</span></span>
 <span><span class="va">threshold</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">train_mae_loss</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"Reconstruction error threshold: "</span>, <span class="va">threshold</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Reconstruction error threshold:  0.03891236</span></span></code></pre>
+<pre><code><span><span class="co">## Reconstruction error threshold:  0.03916351</span></span></code></pre>
 <div class="section level3">
-<h3 id="compare-recontruction">Compare recontruction<a class="anchor" aria-label="anchor" href="#compare-recontruction"></a>
+<h3 id="compare-reconstruction">Compare reconstruction<a class="anchor" aria-label="anchor" href="#compare-reconstruction"></a>
 </h3>
-<p>Just for fun, let’s see how our model has recontructed the first
+<p>Just for fun, let’s see how our model has reconstructed the first
 sample. This is the 288 timesteps from day 1 of our training
 dataset.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
@@ -487,41 +487,41 @@ dataset.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">5</span> 2014-04-01 <span style="color: #949494;">00:20:00</span> -<span style="color: #BB0000;">0.792</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">6</span> 2014-04-01 <span style="color: #949494;">00:25:00</span> -<span style="color: #BB0000;">0.802</span></span></span>
 <span><span class="co">## 118/118 - 0s - 1ms/step</span></span>
-<span><span class="co">## Number of anomaly samples: 507</span></span>
-<span><span class="co">## Indices of anomaly samples: 216 217 218 219 220 221 396 398 507 777 793 794</span></span>
-<span><span class="co">## 795 797 798 799 801 845 849 853 861 865 974 1658 1659 1944 1945 1946 1947</span></span>
-<span><span class="co">## 1949 2016 2020 2036 2038 2042 2045 2046 2050 2052 2053 2054 2056 2057 2058</span></span>
-<span><span class="co">## 2060 2061 2062 2064 2065 2066 2068 2069 2070 2072 2073 2074 2076 2077 2078</span></span>
-<span><span class="co">## 2080 2081 2082 2083 2084 2085 2086 2088 2089 2090 2092 2093 2094 2096 2097</span></span>
-<span><span class="co">## 2098 2100 2101 2102 2104 2105 2106 2108 2109 2110 2112 2113 2114 2116 2117</span></span>
-<span><span class="co">## 2118 2120 2121 2122 2124 2126 2129 2138 2141 2520 2521 2522 2523 2525 2546</span></span>
-<span><span class="co">## 2698 2700 2702 2703 2704 2705 2706 2707 2708 2709 2710 2711 2712 2713 2714</span></span>
-<span><span class="co">## 2715 2716 2717 2718 2719 2720 2721 2722 2723 2724 2725 2726 2727 2728 2729</span></span>
-<span><span class="co">## 2730 2731 2732 2733 2734 2735 2736 2737 2738 2739 2740 2741 2742 2743 2744</span></span>
-<span><span class="co">## 2745 2746 2747 2748 2749 2750 2751 2752 2753 2754 2755 2756 2757 2758 2759</span></span>
-<span><span class="co">## 2760 2761 2762 2763 2764 2765 2766 2767 2768 2769 2770 2771 2772 2773 2774</span></span>
-<span><span class="co">## 2775 2776 2777 2778 2779 2780 2781 2782 2783 2784 2785 2786 2787 2788 2789</span></span>
-<span><span class="co">## 2790 2791 2792 2793 2794 2795 2796 2797 2798 2799 2800 2801 2802 2803 2804</span></span>
-<span><span class="co">## 2805 2806 2807 2808 2809 2810 2811 2812 2813 2814 2815 2816 2817 2818 2819</span></span>
-<span><span class="co">## 2820 2821 2822 2823 2824 2825 2826 2827 2828 2829 2830 2831 2832 2833 2834</span></span>
-<span><span class="co">## 2835 2836 2837 2838 2839 2840 2841 2842 2843 2844 2845 2846 2847 2848 2849</span></span>
-<span><span class="co">## 2850 2851 2852 2853 2854 2855 2856 2857 2858 2859 2860 2861 2862 2863 2864</span></span>
-<span><span class="co">## 2865 2866 2867 2868 2869 2870 2871 2872 2873 2874 2875 2876 2877 2878 2879</span></span>
-<span><span class="co">## 2880 2881 2882 2883 2884 2885 2886 2887 2888 2889 2890 2891 2892 2893 2894</span></span>
-<span><span class="co">## 2895 2896 2897 2898 2899 2900 2901 2902 2903 2904 2905 2906 2907 2908 2909</span></span>
-<span><span class="co">## 2910 2911 2912 2913 2914 2915 2916 2917 2918 2919 2920 2921 2922 2923 2924</span></span>
-<span><span class="co">## 2925 2926 2927 2928 2929 2930 2931 2932 2933 2934 2935 2936 2937 2938 2939</span></span>
-<span><span class="co">## 2940 2941 2942 2943 2944 2945 2946 2947 2948 2949 2950 2951 2952 2953 2954</span></span>
-<span><span class="co">## 2955 2956 2957 2958 2959 2960 2961 2962 2963 2964 2965 2966 2967 2968 2969</span></span>
-<span><span class="co">## 2970 2971 2972 2973 2974 2975 2976 2977 2978 2979 2980 2981 2982 2983 2984</span></span>
-<span><span class="co">## 2985 2986 2987 2988 2989 2990 2991 2992 2993 2994 2995 2996 2997 2998 2999</span></span>
-<span><span class="co">## 3000 3001 3002 3003 3004 3005 3006 3007 3008 3009 3010 3011 3012 3013 3014</span></span>
-<span><span class="co">## 3015 3016 3017 3018 3019 3020 3021 3022 3023 3024 3025 3026 3027 3028 3029</span></span>
-<span><span class="co">## 3030 3031 3032 3033 3034 3035 3036 3037 3038 3039 3040 3041 3042 3043 3044</span></span>
-<span><span class="co">## 3045 3046 3047 3048 3049 3050 3051 3052 3053 3054 3055 3056 3057 3058 3059</span></span>
-<span><span class="co">## 3060 3061 3062 3063 3064 3065 3066 3067 3068 3069 3070 3071 3072 3073 3074</span></span>
-<span><span class="co">## 3075 3076 3077 3078 3079 3080 3081 3082 3083 3084 3085 3086 3087 3088 3089</span></span>
-<span><span class="co">## 3090 3091 3092 3093 3094 3095 3096 3097 3098 3099 3100 3101 3102</span></span></code></pre>
+<span><span class="co">## Number of anomaly samples: 498</span></span>
+<span><span class="co">## Indices of anomaly samples: 216 217 218 219 220 221 396 507 793 794 795 797</span></span>
+<span><span class="co">## 798 799 853 861 974 1658 1659 1944 1945 1946 1947 1949 2008 2012 2016 2020</span></span>
+<span><span class="co">## 2024 2028 2036 2040 2044 2045 2046 2048 2052 2053 2054 2056 2057 2058 2060</span></span>
+<span><span class="co">## 2061 2062 2064 2065 2066 2068 2069 2070 2072 2073 2074 2076 2077 2078 2080</span></span>
+<span><span class="co">## 2081 2082 2083 2084 2085 2086 2088 2089 2090 2092 2093 2094 2096 2097 2098</span></span>
+<span><span class="co">## 2100 2101 2102 2104 2105 2108 2109 2110 2112 2113 2116 2117 2120 2121 2124</span></span>
+<span><span class="co">## 2126 2141 2520 2521 2522 2523 2525 2698 2700 2702 2703 2704 2705 2706 2707</span></span>
+<span><span class="co">## 2708 2709 2710 2711 2712 2713 2714 2715 2716 2717 2718 2719 2720 2721 2722</span></span>
+<span><span class="co">## 2723 2724 2725 2726 2727 2728 2729 2730 2731 2732 2733 2734 2735 2736 2737</span></span>
+<span><span class="co">## 2738 2739 2740 2741 2742 2743 2744 2745 2746 2747 2748 2749 2750 2751 2752</span></span>
+<span><span class="co">## 2753 2754 2755 2756 2757 2758 2759 2760 2761 2762 2763 2764 2765 2766 2767</span></span>
+<span><span class="co">## 2768 2769 2770 2771 2772 2773 2774 2775 2776 2777 2778 2779 2780 2781 2782</span></span>
+<span><span class="co">## 2783 2784 2785 2786 2787 2788 2789 2790 2791 2792 2793 2794 2795 2796 2797</span></span>
+<span><span class="co">## 2798 2799 2800 2801 2802 2803 2804 2805 2806 2807 2808 2809 2810 2811 2812</span></span>
+<span><span class="co">## 2813 2814 2815 2816 2817 2818 2819 2820 2821 2822 2823 2824 2825 2826 2827</span></span>
+<span><span class="co">## 2828 2829 2830 2831 2832 2833 2834 2835 2836 2837 2838 2839 2840 2841 2842</span></span>
+<span><span class="co">## 2843 2844 2845 2846 2847 2848 2849 2850 2851 2852 2853 2854 2855 2856 2857</span></span>
+<span><span class="co">## 2858 2859 2860 2861 2862 2863 2864 2865 2866 2867 2868 2869 2870 2871 2872</span></span>
+<span><span class="co">## 2873 2874 2875 2876 2877 2878 2879 2880 2881 2882 2883 2884 2885 2886 2887</span></span>
+<span><span class="co">## 2888 2889 2890 2891 2892 2893 2894 2895 2896 2897 2898 2899 2900 2901 2902</span></span>
+<span><span class="co">## 2903 2904 2905 2906 2907 2908 2909 2910 2911 2912 2913 2914 2915 2916 2917</span></span>
+<span><span class="co">## 2918 2919 2920 2921 2922 2923 2924 2925 2926 2927 2928 2929 2930 2931 2932</span></span>
+<span><span class="co">## 2933 2934 2935 2936 2937 2938 2939 2940 2941 2942 2943 2944 2945 2946 2947</span></span>
+<span><span class="co">## 2948 2949 2950 2951 2952 2953 2954 2955 2956 2957 2958 2959 2960 2961 2962</span></span>
+<span><span class="co">## 2963 2964 2965 2966 2967 2968 2969 2970 2971 2972 2973 2974 2975 2976 2977</span></span>
+<span><span class="co">## 2978 2979 2980 2981 2982 2983 2984 2985 2986 2987 2988 2989 2990 2991 2992</span></span>
+<span><span class="co">## 2993 2994 2995 2996 2997 2998 2999 3000 3001 3002 3003 3004 3005 3006 3007</span></span>
+<span><span class="co">## 3008 3009 3010 3011 3012 3013 3014 3015 3016 3017 3018 3019 3020 3021 3022</span></span>
+<span><span class="co">## 3023 3024 3025 3026 3027 3028 3029 3030 3031 3032 3033 3034 3035 3036 3037</span></span>
+<span><span class="co">## 3038 3039 3040 3041 3042 3043 3044 3045 3046 3047 3048 3049 3050 3051 3052</span></span>
+<span><span class="co">## 3053 3054 3055 3056 3057 3058 3059 3060 3061 3062 3063 3064 3065 3066 3067</span></span>
+<span><span class="co">## 3068 3069 3070 3071 3072 3073 3074 3075 3076 3077 3078 3079 3080 3081 3082</span></span>
+<span><span class="co">## 3083 3084 3085 3086 3087 3088 3089 3090 3091 3092 3093 3094 3095 3096 3097</span></span>
+<span><span class="co">## 3098 3099 3100 3101 3102</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -550,7 +550,7 @@ that the data point 5 is an anomaly.</p>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">is_anomaly</span> <span class="op">&lt;-</span> <span class="va">test_mae_loss</span> <span class="op">&gt;</span> <span class="va">threshold</span></span>
 <span><span class="va">is_anomaly</span> <span class="op">&lt;-</span> <span class="va">is_anomaly</span> <span class="op">&amp;</span></span>
-<span>  <span class="fu">zoo</span><span class="fu">::</span><span class="fu">rollsum</span><span class="op">(</span><span class="va">is_anomaly</span>, <span class="va">TIME_STEPS</span>,</span>
+<span>  <span class="fu">zoo</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/zoo/man/rollmean.html" class="external-link">rollsum</a></span><span class="op">(</span><span class="va">is_anomaly</span>, <span class="va">TIME_STEPS</span>,</span>
 <span>               align <span class="op">=</span> <span class="st">"right"</span>, na.pad <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="va">TIME_STEPS</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">df_test</span>, <span class="op">{</span></span>

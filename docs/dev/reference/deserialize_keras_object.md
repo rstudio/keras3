@@ -136,7 +136,7 @@ deserialize_keras_object(config, custom_objects = NULL, safe_mode = TRUE, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

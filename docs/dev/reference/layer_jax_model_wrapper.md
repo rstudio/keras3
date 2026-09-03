@@ -66,7 +66,7 @@ layer_jax_model_wrapper(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

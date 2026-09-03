@@ -42,7 +42,7 @@ get_file(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - file_hash:
 

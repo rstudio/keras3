@@ -48,7 +48,7 @@ layer_rms_normalization(object, axis = -1L, epsilon = 1e-06, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 

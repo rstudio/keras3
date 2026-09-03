@@ -127,7 +127,7 @@ optimizer_lamb(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

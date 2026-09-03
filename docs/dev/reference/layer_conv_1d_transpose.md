@@ -130,7 +130,7 @@ layer_conv_1d_transpose(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

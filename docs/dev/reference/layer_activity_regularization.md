@@ -25,7 +25,7 @@ layer_activity_regularization(object, l1 = 0, l2 = 0, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

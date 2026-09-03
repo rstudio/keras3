@@ -234,7 +234,7 @@ set_vocabulary(object, vocabulary, idf_weights = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - include_special_tokens:
 

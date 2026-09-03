@@ -9,10 +9,6 @@ to expand dimensions of a tensor
 newaxis
 ```
 
-## Format
-
-An object of class `NULL` of length 0.
-
 ## Details
 
     x <- op_convert_to_tensor(1:10)

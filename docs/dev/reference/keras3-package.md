@@ -43,19 +43,13 @@ Useful links:
 
 - Report bugs at <https://github.com/rstudio/keras3/issues>
 
-Useful links:
-
-- <https://keras3.posit.co/>
-
-- <https://github.com/rstudio/keras3>
-
-- Report bugs at <https://github.com/rstudio/keras3/issues>
-
 ## Author
 
 **Maintainer**: Tomasz Kalinowski <tomasz@posit.co> \[copyright holder\]
 
 Authors:
+
+- Tomasz Kalinowski <tomasz@posit.co> \[copyright holder\]
 
 - JJ Allaire \[copyright holder\]
 

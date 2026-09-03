@@ -25,7 +25,7 @@ metric_kl_divergence(y_true, y_pred, ..., name = "kl_divergence", dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

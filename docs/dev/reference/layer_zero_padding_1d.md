@@ -37,7 +37,7 @@ layer_zero_padding_1d(object, padding = 1L, data_format = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

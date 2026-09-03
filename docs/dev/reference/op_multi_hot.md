@@ -43,7 +43,7 @@ op_multi_hot(
 
 - ...:
 
-  For forward/backwards compatability
+  For forward/backwards compatibility
 
 ## Value
 

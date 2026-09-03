@@ -56,7 +56,7 @@ layer_random_contrast(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

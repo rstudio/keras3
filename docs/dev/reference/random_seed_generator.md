@@ -35,7 +35,7 @@ random_seed_generator(seed = NULL, name = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

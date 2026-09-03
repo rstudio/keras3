@@ -52,7 +52,7 @@ loss_categorical_crossentropy(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

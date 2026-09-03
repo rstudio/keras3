@@ -33,7 +33,7 @@ loss_mean_absolute_percentage_error(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

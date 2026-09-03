@@ -31,7 +31,7 @@ save_model(model, filepath = NULL, overwrite = FALSE, zipped = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

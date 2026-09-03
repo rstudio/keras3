@@ -136,7 +136,7 @@ layer_depthwise_conv_1d(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

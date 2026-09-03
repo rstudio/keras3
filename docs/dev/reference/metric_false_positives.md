@@ -17,7 +17,7 @@ metric_false_positives(..., thresholds = NULL, name = NULL, dtype = NULL)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - thresholds:
 

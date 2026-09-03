@@ -502,7 +502,7 @@
 - [`adapt()`](https://keras3.posit.co/dev/reference/adapt.md) : Fits the
   state of the preprocessing layer to the data being passed
 
-### Compatability Layers
+### Compatibility Layers
 
 - [`layer_tfsm()`](https://keras3.posit.co/dev/reference/layer_tfsm.md)
   :
@@ -2073,7 +2073,7 @@ Functions that are safe to call with both symbolic and eager tensor.
 
 Keras data loading utilities help you quickly go from raw data to a TF
 `Dataset` object that can be used to efficiently train a model. These
-loading utilites can be combined with preprocessing layers to futher
+loading utilities can be combined with preprocessing layers to further
 transform your input dataset before training.
 
 - [`image_dataset_from_directory()`](https://keras3.posit.co/dev/reference/image_dataset_from_directory.md)

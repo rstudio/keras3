@@ -74,7 +74,7 @@ image_smart_resize(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

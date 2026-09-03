@@ -29,7 +29,7 @@ loss_poisson(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - reduction:
 

@@ -63,7 +63,7 @@ layer_attention(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

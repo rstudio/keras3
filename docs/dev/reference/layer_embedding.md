@@ -92,7 +92,7 @@ layer_embedding(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -116,7 +116,7 @@ optimizer_adam(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - loss_scale_factor:
 

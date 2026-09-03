@@ -46,7 +46,7 @@ layer_cut_mix(object, factor = 1, seed = NULL, data_format = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## References
 

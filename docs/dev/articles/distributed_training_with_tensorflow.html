@@ -176,7 +176,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">'Number of devices: %d\n'</span>, <span class="va">strategy</span><span class="op">$</span><span class="va">num_replicas_in_sync</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Open a strategy scope.</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">startegy</span><span class="op">$</span><span class="fu">scope</span><span class="op">(</span><span class="op">)</span>, <span class="op">{</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">strategy</span><span class="op">$</span><span class="fu">scope</span><span class="op">(</span><span class="op">)</span>, <span class="op">{</span></span>
 <span>  <span class="co"># Everything that creates variables should be under the strategy scope.</span></span>
 <span>  <span class="co"># In general this is only model construction &amp; `compile()`.</span></span>
 <span>  <span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Model.html">Model</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
@@ -246,7 +246,7 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span><span class="co"># Create a MirroredStrategy.</span></span>
 <span><span class="va">strategy</span> <span class="op">&lt;-</span> <span class="va">tf</span><span class="op">$</span><span class="va">distribute</span><span class="op">$</span><span class="fu">MirroredStrategy</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">'Number of devices: %d\n'</span>, <span class="va">strategy</span><span class="op">$</span><span class="va">num_replicas_in_sync</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Number of devices: 1</span></span></code></pre>
+<pre><code><span><span class="co">## Number of devices: 2</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Open a strategy scope.</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/with.html" class="external-link">with</a></span><span class="op">(</span><span class="va">strategy</span><span class="op">$</span><span class="fu">scope</span><span class="op">(</span><span class="op">)</span>, <span class="op">{</span></span>
@@ -264,12 +264,12 @@ objects to load data in a multi-device or distributed workflow.</p>
 <span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Epoch 1/2</span></span>
-<span><span class="co">## 782/782 - 4s - 6ms/step - loss: 0.2617 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1461 - val_sparse_categorical_accuracy: 0.9546</span></span>
+<span><span class="co">## 782/782 - 6s - 8ms/step - loss: 0.2617 - sparse_categorical_accuracy: 0.9232 - val_loss: 0.1461 - val_sparse_categorical_accuracy: 0.9546</span></span>
 <span><span class="co">## Epoch 2/2</span></span>
-<span><span class="co">## 782/782 - 3s - 3ms/step - loss: 0.1045 - sparse_categorical_accuracy: 0.9680 - val_loss: 0.0967 - val_sparse_categorical_accuracy: 0.9693</span></span>
-<span><span class="co">## 157/157 - 0s - 2ms/step - loss: 0.0970 - sparse_categorical_accuracy: 0.9697</span></span></code></pre>
+<span><span class="co">## 782/782 - 4s - 5ms/step - loss: 0.1045 - sparse_categorical_accuracy: 0.9680 - val_loss: 0.0967 - val_sparse_categorical_accuracy: 0.9693</span></span>
+<span><span class="co">## 157/157 - 1s - 3ms/step - loss: 0.0970 - sparse_categorical_accuracy: 0.9697</span></span></code></pre>
 <pre><code><span><span class="co">## $loss</span></span>
-<span><span class="co">## [1] 0.09699132</span></span>
+<span><span class="co">## [1] 0.09699129</span></span>
 <span><span class="co">##</span></span>
 <span><span class="co">## $sparse_categorical_accuracy</span></span>
 <span><span class="co">## [1] 0.9697</span></span></code></pre>
@@ -337,11 +337,11 @@ saved model.</p>
 <span></span>
 <span><span class="co"># Running the first time creates the model</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.2575 - sparse_categorical_accuracy: 0.9237 - val_loss: 0.1428 - val_sparse_categorical_accuracy: 0.9537</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 0.2573 - sparse_categorical_accuracy: 0.9238 - val_loss: 0.1507 - val_sparse_categorical_accuracy: 0.9517</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calling the same function again will resume from where we left off</span></span>
 <span><span class="fu">run_training</span><span class="op">(</span>epochs <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 782/782 - 3s - 4ms/step - loss: 0.1011 - sparse_categorical_accuracy: 0.9694 - val_loss: 0.1212 - val_sparse_categorical_accuracy: 0.9598</span></span></code></pre>
+<pre><code><span><span class="co">## 782/782 - 5s - 6ms/step - loss: 0.1008 - sparse_categorical_accuracy: 0.9691 - val_loss: 0.1082 - val_sparse_categorical_accuracy: 0.9646</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="tfdata-performance-tips">

@@ -55,7 +55,7 @@ layer_lambda(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

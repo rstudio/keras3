@@ -35,7 +35,7 @@ layer_upsampling_3d(object, size = list(2L, 2L, 2L), data_format = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

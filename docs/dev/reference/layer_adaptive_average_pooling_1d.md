@@ -44,7 +44,7 @@ layer_adaptive_average_pooling_1d(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

@@ -17,7 +17,7 @@ layer_average(inputs, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

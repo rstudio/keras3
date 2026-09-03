@@ -54,7 +54,7 @@ evaluate(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - batch_size:
 

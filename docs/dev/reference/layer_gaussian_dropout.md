@@ -26,7 +26,7 @@ layer_gaussian_dropout(object, rate, seed = NULL, ...)
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Value
 

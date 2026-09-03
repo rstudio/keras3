@@ -26,7 +26,7 @@ metric_fbeta_score(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - average:
 

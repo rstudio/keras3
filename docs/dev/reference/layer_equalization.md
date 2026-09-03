@@ -68,7 +68,7 @@ layer_equalization(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## Examples
 

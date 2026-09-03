@@ -162,23 +162,23 @@ model |> fit(
 ```
 
     ## Epoch 1/10
-    ## 399/399 - 10s - 24ms/step - acc: 0.7447 - loss: 0.7516 - val_acc: 0.9639 - val_loss: 0.1245
+    ## 399/399 - 9s - 23ms/step - acc: 0.7456 - loss: 0.7513 - val_acc: 0.9650 - val_loss: 0.1209
     ## Epoch 2/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9378 - loss: 0.2065 - val_acc: 0.9780 - val_loss: 0.0748
+    ## 399/399 - 2s - 6ms/step - acc: 0.9375 - loss: 0.2077 - val_acc: 0.9772 - val_loss: 0.0757
     ## Epoch 3/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9569 - loss: 0.1467 - val_acc: 0.9822 - val_loss: 0.0615
+    ## 399/399 - 2s - 6ms/step - acc: 0.9563 - loss: 0.1479 - val_acc: 0.9824 - val_loss: 0.0602
     ## Epoch 4/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9656 - loss: 0.1162 - val_acc: 0.9869 - val_loss: 0.0468
+    ## 399/399 - 2s - 6ms/step - acc: 0.9659 - loss: 0.1173 - val_acc: 0.9864 - val_loss: 0.0489
     ## Epoch 5/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9722 - loss: 0.0984 - val_acc: 0.9869 - val_loss: 0.0462
+    ## 399/399 - 2s - 6ms/step - acc: 0.9720 - loss: 0.0996 - val_acc: 0.9876 - val_loss: 0.0470
     ## Epoch 6/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9751 - loss: 0.0863 - val_acc: 0.9889 - val_loss: 0.0385
+    ## 399/399 - 2s - 6ms/step - acc: 0.9751 - loss: 0.0865 - val_acc: 0.9891 - val_loss: 0.0378
     ## Epoch 7/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9765 - loss: 0.0781 - val_acc: 0.9900 - val_loss: 0.0341
+    ## 399/399 - 2s - 6ms/step - acc: 0.9764 - loss: 0.0788 - val_acc: 0.9900 - val_loss: 0.0360
     ## Epoch 8/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9791 - loss: 0.0679 - val_acc: 0.9882 - val_loss: 0.0411
+    ## 399/399 - 2s - 6ms/step - acc: 0.9793 - loss: 0.0687 - val_acc: 0.9879 - val_loss: 0.0415
     ## Epoch 9/10
-    ## 399/399 - 2s - 6ms/step - acc: 0.9804 - loss: 0.0652 - val_acc: 0.9896 - val_loss: 0.0381
+    ## 399/399 - 2s - 6ms/step - acc: 0.9809 - loss: 0.0651 - val_acc: 0.9889 - val_loss: 0.0397
 
 ``` r
 score <- model |> evaluate(x_test, y_test, verbose = 0)
@@ -204,7 +204,7 @@ Next, you can query predictions of class probabilities with
 predictions <- model |> predict(x_test)
 ```
 
-    ## 313/313 - 1s - 3ms/step
+    ## 313/313 - 1s - 2ms/step
 
 ``` r
 dim(predictions)
@@ -332,7 +332,7 @@ model |> fit(
 )
 ```
 
-    ## 399/399 - 7s - 17ms/step - acc: 0.7348 - loss: 0.7740 - val_acc: 0.9289 - val_loss: 0.2364
+    ## 399/399 - 7s - 16ms/step - acc: 0.7356 - loss: 0.7722 - val_acc: 0.9271 - val_loss: 0.2375
 
 ## Training models on arbitrary data sources
 
@@ -375,7 +375,7 @@ model |> compile(
 model |> fit(train_dataset, epochs = 1, validation_data = test_dataset)
 ```
 
-    ## 469/469 - 8s - 18ms/step - acc: 0.7548 - loss: 0.7305 - val_acc: 0.9116 - val_loss: 0.2958
+    ## 469/469 - 8s - 17ms/step - acc: 0.7533 - loss: 0.7348 - val_acc: 0.9033 - val_loss: 0.3159
 
 ## Further reading
 

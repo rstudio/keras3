@@ -28,7 +28,7 @@ metric_mean_absolute_error(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - name:
 

@@ -106,7 +106,7 @@ optimizer_sgd(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 - loss_scale_factor:
 

@@ -74,7 +74,7 @@ layer_random_gaussian_blur(
 
 - ...:
 
-  For forward/backward compatability.
+  For forward/backward compatibility.
 
 ## See also
 
