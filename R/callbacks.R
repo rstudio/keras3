@@ -749,7 +749,7 @@ function (count_mode = NULL)
 #' Float. Lower bound on the learning rate.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit callback_backup_and_restore return
 #' @export

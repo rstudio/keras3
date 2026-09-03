@@ -283,7 +283,7 @@ as_metrics <- function(x) as_list(as_loss(x, default_name = "custom_metric"))
 #' List of callbacks to apply during evaluation.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param object Keras model object
 #'
@@ -704,7 +704,7 @@ input_data_normalizer <- function(model) {
 #' List of callbacks to apply during prediction.
 #'
 #' @param object Keras model object
-#' @param ... For forward/backward compatability.
+#' @param ... For forward/backward compatibility.
 #'
 #' @export
 #' @importFrom stats predict
@@ -783,7 +783,7 @@ function(object, x)
 # they are returned as a list.
 #'
 #' @param object Keras model object
-#' @param ... for forward/backward compatability
+#' @param ... for forward/backward compatibility
 #'
 #' @export
 #' @tether keras.Model.test_on_batch

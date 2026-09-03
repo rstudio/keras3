@@ -22,7 +22,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -84,7 +84,7 @@ function (object, l1 = 0, l2 = 0, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -138,7 +138,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -178,7 +178,7 @@ function (object, rate, noise_shape = NULL, seed = NULL, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -223,7 +223,7 @@ function (object, rate, seed = NULL, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export

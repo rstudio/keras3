@@ -96,7 +96,7 @@ strategy <- tf$distribute$MirroredStrategy()
 cat(sprintf('Number of devices: %d\n', strategy$num_replicas_in_sync))
 
 # Open a strategy scope.
-with(startegy$scope(), {
+with(strategy$scope(), {
   # Everything that creates variables should be under the strategy scope.
   # In general this is only model construction & `compile()`.
   model <- Model(...)

@@ -87,7 +87,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param weights
 #' see description
@@ -281,7 +281,7 @@ function (object, layer, merge_mode = "concat", weights = NULL,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -481,7 +481,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -680,7 +680,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -881,7 +881,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1008,7 +1008,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Random seed for dropout.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @returns A `Layer` instance, which is intended to be used with `layer_rnn()`.
 #' @export
@@ -1196,7 +1196,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1326,7 +1326,7 @@ function (object, units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Random seed for dropout.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit rnn_cell_gru return
 #' @export
@@ -1534,7 +1534,7 @@ function (units, activation = "tanh", recurrent_activation = "sigmoid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1686,7 +1686,7 @@ function (object, cell, return_sequences = FALSE, return_state = FALSE,
 #' Initial seed for the random number generator
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -1806,7 +1806,7 @@ function (object, units, activation = "tanh", use_bias = TRUE,
 #' Random seed for dropout.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit rnn_cell_gru return
 #' @export
@@ -1929,7 +1929,7 @@ function (cells, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export

@@ -120,7 +120,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -261,7 +261,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -409,7 +409,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -555,7 +555,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -701,7 +701,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L),
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -852,7 +852,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -1005,7 +1005,7 @@ function (object, filters, kernel_size, strides = list(1L, 1L,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -1153,7 +1153,7 @@ function (object, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -1302,7 +1302,7 @@ function (object, kernel_size, strides = list(1L, 1L), padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers
@@ -1454,7 +1454,7 @@ function (object, filters, kernel_size, strides = 1L, padding = "valid",
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family convolutional layers

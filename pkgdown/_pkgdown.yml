@@ -210,7 +210,7 @@ reference:
     - adapt
     # - has_concept("random preprocessing layers")
 
-  - subtitle: "Compatability Layers"
+  - subtitle: "Compatibility Layers"
   - contents:
     - layer_tfsm
     - layer_jax_model_wrapper
@@ -300,8 +300,8 @@ reference:
   - title: "Data Loading"
     desc: >
       Keras data loading utilities help you quickly go from raw data to a TF `Dataset` object
-      that can be used to efficiently train a model. These loading utilites can be
-      combined with preprocessing layers to futher transform your input dataset before training.
+      that can be used to efficiently train a model. These loading utilities can be
+      combined with preprocessing layers to further transform your input dataset before training.
 
   - contents:
     - image_dataset_from_directory

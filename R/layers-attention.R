@@ -59,7 +59,7 @@
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -145,7 +145,7 @@ function (object, use_scale = TRUE, dropout = 0, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -284,7 +284,7 @@ function (object, use_scale = FALSE, score_mode = "dot", dropout = 0,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family attention layers
@@ -451,7 +451,7 @@ function (object, head_dim, num_query_heads, num_key_value_heads,
 #' Optional integer to seed the dropout layer.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @param inputs
 #' see description

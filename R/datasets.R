@@ -93,7 +93,7 @@ dataset_cifar100 <- function(label_mode = c("fine", "coarse"), convert = TRUE) {
 #' @param num_words Max number of words to include. Words are ranked by how
 #'   often they occur (in the training set) and only the most frequent words are
 #'   kept
-#' @param skip_top Skip the top N most frequently occuring words (which may not
+#' @param skip_top Skip the top N most frequently occurring words (which may not
 #'   be informative).
 #' @param maxlen sequences longer than this will be filtered out.
 #' @param seed random seed for sample shuffling.
@@ -176,7 +176,7 @@ dataset_imdb_word_index <- function(path = "imdb_word_index.json") {
 #' @param num_words Max number of words to include. Words are ranked by how
 #'   often they occur (in the training set) and only the most frequent words are
 #'   kept
-#' @param skip_top Skip the top N most frequently occuring words (which may not
+#' @param skip_top Skip the top N most frequently occurring words (which may not
 #'   be informative).
 #' @param maxlen Truncate sequences after this length.
 #' @param test_split Fraction of the dataset to be used as test data.

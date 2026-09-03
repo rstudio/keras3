@@ -268,7 +268,7 @@ function (object, axis = -1L, momentum = 0.99, epsilon = 0.001,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export
@@ -458,7 +458,7 @@ function (object, axis = -1L, epsilon = 0.001, center = TRUE,
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @tether keras.layers.RMSNormalization
@@ -557,7 +557,7 @@ function (object, layer, power_iterations = 1L, ...)
 #' Object to compose the layer with. A tensor, array, or sequential model.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @inherit layer_dense return
 #' @export

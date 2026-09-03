@@ -117,7 +117,7 @@
 #' The predicted values. shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -338,7 +338,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' The predicted values, of shape `(batch_size, d0, .. dN)`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -457,7 +457,7 @@ function (y_true, y_pred, apply_class_balancing = FALSE,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -623,7 +623,7 @@ function (y_true, y_pred, from_logits = FALSE, label_smoothing = 0,
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -776,7 +776,7 @@ function (y_true, y_pred, q = 0.5, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -856,7 +856,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -946,7 +946,7 @@ function (y_true, y_pred, axis = -1L, ..., reduction = "sum_over_batch_size",
 #' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1015,7 +1015,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size", name = "dice",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1089,7 +1089,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1162,7 +1162,7 @@ function (y_true, y_pred, delta = 1, ..., reduction = "sum_over_batch_size",
 #' Tensor of predicted targets.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1231,7 +1231,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1299,7 +1299,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1372,7 +1372,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1440,7 +1440,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1512,7 +1512,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1581,7 +1581,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' The predicted values. shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1702,7 +1702,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' computed.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1778,7 +1778,7 @@ function (y_true, y_pred, from_logits = FALSE, ignore_class = NULL,
 #' The predicted values with shape = `[batch_size, d0, .. dN]`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @family losses
@@ -1833,7 +1833,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' provided, then the `compute_dtype` will be utilized.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @returns
 #' CTC loss value.
@@ -1902,7 +1902,7 @@ function (y_true, y_pred, ..., reduction = "sum_over_batch_size",
 #' @param axis Axis (1-based)
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @export
 #' @inheritParams loss_hinge
@@ -2004,7 +2004,7 @@ function (y_true, y_pred, ..., alpha = 0.5, beta = 0.5,
 #' If `NULL`, defaults to `y_pred`.
 #'
 #' @param ...
-#' For forward/backward compatability.
+#' For forward/backward compatibility.
 #'
 #' @family losses
 #' @export
