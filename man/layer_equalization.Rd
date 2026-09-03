@@ -32,7 +32,7 @@ Larger values can provide more granular intensity redistribution.}
 corresponds to inputs with shape
 \verb{(batch, channels, height, width)}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 Histogram equalization is a technique to adjust image intensities to

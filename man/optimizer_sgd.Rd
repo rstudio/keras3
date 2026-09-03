@@ -73,7 +73,7 @@ and you don't need to do anything.}
 for momentum accumulator weights created by
 the optimizer.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{loss_scale_factor}{Float or \code{NULL}. If a float, the scale factor will
 be multiplied the loss before computing gradients, and the inverse of

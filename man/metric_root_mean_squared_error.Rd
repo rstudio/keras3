@@ -11,7 +11,7 @@ metric_root_mean_squared_error(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

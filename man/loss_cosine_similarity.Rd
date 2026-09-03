@@ -22,7 +22,7 @@ loss_cosine_similarity(
 \item{axis}{The axis along which the cosine similarity is computed
 (the features axis). Defaults to \code{-1}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}. Supported options are

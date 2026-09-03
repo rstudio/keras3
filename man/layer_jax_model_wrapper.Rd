@@ -44,7 +44,7 @@ is used only when the Keras backend is TensorFlow. If \code{NULL}, the function
 is compiled for the default backend. If multiple platforms are supplied,
 the exported module is device-polymorphic.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

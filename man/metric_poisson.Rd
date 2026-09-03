@@ -11,7 +11,7 @@ metric_poisson(y_true, y_pred, ..., name = "poisson", dtype = NULL)
 
 \item{y_pred}{The predicted values. shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

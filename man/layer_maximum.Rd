@@ -9,7 +9,7 @@ layer_maximum(inputs, ...)
 \arguments{
 \item{inputs}{layers to combine}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

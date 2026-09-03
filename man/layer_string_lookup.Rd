@@ -116,7 +116,7 @@ uses SipHash64, with these values as an additional input (a "salt" in
 cryptography). May be a pair of integers, or a single integer used for both
 key components. If \code{NULL} (the default), FarmHash64 is used.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

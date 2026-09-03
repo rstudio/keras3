@@ -17,7 +17,7 @@ When \code{safe_mode=FALSE}, loading an object has the potential to
 trigger arbitrary code execution. This argument is only
 applicable to the Keras v3 model format. Defaults to \code{TRUE}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The object described by the \code{config} dictionary.

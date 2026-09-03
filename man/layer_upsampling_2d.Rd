@@ -33,7 +33,7 @@ Defaults to \code{"channels_last"}.}
 \item{interpolation}{A string, one of \code{"bicubic"}, \code{"bilinear"}, \code{"lanczos3"},
 \code{"lanczos5"}, \code{"nearest"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

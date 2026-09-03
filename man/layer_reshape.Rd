@@ -13,7 +13,7 @@ layer_reshape(object, target_shape, ...)
 samples dimension (batch size). One element may be \code{-1}, in which case its
 size is inferred from the input size and the remaining dimensions.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

@@ -18,7 +18,7 @@ loss_log_cosh(
 
 \item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{reduction}{Type of reduction to apply to loss. Options are \code{"sum"},
 \code{"sum_over_batch_size"} or \code{NULL}. Defaults to

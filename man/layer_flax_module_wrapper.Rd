@@ -27,7 +27,7 @@ controlling the initialization. If \code{NULL} is passed, the module's
 \code{init} function is called at build time to initialize the variables
 of the model.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

@@ -21,7 +21,7 @@ metric_top_k_categorical_accuracy(
 \item{k}{(Optional) Number of top elements to look at for computing accuracy.
 Defaults to \code{5}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

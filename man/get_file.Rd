@@ -27,7 +27,7 @@ name (only if it doesn't have an extension).}
 
 \item{origin}{Original URL of the file.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{file_hash}{The expected hash string of the file after download.
 The sha256 and md5 hash algorithms are both supported.}

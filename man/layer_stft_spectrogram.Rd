@@ -62,7 +62,7 @@ corresponds to inputs with shape \verb{(batch, height, width, channels)}
 while \code{"channels_first"} corresponds to inputs with shape
 \verb{(batch, channels, height, weight)}. Defaults to \code{"channels_last"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

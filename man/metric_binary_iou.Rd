@@ -13,7 +13,7 @@ metric_binary_iou(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{target_class_ids}{A list or list of target class ids for which the
 metric is returned. Options are \code{0}, \code{1}, or \code{c(0, 1)}. With

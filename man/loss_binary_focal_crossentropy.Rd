@@ -48,7 +48,7 @@ Larger values of \code{label_smoothing} correspond to heavier smoothing.}
 \item{axis}{The axis along which to compute crossentropy (the features axis).
 Defaults to \code{-1}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}. Supported options are

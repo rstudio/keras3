@@ -19,7 +19,7 @@ layer_max_num_bounding_boxes(
 
 \item{fill_value}{Deprecated alias for \code{padding_value}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{padding_value}{The fill value of the \code{boxes} and \code{labels} in
 \code{bounding_boxes}. Defaults to \code{-1}.}

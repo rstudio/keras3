@@ -13,7 +13,7 @@ layer_activity_regularization(object, l1 = 0, l2 = 0, ...)
 
 \item{l2}{L2 regularization factor (positive float).}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

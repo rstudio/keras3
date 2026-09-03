@@ -79,7 +79,7 @@ before matrix multiplication). \code{FALSE} = \code{"before"},
 
 \item{seed}{Random seed for dropout.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A \code{Layer} instance, which is intended to be used with \code{layer_rnn()}.

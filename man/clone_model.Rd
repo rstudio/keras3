@@ -56,7 +56,7 @@ arguments. Note that in this case, \code{call_function}
 will not be propagated to any Sequential model
 (since it is not applicable to Sequential models).}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 An instance of \code{Model} reproducing the behavior

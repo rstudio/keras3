@@ -26,7 +26,7 @@ dataset_imdb_word_index(path = "imdb_word_index.json")
 often they occur (in the training set) and only the most frequent words are
 kept}
 
-\item{skip_top}{Skip the top N most frequently occuring words (which may not
+\item{skip_top}{Skip the top N most frequently occurring words (which may not
 be informative).}
 
 \item{maxlen}{sequences longer than this will be filtered out.}

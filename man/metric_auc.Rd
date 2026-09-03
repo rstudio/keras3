@@ -19,7 +19,7 @@ metric_auc(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{num_thresholds}{(Optional) The number of thresholds to
 use when discretizing the roc curve. Values must be > 1.

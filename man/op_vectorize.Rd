@@ -9,7 +9,7 @@ op_vectorize(func, ..., excluded = NULL, signature = NULL)
 \arguments{
 \item{func}{Callable of a single tensor argument.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{excluded}{Optional set of integers representing
 positional arguments for which the function

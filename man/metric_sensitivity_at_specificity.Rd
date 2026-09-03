@@ -14,7 +14,7 @@ metric_sensitivity_at_specificity(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{specificity}{A scalar value in range \verb{[0, 1]}.}
 

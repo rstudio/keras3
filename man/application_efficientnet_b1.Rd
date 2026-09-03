@@ -61,7 +61,7 @@ be \code{NULL} or \code{"softmax"}.}
 
 \item{name}{The name of the model (string).}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A model instance.

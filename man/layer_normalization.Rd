@@ -45,7 +45,7 @@ specified together.}
 to its inputs: it would turn a normalized input back into its
 original form.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

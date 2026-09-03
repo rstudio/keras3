@@ -38,7 +38,7 @@ and the number of input units is "large enough"
 \item To be used together with
 \code{\link[=initializer_lecun_normal]{initializer_lecun_normal()}}.
 \item To be used together with the dropout variant
-\code{layer_alpha_dropout()} (legacy, depracated).
+\code{layer_alpha_dropout()} (legacy, deprecated).
 }
 }
 

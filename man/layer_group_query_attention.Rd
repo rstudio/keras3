@@ -73,7 +73,7 @@ eliminates "attention sinks".}
 
 \item{seed}{Optional integer to seed the dropout layer.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 attention_output: Result of the computation, of shape

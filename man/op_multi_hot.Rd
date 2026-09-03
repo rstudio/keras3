@@ -27,7 +27,7 @@ is backend's float type.}
 \item{sparse}{Whether to return a sparse tensor; for backends that support
 sparse tensors.}
 
-\item{...}{For forward/backwards compatability}
+\item{...}{For forward/backwards compatibility}
 }
 \value{
 Tensor: The multi-hot encoded tensor.

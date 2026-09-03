@@ -71,7 +71,7 @@ floats: \verb{(0.5, 0.5)}.}
 corresponds to inputs with shape
 \verb{(batch, channels, height, width)}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 Applies these image processing operations sequentially and randomly to the

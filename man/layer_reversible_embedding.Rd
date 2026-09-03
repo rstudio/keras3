@@ -56,7 +56,7 @@ reverse-projection logits are scaled by
 \code{tanh(logits / logit_soft_cap) * logit_soft_cap}. This narrows the range
 of output logits and can improve training.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

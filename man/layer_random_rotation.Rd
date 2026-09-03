@@ -66,7 +66,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

@@ -22,7 +22,7 @@ the blank/mask index and should not be used for classes.}
 containing logits (the output of your model).
 They should \emph{not} be normalized via softmax.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}. Supported options are

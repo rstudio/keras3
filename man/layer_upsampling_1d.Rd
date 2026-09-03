@@ -11,7 +11,7 @@ layer_upsampling_1d(object, size = 2L, ...)
 
 \item{size}{Integer. Upsampling factor.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

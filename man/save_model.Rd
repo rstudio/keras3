@@ -20,7 +20,7 @@ via an interactive prompt.}
 archive (default when saving locally), or as an unzipped directory
 (default when saving on the Hugging Face Hub).}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 If \code{filepath} is provided, then this function is called primarily

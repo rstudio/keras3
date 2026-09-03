@@ -131,7 +131,7 @@ strings. Defaults to \code{"utf-8"}.}
 
 \item{name}{String, name for the object}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{include_special_tokens}{If TRUE, the returned vocabulary will include
 the padding and OOV tokens, and a term's index in the vocabulary will equal

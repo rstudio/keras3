@@ -26,7 +26,7 @@ Defaults to \code{'bilinear'}.}
 
 \item{data_format}{\code{"channels_last"} or \code{"channels_first"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 Array with shape \verb{(size[1], size[2], channels)}.

@@ -17,7 +17,7 @@ shard files (\verb{*_xxxxx.weights.h5}).}
 there is a mismatch in the number of weights, or a mismatch in
 the shape of the weights.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 This is called primarily for side effects. \code{model} is returned,

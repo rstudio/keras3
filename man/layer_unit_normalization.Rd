@@ -14,7 +14,7 @@ Typically, this is the features axis or axes. The left-out axes are
 typically the batch axis or axes. \code{-1} is the last dimension
 in the input. Defaults to \code{-1}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

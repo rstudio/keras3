@@ -13,7 +13,7 @@ metric_f1_score(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{average}{Type of averaging to be performed on data.
 Acceptable values are \code{NULL}, \code{"micro"}, \code{"macro"}

@@ -75,7 +75,7 @@ It can useful if you want to reuse the raw output sequence of
 the RNN without interference from the masked timesteps, e.g.,
 merging bidirectional RNNs.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

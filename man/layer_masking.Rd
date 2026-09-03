@@ -11,7 +11,7 @@ layer_masking(object, mask_value = 0, ...)
 
 \item{mask_value}{see description}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

@@ -34,7 +34,7 @@ output values will be clipped to this range.}
 
 \item{seed}{optional integer, for fixed RNG behavior.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

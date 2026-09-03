@@ -7,7 +7,7 @@
 metric_mean(..., name = "mean", dtype = NULL)
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

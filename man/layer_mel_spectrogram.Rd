@@ -60,7 +60,7 @@ If \code{NULL}, defaults to \code{sampling_rate / 2}.}
 \item{ref_power}{Float, the power is scaled relative to it
 \code{10 * log10(S / ref_power)}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

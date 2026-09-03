@@ -29,7 +29,7 @@ corresponds to inputs with shape
 
 \item{seed}{Initial seed for the random number generator}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 This layer randomly converts input images to grayscale with a specified

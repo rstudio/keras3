@@ -29,7 +29,7 @@ When unspecified, uses \code{image_data_format} value found in your Keras
 config file at \verb{~/.keras/keras.json} (if exists). Defaults to
 \code{"channels_last"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

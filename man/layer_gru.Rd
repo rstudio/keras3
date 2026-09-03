@@ -120,7 +120,7 @@ before matrix multiplication). \code{FALSE} is \code{"before"},
 attempt to use cuDNN when feasible, and will fallback to the
 default implementation if not.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

@@ -40,7 +40,7 @@ Options include \code{nearest}, \code{bilinear}. Default is \code{bilinear}.}
 corresponds to inputs with shape
 \verb{(batch, channels, height, width)}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 \strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline

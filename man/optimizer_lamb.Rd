@@ -99,7 +99,7 @@ Learning rate schedules will look at "real" iterations value
 for momentum accumulator weights created by
 the optimizer.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 an \code{Optimizer} instance

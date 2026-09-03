@@ -40,7 +40,7 @@ If \code{x} is a \code{tf.data.Dataset} or generator function,
 \code{y} should not be specified
 (since targets will be obtained from the iterator/dataset).}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{batch_size}{Integer or \code{NULL}. Number of samples per batch of
 computation. If unspecified, \code{batch_size} will default to \code{32}. Do

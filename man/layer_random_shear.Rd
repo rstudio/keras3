@@ -68,7 +68,7 @@ corresponds to inputs with shape
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 This layer shears the input images along the x-axis and/or y-axis by a

@@ -42,7 +42,7 @@ operation after the learning rate has been reduced.}
 
 \item{min_lr}{Float. Lower bound on the learning rate.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A \code{Callback} instance that can be passed to \code{\link[=fit.keras.src.models.model.Model]{fit.keras.src.models.model.Model()}}.

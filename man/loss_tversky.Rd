@@ -21,7 +21,7 @@ loss_tversky(
 
 \item{y_pred}{tensor of predicted targets.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{alpha}{The coefficient controlling incidence of false positives.
 Defaults to \code{0.5}.}

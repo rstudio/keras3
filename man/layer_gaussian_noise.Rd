@@ -13,7 +13,7 @@ layer_gaussian_noise(object, stddev, seed = NULL, ...)
 
 \item{seed}{Integer, optional random seed to enable deterministic behavior.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

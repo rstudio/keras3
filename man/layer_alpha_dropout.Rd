@@ -21,7 +21,7 @@ you can use \verb{noise_shape = (batch_size, 1, features)}.}
 
 \item{seed}{An integer to use as random seed.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

@@ -9,7 +9,7 @@ layer_identity(object, ...)
 \arguments{
 \item{object}{Object to compose the layer with. A tensor, array, or sequential model.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

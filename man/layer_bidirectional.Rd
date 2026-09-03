@@ -54,7 +54,7 @@ it should have the same values for \code{stateful}, \code{return_states},
 and \code{layer} should have different \code{go_backwards} argument values.
 A \code{ValueError} will be raised if these requirements are not met.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

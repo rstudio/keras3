@@ -15,7 +15,7 @@ This is typically either \verb{(0, 1)} or \verb{(0, 255)} depending
 on how your preprocessing pipeline is set up.
 Defaults to \verb{(0, 255)}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 \strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline

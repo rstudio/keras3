@@ -58,7 +58,7 @@ while \code{"channels_first"} corresponds to inputs with shape
 \verb{~/.keras/keras.json}. If you never set it, then it will be
 \code{"channels_last"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 \strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline

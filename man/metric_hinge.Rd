@@ -13,7 +13,7 @@ to -1 or 1 with shape = \verb{[batch_size, d0, .. dN]}.}
 
 \item{y_pred}{The predicted values with shape = \verb{[batch_size, d0, .. dN]}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

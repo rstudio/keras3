@@ -14,7 +14,7 @@ metric_recall_at_precision(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{precision}{A scalar value in range \verb{[0, 1]}.}
 

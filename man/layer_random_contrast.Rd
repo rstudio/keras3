@@ -30,7 +30,7 @@ preprocessing pipeline is set up.}
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

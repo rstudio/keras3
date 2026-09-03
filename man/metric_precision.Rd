@@ -14,7 +14,7 @@ metric_precision(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{thresholds}{(Optional) A float value, or a Python list of float
 threshold values in \verb{[0, 1]}. A threshold is compared with

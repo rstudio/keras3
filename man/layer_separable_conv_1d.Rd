@@ -100,7 +100,7 @@ pointwise kernel after being updated by an \code{Optimizer}.}
 \item{bias_constraint}{Optional projection function to be applied to the
 bias after being updated by an \code{Optimizer}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A 3D tensor representing

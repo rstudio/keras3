@@ -40,7 +40,7 @@ up weighted and positives are down weighted. Similarly, above this
 distance negatives are down weighted and positive are up weighted.
 Defaults to \code{0.4}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{reduction}{Type of reduction to apply to the loss. In almost all cases
 this should be \code{"sum_over_batch_size"}. Supported options are

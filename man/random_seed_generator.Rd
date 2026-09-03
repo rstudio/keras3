@@ -11,7 +11,7 @@ random_seed_generator(seed = NULL, name = NULL, ...)
 
 \item{name}{String, name for the object}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 A \code{SeedGenerator} instance, which can be passed as the \verb{seed = }

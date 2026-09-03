@@ -7,7 +7,7 @@
 metric_true_negatives(..., thresholds = NULL, name = NULL, dtype = NULL)
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{thresholds}{(Optional) Defaults to \code{0.5}. A float value, or a Python
 list of float threshold values in \verb{[0, 1]}. A threshold is

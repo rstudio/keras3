@@ -21,7 +21,7 @@ metric_pearson_correlation(
 \item{axis}{(Optional) integer or tuple of integers of the axis/axes along
 which to compute the metric. Defaults to \code{-1}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{name}{(Optional) string name of the metric instance.}
 

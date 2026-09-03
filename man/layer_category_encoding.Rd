@@ -42,7 +42,7 @@ Defaults to \code{"multi_hot"}.}
 \item{sparse}{Whether to return a sparse tensor; for backends that support
 sparse tensors.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

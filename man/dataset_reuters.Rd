@@ -27,7 +27,7 @@ dataset_reuters_word_index(path = "reuters_word_index.pkl")
 often they occur (in the training set) and only the most frequent words are
 kept}
 
-\item{skip_top}{Skip the top N most frequently occuring words (which may not
+\item{skip_top}{Skip the top N most frequently occurring words (which may not
 be informative).}
 
 \item{maxlen}{Truncate sequences after this length.}

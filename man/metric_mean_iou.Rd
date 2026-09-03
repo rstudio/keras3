@@ -16,7 +16,7 @@ metric_mean_iou(
 )
 }
 \arguments{
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{num_classes}{The possible number of labels the prediction task can have.
 This value must be provided, since a confusion matrix of dimension =

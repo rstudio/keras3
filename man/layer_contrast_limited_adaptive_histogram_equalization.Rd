@@ -32,7 +32,7 @@ tiles into which to divide the image. Defaults to \code{c(8, 8)}.}
 corresponds to inputs with shape
 \verb{(batch, channels, height, width)}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

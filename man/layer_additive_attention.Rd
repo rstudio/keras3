@@ -15,7 +15,7 @@ attention scores.}
 \item{dropout}{Float between 0 and 1. Fraction of the units to drop for the
 attention scores. Defaults to \code{0.0}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

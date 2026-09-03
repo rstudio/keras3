@@ -60,7 +60,7 @@ default.}
 \item{gamma_constraint}{Optional constraint for the gamma weight. \code{NULL} by
 default.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

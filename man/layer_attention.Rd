@@ -29,7 +29,7 @@ attention scores. Defaults to \code{0.0}.}
 
 \item{seed}{An integer to use as random seed in case of \code{dropout}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

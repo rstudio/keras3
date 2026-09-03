@@ -14,7 +14,7 @@ batch dimension. Indexing starts at 1.
 For instance, \verb{(1, 3, 2)} permutes the second and third dimensions
 of the input.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

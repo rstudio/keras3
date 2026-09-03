@@ -27,7 +27,7 @@
 \item A Python generator function.
 }}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 
 \item{batch_size}{Integer or \code{NULL}.
 Number of samples per batch of computation.

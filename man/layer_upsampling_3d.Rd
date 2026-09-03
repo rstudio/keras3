@@ -24,7 +24,7 @@ When unspecified, uses
 \verb{~/.keras/keras.json} (if exists) else \code{"channels_last"}.
 Defaults to \code{"channels_last"}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

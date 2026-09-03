@@ -28,7 +28,7 @@ reduced for spatial dimensions. If \code{keepdims} is \code{TRUE}, the
 temporal dimension are retained with length 1.
 The behavior is the same as for \code{tf$reduce_mean()} or \code{op_mean()}.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \value{
 The return value depends on the value provided for the first argument.

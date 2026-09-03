@@ -13,7 +13,7 @@ layer_rms_normalization(object, axis = -1L, epsilon = 1e-06, ...)
 
 \item{epsilon}{float. A small number to add to avoid division by zero.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 This layer normalizes the input tensor based on its RMS value.

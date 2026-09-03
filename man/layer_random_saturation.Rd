@@ -41,7 +41,7 @@ corresponds to inputs with shape
 
 \item{seed}{Integer. Used to create a random seed.}
 
-\item{...}{For forward/backward compatability.}
+\item{...}{For forward/backward compatibility.}
 }
 \description{
 \strong{Note:} This layer is safe to use inside a \code{tf.data} or \code{grain} pipeline
