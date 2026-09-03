@@ -35,25 +35,25 @@ quickly constrain a run without modifying source code.
 }
 \seealso{
 Other config: \cr
-\code{\link{config_backend}()} \cr
-\code{\link{config_disable_flash_attention}()} \cr
-\code{\link{config_disable_interactive_logging}()} \cr
-\code{\link{config_disable_traceback_filtering}()} \cr
-\code{\link{config_dtype_policy}()} \cr
-\code{\link{config_enable_flash_attention}()} \cr
-\code{\link{config_enable_interactive_logging}()} \cr
-\code{\link{config_enable_traceback_filtering}()} \cr
-\code{\link{config_enable_unsafe_deserialization}()} \cr
-\code{\link{config_epsilon}()} \cr
-\code{\link{config_floatx}()} \cr
-\code{\link{config_image_data_format}()} \cr
-\code{\link{config_is_interactive_logging_enabled}()} \cr
-\code{\link{config_is_nnx_enabled}()} \cr
-\code{\link{config_is_traceback_filtering_enabled}()} \cr
-\code{\link{config_set_backend}()} \cr
-\code{\link{config_set_dtype_policy}()} \cr
-\code{\link{config_set_epsilon}()} \cr
-\code{\link{config_set_floatx}()} \cr
-\code{\link{config_set_image_data_format}()} \cr
+\code{\link[=config_backend]{config_backend()}} \cr
+\code{\link[=config_disable_flash_attention]{config_disable_flash_attention()}} \cr
+\code{\link[=config_disable_interactive_logging]{config_disable_interactive_logging()}} \cr
+\code{\link[=config_disable_traceback_filtering]{config_disable_traceback_filtering()}} \cr
+\code{\link[=config_dtype_policy]{config_dtype_policy()}} \cr
+\code{\link[=config_enable_flash_attention]{config_enable_flash_attention()}} \cr
+\code{\link[=config_enable_interactive_logging]{config_enable_interactive_logging()}} \cr
+\code{\link[=config_enable_traceback_filtering]{config_enable_traceback_filtering()}} \cr
+\code{\link[=config_enable_unsafe_deserialization]{config_enable_unsafe_deserialization()}} \cr
+\code{\link[=config_epsilon]{config_epsilon()}} \cr
+\code{\link[=config_floatx]{config_floatx()}} \cr
+\code{\link[=config_image_data_format]{config_image_data_format()}} \cr
+\code{\link[=config_is_interactive_logging_enabled]{config_is_interactive_logging_enabled()}} \cr
+\code{\link[=config_is_nnx_enabled]{config_is_nnx_enabled()}} \cr
+\code{\link[=config_is_traceback_filtering_enabled]{config_is_traceback_filtering_enabled()}} \cr
+\code{\link[=config_set_backend]{config_set_backend()}} \cr
+\code{\link[=config_set_dtype_policy]{config_set_dtype_policy()}} \cr
+\code{\link[=config_set_epsilon]{config_set_epsilon()}} \cr
+\code{\link[=config_set_floatx]{config_set_floatx()}} \cr
+\code{\link[=config_set_image_data_format]{config_set_image_data_format()}} \cr
 }
 \concept{config}

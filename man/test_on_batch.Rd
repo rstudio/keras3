@@ -35,10 +35,10 @@ Test the model on a single batch of samples.
 }
 
 Other model training: \cr
-\code{\link{compile.keras.src.models.model.Model}()} \cr
-\code{\link{evaluate.keras.src.models.model.Model}()} \cr
-\code{\link{predict.keras.src.models.model.Model}()} \cr
-\code{\link{predict_on_batch}()} \cr
-\code{\link{train_on_batch}()} \cr
+\code{\link[=compile.keras.src.models.model.Model]{compile.keras.src.models.model.Model()}} \cr
+\code{\link[=evaluate.keras.src.models.model.Model]{evaluate.keras.src.models.model.Model()}} \cr
+\code{\link[=predict.keras.src.models.model.Model]{predict.keras.src.models.model.Model()}} \cr
+\code{\link[=predict_on_batch]{predict_on_batch()}} \cr
+\code{\link[=train_on_batch]{train_on_batch()}} \cr
 }
 \concept{model training}

@@ -57,13 +57,13 @@ access specific variables, e.g. \code{model |> get_layer("dense_1") |> _$kernel}
 }
 
 Other saving and loading functions: \cr
-\code{\link{export_savedmodel.keras.src.models.model.Model}()} \cr
-\code{\link{layer_tfsm}()} \cr
-\code{\link{load_model_weights}()} \cr
-\code{\link{register_keras_serializable}()} \cr
-\code{\link{save_model}()} \cr
-\code{\link{save_model_config}()} \cr
-\code{\link{save_model_weights}()} \cr
-\code{\link{with_custom_object_scope}()} \cr
+\code{\link[=export_savedmodel.keras.src.models.model.Model]{export_savedmodel.keras.src.models.model.Model()}} \cr
+\code{\link[=layer_tfsm]{layer_tfsm()}} \cr
+\code{\link[=load_model_weights]{load_model_weights()}} \cr
+\code{\link[=register_keras_serializable]{register_keras_serializable()}} \cr
+\code{\link[=save_model]{save_model()}} \cr
+\code{\link[=save_model_config]{save_model_config()}} \cr
+\code{\link[=save_model_weights]{save_model_weights()}} \cr
+\code{\link[=with_custom_object_scope]{with_custom_object_scope()}} \cr
 }
 \concept{saving and loading functions}

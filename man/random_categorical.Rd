@@ -90,15 +90,15 @@ random_categorical(x, num_samples = 5, seed = 1234)
 }
 \seealso{
 Other random: \cr
-\code{\link{random_beta}()} \cr
-\code{\link{random_binomial}()} \cr
-\code{\link{random_dropout}()} \cr
-\code{\link{random_gamma}()} \cr
-\code{\link{random_integer}()} \cr
-\code{\link{random_normal}()} \cr
-\code{\link{random_seed_generator}()} \cr
-\code{\link{random_shuffle}()} \cr
-\code{\link{random_truncated_normal}()} \cr
-\code{\link{random_uniform}()} \cr
+\code{\link[=random_beta]{random_beta()}} \cr
+\code{\link[=random_binomial]{random_binomial()}} \cr
+\code{\link[=random_dropout]{random_dropout()}} \cr
+\code{\link[=random_gamma]{random_gamma()}} \cr
+\code{\link[=random_integer]{random_integer()}} \cr
+\code{\link[=random_normal]{random_normal()}} \cr
+\code{\link[=random_seed_generator]{random_seed_generator()}} \cr
+\code{\link[=random_shuffle]{random_shuffle()}} \cr
+\code{\link[=random_truncated_normal]{random_truncated_normal()}} \cr
+\code{\link[=random_uniform]{random_uniform()}} \cr
 }
 \concept{random}

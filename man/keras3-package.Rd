@@ -36,20 +36,13 @@ Useful links:
   \item Report bugs at \url{https://github.com/rstudio/keras3/issues}
 }
 
-
-Useful links:
-\itemize{
-  \item \url{https://keras3.posit.co/}
-  \item \url{https://github.com/rstudio/keras3}
-  \item Report bugs at \url{https://github.com/rstudio/keras3/issues}
-}
-
 }
 \author{
 \strong{Maintainer}: Tomasz Kalinowski \email{tomasz@posit.co} [copyright holder]
 
 Authors:
 \itemize{
+  \item Tomasz Kalinowski \email{tomasz@posit.co} [copyright holder]
   \item JJ Allaire [copyright holder]
   \item François Chollet [copyright holder]
 }

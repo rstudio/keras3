@@ -21,9 +21,9 @@ Reset the state for a model, layer or metric.
 }
 \seealso{
 Other layer methods: \cr
-\code{\link{count_params}()} \cr
-\code{\link{get_config}()} \cr
-\code{\link{get_weights}()} \cr
-\code{\link{quantize_weights}()} \cr
+\code{\link[=count_params]{count_params()}} \cr
+\code{\link[=get_config]{get_config()}} \cr
+\code{\link[=get_weights]{get_weights()}} \cr
+\code{\link[=quantize_weights]{quantize_weights()}} \cr
 }
 \concept{layer methods}

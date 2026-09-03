@@ -40,14 +40,13 @@ Quantize a model to int8 with the default configuration:
   layer_dense(10)
 model |> quantize_weights("int8")
 }\if{html}{\out{</div>}}
-
 }
 
 \seealso{
 Other layer methods: \cr
-\code{\link{count_params}()} \cr
-\code{\link{get_config}()} \cr
-\code{\link{get_weights}()} \cr
-\code{\link{reset_state}()} \cr
+\code{\link[=count_params]{count_params()}} \cr
+\code{\link[=get_config]{get_config()}} \cr
+\code{\link[=get_weights]{get_weights()}} \cr
+\code{\link[=reset_state]{reset_state()}} \cr
 }
 \concept{layer methods}

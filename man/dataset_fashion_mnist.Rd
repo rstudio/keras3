@@ -66,12 +66,12 @@ replacement for MNIST. The class labels are:
 }
 \seealso{
 Other datasets: \cr
-\code{\link{dataset_boston_housing}()} \cr
-\code{\link{dataset_california_housing}()} \cr
-\code{\link{dataset_cifar10}()} \cr
-\code{\link{dataset_cifar100}()} \cr
-\code{\link{dataset_imdb}()} \cr
-\code{\link{dataset_mnist}()} \cr
-\code{\link{dataset_reuters}()} \cr
+\code{\link[=dataset_boston_housing]{dataset_boston_housing()}} \cr
+\code{\link[=dataset_california_housing]{dataset_california_housing()}} \cr
+\code{\link[=dataset_cifar10]{dataset_cifar10()}} \cr
+\code{\link[=dataset_cifar100]{dataset_cifar100()}} \cr
+\code{\link[=dataset_imdb]{dataset_imdb()}} \cr
+\code{\link[=dataset_mnist]{dataset_mnist()}} \cr
+\code{\link[=dataset_reuters]{dataset_reuters()}} \cr
 }
 \concept{datasets}

@@ -40,8 +40,8 @@ layer <- layer_dense(units=4, kernel_regularizer=regularizer)
 }
 
 Other regularizers: \cr
-\code{\link{regularizer_l1}()} \cr
-\code{\link{regularizer_l1_l2}()} \cr
-\code{\link{regularizer_l2}()} \cr
+\code{\link[=regularizer_l1]{regularizer_l1()}} \cr
+\code{\link[=regularizer_l1_l2]{regularizer_l1_l2()}} \cr
+\code{\link[=regularizer_l2]{regularizer_l2()}} \cr
 }
 \concept{regularizers}

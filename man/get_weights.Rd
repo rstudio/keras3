@@ -31,10 +31,10 @@ backend-native tensors like \code{tf.Variable}) at \code{object$weights},
 }
 \seealso{
 Other layer methods: \cr
-\code{\link{count_params}()} \cr
-\code{\link{get_config}()} \cr
-\code{\link{quantize_weights}()} \cr
-\code{\link{reset_state}()} \cr
+\code{\link[=count_params]{count_params()}} \cr
+\code{\link[=get_config]{get_config()}} \cr
+\code{\link[=quantize_weights]{quantize_weights()}} \cr
+\code{\link[=reset_state]{reset_state()}} \cr
 }
 \concept{layer methods}
 \concept{model persistence}

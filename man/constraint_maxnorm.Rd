@@ -35,9 +35,9 @@ to have a norm less than or equal to a desired value.
 }
 
 Other constraints: \cr
-\code{\link{Constraint}()} \cr
-\code{\link{constraint_minmaxnorm}()} \cr
-\code{\link{constraint_nonneg}()} \cr
-\code{\link{constraint_unitnorm}()} \cr
+\code{\link[=Constraint]{Constraint()}} \cr
+\code{\link[=constraint_minmaxnorm]{constraint_minmaxnorm()}} \cr
+\code{\link[=constraint_nonneg]{constraint_nonneg()}} \cr
+\code{\link[=constraint_unitnorm]{constraint_unitnorm()}} \cr
 }
 \concept{constraints}

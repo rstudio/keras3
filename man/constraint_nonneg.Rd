@@ -19,9 +19,9 @@ Constrains the weights to be non-negative.
 }
 
 Other constraints: \cr
-\code{\link{Constraint}()} \cr
-\code{\link{constraint_maxnorm}()} \cr
-\code{\link{constraint_minmaxnorm}()} \cr
-\code{\link{constraint_unitnorm}()} \cr
+\code{\link[=Constraint]{Constraint()}} \cr
+\code{\link[=constraint_maxnorm]{constraint_maxnorm()}} \cr
+\code{\link[=constraint_minmaxnorm]{constraint_minmaxnorm()}} \cr
+\code{\link[=constraint_unitnorm]{constraint_unitnorm()}} \cr
 }
 \concept{constraints}

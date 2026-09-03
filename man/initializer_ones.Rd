@@ -31,27 +31,27 @@ layer <- layer_dense(units = 3, kernel_initializer = initializer)
 }
 
 Other constant initializers: \cr
-\code{\link{initializer_constant}()} \cr
-\code{\link{initializer_identity}()} \cr
-\code{\link{initializer_stft}()} \cr
-\code{\link{initializer_zeros}()} \cr
+\code{\link[=initializer_constant]{initializer_constant()}} \cr
+\code{\link[=initializer_identity]{initializer_identity()}} \cr
+\code{\link[=initializer_stft]{initializer_stft()}} \cr
+\code{\link[=initializer_zeros]{initializer_zeros()}} \cr
 
 Other initializers: \cr
-\code{\link{initializer_constant}()} \cr
-\code{\link{initializer_glorot_normal}()} \cr
-\code{\link{initializer_glorot_uniform}()} \cr
-\code{\link{initializer_he_normal}()} \cr
-\code{\link{initializer_he_uniform}()} \cr
-\code{\link{initializer_identity}()} \cr
-\code{\link{initializer_lecun_normal}()} \cr
-\code{\link{initializer_lecun_uniform}()} \cr
-\code{\link{initializer_orthogonal}()} \cr
-\code{\link{initializer_random_normal}()} \cr
-\code{\link{initializer_random_uniform}()} \cr
-\code{\link{initializer_stft}()} \cr
-\code{\link{initializer_truncated_normal}()} \cr
-\code{\link{initializer_variance_scaling}()} \cr
-\code{\link{initializer_zeros}()} \cr
+\code{\link[=initializer_constant]{initializer_constant()}} \cr
+\code{\link[=initializer_glorot_normal]{initializer_glorot_normal()}} \cr
+\code{\link[=initializer_glorot_uniform]{initializer_glorot_uniform()}} \cr
+\code{\link[=initializer_he_normal]{initializer_he_normal()}} \cr
+\code{\link[=initializer_he_uniform]{initializer_he_uniform()}} \cr
+\code{\link[=initializer_identity]{initializer_identity()}} \cr
+\code{\link[=initializer_lecun_normal]{initializer_lecun_normal()}} \cr
+\code{\link[=initializer_lecun_uniform]{initializer_lecun_uniform()}} \cr
+\code{\link[=initializer_orthogonal]{initializer_orthogonal()}} \cr
+\code{\link[=initializer_random_normal]{initializer_random_normal()}} \cr
+\code{\link[=initializer_random_uniform]{initializer_random_uniform()}} \cr
+\code{\link[=initializer_stft]{initializer_stft()}} \cr
+\code{\link[=initializer_truncated_normal]{initializer_truncated_normal()}} \cr
+\code{\link[=initializer_variance_scaling]{initializer_variance_scaling()}} \cr
+\code{\link[=initializer_zeros]{initializer_zeros()}} \cr
 }
 \concept{constant initializers}
 \concept{initializers}

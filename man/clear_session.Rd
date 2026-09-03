@@ -76,39 +76,39 @@ print(new_layer$name)
 }
 
 Other backend: \cr
-\code{\link{config_backend}()} \cr
-\code{\link{config_epsilon}()} \cr
-\code{\link{config_floatx}()} \cr
-\code{\link{config_image_data_format}()} \cr
-\code{\link{config_set_epsilon}()} \cr
-\code{\link{config_set_floatx}()} \cr
-\code{\link{config_set_image_data_format}()} \cr
+\code{\link[=config_backend]{config_backend()}} \cr
+\code{\link[=config_epsilon]{config_epsilon()}} \cr
+\code{\link[=config_floatx]{config_floatx()}} \cr
+\code{\link[=config_image_data_format]{config_image_data_format()}} \cr
+\code{\link[=config_set_epsilon]{config_set_epsilon()}} \cr
+\code{\link[=config_set_floatx]{config_set_floatx()}} \cr
+\code{\link[=config_set_image_data_format]{config_set_image_data_format()}} \cr
 
 Other utils: \cr
-\code{\link{audio_dataset_from_directory}()} \cr
-\code{\link{config_disable_interactive_logging}()} \cr
-\code{\link{config_disable_traceback_filtering}()} \cr
-\code{\link{config_enable_interactive_logging}()} \cr
-\code{\link{config_enable_traceback_filtering}()} \cr
-\code{\link{config_is_interactive_logging_enabled}()} \cr
-\code{\link{config_is_traceback_filtering_enabled}()} \cr
-\code{\link{get_file}()} \cr
-\code{\link{get_source_inputs}()} \cr
-\code{\link{image_array_save}()} \cr
-\code{\link{image_dataset_from_directory}()} \cr
-\code{\link{image_from_array}()} \cr
-\code{\link{image_load}()} \cr
-\code{\link{image_smart_resize}()} \cr
-\code{\link{image_to_array}()} \cr
-\code{\link{layer_feature_space}()} \cr
-\code{\link{normalize}()} \cr
-\code{\link{pad_sequences}()} \cr
-\code{\link{set_random_seed}()} \cr
-\code{\link{split_dataset}()} \cr
-\code{\link{text_dataset_from_directory}()} \cr
-\code{\link{timeseries_dataset_from_array}()} \cr
-\code{\link{to_categorical}()} \cr
-\code{\link{zip_lists}()} \cr
+\code{\link[=audio_dataset_from_directory]{audio_dataset_from_directory()}} \cr
+\code{\link[=config_disable_interactive_logging]{config_disable_interactive_logging()}} \cr
+\code{\link[=config_disable_traceback_filtering]{config_disable_traceback_filtering()}} \cr
+\code{\link[=config_enable_interactive_logging]{config_enable_interactive_logging()}} \cr
+\code{\link[=config_enable_traceback_filtering]{config_enable_traceback_filtering()}} \cr
+\code{\link[=config_is_interactive_logging_enabled]{config_is_interactive_logging_enabled()}} \cr
+\code{\link[=config_is_traceback_filtering_enabled]{config_is_traceback_filtering_enabled()}} \cr
+\code{\link[=get_file]{get_file()}} \cr
+\code{\link[=get_source_inputs]{get_source_inputs()}} \cr
+\code{\link[=image_array_save]{image_array_save()}} \cr
+\code{\link[=image_dataset_from_directory]{image_dataset_from_directory()}} \cr
+\code{\link[=image_from_array]{image_from_array()}} \cr
+\code{\link[=image_load]{image_load()}} \cr
+\code{\link[=image_smart_resize]{image_smart_resize()}} \cr
+\code{\link[=image_to_array]{image_to_array()}} \cr
+\code{\link[=layer_feature_space]{layer_feature_space()}} \cr
+\code{\link[=normalize]{normalize()}} \cr
+\code{\link[=pad_sequences]{pad_sequences()}} \cr
+\code{\link[=set_random_seed]{set_random_seed()}} \cr
+\code{\link[=split_dataset]{split_dataset()}} \cr
+\code{\link[=text_dataset_from_directory]{text_dataset_from_directory()}} \cr
+\code{\link[=timeseries_dataset_from_array]{timeseries_dataset_from_array()}} \cr
+\code{\link[=to_categorical]{to_categorical()}} \cr
+\code{\link[=zip_lists]{zip_lists()}} \cr
 }
 \concept{backend}
 \concept{utils}

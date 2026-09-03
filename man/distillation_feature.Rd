@@ -44,7 +44,7 @@ final model outputs are used.
 
 \seealso{
 Other distillation: \cr
-\code{\link{distillation_logits}()} \cr
-\code{\link{distiller}()} \cr
+\code{\link[=distillation_logits]{distillation_logits()}} \cr
+\code{\link[=distiller]{distiller()}} \cr
 }
 \concept{distillation}

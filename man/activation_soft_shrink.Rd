@@ -23,33 +23,33 @@ It is defined as:
 }
 \seealso{
 Other activations: \cr
-\code{\link{activation_celu}()} \cr
-\code{\link{activation_elu}()} \cr
-\code{\link{activation_exponential}()} \cr
-\code{\link{activation_gelu}()} \cr
-\code{\link{activation_glu}()} \cr
-\code{\link{activation_hard_shrink}()} \cr
-\code{\link{activation_hard_sigmoid}()} \cr
-\code{\link{activation_hard_tanh}()} \cr
-\code{\link{activation_leaky_relu}()} \cr
-\code{\link{activation_linear}()} \cr
-\code{\link{activation_log_sigmoid}()} \cr
-\code{\link{activation_log_softmax}()} \cr
-\code{\link{activation_mish}()} \cr
-\code{\link{activation_relu}()} \cr
-\code{\link{activation_relu6}()} \cr
-\code{\link{activation_selu}()} \cr
-\code{\link{activation_sigmoid}()} \cr
-\code{\link{activation_silu}()} \cr
-\code{\link{activation_softmax}()} \cr
-\code{\link{activation_softplus}()} \cr
-\code{\link{activation_softsign}()} \cr
-\code{\link{activation_sparse_plus}()} \cr
-\code{\link{activation_sparse_sigmoid}()} \cr
-\code{\link{activation_sparsemax}()} \cr
-\code{\link{activation_squareplus}()} \cr
-\code{\link{activation_tanh}()} \cr
-\code{\link{activation_tanh_shrink}()} \cr
-\code{\link{activation_threshold}()} \cr
+\code{\link[=activation_celu]{activation_celu()}} \cr
+\code{\link[=activation_elu]{activation_elu()}} \cr
+\code{\link[=activation_exponential]{activation_exponential()}} \cr
+\code{\link[=activation_gelu]{activation_gelu()}} \cr
+\code{\link[=activation_glu]{activation_glu()}} \cr
+\code{\link[=activation_hard_shrink]{activation_hard_shrink()}} \cr
+\code{\link[=activation_hard_sigmoid]{activation_hard_sigmoid()}} \cr
+\code{\link[=activation_hard_tanh]{activation_hard_tanh()}} \cr
+\code{\link[=activation_leaky_relu]{activation_leaky_relu()}} \cr
+\code{\link[=activation_linear]{activation_linear()}} \cr
+\code{\link[=activation_log_sigmoid]{activation_log_sigmoid()}} \cr
+\code{\link[=activation_log_softmax]{activation_log_softmax()}} \cr
+\code{\link[=activation_mish]{activation_mish()}} \cr
+\code{\link[=activation_relu]{activation_relu()}} \cr
+\code{\link[=activation_relu6]{activation_relu6()}} \cr
+\code{\link[=activation_selu]{activation_selu()}} \cr
+\code{\link[=activation_sigmoid]{activation_sigmoid()}} \cr
+\code{\link[=activation_silu]{activation_silu()}} \cr
+\code{\link[=activation_softmax]{activation_softmax()}} \cr
+\code{\link[=activation_softplus]{activation_softplus()}} \cr
+\code{\link[=activation_softsign]{activation_softsign()}} \cr
+\code{\link[=activation_sparse_plus]{activation_sparse_plus()}} \cr
+\code{\link[=activation_sparse_sigmoid]{activation_sparse_sigmoid()}} \cr
+\code{\link[=activation_sparsemax]{activation_sparsemax()}} \cr
+\code{\link[=activation_squareplus]{activation_squareplus()}} \cr
+\code{\link[=activation_tanh]{activation_tanh()}} \cr
+\code{\link[=activation_tanh_shrink]{activation_tanh_shrink()}} \cr
+\code{\link[=activation_threshold]{activation_threshold()}} \cr
 }
 \concept{activations}

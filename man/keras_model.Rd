@@ -43,18 +43,18 @@ model |> compile(
 
 \seealso{
 Other model functions: \cr
-\code{\link{get_config}()} \cr
-\code{\link{get_layer}()} \cr
-\code{\link{get_state_tree}()} \cr
-\code{\link{keras_model_sequential}()} \cr
-\code{\link{pop_layer}()} \cr
-\code{\link{set_state_tree}()} \cr
-\code{\link{summary.keras.src.models.model.Model}()} \cr
+\code{\link[=get_config]{get_config()}} \cr
+\code{\link[=get_layer]{get_layer()}} \cr
+\code{\link[=get_state_tree]{get_state_tree()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
+\code{\link[=pop_layer]{pop_layer()}} \cr
+\code{\link[=set_state_tree]{set_state_tree()}} \cr
+\code{\link[=summary.keras.src.models.model.Model]{summary.keras.src.models.model.Model()}} \cr
 
 Other model creation: \cr
-\code{\link{distiller}()} \cr
-\code{\link{keras_input}()} \cr
-\code{\link{keras_model_sequential}()} \cr
+\code{\link[=distiller]{distiller()}} \cr
+\code{\link[=keras_input]{keras_input()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
 }
 \concept{model creation}
 \concept{model functions}

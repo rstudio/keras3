@@ -78,8 +78,8 @@ model <- keras_model(input, output)
 
 \seealso{
 Other model creation: \cr
-\code{\link{distiller}()} \cr
-\code{\link{keras_model}()} \cr
-\code{\link{keras_model_sequential}()} \cr
+\code{\link[=distiller]{distiller()}} \cr
+\code{\link[=keras_model]{keras_model()}} \cr
+\code{\link[=keras_model_sequential]{keras_model_sequential()}} \cr
 }
 \concept{model creation}
