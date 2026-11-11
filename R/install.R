@@ -101,9 +101,6 @@ install_keras <- function(
   )
   extra_packages <- unique(extra_packages)
 
-  if(!any(grepl("^numpy[=><!]?", extra_packages)))
-    extra_packages <- c(extra_packages, "numpy<2")
-
   if (length(extra_packages))
     reticulate::py_install(extra_packages, envname = envname)
 
@@ -274,7 +271,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Windows_tensorflow = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
-      py_require(c("tensorflow", "numpy<2"))
+      py_require("tensorflow")
     },
 
     Windows_jax = {
