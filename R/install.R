@@ -68,9 +68,9 @@ install_keras <- function(
       jax <- c("jax[cuda12]")
       # if there is only one backend, it must be "tensorflow"
       # for the Linux user requesting only tensorflow and GPU,
-      # we should install the "tensorflow[and-gpu]"
+      # we should install the "tensorflow[and-cuda]"
       # otherwise (requesting other backends), only cpu version is installed
-      tensorflow <- if (length(backend) == 1) "tensorflow[and-gpu]" else "tensorflow-cpu"
+      tensorflow <- if (length(backend) == 1) "tensorflow[and-cuda]" else "tensorflow-cpu"
     }
   } else { # no GPU
     jax <- "jax[cpu]"
@@ -100,9 +100,6 @@ install_keras <- function(
     packages = NULL
   )
   extra_packages <- unique(extra_packages)
-
-  if(!any(grepl("^numpy[=><!]?", extra_packages)))
-    extra_packages <- c(extra_packages, "numpy<2")
 
   if (length(extra_packages))
     reticulate::py_install(extra_packages, envname = envname)
@@ -274,7 +271,7 @@ use_backend <- function(backend, gpu = NA) {
 
     Windows_tensorflow = {
       if(isTRUE(gpu)) warning("GPU usage not supported on Windows. Please use WSL.")
-      py_require(c("tensorflow", "numpy<2"))
+      py_require("tensorflow")
     },
 
     Windows_jax = {

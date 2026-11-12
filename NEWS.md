@@ -1,5 +1,12 @@
 # keras3 (development version)
 
+- `use_backend("tensorflow")` on Windows and `install_keras()` no longer
+  require NumPy < 2, allowing current TensorFlow releases to select compatible
+  NumPy versions.
+
+- Updated `install_keras(backend = "tensorflow", gpu = TRUE)` on Linux to
+  use the `and-cuda` extra for TF 2.21.
+
 - TensorBoard is now declared explicitly as a Python dependency, restoring
   `callback_tensorboard()` with TensorFlow 2.21.
 
