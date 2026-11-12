@@ -67,7 +67,7 @@ jobs:
         run: |
           options(echo = TRUE)
           print(sessionInfo())
-          reticulate::py_require(python_version = paste0("==", Sys.getenv("PYTHON_VERSION"), ".*"))
+          reticulate::py_require(python_version = Sys.getenv("PYTHON_VERSION"))
           print(keras3::op_convert_to_tensor("Hello World!"))
           config <- reticulate::py_config()
           print(config)
