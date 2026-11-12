@@ -4,8 +4,8 @@
   require NumPy < 2, allowing current TensorFlow releases to select compatible
   NumPy versions.
 
-- `install_keras(backend = "tensorflow", gpu = TRUE)` now requests the
-  TensorFlow CUDA dependencies on Linux using the correct `and-cuda` extra.
+- Corrected the extra name from `and-gpu` to `and-cuda` in the Linux
+  installation path for `install_keras(backend = "tensorflow", gpu = TRUE)`.
 
 - TensorBoard is now declared explicitly as a Python dependency, restoring
   `callback_tensorboard()` with TensorFlow 2.21.
